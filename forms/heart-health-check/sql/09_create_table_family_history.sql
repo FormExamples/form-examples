@@ -1,10 +1,10 @@
-CREATE TABLE family_history (
+CREATE TABLE heart_health_check.family_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     family_cvd_under_60 VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (family_cvd_under_60 IN ('yes', 'no', '')),
     family_cvd_relationship VARCHAR(20) NOT NULL DEFAULT ''
@@ -14,26 +14,26 @@ CREATE TABLE family_history (
 );
 
 CREATE TRIGGER trigger_family_history_updated_at
-    BEFORE UPDATE ON family_history
+    BEFORE UPDATE ON heart_health_check.family_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE family_history IS
+COMMENT ON TABLE heart_health_check.family_history IS
     'Family history of cardiovascular disease and diabetes.';
-COMMENT ON COLUMN family_history.family_cvd_under_60 IS
+COMMENT ON COLUMN heart_health_check.family_history.family_cvd_under_60 IS
     'Whether a first-degree relative had CVD under age 60.';
-COMMENT ON COLUMN family_history.family_cvd_relationship IS
+COMMENT ON COLUMN heart_health_check.family_history.family_cvd_relationship IS
     'Relationship of the affected relative.';
-COMMENT ON COLUMN family_history.family_diabetes_history IS
+COMMENT ON COLUMN heart_health_check.family_history.family_diabetes_history IS
     'Whether there is a family history of diabetes.';
 
-COMMENT ON COLUMN family_history.assessment_id IS
+COMMENT ON COLUMN heart_health_check.family_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN family_history.id IS
+COMMENT ON COLUMN heart_health_check.family_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN family_history.created_at IS
+COMMENT ON COLUMN heart_health_check.family_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN family_history.updated_at IS
+COMMENT ON COLUMN heart_health_check.family_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN family_history.deleted_at IS
+COMMENT ON COLUMN heart_health_check.family_history.deleted_at IS
     'Timestamp when this row was deleted.';

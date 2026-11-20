@@ -1,7 +1,7 @@
 -- Child demographic information for the safeguarding referral. The
 -- "patient" is the child the referral concerns.
 
-CREATE TABLE patient (
+CREATE TABLE child_safeguarding_referral.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -24,49 +24,49 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON child_safeguarding_referral.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE child_safeguarding_referral.patient IS
     'Child demographic information for the child the safeguarding referral concerns.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.name IS
     'Full name of the child.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.birth_date IS
     'Date of birth of the child.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.sex IS
     'Sex recorded for the child: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.email IS
     'Email address, where held.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.phone IS
     'Phone number, where held.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.postal_address_as_full_text IS
     'Home address of the child as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.hospital_mrn IS
     'Local hospital or unique reference number for the child.';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON child_safeguarding_referral.patient
     USING GIN (name gin_trgm_ops);

@@ -84,7 +84,7 @@ def split_top(body):
 def create_bodies(text):
     """Yield (table, body) for each CREATE TABLE, matching the closing paren."""
     text = re.sub(r"--[^\n]*", "", text)
-    for match in re.finditer(r'CREATE TABLE(?: IF NOT EXISTS)?\s+"?(\w+)"?\s*\(', text, re.I):
+    for match in re.finditer(r'CREATE TABLE(?: IF NOT EXISTS)?\s+(?:\w+\.)?"?(\w+)"?\s*\(', text, re.I):
         depth, quoted, start = 1, False, match.end()
         for index in range(start, len(text)):
             char = text[index]
@@ -114,7 +114,7 @@ def parse_column(part):
         value = re.sub(r"::\w+$", "", value)
     if value is not None and re.fullmatch(r"now\(\)", value, re.I):
         value = "CURRENT_TIMESTAMP"
-    refers = re.search(r'REFERENCES\s+"?(\w+)"?\s*\(\s*"?id"?\s*\)(?:\s+ON DELETE ((?:SET )?\w+(?: ACTION)?))?',
+    refers = re.search(r'REFERENCES\s+(?:\w+\.)?"?(\w+)"?\s*\(\s*"?id"?\s*\)(?:\s+ON DELETE ((?:SET )?\w+(?: ACTION)?))?',
                        tail, re.I)
     stripped = re.sub(r"\bCHECK\s*\(.*\)", " ", tail, flags=re.I)
     return Column(
@@ -138,7 +138,7 @@ def parse_tables(text):
                 if unique:
                     table.uniques.append([c.strip(' "\n') for c in unique[1].split(",")])
                 foreign = re.search(
-                    r'FOREIGN KEY\s*\(\s*"?(\w+)"?\s*\)\s*REFERENCES\s+"?(\w+)"?\s*\(\s*"?id"?\s*\)'
+                    r'FOREIGN KEY\s*\(\s*"?(\w+)"?\s*\)\s*REFERENCES\s+(?:\w+\.)?"?(\w+)"?\s*\(\s*"?id"?\s*\)'
                     r"(?:\s+ON DELETE ((?:SET )?\w+(?: ACTION)?))?", part, re.I)
                 if foreign:
                     for column in table.columns:
@@ -161,7 +161,7 @@ def sql_tables(form):
 
 def apply_alters(tables, text):
     """Follow the ALTER TABLE statements that change a table's columns."""
-    for match in re.finditer(r'ALTER TABLE\s+"?(\w+)"?\s+(.*?);', text, re.S):
+    for match in re.finditer(r'ALTER TABLE\s+(?:\w+\.)?"?(\w+)"?\s+(.*?);', text, re.S):
         table = tables.get(match[1])
         action = " ".join(match[2].split())
         if table is None:

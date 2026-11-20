@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (12):
+-- Source files (13):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -35,12 +36,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medication_reconciliation;
+
+COMMENT ON SCHEMA medication_reconciliation IS
+    'Namespace for the Medication Reconciliation form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medication_reconciliation.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -48,7 +65,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medication_reconciliation.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -61,7 +78,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE medication_reconciliation.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -84,51 +101,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON medication_reconciliation.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE medication_reconciliation.patient IS
     'Patient demographic information used by the medication-reconciliation record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN medication_reconciliation.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN medication_reconciliation.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN medication_reconciliation.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN medication_reconciliation.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN medication_reconciliation.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN medication_reconciliation.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN medication_reconciliation.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN medication_reconciliation.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medication_reconciliation.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN medication_reconciliation.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medication_reconciliation.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN medication_reconciliation.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN medication_reconciliation.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN medication_reconciliation.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN medication_reconciliation.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN medication_reconciliation.patient.allergies_summary IS
     'Free-text summary of the patient''s known drug allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON medication_reconciliation.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -143,7 +160,7 @@ CREATE INDEX patient_name_trgm_idx
 -- carried out the medication reconciliation (pharmacist, pharmacy
 -- technician, prescriber, or nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE medication_reconciliation.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -161,41 +178,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medication_reconciliation.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medication_reconciliation.clinician IS
     'Clinician identifying information for the professional who reconciled the patient''s medicines.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medication_reconciliation.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medication_reconciliation.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medication_reconciliation.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medication_reconciliation.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medication_reconciliation.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medication_reconciliation.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medication_reconciliation.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medication_reconciliation.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medication_reconciliation.clinician.role IS
     'Primary clinical role for the reconciliation: pharmacist, pharmacy-technician, prescriber, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medication_reconciliation.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medication_reconciliation.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON medication_reconciliation.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- (best-possible medication history and inpatient list), and reconciliation
 -- discrepancies are held in child tables that cascade from this parent.
 
-CREATE TABLE medication_reconciliation (
+CREATE TABLE medication_reconciliation.medication_reconciliation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES medication_reconciliation.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES medication_reconciliation.clinician(id) ON DELETE RESTRICT,
 
     reconciliation_type VARCHAR(15) NOT NULL DEFAULT '' CHECK (reconciliation_type IN ('admission', 'transfer', 'discharge', '')),
     care_setting VARCHAR(25) NOT NULL DEFAULT '' CHECK (care_setting IN ('emergency-department', 'acute-medical-unit', 'surgical-admissions', 'ward', 'critical-care', 'other', '')),
@@ -238,48 +255,48 @@ CREATE TABLE medication_reconciliation (
 );
 
 CREATE INDEX medication_reconciliation_patient_id_idx
-    ON medication_reconciliation (patient_id);
+    ON medication_reconciliation.medication_reconciliation (patient_id);
 CREATE INDEX medication_reconciliation_clinician_id_idx
-    ON medication_reconciliation (clinician_id);
+    ON medication_reconciliation.medication_reconciliation (clinician_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_updated_at
-    BEFORE UPDATE ON medication_reconciliation
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation IS
     'Parent medication-reconciliation header: transition-of-care context, care setting, reconciling clinician, patient identification, and patient-level allergy status.';
-COMMENT ON COLUMN medication_reconciliation.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN medication_reconciliation.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medication_reconciliation.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medication_reconciliation.patient_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.patient_id IS
     'Foreign key to the patient this reconciliation is for (restricted delete).';
-COMMENT ON COLUMN medication_reconciliation.clinician_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.clinician_id IS
     'Foreign key to the reconciling clinician (restricted delete); optional.';
-COMMENT ON COLUMN medication_reconciliation.reconciliation_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.reconciliation_type IS
     'Transition of care at which the reconciliation is performed: admission, transfer, or discharge.';
-COMMENT ON COLUMN medication_reconciliation.care_setting IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.care_setting IS
     'Care setting: emergency-department, acute-medical-unit, surgical-admissions, ward, critical-care, or other.';
-COMMENT ON COLUMN medication_reconciliation.reconciled_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.reconciled_at IS
     'Date and time the reconciliation was carried out.';
-COMMENT ON COLUMN medication_reconciliation.clinician_name IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.clinician_name IS
     'Name of the reconciling clinician as entered on the form.';
-COMMENT ON COLUMN medication_reconciliation.clinician_role IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.clinician_role IS
     'Role of the reconciling clinician: pharmacist, pharmacy-technician, prescriber, nurse, or other.';
-COMMENT ON COLUMN medication_reconciliation.patient_identifier IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.patient_identifier IS
     'Local patient identifier as entered on the form.';
-COMMENT ON COLUMN medication_reconciliation.age_band IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.age_band IS
     'Patient age band for dosing context: adult or paediatric.';
-COMMENT ON COLUMN medication_reconciliation.sex IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN medication_reconciliation.weight_kg IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.weight_kg IS
     'Patient weight in kilograms for weight-based dosing (nullable).';
-COMMENT ON COLUMN medication_reconciliation.allergy_status IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation.allergy_status IS
     'Patient allergy status: documented, no-known-drug-allergies, or not-documented.';
 
 -- ========================================================================
@@ -297,13 +314,13 @@ COMMENT ON COLUMN medication_reconciliation.allergy_status IS
 -- frequency, indication, high-risk class, adherence, originating information
 -- source, and (for inpatient rows) the prescribing status.
 
-CREATE TABLE medication_reconciliation_line_item (
+CREATE TABLE medication_reconciliation.medication_reconciliation_line_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     list_source VARCHAR(10) NOT NULL DEFAULT '' CHECK (list_source IN ('bpmh', 'inpatient', '')),
     drug_name TEXT NOT NULL DEFAULT '',
@@ -319,46 +336,46 @@ CREATE TABLE medication_reconciliation_line_item (
 );
 
 CREATE INDEX medication_reconciliation_line_item_reconciliation_id_idx
-    ON medication_reconciliation_line_item (medication_reconciliation_id);
+    ON medication_reconciliation.medication_reconciliation_line_item (medication_reconciliation_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_line_item_updated_at
-    BEFORE UPDATE ON medication_reconciliation_line_item
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_line_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_line_item IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_line_item IS
     'Medication line items on either list (BPMH or inpatient), discriminated by list_source, cascading from the parent reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_line_item.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_line_item.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_line_item.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_line_item.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_line_item.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_line_item.list_source IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.list_source IS
     'Which list this line belongs to: bpmh (best-possible medication history) or inpatient.';
-COMMENT ON COLUMN medication_reconciliation_line_item.drug_name IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.drug_name IS
     'Generic (preferred) or brand name of the medicine.';
-COMMENT ON COLUMN medication_reconciliation_line_item.form IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.form IS
     'Pharmaceutical form, e.g. tablet, capsule, injection, patch.';
-COMMENT ON COLUMN medication_reconciliation_line_item.dose IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.dose IS
     'Dose as free text to preserve units, e.g. "5 mg".';
-COMMENT ON COLUMN medication_reconciliation_line_item.route IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.route IS
     'Route of administration: oral, iv, im, subcutaneous, topical, inhaled, or other.';
-COMMENT ON COLUMN medication_reconciliation_line_item.frequency IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.frequency IS
     'Dosing frequency as free text, e.g. "once daily", "BD", "PRN".';
-COMMENT ON COLUMN medication_reconciliation_line_item.indication IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.indication IS
     'Reason the medicine is prescribed.';
-COMMENT ON COLUMN medication_reconciliation_line_item.high_risk_class IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.high_risk_class IS
     'High-risk medicine class: none, anticoagulant, insulin, opioid, or other.';
-COMMENT ON COLUMN medication_reconciliation_line_item.adherence IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.adherence IS
     'Patient adherence: taking, not-taking, intermittent, or unknown.';
-COMMENT ON COLUMN medication_reconciliation_line_item.source_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.source_type IS
     'Information source this line came from: patient-interview, carer-interview, gp-record, repeat-prescription, community-pharmacy, dispensing-history, previous-discharge-summary, own-drugs-bag, or care-home-mar.';
-COMMENT ON COLUMN medication_reconciliation_line_item.status IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.status IS
     'Prescribing status for inpatient rows: active, held, stopped, or suspended.';
 
 -- ========================================================================
@@ -374,41 +391,41 @@ COMMENT ON COLUMN medication_reconciliation_line_item.status IS
 -- medication_reconciliation. Two or more independent, verified sources are
 -- required for a complete reconciliation.
 
-CREATE TABLE medication_reconciliation_information_source (
+CREATE TABLE medication_reconciliation.medication_reconciliation_information_source (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     source_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (source_type IN ('patient-interview', 'carer-interview', 'gp-record', 'repeat-prescription', 'community-pharmacy', 'dispensing-history', 'previous-discharge-summary', 'own-drugs-bag', 'care-home-mar', '')),
     verified BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE INDEX medication_reconciliation_information_source_reconciliation_id_idx
-    ON medication_reconciliation_information_source (medication_reconciliation_id);
+    ON medication_reconciliation.medication_reconciliation_information_source (medication_reconciliation_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_information_source_updated_at
-    BEFORE UPDATE ON medication_reconciliation_information_source
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_information_source
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_information_source IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_information_source IS
     'Information sources used to build the best-possible medication history (BPMH), cascading from the parent reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_information_source.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_information_source.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_information_source.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_information_source.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_information_source.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_information_source.source_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.source_type IS
     'Type of source: patient-interview, carer-interview, gp-record, repeat-prescription, community-pharmacy, dispensing-history, previous-discharge-summary, own-drugs-bag, or care-home-mar.';
-COMMENT ON COLUMN medication_reconciliation_information_source.verified IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_information_source.verified IS
     'Whether the source was directly checked by the reconciling clinician.';
 
 -- ========================================================================
@@ -424,13 +441,13 @@ COMMENT ON COLUMN medication_reconciliation_information_source.verified IS
 -- Allergy substances are cross-checked against reconciled medicines to raise
 -- the allergy-conflict safety flag.
 
-CREATE TABLE medication_reconciliation_allergy (
+CREATE TABLE medication_reconciliation.medication_reconciliation_allergy (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     substance TEXT NOT NULL DEFAULT '',
     reaction_type VARCHAR(15) NOT NULL DEFAULT '' CHECK (reaction_type IN ('allergy', 'intolerance', 'adverse-effect', 'unknown', '')),
@@ -438,30 +455,30 @@ CREATE TABLE medication_reconciliation_allergy (
 );
 
 CREATE INDEX medication_reconciliation_allergy_reconciliation_id_idx
-    ON medication_reconciliation_allergy (medication_reconciliation_id);
+    ON medication_reconciliation.medication_reconciliation_allergy (medication_reconciliation_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_allergy_updated_at
-    BEFORE UPDATE ON medication_reconciliation_allergy
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_allergy
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_allergy IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_allergy IS
     'Drug allergies and adverse reactions recorded for the patient, cascading from the parent reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_allergy.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_allergy.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_allergy.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_allergy.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_allergy.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_allergy.substance IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.substance IS
     'Drug or drug class the patient reacts to.';
-COMMENT ON COLUMN medication_reconciliation_allergy.reaction_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.reaction_type IS
     'Reaction type: allergy, intolerance, adverse-effect, or unknown.';
-COMMENT ON COLUMN medication_reconciliation_allergy.severity IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_allergy.severity IS
     'Reaction severity: mild, moderate, severe, or anaphylaxis.';
 
 -- ========================================================================
@@ -479,13 +496,13 @@ COMMENT ON COLUMN medication_reconciliation_allergy.severity IS
 -- to, and marked intentional (a documented decision carrying an intended
 -- action and rationale) or unintentional (an unexplained error).
 
-CREATE TABLE medication_reconciliation_discrepancy (
+CREATE TABLE medication_reconciliation.medication_reconciliation_discrepancy (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     discrepancy_type VARCHAR(15) NOT NULL DEFAULT '' CHECK (discrepancy_type IN ('omission', 'commission', 'duplication', 'dose', 'frequency', 'route', 'formulation', '')),
     bpmh_item_ref TEXT NOT NULL DEFAULT '',
@@ -496,36 +513,36 @@ CREATE TABLE medication_reconciliation_discrepancy (
 );
 
 CREATE INDEX medication_reconciliation_discrepancy_reconciliation_id_idx
-    ON medication_reconciliation_discrepancy (medication_reconciliation_id);
+    ON medication_reconciliation.medication_reconciliation_discrepancy (medication_reconciliation_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_discrepancy_updated_at
-    BEFORE UPDATE ON medication_reconciliation_discrepancy
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_discrepancy
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_discrepancy IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_discrepancy IS
     'Reconciliation discrepancies between the BPMH and the inpatient list, classified by type and by intentional / unintentional, cascading from the parent reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.discrepancy_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.discrepancy_type IS
     'Type of difference: omission, commission, duplication, dose, frequency, route, or formulation.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.bpmh_item_ref IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.bpmh_item_ref IS
     'Reference to the matched BPMH line item (free text; empty when not applicable).';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.inpatient_item_ref IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.inpatient_item_ref IS
     'Reference to the matched inpatient line item (free text; empty when not applicable).';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.intended_action IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.intended_action IS
     'Documented action for an intentional discrepancy: continue, hold, stop, change, or start.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.rationale IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.rationale IS
     'Clinical reason for the intended action.';
-COMMENT ON COLUMN medication_reconciliation_discrepancy.intentional IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_discrepancy.intentional IS
     'True when the discrepancy is a documented decision; false when unexplained (an error).';
 
 -- ========================================================================
@@ -541,14 +558,14 @@ COMMENT ON COLUMN medication_reconciliation_discrepancy.intentional IS
 -- the engine produced from the information sources, line items, and
 -- discrepancies. One row per reconciliation (1:1).
 
-CREATE TABLE medication_reconciliation_grade (
+CREATE TABLE medication_reconciliation.medication_reconciliation_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medication_reconciliation_id UUID NOT NULL UNIQUE
-        REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+        REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     status VARCHAR(25) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'discrepancies-outstanding', 'incomplete', '')),
@@ -562,31 +579,31 @@ CREATE TABLE medication_reconciliation_grade (
 );
 
 CREATE TRIGGER trigger_medication_reconciliation_grade_updated_at
-    BEFORE UPDATE ON medication_reconciliation_grade
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_grade IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_grade IS
     'Computed reconciliation grading result: overall status and the derived source / unintentional / high-risk-unintentional counts.';
-COMMENT ON COLUMN medication_reconciliation_grade.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_grade.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_grade.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_grade.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_grade.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation (unique, 1:1).';
-COMMENT ON COLUMN medication_reconciliation_grade.status IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.status IS
     'Overall reconciliation status: complete, discrepancies-outstanding, or incomplete.';
-COMMENT ON COLUMN medication_reconciliation_grade.source_count IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.source_count IS
     'Number of independent information sources used to build the BPMH.';
-COMMENT ON COLUMN medication_reconciliation_grade.unintentional_count IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.unintentional_count IS
     'Number of unintentional (unexplained) discrepancies outstanding.';
-COMMENT ON COLUMN medication_reconciliation_grade.high_risk_unintentional_count IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.high_risk_unintentional_count IS
     'Number of unintentional discrepancies on a high-risk medicine (anticoagulant, insulin, or opioid).';
-COMMENT ON COLUMN medication_reconciliation_grade.graded_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -600,14 +617,14 @@ COMMENT ON COLUMN medication_reconciliation_grade.graded_at IS
 -- Audit trail of every reconciliation rule that fired during grading. Each row
 -- records one rule firing with a category and a human-readable description.
 
-CREATE TABLE medication_reconciliation_grade_rule (
+CREATE TABLE medication_reconciliation.medication_reconciliation_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medication_reconciliation_grade_id UUID NOT NULL
-        REFERENCES medication_reconciliation_grade(id) ON DELETE CASCADE,
+        REFERENCES medication_reconciliation.medication_reconciliation_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -615,30 +632,30 @@ CREATE TABLE medication_reconciliation_grade_rule (
 );
 
 CREATE INDEX medication_reconciliation_grade_rule_grade_id_idx
-    ON medication_reconciliation_grade_rule (medication_reconciliation_grade_id);
+    ON medication_reconciliation.medication_reconciliation_grade_rule (medication_reconciliation_grade_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_grade_rule_updated_at
-    BEFORE UPDATE ON medication_reconciliation_grade_rule
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_grade_rule IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_grade_rule IS
     'Audit trail of every reconciliation rule that fired during grading: category and description.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.medication_reconciliation_grade_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.medication_reconciliation_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.rule_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-STATUS-INCOMPLETE-01).';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.category IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.category IS
     'Subject category (e.g. status, discrepancy-classification).';
-COMMENT ON COLUMN medication_reconciliation_grade_rule.description IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -653,14 +670,14 @@ COMMENT ON COLUMN medication_reconciliation_grade_rule.description IS
 -- priority, a description, and a suggested action for the pharmacy or
 -- prescribing team.
 
-CREATE TABLE medication_reconciliation_grade_flag (
+CREATE TABLE medication_reconciliation.medication_reconciliation_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medication_reconciliation_grade_id UUID NOT NULL
-        REFERENCES medication_reconciliation_grade(id) ON DELETE CASCADE,
+        REFERENCES medication_reconciliation.medication_reconciliation_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -682,34 +699,34 @@ CREATE TABLE medication_reconciliation_grade_flag (
 );
 
 CREATE INDEX medication_reconciliation_grade_flag_grade_id_idx
-    ON medication_reconciliation_grade_flag (medication_reconciliation_grade_id);
+    ON medication_reconciliation.medication_reconciliation_grade_flag (medication_reconciliation_grade_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_grade_flag_updated_at
-    BEFORE UPDATE ON medication_reconciliation_grade_flag
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_grade_flag IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_grade_flag IS
     'Safety flags raised independently of the reconciliation status, with priority, description, and a suggested action for the pharmacy or prescribing team.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.medication_reconciliation_grade_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.medication_reconciliation_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.flag_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-RISK-UNINTENTIONAL-DISCREPANCY-001).';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.category IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.category IS
     'Flag category: high-risk-unintentional-discrepancy, insufficient-sources, allergy-conflict, interaction, therapeutic-duplication, unintentional-discrepancy-outstanding, allergy-status-not-documented, or other.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.priority IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.description IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN medication_reconciliation_grade_flag.suggested_action IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_grade_flag.suggested_action IS
     'Suggested action (e.g. "resolve the unintentional anticoagulant discrepancy with the prescriber").';
 
 -- ========================================================================

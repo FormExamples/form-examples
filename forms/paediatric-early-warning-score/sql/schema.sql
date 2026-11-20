@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS paediatric_early_warning_score;
+
+COMMENT ON SCHEMA paediatric_early_warning_score IS
+    'Namespace for the Paediatric Early Warning Score (PEWS) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION paediatric_early_warning_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION paediatric_early_warning_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE paediatric_early_warning_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON paediatric_early_warning_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE paediatric_early_warning_score.patient IS
     'Patient demographic information used by the paediatric early warning score observation record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.birth_date IS
     'Date of birth; also determines the child''s PEWS age band.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN paediatric_early_warning_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON paediatric_early_warning_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clinician who
 -- recorded the paediatric early warning score observation set.
 
-CREATE TABLE clinician (
+CREATE TABLE paediatric_early_warning_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON paediatric_early_warning_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE paediatric_early_warning_score.clinician IS
     'Clinician identifying information for the person who recorded the paediatric early warning score observation set.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.role IS
     'Assessing clinical role: nurse, healthcare-assistant, doctor, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN paediatric_early_warning_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON paediatric_early_warning_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- live in dedicated child tables. Raw numeric observations use NULL when a
 -- measurement was not recorded.
 
-CREATE TABLE paediatric_early_warning_score (
+CREATE TABLE paediatric_early_warning_score.paediatric_early_warning_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES paediatric_early_warning_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES paediatric_early_warning_score.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'amended', 'signed')),
@@ -258,56 +275,56 @@ CREATE TABLE paediatric_early_warning_score (
 );
 
 CREATE INDEX paediatric_early_warning_score_patient_id_idx
-    ON paediatric_early_warning_score (patient_id);
+    ON paediatric_early_warning_score.paediatric_early_warning_score (patient_id);
 CREATE INDEX paediatric_early_warning_score_clinician_id_idx
-    ON paediatric_early_warning_score (clinician_id);
+    ON paediatric_early_warning_score.paediatric_early_warning_score (clinician_id);
 
 CREATE TRIGGER trigger_paediatric_early_warning_score_updated_at
-    BEFORE UPDATE ON paediatric_early_warning_score
+    BEFORE UPDATE ON paediatric_early_warning_score.paediatric_early_warning_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE paediatric_early_warning_score IS
+COMMENT ON TABLE paediatric_early_warning_score.paediatric_early_warning_score IS
     'Main PEWS observation record: raw physiological observations for a single measurement set plus recording context (age band, care setting, observation timestamp) and the documented-concern override triggers. Sub-scores, aggregate, escalation band, rules, and flags live in child tables.';
-COMMENT ON COLUMN paediatric_early_warning_score.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paediatric_early_warning_score.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paediatric_early_warning_score.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paediatric_early_warning_score.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paediatric_early_warning_score.patient_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.patient_id IS
     'Foreign key to the child observed (RESTRICT: patients are not deleted while observations exist).';
-COMMENT ON COLUMN paediatric_early_warning_score.clinician_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.clinician_id IS
     'Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.';
-COMMENT ON COLUMN paediatric_early_warning_score.status IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN paediatric_early_warning_score.observation_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.observation_at IS
     'Date and time the observation set was taken; NULL when not yet recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score.care_setting IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.care_setting IS
     'Care setting where the observations were recorded: ward, childrens-assessment-unit, emergency-department, or other.';
-COMMENT ON COLUMN paediatric_early_warning_score.age_band IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.age_band IS
     'Age band selected first; sets the normal respiratory-rate and heart-rate ranges: neonate (0-<1 month), infant (1-11 months), young-child (1-4 years), child (5-11 years), or adolescent (>=12 years).';
-COMMENT ON COLUMN paediatric_early_warning_score.respiratory_rate IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.respiratory_rate IS
     'Respiratory rate in breaths per minute, scored against the age-band normal range; NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score.respiratory_effort IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.respiratory_effort IS
     'Respiratory effort / recession: none, mild, moderate, or severe (grunting).';
-COMMENT ON COLUMN paediatric_early_warning_score.oxygen_saturation IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.oxygen_saturation IS
     'Oxygen saturation (SpO2) as a percentage; NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score.supplemental_oxygen IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.supplemental_oxygen IS
     'Supplemental-oxygen requirement: room-air, low-flow, or high-flow.';
-COMMENT ON COLUMN paediatric_early_warning_score.heart_rate IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.heart_rate IS
     'Heart rate in beats per minute, scored against the age-band normal range; NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score.capillary_refill IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.capillary_refill IS
     'Capillary refill time / colour: under-2s, 2-3s, 3-4s, or over-4s.';
-COMMENT ON COLUMN paediatric_early_warning_score.consciousness_acvpu IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.consciousness_acvpu IS
     'Consciousness level on the ACVPU scale: alert, voice, pain, or unresponsive.';
-COMMENT ON COLUMN paediatric_early_warning_score.nurse_concern IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.nurse_concern IS
     'Documented nurse / staff concern: an independent escalation trigger.';
-COMMENT ON COLUMN paediatric_early_warning_score.parent_concern IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.parent_concern IS
     'Documented parent / carer concern: an independent escalation trigger.';
-COMMENT ON COLUMN paediatric_early_warning_score.clinical_notes IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score.clinical_notes IS
     'Free-text clinical notes accompanying the observation set.';
 
 -- ========================================================================
@@ -324,14 +341,14 @@ COMMENT ON COLUMN paediatric_early_warning_score.clinical_notes IS
 -- override-trigger indicators, and the recommended monitoring frequency. One row
 -- per observation record (1:1).
 
-CREATE TABLE paediatric_early_warning_score_grade (
+CREATE TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     paediatric_early_warning_score_id UUID NOT NULL UNIQUE
-        REFERENCES paediatric_early_warning_score(id) ON DELETE CASCADE,
+        REFERENCES paediatric_early_warning_score.paediatric_early_warning_score(id) ON DELETE CASCADE,
 
     -- Aggregate total across the seven parameter sub-scores
     aggregate_score INTEGER,
@@ -366,49 +383,49 @@ CREATE TABLE paediatric_early_warning_score_grade (
 );
 
 CREATE TRIGGER trigger_paediatric_early_warning_score_grade_updated_at
-    BEFORE UPDATE ON paediatric_early_warning_score_grade
+    BEFORE UPDATE ON paediatric_early_warning_score.paediatric_early_warning_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE paediatric_early_warning_score_grade IS
+COMMENT ON TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade IS
     'Computed PEWS grading result: per-parameter 0-3 sub-scores, aggregate total (0-21), maximum single-parameter sub-score, derived escalation band, single-parameter-3 and documented-concern override triggers, and recommended monitoring frequency. One row per observation record (1:1).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.paediatric_early_warning_score_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.paediatric_early_warning_score_id IS
     'Foreign key to the parent observation record (unique, 1:1).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.aggregate_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.aggregate_score IS
     'Aggregate PEWS total (0-21): sum of the seven parameter sub-scores; NULL until computed.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.max_parameter_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.max_parameter_score IS
     'Maximum of the seven parameter sub-scores (0-3); a value of 3 fires the single-parameter override trigger.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.respiratory_rate_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.respiratory_rate_score IS
     'Respiratory-rate sub-score (0-3), scored against the age-band normal range; NULL when not recorded or the age band was unset.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.respiratory_effort_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.respiratory_effort_score IS
     'Respiratory-effort / recession sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.oxygen_saturation_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.oxygen_saturation_score IS
     'Oxygen-saturation (SpO2) sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.supplemental_oxygen_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.supplemental_oxygen_score IS
     'Supplemental-oxygen sub-score (0, 1, or 3); NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.heart_rate_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.heart_rate_score IS
     'Heart-rate sub-score (0-3), scored against the age-band normal range; NULL when not recorded or the age band was unset.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.capillary_refill_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.capillary_refill_score IS
     'Capillary-refill / colour sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.consciousness_score IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.consciousness_score IS
     'Consciousness (ACVPU) sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.risk_band IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.risk_band IS
     'Derived escalation band from the aggregate total (>=6 high, 4-5 medium, 2-3 low, else routine), raised as needed by the override triggers.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.single_parameter_trigger IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.single_parameter_trigger IS
     'Whether any single parameter scored 3 (max_parameter_score = 3), an independent escalation trigger to at least medium.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.concern_trigger IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.concern_trigger IS
     'Whether a documented nurse / staff or parent / carer concern fired an independent escalation trigger.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.monitoring_frequency IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.monitoring_frequency IS
     'Recommended monitoring frequency and escalation response for the escalation band (e.g. routine observations, hourly, continuous with immediate senior review).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade.graded_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -423,14 +440,14 @@ COMMENT ON COLUMN paediatric_early_warning_score_grade.graded_at IS
 -- Each row records one rule firing with the parameter instrument that produced
 -- it, the sub-score or band it contributed, and a human-readable description.
 
-CREATE TABLE paediatric_early_warning_score_grade_rule (
+CREATE TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     paediatric_early_warning_score_grade_id UUID NOT NULL
-        REFERENCES paediatric_early_warning_score_grade(id) ON DELETE CASCADE,
+        REFERENCES paediatric_early_warning_score.paediatric_early_warning_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(30) NOT NULL
@@ -443,36 +460,36 @@ CREATE TABLE paediatric_early_warning_score_grade_rule (
 );
 
 CREATE INDEX paediatric_early_warning_score_grade_rule_grade_id_idx
-    ON paediatric_early_warning_score_grade_rule (paediatric_early_warning_score_grade_id);
+    ON paediatric_early_warning_score.paediatric_early_warning_score_grade_rule (paediatric_early_warning_score_grade_id);
 
 CREATE TRIGGER trigger_paediatric_early_warning_score_grade_rule_updated_at
-    BEFORE UPDATE ON paediatric_early_warning_score_grade_rule
+    BEFORE UPDATE ON paediatric_early_warning_score.paediatric_early_warning_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE paediatric_early_warning_score_grade_rule IS
+COMMENT ON TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade_rule IS
     'Audit trail of every grading rule that fired during PEWS computation: instrument, band, points contributed, category, and description.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.paediatric_early_warning_score_grade_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.paediatric_early_warning_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.rule_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-RESP-RATE-3-HIGH-01).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.instrument IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: respiratory-rate, respiratory-effort, oxygen-saturation, supplemental-oxygen, heart-rate, capillary-refill, consciousness, aggregate, single-parameter, or concern.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.band IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.band IS
     'Escalation band contributed by this rule: routine, low, medium, or high.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.points IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.points IS
     'Sub-score points contributed by this rule (0-3); NULL for non-scoring rules.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.category IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.category IS
     'Subject category (e.g. tachypnoea, recession, hypoxia, prolonged-refill, reduced-consciousness).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.description IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -486,14 +503,14 @@ COMMENT ON COLUMN paediatric_early_warning_score_grade_rule.description IS
 -- Safety-critical flags that fire independently of the aggregate escalation
 -- band, with priority and a suggested action for the ward and escalation team.
 
-CREATE TABLE paediatric_early_warning_score_grade_flag (
+CREATE TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     paediatric_early_warning_score_grade_id UUID NOT NULL
-        REFERENCES paediatric_early_warning_score_grade(id) ON DELETE CASCADE,
+        REFERENCES paediatric_early_warning_score.paediatric_early_warning_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -513,34 +530,34 @@ CREATE TABLE paediatric_early_warning_score_grade_flag (
 );
 
 CREATE INDEX paediatric_early_warning_score_grade_flag_grade_id_idx
-    ON paediatric_early_warning_score_grade_flag (paediatric_early_warning_score_grade_id);
+    ON paediatric_early_warning_score.paediatric_early_warning_score_grade_flag (paediatric_early_warning_score_grade_id);
 
 CREATE TRIGGER trigger_paediatric_early_warning_score_grade_flag_updated_at
-    BEFORE UPDATE ON paediatric_early_warning_score_grade_flag
+    BEFORE UPDATE ON paediatric_early_warning_score.paediatric_early_warning_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE paediatric_early_warning_score_grade_flag IS
+COMMENT ON TABLE paediatric_early_warning_score.paediatric_early_warning_score_grade_flag IS
     'Safety-critical flags that fire independently of the aggregate escalation band, with priority and a suggested action for the ward and escalation team.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.created_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.updated_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.paediatric_early_warning_score_grade_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.paediatric_early_warning_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.flag_id IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SINGLE-PARAMETER-3-001).';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.category IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.category IS
     'Flag category: urgent-review, single-parameter-3, parent-nurse-concern, deteriorating-trend, incomplete, or other.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.priority IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.description IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN paediatric_early_warning_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN paediatric_early_warning_score.paediatric_early_warning_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "immediate senior review; consider critical-care outreach", "escalate and act on documented concern").';
 
 -- ========================================================================

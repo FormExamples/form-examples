@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_certificate_of_cause_of_death;
+
+COMMENT ON SCHEMA medical_certificate_of_cause_of_death IS
+    'Namespace for the Medical Certificate of Cause of Death (MCCD) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_certificate_of_cause_of_death.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_certificate_of_cause_of_death.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Patient demographic information for the deceased whose cause of death
 -- this certificate records.
 
-CREATE TABLE patient (
+CREATE TABLE medical_certificate_of_cause_of_death.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.patient IS
     'Patient demographic information for the deceased whose cause of death this certificate records.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.name IS
     'Full name of the deceased.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.birth_date IS
     'Date of birth of the deceased.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.sex IS
     'Sex recorded for the deceased: female, male, other, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON medical_certificate_of_cause_of_death.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information for the certifying doctor who completes this
 -- Medical Certificate of Cause of Death.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_certificate_of_cause_of_death.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.clinician IS
     'Clinician information for the certifying doctor who completes the Medical Certificate of Cause of Death.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.name IS
     'Certifying doctor full name as registered with the GMC.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.role IS
     'Grade of the certifying doctor: consultant, sas, registrar, foundation, gp, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician.registration_number IS
     'Professional registration number (typically the GMC reference).';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON medical_certificate_of_cause_of_death.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- flagged issues live in dedicated child tables. This record documents the
 -- certifying doctor's statutory judgement; it does not itself diagnose.
 
-CREATE TABLE medical_certificate_of_cause_of_death (
+CREATE TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES medical_certificate_of_cause_of_death.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES medical_certificate_of_cause_of_death.clinician(id) ON DELETE RESTRICT,
 
     -- Certification context
     certifying_doctor_name TEXT NOT NULL DEFAULT '',
@@ -272,102 +289,102 @@ CREATE TABLE medical_certificate_of_cause_of_death (
 );
 
 CREATE INDEX medical_certificate_of_cause_of_death_patient_id_idx
-    ON medical_certificate_of_cause_of_death (patient_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (patient_id);
 CREATE INDEX medical_certificate_of_cause_of_death_clinician_id_idx
-    ON medical_certificate_of_cause_of_death (clinician_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (clinician_id);
 
 CREATE TRIGGER trigger_medical_certificate_of_cause_of_death_updated_at
-    BEFORE UPDATE ON medical_certificate_of_cause_of_death
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE medical_certificate_of_cause_of_death IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death IS
     'Main Medical Certificate of Cause of Death (MCCD) record: certification context, deceased death details, the Part I direct causal sequence (I(a) -> I(b) -> I(c)) with onset-to-death intervals, the Part II contributory conditions, and the coroner / medical-examiner referral status. Validity classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.patient_id IS
     'Foreign key to the deceased this certificate documents (restrict delete).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.clinician_id IS
     'Foreign key to the certifying doctor (restrict delete); optional.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifying_doctor_name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifying_doctor_name IS
     'Name of the attending practitioner certifying the cause of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifying_doctor_grade IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifying_doctor_grade IS
     'Grade of the certifying doctor: consultant, sas, registrar, foundation, gp, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.gmc_reference IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.gmc_reference IS
     'GMC registration number of the certifying doctor.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.place_of_certification IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.place_of_certification IS
     'Place where the certificate is completed: hospital, practice, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certification_date IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certification_date IS
     'Date the certificate was completed.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.attended_deceased IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.attended_deceased IS
     'Whether the certifier attended the deceased during the last illness (yes/no).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.last_seen_alive_date IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.last_seen_alive_date IS
     'Date the certifier last saw the deceased alive.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.deceased_name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.deceased_name IS
     'Full name of the deceased as recorded on the certificate.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.sex IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.sex IS
     'Sex of the deceased: female, male, other, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.date_of_birth IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.date_of_birth IS
     'Date of birth of the deceased.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.age_years IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.age_years IS
     'Age of the deceased at death, in whole years.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient_identifier IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.patient_identifier IS
     'NHS number or local identifier of the deceased as recorded on the certificate.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.date_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.date_of_death IS
     'Date of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.time_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.time_of_death IS
     'Time of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.place_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.place_of_death IS
     'Place of death: ward, home, hospice, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.seen_after_death_by IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.seen_after_death_by IS
     'Who saw the body after death: certifier, another-practitioner, or not-seen.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ia_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ia_condition IS
     'Part I(a): the disease or condition directly leading to death (required).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ia_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ia_interval IS
     'Part I(a): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ib_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ib_condition IS
     'Part I(b): the antecedent condition giving rise to I(a).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ib_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ib_interval IS
     'Part I(b): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ic_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ic_condition IS
     'Part I(c): the underlying condition giving rise to I(b).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ic_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ic_interval IS
     'Part I(c): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.part_ii_conditions IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.part_ii_conditions IS
     'Part II: other significant conditions contributing to death but not part of the Part I sequence.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.part_ii_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.part_ii_interval IS
     'Part II: approximate interval between onset and death (optional).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.referred_to_coroner IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.referred_to_coroner IS
     'Whether the death has been referred to the coroner (yes/no).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.coroner_reason IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.coroner_reason IS
     'Coroner-referral criterion, if any: unnatural, violent, suspicious, unknown-cause, industrial-disease, medical-procedure, custody, no-attending-practitioner, neglect, self-harm, poisoning, other, or none.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_examiner_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.medical_examiner_status IS
     'Medical-examiner scrutiny status: scrutinised, discussed, pending, or not-required.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifier_note IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifier_note IS
     'Free-text note from the certifying doctor.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.qualifications IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.qualifications IS
     'Certifier primary medical qualifications, stated alongside the signature in the declaration.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.attendance_mode IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.attendance_mode IS
     'How the certifier attended the deceased during life: in-person, video, telephone, or none. Telephone alone does not qualify.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.ethnicity IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.ethnicity IS
     'Self-declared ethnicity copied from the medical record; unknown if not documented. Never guessed or asked of the family.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.pregnancy_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.pregnancy_status IS
     'Pregnancy status: not-applicable, not-pregnant, pregnant-at-death, pregnant-within-12-months, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_device_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.implanted_device_status IS
     'Whether hazardous implantable devices are present, checked in the records and on the body for cremation safety: none, present, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_devices IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.implanted_devices IS
     'Description of hazardous implantable devices, for example pacemaker, ICD, neurostimulator, or radioactive implant.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_id_condition IS
     'Part I(d): the underlying condition giving rise to I(c), when the sequence has four steps.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_id_interval IS
     'Part I(d): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.bereaved_family_discussed IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.bereaved_family_discussed IS
     'Whether the medical examiner has discussed the cause of death with the bereaved family (yes/no).';
 
 -- ========================================================================
@@ -386,14 +403,14 @@ COMMENT ON COLUMN medical_certificate_of_cause_of_death.bereaved_family_discusse
 -- not a numeric score, and it does not replace the statutory judgement of the
 -- certifying doctor, coroner, or medical examiner.
 
-CREATE TABLE medical_certificate_of_cause_of_death_grade (
+CREATE TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_certificate_of_cause_of_death_id UUID NOT NULL UNIQUE
-        REFERENCES medical_certificate_of_cause_of_death(id) ON DELETE CASCADE,
+        REFERENCES medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death(id) ON DELETE CASCADE,
 
     validity_class VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (validity_class IN ('valid', 'incomplete', 'refer-to-coroner', '')),
@@ -405,29 +422,29 @@ CREATE TABLE medical_certificate_of_cause_of_death_grade (
 );
 
 CREATE TRIGGER trigger_medical_certificate_of_cause_of_death_grade_updated_at
-    BEFORE UPDATE ON medical_certificate_of_cause_of_death_grade
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE medical_certificate_of_cause_of_death_grade IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade IS
     'Computed completeness and validity-classification result for a Medical Certificate of Cause of Death: validity class (valid/incomplete/refer-to-coroner), derived underlying cause of death, and whether a coroner-referral criterion is indicated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.medical_certificate_of_cause_of_death_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.medical_certificate_of_cause_of_death_id IS
     'Foreign key to the parent certificate (unique, 1:1).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.validity_class IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.validity_class IS
     'Validity classification: valid, incomplete, or refer-to-coroner (refer-to-coroner takes precedence).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.underlying_cause IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.underlying_cause IS
     'Derived underlying cause of death: the lowest completed Part I line (I(c) else I(b) else I(a)); empty when Part I is empty.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.coroner_referral_indicated IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.coroner_referral_indicated IS
     'Whether a coroner-referral criterion is indicated (yes/no).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.graded_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -442,14 +459,14 @@ COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade.graded_at IS
 -- row records one rule firing with the certificate dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE medical_certificate_of_cause_of_death_grade_rule (
+CREATE TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_certificate_of_cause_of_death_grade_id UUID NOT NULL
-        REFERENCES medical_certificate_of_cause_of_death_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -459,32 +476,32 @@ CREATE TABLE medical_certificate_of_cause_of_death_grade_rule (
 );
 
 CREATE INDEX medical_certificate_of_cause_of_death_grade_rule_grade_id_idx
-    ON medical_certificate_of_cause_of_death_grade_rule (medical_certificate_of_cause_of_death_grade_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule (medical_certificate_of_cause_of_death_grade_id);
 
 CREATE TRIGGER trigger_medical_certificate_of_cause_of_death_grade_rule_updated_at
-    BEFORE UPDATE ON medical_certificate_of_cause_of_death_grade_rule
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE medical_certificate_of_cause_of_death_grade_rule IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule IS
     'Audit trail of every validity rule that fired during classification: certificate dimension, category, and description.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.medical_certificate_of_cause_of_death_grade_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.medical_certificate_of_cause_of_death_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.rule_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MISSING-PART-IA-01).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.dimension IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.dimension IS
     'Certificate dimension the rule concerns: part-i, part-ii, referral, scrutiny, certifier, or classification.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.category IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.category IS
     'Subject category (e.g. required-component, illogical-sequence, coroner-referral).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.description IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -499,14 +516,14 @@ COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_rule.description I
 -- priority and a suggested action for the certifying doctor, coroner, or
 -- medical examiner.
 
-CREATE TABLE medical_certificate_of_cause_of_death_grade_flag (
+CREATE TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_certificate_of_cause_of_death_grade_id UUID NOT NULL
-        REFERENCES medical_certificate_of_cause_of_death_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -528,34 +545,34 @@ CREATE TABLE medical_certificate_of_cause_of_death_grade_flag (
 );
 
 CREATE INDEX medical_certificate_of_cause_of_death_grade_flag_grade_id_idx
-    ON medical_certificate_of_cause_of_death_grade_flag (medical_certificate_of_cause_of_death_grade_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag (medical_certificate_of_cause_of_death_grade_id);
 
 CREATE TRIGGER trigger_medical_certificate_of_cause_of_death_grade_flag_updated_at
-    BEFORE UPDATE ON medical_certificate_of_cause_of_death_grade_flag
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE medical_certificate_of_cause_of_death_grade_flag IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the certifying doctor, coroner, or medical examiner.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.medical_certificate_of_cause_of_death_grade_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.medical_certificate_of_cause_of_death_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.flag_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CORONER-REFERRAL-REQUIRED-001).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.category IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.category IS
     'Flag category: coroner-referral-required, unacceptable-sole-cause, missing-part-i, illogical-sequence, medical-examiner-scrutiny, missing-interval, incomplete-certifier, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.priority IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.description IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death_grade_flag.suggested_action IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death_grade_flag.suggested_action IS
     'Suggested clinical or statutory action (e.g. "refer to the coroner before issuing the MCCD", "state the underlying disease, not the mode of death").';
 
 -- ========================================================================

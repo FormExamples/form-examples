@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_practitioner.sql
@@ -29,12 +30,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS paediatric_surgery_waiting_list_card;
+
+COMMENT ON SCHEMA paediatric_surgery_waiting_list_card IS
+    'Namespace for the Paediatric Surgery Waiting List Card form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -42,7 +59,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION paediatric_surgery_waiting_list_card.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -55,7 +72,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE paediatric_surgery_waiting_list_card.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,45 +97,45 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.patient IS
     'Patient placed on a paediatric surgery waiting list.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.sex IS
     'Sex recorded for clinical purposes.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.preferred_language_as_iso_639_1 IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.preferred_language_as_iso_639_1 IS
     'Preferred written / spoken language as ISO 639-1 two-letter code.';
-COMMENT ON COLUMN patient.interpreter_required IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.interpreter_required IS
     'Whether an interpreter is required for clinical communication.';
-COMMENT ON COLUMN patient.accessibility_needs IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.accessibility_needs IS
     'Recorded accessibility needs (e.g. BSL, large print, easy read, step-free access).';
-COMMENT ON COLUMN patient.preferred_contact_channel IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.patient.preferred_contact_channel IS
     'Preferred channel for waiting-list and appointment communications.';
 
 -- ========================================================================
@@ -131,7 +148,7 @@ COMMENT ON COLUMN patient.preferred_contact_channel IS
 
 -- Practitioner who places the patient on a paediatric surgery waiting list.
 
-CREATE TABLE practitioner (
+CREATE TABLE paediatric_surgery_waiting_list_card.practitioner (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -161,39 +178,39 @@ CREATE TABLE practitioner (
 );
 
 CREATE TRIGGER trigger_practitioner_updated_at
-    BEFORE UPDATE ON practitioner
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.practitioner
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
-COMMENT ON TABLE practitioner IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.practitioner IS
     'Practitioner who completes a paediatric surgery waiting list card on behalf of the patient.';
-COMMENT ON COLUMN practitioner.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN practitioner.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN practitioner.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN practitioner.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN practitioner.name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.name IS
     'Name.';
-COMMENT ON COLUMN practitioner.email IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.email IS
     'Email address.';
-COMMENT ON COLUMN practitioner.phone IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.phone IS
     'Phone number.';
-COMMENT ON COLUMN practitioner.role IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.role IS
     'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk, rtt-validator, other.';
-COMMENT ON COLUMN practitioner.registration_body IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN practitioner.registration_number IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.registration_number IS
     'Professional registration number.';
-COMMENT ON COLUMN practitioner.organisation_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.organisation_name IS
     'Employing organisation (e.g. NHS trust name, GP practice name).';
-COMMENT ON COLUMN practitioner.organisation_ods_code IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.organisation_ods_code IS
     'NHS Organisation Data Service (ODS) code for the organisation.';
-COMMENT ON COLUMN practitioner.site_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.site_name IS
     'Site or clinic name within the organisation.';
-COMMENT ON COLUMN practitioner.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.practitioner.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format.';
 
 -- ========================================================================
@@ -206,15 +223,15 @@ COMMENT ON COLUMN practitioner.country_as_iso_3166_1_alpha_2 IS
 
 -- Paediatric Surgery waiting list card: the top-level record placing a patient on a list.
 
-CREATE TABLE paeds_surgery_waiting_list_card (
+CREATE TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.patient(id) ON DELETE CASCADE,
     practitioner_id UUID NOT NULL
-        REFERENCES practitioner(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.practitioner(id) ON DELETE CASCADE,
 
     -- Lifecycle
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
@@ -278,80 +295,80 @@ CREATE TABLE paeds_surgery_waiting_list_card (
 );
 
 CREATE TRIGGER trigger_paeds_surgery_waiting_list_card_updated_at
-    BEFORE UPDATE ON paeds_surgery_waiting_list_card
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_patient_id
-    ON paeds_surgery_waiting_list_card(patient_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card(patient_id);
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_practitioner_id
-    ON paeds_surgery_waiting_list_card(practitioner_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card(practitioner_id);
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_clock_start
-    ON paeds_surgery_waiting_list_card(rtt_clock_start_date);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card(rtt_clock_start_date);
 
-COMMENT ON TABLE paeds_surgery_waiting_list_card IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card IS
     'Top-level record placing a patient on a paediatric surgery waiting list. Parent of appointment(s) and grading result.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.patient_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.patient_id IS
     'Foreign key to the patient placed on the list.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.practitioner_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.practitioner_id IS
     'Foreign key to the practitioner who placed the patient on the list.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.status IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.status IS
     'Lifecycle status: draft, submitted, reviewed, or closed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.entry_date IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.entry_date IS
     'Date the practitioner entered the card.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.entry_time IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.entry_time IS
     'Time the practitioner entered the card.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.referral_source IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.referral_source IS
     'Where the referral originated: gp, consultant, a-and-e, self, community, screening, other.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.referral_date IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.referral_letter_reference IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.referral_letter_reference IS
     'Reference number / identifier for the originating referral letter.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.reason_for_referral IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.reason_for_referral IS
     'Free-text reason for referral.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.presenting_condition IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.presenting_condition IS
     'Free-text presenting condition / clinical summary.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.icd_10_code IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.icd_10_code IS
     'ICD-10 diagnostic code for the presenting condition.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.snomed_ct_code IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.snomed_ct_code IS
     'SNOMED CT clinical concept code for the presenting condition.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.suspected_cancer IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.suspected_cancer IS
     'Whether this is a suspected-cancer (two-week wait) referral.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.list_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.list_name IS
     'Display name for the waiting list (e.g. "Orthopaedic — knee replacement").';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.specialty IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.specialty IS
     'NHS specialty (e.g. "Trauma & Orthopaedics").';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.sub_specialty IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.sub_specialty IS
     'NHS sub-specialty (e.g. "Knee surgery").';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.procedure_description IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.procedure_description IS
     'Plain-language description of what the patient is waiting to do.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.opcs_4_code IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.opcs_4_code IS
     'OPCS-4 procedure code if a specific procedure is planned.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.clinical_priority IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.clinical_priority IS
     'NHS England clinical priority: P1a, P1b, P2, P3, P4, P5, P6.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.rtt_clock_start_date IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.rtt_clock_start_date IS
     'Referral to Treatment (RTT) clock-start date. The date the patient joined the list.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.expected_procedure_type IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.expected_procedure_type IS
     'Expected next event for the patient.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.expected_wait_weeks IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.expected_wait_weeks IS
     'Expected wait, in weeks, communicated to the patient at entry.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.consent_to_reminders IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.consent_to_reminders IS
     'Whether the patient has consented to appointment reminders.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.communication_notes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.communication_notes IS
     'Free-text communication preferences and notes.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.additional_notes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.additional_notes IS
     'Free-text practitioner sign-off notes.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card.signed_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card.signed_at IS
     'Timestamp of practitioner electronic signature.';
 
 -- ========================================================================
@@ -364,13 +381,13 @@ COMMENT ON COLUMN paeds_surgery_waiting_list_card.signed_at IS
 
 -- Upcoming or scheduled appointment(s) attached to a waiting list card.
 
-CREATE TABLE paeds_surgery_waiting_list_card_appointment (
+CREATE TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     paeds_surgery_waiting_list_card_id UUID NOT NULL
-        REFERENCES paeds_surgery_waiting_list_card(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card(id) ON DELETE CASCADE,
 
     appointment_date DATE,
     appointment_time TIME,
@@ -403,53 +420,53 @@ CREATE TABLE paeds_surgery_waiting_list_card_appointment (
 );
 
 CREATE TRIGGER trigger_paeds_surgery_waiting_list_card_appointment_updated_at
-    BEFORE UPDATE ON paeds_surgery_waiting_list_card_appointment
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_appointment_card_id
-    ON paeds_surgery_waiting_list_card_appointment(paeds_surgery_waiting_list_card_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment(paeds_surgery_waiting_list_card_id);
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_appointment_date
-    ON paeds_surgery_waiting_list_card_appointment(appointment_date);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment(appointment_date);
 
-COMMENT ON TABLE paeds_surgery_waiting_list_card_appointment IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment IS
     'Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.paeds_surgery_waiting_list_card_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.paeds_surgery_waiting_list_card_id IS
     'Foreign key to the parent waiting list card.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.appointment_date IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.appointment_date IS
     'Date of the appointment.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.appointment_time IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.appointment_time IS
     'Start time of the appointment.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.duration_minutes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.duration_minutes IS
     'Planned duration in minutes.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.appointment_type IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.appointment_type IS
     'Appointment type: first-outpatient, follow-up, pre-assessment, diagnostic, treatment, procedure, admission, telephone, video, other.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.site_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.site_name IS
     'Name of the site (hospital, clinic, or community location).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.site_address IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.site_address IS
     'Postal address of the site, suitable for printing on a patient letter.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.clinic_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.clinic_name IS
     'Name of the clinic within the site.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.room IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.room IS
     'Room or location reference within the clinic.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.clinician_name IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.clinician_name IS
     'Name of the attending clinician, if known.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.clinician_team IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.clinician_team IS
     'Name of the clinical team, if assignment is by team rather than individual.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.status IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.status IS
     'Appointment status: scheduled, confirmed, rebooked, cancelled, attended, did-not-attend.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.travel_notes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.travel_notes IS
     'Free-text travel information for the patient (transport, parking).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.access_notes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_appointment.access_notes IS
     'Free-text accessibility notes (step-free access, BSL interpreter booked, etc.).';
 
 -- ========================================================================
@@ -462,13 +479,13 @@ COMMENT ON COLUMN paeds_surgery_waiting_list_card_appointment.access_notes IS
 
 -- Computed grading result for a waiting list card.
 
-CREATE TABLE paeds_surgery_waiting_list_card_grade (
+CREATE TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     paeds_surgery_waiting_list_card_id UUID NOT NULL UNIQUE
-        REFERENCES paeds_surgery_waiting_list_card(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card(id) ON DELETE CASCADE,
 
     waiting_time_status VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (waiting_time_status IN (
@@ -493,44 +510,44 @@ CREATE TABLE paeds_surgery_waiting_list_card_grade (
 );
 
 CREATE TRIGGER trigger_paeds_surgery_waiting_list_card_grade_updated_at
-    BEFORE UPDATE ON paeds_surgery_waiting_list_card_grade
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_grade_card_id
-    ON paeds_surgery_waiting_list_card_grade(paeds_surgery_waiting_list_card_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade(paeds_surgery_waiting_list_card_id);
 
-COMMENT ON TABLE paeds_surgery_waiting_list_card_grade IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade IS
     'Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.paeds_surgery_waiting_list_card_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.paeds_surgery_waiting_list_card_id IS
     'Foreign key to the parent waiting list card (unique, 1:1).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.waiting_time_status IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.waiting_time_status IS
     'Waiting Time Status band: within-target, approaching-breach, breached, long-wait.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.clinical_priority IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.clinical_priority IS
     'Clinical priority that drove the calculation (echo of the input).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.target_wait_weeks IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.target_wait_weeks IS
     'Maximum permitted wait in weeks for the recorded clinical priority.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.days_waited IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.days_waited IS
     'Days elapsed since the RTT clock-start date.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.weeks_waited IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.weeks_waited IS
     'Weeks elapsed since the RTT clock-start date.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.days_to_target IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.days_to_target IS
     'Days remaining until the priority-driven target wait is reached (negative if exceeded).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.days_to_breach IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.days_to_breach IS
     'Days remaining until the 18-week RTT breach threshold is reached (negative if breached).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.days_to_appointment IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.days_to_appointment IS
     'Days until the next scheduled appointment (negative if in the past).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.grader_notes IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.grader_notes IS
     'Free-text grader notes (typically empty; populated when the engine cannot compute).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.graded_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -543,13 +560,13 @@ COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade.graded_at IS
 
 -- Audit trail of rules that fired during grading of a waiting list card.
 
-CREATE TABLE paeds_surgery_waiting_list_card_grade_rule (
+CREATE TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     paeds_surgery_waiting_list_card_grade_id UUID NOT NULL
-        REFERENCES paeds_surgery_waiting_list_card_grade(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(50) NOT NULL,
     instrument VARCHAR(30) NOT NULL
         CHECK (instrument IN ('waiting-time-status', 'clinical-priority', 'long-wait')),
@@ -566,34 +583,34 @@ CREATE TABLE paeds_surgery_waiting_list_card_grade_rule (
 );
 
 CREATE TRIGGER trigger_paeds_surgery_waiting_list_card_grade_rule_updated_at
-    BEFORE UPDATE ON paeds_surgery_waiting_list_card_grade_rule
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_grade_rule_grade_id
-    ON paeds_surgery_waiting_list_card_grade_rule(paeds_surgery_waiting_list_card_grade_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule(paeds_surgery_waiting_list_card_grade_id);
 
-COMMENT ON TABLE paeds_surgery_waiting_list_card_grade_rule IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule IS
     'Audit trail of every waiting-time-status / clinical-priority / long-wait rule that fired during grading of a waiting list card.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.paeds_surgery_waiting_list_card_grade_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.paeds_surgery_waiting_list_card_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.rule_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-WTS-BREACHED-001).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.instrument IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: waiting-time-status, clinical-priority, long-wait.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.band IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.band IS
     'Band contributed by this rule (e.g. breached).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.category IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.category IS
     'Category descriptor (e.g. rtt-18-week, priority-target, long-waiter).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.description IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -606,13 +623,13 @@ COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_rule.description IS
 
 -- Safety / operational flags that fire independently of the Waiting Time Status.
 
-CREATE TABLE paeds_surgery_waiting_list_card_grade_flag (
+CREATE TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     paeds_surgery_waiting_list_card_grade_id UUID NOT NULL
-        REFERENCES paeds_surgery_waiting_list_card_grade(id) ON DELETE CASCADE,
+        REFERENCES paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -634,34 +651,34 @@ CREATE TABLE paeds_surgery_waiting_list_card_grade_flag (
 );
 
 CREATE TRIGGER trigger_paeds_surgery_waiting_list_card_grade_flag_updated_at
-    BEFORE UPDATE ON paeds_surgery_waiting_list_card_grade_flag
+    BEFORE UPDATE ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION paediatric_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_paeds_surgery_waiting_list_card_grade_flag_grade_id
-    ON paeds_surgery_waiting_list_card_grade_flag(paeds_surgery_waiting_list_card_grade_id);
+    ON paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag(paeds_surgery_waiting_list_card_grade_id);
 
-COMMENT ON TABLE paeds_surgery_waiting_list_card_grade_flag IS
+COMMENT ON TABLE paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag IS
     'Safety / operational flags that fire independently of the Waiting Time Status, with priority and a suggested action for the booking team.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.created_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.updated_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.deleted_at IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.paeds_surgery_waiting_list_card_grade_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.paeds_surgery_waiting_list_card_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.flag_id IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-BREACH-RISK-001).';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.category IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.priority IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.description IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN paeds_surgery_waiting_list_card_grade_flag.suggested_action IS
+COMMENT ON COLUMN paediatric_surgery_waiting_list_card.paeds_surgery_waiting_list_card_grade_flag.suggested_action IS
     'Suggested action (e.g. "contact patient to confirm next appointment").';
 
 -- ========================================================================

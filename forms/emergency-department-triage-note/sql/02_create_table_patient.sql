@@ -1,6 +1,6 @@
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE emergency_department_triage_note.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -23,49 +23,49 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON emergency_department_triage_note.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE emergency_department_triage_note.patient IS
     'Patient demographic information used by the emergency-department triage note.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.name IS
     'Full patient name as recorded at the front desk or on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at triage.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON emergency_department_triage_note.patient
     USING GIN (name gin_trgm_ops);

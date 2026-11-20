@@ -1,10 +1,10 @@
-CREATE TABLE records_to_release (
+CREATE TABLE medical_records_release_permission.records_to_release (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     record_types TEXT[] NOT NULL DEFAULT '{}',
     specific_date_range VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (specific_date_range IN ('yes', 'no', '')),
@@ -15,30 +15,30 @@ CREATE TABLE records_to_release (
 );
 
 CREATE TRIGGER trigger_records_to_release_updated_at
-    BEFORE UPDATE ON records_to_release
+    BEFORE UPDATE ON medical_records_release_permission.records_to_release
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE records_to_release IS
+COMMENT ON TABLE medical_records_release_permission.records_to_release IS
     'Types and date range of medical records to be released. One-to-one child of release_form.';
-COMMENT ON COLUMN records_to_release.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN records_to_release.record_types IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.record_types IS
     'Array of record type identifiers selected for release.';
-COMMENT ON COLUMN records_to_release.specific_date_range IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.specific_date_range IS
     'Whether a specific date range applies: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN records_to_release.date_from IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.date_from IS
     'Start date of the records date range (nullable).';
-COMMENT ON COLUMN records_to_release.date_to IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.date_to IS
     'End date of the records date range (nullable). Must be >= date_from when both are set.';
-COMMENT ON COLUMN records_to_release.specific_record_details IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.specific_record_details IS
     'Free-text description of specific records requested.';
 
-COMMENT ON COLUMN records_to_release.id IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN records_to_release.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN records_to_release.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN records_to_release.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.deleted_at IS
     'Timestamp when this row was deleted.';

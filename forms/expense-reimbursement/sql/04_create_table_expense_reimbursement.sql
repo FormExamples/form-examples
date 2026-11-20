@@ -1,13 +1,13 @@
 -- Expense reimbursement claim: the worker requests repayment for work-related expenses paid personally.
 
-CREATE TABLE expense_reimbursement (
+CREATE TABLE expense_reimbursement.expense_reimbursement (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    worker_id UUID NOT NULL REFERENCES worker(id) ON DELETE CASCADE,
-    manager_id UUID NOT NULL REFERENCES manager(id) ON DELETE CASCADE,
+    worker_id UUID NOT NULL REFERENCES expense_reimbursement.worker(id) ON DELETE CASCADE,
+    manager_id UUID NOT NULL REFERENCES expense_reimbursement.manager(id) ON DELETE CASCADE,
 
     -- Claim lifecycle
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
@@ -40,66 +40,66 @@ CREATE TABLE expense_reimbursement (
     declaration_signed_at TIMESTAMPTZ
 );
 
-CREATE INDEX index_expense_reimbursement_worker_id ON expense_reimbursement(worker_id);
-CREATE INDEX index_expense_reimbursement_manager_id ON expense_reimbursement(manager_id);
+CREATE INDEX index_expense_reimbursement_worker_id ON expense_reimbursement.expense_reimbursement(worker_id);
+CREATE INDEX index_expense_reimbursement_manager_id ON expense_reimbursement.expense_reimbursement(manager_id);
 
 CREATE TRIGGER trigger_expense_reimbursement_updated_at
-    BEFORE UPDATE ON expense_reimbursement
+    BEFORE UPDATE ON expense_reimbursement.expense_reimbursement
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION expense_reimbursement.set_updated_at();
 
-COMMENT ON TABLE expense_reimbursement IS
+COMMENT ON TABLE expense_reimbursement.expense_reimbursement IS
     'Expense reimbursement claim: a worker asks the employer to repay money the worker spent personally on work-related expenses.';
 
-COMMENT ON COLUMN expense_reimbursement.id IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN expense_reimbursement.created_at IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN expense_reimbursement.updated_at IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN expense_reimbursement.deleted_at IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN expense_reimbursement.worker_id IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.worker_id IS
     'Foreign key to the worker table.';
-COMMENT ON COLUMN expense_reimbursement.manager_id IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.manager_id IS
     'Foreign key to the manager table.';
-COMMENT ON COLUMN expense_reimbursement.status IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN expense_reimbursement.claim_date IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.claim_date IS
     'Claim date.';
-COMMENT ON COLUMN expense_reimbursement.claim_period_start_date IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.claim_period_start_date IS
     'Claim period start date.';
-COMMENT ON COLUMN expense_reimbursement.claim_period_end_date IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.claim_period_end_date IS
     'Claim period end date.';
-COMMENT ON COLUMN expense_reimbursement.claim_title IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.claim_title IS
     'Claim title.';
-COMMENT ON COLUMN expense_reimbursement.business_purpose IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.business_purpose IS
     'Business purpose.';
-COMMENT ON COLUMN expense_reimbursement.project_or_cost_code IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.project_or_cost_code IS
     'Project or cost code.';
-COMMENT ON COLUMN expense_reimbursement.currency_as_iso_4217 IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.currency_as_iso_4217 IS
     'Currency as iso 4217.';
-COMMENT ON COLUMN expense_reimbursement.total_amount IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.total_amount IS
     'Total amount.';
-COMMENT ON COLUMN expense_reimbursement.total_vat_amount IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.total_vat_amount IS
     'Total vat amount.';
-COMMENT ON COLUMN expense_reimbursement.advance_already_received_amount IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.advance_already_received_amount IS
     'Advance already received amount.';
-COMMENT ON COLUMN expense_reimbursement.amount_to_repay IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.amount_to_repay IS
     'Amount to repay.';
-COMMENT ON COLUMN expense_reimbursement.repayment_method IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.repayment_method IS
     'Repayment method. One of: payroll, bank-transfer, cheque, cash, other.';
-COMMENT ON COLUMN expense_reimbursement.bank_account_name IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.bank_account_name IS
     'Bank account name.';
-COMMENT ON COLUMN expense_reimbursement.bank_account_last_four IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.bank_account_last_four IS
     'Bank account last four.';
-COMMENT ON COLUMN expense_reimbursement.declaration_expenses_were_incurred_wholly_for_work IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.declaration_expenses_were_incurred_wholly_for_work IS
     'Declaration expenses were incurred wholly for work.';
-COMMENT ON COLUMN expense_reimbursement.declaration_no_duplicate_claim IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.declaration_no_duplicate_claim IS
     'Declaration no duplicate claim.';
-COMMENT ON COLUMN expense_reimbursement.declaration_receipts_attached IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.declaration_receipts_attached IS
     'Declaration receipts attached.';
-COMMENT ON COLUMN expense_reimbursement.declaration_signed_name IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.declaration_signed_name IS
     'Declaration signed name.';
-COMMENT ON COLUMN expense_reimbursement.declaration_signed_at IS
+COMMENT ON COLUMN expense_reimbursement.expense_reimbursement.declaration_signed_at IS
     'Declaration signed at.';

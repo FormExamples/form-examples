@@ -1,10 +1,10 @@
-CREATE TABLE assessment_polypharmacy_review (
+CREATE TABLE gerontology_assessment.assessment_polypharmacy_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES gerontology_assessment.assessment(id) ON DELETE CASCADE,
     total_regular_medications INTEGER
         CHECK (total_regular_medications IS NULL OR total_regular_medications >= 0),
     total_prn_medications INTEGER
@@ -30,49 +30,49 @@ CREATE TABLE assessment_polypharmacy_review (
 );
 
 CREATE TRIGGER trigger_assessment_polypharmacy_review_updated_at
-    BEFORE UPDATE ON assessment_polypharmacy_review
+    BEFORE UPDATE ON gerontology_assessment.assessment_polypharmacy_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION gerontology_assessment.set_updated_at();
 
 -- Individual medication entries (one-to-many child)
 
-COMMENT ON TABLE assessment_polypharmacy_review IS
+COMMENT ON TABLE gerontology_assessment.assessment_polypharmacy_review IS
     'Assessment polypharmacy review.';
-COMMENT ON COLUMN assessment_polypharmacy_review.assessment_id IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_polypharmacy_review.total_regular_medications IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.total_regular_medications IS
     'Total regular medications.';
-COMMENT ON COLUMN assessment_polypharmacy_review.total_prn_medications IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.total_prn_medications IS
     'Total prn medications.';
-COMMENT ON COLUMN assessment_polypharmacy_review.polypharmacy_flag IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.polypharmacy_flag IS
     'Polypharmacy flag. One of: yes, no.';
-COMMENT ON COLUMN assessment_polypharmacy_review.medication_review_date IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.medication_review_date IS
     'Medication review date.';
-COMMENT ON COLUMN assessment_polypharmacy_review.falls_risk_medications IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.falls_risk_medications IS
     'Falls risk medications. One of: yes, no.';
-COMMENT ON COLUMN assessment_polypharmacy_review.falls_risk_medication_details IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.falls_risk_medication_details IS
     'Falls risk medication details.';
-COMMENT ON COLUMN assessment_polypharmacy_review.anticholinergic_burden IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.anticholinergic_burden IS
     'Anticholinergic burden. One of: low, moderate, high.';
-COMMENT ON COLUMN assessment_polypharmacy_review.drug_interactions_identified IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.drug_interactions_identified IS
     'Drug interactions identified. One of: yes, no.';
-COMMENT ON COLUMN assessment_polypharmacy_review.drug_interaction_details IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.drug_interaction_details IS
     'Drug interaction details.';
-COMMENT ON COLUMN assessment_polypharmacy_review.adherence_concerns IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.adherence_concerns IS
     'Adherence concerns. One of: yes, no.';
-COMMENT ON COLUMN assessment_polypharmacy_review.adherence_details IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.adherence_details IS
     'Adherence details.';
-COMMENT ON COLUMN assessment_polypharmacy_review.stopp_start_review_done IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.stopp_start_review_done IS
     'Stopp start review done. One of: yes, no.';
-COMMENT ON COLUMN assessment_polypharmacy_review.deprescribing_opportunities IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.deprescribing_opportunities IS
     'Deprescribing opportunities.';
-COMMENT ON COLUMN assessment_polypharmacy_review.polypharmacy_notes IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.polypharmacy_notes IS
     'Polypharmacy notes.';
-COMMENT ON COLUMN assessment_polypharmacy_review.id IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_polypharmacy_review.created_at IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_polypharmacy_review.updated_at IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_polypharmacy_review.deleted_at IS
+COMMENT ON COLUMN gerontology_assessment.assessment_polypharmacy_review.deleted_at IS
     'Timestamp when this row was deleted.';

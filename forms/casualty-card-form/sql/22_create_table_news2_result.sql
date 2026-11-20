@@ -1,10 +1,10 @@
-CREATE TABLE news2_result (
+CREATE TABLE casualty_card_form.news2_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Computed NEWS2 total score (sum of 7 parameter scores, range 0-20)
     total_score             INTEGER NOT NULL
                             CHECK (total_score >= 0 AND total_score <= 20),
@@ -23,28 +23,28 @@ CREATE TABLE news2_result (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_news2_result_updated_at
-    BEFORE UPDATE ON news2_result
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.news2_result
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE news2_result IS
+COMMENT ON TABLE casualty_card_form.news2_result IS
     '1:1 with casualty_card. Computed NEWS2 score with clinical response threshold and parameter breakdown.';
-COMMENT ON COLUMN news2_result.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.news2_result.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN news2_result.total_score IS
+COMMENT ON COLUMN casualty_card_form.news2_result.total_score IS
     'NEWS2 aggregate score (0-20). Sum of 7 parameter scores.';
-COMMENT ON COLUMN news2_result.clinical_response IS
+COMMENT ON COLUMN casualty_card_form.news2_result.clinical_response IS
     'Clinical response threshold: low (0-4), low-medium (single param 3), medium (5-6), high (>=7), or empty string if unanswered.';
-COMMENT ON COLUMN news2_result.has_any_single_score_3 IS
+COMMENT ON COLUMN casualty_card_form.news2_result.has_any_single_score_3 IS
     'TRUE if any single NEWS2 parameter scored 3. Triggers urgent ward review regardless of total.';
-COMMENT ON COLUMN news2_result.parameter_scores IS
+COMMENT ON COLUMN casualty_card_form.news2_result.parameter_scores IS
     'JSONB object with individual parameter scores. Keys: respiratory_rate, oxygen_saturation, systolic_bp, pulse, consciousness, temperature, supplemental_oxygen.';
-COMMENT ON COLUMN news2_result.scored_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.scored_at IS
     'Timestamp when the NEWS2 scoring engine produced this result.';
-COMMENT ON COLUMN news2_result.id IS
+COMMENT ON COLUMN casualty_card_form.news2_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN news2_result.created_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN news2_result.updated_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN news2_result.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.deleted_at IS
     'Timestamp when this row was deleted.';

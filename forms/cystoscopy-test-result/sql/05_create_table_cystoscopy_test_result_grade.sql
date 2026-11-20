@@ -1,13 +1,13 @@
 -- Computed interpretation grade for a cystoscopy result (four-axis engine).
 
-CREATE TABLE cystoscopy_test_result_grade (
+CREATE TABLE cystoscopy_test_result.cystoscopy_test_result_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cystoscopy_test_result_id UUID NOT NULL UNIQUE
-        REFERENCES cystoscopy_test_result(id) ON DELETE CASCADE,
+        REFERENCES cystoscopy_test_result.cystoscopy_test_result(id) ON DELETE CASCADE,
 
     -- Axis A: result classification
     result_classification VARCHAR(15) NOT NULL DEFAULT ''
@@ -36,41 +36,41 @@ CREATE TABLE cystoscopy_test_result_grade (
 );
 
 CREATE TRIGGER trigger_cystoscopy_test_result_grade_updated_at
-    BEFORE UPDATE ON cystoscopy_test_result_grade
+    BEFORE UPDATE ON cystoscopy_test_result.cystoscopy_test_result_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cystoscopy_test_result.set_updated_at();
 
-COMMENT ON TABLE cystoscopy_test_result_grade IS
+COMMENT ON TABLE cystoscopy_test_result.cystoscopy_test_result_grade IS
     'Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A bladder tumour or suspicious lesion auto-escalates the follow-up urgency to critical-alert regardless of the other axes.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.id IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.created_at IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.updated_at IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.deleted_at IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.cystoscopy_test_result_id IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.cystoscopy_test_result_id IS
     'Foreign key to the parent result (unique, 1:1).';
-COMMENT ON COLUMN cystoscopy_test_result_grade.result_classification IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.result_classification IS
     'Axis A overall classification: normal, abnormal, critical, inconclusive.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.abnormality_severity IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.abnormality_severity IS
     'Axis B abnormality severity: none, minor, moderate, major.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.reporting_category IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.reporting_category IS
     'Axis B structured-reporting score / category label (e.g. an EAU NMIBC risk group or a suspected-tumour category).';
-COMMENT ON COLUMN cystoscopy_test_result_grade.report_completeness_percent IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.report_completeness_percent IS
     'Axis C report completeness as a percentage of mandatory report sections (0-100).';
-COMMENT ON COLUMN cystoscopy_test_result_grade.follow_up_urgency IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.follow_up_urgency IS
     'Axis D follow-up urgency: routine, recommended, urgent, critical-alert.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.target_timeframe IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.target_timeframe IS
     'Target timeframe for the recommended follow-up implied by the urgency.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.recommended_action IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.recommended_action IS
     'Axis D concise recommended action derived from the urgency.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.recommendation IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.recommendation IS
     'Overall recommendation: no-action, routine-follow-up, further-imaging, specialist-referral, urgent-review.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.clinician_notes IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.clinician_notes IS
     'Free-text interpretation / sign-off notes.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.signed_at IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.signed_at IS
     'Timestamp of the reporting clinician electronic signature.';
-COMMENT ON COLUMN cystoscopy_test_result_grade.graded_at IS
+COMMENT ON COLUMN cystoscopy_test_result.cystoscopy_test_result_grade.graded_at IS
     'Timestamp when the engine last computed the result.';

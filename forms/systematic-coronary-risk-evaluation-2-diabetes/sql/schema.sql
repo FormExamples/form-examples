@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS systematic_coronary_risk_evaluation_2_diabetes;
+
+COMMENT ON SCHEMA systematic_coronary_risk_evaluation_2_diabetes IS
+    'Namespace for the SCORE2-Diabetes form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,56 +97,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON systematic_coronary_risk_evaluation_2_diabetes.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -142,7 +159,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -161,46 +178,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON systematic_coronary_risk_evaluation_2_diabetes.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -211,36 +228,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_systematic_coronary_risk_evaluation_2_diabetes.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES systematic_coronary_risk_evaluation_2_diabetes.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.assessment IS
     'SCORE2-Diabetes assessment form. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -251,39 +268,39 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_systematic_coronary_risk_evaluation_2_diabetes_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES systematic_coronary_risk_evaluation_2_diabetes.assessment(id) ON DELETE CASCADE,
     risk_category VARCHAR(20) NOT NULL DEFAULT 'low'
         CHECK (risk_category IN ('low', 'moderate', 'high', 'veryHigh')),
     graded_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.grade IS
     'Computed SCORE2-Diabetes risk grading result. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.risk_category IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.risk_category IS
     'Overall risk classification: low, moderate, high, or veryHigh.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -294,13 +311,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 06_create_table_systematic_coronary_risk_evaluation_2_diabetes_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES systematic_coronary_risk_evaluation_2_diabetes.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -309,30 +326,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule IS
     'Individual cardiovascular risk rules that evaluated to true during grading.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. CVR-001, CVR-002).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.category IS
     'Category of the rule (e.g. Cardiovascular History, Blood Pressure, Glycaemic Control).';
-COMMENT ON COLUMN grading_fired_rule.risk_level IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.risk_level IS
     'Risk level contributed by this rule: high, medium, or low.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.description IS
     'Description.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -343,13 +360,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 92_create_table_systematic_coronary_risk_evaluation_2_diabetes_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES systematic_coronary_risk_evaluation_2_diabetes.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -358,30 +375,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION systematic_coronary_risk_evaluation_2_diabetes.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag IS
     'Additional safety-critical flags detected during SCORE2-Diabetes assessment grading.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-BP-001, FLAG-HBA1C-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.category IS
     'Category of the flag (e.g. Blood Pressure, Glycaemic Control, Medications).';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.message IS
     'Message.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN systematic_coronary_risk_evaluation_2_diabetes.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

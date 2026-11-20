@@ -4,14 +4,14 @@
 -- encephalopathy). The computed grade, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE child_pugh_score (
+CREATE TABLE child_pugh_score.child_pugh_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES child_pugh_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES child_pugh_score.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -46,56 +46,56 @@ CREATE TABLE child_pugh_score (
 );
 
 CREATE INDEX child_pugh_score_patient_id_idx
-    ON child_pugh_score (patient_id);
+    ON child_pugh_score.child_pugh_score (patient_id);
 CREATE INDEX child_pugh_score_clinician_id_idx
-    ON child_pugh_score (clinician_id);
+    ON child_pugh_score.child_pugh_score (clinician_id);
 
 CREATE TRIGGER trigger_child_pugh_score_updated_at
-    BEFORE UPDATE ON child_pugh_score
+    BEFORE UPDATE ON child_pugh_score.child_pugh_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE child_pugh_score IS
+COMMENT ON TABLE child_pugh_score.child_pugh_score IS
     'Main Child-Pugh assessment record: assessment context, patient identification, and the five scored parameter inputs (total bilirubin, serum albumin, coagulation, ascites, hepatic encephalopathy).';
-COMMENT ON COLUMN child_pugh_score.id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_pugh_score.created_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN child_pugh_score.updated_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN child_pugh_score.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN child_pugh_score.patient_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN child_pugh_score.clinician_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN child_pugh_score.clinician_name IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN child_pugh_score.clinician_role IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_role IS
     'Role of the assessing clinician: hepatologist, surgeon, anaesthetist, physician, nurse, or other.';
-COMMENT ON COLUMN child_pugh_score.assessed_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN child_pugh_score.care_setting IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.care_setting IS
     'Care setting: hepatology-clinic, ward, pre-operative, intensive-care, or other.';
-COMMENT ON COLUMN child_pugh_score.aetiology IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.aetiology IS
     'Aetiology of liver disease: alcohol, viral-hepatitis, nafld, autoimmune, cholestatic, or other.';
-COMMENT ON COLUMN child_pugh_score.patient_identifier IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN child_pugh_score.age_band IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN child_pugh_score.sex IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN child_pugh_score.total_bilirubin_umol_l IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.total_bilirubin_umol_l IS
     'Parameter 1 — measured total bilirubin in micromoles per litre (umol/L).';
-COMMENT ON COLUMN child_pugh_score.serum_albumin_g_l IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.serum_albumin_g_l IS
     'Parameter 2 — measured serum albumin in grams per litre (g/L).';
-COMMENT ON COLUMN child_pugh_score.inr IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.inr IS
     'Parameter 3 — International Normalised Ratio (INR); preferred coagulation measure.';
-COMMENT ON COLUMN child_pugh_score.prothrombin_time_seconds IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.prothrombin_time_seconds IS
     'Parameter 3 — prothrombin-time prolongation in seconds; fallback used when INR is unavailable.';
-COMMENT ON COLUMN child_pugh_score.ascites IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.ascites IS
     'Parameter 4 — clinical ascites grade: none, mild (diuretic-responsive), or moderate-severe (refractory).';
-COMMENT ON COLUMN child_pugh_score.hepatic_encephalopathy IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.hepatic_encephalopathy IS
     'Parameter 5 — hepatic encephalopathy grade: none, grade-1-2, or grade-3-4.';
-COMMENT ON COLUMN child_pugh_score.clinical_note IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinical_note IS
     'Free-text clinical note recorded with the assessment.';

@@ -1,6 +1,6 @@
 -- Clinician (operating-team member) who can sign off a checklist phase.
 
-CREATE TABLE clinician (
+CREATE TABLE who_surgical_safety_checklist.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -17,39 +17,39 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON who_surgical_safety_checklist.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE who_surgical_safety_checklist.clinician IS
     'Operating-room clinician who can fill in or sign off the WHO Surgical Safety Checklist.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.email IS
     'Work email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.phone IS
     'Work phone number.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.role IS
     'Operating-room role. One of: surgeon, assistant-surgeon, anaesthetist, circulating-nurse, scrub-nurse, anaesthetic-assistant, perfusionist, technician, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.registration_body IS
     'Professional registration body. One of: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.registration_number IS
     'Registration number issued by the registration body.';
-COMMENT ON COLUMN clinician.employee_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.employee_number IS
     'Local employee or smart-card number at the operating facility.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON who_surgical_safety_checklist.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);

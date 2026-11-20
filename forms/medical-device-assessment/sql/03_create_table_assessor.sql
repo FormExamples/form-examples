@@ -1,6 +1,6 @@
 -- Assessor (regulatory affairs professional, clinical engineer, or quality manager) who completes the assessment.
 
-CREATE TABLE assessor (
+CREATE TABLE medical_device_assessment.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -14,33 +14,33 @@ CREATE TABLE assessor (
 );
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON medical_device_assessment.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
 CREATE INDEX assessor_index_gto
-    ON assessor
+    ON medical_device_assessment.assessor
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE medical_device_assessment.assessor IS
     'Assessor.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN medical_device_assessment.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN medical_device_assessment.assessor.name IS
     'Name.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN medical_device_assessment.assessor.email IS
     'Email.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN medical_device_assessment.assessor.phone IS
     'Phone.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN medical_device_assessment.assessor.role IS
     'Role. One of: regulatory-affairs, clinical-engineer, quality-manager, clinical-safety-officer, notified-body-reviewer, other.';
-COMMENT ON COLUMN assessor.organization IS
+COMMENT ON COLUMN medical_device_assessment.assessor.organization IS
     'Organization.';

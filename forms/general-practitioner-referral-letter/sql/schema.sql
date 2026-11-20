@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS general_practitioner_referral_letter;
+
+COMMENT ON SCHEMA general_practitioner_referral_letter IS
+    'Namespace for the General Practitioner Referral Letter form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION general_practitioner_referral_letter.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION general_practitioner_referral_letter.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE general_practitioner_referral_letter.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON general_practitioner_referral_letter.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE general_practitioner_referral_letter.patient IS
     'Patient demographic information used by the general-practitioner referral letter.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN general_practitioner_referral_letter.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON general_practitioner_referral_letter.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the referring
 -- clinician who authored the general-practitioner referral letter.
 
-CREATE TABLE clinician (
+CREATE TABLE general_practitioner_referral_letter.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON general_practitioner_referral_letter.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE general_practitioner_referral_letter.clinician IS
     'Clinician identifying information for the referring clinician who authored the referral letter.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.name IS
     'Referring clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.role IS
     'Referrer role: gp, gp-registrar, nurse-practitioner, pharmacist, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN general_practitioner_referral_letter.clinician.registration_number IS
     'Professional registration number (GMC / NMC / GPhC) issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON general_practitioner_referral_letter.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -211,14 +228,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- content is free text; presence of a field is detected by a non-empty
 -- value, not by semantic analysis.
 
-CREATE TABLE general_practitioner_referral_letter (
+CREATE TABLE general_practitioner_referral_letter.general_practitioner_referral_letter (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES general_practitioner_referral_letter.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES general_practitioner_referral_letter.clinician(id) ON DELETE RESTRICT,
 
     -- Identification and referral context
     patient_identifier VARCHAR(100) NOT NULL DEFAULT '',
@@ -255,78 +272,78 @@ CREATE TABLE general_practitioner_referral_letter (
 );
 
 CREATE INDEX general_practitioner_referral_letter_patient_id_idx
-    ON general_practitioner_referral_letter (patient_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter (patient_id);
 CREATE INDEX general_practitioner_referral_letter_clinician_id_idx
-    ON general_practitioner_referral_letter (clinician_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter (clinician_id);
 
 CREATE TRIGGER trigger_general_practitioner_referral_letter_updated_at
-    BEFORE UPDATE ON general_practitioner_referral_letter
+    BEFORE UPDATE ON general_practitioner_referral_letter.general_practitioner_referral_letter
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE general_practitioner_referral_letter IS
+COMMENT ON TABLE general_practitioner_referral_letter.general_practitioner_referral_letter IS
     'Main general-practitioner referral letter record: referral destination, urgency, reason and history, examination and investigation findings, medications and allergies, and the patient''s expectations, consent, and safety-netting, plus patient and referrer identification. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN general_practitioner_referral_letter.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN general_practitioner_referral_letter.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN general_practitioner_referral_letter.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN general_practitioner_referral_letter.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_id IS
     'Foreign key to the patient being referred (restrict delete).';
-COMMENT ON COLUMN general_practitioner_referral_letter.clinician_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.clinician_id IS
     'Foreign key to the referring clinician (restrict delete); optional.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_identifier IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_identifier IS
     'NHS number or local patient identifier as recorded on the letter.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referrer_role IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referrer_role IS
     'Referrer role: gp, gp-registrar, nurse-practitioner, pharmacist, paramedic, or other.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referring_practice IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referring_practice IS
     'Referring practice name.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referral_date IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referral_date IS
     'Date of referral.';
-COMMENT ON COLUMN general_practitioner_referral_letter.access_needs IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.access_needs IS
     'Interpreter or accessibility needs recorded for the patient.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referral_specialty IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referral_specialty IS
     'Specialty or service being referred to (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.named_clinician IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.named_clinician IS
     'Named consultant or team being referred to (optional).';
-COMMENT ON COLUMN general_practitioner_referral_letter.receiving_organisation IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.receiving_organisation IS
     'Receiving hospital, trust, or community provider.';
-COMMENT ON COLUMN general_practitioner_referral_letter.urgency IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.urgency IS
     'Urgency classification: routine, urgent, two-week-wait, or emergency (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.urgency_reason IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.urgency_reason IS
     'Why the referral is urgent; mandatory for urgent and two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.suspected_cancer_criterion IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.suspected_cancer_criterion IS
     'Named NICE NG12 criterion; mandatory for two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.suspected_cancer_pathway IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.suspected_cancer_pathway IS
     'Tumour-site suspected-cancer pathway; mandatory for two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.reason_for_referral IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.reason_for_referral IS
     'Primary reason for the referral (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.relevant_history IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.relevant_history IS
     'Relevant clinical history (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.presenting_problem IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.presenting_problem IS
     'Presenting problem.';
-COMMENT ON COLUMN general_practitioner_referral_letter.symptom_duration IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.symptom_duration IS
     'Duration of symptoms.';
-COMMENT ON COLUMN general_practitioner_referral_letter.red_flag_symptoms IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.red_flag_symptoms IS
     'Documented red-flag symptoms; presence drives the emergency-features flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.examination_findings IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.examination_findings IS
     'Examination findings.';
-COMMENT ON COLUMN general_practitioner_referral_letter.investigation_results IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.investigation_results IS
     'Bloods, imaging, or other investigations already done.';
-COMMENT ON COLUMN general_practitioner_referral_letter.current_medications IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.current_medications IS
     'Current medications.';
-COMMENT ON COLUMN general_practitioner_referral_letter.allergies IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.allergies IS
     'Allergies and reactions.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_expectations IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_expectations IS
     'Patient''s expectations or question to the specialist.';
-COMMENT ON COLUMN general_practitioner_referral_letter.consent_to_share IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.consent_to_share IS
     'Whether consent to share information is documented (yes/no); anything other than yes raises the consent-not-documented flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.safety_netting IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.safety_netting IS
     'Safety-netting advice given to the patient while waiting; absence raises the no-safety-netting flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.clinical_note IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.clinical_note IS
     'Optional free-text note shown in the summary.';
 
 -- ========================================================================
@@ -343,14 +360,14 @@ COMMENT ON COLUMN general_practitioner_referral_letter.clinical_note IS
 -- percentage. A grade reflects the quality of the letter, not the
 -- clinical decision of whether to refer.
 
-CREATE TABLE general_practitioner_referral_letter_grade (
+CREATE TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     general_practitioner_referral_letter_id UUID NOT NULL UNIQUE
-        REFERENCES general_practitioner_referral_letter(id) ON DELETE CASCADE,
+        REFERENCES general_practitioner_referral_letter.general_practitioner_referral_letter(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('Complete', 'Incomplete', '')),
@@ -362,29 +379,29 @@ CREATE TABLE general_practitioner_referral_letter_grade (
 );
 
 CREATE TRIGGER trigger_general_practitioner_referral_letter_grade_updated_at
-    BEFORE UPDATE ON general_practitioner_referral_letter_grade
+    BEFORE UPDATE ON general_practitioner_referral_letter.general_practitioner_referral_letter_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE general_practitioner_referral_letter_grade IS
+COMMENT ON TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade IS
     'Computed documentation-completeness grading result for a referral letter: status (Complete/Incomplete), echoed urgency classification, and completeness percentage.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.general_practitioner_referral_letter_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.general_practitioner_referral_letter_id IS
     'Foreign key to the parent referral letter (unique, 1:1).';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.status IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.status IS
     'Completeness status: Complete when every mandatory field is present, otherwise Incomplete.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.urgency IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.urgency IS
     'Echoed urgency classification: routine, urgent, two-week-wait, or emergency.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.completeness_percent IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.completeness_percent IS
     'Completeness percentage (0..100): present mandatory fields / total mandatory fields x 100.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade.graded_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -399,14 +416,14 @@ COMMENT ON COLUMN general_practitioner_referral_letter_grade.graded_at IS
 -- row records one rule firing with its category and a human-readable
 -- description.
 
-CREATE TABLE general_practitioner_referral_letter_grade_rule (
+CREATE TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     general_practitioner_referral_letter_grade_id UUID NOT NULL
-        REFERENCES general_practitioner_referral_letter_grade(id) ON DELETE CASCADE,
+        REFERENCES general_practitioner_referral_letter.general_practitioner_referral_letter_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -414,30 +431,30 @@ CREATE TABLE general_practitioner_referral_letter_grade_rule (
 );
 
 CREATE INDEX general_practitioner_referral_letter_grade_rule_grade_id_idx
-    ON general_practitioner_referral_letter_grade_rule (general_practitioner_referral_letter_grade_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule (general_practitioner_referral_letter_grade_id);
 
 CREATE TRIGGER trigger_general_practitioner_referral_letter_grade_rule_updated_at
-    BEFORE UPDATE ON general_practitioner_referral_letter_grade_rule
+    BEFORE UPDATE ON general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE general_practitioner_referral_letter_grade_rule IS
+COMMENT ON TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule IS
     'Audit trail of every completeness rule that fired during grading: category and description.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.general_practitioner_referral_letter_grade_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.general_practitioner_referral_letter_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.rule_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MANDATORY-URGENCY-01).';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.category IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.category IS
     'Subject category (e.g. mandatory-field, conditional-requirement, urgency-classification).';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.description IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -451,14 +468,14 @@ COMMENT ON COLUMN general_practitioner_referral_letter_grade_rule.description IS
 -- Flags that fire independently of the completeness status, with a
 -- priority and a suggested action for the referring clinician.
 
-CREATE TABLE general_practitioner_referral_letter_grade_flag (
+CREATE TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     general_practitioner_referral_letter_grade_id UUID NOT NULL
-        REFERENCES general_practitioner_referral_letter_grade(id) ON DELETE CASCADE,
+        REFERENCES general_practitioner_referral_letter.general_practitioner_referral_letter_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -479,34 +496,34 @@ CREATE TABLE general_practitioner_referral_letter_grade_flag (
 );
 
 CREATE INDEX general_practitioner_referral_letter_grade_flag_grade_id_idx
-    ON general_practitioner_referral_letter_grade_flag (general_practitioner_referral_letter_grade_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag (general_practitioner_referral_letter_grade_id);
 
 CREATE TRIGGER trigger_general_practitioner_referral_letter_grade_flag_updated_at
-    BEFORE UPDATE ON general_practitioner_referral_letter_grade_flag
+    BEFORE UPDATE ON general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE general_practitioner_referral_letter_grade_flag IS
+COMMENT ON TABLE general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag IS
     'Flags that fire independently of the completeness status, with priority and a suggested action for the referring clinician.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.general_practitioner_referral_letter_grade_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.general_practitioner_referral_letter_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.flag_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SUSPECTED-CANCER-PATHWAY-001).';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.category IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.category IS
     'Flag category: suspected-cancer-pathway, emergency-features, mandatory-information-missing, urgency-information-missing, consent-not-documented, no-safety-netting, or other.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.priority IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.description IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter_grade_flag.suggested_action IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter_grade_flag.suggested_action IS
     'Suggested action (e.g. "name the NICE NG12 criterion and pathway", "arrange same-day assessment").';
 
 -- ========================================================================

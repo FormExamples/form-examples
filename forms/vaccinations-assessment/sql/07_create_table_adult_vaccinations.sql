@@ -1,10 +1,10 @@
-CREATE TABLE adult_vaccinations (
+CREATE TABLE vaccinations_assessment.adult_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     td_ipv_booster SMALLINT CHECK (td_ipv_booster IS NULL OR td_ipv_booster BETWEEN 0 AND 2),
     hpv SMALLINT CHECK (hpv IS NULL OR hpv BETWEEN 0 AND 2),
     meningitis_acwy SMALLINT CHECK (meningitis_acwy IS NULL OR meningitis_acwy BETWEEN 0 AND 2),
@@ -15,34 +15,34 @@ CREATE TABLE adult_vaccinations (
 );
 
 CREATE TRIGGER trigger_adult_vaccinations_updated_at
-    BEFORE UPDATE ON adult_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.adult_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE adult_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.adult_vaccinations IS
     'Adult vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.';
 
-COMMENT ON COLUMN adult_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN adult_vaccinations.td_ipv_booster IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.td_ipv_booster IS
     'Td ipv booster.';
-COMMENT ON COLUMN adult_vaccinations.hpv IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.hpv IS
     'Hpv.';
-COMMENT ON COLUMN adult_vaccinations.meningitis_acwy IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.meningitis_acwy IS
     'Meningitis acwy.';
-COMMENT ON COLUMN adult_vaccinations.influenza_annual IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.influenza_annual IS
     'Influenza annual.';
-COMMENT ON COLUMN adult_vaccinations.covid19 IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.covid19 IS
     'Covid19.';
-COMMENT ON COLUMN adult_vaccinations.shingles IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.shingles IS
     'Shingles.';
-COMMENT ON COLUMN adult_vaccinations.pneumococcal_ppv IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.pneumococcal_ppv IS
     'Pneumococcal ppv.';
-COMMENT ON COLUMN adult_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN adult_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN adult_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN adult_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';

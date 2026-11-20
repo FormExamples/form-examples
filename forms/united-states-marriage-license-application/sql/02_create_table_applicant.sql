@@ -1,7 +1,7 @@
 -- One person applying for a marriage license. The main application references two
 -- of these rows, the first and the second applicant.
 
-CREATE TABLE applicant (
+CREATE TABLE united_states_marriage_license_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,37 +18,37 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_states_marriage_license_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_states_marriage_license_application.applicant IS
     'One person applying for a marriage license; the application references two of these rows.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.name IS
     'Full legal name of the applicant.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.sex IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.sex IS
     'Sex or gender recorded for the applicant: female, male, nonbinary, or unknown.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN applicant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.postcode IS
     'ZIP or postal code.';
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_states_marriage_license_application.applicant
     USING GIN (name gin_trgm_ops);

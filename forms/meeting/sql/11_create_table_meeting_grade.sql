@@ -2,14 +2,14 @@
 -- derived counts and completion status produced by validateMeeting(),
 -- plus the organiser's sign-off.
 
-CREATE TABLE meeting_grade (
+CREATE TABLE meeting.meeting_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     meeting_id UUID NOT NULL UNIQUE
-        REFERENCES meeting(id) ON DELETE CASCADE,
+        REFERENCES meeting.meeting(id) ON DELETE CASCADE,
 
     duration_minutes INTEGER
         CHECK (duration_minutes IS NULL OR duration_minutes BETWEEN 0 AND 1440),
@@ -44,54 +44,54 @@ CREATE TABLE meeting_grade (
 );
 
 CREATE TRIGGER trigger_meeting_grade_updated_at
-    BEFORE UPDATE ON meeting_grade
+    BEFORE UPDATE ON meeting.meeting_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_grade IS
+COMMENT ON TABLE meeting.meeting_grade IS
     'Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.';
-COMMENT ON COLUMN meeting_grade.id IS
+COMMENT ON COLUMN meeting.meeting_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_grade.created_at IS
+COMMENT ON COLUMN meeting.meeting_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_grade.updated_at IS
+COMMENT ON COLUMN meeting.meeting_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_grade.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_grade.meeting_id IS
+COMMENT ON COLUMN meeting.meeting_grade.meeting_id IS
     'Foreign key to the parent meeting row (unique, 1:1).';
-COMMENT ON COLUMN meeting_grade.duration_minutes IS
+COMMENT ON COLUMN meeting.meeting_grade.duration_minutes IS
     'Derived duration in minutes from actual_start_at to actual_end_at, or scheduled fallback.';
-COMMENT ON COLUMN meeting_grade.agenda_item_count IS
+COMMENT ON COLUMN meeting.meeting_grade.agenda_item_count IS
     'Derived count of agenda_item rows.';
-COMMENT ON COLUMN meeting_grade.participant_count IS
+COMMENT ON COLUMN meeting.meeting_grade.participant_count IS
     'Derived count of participant rows.';
-COMMENT ON COLUMN meeting_grade.accepted_count IS
+COMMENT ON COLUMN meeting.meeting_grade.accepted_count IS
     'Derived count of participants with response_status = accepted.';
-COMMENT ON COLUMN meeting_grade.declined_count IS
+COMMENT ON COLUMN meeting.meeting_grade.declined_count IS
     'Derived count of participants with response_status = declined.';
-COMMENT ON COLUMN meeting_grade.attended_count IS
+COMMENT ON COLUMN meeting.meeting_grade.attended_count IS
     'Derived count of participants with attendance_status = present or late or remote.';
-COMMENT ON COLUMN meeting_grade.action_item_count IS
+COMMENT ON COLUMN meeting.meeting_grade.action_item_count IS
     'Derived count of action_item rows.';
-COMMENT ON COLUMN meeting_grade.output_count IS
+COMMENT ON COLUMN meeting.meeting_grade.output_count IS
     'Derived count of meeting_output rows.';
-COMMENT ON COLUMN meeting_grade.outcome_count IS
+COMMENT ON COLUMN meeting.meeting_grade.outcome_count IS
     'Derived count of meeting_outcome rows.';
-COMMENT ON COLUMN meeting_grade.completion_status IS
+COMMENT ON COLUMN meeting.meeting_grade.completion_status IS
     'Completion status derived by validateMeeting: planned, in-progress, complete, incomplete.';
-COMMENT ON COLUMN meeting_grade.overall_health IS
+COMMENT ON COLUMN meeting.meeting_grade.overall_health IS
     'Overall health: green (no flags), amber (low/medium flags), red (high-priority flag fired).';
-COMMENT ON COLUMN meeting_grade.override_reason IS
+COMMENT ON COLUMN meeting.meeting_grade.override_reason IS
     'Reason the organiser overrode the engine-computed completion status, if any.';
-COMMENT ON COLUMN meeting_grade.notes IS
+COMMENT ON COLUMN meeting.meeting_grade.notes IS
     'Free-text organiser sign-off notes.';
-COMMENT ON COLUMN meeting_grade.signed_by IS
+COMMENT ON COLUMN meeting.meeting_grade.signed_by IS
     'Name or identifier of the organiser who signed off.';
-COMMENT ON COLUMN meeting_grade.signed_at IS
+COMMENT ON COLUMN meeting.meeting_grade.signed_at IS
     'Timestamp of the organiser electronic signature.';
-COMMENT ON COLUMN meeting_grade.graded_at IS
+COMMENT ON COLUMN meeting.meeting_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 CREATE INDEX meeting_grade_index_meeting_id
-    ON meeting_grade(meeting_id);
+    ON meeting.meeting_grade(meeting_id);

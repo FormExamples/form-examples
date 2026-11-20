@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_clinical_examination (
+CREATE TABLE casualty_card_form.casualty_card_clinical_examination (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Systems examination
     general_appearance      TEXT NOT NULL DEFAULT '',
     head_and_face           TEXT NOT NULL DEFAULT '',
@@ -24,42 +24,42 @@ CREATE TABLE casualty_card_clinical_examination (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_clinical_examination_updated_at
-    BEFORE UPDATE ON casualty_card_clinical_examination
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_clinical_examination
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_clinical_examination IS
+COMMENT ON TABLE casualty_card_form.casualty_card_clinical_examination IS
     '1:1 with casualty_card. Systems-based clinical examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_clinical_examination.general_appearance IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.general_appearance IS
     'General appearance (e.g. alert, distressed, comfortable, unwell).';
-COMMENT ON COLUMN casualty_card_clinical_examination.head_and_face IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.head_and_face IS
     'Head and face examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.neck IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.neck IS
     'Neck examination findings (e.g. JVP, lymphadenopathy, c-spine tenderness).';
-COMMENT ON COLUMN casualty_card_clinical_examination.chest_cardiovascular IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.chest_cardiovascular IS
     'Cardiovascular examination findings (e.g. heart sounds, murmurs, oedema).';
-COMMENT ON COLUMN casualty_card_clinical_examination.chest_respiratory IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.chest_respiratory IS
     'Respiratory examination findings (e.g. air entry, added sounds).';
-COMMENT ON COLUMN casualty_card_clinical_examination.abdomen IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.abdomen IS
     'Abdominal examination findings (e.g. soft, tender, guarding, bowel sounds).';
-COMMENT ON COLUMN casualty_card_clinical_examination.pelvis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.pelvis IS
     'Pelvic examination findings (e.g. stable, spring test).';
-COMMENT ON COLUMN casualty_card_clinical_examination.musculoskeletal_limbs IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.musculoskeletal_limbs IS
     'Musculoskeletal and limb examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.neurological IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.neurological IS
     'Neurological examination findings (e.g. power, sensation, reflexes, cranial nerves).';
-COMMENT ON COLUMN casualty_card_clinical_examination.skin IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.skin IS
     'Skin examination findings (e.g. rash, wounds, bruising, cellulitis).';
-COMMENT ON COLUMN casualty_card_clinical_examination.mental_state IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.mental_state IS
     'Mental state assessment findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.body_diagram_notes IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.body_diagram_notes IS
     'Free-text notes to accompany body diagram markings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_clinical_examination.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_clinical_examination.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_clinical_examination.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.deleted_at IS
     'Timestamp when this row was deleted.';

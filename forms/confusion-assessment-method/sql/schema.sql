@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS confusion_assessment_method;
+
+COMMENT ON SCHEMA confusion_assessment_method IS
+    'Namespace for the Confusion Assessment Method (CAM) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION confusion_assessment_method.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION confusion_assessment_method.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE confusion_assessment_method.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON confusion_assessment_method.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE confusion_assessment_method.patient IS
     'Patient demographic information used by the CAM delirium-screening record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN confusion_assessment_method.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN confusion_assessment_method.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN confusion_assessment_method.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN confusion_assessment_method.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN confusion_assessment_method.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN confusion_assessment_method.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN confusion_assessment_method.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN confusion_assessment_method.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN confusion_assessment_method.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN confusion_assessment_method.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN confusion_assessment_method.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN confusion_assessment_method.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN confusion_assessment_method.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN confusion_assessment_method.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN confusion_assessment_method.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at the bedside.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON confusion_assessment_method.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- geriatrician, liaison psychiatrist, physiotherapist, occupational
 -- therapist, or clinical researcher).
 
-CREATE TABLE clinician (
+CREATE TABLE confusion_assessment_method.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON confusion_assessment_method.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE confusion_assessment_method.clinician IS
     'Clinician identifying information for the assessor performing the CAM delirium screen.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.role IS
     'Primary clinical role: nurse, doctor, geriatrician, liaison-psychiatrist, physiotherapist, occupational-therapist, researcher, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN confusion_assessment_method.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON confusion_assessment_method.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -211,14 +228,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- dedicated child tables. This is a status / classification form: there
 -- is no numeric total.
 
-CREATE TABLE confusion_assessment_method (
+CREATE TABLE confusion_assessment_method.confusion_assessment_method (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES confusion_assessment_method.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES confusion_assessment_method.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessor and encounter
     assessor_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -265,82 +282,82 @@ CREATE TABLE confusion_assessment_method (
 );
 
 CREATE INDEX confusion_assessment_method_patient_id_idx
-    ON confusion_assessment_method (patient_id);
+    ON confusion_assessment_method.confusion_assessment_method (patient_id);
 CREATE INDEX confusion_assessment_method_clinician_id_idx
-    ON confusion_assessment_method (clinician_id);
+    ON confusion_assessment_method.confusion_assessment_method (clinician_id);
 
 CREATE TRIGGER trigger_confusion_assessment_method_updated_at
-    BEFORE UPDATE ON confusion_assessment_method
+    BEFORE UPDATE ON confusion_assessment_method.confusion_assessment_method
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE confusion_assessment_method IS
+COMMENT ON TABLE confusion_assessment_method.confusion_assessment_method IS
     'Main Confusion Assessment Method (CAM) record: assessment context, patient identification, and the four observational feature inputs plus CAM-ICU support fields. Status / classification form with no numeric total.';
-COMMENT ON COLUMN confusion_assessment_method.id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN confusion_assessment_method.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN confusion_assessment_method.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN confusion_assessment_method.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN confusion_assessment_method.patient_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN confusion_assessment_method.clinician_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN confusion_assessment_method.assessor_name IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.assessor_name IS
     'Name of the assessor as recorded on the assessment.';
-COMMENT ON COLUMN confusion_assessment_method.assessor_role IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.assessor_role IS
     'Role of the assessor: nurse, doctor, geriatrician, liaison-psychiatrist, physiotherapist, occupational-therapist, researcher, or other.';
-COMMENT ON COLUMN confusion_assessment_method.assessed_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN confusion_assessment_method.ward_unit IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.ward_unit IS
     'Ward or unit where the assessment took place.';
-COMMENT ON COLUMN confusion_assessment_method.cam_variant IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.cam_variant IS
     'Assessment variant: cam (standard bedside) or cam-icu (ventilated / non-verbal patients).';
-COMMENT ON COLUMN confusion_assessment_method.patient_identifier IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN confusion_assessment_method.age_band IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN confusion_assessment_method.sex IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN confusion_assessment_method.cognitive_baseline IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.cognitive_baseline IS
     'Cognitive baseline before the acute change: independent, known-dementia, mild-cognitive-impairment, or unknown.';
-COMMENT ON COLUMN confusion_assessment_method.collateral_source IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.collateral_source IS
     'Source of collateral history establishing the baseline: family, carer, nurse, notes, or none.';
-COMMENT ON COLUMN confusion_assessment_method.feature_acute_onset_fluctuating IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.feature_acute_onset_fluctuating IS
     'Feature 1 — acute onset and fluctuating course: present or absent (empty when unset).';
-COMMENT ON COLUMN confusion_assessment_method.onset_timing IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.onset_timing IS
     'Timing of the acute change from baseline: hours, days, weeks, or unknown.';
-COMMENT ON COLUMN confusion_assessment_method.feature_inattention IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.feature_inattention IS
     'Feature 2 — inattention: present or absent (empty when unset).';
-COMMENT ON COLUMN confusion_assessment_method.attention_test IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.attention_test IS
     'Attention test used: digit-span, months-backwards, serial-sevens, attention-screening-examination (CAM-ICU), or not-completable.';
-COMMENT ON COLUMN confusion_assessment_method.feature_disorganised_thinking IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.feature_disorganised_thinking IS
     'Feature 3 — disorganised thinking: present or absent (empty when unset).';
-COMMENT ON COLUMN confusion_assessment_method.feature_altered_consciousness IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.feature_altered_consciousness IS
     'Feature 4 — altered level of consciousness: present or absent (empty when unset).';
-COMMENT ON COLUMN confusion_assessment_method.consciousness_level IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.consciousness_level IS
     'Observed level of consciousness: alert, vigilant, lethargic, stupor, or coma.';
-COMMENT ON COLUMN confusion_assessment_method.rass_score IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.rass_score IS
     'Richmond Agitation-Sedation Scale score (-5 to +4); recorded for the CAM-ICU variant. RASS -4/-5 (unrousable) yields an unable-to-assess classification.';
-COMMENT ON COLUMN confusion_assessment_method.motoric_subtype IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.motoric_subtype IS
     'Psychomotor subtype of delirium: hypoactive, hyperactive, mixed, or normal.';
-COMMENT ON COLUMN confusion_assessment_method.hallucinations IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.hallucinations IS
     'Whether hallucinations were observed during the assessment.';
-COMMENT ON COLUMN confusion_assessment_method.delusions IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.delusions IS
     'Whether delusions were observed during the assessment.';
-COMMENT ON COLUMN confusion_assessment_method.sleep_wake_disturbance IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.sleep_wake_disturbance IS
     'Whether a sleep-wake cycle disturbance was observed.';
-COMMENT ON COLUMN confusion_assessment_method.deliriogenic_medication IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.deliriogenic_medication IS
     'Whether a recent high-risk deliriogenic medication (anticholinergic, benzodiazepine, opioid) was noted.';
-COMMENT ON COLUMN confusion_assessment_method.deliriogenic_medication_detail IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.deliriogenic_medication_detail IS
     'Free-text detail of the deliriogenic medication noted.';
-COMMENT ON COLUMN confusion_assessment_method.suspected_precipitants IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.suspected_precipitants IS
     'Free-text note of suspected reversible precipitants (PINCH ME screen).';
-COMMENT ON COLUMN confusion_assessment_method.recommended_actions IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.recommended_actions IS
     'Free-text note of recommended actions and disposition.';
-COMMENT ON COLUMN confusion_assessment_method.clinical_note IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -357,14 +374,14 @@ COMMENT ON COLUMN confusion_assessment_method.clinical_note IS
 -- diagnostic algorithm, and the motoric subtype. This is a status /
 -- classification result: there is no numeric total or band.
 
-CREATE TABLE confusion_assessment_method_grade (
+CREATE TABLE confusion_assessment_method.confusion_assessment_method_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     confusion_assessment_method_id UUID NOT NULL UNIQUE
-        REFERENCES confusion_assessment_method(id) ON DELETE CASCADE,
+        REFERENCES confusion_assessment_method.confusion_assessment_method(id) ON DELETE CASCADE,
 
     classification VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (classification IN ('present', 'absent', 'unable-to-assess', '')),
@@ -384,39 +401,39 @@ CREATE TABLE confusion_assessment_method_grade (
 );
 
 CREATE TRIGGER trigger_confusion_assessment_method_grade_updated_at
-    BEFORE UPDATE ON confusion_assessment_method_grade
+    BEFORE UPDATE ON confusion_assessment_method.confusion_assessment_method_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE confusion_assessment_method_grade IS
+COMMENT ON TABLE confusion_assessment_method.confusion_assessment_method_grade IS
     'Computed CAM classification result (1:1): boolean delirium status, derived classification (present / absent / unable-to-assess), the positive-feature set, and the motoric subtype. Status result with no numeric total.';
-COMMENT ON COLUMN confusion_assessment_method_grade.id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN confusion_assessment_method_grade.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN confusion_assessment_method_grade.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN confusion_assessment_method_grade.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN confusion_assessment_method_grade.confusion_assessment_method_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.confusion_assessment_method_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN confusion_assessment_method_grade.classification IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.classification IS
     'Derived classification: present, absent, or unable-to-assess (empty when not yet graded).';
-COMMENT ON COLUMN confusion_assessment_method_grade.delirium_present IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.delirium_present IS
     'Boolean result of the diagnostic algorithm: 1 AND 2 AND (3 OR 4). Null when unable-to-assess or not graded.';
-COMMENT ON COLUMN confusion_assessment_method_grade.feature_1_positive IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.feature_1_positive IS
     'Whether feature 1 (acute onset and fluctuating course) was positive.';
-COMMENT ON COLUMN confusion_assessment_method_grade.feature_2_positive IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.feature_2_positive IS
     'Whether feature 2 (inattention) was positive.';
-COMMENT ON COLUMN confusion_assessment_method_grade.feature_3_positive IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.feature_3_positive IS
     'Whether feature 3 (disorganised thinking) was positive.';
-COMMENT ON COLUMN confusion_assessment_method_grade.feature_4_positive IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.feature_4_positive IS
     'Whether feature 4 (altered level of consciousness) was positive.';
-COMMENT ON COLUMN confusion_assessment_method_grade.positive_features IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.positive_features IS
     'Comma-separated subset of {1,2,3,4} that were positive (e.g. "1,2,4"), for auditable reasoning.';
-COMMENT ON COLUMN confusion_assessment_method_grade.motoric_subtype IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.motoric_subtype IS
     'Psychomotor subtype carried through to the result: hypoactive, hyperactive, mixed, or normal.';
-COMMENT ON COLUMN confusion_assessment_method_grade.graded_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -432,14 +449,14 @@ COMMENT ON COLUMN confusion_assessment_method_grade.graded_at IS
 -- belongs to, whether that feature was positive, and a human-readable
 -- description of the reasoning.
 
-CREATE TABLE confusion_assessment_method_grade_rule (
+CREATE TABLE confusion_assessment_method.confusion_assessment_method_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     confusion_assessment_method_grade_id UUID NOT NULL
-        REFERENCES confusion_assessment_method_grade(id) ON DELETE CASCADE,
+        REFERENCES confusion_assessment_method.confusion_assessment_method_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     feature VARCHAR(30) NOT NULL
@@ -450,34 +467,34 @@ CREATE TABLE confusion_assessment_method_grade_rule (
 );
 
 CREATE INDEX confusion_assessment_method_grade_rule_grade_id_idx
-    ON confusion_assessment_method_grade_rule (confusion_assessment_method_grade_id);
+    ON confusion_assessment_method.confusion_assessment_method_grade_rule (confusion_assessment_method_grade_id);
 
 CREATE TRIGGER trigger_confusion_assessment_method_grade_rule_updated_at
-    BEFORE UPDATE ON confusion_assessment_method_grade_rule
+    BEFORE UPDATE ON confusion_assessment_method.confusion_assessment_method_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE confusion_assessment_method_grade_rule IS
+COMMENT ON TABLE confusion_assessment_method.confusion_assessment_method_grade_rule IS
     'Audit trail of every classification rule that fired during CAM computation: feature, whether it was positive, category, and description.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.confusion_assessment_method_grade_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.confusion_assessment_method_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.rule_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-FEATURE-1-POSITIVE-01).';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.feature IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.feature IS
     'Feature the rule belongs to: acute-onset-fluctuating, inattention, disorganised-thinking, altered-consciousness, algorithm (the 1 AND 2 AND (3 OR 4) combiner), or arousal (RASS gating).';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.positive IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.positive IS
     'Whether the feature evaluated positive for this firing (null for combiner / arousal rules).';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.category IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.category IS
     'Subject category (e.g. feature-evaluation, algorithm-combiner, arousal-gate).';
-COMMENT ON COLUMN confusion_assessment_method_grade_rule.description IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -492,14 +509,14 @@ COMMENT ON COLUMN confusion_assessment_method_grade_rule.description IS
 -- classification, with priority and a suggested action for the clinical
 -- team.
 
-CREATE TABLE confusion_assessment_method_grade_flag (
+CREATE TABLE confusion_assessment_method.confusion_assessment_method_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     confusion_assessment_method_grade_id UUID NOT NULL
-        REFERENCES confusion_assessment_method_grade(id) ON DELETE CASCADE,
+        REFERENCES confusion_assessment_method.confusion_assessment_method_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -520,34 +537,34 @@ CREATE TABLE confusion_assessment_method_grade_flag (
 );
 
 CREATE INDEX confusion_assessment_method_grade_flag_grade_id_idx
-    ON confusion_assessment_method_grade_flag (confusion_assessment_method_grade_id);
+    ON confusion_assessment_method.confusion_assessment_method_grade_flag (confusion_assessment_method_grade_id);
 
 CREATE TRIGGER trigger_confusion_assessment_method_grade_flag_updated_at
-    BEFORE UPDATE ON confusion_assessment_method_grade_flag
+    BEFORE UPDATE ON confusion_assessment_method.confusion_assessment_method_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION confusion_assessment_method.set_updated_at();
 
-COMMENT ON TABLE confusion_assessment_method_grade_flag IS
+COMMENT ON TABLE confusion_assessment_method.confusion_assessment_method_grade_flag IS
     'Red-flag issues that fire independently of the present / absent classification, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.created_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.updated_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.deleted_at IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.confusion_assessment_method_grade_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.confusion_assessment_method_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.flag_id IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DELIRIUM-PRESENT-001).';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.category IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.category IS
     'Flag category: delirium-present, hypoactive-delirium, altered-consciousness, deliriogenic-medication, unable-to-assess, repeat-screening, or other.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.priority IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.description IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN confusion_assessment_method_grade_flag.suggested_action IS
+COMMENT ON COLUMN confusion_assessment_method.confusion_assessment_method_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "commence PINCH ME reversible-precipitant screen").';
 
 -- ========================================================================

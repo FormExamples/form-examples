@@ -1,6 +1,6 @@
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE post_operative_report.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,44 +19,44 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON post_operative_report.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_operative_report.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE post_operative_report.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN post_operative_report.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN post_operative_report.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN post_operative_report.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN post_operative_report.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN post_operative_report.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN post_operative_report.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN post_operative_report.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN post_operative_report.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN post_operative_report.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN post_operative_report.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN post_operative_report.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN post_operative_report.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN post_operative_report.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON post_operative_report.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN post_operative_report.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';

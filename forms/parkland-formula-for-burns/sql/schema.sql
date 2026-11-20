@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS parkland_formula_for_burns;
+
+COMMENT ON SCHEMA parkland_formula_for_burns IS
+    'Namespace for the Parkland Formula for Burns form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION parkland_formula_for_burns.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION parkland_formula_for_burns.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE parkland_formula_for_burns.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON parkland_formula_for_burns.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE parkland_formula_for_burns.patient IS
     'Patient demographic information used by the Parkland-formula burns-resuscitation record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN parkland_formula_for_burns.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON parkland_formula_for_burns.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- burns fluid-resuscitation calculation (emergency, burns, and critical-care
 -- roles).
 
-CREATE TABLE clinician (
+CREATE TABLE parkland_formula_for_burns.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON parkland_formula_for_burns.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE parkland_formula_for_burns.clinician IS
     'Clinician identifying information for the staff recording a Parkland-formula burns fluid-resuscitation calculation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.role IS
     'Primary clinical role: emergency-physician, burns-surgeon, intensivist, anaesthetist, emergency-nurse, burns-nurse, paramedic, retrieval-clinician, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN parkland_formula_for_burns.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON parkland_formula_for_burns.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- phase split, infusion rates, urine-output target, fired rules, and safety
 -- flags live in dedicated child tables.
 
-CREATE TABLE parkland_formula_for_burns (
+CREATE TABLE parkland_formula_for_burns.parkland_formula_for_burns (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES parkland_formula_for_burns.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES parkland_formula_for_burns.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -240,58 +257,58 @@ CREATE TABLE parkland_formula_for_burns (
 );
 
 CREATE INDEX parkland_formula_for_burns_patient_id_idx
-    ON parkland_formula_for_burns (patient_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns (patient_id);
 CREATE INDEX parkland_formula_for_burns_clinician_id_idx
-    ON parkland_formula_for_burns (clinician_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns (clinician_id);
 
 CREATE TRIGGER trigger_parkland_formula_for_burns_updated_at
-    BEFORE UPDATE ON parkland_formula_for_burns
+    BEFORE UPDATE ON parkland_formula_for_burns.parkland_formula_for_burns
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE parkland_formula_for_burns IS
+COMMENT ON TABLE parkland_formula_for_burns.parkland_formula_for_burns IS
     'Main Parkland-formula burns record: context and identification, plus the body weight, %TBSA, and time-of-injury inputs and the injury-feature flags.';
-COMMENT ON COLUMN parkland_formula_for_burns.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN parkland_formula_for_burns.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN parkland_formula_for_burns.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN parkland_formula_for_burns.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN parkland_formula_for_burns.patient_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.patient_id IS
     'Foreign key to the patient this calculation is for (restricted delete).';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_id IS
     'Foreign key to the clinician who recorded the calculation (optional, restricted delete).';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_name IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_name IS
     'Assessing clinician name as recorded on the form.';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_role IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_role IS
     'Assessing clinician role: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.care_setting IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.care_setting IS
     'Care setting: emergency-department, burns-unit, intensive-care, retrieval, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.assessed_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.assessed_at IS
     'Date and time the calculation was assessed (used with injury_at to derive hours since injury).';
-COMMENT ON COLUMN parkland_formula_for_burns.patient_identifier IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.patient_identifier IS
     'Local patient identifier as recorded on the form.';
-COMMENT ON COLUMN parkland_formula_for_burns.age_band IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.age_band IS
     'Age band that selects the major-burn referral threshold: adult (>=15% TBSA) or child (>=10% TBSA).';
-COMMENT ON COLUMN parkland_formula_for_burns.sex IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.sex IS
     'Patient sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN parkland_formula_for_burns.weight_kg IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.weight_kg IS
     'Body weight in kilograms used in the Parkland formula (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.tbsa_percent IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.tbsa_percent IS
     'Percentage total body surface area burned (partial-thickness or deeper; superficial excluded), 0-100 (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.tbsa_method IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.tbsa_method IS
     'Method used to estimate %TBSA: rule-of-nines, lund-browder, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.injury_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.injury_at IS
     'Date and time the burn occurred; the 8h/16h phase split is measured from this instant (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.injury_time_known IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.injury_time_known IS
     'Whether the time of injury is known or estimated.';
-COMMENT ON COLUMN parkland_formula_for_burns.inhalation_suspected IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.inhalation_suspected IS
     'Whether inhalation / airway injury is suspected: yes or no.';
-COMMENT ON COLUMN parkland_formula_for_burns.circumferential_or_deep IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.circumferential_or_deep IS
     'Whether a circumferential or deep burn is present (escharotomy risk): yes or no.';
-COMMENT ON COLUMN parkland_formula_for_burns.mechanism IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.mechanism IS
     'Burn mechanism: thermal, electrical, chemical, or other.';
 
 -- ========================================================================
@@ -307,14 +324,14 @@ COMMENT ON COLUMN parkland_formula_for_burns.mechanism IS
 -- (offset for time elapsed since injury), and the urine-output titration
 -- target band, 1:1 with the parent calculation record.
 
-CREATE TABLE parkland_formula_for_burns_grade (
+CREATE TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     parkland_formula_for_burns_id UUID NOT NULL UNIQUE
-        REFERENCES parkland_formula_for_burns(id) ON DELETE CASCADE,
+        REFERENCES parkland_formula_for_burns.parkland_formula_for_burns(id) ON DELETE CASCADE,
 
     total_24h_volume_ml NUMERIC(10,2),
     first_8h_volume_ml NUMERIC(10,2),
@@ -329,41 +346,41 @@ CREATE TABLE parkland_formula_for_burns_grade (
 );
 
 CREATE TRIGGER trigger_parkland_formula_for_burns_grade_updated_at
-    BEFORE UPDATE ON parkland_formula_for_burns_grade
+    BEFORE UPDATE ON parkland_formula_for_burns.parkland_formula_for_burns_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE parkland_formula_for_burns_grade IS
+COMMENT ON TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade IS
     'Computed Parkland-formula result: total 24-hour volume, phase volumes and rates (time-offset), and the urine-output titration band (1:1 with the parent calculation record).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.parkland_formula_for_burns_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.parkland_formula_for_burns_id IS
     'Foreign key to the parent calculation record (unique, 1:1).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.total_24h_volume_ml IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.total_24h_volume_ml IS
     'Total 24-hour crystalloid volume in mL: 4 x weight_kg x tbsa_percent (null when weight or %TBSA is missing).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.first_8h_volume_ml IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.first_8h_volume_ml IS
     'First-8-hour phase volume in mL: half of the total 24-hour volume (null when the total is null).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.next_16h_volume_ml IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.next_16h_volume_ml IS
     'Next-16-hour phase volume in mL: half of the total 24-hour volume (null when the total is null).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.hours_since_injury IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.hours_since_injury IS
     'Hours elapsed from time of injury to assessment, clamped at >= 0 (null when injury_at or assessed_at is missing).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.remaining_first_8h_hours IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.remaining_first_8h_hours IS
     'Hours remaining in the first-8-hour window from injury: max(8 - hours_since_injury, 0); defaults to 8 when hours_since_injury is unknown.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.first_8h_rate_ml_h IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.first_8h_rate_ml_h IS
     'First-phase infusion rate in mL/hour: first_8h_volume_ml / remaining_first_8h_hours (null when overdue, i.e. the first-8-hour window has passed).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.next_16h_rate_ml_h IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.next_16h_rate_ml_h IS
     'Second-phase infusion rate in mL/hour: next_16h_volume_ml / 16 (null when the next-16-hour volume is null).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.urine_output_target_min_ml_h IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.urine_output_target_min_ml_h IS
     'Lower urine-output titration target in mL/hour: 0.5 x weight_kg (null when weight is missing).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.urine_output_target_max_ml_h IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.urine_output_target_max_ml_h IS
     'Upper urine-output titration target in mL/hour: 1.0 x weight_kg (null when weight is missing).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade.graded_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -378,14 +395,14 @@ COMMENT ON COLUMN parkland_formula_for_burns_grade.graded_at IS
 -- computation. Each row records one rule firing with the instrument that
 -- produced it, a subject category, and a human-readable description.
 
-CREATE TABLE parkland_formula_for_burns_grade_rule (
+CREATE TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     parkland_formula_for_burns_grade_id UUID NOT NULL
-        REFERENCES parkland_formula_for_burns_grade(id) ON DELETE CASCADE,
+        REFERENCES parkland_formula_for_burns.parkland_formula_for_burns_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -395,32 +412,32 @@ CREATE TABLE parkland_formula_for_burns_grade_rule (
 );
 
 CREATE INDEX parkland_formula_for_burns_grade_rule_grade_id_idx
-    ON parkland_formula_for_burns_grade_rule (parkland_formula_for_burns_grade_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns_grade_rule (parkland_formula_for_burns_grade_id);
 
 CREATE TRIGGER trigger_parkland_formula_for_burns_grade_rule_updated_at
-    BEFORE UPDATE ON parkland_formula_for_burns_grade_rule
+    BEFORE UPDATE ON parkland_formula_for_burns.parkland_formula_for_burns_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE parkland_formula_for_burns_grade_rule IS
+COMMENT ON TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade_rule IS
     'Audit trail of every rule that fired during the Parkland-formula computation: instrument, category, and description.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.parkland_formula_for_burns_grade_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.parkland_formula_for_burns_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.rule_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-VOLUME-PARKLAND-01).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.instrument IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.instrument IS
     'Instrument the rule belongs to: volume, phase-split, rate, urine-output, or composite.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.category IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.category IS
     'Subject category (e.g. base-formula, time-offset, overdue, missing-input).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.description IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -434,14 +451,14 @@ COMMENT ON COLUMN parkland_formula_for_burns_grade_rule.description IS
 -- Safety-critical red flags that fire independently of the arithmetic, with a
 -- priority and a suggested action for the assessing clinician.
 
-CREATE TABLE parkland_formula_for_burns_grade_flag (
+CREATE TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     parkland_formula_for_burns_grade_id UUID NOT NULL
-        REFERENCES parkland_formula_for_burns_grade(id) ON DELETE CASCADE,
+        REFERENCES parkland_formula_for_burns.parkland_formula_for_burns_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -463,34 +480,34 @@ CREATE TABLE parkland_formula_for_burns_grade_flag (
 );
 
 CREATE INDEX parkland_formula_for_burns_grade_flag_grade_id_idx
-    ON parkland_formula_for_burns_grade_flag (parkland_formula_for_burns_grade_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns_grade_flag (parkland_formula_for_burns_grade_id);
 
 CREATE TRIGGER trigger_parkland_formula_for_burns_grade_flag_updated_at
-    BEFORE UPDATE ON parkland_formula_for_burns_grade_flag
+    BEFORE UPDATE ON parkland_formula_for_burns.parkland_formula_for_burns_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE parkland_formula_for_burns_grade_flag IS
+COMMENT ON TABLE parkland_formula_for_burns.parkland_formula_for_burns_grade_flag IS
     'Safety-critical red flags that fire independently of the arithmetic, with priority and a suggested action for the assessing clinician.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.parkland_formula_for_burns_grade_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.parkland_formula_for_burns_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.flag_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-MAJOR-BURN-REFERRAL-001).';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.category IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.category IS
     'Flag category: major-burn-referral, inhalation-airway, escharotomy, resuscitation-overdue, titrate-to-urine-output, special-mechanism, incomplete, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.priority IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.description IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN parkland_formula_for_burns_grade_flag.suggested_action IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "refer to a specialist burns service and commence formal resuscitation").';
 
 -- ========================================================================

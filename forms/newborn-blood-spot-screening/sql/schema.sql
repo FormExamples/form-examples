@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS newborn_blood_spot_screening;
+
+COMMENT ON SCHEMA newborn_blood_spot_screening IS
+    'Namespace for the Newborn Blood Spot Screening form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION newborn_blood_spot_screening.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION newborn_blood_spot_screening.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the newborn (infant) being screened.
 
-CREATE TABLE patient (
+CREATE TABLE newborn_blood_spot_screening.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON newborn_blood_spot_screening.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE newborn_blood_spot_screening.patient IS
     'Patient demographic information for the newborn (infant) documented by the newborn-blood-spot-screening record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.name IS
     'Full baby name (may be provisional).';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.birth_date IS
     'Date of birth (day 0 for age-at-sample calculation).';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.sex IS
     'Sex recorded for clinical purposes: female, male, indeterminate, or not-recorded.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.email IS
     'Email address (of the parent or guardian, where held).';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.phone IS
     'Phone number (of the parent or guardian, where held).';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.height_as_cm IS
     'Height a.k.a. length in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN newborn_blood_spot_screening.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON newborn_blood_spot_screening.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- recorded the newborn blood spot (heel-prick) sample (midwife, health
 -- visitor, neonatal nurse, laboratory, or other trained sample-taker).
 
-CREATE TABLE clinician (
+CREATE TABLE newborn_blood_spot_screening.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON newborn_blood_spot_screening.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE newborn_blood_spot_screening.clinician IS
     'Clinician identifying information for the sample-taker who took and recorded the newborn blood spot sample.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.name IS
     'Sample-taker full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.role IS
     'Sample-taker role: midwife, health-visitor, neonatal-nurse, laboratory, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN newborn_blood_spot_screening.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON newborn_blood_spot_screening.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- GA1, HCU). The computed overall outcome, the audit trail of fired rules, and
 -- the safety flags live in dedicated child tables.
 
-CREATE TABLE newborn_blood_spot_screening (
+CREATE TABLE newborn_blood_spot_screening.newborn_blood_spot_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES newborn_blood_spot_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES newborn_blood_spot_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Sample-taker and setting
     sample_taker_role VARCHAR(20) NOT NULL DEFAULT '' CHECK (sample_taker_role IN ('midwife', 'health-visitor', 'neonatal-nurse', 'laboratory', 'other', '')),
@@ -262,82 +279,82 @@ CREATE TABLE newborn_blood_spot_screening (
 );
 
 CREATE INDEX newborn_blood_spot_screening_patient_id_idx
-    ON newborn_blood_spot_screening (patient_id);
+    ON newborn_blood_spot_screening.newborn_blood_spot_screening (patient_id);
 CREATE INDEX newborn_blood_spot_screening_clinician_id_idx
-    ON newborn_blood_spot_screening (clinician_id);
+    ON newborn_blood_spot_screening.newborn_blood_spot_screening (clinician_id);
 
 CREATE TRIGGER trigger_newborn_blood_spot_screening_updated_at
-    BEFORE UPDATE ON newborn_blood_spot_screening
+    BEFORE UPDATE ON newborn_blood_spot_screening.newborn_blood_spot_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE newborn_blood_spot_screening IS
+COMMENT ON TABLE newborn_blood_spot_screening.newborn_blood_spot_screening IS
     'Main newborn-blood-spot-screening record for one heel-prick screening event: sample-taker and setting, baby identification, eligibility and consent, the sample event and its timing, sample quality, and the per-condition result class for the nine screened conditions. Overall outcome, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN newborn_blood_spot_screening.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN newborn_blood_spot_screening.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN newborn_blood_spot_screening.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN newborn_blood_spot_screening.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN newborn_blood_spot_screening.patient_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.patient_id IS
     'Foreign key to the newborn (infant) this screening documents (restrict delete).';
-COMMENT ON COLUMN newborn_blood_spot_screening.clinician_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.clinician_id IS
     'Foreign key to the sample-taker clinician (restrict delete); optional.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sample_taker_role IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sample_taker_role IS
     'Role of the person taking and recording the sample: midwife, health-visitor, neonatal-nurse, laboratory, or other.';
-COMMENT ON COLUMN newborn_blood_spot_screening.care_setting IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.care_setting IS
     'Care setting where the sample was taken: community, home, neonatal-unit, hospital, or other.';
-COMMENT ON COLUMN newborn_blood_spot_screening.record_date IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.record_date IS
     'Date of this record.';
-COMMENT ON COLUMN newborn_blood_spot_screening.time_of_birth IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.time_of_birth IS
     'Time of birth of the baby.';
-COMMENT ON COLUMN newborn_blood_spot_screening.gestation_weeks IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.gestation_weeks IS
     'Gestation at birth in weeks; affects cystic-fibrosis and preterm handling.';
-COMMENT ON COLUMN newborn_blood_spot_screening.previously_screened IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.previously_screened IS
     'Whether the baby has been previously screened: yes, no, or unknown.';
-COMMENT ON COLUMN newborn_blood_spot_screening.consent_given IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.consent_given IS
     'Whether informed parental consent to screen was given: yes, no, or partial.';
-COMMENT ON COLUMN newborn_blood_spot_screening.decline_reason IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.decline_reason IS
     'Free-text reason where screening for any condition was declined.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sample_date IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sample_date IS
     'Date the heel-prick sample was taken.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sample_time IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sample_time IS
     'Time the heel-prick sample was taken.';
-COMMENT ON COLUMN newborn_blood_spot_screening.age_at_sample_days IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.age_at_sample_days IS
     'Age of the baby in days at the time of sampling (sample_date minus birth_date); stored for audit and drives the day 5-8 window flag.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sampling_site IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sampling_site IS
     'Site the sample was taken from: heel or other.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sample_notes IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sample_notes IS
     'Free-text sample-taker note about the sample event.';
-COMMENT ON COLUMN newborn_blood_spot_screening.sample_adequacy IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.sample_adequacy IS
     'Sample adequacy: adequate or inadequate; an inadequate sample cannot be reliably screened and is repeated.';
-COMMENT ON COLUMN newborn_blood_spot_screening.spot_quality_issue IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.spot_quality_issue IS
     'Blood-spot quality issue: none, insufficient, compressed, layered, contaminated, or incomplete-circles.';
-COMMENT ON COLUMN newborn_blood_spot_screening.is_repeat IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.is_repeat IS
     'Whether this sample is a repeat: yes or no.';
-COMMENT ON COLUMN newborn_blood_spot_screening.repeat_reason IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.repeat_reason IS
     'Reason a repeat was taken: not-applicable, borderline-result, inadequate-sample, too-early, technical, or other; the last three are avoidable repeats.';
-COMMENT ON COLUMN newborn_blood_spot_screening.scd_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.scd_result IS
     'Sickle cell disease result class: not-suspected, suspected, carrier, repeat-required, declined, or pending. carrier is valid for this condition only.';
-COMMENT ON COLUMN newborn_blood_spot_screening.cf_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.cf_result IS
     'Cystic fibrosis result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.cht_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.cht_result IS
     'Congenital hypothyroidism result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.pku_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.pku_result IS
     'Phenylketonuria result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.mcadd_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.mcadd_result IS
     'MCADD (medium-chain acyl-CoA dehydrogenase deficiency) result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.msud_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.msud_result IS
     'Maple syrup urine disease result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.iva_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.iva_result IS
     'Isovaleric acidaemia result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.ga1_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.ga1_result IS
     'Glutaric aciduria type 1 result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.hcu_result IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.hcu_result IS
     'Homocystinuria (pyridoxine unresponsive) result class: not-suspected, suspected, carrier (invalid), repeat-required, declined, or pending.';
-COMMENT ON COLUMN newborn_blood_spot_screening.clinical_context IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -354,14 +371,14 @@ COMMENT ON COLUMN newborn_blood_spot_screening.clinical_context IS
 -- status, and records the derived sample-quality flags. This is a
 -- result-classification outcome, not a numeric score.
 
-CREATE TABLE newborn_blood_spot_screening_grade (
+CREATE TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     newborn_blood_spot_screening_id UUID NOT NULL UNIQUE
-        REFERENCES newborn_blood_spot_screening(id) ON DELETE CASCADE,
+        REFERENCES newborn_blood_spot_screening.newborn_blood_spot_screening(id) ON DELETE CASCADE,
 
     overall_outcome VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (overall_outcome IN (
@@ -384,33 +401,33 @@ CREATE TABLE newborn_blood_spot_screening_grade (
 );
 
 CREATE TRIGGER trigger_newborn_blood_spot_screening_grade_updated_at
-    BEFORE UPDATE ON newborn_blood_spot_screening_grade
+    BEFORE UPDATE ON newborn_blood_spot_screening.newborn_blood_spot_screening_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE newborn_blood_spot_screening_grade IS
+COMMENT ON TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade IS
     'Computed classification for a newborn-blood-spot-screening record: overall screening outcome, referral status, and derived sample-quality flags.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.newborn_blood_spot_screening_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.newborn_blood_spot_screening_id IS
     'Foreign key to the parent newborn-blood-spot-screening record (unique, 1:1).';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.overall_outcome IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.overall_outcome IS
     'Overall screening outcome by precedence: referral-required (any suspected), repeat-required, incomplete, declined-only-outstanding, or all-not-suspected.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.referral_status IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.referral_status IS
     'Referral status: urgent when referral-required, repeat when repeat-required, otherwise routine.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.sample_adequate IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.sample_adequate IS
     'Derived: true when sample_adequacy is adequate.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.within_window IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.within_window IS
     'Derived: true when age_at_sample_days is between day 5 and day 8 inclusive.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.avoidable_repeat IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.avoidable_repeat IS
     'Derived: true when this is a repeat whose reason is inadequate-sample, too-early, or technical.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade.graded_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -425,14 +442,14 @@ COMMENT ON COLUMN newborn_blood_spot_screening_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE newborn_blood_spot_screening_grade_rule (
+CREATE TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     newborn_blood_spot_screening_grade_id UUID NOT NULL
-        REFERENCES newborn_blood_spot_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES newborn_blood_spot_screening.newborn_blood_spot_screening_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -442,32 +459,32 @@ CREATE TABLE newborn_blood_spot_screening_grade_rule (
 );
 
 CREATE INDEX newborn_blood_spot_screening_grade_rule_grade_id_idx
-    ON newborn_blood_spot_screening_grade_rule (newborn_blood_spot_screening_grade_id);
+    ON newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule (newborn_blood_spot_screening_grade_id);
 
 CREATE TRIGGER trigger_newborn_blood_spot_screening_grade_rule_updated_at
-    BEFORE UPDATE ON newborn_blood_spot_screening_grade_rule
+    BEFORE UPDATE ON newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE newborn_blood_spot_screening_grade_rule IS
+COMMENT ON TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.newborn_blood_spot_screening_grade_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.newborn_blood_spot_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.rule_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-OUTCOME-REFERRAL-01).';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.stage IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.stage IS
     'Pathway stage the rule concerns: condition, outcome, referral, sample-quality, or completeness.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.category IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.category IS
     'Subject category (e.g. classification, precedence, conditional-requirement).';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.description IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -481,14 +498,14 @@ COMMENT ON COLUMN newborn_blood_spot_screening_grade_rule.description IS
 -- Safety flags that fire independently of the overall outcome, each with a
 -- priority and a suggested action for the sample-taker or screening service.
 
-CREATE TABLE newborn_blood_spot_screening_grade_flag (
+CREATE TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     newborn_blood_spot_screening_grade_id UUID NOT NULL
-        REFERENCES newborn_blood_spot_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES newborn_blood_spot_screening.newborn_blood_spot_screening_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -510,34 +527,34 @@ CREATE TABLE newborn_blood_spot_screening_grade_flag (
 );
 
 CREATE INDEX newborn_blood_spot_screening_grade_flag_grade_id_idx
-    ON newborn_blood_spot_screening_grade_flag (newborn_blood_spot_screening_grade_id);
+    ON newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag (newborn_blood_spot_screening_grade_id);
 
 CREATE TRIGGER trigger_newborn_blood_spot_screening_grade_flag_updated_at
-    BEFORE UPDATE ON newborn_blood_spot_screening_grade_flag
+    BEFORE UPDATE ON newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_blood_spot_screening.set_updated_at();
 
-COMMENT ON TABLE newborn_blood_spot_screening_grade_flag IS
+COMMENT ON TABLE newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag IS
     'Safety flags that fire independently of the overall outcome, with priority and a suggested action for the sample-taker or screening service.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.created_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.updated_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.deleted_at IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.newborn_blood_spot_screening_grade_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.newborn_blood_spot_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.flag_id IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-URGENT-REFERRAL-001).';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.category IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.category IS
     'Flag category: urgent-referral, inadequate-sample, out-of-window-sample, avoidable-repeat, carrier, declined, incomplete, or other (invalid result class maps to other).';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.priority IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.description IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN newborn_blood_spot_screening_grade_flag.suggested_action IS
+COMMENT ON COLUMN newborn_blood_spot_screening.newborn_blood_spot_screening_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "refer urgently to the named specialist service", "repeat the sample").';
 
 -- ========================================================================

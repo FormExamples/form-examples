@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_employee.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_fit_note;
+
+COMMENT ON SCHEMA medical_fit_note IS
+    'Namespace for the Medical Fit Note form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_fit_note.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_fit_note.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Employee (the patient) who is taking sick leave.
 
-CREATE TABLE employee (
+CREATE TABLE medical_fit_note.employee (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -76,45 +93,45 @@ CREATE TABLE employee (
 );
 
 CREATE TRIGGER trigger_employee_updated_at
-    BEFORE UPDATE ON employee
+    BEFORE UPDATE ON medical_fit_note.employee
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
 CREATE INDEX employee_index_gto
-    ON employee
+    ON medical_fit_note.employee
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE employee IS
+COMMENT ON TABLE medical_fit_note.employee IS
     'Employee.';
-COMMENT ON COLUMN employee.id IS
+COMMENT ON COLUMN medical_fit_note.employee.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN employee.created_at IS
+COMMENT ON COLUMN medical_fit_note.employee.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN employee.updated_at IS
+COMMENT ON COLUMN medical_fit_note.employee.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN employee.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.employee.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN employee.name IS
+COMMENT ON COLUMN medical_fit_note.employee.name IS
     'Name.';
-COMMENT ON COLUMN employee.birth_date IS
+COMMENT ON COLUMN medical_fit_note.employee.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN employee.email IS
+COMMENT ON COLUMN medical_fit_note.employee.email IS
     'Email.';
-COMMENT ON COLUMN employee.phone IS
+COMMENT ON COLUMN medical_fit_note.employee.phone IS
     'Phone.';
-COMMENT ON COLUMN employee.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_fit_note.employee.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN employee.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_fit_note.employee.country_as_iso_3166_1_alpha_2 IS
     'Country as iso 3166 1 alpha 2.';
-COMMENT ON COLUMN employee.postcode IS
+COMMENT ON COLUMN medical_fit_note.employee.postcode IS
     'Postcode.';
-COMMENT ON COLUMN employee.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_fit_note.employee.united_kingdom_nhs_number IS
     'United kingdom NHS number.';
-COMMENT ON COLUMN employee.employer_name IS
+COMMENT ON COLUMN medical_fit_note.employee.employer_name IS
     'Employer name.';
-COMMENT ON COLUMN employee.job_title IS
+COMMENT ON COLUMN medical_fit_note.employee.job_title IS
     'Job title.';
 
 -- ========================================================================
@@ -127,7 +144,7 @@ COMMENT ON COLUMN employee.job_title IS
 
 -- Clinician who assesses the employee and signs the fit note.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_fit_note.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -143,39 +160,39 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_fit_note.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON medical_fit_note.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_fit_note.clinician IS
     'Clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_fit_note.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_fit_note.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_fit_note.clinician.email IS
     'Email.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_fit_note.clinician.phone IS
     'Phone.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_fit_note.clinician.role IS
     'Role. One of: gp, hospital-doctor, nurse, occupational-therapist, pharmacist, physiotherapist, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_fit_note.clinician.registration_body IS
     'Registration body. One of: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_fit_note.clinician.registration_number IS
     'Registration number.';
-COMMENT ON COLUMN clinician.practice_name IS
+COMMENT ON COLUMN medical_fit_note.clinician.practice_name IS
     'Practice name.';
 
 -- ========================================================================
@@ -188,13 +205,13 @@ COMMENT ON COLUMN clinician.practice_name IS
 
 -- Fit note (Statement of Fitness for Work): a clinician's signed advice on an employee's sick leave.
 
-CREATE TABLE medical_fit_note (
+CREATE TABLE medical_fit_note.medical_fit_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    employee_id UUID NOT NULL REFERENCES employee(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    employee_id UUID NOT NULL REFERENCES medical_fit_note.employee(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES medical_fit_note.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'signed', 'issued', 'cancelled')),
     assessment_date DATE,
     assessment_method VARCHAR(20) NOT NULL DEFAULT '' CHECK (assessment_method IN ('face-to-face', 'video', 'telephone', 'records-review', '')),
@@ -218,64 +235,64 @@ CREATE TABLE medical_fit_note (
 );
 
 CREATE TRIGGER trigger_medical_fit_note_updated_at
-    BEFORE UPDATE ON medical_fit_note
+    BEFORE UPDATE ON medical_fit_note.medical_fit_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
-CREATE INDEX index_medical_fit_note_employee_id ON medical_fit_note(employee_id);
-CREATE INDEX index_medical_fit_note_clinician_id ON medical_fit_note(clinician_id);
+CREATE INDEX index_medical_fit_note_employee_id ON medical_fit_note.medical_fit_note(employee_id);
+CREATE INDEX index_medical_fit_note_clinician_id ON medical_fit_note.medical_fit_note(clinician_id);
 
-COMMENT ON TABLE medical_fit_note IS
+COMMENT ON TABLE medical_fit_note.medical_fit_note IS
     'Medical fit note.';
-COMMENT ON COLUMN medical_fit_note.id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_fit_note.created_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_fit_note.updated_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_fit_note.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_fit_note.employee_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.employee_id IS
     'Foreign key to the employee table.';
-COMMENT ON COLUMN medical_fit_note.clinician_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.clinician_id IS
     'Foreign key to the clinician table.';
-COMMENT ON COLUMN medical_fit_note.status IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN medical_fit_note.assessment_date IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.assessment_date IS
     'Assessment date.';
-COMMENT ON COLUMN medical_fit_note.assessment_method IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.assessment_method IS
     'Assessment method. One of: face-to-face, video, telephone, records-review.';
-COMMENT ON COLUMN medical_fit_note.diagnosis_primary IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.diagnosis_primary IS
     'Diagnosis primary.';
-COMMENT ON COLUMN medical_fit_note.diagnosis_additional IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.diagnosis_additional IS
     'Diagnosis additional.';
-COMMENT ON COLUMN medical_fit_note.fitness_advice IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.fitness_advice IS
     'Fitness advice. One of: not-fit-for-work, may-be-fit-for-work.';
-COMMENT ON COLUMN medical_fit_note.period_from IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_from IS
     'Period from.';
-COMMENT ON COLUMN medical_fit_note.period_to IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_to IS
     'Period to.';
-COMMENT ON COLUMN medical_fit_note.period_duration_days IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_duration_days IS
     'Period duration days.';
-COMMENT ON COLUMN medical_fit_note.reassessment_required IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.reassessment_required IS
     'Reassessment required. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_phased_return IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_phased_return IS
     'Adjustment phased return. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_altered_hours IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_altered_hours IS
     'Adjustment altered hours. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_amended_duties IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_amended_duties IS
     'Adjustment amended duties. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_workplace_adaptations IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_workplace_adaptations IS
     'Adjustment workplace adaptations. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.functional_effects IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.functional_effects IS
     'Functional effects.';
-COMMENT ON COLUMN medical_fit_note.comments IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.comments IS
     'Comments.';
-COMMENT ON COLUMN medical_fit_note.employee_consent_to_share IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.employee_consent_to_share IS
     'Employee consent to share. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.clinician_declaration IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.clinician_declaration IS
     'Clinician declaration. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.signed_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.signed_at IS
     'Signed at.';
 
 -- ========================================================================
@@ -288,12 +305,12 @@ COMMENT ON COLUMN medical_fit_note.signed_at IS
 
 -- Computed validation result for a fit note.
 
-CREATE TABLE medical_fit_note_grade (
+CREATE TABLE medical_fit_note.medical_fit_note_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    medical_fit_note_id UUID NOT NULL UNIQUE REFERENCES medical_fit_note(id) ON DELETE CASCADE,
+    medical_fit_note_id UUID NOT NULL UNIQUE REFERENCES medical_fit_note.medical_fit_note(id) ON DELETE CASCADE,
     outcome VARCHAR(30) NOT NULL DEFAULT '' CHECK (outcome IN ('not-fit-for-work', 'may-be-fit-for-work', '')),
     approval_status VARCHAR(20) NOT NULL DEFAULT '' CHECK (approval_status IN ('approved', 'needs-completion', 'blocked', '')),
     duration_days INTEGER,
@@ -302,31 +319,31 @@ CREATE TABLE medical_fit_note_grade (
 );
 
 CREATE TRIGGER trigger_medical_fit_note_grade_updated_at
-    BEFORE UPDATE ON medical_fit_note_grade
+    BEFORE UPDATE ON medical_fit_note.medical_fit_note_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
-COMMENT ON TABLE medical_fit_note_grade IS
+COMMENT ON TABLE medical_fit_note.medical_fit_note_grade IS
     'Medical fit note grade.';
-COMMENT ON COLUMN medical_fit_note_grade.id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_fit_note_grade.created_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_fit_note_grade.updated_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_fit_note_grade.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_fit_note_grade.medical_fit_note_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.medical_fit_note_id IS
     'Foreign key to the medical_fit_note table.';
-COMMENT ON COLUMN medical_fit_note_grade.outcome IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.outcome IS
     'Outcome. One of: not-fit-for-work, may-be-fit-for-work.';
-COMMENT ON COLUMN medical_fit_note_grade.approval_status IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.approval_status IS
     'Approval status. One of: approved, needs-completion, blocked.';
-COMMENT ON COLUMN medical_fit_note_grade.duration_days IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.duration_days IS
     'Duration days.';
-COMMENT ON COLUMN medical_fit_note_grade.adjustment_count IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.adjustment_count IS
     'Adjustment count.';
-COMMENT ON COLUMN medical_fit_note_grade.graded_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade.graded_at IS
     'Graded at.';
 
 -- ========================================================================
@@ -337,41 +354,41 @@ COMMENT ON COLUMN medical_fit_note_grade.graded_at IS
 -- BEGIN 06_create_table_medical_fit_note_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE medical_fit_note_grade_rule (
+CREATE TABLE medical_fit_note.medical_fit_note_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grade_id UUID NOT NULL REFERENCES medical_fit_note_grade(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL REFERENCES medical_fit_note.medical_fit_note_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     description VARCHAR(500) NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_medical_fit_note_grade_rule_grade_id ON medical_fit_note_grade_rule(grade_id);
+CREATE INDEX index_medical_fit_note_grade_rule_grade_id ON medical_fit_note.medical_fit_note_grade_rule(grade_id);
 
 CREATE TRIGGER trigger_medical_fit_note_grade_rule_updated_at
-    BEFORE UPDATE ON medical_fit_note_grade_rule
+    BEFORE UPDATE ON medical_fit_note.medical_fit_note_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
-COMMENT ON TABLE medical_fit_note_grade_rule IS
+COMMENT ON TABLE medical_fit_note.medical_fit_note_grade_rule IS
     'Medical fit note grade rule.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.created_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.updated_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.grade_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.grade_id IS
     'Foreign key to the medical_fit_note_grade table.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.rule_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.rule_id IS
     'Rule ID.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.category IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.category IS
     'Category.';
-COMMENT ON COLUMN medical_fit_note_grade_rule.description IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_rule.description IS
     'Description.';
 
 -- ========================================================================
@@ -382,12 +399,12 @@ COMMENT ON COLUMN medical_fit_note_grade_rule.description IS
 -- BEGIN 07_create_table_medical_fit_note_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE medical_fit_note_grade_flag (
+CREATE TABLE medical_fit_note.medical_fit_note_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    medical_fit_note_grade_id UUID NOT NULL REFERENCES medical_fit_note_grade(id) ON DELETE CASCADE,
+    medical_fit_note_grade_id UUID NOT NULL REFERENCES medical_fit_note.medical_fit_note_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -408,34 +425,34 @@ CREATE TABLE medical_fit_note_grade_flag (
     suggested_action VARCHAR(500) NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_medical_fit_note_grade_flag_grade_id ON medical_fit_note_grade_flag(medical_fit_note_grade_id);
+CREATE INDEX index_medical_fit_note_grade_flag_grade_id ON medical_fit_note.medical_fit_note_grade_flag(medical_fit_note_grade_id);
 
 CREATE TRIGGER trigger_medical_fit_note_grade_flag_updated_at
-    BEFORE UPDATE ON medical_fit_note_grade_flag
+    BEFORE UPDATE ON medical_fit_note.medical_fit_note_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
-COMMENT ON TABLE medical_fit_note_grade_flag IS
+COMMENT ON TABLE medical_fit_note.medical_fit_note_grade_flag IS
     'Medical fit note grade flag.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.created_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.updated_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.medical_fit_note_grade_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.medical_fit_note_grade_id IS
     'Foreign key to the medical_fit_note_grade table.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.flag_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.flag_id IS
     'Flag ID.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.category IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.category IS
     'Category. One of: missing-diagnosis, missing-assessment, invalid-period, long-period-without-review, missing-adjustments, missing-consent, missing-declaration, unregistered-clinician, ….';
-COMMENT ON COLUMN medical_fit_note_grade_flag.priority IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.priority IS
     'Priority. One of: low, medium, high.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.description IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.description IS
     'Description.';
-COMMENT ON COLUMN medical_fit_note_grade_flag.suggested_action IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note_grade_flag.suggested_action IS
     'Suggested action.';
 
 -- ========================================================================

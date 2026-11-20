@@ -1,6 +1,6 @@
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -8,5 +8,5 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hip_replacement_surgery_evaluation;
+
+COMMENT ON SCHEMA hip_replacement_surgery_evaluation IS
+    'Namespace for the Hip Replacement Surgery Evaluation form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hip_replacement_surgery_evaluation.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hip_replacement_surgery_evaluation.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information and anthropometrics.
 
-CREATE TABLE patient (
+CREATE TABLE hip_replacement_surgery_evaluation.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -77,47 +94,47 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON hip_replacement_surgery_evaluation.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hip_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE hip_replacement_surgery_evaluation.patient IS
     'Patient.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.birth_date IS
     'Birth date, such as for calculating age and for the paediatric safety flag, because the Oxford Hip Score is not validated below 16 years.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.sex IS
     'Sex.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating body mass index (BMI).';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.weight_as_kg IS
     'Weight measurement in kg, such as for calculating body mass index (BMI).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient.body_mass_index IS
     'Body mass index (BMI) measurement, i.e. weight in kg divided by the square of height in metres, such as for the high-bmi-surgical-risk safety flag when 40 or above.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON hip_replacement_surgery_evaluation.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -134,7 +151,7 @@ CREATE INDEX patient_index_gto
 -- orthopaedic surgeon or extended-scope physiotherapist in a joint-replacement
 -- clinic.
 
-CREATE TABLE clinician (
+CREATE TABLE hip_replacement_surgery_evaluation.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -153,43 +170,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON hip_replacement_surgery_evaluation.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hip_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE hip_replacement_surgery_evaluation.clinician IS
     'Clinician, i.e. the orthopaedic surgeon or extended-scope physiotherapist who conducts the hip-replacement surgery evaluation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.role IS
     'Clinician role, i.e. the job role the practitioner holds in the joint-replacement clinic.';
-COMMENT ON COLUMN clinician.gmc_number IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.gmc_number IS
     'General Medical Council (GMC) registration number, or the equivalent professional registration number for a non-medical practitioner such as an extended-scope physiotherapist.';
-COMMENT ON COLUMN clinician.site_name IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.site_name IS
     'Site where the clinician usually practises, such as the hospital or joint-replacement clinic.';
-COMMENT ON COLUMN clinician.employer IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician.employer IS
     'Employer, such as the NHS trust or health board.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON hip_replacement_surgery_evaluation.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -212,13 +229,13 @@ CREATE INDEX clinician_index_gto
 -- columns are NULL. See ../index.md for the wizard table and ../spec/index.md
 -- for the contract.
 
-CREATE TABLE hip_replacement_surgery_evaluation (
+CREATE TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES hip_replacement_surgery_evaluation.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES hip_replacement_surgery_evaluation.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
 
     -- Step 1: clinician identification
@@ -330,193 +347,193 @@ CREATE TABLE hip_replacement_surgery_evaluation (
 );
 
 CREATE INDEX hip_replacement_surgery_evaluation_patient_id_index
-    ON hip_replacement_surgery_evaluation (patient_id);
+    ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation (patient_id);
 
 CREATE INDEX hip_replacement_surgery_evaluation_clinician_id_index
-    ON hip_replacement_surgery_evaluation (clinician_id);
+    ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation (clinician_id);
 
 CREATE INDEX hip_replacement_surgery_evaluation_status_index
-    ON hip_replacement_surgery_evaluation (status);
+    ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation (status);
 
 CREATE INDEX hip_replacement_surgery_evaluation_assessment_date_index
-    ON hip_replacement_surgery_evaluation (assessment_date);
+    ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation (assessment_date);
 
 CREATE TRIGGER trigger_hip_replacement_surgery_evaluation_updated_at
-    BEFORE UPDATE ON hip_replacement_surgery_evaluation
+    BEFORE UPDATE ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hip_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE hip_replacement_surgery_evaluation IS
+COMMENT ON TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation IS
     'Hip-replacement surgery evaluation: the payload of the 15-step single-page wizard, i.e. the orthopaedic assessment of whether a patient''s hip disease and functional decline justify total hip arthroplasty and whether conservative options have been exhausted.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.created_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.updated_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.deleted_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient_id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.clinician_id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.clinician_id IS
     'Foreign key to the clinician table, i.e. the practitioner conducting the evaluation.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.status IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.status IS
     'Workflow status of the evaluation: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.assessment_date IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.assessment_date IS
     'Date the evaluation was conducted.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.assessment_time IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.assessment_time IS
     'Time the evaluation was conducted.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.site_name IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.site_name IS
     'Site where the evaluation was conducted, such as the joint-replacement clinic.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.affected_side IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.affected_side IS
     'Hip side affected: left, right, or bilateral.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.symptom_duration_months IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.symptom_duration_months IS
     'Duration of hip symptoms in months.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.pain_at_rest_0_10 IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.pain_at_rest_0_10 IS
     'Pain severity at rest, 0 (none) to 10 (worst imaginable).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.pain_on_activity_0_10 IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.pain_on_activity_0_10 IS
     'Pain severity on activity, 0 (none) to 10 (worst imaginable).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.night_pain IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.night_pain IS
     'Whether the patient reports night pain.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.prior_hip_surgery IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.prior_hip_surgery IS
     'Whether the patient has had prior surgery on the affected hip.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.prior_hip_surgery_detail IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.prior_hip_surgery_detail IS
     'Description of any prior hip surgery, such as arthroscopy or osteotomy.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.prior_injury_or_dysplasia_history IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.prior_injury_or_dysplasia_history IS
     'Whether the patient has a history of prior hip injury or developmental dysplasia of the hip.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.prior_injury_or_dysplasia_detail IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.prior_injury_or_dysplasia_detail IS
     'Description of the prior hip injury or dysplasia history.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_pain_severity IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_pain_severity IS
     'Oxford Hip Score item 1: usual hip pain severity, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_washing_and_drying IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_washing_and_drying IS
     'Oxford Hip Score item 2: difficulty washing and drying yourself because of your hip, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_transport IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_transport IS
     'Oxford Hip Score item 3: difficulty getting in and out of a car, or using public transport, because of your hip, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_dressing_socks IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_dressing_socks IS
     'Oxford Hip Score item 4: difficulty putting on a pair of socks or stockings because of your hip, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_shopping IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_shopping IS
     'Oxford Hip Score item 5: ability to do the household shopping on your own, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_walking_pain IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_walking_pain IS
     'Oxford Hip Score item 6: pain experienced walking, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_limping IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_limping IS
     'Oxford Hip Score item 7: limping when walking because of your hip, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_kneeling IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_kneeling IS
     'Oxford Hip Score item 8: difficulty kneeling and getting up again afterwards because of your hip, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_night_pain IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_night_pain IS
     'Oxford Hip Score item 9: how often has hip pain troubled you in bed at night, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_work_interference IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_work_interference IS
     'Oxford Hip Score item 10: how much has hip pain interfered with your usual work, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_giving_way IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_giving_way IS
     'Oxford Hip Score item 11: how often has the hip felt like it might suddenly give way or let you down, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ohs_stairs IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ohs_stairs IS
     'Oxford Hip Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.walking_distance_before_pain IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.walking_distance_before_pain IS
     'Walking distance before pain forces a stop: unlimited, over 1km, 100m to 1km, under 100m, or housebound.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.shoes_and_socks_difficulty IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.shoes_and_socks_difficulty IS
     'Difficulty putting on shoes and socks: none, some, severe, or unable.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.walking_aid_use IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.walking_aid_use IS
     'Walking aid in use: none, stick, frame, or wheelchair.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.limp_present IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.limp_present IS
     'Whether a limp is present on examination.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.antalgic_gait IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.antalgic_gait IS
     'Whether an antalgic (pain-avoiding) gait is present on examination.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.trendelenburg_sign IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.trendelenburg_sign IS
     'Whether the Trendelenburg sign is positive, indicating hip abductor weakness relevant to surgical planning.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.leg_length_discrepancy_as_cm IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.leg_length_discrepancy_as_cm IS
     'Measured leg-length discrepancy in cm; greater than 2cm affects surgical planning.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.flexion_degrees IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.flexion_degrees IS
     'Hip flexion range of motion in degrees.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.internal_rotation_degrees IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.internal_rotation_degrees IS
     'Hip internal rotation range of motion in degrees.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.external_rotation_degrees IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.external_rotation_degrees IS
     'Hip external rotation range of motion in degrees.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.abduction_degrees IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.abduction_degrees IS
     'Hip abduction range of motion in degrees.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.adduction_degrees IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.adduction_degrees IS
     'Hip adduction range of motion in degrees.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.fixed_flexion_deformity_present IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.fixed_flexion_deformity_present IS
     'Whether a fixed flexion deformity is present on examination.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_abductor_strength_mrc IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.hip_abductor_strength_mrc IS
     'Hip abductor muscle strength on the Medical Research Council (MRC) 0 to 5 scale.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.joint_stability IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.joint_stability IS
     'Joint stability on examination: stable or unstable.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.tenderness_site IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.tenderness_site IS
     'Site of tenderness on examination: none, groin, trochanteric, buttock, or other.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.weight_bearing_xray_performed IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.weight_bearing_xray_performed IS
     'Whether a weight-bearing pelvic or hip X-ray was performed.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.kellgren_lawrence_grade IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.kellgren_lawrence_grade IS
     'Kellgren and Lawrence radiographic osteoarthritis grade, 0 (none) to 4 (severe).';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.joint_space_narrowing IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.joint_space_narrowing IS
     'Degree of joint-space narrowing on imaging: none, mild, moderate, or severe.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.subchondral_sclerosis_or_cysts_present IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.subchondral_sclerosis_or_cysts_present IS
     'Whether subchondral sclerosis or cysts are present on imaging.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.mri_performed IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.mri_performed IS
     'Whether an MRI was performed.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.mri_findings IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.mri_findings IS
     'Free-text MRI findings.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ct_performed IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ct_performed IS
     'Whether a CT scan was performed.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ct_indication IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ct_indication IS
     'Indication for the CT scan, such as robotic-assisted surgical planning or a complex deformity.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.physiotherapy_tried IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.physiotherapy_tried IS
     'Whether physiotherapy has been tried as a conservative measure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.physiotherapy_duration_weeks IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.physiotherapy_duration_weeks IS
     'Duration of the physiotherapy trial in weeks.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.weight_management_advice_given IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.weight_management_advice_given IS
     'Whether weight-management advice has been given as a conservative measure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.steroid_injection_given IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.steroid_injection_given IS
     'Whether an intra-articular steroid injection has been given as a conservative measure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.steroid_injection_count IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.steroid_injection_count IS
     'Number of intra-articular steroid injections given.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.steroid_injection_response IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.steroid_injection_response IS
     'Response to the intra-articular steroid injection: no relief, partial relief, or good relief.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.analgesic_trial_given IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.analgesic_trial_given IS
     'Whether a trial of NSAID or other analgesic medication has been given as a conservative measure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.analgesic_trial_response IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.analgesic_trial_response IS
     'Response to the analgesic trial: no relief, partial relief, or good relief.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.walking_aid_trial IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.walking_aid_trial IS
     'Whether a walking-aid trial has been given as a conservative measure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.conservative_measures_exhausted IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.conservative_measures_exhausted IS
     'Whether all appropriate conservative measures have been exhausted, i.e. the primary gate on surgical candidacy alongside the Oxford Hip Score and the Kellgren and Lawrence grade.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.diabetes_controlled IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.diabetes_controlled IS
     'Diabetes control status: not diabetic, controlled, or poorly controlled.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.cardiac_disease_present IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.cardiac_disease_present IS
     'Whether cardiac disease is present.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.bleeding_disorder_or_anticoagulant_use IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.bleeding_disorder_or_anticoagulant_use IS
     'Whether a bleeding disorder is present or an anticoagulant medicine is in use.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.smoking_status IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.smoking_status IS
     'Smoking status: never, ex-smoker, or current smoker.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.general_fitness_note IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.general_fitness_note IS
     'Free-text general surgical-fitness note. Detailed ASA grading belongs to the pre-operative assessment forms, not here.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.full_blood_count_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.full_blood_count_done IS
     'Whether a full blood count has been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.renal_function_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.renal_function_done IS
     'Whether renal function tests have been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.clotting_or_inr_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.clotting_or_inr_done IS
     'Whether clotting studies or INR have been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.ecg_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.ecg_done IS
     'Whether an ECG has been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.mrsa_screen_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.mrsa_screen_done IS
     'Whether an MRSA screen has been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.urinalysis_done IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.urinalysis_done IS
     'Whether urinalysis has been done as part of the pre-operative baseline.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.risks_and_benefits_discussed IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.risks_and_benefits_discussed IS
     'Whether the risks and benefits of surgery have been discussed with the patient.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.realistic_expectations_discussed IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.realistic_expectations_discussed IS
     'Whether realistic expectations of surgical outcome have been discussed with the patient.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.patient_decision_aid_given IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.patient_decision_aid_given IS
     'Whether a patient decision aid has been given.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.interpreter_required IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.interpreter_required IS
     'Whether an interpreter is required for shared decision-making.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.interpreter_language IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.interpreter_language IS
     'Language the interpreter is required for.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.recommendation IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.recommendation IS
     'Clinician recommendation: total hip replacement, hip resurfacing, continue conservative management, MDT review, or not currently a candidate.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.target_list_date IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.target_list_date IS
     'Target date to add the patient to the surgical waiting list, where applicable.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.responsible_surgeon IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.responsible_surgeon IS
     'Name of the surgeon responsible for the planned procedure.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation.additional_notes IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation.additional_notes IS
     'Free-text summary notes.';
 
 -- ========================================================================
@@ -532,13 +549,13 @@ COMMENT ON COLUMN hip_replacement_surgery_evaluation.additional_notes IS
 -- values with an override reason, so the override is auditable rather than
 -- silent.
 
-CREATE TABLE hip_replacement_surgery_evaluation_grade (
+CREATE TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     hip_replacement_surgery_evaluation_id UUID NOT NULL UNIQUE
-        REFERENCES hip_replacement_surgery_evaluation(id) ON DELETE CASCADE,
+        REFERENCES hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation(id) ON DELETE CASCADE,
 
     ohs_total INTEGER
         CHECK (ohs_total IS NULL OR ohs_total BETWEEN 0 AND 48),
@@ -558,39 +575,39 @@ CREATE TABLE hip_replacement_surgery_evaluation_grade (
 );
 
 CREATE TRIGGER trigger_hip_replacement_surgery_evaluation_grade_updated_at
-    BEFORE UPDATE ON hip_replacement_surgery_evaluation_grade
+    BEFORE UPDATE ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hip_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE hip_replacement_surgery_evaluation_grade IS
+COMMENT ON TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade IS
     'Computed and signed-off grading result for one hip-replacement surgery evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.created_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.updated_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.deleted_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.hip_replacement_surgery_evaluation_id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.hip_replacement_surgery_evaluation_id IS
     'Foreign key to the hip_replacement_surgery_evaluation table, unique because grading is one-to-one with the evaluation.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.ohs_total IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.ohs_total IS
     'Oxford Hip Score total, 0 to 48, being the sum of the 12 items, where 48 is the best outcome.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.ohs_category IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.ohs_category IS
     'Oxford Hip Score category computed by the engine: severe (0-19), moderate (20-29), mild-to-moderate (30-39), or satisfactory (40-48). This banding is this form''s operational convention; see spec/index.md.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.computed_candidacy IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.computed_candidacy IS
     'Surgical-candidacy recommendation computed by the engine from the Oxford Hip Score total, the Kellgren and Lawrence grade, and whether conservative measures are exhausted: strong-candidate, candidate, continue-conservative, not-indicated, or mdt-review.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.final_candidacy IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.final_candidacy IS
     'Surgical-candidacy recommendation signed off by the clinician, which may equal or differ from the computed value.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.override_reason IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.override_reason IS
     'Reason the clinician set a final candidacy differently from the computed value, mandatory when they differ.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.clinician_notes IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.signed_by_name IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.signed_by_name IS
     'Name of the clinician who signed the evaluation.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.signed_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.signed_at IS
     'Timestamp of the clinician electronic signature.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.graded_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -605,13 +622,13 @@ COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade.graded_at IS
 -- recommendation, with a priority and a suggested action. Flags are never
 -- suppressed by a clinician override of the candidacy recommendation.
 
-CREATE TABLE hip_replacement_surgery_evaluation_grade_flag (
+CREATE TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     hip_replacement_surgery_evaluation_grade_id UUID NOT NULL
-        REFERENCES hip_replacement_surgery_evaluation_grade(id) ON DELETE CASCADE,
+        REFERENCES hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -632,34 +649,34 @@ CREATE TABLE hip_replacement_surgery_evaluation_grade_flag (
 );
 
 CREATE INDEX hip_replacement_surgery_evaluation_grade_flag_grade_id_index
-    ON hip_replacement_surgery_evaluation_grade_flag (hip_replacement_surgery_evaluation_grade_id);
+    ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag (hip_replacement_surgery_evaluation_grade_id);
 
 CREATE TRIGGER trigger_hip_replacement_surgery_evaluation_grade_flag_updated_at
-    BEFORE UPDATE ON hip_replacement_surgery_evaluation_grade_flag
+    BEFORE UPDATE ON hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hip_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE hip_replacement_surgery_evaluation_grade_flag IS
+COMMENT ON TABLE hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag IS
     'Safety-critical flags that fire independently of the candidacy recommendation, with a priority and a suggested action for the joint-replacement clinic team.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.created_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.updated_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.deleted_at IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.hip_replacement_surgery_evaluation_grade_id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.hip_replacement_surgery_evaluation_grade_id IS
     'Foreign key to the parent hip_replacement_surgery_evaluation_grade table.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.flag_id IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.flag_id IS
     'Stable flag identifier, such as F-CONSERVATIVE-TREATMENT-NOT-EXHAUSTED-001.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.category IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.category IS
     'Flag category, such as conservative-treatment-not-exhausted or trendelenburg-positive.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.priority IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.priority IS
     'Priority: low, medium, or high.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.description IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN hip_replacement_surgery_evaluation_grade_flag.suggested_action IS
+COMMENT ON COLUMN hip_replacement_surgery_evaluation.hip_replacement_surgery_evaluation_grade_flag.suggested_action IS
     'Suggested clinical action, such as "complete pre-operative bloods before listing for surgery".';
 
 -- ========================================================================

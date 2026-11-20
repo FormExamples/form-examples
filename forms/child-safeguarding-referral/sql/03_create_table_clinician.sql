@@ -1,7 +1,7 @@
 -- Referrer information used to identify the professional making the
 -- safeguarding referral to children's social care.
 
-CREATE TABLE clinician (
+CREATE TABLE child_safeguarding_referral.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,39 +19,39 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON child_safeguarding_referral.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE child_safeguarding_referral.clinician IS
     'Referrer identifying information for the professional making the child safeguarding referral.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.name IS
     'Referrer full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.email IS
     'Referrer email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.phone IS
     'Referrer phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.role IS
     'Referrer professional sector: education, health, social-care, police, early-years, allied-health, voluntary-sector, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.registration_body IS
     'Professional registration body, where applicable: GMC, NMC, HCPC, GPhC, SWE, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON child_safeguarding_referral.clinician
     USING GIN (name gin_trgm_ops);

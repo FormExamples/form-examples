@@ -9,9 +9,9 @@
 -- pre-proliferative (R2) and maculopathy (M1) both warrant the same urgent
 -- ophthalmology referral pathway as proliferative retinopathy (R3), not the
 -- routine annual re-screening that 'background' (R1) warrants.
-INSERT INTO diabetes_rule (code, category, description, concern_level) VALUES
+INSERT INTO diabetes_assessment.diabetes_rule (code, category, description, concern_level) VALUES
     ('DM-021', 'Eye', 'Pre-proliferative retinopathy detected', 'high'),
     ('DM-022', 'Eye', 'Diabetic maculopathy detected', 'high');
 
-COMMENT ON TABLE diabetes_rule IS
+COMMENT ON TABLE diabetes_assessment.diabetes_rule IS
     'Reference catalogue of all 22 diabetes assessment rules (DM-001 to DM-022). Seeded at deployment.';

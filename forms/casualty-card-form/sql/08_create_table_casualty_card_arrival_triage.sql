@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_arrival_triage (
+CREATE TABLE casualty_card_form.casualty_card_arrival_triage (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Attendance classification
     attendance_category         TEXT NOT NULL DEFAULT ''
                                 CHECK (attendance_category IN ('first', 'follow-up', 'planned', 'unplanned', '')),
@@ -28,36 +28,36 @@ CREATE TABLE casualty_card_arrival_triage (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_arrival_triage_updated_at
-    BEFORE UPDATE ON casualty_card_arrival_triage
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_arrival_triage
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_arrival_triage IS
+COMMENT ON TABLE casualty_card_form.casualty_card_arrival_triage IS
     '1:1 with casualty_card. Arrival mode, referral source, and Manchester Triage System assessment.';
-COMMENT ON COLUMN casualty_card_arrival_triage.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_arrival_triage.attendance_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.attendance_category IS
     'Attendance classification: first, follow-up, planned, unplanned, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.arrival_mode IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.arrival_mode IS
     'How the patient arrived: ambulance, walk-in, helicopter, police, other, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.referral_source IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.referral_source IS
     'Who referred the patient: self, gp, 999, nhs111, other-hospital, police, other, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.ambulance_incident_number IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.ambulance_incident_number IS
     'Ambulance service incident reference number.';
-COMMENT ON COLUMN casualty_card_arrival_triage.triage_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.triage_time IS
     'Timestamp when triage was performed. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_arrival_triage.triage_nurse IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.triage_nurse IS
     'Name of the triage nurse who assessed the patient.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_flowchart IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_flowchart IS
     'Manchester Triage System flowchart used for triage assessment.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_category IS
     'MTS urgency category: 1-immediate, 2-very-urgent, 3-urgent, 4-standard, 5-non-urgent, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_discriminator IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_discriminator IS
     'MTS discriminator that determined the triage category.';
-COMMENT ON COLUMN casualty_card_arrival_triage.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_arrival_triage.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_arrival_triage.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_arrival_triage.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.deleted_at IS
     'Timestamp when this row was deleted.';

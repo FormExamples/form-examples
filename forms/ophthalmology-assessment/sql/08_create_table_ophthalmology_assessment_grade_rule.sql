@@ -1,10 +1,10 @@
-CREATE TABLE grading_fired_rule (
+CREATE TABLE ophthalmology_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES ophthalmology_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -13,28 +13,28 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON ophthalmology_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ophthalmology_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE ophthalmology_assessment.grading_fired_rule IS
     'Individual visual acuity classification rules that evaluated to true during grading of the ophthalmology assessment.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. VA-ACUITY-001, VA-FIELD-001).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Visual Acuity, Visual Field, IOP, Posterior Segment).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.description IS
     'Human-readable description of the rule and why it fired.';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.severity_level IS
     'Visual acuity grade contributed by this rule.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN ophthalmology_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';

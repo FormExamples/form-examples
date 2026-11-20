@@ -1,6 +1,6 @@
 -- Practitioner who places the patient on a plastic surgery waiting list.
 
-CREATE TABLE practitioner (
+CREATE TABLE plastic_surgery_waiting_list_card.practitioner (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -30,37 +30,37 @@ CREATE TABLE practitioner (
 );
 
 CREATE TRIGGER trigger_practitioner_updated_at
-    BEFORE UPDATE ON practitioner
+    BEFORE UPDATE ON plastic_surgery_waiting_list_card.practitioner
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION plastic_surgery_waiting_list_card.set_updated_at();
 
-COMMENT ON TABLE practitioner IS
+COMMENT ON TABLE plastic_surgery_waiting_list_card.practitioner IS
     'Practitioner who completes a plastic surgery waiting list card on behalf of the patient.';
-COMMENT ON COLUMN practitioner.id IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN practitioner.created_at IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN practitioner.updated_at IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN practitioner.deleted_at IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN practitioner.name IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.name IS
     'Name.';
-COMMENT ON COLUMN practitioner.email IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.email IS
     'Email address.';
-COMMENT ON COLUMN practitioner.phone IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.phone IS
     'Phone number.';
-COMMENT ON COLUMN practitioner.role IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.role IS
     'Practitioner role: gp, consultant, specialist-nurse, referral-coordinator, booking-clerk, rtt-validator, other.';
-COMMENT ON COLUMN practitioner.registration_body IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN practitioner.registration_number IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.registration_number IS
     'Professional registration number.';
-COMMENT ON COLUMN practitioner.organisation_name IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.organisation_name IS
     'Employing organisation (e.g. NHS trust name, GP practice name).';
-COMMENT ON COLUMN practitioner.organisation_ods_code IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.organisation_ods_code IS
     'NHS Organisation Data Service (ODS) code for the organisation.';
-COMMENT ON COLUMN practitioner.site_name IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.site_name IS
     'Site or clinic name within the organisation.';
-COMMENT ON COLUMN practitioner.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN plastic_surgery_waiting_list_card.practitioner.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format.';

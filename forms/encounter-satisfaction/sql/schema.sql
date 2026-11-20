@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (14):
+-- Source files (15):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -37,12 +38,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS encounter_satisfaction;
+
+COMMENT ON SCHEMA encounter_satisfaction IS
+    'Namespace for the Encounter Satisfaction form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION encounter_satisfaction.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -50,7 +67,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION encounter_satisfaction.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -63,7 +80,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE encounter_satisfaction.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -86,56 +103,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON encounter_satisfaction.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE encounter_satisfaction.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN encounter_satisfaction.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN encounter_satisfaction.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN encounter_satisfaction.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN encounter_satisfaction.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN encounter_satisfaction.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN encounter_satisfaction.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN encounter_satisfaction.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN encounter_satisfaction.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN encounter_satisfaction.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN encounter_satisfaction.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN encounter_satisfaction.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN encounter_satisfaction.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN encounter_satisfaction.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN encounter_satisfaction.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON encounter_satisfaction.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN encounter_satisfaction.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -148,7 +165,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE encounter_satisfaction.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -167,46 +184,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON encounter_satisfaction.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE encounter_satisfaction.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON encounter_satisfaction.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -217,39 +234,39 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_encounter_satisfaction.sql
 -- ========================================================================
 
-CREATE TABLE encounter_satisfaction (
+CREATE TABLE encounter_satisfaction.encounter_satisfaction (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Foreign key to the patient this survey belongs to
-    patient_id          UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id          UUID NOT NULL REFERENCES encounter_satisfaction.patient(id) ON DELETE CASCADE,
     -- Workflow status tracking
     status              TEXT NOT NULL DEFAULT 'in_progress'
                         CHECK (status IN ('in_progress', 'completed', 'reviewed', ''))
 );
 
 -- Index for the most common query: all surveys for a patient
-CREATE INDEX index_encounter_satisfaction_patient_id ON encounter_satisfaction(patient_id);
+CREATE INDEX index_encounter_satisfaction_patient_id ON encounter_satisfaction.encounter_satisfaction(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_encounter_satisfaction_updated_at
-    BEFORE UPDATE ON encounter_satisfaction
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.encounter_satisfaction
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE encounter_satisfaction IS
+COMMENT ON TABLE encounter_satisfaction.encounter_satisfaction IS
     'A single encounter satisfaction survey record. Child tables hold section-specific data.';
-COMMENT ON COLUMN encounter_satisfaction.patient_id IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.patient_id IS
     'FK to patient. One patient may have many surveys.';
-COMMENT ON COLUMN encounter_satisfaction.status IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.status IS
     'Workflow status: in_progress, completed, reviewed, or empty string if unanswered.';
-COMMENT ON COLUMN encounter_satisfaction.id IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN encounter_satisfaction.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN encounter_satisfaction.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN encounter_satisfaction.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.encounter_satisfaction.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -260,13 +277,13 @@ COMMENT ON COLUMN encounter_satisfaction.deleted_at IS
 -- BEGIN 05_create_table_visit_information.sql
 -- ========================================================================
 
-CREATE TABLE visit_information (
+CREATE TABLE encounter_satisfaction.visit_information (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Visit details
     visit_date                  DATE,
     department                  TEXT NOT NULL DEFAULT '',
@@ -286,32 +303,32 @@ CREATE TABLE visit_information (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_visit_information_updated_at
-    BEFORE UPDATE ON visit_information
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.visit_information
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE visit_information IS
+COMMENT ON TABLE encounter_satisfaction.visit_information IS
     '1:1 with encounter_satisfaction. Details about the healthcare visit being rated.';
-COMMENT ON COLUMN visit_information.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN visit_information.visit_date IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.visit_date IS
     'Date of the healthcare visit. NULL if not recorded.';
-COMMENT ON COLUMN visit_information.department IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.department IS
     'Department or clinic name.';
-COMMENT ON COLUMN visit_information.provider_name IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.provider_name IS
     'Name of the healthcare provider.';
-COMMENT ON COLUMN visit_information.visit_type IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.visit_type IS
     'Type of visit: routine-checkup, follow-up, urgent-care, specialist-referral, procedure, other, or empty string.';
-COMMENT ON COLUMN visit_information.reason_for_visit IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.reason_for_visit IS
     'Free-text description of the reason for the visit.';
-COMMENT ON COLUMN visit_information.first_visit IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.first_visit IS
     'Whether this was the patients first visit to this provider: yes, no, or empty string.';
-COMMENT ON COLUMN visit_information.id IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN visit_information.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN visit_information.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN visit_information.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.visit_information.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -322,13 +339,13 @@ COMMENT ON COLUMN visit_information.deleted_at IS
 -- BEGIN 06_create_table_access_scheduling.sql
 -- ========================================================================
 
-CREATE TABLE access_scheduling (
+CREATE TABLE encounter_satisfaction.access_scheduling (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     ease_of_scheduling          SMALLINT CHECK (ease_of_scheduling BETWEEN 1 AND 5),
@@ -338,26 +355,26 @@ CREATE TABLE access_scheduling (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_access_scheduling_updated_at
-    BEFORE UPDATE ON access_scheduling
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.access_scheduling
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE access_scheduling IS
+COMMENT ON TABLE encounter_satisfaction.access_scheduling IS
     '1:1 with encounter_satisfaction. Access & Scheduling domain: 3 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN access_scheduling.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN access_scheduling.ease_of_scheduling IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.ease_of_scheduling IS
     'Satisfaction with ease of scheduling (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN access_scheduling.wait_for_appointment IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.wait_for_appointment IS
     'Satisfaction with wait time for appointment (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN access_scheduling.wait_in_waiting_room IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.wait_in_waiting_room IS
     'Satisfaction with wait time in waiting room (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN access_scheduling.id IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN access_scheduling.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN access_scheduling.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN access_scheduling.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.access_scheduling.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -368,13 +385,13 @@ COMMENT ON COLUMN access_scheduling.deleted_at IS
 -- BEGIN 07_create_table_communication.sql
 -- ========================================================================
 
-CREATE TABLE communication (
+CREATE TABLE encounter_satisfaction.communication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     listening                   SMALLINT CHECK (listening BETWEEN 1 AND 5),
@@ -385,28 +402,28 @@ CREATE TABLE communication (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_communication_updated_at
-    BEFORE UPDATE ON communication
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.communication
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE communication IS
+COMMENT ON TABLE encounter_satisfaction.communication IS
     '1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN communication.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.communication.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN communication.listening IS
+COMMENT ON COLUMN encounter_satisfaction.communication.listening IS
     'Satisfaction with how well the provider listened (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.explaining_condition IS
+COMMENT ON COLUMN encounter_satisfaction.communication.explaining_condition IS
     'Satisfaction with how clearly the condition was explained (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.answering_questions IS
+COMMENT ON COLUMN encounter_satisfaction.communication.answering_questions IS
     'Satisfaction with how thoroughly questions were answered (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.time_spent IS
+COMMENT ON COLUMN encounter_satisfaction.communication.time_spent IS
     'Satisfaction with time the provider spent with patient (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.id IS
+COMMENT ON COLUMN encounter_satisfaction.communication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN communication.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN communication.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN communication.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -417,13 +434,13 @@ COMMENT ON COLUMN communication.deleted_at IS
 -- BEGIN 08_create_table_staff_professionalism.sql
 -- ========================================================================
 
-CREATE TABLE staff_professionalism (
+CREATE TABLE encounter_satisfaction.staff_professionalism (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     reception_courtesy          SMALLINT CHECK (reception_courtesy BETWEEN 1 AND 5),
@@ -433,26 +450,26 @@ CREATE TABLE staff_professionalism (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_staff_professionalism_updated_at
-    BEFORE UPDATE ON staff_professionalism
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.staff_professionalism
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE staff_professionalism IS
+COMMENT ON TABLE encounter_satisfaction.staff_professionalism IS
     '1:1 with encounter_satisfaction. Staff & Professionalism domain: 3 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN staff_professionalism.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN staff_professionalism.reception_courtesy IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.reception_courtesy IS
     'Satisfaction with reception staff courtesy (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN staff_professionalism.nursing_courtesy IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.nursing_courtesy IS
     'Satisfaction with nursing staff courtesy (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN staff_professionalism.respect_shown IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.respect_shown IS
     'Satisfaction with respect shown during visit (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN staff_professionalism.id IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN staff_professionalism.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN staff_professionalism.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN staff_professionalism.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.staff_professionalism.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -463,13 +480,13 @@ COMMENT ON COLUMN staff_professionalism.deleted_at IS
 -- BEGIN 09_create_table_care_quality.sql
 -- ========================================================================
 
-CREATE TABLE care_quality (
+CREATE TABLE encounter_satisfaction.care_quality (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     involvement_in_decisions    SMALLINT CHECK (involvement_in_decisions BETWEEN 1 AND 5),
@@ -479,26 +496,26 @@ CREATE TABLE care_quality (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_care_quality_updated_at
-    BEFORE UPDATE ON care_quality
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.care_quality
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE care_quality IS
+COMMENT ON TABLE encounter_satisfaction.care_quality IS
     '1:1 with encounter_satisfaction. Care Quality domain: 3 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN care_quality.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN care_quality.involvement_in_decisions IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.involvement_in_decisions IS
     'Satisfaction with involvement in care decisions (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN care_quality.treatment_plan_explanation IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.treatment_plan_explanation IS
     'Satisfaction with treatment plan explanation (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN care_quality.confidence_in_care IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.confidence_in_care IS
     'Confidence in the care received (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN care_quality.id IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN care_quality.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN care_quality.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN care_quality.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.care_quality.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -509,13 +526,13 @@ COMMENT ON COLUMN care_quality.deleted_at IS
 -- BEGIN 10_create_table_environment.sql
 -- ========================================================================
 
-CREATE TABLE environment (
+CREATE TABLE encounter_satisfaction.environment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     cleanliness                 SMALLINT CHECK (cleanliness BETWEEN 1 AND 5),
@@ -525,26 +542,26 @@ CREATE TABLE environment (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_environment_updated_at
-    BEFORE UPDATE ON environment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.environment
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE environment IS
+COMMENT ON TABLE encounter_satisfaction.environment IS
     '1:1 with encounter_satisfaction. Environment domain: 3 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN environment.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.environment.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN environment.cleanliness IS
+COMMENT ON COLUMN encounter_satisfaction.environment.cleanliness IS
     'Satisfaction with facility cleanliness (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN environment.waiting_area_comfort IS
+COMMENT ON COLUMN encounter_satisfaction.environment.waiting_area_comfort IS
     'Satisfaction with waiting area comfort (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN environment.privacy IS
+COMMENT ON COLUMN encounter_satisfaction.environment.privacy IS
     'Satisfaction with privacy during visit (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN environment.id IS
+COMMENT ON COLUMN encounter_satisfaction.environment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN environment.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.environment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN environment.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.environment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN environment.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.environment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -555,13 +572,13 @@ COMMENT ON COLUMN environment.deleted_at IS
 -- BEGIN 11_create_table_overall_satisfaction.sql
 -- ========================================================================
 
-CREATE TABLE overall_satisfaction (
+CREATE TABLE encounter_satisfaction.overall_satisfaction (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     overall_rating              SMALLINT CHECK (overall_rating BETWEEN 1 AND 5),
@@ -573,28 +590,28 @@ CREATE TABLE overall_satisfaction (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_overall_satisfaction_updated_at
-    BEFORE UPDATE ON overall_satisfaction
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.overall_satisfaction
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE overall_satisfaction IS
+COMMENT ON TABLE encounter_satisfaction.overall_satisfaction IS
     '1:1 with encounter_satisfaction. Overall Satisfaction domain: 3 Likert-scale questions plus free-text comments.';
-COMMENT ON COLUMN overall_satisfaction.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN overall_satisfaction.overall_rating IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.overall_rating IS
     'Overall satisfaction rating (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN overall_satisfaction.likely_to_recommend IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.likely_to_recommend IS
     'Likelihood of recommending the provider (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN overall_satisfaction.likely_to_return IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.likely_to_return IS
     'Likelihood of returning for future care (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN overall_satisfaction.comments IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.comments IS
     'Free-text additional comments from the patient.';
-COMMENT ON COLUMN overall_satisfaction.id IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN overall_satisfaction.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN overall_satisfaction.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN overall_satisfaction.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.overall_satisfaction.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -605,13 +622,13 @@ COMMENT ON COLUMN overall_satisfaction.deleted_at IS
 -- BEGIN 12_create_table_satisfaction_result.sql
 -- ========================================================================
 
-CREATE TABLE satisfaction_result (
+CREATE TABLE encounter_satisfaction.satisfaction_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Computed ESS composite score (mean of all answered Likert questions, range 1.0-5.0)
     composite_score             NUMERIC(3,2) NOT NULL
                                 CHECK (composite_score >= 0 AND composite_score <= 5.0),
@@ -631,30 +648,30 @@ CREATE TABLE satisfaction_result (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_satisfaction_result_updated_at
-    BEFORE UPDATE ON satisfaction_result
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.satisfaction_result
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE satisfaction_result IS
+COMMENT ON TABLE encounter_satisfaction.satisfaction_result IS
     '1:1 with encounter_satisfaction. Computed ESS score with category and per-domain breakdown.';
-COMMENT ON COLUMN satisfaction_result.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN satisfaction_result.composite_score IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.composite_score IS
     'ESS composite score (1.0-5.0). Mean of all answered Likert questions. 0 if no responses.';
-COMMENT ON COLUMN satisfaction_result.category IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.category IS
     'Satisfaction category: Excellent (4.5-5.0), Good (3.5-4.4), Fair (2.5-3.4), Poor (1.5-2.4), Very Poor (1.0-1.4), No responses.';
-COMMENT ON COLUMN satisfaction_result.answered_count IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.answered_count IS
     'Number of Likert questions answered out of 19 total.';
-COMMENT ON COLUMN satisfaction_result.domain_scores IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.domain_scores IS
     'JSONB array of per-domain score objects. Each object has domain, mean, count, and questions array.';
-COMMENT ON COLUMN satisfaction_result.scored_at IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.scored_at IS
     'Timestamp when the ESS scoring engine produced this result.';
-COMMENT ON COLUMN satisfaction_result.id IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN satisfaction_result.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN satisfaction_result.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN satisfaction_result.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.satisfaction_result.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -665,13 +682,13 @@ COMMENT ON COLUMN satisfaction_result.deleted_at IS
 -- BEGIN 13_create_table_flagged_issue.sql
 -- ========================================================================
 
-CREATE TABLE flagged_issue (
+CREATE TABLE encounter_satisfaction.flagged_issue (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one satisfaction result can have many flagged issues
-    satisfaction_result_id      UUID NOT NULL REFERENCES satisfaction_result(id) ON DELETE CASCADE,
+    satisfaction_result_id      UUID NOT NULL REFERENCES encounter_satisfaction.satisfaction_result(id) ON DELETE CASCADE,
     -- Flag identification (matches the application-side flag id)
     flag_id                     TEXT NOT NULL,
     -- Flag details
@@ -682,36 +699,36 @@ CREATE TABLE flagged_issue (
 
 -- Index for fetching all flagged issues for a satisfaction result
 CREATE INDEX index_flagged_issue_satisfaction_result_id
-    ON flagged_issue(satisfaction_result_id);
+    ON encounter_satisfaction.flagged_issue(satisfaction_result_id);
 
 -- Prevent duplicate flags per satisfaction result
 CREATE UNIQUE INDEX idx_flagged_issue_unique
-    ON flagged_issue(satisfaction_result_id, flag_id);
+    ON encounter_satisfaction.flagged_issue(satisfaction_result_id, flag_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_flagged_issue_updated_at
-    BEFORE UPDATE ON flagged_issue
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.flagged_issue
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE flagged_issue IS
+COMMENT ON TABLE encounter_satisfaction.flagged_issue IS
     'Many-to-one with satisfaction_result. Alerts detected by the flagged issues engine.';
-COMMENT ON COLUMN flagged_issue.satisfaction_result_id IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.satisfaction_result_id IS
     'FK to satisfaction_result. One result may have many flagged issues.';
-COMMENT ON COLUMN flagged_issue.flag_id IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.flag_id IS
     'Application-side flag identifier (e.g. FLAG-VDIS-listening, FLAG-COMM-timeSpent).';
-COMMENT ON COLUMN flagged_issue.category IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.category IS
     'Flag category (e.g. Very Dissatisfied Response, Communication Concern, Poor Overall Satisfaction).';
-COMMENT ON COLUMN flagged_issue.message IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.message IS
     'Human-readable alert message for the clinician.';
-COMMENT ON COLUMN flagged_issue.priority IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.priority IS
     'Alert priority: high, medium, or low.';
-COMMENT ON COLUMN flagged_issue.id IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN flagged_issue.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN flagged_issue.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN flagged_issue.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.flagged_issue.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

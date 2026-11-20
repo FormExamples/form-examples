@@ -33,7 +33,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 FORMS_DIR = REPO_ROOT / "forms"
 
-CREATE_TABLE_RE = re.compile(r"CREATE TABLE\s+(?:IF NOT EXISTS\s+)?\"?([a-z0-9_]+)\"?\s*\(", re.I)
+CREATE_TABLE_RE = re.compile(r"CREATE TABLE\s+(?:IF NOT EXISTS\s+)?(?:\w+\.)?\"?([a-z0-9_]+)\"?\s*\(", re.I)
 # A column definition line: leading identifier followed by a type token.
 COLUMN_RE = re.compile(r'^\s*"?([a-z_][a-z0-9_]*)"?\s+([A-Za-z]+)')
 # Line-leading tokens that begin a table constraint, not a column.

@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+"""bin/sql-schema-namespace — put each form's sql/ objects in its own Postgres schema.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form subproject
+is fully namespaced by its slug. For `sql/` that is a Postgres schema named for
+the form: the slug in snake_case, for example `pre_operative_assessment_by_clinician`.
+Table names stay short (`patient`, `clinician`, `grade`) and the schema is the
+namespace:
+
+    CREATE SCHEMA IF NOT EXISTS pre_operative_assessment_by_clinician;
+    CREATE TABLE pre_operative_assessment_by_clinician.patient (...);
+
+A schema, rather than a `<slug>_` name prefix, because Postgres caps every
+identifier at 63 bytes and silently truncates longer ones: prefixing would push
+265 tables in 59 forms over the cap. Two snake slugs are themselves longer than
+63 bytes, so those two forms use the registered short schema names in
+`SCHEMA_OVERRIDES` below (also listed in the spec).
+
+For each form the tool writes `sql/00_create_schema.sql` and, in every other
+numbered `sql/NN_*.sql` file, qualifies each reference to the form's own
+tables, functions and domains with the schema:
+
+    CREATE TABLE t / ALTER TABLE t / INSERT INTO t / DROP TABLE t
+    REFERENCES t (...)
+    ... ON t (...)                    CREATE INDEX, CREATE TRIGGER
+    COMMENT ON TABLE t / COMMENT ON COLUMN t.c
+    f(...)                            a function the form creates (set_updated_at)
+    d                                 a domain the form creates, and its uses
+
+Only SQL code is rewritten, never text inside a '...' string literal, a `--`
+comment, or a `$$ ... $$` function body. A reference already qualified is
+left alone, so the tool is idempotent. `sql/schema.sql` is generated; rebuild
+it afterwards with `python3 bin/sql/generate-sql-combined.py`.
+
+The generators that read `sql/` (XML, FHIR, protobuf, OpenAPI, the Axum tools,
+the examples) accept an optional `schema.` qualifier and name entities by
+the bare table name, so their output does not change.
+
+This is an ongoing convention: run the tool on a new form's `sql/` (it writes
+the schema file and qualifies what `bin/create-form` and hand authoring
+produce). `--check` is the CI drift detector.
+
+Usage:
+  bin/sql-schema-namespace <slug>...        # named forms
+  bin/sql-schema-namespace --all            # every form with sql/
+  bin/sql-schema-namespace --dry-run --all  # show what would change
+  bin/sql-schema-namespace --check --all    # CI drift check (non-zero on drift)
+  bin/sql-schema-namespace --schema <slug>  # print a form's schema name
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+# Snake slugs longer than Postgres's 63-byte identifier cap.
+SCHEMA_OVERRIDES = {
+    "united-kingdom-lasting-power-of-attorney-for-financial-decisions":
+        "united_kingdom_lpa_for_financial_decisions",
+    "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions":
+        "united_kingdom_lpa_for_health_and_care_decisions",
+}
+
+NAME = r'"?([a-z_][a-z0-9_]*)"?'
+QUALIFIED = r'"?[a-z_][a-z0-9_]*"?\s*\.\s*'
+
+
+def schema_of(slug: str) -> str:
+    name = SCHEMA_OVERRIDES.get(slug, slug.replace("-", "_"))
+    assert len(name.encode()) <= 63, name
+    return name
+
+
+def title_of(form: pathlib.Path) -> str:
+    index = form / "index.md"
+    if index.is_file():
+        for line in index.read_text().splitlines():
+            if line.startswith("# "):
+                return line[2:].strip()
+    return form.name.replace("-", " ").title()
+
+
+def segments(text: str):
+    """Split SQL into (is_code, chunk): string literals, comments and $$ bodies are not code."""
+    out, i, start, n = [], 0, 0, len(text)
+    while i < n:
+        c = text[i]
+        if c == "'" or text.startswith("--", i) or text.startswith("$$", i):
+            if start < i:
+                out.append((True, text[start:i]))
+            if c == "'":
+                j = i + 1
+                while j < n:
+                    if text[j] == "'" and text.startswith("''", j):
+                        j += 2
+                        continue
+                    if text[j] == "'":
+                        break
+                    j += 1
+                j += 1
+            elif text.startswith("--", i):
+                j = text.find("\n", i)
+                j = n if j < 0 else j
+            else:
+                j = text.find("$$", i + 2)
+                j = n if j < 0 else j + 2
+            out.append((False, text[i:j]))
+            i = start = j
+        else:
+            i += 1
+    if start < n:
+        out.append((True, text[start:]))
+    return out
+
+
+def own_objects(files):
+    tables, functions, domains = set(), set(), set()
+    for path in files:
+        text = "".join(chunk for code, chunk in segments(path.read_text()) if code)
+        tables |= set(re.findall(rf"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:{QUALIFIED})?{NAME}", text, re.I))
+        functions |= set(re.findall(rf"CREATE\s+(?:OR\s+REPLACE\s+)?FUNCTION\s+(?:{QUALIFIED})?{NAME}\s*\(", text, re.I))
+        domains |= set(re.findall(rf"CREATE\s+DOMAIN\s+(?:{QUALIFIED})?{NAME}", text, re.I))
+    return tables, functions, domains
+
+
+def qualify(code: str, schema: str, tables, functions, domains) -> str:
+    def table_ref(prefix: str):
+        pattern = re.compile(rf"({prefix})(?!{QUALIFIED}){NAME}(?![\w.])", re.I)
+
+        def sub(m):
+            return f"{m.group(1)}{schema}.{m.group(2)}" if m.group(2) in tables else m.group(0)
+        return pattern, sub
+
+    for prefix in (
+        r"\bCREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?",
+        r"\bALTER\s+TABLE\s+(?:IF\s+EXISTS\s+)?(?:ONLY\s+)?",
+        r"\bDROP\s+TABLE\s+(?:IF\s+EXISTS\s+)?",
+        r"\bINSERT\s+INTO\s+",
+        r"\bREFERENCES\s+",
+        r"\bCOMMENT\s+ON\s+TABLE\s+",
+        r"\bON\s+(?:ONLY\s+)?",
+    ):
+        pattern, sub = table_ref(prefix)
+        code = pattern.sub(sub, code)
+
+    # COMMENT ON COLUMN t.c
+    code = re.sub(
+        rf"(\bCOMMENT\s+ON\s+COLUMN\s+)(?!{QUALIFIED}{QUALIFIED}){NAME}(\s*\.\s*[a-z_])",
+        lambda m: f"{m.group(1)}{schema}.{m.group(2)}{m.group(3)}" if m.group(2) in tables else m.group(0),
+        code, flags=re.I)
+
+    for name in functions:
+        code = re.sub(rf"(?<![\w.]){re.escape(name)}(\s*\()", rf"{schema}.{name}\1", code)
+    for name in domains:
+        code = re.sub(rf"(?<![\w.]){re.escape(name)}(?![\w.])", f"{schema}.{name}", code)
+    return code
+
+
+def rewrite(text: str, schema: str, objects) -> str:
+    return "".join(qualify(chunk, schema, *objects) if code else chunk
+                   for code, chunk in segments(text))
+
+
+def schema_file(form: pathlib.Path, schema: str) -> str:
+    title = title_of(form).replace("'", "''")
+    return (
+        "-- Every table, function and domain of this form lives in its own schema,\n"
+        "-- named for the form, so no two forms' names can collide; see\n"
+        "-- spec/form-namespacing/.\n"
+        f"CREATE SCHEMA IF NOT EXISTS {schema};\n"
+        "\n"
+        f"COMMENT ON SCHEMA {schema} IS\n"
+        f"    'Namespace for the {title} form''s tables, functions and domains.';\n"
+    )
+
+
+def numbered(form: pathlib.Path):
+    return sorted(p for p in (form / "sql").glob("[0-9]*.sql"))
+
+
+def forms(args):
+    if args.all:
+        return sorted(p for p in FORMS.iterdir() if (p / "sql").is_dir() and numbered(p))
+    out = []
+    for slug in args.slugs:
+        form = FORMS / slug
+        if not (form / "sql").is_dir():
+            sys.exit(f"sql-schema-namespace: no such form sql/: {slug}")
+        out.append(form)
+    return out
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
+    parser.add_argument("--schema", metavar="SLUG")
+    args = parser.parse_args()
+    if args.schema:
+        print(schema_of(args.schema))
+        return 0
+    if not args.all and not args.slugs:
+        parser.error("name one or more slugs, or --all")
+
+    changed_forms = changed_files = 0
+    for form in forms(args):
+        schema = schema_of(form.name)
+        wanted = {form / "sql" / "00_create_schema.sql": schema_file(form, schema)}
+        files = [p for p in numbered(form) if p.name != "00_create_schema.sql"]
+        objects = own_objects(files)
+        for path in files:
+            old = path.read_text()
+            wanted[path] = rewrite(old, schema, objects)
+        touched = 0
+        for path, new in wanted.items():
+            old = path.read_text() if path.is_file() else None
+            if old == new:
+                continue
+            touched += 1
+            if args.verbose or args.dry_run or args.check:
+                print(path.relative_to(ROOT))
+            if not (args.check or args.dry_run):
+                path.write_text(new)
+        if touched:
+            changed_forms += 1
+            changed_files += touched
+
+    verb = "out of step" if args.check else ("would change" if args.dry_run else "changed")
+    print(f"sql-schema-namespace: {changed_forms} form(s), {changed_files} file(s) {verb}")
+    return 1 if args.check and changed_files else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

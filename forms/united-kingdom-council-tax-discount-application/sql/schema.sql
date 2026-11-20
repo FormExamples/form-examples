@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_billing_authority.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_council_tax_discount_application;
+
+COMMENT ON SCHEMA united_kingdom_council_tax_discount_application IS
+    'Namespace for the United Kingdom Council Tax Discount Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_council_tax_discount_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- The liable person applying for the Council Tax discount: name, birth date
 -- and contact details.
 
-CREATE TABLE applicant (
+CREATE TABLE united_kingdom_council_tax_discount_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,37 +92,37 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.applicant IS
     'The liable person applying for the Council Tax discount: name, birth date and contact details.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.name IS
     'Full name of the applicant (the liable person).';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.postcode IS
     'Postal code.';
-COMMENT ON COLUMN applicant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_kingdom_council_tax_discount_application.applicant
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -119,7 +136,7 @@ CREATE INDEX applicant_name_trgm_idx
 -- The billing authority (local council in England) that receives the
 -- application and decides eligibility.
 
-CREATE TABLE billing_authority (
+CREATE TABLE united_kingdom_council_tax_discount_application.billing_authority (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -133,33 +150,33 @@ CREATE TABLE billing_authority (
 );
 
 CREATE TRIGGER trigger_billing_authority_updated_at
-    BEFORE UPDATE ON billing_authority
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.billing_authority
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE billing_authority IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.billing_authority IS
     'The billing authority (local council in England) that receives the application and decides eligibility.';
-COMMENT ON COLUMN billing_authority.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN billing_authority.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN billing_authority.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN billing_authority.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN billing_authority.name IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.name IS
     'Name of the billing authority.';
-COMMENT ON COLUMN billing_authority.gss_code IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.gss_code IS
     'Office for National Statistics GSS code of the authority.';
-COMMENT ON COLUMN billing_authority.email IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.email IS
     'Council Tax team email address.';
-COMMENT ON COLUMN billing_authority.phone IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.phone IS
     'Council Tax team phone number.';
-COMMENT ON COLUMN billing_authority.website_url IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority.website_url IS
     'Council Tax web page of the authority.';
 
 CREATE INDEX billing_authority_name_trgm_idx
-    ON billing_authority
+    ON united_kingdom_council_tax_discount_application.billing_authority
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -178,14 +195,14 @@ CREATE INDEX billing_authority_name_trgm_idx
 -- and the flagged issues live in dedicated child tables. Eligibility is
 -- decided by the billing authority, not by this record.
 
-CREATE TABLE united_kingdom_council_tax_discount_application (
+CREATE TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    billing_authority_id UUID REFERENCES billing_authority(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application.applicant(id) ON DELETE RESTRICT,
+    billing_authority_id UUID REFERENCES united_kingdom_council_tax_discount_application.billing_authority(id) ON DELETE RESTRICT,
     claim_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (claim_type IN ('single-person-discount', 'all-disregarded-discount', 'student-exemption', 'severe-mental-impairment', 'disabled-band-reduction', 'care-leaver-relief', 'council-tax-reduction', '')),
     account_reference VARCHAR(50) NOT NULL DEFAULT '',
     application_date DATE,
@@ -216,84 +233,84 @@ CREATE TABLE united_kingdom_council_tax_discount_application (
 );
 
 CREATE TRIGGER trigger_united_kingdom_council_tax_discount_application_updated_at
-    BEFORE UPDATE ON united_kingdom_council_tax_discount_application
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_council_tax_discount_application IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application IS
     'Main United Kingdom Council Tax discount application: one application to an English billing authority for a Council Tax discount, exemption, disregard or reduction. It captures the claim type, the property, the evidence and the declaration; the occupant roster lives in the occupant table. The completeness and eligibility classification, the audit trail of fired rules and the flagged issues live in dedicated child tables. Eligibility is decided by the billing authority, not by this record.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.applicant_id IS
     'Foreign key to the applicant (liable person).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.billing_authority_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.billing_authority_id IS
     'Foreign key to the billing authority the application is made to.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.claim_type IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.claim_type IS
     'Claim type: single-person-discount, all-disregarded-discount, student-exemption, severe-mental-impairment, disabled-band-reduction, care-leaver-relief or council-tax-reduction.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.account_reference IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.account_reference IS
     'Council Tax account reference, if known.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.application_date IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.application_date IS
     'Date the application is made.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.effective_date IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.effective_date IS
     'Date the discount should take effect from; earlier than the application date means backdating.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.applicant_status IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.applicant_status IS
     'The applicant''s own status on the occupant roster: counted-adult or a disregarded status.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.property_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.property_address_as_full_text IS
     'Address of the property the Council Tax bill is for.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.property_postcode IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.property_postcode IS
     'Postcode of the property.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.council_tax_band IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.council_tax_band IS
     'Council Tax valuation band of the property, A to H.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.main_residence IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.main_residence IS
     'Whether the property is the applicant''s main home (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.liable_role IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.liable_role IS
     'Role of the applicant in paying the Council Tax: owner-occupier, tenant, landlord or other.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.other_occupants IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.other_occupants IS
     'Whether anyone other than the applicant lives in the property (yes/no); the occupant table holds them.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.smi_certificate IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.smi_certificate IS
     'Whether a registered medical practitioner''s certificate of severe mental impairment is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.qualifying_benefit IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.qualifying_benefit IS
     'Whether the severely mentally impaired person receives a qualifying benefit (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.student_certificate IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.student_certificate IS
     'Whether a course-provider student certificate is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.student_course_months IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.student_course_months IS
     'Length of the student course in months.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.student_hours_per_week IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.student_hours_per_week IS
     'Weekly hours of study on the student course.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.disability_adaptation IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.disability_adaptation IS
     'Adaptation qualifying for the disabled band reduction: extra-bathroom, extra-kitchen, extra-room, wheelchair-space or none.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.disabled_person_main_home IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.disabled_person_main_home IS
     'Whether the property is the main home of a disabled person (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.apprentice_declaration IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.apprentice_declaration IS
     'Whether the employer''s apprentice declaration is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.care_leaver_proof IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.care_leaver_proof IS
     'Whether proof from the looking-after local authority is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.care_leaver_age_years IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.care_leaver_age_years IS
     'Age of the care leaver in years.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.evidence_notes IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.evidence_notes IS
     'Free-text list of supporting documents.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.declared_true IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.declared_true IS
     'Declaration that the information is true and complete (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.agrees_to_report_changes IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.agrees_to_report_changes IS
     'Agreement to report a change in circumstances within 21 days (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.fraud_warning_acknowledged IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.fraud_warning_acknowledged IS
     'Acknowledgement of the penalty and prosecution warning for false information (yes/no).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.declarant_name IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.declarant_name IS
     'Name of the person making the declaration.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application.declaration_date IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application.declaration_date IS
     'Date of the declaration.';
 
 CREATE INDEX ukctda_applicant_id_idx
-    ON united_kingdom_council_tax_discount_application (applicant_id);
+    ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application (applicant_id);
 
 CREATE INDEX ukctda_billing_authority_id_idx
-    ON united_kingdom_council_tax_discount_application (billing_authority_id);
+    ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application (billing_authority_id);
 
 -- ========================================================================
 -- END 04_create_table_united_kingdom_council_tax_discount_application.sql
@@ -306,13 +323,13 @@ CREATE INDEX ukctda_billing_authority_id_idx
 -- One person on the occupant roster of a Council Tax discount application,
 -- other than the applicant, with their status and whether evidence is held.
 
-CREATE TABLE occupant (
+CREATE TABLE united_kingdom_council_tax_discount_application.occupant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_council_tax_discount_application_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application(id) ON DELETE CASCADE,
+    united_kingdom_council_tax_discount_application_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application(id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL DEFAULT '',
     birth_date DATE,
     status VARCHAR(30) NOT NULL DEFAULT '' CHECK (status IN ('counted-adult', 'full-time-student', 'severely-mentally-impaired', 'under-18', 'apprentice', 'education-18-19', 'live-in-carer', 'care-leaver', 'other-disregarded', '')),
@@ -320,33 +337,33 @@ CREATE TABLE occupant (
 );
 
 CREATE TRIGGER trigger_occupant_updated_at
-    BEFORE UPDATE ON occupant
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.occupant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE occupant IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.occupant IS
     'One person on the occupant roster of a Council Tax discount application, other than the applicant, with their status and whether evidence is held.';
-COMMENT ON COLUMN occupant.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN occupant.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN occupant.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN occupant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN occupant.united_kingdom_council_tax_discount_application_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.united_kingdom_council_tax_discount_application_id IS
     'Foreign key to the parent application.';
-COMMENT ON COLUMN occupant.name IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.name IS
     'Full name of the occupant.';
-COMMENT ON COLUMN occupant.birth_date IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.birth_date IS
     'Date of birth of the occupant.';
-COMMENT ON COLUMN occupant.status IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.status IS
     'Status of the occupant: counted-adult or a disregarded status.';
-COMMENT ON COLUMN occupant.evidence_held IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.occupant.evidence_held IS
     'Whether evidence of the occupant''s status is held (yes/no).';
 
 CREATE INDEX occupant_ukctda_id_idx
-    ON occupant (united_kingdom_council_tax_discount_application_id);
+    ON united_kingdom_council_tax_discount_application.occupant (united_kingdom_council_tax_discount_application_id);
 
 -- ========================================================================
 -- END 05_create_table_occupant.sql
@@ -362,13 +379,13 @@ CREATE INDEX occupant_ukctda_id_idx
 -- outcome. It is not a decision: eligibility is decided by the billing
 -- authority.
 
-CREATE TABLE united_kingdom_council_tax_discount_application_grade (
+CREATE TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_council_tax_discount_application_id UUID NOT NULL UNIQUE REFERENCES united_kingdom_council_tax_discount_application(id) ON DELETE CASCADE,
+    united_kingdom_council_tax_discount_application_id UUID NOT NULL UNIQUE REFERENCES united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application(id) ON DELETE CASCADE,
     eligibility_class VARCHAR(20) NOT NULL DEFAULT '' CHECK (eligibility_class IN ('likely-eligible', 'incomplete', 'likely-ineligible', '')),
     counted_adults INTEGER,
     indicative_outcome VARCHAR(30) NOT NULL DEFAULT '' CHECK (indicative_outcome IN ('25-percent-discount', '50-percent-discount', 'full-exemption', 'smi-disregard', 'band-reduction', 'care-leaver-relief', 'means-tested-reduction', 'none', '')),
@@ -376,29 +393,29 @@ CREATE TABLE united_kingdom_council_tax_discount_application_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_council_tax_discount_application_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_council_tax_discount_application_grade
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_council_tax_discount_application_grade IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade IS
     'Computed completeness and eligibility result for a Council Tax discount application. The engine classifies the application as likely-eligible, incomplete or likely-ineligible, counts the adults and states the indicative outcome. It is not a decision: eligibility is decided by the billing authority.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.united_kingdom_council_tax_discount_application_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.united_kingdom_council_tax_discount_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.eligibility_class IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.eligibility_class IS
     'Eligibility classification: likely-eligible, incomplete or likely-ineligible (likely-ineligible takes precedence).';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.counted_adults IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.counted_adults IS
     'Number of counted adults: the applicant and occupants who are not disregarded.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.indicative_outcome IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.indicative_outcome IS
     'Indicative outcome if the authority agrees: 25-percent-discount, 50-percent-discount, full-exemption, smi-disregard, band-reduction, care-leaver-relief, means-tested-reduction or none.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -412,13 +429,13 @@ COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade.graded_a
 -- Audit trail of every eligibility rule that fired during classification, with
 -- the application dimension it concerns, the category and a description.
 
-CREATE TABLE united_kingdom_council_tax_discount_application_grade_rule (
+CREATE TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_council_tax_discount_application_grade_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application_grade(id) ON DELETE CASCADE,
+    united_kingdom_council_tax_discount_application_grade_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT '' CHECK (dimension IN ('claim', 'household', 'evidence', 'property', 'declaration', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -426,33 +443,33 @@ CREATE TABLE united_kingdom_council_tax_discount_application_grade_rule (
 );
 
 CREATE TRIGGER trigger_united_kingdom_council_tax_discount_application_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_council_tax_discount_application_grade_rule
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_council_tax_discount_application_grade_rule IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule IS
     'Audit trail of every eligibility rule that fired during classification, with the application dimension it concerns, the category and a description.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.united_kingdom_council_tax_discount_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.united_kingdom_council_tax_discount_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.rule_id IS
     'Stable identifier of the rule that fired.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.dimension IS
     'Application dimension the rule concerns.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.category IS
     'Rule category.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule.description IS
     'Human-readable description of the rule that fired.';
 
 CREATE INDEX ukctda_grade_rule_ukctda_grade_id_idx
-    ON united_kingdom_council_tax_discount_application_grade_rule (united_kingdom_council_tax_discount_application_grade_id);
+    ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_rule (united_kingdom_council_tax_discount_application_grade_id);
 
 -- ========================================================================
 -- END 07_create_table_united_kingdom_council_tax_discount_application_grade_rule.sql
@@ -465,13 +482,13 @@ CREATE INDEX ukctda_grade_rule_ukctda_grade_id_idx
 -- Flagged issues that fire independently of the eligibility class, with a
 -- priority and a suggested action for the applicant or the billing authority.
 
-CREATE TABLE united_kingdom_council_tax_discount_application_grade_flag (
+CREATE TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_council_tax_discount_application_grade_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application_grade(id) ON DELETE CASCADE,
+    united_kingdom_council_tax_discount_application_grade_id UUID NOT NULL REFERENCES united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '' CHECK (category IN ('adult-count-mismatch', 'not-main-residence', 'student-evidence', 'smi-evidence', 'disability-adaptation', 'disregard-evidence', 'age-status-mismatch', 'backdating', 'care-leaver-age', 'duty-to-report-changes', 'fraud-warning', 'band-a-percentage', 'means-tested', 'incomplete-application', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -480,35 +497,35 @@ CREATE TABLE united_kingdom_council_tax_discount_application_grade_flag (
 );
 
 CREATE TRIGGER trigger_united_kingdom_council_tax_discount_application_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_council_tax_discount_application_grade_flag
+    BEFORE UPDATE ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_council_tax_discount_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_council_tax_discount_application_grade_flag IS
+COMMENT ON TABLE united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag IS
     'Flagged issues that fire independently of the eligibility class, with a priority and a suggested action for the applicant or the billing authority.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.united_kingdom_council_tax_discount_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.united_kingdom_council_tax_discount_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.flag_id IS
     'Stable identifier of the flag.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.priority IS
     'Flag priority: low, medium or high.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.description IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN united_kingdom_council_tax_discount_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag.suggested_action IS
     'Suggested action to resolve the flag.';
 
 CREATE INDEX ukctda_grade_flag_ukctda_grade_id_idx
-    ON united_kingdom_council_tax_discount_application_grade_flag (united_kingdom_council_tax_discount_application_grade_id);
+    ON united_kingdom_council_tax_discount_application.united_kingdom_council_tax_discount_application_grade_flag (united_kingdom_council_tax_discount_application_grade_id);
 
 -- ========================================================================
 -- END 08_create_table_united_kingdom_council_tax_discount_application_grade_flag.sql

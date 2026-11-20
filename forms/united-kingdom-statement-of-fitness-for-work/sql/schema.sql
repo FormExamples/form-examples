@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_statement_of_fitness_for_work;
+
+COMMENT ON SCHEMA united_kingdom_statement_of_fitness_for_work IS
+    'Namespace for the United Kingdom Statement of Fitness for Work form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -77,43 +94,43 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.patient IS
     'Patient who is the subject of the fit note.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.name IS
     'Full name as recorded on the fit note.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.birth_date IS
     'Date of birth, optional on Med 3 if NHS number is supplied.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.email IS
     'Email address for digital fit-note delivery.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.postal_address_as_full_text IS
     'Postal address as a single block of text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 code (typically GB).';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.postcode IS
     'Postal code for address validation.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.employer_name IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.employer_name IS
     'Patient-reported employer name, useful for occupational-health triage.';
-COMMENT ON COLUMN patient.occupation IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient.occupation IS
     'Patient-reported occupation, supports tailoring of workplace adaptations.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON united_kingdom_statement_of_fitness_for_work.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -130,7 +147,7 @@ CREATE INDEX patient_index_gto
 -- 2022 DWP amendment, this includes doctors, nurses, occupational
 -- therapists, pharmacists, and physiotherapists.
 
-CREATE TABLE clinician (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -164,43 +181,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.clinician IS
     'Healthcare professional issuing the fit note (doctor, nurse, OT, pharmacist, or physiotherapist).';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.name IS
     'Full name of the issuing clinician (mandatory per DWP policy 3.7).';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.postal_address_as_full_text IS
     'Postal address (typically the practice).';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.profession IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.profession IS
     'Profession: doctor, nurse, occupational_therapist, pharmacist, physiotherapist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.registration_body IS
     'Regulator: GMC (doctors), NMC (nurses), HCPC (OTs/physios), GPhC (pharmacists).';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.registration_number IS
     'Registration number issued by the regulator.';
-COMMENT ON COLUMN clinician.is_private_practice IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician.is_private_practice IS
     'Whether the clinician is operating in private practice (non-NHS).';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON united_kingdom_statement_of_fitness_for_work.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -217,7 +234,7 @@ CREATE INDEX clinician_index_gto
 -- service, pharmacy, etc.) responsible for the fit note. DWP policy 3.7
 -- requires the practice address to appear on the form.
 
-CREATE TABLE medical_practice (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.medical_practice (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -244,39 +261,39 @@ CREATE TABLE medical_practice (
 );
 
 CREATE TRIGGER trigger_medical_practice_updated_at
-    BEFORE UPDATE ON medical_practice
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.medical_practice
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE medical_practice IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.medical_practice IS
     'The medical practice that owns the fit note (mandatory per DWP policy 3.7).';
-COMMENT ON COLUMN medical_practice.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_practice.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN medical_practice.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medical_practice.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_practice.name IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.name IS
     'Practice or organisation name as printed on the fit note.';
-COMMENT ON COLUMN medical_practice.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.postal_address_as_full_text IS
     'Practice postal address.';
-COMMENT ON COLUMN medical_practice.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 (typically GB).';
-COMMENT ON COLUMN medical_practice.postcode IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.postcode IS
     'Practice postcode.';
-COMMENT ON COLUMN medical_practice.phone IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.phone IS
     'Practice phone number.';
-COMMENT ON COLUMN medical_practice.email IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.email IS
     'Practice email address.';
-COMMENT ON COLUMN medical_practice.ods_code IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.ods_code IS
     'NHS Organisation Data Service (ODS) code identifying the practice.';
-COMMENT ON COLUMN medical_practice.setting IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.setting IS
     'Care setting: primary_care, secondary_care_inpatient, secondary_care_discharge, occupational_health, pharmacy, community_clinic, or private_practice.';
 
 CREATE INDEX medical_practice_index_gto
-    ON medical_practice
+    ON united_kingdom_statement_of_fitness_for_work.medical_practice
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -293,15 +310,15 @@ CREATE INDEX medical_practice_index_gto
 -- professional for a patient. Mirrors the DWP Med 3 form fields after the
 -- 2022 amendment that broadened issuance and enabled digital delivery.
 
-CREATE TABLE united_kingdom_statement_of_fitness_for_work (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
-    medical_practice_id UUID NOT NULL REFERENCES medical_practice(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES united_kingdom_statement_of_fitness_for_work.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES united_kingdom_statement_of_fitness_for_work.clinician(id) ON DELETE CASCADE,
+    medical_practice_id UUID NOT NULL REFERENCES united_kingdom_statement_of_fitness_for_work.medical_practice(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN (
         'draft', 'submitted', 'issued', 'duplicate', 'cancelled'
@@ -384,7 +401,7 @@ CREATE TABLE united_kingdom_statement_of_fitness_for_work (
         'community',
         ''
     )),
-    is_duplicate_of UUID REFERENCES united_kingdom_statement_of_fitness_for_work(id) ON DELETE SET NULL,
+    is_duplicate_of UUID REFERENCES united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work(id) ON DELETE SET NULL,
 
     -- Safeguarding (Step 10)
     safeguarding_concern VARCHAR(5) NOT NULL DEFAULT '' CHECK (safeguarding_concern IN ('yes', 'no', '')),
@@ -396,96 +413,96 @@ CREATE TABLE united_kingdom_statement_of_fitness_for_work (
 );
 
 CREATE TRIGGER trigger_united_kingdom_statement_of_fitness_for_work_updated_at
-    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
 CREATE INDEX index_united_kingdom_statement_of_fitness_for_work_patient_id
-    ON united_kingdom_statement_of_fitness_for_work(patient_id);
+    ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work(patient_id);
 CREATE INDEX index_united_kingdom_statement_of_fitness_for_work_clinician_id
-    ON united_kingdom_statement_of_fitness_for_work(clinician_id);
+    ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work(clinician_id);
 CREATE INDEX index_united_kingdom_statement_of_fitness_for_work_medical_practice_id
-    ON united_kingdom_statement_of_fitness_for_work(medical_practice_id);
+    ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work(medical_practice_id);
 
-COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work IS
     'UK Statement of Fitness for Work (Med 3 / fit note). A single assessment record covering diagnosis, fitness category, adaptations, period, and follow-up.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.patient_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.patient_id IS
     'Foreign key to the patient who is the subject of the fit note.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.clinician_id IS
     'Foreign key to the issuing clinician.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.medical_practice_id IS
     'Foreign key to the medical practice owning the fit note.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.status IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.status IS
     'Lifecycle status: draft, submitted, issued, duplicate, or cancelled.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.assessment_date IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.assessment_date IS
     'Date the assessment was performed (Step 3).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.assessment_method IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.assessment_method IS
     'Assessment modality (DWP policy 3.1): in_person, video_call, telephone, or written_report_from_other_hcp.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.general_fitness_considered IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.general_fitness_considered IS
     'Whether the clinician considered fitness for work in general rather than just the current job (DWP policy 5.1).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.diagnosis_text IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.diagnosis_text IS
     'Free-text description of the condition causing the absence (Step 4).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.diagnosis_snomed_code IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.diagnosis_snomed_code IS
     'Optional SNOMED CT concept identifier from the NHS Digital fit-note refset.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.diagnosis_snomed_display IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.diagnosis_snomed_display IS
     'Optional preferred display name for the SNOMED CT concept.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.diagnosis_category IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.diagnosis_category IS
     'Coarse diagnosis category used by the grading engine.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.condition_first_recorded_date IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.condition_first_recorded_date IS
     'Date the condition was first recorded; drives the "first 6 months" rule (DWP policy 3.3).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.is_automatic_disability IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.is_automatic_disability IS
     'Whether the condition is automatically classed as a disability (HIV / cancer / MS — Equality Act 2010 s.6).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.is_non_medical IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.is_non_medical IS
     'Clinician flag that the underlying problem is non-medical and not certifiable (DWP policy 3.6).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.fitness_for_work IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.fitness_for_work IS
     'Fitness category (Step 5): not_fit or may_be_fit. The form cannot say "fit for work" (DWP policy 3.2).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.adaptation_phased_return IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.adaptation_phased_return IS
     'Adaptation tick box (Step 6): a phased return to work.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.adaptation_altered_hours IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.adaptation_altered_hours IS
     'Adaptation tick box (Step 6): altered hours.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.adaptation_amended_duties IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.adaptation_amended_duties IS
     'Adaptation tick box (Step 6): amended duties.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.adaptation_workplace_adaptations IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.adaptation_workplace_adaptations IS
     'Adaptation tick box (Step 6): workplace adaptations.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.comments IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.comments IS
     'Free-text advice (Step 7) describing the functional impact of the condition (DWP policy 5.6).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.period_type IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.period_type IS
     'Period entry mode (Step 8): duration (e.g. 4 weeks) or from_to (e.g. 2026-05-18 to 2026-06-15).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.period_duration_value IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.period_duration_value IS
     'Numeric period duration value when period_type = duration.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.period_duration_unit IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.period_duration_unit IS
     'Period duration unit when period_type = duration: days, weeks, or months.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.period_from IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.period_from IS
     'Period start date when period_type = from_to.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.period_to IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.period_to IS
     'Period end date when period_type = from_to.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.will_assess_again IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.will_assess_again IS
     'Whether the clinician intends to reassess at the end of the period (Step 9).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.planned_review_date IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.planned_review_date IS
     'Planned date for the follow-up assessment.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.issued_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.issued_at IS
     'Timestamp when the fit note was issued to the patient.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.issued_via IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.issued_via IS
     'Delivery channel: digital, printed_computer_generated, or printed_handwritten.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.issue_setting IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.issue_setting IS
     'Care setting in which the fit note was issued.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.is_duplicate_of IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.is_duplicate_of IS
     'If this is a duplicate (DWP policy 3.7 — only if the original was lost), points to the original fit note.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.safeguarding_concern IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.safeguarding_concern IS
     'Whether the clinician flagged a safeguarding concern during the assessment.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.safeguarding_notes IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.safeguarding_notes IS
     'Free-text notes describing the safeguarding concern (not printed on the fit note).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician_signature_svg IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.clinician_signature_svg IS
     'Electronic signature captured as SVG path data, when issued_via = digital.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician_signed_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work.clinician_signed_at IS
     'Timestamp the clinician applied the electronic signature.';
 
 -- ========================================================================
@@ -499,14 +516,14 @@ COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.clinician_signed_
 -- Computed grading result for a fit note. One-to-one with the fit-note row.
 -- Stores the engine outputs alongside the clinician's signed-off recommendation.
 
-CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_statement_of_fitness_for_work_id UUID NOT NULL UNIQUE
-        REFERENCES united_kingdom_statement_of_fitness_for_work(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work(id) ON DELETE CASCADE,
 
     fitness_category VARCHAR(15) NOT NULL DEFAULT '' CHECK (fitness_category IN (
         'not_fit',
@@ -556,47 +573,47 @@ CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_statement_of_fitness_for_work_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work_grade
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work_grade IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade IS
     'Computed grading result for a fit note: fitness category, adaptation intensity, period compliance, and overall recommendation.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.united_kingdom_statement_of_fitness_for_work_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.united_kingdom_statement_of_fitness_for_work_id IS
     'Foreign key to the parent fit note (one-to-one).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.fitness_category IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.fitness_category IS
     'Fitness category computed from the form: not_fit or may_be_fit.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.adaptation_intensity IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.adaptation_intensity IS
     'Adaptation intensity classification based on the number of tick boxes selected.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.adaptation_count IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.adaptation_count IS
     'Number of adaptation tick boxes selected (0-4).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.period_days IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.period_days IS
     'Computed period length in calendar days.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.period_compliance IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.period_compliance IS
     'Compliance category for the period: self_cert_range, compliant, exceeds_initial_max, long_term, or very_long_term.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.recommendation IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.recommendation IS
     'Engine recommendation: standard, refer_occupational_health, refer_access_to_work, refer_employment_advisor, or review_for_validity.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.is_within_first_six_months_of_condition IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.is_within_first_six_months_of_condition IS
     'Whether the assessment falls within the first six months of the condition (drives the 3-month max rule).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.is_valid IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.is_valid IS
     'Whether the fit note passes the validity checks (name, profession, practice address all present).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.grader_notes IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.grader_notes IS
     'Free-text notes from the engine.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.graded_at IS
     'Timestamp the engine last computed the result.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.clinician_override IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.clinician_override IS
     'Whether the clinician overrode the engine recommendation.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.clinician_override_reason IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.clinician_override_reason IS
     'Required justification when the clinician overrode the engine recommendation.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.clinician_final_recommendation IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade.clinician_final_recommendation IS
     'Clinician-signed-off recommendation (may equal or differ from the engine recommendation).';
 
 -- ========================================================================
@@ -610,14 +627,14 @@ COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade.clinician_f
 -- Audit trail of every validity / adaptation / period / safety rule that
 -- fired for a fit note grade.
 
-CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade_rule (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_statement_of_fitness_for_work_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_statement_of_fitness_for_work_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     rule_set VARCHAR(15) NOT NULL DEFAULT '' CHECK (rule_set IN (
         'validity',
@@ -631,32 +648,32 @@ CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade_rule (
 );
 
 CREATE INDEX index_united_kingdom_statement_of_fitness_for_work_grade_rule_grade_id
-    ON united_kingdom_statement_of_fitness_for_work_grade_rule(united_kingdom_statement_of_fitness_for_work_grade_id);
+    ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule(united_kingdom_statement_of_fitness_for_work_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_statement_of_fitness_for_work_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work_grade_rule
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work_grade_rule IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule IS
     'Audit trail of every grading rule that fired for a fit note (validity, adaptation, period, or safety).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.united_kingdom_statement_of_fitness_for_work_grade_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.united_kingdom_statement_of_fitness_for_work_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-VALID-NAME-001, R-PERIOD-MAX-001).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.rule_set IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.rule_set IS
     'Rule set: validity, adaptation, period, or safety.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.severity IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.severity IS
     'Rule severity contribution: low, medium, or high.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -670,14 +687,14 @@ COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_rule.descri
 -- Safety-critical flags that fire independently of the fitness category,
 -- with priority and a suggested action for the patient, employer, or DWP.
 
-CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade_flag (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_statement_of_fitness_for_work_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_statement_of_fitness_for_work_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(60) NOT NULL,
     category VARCHAR(60) NOT NULL DEFAULT '' CHECK (category IN (
         'invalid_no_name',
@@ -707,34 +724,34 @@ CREATE TABLE united_kingdom_statement_of_fitness_for_work_grade_flag (
 );
 
 CREATE INDEX index_united_kingdom_statement_of_fitness_for_work_grade_flag_grade_id
-    ON united_kingdom_statement_of_fitness_for_work_grade_flag(united_kingdom_statement_of_fitness_for_work_grade_id);
+    ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag(united_kingdom_statement_of_fitness_for_work_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_statement_of_fitness_for_work_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work_grade_flag
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work_grade_flag IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag IS
     'Safety-critical flags fired independently of the fitness category, with priority and suggested action.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.united_kingdom_statement_of_fitness_for_work_grade_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.united_kingdom_statement_of_fitness_for_work_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-AUTOMATIC-DISABILITY-001).';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.category IS
     'Flag category — see the eighteen-flag catalogue in index.md.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.priority IS
     'Priority: low, medium, or high.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.description IS
     'Human-readable description of what triggered the flag.';
-COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.united_kingdom_statement_of_fitness_for_work_grade_flag.suggested_action IS
     'Suggested action (e.g. "consider Access to Work referral").';
 
 -- ========================================================================

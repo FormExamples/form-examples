@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (21):
+-- Source files (22):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_architecture.sql
 --   - 03_create_table_arc42_documentation.sql
@@ -43,12 +44,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS arc42;
+
+COMMENT ON SCHEMA arc42 IS
+    'Namespace for the arc42 form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION arc42.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -56,7 +73,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION arc42.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -69,7 +86,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- A software architecture being documented with the arc42 template.
 
-CREATE TABLE architecture (
+CREATE TABLE arc42.architecture (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -83,23 +100,23 @@ CREATE TABLE architecture (
 );
 
 CREATE TRIGGER trigger_architecture_updated_at
-    BEFORE UPDATE ON architecture
+    BEFORE UPDATE ON arc42.architecture
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE architecture IS 'Software architecture being documented with arc42.';
-COMMENT ON COLUMN architecture.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN architecture.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN architecture.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN architecture.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN architecture.name IS 'Architecture name.';
-COMMENT ON COLUMN architecture.version IS 'Documentation version (free text, e.g. semantic version).';
-COMMENT ON COLUMN architecture.owner IS 'Person or team responsible for the architecture.';
-COMMENT ON COLUMN architecture.status IS 'Lifecycle status of the documented architecture: draft, active, or archived.';
-COMMENT ON COLUMN architecture.description IS 'One-paragraph summary of the architecture.';
+COMMENT ON TABLE arc42.architecture IS 'Software architecture being documented with arc42.';
+COMMENT ON COLUMN arc42.architecture.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.architecture.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.architecture.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.architecture.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.architecture.name IS 'Architecture name.';
+COMMENT ON COLUMN arc42.architecture.version IS 'Documentation version (free text, e.g. semantic version).';
+COMMENT ON COLUMN arc42.architecture.owner IS 'Person or team responsible for the architecture.';
+COMMENT ON COLUMN arc42.architecture.status IS 'Lifecycle status of the documented architecture: draft, active, or archived.';
+COMMENT ON COLUMN arc42.architecture.description IS 'One-paragraph summary of the architecture.';
 
 CREATE INDEX architecture_index_gto
-    ON architecture
+    ON arc42.architecture
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -114,13 +131,13 @@ CREATE INDEX architecture_index_gto
 -- list elements (stakeholders, ADRs, risks, etc.) are FK-referenced from
 -- their dedicated tables.
 
-CREATE TABLE arc42_documentation (
+CREATE TABLE arc42.arc42_documentation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    architecture_id UUID NOT NULL REFERENCES architecture(id) ON DELETE CASCADE,
+    architecture_id UUID NOT NULL REFERENCES arc42.architecture(id) ON DELETE CASCADE,
     author_name TEXT NOT NULL DEFAULT '',
     author_role TEXT NOT NULL DEFAULT '',
     document_date DATE,
@@ -159,36 +176,36 @@ CREATE TABLE arc42_documentation (
 );
 
 CREATE TRIGGER trigger_arc42_documentation_updated_at
-    BEFORE UPDATE ON arc42_documentation
+    BEFORE UPDATE ON arc42.arc42_documentation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE arc42_documentation IS 'Snapshot of arc42 architecture documentation (prose fields and metadata).';
-COMMENT ON COLUMN arc42_documentation.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN arc42_documentation.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN arc42_documentation.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN arc42_documentation.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN arc42_documentation.architecture_id IS 'Parent architecture (cascade-deleted).';
-COMMENT ON COLUMN arc42_documentation.author_name IS 'Name of the person who authored this documentation snapshot.';
-COMMENT ON COLUMN arc42_documentation.author_role IS 'Role of the author (e.g. Lead Architect, Tech Lead).';
-COMMENT ON COLUMN arc42_documentation.document_date IS 'Date this documentation snapshot was produced.';
-COMMENT ON COLUMN arc42_documentation.introduction IS '§1 Introduction & Goals — free-text introduction to the architecture.';
-COMMENT ON COLUMN arc42_documentation.business_context_description IS '§3 Context & Scope — prose description of the business context and external business partners.';
-COMMENT ON COLUMN arc42_documentation.technical_context_description IS '§3 Context & Scope — prose description of the technical context and external interfaces.';
-COMMENT ON COLUMN arc42_documentation.solution_strategy_summary IS '§4 Solution Strategy — summary of the key solution strategy decisions.';
-COMMENT ON COLUMN arc42_documentation.top_level_decomposition_summary IS '§4 Solution Strategy — prose summary of the top-level system decomposition approach.';
-COMMENT ON COLUMN arc42_documentation.building_block_overview IS '§5 Building Block View — prose overview of the top-level building block structure.';
-COMMENT ON COLUMN arc42_documentation.runtime_overview IS '§6 Runtime View — prose overview of the key runtime scenarios.';
-COMMENT ON COLUMN arc42_documentation.deployment_overview IS '§7 Deployment View — prose overview of the deployment environment and topology.';
-COMMENT ON COLUMN arc42_documentation.crosscutting_overview IS '§8 Crosscutting Concepts — prose overview of shared architectural patterns and constraints.';
-COMMENT ON COLUMN arc42_documentation.quality_tree_summary IS '§10 Quality Requirements — prose summary of the quality attribute tree.';
-COMMENT ON COLUMN arc42_documentation.recommendation IS '§12 Sign-off — author recommendation: proceed, revise-first, or block.';
-COMMENT ON COLUMN arc42_documentation.additional_notes IS '§12 Sign-off — free-text additional notes from the author.';
-COMMENT ON COLUMN arc42_documentation.signed_by IS '§12 Sign-off — name of the person who signed off the documentation.';
-COMMENT ON COLUMN arc42_documentation.signed_at IS '§12 Sign-off — timestamp when the documentation was signed off.';
+COMMENT ON TABLE arc42.arc42_documentation IS 'Snapshot of arc42 architecture documentation (prose fields and metadata).';
+COMMENT ON COLUMN arc42.arc42_documentation.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.arc42_documentation.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.arc42_documentation.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.arc42_documentation.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.arc42_documentation.architecture_id IS 'Parent architecture (cascade-deleted).';
+COMMENT ON COLUMN arc42.arc42_documentation.author_name IS 'Name of the person who authored this documentation snapshot.';
+COMMENT ON COLUMN arc42.arc42_documentation.author_role IS 'Role of the author (e.g. Lead Architect, Tech Lead).';
+COMMENT ON COLUMN arc42.arc42_documentation.document_date IS 'Date this documentation snapshot was produced.';
+COMMENT ON COLUMN arc42.arc42_documentation.introduction IS '§1 Introduction & Goals — free-text introduction to the architecture.';
+COMMENT ON COLUMN arc42.arc42_documentation.business_context_description IS '§3 Context & Scope — prose description of the business context and external business partners.';
+COMMENT ON COLUMN arc42.arc42_documentation.technical_context_description IS '§3 Context & Scope — prose description of the technical context and external interfaces.';
+COMMENT ON COLUMN arc42.arc42_documentation.solution_strategy_summary IS '§4 Solution Strategy — summary of the key solution strategy decisions.';
+COMMENT ON COLUMN arc42.arc42_documentation.top_level_decomposition_summary IS '§4 Solution Strategy — prose summary of the top-level system decomposition approach.';
+COMMENT ON COLUMN arc42.arc42_documentation.building_block_overview IS '§5 Building Block View — prose overview of the top-level building block structure.';
+COMMENT ON COLUMN arc42.arc42_documentation.runtime_overview IS '§6 Runtime View — prose overview of the key runtime scenarios.';
+COMMENT ON COLUMN arc42.arc42_documentation.deployment_overview IS '§7 Deployment View — prose overview of the deployment environment and topology.';
+COMMENT ON COLUMN arc42.arc42_documentation.crosscutting_overview IS '§8 Crosscutting Concepts — prose overview of shared architectural patterns and constraints.';
+COMMENT ON COLUMN arc42.arc42_documentation.quality_tree_summary IS '§10 Quality Requirements — prose summary of the quality attribute tree.';
+COMMENT ON COLUMN arc42.arc42_documentation.recommendation IS '§12 Sign-off — author recommendation: proceed, revise-first, or block.';
+COMMENT ON COLUMN arc42.arc42_documentation.additional_notes IS '§12 Sign-off — free-text additional notes from the author.';
+COMMENT ON COLUMN arc42.arc42_documentation.signed_by IS '§12 Sign-off — name of the person who signed off the documentation.';
+COMMENT ON COLUMN arc42.arc42_documentation.signed_at IS '§12 Sign-off — timestamp when the documentation was signed off.';
 
 CREATE INDEX arc42_documentation_index_gto
-    ON arc42_documentation
+    ON arc42.arc42_documentation
     USING GIN ((introduction) gin_trgm_ops);
 
 -- ========================================================================
@@ -201,35 +218,35 @@ CREATE INDEX arc42_documentation_index_gto
 
 -- Business goal — §1 Introduction & Goals.
 
-CREATE TABLE business_goal (
+CREATE TABLE arc42.business_goal (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     name TEXT NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_business_goal_updated_at
-    BEFORE UPDATE ON business_goal
+    BEFORE UPDATE ON arc42.business_goal
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE business_goal IS 'Business goal captured in §1 Introduction & Goals of the arc42 documentation.';
-COMMENT ON COLUMN business_goal.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN business_goal.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN business_goal.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN business_goal.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN business_goal.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN business_goal.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN business_goal.name IS 'Short name or title of the business goal.';
-COMMENT ON COLUMN business_goal.description IS 'Detailed description of the business goal.';
+COMMENT ON TABLE arc42.business_goal IS 'Business goal captured in §1 Introduction & Goals of the arc42 documentation.';
+COMMENT ON COLUMN arc42.business_goal.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.business_goal.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.business_goal.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.business_goal.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.business_goal.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.business_goal.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.business_goal.name IS 'Short name or title of the business goal.';
+COMMENT ON COLUMN arc42.business_goal.description IS 'Detailed description of the business goal.';
 
 CREATE INDEX business_goal_index_gto
-    ON business_goal
+    ON arc42.business_goal
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -242,13 +259,13 @@ CREATE INDEX business_goal_index_gto
 
 -- Quality goal — §1 Introduction & Goals.
 
-CREATE TABLE quality_goal (
+CREATE TABLE arc42.quality_goal (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     name TEXT NOT NULL DEFAULT '',
     priority TEXT NOT NULL DEFAULT '' CHECK (priority IN ('high', 'medium', 'low', '')),
@@ -256,23 +273,23 @@ CREATE TABLE quality_goal (
 );
 
 CREATE TRIGGER trigger_quality_goal_updated_at
-    BEFORE UPDATE ON quality_goal
+    BEFORE UPDATE ON arc42.quality_goal
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE quality_goal IS 'Quality goal captured in §1 Introduction & Goals of the arc42 documentation.';
-COMMENT ON COLUMN quality_goal.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quality_goal.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN quality_goal.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN quality_goal.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN quality_goal.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN quality_goal.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN quality_goal.name IS 'Short name or title of the quality goal (e.g. Performance, Security).';
-COMMENT ON COLUMN quality_goal.priority IS 'Priority of this quality goal: high, medium, or low.';
-COMMENT ON COLUMN quality_goal.scenario IS 'Concrete scenario illustrating when and how this quality goal applies.';
+COMMENT ON TABLE arc42.quality_goal IS 'Quality goal captured in §1 Introduction & Goals of the arc42 documentation.';
+COMMENT ON COLUMN arc42.quality_goal.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.quality_goal.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.quality_goal.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.quality_goal.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.quality_goal.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.quality_goal.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.quality_goal.name IS 'Short name or title of the quality goal (e.g. Performance, Security).';
+COMMENT ON COLUMN arc42.quality_goal.priority IS 'Priority of this quality goal: high, medium, or low.';
+COMMENT ON COLUMN arc42.quality_goal.scenario IS 'Concrete scenario illustrating when and how this quality goal applies.';
 
 CREATE INDEX quality_goal_index_gto
-    ON quality_goal
+    ON arc42.quality_goal
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -285,13 +302,13 @@ CREATE INDEX quality_goal_index_gto
 
 -- Stakeholder — §1 Introduction & Goals.
 
-CREATE TABLE stakeholder (
+CREATE TABLE arc42.stakeholder (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     name TEXT NOT NULL DEFAULT '',
     role TEXT NOT NULL DEFAULT '',
@@ -299,23 +316,23 @@ CREATE TABLE stakeholder (
 );
 
 CREATE TRIGGER trigger_stakeholder_updated_at
-    BEFORE UPDATE ON stakeholder
+    BEFORE UPDATE ON arc42.stakeholder
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE stakeholder IS 'Stakeholder captured in §1 Introduction & Goals of the arc42 documentation.';
-COMMENT ON COLUMN stakeholder.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN stakeholder.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN stakeholder.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN stakeholder.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN stakeholder.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN stakeholder.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN stakeholder.name IS 'Name or group name of the stakeholder.';
-COMMENT ON COLUMN stakeholder.role IS 'Role or position of the stakeholder in relation to the architecture.';
-COMMENT ON COLUMN stakeholder.concerns IS 'Key concerns, expectations, or interests this stakeholder has about the architecture.';
+COMMENT ON TABLE arc42.stakeholder IS 'Stakeholder captured in §1 Introduction & Goals of the arc42 documentation.';
+COMMENT ON COLUMN arc42.stakeholder.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.stakeholder.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.stakeholder.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.stakeholder.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.stakeholder.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.stakeholder.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.stakeholder.name IS 'Name or group name of the stakeholder.';
+COMMENT ON COLUMN arc42.stakeholder.role IS 'Role or position of the stakeholder in relation to the architecture.';
+COMMENT ON COLUMN arc42.stakeholder.concerns IS 'Key concerns, expectations, or interests this stakeholder has about the architecture.';
 
 CREATE INDEX stakeholder_index_gto
-    ON stakeholder
+    ON arc42.stakeholder
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -328,13 +345,13 @@ CREATE INDEX stakeholder_index_gto
 
 -- Constraint item — §2 Constraints.
 
-CREATE TABLE constraint_item (
+CREATE TABLE arc42.constraint_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     kind TEXT NOT NULL DEFAULT '' CHECK (kind IN ('technical', 'organizational', 'convention', '')),
     name TEXT NOT NULL DEFAULT '',
@@ -342,23 +359,23 @@ CREATE TABLE constraint_item (
 );
 
 CREATE TRIGGER trigger_constraint_item_updated_at
-    BEFORE UPDATE ON constraint_item
+    BEFORE UPDATE ON arc42.constraint_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE constraint_item IS 'Constraint item captured in §2 Constraints of the arc42 documentation.';
-COMMENT ON COLUMN constraint_item.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN constraint_item.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN constraint_item.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN constraint_item.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN constraint_item.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN constraint_item.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN constraint_item.kind IS 'Kind of constraint: technical, organizational, or convention.';
-COMMENT ON COLUMN constraint_item.name IS 'Short name or title of the constraint.';
-COMMENT ON COLUMN constraint_item.description IS 'Detailed description of the constraint and its impact on the architecture.';
+COMMENT ON TABLE arc42.constraint_item IS 'Constraint item captured in §2 Constraints of the arc42 documentation.';
+COMMENT ON COLUMN arc42.constraint_item.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.constraint_item.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.constraint_item.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.constraint_item.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.constraint_item.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.constraint_item.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.constraint_item.kind IS 'Kind of constraint: technical, organizational, or convention.';
+COMMENT ON COLUMN arc42.constraint_item.name IS 'Short name or title of the constraint.';
+COMMENT ON COLUMN arc42.constraint_item.description IS 'Detailed description of the constraint and its impact on the architecture.';
 
 CREATE INDEX constraint_item_index_gto
-    ON constraint_item
+    ON arc42.constraint_item
     USING GIN ((description) gin_trgm_ops);
 
 -- ========================================================================
@@ -371,13 +388,13 @@ CREATE INDEX constraint_item_index_gto
 
 -- Context partner — §3 Context & Scope.
 
-CREATE TABLE context_partner (
+CREATE TABLE arc42.context_partner (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     kind TEXT NOT NULL DEFAULT '' CHECK (kind IN ('business', 'technical', '')),
     name TEXT NOT NULL DEFAULT '',
@@ -387,25 +404,25 @@ CREATE TABLE context_partner (
 );
 
 CREATE TRIGGER trigger_context_partner_updated_at
-    BEFORE UPDATE ON context_partner
+    BEFORE UPDATE ON arc42.context_partner
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE context_partner IS 'External context partner captured in §3 Context & Scope of the arc42 documentation.';
-COMMENT ON COLUMN context_partner.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN context_partner.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN context_partner.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN context_partner.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN context_partner.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN context_partner.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN context_partner.kind IS 'Kind of context partner: business (external business system) or technical (external technical interface).';
-COMMENT ON COLUMN context_partner.name IS 'Name of the external system, service, or organisation.';
-COMMENT ON COLUMN context_partner.interface_description IS 'Description of the interface between the architecture and this partner.';
-COMMENT ON COLUMN context_partner.protocol IS 'Communication protocol used at this interface (e.g. REST, gRPC, SFTP).';
-COMMENT ON COLUMN context_partner.direction IS 'Direction of data or control flow: inbound, outbound, or bidirectional.';
+COMMENT ON TABLE arc42.context_partner IS 'External context partner captured in §3 Context & Scope of the arc42 documentation.';
+COMMENT ON COLUMN arc42.context_partner.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.context_partner.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.context_partner.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.context_partner.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.context_partner.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.context_partner.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.context_partner.kind IS 'Kind of context partner: business (external business system) or technical (external technical interface).';
+COMMENT ON COLUMN arc42.context_partner.name IS 'Name of the external system, service, or organisation.';
+COMMENT ON COLUMN arc42.context_partner.interface_description IS 'Description of the interface between the architecture and this partner.';
+COMMENT ON COLUMN arc42.context_partner.protocol IS 'Communication protocol used at this interface (e.g. REST, gRPC, SFTP).';
+COMMENT ON COLUMN arc42.context_partner.direction IS 'Direction of data or control flow: inbound, outbound, or bidirectional.';
 
 CREATE INDEX context_partner_index_gto
-    ON context_partner
+    ON arc42.context_partner
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -418,13 +435,13 @@ CREATE INDEX context_partner_index_gto
 
 -- Technology decision — §4 Solution Strategy.
 
-CREATE TABLE technology_decision (
+CREATE TABLE arc42.technology_decision (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     category TEXT NOT NULL DEFAULT '',
     choice TEXT NOT NULL DEFAULT '',
@@ -432,23 +449,23 @@ CREATE TABLE technology_decision (
 );
 
 CREATE TRIGGER trigger_technology_decision_updated_at
-    BEFORE UPDATE ON technology_decision
+    BEFORE UPDATE ON arc42.technology_decision
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE technology_decision IS 'Technology decision captured in §4 Solution Strategy of the arc42 documentation.';
-COMMENT ON COLUMN technology_decision.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN technology_decision.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN technology_decision.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN technology_decision.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN technology_decision.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN technology_decision.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN technology_decision.category IS 'Category of the technology decision (e.g. language, database, framework, infrastructure).';
-COMMENT ON COLUMN technology_decision.choice IS 'The specific technology or approach chosen.';
-COMMENT ON COLUMN technology_decision.rationale IS 'Rationale explaining why this technology was chosen over alternatives.';
+COMMENT ON TABLE arc42.technology_decision IS 'Technology decision captured in §4 Solution Strategy of the arc42 documentation.';
+COMMENT ON COLUMN arc42.technology_decision.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.technology_decision.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.technology_decision.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.technology_decision.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.technology_decision.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.technology_decision.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.technology_decision.category IS 'Category of the technology decision (e.g. language, database, framework, infrastructure).';
+COMMENT ON COLUMN arc42.technology_decision.choice IS 'The specific technology or approach chosen.';
+COMMENT ON COLUMN arc42.technology_decision.rationale IS 'Rationale explaining why this technology was chosen over alternatives.';
 
 CREATE INDEX technology_decision_index_gto
-    ON technology_decision
+    ON arc42.technology_decision
     USING GIN ((choice) gin_trgm_ops);
 
 -- ========================================================================
@@ -461,39 +478,39 @@ CREATE INDEX technology_decision_index_gto
 
 -- Building block — §5 Building Block View.
 
-CREATE TABLE building_block (
+CREATE TABLE arc42.building_block (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
-    parent_id UUID REFERENCES building_block(id) ON DELETE CASCADE,
+    parent_id UUID REFERENCES arc42.building_block(id) ON DELETE CASCADE,
     name TEXT NOT NULL DEFAULT '',
     responsibility TEXT NOT NULL DEFAULT '',
     interfaces TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_building_block_updated_at
-    BEFORE UPDATE ON building_block
+    BEFORE UPDATE ON arc42.building_block
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE building_block IS 'Building block captured in §5 Building Block View of the arc42 documentation.';
-COMMENT ON COLUMN building_block.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN building_block.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN building_block.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN building_block.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN building_block.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN building_block.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN building_block.parent_id IS 'Self-referential FK to the parent building block; NULL for top-level blocks (cascade-deleted with parent).';
-COMMENT ON COLUMN building_block.name IS 'Name of the building block (e.g. component, subsystem, or module name).';
-COMMENT ON COLUMN building_block.responsibility IS 'Single-sentence description of what this building block is responsible for.';
-COMMENT ON COLUMN building_block.interfaces IS 'Description of the interfaces this building block exposes or consumes.';
+COMMENT ON TABLE arc42.building_block IS 'Building block captured in §5 Building Block View of the arc42 documentation.';
+COMMENT ON COLUMN arc42.building_block.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.building_block.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.building_block.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.building_block.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.building_block.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.building_block.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.building_block.parent_id IS 'Self-referential FK to the parent building block; NULL for top-level blocks (cascade-deleted with parent).';
+COMMENT ON COLUMN arc42.building_block.name IS 'Name of the building block (e.g. component, subsystem, or module name).';
+COMMENT ON COLUMN arc42.building_block.responsibility IS 'Single-sentence description of what this building block is responsible for.';
+COMMENT ON COLUMN arc42.building_block.interfaces IS 'Description of the interfaces this building block exposes or consumes.';
 
 CREATE INDEX building_block_index_gto
-    ON building_block
+    ON arc42.building_block
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -506,13 +523,13 @@ CREATE INDEX building_block_index_gto
 
 -- Runtime scenario — §6 Runtime View.
 
-CREATE TABLE runtime_scenario (
+CREATE TABLE arc42.runtime_scenario (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     name TEXT NOT NULL DEFAULT '',
     trigger_description TEXT NOT NULL DEFAULT '',
@@ -520,23 +537,23 @@ CREATE TABLE runtime_scenario (
 );
 
 CREATE TRIGGER trigger_runtime_scenario_updated_at
-    BEFORE UPDATE ON runtime_scenario
+    BEFORE UPDATE ON arc42.runtime_scenario
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE runtime_scenario IS 'Runtime scenario captured in §6 Runtime View of the arc42 documentation.';
-COMMENT ON COLUMN runtime_scenario.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN runtime_scenario.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN runtime_scenario.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN runtime_scenario.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN runtime_scenario.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN runtime_scenario.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN runtime_scenario.name IS 'Name of the runtime scenario (e.g. user login flow, batch job).';
-COMMENT ON COLUMN runtime_scenario.trigger_description IS 'What event or condition triggers this runtime scenario.';
-COMMENT ON COLUMN runtime_scenario.steps_summary IS 'Ordered prose summary of the steps or interactions in this scenario.';
+COMMENT ON TABLE arc42.runtime_scenario IS 'Runtime scenario captured in §6 Runtime View of the arc42 documentation.';
+COMMENT ON COLUMN arc42.runtime_scenario.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.runtime_scenario.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.runtime_scenario.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.runtime_scenario.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.runtime_scenario.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.runtime_scenario.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.runtime_scenario.name IS 'Name of the runtime scenario (e.g. user login flow, batch job).';
+COMMENT ON COLUMN arc42.runtime_scenario.trigger_description IS 'What event or condition triggers this runtime scenario.';
+COMMENT ON COLUMN arc42.runtime_scenario.steps_summary IS 'Ordered prose summary of the steps or interactions in this scenario.';
 
 CREATE INDEX runtime_scenario_index_gto
-    ON runtime_scenario
+    ON arc42.runtime_scenario
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -549,13 +566,13 @@ CREATE INDEX runtime_scenario_index_gto
 
 -- Deployment node — §7 Deployment View.
 
-CREATE TABLE deployment_node (
+CREATE TABLE arc42.deployment_node (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     environment TEXT NOT NULL DEFAULT '' CHECK (environment IN ('development', 'staging', 'production', 'disaster-recovery', 'other', '')),
     node_name TEXT NOT NULL DEFAULT '',
@@ -563,23 +580,23 @@ CREATE TABLE deployment_node (
 );
 
 CREATE TRIGGER trigger_deployment_node_updated_at
-    BEFORE UPDATE ON deployment_node
+    BEFORE UPDATE ON arc42.deployment_node
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE deployment_node IS 'Deployment node captured in §7 Deployment View of the arc42 documentation.';
-COMMENT ON COLUMN deployment_node.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN deployment_node.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN deployment_node.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN deployment_node.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN deployment_node.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN deployment_node.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN deployment_node.environment IS 'Target environment for this deployment node: development, staging, production, disaster-recovery, or other.';
-COMMENT ON COLUMN deployment_node.node_name IS 'Name of the deployment node (e.g. server hostname, Kubernetes cluster, cloud region).';
-COMMENT ON COLUMN deployment_node.responsibility IS 'What this deployment node is responsible for hosting or executing.';
+COMMENT ON TABLE arc42.deployment_node IS 'Deployment node captured in §7 Deployment View of the arc42 documentation.';
+COMMENT ON COLUMN arc42.deployment_node.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.deployment_node.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.deployment_node.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.deployment_node.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.deployment_node.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.deployment_node.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.deployment_node.environment IS 'Target environment for this deployment node: development, staging, production, disaster-recovery, or other.';
+COMMENT ON COLUMN arc42.deployment_node.node_name IS 'Name of the deployment node (e.g. server hostname, Kubernetes cluster, cloud region).';
+COMMENT ON COLUMN arc42.deployment_node.responsibility IS 'What this deployment node is responsible for hosting or executing.';
 
 CREATE INDEX deployment_node_index_gto
-    ON deployment_node
+    ON arc42.deployment_node
     USING GIN ((node_name) gin_trgm_ops);
 
 -- ========================================================================
@@ -592,35 +609,35 @@ CREATE INDEX deployment_node_index_gto
 
 -- Crosscutting concept — §8 Crosscutting Concepts.
 
-CREATE TABLE crosscutting_concept (
+CREATE TABLE arc42.crosscutting_concept (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     name TEXT NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_crosscutting_concept_updated_at
-    BEFORE UPDATE ON crosscutting_concept
+    BEFORE UPDATE ON arc42.crosscutting_concept
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE crosscutting_concept IS 'Crosscutting concept captured in §8 Crosscutting Concepts of the arc42 documentation.';
-COMMENT ON COLUMN crosscutting_concept.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN crosscutting_concept.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN crosscutting_concept.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN crosscutting_concept.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN crosscutting_concept.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN crosscutting_concept.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN crosscutting_concept.name IS 'Name of the crosscutting concept (e.g. Logging, Security, Internationalisation).';
-COMMENT ON COLUMN crosscutting_concept.description IS 'Description of the concept, the pattern or approach used, and which building blocks it applies to.';
+COMMENT ON TABLE arc42.crosscutting_concept IS 'Crosscutting concept captured in §8 Crosscutting Concepts of the arc42 documentation.';
+COMMENT ON COLUMN arc42.crosscutting_concept.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.crosscutting_concept.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.crosscutting_concept.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.crosscutting_concept.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.crosscutting_concept.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.crosscutting_concept.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.crosscutting_concept.name IS 'Name of the crosscutting concept (e.g. Logging, Security, Internationalisation).';
+COMMENT ON COLUMN arc42.crosscutting_concept.description IS 'Description of the concept, the pattern or approach used, and which building blocks it applies to.';
 
 CREATE INDEX crosscutting_concept_index_gto
-    ON crosscutting_concept
+    ON arc42.crosscutting_concept
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -633,13 +650,13 @@ CREATE INDEX crosscutting_concept_index_gto
 
 -- Architectural decision record (ADR) — §9 Architectural Decisions.
 
-CREATE TABLE architectural_decision (
+CREATE TABLE arc42.architectural_decision (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     title TEXT NOT NULL DEFAULT '',
     status TEXT NOT NULL DEFAULT '' CHECK (status IN ('draft', 'proposed', 'accepted', 'deprecated', 'superseded', '')),
@@ -649,25 +666,25 @@ CREATE TABLE architectural_decision (
 );
 
 CREATE TRIGGER trigger_architectural_decision_updated_at
-    BEFORE UPDATE ON architectural_decision
+    BEFORE UPDATE ON arc42.architectural_decision
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE architectural_decision IS 'Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.';
-COMMENT ON COLUMN architectural_decision.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN architectural_decision.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN architectural_decision.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN architectural_decision.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN architectural_decision.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN architectural_decision.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN architectural_decision.title IS 'Short title of the architectural decision (e.g. Use PostgreSQL as primary database).';
-COMMENT ON COLUMN architectural_decision.status IS 'Lifecycle status of the ADR: draft, proposed, accepted, deprecated, or superseded.';
-COMMENT ON COLUMN architectural_decision.context IS 'Context explaining the problem or force that drove this decision.';
-COMMENT ON COLUMN architectural_decision.decision IS 'The decision that was made.';
-COMMENT ON COLUMN architectural_decision.consequences IS 'Consequences — positive and negative — of this decision.';
+COMMENT ON TABLE arc42.architectural_decision IS 'Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.';
+COMMENT ON COLUMN arc42.architectural_decision.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.architectural_decision.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.architectural_decision.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.architectural_decision.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.architectural_decision.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.architectural_decision.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.architectural_decision.title IS 'Short title of the architectural decision (e.g. Use PostgreSQL as primary database).';
+COMMENT ON COLUMN arc42.architectural_decision.status IS 'Lifecycle status of the ADR: draft, proposed, accepted, deprecated, or superseded.';
+COMMENT ON COLUMN arc42.architectural_decision.context IS 'Context explaining the problem or force that drove this decision.';
+COMMENT ON COLUMN arc42.architectural_decision.decision IS 'The decision that was made.';
+COMMENT ON COLUMN arc42.architectural_decision.consequences IS 'Consequences — positive and negative — of this decision.';
 
 CREATE INDEX architectural_decision_index_gto
-    ON architectural_decision
+    ON arc42.architectural_decision
     USING GIN ((title) gin_trgm_ops);
 
 -- ========================================================================
@@ -680,13 +697,13 @@ CREATE INDEX architectural_decision_index_gto
 
 -- Quality scenario — §10 Quality Requirements.
 
-CREATE TABLE quality_scenario (
+CREATE TABLE arc42.quality_scenario (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     source TEXT NOT NULL DEFAULT '',
     stimulus TEXT NOT NULL DEFAULT '',
@@ -696,25 +713,25 @@ CREATE TABLE quality_scenario (
 );
 
 CREATE TRIGGER trigger_quality_scenario_updated_at
-    BEFORE UPDATE ON quality_scenario
+    BEFORE UPDATE ON arc42.quality_scenario
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE quality_scenario IS 'Quality scenario captured in §10 Quality Requirements of the arc42 documentation.';
-COMMENT ON COLUMN quality_scenario.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quality_scenario.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN quality_scenario.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN quality_scenario.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN quality_scenario.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN quality_scenario.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN quality_scenario.source IS 'Source of the stimulus (e.g. end user, external system, time-based event).';
-COMMENT ON COLUMN quality_scenario.stimulus IS 'The stimulus or event that triggers the scenario.';
-COMMENT ON COLUMN quality_scenario.artifact IS 'The system artifact or component being stimulated.';
-COMMENT ON COLUMN quality_scenario.response IS 'The expected response of the system to the stimulus.';
-COMMENT ON COLUMN quality_scenario.measure IS 'Measurable criterion defining when the response is acceptable.';
+COMMENT ON TABLE arc42.quality_scenario IS 'Quality scenario captured in §10 Quality Requirements of the arc42 documentation.';
+COMMENT ON COLUMN arc42.quality_scenario.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.quality_scenario.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.quality_scenario.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.quality_scenario.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.quality_scenario.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.quality_scenario.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.quality_scenario.source IS 'Source of the stimulus (e.g. end user, external system, time-based event).';
+COMMENT ON COLUMN arc42.quality_scenario.stimulus IS 'The stimulus or event that triggers the scenario.';
+COMMENT ON COLUMN arc42.quality_scenario.artifact IS 'The system artifact or component being stimulated.';
+COMMENT ON COLUMN arc42.quality_scenario.response IS 'The expected response of the system to the stimulus.';
+COMMENT ON COLUMN arc42.quality_scenario.measure IS 'Measurable criterion defining when the response is acceptable.';
 
 CREATE INDEX quality_scenario_index_gto
-    ON quality_scenario
+    ON arc42.quality_scenario
     USING GIN ((stimulus) gin_trgm_ops);
 
 -- ========================================================================
@@ -727,13 +744,13 @@ CREATE INDEX quality_scenario_index_gto
 
 -- Risk item — §11 Risks & Technical Debt.
 
-CREATE TABLE risk_item (
+CREATE TABLE arc42.risk_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     kind TEXT NOT NULL DEFAULT '' CHECK (kind IN ('risk', 'technical-debt', '')),
     name TEXT NOT NULL DEFAULT '',
@@ -743,25 +760,25 @@ CREATE TABLE risk_item (
 );
 
 CREATE TRIGGER trigger_risk_item_updated_at
-    BEFORE UPDATE ON risk_item
+    BEFORE UPDATE ON arc42.risk_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE risk_item IS 'Risk or technical debt item captured in §11 Risks & Technical Debt of the arc42 documentation.';
-COMMENT ON COLUMN risk_item.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN risk_item.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN risk_item.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN risk_item.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN risk_item.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN risk_item.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN risk_item.kind IS 'Kind of item: risk (future threat) or technical-debt (known liability).';
-COMMENT ON COLUMN risk_item.name IS 'Short name or title of the risk or technical debt item.';
-COMMENT ON COLUMN risk_item.probability IS 'Likelihood of the risk materialising: high, medium, or low.';
-COMMENT ON COLUMN risk_item.impact IS 'Impact if the risk materialises: high, medium, or low.';
-COMMENT ON COLUMN risk_item.mitigation IS 'Action taken or planned to mitigate the risk or address the technical debt.';
+COMMENT ON TABLE arc42.risk_item IS 'Risk or technical debt item captured in §11 Risks & Technical Debt of the arc42 documentation.';
+COMMENT ON COLUMN arc42.risk_item.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.risk_item.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.risk_item.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.risk_item.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.risk_item.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.risk_item.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.risk_item.kind IS 'Kind of item: risk (future threat) or technical-debt (known liability).';
+COMMENT ON COLUMN arc42.risk_item.name IS 'Short name or title of the risk or technical debt item.';
+COMMENT ON COLUMN arc42.risk_item.probability IS 'Likelihood of the risk materialising: high, medium, or low.';
+COMMENT ON COLUMN arc42.risk_item.impact IS 'Impact if the risk materialises: high, medium, or low.';
+COMMENT ON COLUMN arc42.risk_item.mitigation IS 'Action taken or planned to mitigate the risk or address the technical debt.';
 
 CREATE INDEX risk_item_index_gto
-    ON risk_item
+    ON arc42.risk_item
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -774,35 +791,35 @@ CREATE INDEX risk_item_index_gto
 
 -- Glossary term — §12 Glossary.
 
-CREATE TABLE glossary_term (
+CREATE TABLE arc42.glossary_term (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     term TEXT NOT NULL DEFAULT '',
     definition TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_glossary_term_updated_at
-    BEFORE UPDATE ON glossary_term
+    BEFORE UPDATE ON arc42.glossary_term
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE glossary_term IS 'Glossary term captured in §12 Glossary of the arc42 documentation.';
-COMMENT ON COLUMN glossary_term.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glossary_term.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN glossary_term.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN glossary_term.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN glossary_term.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
-COMMENT ON COLUMN glossary_term.ordinal IS 'Display/order index within the parent documentation.';
-COMMENT ON COLUMN glossary_term.term IS 'The domain or architectural term being defined.';
-COMMENT ON COLUMN glossary_term.definition IS 'Clear, concise definition of the term as used in this architecture.';
+COMMENT ON TABLE arc42.glossary_term IS 'Glossary term captured in §12 Glossary of the arc42 documentation.';
+COMMENT ON COLUMN arc42.glossary_term.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.glossary_term.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.glossary_term.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.glossary_term.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.glossary_term.arc42_documentation_id IS 'Parent documentation (cascade-deleted).';
+COMMENT ON COLUMN arc42.glossary_term.ordinal IS 'Display/order index within the parent documentation.';
+COMMENT ON COLUMN arc42.glossary_term.term IS 'The domain or architectural term being defined.';
+COMMENT ON COLUMN arc42.glossary_term.definition IS 'Clear, concise definition of the term as used in this architecture.';
 
 CREATE INDEX glossary_term_index_gto
-    ON glossary_term
+    ON arc42.glossary_term
     USING GIN ((term) gin_trgm_ops);
 
 -- ========================================================================
@@ -815,13 +832,13 @@ CREATE INDEX glossary_term_index_gto
 
 -- Grading result for an arc42 documentation snapshot — computed maturity, final maturity, and per-section completeness.
 
-CREATE TABLE arc42_documentation_grade (
+CREATE TABLE arc42.arc42_documentation_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_id UUID NOT NULL UNIQUE REFERENCES arc42_documentation(id) ON DELETE CASCADE,
+    arc42_documentation_id UUID NOT NULL UNIQUE REFERENCES arc42.arc42_documentation(id) ON DELETE CASCADE,
     computed_maturity TEXT NOT NULL DEFAULT '' CHECK (computed_maturity IN ('draft', 'reviewable', 'ready', 'mature', '')),
     final_maturity TEXT NOT NULL DEFAULT '' CHECK (final_maturity IN ('draft', 'reviewable', 'ready', 'mature', '')),
     override_reason TEXT NOT NULL DEFAULT '',
@@ -841,31 +858,31 @@ CREATE TABLE arc42_documentation_grade (
 );
 
 CREATE TRIGGER trigger_arc42_documentation_grade_updated_at
-    BEFORE UPDATE ON arc42_documentation_grade
+    BEFORE UPDATE ON arc42.arc42_documentation_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE arc42_documentation_grade IS 'Grading result for an arc42 documentation snapshot: computed and final maturity band plus per-section completeness.';
-COMMENT ON COLUMN arc42_documentation_grade.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN arc42_documentation_grade.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN arc42_documentation_grade.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN arc42_documentation_grade.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN arc42_documentation_grade.arc42_documentation_id IS 'Parent documentation (1:1, cascade-deleted).';
-COMMENT ON COLUMN arc42_documentation_grade.computed_maturity IS 'Maturity band computed by the scoring engine: draft, reviewable, ready, or mature.';
-COMMENT ON COLUMN arc42_documentation_grade.final_maturity IS 'Final maturity band after any author override; equals computed_maturity when no override is applied.';
-COMMENT ON COLUMN arc42_documentation_grade.override_reason IS 'Author-provided reason when final_maturity differs from computed_maturity.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_1 IS '§1 Introduction & Goals completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_2 IS '§2 Constraints completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_3 IS '§3 Context & Scope completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_4 IS '§4 Solution Strategy completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_5 IS '§5 Building Block View completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_6 IS '§6 Runtime View completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_7 IS '§7 Deployment View completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_8 IS '§8 Crosscutting Concepts completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_9 IS '§9 Architectural Decisions completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_10 IS '§10 Quality Requirements completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_11 IS '§11 Risks & Technical Debt completeness: empty, partial, or complete.';
-COMMENT ON COLUMN arc42_documentation_grade.completeness_section_12 IS '§12 Glossary completeness: empty, partial, or complete.';
+COMMENT ON TABLE arc42.arc42_documentation_grade IS 'Grading result for an arc42 documentation snapshot: computed and final maturity band plus per-section completeness.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.arc42_documentation_id IS 'Parent documentation (1:1, cascade-deleted).';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.computed_maturity IS 'Maturity band computed by the scoring engine: draft, reviewable, ready, or mature.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.final_maturity IS 'Final maturity band after any author override; equals computed_maturity when no override is applied.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.override_reason IS 'Author-provided reason when final_maturity differs from computed_maturity.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_1 IS '§1 Introduction & Goals completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_2 IS '§2 Constraints completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_3 IS '§3 Context & Scope completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_4 IS '§4 Solution Strategy completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_5 IS '§5 Building Block View completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_6 IS '§6 Runtime View completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_7 IS '§7 Deployment View completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_8 IS '§8 Crosscutting Concepts completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_9 IS '§9 Architectural Decisions completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_10 IS '§10 Quality Requirements completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_11 IS '§11 Risks & Technical Debt completeness: empty, partial, or complete.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade.completeness_section_12 IS '§12 Glossary completeness: empty, partial, or complete.';
 
 -- ========================================================================
 -- END 18_create_table_arc42_documentation_grade.sql
@@ -877,13 +894,13 @@ COMMENT ON COLUMN arc42_documentation_grade.completeness_section_12 IS '§12 Glo
 
 -- Fired grading rule — audit trail of rules that fired during arc42 documentation grading.
 
-CREATE TABLE arc42_documentation_grade_rule (
+CREATE TABLE arc42.arc42_documentation_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_grade_id UUID NOT NULL REFERENCES arc42_documentation_grade(id) ON DELETE CASCADE,
+    arc42_documentation_grade_id UUID NOT NULL REFERENCES arc42.arc42_documentation_grade(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     rule_id TEXT NOT NULL DEFAULT '',
     section_number SMALLINT,
@@ -891,23 +908,23 @@ CREATE TABLE arc42_documentation_grade_rule (
 );
 
 CREATE TRIGGER trigger_arc42_documentation_grade_rule_updated_at
-    BEFORE UPDATE ON arc42_documentation_grade_rule
+    BEFORE UPDATE ON arc42.arc42_documentation_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE arc42_documentation_grade_rule IS 'Audit trail of grading rules that fired when computing the maturity of an arc42 documentation snapshot.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.arc42_documentation_grade_id IS 'Parent grade record (cascade-deleted).';
-COMMENT ON COLUMN arc42_documentation_grade_rule.ordinal IS 'Display/order index within the parent grade record.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.rule_id IS 'Machine-readable identifier of the rule that fired (e.g. SECTION_1_EMPTY).';
-COMMENT ON COLUMN arc42_documentation_grade_rule.section_number IS 'arc42 section number (1–12) the rule applies to; NULL if cross-section.';
-COMMENT ON COLUMN arc42_documentation_grade_rule.description IS 'Human-readable description of why the rule fired.';
+COMMENT ON TABLE arc42.arc42_documentation_grade_rule IS 'Audit trail of grading rules that fired when computing the maturity of an arc42 documentation snapshot.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.arc42_documentation_grade_id IS 'Parent grade record (cascade-deleted).';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.ordinal IS 'Display/order index within the parent grade record.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.rule_id IS 'Machine-readable identifier of the rule that fired (e.g. SECTION_1_EMPTY).';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.section_number IS 'arc42 section number (1–12) the rule applies to; NULL if cross-section.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_rule.description IS 'Human-readable description of why the rule fired.';
 
 CREATE INDEX arc42_documentation_grade_rule_index_gto
-    ON arc42_documentation_grade_rule
+    ON arc42.arc42_documentation_grade_rule
     USING GIN ((description) gin_trgm_ops);
 
 -- ========================================================================
@@ -920,13 +937,13 @@ CREATE INDEX arc42_documentation_grade_rule_index_gto
 
 -- Additional flag — flags fired independently of the maturity band during arc42 documentation grading.
 
-CREATE TABLE arc42_documentation_grade_flag (
+CREATE TABLE arc42.arc42_documentation_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    arc42_documentation_grade_id UUID NOT NULL REFERENCES arc42_documentation_grade(id) ON DELETE CASCADE,
+    arc42_documentation_grade_id UUID NOT NULL REFERENCES arc42.arc42_documentation_grade(id) ON DELETE CASCADE,
     ordinal SMALLINT NOT NULL DEFAULT 0,
     category TEXT NOT NULL DEFAULT '',
     priority TEXT NOT NULL DEFAULT '' CHECK (priority IN ('high', 'medium', 'low', '')),
@@ -934,23 +951,23 @@ CREATE TABLE arc42_documentation_grade_flag (
 );
 
 CREATE TRIGGER trigger_arc42_documentation_grade_flag_updated_at
-    BEFORE UPDATE ON arc42_documentation_grade_flag
+    BEFORE UPDATE ON arc42.arc42_documentation_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION arc42.set_updated_at();
 
-COMMENT ON TABLE arc42_documentation_grade_flag IS 'Additional flag fired during arc42 documentation grading, independent of the maturity band.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.created_at IS 'Timestamp when the record was created.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.arc42_documentation_grade_id IS 'Parent grade record (cascade-deleted).';
-COMMENT ON COLUMN arc42_documentation_grade_flag.ordinal IS 'Display/order index within the parent grade record.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.category IS 'Category of the flag (e.g. missing-stakeholders, insufficient-adrs, no-deployment-view).';
-COMMENT ON COLUMN arc42_documentation_grade_flag.priority IS 'Priority of the flag: high, medium, or low.';
-COMMENT ON COLUMN arc42_documentation_grade_flag.description IS 'Human-readable description of the architectural omission or concern flagged.';
+COMMENT ON TABLE arc42.arc42_documentation_grade_flag IS 'Additional flag fired during arc42 documentation grading, independent of the maturity band.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.created_at IS 'Timestamp when the record was created.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.deleted_at IS 'Timestamp when the record was deleted a.k.a. soft-removed.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.arc42_documentation_grade_id IS 'Parent grade record (cascade-deleted).';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.ordinal IS 'Display/order index within the parent grade record.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.category IS 'Category of the flag (e.g. missing-stakeholders, insufficient-adrs, no-deployment-view).';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.priority IS 'Priority of the flag: high, medium, or low.';
+COMMENT ON COLUMN arc42.arc42_documentation_grade_flag.description IS 'Human-readable description of the architectural omission or concern flagged.';
 
 CREATE INDEX arc42_documentation_grade_flag_index_gto
-    ON arc42_documentation_grade_flag
+    ON arc42.arc42_documentation_grade_flag
     USING GIN ((description) gin_trgm_ops);
 
 -- ========================================================================

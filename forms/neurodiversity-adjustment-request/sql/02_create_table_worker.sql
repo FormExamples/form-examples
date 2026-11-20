@@ -1,6 +1,6 @@
 -- Worker (the neurodivergent employee) requesting workplace reasonable adjustments.
 
-CREATE TABLE worker (
+CREATE TABLE neurodiversity_adjustment_request.worker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -25,49 +25,49 @@ CREATE TABLE worker (
 );
 
 CREATE TRIGGER trigger_worker_updated_at
-    BEFORE UPDATE ON worker
+    BEFORE UPDATE ON neurodiversity_adjustment_request.worker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_request.set_updated_at();
 
-COMMENT ON TABLE worker IS
+COMMENT ON TABLE neurodiversity_adjustment_request.worker IS
     'Worker (the neurodivergent employee) who requests, or on whose behalf a manager requests, workplace reasonable adjustments.';
-COMMENT ON COLUMN worker.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN worker.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN worker.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN worker.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN worker.name IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.name IS
     'Name.';
-COMMENT ON COLUMN worker.email IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.email IS
     'Email address.';
-COMMENT ON COLUMN worker.phone IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.phone IS
     'Phone number.';
-COMMENT ON COLUMN worker.postal_address_as_full_text IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN worker.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN worker.postcode IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN worker.employee_reference IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.employee_reference IS
     'Employer-assigned employee / payroll reference, unique per worker.';
-COMMENT ON COLUMN worker.job_title IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.job_title IS
     'Job title / role of the worker.';
-COMMENT ON COLUMN worker.department IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.department IS
     'Department / team the worker belongs to.';
-COMMENT ON COLUMN worker.employment_type IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.employment_type IS
     'Employment type: permanent, fixed-term, agency, contractor, apprentice, volunteer, other.';
-COMMENT ON COLUMN worker.work_pattern IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.work_pattern IS
     'Working pattern: full-time, part-time, shift, flexible, other.';
-COMMENT ON COLUMN worker.work_location IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.work_location IS
     'Primary work location: office, remote, hybrid, field, other.';
-COMMENT ON COLUMN worker.employment_start_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_request.worker.employment_start_date IS
     'Date the worker started employment.';
 
 CREATE INDEX worker_index_gto
-    ON worker
+    ON neurodiversity_adjustment_request.worker
     USING GIN ((
         name
     ) gin_trgm_ops);

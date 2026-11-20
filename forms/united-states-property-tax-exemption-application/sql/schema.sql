@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_assessor.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_property_tax_exemption_application;
+
+COMMENT ON SCHEMA united_states_property_tax_exemption_application IS
+    'Namespace for the United States Property Tax Exemption Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_property_tax_exemption_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_property_tax_exemption_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Applicant: the property owner who files the homestead exemption application
 -- with the county assessor.
 
-CREATE TABLE applicant (
+CREATE TABLE united_states_property_tax_exemption_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -73,31 +90,31 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.applicant IS
     'Applicant (property owner) who files a United States residential property tax exemption application.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.name IS
     'Applicant full legal name.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.email IS
     'Applicant email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.phone IS
     'Applicant telephone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.postal_address_as_full_text IS
     'Applicant mailing address as free text.';
-COMMENT ON COLUMN applicant.state IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.state IS
     'Two-letter US state or territory code of the mailing address.';
-COMMENT ON COLUMN applicant.zip_code IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.applicant.zip_code IS
     'ZIP or ZIP+4 code of the mailing address.';
 
 -- ========================================================================
@@ -111,7 +128,7 @@ COMMENT ON COLUMN applicant.zip_code IS
 -- Assessor: the county or state assessing official who receives and decides the
 -- application. Optional on an application until it is assigned.
 
-CREATE TABLE assessor (
+CREATE TABLE united_states_property_tax_exemption_application.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -127,33 +144,33 @@ CREATE TABLE assessor (
 );
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.assessor IS
     'County assessing official who receives and decides the property tax exemption application.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.name IS
     'Assessing official full name.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.email IS
     'Assessor office email address.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.phone IS
     'Assessor office telephone number.';
-COMMENT ON COLUMN assessor.office_name IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.office_name IS
     'Name of the assessing office, e.g. a county assessor or appraisal district.';
-COMMENT ON COLUMN assessor.county IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.county IS
     'County the office serves.';
-COMMENT ON COLUMN assessor.state IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.state IS
     'Two-letter US state code the office is in.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.assessor.role IS
     'Role of the official: assessor, deputy-assessor, appraiser, clerk, or other.';
 
 -- ========================================================================
@@ -170,14 +187,14 @@ COMMENT ON COLUMN assessor.role IS
 -- audit trail of rules, and the flagged issues live in child tables. This record
 -- documents the claim; the county assessor decides it.
 
-CREATE TABLE property_tax_exemption_application (
+CREATE TABLE united_states_property_tax_exemption_application.property_tax_exemption_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    assessor_id UUID REFERENCES assessor(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_states_property_tax_exemption_application.applicant(id) ON DELETE RESTRICT,
+    assessor_id UUID REFERENCES united_states_property_tax_exemption_application.assessor(id) ON DELETE RESTRICT,
     applicant_name TEXT NOT NULL DEFAULT '',
     date_of_birth DATE,
     age_on_assessment_date INTEGER,
@@ -217,102 +234,102 @@ CREATE TABLE property_tax_exemption_application (
 );
 
 CREATE INDEX property_tax_exemption_application_applicant_id_idx
-    ON property_tax_exemption_application (applicant_id);
+    ON united_states_property_tax_exemption_application.property_tax_exemption_application (applicant_id);
 CREATE INDEX property_tax_exemption_application_assessor_id_idx
-    ON property_tax_exemption_application (assessor_id);
+    ON united_states_property_tax_exemption_application.property_tax_exemption_application (assessor_id);
 CREATE INDEX property_tax_exemption_application_state_idx
-    ON property_tax_exemption_application (state);
+    ON united_states_property_tax_exemption_application.property_tax_exemption_application (state);
 
 CREATE TRIGGER trigger_property_tax_exemption_application_updated_at
-    BEFORE UPDATE ON property_tax_exemption_application
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.property_tax_exemption_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE property_tax_exemption_application IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.property_tax_exemption_application IS
     'Main United States property tax exemption application: parcel, ownership and occupancy on the assessment date, exemptions claimed, income, proof documents, filing date, appeal basics and the signed declaration.';
-COMMENT ON COLUMN property_tax_exemption_application.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN property_tax_exemption_application.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN property_tax_exemption_application.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN property_tax_exemption_application.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN property_tax_exemption_application.applicant_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.applicant_id IS
     'Foreign key to the applicant.';
-COMMENT ON COLUMN property_tax_exemption_application.assessor_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.assessor_id IS
     'Foreign key to the assessing official; null until assigned.';
-COMMENT ON COLUMN property_tax_exemption_application.applicant_name IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.applicant_name IS
     'Applicant name as written on the application.';
-COMMENT ON COLUMN property_tax_exemption_application.date_of_birth IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.date_of_birth IS
     'Applicant date of birth; used for the senior age test.';
-COMMENT ON COLUMN property_tax_exemption_application.age_on_assessment_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.age_on_assessment_date IS
     'Applicant age in whole years on the assessment date.';
-COMMENT ON COLUMN property_tax_exemption_application.mailing_address IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.mailing_address IS
     'Mailing address for notices about the application.';
-COMMENT ON COLUMN property_tax_exemption_application.state IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.state IS
     'Two-letter code of the state where the property is located; selects the state rule set.';
-COMMENT ON COLUMN property_tax_exemption_application.county IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.county IS
     'County where the property is located.';
-COMMENT ON COLUMN property_tax_exemption_application.parcel_number IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.parcel_number IS
     'Assessor parcel number (APN) or account number identifying the property.';
-COMMENT ON COLUMN property_tax_exemption_application.property_address IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.property_address IS
     'Street address of the property claiming the exemption.';
-COMMENT ON COLUMN property_tax_exemption_application.property_type IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.property_type IS
     'Property type: single-family, condominium, manufactured-home, multi-unit, or other.';
-COMMENT ON COLUMN property_tax_exemption_application.ownership_type IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.ownership_type IS
     'How the applicant holds title: sole, joint, trust, life-estate, contract-buyer, or other.';
-COMMENT ON COLUMN property_tax_exemption_application.owner_on_assessment_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.owner_on_assessment_date IS
     'Whether the applicant held title on the assessment (lien) date (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.occupied_as_primary_residence IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.occupied_as_primary_residence IS
     'Whether the applicant occupied the property as the primary residence on the assessment date (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.occupancy_start_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.occupancy_start_date IS
     'Date the applicant began occupying the property as a primary residence.';
-COMMENT ON COLUMN property_tax_exemption_application.other_homestead_claimed IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.other_homestead_claimed IS
     'Whether a homestead exemption is already claimed on another property (yes/no); only one is allowed.';
-COMMENT ON COLUMN property_tax_exemption_application.claim_homestead IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.claim_homestead IS
     'Whether the general homestead exemption is claimed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.claim_senior IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.claim_senior IS
     'Whether a senior (age-based) exemption or relief is claimed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.claim_disability IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.claim_disability IS
     'Whether a disability exemption is claimed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.claim_veteran IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.claim_veteran IS
     'Whether a disabled-veteran exemption is claimed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.claim_circuit_breaker IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.claim_circuit_breaker IS
     'Whether circuit-breaker (income-based property tax relief) is claimed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.veteran_disability_percent IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.veteran_disability_percent IS
     'VA service-connected disability rating percent (0 to 100); null when not applicable.';
-COMMENT ON COLUMN property_tax_exemption_application.household_income_dollars IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.household_income_dollars IS
     'Total household income in whole US dollars for the income year.';
-COMMENT ON COLUMN property_tax_exemption_application.income_tax_year IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.income_tax_year IS
     'Calendar year the reported household income covers.';
-COMMENT ON COLUMN property_tax_exemption_application.assessment_year IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.assessment_year IS
     'Assessment or tax year the exemption is sought for.';
-COMMENT ON COLUMN property_tax_exemption_application.filing_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.filing_date IS
     'Date the application is filed with the assessor.';
-COMMENT ON COLUMN property_tax_exemption_application.application_type IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.application_type IS
     'Application type: initial, renewal, or late (late-filing relief requested).';
-COMMENT ON COLUMN property_tax_exemption_application.proof_of_ownership IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.proof_of_ownership IS
     'Whether proof of ownership (deed) is attached (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.proof_of_residency IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.proof_of_residency IS
     'Whether proof of residency (driver licence, voter or vehicle registration) is attached (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.proof_of_age IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.proof_of_age IS
     'Whether proof of age is attached (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.proof_of_income IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.proof_of_income IS
     'Whether proof of income (tax return, benefit letter) is attached (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.proof_of_disability IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.proof_of_disability IS
     'Whether proof of disability or VA rating is attached (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.appeal_requested IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.appeal_requested IS
     'Whether the applicant wants guidance on appealing the assessed value (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.notice_of_value_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.notice_of_value_date IS
     'Date of the assessment or value notice, which starts the appeal window.';
-COMMENT ON COLUMN property_tax_exemption_application.appeal_filed IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.appeal_filed IS
     'Whether an assessment appeal has already been filed (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.penalty_acknowledged IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.penalty_acknowledged IS
     'Whether the applicant acknowledged the penalty for a false statement (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.signed_by_applicant IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.signed_by_applicant IS
     'Whether the applicant signed the declaration (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application.signature_date IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application.signature_date IS
     'Date the applicant signed the declaration.';
 
 -- ========================================================================
@@ -328,13 +345,13 @@ COMMENT ON COLUMN property_tax_exemption_application.signature_date IS
 -- whether the application is late. This is documentation support, not legal
 -- advice; the county assessor decides.
 
-CREATE TABLE property_tax_exemption_application_grade (
+CREATE TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    property_tax_exemption_application_id UUID NOT NULL UNIQUE REFERENCES property_tax_exemption_application(id) ON DELETE CASCADE,
+    property_tax_exemption_application_id UUID NOT NULL UNIQUE REFERENCES united_states_property_tax_exemption_application.property_tax_exemption_application(id) ON DELETE CASCADE,
     eligibility_class VARCHAR(20) NOT NULL DEFAULT '' CHECK (eligibility_class IN ('likely-eligible', 'incomplete', 'likely-ineligible', '')),
     filing_deadline DATE,
     filed_late VARCHAR(5) NOT NULL DEFAULT '' CHECK (filed_late IN ('yes', 'no', '')),
@@ -343,31 +360,31 @@ CREATE TABLE property_tax_exemption_application_grade (
 );
 
 CREATE TRIGGER trigger_property_tax_exemption_application_grade_updated_at
-    BEFORE UPDATE ON property_tax_exemption_application_grade
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.property_tax_exemption_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE property_tax_exemption_application_grade IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade IS
     'Computed eligibility result for a property tax exemption application: class (likely-eligible/incomplete/likely-ineligible), state filing deadline, late flag and qualifying exemptions.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.property_tax_exemption_application_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.property_tax_exemption_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN property_tax_exemption_application_grade.eligibility_class IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.eligibility_class IS
     'Eligibility classification: likely-eligible, incomplete, or likely-ineligible (likely-ineligible takes precedence).';
-COMMENT ON COLUMN property_tax_exemption_application_grade.filing_deadline IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.filing_deadline IS
     'Filing deadline derived from the state rule for the assessment year; null when the state has none or is unknown.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.filed_late IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.filed_late IS
     'Whether the filing date is after the state filing deadline (yes/no).';
-COMMENT ON COLUMN property_tax_exemption_application_grade.qualifying_exemptions IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.qualifying_exemptions IS
     'Comma-separated exemptions claimed that pass the state age, income and rating tests.';
-COMMENT ON COLUMN property_tax_exemption_application_grade.graded_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -381,13 +398,13 @@ COMMENT ON COLUMN property_tax_exemption_application_grade.graded_at IS
 -- Audit trail of every eligibility rule that fired. Each row records one rule
 -- with the application dimension it concerns, the category and a description.
 
-CREATE TABLE property_tax_exemption_application_grade_rule (
+CREATE TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    property_tax_exemption_application_grade_id UUID NOT NULL REFERENCES property_tax_exemption_application_grade(id) ON DELETE CASCADE,
+    property_tax_exemption_application_grade_id UUID NOT NULL REFERENCES united_states_property_tax_exemption_application.property_tax_exemption_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT '' CHECK (dimension IN ('ownership', 'occupancy', 'exemption', 'income', 'documents', 'filing', 'declaration', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -395,32 +412,32 @@ CREATE TABLE property_tax_exemption_application_grade_rule (
 );
 
 CREATE INDEX property_tax_exemption_application_grade_rule_grade_id_idx
-    ON property_tax_exemption_application_grade_rule (property_tax_exemption_application_grade_id);
+    ON united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule (property_tax_exemption_application_grade_id);
 
 CREATE TRIGGER trigger_property_tax_exemption_application_grade_rule_updated_at
-    BEFORE UPDATE ON property_tax_exemption_application_grade_rule
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE property_tax_exemption_application_grade_rule IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule IS
     'Audit trail of every eligibility rule that fired during classification: application dimension, category and description.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.property_tax_exemption_application_grade_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.property_tax_exemption_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-OWNERSHIP-01).';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.dimension IS
     'Application dimension the rule concerns.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.category IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.category IS
     'Subject category (e.g. base-eligibility, state-rule).';
-COMMENT ON COLUMN property_tax_exemption_application_grade_rule.description IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -434,13 +451,13 @@ COMMENT ON COLUMN property_tax_exemption_application_grade_rule.description IS
 -- Flagged issues raised independently of the class, with a priority and a
 -- suggested action for the applicant or the assessor.
 
-CREATE TABLE property_tax_exemption_application_grade_flag (
+CREATE TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    property_tax_exemption_application_grade_id UUID NOT NULL REFERENCES property_tax_exemption_application_grade(id) ON DELETE CASCADE,
+    property_tax_exemption_application_grade_id UUID NOT NULL REFERENCES united_states_property_tax_exemption_application.property_tax_exemption_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '' CHECK (category IN ('ownership','occupancy','duplicate-homestead','late-filing','age-requirement','income-limit','veteran-rating','no-exemption-claimed','missing-information','missing-documents','missing-signature','state-rule-verify','appeal-guidance','other','')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -449,34 +466,34 @@ CREATE TABLE property_tax_exemption_application_grade_flag (
 );
 
 CREATE INDEX property_tax_exemption_application_grade_flag_grade_id_idx
-    ON property_tax_exemption_application_grade_flag (property_tax_exemption_application_grade_id);
+    ON united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag (property_tax_exemption_application_grade_id);
 
 CREATE TRIGGER trigger_property_tax_exemption_application_grade_flag_updated_at
-    BEFORE UPDATE ON property_tax_exemption_application_grade_flag
+    BEFORE UPDATE ON united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_property_tax_exemption_application.set_updated_at();
 
-COMMENT ON TABLE property_tax_exemption_application_grade_flag IS
+COMMENT ON TABLE united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag IS
     'Flagged issues raised independently of the eligibility class, with priority and a suggested action for the applicant or assessor.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.property_tax_exemption_application_grade_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.property_tax_exemption_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-OWNERSHIP-001).';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.category IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.priority IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.description IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN property_tax_exemption_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_property_tax_exemption_application.property_tax_exemption_application_grade_flag.suggested_action IS
     'Suggested action (e.g. "file before the state deadline", "attach proof of age").';
 
 -- ========================================================================

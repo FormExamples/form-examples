@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS padua_venous_thromboembolism_risk_assessment;
+
+COMMENT ON SCHEMA padua_venous_thromboembolism_risk_assessment IS
+    'Namespace for the Padua Venous Thromboembolism Risk Assessment (Padua Prediction Score) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.patient IS
     'Patient demographic information used by the Padua VTE risk assessment.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at admission.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON padua_venous_thromboembolism_risk_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clinician who
 -- performed the Padua VTE risk assessment (doctor, nurse, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.clinician IS
     'Clinician identifying information for the clinician performing the Padua VTE risk assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.role IS
     'Primary clinical role of the assessing clinician: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON padua_venous_thromboembolism_risk_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -206,14 +223,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- informational bleeding-risk check. The computed grade, fired rules,
 -- and flags live in dedicated child tables.
 
-CREATE TABLE padua_venous_thromboembolism_risk_assessment (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES padua_venous_thromboembolism_risk_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES padua_venous_thromboembolism_risk_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -258,70 +275,70 @@ CREATE TABLE padua_venous_thromboembolism_risk_assessment (
 );
 
 CREATE INDEX padua_venous_thromboembolism_risk_assessment_patient_id_idx
-    ON padua_venous_thromboembolism_risk_assessment (patient_id);
+    ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment (patient_id);
 CREATE INDEX padua_venous_thromboembolism_risk_assessment_clinician_id_idx
-    ON padua_venous_thromboembolism_risk_assessment (clinician_id);
+    ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment (clinician_id);
 
 CREATE TRIGGER trigger_padua_venous_thromboembolism_risk_assessment_updated_at
-    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment IS
     'Main Padua VTE risk-assessment record: assessment context, patient identification, the eleven weighted risk-factor inputs, and the informational bleeding-risk check.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician_name IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinician_role IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.assessed_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.care_setting IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.care_setting IS
     'Care setting: acute-medical, general-medical, admissions-unit, or other.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.admission_reason IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.admission_reason IS
     'Free-text reason for the patient''s admission.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.patient_identifier IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.age_years IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.age_years IS
     'Patient age in years; drives risk factor 6 (age >= 70 scores 1 point). Null when unanswered.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.sex IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.active_cancer IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.active_cancer IS
     'Risk factor 1 — active cancer (3 points): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.previous_vte IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.previous_vte IS
     'Risk factor 2 — previous VTE, excluding superficial vein thrombosis (3 points): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.reduced_mobility IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.reduced_mobility IS
     'Risk factor 3 — reduced mobility (bed rest with bathroom privileges) for at least 3 days (3 points): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.known_thrombophilia IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.known_thrombophilia IS
     'Risk factor 4 — known thrombophilic condition (3 points): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.recent_trauma_or_surgery IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.recent_trauma_or_surgery IS
     'Risk factor 5 — recent (<= 1 month) trauma and/or surgery (2 points): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.heart_or_respiratory_failure IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.heart_or_respiratory_failure IS
     'Risk factor 7 — acute heart failure and/or respiratory failure (1 point): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.acute_mi_or_ischaemic_stroke IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.acute_mi_or_ischaemic_stroke IS
     'Risk factor 8 — acute myocardial infarction or ischaemic stroke (1 point): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.acute_infection_or_rheumatological IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.acute_infection_or_rheumatological IS
     'Risk factor 9 — acute infection and/or rheumatological disorder (1 point): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.body_mass_index IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.body_mass_index IS
     'Body mass index (BMI), kg/m^2; drives risk factor 10 (obesity BMI >= 30 scores 1 point). Null when unanswered.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.ongoing_hormonal_treatment IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.ongoing_hormonal_treatment IS
     'Risk factor 11 — ongoing hormonal treatment (1 point): yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.active_bleeding IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.active_bleeding IS
     'Bleeding-risk check — active bleeding present; contraindicates pharmacological prophylaxis. Does not change the score. Yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
     'Bleeding-risk check — other high bleeding-risk factors present; gates the recommendation. Does not change the score. Yes or no.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinical_note IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -337,14 +354,14 @@ COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.clinical_note IS
 -- (low / high), and the prophylaxis recommendation gated by the
 -- bleeding-risk check.
 
-CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     padua_venous_thromboembolism_risk_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES padua_venous_thromboembolism_risk_assessment(id) ON DELETE CASCADE,
+        REFERENCES padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment(id) ON DELETE CASCADE,
 
     active_cancer_points INT,
     previous_vte_points INT,
@@ -367,51 +384,51 @@ CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade (
 );
 
 CREATE TRIGGER trigger_padua_venous_thromboembolism_risk_assessment_grade_updated_at
-    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment_grade
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment_grade IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade IS
     'Computed Padua grading result: per-factor points, summed Padua Prediction Score (0-20), derived risk band (low/high), and the bleeding-risk-gated prophylaxis recommendation.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.padua_venous_thromboembolism_risk_assessment_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.padua_venous_thromboembolism_risk_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.active_cancer_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.active_cancer_points IS
     'Points contributed by factor 1, active cancer (3 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.previous_vte_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.previous_vte_points IS
     'Points contributed by factor 2, previous VTE (3 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.reduced_mobility_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.reduced_mobility_points IS
     'Points contributed by factor 3, reduced mobility >= 3 days (3 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.known_thrombophilia_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.known_thrombophilia_points IS
     'Points contributed by factor 4, known thrombophilia (3 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.recent_trauma_or_surgery_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.recent_trauma_or_surgery_points IS
     'Points contributed by factor 5, recent trauma or surgery <= 1 month (2 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.elderly_age_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.elderly_age_points IS
     'Points contributed by factor 6, age >= 70 (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.heart_or_respiratory_failure_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.heart_or_respiratory_failure_points IS
     'Points contributed by factor 7, heart and/or respiratory failure (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.acute_mi_or_ischaemic_stroke_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.acute_mi_or_ischaemic_stroke_points IS
     'Points contributed by factor 8, acute MI or ischaemic stroke (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.acute_infection_or_rheumatological_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.acute_infection_or_rheumatological_points IS
     'Points contributed by factor 9, acute infection and/or rheumatological disorder (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.obesity_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.obesity_points IS
     'Points contributed by factor 10, obesity BMI >= 30 (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.ongoing_hormonal_treatment_points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.ongoing_hormonal_treatment_points IS
     'Points contributed by factor 11, ongoing hormonal treatment (1 or 0).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.total_score IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.total_score IS
     'Summed Padua Prediction Score across the eleven factors (0-20).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.risk_band IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.risk_band IS
     'Derived risk band: low (< 4) or high (>= 4).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.prophylaxis_recommendation IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.prophylaxis_recommendation IS
     'Prophylaxis recommendation gated by the bleeding-risk check: pharmacological, mechanical, or none.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.graded_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -427,14 +444,14 @@ COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade.graded_at I
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade_rule (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     padua_venous_thromboembolism_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES padua_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(60) NOT NULL,
     factor VARCHAR(40) NOT NULL
@@ -458,34 +475,34 @@ CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade_rule (
 );
 
 CREATE INDEX padua_venous_thromboembolism_risk_assessment_grade_rule_grade_id_idx
-    ON padua_venous_thromboembolism_risk_assessment_grade_rule (padua_venous_thromboembolism_risk_assessment_grade_id);
+    ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule (padua_venous_thromboembolism_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_padua_venous_thromboembolism_risk_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment_grade_rule
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment_grade_rule IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule IS
     'Audit trail of every grading rule that fired during Padua computation: factor, points contributed, category, and description.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.padua_venous_thromboembolism_risk_assessment_grade_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.padua_venous_thromboembolism_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ACTIVE-CANCER-01).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.factor IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.factor IS
     'Weighted factor the rule belongs to (see CHECK constraint for enumeration), or band for the risk-band classification.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.points IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.points IS
     'Points contributed by this rule for its factor.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.category IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.category IS
     'Subject category (e.g. weighted-factor, band).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.description IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -499,14 +516,14 @@ COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_rule.descri
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade_flag (
+CREATE TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     padua_venous_thromboembolism_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES padua_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(60) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -526,34 +543,34 @@ CREATE TABLE padua_venous_thromboembolism_risk_assessment_grade_flag (
 );
 
 CREATE INDEX padua_venous_thromboembolism_risk_assessment_grade_flag_grade_id_idx
-    ON padua_venous_thromboembolism_risk_assessment_grade_flag (padua_venous_thromboembolism_risk_assessment_grade_id);
+    ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag (padua_venous_thromboembolism_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_padua_venous_thromboembolism_risk_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment_grade_flag
+    BEFORE UPDATE ON padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION padua_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment_grade_flag IS
+COMMENT ON TABLE padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.padua_venous_thromboembolism_risk_assessment_grade_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.padua_venous_thromboembolism_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-RISK-PROPHYLAXIS-001).';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.category IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.category IS
     'Flag category: high-risk-prophylaxis, bleeding-contraindication, active-cancer, previous-vte, incomplete-assessment, or other.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.priority IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.description IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN padua_venous_thromboembolism_risk_assessment.padua_venous_thromboembolism_risk_assessment_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "consider pharmacological thromboprophylaxis").';
 
 -- ========================================================================

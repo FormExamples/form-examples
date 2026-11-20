@@ -2,7 +2,7 @@
 -- One organizer may run many meetings; the analogue of "patient" in a
 -- clinical assessment.
 
-CREATE TABLE organizer (
+CREATE TABLE meeting.organizer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -26,39 +26,39 @@ CREATE TABLE organizer (
 );
 
 CREATE TRIGGER trigger_organizer_updated_at
-    BEFORE UPDATE ON organizer
+    BEFORE UPDATE ON meeting.organizer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE organizer IS
+COMMENT ON TABLE meeting.organizer IS
     'Person who schedules a meeting and signs the record. The analogue of patient in a clinical form: the subject of the assessment is the meeting itself, but the organizer is the human who scheduled it.';
-COMMENT ON COLUMN organizer.id IS
+COMMENT ON COLUMN meeting.organizer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN organizer.created_at IS
+COMMENT ON COLUMN meeting.organizer.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN organizer.updated_at IS
+COMMENT ON COLUMN meeting.organizer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN organizer.deleted_at IS
+COMMENT ON COLUMN meeting.organizer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN organizer.name IS
+COMMENT ON COLUMN meeting.organizer.name IS
     'Organizer full name.';
-COMMENT ON COLUMN organizer.email IS
+COMMENT ON COLUMN meeting.organizer.email IS
     'Organizer email address.';
-COMMENT ON COLUMN organizer.phone IS
+COMMENT ON COLUMN meeting.organizer.phone IS
     'Organizer phone number.';
-COMMENT ON COLUMN organizer.role IS
+COMMENT ON COLUMN meeting.organizer.role IS
     'Organizer role: organizer, secretary, chair, facilitator, project-manager, scrum-master, etc.';
-COMMENT ON COLUMN organizer.organisation IS
+COMMENT ON COLUMN meeting.organizer.organisation IS
     'Organisation, company, or trust the organizer belongs to.';
-COMMENT ON COLUMN organizer.team IS
+COMMENT ON COLUMN meeting.organizer.team IS
     'Team or department within the organisation.';
-COMMENT ON COLUMN organizer.location IS
+COMMENT ON COLUMN meeting.organizer.location IS
     'Physical or virtual base location of the organizer.';
-COMMENT ON COLUMN organizer.timezone IS
+COMMENT ON COLUMN meeting.organizer.timezone IS
     'IANA timezone identifier (e.g. Europe/London).';
-COMMENT ON COLUMN organizer.preferred_contact IS
+COMMENT ON COLUMN meeting.organizer.preferred_contact IS
     'Preferred contact channel: email, phone, chat, or in-person.';
 
 CREATE INDEX organizer_index_name_trgm
-    ON organizer
+    ON meeting.organizer
     USING GIN (name gin_trgm_ops);

@@ -1,10 +1,10 @@
-CREATE TABLE pre_anaesthesia_assessment_grade (
+CREATE TABLE pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     pre_anaesthesia_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES pre_anaesthesia_assessment(id) ON DELETE CASCADE,
+        REFERENCES pre_anaesthesia_assessment.pre_anaesthesia_assessment(id) ON DELETE CASCADE,
     computed_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (computed_asa_grade IN ('I', 'II', 'III', 'IV', 'V', 'VI', '')),
     final_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
@@ -30,46 +30,46 @@ CREATE TABLE pre_anaesthesia_assessment_grade (
 );
 
 CREATE TRIGGER trigger_pre_anaesthesia_assessment_grade_updated_at
-    BEFORE UPDATE ON pre_anaesthesia_assessment_grade
+    BEFORE UPDATE ON pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_anaesthesia_assessment.set_updated_at();
 
-COMMENT ON TABLE pre_anaesthesia_assessment_grade IS
+COMMENT ON TABLE pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade IS
     'Computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.id IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.created_at IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.updated_at IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.deleted_at IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.pre_anaesthesia_assessment_id IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.pre_anaesthesia_assessment_id IS
     'Foreign key to the pre_anaesthesia_assessment table.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.computed_asa_grade IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.final_asa_grade IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.final_asa_grade IS
     'ASA grade signed off by the clinician (may equal or differ from computed).';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.asa_emergency_suffix IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.asa_emergency_suffix IS
     'Emergency suffix: E if the procedure is emergency, empty otherwise.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.override_reason IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.override_reason IS
     'Reason the clinician set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.mallampati_class IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.mallampati_class IS
     'Mallampati airway class as per step 4.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.rcri_score IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.rcri_score IS
     'Revised Cardiac Risk Index score (0-6).';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.stopbang_score IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.stopbang_score IS
     'STOP-BANG score (0-8).';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.frailty_scale IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.frailty_scale IS
     'Clinical Frailty Scale score (1-9).';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.composite_risk IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.composite_risk IS
     'Composite perioperative risk: low, moderate, high, critical.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.recommendation IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.recommendation IS
     'Overall recommendation: proceed, optimise-first, mdt-review, cancel.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.clinician_notes IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.signed_at IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.signed_at IS
     'Timestamp of clinician electronic signature.';
-COMMENT ON COLUMN pre_anaesthesia_assessment_grade.graded_at IS
+COMMENT ON COLUMN pre_anaesthesia_assessment.pre_anaesthesia_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 

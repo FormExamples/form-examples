@@ -1,10 +1,10 @@
-CREATE TABLE communication (
+CREATE TABLE encounter_satisfaction.communication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with encounter_satisfaction
-    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction(id) ON DELETE CASCADE,
+    encounter_satisfaction_id   UUID NOT NULL UNIQUE REFERENCES encounter_satisfaction.encounter_satisfaction(id) ON DELETE CASCADE,
     -- Likert scores (1=Very Dissatisfied ... 5=Very Satisfied),
     -- NULL if unanswered
     listening                   SMALLINT CHECK (listening BETWEEN 1 AND 5),
@@ -15,27 +15,27 @@ CREATE TABLE communication (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_communication_updated_at
-    BEFORE UPDATE ON communication
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON encounter_satisfaction.communication
+    FOR EACH ROW EXECUTE FUNCTION encounter_satisfaction.set_updated_at();
 
-COMMENT ON TABLE communication IS
+COMMENT ON TABLE encounter_satisfaction.communication IS
     '1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions.';
-COMMENT ON COLUMN communication.encounter_satisfaction_id IS
+COMMENT ON COLUMN encounter_satisfaction.communication.encounter_satisfaction_id IS
     'FK to encounter_satisfaction (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN communication.listening IS
+COMMENT ON COLUMN encounter_satisfaction.communication.listening IS
     'Satisfaction with how well the provider listened (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.explaining_condition IS
+COMMENT ON COLUMN encounter_satisfaction.communication.explaining_condition IS
     'Satisfaction with how clearly the condition was explained (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.answering_questions IS
+COMMENT ON COLUMN encounter_satisfaction.communication.answering_questions IS
     'Satisfaction with how thoroughly questions were answered (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.time_spent IS
+COMMENT ON COLUMN encounter_satisfaction.communication.time_spent IS
     'Satisfaction with time the provider spent with patient (1-5 Likert). NULL if unanswered.';
-COMMENT ON COLUMN communication.id IS
+COMMENT ON COLUMN encounter_satisfaction.communication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN communication.created_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN communication.updated_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN communication.deleted_at IS
+COMMENT ON COLUMN encounter_satisfaction.communication.deleted_at IS
     'Timestamp when this row was deleted.';
 

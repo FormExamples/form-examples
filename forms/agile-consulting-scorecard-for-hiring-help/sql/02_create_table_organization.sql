@@ -3,7 +3,7 @@
 -- assessment: the subject of the scorecard is the *organization*, evaluated
 -- from the perspective of one or more respondents.
 
-CREATE TABLE organization (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.organization (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -29,43 +29,43 @@ CREATE TABLE organization (
 );
 
 CREATE TRIGGER trigger_organization_updated_at
-    BEFORE UPDATE ON organization
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.organization
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE organization IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.organization IS
     'Organization being assessed for agile-consulting readiness. The subject of the scorecard.';
-COMMENT ON COLUMN organization.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN organization.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN organization.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN organization.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN organization.name IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.name IS
     'Trading name of the organization.';
-COMMENT ON COLUMN organization.legal_name IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.legal_name IS
     'Registered legal name (may differ from trading name).';
-COMMENT ON COLUMN organization.sector IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.sector IS
     'Sector: healthcare, pharmaceuticals, medtech, public-sector, finance, insurance, retail, manufacturing, etc.';
-COMMENT ON COLUMN organization.size_band IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.size_band IS
     'Size band: micro (<10), small (10-49), medium (50-249), large (250-999), enterprise (1000+).';
-COMMENT ON COLUMN organization.headcount IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.headcount IS
     'Approximate number of staff (full-time-equivalent).';
-COMMENT ON COLUMN organization.country IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.country IS
     'ISO 3166-1 alpha-2 country code (e.g. GB, US, DE).';
-COMMENT ON COLUMN organization.region IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.region IS
     'Region, state, or sub-national area within the country.';
-COMMENT ON COLUMN organization.website IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.website IS
     'Public website URL.';
-COMMENT ON COLUMN organization.notes IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.notes IS
     'Free-text notes about the organization.';
 
 CREATE INDEX organization_index_name_trgm
-    ON organization
+    ON agile_consulting_scorecard_for_hiring_help.organization
     USING GIN (name gin_trgm_ops);
 CREATE INDEX organization_index_sector
-    ON organization(sector);
+    ON agile_consulting_scorecard_for_hiring_help.organization(sector);
 CREATE INDEX organization_index_size_band
-    ON organization(size_band);
+    ON agile_consulting_scorecard_for_hiring_help.organization(size_band);

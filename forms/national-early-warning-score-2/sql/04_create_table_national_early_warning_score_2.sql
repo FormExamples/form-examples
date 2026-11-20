@@ -6,14 +6,14 @@
 -- dedicated child tables. Raw numeric observations use NULL when a
 -- measurement was not recorded.
 
-CREATE TABLE national_early_warning_score_2 (
+CREATE TABLE national_early_warning_score_2.national_early_warning_score_2 (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES national_early_warning_score_2.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES national_early_warning_score_2.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'amended', 'signed')),
@@ -67,64 +67,64 @@ CREATE TABLE national_early_warning_score_2 (
 );
 
 CREATE INDEX national_early_warning_score_2_patient_id_idx
-    ON national_early_warning_score_2 (patient_id);
+    ON national_early_warning_score_2.national_early_warning_score_2 (patient_id);
 CREATE INDEX national_early_warning_score_2_clinician_id_idx
-    ON national_early_warning_score_2 (clinician_id);
+    ON national_early_warning_score_2.national_early_warning_score_2 (clinician_id);
 
 CREATE TRIGGER trigger_national_early_warning_score_2_updated_at
-    BEFORE UPDATE ON national_early_warning_score_2
+    BEFORE UPDATE ON national_early_warning_score_2.national_early_warning_score_2
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE national_early_warning_score_2 IS
+COMMENT ON TABLE national_early_warning_score_2.national_early_warning_score_2 IS
     'Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables.';
-COMMENT ON COLUMN national_early_warning_score_2.id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN national_early_warning_score_2.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN national_early_warning_score_2.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN national_early_warning_score_2.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN national_early_warning_score_2.patient_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.patient_id IS
     'Foreign key to the patient observed (RESTRICT: patients are not deleted while observations exist).';
-COMMENT ON COLUMN national_early_warning_score_2.clinician_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.clinician_id IS
     'Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.';
-COMMENT ON COLUMN national_early_warning_score_2.status IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN national_early_warning_score_2.observation_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.observation_at IS
     'Date and time the observation set was taken; NULL when not yet recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.ward_or_location IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.ward_or_location IS
     'Ward or clinical location where the observations were recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.spo2_scale IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2_scale IS
     'SpO2 scoring scale: scale-1 (default) or scale-2 (prescribed 88-92% target, e.g. hypercapnic respiratory failure).';
-COMMENT ON COLUMN national_early_warning_score_2.spo2_scale2_endorsed IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2_scale2_endorsed IS
     'Whether a clinician has endorsed use of Scale 2 for this patient.';
-COMMENT ON COLUMN national_early_warning_score_2.respiratory_rate IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.respiratory_rate IS
     'Respiration rate in breaths per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.spo2 IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2 IS
     'Oxygen saturation as a percentage; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.on_oxygen IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.on_oxygen IS
     'Whether the patient is breathing air or receiving supplemental oxygen.';
-COMMENT ON COLUMN national_early_warning_score_2.oxygen_device IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.oxygen_device IS
     'Supplemental-oxygen delivery device when on oxygen.';
-COMMENT ON COLUMN national_early_warning_score_2.oxygen_flow_rate_l_min IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.oxygen_flow_rate_l_min IS
     'Supplemental-oxygen flow rate in litres per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.inspired_oxygen_fraction_percent IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.inspired_oxygen_fraction_percent IS
     'Fraction of inspired oxygen (FiO2) as a percentage; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.systolic_blood_pressure IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.systolic_blood_pressure IS
     'Systolic blood pressure in mmHg; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.pulse IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.pulse IS
     'Pulse rate in beats per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.consciousness_acvpu IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.consciousness_acvpu IS
     'Consciousness level on the ACVPU scale: A (alert), C (new confusion), V (voice), P (pain), U (unresponsive).';
-COMMENT ON COLUMN national_early_warning_score_2.temperature IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.temperature IS
     'Body temperature in degrees Celsius; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.is_under_16 IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.is_under_16 IS
     'Whether the patient is under 16 years old (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.is_pregnant IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.is_pregnant IS
     'Whether the patient is pregnant (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.has_spinal_cord_injury IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.has_spinal_cord_injury IS
     'Whether the patient has a spinal-cord injury (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.clinical_notes IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.clinical_notes IS
     'Free-text clinical notes accompanying the observation set.';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (10):
+-- Source files (11):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -33,12 +34,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS respirology_assessment;
+
+COMMENT ON SCHEMA respirology_assessment IS
+    'Namespace for the Respirology Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION respirology_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -46,7 +63,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION respirology_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE respirology_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -82,56 +99,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON respirology_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE respirology_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN respirology_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN respirology_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN respirology_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN respirology_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN respirology_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN respirology_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN respirology_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN respirology_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN respirology_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN respirology_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN respirology_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN respirology_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN respirology_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN respirology_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN respirology_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN respirology_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN respirology_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON respirology_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN respirology_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -144,7 +161,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE respirology_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -163,46 +180,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON respirology_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE respirology_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN respirology_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN respirology_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN respirology_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN respirology_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN respirology_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN respirology_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN respirology_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN respirology_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN respirology_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN respirology_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN respirology_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN respirology_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN respirology_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON respirology_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -213,36 +230,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_respirology_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE respirology_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON respirology_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE respirology_assessment.assessment IS
     'Respirology assessment form. Parent entity for all sections covering the MRC (Medical Research Council) Dyspnoea Scale evaluation.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN respirology_assessment.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN respirology_assessment.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN respirology_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN respirology_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN respirology_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -253,13 +270,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_respirology_assessment_current_medications.sql
 -- ========================================================================
 
-CREATE TABLE assessment_current_medications (
+CREATE TABLE respirology_assessment.assessment_current_medications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.assessment(id) ON DELETE CASCADE,
     takes_respiratory_medications VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (takes_respiratory_medications IN ('yes', 'no', '')),
     inhaler_use VARCHAR(5) NOT NULL DEFAULT ''
@@ -281,44 +298,44 @@ CREATE TABLE assessment_current_medications (
 );
 
 CREATE TRIGGER trigger_assessment_current_medications_updated_at
-    BEFORE UPDATE ON assessment_current_medications
+    BEFORE UPDATE ON respirology_assessment.assessment_current_medications
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_current_medications IS
+COMMENT ON TABLE respirology_assessment.assessment_current_medications IS
     'Current medications section header. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_current_medications.assessment_id IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_current_medications.takes_respiratory_medications IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.takes_respiratory_medications IS
     'Whether the patient takes respiratory medications.';
-COMMENT ON COLUMN assessment_current_medications.inhaler_use IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.inhaler_use IS
     'Whether the patient uses inhaler devices.';
-COMMENT ON COLUMN assessment_current_medications.inhaler_technique_assessed IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.inhaler_technique_assessed IS
     'Whether inhaler technique was assessed.';
-COMMENT ON COLUMN assessment_current_medications.inhaler_technique_adequate IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.inhaler_technique_adequate IS
     'Whether inhaler technique is adequate.';
-COMMENT ON COLUMN assessment_current_medications.long_term_oxygen_therapy IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.long_term_oxygen_therapy IS
     'Whether the patient is on long-term oxygen therapy.';
-COMMENT ON COLUMN assessment_current_medications.nebuliser_use IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.nebuliser_use IS
     'Whether the patient uses a nebuliser.';
-COMMENT ON COLUMN assessment_current_medications.medication_adherence IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.medication_adherence IS
     'Medication adherence: good, fair, poor, or empty.';
 
 -- Individual medication items (one-to-many child)
 
-COMMENT ON COLUMN assessment_current_medications.takes_other_medications IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.takes_other_medications IS
     'Takes other medications. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_medications.adverse_drug_reactions IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.adverse_drug_reactions IS
     'Adverse drug reactions.';
-COMMENT ON COLUMN assessment_current_medications.additional_notes IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.additional_notes IS
     'Additional notes.';
-COMMENT ON COLUMN assessment_current_medications.id IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_medications.created_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_medications.updated_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_current_medications.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -329,13 +346,13 @@ COMMENT ON COLUMN assessment_current_medications.deleted_at IS
 -- BEGIN 06_create_table_respirology_assessment_medication_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_medication_item (
+CREATE TABLE respirology_assessment.assessment_medication_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     current_medications_id UUID NOT NULL
-        REFERENCES assessment_current_medications(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.assessment_current_medications(id) ON DELETE CASCADE,
     medication_name VARCHAR(255) NOT NULL DEFAULT '',
     dose VARCHAR(100) NOT NULL DEFAULT '',
     frequency VARCHAR(100) NOT NULL DEFAULT '',
@@ -346,46 +363,46 @@ CREATE TABLE assessment_medication_item (
 );
 
 CREATE TRIGGER trigger_assessment_medication_item_updated_at
-    BEFORE UPDATE ON assessment_medication_item
+    BEFORE UPDATE ON respirology_assessment.assessment_medication_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_medication_item IS
+COMMENT ON TABLE respirology_assessment.assessment_medication_item IS
     'Individual medication entry with name, dose, frequency, and route.';
-COMMENT ON COLUMN assessment_medication_item.medication_name IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.medication_name IS
     'Name of the medication.';
-COMMENT ON COLUMN assessment_medication_item.dose IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.dose IS
     'Dosage amount and unit.';
-COMMENT ON COLUMN assessment_medication_item.frequency IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.frequency IS
     'Dosing frequency.';
-COMMENT ON COLUMN assessment_medication_item.route IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.route IS
     'Route of administration: inhaled, oral, nebulised, subcutaneous, intravenous, other, or empty.';
-COMMENT ON COLUMN assessment_medication_item.sort_order IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.sort_order IS
     'Display order of the medication in the list.';
 
-COMMENT ON COLUMN assessment_current_medications.id IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_medications.takes_other_medications IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.takes_other_medications IS
     'Takes other medications. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_medications.adverse_drug_reactions IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.adverse_drug_reactions IS
     'Adverse drug reactions.';
-COMMENT ON COLUMN assessment_current_medications.additional_notes IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.additional_notes IS
     'Additional notes.';
-COMMENT ON COLUMN assessment_current_medications.created_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_medications.updated_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_current_medications.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.current_medications_id IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.current_medications_id IS
     'Foreign key to the assessment_current_medications table.';
-COMMENT ON COLUMN assessment_medication_item.indication IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.indication IS
     'Indication.';
-COMMENT ON COLUMN assessment_medication_item.id IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_medication_item.created_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_medication_item.updated_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.assessment_medication_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -396,13 +413,13 @@ COMMENT ON COLUMN assessment_medication_item.deleted_at IS
 -- BEGIN 07_create_table_respirology_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE respirology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.assessment(id) ON DELETE CASCADE,
     mrc_grade INTEGER NOT NULL DEFAULT 1
         CHECK (mrc_grade >= 1 AND mrc_grade <= 5),
     mrc_description VARCHAR(100) NOT NULL DEFAULT '',
@@ -416,34 +433,34 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON respirology_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE respirology_assessment.grade IS
     'Computed MRC (Medical Research Council) Dyspnoea Scale result. Grade 1-5, with higher grades indicating worse breathlessness. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN respirology_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.mrc_grade IS
+COMMENT ON COLUMN respirology_assessment.grade.mrc_grade IS
     'MRC dyspnoea grade: 1=strenuous exercise only, 2=hurrying on flat, 3=slower than peers, 4=stops after 100m, 5=too breathless to leave house.';
-COMMENT ON COLUMN grade.mrc_description IS
+COMMENT ON COLUMN respirology_assessment.grade.mrc_description IS
     'Human-readable description of the MRC dyspnoea grade.';
-COMMENT ON COLUMN grade.overall_severity IS
+COMMENT ON COLUMN respirology_assessment.grade.overall_severity IS
     'Overall respiratory disease severity: mild, moderate, severe, very-severe, or empty.';
-COMMENT ON COLUMN grade.functional_impairment IS
+COMMENT ON COLUMN respirology_assessment.grade.functional_impairment IS
     'Overall functional impairment: minimal, mild, moderate, severe, or empty.';
-COMMENT ON COLUMN grade.composite_score IS
+COMMENT ON COLUMN respirology_assessment.grade.composite_score IS
     'Aggregate composite score across all respiratory domains.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN respirology_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN respirology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN respirology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN respirology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -454,13 +471,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 08_create_table_respirology_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE respirology_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -469,30 +486,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON respirology_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE respirology_assessment.grading_fired_rule IS
     'Individual MRC dyspnoea grading rules that evaluated to true during grading.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. MRC-001, COUGH-002, PFT-003).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Dyspnoea, Cough, Pulmonary Function, Sleep).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.severity_level IS
     'Severity level contributed by this rule: mild, moderate, severe, very-severe, or empty.';
 
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -503,13 +520,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 09_create_table_respirology_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE respirology_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES respirology_assessment.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -518,30 +535,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON respirology_assessment.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION respirology_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE respirology_assessment.grading_additional_flag IS
     'Additional safety-critical flags detected during respirology assessment grading (e.g. haemoptysis, respiratory failure, suspected malignancy).';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-HAEMOPTYSIS-001, FLAG-DESAT-001, FLAG-OSA-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.category IS
     'Category of the flag (e.g. Dyspnoea, Cough, Pulmonary Function, Sleep, Exposure).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.message IS
     'Human-readable description of the flagged concern.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN respirology_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

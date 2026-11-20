@@ -1,10 +1,10 @@
-CREATE TABLE assessment_testing_results (
+CREATE TABLE allergy_assessment.assessment_testing_results (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     skin_prick_tests_done VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (skin_prick_tests_done IN ('yes', 'no', '')),
     specific_ige_done VARCHAR(5) NOT NULL DEFAULT ''
@@ -18,32 +18,32 @@ CREATE TABLE assessment_testing_results (
 );
 
 CREATE TRIGGER trigger_assessment_testing_results_updated_at
-    BEFORE UPDATE ON assessment_testing_results
+    BEFORE UPDATE ON allergy_assessment.assessment_testing_results
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_testing_results IS
+COMMENT ON TABLE allergy_assessment.assessment_testing_results IS
     'Testing results section: which allergy tests have been performed. One-to-one child of assessment.';
 
 -- Individual test result items (one-to-many child)
 
-COMMENT ON COLUMN assessment_testing_results.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_testing_results.skin_prick_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.skin_prick_tests_done IS
     'Skin prick tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.specific_ige_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.specific_ige_done IS
     'Specific ige done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.component_resolved_diagnostics_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.component_resolved_diagnostics_done IS
     'Component resolved diagnostics done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.challenge_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.challenge_tests_done IS
     'Challenge tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.patch_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.patch_tests_done IS
     'Patch tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_testing_results.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_testing_results.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_testing_results.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.deleted_at IS
     'Timestamp when this row was deleted.';

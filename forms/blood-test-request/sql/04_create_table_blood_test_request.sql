@@ -3,14 +3,14 @@
 -- modelled as BOOLEAN columns. At least one panel should be selected; a request
 -- with no panel selected fires the no-test-selected flag.
 
-CREATE TABLE blood_test_request (
+CREATE TABLE blood_test_request.blood_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES blood_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES blood_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'collected', 'rejected', '')),
@@ -69,102 +69,102 @@ CREATE TABLE blood_test_request (
 );
 
 CREATE INDEX index_blood_test_request_patient_id
-    ON blood_test_request(patient_id);
+    ON blood_test_request.blood_test_request(patient_id);
 CREATE INDEX index_blood_test_request_clinician_id
-    ON blood_test_request(clinician_id);
+    ON blood_test_request.blood_test_request(clinician_id);
 
 CREATE TRIGGER trigger_blood_test_request_updated_at
-    BEFORE UPDATE ON blood_test_request
+    BEFORE UPDATE ON blood_test_request.blood_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION blood_test_request.set_updated_at();
 
-COMMENT ON TABLE blood_test_request IS
+COMMENT ON TABLE blood_test_request.blood_test_request IS
     'Pathology / phlebotomy blood-test order (request). Captures the requested test panels (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.';
-COMMENT ON COLUMN blood_test_request.id IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN blood_test_request.created_at IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN blood_test_request.updated_at IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN blood_test_request.deleted_at IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN blood_test_request.patient_id IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN blood_test_request.clinician_id IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN blood_test_request.status IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, collected, rejected.';
-COMMENT ON COLUMN blood_test_request.site_name IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN blood_test_request.setting IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN blood_test_request.referral_date IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.referral_date IS
     'Date the request was made.';
-COMMENT ON COLUMN blood_test_request.full_blood_count IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.full_blood_count IS
     'Whether a full blood count (FBC) is requested.';
-COMMENT ON COLUMN blood_test_request.urea_electrolytes IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.urea_electrolytes IS
     'Whether urea and electrolytes (U&E) are requested.';
-COMMENT ON COLUMN blood_test_request.liver_function IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.liver_function IS
     'Whether liver function tests (LFT) are requested.';
-COMMENT ON COLUMN blood_test_request.thyroid_function IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.thyroid_function IS
     'Whether thyroid function tests (TFT) are requested.';
-COMMENT ON COLUMN blood_test_request.hba1c IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.hba1c IS
     'Whether HbA1c (glycated haemoglobin, diagnostic) is requested.';
-COMMENT ON COLUMN blood_test_request.lipid_profile IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.lipid_profile IS
     'Whether a lipid profile is requested.';
-COMMENT ON COLUMN blood_test_request.c_reactive_protein IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.c_reactive_protein IS
     'Whether C-reactive protein (CRP) is requested.';
-COMMENT ON COLUMN blood_test_request.coagulation_screen IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.coagulation_screen IS
     'Whether a coagulation screen (PT / APTT) is requested.';
-COMMENT ON COLUMN blood_test_request.bone_profile IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.bone_profile IS
     'Whether a bone profile (calcium, phosphate, ALP, albumin) is requested.';
-COMMENT ON COLUMN blood_test_request.ferritin_iron IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.ferritin_iron IS
     'Whether ferritin / iron studies are requested.';
-COMMENT ON COLUMN blood_test_request.vitamin_b12_folate IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.vitamin_b12_folate IS
     'Whether vitamin B12 and folate are requested.';
-COMMENT ON COLUMN blood_test_request.vitamin_d IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.vitamin_d IS
     'Whether vitamin D (25-OH) is requested.';
-COMMENT ON COLUMN blood_test_request.hba1c_monitoring IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.hba1c_monitoring IS
     'Whether HbA1c for diabetes monitoring (repeat) is requested.';
-COMMENT ON COLUMN blood_test_request.glucose IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.glucose IS
     'Whether a glucose (fasting or random) is requested.';
-COMMENT ON COLUMN blood_test_request.inr IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.inr IS
     'Whether an INR (anticoagulation monitoring) is requested.';
-COMMENT ON COLUMN blood_test_request.blood_culture IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.blood_culture IS
     'Whether a blood culture is requested.';
-COMMENT ON COLUMN blood_test_request.group_and_save IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.group_and_save IS
     'Whether a group and save (blood group and antibody screen) is requested.';
-COMMENT ON COLUMN blood_test_request.crossmatch IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.crossmatch IS
     'Whether a crossmatch (for transfusion) is requested.';
-COMMENT ON COLUMN blood_test_request.troponin IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.troponin IS
     'Whether a troponin (cardiac marker) is requested.';
-COMMENT ON COLUMN blood_test_request.d_dimer IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.d_dimer IS
     'Whether a D-dimer is requested.';
-COMMENT ON COLUMN blood_test_request.amylase_lipase IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.amylase_lipase IS
     'Whether amylase / lipase is requested.';
-COMMENT ON COLUMN blood_test_request.primary_indication IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring.';
-COMMENT ON COLUMN blood_test_request.clinical_details IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.clinical_details IS
     'Clinical details / history supporting the request (highest-value completeness field).';
-COMMENT ON COLUMN blood_test_request.relevant_medications IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.relevant_medications IS
     'Relevant medications (e.g. anticoagulants, statins) affecting interpretation or safety.';
-COMMENT ON COLUMN blood_test_request.fasting_required IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.fasting_required IS
     'Whether any requested test requires the patient to be fasting.';
-COMMENT ON COLUMN blood_test_request.fasting_status IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.fasting_status IS
     'Patient fasting status at collection: fasting, non-fasting, unknown.';
-COMMENT ON COLUMN blood_test_request.specimen_collected IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.specimen_collected IS
     'Whether the specimen has been collected: yes, no.';
-COMMENT ON COLUMN blood_test_request.collection_datetime IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.collection_datetime IS
     'Timestamp when the specimen was collected.';
-COMMENT ON COLUMN blood_test_request.known_blood_borne_virus IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.known_blood_borne_virus IS
     'Whether the patient has a known blood-borne virus (handling precaution).';
-COMMENT ON COLUMN blood_test_request.difficult_venous_access IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.difficult_venous_access IS
     'Whether the patient has difficult venous access.';
-COMMENT ON COLUMN blood_test_request.urgency IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.urgency IS
     'Requested triage urgency: routine, urgent, stat.';
-COMMENT ON COLUMN blood_test_request.supervising_consultant IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN blood_test_request.requester_contact IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN blood_test_request.notes IS
+COMMENT ON COLUMN blood_test_request.blood_test_request.notes IS
     'Free-text additional notes.';

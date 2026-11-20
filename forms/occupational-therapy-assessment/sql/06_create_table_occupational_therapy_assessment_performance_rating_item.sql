@@ -1,10 +1,10 @@
-CREATE TABLE assessment_performance_rating_item (
+CREATE TABLE occupational_therapy_assessment.assessment_performance_rating_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     performance_ratings_id UUID NOT NULL
-        REFERENCES assessment_performance_ratings(id) ON DELETE CASCADE,
+        REFERENCES occupational_therapy_assessment.assessment_performance_ratings(id) ON DELETE CASCADE,
     occupational_issue VARCHAR(255) NOT NULL DEFAULT '',
     domain VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (domain IN ('self-care', 'productivity', 'leisure', '')),
@@ -16,36 +16,36 @@ CREATE TABLE assessment_performance_rating_item (
 );
 
 CREATE TRIGGER trigger_assessment_performance_rating_item_updated_at
-    BEFORE UPDATE ON assessment_performance_rating_item
+    BEFORE UPDATE ON occupational_therapy_assessment.assessment_performance_rating_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION occupational_therapy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_performance_rating_item IS
+COMMENT ON TABLE occupational_therapy_assessment.assessment_performance_rating_item IS
     'Individual COPM performance rating for a specific occupational issue identified by the patient.';
-COMMENT ON COLUMN assessment_performance_rating_item.occupational_issue IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.occupational_issue IS
     'Description of the specific occupational performance issue.';
-COMMENT ON COLUMN assessment_performance_rating_item.domain IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.domain IS
     'COPM domain: self-care, productivity, leisure, or empty.';
-COMMENT ON COLUMN assessment_performance_rating_item.importance_score IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.importance_score IS
     'Patient-rated importance of this issue (1 = not important, 10 = extremely important).';
-COMMENT ON COLUMN assessment_performance_rating_item.performance_score IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.performance_score IS
     'Patient-rated performance score (1 = not able, 10 = able to do extremely well).';
-COMMENT ON COLUMN assessment_performance_rating_item.sort_order IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_performance_ratings.id IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_ratings.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_performance_ratings.created_at IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_ratings.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_performance_ratings.updated_at IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_ratings.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_performance_rating_item.performance_ratings_id IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.performance_ratings_id IS
     'Foreign key to the assessment_performance_ratings table.';
-COMMENT ON COLUMN assessment_performance_rating_item.id IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_performance_rating_item.created_at IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_performance_rating_item.updated_at IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_performance_rating_item.deleted_at IS
+COMMENT ON COLUMN occupational_therapy_assessment.assessment_performance_rating_item.deleted_at IS
     'Timestamp when this row was deleted.';

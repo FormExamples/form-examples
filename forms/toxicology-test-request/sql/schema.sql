@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS toxicology_test_request;
+
+COMMENT ON SCHEMA toxicology_test_request IS
+    'Namespace for the Toxicology Test Request form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION toxicology_test_request.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION toxicology_test_request.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE toxicology_test_request.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON toxicology_test_request.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE toxicology_test_request.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN toxicology_test_request.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN toxicology_test_request.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN toxicology_test_request.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN toxicology_test_request.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN toxicology_test_request.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN toxicology_test_request.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN toxicology_test_request.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN toxicology_test_request.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN toxicology_test_request.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN toxicology_test_request.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN toxicology_test_request.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN toxicology_test_request.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN toxicology_test_request.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN toxicology_test_request.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN toxicology_test_request.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON toxicology_test_request.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN toxicology_test_request.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Requesting clinician (referrer) information.
 
-CREATE TABLE clinician (
+CREATE TABLE toxicology_test_request.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON toxicology_test_request.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE toxicology_test_request.clinician IS
     'Requesting clinician (referrer) who completes the toxicology test request.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN toxicology_test_request.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN toxicology_test_request.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN toxicology_test_request.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN toxicology_test_request.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN toxicology_test_request.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN toxicology_test_request.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN toxicology_test_request.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN toxicology_test_request.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN toxicology_test_request.clinician.role IS
     'Clinician role: gp, hospital-doctor, emergency-physician, toxicologist, nurse, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN toxicology_test_request.clinician.registration_body IS
     'Clinician registration body: GMC, NMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN toxicology_test_request.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN toxicology_test_request.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON toxicology_test_request.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -212,14 +229,14 @@ CREATE INDEX clinician_index_gto
 -- more toxicology assays, modelled as BOOLEAN columns. At least one assay should
 -- be selected; a request with no assay selected fires the no-test-selected flag.
 
-CREATE TABLE toxicology_test_request (
+CREATE TABLE toxicology_test_request.toxicology_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES toxicology_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES toxicology_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'collected', 'rejected', '')),
@@ -265,82 +282,82 @@ CREATE TABLE toxicology_test_request (
 );
 
 CREATE INDEX index_toxicology_test_request_patient_id
-    ON toxicology_test_request(patient_id);
+    ON toxicology_test_request.toxicology_test_request(patient_id);
 CREATE INDEX index_toxicology_test_request_clinician_id
-    ON toxicology_test_request(clinician_id);
+    ON toxicology_test_request.toxicology_test_request(clinician_id);
 
 CREATE TRIGGER trigger_toxicology_test_request_updated_at
-    BEFORE UPDATE ON toxicology_test_request
+    BEFORE UPDATE ON toxicology_test_request.toxicology_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE toxicology_test_request IS
+COMMENT ON TABLE toxicology_test_request.toxicology_test_request IS
     'Toxicology / poisons / therapeutic-drug-level blood-test request. Captures the requested assays (booleans), the clinical indication and details, suspected agent and ingestion timing, specimen handling, and triage urgency.';
-COMMENT ON COLUMN toxicology_test_request.id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN toxicology_test_request.created_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN toxicology_test_request.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN toxicology_test_request.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN toxicology_test_request.patient_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN toxicology_test_request.clinician_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN toxicology_test_request.status IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, collected, rejected.';
-COMMENT ON COLUMN toxicology_test_request.site_name IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN toxicology_test_request.setting IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN toxicology_test_request.referral_date IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.referral_date IS
     'Date the request was made.';
-COMMENT ON COLUMN toxicology_test_request.requested_by_date IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.requested_by_date IS
     'Date by which the test is requested to be performed.';
-COMMENT ON COLUMN toxicology_test_request.paracetamol_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.paracetamol_level IS
     'Whether a paracetamol (acetaminophen) level is requested. Interpretable on the treatment nomogram only at >=4 h post-ingestion.';
-COMMENT ON COLUMN toxicology_test_request.salicylate_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.salicylate_level IS
     'Whether a salicylate (aspirin) level is requested.';
-COMMENT ON COLUMN toxicology_test_request.alcohol_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.alcohol_level IS
     'Whether a blood alcohol (ethanol) level is requested.';
-COMMENT ON COLUMN toxicology_test_request.drugs_of_abuse_screen IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.drugs_of_abuse_screen IS
     'Whether a drugs-of-abuse screen (e.g. opiates, benzodiazepines, cocaine, amphetamines) is requested.';
-COMMENT ON COLUMN toxicology_test_request.lithium_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.lithium_level IS
     'Whether a lithium level is requested.';
-COMMENT ON COLUMN toxicology_test_request.digoxin_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.digoxin_level IS
     'Whether a digoxin level is requested.';
-COMMENT ON COLUMN toxicology_test_request.antiepileptic_drug_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.antiepileptic_drug_level IS
     'Whether an antiepileptic drug level (e.g. phenytoin, carbamazepine, valproate) is requested.';
-COMMENT ON COLUMN toxicology_test_request.carboxyhaemoglobin IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.carboxyhaemoglobin IS
     'Whether a carboxyhaemoglobin (COHb, carbon-monoxide exposure) level is requested.';
-COMMENT ON COLUMN toxicology_test_request.heavy_metals IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.heavy_metals IS
     'Whether a heavy-metals screen (e.g. lead, mercury, arsenic) is requested.';
-COMMENT ON COLUMN toxicology_test_request.specific_drug_level IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.specific_drug_level IS
     'Whether a specific (named) drug level is requested; the named agent is given in suspected_agent.';
-COMMENT ON COLUMN toxicology_test_request.primary_indication IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring: suspected-overdose, deliberate-self-harm, therapeutic-drug-monitoring, suspected-poisoning, substance-misuse-screen, occupational-screen, forensic, other.';
-COMMENT ON COLUMN toxicology_test_request.clinical_details IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.clinical_details IS
     'Clinical details / history supporting the request (highest-value completeness field).';
-COMMENT ON COLUMN toxicology_test_request.suspected_agent IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.suspected_agent IS
     'Suspected toxic agent or named drug, free text.';
-COMMENT ON COLUMN toxicology_test_request.time_since_ingestion_hours IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.time_since_ingestion_hours IS
     'Hours since ingestion, used for timing appropriateness (e.g. paracetamol nomogram requires >=4 h).';
-COMMENT ON COLUMN toxicology_test_request.deliberate_overdose IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.deliberate_overdose IS
     'Whether the exposure is a deliberate overdose (triggers safeguarding / triage escalation).';
-COMMENT ON COLUMN toxicology_test_request.symptomatic IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.symptomatic IS
     'Whether the patient is currently symptomatic from the exposure.';
-COMMENT ON COLUMN toxicology_test_request.specimen_collected IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.specimen_collected IS
     'Whether the specimen has been collected: yes, no.';
-COMMENT ON COLUMN toxicology_test_request.collection_datetime IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.collection_datetime IS
     'Timestamp when the specimen was collected.';
-COMMENT ON COLUMN toxicology_test_request.urgency IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.urgency IS
     'Requested triage urgency: routine, urgent, stat.';
-COMMENT ON COLUMN toxicology_test_request.supervising_consultant IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN toxicology_test_request.requester_contact IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN toxicology_test_request.notes IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request.notes IS
     'Free-text additional notes.';
 
 -- ========================================================================
@@ -353,14 +370,14 @@ COMMENT ON COLUMN toxicology_test_request.notes IS
 
 -- Computed grading result for a toxicology test request (four-axis engine).
 
-CREATE TABLE toxicology_test_request_grade (
+CREATE TABLE toxicology_test_request.toxicology_test_request_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     toxicology_test_request_id UUID NOT NULL UNIQUE
-        REFERENCES toxicology_test_request(id) ON DELETE CASCADE,
+        REFERENCES toxicology_test_request.toxicology_test_request(id) ON DELETE CASCADE,
 
     -- Axis A: appropriateness (1-9 ordinal, anchored on TOXBASE / indication match)
     appropriateness_score INTEGER
@@ -389,41 +406,41 @@ CREATE TABLE toxicology_test_request_grade (
 );
 
 CREATE TRIGGER trigger_toxicology_test_request_grade_updated_at
-    BEFORE UPDATE ON toxicology_test_request_grade
+    BEFORE UPDATE ON toxicology_test_request.toxicology_test_request_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE toxicology_test_request_grade IS
+COMMENT ON TABLE toxicology_test_request.toxicology_test_request_grade IS
     'Computed four-axis grading result: appropriateness (1-9 indication match), timing band (ingestion-time validity), request completeness, and triage priority.';
-COMMENT ON COLUMN toxicology_test_request_grade.id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN toxicology_test_request_grade.created_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN toxicology_test_request_grade.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN toxicology_test_request_grade.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN toxicology_test_request_grade.toxicology_test_request_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.toxicology_test_request_id IS
     'Foreign key to the parent request (unique, 1:1).';
-COMMENT ON COLUMN toxicology_test_request_grade.appropriateness_score IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.appropriateness_score IS
     'Appropriateness score (1-9). No single published toxicology-ordering score exists; anchored on TOXBASE / NPIS guidance and indication-to-assay match. Decision support only.';
-COMMENT ON COLUMN toxicology_test_request_grade.appropriateness_band IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.appropriateness_band IS
     'Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3).';
-COMMENT ON COLUMN toxicology_test_request_grade.timing_band IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.timing_band IS
     'Timing validity band: ok, caution, invalid. E.g. a paracetamol level taken <4 h post-ingestion is invalid for nomogram interpretation.';
-COMMENT ON COLUMN toxicology_test_request_grade.completeness_percent IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.completeness_percent IS
     'Request completeness as a percentage of mandatory fields (0-100).';
-COMMENT ON COLUMN toxicology_test_request_grade.triage_tier IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.triage_tier IS
     'Assigned triage tier: routine, urgent, stat.';
-COMMENT ON COLUMN toxicology_test_request_grade.target_timeframe IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.target_timeframe IS
     'Target timeframe for the assay implied by the triage tier (deliberate overdose / symptomatic -> stat).';
-COMMENT ON COLUMN toxicology_test_request_grade.recommendation IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.recommendation IS
     'Vetting recommendation: accept, query-referrer, redirect, reject.';
-COMMENT ON COLUMN toxicology_test_request_grade.clinician_notes IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.clinician_notes IS
     'Free-text vetting notes.';
-COMMENT ON COLUMN toxicology_test_request_grade.signed_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.signed_at IS
     'Timestamp of vetting clinician electronic signature.';
-COMMENT ON COLUMN toxicology_test_request_grade.graded_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -436,14 +453,14 @@ COMMENT ON COLUMN toxicology_test_request_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a toxicology test request.
 
-CREATE TABLE toxicology_test_request_grade_rule (
+CREATE TABLE toxicology_test_request.toxicology_test_request_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     toxicology_test_request_grade_id UUID NOT NULL
-        REFERENCES toxicology_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES toxicology_test_request.toxicology_test_request_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('appropriateness', 'timing', 'completeness', 'triage', '')),
@@ -452,32 +469,32 @@ CREATE TABLE toxicology_test_request_grade_rule (
 );
 
 CREATE INDEX index_toxicology_test_request_grade_rule_grade_id
-    ON toxicology_test_request_grade_rule(toxicology_test_request_grade_id);
+    ON toxicology_test_request.toxicology_test_request_grade_rule(toxicology_test_request_grade_id);
 
 CREATE TRIGGER trigger_toxicology_test_request_grade_rule_updated_at
-    BEFORE UPDATE ON toxicology_test_request_grade_rule
+    BEFORE UPDATE ON toxicology_test_request.toxicology_test_request_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE toxicology_test_request_grade_rule IS
+COMMENT ON TABLE toxicology_test_request.toxicology_test_request_grade_rule IS
     'Audit trail of every appropriateness / timing / completeness / triage rule that fired for this request.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.created_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.toxicology_test_request_grade_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.toxicology_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.rule_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-TIMING-PARACETAMOL-01).';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.axis IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.axis IS
     'Scoring axis the rule belongs to: appropriateness, timing, completeness, triage.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.category IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.category IS
     'Category or indication the rule relates to.';
-COMMENT ON COLUMN toxicology_test_request_grade_rule.description IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -490,14 +507,14 @@ COMMENT ON COLUMN toxicology_test_request_grade_rule.description IS
 
 -- Safety-critical flags for a toxicology test request, independent of the axes.
 
-CREATE TABLE toxicology_test_request_grade_flag (
+CREATE TABLE toxicology_test_request.toxicology_test_request_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     toxicology_test_request_grade_id UUID NOT NULL
-        REFERENCES toxicology_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES toxicology_test_request.toxicology_test_request_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -517,34 +534,34 @@ CREATE TABLE toxicology_test_request_grade_flag (
 );
 
 CREATE INDEX index_toxicology_test_request_grade_flag_grade_id
-    ON toxicology_test_request_grade_flag(toxicology_test_request_grade_id);
+    ON toxicology_test_request.toxicology_test_request_grade_flag(toxicology_test_request_grade_id);
 
 CREATE TRIGGER trigger_toxicology_test_request_grade_flag_updated_at
-    BEFORE UPDATE ON toxicology_test_request_grade_flag
+    BEFORE UPDATE ON toxicology_test_request.toxicology_test_request_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_request.set_updated_at();
 
-COMMENT ON TABLE toxicology_test_request_grade_flag IS
+COMMENT ON TABLE toxicology_test_request.toxicology_test_request_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the toxicology / vetting team.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.created_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.updated_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.deleted_at IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.toxicology_test_request_grade_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.toxicology_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.flag_id IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-PARACETAMOL-TIMING-001).';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.category IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.category IS
     'Flag category: suspected-overdose-stat, paracetamol-timing-critical, deliberate-self-harm-safeguarding, specimen-not-collected, missing-clinical-details, no-test-selected, other.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.priority IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.description IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN toxicology_test_request_grade_flag.suggested_action IS
+COMMENT ON COLUMN toxicology_test_request.toxicology_test_request_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "contact NPIS / TOXBASE and arrange stat level").';
 
 -- ========================================================================

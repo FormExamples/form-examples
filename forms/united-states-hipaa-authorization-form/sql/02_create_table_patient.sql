@@ -1,6 +1,6 @@
 -- Patient identification fields for the HIPAA authorization form.
 
-CREATE TABLE patient (
+CREATE TABLE united_states_hipaa_authorization_form.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,35 +18,35 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_states_hipaa_authorization_form.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_hipaa_authorization_form.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_states_hipaa_authorization_form.patient IS
     'Patient identification fields for the HIPAA authorization form.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.deleted_at IS
     'Timestamp when this row was deleted (soft-delete).';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.name IS
     'Patient print name, as it appears on the signed authorization.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.birth_date IS
     'Date of birth. Required by 45 CFR § 164.508(c)(1)(vi) for identity-binding the signature.';
-COMMENT ON COLUMN patient.social_security_number IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.social_security_number IS
     'Social Security Number, optional. State templates such as TN HS-2557 mark this as "not required". Format NNN-NN-NNNN.';
-COMMENT ON COLUMN patient.street_address IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.street_address IS
     'Street address line.';
-COMMENT ON COLUMN patient.city IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.city IS
     'City.';
-COMMENT ON COLUMN patient.state IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.state IS
     'US state two-letter abbreviation (e.g. TN, PA, CA).';
-COMMENT ON COLUMN patient.zip_code IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.zip_code IS
     'US ZIP code (5 or 9 digit).';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.phone IS
     'Phone number including area code.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_states_hipaa_authorization_form.patient.email IS
     'Email address, optional.';

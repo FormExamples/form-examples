@@ -4,14 +4,14 @@
 --   mixed                         — joint for the listed decisions, severally for the rest
 -- 1:1 with lpa.
 
-CREATE TABLE lpa_decision_rule (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL UNIQUE
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     decision_rule VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (decision_rule IN (
             'jointly',
@@ -23,23 +23,23 @@ CREATE TABLE lpa_decision_rule (
 );
 
 CREATE TRIGGER trigger_lpa_decision_rule_updated_at
-    BEFORE UPDATE ON lpa_decision_rule
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_decision_rule IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule IS
     'How the attorneys must act together when making decisions (LP1H s.3, MCA 2005 s.10(4)).';
-COMMENT ON COLUMN lpa_decision_rule.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_decision_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_decision_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_decision_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_decision_rule.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.lpa_id IS
     'Foreign key to the parent LPA (unique, 1:1).';
-COMMENT ON COLUMN lpa_decision_rule.decision_rule IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.decision_rule IS
     'Decision-making rule: jointly, jointly-and-severally, or mixed.';
-COMMENT ON COLUMN lpa_decision_rule.joint_decision_set IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.joint_decision_set IS
     'When decision_rule = mixed: list of decisions that must be made jointly. Required when mixed (R-MCA-JOINT-MIXED-SCOPE).';

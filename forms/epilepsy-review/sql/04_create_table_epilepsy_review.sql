@@ -10,14 +10,14 @@
 -- documentation and decision-support record, not a numeric score, a
 -- diagnostic test, or a prescribing instrument.
 
-CREATE TABLE epilepsy_review (
+CREATE TABLE epilepsy_review.epilepsy_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES epilepsy_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES epilepsy_review.clinician(id) ON DELETE RESTRICT,
 
     -- Context and profile
     reviewer_name TEXT NOT NULL DEFAULT '',
@@ -68,104 +68,104 @@ CREATE TABLE epilepsy_review (
 );
 
 CREATE INDEX epilepsy_review_patient_id_idx
-    ON epilepsy_review (patient_id);
+    ON epilepsy_review.epilepsy_review (patient_id);
 CREATE INDEX epilepsy_review_clinician_id_idx
-    ON epilepsy_review (clinician_id);
+    ON epilepsy_review.epilepsy_review (clinician_id);
 
 CREATE TRIGGER trigger_epilepsy_review_updated_at
-    BEFORE UPDATE ON epilepsy_review
+    BEFORE UPDATE ON epilepsy_review.epilepsy_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION epilepsy_review.set_updated_at();
 
-COMMENT ON TABLE epilepsy_review IS
+COMMENT ON TABLE epilepsy_review.epilepsy_review IS
     'Main epilepsy annual-review record (NICE NG217): patient and clinician identification, review context, epilepsy profile, seizures and anti-seizure medication with adherence and side effects, triggers, SUDEP discussion, injuries and status epilepticus, safety (DVLA driving, bathing, occupation), valproate and pregnancy-prevention arrangements, mental health, and the care plan. The computed seizure-control classification, completeness grade, fired rules, and safety flags live in child tables.';
-COMMENT ON COLUMN epilepsy_review.id IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN epilepsy_review.created_at IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN epilepsy_review.updated_at IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN epilepsy_review.deleted_at IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN epilepsy_review.patient_id IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN epilepsy_review.clinician_id IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN epilepsy_review.reviewer_name IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.reviewer_name IS
     'Name of the reviewing clinician as recorded on the review.';
-COMMENT ON COLUMN epilepsy_review.reviewer_role IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.reviewer_role IS
     'Reviewing clinician role: gp, practice-nurse, epilepsy-nurse, neurologist, or other.';
-COMMENT ON COLUMN epilepsy_review.reviewed_at IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.reviewed_at IS
     'Date the annual review was conducted.';
-COMMENT ON COLUMN epilepsy_review.care_setting IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.care_setting IS
     'Care setting where the review was conducted: general-practice, epilepsy-clinic, community, or other.';
-COMMENT ON COLUMN epilepsy_review.review_type IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.review_type IS
     'Type of review: annual or interim.';
-COMMENT ON COLUMN epilepsy_review.months_since_last_review IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.months_since_last_review IS
     'Interval in months since the last review; drives the review-overdue flag when greater than 12.';
-COMMENT ON COLUMN epilepsy_review.patient_identifier IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.patient_identifier IS
     'NHS number or local patient identifier as recorded on the review.';
-COMMENT ON COLUMN epilepsy_review.age_band IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.age_band IS
     'Adult age band: 18-39, 40-59, 60-79, or >=80.';
-COMMENT ON COLUMN epilepsy_review.sex IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN epilepsy_review.epilepsy_type IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.epilepsy_type IS
     'Epilepsy type: focal, generalised, combined, or unknown.';
-COMMENT ON COLUMN epilepsy_review.age_at_onset IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.age_at_onset IS
     'Age at epilepsy onset in years.';
-COMMENT ON COLUMN epilepsy_review.years_since_diagnosis IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.years_since_diagnosis IS
     'Years since epilepsy diagnosis.';
-COMMENT ON COLUMN epilepsy_review.learning_disability IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.learning_disability IS
     'Whether the patient has a learning disability (yes/no).';
-COMMENT ON COLUMN epilepsy_review.seizure_types IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.seizure_types IS
     'Free-text record of the seizure type(s) present.';
-COMMENT ON COLUMN epilepsy_review.seizure_frequency IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.seizure_frequency IS
     'Seizure frequency: none, less-than-monthly, monthly, weekly, or daily (weekly/daily drive an uncontrolled classification).';
-COMMENT ON COLUMN epilepsy_review.last_seizure_date IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.last_seizure_date IS
     'Date of the most recent seizure.';
-COMMENT ON COLUMN epilepsy_review.seizure_free_months IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.seizure_free_months IS
     'Documented seizure-free duration in months.';
-COMMENT ON COLUMN epilepsy_review.seizure_trend IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.seizure_trend IS
     'Seizure trend since the last review: seizure-free, decreasing, stable, or increasing (increasing drives an uncontrolled classification).';
-COMMENT ON COLUMN epilepsy_review.current_asms IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.current_asms IS
     'Free-text record of current anti-seizure medication(s) and doses.';
-COMMENT ON COLUMN epilepsy_review.asm_adherence IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.asm_adherence IS
     'Self-reported ASM adherence: good, partial, or poor (poor drives an adherence flag).';
-COMMENT ON COLUMN epilepsy_review.asm_side_effects IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.asm_side_effects IS
     'ASM side-effect burden: none, mild, or significant (significant drives a side-effects flag).';
-COMMENT ON COLUMN epilepsy_review.drug_level IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.drug_level IS
     'Therapeutic ASM drug level where relevant (units per the specific drug).';
-COMMENT ON COLUMN epilepsy_review.triggers IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.triggers IS
     'Free-text record of reported seizure triggers.';
-COMMENT ON COLUMN epilepsy_review.sudep_discussed IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.sudep_discussed IS
     'Whether Sudden Unexpected Death in Epilepsy (SUDEP) risk was discussed (yes/no); a non-yes value drives a SUDEP-not-documented flag.';
-COMMENT ON COLUMN epilepsy_review.status_epilepticus IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.status_epilepticus IS
     'Whether status epilepticus occurred since the last review (yes/no); yes drives an uncontrolled classification and a high-priority flag.';
-COMMENT ON COLUMN epilepsy_review.seizure_injury IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.seizure_injury IS
     'Whether a seizure-related injury occurred since the last review (yes/no).';
-COMMENT ON COLUMN epilepsy_review.dvla_eligible IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.dvla_eligible IS
     'DVLA driving eligibility: eligible, not-eligible, or not-applicable.';
-COMMENT ON COLUMN epilepsy_review.currently_driving IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.currently_driving IS
     'Whether the patient is currently driving (yes/no); driving while not DVLA-eligible drives a driving-safety flag.';
-COMMENT ON COLUMN epilepsy_review.bathing_advice_given IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.bathing_advice_given IS
     'Whether bathing / showering safety advice was given (yes/no).';
-COMMENT ON COLUMN epilepsy_review.woman_of_childbearing_potential IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.woman_of_childbearing_potential IS
     'Whether the patient is a woman of childbearing potential (yes/no/not-applicable); when yes, the valproate/PPP, folic-acid, and contraception domains become required for completeness.';
-COMMENT ON COLUMN epilepsy_review.on_valproate IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.on_valproate IS
     'Whether the patient is prescribed sodium valproate (yes/no).';
-COMMENT ON COLUMN epilepsy_review.pregnancy_prevention_programme IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.pregnancy_prevention_programme IS
     'Valproate Pregnancy Prevention Programme status: in-place, not-in-place, or not-applicable.';
-COMMENT ON COLUMN epilepsy_review.folic_acid IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.folic_acid IS
     'Whether folic acid is prescribed: yes, no, or not-applicable.';
-COMMENT ON COLUMN epilepsy_review.contraception_interaction_reviewed IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.contraception_interaction_reviewed IS
     'Whether contraception and ASM interactions were reviewed: yes, no, or not-applicable.';
-COMMENT ON COLUMN epilepsy_review.mental_health_concern IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.mental_health_concern IS
     'Mental-health concern: none, low-mood, anxiety, depression, or suicidality (suicidality high priority; depression/anxiety/low-mood medium).';
-COMMENT ON COLUMN epilepsy_review.specialist_review_needed IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.specialist_review_needed IS
     'Whether specialist (neurology) review is needed (yes/no).';
-COMMENT ON COLUMN epilepsy_review.next_review_due IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.next_review_due IS
     'Date the next review is planned.';
-COMMENT ON COLUMN epilepsy_review.care_plan IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.care_plan IS
     'Free-text record of the agreed epilepsy care plan.';
-COMMENT ON COLUMN epilepsy_review.review_context IS
+COMMENT ON COLUMN epilepsy_review.epilepsy_review.review_context IS
     'Optional free-text review context or narrative shown in the summary.';

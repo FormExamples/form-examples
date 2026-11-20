@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk;
+
+COMMENT ON SCHEMA cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk IS
+    'Namespace for the CHA2DS2-VASc Score for Atrial Fibrillation Stroke Risk form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient IS
     'Patient demographic information used by the CHA2DS2-VASc assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.role IS
     'Primary clinical role: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- vascular disease, and sex category). Age and sex drive their own points.
 -- The computed grade, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE cha2ds2_vasc (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -248,56 +265,56 @@ CREATE TABLE cha2ds2_vasc (
 );
 
 CREATE INDEX cha2ds2_vasc_patient_id_idx
-    ON cha2ds2_vasc (patient_id);
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc (patient_id);
 CREATE INDEX cha2ds2_vasc_clinician_id_idx
-    ON cha2ds2_vasc (clinician_id);
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc (clinician_id);
 
 CREATE TRIGGER trigger_cha2ds2_vasc_updated_at
-    BEFORE UPDATE ON cha2ds2_vasc
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE cha2ds2_vasc IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc IS
     'Main CHA2DS2-VASc assessment record: assessment context, patient identification, and the weighted criterion inputs (congestive heart failure, hypertension, age, diabetes, prior stroke/TIA/thromboembolism, vascular disease, and sex category).';
-COMMENT ON COLUMN cha2ds2_vasc.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cha2ds2_vasc.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cha2ds2_vasc.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cha2ds2_vasc.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cha2ds2_vasc.patient_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN cha2ds2_vasc.clinician_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN cha2ds2_vasc.clinician_name IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN cha2ds2_vasc.clinician_role IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN cha2ds2_vasc.assessed_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN cha2ds2_vasc.care_setting IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.care_setting IS
     'Care setting: primary-care, cardiology, anticoagulation-clinic, emergency-department, or other.';
-COMMENT ON COLUMN cha2ds2_vasc.atrial_fibrillation_type IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.atrial_fibrillation_type IS
     'Type of atrial fibrillation: paroxysmal, persistent, permanent, or flutter.';
-COMMENT ON COLUMN cha2ds2_vasc.patient_identifier IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN cha2ds2_vasc.age_years IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.age_years IS
     'Patient age in years; drives the age criterion (>= 75 scores 2, 65-74 scores 1). NULL when unanswered.';
-COMMENT ON COLUMN cha2ds2_vasc.sex IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.sex IS
     'Patient sex driving the sex-category point (female scores 1): female, male, or other.';
-COMMENT ON COLUMN cha2ds2_vasc.congestive_heart_failure IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.congestive_heart_failure IS
     'Criterion C — congestive heart failure or left-ventricular dysfunction (scores 1 when yes): yes or no.';
-COMMENT ON COLUMN cha2ds2_vasc.hypertension IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.hypertension IS
     'Criterion H — hypertension, treated or with blood pressure > 140/90 (scores 1 when yes): yes or no.';
-COMMENT ON COLUMN cha2ds2_vasc.diabetes IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.diabetes IS
     'Criterion D — diabetes mellitus (scores 1 when yes): yes or no.';
-COMMENT ON COLUMN cha2ds2_vasc.stroke_tia_thromboembolism IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.stroke_tia_thromboembolism IS
     'Criterion S2 — prior stroke, transient ischaemic attack, or thromboembolism (scores 2 when yes): yes or no.';
-COMMENT ON COLUMN cha2ds2_vasc.vascular_disease IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.vascular_disease IS
     'Criterion V — vascular disease (prior MI, peripheral arterial disease, or aortic plaque; scores 1 when yes): yes or no.';
-COMMENT ON COLUMN cha2ds2_vasc.clinical_note IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -312,14 +329,14 @@ COMMENT ON COLUMN cha2ds2_vasc.clinical_note IS
 -- sub-score, the summed total (0-9), and the derived risk band with the
 -- looked-up annual stroke rate and the anticoagulation recommendation.
 
-CREATE TABLE cha2ds2_vasc_grade (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cha2ds2_vasc_id UUID NOT NULL UNIQUE
-        REFERENCES cha2ds2_vasc(id) ON DELETE CASCADE,
+        REFERENCES cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc(id) ON DELETE CASCADE,
 
     congestive_heart_failure_points INT,
     hypertension_points INT,
@@ -339,45 +356,45 @@ CREATE TABLE cha2ds2_vasc_grade (
 );
 
 CREATE TRIGGER trigger_cha2ds2_vasc_grade_updated_at
-    BEFORE UPDATE ON cha2ds2_vasc_grade
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE cha2ds2_vasc_grade IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade IS
     'Computed CHA2DS2-VASc grading result: per-criterion sub-scores, summed total (0-9), derived risk band, looked-up annual stroke rate, and anticoagulation recommendation.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.cha2ds2_vasc_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.cha2ds2_vasc_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN cha2ds2_vasc_grade.congestive_heart_failure_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.congestive_heart_failure_points IS
     'Points (0 or 1) awarded for criterion C, congestive heart failure / LV dysfunction.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.hypertension_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.hypertension_points IS
     'Points (0 or 1) awarded for criterion H, hypertension.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.age_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.age_points IS
     'Points (0, 1, or 2) awarded for the age criterion (2 for >= 75, 1 for 65-74, 0 otherwise); mutually exclusive bands.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.diabetes_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.diabetes_points IS
     'Points (0 or 1) awarded for criterion D, diabetes mellitus.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.stroke_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.stroke_points IS
     'Points (0 or 2) awarded for criterion S2, prior stroke / TIA / thromboembolism.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.vascular_disease_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.vascular_disease_points IS
     'Points (0 or 1) awarded for criterion V, vascular disease.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.sex_points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.sex_points IS
     'Points (0 or 1) awarded for the sex category (1 for female).';
-COMMENT ON COLUMN cha2ds2_vasc_grade.total_score IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.total_score IS
     'Summed CHA2DS2-VASc score across the criteria (0-9 when complete).';
-COMMENT ON COLUMN cha2ds2_vasc_grade.risk_band IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.risk_band IS
     'Derived risk band: low, intermediate, or high.';
-COMMENT ON COLUMN cha2ds2_vasc_grade.annual_stroke_risk_percent IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.annual_stroke_risk_percent IS
     'Estimated annual ischaemic-stroke rate as a percentage, looked up by total score (Lip et al., Chest 2010 adjusted rates).';
-COMMENT ON COLUMN cha2ds2_vasc_grade.anticoagulation_recommendation IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.anticoagulation_recommendation IS
     'Anticoagulation recommendation mirroring the risk band: none (low), consider (intermediate), or recommended (high).';
-COMMENT ON COLUMN cha2ds2_vasc_grade.graded_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -393,14 +410,14 @@ COMMENT ON COLUMN cha2ds2_vasc_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE cha2ds2_vasc_grade_rule (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cha2ds2_vasc_grade_id UUID NOT NULL
-        REFERENCES cha2ds2_vasc_grade(id) ON DELETE CASCADE,
+        REFERENCES cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     criterion VARCHAR(30) NOT NULL
@@ -411,34 +428,34 @@ CREATE TABLE cha2ds2_vasc_grade_rule (
 );
 
 CREATE INDEX cha2ds2_vasc_grade_rule_grade_id_idx
-    ON cha2ds2_vasc_grade_rule (cha2ds2_vasc_grade_id);
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule (cha2ds2_vasc_grade_id);
 
 CREATE TRIGGER trigger_cha2ds2_vasc_grade_rule_updated_at
-    BEFORE UPDATE ON cha2ds2_vasc_grade_rule
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE cha2ds2_vasc_grade_rule IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule IS
     'Audit trail of every grading rule that fired during CHA2DS2-VASc computation: criterion, points contributed, category, and description.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.cha2ds2_vasc_grade_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.cha2ds2_vasc_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.rule_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-STROKE-2POINT-01).';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.criterion IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.criterion IS
     'Scored criterion the rule belongs to: congestive-heart-failure, hypertension, age, diabetes, stroke, vascular-disease, sex, or risk-band.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.points IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.points IS
     'Points contributed by this rule for its criterion.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.category IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.category IS
     'Subject category (e.g. criterion-fired, risk-band).';
-COMMENT ON COLUMN cha2ds2_vasc_grade_rule.description IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -452,14 +469,14 @@ COMMENT ON COLUMN cha2ds2_vasc_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE cha2ds2_vasc_grade_flag (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cha2ds2_vasc_grade_id UUID NOT NULL
-        REFERENCES cha2ds2_vasc_grade(id) ON DELETE CASCADE,
+        REFERENCES cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -481,34 +498,34 @@ CREATE TABLE cha2ds2_vasc_grade_flag (
 );
 
 CREATE INDEX cha2ds2_vasc_grade_flag_grade_id_idx
-    ON cha2ds2_vasc_grade_flag (cha2ds2_vasc_grade_id);
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag (cha2ds2_vasc_grade_id);
 
 CREATE TRIGGER trigger_cha2ds2_vasc_grade_flag_updated_at
-    BEFORE UPDATE ON cha2ds2_vasc_grade_flag
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE cha2ds2_vasc_grade_flag IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.cha2ds2_vasc_grade_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.cha2ds2_vasc_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.flag_id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-RISK-UNTREATED-001).';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.category IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.priority IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.description IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN cha2ds2_vasc_grade_flag.suggested_action IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.cha2ds2_vasc_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "complete a HAS-BLED assessment before starting anticoagulation").';
 
 -- ========================================================================

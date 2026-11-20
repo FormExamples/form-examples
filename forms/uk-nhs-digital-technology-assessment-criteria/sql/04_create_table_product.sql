@@ -1,9 +1,9 @@
-CREATE TABLE product (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.product (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    supplier_id UUID NOT NULL REFERENCES supplier(id) ON DELETE CASCADE,
+    supplier_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.supplier(id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     version TEXT NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -14,38 +14,38 @@ CREATE TABLE product (
     is_patient_facing TEXT NOT NULL DEFAULT '' CHECK (is_patient_facing IN ('yes','no',''))
 );
 
-CREATE INDEX index_product_supplier_id ON product(supplier_id);
+CREATE INDEX index_product_supplier_id ON uk_nhs_digital_technology_assessment_criteria.product(supplier_id);
 
 CREATE TRIGGER trigger_product_updated_at
-    BEFORE UPDATE ON product
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.product
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE product IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.product IS
     'Digital health technology product under assessment.';
-COMMENT ON COLUMN product.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN product.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN product.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN product.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN product.supplier_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.supplier_id IS
     'Foreign key to the supplier table.';
-COMMENT ON COLUMN product.name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.name IS
     'Product name.';
-COMMENT ON COLUMN product.version IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.version IS
     'Product version or release assessed.';
-COMMENT ON COLUMN product.description IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.description IS
     'Short description of the product.';
-COMMENT ON COLUMN product.intended_purpose IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.intended_purpose IS
     'Intended purpose as stated by the supplier.';
-COMMENT ON COLUMN product.product_type IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.product_type IS
     'Kind of digital health technology.';
-COMMENT ON COLUMN product.medical_device_class IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.medical_device_class IS
     'UK MDR 2002 medical device classification.';
-COMMENT ON COLUMN product.handles_patient_data IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.handles_patient_data IS
     'Whether the product processes patient-identifiable data.';
-COMMENT ON COLUMN product.is_patient_facing IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.is_patient_facing IS
     'Whether patients or the public use the product directly.';

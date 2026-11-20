@@ -6,14 +6,14 @@
 -- The computed grade, fired rules, and flags live in dedicated child
 -- tables.
 
-CREATE TABLE timi_risk_score_for_acute_coronary_syndrome (
+CREATE TABLE timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES timi_risk_score_for_acute_coronary_syndrome.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES timi_risk_score_for_acute_coronary_syndrome.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -52,56 +52,56 @@ CREATE TABLE timi_risk_score_for_acute_coronary_syndrome (
 );
 
 CREATE INDEX timi_risk_score_for_acute_coronary_syndrome_patient_id_idx
-    ON timi_risk_score_for_acute_coronary_syndrome (patient_id);
+    ON timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome (patient_id);
 CREATE INDEX timi_risk_score_for_acute_coronary_syndrome_clinician_id_idx
-    ON timi_risk_score_for_acute_coronary_syndrome (clinician_id);
+    ON timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome (clinician_id);
 
 CREATE TRIGGER trigger_timi_risk_score_for_acute_coronary_syndrome_updated_at
-    BEFORE UPDATE ON timi_risk_score_for_acute_coronary_syndrome
+    BEFORE UPDATE ON timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION timi_risk_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE timi_risk_score_for_acute_coronary_syndrome IS
+COMMENT ON TABLE timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome IS
     'Main TIMI risk-score (UA/NSTEMI) assessment record: assessment context, patient identification, and the seven scored criterion inputs.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.id IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.created_at IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.updated_at IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.deleted_at IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.patient_id IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.clinician_id IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.clinician_name IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.clinician_role IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.clinician_role IS
     'Role of the assessing clinician: physician, cardiologist, nurse-practitioner, or other.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.assessed_at IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.care_setting IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.care_setting IS
     'Care setting: emergency-department, chest-pain-unit, ward, coronary-care, or other.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.working_diagnosis IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.working_diagnosis IS
     'Working diagnosis: unstable-angina or nstemi.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.patient_identifier IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.sex IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.age_over_65 IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.age_over_65 IS
     'Criterion 1 — age >= 65 years (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.three_or_more_cad_risk_factors IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.three_or_more_cad_risk_factors IS
     'Criterion 2 — >= 3 of five coronary risk factors (hypertension, hypercholesterolaemia, diabetes, current smoking, family history of premature CAD) present (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.known_cad_stenosis IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.known_cad_stenosis IS
     'Criterion 3 — known coronary artery disease with stenosis >= 50% (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.aspirin_use_prior_7_days IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.aspirin_use_prior_7_days IS
     'Criterion 4 — aspirin use in the prior 7 days (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.two_or_more_angina_episodes_24h IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.two_or_more_angina_episodes_24h IS
     'Criterion 5 — >= 2 anginal episodes in the prior 24 hours (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.st_deviation IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.st_deviation IS
     'Criterion 6 — ST deviation >= 0.5 mm on the presenting ECG (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.positive_cardiac_marker IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.positive_cardiac_marker IS
     'Criterion 7 — positive cardiac marker, elevated troponin or CK-MB (yes/no).';
-COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.clinical_note IS
+COMMENT ON COLUMN timi_risk_score_for_acute_coronary_syndrome.timi_risk_score_for_acute_coronary_syndrome.clinical_note IS
     'Free-text clinical note recorded with the assessment.';

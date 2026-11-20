@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE psychiatry_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES psychiatry_assessment.assessment(id) ON DELETE CASCADE,
     gaf_score INTEGER NOT NULL DEFAULT 0
         CHECK (gaf_score >= 1 AND gaf_score <= 100),
     gaf_category VARCHAR(50) NOT NULL DEFAULT ''
@@ -31,32 +31,32 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON psychiatry_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION psychiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE psychiatry_assessment.grade IS
     'Computed GAF (Global Assessment of Functioning) score. Range 1-100, with higher scores indicating better functioning. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN psychiatry_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.gaf_score IS
+COMMENT ON COLUMN psychiatry_assessment.grade.gaf_score IS
     'GAF score (1-100): 91-100 superior functioning, 51-60 moderate symptoms, 1-10 persistent danger.';
-COMMENT ON COLUMN grade.gaf_category IS
+COMMENT ON COLUMN psychiatry_assessment.grade.gaf_category IS
     'GAF descriptive category corresponding to the score decile.';
-COMMENT ON COLUMN grade.symptom_severity IS
+COMMENT ON COLUMN psychiatry_assessment.grade.symptom_severity IS
     'Overall symptom severity: minimal, mild, moderate, severe, extreme, or empty.';
-COMMENT ON COLUMN grade.functional_impairment IS
+COMMENT ON COLUMN psychiatry_assessment.grade.functional_impairment IS
     'Overall functional impairment level: minimal, mild, moderate, severe, extreme, or empty.';
-COMMENT ON COLUMN grade.risk_classification IS
+COMMENT ON COLUMN psychiatry_assessment.grade.risk_classification IS
     'Overall risk classification: low, moderate, high, imminent, or empty.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN psychiatry_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN psychiatry_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN psychiatry_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN psychiatry_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN psychiatry_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

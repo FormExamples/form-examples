@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS fluid_balance_chart;
+
+COMMENT ON SCHEMA fluid_balance_chart IS
+    'Namespace for the Fluid Balance Chart form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION fluid_balance_chart.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION fluid_balance_chart.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE fluid_balance_chart.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON fluid_balance_chart.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE fluid_balance_chart.patient IS
     'Patient demographic information used by the fluid balance chart record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN fluid_balance_chart.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN fluid_balance_chart.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN fluid_balance_chart.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN fluid_balance_chart.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN fluid_balance_chart.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN fluid_balance_chart.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN fluid_balance_chart.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN fluid_balance_chart.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN fluid_balance_chart.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN fluid_balance_chart.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN fluid_balance_chart.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN fluid_balance_chart.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN fluid_balance_chart.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN fluid_balance_chart.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN fluid_balance_chart.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON fluid_balance_chart.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the charting professional
 -- who records the fluid balance chart (nurse, doctor, healthcare assistant).
 
-CREATE TABLE clinician (
+CREATE TABLE fluid_balance_chart.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON fluid_balance_chart.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE fluid_balance_chart.clinician IS
     'Clinician identifying information for the charting professional who records the fluid balance chart.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.role IS
     'Primary clinical role: nurse, doctor, healthcare-assistant, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN fluid_balance_chart.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON fluid_balance_chart.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- fluid_balance_chart_entry child table that cascades from this parent, and the
 -- computed grade cascades 1:1 from it.
 
-CREATE TABLE fluid_balance_chart (
+CREATE TABLE fluid_balance_chart.fluid_balance_chart (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES fluid_balance_chart.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES fluid_balance_chart.clinician(id) ON DELETE RESTRICT,
 
     clinician_name TEXT NOT NULL DEFAULT '',
     clinician_role VARCHAR(30) NOT NULL DEFAULT '' CHECK (clinician_role IN ('nurse', 'doctor', 'healthcare-assistant', 'other', '')),
@@ -229,44 +246,44 @@ CREATE TABLE fluid_balance_chart (
 );
 
 CREATE INDEX fluid_balance_chart_patient_id_idx
-    ON fluid_balance_chart (patient_id);
+    ON fluid_balance_chart.fluid_balance_chart (patient_id);
 CREATE INDEX fluid_balance_chart_clinician_id_idx
-    ON fluid_balance_chart (clinician_id);
+    ON fluid_balance_chart.fluid_balance_chart (clinician_id);
 
 CREATE TRIGGER trigger_fluid_balance_chart_updated_at
-    BEFORE UPDATE ON fluid_balance_chart
+    BEFORE UPDATE ON fluid_balance_chart.fluid_balance_chart
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE fluid_balance_chart IS
+COMMENT ON TABLE fluid_balance_chart.fluid_balance_chart IS
     'Parent fluid balance chart header: charting context, patient identification, charting period, and patient weight enabling the mL/kg/h urine output rate.';
-COMMENT ON COLUMN fluid_balance_chart.id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fluid_balance_chart.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN fluid_balance_chart.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN fluid_balance_chart.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN fluid_balance_chart.patient_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.patient_id IS
     'Foreign key to the patient this chart is for (restricted delete).';
-COMMENT ON COLUMN fluid_balance_chart.clinician_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.clinician_id IS
     'Foreign key to the charting clinician (restricted delete); optional.';
-COMMENT ON COLUMN fluid_balance_chart.clinician_name IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.clinician_name IS
     'Name of the charting clinician as entered on the chart.';
-COMMENT ON COLUMN fluid_balance_chart.clinician_role IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.clinician_role IS
     'Role of the charting clinician: nurse, doctor, healthcare-assistant, or other.';
-COMMENT ON COLUMN fluid_balance_chart.patient_identifier IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.patient_identifier IS
     'Local patient identifier as entered on the chart.';
-COMMENT ON COLUMN fluid_balance_chart.ward_or_unit IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.ward_or_unit IS
     'Ward or unit name where the chart is being kept.';
-COMMENT ON COLUMN fluid_balance_chart.chart_start_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.chart_start_at IS
     'Date and time the charting period starts.';
-COMMENT ON COLUMN fluid_balance_chart.chart_period_hours IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.chart_period_hours IS
     'Charting period in hours (default 24); used to scale balance thresholds and compute the mL/kg/h rate.';
-COMMENT ON COLUMN fluid_balance_chart.weight_kg IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.weight_kg IS
     'Patient weight in kilograms; enables the urine output rate in mL/kg/h.';
-COMMENT ON COLUMN fluid_balance_chart.clinical_note IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart.clinical_note IS
     'Free-text summary note for the chart.';
 
 -- ========================================================================
@@ -282,13 +299,13 @@ COMMENT ON COLUMN fluid_balance_chart.clinical_note IS
 -- carries the time it was recorded, its direction (intake or output), the fluid
 -- category, an optional route or description, and the volume in millilitres.
 
-CREATE TABLE fluid_balance_chart_entry (
+CREATE TABLE fluid_balance_chart.fluid_balance_chart_entry (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    fluid_balance_chart_id UUID NOT NULL REFERENCES fluid_balance_chart(id) ON DELETE CASCADE,
+    fluid_balance_chart_id UUID NOT NULL REFERENCES fluid_balance_chart.fluid_balance_chart(id) ON DELETE CASCADE,
 
     entry_at TIMESTAMPTZ,
     direction VARCHAR(10) NOT NULL DEFAULT '' CHECK (direction IN ('intake', 'output', '')),
@@ -298,34 +315,34 @@ CREATE TABLE fluid_balance_chart_entry (
 );
 
 CREATE INDEX fluid_balance_chart_entry_chart_id_idx
-    ON fluid_balance_chart_entry (fluid_balance_chart_id);
+    ON fluid_balance_chart.fluid_balance_chart_entry (fluid_balance_chart_id);
 
 CREATE TRIGGER trigger_fluid_balance_chart_entry_updated_at
-    BEFORE UPDATE ON fluid_balance_chart_entry
+    BEFORE UPDATE ON fluid_balance_chart.fluid_balance_chart_entry
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE fluid_balance_chart_entry IS
+COMMENT ON TABLE fluid_balance_chart.fluid_balance_chart_entry IS
     'Timed intake and output line items for a fluid balance chart; cascades from the parent chart.';
-COMMENT ON COLUMN fluid_balance_chart_entry.id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fluid_balance_chart_entry.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN fluid_balance_chart_entry.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN fluid_balance_chart_entry.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN fluid_balance_chart_entry.fluid_balance_chart_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.fluid_balance_chart_id IS
     'Foreign key to the parent fluid balance chart.';
-COMMENT ON COLUMN fluid_balance_chart_entry.entry_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.entry_at IS
     'Date and time the volume was recorded.';
-COMMENT ON COLUMN fluid_balance_chart_entry.direction IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.direction IS
     'Direction of the volume: intake or output.';
-COMMENT ON COLUMN fluid_balance_chart_entry.category IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.category IS
     'Fluid category: intake (oral, iv, enteral, blood-products, other-intake) or output (urine, drains, vomit-ng, stool, insensible-other).';
-COMMENT ON COLUMN fluid_balance_chart_entry.description IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.description IS
     'Optional route or free-text description of the recorded volume.';
-COMMENT ON COLUMN fluid_balance_chart_entry.volume_ml IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_entry.volume_ml IS
     'Recorded volume in millilitres; null when not recorded.';
 
 -- ========================================================================
@@ -341,14 +358,14 @@ COMMENT ON COLUMN fluid_balance_chart_entry.volume_ml IS
 -- observed hours and weight used in the calculation, and the classified fluid
 -- status (Balanced / Positive / Negative / Oliguria). One row per chart (1:1).
 
-CREATE TABLE fluid_balance_chart_grade (
+CREATE TABLE fluid_balance_chart.fluid_balance_chart_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     fluid_balance_chart_id UUID NOT NULL UNIQUE
-        REFERENCES fluid_balance_chart(id) ON DELETE CASCADE,
+        REFERENCES fluid_balance_chart.fluid_balance_chart(id) ON DELETE CASCADE,
 
     total_intake_ml NUMERIC(10,2) NOT NULL DEFAULT 0,
     total_output_ml NUMERIC(10,2) NOT NULL DEFAULT 0,
@@ -363,39 +380,39 @@ CREATE TABLE fluid_balance_chart_grade (
 );
 
 CREATE TRIGGER trigger_fluid_balance_chart_grade_updated_at
-    BEFORE UPDATE ON fluid_balance_chart_grade
+    BEFORE UPDATE ON fluid_balance_chart.fluid_balance_chart_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE fluid_balance_chart_grade IS
+COMMENT ON TABLE fluid_balance_chart.fluid_balance_chart_grade IS
     'Computed grading result for a fluid balance chart: intake/output totals, net balance, urine output rate, and the classified fluid status; 1:1 with the chart.';
-COMMENT ON COLUMN fluid_balance_chart_grade.id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fluid_balance_chart_grade.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN fluid_balance_chart_grade.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN fluid_balance_chart_grade.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN fluid_balance_chart_grade.fluid_balance_chart_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.fluid_balance_chart_id IS
     'Foreign key to the parent fluid balance chart (unique, 1:1).';
-COMMENT ON COLUMN fluid_balance_chart_grade.total_intake_ml IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.total_intake_ml IS
     'Sum of all recorded intake volumes in millilitres.';
-COMMENT ON COLUMN fluid_balance_chart_grade.total_output_ml IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.total_output_ml IS
     'Sum of all recorded output volumes in millilitres.';
-COMMENT ON COLUMN fluid_balance_chart_grade.net_balance_ml IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.net_balance_ml IS
     'Net balance in millilitres (total intake minus total output); positive is a net gain.';
-COMMENT ON COLUMN fluid_balance_chart_grade.urine_output_ml IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.urine_output_ml IS
     'Total urine output in millilitres (sum of output entries with category urine).';
-COMMENT ON COLUMN fluid_balance_chart_grade.hours_observed IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.hours_observed IS
     'Hours over which the chart was observed (chart period, or the span of entries); null when unknown.';
-COMMENT ON COLUMN fluid_balance_chart_grade.weight_kg IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.weight_kg IS
     'Patient weight in kilograms used for the mL/kg/h calculation; null when unknown.';
-COMMENT ON COLUMN fluid_balance_chart_grade.urine_output_ml_kg_h IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.urine_output_ml_kg_h IS
     'Urine output rate in millilitres per kilogram per hour; null when weight or hours are unknown.';
-COMMENT ON COLUMN fluid_balance_chart_grade.fluid_status IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.fluid_status IS
     'Classified fluid status: balanced, positive, negative, or oliguria.';
-COMMENT ON COLUMN fluid_balance_chart_grade.graded_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -409,14 +426,14 @@ COMMENT ON COLUMN fluid_balance_chart_grade.graded_at IS
 -- Audit trail of every classification rule that fired during grading. Each row
 -- records one rule firing with a category and a human-readable description.
 
-CREATE TABLE fluid_balance_chart_grade_rule (
+CREATE TABLE fluid_balance_chart.fluid_balance_chart_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     fluid_balance_chart_grade_id UUID NOT NULL
-        REFERENCES fluid_balance_chart_grade(id) ON DELETE CASCADE,
+        REFERENCES fluid_balance_chart.fluid_balance_chart_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -424,30 +441,30 @@ CREATE TABLE fluid_balance_chart_grade_rule (
 );
 
 CREATE INDEX fluid_balance_chart_grade_rule_grade_id_idx
-    ON fluid_balance_chart_grade_rule (fluid_balance_chart_grade_id);
+    ON fluid_balance_chart.fluid_balance_chart_grade_rule (fluid_balance_chart_grade_id);
 
 CREATE TRIGGER trigger_fluid_balance_chart_grade_rule_updated_at
-    BEFORE UPDATE ON fluid_balance_chart_grade_rule
+    BEFORE UPDATE ON fluid_balance_chart.fluid_balance_chart_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE fluid_balance_chart_grade_rule IS
+COMMENT ON TABLE fluid_balance_chart.fluid_balance_chart_grade_rule IS
     'Audit trail of every classification rule that fired during grading: category and description.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.fluid_balance_chart_grade_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.fluid_balance_chart_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.rule_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-STATUS-OLIGURIA-01).';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.category IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.category IS
     'Subject category (e.g. fluid-status, threshold-scaling).';
-COMMENT ON COLUMN fluid_balance_chart_grade_rule.description IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -461,14 +478,14 @@ COMMENT ON COLUMN fluid_balance_chart_grade_rule.description IS
 -- Flagged issues raised independently of the fluid-status classification, with a
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE fluid_balance_chart_grade_flag (
+CREATE TABLE fluid_balance_chart.fluid_balance_chart_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     fluid_balance_chart_grade_id UUID NOT NULL
-        REFERENCES fluid_balance_chart_grade(id) ON DELETE CASCADE,
+        REFERENCES fluid_balance_chart.fluid_balance_chart_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -488,34 +505,34 @@ CREATE TABLE fluid_balance_chart_grade_flag (
 );
 
 CREATE INDEX fluid_balance_chart_grade_flag_grade_id_idx
-    ON fluid_balance_chart_grade_flag (fluid_balance_chart_grade_id);
+    ON fluid_balance_chart.fluid_balance_chart_grade_flag (fluid_balance_chart_grade_id);
 
 CREATE TRIGGER trigger_fluid_balance_chart_grade_flag_updated_at
-    BEFORE UPDATE ON fluid_balance_chart_grade_flag
+    BEFORE UPDATE ON fluid_balance_chart.fluid_balance_chart_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION fluid_balance_chart.set_updated_at();
 
-COMMENT ON TABLE fluid_balance_chart_grade_flag IS
+COMMENT ON TABLE fluid_balance_chart.fluid_balance_chart_grade_flag IS
     'Flagged issues raised independently of the fluid-status classification, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.created_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.updated_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.deleted_at IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.fluid_balance_chart_grade_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.fluid_balance_chart_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.flag_id IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-FLUID-OVERLOAD-001).';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.category IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.category IS
     'Flag category: fluid-overload, dehydration, oliguria, anuria, incomplete-recording, or other.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.priority IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.description IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN fluid_balance_chart_grade_flag.suggested_action IS
+COMMENT ON COLUMN fluid_balance_chart.fluid_balance_chart_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "review for pulmonary or peripheral oedema").';
 
 -- ========================================================================

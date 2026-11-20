@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_medical_history (
+CREATE TABLE casualty_card_form.casualty_card_medical_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Past history
     past_medical_history    TEXT NOT NULL DEFAULT '',
     past_surgical_history   TEXT NOT NULL DEFAULT '',
@@ -22,32 +22,32 @@ CREATE TABLE casualty_card_medical_history (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_medical_history_updated_at
-    BEFORE UPDATE ON casualty_card_medical_history
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_medical_history
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_medical_history IS
+COMMENT ON TABLE casualty_card_form.casualty_card_medical_history IS
     '1:1 with casualty_card. Past medical/surgical history, tetanus status, and social history.';
-COMMENT ON COLUMN casualty_card_medical_history.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_medical_history.past_medical_history IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.past_medical_history IS
     'Free-text past medical history.';
-COMMENT ON COLUMN casualty_card_medical_history.past_surgical_history IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.past_surgical_history IS
     'Free-text past surgical history.';
-COMMENT ON COLUMN casualty_card_medical_history.tetanus_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.tetanus_status IS
     'Tetanus immunisation status: up-to-date, not-up-to-date, unknown, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_medical_history.smoking_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.smoking_status IS
     'Smoking status: current, ex-smoker, never, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_medical_history.alcohol_consumption IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.alcohol_consumption IS
     'Description of alcohol consumption (e.g. units per week).';
-COMMENT ON COLUMN casualty_card_medical_history.recreational_drug_use IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.recreational_drug_use IS
     'Description of recreational drug use.';
-COMMENT ON COLUMN casualty_card_medical_history.last_oral_intake IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.last_oral_intake IS
     'Time and nature of last oral intake. Relevant for procedural sedation decisions.';
-COMMENT ON COLUMN casualty_card_medical_history.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_medical_history.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_medical_history.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_medical_history.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.deleted_at IS
     'Timestamp when this row was deleted.';

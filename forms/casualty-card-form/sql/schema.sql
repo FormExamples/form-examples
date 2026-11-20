@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (24):
+-- Source files (25):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -47,12 +48,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS casualty_card_form;
+
+COMMENT ON SCHEMA casualty_card_form IS
+    'Namespace for the Casualty Card Form form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION casualty_card_form.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -60,7 +77,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION casualty_card_form.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -73,7 +90,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE casualty_card_form.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -96,56 +113,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON casualty_card_form.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE casualty_card_form.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN casualty_card_form.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN casualty_card_form.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN casualty_card_form.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN casualty_card_form.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN casualty_card_form.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN casualty_card_form.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN casualty_card_form.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN casualty_card_form.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN casualty_card_form.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN casualty_card_form.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN casualty_card_form.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN casualty_card_form.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN casualty_card_form.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN casualty_card_form.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN casualty_card_form.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN casualty_card_form.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN casualty_card_form.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON casualty_card_form.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN casualty_card_form.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -158,7 +175,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE casualty_card_form.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -177,46 +194,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON casualty_card_form.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE casualty_card_form.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN casualty_card_form.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN casualty_card_form.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN casualty_card_form.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN casualty_card_form.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN casualty_card_form.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN casualty_card_form.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN casualty_card_form.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN casualty_card_form.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN casualty_card_form.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN casualty_card_form.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN casualty_card_form.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN casualty_card_form.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN casualty_card_form.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON casualty_card_form.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -227,13 +244,13 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_casualty_card.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card (
+CREATE TABLE casualty_card_form.casualty_card (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Foreign key to the patient this casualty card belongs to
-    patient_id          UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id          UUID NOT NULL REFERENCES casualty_card_form.patient(id) ON DELETE CASCADE,
     -- Workflow status tracking
     status              TEXT NOT NULL DEFAULT 'in_progress'
                         CHECK (status IN ('in_progress', 'completed', 'reviewed', '')),
@@ -243,30 +260,30 @@ CREATE TABLE casualty_card (
 );
 
 -- Index for the most common query: all casualty cards for a patient
-CREATE INDEX index_casualty_card_patient_id ON casualty_card(patient_id);
+CREATE INDEX index_casualty_card_patient_id ON casualty_card_form.casualty_card(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_updated_at
-    BEFORE UPDATE ON casualty_card
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card IS
+COMMENT ON TABLE casualty_card_form.casualty_card IS
     'A single ED or MIU attendance record. Child tables hold section-specific clinical data.';
-COMMENT ON COLUMN casualty_card.patient_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.patient_id IS
     'FK to patient. One patient may have many casualty cards.';
-COMMENT ON COLUMN casualty_card.status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.status IS
     'Workflow status: in_progress, completed, reviewed, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card.attendance_date IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.attendance_date IS
     'Date of ED attendance. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card.arrival_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.arrival_time IS
     'Timestamp of patient arrival at the department. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -277,13 +294,13 @@ COMMENT ON COLUMN casualty_card.deleted_at IS
 -- BEGIN 05_create_table_casualty_card_demographics.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_demographics (
+CREATE TABLE casualty_card_form.casualty_card_demographics (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id      UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id      UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Assessment-time demographics (may differ from patient record)
     address               TEXT NOT NULL DEFAULT '',
     postcode              TEXT NOT NULL DEFAULT '',
@@ -297,34 +314,34 @@ CREATE TABLE casualty_card_demographics (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_demographics_updated_at
-    BEFORE UPDATE ON casualty_card_demographics
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_demographics
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_demographics IS
+COMMENT ON TABLE casualty_card_form.casualty_card_demographics IS
     '1:1 with casualty_card. Assessment-time demographic data that may differ from the patient record.';
-COMMENT ON COLUMN casualty_card_demographics.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_demographics.address IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.address IS
     'Patient address at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.postcode IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.postcode IS
     'Patient postcode at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.phone IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.phone IS
     'Patient phone number at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.email IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.email IS
     'Patient email address at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.ethnicity IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.ethnicity IS
     'Patient ethnicity at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.preferred_language IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.preferred_language IS
     'Patient preferred language at time of attendance.';
-COMMENT ON COLUMN casualty_card_demographics.interpreter_required IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.interpreter_required IS
     'Whether an interpreter is required: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_demographics.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_demographics.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_demographics.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_demographics.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_demographics.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -335,13 +352,13 @@ COMMENT ON COLUMN casualty_card_demographics.deleted_at IS
 -- BEGIN 06_create_table_casualty_card_next_of_kin.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_next_of_kin (
+CREATE TABLE casualty_card_form.casualty_card_next_of_kin (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id  UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id  UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Next of kin details
     name              TEXT NOT NULL DEFAULT '',
     relationship      TEXT NOT NULL DEFAULT '',
@@ -352,28 +369,28 @@ CREATE TABLE casualty_card_next_of_kin (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_next_of_kin_updated_at
-    BEFORE UPDATE ON casualty_card_next_of_kin
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_next_of_kin
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_next_of_kin IS
+COMMENT ON TABLE casualty_card_form.casualty_card_next_of_kin IS
     '1:1 with casualty_card. Next of kin contact details and notification status.';
-COMMENT ON COLUMN casualty_card_next_of_kin.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_next_of_kin.name IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.name IS
     'Full name of the next of kin.';
-COMMENT ON COLUMN casualty_card_next_of_kin.relationship IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.relationship IS
     'Relationship to the patient (e.g. spouse, parent, sibling).';
-COMMENT ON COLUMN casualty_card_next_of_kin.phone IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.phone IS
     'Contact phone number for the next of kin.';
-COMMENT ON COLUMN casualty_card_next_of_kin.notified IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.notified IS
     'Whether the next of kin has been notified: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_next_of_kin.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_next_of_kin.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_next_of_kin.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_next_of_kin.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_next_of_kin.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -384,13 +401,13 @@ COMMENT ON COLUMN casualty_card_next_of_kin.deleted_at IS
 -- BEGIN 07_create_table_casualty_card_gp.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_gp (
+CREATE TABLE casualty_card_form.casualty_card_gp (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id  UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id  UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- GP details
     name              TEXT NOT NULL DEFAULT '',
     practice_name     TEXT NOT NULL DEFAULT '',
@@ -400,28 +417,28 @@ CREATE TABLE casualty_card_gp (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_gp_updated_at
-    BEFORE UPDATE ON casualty_card_gp
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_gp
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_gp IS
+COMMENT ON TABLE casualty_card_form.casualty_card_gp IS
     '1:1 with casualty_card. Registered GP and practice details for communication and follow-up.';
-COMMENT ON COLUMN casualty_card_gp.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_gp.name IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.name IS
     'Full name of the patient registered GP.';
-COMMENT ON COLUMN casualty_card_gp.practice_name IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.practice_name IS
     'Name of the GP practice.';
-COMMENT ON COLUMN casualty_card_gp.practice_address IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.practice_address IS
     'Address of the GP practice.';
-COMMENT ON COLUMN casualty_card_gp.practice_phone IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.practice_phone IS
     'Phone number of the GP practice.';
-COMMENT ON COLUMN casualty_card_gp.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_gp.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_gp.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_gp.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_gp.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -432,13 +449,13 @@ COMMENT ON COLUMN casualty_card_gp.deleted_at IS
 -- BEGIN 08_create_table_casualty_card_arrival_triage.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_arrival_triage (
+CREATE TABLE casualty_card_form.casualty_card_arrival_triage (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Attendance classification
     attendance_category         TEXT NOT NULL DEFAULT ''
                                 CHECK (attendance_category IN ('first', 'follow-up', 'planned', 'unplanned', '')),
@@ -462,38 +479,38 @@ CREATE TABLE casualty_card_arrival_triage (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_arrival_triage_updated_at
-    BEFORE UPDATE ON casualty_card_arrival_triage
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_arrival_triage
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_arrival_triage IS
+COMMENT ON TABLE casualty_card_form.casualty_card_arrival_triage IS
     '1:1 with casualty_card. Arrival mode, referral source, and Manchester Triage System assessment.';
-COMMENT ON COLUMN casualty_card_arrival_triage.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_arrival_triage.attendance_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.attendance_category IS
     'Attendance classification: first, follow-up, planned, unplanned, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.arrival_mode IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.arrival_mode IS
     'How the patient arrived: ambulance, walk-in, helicopter, police, other, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.referral_source IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.referral_source IS
     'Who referred the patient: self, gp, 999, nhs111, other-hospital, police, other, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.ambulance_incident_number IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.ambulance_incident_number IS
     'Ambulance service incident reference number.';
-COMMENT ON COLUMN casualty_card_arrival_triage.triage_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.triage_time IS
     'Timestamp when triage was performed. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_arrival_triage.triage_nurse IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.triage_nurse IS
     'Name of the triage nurse who assessed the patient.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_flowchart IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_flowchart IS
     'Manchester Triage System flowchart used for triage assessment.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_category IS
     'MTS urgency category: 1-immediate, 2-very-urgent, 3-urgent, 4-standard, 5-non-urgent, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_arrival_triage.mts_discriminator IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.mts_discriminator IS
     'MTS discriminator that determined the triage category.';
-COMMENT ON COLUMN casualty_card_arrival_triage.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_arrival_triage.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_arrival_triage.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_arrival_triage.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_arrival_triage.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -504,13 +521,13 @@ COMMENT ON COLUMN casualty_card_arrival_triage.deleted_at IS
 -- BEGIN 09_create_table_casualty_card_presenting_complaint.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_presenting_complaint (
+CREATE TABLE casualty_card_form.casualty_card_presenting_complaint (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id              UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id              UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Chief complaint
     chief_complaint               TEXT NOT NULL DEFAULT '',
     history_of_presenting_complaint TEXT NOT NULL DEFAULT '',
@@ -531,46 +548,46 @@ CREATE TABLE casualty_card_presenting_complaint (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_presenting_complaint_updated_at
-    BEFORE UPDATE ON casualty_card_presenting_complaint
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_presenting_complaint
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_presenting_complaint IS
+COMMENT ON TABLE casualty_card_form.casualty_card_presenting_complaint IS
     '1:1 with casualty_card. Chief complaint and structured history using SOCRATES framework.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_presenting_complaint.chief_complaint IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.chief_complaint IS
     'Brief description of the main reason for attendance.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.history_of_presenting_complaint IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.history_of_presenting_complaint IS
     'Detailed narrative history of the presenting complaint.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.onset IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.onset IS
     'When the symptoms started (e.g. sudden, gradual, 2 hours ago).';
-COMMENT ON COLUMN casualty_card_presenting_complaint.duration IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.duration IS
     'How long the symptoms have been present.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.character IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.character IS
     'Nature of the symptoms (e.g. sharp, dull, burning, colicky).';
-COMMENT ON COLUMN casualty_card_presenting_complaint.severity IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.severity IS
     'Patient-reported severity of symptoms.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.location IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.location IS
     'Anatomical location of the symptoms.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.radiation IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.radiation IS
     'Whether and where symptoms radiate to.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.aggravating_factors IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.aggravating_factors IS
     'Factors that worsen the symptoms.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.relieving_factors IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.relieving_factors IS
     'Factors that relieve or improve the symptoms.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.associated_symptoms IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.associated_symptoms IS
     'Other symptoms occurring alongside the chief complaint.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.previous_episodes IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.previous_episodes IS
     'History of previous similar episodes.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.treatment_prior_to_arrival IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.treatment_prior_to_arrival IS
     'Any treatment received before arriving at the department.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_presenting_complaint.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_presenting_complaint.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -581,13 +598,13 @@ COMMENT ON COLUMN casualty_card_presenting_complaint.deleted_at IS
 -- BEGIN 10_create_table_casualty_card_pain_assessment.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_pain_assessment (
+CREATE TABLE casualty_card_form.casualty_card_pain_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Pain presence
     pain_present            TEXT NOT NULL DEFAULT ''
                             CHECK (pain_present IN ('yes', 'no', '')),
@@ -605,32 +622,32 @@ CREATE TABLE casualty_card_pain_assessment (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_pain_assessment_updated_at
-    BEFORE UPDATE ON casualty_card_pain_assessment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_pain_assessment
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_pain_assessment IS
+COMMENT ON TABLE casualty_card_form.casualty_card_pain_assessment IS
     '1:1 with casualty_card. Structured pain assessment using NRS and descriptive characterisation.';
-COMMENT ON COLUMN casualty_card_pain_assessment.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_present IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_present IS
     'Whether pain is present: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_score IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_score IS
     'Numeric Rating Scale 0-10 (0 = no pain, 10 = worst pain imaginable). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_location IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_location IS
     'Anatomical location of the pain.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_character IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_character IS
     'Nature of the pain (e.g. sharp, dull, burning, throbbing).';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_onset IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_onset IS
     'When the pain started.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_severity_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_severity_category IS
     'Severity category: mild, moderate, severe, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_pain_assessment.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_pain_assessment.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_pain_assessment.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_pain_assessment.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -641,13 +658,13 @@ COMMENT ON COLUMN casualty_card_pain_assessment.deleted_at IS
 -- BEGIN 11_create_table_casualty_card_medical_history.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_medical_history (
+CREATE TABLE casualty_card_form.casualty_card_medical_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Past history
     past_medical_history    TEXT NOT NULL DEFAULT '',
     past_surgical_history   TEXT NOT NULL DEFAULT '',
@@ -665,34 +682,34 @@ CREATE TABLE casualty_card_medical_history (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_medical_history_updated_at
-    BEFORE UPDATE ON casualty_card_medical_history
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_medical_history
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_medical_history IS
+COMMENT ON TABLE casualty_card_form.casualty_card_medical_history IS
     '1:1 with casualty_card. Past medical/surgical history, tetanus status, and social history.';
-COMMENT ON COLUMN casualty_card_medical_history.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_medical_history.past_medical_history IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.past_medical_history IS
     'Free-text past medical history.';
-COMMENT ON COLUMN casualty_card_medical_history.past_surgical_history IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.past_surgical_history IS
     'Free-text past surgical history.';
-COMMENT ON COLUMN casualty_card_medical_history.tetanus_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.tetanus_status IS
     'Tetanus immunisation status: up-to-date, not-up-to-date, unknown, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_medical_history.smoking_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.smoking_status IS
     'Smoking status: current, ex-smoker, never, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_medical_history.alcohol_consumption IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.alcohol_consumption IS
     'Description of alcohol consumption (e.g. units per week).';
-COMMENT ON COLUMN casualty_card_medical_history.recreational_drug_use IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.recreational_drug_use IS
     'Description of recreational drug use.';
-COMMENT ON COLUMN casualty_card_medical_history.last_oral_intake IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.last_oral_intake IS
     'Time and nature of last oral intake. Relevant for procedural sedation decisions.';
-COMMENT ON COLUMN casualty_card_medical_history.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_medical_history.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_medical_history.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_medical_history.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medical_history.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -703,13 +720,13 @@ COMMENT ON COLUMN casualty_card_medical_history.deleted_at IS
 -- BEGIN 12_create_table_casualty_card_medication.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_medication (
+CREATE TABLE casualty_card_form.casualty_card_medication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: each casualty card can have multiple medications
-    casualty_card_id  UUID NOT NULL REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id  UUID NOT NULL REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Medication details
     name              TEXT NOT NULL DEFAULT '',
     dose              TEXT NOT NULL DEFAULT '',
@@ -720,32 +737,32 @@ CREATE TABLE casualty_card_medication (
 
 -- Index for fetching all medications for a casualty card
 CREATE INDEX index_casualty_card_medication_casualty_card_id
-    ON casualty_card_medication(casualty_card_id);
+    ON casualty_card_form.casualty_card_medication(casualty_card_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_medication_updated_at
-    BEFORE UPDATE ON casualty_card_medication
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_medication
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_medication IS
+COMMENT ON TABLE casualty_card_form.casualty_card_medication IS
     'Many-to-one with casualty_card. Each row is one current medication the patient takes.';
-COMMENT ON COLUMN casualty_card_medication.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.casualty_card_id IS
     'FK to casualty_card. One casualty card may have many medications.';
-COMMENT ON COLUMN casualty_card_medication.name IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.name IS
     'Medication name (e.g. Metformin, Warfarin).';
-COMMENT ON COLUMN casualty_card_medication.dose IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.dose IS
     'Dose (e.g. 500mg, 5mg).';
-COMMENT ON COLUMN casualty_card_medication.frequency IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.frequency IS
     'Frequency (e.g. once daily, twice daily, PRN).';
-COMMENT ON COLUMN casualty_card_medication.sort_order IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.sort_order IS
     'Display ordering for consistent list rendering.';
-COMMENT ON COLUMN casualty_card_medication.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_medication.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_medication.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_medication.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_medication.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -756,13 +773,13 @@ COMMENT ON COLUMN casualty_card_medication.deleted_at IS
 -- BEGIN 13_create_table_casualty_card_allergy.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_allergy (
+CREATE TABLE casualty_card_form.casualty_card_allergy (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: each casualty card can have multiple allergies
-    casualty_card_id  UUID NOT NULL REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id  UUID NOT NULL REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Allergy details
     allergen          TEXT NOT NULL DEFAULT '',
     reaction          TEXT NOT NULL DEFAULT '',
@@ -774,32 +791,32 @@ CREATE TABLE casualty_card_allergy (
 
 -- Index for fetching all allergies for a casualty card
 CREATE INDEX index_casualty_card_allergy_casualty_card_id
-    ON casualty_card_allergy(casualty_card_id);
+    ON casualty_card_form.casualty_card_allergy(casualty_card_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_allergy_updated_at
-    BEFORE UPDATE ON casualty_card_allergy
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_allergy
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_allergy IS
+COMMENT ON TABLE casualty_card_form.casualty_card_allergy IS
     'Many-to-one with casualty_card. Each row is one documented allergy.';
-COMMENT ON COLUMN casualty_card_allergy.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.casualty_card_id IS
     'FK to casualty_card. One casualty card may have many allergies.';
-COMMENT ON COLUMN casualty_card_allergy.allergen IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.allergen IS
     'Name of the allergen (e.g. Penicillin, Latex).';
-COMMENT ON COLUMN casualty_card_allergy.reaction IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.reaction IS
     'Description of the allergic reaction.';
-COMMENT ON COLUMN casualty_card_allergy.severity IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.severity IS
     'Allergy severity: mild, moderate, anaphylaxis, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_allergy.sort_order IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.sort_order IS
     'Display ordering for consistent list rendering.';
-COMMENT ON COLUMN casualty_card_allergy.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_allergy.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_allergy.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_allergy.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_allergy.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -810,13 +827,13 @@ COMMENT ON COLUMN casualty_card_allergy.deleted_at IS
 -- BEGIN 14_create_table_casualty_card_vital_signs.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_vital_signs (
+CREATE TABLE casualty_card_form.casualty_card_vital_signs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Cardiovascular
     heart_rate              INTEGER
                             CHECK (heart_rate IS NULL OR (heart_rate >= 0 AND heart_rate <= 300)),
@@ -858,52 +875,52 @@ CREATE TABLE casualty_card_vital_signs (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_vital_signs_updated_at
-    BEFORE UPDATE ON casualty_card_vital_signs
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_vital_signs
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_vital_signs IS
+COMMENT ON TABLE casualty_card_form.casualty_card_vital_signs IS
     '1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.';
-COMMENT ON COLUMN casualty_card_vital_signs.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_vital_signs.heart_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.heart_rate IS
     'Heart rate in beats per minute. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.systolic_bp IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.systolic_bp IS
     'Systolic blood pressure in mmHg. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.diastolic_bp IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.diastolic_bp IS
     'Diastolic blood pressure in mmHg. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.respiratory_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.respiratory_rate IS
     'Respiratory rate in breaths per minute. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.oxygen_saturation IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.oxygen_saturation IS
     'Peripheral oxygen saturation (SpO2) as a percentage. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.supplemental_oxygen IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.supplemental_oxygen IS
     'Whether patient is on supplemental oxygen: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.oxygen_flow_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.oxygen_flow_rate IS
     'Oxygen flow rate (e.g. 2L/min, 15L NRB).';
-COMMENT ON COLUMN casualty_card_vital_signs.temperature IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.temperature IS
     'Core temperature in degrees Celsius. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.blood_glucose IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.blood_glucose IS
     'Blood glucose in mmol/L. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.consciousness_level IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.consciousness_level IS
     'AVPU consciousness level: alert, verbal, pain, unresponsive, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_left_size IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_left_size IS
     'Left pupil size in mm (1-9). NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_left_reactive IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_left_reactive IS
     'Whether the left pupil is reactive to light: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_right_size IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_right_size IS
     'Right pupil size in mm (1-9). NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_right_reactive IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_right_reactive IS
     'Whether the right pupil is reactive to light: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.capillary_refill_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.capillary_refill_time IS
     'Capillary refill time (e.g. less than 2 seconds, 3 seconds).';
-COMMENT ON COLUMN casualty_card_vital_signs.weight IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.weight IS
     'Patient weight in kilograms. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_vital_signs.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_vital_signs.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_vital_signs.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -914,13 +931,13 @@ COMMENT ON COLUMN casualty_card_vital_signs.deleted_at IS
 -- BEGIN 15_create_table_casualty_card_primary_survey.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_primary_survey (
+CREATE TABLE casualty_card_form.casualty_card_primary_survey (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- A: Airway
     airway_status             TEXT NOT NULL DEFAULT ''
                               CHECK (airway_status IN ('patent', 'compromised', 'obstructed', '')),
@@ -960,66 +977,66 @@ CREATE TABLE casualty_card_primary_survey (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_primary_survey_updated_at
-    BEFORE UPDATE ON casualty_card_primary_survey
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_primary_survey
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_primary_survey IS
+COMMENT ON TABLE casualty_card_form.casualty_card_primary_survey IS
     '1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.';
-COMMENT ON COLUMN casualty_card_primary_survey.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_primary_survey.airway_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.airway_status IS
     'Airway status: patent, compromised, obstructed, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.airway_adjuncts IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.airway_adjuncts IS
     'Airway adjuncts in use (e.g. oropharyngeal, nasopharyngeal, LMA, ETT).';
-COMMENT ON COLUMN casualty_card_primary_survey.c_spine_immobilised IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.c_spine_immobilised IS
     'Whether cervical spine immobilisation is in place: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.breathing_effort IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.breathing_effort IS
     'Breathing effort: normal, laboured, shallow, absent, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.chest_movement IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.chest_movement IS
     'Description of chest wall movement (e.g. equal bilateral, asymmetric).';
-COMMENT ON COLUMN casualty_card_primary_survey.breath_sounds IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.breath_sounds IS
     'Auscultation findings (e.g. clear bilateral, wheeze, crackles, absent).';
-COMMENT ON COLUMN casualty_card_primary_survey.trachea_position IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.trachea_position IS
     'Trachea position (e.g. central, deviated left, deviated right).';
-COMMENT ON COLUMN casualty_card_primary_survey.pulse_character IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.pulse_character IS
     'Pulse character (e.g. regular, irregular, bounding, thready, absent).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_colour IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_colour IS
     'Skin colour (e.g. normal, pale, cyanosed, flushed, mottled).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_temperature IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_temperature IS
     'Skin temperature on palpation (e.g. warm, cool, cold, clammy).';
-COMMENT ON COLUMN casualty_card_primary_survey.capillary_refill IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.capillary_refill IS
     'Capillary refill time assessment.';
-COMMENT ON COLUMN casualty_card_primary_survey.haemorrhage IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.haemorrhage IS
     'Description of any active haemorrhage and control measures.';
-COMMENT ON COLUMN casualty_card_primary_survey.iv_access IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.iv_access IS
     'IV access details (e.g. 18G left ACF, none).';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_eye IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_eye IS
     'Glasgow Coma Scale eye opening component (1-4). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_verbal IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_verbal IS
     'Glasgow Coma Scale verbal response component (1-5). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_motor IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_motor IS
     'Glasgow Coma Scale motor response component (1-6). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_total IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_total IS
     'Glasgow Coma Scale total (3-15), auto-calculated from eye + verbal + motor. NULL if components not complete.';
-COMMENT ON COLUMN casualty_card_primary_survey.pupils IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.pupils IS
     'Pupil assessment findings.';
-COMMENT ON COLUMN casualty_card_primary_survey.blood_glucose_disability IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.blood_glucose_disability IS
     'Blood glucose level recorded during disability assessment.';
-COMMENT ON COLUMN casualty_card_primary_survey.limb_movements IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.limb_movements IS
     'Limb movement assessment (e.g. all limbs moving spontaneously).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_examination IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_examination IS
     'Skin examination findings on exposure (e.g. rashes, wounds, bruising).';
-COMMENT ON COLUMN casualty_card_primary_survey.injuries_identified IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.injuries_identified IS
     'Injuries identified on full exposure examination.';
-COMMENT ON COLUMN casualty_card_primary_survey.log_roll_findings IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.log_roll_findings IS
     'Findings from log roll examination (e.g. spinal tenderness, sacral oedema).';
-COMMENT ON COLUMN casualty_card_primary_survey.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_primary_survey.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_primary_survey.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_primary_survey.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1030,13 +1047,13 @@ COMMENT ON COLUMN casualty_card_primary_survey.deleted_at IS
 -- BEGIN 16_create_table_casualty_card_clinical_examination.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_clinical_examination (
+CREATE TABLE casualty_card_form.casualty_card_clinical_examination (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Systems examination
     general_appearance      TEXT NOT NULL DEFAULT '',
     head_and_face           TEXT NOT NULL DEFAULT '',
@@ -1056,44 +1073,44 @@ CREATE TABLE casualty_card_clinical_examination (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_clinical_examination_updated_at
-    BEFORE UPDATE ON casualty_card_clinical_examination
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_clinical_examination
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_clinical_examination IS
+COMMENT ON TABLE casualty_card_form.casualty_card_clinical_examination IS
     '1:1 with casualty_card. Systems-based clinical examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_clinical_examination.general_appearance IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.general_appearance IS
     'General appearance (e.g. alert, distressed, comfortable, unwell).';
-COMMENT ON COLUMN casualty_card_clinical_examination.head_and_face IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.head_and_face IS
     'Head and face examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.neck IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.neck IS
     'Neck examination findings (e.g. JVP, lymphadenopathy, c-spine tenderness).';
-COMMENT ON COLUMN casualty_card_clinical_examination.chest_cardiovascular IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.chest_cardiovascular IS
     'Cardiovascular examination findings (e.g. heart sounds, murmurs, oedema).';
-COMMENT ON COLUMN casualty_card_clinical_examination.chest_respiratory IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.chest_respiratory IS
     'Respiratory examination findings (e.g. air entry, added sounds).';
-COMMENT ON COLUMN casualty_card_clinical_examination.abdomen IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.abdomen IS
     'Abdominal examination findings (e.g. soft, tender, guarding, bowel sounds).';
-COMMENT ON COLUMN casualty_card_clinical_examination.pelvis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.pelvis IS
     'Pelvic examination findings (e.g. stable, spring test).';
-COMMENT ON COLUMN casualty_card_clinical_examination.musculoskeletal_limbs IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.musculoskeletal_limbs IS
     'Musculoskeletal and limb examination findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.neurological IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.neurological IS
     'Neurological examination findings (e.g. power, sensation, reflexes, cranial nerves).';
-COMMENT ON COLUMN casualty_card_clinical_examination.skin IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.skin IS
     'Skin examination findings (e.g. rash, wounds, bruising, cellulitis).';
-COMMENT ON COLUMN casualty_card_clinical_examination.mental_state IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.mental_state IS
     'Mental state assessment findings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.body_diagram_notes IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.body_diagram_notes IS
     'Free-text notes to accompany body diagram markings.';
-COMMENT ON COLUMN casualty_card_clinical_examination.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_clinical_examination.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_clinical_examination.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_clinical_examination.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_clinical_examination.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1104,13 +1121,13 @@ COMMENT ON COLUMN casualty_card_clinical_examination.deleted_at IS
 -- BEGIN 17_create_table_casualty_card_investigations.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_investigations (
+CREATE TABLE casualty_card_form.casualty_card_investigations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Blood tests (array of selected test types, e.g. FBC, U&E, LFTs, CRP, troponin)
     blood_tests             TEXT[] NOT NULL DEFAULT '{}',
     -- Urinalysis
@@ -1126,32 +1143,32 @@ CREATE TABLE casualty_card_investigations (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_investigations_updated_at
-    BEFORE UPDATE ON casualty_card_investigations
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_investigations
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_investigations IS
+COMMENT ON TABLE casualty_card_form.casualty_card_investigations IS
     '1:1 with casualty_card. Investigations ordered and their results.';
-COMMENT ON COLUMN casualty_card_investigations.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_investigations.blood_tests IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.blood_tests IS
     'Array of blood test types ordered (e.g. FBC, U&E, LFTs, CRP, coagulation, troponin).';
-COMMENT ON COLUMN casualty_card_investigations.urinalysis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.urinalysis IS
     'Urinalysis dipstick results.';
-COMMENT ON COLUMN casualty_card_investigations.pregnancy_test IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.pregnancy_test IS
     'Pregnancy test result.';
-COMMENT ON COLUMN casualty_card_investigations.ecg_performed IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.ecg_performed IS
     'Whether an ECG was performed: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_investigations.ecg_findings IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.ecg_findings IS
     'ECG interpretation findings.';
-COMMENT ON COLUMN casualty_card_investigations.other_investigations IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.other_investigations IS
     'Free-text description of other investigations performed.';
-COMMENT ON COLUMN casualty_card_investigations.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_investigations.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_investigations.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_investigations.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_investigations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1162,13 +1179,13 @@ COMMENT ON COLUMN casualty_card_investigations.deleted_at IS
 -- BEGIN 18_create_table_casualty_card_treatment.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_treatment (
+CREATE TABLE casualty_card_form.casualty_card_treatment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Oxygen therapy
     oxygen_therapy_device     TEXT NOT NULL DEFAULT '',
     oxygen_therapy_flow_rate  TEXT NOT NULL DEFAULT '',
@@ -1179,26 +1196,26 @@ CREATE TABLE casualty_card_treatment (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_treatment_updated_at
-    BEFORE UPDATE ON casualty_card_treatment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_treatment
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_treatment IS
+COMMENT ON TABLE casualty_card_form.casualty_card_treatment IS
     '1:1 with casualty_card. Oxygen therapy and tetanus prophylaxis. Medications, fluids, and procedures are separate tables.';
-COMMENT ON COLUMN casualty_card_treatment.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_treatment.oxygen_therapy_device IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.oxygen_therapy_device IS
     'Oxygen delivery device (e.g. nasal cannula, simple face mask, non-rebreather mask).';
-COMMENT ON COLUMN casualty_card_treatment.oxygen_therapy_flow_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.oxygen_therapy_flow_rate IS
     'Oxygen flow rate (e.g. 2L/min, 15L/min).';
-COMMENT ON COLUMN casualty_card_treatment.tetanus_prophylaxis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.tetanus_prophylaxis IS
     'Tetanus prophylaxis status: given, not-indicated, status-checked, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_treatment.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_treatment.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_treatment.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_treatment.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_treatment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1209,13 +1226,13 @@ COMMENT ON COLUMN casualty_card_treatment.deleted_at IS
 -- BEGIN 19_create_table_casualty_card_assessment_plan.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_assessment_plan (
+CREATE TABLE casualty_card_form.casualty_card_assessment_plan (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Clinical assessment
     working_diagnosis         TEXT NOT NULL DEFAULT '',
     differential_diagnoses    TEXT NOT NULL DEFAULT '',
@@ -1225,28 +1242,28 @@ CREATE TABLE casualty_card_assessment_plan (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_assessment_plan_updated_at
-    BEFORE UPDATE ON casualty_card_assessment_plan
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_assessment_plan
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_assessment_plan IS
+COMMENT ON TABLE casualty_card_form.casualty_card_assessment_plan IS
     '1:1 with casualty_card. Working diagnosis, differentials, clinical impression, and risk stratification.';
-COMMENT ON COLUMN casualty_card_assessment_plan.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_assessment_plan.working_diagnosis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.working_diagnosis IS
     'Primary working diagnosis based on clinical assessment.';
-COMMENT ON COLUMN casualty_card_assessment_plan.differential_diagnoses IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.differential_diagnoses IS
     'List of differential diagnoses being considered.';
-COMMENT ON COLUMN casualty_card_assessment_plan.clinical_impression IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.clinical_impression IS
     'Overall clinical impression and summary of findings.';
-COMMENT ON COLUMN casualty_card_assessment_plan.risk_stratification IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.risk_stratification IS
     'Risk stratification assessment (e.g. HEART score, Wells score results).';
-COMMENT ON COLUMN casualty_card_assessment_plan.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_assessment_plan.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_assessment_plan.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_assessment_plan.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_assessment_plan.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1257,13 +1274,13 @@ COMMENT ON COLUMN casualty_card_assessment_plan.deleted_at IS
 -- BEGIN 20_create_table_casualty_card_disposition.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_disposition (
+CREATE TABLE casualty_card_form.casualty_card_disposition (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Disposition type
     disposition                 TEXT NOT NULL DEFAULT ''
                                 CHECK (disposition IN ('admitted', 'discharged', 'transferred', 'left-before-seen', 'self-discharged', '')),
@@ -1289,50 +1306,50 @@ CREATE TABLE casualty_card_disposition (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_disposition_updated_at
-    BEFORE UPDATE ON casualty_card_disposition
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_disposition
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_disposition IS
+COMMENT ON TABLE casualty_card_form.casualty_card_disposition IS
     '1:1 with casualty_card. Disposition, discharge, admission, or transfer details.';
-COMMENT ON COLUMN casualty_card_disposition.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_disposition.disposition IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.disposition IS
     'Disposition type: admitted, discharged, transferred, left-before-seen, self-discharged, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_disposition.admitting_specialty IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.admitting_specialty IS
     'Specialty the patient is admitted under (e.g. General Medicine, Orthopaedics). Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.admitting_consultant IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.admitting_consultant IS
     'Name of the admitting consultant. Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.ward IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.ward IS
     'Ward the patient is admitted to. Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.level_of_care IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.level_of_care IS
     'Level of care required (e.g. Level 0, Level 1, Level 2, Level 3). Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_diagnosis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_diagnosis IS
     'Final diagnosis at discharge. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_medications IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_medications IS
     'Medications prescribed at discharge (TTO). Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_instructions IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_instructions IS
     'Patient discharge instructions and advice. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.follow_up IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.follow_up IS
     'Follow-up arrangements (e.g. GP in 48 hours, fracture clinic 1 week). Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.return_precautions IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.return_precautions IS
     'Safety-net advice: symptoms or signs warranting return to ED. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.receiving_hospital IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.receiving_hospital IS
     'Name of the receiving hospital. Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.reason_for_transfer IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.reason_for_transfer IS
     'Clinical reason for transfer. Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.mode_of_transfer IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.mode_of_transfer IS
     'Mode of transfer (e.g. ambulance, helicopter). Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_time IS
     'Timestamp when the patient left the department. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_disposition.total_time_in_department IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.total_time_in_department IS
     'Total time the patient spent in the department.';
-COMMENT ON COLUMN casualty_card_disposition.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_disposition.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_disposition.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_disposition.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1343,13 +1360,13 @@ COMMENT ON COLUMN casualty_card_disposition.deleted_at IS
 -- BEGIN 21_create_table_casualty_card_safeguarding_consent.sql
 -- ========================================================================
 
-CREATE TABLE casualty_card_safeguarding_consent (
+CREATE TABLE casualty_card_form.casualty_card_safeguarding_consent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id              UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id              UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Safeguarding
     safeguarding_concern          TEXT NOT NULL DEFAULT ''
                                   CHECK (safeguarding_concern IN ('yes', 'no', '')),
@@ -1371,40 +1388,40 @@ CREATE TABLE casualty_card_safeguarding_consent (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_safeguarding_consent_updated_at
-    BEFORE UPDATE ON casualty_card_safeguarding_consent
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_safeguarding_consent
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_safeguarding_consent IS
+COMMENT ON TABLE casualty_card_form.casualty_card_safeguarding_consent IS
     '1:1 with casualty_card. Safeguarding concerns, mental capacity, consent, and completing clinician details.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.safeguarding_concern IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.safeguarding_concern IS
     'Whether a safeguarding concern has been identified: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.safeguarding_type IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.safeguarding_type IS
     'Type of safeguarding concern (e.g. adult at risk, child protection, domestic abuse).';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.referral_made IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.referral_made IS
     'Whether a safeguarding referral has been made: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.mental_capacity_assessment IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.mental_capacity_assessment IS
     'Outcome of mental capacity assessment.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.mental_health_act_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.mental_health_act_status IS
     'Mental Health Act section status if applicable (e.g. Section 2, Section 136).';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.consent_for_treatment IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.consent_for_treatment IS
     'Type of consent obtained: verbal, written, lacks-capacity, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.completed_by_name IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.completed_by_name IS
     'Name of the clinician who completed the casualty card.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.completed_by_role IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.completed_by_role IS
     'Role of the completing clinician (e.g. SHO, Registrar, Consultant).';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.completed_by_gmc_number IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.completed_by_gmc_number IS
     'GMC registration number of the completing clinician.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.senior_reviewing_clinician IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.senior_reviewing_clinician IS
     'Name of the senior clinician who reviewed the case.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_safeguarding_consent.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_safeguarding_consent.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1415,13 +1432,13 @@ COMMENT ON COLUMN casualty_card_safeguarding_consent.deleted_at IS
 -- BEGIN 22_create_table_news2_result.sql
 -- ========================================================================
 
-CREATE TABLE news2_result (
+CREATE TABLE casualty_card_form.news2_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Computed NEWS2 total score (sum of 7 parameter scores, range 0-20)
     total_score             INTEGER NOT NULL
                             CHECK (total_score >= 0 AND total_score <= 20),
@@ -1440,30 +1457,30 @@ CREATE TABLE news2_result (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_news2_result_updated_at
-    BEFORE UPDATE ON news2_result
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.news2_result
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE news2_result IS
+COMMENT ON TABLE casualty_card_form.news2_result IS
     '1:1 with casualty_card. Computed NEWS2 score with clinical response threshold and parameter breakdown.';
-COMMENT ON COLUMN news2_result.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.news2_result.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN news2_result.total_score IS
+COMMENT ON COLUMN casualty_card_form.news2_result.total_score IS
     'NEWS2 aggregate score (0-20). Sum of 7 parameter scores.';
-COMMENT ON COLUMN news2_result.clinical_response IS
+COMMENT ON COLUMN casualty_card_form.news2_result.clinical_response IS
     'Clinical response threshold: low (0-4), low-medium (single param 3), medium (5-6), high (>=7), or empty string if unanswered.';
-COMMENT ON COLUMN news2_result.has_any_single_score_3 IS
+COMMENT ON COLUMN casualty_card_form.news2_result.has_any_single_score_3 IS
     'TRUE if any single NEWS2 parameter scored 3. Triggers urgent ward review regardless of total.';
-COMMENT ON COLUMN news2_result.parameter_scores IS
+COMMENT ON COLUMN casualty_card_form.news2_result.parameter_scores IS
     'JSONB object with individual parameter scores. Keys: respiratory_rate, oxygen_saturation, systolic_bp, pulse, consciousness, temperature, supplemental_oxygen.';
-COMMENT ON COLUMN news2_result.scored_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.scored_at IS
     'Timestamp when the NEWS2 scoring engine produced this result.';
-COMMENT ON COLUMN news2_result.id IS
+COMMENT ON COLUMN casualty_card_form.news2_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN news2_result.created_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN news2_result.updated_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN news2_result.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.news2_result.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1474,13 +1491,13 @@ COMMENT ON COLUMN news2_result.deleted_at IS
 -- BEGIN 23_create_table_flagged_issue.sql
 -- ========================================================================
 
-CREATE TABLE flagged_issue (
+CREATE TABLE casualty_card_form.flagged_issue (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one NEWS2 result can have many flagged issues
-    news2_result_id     UUID NOT NULL REFERENCES news2_result(id) ON DELETE CASCADE,
+    news2_result_id     UUID NOT NULL REFERENCES casualty_card_form.news2_result(id) ON DELETE CASCADE,
     -- Flag identification (matches the application-side flag id)
     flag_id             TEXT NOT NULL,
     -- Flag details
@@ -1491,36 +1508,36 @@ CREATE TABLE flagged_issue (
 
 -- Index for fetching all flagged issues for a NEWS2 result
 CREATE INDEX index_flagged_issue_news2_result_id
-    ON flagged_issue(news2_result_id);
+    ON casualty_card_form.flagged_issue(news2_result_id);
 
 -- Prevent duplicate flags per NEWS2 result
 CREATE UNIQUE INDEX idx_flagged_issue_unique
-    ON flagged_issue(news2_result_id, flag_id);
+    ON casualty_card_form.flagged_issue(news2_result_id, flag_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_flagged_issue_updated_at
-    BEFORE UPDATE ON flagged_issue
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.flagged_issue
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE flagged_issue IS
+COMMENT ON TABLE casualty_card_form.flagged_issue IS
     'Many-to-one with news2_result. Safety-critical alerts detected by the flagged issues engine.';
-COMMENT ON COLUMN flagged_issue.news2_result_id IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.news2_result_id IS
     'FK to news2_result. One result may have many flagged issues.';
-COMMENT ON COLUMN flagged_issue.flag_id IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.flag_id IS
     'Application-side flag identifier (e.g. FLAG-NEWS2-CRITICAL, FLAG-GCS-LOW).';
-COMMENT ON COLUMN flagged_issue.category IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.category IS
     'Flag category (e.g. NEWS2, Airway, Allergy, Safeguarding, Neurology).';
-COMMENT ON COLUMN flagged_issue.message IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.message IS
     'Human-readable alert message for the clinician.';
-COMMENT ON COLUMN flagged_issue.priority IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.priority IS
     'Alert priority: high, medium, or low.';
-COMMENT ON COLUMN flagged_issue.id IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN flagged_issue.created_at IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN flagged_issue.updated_at IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN flagged_issue.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.flagged_issue.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

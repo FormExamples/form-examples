@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS columbia_suicide_severity_rating_scale;
+
+COMMENT ON SCHEMA columbia_suicide_severity_rating_scale IS
+    'Namespace for the Columbia Suicide Severity Rating Scale (C-SSRS) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION columbia_suicide_severity_rating_scale.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE columbia_suicide_severity_rating_scale.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.patient IS
     'Patient demographic information used by the C-SSRS suicide-risk assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON columbia_suicide_severity_rating_scale.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- practitioner, nurse, emergency or crisis worker, or other trained
 -- screener).
 
-CREATE TABLE clinician (
+CREATE TABLE columbia_suicide_severity_rating_scale.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.clinician IS
     'Clinician identifying information for the member of staff who performed the C-SSRS suicide-risk assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.role IS
     'Assessing role: clinician, nurse, mental-health-practitioner, crisis-worker, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON columbia_suicide_severity_rating_scale.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- inputs. The computed risk classification, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE columbia_suicide_severity_rating_scale (
+CREATE TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES columbia_suicide_severity_rating_scale.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES columbia_suicide_severity_rating_scale.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -270,94 +287,94 @@ CREATE TABLE columbia_suicide_severity_rating_scale (
 );
 
 CREATE INDEX columbia_suicide_severity_rating_scale_patient_id_idx
-    ON columbia_suicide_severity_rating_scale (patient_id);
+    ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale (patient_id);
 CREATE INDEX columbia_suicide_severity_rating_scale_clinician_id_idx
-    ON columbia_suicide_severity_rating_scale (clinician_id);
+    ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale (clinician_id);
 
 CREATE TRIGGER trigger_columbia_suicide_severity_rating_scale_updated_at
-    BEFORE UPDATE ON columbia_suicide_severity_rating_scale
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE columbia_suicide_severity_rating_scale IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale IS
     'Main C-SSRS assessment record: context, patient identification, the five ordinal ideation items, optional ideation-intensity sub-items, categorical behaviour items with recency, and lethality and means inputs.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician_name IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinician_role IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.clinician_role IS
     'Role of the assessing clinician: clinician, nurse, mental-health-practitioner, crisis-worker, or other.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.assessed_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.care_setting IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.care_setting IS
     'Care setting: mental-health, emergency-department, primary-care, crisis-service, inpatient, or other.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.scale_version IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.scale_version IS
     'C-SSRS version used: screener (triage) or full (clinical).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.reason_for_assessment IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.reason_for_assessment IS
     'Free-text trigger or reason for performing the screen.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.patient_identifier IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.age_band IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.age_band IS
     'Age band: adolescent or adult.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.sex IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.wish_to_be_dead IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.wish_to_be_dead IS
     'Ideation Q1 (level 1) — passive wish to be dead (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.non_specific_active_thoughts IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.non_specific_active_thoughts IS
     'Ideation Q2 (level 2) — non-specific active suicidal thoughts, no method, intent, or plan (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.active_ideation_methods IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.active_ideation_methods IS
     'Ideation Q3 (level 3) — active ideation with any methods but no specific plan or intent (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.active_ideation_intent IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.active_ideation_intent IS
     'Ideation Q4 (level 4) — active ideation with some intent to act, without a fully worked-out plan (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.active_ideation_plan IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.active_ideation_plan IS
     'Ideation Q5 (level 5) — active ideation with a specific plan and intent to act (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_timeframe IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_timeframe IS
     'Reference timeframe for the ideation items: past-month or lifetime-worst.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_frequency IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_frequency IS
     'Ideation-intensity sub-item (0-5) — frequency of the most severe ideation; full version only.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_duration IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_duration IS
     'Ideation-intensity sub-item (0-5) — duration of the most severe ideation; full version only.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_controllability IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_controllability IS
     'Ideation-intensity sub-item (0-5) — controllability of the most severe ideation; full version only.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_deterrents IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_deterrents IS
     'Ideation-intensity sub-item (0-5) — deterrents against acting on the ideation; full version only.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.ideation_reasons IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.ideation_reasons IS
     'Ideation-intensity sub-item (0-5) — reasons for the ideation; full version only.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.actual_attempt IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.actual_attempt IS
     'Suicidal behaviour — actual attempt, a potentially self-injurious act with at least some intent to die (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.interrupted_attempt IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.interrupted_attempt IS
     'Suicidal behaviour — interrupted attempt, stopped by an outside circumstance before self-harm begins (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.aborted_attempt IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.aborted_attempt IS
     'Suicidal behaviour — aborted or self-interrupted attempt, the person stops before beginning the act (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.preparatory_acts IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.preparatory_acts IS
     'Suicidal behaviour — preparatory acts or behaviour, e.g. acquiring means or writing a note (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.non_suicidal_self_injury IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.non_suicidal_self_injury IS
     'Non-suicidal self-injury (NSSI) — self-injury without intent to die; tracked separately and does not count as suicidal behaviour (yes/no).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.behaviour_recency IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.behaviour_recency IS
     'Recency of the most recent suicidal behaviour: within-3-months or over-3-months (lifetime).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.lifetime_attempt_count IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.lifetime_attempt_count IS
     'Total number of lifetime actual attempts.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.most_recent_attempt_date IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.most_recent_attempt_date IS
     'Date of the most recent actual attempt.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.actual_lethality IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.actual_lethality IS
     'Actual lethality / medical damage of the most recent actual attempt, ordinal 0-5 (0 = no physical damage, 5 = death).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.potential_lethality IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.potential_lethality IS
     'Potential lethality, ordinal 0-2, coded only when actual lethality is 0.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.access_to_lethal_means IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.access_to_lethal_means IS
     'Access to lethal means: yes, no, or unknown.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.protective_factors IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.protective_factors IS
     'Free-text note describing protective factors.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinical_note IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -374,14 +391,14 @@ COMMENT ON COLUMN columbia_suicide_severity_rating_scale.clinical_note IS
 -- the positive features that drove the tier, and the management
 -- recommendation. The fired rules and flags live in dedicated child tables.
 
-CREATE TABLE columbia_suicide_severity_rating_scale_grade (
+CREATE TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     columbia_suicide_severity_rating_scale_id UUID NOT NULL UNIQUE
-        REFERENCES columbia_suicide_severity_rating_scale(id) ON DELETE CASCADE,
+        REFERENCES columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale(id) ON DELETE CASCADE,
 
     ideation_level INT CHECK (ideation_level BETWEEN 0 AND 5),
     any_behaviour VARCHAR(5) NOT NULL DEFAULT ''
@@ -398,35 +415,35 @@ CREATE TABLE columbia_suicide_severity_rating_scale_grade (
 );
 
 CREATE TRIGGER trigger_columbia_suicide_severity_rating_scale_grade_updated_at
-    BEFORE UPDATE ON columbia_suicide_severity_rating_scale_grade
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE columbia_suicide_severity_rating_scale_grade IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade IS
     'Computed C-SSRS risk classification result: derived ideation level (0-5), behaviour-present and recent-behaviour flags, Low / Moderate / High risk tier, positive-features summary, and management recommendation.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.columbia_suicide_severity_rating_scale_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.columbia_suicide_severity_rating_scale_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.ideation_level IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.ideation_level IS
     'Derived ordinal ideation level 0-5: the highest affirmative ideation item (0 when none present).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.any_behaviour IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.any_behaviour IS
     'Whether any suicidal behaviour is present (actual, interrupted, aborted attempt, or preparatory acts; NSSI excluded).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.recent_behaviour IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.recent_behaviour IS
     'Whether suicidal behaviour is present and occurred within the past 3 months.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.risk_tier IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.risk_tier IS
     'Derived risk tier: low, moderate, or high.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.positive_features IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.positive_features IS
     'Human-readable summary of the positive features (fired criteria) that drove the risk tier.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.management_recommendation IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.management_recommendation IS
     'Proportionate management recommendation for the derived risk tier.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.graded_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -442,14 +459,14 @@ COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade.graded_at IS
 -- dimension it belongs to, the risk tier it contributed, a subject
 -- category, and a human-readable description.
 
-CREATE TABLE columbia_suicide_severity_rating_scale_grade_rule (
+CREATE TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     columbia_suicide_severity_rating_scale_grade_id UUID NOT NULL
-        REFERENCES columbia_suicide_severity_rating_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL
@@ -461,34 +478,34 @@ CREATE TABLE columbia_suicide_severity_rating_scale_grade_rule (
 );
 
 CREATE INDEX columbia_suicide_severity_rating_scale_grade_rule_grade_id_idx
-    ON columbia_suicide_severity_rating_scale_grade_rule (columbia_suicide_severity_rating_scale_grade_id);
+    ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule (columbia_suicide_severity_rating_scale_grade_id);
 
 CREATE TRIGGER trigger_columbia_suicide_severity_rating_scale_grade_rule_updated_at
-    BEFORE UPDATE ON columbia_suicide_severity_rating_scale_grade_rule
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE columbia_suicide_severity_rating_scale_grade_rule IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule IS
     'Audit trail of every classification rule that fired during C-SSRS risk-tier computation: dimension, contributed tier, category, and description.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.columbia_suicide_severity_rating_scale_grade_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.columbia_suicide_severity_rating_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.rule_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-IDEATION-LEVEL5-01).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.dimension IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.dimension IS
     'Assessment dimension the rule belongs to: ideation, behaviour, lethality, means, or tier.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.tier IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.tier IS
     'Risk tier contributed by this rule: low, moderate, or high.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.category IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.category IS
     'Subject category (e.g. ideation-level, recent-behaviour, high-lethality).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.description IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -502,14 +519,14 @@ COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_rule.description 
 -- Red-flag issues that fire independently of the risk tier, each with a
 -- priority and a suggested action for the clinical or crisis team.
 
-CREATE TABLE columbia_suicide_severity_rating_scale_grade_flag (
+CREATE TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     columbia_suicide_severity_rating_scale_grade_id UUID NOT NULL
-        REFERENCES columbia_suicide_severity_rating_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -533,34 +550,34 @@ CREATE TABLE columbia_suicide_severity_rating_scale_grade_flag (
 );
 
 CREATE INDEX columbia_suicide_severity_rating_scale_grade_flag_grade_id_idx
-    ON columbia_suicide_severity_rating_scale_grade_flag (columbia_suicide_severity_rating_scale_grade_id);
+    ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag (columbia_suicide_severity_rating_scale_grade_id);
 
 CREATE TRIGGER trigger_columbia_suicide_severity_rating_scale_grade_flag_updated_at
-    BEFORE UPDATE ON columbia_suicide_severity_rating_scale_grade_flag
+    BEFORE UPDATE ON columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION columbia_suicide_severity_rating_scale.set_updated_at();
 
-COMMENT ON TABLE columbia_suicide_severity_rating_scale_grade_flag IS
+COMMENT ON TABLE columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag IS
     'Red-flag issues that fire independently of the risk tier, with priority and a suggested action for the clinical or crisis team.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.created_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.updated_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.deleted_at IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.columbia_suicide_severity_rating_scale_grade_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.columbia_suicide_severity_rating_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.flag_id IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-RISK-CRISIS-RESPONSE-001).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.category IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.priority IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.description IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN columbia_suicide_severity_rating_scale_grade_flag.suggested_action IS
+COMMENT ON COLUMN columbia_suicide_severity_rating_scale.columbia_suicide_severity_rating_scale_grade_flag.suggested_action IS
     'Suggested clinical or crisis-response action (e.g. "arrange emergency mental-health evaluation; do not leave the person alone").';
 
 -- ========================================================================

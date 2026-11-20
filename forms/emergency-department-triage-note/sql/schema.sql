@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS emergency_department_triage_note;
+
+COMMENT ON SCHEMA emergency_department_triage_note IS
+    'Namespace for the Emergency Department Triage Note form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION emergency_department_triage_note.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION emergency_department_triage_note.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE emergency_department_triage_note.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON emergency_department_triage_note.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE emergency_department_triage_note.patient IS
     'Patient demographic information used by the emergency-department triage note.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.name IS
     'Full patient name as recorded at the front desk or on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN emergency_department_triage_note.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at triage.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON emergency_department_triage_note.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- (triage nurse, emergency nurse practitioner, emergency physician,
 -- registrar, healthcare assistant, or paramedic).
 
-CREATE TABLE clinician (
+CREATE TABLE emergency_department_triage_note.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON emergency_department_triage_note.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE emergency_department_triage_note.clinician IS
     'Clinician identifying information for the triaging clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.role IS
     'Primary clinical role: triage-nurse, emergency-nurse-practitioner, emergency-physician, emergency-registrar, foundation-trainee, healthcare-assistant, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN emergency_department_triage_note.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON emergency_department_triage_note.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- observations use NULL when a measurement was not recorded; text and
 -- enum fields default to the empty string.
 
-CREATE TABLE emergency_department_triage_note (
+CREATE TABLE emergency_department_triage_note.emergency_department_triage_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES emergency_department_triage_note.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES emergency_department_triage_note.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'amended', 'signed')),
@@ -288,94 +305,94 @@ CREATE TABLE emergency_department_triage_note (
 );
 
 CREATE INDEX emergency_department_triage_note_patient_id_idx
-    ON emergency_department_triage_note (patient_id);
+    ON emergency_department_triage_note.emergency_department_triage_note (patient_id);
 CREATE INDEX emergency_department_triage_note_clinician_id_idx
-    ON emergency_department_triage_note (clinician_id);
+    ON emergency_department_triage_note.emergency_department_triage_note (clinician_id);
 
 CREATE TRIGGER trigger_emergency_department_triage_note_updated_at
-    BEFORE UPDATE ON emergency_department_triage_note
+    BEFORE UPDATE ON emergency_department_triage_note.emergency_department_triage_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE emergency_department_triage_note IS
+COMMENT ON TABLE emergency_department_triage_note.emergency_department_triage_note IS
     'Main emergency-department triage-note record: arrival and context, presenting complaint and brief history, triage vital signs (NEWS2 inputs), pain score, and Manchester Triage System discriminator flags. The classification result, fired rules, and red-flag issues live in child tables.';
-COMMENT ON COLUMN emergency_department_triage_note.id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN emergency_department_triage_note.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN emergency_department_triage_note.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN emergency_department_triage_note.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN emergency_department_triage_note.patient_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.patient_id IS
     'Foreign key to the patient being triaged (RESTRICT: patients are not deleted while triage notes exist).';
-COMMENT ON COLUMN emergency_department_triage_note.clinician_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.clinician_id IS
     'Foreign key to the triaging clinician (RESTRICT); NULL until assigned.';
-COMMENT ON COLUMN emergency_department_triage_note.status IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN emergency_department_triage_note.nurse_name IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.nurse_name IS
     'Name of the triage nurse or clinician who performed the assessment.';
-COMMENT ON COLUMN emergency_department_triage_note.triaged_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.triaged_at IS
     'Date and time the triage assessment was performed; NULL when not yet recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.care_setting IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.care_setting IS
     'Care setting: emergency-department, urgent-treatment-centre, or minor-injuries-unit.';
-COMMENT ON COLUMN emergency_department_triage_note.arrival_mode IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.arrival_mode IS
     'Mode of arrival: walk-in, ambulance, or other.';
-COMMENT ON COLUMN emergency_department_triage_note.arrived_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.arrived_at IS
     'Date and time the patient arrived; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.referral_source IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.referral_source IS
     'Referral source (e.g. self, GP, ambulance service, other).';
-COMMENT ON COLUMN emergency_department_triage_note.patient_identifier IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.patient_identifier IS
     'Local patient identifier as recorded at triage.';
-COMMENT ON COLUMN emergency_department_triage_note.age_band IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.age_band IS
     'Age band: paediatric, adult, or older-adult.';
-COMMENT ON COLUMN emergency_department_triage_note.presenting_complaint IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.presenting_complaint IS
     'Chief presenting complaint in the patient''s or clinician''s words.';
-COMMENT ON COLUMN emergency_department_triage_note.brief_history IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.brief_history IS
     'Relevant brief history accompanying the presenting complaint.';
-COMMENT ON COLUMN emergency_department_triage_note.symptom_onset IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.symptom_onset IS
     'Timing of symptom onset (free text).';
-COMMENT ON COLUMN emergency_department_triage_note.respiratory_rate IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.respiratory_rate IS
     'Respiration rate in breaths per minute; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.spo2 IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.spo2 IS
     'Oxygen saturation as a percentage (SpO2); NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.on_oxygen IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.on_oxygen IS
     'Whether the patient is breathing air or receiving supplemental oxygen (NEWS2 +2 when oxygen).';
-COMMENT ON COLUMN emergency_department_triage_note.systolic_bp IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.systolic_bp IS
     'Systolic blood pressure in mmHg; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.pulse IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.pulse IS
     'Pulse rate in beats per minute; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.consciousness_acvpu IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.consciousness_acvpu IS
     'Consciousness level on the ACVPU scale: A (alert), C (new confusion), V (voice), P (pain), U (unresponsive).';
-COMMENT ON COLUMN emergency_department_triage_note.temperature IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.temperature IS
     'Body temperature in degrees Celsius; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.glasgow_coma_scale IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.glasgow_coma_scale IS
     'Optional Glasgow Coma Scale total (3-15) as a supporting disability finding; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.pain_score IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.pain_score IS
     'Pain score (0-10) used as a pain discriminator; NULL when not recorded.';
-COMMENT ON COLUMN emergency_department_triage_note.airway_threat IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.airway_threat IS
     'Discriminator: threat to the airway (Level-1 immediate).';
-COMMENT ON COLUMN emergency_department_triage_note.breathing_inadequate IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.breathing_inadequate IS
     'Discriminator: severely inadequate breathing (Level-1 immediate).';
-COMMENT ON COLUMN emergency_department_triage_note.circulation_shock IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.circulation_shock IS
     'Discriminator: shock or circulatory compromise (Level-1 immediate).';
-COMMENT ON COLUMN emergency_department_triage_note.haemorrhage_major IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.haemorrhage_major IS
     'Discriminator: major or catastrophic haemorrhage (Level-1 immediate).';
-COMMENT ON COLUMN emergency_department_triage_note.consciousness_reduced IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.consciousness_reduced IS
     'Discriminator: reduced consciousness responding to voice or pain (Level-2 very urgent).';
-COMMENT ON COLUMN emergency_department_triage_note.seizure_active IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.seizure_active IS
     'Discriminator: active seizure (Level-1 immediate).';
-COMMENT ON COLUMN emergency_department_triage_note.focal_neurology IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.focal_neurology IS
     'Discriminator: acute focal neurological deficit (Level-2 very urgent).';
-COMMENT ON COLUMN emergency_department_triage_note.sepsis_features IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.sepsis_features IS
     'Discriminator: features suggestive of sepsis (Level-2 very urgent; sepsis screen).';
-COMMENT ON COLUMN emergency_department_triage_note.chest_pain_cardiac IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.chest_pain_cardiac IS
     'Discriminator: chest pain of possible cardiac origin (Level-2 very urgent; time-critical).';
-COMMENT ON COLUMN emergency_department_triage_note.stroke_features IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.stroke_features IS
     'Discriminator: features suggestive of acute stroke (Level-2 very urgent; time-critical).';
-COMMENT ON COLUMN emergency_department_triage_note.paediatric_red_flag IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.paediatric_red_flag IS
     'Discriminator: paediatric red flag (Level-2 very urgent; time-critical).';
-COMMENT ON COLUMN emergency_department_triage_note.clinical_notes IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note.clinical_notes IS
     'Free-text clinical notes accompanying the triage assessment.';
 
 -- ========================================================================
@@ -393,14 +410,14 @@ COMMENT ON COLUMN emergency_department_triage_note.clinical_notes IS
 -- and target time from that level. The audit trail of fired rules and the
 -- red-flag issues live in sibling child tables.
 
-CREATE TABLE emergency_department_triage_note_grade (
+CREATE TABLE emergency_department_triage_note.emergency_department_triage_note_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     emergency_department_triage_note_id UUID NOT NULL UNIQUE
-        REFERENCES emergency_department_triage_note(id) ON DELETE CASCADE,
+        REFERENCES emergency_department_triage_note.emergency_department_triage_note(id) ON DELETE CASCADE,
 
     news2_total INT,
     news2_any_parameter_three VARCHAR(5) NOT NULL DEFAULT ''
@@ -419,35 +436,35 @@ CREATE TABLE emergency_department_triage_note_grade (
 );
 
 CREATE TRIGGER trigger_emergency_department_triage_note_grade_updated_at
-    BEFORE UPDATE ON emergency_department_triage_note_grade
+    BEFORE UPDATE ON emergency_department_triage_note.emergency_department_triage_note_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE emergency_department_triage_note_grade IS
+COMMENT ON TABLE emergency_department_triage_note.emergency_department_triage_note_grade IS
     'Computed triage classification result (1:1 with the triage note): supporting NEWS2 aggregate, the selected MTS priority level, and the fixed colour, name, and target time derived from that level.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.emergency_department_triage_note_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.emergency_department_triage_note_id IS
     'Foreign key to the parent triage note (unique, 1:1).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.news2_total IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.news2_total IS
     'Supporting NEWS2 aggregate computed from the recorded vital signs; NULL when not computed.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.news2_any_parameter_three IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.news2_any_parameter_three IS
     'Whether any single NEWS2 parameter scored 3 (drives escalation to at least Level 2).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_level IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_level IS
     'Selected MTS priority level: 1 (most urgent) to 5 (least urgent); NULL when not classified.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_colour IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_colour IS
     'Colour derived from the level: red (1), orange (2), yellow (3), green (4), blue (5).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_name IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_name IS
     'Name derived from the level: Immediate, Very urgent, Urgent, Standard, or Non-urgent.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.target_minutes IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.target_minutes IS
     'Target minutes to first clinical assessment derived from the level: 0, 10, 60, 120, or 240.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.graded_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -464,14 +481,14 @@ COMMENT ON COLUMN emergency_department_triage_note_grade.graded_at IS
 -- a human-readable description. Because the engine selects (does not sum),
 -- these rows explain why the assigned level is the most urgent justified.
 
-CREATE TABLE emergency_department_triage_note_grade_rule (
+CREATE TABLE emergency_department_triage_note.emergency_department_triage_note_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     emergency_department_triage_note_grade_id UUID NOT NULL
-        REFERENCES emergency_department_triage_note_grade(id) ON DELETE CASCADE,
+        REFERENCES emergency_department_triage_note.emergency_department_triage_note_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(30) NOT NULL
@@ -483,34 +500,34 @@ CREATE TABLE emergency_department_triage_note_grade_rule (
 );
 
 CREATE INDEX emergency_department_triage_note_grade_rule_grade_id_idx
-    ON emergency_department_triage_note_grade_rule (emergency_department_triage_note_grade_id);
+    ON emergency_department_triage_note.emergency_department_triage_note_grade_rule (emergency_department_triage_note_grade_id);
 
 CREATE TRIGGER trigger_emergency_department_triage_note_grade_rule_updated_at
-    BEFORE UPDATE ON emergency_department_triage_note_grade_rule
+    BEFORE UPDATE ON emergency_department_triage_note.emergency_department_triage_note_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE emergency_department_triage_note_grade_rule IS
+COMMENT ON TABLE emergency_department_triage_note.emergency_department_triage_note_grade_rule IS
     'Audit trail of every classification rule that fired while selecting the MTS priority level: instrument, minimum level justified, category, and description.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.emergency_department_triage_note_grade_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.emergency_department_triage_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.rule_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-DISCRIMINATOR-AIRWAY-01).';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.instrument IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.instrument IS
     'Classification instrument the rule belongs to: discriminator, news2, pain, vital-sign, or composite.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.band IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.band IS
     'Minimum MTS priority level (1-5) justified by this rule; NULL when not applicable.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.category IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.category IS
     'Subject category (e.g. airway, sepsis, deterioration, pain).';
-COMMENT ON COLUMN emergency_department_triage_note_grade_rule.description IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -527,14 +544,14 @@ COMMENT ON COLUMN emergency_department_triage_note_grade_rule.description IS
 -- life threat / category 1, sepsis / high NEWS2, time-critical
 -- presentation, severe pain, and incomplete triage.
 
-CREATE TABLE emergency_department_triage_note_grade_flag (
+CREATE TABLE emergency_department_triage_note.emergency_department_triage_note_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     emergency_department_triage_note_grade_id UUID NOT NULL
-        REFERENCES emergency_department_triage_note_grade(id) ON DELETE CASCADE,
+        REFERENCES emergency_department_triage_note.emergency_department_triage_note_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -555,34 +572,34 @@ CREATE TABLE emergency_department_triage_note_grade_flag (
 );
 
 CREATE INDEX emergency_department_triage_note_grade_flag_grade_id_idx
-    ON emergency_department_triage_note_grade_flag (emergency_department_triage_note_grade_id);
+    ON emergency_department_triage_note.emergency_department_triage_note_grade_flag (emergency_department_triage_note_grade_id);
 
 CREATE TRIGGER trigger_emergency_department_triage_note_grade_flag_updated_at
-    BEFORE UPDATE ON emergency_department_triage_note_grade_flag
+    BEFORE UPDATE ON emergency_department_triage_note.emergency_department_triage_note_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE emergency_department_triage_note_grade_flag IS
+COMMENT ON TABLE emergency_department_triage_note.emergency_department_triage_note_grade_flag IS
     'Red-flag issues that fire independently of the assigned priority level, with priority and a suggested action for the triage and resuscitation team.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.emergency_department_triage_note_grade_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.emergency_department_triage_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.flag_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-RESUS-IMMEDIATE-001).';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.category IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.category IS
     'Flag category: resus-immediate, sepsis-escalate, chest-pain, stroke, paediatric-red-flag, incomplete-vitals, or other.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.priority IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.description IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN emergency_department_triage_note_grade_flag.suggested_action IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "move to resuscitation immediately", "start sepsis screen").';
 
 -- ========================================================================

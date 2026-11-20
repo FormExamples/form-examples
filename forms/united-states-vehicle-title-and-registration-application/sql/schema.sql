@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_lienholder.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_vehicle_title_and_registration_application;
+
+COMMENT ON SCHEMA united_states_vehicle_title_and_registration_application IS
+    'Namespace for the United States Vehicle Title and Registration Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- The owner of the vehicle named on the application: an individual or a
 -- business that will appear on the certificate of title.
 
-CREATE TABLE applicant (
+CREATE TABLE united_states_vehicle_title_and_registration_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -77,43 +94,43 @@ CREATE TABLE applicant (
 );
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_states_vehicle_title_and_registration_application.applicant
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.applicant IS
     'The owner of the vehicle named on a vehicle title and registration application: an individual or a business.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.name IS
     'Full legal name of the owner (an individual or a business).';
-COMMENT ON COLUMN applicant.owner_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.owner_type IS
     'Owner type: individual or business.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.birth_date IS
     'Date of birth of an individual owner; empty for a business.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.postal_address_as_full_text IS
     'Mailing address as a single text block.';
-COMMENT ON COLUMN applicant.state_code IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.state_code IS
     'Two-letter code of the state of residence.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.postcode IS
     'ZIP code.';
-COMMENT ON COLUMN applicant.identification_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.identification_type IS
     'Identification presented: driver license, state ID, passport, federal employer identification number, or other.';
-COMMENT ON COLUMN applicant.identification_number IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.applicant.identification_number IS
     'Identification number as shown on the document presented.';
 
 -- ========================================================================
@@ -127,7 +144,7 @@ COMMENT ON COLUMN applicant.identification_number IS
 -- The bank, credit union, or finance company that holds a security interest in
 -- the vehicle and is named on the title as lienholder.
 
-CREATE TABLE lienholder (
+CREATE TABLE united_states_vehicle_title_and_registration_application.lienholder (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -143,33 +160,33 @@ CREATE TABLE lienholder (
 );
 
 CREATE TRIGGER trigger_lienholder_updated_at
-    BEFORE UPDATE ON lienholder
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.lienholder
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE lienholder IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.lienholder IS
     'The lienholder: the bank, credit union, or finance company holding a security interest in the vehicle.';
-COMMENT ON COLUMN lienholder.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lienholder.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN lienholder.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN lienholder.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN lienholder.name IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.name IS
     'Exact name of the lienholder as it should print on the title.';
-COMMENT ON COLUMN lienholder.email IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.email IS
     'Email address.';
-COMMENT ON COLUMN lienholder.phone IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.phone IS
     'Phone number.';
-COMMENT ON COLUMN lienholder.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.postal_address_as_full_text IS
     'Lienholder mailing address as a single text block.';
-COMMENT ON COLUMN lienholder.state_code IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.state_code IS
     'Two-letter code of the lienholder''s state.';
-COMMENT ON COLUMN lienholder.postcode IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.postcode IS
     'ZIP code.';
-COMMENT ON COLUMN lienholder.electronic_lien_identifier IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.lienholder.electronic_lien_identifier IS
     'Identifier the state assigns for electronic lien and title participation; empty when none.';
 
 -- ========================================================================
@@ -190,14 +207,14 @@ COMMENT ON COLUMN lienholder.electronic_lien_identifier IS
 -- record is documentation support, not legal advice; the issuing state agency
 -- decides.
 
-CREATE TABLE vehicle_title_application (
+CREATE TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    lienholder_id UUID REFERENCES lienholder(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_states_vehicle_title_and_registration_application.applicant(id) ON DELETE RESTRICT,
+    lienholder_id UUID REFERENCES united_states_vehicle_title_and_registration_application.lienholder(id) ON DELETE RESTRICT,
     state VARCHAR(2) NOT NULL DEFAULT '',
     transaction_type VARCHAR(22) NOT NULL DEFAULT '' CHECK (transaction_type IN ('title-and-registration', 'title-only', 'registration-only', '')),
     vehicle_condition VARCHAR(4) NOT NULL DEFAULT '' CHECK (vehicle_condition IN ('new', 'used', '')),
@@ -254,134 +271,134 @@ CREATE TABLE vehicle_title_application (
 );
 
 CREATE INDEX vehicle_title_application_applicant_id_idx
-    ON vehicle_title_application (applicant_id);
+    ON united_states_vehicle_title_and_registration_application.vehicle_title_application (applicant_id);
 CREATE INDEX vehicle_title_application_lienholder_id_idx
-    ON vehicle_title_application (lienholder_id);
+    ON united_states_vehicle_title_and_registration_application.vehicle_title_application (lienholder_id);
 
 CREATE TRIGGER trigger_vehicle_title_application_updated_at
-    BEFORE UPDATE ON vehicle_title_application
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.vehicle_title_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE vehicle_title_application IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application IS
     'A United States vehicle title and registration application: the application, owner, vehicle, odometer disclosure, title history and brands, lien, insurance and inspections, and fees and tax.';
-COMMENT ON COLUMN vehicle_title_application.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN vehicle_title_application.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN vehicle_title_application.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN vehicle_title_application.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN vehicle_title_application.applicant_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.applicant_id IS
     'Foreign key to the owner (applicant).';
-COMMENT ON COLUMN vehicle_title_application.lienholder_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.lienholder_id IS
     'Foreign key to the lienholder; null when there is no lien.';
-COMMENT ON COLUMN vehicle_title_application.state IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.state IS
     'Two-letter code of the state that will issue the title.';
-COMMENT ON COLUMN vehicle_title_application.transaction_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.transaction_type IS
     'Transaction type: title and registration, title only, or registration only.';
-COMMENT ON COLUMN vehicle_title_application.vehicle_condition IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.vehicle_condition IS
     'Whether the vehicle is new (never titled) or used.';
-COMMENT ON COLUMN vehicle_title_application.acquisition_method IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.acquisition_method IS
     'How the vehicle was acquired.';
-COMMENT ON COLUMN vehicle_title_application.out_of_state_transfer IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.out_of_state_transfer IS
     'Whether the vehicle was last titled in another state (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.previous_state IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.previous_state IS
     'Two-letter code of the state that last titled the vehicle.';
-COMMENT ON COLUMN vehicle_title_application.acquisition_date IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.acquisition_date IS
     'Date of sale, gift, or inheritance; most states set a deadline from this date.';
-COMMENT ON COLUMN vehicle_title_application.application_date IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.application_date IS
     'Date of the application.';
-COMMENT ON COLUMN vehicle_title_application.owner_name IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.owner_name IS
     'Owner full legal name as entered on the application.';
-COMMENT ON COLUMN vehicle_title_application.co_owner_name IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.co_owner_name IS
     'Co-owner full legal name, if any.';
-COMMENT ON COLUMN vehicle_title_application.co_owner_conjunction IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.co_owner_conjunction IS
     'AND (both owners must sign to sell) or OR (either may sign) between the owners.';
-COMMENT ON COLUMN vehicle_title_application.owner_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.owner_type IS
     'Owner type: individual or business.';
-COMMENT ON COLUMN vehicle_title_application.identification_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.identification_type IS
     'Identification type presented by the owner.';
-COMMENT ON COLUMN vehicle_title_application.identification_number IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.identification_number IS
     'Identification number presented by the owner.';
-COMMENT ON COLUMN vehicle_title_application.mailing_address IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.mailing_address IS
     'Owner mailing address as a single text block.';
-COMMENT ON COLUMN vehicle_title_application.owner_signed IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.owner_signed IS
     'Whether the owner has signed the application (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.co_owner_signed IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.co_owner_signed IS
     'Whether the co-owner has signed the application (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.vin IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.vin IS
     'Vehicle identification number as entered; validated against 49 CFR 565.15.';
-COMMENT ON COLUMN vehicle_title_application.model_year IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.model_year IS
     'Model year of the vehicle.';
-COMMENT ON COLUMN vehicle_title_application.make IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.make IS
     'Vehicle make.';
-COMMENT ON COLUMN vehicle_title_application.model IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.model IS
     'Vehicle model.';
-COMMENT ON COLUMN vehicle_title_application.body_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.body_type IS
     'Vehicle body type, e.g. 4-door sedan.';
-COMMENT ON COLUMN vehicle_title_application.vehicle_class IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.vehicle_class IS
     'Vehicle class: passenger car, light truck or SUV, heavy truck, motorcycle, trailer, or motorhome.';
-COMMENT ON COLUMN vehicle_title_application.fuel_type IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.fuel_type IS
     'Fuel type; electric and hybrid vehicles are treated differently for emissions and some fees.';
-COMMENT ON COLUMN vehicle_title_application.gvwr_lbs IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.gvwr_lbs IS
     'Gross vehicle weight rating in pounds; over 16,000 exempts the odometer disclosure.';
-COMMENT ON COLUMN vehicle_title_application.color IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.color IS
     'Vehicle color.';
-COMMENT ON COLUMN vehicle_title_application.odometer_reading IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.odometer_reading IS
     'Odometer reading in whole miles.';
-COMMENT ON COLUMN vehicle_title_application.odometer_status IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.odometer_status IS
     'Odometer status: actual mileage, exceeds mechanical limits, or not the actual mileage.';
-COMMENT ON COLUMN vehicle_title_application.seller_odometer_statement IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.seller_odometer_statement IS
     'Whether the seller signed the odometer disclosure statement (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.buyer_odometer_acknowledged IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.buyer_odometer_acknowledged IS
     'Whether the buyer acknowledged the odometer disclosure (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.title_document IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.title_document IS
     'Title document held: state title, manufacturer''s statement of origin, out-of-state title, or none.';
-COMMENT ON COLUMN vehicle_title_application.prior_title_surrendered IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.prior_title_surrendered IS
     'Whether the prior title is surrendered with the application (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.title_brand IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.title_brand IS
     'Title brand: none, salvage, junk, rebuilt, flood, odometer not actual, lemon-law buyback, hail, or other.';
-COMMENT ON COLUMN vehicle_title_application.brand_disclosed IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.brand_disclosed IS
     'Whether the brand is disclosed on the application and to the buyer (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.nmvtis_check IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.nmvtis_check IS
     'Result of the National Motor Vehicle Title Information System check.';
-COMMENT ON COLUMN vehicle_title_application.brand_inspection IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.brand_inspection IS
     'Rebuilt-vehicle inspection status.';
-COMMENT ON COLUMN vehicle_title_application.lien_status IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.lien_status IS
     'Lien status: none, new lien, existing lien released, or existing lien not released.';
-COMMENT ON COLUMN vehicle_title_application.lienholder_name IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.lienholder_name IS
     'Lienholder name as entered on the application.';
-COMMENT ON COLUMN vehicle_title_application.lien_electronic IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.lien_electronic IS
     'Whether the lien is held electronically (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.insurance_proof IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.insurance_proof IS
     'Whether proof of insurance is provided.';
-COMMENT ON COLUMN vehicle_title_application.insurance_expiry_date IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.insurance_expiry_date IS
     'Insurance policy expiry date.';
-COMMENT ON COLUMN vehicle_title_application.emissions_inspection IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.emissions_inspection IS
     'Emissions (smog) inspection status.';
-COMMENT ON COLUMN vehicle_title_application.safety_inspection IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.safety_inspection IS
     'Safety inspection status.';
-COMMENT ON COLUMN vehicle_title_application.vin_verification IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.vin_verification IS
     'Out-of-state VIN verification status.';
-COMMENT ON COLUMN vehicle_title_application.purchase_price_usd IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.purchase_price_usd IS
     'Purchase price in US dollars.';
-COMMENT ON COLUMN vehicle_title_application.sales_tax_status IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.sales_tax_status IS
     'Sales or use tax status: paid to the dealer, due at titling, exempt, or not yet calculated.';
-COMMENT ON COLUMN vehicle_title_application.sales_tax_rate_percent IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.sales_tax_rate_percent IS
     'Sales or use tax rate entered, in percent.';
-COMMENT ON COLUMN vehicle_title_application.sales_tax_amount_usd IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.sales_tax_amount_usd IS
     'Sales or use tax amount in US dollars.';
-COMMENT ON COLUMN vehicle_title_application.tax_exemption_reason IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.tax_exemption_reason IS
     'Statutory basis for a tax exemption.';
-COMMENT ON COLUMN vehicle_title_application.title_fee_usd IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.title_fee_usd IS
     'Title fee in US dollars.';
-COMMENT ON COLUMN vehicle_title_application.registration_fee_usd IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.registration_fee_usd IS
     'Registration fee in US dollars.';
-COMMENT ON COLUMN vehicle_title_application.fees_tendered IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.fees_tendered IS
     'Whether the title and registration fees are tendered with the application (yes/no).';
-COMMENT ON COLUMN vehicle_title_application.applicant_note IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application.applicant_note IS
     'Free-text note from the applicant to the clerk.';
 
 -- ========================================================================
@@ -399,13 +416,13 @@ COMMENT ON COLUMN vehicle_title_application.applicant_note IS
 -- outstanding. This is a classification, not a numeric score, and it does not
 -- replace the issuing state agency's decision.
 
-CREATE TABLE vehicle_title_application_grade (
+CREATE TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    vehicle_title_application_id UUID NOT NULL UNIQUE REFERENCES vehicle_title_application(id) ON DELETE CASCADE,
+    vehicle_title_application_id UUID NOT NULL UNIQUE REFERENCES united_states_vehicle_title_and_registration_application.vehicle_title_application(id) ON DELETE CASCADE,
     application_class VARCHAR(25) NOT NULL DEFAULT '' CHECK (application_class IN ('ready-to-submit', 'incomplete', 'title-brand-or-lien-issue', '')),
     vin_status VARCHAR(22) NOT NULL DEFAULT '' CHECK (vin_status IN ('valid', 'not-standardized', 'invalid-length', 'invalid-characters', 'check-digit-mismatch', '')),
     odometer_disclosure_required VARCHAR(5) NOT NULL DEFAULT '' CHECK (odometer_disclosure_required IN ('yes', 'no', '')),
@@ -416,38 +433,38 @@ CREATE TABLE vehicle_title_application_grade (
 );
 
 CREATE INDEX vehicle_title_application_grade_class_idx
-    ON vehicle_title_application_grade (application_class);
+    ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade (application_class);
 
 CREATE TRIGGER trigger_vehicle_title_application_grade_updated_at
-    BEFORE UPDATE ON vehicle_title_application_grade
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE vehicle_title_application_grade IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade IS
     'Computed completeness and eligibility result for a vehicle title and registration application: application class, VIN status, odometer-disclosure requirement, brand-or-lien issue, and outstanding-item count.';
-COMMENT ON COLUMN vehicle_title_application_grade.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN vehicle_title_application_grade.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN vehicle_title_application_grade.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN vehicle_title_application_grade.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN vehicle_title_application_grade.vehicle_title_application_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.vehicle_title_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN vehicle_title_application_grade.application_class IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.application_class IS
     'Application class: ready-to-submit, incomplete, or title-brand-or-lien-issue (the issue class takes precedence).';
-COMMENT ON COLUMN vehicle_title_application_grade.vin_status IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.vin_status IS
     'VIN validity per 49 CFR 565.15: valid, not-standardized (pre-1981), invalid-length, invalid-characters, or check-digit-mismatch; empty when no VIN.';
-COMMENT ON COLUMN vehicle_title_application_grade.odometer_disclosure_required IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.odometer_disclosure_required IS
     'Whether a federal odometer disclosure is required (no when exempt under 49 CFR 580.17).';
-COMMENT ON COLUMN vehicle_title_application_grade.brand_or_lien_issue IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.brand_or_lien_issue IS
     'Whether a title brand, NMVTIS alert, unreleased lien, or not-actual odometer disclosure is present.';
-COMMENT ON COLUMN vehicle_title_application_grade.outstanding_item_count IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.outstanding_item_count IS
     'Number of items still missing before the application can be submitted.';
-COMMENT ON COLUMN vehicle_title_application_grade.state_rule_known IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.state_rule_known IS
     'Whether the state is in the encoded rule table (no means the uniform default applied).';
-COMMENT ON COLUMN vehicle_title_application_grade.graded_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -462,13 +479,13 @@ COMMENT ON COLUMN vehicle_title_application_grade.graded_at IS
 -- firing with the application dimension it concerns, the category, and a
 -- human-readable description.
 
-CREATE TABLE vehicle_title_application_grade_rule (
+CREATE TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    vehicle_title_application_grade_id UUID NOT NULL REFERENCES vehicle_title_application_grade(id) ON DELETE CASCADE,
+    vehicle_title_application_grade_id UUID NOT NULL REFERENCES united_states_vehicle_title_and_registration_application.vehicle_title_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(14) NOT NULL DEFAULT '' CHECK (dimension IN ('vin', 'odometer', 'brand', 'lien', 'owner', 'state', 'compliance', 'tax', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -476,32 +493,32 @@ CREATE TABLE vehicle_title_application_grade_rule (
 );
 
 CREATE INDEX vehicle_title_application_grade_rule_grade_id_idx
-    ON vehicle_title_application_grade_rule (vehicle_title_application_grade_id);
+    ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule (vehicle_title_application_grade_id);
 
 CREATE TRIGGER trigger_vehicle_title_application_grade_rule_updated_at
-    BEFORE UPDATE ON vehicle_title_application_grade_rule
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE vehicle_title_application_grade_rule IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule IS
     'Audit trail of every classification rule that fired: application dimension, category, and description.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.vehicle_title_application_grade_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.vehicle_title_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-BRAND-PRESENT-01).';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.dimension IS
     'Application dimension the rule concerns: vin, odometer, brand, lien, owner, state, compliance, tax, or classification.';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.category IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.category IS
     'Subject category (e.g. required-component, brand, outstanding-item).';
-COMMENT ON COLUMN vehicle_title_application_grade_rule.description IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -515,13 +532,13 @@ COMMENT ON COLUMN vehicle_title_application_grade_rule.description IS
 -- Flagged issues that fire independently of the application class, with a
 -- priority and a suggested action for the applicant or the agency clerk.
 
-CREATE TABLE vehicle_title_application_grade_flag (
+CREATE TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    vehicle_title_application_grade_id UUID NOT NULL REFERENCES vehicle_title_application_grade(id) ON DELETE CASCADE,
+    vehicle_title_application_grade_id UUID NOT NULL REFERENCES united_states_vehicle_title_and_registration_application.vehicle_title_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(12) NOT NULL DEFAULT '' CHECK (category IN ('state', 'vin', 'odometer', 'brand', 'lien', 'title', 'owner', 'insurance', 'inspection', 'tax', 'fees', 'deadline', 'date', 'weight', 'vehicle', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -530,34 +547,34 @@ CREATE TABLE vehicle_title_application_grade_flag (
 );
 
 CREATE INDEX vehicle_title_application_grade_flag_grade_id_idx
-    ON vehicle_title_application_grade_flag (vehicle_title_application_grade_id);
+    ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag (vehicle_title_application_grade_id);
 
 CREATE TRIGGER trigger_vehicle_title_application_grade_flag_updated_at
-    BEFORE UPDATE ON vehicle_title_application_grade_flag
+    BEFORE UPDATE ON united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_title_and_registration_application.set_updated_at();
 
-COMMENT ON TABLE vehicle_title_application_grade_flag IS
+COMMENT ON TABLE united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag IS
     'Flagged issues that fire independently of the application class, with priority and a suggested action for the applicant or clerk.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.vehicle_title_application_grade_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.vehicle_title_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-VIN-002).';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.category IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.category IS
     'Flag category: state, vin, odometer, brand, lien, title, owner, insurance, inspection, tax, fees, deadline, date, weight, vehicle, other.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.priority IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.description IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN vehicle_title_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_vehicle_title_and_registration_application.vehicle_title_application_grade_flag.suggested_action IS
     'Suggested action for the applicant or clerk (e.g. "obtain a signed lien release before submitting").';
 
 -- ========================================================================

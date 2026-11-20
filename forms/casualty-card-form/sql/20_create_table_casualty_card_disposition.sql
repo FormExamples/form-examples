@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_disposition (
+CREATE TABLE casualty_card_form.casualty_card_disposition (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id            UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Disposition type
     disposition                 TEXT NOT NULL DEFAULT ''
                                 CHECK (disposition IN ('admitted', 'discharged', 'transferred', 'left-before-seen', 'self-discharged', '')),
@@ -30,48 +30,48 @@ CREATE TABLE casualty_card_disposition (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_disposition_updated_at
-    BEFORE UPDATE ON casualty_card_disposition
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_disposition
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_disposition IS
+COMMENT ON TABLE casualty_card_form.casualty_card_disposition IS
     '1:1 with casualty_card. Disposition, discharge, admission, or transfer details.';
-COMMENT ON COLUMN casualty_card_disposition.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_disposition.disposition IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.disposition IS
     'Disposition type: admitted, discharged, transferred, left-before-seen, self-discharged, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_disposition.admitting_specialty IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.admitting_specialty IS
     'Specialty the patient is admitted under (e.g. General Medicine, Orthopaedics). Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.admitting_consultant IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.admitting_consultant IS
     'Name of the admitting consultant. Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.ward IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.ward IS
     'Ward the patient is admitted to. Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.level_of_care IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.level_of_care IS
     'Level of care required (e.g. Level 0, Level 1, Level 2, Level 3). Used when disposition is admitted.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_diagnosis IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_diagnosis IS
     'Final diagnosis at discharge. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_medications IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_medications IS
     'Medications prescribed at discharge (TTO). Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_instructions IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_instructions IS
     'Patient discharge instructions and advice. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.follow_up IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.follow_up IS
     'Follow-up arrangements (e.g. GP in 48 hours, fracture clinic 1 week). Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.return_precautions IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.return_precautions IS
     'Safety-net advice: symptoms or signs warranting return to ED. Used when disposition is discharged.';
-COMMENT ON COLUMN casualty_card_disposition.receiving_hospital IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.receiving_hospital IS
     'Name of the receiving hospital. Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.reason_for_transfer IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.reason_for_transfer IS
     'Clinical reason for transfer. Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.mode_of_transfer IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.mode_of_transfer IS
     'Mode of transfer (e.g. ambulance, helicopter). Used when disposition is transferred.';
-COMMENT ON COLUMN casualty_card_disposition.discharge_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.discharge_time IS
     'Timestamp when the patient left the department. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_disposition.total_time_in_department IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.total_time_in_department IS
     'Total time the patient spent in the department.';
-COMMENT ON COLUMN casualty_card_disposition.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_disposition.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_disposition.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_disposition.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_disposition.deleted_at IS
     'Timestamp when this row was deleted.';

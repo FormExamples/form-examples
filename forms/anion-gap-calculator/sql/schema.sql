@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS anion_gap_calculator;
+
+COMMENT ON SCHEMA anion_gap_calculator IS
+    'Namespace for the Anion Gap Calculator form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION anion_gap_calculator.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION anion_gap_calculator.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE anion_gap_calculator.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON anion_gap_calculator.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE anion_gap_calculator.patient IS
     'Patient demographic information used by the anion-gap-calculator record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN anion_gap_calculator.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN anion_gap_calculator.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN anion_gap_calculator.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN anion_gap_calculator.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN anion_gap_calculator.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN anion_gap_calculator.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN anion_gap_calculator.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN anion_gap_calculator.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN anion_gap_calculator.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN anion_gap_calculator.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN anion_gap_calculator.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN anion_gap_calculator.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN anion_gap_calculator.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN anion_gap_calculator.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN anion_gap_calculator.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON anion_gap_calculator.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information used to identify the member of staff who recorded
 -- the anion-gap calculation (doctor, nurse, scientist, pharmacist, other).
 
-CREATE TABLE clinician (
+CREATE TABLE anion_gap_calculator.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON anion_gap_calculator.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE anion_gap_calculator.clinician IS
     'Clinician identifying information for the staff recording an anion-gap calculation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.role IS
     'Primary clinical role: doctor, nurse, scientist, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN anion_gap_calculator.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON anion_gap_calculator.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -206,14 +223,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- and the optional albumin used for the correction. The computed anion gap,
 -- its classification, fired rules, and safety flags live in child tables.
 
-CREATE TABLE anion_gap_calculator (
+CREATE TABLE anion_gap_calculator.anion_gap_calculator (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES anion_gap_calculator.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES anion_gap_calculator.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -235,56 +252,56 @@ CREATE TABLE anion_gap_calculator (
 );
 
 CREATE INDEX anion_gap_calculator_patient_id_idx
-    ON anion_gap_calculator (patient_id);
+    ON anion_gap_calculator.anion_gap_calculator (patient_id);
 CREATE INDEX anion_gap_calculator_clinician_id_idx
-    ON anion_gap_calculator (clinician_id);
+    ON anion_gap_calculator.anion_gap_calculator (clinician_id);
 
 CREATE TRIGGER trigger_anion_gap_calculator_updated_at
-    BEFORE UPDATE ON anion_gap_calculator
+    BEFORE UPDATE ON anion_gap_calculator.anion_gap_calculator
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE anion_gap_calculator IS
+COMMENT ON TABLE anion_gap_calculator.anion_gap_calculator IS
     'Main anion-gap calculation record: context and identification, plus the electrolyte-panel inputs (sodium, chloride, bicarbonate, optional potassium) and the optional albumin used for the correction.';
-COMMENT ON COLUMN anion_gap_calculator.id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anion_gap_calculator.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anion_gap_calculator.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anion_gap_calculator.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anion_gap_calculator.patient_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.patient_id IS
     'Foreign key to the patient this calculation is for (restricted delete).';
-COMMENT ON COLUMN anion_gap_calculator.clinician_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.clinician_id IS
     'Foreign key to the clinician who recorded the calculation (optional, restricted delete).';
-COMMENT ON COLUMN anion_gap_calculator.clinician_name IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.clinician_name IS
     'Assessing clinician name as recorded on the form.';
-COMMENT ON COLUMN anion_gap_calculator.clinician_role IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.clinician_role IS
     'Assessing clinician role: doctor, nurse, scientist, pharmacist, or other.';
-COMMENT ON COLUMN anion_gap_calculator.calculated_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.calculated_at IS
     'Date and time the calculation was performed.';
-COMMENT ON COLUMN anion_gap_calculator.care_setting IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.care_setting IS
     'Care setting: emergency-department, ward, intensive-care, laboratory, or other.';
-COMMENT ON COLUMN anion_gap_calculator.clinical_context IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.clinical_context IS
     'Free-text indication or clinical context for the calculation.';
-COMMENT ON COLUMN anion_gap_calculator.patient_identifier IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.patient_identifier IS
     'Local patient identifier as recorded on the form.';
-COMMENT ON COLUMN anion_gap_calculator.age_band IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.age_band IS
     'Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus.';
-COMMENT ON COLUMN anion_gap_calculator.sex IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.sex IS
     'Patient sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN anion_gap_calculator.sodium_mmol_l IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.sodium_mmol_l IS
     'Serum sodium in mmol/L; required input (null when unanswered).';
-COMMENT ON COLUMN anion_gap_calculator.potassium_mmol_l IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.potassium_mmol_l IS
     'Serum potassium in mmol/L; optional input that selects the potassium-inclusive formula and reference range (null when unanswered).';
-COMMENT ON COLUMN anion_gap_calculator.chloride_mmol_l IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.chloride_mmol_l IS
     'Serum chloride in mmol/L; required input (null when unanswered).';
-COMMENT ON COLUMN anion_gap_calculator.bicarbonate_mmol_l IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.bicarbonate_mmol_l IS
     'Serum bicarbonate (HCO3-) in mmol/L; required input (null when unanswered).';
-COMMENT ON COLUMN anion_gap_calculator.albumin_g_l IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.albumin_g_l IS
     'Serum albumin in g/L; optional input that enables the albumin correction (null when unanswered).';
-COMMENT ON COLUMN anion_gap_calculator.include_potassium IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator.include_potassium IS
     'Whether potassium is included in the anion-gap formula: yes or no.';
 
 -- ========================================================================
@@ -299,14 +316,14 @@ COMMENT ON COLUMN anion_gap_calculator.include_potassium IS
 -- anion gap, and the classification band (low / normal / high / very-high),
 -- 1:1 with the parent calculation record.
 
-CREATE TABLE anion_gap_calculator_grade (
+CREATE TABLE anion_gap_calculator.anion_gap_calculator_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anion_gap_calculator_id UUID NOT NULL UNIQUE
-        REFERENCES anion_gap_calculator(id) ON DELETE CASCADE,
+        REFERENCES anion_gap_calculator.anion_gap_calculator(id) ON DELETE CASCADE,
 
     anion_gap NUMERIC(6,2),
     corrected_anion_gap NUMERIC(6,2),
@@ -316,29 +333,29 @@ CREATE TABLE anion_gap_calculator_grade (
 );
 
 CREATE TRIGGER trigger_anion_gap_calculator_grade_updated_at
-    BEFORE UPDATE ON anion_gap_calculator_grade
+    BEFORE UPDATE ON anion_gap_calculator.anion_gap_calculator_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE anion_gap_calculator_grade IS
+COMMENT ON TABLE anion_gap_calculator.anion_gap_calculator_grade IS
     'Computed anion-gap result: the raw anion gap, the albumin-corrected anion gap, and the classification band (low / normal / high / very-high), 1:1 with the parent calculation record.';
-COMMENT ON COLUMN anion_gap_calculator_grade.id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anion_gap_calculator_grade.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anion_gap_calculator_grade.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anion_gap_calculator_grade.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anion_gap_calculator_grade.anion_gap_calculator_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.anion_gap_calculator_id IS
     'Foreign key to the parent calculation record (unique, 1:1).';
-COMMENT ON COLUMN anion_gap_calculator_grade.anion_gap IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.anion_gap IS
     'Raw anion gap in mmol/L (null when any required electrolyte is missing).';
-COMMENT ON COLUMN anion_gap_calculator_grade.corrected_anion_gap IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.corrected_anion_gap IS
     'Albumin-corrected anion gap in mmol/L (null when albumin is missing).';
-COMMENT ON COLUMN anion_gap_calculator_grade.classification IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.classification IS
     'Classification band using the corrected gap when available, else the raw gap: low, normal, high, or very-high.';
-COMMENT ON COLUMN anion_gap_calculator_grade.graded_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -353,14 +370,14 @@ COMMENT ON COLUMN anion_gap_calculator_grade.graded_at IS
 -- records one rule firing with the instrument that produced it, the
 -- classification band it contributed, and a human-readable description.
 
-CREATE TABLE anion_gap_calculator_grade_rule (
+CREATE TABLE anion_gap_calculator.anion_gap_calculator_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anion_gap_calculator_grade_id UUID NOT NULL
-        REFERENCES anion_gap_calculator_grade(id) ON DELETE CASCADE,
+        REFERENCES anion_gap_calculator.anion_gap_calculator_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -372,34 +389,34 @@ CREATE TABLE anion_gap_calculator_grade_rule (
 );
 
 CREATE INDEX anion_gap_calculator_grade_rule_grade_id_idx
-    ON anion_gap_calculator_grade_rule (anion_gap_calculator_grade_id);
+    ON anion_gap_calculator.anion_gap_calculator_grade_rule (anion_gap_calculator_grade_id);
 
 CREATE TRIGGER trigger_anion_gap_calculator_grade_rule_updated_at
-    BEFORE UPDATE ON anion_gap_calculator_grade_rule
+    BEFORE UPDATE ON anion_gap_calculator.anion_gap_calculator_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE anion_gap_calculator_grade_rule IS
+COMMENT ON TABLE anion_gap_calculator.anion_gap_calculator_grade_rule IS
     'Audit trail of every rule that fired during anion-gap computation: instrument, band, category, and description.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.anion_gap_calculator_grade_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.anion_gap_calculator_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.rule_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CLASSIFY-HIGH-01).';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.instrument IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.instrument IS
     'Instrument the rule belongs to: formula, correction, classification, or composite.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.band IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.band IS
     'Classification band contributed by this rule: normal, high, very-high, or low.';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.category IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.category IS
     'Subject category (e.g. reference-range, albumin-correction, missing-input).';
-COMMENT ON COLUMN anion_gap_calculator_grade_rule.description IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -413,14 +430,14 @@ COMMENT ON COLUMN anion_gap_calculator_grade_rule.description IS
 -- Safety-critical flags that fire independently of the classification, with
 -- a priority and a suggested action for the assessing clinician.
 
-CREATE TABLE anion_gap_calculator_grade_flag (
+CREATE TABLE anion_gap_calculator.anion_gap_calculator_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anion_gap_calculator_grade_id UUID NOT NULL
-        REFERENCES anion_gap_calculator_grade(id) ON DELETE CASCADE,
+        REFERENCES anion_gap_calculator.anion_gap_calculator_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -440,34 +457,34 @@ CREATE TABLE anion_gap_calculator_grade_flag (
 );
 
 CREATE INDEX anion_gap_calculator_grade_flag_grade_id_idx
-    ON anion_gap_calculator_grade_flag (anion_gap_calculator_grade_id);
+    ON anion_gap_calculator.anion_gap_calculator_grade_flag (anion_gap_calculator_grade_id);
 
 CREATE TRIGGER trigger_anion_gap_calculator_grade_flag_updated_at
-    BEFORE UPDATE ON anion_gap_calculator_grade_flag
+    BEFORE UPDATE ON anion_gap_calculator.anion_gap_calculator_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anion_gap_calculator.set_updated_at();
 
-COMMENT ON TABLE anion_gap_calculator_grade_flag IS
+COMMENT ON TABLE anion_gap_calculator.anion_gap_calculator_grade_flag IS
     'Safety-critical flags that fire independently of the classification, with priority and a suggested action for the assessing clinician.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.created_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.updated_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.deleted_at IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.anion_gap_calculator_grade_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.anion_gap_calculator_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.flag_id IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-VERY-HIGH-001).';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.category IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.category IS
     'Flag category: very-high, high-hagma, hypoalbuminaemia-masking, low, incomplete, or other.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.priority IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.priority IS
     'Priority: low, medium, high, or urgent.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.description IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN anion_gap_calculator_grade_flag.suggested_action IS
+COMMENT ON COLUMN anion_gap_calculator.anion_gap_calculator_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "urgent search for the cause of the metabolic acidosis").';
 
 -- ========================================================================

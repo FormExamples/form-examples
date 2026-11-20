@@ -1,10 +1,10 @@
-CREATE TABLE assessment_test_result_item (
+CREATE TABLE allergy_assessment.assessment_test_result_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     testing_results_id UUID NOT NULL
-        REFERENCES assessment_testing_results(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_testing_results(id) ON DELETE CASCADE,
     test_type VARCHAR(255) NOT NULL DEFAULT '',
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     result VARCHAR(255) NOT NULL DEFAULT '',
@@ -12,46 +12,46 @@ CREATE TABLE assessment_test_result_item (
 );
 
 CREATE TRIGGER trigger_assessment_test_result_item_updated_at
-    BEFORE UPDATE ON assessment_test_result_item
+    BEFORE UPDATE ON allergy_assessment.assessment_test_result_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_test_result_item IS
+COMMENT ON TABLE allergy_assessment.assessment_test_result_item IS
     'Individual test result entry with test type, allergen tested, and result.';
 
-COMMENT ON COLUMN assessment_testing_results.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_testing_results.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_testing_results.skin_prick_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.skin_prick_tests_done IS
     'Skin prick tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.specific_ige_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.specific_ige_done IS
     'Specific ige done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.component_resolved_diagnostics_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.component_resolved_diagnostics_done IS
     'Component resolved diagnostics done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.challenge_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.challenge_tests_done IS
     'Challenge tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.patch_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.patch_tests_done IS
     'Patch tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_testing_results.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_test_result_item.testing_results_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.testing_results_id IS
     'Foreign key to the assessment_testing_results table.';
-COMMENT ON COLUMN assessment_test_result_item.test_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.test_type IS
     'Test type.';
-COMMENT ON COLUMN assessment_test_result_item.allergen IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.allergen IS
     'Allergen.';
-COMMENT ON COLUMN assessment_test_result_item.result IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.result IS
     'Result.';
-COMMENT ON COLUMN assessment_test_result_item.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_test_result_item.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_test_result_item.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_test_result_item.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_test_result_item.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.deleted_at IS
     'Timestamp when this row was deleted.';

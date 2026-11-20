@@ -4,14 +4,14 @@
 -- and the recommended monitoring frequency. One row per observation
 -- record (1:1).
 
-CREATE TABLE modified_early_warning_score_grade (
+CREATE TABLE modified_early_warning_score.modified_early_warning_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     modified_early_warning_score_id UUID NOT NULL UNIQUE
-        REFERENCES modified_early_warning_score(id) ON DELETE CASCADE,
+        REFERENCES modified_early_warning_score.modified_early_warning_score(id) ON DELETE CASCADE,
 
     -- Aggregate total across the five parameters (0-14)
     aggregate_score INTEGER,
@@ -37,39 +37,39 @@ CREATE TABLE modified_early_warning_score_grade (
 );
 
 CREATE TRIGGER trigger_modified_early_warning_score_grade_updated_at
-    BEFORE UPDATE ON modified_early_warning_score_grade
+    BEFORE UPDATE ON modified_early_warning_score.modified_early_warning_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION modified_early_warning_score.set_updated_at();
 
-COMMENT ON TABLE modified_early_warning_score_grade IS
+COMMENT ON TABLE modified_early_warning_score.modified_early_warning_score_grade IS
     'Computed MEWS grading result: five per-parameter sub-scores, aggregate total (0-14), single-parameter trigger indicator, derived clinical-risk band, and recommended monitoring frequency. One row per observation record (1:1).';
-COMMENT ON COLUMN modified_early_warning_score_grade.id IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN modified_early_warning_score_grade.created_at IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN modified_early_warning_score_grade.updated_at IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN modified_early_warning_score_grade.deleted_at IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN modified_early_warning_score_grade.modified_early_warning_score_id IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.modified_early_warning_score_id IS
     'Foreign key to the parent observation record (unique, 1:1).';
-COMMENT ON COLUMN modified_early_warning_score_grade.aggregate_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.aggregate_score IS
     'Aggregate MEWS total (0-14): sum of the five parameter sub-scores; NULL until computed.';
-COMMENT ON COLUMN modified_early_warning_score_grade.systolic_blood_pressure_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.systolic_blood_pressure_score IS
     'Systolic-blood-pressure sub-score (0-3); NULL when the observation was not recorded.';
-COMMENT ON COLUMN modified_early_warning_score_grade.heart_rate_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.heart_rate_score IS
     'Heart-rate sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN modified_early_warning_score_grade.respiratory_rate_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.respiratory_rate_score IS
     'Respiratory-rate sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN modified_early_warning_score_grade.temperature_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.temperature_score IS
     'Temperature sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN modified_early_warning_score_grade.avpu_score IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.avpu_score IS
     'Consciousness (AVPU) sub-score (0-3); NULL when not recorded.';
-COMMENT ON COLUMN modified_early_warning_score_grade.single_parameter_trigger IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.single_parameter_trigger IS
     'Single-parameter trigger: whether any single parameter scored 3, which warrants urgent review regardless of the aggregate.';
-COMMENT ON COLUMN modified_early_warning_score_grade.risk_band IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.risk_band IS
     'Derived clinical-risk band: low (0-1), medium (2-4), or high (>= 5).';
-COMMENT ON COLUMN modified_early_warning_score_grade.monitoring_frequency IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.monitoring_frequency IS
     'Recommended monitoring frequency for the risk band (e.g. routine, increased, hourly, continuous).';
-COMMENT ON COLUMN modified_early_warning_score_grade.graded_at IS
+COMMENT ON COLUMN modified_early_warning_score.modified_early_warning_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';

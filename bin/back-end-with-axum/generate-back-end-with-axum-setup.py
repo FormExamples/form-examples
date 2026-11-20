@@ -56,7 +56,7 @@ def split_top_level_commas(body: str):
 def parse_create_tables(sql_text: str):
     """Return a list of (table_name, [column_dicts]) tuples in source order."""
     tables = []
-    pattern = r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s*\((.*?)\)\s*;"
+    pattern = r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:\w+\.)?(\w+)\s*\((.*?)\)\s*;"
     for m in re.finditer(pattern, sql_text, re.DOTALL | re.IGNORECASE):
         table_name = m.group(1)
         body = m.group(2)
@@ -84,7 +84,7 @@ def parse_create_tables(sql_text: str):
             # Detect FK reference target: REFERENCES <table>(<col>)
             fk_target = None
             fk_match = re.search(
-                r"REFERENCES\s+(\w+)\s*\(\s*(\w+)\s*\)",
+                r"REFERENCES\s+(?:\w+\.)?(\w+)\s*\(\s*(\w+)\s*\)",
                 piece,
                 re.IGNORECASE,
             )

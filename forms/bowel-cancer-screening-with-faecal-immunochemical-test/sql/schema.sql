@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS bowel_cancer_screening_with_faecal_immunochemical_test;
+
+COMMENT ON SCHEMA bowel_cancer_screening_with_faecal_immunochemical_test IS
+    'Namespace for the Bowel Cancer Screening with Faecal Immunochemical Test (FIT) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.patient IS
     'Patient demographic information used by the bowel-cancer-screening FIT record; the screening participant.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- administrator who reviewed the FIT kit outcome (screening administrator,
 -- screening practitioner, GP, specialist screening practitioner, or other).
 
-CREATE TABLE clinician (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.clinician IS
     'Clinician identifying information for the reviewing clinician or screening administrator who reviewed the FIT kit outcome.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.name IS
     'Reviewing clinician or administrator full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.role IS
     'Reviewer role: screening-administrator, screening-practitioner, gp, ssp (specialist screening practitioner), or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -211,14 +228,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- dedicated child tables. This is a documentation and result-classification
 -- record, not a diagnostic test.
 
-CREATE TABLE bowel_cancer_screening_fit (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES bowel_cancer_screening_with_faecal_immunochemical_test.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES bowel_cancer_screening_with_faecal_immunochemical_test.clinician(id) ON DELETE RESTRICT,
 
     -- Review context and identification
     reviewed_at TIMESTAMPTZ,
@@ -253,66 +270,66 @@ CREATE TABLE bowel_cancer_screening_fit (
 );
 
 CREATE INDEX bowel_cancer_screening_fit_patient_id_idx
-    ON bowel_cancer_screening_fit (patient_id);
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit (patient_id);
 CREATE INDEX bowel_cancer_screening_fit_clinician_id_idx
-    ON bowel_cancer_screening_fit (clinician_id);
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit (clinician_id);
 
 CREATE TRIGGER trigger_bowel_cancer_screening_fit_updated_at
-    BEFORE UPDATE ON bowel_cancer_screening_fit
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE bowel_cancer_screening_fit IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit IS
     'Main bowel-cancer-screening FIT record for one home faecal immunochemical test kit outcome: review context, participant identification, eligibility and invitation, kit return and sample adequacy, the measured faecal haemoglobin concentration and programme threshold, and red-flag symptoms. Result classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.patient_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.patient_id IS
     'Foreign key to the participant this screening documents (restrict delete).';
-COMMENT ON COLUMN bowel_cancer_screening_fit.clinician_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.clinician_id IS
     'Foreign key to the reviewing clinician or administrator (restrict delete); optional.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.reviewed_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.reviewed_at IS
     'Date and time the FIT result was reviewed.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.screening_hub IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.screening_hub IS
     'Screening hub or centre name that processed the kit.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.participant_identifier IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.participant_identifier IS
     'Local participant or episode identifier as recorded on the record.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.age IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.age IS
     'Participant age in years; drives eligibility for the programme age range.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.within_age_range IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.within_age_range IS
     'Eligibility against the programme age range: eligible, over-age-self-request, or not-eligible.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.recall_interval IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.recall_interval IS
     'Routine recall interval: two-yearly (standard programme) or other.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.invitation_date IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.invitation_date IS
     'Date the FIT kit was issued to the participant.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.previous_outcome IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.previous_outcome IS
     'Outcome of the previous screening round: first-invitation, prior-negative, prior-positive, or unknown.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.last_screen_date IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.last_screen_date IS
     'Date of the most recent previous screening, when known.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.kit_returned IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.kit_returned IS
     'Whether the FIT kit was returned (yes/no); no yields a repeat-kit management action and a non-return flag.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.return_date IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.return_date IS
     'Date the completed sample was received.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.sample_adequacy IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.sample_adequacy IS
     'Sample adequacy: adequate, spoilt, insufficient, or expired; anything other than adequate classifies as spoilt and is repeated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.spoilt_reason IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.spoilt_reason IS
     'Reason a sample was spoilt or inadequate: leaked, undated, unlabelled, too-old, or damaged.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.faecal_haemoglobin_ug_g IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.faecal_haemoglobin_ug_g IS
     'Measured faecal haemoglobin concentration in micrograms of haemoglobin per gram of faeces (ug Hb/g).';
-COMMENT ON COLUMN bowel_cancer_screening_fit.assay IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.assay IS
     'Analyser or assay identifier used to measure the faecal haemoglobin concentration.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.threshold_applied IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.threshold_applied IS
     'Programme threshold in ug Hb/g at or above which the result is positive; defaults to 120 (screening); 10 yields NICE DG56 symptomatic behaviour.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.red_flag_symptoms IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.red_flag_symptoms IS
     'Whether the participant reports red-flag symptoms (yes/no); yes sets the symptomatic pathway independently of the FIT result.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.clinical_note IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.clinical_note IS
     'Free-text clinical note.';
-COMMENT ON COLUMN bowel_cancer_screening_fit.context IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit.context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -330,14 +347,14 @@ COMMENT ON COLUMN bowel_cancer_screening_fit.context IS
 -- symptomatic pathway independently of the numeric result. This is a
 -- result-classification outcome, not a numeric score.
 
-CREATE TABLE bowel_cancer_screening_fit_grade (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bowel_cancer_screening_fit_id UUID NOT NULL UNIQUE
-        REFERENCES bowel_cancer_screening_fit(id) ON DELETE CASCADE,
+        REFERENCES bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit(id) ON DELETE CASCADE,
 
     result_class VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (result_class IN (
@@ -361,31 +378,31 @@ CREATE TABLE bowel_cancer_screening_fit_grade (
 );
 
 CREATE TRIGGER trigger_bowel_cancer_screening_fit_grade_updated_at
-    BEFORE UPDATE ON bowel_cancer_screening_fit_grade
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE bowel_cancer_screening_fit_grade IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade IS
     'Computed result classification for a bowel-cancer-screening FIT record: result class, recommended management action, symptomatic-pathway indicator, and completeness status.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.bowel_cancer_screening_fit_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.bowel_cancer_screening_fit_id IS
     'Foreign key to the parent bowel-cancer-screening FIT record (unique, 1:1).';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.result_class IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.result_class IS
     'Result classification: negative (below threshold), positive (at or above threshold), spoilt (kit not returned or inadequate sample), or empty when returned and adequate but no numeric result.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.management_action IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.management_action IS
     'Recommended management action: routine-recall (negative), refer-colonoscopy (positive), or repeat-kit (non-return, spoilt, or incomplete).';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.symptomatic_pathway IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.symptomatic_pathway IS
     'Whether the participant is routed to the urgent suspected-cancer pathway (red-flag symptoms present); set independently of the result class.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.status IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.status IS
     'Completeness status: complete when the fields required for the reached branch are present; otherwise incomplete.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade.graded_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -400,14 +417,14 @@ COMMENT ON COLUMN bowel_cancer_screening_fit_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE bowel_cancer_screening_fit_grade_rule (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bowel_cancer_screening_fit_grade_id UUID NOT NULL
-        REFERENCES bowel_cancer_screening_fit_grade(id) ON DELETE CASCADE,
+        REFERENCES bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -417,32 +434,32 @@ CREATE TABLE bowel_cancer_screening_fit_grade_rule (
 );
 
 CREATE INDEX bowel_cancer_screening_fit_grade_rule_grade_id_idx
-    ON bowel_cancer_screening_fit_grade_rule (bowel_cancer_screening_fit_grade_id);
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule (bowel_cancer_screening_fit_grade_id);
 
 CREATE TRIGGER trigger_bowel_cancer_screening_fit_grade_rule_updated_at
-    BEFORE UPDATE ON bowel_cancer_screening_fit_grade_rule
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE bowel_cancer_screening_fit_grade_rule IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.bowel_cancer_screening_fit_grade_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.bowel_cancer_screening_fit_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.rule_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-FIT-RESULT-POSITIVE-01).';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.stage IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.stage IS
     'Pathway stage the rule concerns: kit-return, adequacy, fit-result, symptom, or completeness.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.category IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.category IS
     'Subject category (e.g. gate, classification, conditional-requirement).';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.description IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -457,14 +474,14 @@ COMMENT ON COLUMN bowel_cancer_screening_fit_grade_rule.description IS
 -- priority and a suggested action for the reviewing clinician or screening
 -- service.
 
-CREATE TABLE bowel_cancer_screening_fit_grade_flag (
+CREATE TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bowel_cancer_screening_fit_grade_id UUID NOT NULL
-        REFERENCES bowel_cancer_screening_fit_grade(id) ON DELETE CASCADE,
+        REFERENCES bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -484,34 +501,34 @@ CREATE TABLE bowel_cancer_screening_fit_grade_flag (
 );
 
 CREATE INDEX bowel_cancer_screening_fit_grade_flag_grade_id_idx
-    ON bowel_cancer_screening_fit_grade_flag (bowel_cancer_screening_fit_grade_id);
+    ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag (bowel_cancer_screening_fit_grade_id);
 
 CREATE TRIGGER trigger_bowel_cancer_screening_fit_grade_flag_updated_at
-    BEFORE UPDATE ON bowel_cancer_screening_fit_grade_flag
+    BEFORE UPDATE ON bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bowel_cancer_screening_with_faecal_immunochemical_test.set_updated_at();
 
-COMMENT ON TABLE bowel_cancer_screening_fit_grade_flag IS
+COMMENT ON TABLE bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag IS
     'Safety flags that fire independently of the result class, with priority and a suggested action for the reviewing clinician or screening service.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.created_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.updated_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.deleted_at IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.bowel_cancer_screening_fit_grade_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.bowel_cancer_screening_fit_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.flag_id IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-POSITIVE-COLONOSCOPY-001).';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.category IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.category IS
     'Flag category: positive-colonoscopy-referral, symptomatic-suspected-cancer, non-return, spoilt-kit, incomplete, or other.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.priority IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.description IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN bowel_cancer_screening_fit_grade_flag.suggested_action IS
+COMMENT ON COLUMN bowel_cancer_screening_with_faecal_immunochemical_test.bowel_cancer_screening_fit_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "refer for colonoscopy", "reissue FIT kit").';
 
 -- ========================================================================

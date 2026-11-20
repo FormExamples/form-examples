@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE contraception_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES contraception_assessment.assessment(id) ON DELETE CASCADE,
     overall_highest_ukmec_category INTEGER NOT NULL DEFAULT 1
         CHECK (overall_highest_ukmec_category >= 1 AND overall_highest_ukmec_category <= 4),
     ukmec_cocp INTEGER
@@ -33,46 +33,46 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON contraception_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION contraception_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE contraception_assessment.grade IS
     'Computed UKMEC grading result per contraceptive method. UKMEC 1 = no restriction, 2 = advantages outweigh risks, 3 = risks outweigh advantages, 4 = unacceptable health risk. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN contraception_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.overall_highest_ukmec_category IS
+COMMENT ON COLUMN contraception_assessment.grade.overall_highest_ukmec_category IS
     'Highest UKMEC category across all methods (1-4).';
-COMMENT ON COLUMN grade.ukmec_cocp IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_cocp IS
     'UKMEC category for combined oral contraceptive pill (1-4).';
-COMMENT ON COLUMN grade.ukmec_pop IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_pop IS
     'UKMEC category for progestogen-only pill (1-4).';
-COMMENT ON COLUMN grade.ukmec_patch IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_patch IS
     'UKMEC category for contraceptive patch (1-4).';
-COMMENT ON COLUMN grade.ukmec_ring IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_ring IS
     'UKMEC category for vaginal ring (1-4).';
-COMMENT ON COLUMN grade.ukmec_injection IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_injection IS
     'UKMEC category for progestogen-only injectable (1-4).';
-COMMENT ON COLUMN grade.ukmec_implant IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_implant IS
     'UKMEC category for subdermal implant (1-4).';
-COMMENT ON COLUMN grade.ukmec_cu_iud IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_cu_iud IS
     'UKMEC category for copper intrauterine device (1-4).';
-COMMENT ON COLUMN grade.ukmec_lng_ius IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_lng_ius IS
     'UKMEC category for levonorgestrel intrauterine system (1-4).';
-COMMENT ON COLUMN grade.ukmec_condom_male IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_condom_male IS
     'UKMEC category for male condom (1-4).';
-COMMENT ON COLUMN grade.ukmec_condom_female IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_condom_female IS
     'UKMEC category for female condom (1-4).';
-COMMENT ON COLUMN grade.ukmec_diaphragm IS
+COMMENT ON COLUMN contraception_assessment.grade.ukmec_diaphragm IS
     'UKMEC category for diaphragm or cap (1-4).';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN contraception_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN contraception_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN contraception_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN contraception_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN contraception_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

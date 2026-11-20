@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS holter_monitor_test_request;
+
+COMMENT ON SCHEMA holter_monitor_test_request IS
+    'Namespace for the Holter Monitor Test Request form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION holter_monitor_test_request.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION holter_monitor_test_request.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE holter_monitor_test_request.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON holter_monitor_test_request.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE holter_monitor_test_request.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON holter_monitor_test_request.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN holter_monitor_test_request.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Requesting clinician (referrer) information.
 
-CREATE TABLE clinician (
+CREATE TABLE holter_monitor_test_request.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON holter_monitor_test_request.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE holter_monitor_test_request.clinician IS
     'Requesting clinician (referrer) who completes the Holter monitor request.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.role IS
     'Clinician role: cardiologist, gp, hospital-doctor, physiologist, nurse, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.registration_body IS
     'Clinician registration body: GMC, NMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN holter_monitor_test_request.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON holter_monitor_test_request.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -209,14 +226,14 @@ CREATE INDEX clinician_index_gto
 
 -- Ambulatory ECG (Holter) monitoring request (referral) — the source-of-truth record.
 
-CREATE TABLE holter_monitor_test_request (
+CREATE TABLE holter_monitor_test_request.holter_monitor_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES holter_monitor_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES holter_monitor_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'scheduled', 'rejected', '')),
@@ -257,70 +274,70 @@ CREATE TABLE holter_monitor_test_request (
 );
 
 CREATE INDEX index_holter_monitor_test_request_patient_id
-    ON holter_monitor_test_request(patient_id);
+    ON holter_monitor_test_request.holter_monitor_test_request(patient_id);
 CREATE INDEX index_holter_monitor_test_request_clinician_id
-    ON holter_monitor_test_request(clinician_id);
+    ON holter_monitor_test_request.holter_monitor_test_request(clinician_id);
 
 CREATE TRIGGER trigger_holter_monitor_test_request_updated_at
-    BEFORE UPDATE ON holter_monitor_test_request
+    BEFORE UPDATE ON holter_monitor_test_request.holter_monitor_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE holter_monitor_test_request IS
+COMMENT ON TABLE holter_monitor_test_request.holter_monitor_test_request IS
     'Ambulatory ECG (Holter) monitoring request (referral). Captures the requested monitor type, primary indication and clinical question, symptoms and symptom frequency, cardiac context and red flags, relevant history and medications, and triage urgency.';
-COMMENT ON COLUMN holter_monitor_test_request.id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN holter_monitor_test_request.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN holter_monitor_test_request.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN holter_monitor_test_request.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN holter_monitor_test_request.patient_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN holter_monitor_test_request.clinician_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN holter_monitor_test_request.status IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, scheduled, rejected.';
-COMMENT ON COLUMN holter_monitor_test_request.site_name IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN holter_monitor_test_request.setting IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN holter_monitor_test_request.referral_date IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN holter_monitor_test_request.requested_by_date IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.requested_by_date IS
     'Date by which the monitoring is requested to be performed.';
-COMMENT ON COLUMN holter_monitor_test_request.monitor_type IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.monitor_type IS
     'Requested monitor type: 24-hour, 48-hour, 7-day, 14-day, event-recorder, implantable-loop-recorder, other. Used for symptom-frequency / monitor-duration appropriateness.';
-COMMENT ON COLUMN holter_monitor_test_request.primary_indication IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring.';
-COMMENT ON COLUMN holter_monitor_test_request.clinical_question IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.clinical_question IS
     'Specific clinical question the monitoring should answer (highest-value field).';
-COMMENT ON COLUMN holter_monitor_test_request.relevant_history IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.relevant_history IS
     'Relevant cardiac, medical, and surgical history.';
-COMMENT ON COLUMN holter_monitor_test_request.symptom_palpitations IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.symptom_palpitations IS
     'Whether the patient reports palpitations.';
-COMMENT ON COLUMN holter_monitor_test_request.symptom_syncope IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.symptom_syncope IS
     'Whether the patient reports syncope (red flag).';
-COMMENT ON COLUMN holter_monitor_test_request.symptom_presyncope IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.symptom_presyncope IS
     'Whether the patient reports presyncope / near-syncope.';
-COMMENT ON COLUMN holter_monitor_test_request.symptom_breathlessness IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.symptom_breathlessness IS
     'Whether the patient reports breathlessness.';
-COMMENT ON COLUMN holter_monitor_test_request.symptom_frequency IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.symptom_frequency IS
     'Frequency of symptoms: daily, weekly, monthly, rare. Drives monitor-duration matching.';
-COMMENT ON COLUMN holter_monitor_test_request.known_arrhythmia IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.known_arrhythmia IS
     'Known arrhythmia: none, atrial-fibrillation, svt, vt, heart-block, other.';
-COMMENT ON COLUMN holter_monitor_test_request.recent_stroke_tia IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.recent_stroke_tia IS
     'Whether the patient has had a recent stroke or TIA (AF-detection driver).';
-COMMENT ON COLUMN holter_monitor_test_request.relevant_medications IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.relevant_medications IS
     'Relevant current medications (e.g. rate-control, antiarrhythmics, QT-prolonging drugs).';
-COMMENT ON COLUMN holter_monitor_test_request.urgency IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.urgency IS
     'Requested triage urgency: routine, urgent.';
-COMMENT ON COLUMN holter_monitor_test_request.supervising_consultant IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN holter_monitor_test_request.requester_contact IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN holter_monitor_test_request.notes IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request.notes IS
     'Free-text additional notes.';
 
 -- ========================================================================
@@ -333,14 +350,14 @@ COMMENT ON COLUMN holter_monitor_test_request.notes IS
 
 -- Computed grading result for a Holter monitor request (four-axis engine).
 
-CREATE TABLE holter_monitor_test_request_grade (
+CREATE TABLE holter_monitor_test_request.holter_monitor_test_request_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     holter_monitor_test_request_id UUID NOT NULL UNIQUE
-        REFERENCES holter_monitor_test_request(id) ON DELETE CASCADE,
+        REFERENCES holter_monitor_test_request.holter_monitor_test_request(id) ON DELETE CASCADE,
 
     -- Axis A: appropriateness (AHA/ACC ambulatory ECG 1-9 ordinal scale)
     appropriateness_score INTEGER
@@ -369,41 +386,41 @@ CREATE TABLE holter_monitor_test_request_grade (
 );
 
 CREATE TRIGGER trigger_holter_monitor_test_request_grade_updated_at
-    BEFORE UPDATE ON holter_monitor_test_request_grade
+    BEFORE UPDATE ON holter_monitor_test_request.holter_monitor_test_request_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE holter_monitor_test_request_grade IS
+COMMENT ON TABLE holter_monitor_test_request.holter_monitor_test_request_grade IS
     'Computed four-axis grading result: appropriateness (AHA/ACC ambulatory ECG 1-9), urgency / triage, request completeness, and clinical priority.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.holter_monitor_test_request_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.holter_monitor_test_request_id IS
     'Foreign key to the parent request (unique, 1:1).';
-COMMENT ON COLUMN holter_monitor_test_request_grade.appropriateness_score IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.appropriateness_score IS
     'AHA/ACC ambulatory ECG appropriateness score (1-9), matching indication and symptom frequency to monitor type.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.appropriateness_band IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.appropriateness_band IS
     'Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3).';
-COMMENT ON COLUMN holter_monitor_test_request_grade.triage_tier IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.triage_tier IS
     'Assigned triage tier: routine, urgent, emergency.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.target_timeframe IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.target_timeframe IS
     'Target timeframe for the monitoring implied by the triage tier.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.completeness_percent IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.completeness_percent IS
     'Request completeness as a percentage of mandatory fields (0-100).';
-COMMENT ON COLUMN holter_monitor_test_request_grade.priority_band IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.priority_band IS
     'Clinical priority band: low, moderate, high.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.recommendation IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.recommendation IS
     'Vetting recommendation: accept, query-referrer, redirect, reject.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.clinician_notes IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.clinician_notes IS
     'Free-text vetting notes.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.signed_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.signed_at IS
     'Timestamp of vetting clinician electronic signature.';
-COMMENT ON COLUMN holter_monitor_test_request_grade.graded_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -416,14 +433,14 @@ COMMENT ON COLUMN holter_monitor_test_request_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a Holter monitor request.
 
-CREATE TABLE holter_monitor_test_request_grade_rule (
+CREATE TABLE holter_monitor_test_request.holter_monitor_test_request_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     holter_monitor_test_request_grade_id UUID NOT NULL
-        REFERENCES holter_monitor_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES holter_monitor_test_request.holter_monitor_test_request_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('appropriateness', 'urgency', 'completeness', 'priority', '')),
@@ -432,32 +449,32 @@ CREATE TABLE holter_monitor_test_request_grade_rule (
 );
 
 CREATE INDEX index_holter_monitor_test_request_grade_rule_grade_id
-    ON holter_monitor_test_request_grade_rule(holter_monitor_test_request_grade_id);
+    ON holter_monitor_test_request.holter_monitor_test_request_grade_rule(holter_monitor_test_request_grade_id);
 
 CREATE TRIGGER trigger_holter_monitor_test_request_grade_rule_updated_at
-    BEFORE UPDATE ON holter_monitor_test_request_grade_rule
+    BEFORE UPDATE ON holter_monitor_test_request.holter_monitor_test_request_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE holter_monitor_test_request_grade_rule IS
+COMMENT ON TABLE holter_monitor_test_request.holter_monitor_test_request_grade_rule IS
     'Audit trail of every appropriateness / urgency / completeness / priority rule that fired for this request.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.holter_monitor_test_request_grade_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.holter_monitor_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.rule_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-APPROP-PALPITATIONS-01).';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.axis IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.axis IS
     'Scoring axis the rule belongs to: appropriateness, urgency, completeness, priority.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.category IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.category IS
     'Category or indication the rule relates to.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_rule.description IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -470,14 +487,14 @@ COMMENT ON COLUMN holter_monitor_test_request_grade_rule.description IS
 
 -- Safety-critical flags for a Holter monitor request, independent of the axes.
 
-CREATE TABLE holter_monitor_test_request_grade_flag (
+CREATE TABLE holter_monitor_test_request.holter_monitor_test_request_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     holter_monitor_test_request_grade_id UUID NOT NULL
-        REFERENCES holter_monitor_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES holter_monitor_test_request.holter_monitor_test_request_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -497,34 +514,34 @@ CREATE TABLE holter_monitor_test_request_grade_flag (
 );
 
 CREATE INDEX index_holter_monitor_test_request_grade_flag_grade_id
-    ON holter_monitor_test_request_grade_flag(holter_monitor_test_request_grade_id);
+    ON holter_monitor_test_request.holter_monitor_test_request_grade_flag(holter_monitor_test_request_grade_id);
 
 CREATE TRIGGER trigger_holter_monitor_test_request_grade_flag_updated_at
-    BEFORE UPDATE ON holter_monitor_test_request_grade_flag
+    BEFORE UPDATE ON holter_monitor_test_request.holter_monitor_test_request_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION holter_monitor_test_request.set_updated_at();
 
-COMMENT ON TABLE holter_monitor_test_request_grade_flag IS
+COMMENT ON TABLE holter_monitor_test_request.holter_monitor_test_request_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the cardiac physiology / vetting team.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.created_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.updated_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.deleted_at IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.holter_monitor_test_request_grade_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.holter_monitor_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.flag_id IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SYNCOPE-RED-FLAG-001).';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.category IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.priority IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.description IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN holter_monitor_test_request_grade_flag.suggested_action IS
+COMMENT ON COLUMN holter_monitor_test_request.holter_monitor_test_request_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "escalate to same-day cardiology review").';
 
 -- ========================================================================

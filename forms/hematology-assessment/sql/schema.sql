@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hematology_assessment;
+
+COMMENT ON SCHEMA hematology_assessment IS
+    'Namespace for the Hematology Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hematology_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hematology_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE hematology_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,56 +98,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON hematology_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE hematology_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN hematology_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN hematology_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN hematology_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN hematology_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN hematology_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN hematology_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN hematology_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN hematology_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN hematology_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hematology_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN hematology_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN hematology_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN hematology_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN hematology_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN hematology_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN hematology_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN hematology_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON hematology_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN hematology_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -143,7 +160,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE hematology_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -162,46 +179,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON hematology_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE hematology_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN hematology_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN hematology_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN hematology_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN hematology_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN hematology_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN hematology_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN hematology_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hematology_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN hematology_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN hematology_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN hematology_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN hematology_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN hematology_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON hematology_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -212,39 +229,39 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_hematology_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE hematology_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Foreign key to the patient this assessment belongs to
-    patient_id          UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id          UUID NOT NULL REFERENCES hematology_assessment.patient(id) ON DELETE CASCADE,
     -- Assessment status tracking
     status              TEXT NOT NULL DEFAULT 'in_progress'
                         CHECK (status IN ('in_progress', 'completed', 'reviewed'))
 );
 
 -- Index for the most common query: all assessments for a patient
-CREATE INDEX index_assessment_patient_id ON assessment(patient_id);
+CREATE INDEX index_assessment_patient_id ON hematology_assessment.assessment(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.assessment
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE hematology_assessment.assessment IS
     'A single hematology assessment. Child tables hold section-specific clinical data.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN hematology_assessment.assessment.patient_id IS
     'FK to patient. One patient may have many assessments over time.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN hematology_assessment.assessment.status IS
     'Workflow status: in_progress (patient filling in), completed (submitted), reviewed (clinician signed off).';
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN hematology_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN hematology_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN hematology_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -255,7 +272,7 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_hem_rule.sql
 -- ========================================================================
 
-CREATE TABLE hem_rule (
+CREATE TABLE hematology_assessment.hem_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -270,15 +287,15 @@ CREATE TABLE hem_rule (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_hem_rule_updated_at
-    BEFORE UPDATE ON hem_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.hem_rule
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
 -- ──────────────────────────────────────────────────────────────
 -- Seed all 20 hematology rules
 -- ──────────────────────────────────────────────────────────────
 
 -- HIGH CONCERN (HEM-001 to HEM-005)
-INSERT INTO hem_rule (code, category, description, concern_level) VALUES
+INSERT INTO hematology_assessment.hem_rule (code, category, description, concern_level) VALUES
     ('HEM-001', 'Blood Count',  'Critical hemoglobin level (<7 g/dL) - severe anemia',                          'high'),
     ('HEM-002', 'Blood Count',  'Severe thrombocytopenia (platelets <20 x10^9/L) - bleeding risk',              'high'),
     ('HEM-003', 'Blood Count',  'Severe leukocytosis (WBC >30 x10^9/L) - possible malignancy',                 'high'),
@@ -286,7 +303,7 @@ INSERT INTO hem_rule (code, category, description, concern_level) VALUES
     ('HEM-005', 'Coagulation',  'Severely low fibrinogen (<100 mg/dL) - DIC risk',                              'high');
 
 -- MEDIUM CONCERN (HEM-006 to HEM-014)
-INSERT INTO hem_rule (code, category, description, concern_level) VALUES
+INSERT INTO hematology_assessment.hem_rule (code, category, description, concern_level) VALUES
     ('HEM-006', 'Blood Count',  'Moderate anemia (hemoglobin 7-10 g/dL)',                                       'medium'),
     ('HEM-007', 'Blood Count',  'Moderate thrombocytopenia (platelets 20-50 x10^9/L)',                          'medium'),
     ('HEM-008', 'Blood Count',  'Leukopenia (WBC <4.0 x10^9/L) - infection risk',                              'medium'),
@@ -298,7 +315,7 @@ INSERT INTO hem_rule (code, category, description, concern_level) VALUES
     ('HEM-014', 'Iron Studies', 'Iron overload (ferritin >500 ng/mL) - hemochromatosis risk',                   'medium');
 
 -- LOW CONCERN (HEM-015 to HEM-020)
-INSERT INTO hem_rule (code, category, description, concern_level) VALUES
+INSERT INTO hematology_assessment.hem_rule (code, category, description, concern_level) VALUES
     ('HEM-015', 'Blood Count',  'Mild anemia (hemoglobin 10-12 g/dL)',                                          'low'),
     ('HEM-016', 'Blood Count',  'Mild thrombocytopenia (platelets 100-150 x10^9/L)',                            'low'),
     ('HEM-017', 'Blood Count',  'Mild leukocytosis (WBC 11-15 x10^9/L)',                                       'low'),
@@ -306,23 +323,23 @@ INSERT INTO hem_rule (code, category, description, concern_level) VALUES
     ('HEM-019', 'Iron Studies', 'Borderline low ferritin (10-30 ng/mL)',                                        'low'),
     ('HEM-020', 'Iron Studies', 'Elevated TIBC (>400 mcg/dL) - possible iron deficiency',                       'low');
 
-COMMENT ON TABLE hem_rule IS
+COMMENT ON TABLE hematology_assessment.hem_rule IS
     'Catalogue of 20 hematology rules evaluated during grading.';
-COMMENT ON COLUMN hem_rule.code IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN hem_rule.category IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.category IS
     'Clinical category (e.g. Blood Count, Coagulation, Iron Studies).';
-COMMENT ON COLUMN hem_rule.description IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN hem_rule.concern_level IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.concern_level IS
     'Concern level: high, medium, or low.';
-COMMENT ON COLUMN hem_rule.id IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hem_rule.created_at IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hem_rule.updated_at IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN hem_rule.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.hem_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -333,13 +350,13 @@ COMMENT ON COLUMN hem_rule.deleted_at IS
 -- BEGIN 06_create_table_hematology_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE hematology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with assessment
-    assessment_id               UUID NOT NULL UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
+    assessment_id               UUID NOT NULL UNIQUE REFERENCES hematology_assessment.assessment(id) ON DELETE CASCADE,
     -- Abnormality classification
     abnormality_level           TEXT NOT NULL
                                 CHECK (abnormality_level IN ('draft', 'normal', 'mildAbnormality', 'moderateAbnormality', 'severeAbnormality', 'critical')),
@@ -355,30 +372,30 @@ CREATE TABLE grade (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.grade
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE hematology_assessment.grade IS
     '1:1 with assessment. Stores computed hematology abnormality level, score, and optional clinician override.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN hematology_assessment.grade.assessment_id IS
     'FK to assessment (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN grade.abnormality_level IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_level IS
     'Computed abnormality level: draft (insufficient data), normal (0%), mildAbnormality (1-20%), moderateAbnormality (21-50%), severeAbnormality (51-75%), critical (76-100%).';
-COMMENT ON COLUMN grade.abnormality_score IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_score IS
     'Composite abnormality score as percentage (0.0-100.0).';
-COMMENT ON COLUMN grade.abnormality_level_override IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_level_override IS
     'Clinician-assigned abnormality level override. NULL means no override.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN hematology_assessment.grade.override_reason IS
     'Free-text justification for overriding the computed level. Required when override is set.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN hematology_assessment.grade.graded_at IS
     'Timestamp when the grading engine produced this result.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN hematology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN hematology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN hematology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -389,15 +406,15 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 07_create_table_hematology_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE hematology_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many fired rules
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES hematology_assessment.grade(id) ON DELETE CASCADE,
     -- FK to the rule catalogue (may be NULL if rule is retired)
-    rule_code         TEXT REFERENCES hem_rule(code) ON DELETE SET NULL,
+    rule_code         TEXT REFERENCES hematology_assessment.hem_rule(code) ON DELETE SET NULL,
     -- Denormalized snapshot of the rule at grading time
     rule_category       TEXT NOT NULL,
     rule_description    TEXT NOT NULL,
@@ -406,32 +423,32 @@ CREATE TABLE grading_fired_rule (
 
 -- Index for fetching all fired rules for a grading result
 CREATE INDEX index_grading_fired_rule_grade_id
-    ON grading_fired_rule(grade_id);
+    ON hematology_assessment.grading_fired_rule(grade_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.grading_fired_rule
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE hematology_assessment.grading_fired_rule IS
     'Many-to-one with grade. Each row is one hematology rule that fired. Denormalized for audit.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.grade_id IS
     'FK to grade. One result may have many fired rules.';
-COMMENT ON COLUMN grading_fired_rule.rule_code IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.rule_code IS
     'FK to hem_rule catalogue. SET NULL on delete so audit rows survive rule removal.';
-COMMENT ON COLUMN grading_fired_rule.rule_category IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.rule_category IS
     'Clinical category at grading time (denormalized from hem_rule).';
-COMMENT ON COLUMN grading_fired_rule.rule_description IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.rule_description IS
     'Rule description at grading time (denormalized from hem_rule).';
-COMMENT ON COLUMN grading_fired_rule.rule_concern_level IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.rule_concern_level IS
     'Concern level at grading time: high, medium, or low (denormalized from hem_rule).';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -442,13 +459,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 08_create_table_hematology_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE hematology_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many flags
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES hematology_assessment.grade(id) ON DELETE CASCADE,
     -- Flag identification (matches the application-side flag id)
     flag_id             TEXT NOT NULL,
     -- Flag details
@@ -459,36 +476,36 @@ CREATE TABLE grading_additional_flag (
 
 -- Index for fetching all flags for a grading result
 CREATE INDEX index_grading_additional_flag_grade_id
-    ON grading_additional_flag(grade_id);
+    ON hematology_assessment.grading_additional_flag(grade_id);
 
 -- Prevent duplicate flags per grading result
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag(grade_id, flag_id);
+    ON hematology_assessment.grading_additional_flag(grade_id, flag_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.grading_additional_flag
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE hematology_assessment.grading_additional_flag IS
     'Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.grade_id IS
     'FK to grade. One result may have many flags.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.flag_id IS
     'Application-side flag identifier (e.g. FLAG-CBC-001, FLAG-COAG-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.category IS
     'Flag category (e.g. Blood Count, Coagulation, Iron Studies, Blood Film, Hemoglobinopathy, Transfusion, Clinical).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.message IS
     'Human-readable alert message for the clinician.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.priority IS
     'Alert priority: high, medium, or low.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

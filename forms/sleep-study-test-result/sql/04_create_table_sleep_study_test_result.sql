@@ -1,13 +1,13 @@
 -- Sleep study / polysomnography result (report) — the source-of-truth record.
 
-CREATE TABLE sleep_study_test_result (
+CREATE TABLE sleep_study_test_result.sleep_study_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES sleep_study_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES sleep_study_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -66,82 +66,82 @@ CREATE TABLE sleep_study_test_result (
 );
 
 CREATE INDEX index_sleep_study_test_result_patient_id
-    ON sleep_study_test_result(patient_id);
+    ON sleep_study_test_result.sleep_study_test_result(patient_id);
 CREATE INDEX index_sleep_study_test_result_clinician_id
-    ON sleep_study_test_result(clinician_id);
+    ON sleep_study_test_result.sleep_study_test_result(clinician_id);
 
 CREATE TRIGGER trigger_sleep_study_test_result_updated_at
-    BEFORE UPDATE ON sleep_study_test_result
+    BEFORE UPDATE ON sleep_study_test_result.sleep_study_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sleep_study_test_result.set_updated_at();
 
-COMMENT ON TABLE sleep_study_test_result IS
+COMMENT ON TABLE sleep_study_test_result.sleep_study_test_result IS
     'Sleep study / polysomnography result (report). Captures the performed study type and adequacy, clinical history, the key quantitative metrics (recording and sleep time, apnoea-hypopnoea index, oxygen desaturation index, minimum and time-below-90% SpO2, mean heart rate), the OSA severity band, the narrative and structured findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN sleep_study_test_result.id IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN sleep_study_test_result.created_at IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN sleep_study_test_result.updated_at IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN sleep_study_test_result.deleted_at IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN sleep_study_test_result.patient_id IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN sleep_study_test_result.clinician_id IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.clinician_id IS
     'Foreign key to the reporting clinician (respiratory / sleep physician or clinical physiologist).';
-COMMENT ON COLUMN sleep_study_test_result.originating_request_reference IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating sleep study request (referral).';
-COMMENT ON COLUMN sleep_study_test_result.report_status IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN sleep_study_test_result.performed_date IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.performed_date IS
     'Date the sleep study was performed (night of recording).';
-COMMENT ON COLUMN sleep_study_test_result.reported_date IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN sleep_study_test_result.study_type IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.study_type IS
     'Performed study type: home-sleep-apnoea-test, polysomnography, overnight-oximetry, multiple-sleep-latency-test, actigraphy, other.';
-COMMENT ON COLUMN sleep_study_test_result.study_adequacy IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.study_adequacy IS
     'Diagnostic adequacy of the study: adequate, limited, failed (e.g. insufficient recording time or signal loss).';
-COMMENT ON COLUMN sleep_study_test_result.clinical_history IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.clinical_history IS
     'Clinical history and the question the study was performed to answer.';
-COMMENT ON COLUMN sleep_study_test_result.comparison_with_previous IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.comparison_with_previous IS
     'Comparison with relevant previous sleep studies.';
-COMMENT ON COLUMN sleep_study_test_result.total_recording_time_hours IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.total_recording_time_hours IS
     'Total recording time in hours.';
-COMMENT ON COLUMN sleep_study_test_result.total_sleep_time_hours IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.total_sleep_time_hours IS
     'Total sleep time in hours (for attended polysomnography with sleep staging).';
-COMMENT ON COLUMN sleep_study_test_result.apnoea_hypopnoea_index IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.apnoea_hypopnoea_index IS
     'Apnoea-Hypopnoea Index (AHI): events per hour. AASM bands: normal <5, mild 5 to <15, moderate 15 to <30, severe >=30.';
-COMMENT ON COLUMN sleep_study_test_result.oxygen_desaturation_index IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.oxygen_desaturation_index IS
     'Oxygen Desaturation Index (ODI): >=3% (or >=4%) desaturations per hour.';
-COMMENT ON COLUMN sleep_study_test_result.minimum_spo2_percent IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.minimum_spo2_percent IS
     'Lowest (nadir) oxygen saturation recorded, as a percentage.';
-COMMENT ON COLUMN sleep_study_test_result.time_below_90_percent_spo2 IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.time_below_90_percent_spo2 IS
     'Percentage of recording / sleep time spent with SpO2 below 90% (T90).';
-COMMENT ON COLUMN sleep_study_test_result.mean_heart_rate_bpm IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.mean_heart_rate_bpm IS
     'Mean heart rate during the study, in beats per minute.';
-COMMENT ON COLUMN sleep_study_test_result.osa_severity IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.osa_severity IS
     'OSA severity band derived from AHI: none, mild, moderate, severe.';
-COMMENT ON COLUMN sleep_study_test_result.obstructive_sleep_apnoea IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.obstructive_sleep_apnoea IS
     'Whether obstructive sleep apnoea is present.';
-COMMENT ON COLUMN sleep_study_test_result.central_sleep_apnoea IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.central_sleep_apnoea IS
     'Whether central sleep apnoea (e.g. Cheyne-Stokes respiration) is present.';
-COMMENT ON COLUMN sleep_study_test_result.periodic_limb_movements IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.periodic_limb_movements IS
     'Whether periodic limb movements of sleep are present.';
-COMMENT ON COLUMN sleep_study_test_result.nocturnal_hypoventilation IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.nocturnal_hypoventilation IS
     'Whether nocturnal hypoventilation (e.g. sustained hypercapnia / obesity hypoventilation) is present.';
-COMMENT ON COLUMN sleep_study_test_result.significant_desaturation IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.significant_desaturation IS
     'Whether significant oxygen desaturation is present.';
-COMMENT ON COLUMN sleep_study_test_result.normal_study IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.normal_study IS
     'Whether the study is normal (no significant sleep-disordered breathing).';
-COMMENT ON COLUMN sleep_study_test_result.findings_narrative IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.findings_narrative IS
     'Narrative description of the study findings (the body of the report).';
-COMMENT ON COLUMN sleep_study_test_result.impression IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN sleep_study_test_result.reporting_category IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.reporting_category IS
     'Free-text structured-reporting label for the AHI severity band (e.g. "Severe OSA (AHI >=30)").';
-COMMENT ON COLUMN sleep_study_test_result.recommended_follow_up IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.recommended_follow_up IS
     'Recommended follow-up management (e.g. CPAP titration, ventilation review, sleep-clinic referral).';
-COMMENT ON COLUMN sleep_study_test_result.critical_result_communicated IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the referrer.';
-COMMENT ON COLUMN sleep_study_test_result.reported_to IS
+COMMENT ON COLUMN sleep_study_test_result.sleep_study_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

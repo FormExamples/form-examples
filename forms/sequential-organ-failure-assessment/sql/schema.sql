@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS sequential_organ_failure_assessment;
+
+COMMENT ON SCHEMA sequential_organ_failure_assessment IS
+    'Namespace for the Sequential Organ Failure Assessment (SOFA) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION sequential_organ_failure_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION sequential_organ_failure_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE sequential_organ_failure_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON sequential_organ_failure_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE sequential_organ_failure_assessment.patient IS
     'Patient demographic information used by the Sequential Organ Failure Assessment (SOFA) record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON sequential_organ_failure_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- clinician (intensivist, critical-care physician, acute-medicine
 -- physician, resident, nurse, or outreach practitioner).
 
-CREATE TABLE clinician (
+CREATE TABLE sequential_organ_failure_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON sequential_organ_failure_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE sequential_organ_failure_assessment.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.role IS
     'Primary clinical role: intensivist, critical-care-physician, acute-physician, resident, nurse, outreach-practitioner, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON sequential_organ_failure_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -209,14 +226,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- system, renal). The computed grade, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE sequential_organ_failure_assessment (
+CREATE TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES sequential_organ_failure_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES sequential_organ_failure_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: clinician and context
     assessor_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -264,80 +281,80 @@ CREATE TABLE sequential_organ_failure_assessment (
 );
 
 CREATE INDEX sequential_organ_failure_assessment_patient_id_idx
-    ON sequential_organ_failure_assessment (patient_id);
+    ON sequential_organ_failure_assessment.sequential_organ_failure_assessment (patient_id);
 CREATE INDEX sequential_organ_failure_assessment_clinician_id_idx
-    ON sequential_organ_failure_assessment (clinician_id);
+    ON sequential_organ_failure_assessment.sequential_organ_failure_assessment (clinician_id);
 
 CREATE TRIGGER trigger_sequential_organ_failure_assessment_updated_at
-    BEFORE UPDATE ON sequential_organ_failure_assessment
+    BEFORE UPDATE ON sequential_organ_failure_assessment.sequential_organ_failure_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE sequential_organ_failure_assessment IS
+COMMENT ON TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment IS
     'Main Sequential Organ Failure Assessment (SOFA) record: assessment context, patient identification and baseline, and the raw inputs for the six scored organ systems (respiration, coagulation, liver, cardiovascular, central nervous system, renal).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.patient_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.clinician_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.assessor_name IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.assessor_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.assessor_role IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.assessor_role IS
     'Role of the assessing clinician: intensivist, critical-care-physician, acute-physician, resident, nurse, outreach-practitioner, or other.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.assessor_registration_number IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.assessor_registration_number IS
     'Professional registration number of the assessing clinician.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.assessed_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.care_location IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.care_location IS
     'Care location: icu, hdu, critical-care-outreach, acute-medical-unit, emergency-department, or other.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.hours_since_admission IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.hours_since_admission IS
     'Hours elapsed since ICU/critical-care admission (for serial scoring).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.patient_identifier IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.age_years IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.age_years IS
     'Patient age in years at the time of assessment.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.sex IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.admission_diagnosis IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.admission_diagnosis IS
     'Free-text admission or working diagnosis.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.suspected_infection IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.suspected_infection IS
     'Whether infection is suspected (drives the Sepsis-3 flag): yes, no, or unknown.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.baseline_sofa_total IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.baseline_sofa_total IS
     'Prior (baseline) total SOFA score used to compute delta-SOFA; assumed 0 when no pre-existing organ dysfunction is known.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.pao2 IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.pao2 IS
     'Respiration input — arterial partial pressure of oxygen (PaO2); SI units (kPa) preferred, mmHg accepted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.fio2 IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.fio2 IS
     'Respiration input — fraction of inspired oxygen (FiO2) as a decimal fraction (0.21-1.0).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.pao2_fio2_ratio IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.pao2_fio2_ratio IS
     'Respiration input — directly entered PaO2/FiO2 ratio, used when PaO2 and FiO2 are not entered separately.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.respiratory_support IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.respiratory_support IS
     'Respiration input — respiratory support: ventilated, cpap, or none; sub-scores of 3-4 require support.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.platelets IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.platelets IS
     'Coagulation input — platelet count in x10^9/L (equivalently x10^3/uL).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.bilirubin IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.bilirubin IS
     'Liver input — total bilirubin; SI units (umol/L) preferred, mg/dL accepted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.map IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.map IS
     'Cardiovascular input — mean arterial pressure (MAP) in mmHg.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.vasopressor IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.vasopressor IS
     'Cardiovascular input — vasopressor/inotrope agent: none, dopamine, dobutamine, adrenaline, noradrenaline, or other.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.vasopressor_dose IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.vasopressor_dose IS
     'Cardiovascular input — vasopressor dose in ug/kg/min (administered for at least one hour).';
-COMMENT ON COLUMN sequential_organ_failure_assessment.glasgow_coma_scale IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.glasgow_coma_scale IS
     'Central nervous system input — Glasgow Coma Scale (GCS) total, 3-15.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.sedated IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.sedated IS
     'Central nervous system input — whether the patient is sedated; use pre-sedation GCS or best estimate.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.creatinine IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.creatinine IS
     'Renal input — serum creatinine; SI units (umol/L) preferred, mg/dL accepted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.urine_output IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.urine_output IS
     'Renal input — 24-hour urine output in mL/day.';
-COMMENT ON COLUMN sequential_organ_failure_assessment.clinical_note IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -352,14 +369,14 @@ COMMENT ON COLUMN sequential_organ_failure_assessment.clinical_note IS
 -- sub-score, the summed total (0-24), the change from baseline
 -- (delta-SOFA), the derived mortality band, and the Sepsis-3 flag.
 
-CREATE TABLE sequential_organ_failure_assessment_grade (
+CREATE TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     sequential_organ_failure_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES sequential_organ_failure_assessment(id) ON DELETE CASCADE,
+        REFERENCES sequential_organ_failure_assessment.sequential_organ_failure_assessment(id) ON DELETE CASCADE,
 
     respiration_score INT,
     coagulation_score INT,
@@ -377,43 +394,43 @@ CREATE TABLE sequential_organ_failure_assessment_grade (
 );
 
 CREATE TRIGGER trigger_sequential_organ_failure_assessment_grade_updated_at
-    BEFORE UPDATE ON sequential_organ_failure_assessment_grade
+    BEFORE UPDATE ON sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE sequential_organ_failure_assessment_grade IS
+COMMENT ON TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade IS
     'Computed SOFA grading result: per-system 0-4 sub-scores, summed total (0-24), delta-SOFA versus baseline, derived mortality band, and the Sepsis-3 flag.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.sequential_organ_failure_assessment_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.sequential_organ_failure_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.respiration_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.respiration_score IS
     'Respiration organ-system sub-score (0-4); null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.coagulation_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.coagulation_score IS
     'Coagulation organ-system sub-score (0-4); null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.liver_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.liver_score IS
     'Liver organ-system sub-score (0-4); null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.cardiovascular_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.cardiovascular_score IS
     'Cardiovascular organ-system sub-score (0-4), max of MAP and vasopressor bands; null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.cns_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.cns_score IS
     'Central nervous system organ-system sub-score (0-4); null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.renal_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.renal_score IS
     'Renal organ-system sub-score (0-4), max of creatinine and urine-output bands; null when the input is incomplete.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.total_score IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.total_score IS
     'Summed total SOFA score across the six systems (0-24 when complete).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.delta_sofa IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.delta_sofa IS
     'Change in total SOFA from baseline (total_score minus baseline_sofa_total); null when no baseline is present.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.mortality_band IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.mortality_band IS
     'Derived mortality-risk band: low (0-6), moderate (7-9), high (10-12), veryHigh (13-14), or extreme (15-24).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.sepsis3 IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.sepsis3 IS
     'Sepsis-3 flag: true when infection is suspected and delta-SOFA is >= 2.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade.graded_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -429,14 +446,14 @@ COMMENT ON COLUMN sequential_organ_failure_assessment_grade.graded_at IS
 -- it belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE sequential_organ_failure_assessment_grade_rule (
+CREATE TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     sequential_organ_failure_assessment_grade_id UUID NOT NULL
-        REFERENCES sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(20) NOT NULL
@@ -447,34 +464,34 @@ CREATE TABLE sequential_organ_failure_assessment_grade_rule (
 );
 
 CREATE INDEX sequential_organ_failure_assessment_grade_rule_grade_id_idx
-    ON sequential_organ_failure_assessment_grade_rule (sequential_organ_failure_assessment_grade_id);
+    ON sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule (sequential_organ_failure_assessment_grade_id);
 
 CREATE TRIGGER trigger_sequential_organ_failure_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON sequential_organ_failure_assessment_grade_rule
+    BEFORE UPDATE ON sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE sequential_organ_failure_assessment_grade_rule IS
+COMMENT ON TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule IS
     'Audit trail of every grading rule that fired during SOFA computation: organ system or derivation, points contributed, category, and description.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.sequential_organ_failure_assessment_grade_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.sequential_organ_failure_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-RESPIRATION-3POINT-01).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.parameter IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.parameter IS
     'Organ system or derivation the rule belongs to: respiration, coagulation, liver, cardiovascular, cns, renal, total, delta, band, or sepsis.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.points IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.points IS
     'Points (0-4) contributed by this rule for its organ system.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.category IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.category IS
     'Subject category (e.g. threshold-band, mortality-band, sepsis-criterion).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.description IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -488,14 +505,14 @@ COMMENT ON COLUMN sequential_organ_failure_assessment_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE sequential_organ_failure_assessment_grade_flag (
+CREATE TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     sequential_organ_failure_assessment_grade_id UUID NOT NULL
-        REFERENCES sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -517,34 +534,34 @@ CREATE TABLE sequential_organ_failure_assessment_grade_flag (
 );
 
 CREATE INDEX sequential_organ_failure_assessment_grade_flag_grade_id_idx
-    ON sequential_organ_failure_assessment_grade_flag (sequential_organ_failure_assessment_grade_id);
+    ON sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag (sequential_organ_failure_assessment_grade_id);
 
 CREATE TRIGGER trigger_sequential_organ_failure_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON sequential_organ_failure_assessment_grade_flag
+    BEFORE UPDATE ON sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE sequential_organ_failure_assessment_grade_flag IS
+COMMENT ON TABLE sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.sequential_organ_failure_assessment_grade_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.sequential_organ_failure_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-MULTI-ORGAN-FAILURE-001).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.category IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.priority IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.description IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN sequential_organ_failure_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN sequential_organ_failure_assessment.sequential_organ_failure_assessment_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "commence sepsis six and escalate to critical care").';
 
 -- ========================================================================

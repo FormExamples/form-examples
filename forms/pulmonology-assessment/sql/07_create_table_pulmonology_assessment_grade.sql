@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE pulmonology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES pulmonology_assessment.assessment(id) ON DELETE CASCADE,
     gold_stage VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (gold_stage IN ('I', 'II', 'III', 'IV', '')),
     gold_group VARCHAR(5) NOT NULL DEFAULT ''
@@ -21,34 +21,34 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON pulmonology_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE pulmonology_assessment.grade IS
     'Computed GOLD (Global Initiative for Chronic Obstructive Lung Disease) staging result. Stage I-IV based on FEV1%, Group A/B/E based on symptoms and exacerbations. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN pulmonology_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.gold_stage IS
+COMMENT ON COLUMN pulmonology_assessment.grade.gold_stage IS
     'GOLD spirometric stage: I (>=80%), II (50-79%), III (30-49%), IV (<30%), or empty.';
-COMMENT ON COLUMN grade.gold_group IS
+COMMENT ON COLUMN pulmonology_assessment.grade.gold_group IS
     'GOLD group classification (2023 revision): A (low symptoms, low exacerbations), B (high symptoms, low exacerbations), E (exacerbation history), or empty.';
-COMMENT ON COLUMN grade.fev1_predicted_pct IS
+COMMENT ON COLUMN pulmonology_assessment.grade.fev1_predicted_pct IS
     'Post-bronchodilator FEV1 as percentage of predicted used for staging.';
-COMMENT ON COLUMN grade.symptom_burden IS
+COMMENT ON COLUMN pulmonology_assessment.grade.symptom_burden IS
     'Symptom burden classification: low (CAT<10, mMRC 0-1), high (CAT>=10, mMRC>=2), or empty.';
-COMMENT ON COLUMN grade.exacerbation_risk IS
+COMMENT ON COLUMN pulmonology_assessment.grade.exacerbation_risk IS
     'Exacerbation risk: low (0-1 without hospitalisation), high (>=2 or >=1 with hospitalisation), or empty.';
-COMMENT ON COLUMN grade.composite_score IS
+COMMENT ON COLUMN pulmonology_assessment.grade.composite_score IS
     'Aggregate composite severity score across all domains.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN pulmonology_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN pulmonology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN pulmonology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN pulmonology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN pulmonology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

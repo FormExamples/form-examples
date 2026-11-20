@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_assessor.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS health_screening_questionnaire;
+
+COMMENT ON SCHEMA health_screening_questionnaire IS
+    'Namespace for the Health Screening Questionnaire form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION health_screening_questionnaire.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION health_screening_questionnaire.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient: the person being screened, and their emergency contact.
 
-CREATE TABLE patient (
+CREATE TABLE health_screening_questionnaire.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,43 +92,43 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON health_screening_questionnaire.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE health_screening_questionnaire.patient IS
     'Patient, i.e. the person being screened.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.birth_date IS
     'Birth date, such as for calculating age and for the paediatric safety flag.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.sex IS
     'Sex, such as for the sex-adjusted AUDIT-C at-risk threshold.';
-COMMENT ON COLUMN patient.identifier_type IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.identifier_type IS
     'Which identifier scheme identifier_value belongs to: an NHS number, an employer-issued employee number, or another scheme.';
-COMMENT ON COLUMN patient.identifier_value IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.identifier_value IS
     'The identifier value itself, in the scheme named by identifier_type.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.emergency_contact_name IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.emergency_contact_name IS
     'Name of the emergency contact.';
-COMMENT ON COLUMN patient.emergency_contact_relationship IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.emergency_contact_relationship IS
     'Relationship of the emergency contact to the patient.';
-COMMENT ON COLUMN patient.emergency_contact_phone IS
+COMMENT ON COLUMN health_screening_questionnaire.patient.emergency_contact_phone IS
     'Phone number of the emergency contact.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON health_screening_questionnaire.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -130,7 +147,7 @@ CREATE INDEX patient_index_gto
 -- practice nurses, and occupational-health nurses. See ../AGENTS.md
 -- "assessor, not clinician" for the naming rationale.
 
-CREATE TABLE assessor (
+CREATE TABLE health_screening_questionnaire.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -146,37 +163,37 @@ CREATE TABLE assessor (
 );
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON health_screening_questionnaire.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE health_screening_questionnaire.assessor IS
     'Assessor, i.e. the person who conducts the health screening questionnaire. Often not a clinician.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.name IS
     'Name.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.email IS
     'Email address.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.phone IS
     'Phone number.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.role IS
     'Assessor role, spanning both clinical roles (occupational-health-nurse, general-practitioner, practice-nurse, physiotherapist) and non-clinical roles (personal-trainer, gym-instructor, sports-therapist, hr-officer).';
-COMMENT ON COLUMN assessor.registration_body IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.registration_body IS
     'Professional registration body, such as HCPC or NMC, where applicable. Blank for non-clinical assessors.';
-COMMENT ON COLUMN assessor.registration_number IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.registration_number IS
     'Professional registration number issued by the registration body, where applicable.';
-COMMENT ON COLUMN assessor.employer IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.employer IS
     'Employer, such as the employer commissioning an occupational-health screen, the gym or fitness studio, or the GP practice.';
 
 CREATE INDEX assessor_index_gto
-    ON assessor
+    ON health_screening_questionnaire.assessor
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -197,13 +214,13 @@ CREATE INDEX assessor_index_gto
 -- columns are NULL. See ../index.md for the wizard table and ../spec/index.md
 -- for the contract.
 
-CREATE TABLE health_screening_questionnaire (
+CREATE TABLE health_screening_questionnaire.health_screening_questionnaire (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    assessor_id UUID NOT NULL REFERENCES assessor(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES health_screening_questionnaire.patient(id) ON DELETE CASCADE,
+    assessor_id UUID NOT NULL REFERENCES health_screening_questionnaire.assessor(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
 
     -- Step 1: assessment context
@@ -295,156 +312,156 @@ CREATE TABLE health_screening_questionnaire (
 );
 
 CREATE TRIGGER trigger_health_screening_questionnaire_updated_at
-    BEFORE UPDATE ON health_screening_questionnaire
+    BEFORE UPDATE ON health_screening_questionnaire.health_screening_questionnaire
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE health_screening_questionnaire IS
+COMMENT ON TABLE health_screening_questionnaire.health_screening_questionnaire IS
     'Health screening questionnaire, i.e. the payload of the 14-step single-page wizard: assessment context, personal details, lifestyle, medical and family history, symptom review, PAR-Q+ screen, optional vital signs, occupational factors, wellbeing check, vaccination status, and consent.';
-COMMENT ON COLUMN health_screening_questionnaire.id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN health_screening_questionnaire.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN health_screening_questionnaire.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN health_screening_questionnaire.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN health_screening_questionnaire.patient_id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.patient_id IS
     'Foreign key to the patient table, i.e. the person being screened.';
-COMMENT ON COLUMN health_screening_questionnaire.assessor_id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.assessor_id IS
     'Foreign key to the assessor table, i.e. the person conducting the screen.';
-COMMENT ON COLUMN health_screening_questionnaire.status IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.status IS
     'Questionnaire lifecycle status: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN health_screening_questionnaire.screening_purpose IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.screening_purpose IS
     'Step 1: purpose of the screen, which determines whether step 10 (occupational factors) is shown.';
-COMMENT ON COLUMN health_screening_questionnaire.site_name IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.site_name IS
     'Step 1: site where the screening took place.';
-COMMENT ON COLUMN health_screening_questionnaire.assessment_date IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.assessment_date IS
     'Step 1: date the screening was conducted.';
-COMMENT ON COLUMN health_screening_questionnaire.assessment_mode IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.assessment_mode IS
     'Step 1: mode of assessment, in-person, telephone, or online.';
-COMMENT ON COLUMN health_screening_questionnaire.usual_activity_level IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.usual_activity_level IS
     'Step 3: usual physical activity level.';
-COMMENT ON COLUMN health_screening_questionnaire.moderate_exercise_days_per_week IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.moderate_exercise_days_per_week IS
     'Step 3: number of days per week with at least moderate exercise, 0 to 7.';
-COMMENT ON COLUMN health_screening_questionnaire.fruit_and_vegetable_portions_per_day IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.fruit_and_vegetable_portions_per_day IS
     'Step 3: typical fruit and vegetable portions eaten per day.';
-COMMENT ON COLUMN health_screening_questionnaire.diet_notes IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.diet_notes IS
     'Step 3: free-text diet notes.';
-COMMENT ON COLUMN health_screening_questionnaire.smoking_status IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.smoking_status IS
     'Step 4: smoking status.';
-COMMENT ON COLUMN health_screening_questionnaire.cigarettes_per_day IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.cigarettes_per_day IS
     'Step 4: cigarettes smoked per day, where applicable.';
-COMMENT ON COLUMN health_screening_questionnaire.audit_c_frequency IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.audit_c_frequency IS
     'Step 4: AUDIT-C item 1, frequency of drinking, 0 to 4.';
-COMMENT ON COLUMN health_screening_questionnaire.audit_c_typical_quantity IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.audit_c_typical_quantity IS
     'Step 4: AUDIT-C item 2, typical quantity per drinking day, 0 to 4.';
-COMMENT ON COLUMN health_screening_questionnaire.audit_c_binge_frequency IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.audit_c_binge_frequency IS
     'Step 4: AUDIT-C item 3, frequency of six-or-more (binge) drinking, 0 to 4.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_diabetes IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_diabetes IS
     'Step 5: diagnosed diabetes.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_hypertension IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_hypertension IS
     'Step 5: diagnosed hypertension.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_asthma IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_asthma IS
     'Step 5: diagnosed asthma.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_copd IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_copd IS
     'Step 5: diagnosed chronic obstructive pulmonary disease.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_heart_disease IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_heart_disease IS
     'Step 5: diagnosed heart disease.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_kidney_disease IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_kidney_disease IS
     'Step 5: diagnosed kidney disease.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_thyroid IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_thyroid IS
     'Step 5: diagnosed thyroid condition.';
-COMMENT ON COLUMN health_screening_questionnaire.condition_other IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.condition_other IS
     'Step 5: other diagnosed chronic condition, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.past_surgeries IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.past_surgeries IS
     'Step 5: past surgeries, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.current_medications IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.current_medications IS
     'Step 5: current prescription medications, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.known_drug_allergies IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.known_drug_allergies IS
     'Step 5: known drug allergies, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.family_history_premature_cardiac_event IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.family_history_premature_cardiac_event IS
     'Step 6: premature (before age 60) heart attack or stroke in a first-degree relative.';
-COMMENT ON COLUMN health_screening_questionnaire.family_history_other IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.family_history_other IS
     'Step 6: other hereditary conditions in the family, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_unexplained_chest_pain IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_unexplained_chest_pain IS
     'Step 7: unexplained chest pain, a red-flag symptom driving the refer-urgently risk band.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_dizzy_spells_or_fainting IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_dizzy_spells_or_fainting IS
     'Step 7: dizzy spells or fainting, a red-flag symptom driving the refer-urgently risk band.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_persistent_cough_over_3_weeks IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_persistent_cough_over_3_weeks IS
     'Step 7: persistent cough lasting more than 3 weeks.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_unexplained_weight_loss IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_unexplained_weight_loss IS
     'Step 7: unexplained weight loss, which alone warrants GP review regardless of other findings.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_joint_pain_restricting_movement IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_joint_pain_restricting_movement IS
     'Step 7: joint pain restricting movement.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_shortness_of_breath_on_exertion IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_shortness_of_breath_on_exertion IS
     'Step 7: shortness of breath on exertion.';
-COMMENT ON COLUMN health_screening_questionnaire.symptom_palpitations IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.symptom_palpitations IS
     'Step 7: palpitations.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_diagnosed_heart_condition IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_diagnosed_heart_condition IS
     'Step 8, PAR-Q+ item 1: has a doctor ever diagnosed you with a heart condition.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_chest_pain_at_rest IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_chest_pain_at_rest IS
     'Step 8, PAR-Q+ item 2: do you feel pain in your chest at rest.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_chest_pain_during_activity IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_chest_pain_during_activity IS
     'Step 8, PAR-Q+ item 3: do you feel pain in your chest during, or caused by, physical activity in the last month.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_dizziness_or_loss_of_consciousness IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_dizziness_or_loss_of_consciousness IS
     'Step 8, PAR-Q+ item 4: do you lose balance because of dizziness, or have you lost consciousness, in the last 12 months.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_other_chronic_medical_condition IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_other_chronic_medical_condition IS
     'Step 8, PAR-Q+ item 5: have you been diagnosed with another chronic medical condition.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_prescribed_medication_for_chronic_condition IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_prescribed_medication_for_chronic_condition IS
     'Step 8, PAR-Q+ item 6: are you currently taking prescribed medication for a chronic medical condition.';
-COMMENT ON COLUMN health_screening_questionnaire.parq_bone_or_joint_problem IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.parq_bone_or_joint_problem IS
     'Step 8, PAR-Q+ item 7: do you have a bone, joint, or soft-tissue problem that could be made worse by becoming more physically active.';
-COMMENT ON COLUMN health_screening_questionnaire.height_as_cm IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.height_as_cm IS
     'Step 9: height measurement in cm, optional.';
-COMMENT ON COLUMN health_screening_questionnaire.weight_as_kg IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.weight_as_kg IS
     'Step 9: weight measurement in kg, optional.';
-COMMENT ON COLUMN health_screening_questionnaire.body_mass_index IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.body_mass_index IS
     'Step 9: body mass index, auto-computed from height and weight when both are present.';
-COMMENT ON COLUMN health_screening_questionnaire.resting_blood_pressure_systolic IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.resting_blood_pressure_systolic IS
     'Step 9: resting systolic blood pressure in mmHg, optional.';
-COMMENT ON COLUMN health_screening_questionnaire.resting_blood_pressure_diastolic IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.resting_blood_pressure_diastolic IS
     'Step 9: resting diastolic blood pressure in mmHg, optional.';
-COMMENT ON COLUMN health_screening_questionnaire.resting_heart_rate IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.resting_heart_rate IS
     'Step 9: resting heart rate in beats per minute, optional.';
-COMMENT ON COLUMN health_screening_questionnaire.job_role IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.job_role IS
     'Step 10: job role, free text. Shown only for occupational-pre-placement screens.';
-COMMENT ON COLUMN health_screening_questionnaire.physical_demands_of_role IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.physical_demands_of_role IS
     'Step 10: physical demands of the role.';
-COMMENT ON COLUMN health_screening_questionnaire.exposure_noise IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.exposure_noise IS
     'Step 10: occupational noise exposure risk.';
-COMMENT ON COLUMN health_screening_questionnaire.exposure_chemicals IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.exposure_chemicals IS
     'Step 10: occupational chemical exposure risk.';
-COMMENT ON COLUMN health_screening_questionnaire.exposure_manual_handling IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.exposure_manual_handling IS
     'Step 10: occupational manual-handling exposure risk.';
-COMMENT ON COLUMN health_screening_questionnaire.exposure_other IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.exposure_other IS
     'Step 10: another occupational exposure risk.';
-COMMENT ON COLUMN health_screening_questionnaire.exposure_other_detail IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.exposure_other_detail IS
     'Step 10: detail of the other occupational exposure risk, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.stress_level IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.stress_level IS
     'Step 11: self-reported stress level, 0 (none) to 4 (severe).';
-COMMENT ON COLUMN health_screening_questionnaire.sleep_quality IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.sleep_quality IS
     'Step 11: self-reported sleep quality, 0 (very poor) to 4 (very good).';
-COMMENT ON COLUMN health_screening_questionnaire.mental_health_concern IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.mental_health_concern IS
     'Step 11: any current mental-health concern. Light-touch only; this monorepo has dedicated mental-health assessment forms.';
-COMMENT ON COLUMN health_screening_questionnaire.mental_health_concern_note IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.mental_health_concern_note IS
     'Step 11: optional note on the mental-health concern.';
-COMMENT ON COLUMN health_screening_questionnaire.vaccination_up_to_date IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.vaccination_up_to_date IS
     'Step 12: whether vaccinations are up to date.';
-COMMENT ON COLUMN health_screening_questionnaire.vaccination_gaps_note IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.vaccination_gaps_note IS
     'Step 12: notable vaccination gaps, free text.';
-COMMENT ON COLUMN health_screening_questionnaire.consent_to_screening IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.consent_to_screening IS
     'Step 13: consent to the screening.';
-COMMENT ON COLUMN health_screening_questionnaire.information_accurate_confirmed IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.information_accurate_confirmed IS
     'Step 13: confirmation that the information given is accurate to the best of the respondent''s knowledge.';
-COMMENT ON COLUMN health_screening_questionnaire.interpreter_required IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire.interpreter_required IS
     'Step 13: whether an interpreter was required for this screening.';
 
 CREATE INDEX health_screening_questionnaire_patient_id_index
-    ON health_screening_questionnaire (patient_id);
+    ON health_screening_questionnaire.health_screening_questionnaire (patient_id);
 
 CREATE INDEX health_screening_questionnaire_assessor_id_index
-    ON health_screening_questionnaire (assessor_id);
+    ON health_screening_questionnaire.health_screening_questionnaire (assessor_id);
 
 -- ========================================================================
 -- END 04_create_table_health_screening_questionnaire.sql
@@ -459,13 +476,13 @@ CREATE INDEX health_screening_questionnaire_assessor_id_index
 -- final values with an override reason, so the override is auditable rather
 -- than silent.
 
-CREATE TABLE health_screening_questionnaire_grade (
+CREATE TABLE health_screening_questionnaire.health_screening_questionnaire_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     health_screening_questionnaire_id UUID NOT NULL UNIQUE
-        REFERENCES health_screening_questionnaire(id) ON DELETE CASCADE,
+        REFERENCES health_screening_questionnaire.health_screening_questionnaire(id) ON DELETE CASCADE,
 
     parq_plus_clearance VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (parq_plus_clearance IN ('cleared', 'further-assessment-required', '')),
@@ -493,45 +510,45 @@ CREATE TABLE health_screening_questionnaire_grade (
 );
 
 CREATE TRIGGER trigger_health_screening_questionnaire_grade_updated_at
-    BEFORE UPDATE ON health_screening_questionnaire_grade
+    BEFORE UPDATE ON health_screening_questionnaire.health_screening_questionnaire_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE health_screening_questionnaire_grade IS
+COMMENT ON TABLE health_screening_questionnaire.health_screening_questionnaire_grade IS
     'Computed and signed-off grading result for one health screening questionnaire. Stores both the engine-computed values and the assessor-final values with an override reason.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.health_screening_questionnaire_id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.health_screening_questionnaire_id IS
     'Foreign key to the health_screening_questionnaire table, unique because grading is one-to-one with the questionnaire.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.parq_plus_clearance IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.parq_plus_clearance IS
     'PAR-Q+ clearance status: cleared when all 7 general health items are no, further-assessment-required when any item is yes.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.audit_c_score IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.audit_c_score IS
     'AUDIT-C total score, 0 to 12, being the sum of the three items.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.audit_c_band IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.audit_c_band IS
     'AUDIT-C band: low, increasing-risk (score 5+ men / 4+ women), or higher-risk (score 8+).';
-COMMENT ON COLUMN health_screening_questionnaire_grade.computed_risk_band IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.computed_risk_band IS
     'Composite risk band computed by the engine using the max-grade algorithm: low, moderate, high, or refer-urgently.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.final_risk_band IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.final_risk_band IS
     'Composite risk band signed off by the assessor, which may equal or differ from the computed value.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.computed_recommendation IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.computed_recommendation IS
     'Referral recommendation computed by the engine from the risk band.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.final_recommendation IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.final_recommendation IS
     'Referral recommendation signed off by the assessor, which may equal or differ from the computed value.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.override_reason IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.override_reason IS
     'Reason the assessor set a final value differently from the computed value, mandatory when they differ.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.notes IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.notes IS
     'Free-text assessor summary notes.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.signed_by_name IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.signed_by_name IS
     'Name of the assessor who signed the questionnaire.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.signed_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.signed_at IS
     'Timestamp of the assessor electronic signature.';
-COMMENT ON COLUMN health_screening_questionnaire_grade.graded_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -546,13 +563,13 @@ COMMENT ON COLUMN health_screening_questionnaire_grade.graded_at IS
 -- priority and a suggested action. Flags are never suppressed by an
 -- assessor override of the risk band.
 
-CREATE TABLE health_screening_questionnaire_grade_flag (
+CREATE TABLE health_screening_questionnaire.health_screening_questionnaire_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     health_screening_questionnaire_grade_id UUID NOT NULL
-        REFERENCES health_screening_questionnaire_grade(id) ON DELETE CASCADE,
+        REFERENCES health_screening_questionnaire.health_screening_questionnaire_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(45) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -574,34 +591,34 @@ CREATE TABLE health_screening_questionnaire_grade_flag (
 );
 
 CREATE INDEX health_screening_questionnaire_grade_flag_grade_id_index
-    ON health_screening_questionnaire_grade_flag (health_screening_questionnaire_grade_id);
+    ON health_screening_questionnaire.health_screening_questionnaire_grade_flag (health_screening_questionnaire_grade_id);
 
 CREATE TRIGGER trigger_health_screening_questionnaire_grade_flag_updated_at
-    BEFORE UPDATE ON health_screening_questionnaire_grade_flag
+    BEFORE UPDATE ON health_screening_questionnaire.health_screening_questionnaire_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE health_screening_questionnaire_grade_flag IS
+COMMENT ON TABLE health_screening_questionnaire.health_screening_questionnaire_grade_flag IS
     'Safety-critical flags that fire independently of the risk band, with a priority and a suggested action. Flags are never suppressed by an assessor override.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.health_screening_questionnaire_grade_id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.health_screening_questionnaire_grade_id IS
     'Foreign key to the parent health_screening_questionnaire_grade table.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.flag_id IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.flag_id IS
     'Stable flag identifier, such as F-URGENT-CARDIAC-SYMPTOM-001.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.category IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.category IS
     'Flag category, such as urgent-cardiac-symptom or parq-positive-medical-clearance-needed.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.priority IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.priority IS
     'Priority: low, medium, or high.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.description IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN health_screening_questionnaire_grade_flag.suggested_action IS
+COMMENT ON COLUMN health_screening_questionnaire.health_screening_questionnaire_grade_flag.suggested_action IS
     'Suggested action, such as "same-day GP or emergency review".';
 
 -- ========================================================================

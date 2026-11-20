@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE pre_operative_assessment_by_patient.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     pre_operative_assessment_by_patient_id UUID NOT NULL UNIQUE
-        REFERENCES pre_operative_assessment_by_patient(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_patient.pre_operative_assessment_by_patient(id) ON DELETE CASCADE,
     computed_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (computed_asa_grade IN ('I', 'II', 'III', 'IV', 'V', 'VI', '')),
     final_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
@@ -30,46 +30,46 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.grade IS
     'Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.';
-COMMENT ON COLUMN grade.computed_asa_grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
-COMMENT ON COLUMN grade.final_asa_grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.final_asa_grade IS
     'ASA grade signed off by the clinician (may equal or differ from computed).';
-COMMENT ON COLUMN grade.asa_emergency_suffix IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.asa_emergency_suffix IS
     'Emergency suffix: E if the procedure is emergency, empty otherwise.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.override_reason IS
     'Reason the clinician set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN grade.mallampati_class IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.mallampati_class IS
     'Mallampati airway class as per step 4.';
-COMMENT ON COLUMN grade.rcri_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.rcri_score IS
     'Revised Cardiac Risk Index score (0-6).';
-COMMENT ON COLUMN grade.stopbang_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.stopbang_score IS
     'STOP-BANG score (0-8).';
-COMMENT ON COLUMN grade.frailty_scale IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.frailty_scale IS
     'Clinical Frailty Scale score (1-9).';
-COMMENT ON COLUMN grade.composite_risk IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.composite_risk IS
     'Composite perioperative risk: low, moderate, high, critical.';
-COMMENT ON COLUMN grade.recommendation IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.recommendation IS
     'Overall recommendation: proceed, optimise-first, mdt-review, cancel.';
-COMMENT ON COLUMN grade.clinician_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN grade.signed_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.signed_at IS
     'Timestamp of clinician electronic signature.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
-COMMENT ON COLUMN grade.pre_operative_assessment_by_patient_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.pre_operative_assessment_by_patient_id IS
     'Foreign key to the pre_operative_assessment_by_patient table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.deleted_at IS
     'Timestamp when this row was deleted.';

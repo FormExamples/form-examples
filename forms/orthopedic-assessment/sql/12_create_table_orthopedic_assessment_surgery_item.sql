@@ -1,10 +1,10 @@
-CREATE TABLE assessment_surgery_item (
+CREATE TABLE orthopedic_assessment.assessment_surgery_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     surgical_history_id UUID NOT NULL
-        REFERENCES assessment_surgical_history(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment_surgical_history(id) ON DELETE CASCADE,
     procedure_name VARCHAR(255) NOT NULL DEFAULT '',
     date_performed DATE,
     surgeon VARCHAR(255) NOT NULL DEFAULT '',
@@ -16,40 +16,40 @@ CREATE TABLE assessment_surgery_item (
 );
 
 CREATE TRIGGER trigger_assessment_surgery_item_updated_at
-    BEFORE UPDATE ON assessment_surgery_item
+    BEFORE UPDATE ON orthopedic_assessment.assessment_surgery_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_surgery_item IS
+COMMENT ON TABLE orthopedic_assessment.assessment_surgery_item IS
     'Individual previous orthopedic surgery entry with procedure, date, and outcome.';
-COMMENT ON COLUMN assessment_surgery_item.procedure_name IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.procedure_name IS
     'Name of the surgical procedure.';
-COMMENT ON COLUMN assessment_surgery_item.date_performed IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.date_performed IS
     'Date the surgery was performed.';
-COMMENT ON COLUMN assessment_surgery_item.surgeon IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.surgeon IS
     'Name of the operating surgeon.';
-COMMENT ON COLUMN assessment_surgery_item.hospital IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.hospital IS
     'Hospital where the surgery was performed.';
-COMMENT ON COLUMN assessment_surgery_item.outcome IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.outcome IS
     'Outcome of the surgery: good, fair, poor, complication, or empty.';
-COMMENT ON COLUMN assessment_surgery_item.outcome_details IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.outcome_details IS
     'Details of the surgical outcome.';
-COMMENT ON COLUMN assessment_surgery_item.sort_order IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_surgical_history.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_surgical_history.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_surgical_history.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_surgery_item.surgical_history_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.surgical_history_id IS
     'Foreign key to the assessment_surgical_history table.';
-COMMENT ON COLUMN assessment_surgery_item.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_surgery_item.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_surgery_item.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_surgery_item.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.deleted_at IS
     'Timestamp when this row was deleted.';

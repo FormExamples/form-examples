@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_petitioner.sql
 --   - 03_create_table_attorney.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_divorce_petition;
+
+COMMENT ON SCHEMA united_states_divorce_petition IS
+    'Namespace for the United States Divorce Petition form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_divorce_petition.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_divorce_petition.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Petitioner: the spouse who files the petition for dissolution of marriage.
 
-CREATE TABLE petitioner (
+CREATE TABLE united_states_divorce_petition.petitioner (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -73,37 +90,37 @@ CREATE TABLE petitioner (
 );
 
 CREATE TRIGGER trigger_petitioner_updated_at
-    BEFORE UPDATE ON petitioner
+    BEFORE UPDATE ON united_states_divorce_petition.petitioner
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE petitioner IS
+COMMENT ON TABLE united_states_divorce_petition.petitioner IS
     'Petitioner: the spouse who files the petition for dissolution of marriage.';
-COMMENT ON COLUMN petitioner.id IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN petitioner.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN petitioner.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN petitioner.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN petitioner.name IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.name IS
     'Full legal name of the petitioner.';
-COMMENT ON COLUMN petitioner.birth_date IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.birth_date IS
     'Date of birth of the petitioner.';
-COMMENT ON COLUMN petitioner.email IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.email IS
     'Email address.';
-COMMENT ON COLUMN petitioner.phone IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.phone IS
     'Phone number.';
-COMMENT ON COLUMN petitioner.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN petitioner.state_as_usps_code IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.state_as_usps_code IS
     'Two-letter USPS code of the petitioner''s state of residence.';
-COMMENT ON COLUMN petitioner.postcode IS
+COMMENT ON COLUMN united_states_divorce_petition.petitioner.postcode IS
     'ZIP code.';
 
 CREATE INDEX petitioner_name_trgm_idx
-    ON petitioner
+    ON united_states_divorce_petition.petitioner
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -117,7 +134,7 @@ CREATE INDEX petitioner_name_trgm_idx
 -- Attorney (or court self-help facilitator) who prepares the petition; optional
 -- because many petitioners file pro se.
 
-CREATE TABLE attorney (
+CREATE TABLE united_states_divorce_petition.attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -132,31 +149,31 @@ CREATE TABLE attorney (
 );
 
 CREATE TRIGGER trigger_attorney_updated_at
-    BEFORE UPDATE ON attorney
+    BEFORE UPDATE ON united_states_divorce_petition.attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE attorney IS
+COMMENT ON TABLE united_states_divorce_petition.attorney IS
     'Attorney or court self-help facilitator who prepares the petition; optional because many petitioners file pro se.';
-COMMENT ON COLUMN attorney.id IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN attorney.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN attorney.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN attorney.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN attorney.name IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.name IS
     'Full name of the attorney or self-help facilitator preparing the petition.';
-COMMENT ON COLUMN attorney.email IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.email IS
     'Email address.';
-COMMENT ON COLUMN attorney.phone IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.phone IS
     'Phone number.';
-COMMENT ON COLUMN attorney.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN attorney.bar_state_as_usps_code IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.bar_state_as_usps_code IS
     'Two-letter USPS code of the state bar that admitted the attorney.';
-COMMENT ON COLUMN attorney.bar_number IS
+COMMENT ON COLUMN united_states_divorce_petition.attorney.bar_number IS
     'State bar number; empty for a self-represented filer.';
 
 -- ========================================================================
@@ -174,14 +191,14 @@ COMMENT ON COLUMN attorney.bar_number IS
 -- classification, rule audit and flags live in dedicated child tables. This is
 -- documentation support, not legal advice; the court decides.
 
-CREATE TABLE united_states_divorce_petition (
+CREATE TABLE united_states_divorce_petition.united_states_divorce_petition (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    petitioner_id UUID NOT NULL REFERENCES petitioner(id) ON DELETE RESTRICT,
-    attorney_id UUID REFERENCES attorney(id) ON DELETE RESTRICT,
+    petitioner_id UUID NOT NULL REFERENCES united_states_divorce_petition.petitioner(id) ON DELETE RESTRICT,
+    attorney_id UUID REFERENCES united_states_divorce_petition.attorney(id) ON DELETE RESTRICT,
 
     -- Filing
     state VARCHAR(2) NOT NULL DEFAULT '',
@@ -231,96 +248,96 @@ CREATE TABLE united_states_divorce_petition (
 );
 
 CREATE INDEX united_states_divorce_petition_petitioner_id_idx
-    ON united_states_divorce_petition (petitioner_id);
+    ON united_states_divorce_petition.united_states_divorce_petition (petitioner_id);
 CREATE INDEX united_states_divorce_petition_attorney_id_idx
-    ON united_states_divorce_petition (attorney_id);
+    ON united_states_divorce_petition.united_states_divorce_petition (attorney_id);
 
 CREATE TRIGGER trigger_united_states_divorce_petition_updated_at
-    BEFORE UPDATE ON united_states_divorce_petition
+    BEFORE UPDATE ON united_states_divorce_petition.united_states_divorce_petition
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE united_states_divorce_petition IS
+COMMENT ON TABLE united_states_divorce_petition.united_states_divorce_petition IS
     'Main United States petition for dissolution of marriage record: filing, spouses and residency, children and support, property, service of process, and the decree. Documentation support, not legal advice.';
-COMMENT ON COLUMN united_states_divorce_petition.id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_divorce_petition.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_divorce_petition.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_divorce_petition.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_divorce_petition.petitioner_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.petitioner_id IS
     'Foreign key to the petitioner (restrict delete).';
-COMMENT ON COLUMN united_states_divorce_petition.attorney_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.attorney_id IS
     'Foreign key to the preparing attorney (restrict delete); optional.';
-COMMENT ON COLUMN united_states_divorce_petition.state IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.state IS
     'Two-letter USPS code of the state whose court the petition is filed in.';
-COMMENT ON COLUMN united_states_divorce_petition.county IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.county IS
     'County (or parish) of the filing court.';
-COMMENT ON COLUMN united_states_divorce_petition.filing_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.filing_date IS
     'Date the petition is, or will be, filed with the clerk.';
-COMMENT ON COLUMN united_states_divorce_petition.case_type IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.case_type IS
     'Whether the divorce is expected to be uncontested (agreed) or contested.';
-COMMENT ON COLUMN united_states_divorce_petition.ground_type IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.ground_type IS
     'Kind of ground pleaded: no-fault or fault.';
-COMMENT ON COLUMN united_states_divorce_petition.fault_ground IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.fault_ground IS
     'Fault ground pleaded, when ground_type is fault.';
-COMMENT ON COLUMN united_states_divorce_petition.petitioner_name IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.petitioner_name IS
     'Full legal name of the petitioner (spouse who files).';
-COMMENT ON COLUMN united_states_divorce_petition.respondent_name IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.respondent_name IS
     'Full legal name of the respondent (other spouse).';
-COMMENT ON COLUMN united_states_divorce_petition.marriage_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.marriage_date IS
     'Date of the marriage.';
-COMMENT ON COLUMN united_states_divorce_petition.marriage_place IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.marriage_place IS
     'City and state or country where the marriage took place.';
-COMMENT ON COLUMN united_states_divorce_petition.separation_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.separation_date IS
     'Date the spouses began living separate and apart; null if still together.';
-COMMENT ON COLUMN united_states_divorce_petition.petitioner_residency_months IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.petitioner_residency_months IS
     'Whole months the petitioner has lived in the filing state immediately before filing.';
-COMMENT ON COLUMN united_states_divorce_petition.county_residency_days IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.county_residency_days IS
     'Days the petitioner has lived in the filing county immediately before filing.';
-COMMENT ON COLUMN united_states_divorce_petition.married_or_lived_in_state IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.married_or_lived_in_state IS
     'Whether the spouses married in, or lived together as spouses in, the filing state (shortens the New York residency period).';
-COMMENT ON COLUMN united_states_divorce_petition.respondent_military IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.respondent_military IS
     'Whether the respondent is on active military duty (Servicemembers Civil Relief Act affidavit).';
-COMMENT ON COLUMN united_states_divorce_petition.has_minor_children IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.has_minor_children IS
     'Whether the spouses have minor children of the marriage.';
-COMMENT ON COLUMN united_states_divorce_petition.children_count IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.children_count IS
     'Number of minor children of the marriage.';
-COMMENT ON COLUMN united_states_divorce_petition.children_home_state_months IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.children_home_state_months IS
     'Months the children have lived in the filing state with a parent (UCCJEA home-state test: six months).';
-COMMENT ON COLUMN united_states_divorce_petition.pregnant IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.pregnant IS
     'Whether either spouse is pregnant with a child of the marriage.';
-COMMENT ON COLUMN united_states_divorce_petition.custody_plan_documented IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.custody_plan_documented IS
     'Whether a custody and parenting-time plan is documented.';
-COMMENT ON COLUMN united_states_divorce_petition.child_support_worksheet_completed IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.child_support_worksheet_completed IS
     'Whether the state child-support guideline worksheet is completed.';
-COMMENT ON COLUMN united_states_divorce_petition.child_support_monthly_amount IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.child_support_monthly_amount IS
     'Monthly child support from the worksheet, in US dollars; null when unset.';
-COMMENT ON COLUMN united_states_divorce_petition.property_division_approach IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.property_division_approach IS
     'Property-division approach pleaded: community property or equitable distribution.';
-COMMENT ON COLUMN united_states_divorce_petition.settlement_agreement_signed IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.settlement_agreement_signed IS
     'Whether both spouses signed a marital settlement agreement.';
-COMMENT ON COLUMN united_states_divorce_petition.financial_disclosure_filed IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.financial_disclosure_filed IS
     'Whether the financial disclosure or affidavit is filed or ready.';
-COMMENT ON COLUMN united_states_divorce_petition.spousal_support_requested IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.spousal_support_requested IS
     'Whether spousal support (alimony, maintenance) is requested.';
-COMMENT ON COLUMN united_states_divorce_petition.service_method IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.service_method IS
     'How the respondent is, or will be, served: personal, acceptance (waiver), certified mail, publication, or none yet.';
-COMMENT ON COLUMN united_states_divorce_petition.service_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.service_date IS
     'Date the respondent was served or signed an acceptance of service.';
-COMMENT ON COLUMN united_states_divorce_petition.respondent_responded IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.respondent_responded IS
     'Whether the respondent has filed a response or appearance.';
-COMMENT ON COLUMN united_states_divorce_petition.decree_entered IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.decree_entered IS
     'Whether the court has entered the judgment or decree of dissolution.';
-COMMENT ON COLUMN united_states_divorce_petition.decree_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.decree_date IS
     'Date the decree was entered.';
-COMMENT ON COLUMN united_states_divorce_petition.name_restoration_requested IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.name_restoration_requested IS
     'Whether restoration of a former name is requested in the decree.';
-COMMENT ON COLUMN united_states_divorce_petition.name_to_restore IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.name_to_restore IS
     'Former name to be restored.';
-COMMENT ON COLUMN united_states_divorce_petition.certificate_requested IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition.certificate_requested IS
     'Whether a vital-records divorce certificate or certified decree is requested.';
 
 -- ========================================================================
@@ -335,14 +352,14 @@ COMMENT ON COLUMN united_states_divorce_petition.certificate_requested IS
 -- incomplete, or not-yet-eligible, plus the filing state's property regime
 -- and the earliest permitted decree date. Not a score; the court decides.
 
-CREATE TABLE united_states_divorce_petition_grade (
+CREATE TABLE united_states_divorce_petition.united_states_divorce_petition_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_divorce_petition_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_divorce_petition(id) ON DELETE CASCADE,
+        REFERENCES united_states_divorce_petition.united_states_divorce_petition(id) ON DELETE CASCADE,
 
     readiness_class VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (readiness_class IN ('ready-to-file', 'incomplete', 'not-yet-eligible', '')),
@@ -356,31 +373,31 @@ CREATE TABLE united_states_divorce_petition_grade (
 );
 
 CREATE TRIGGER trigger_united_states_divorce_petition_grade_updated_at
-    BEFORE UPDATE ON united_states_divorce_petition_grade
+    BEFORE UPDATE ON united_states_divorce_petition.united_states_divorce_petition_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE united_states_divorce_petition_grade IS
+COMMENT ON TABLE united_states_divorce_petition.united_states_divorce_petition_grade IS
     'Computed readiness classification for a divorce petition: ready-to-file, incomplete, or not-yet-eligible, the property regime, and the earliest permitted decree date.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.united_states_divorce_petition_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.united_states_divorce_petition_id IS
     'Foreign key to the parent petition (unique, 1:1).';
-COMMENT ON COLUMN united_states_divorce_petition_grade.readiness_class IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.readiness_class IS
     'Readiness class: ready-to-file, incomplete, or not-yet-eligible (not-yet-eligible takes precedence).';
-COMMENT ON COLUMN united_states_divorce_petition_grade.property_regime IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.property_regime IS
     'Property-division regime of the filing state: community, equitable, or unknown.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.earliest_decree_date IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.earliest_decree_date IS
     'Earliest date a decree may be entered under the filing state waiting period; null when it cannot be computed.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.state_rule_known IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.state_rule_known IS
     'Whether the filing state is in the engine rule table (yes/no); unknown states use the default rule.';
-COMMENT ON COLUMN united_states_divorce_petition_grade.graded_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -393,14 +410,14 @@ COMMENT ON COLUMN united_states_divorce_petition_grade.graded_at IS
 
 -- Audit trail of every readiness rule that fired during classification.
 
-CREATE TABLE united_states_divorce_petition_grade_rule (
+CREATE TABLE united_states_divorce_petition.united_states_divorce_petition_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_divorce_petition_grade_id UUID NOT NULL
-        REFERENCES united_states_divorce_petition_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_divorce_petition.united_states_divorce_petition_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -410,32 +427,32 @@ CREATE TABLE united_states_divorce_petition_grade_rule (
 );
 
 CREATE INDEX united_states_divorce_petition_grade_rule_grade_id_idx
-    ON united_states_divorce_petition_grade_rule (united_states_divorce_petition_grade_id);
+    ON united_states_divorce_petition.united_states_divorce_petition_grade_rule (united_states_divorce_petition_grade_id);
 
 CREATE TRIGGER trigger_united_states_divorce_petition_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_divorce_petition_grade_rule
+    BEFORE UPDATE ON united_states_divorce_petition.united_states_divorce_petition_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE united_states_divorce_petition_grade_rule IS
+COMMENT ON TABLE united_states_divorce_petition.united_states_divorce_petition_grade_rule IS
     'Audit trail of every readiness rule that fired during classification.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.united_states_divorce_petition_grade_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.united_states_divorce_petition_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.rule_id IS
     'Stable rule identifier (for example R-RESIDENCY-001).';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.dimension IS
     'Petition dimension the rule concerns: eligibility, residency, children, property, service, decree, state, classification.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.category IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.category IS
     'Rule category.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_rule.description IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_rule.description IS
     'Human-readable description of the rule that fired.';
 
 -- ========================================================================
@@ -449,14 +466,14 @@ COMMENT ON COLUMN united_states_divorce_petition_grade_rule.description IS
 -- Flagged issues that fire independently of the readiness class, with a
 -- priority and a suggested action.
 
-CREATE TABLE united_states_divorce_petition_grade_flag (
+CREATE TABLE united_states_divorce_petition.united_states_divorce_petition_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_divorce_petition_grade_id UUID NOT NULL
-        REFERENCES united_states_divorce_petition_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_divorce_petition.united_states_divorce_petition_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -468,34 +485,34 @@ CREATE TABLE united_states_divorce_petition_grade_flag (
 );
 
 CREATE INDEX united_states_divorce_petition_grade_flag_grade_id_idx
-    ON united_states_divorce_petition_grade_flag (united_states_divorce_petition_grade_id);
+    ON united_states_divorce_petition.united_states_divorce_petition_grade_flag (united_states_divorce_petition_grade_id);
 
 CREATE TRIGGER trigger_united_states_divorce_petition_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_divorce_petition_grade_flag
+    BEFORE UPDATE ON united_states_divorce_petition.united_states_divorce_petition_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_divorce_petition.set_updated_at();
 
-COMMENT ON TABLE united_states_divorce_petition_grade_flag IS
+COMMENT ON TABLE united_states_divorce_petition.united_states_divorce_petition_grade_flag IS
     'Flagged issues that fire independently of the readiness class, with priority and suggested action.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.united_states_divorce_petition_grade_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.united_states_divorce_petition_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.flag_id IS
     'Stable flag identifier (for example F-DIV-RESIDENCY-001).';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.category IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.category IS
     'Flag category: state-residency, county-residency, unknown-state-rule, missing-core-details, ground-not-available, separation-period, custody-plan-missing, child-support-missing, home-state-jurisdiction, property-approach-mismatch, financial-disclosure-missing, service-incomplete, service-by-publication, uncontested-without-agreement, military-respondent, decree-before-waiting-period, waiting-period-pending, name-restoration-incomplete, certificate-not-requested, other.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.priority IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.description IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_divorce_petition_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_divorce_petition.united_states_divorce_petition_grade_flag.suggested_action IS
     'Suggested action for the petitioner or preparer.';
 
 -- ========================================================================

@@ -2,7 +2,7 @@
 -- particulars of the death. A qualified informant is defined by section 16
 -- of the Births and Deaths Registration Act 1953.
 
-CREATE TABLE informant (
+CREATE TABLE united_kingdom_death_registration.informant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,31 +18,31 @@ CREATE TABLE informant (
 );
 
 CREATE TRIGGER trigger_informant_updated_at
-    BEFORE UPDATE ON informant
+    BEFORE UPDATE ON united_kingdom_death_registration.informant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_death_registration.set_updated_at();
 
-COMMENT ON TABLE informant IS
+COMMENT ON TABLE united_kingdom_death_registration.informant IS
     'The informant who gives the particulars of the death to the registrar.';
-COMMENT ON COLUMN informant.id IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN informant.created_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN informant.updated_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN informant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN informant.name IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.name IS
     'Full name of the informant.';
-COMMENT ON COLUMN informant.email IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.email IS
     'Email address.';
-COMMENT ON COLUMN informant.phone IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.phone IS
     'Phone number.';
-COMMENT ON COLUMN informant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN informant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN informant.postcode IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.postcode IS
     'Postal code.';
-COMMENT ON COLUMN informant.relationship IS
+COMMENT ON COLUMN united_kingdom_death_registration.informant.relationship IS
     'Basis on which the person is an informant: a qualified category under section 16 of the 1953 Act, or not-qualified.';

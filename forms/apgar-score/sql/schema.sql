@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS apgar_score;
+
+COMMENT ON SCHEMA apgar_score IS
+    'Namespace for the Apgar Score form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION apgar_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION apgar_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the newborn being assessed.
 
-CREATE TABLE patient (
+CREATE TABLE apgar_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON apgar_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE apgar_score.patient IS
     'Patient demographic information for the newborn assessed by the Apgar-score record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN apgar_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN apgar_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN apgar_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN apgar_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN apgar_score.patient.name IS
     'Full newborn name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN apgar_score.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN apgar_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN apgar_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN apgar_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN apgar_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN apgar_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN apgar_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN apgar_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN apgar_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN apgar_score.patient.height_as_cm IS
     'Length in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN apgar_score.patient.weight_as_kg IS
     'Birth weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN apgar_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN apgar_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON apgar_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- birth and recording the Apgar assessment (midwife, obstetrician,
 -- neonatologist, neonatal nurse, paediatrician).
 
-CREATE TABLE clinician (
+CREATE TABLE apgar_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON apgar_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE apgar_score.clinician IS
     'Clinician identifying information for the professional attending the birth and recording the Apgar assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN apgar_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN apgar_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN apgar_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN apgar_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN apgar_score.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN apgar_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN apgar_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN apgar_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN apgar_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN apgar_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN apgar_score.clinician.role IS
     'Primary clinical role: midwife, obstetrician, neonatologist, neonatal-nurse, paediatrician, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN apgar_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN apgar_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON apgar_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -209,14 +226,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- 10 minutes, and beyond), and the computed grade, fired rules, and flags
 -- live in dedicated child tables that cascade from this parent.
 
-CREATE TABLE apgar_score (
+CREATE TABLE apgar_score.apgar_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES apgar_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES apgar_score.clinician(id) ON DELETE RESTRICT,
 
     -- Assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -237,50 +254,50 @@ CREATE TABLE apgar_score (
 );
 
 CREATE INDEX apgar_score_patient_id_idx
-    ON apgar_score (patient_id);
+    ON apgar_score.apgar_score (patient_id);
 CREATE INDEX apgar_score_clinician_id_idx
-    ON apgar_score (clinician_id);
+    ON apgar_score.apgar_score (clinician_id);
 
 CREATE TRIGGER trigger_apgar_score_updated_at
-    BEFORE UPDATE ON apgar_score
+    BEFORE UPDATE ON apgar_score.apgar_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE apgar_score IS
+COMMENT ON TABLE apgar_score.apgar_score IS
     'Parent Apgar-score assessment record: birth context, newborn identification, and resuscitation notes; the repeated five-sign scores are held in the apgar_score_timepoint child table.';
-COMMENT ON COLUMN apgar_score.id IS
+COMMENT ON COLUMN apgar_score.apgar_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN apgar_score.created_at IS
+COMMENT ON COLUMN apgar_score.apgar_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN apgar_score.updated_at IS
+COMMENT ON COLUMN apgar_score.apgar_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN apgar_score.deleted_at IS
+COMMENT ON COLUMN apgar_score.apgar_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN apgar_score.patient_id IS
+COMMENT ON COLUMN apgar_score.apgar_score.patient_id IS
     'Foreign key to the newborn patient being assessed (delete restricted).';
-COMMENT ON COLUMN apgar_score.clinician_id IS
+COMMENT ON COLUMN apgar_score.apgar_score.clinician_id IS
     'Foreign key to the attending clinician (optional; delete restricted).';
-COMMENT ON COLUMN apgar_score.clinician_name IS
+COMMENT ON COLUMN apgar_score.apgar_score.clinician_name IS
     'Name of the attending clinician as recorded on the assessment.';
-COMMENT ON COLUMN apgar_score.clinician_role IS
+COMMENT ON COLUMN apgar_score.apgar_score.clinician_role IS
     'Role of the attending clinician: midwife, obstetrician, neonatologist, neonatal-nurse, paediatrician, or other.';
-COMMENT ON COLUMN apgar_score.born_at IS
+COMMENT ON COLUMN apgar_score.apgar_score.born_at IS
     'Date and time of birth.';
-COMMENT ON COLUMN apgar_score.care_setting IS
+COMMENT ON COLUMN apgar_score.apgar_score.care_setting IS
     'Care setting where the birth took place: delivery-room, theatre, birth-centre, home, neonatal-unit, or other.';
-COMMENT ON COLUMN apgar_score.gestational_age_weeks IS
+COMMENT ON COLUMN apgar_score.apgar_score.gestational_age_weeks IS
     'Gestational age at birth, in completed weeks.';
-COMMENT ON COLUMN apgar_score.mode_of_delivery IS
+COMMENT ON COLUMN apgar_score.apgar_score.mode_of_delivery IS
     'Mode of delivery: vaginal, assisted, caesarean, or other.';
-COMMENT ON COLUMN apgar_score.newborn_identifier IS
+COMMENT ON COLUMN apgar_score.apgar_score.newborn_identifier IS
     'Local identifier for the newborn as recorded on the assessment.';
-COMMENT ON COLUMN apgar_score.sex IS
+COMMENT ON COLUMN apgar_score.apgar_score.sex IS
     'Newborn sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN apgar_score.birth_order IS
+COMMENT ON COLUMN apgar_score.apgar_score.birth_order IS
     'Birth order for multiple births (1 for a singleton).';
-COMMENT ON COLUMN apgar_score.resuscitation_measures IS
+COMMENT ON COLUMN apgar_score.apgar_score.resuscitation_measures IS
     'Free-text description of resuscitation measures given (drying, stimulation, oxygen, IPPV, chest compressions, etc.).';
-COMMENT ON COLUMN apgar_score.clinician_note IS
+COMMENT ON COLUMN apgar_score.apgar_score.clinician_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -299,13 +316,13 @@ COMMENT ON COLUMN apgar_score.clinician_note IS
 -- the 10-minute (and later) timepoint is expected whenever the 5-minute
 -- total is below 7.
 
-CREATE TABLE apgar_score_timepoint (
+CREATE TABLE apgar_score.apgar_score_timepoint (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    apgar_score_id UUID NOT NULL REFERENCES apgar_score(id) ON DELETE CASCADE,
+    apgar_score_id UUID NOT NULL REFERENCES apgar_score.apgar_score(id) ON DELETE CASCADE,
 
     timepoint_minutes INT,
 
@@ -320,40 +337,40 @@ CREATE TABLE apgar_score_timepoint (
 );
 
 CREATE INDEX apgar_score_timepoint_apgar_score_id_idx
-    ON apgar_score_timepoint (apgar_score_id);
+    ON apgar_score.apgar_score_timepoint (apgar_score_id);
 
 CREATE TRIGGER trigger_apgar_score_timepoint_updated_at
-    BEFORE UPDATE ON apgar_score_timepoint
+    BEFORE UPDATE ON apgar_score.apgar_score_timepoint
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE apgar_score_timepoint IS
+COMMENT ON TABLE apgar_score.apgar_score_timepoint IS
     'Repeated per-timepoint five-sign Apgar scores (1, 5, 10 minutes, and beyond); cascades from the parent apgar_score.';
-COMMENT ON COLUMN apgar_score_timepoint.id IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN apgar_score_timepoint.created_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN apgar_score_timepoint.updated_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN apgar_score_timepoint.deleted_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN apgar_score_timepoint.apgar_score_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.apgar_score_id IS
     'Foreign key to the parent Apgar assessment.';
-COMMENT ON COLUMN apgar_score_timepoint.timepoint_minutes IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.timepoint_minutes IS
     'Timepoint in minutes after birth at which this score was recorded (1, 5, 10, ...).';
-COMMENT ON COLUMN apgar_score_timepoint.appearance IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.appearance IS
     'Sign A — appearance (skin colour), scored 0, 1, or 2.';
-COMMENT ON COLUMN apgar_score_timepoint.pulse IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.pulse IS
     'Sign P — pulse (heart rate), scored 0, 1, or 2.';
-COMMENT ON COLUMN apgar_score_timepoint.grimace IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.grimace IS
     'Sign G — grimace (reflex irritability), scored 0, 1, or 2.';
-COMMENT ON COLUMN apgar_score_timepoint.activity IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.activity IS
     'Sign A — activity (muscle tone), scored 0, 1, or 2.';
-COMMENT ON COLUMN apgar_score_timepoint.respiration IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.respiration IS
     'Sign R — respiration, scored 0, 1, or 2.';
-COMMENT ON COLUMN apgar_score_timepoint.total IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.total IS
     'Derived total for this timepoint: sum of the five signs (0-10).';
-COMMENT ON COLUMN apgar_score_timepoint.band IS
+COMMENT ON COLUMN apgar_score.apgar_score_timepoint.band IS
     'Derived band for this timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3).';
 
 -- ========================================================================
@@ -371,14 +388,14 @@ COMMENT ON COLUMN apgar_score_timepoint.band IS
 -- signs live in the apgar_score_timepoint child table; this table is the
 -- computed summary the engine emits.
 
-CREATE TABLE apgar_score_grade (
+CREATE TABLE apgar_score.apgar_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     apgar_score_id UUID NOT NULL UNIQUE
-        REFERENCES apgar_score(id) ON DELETE CASCADE,
+        REFERENCES apgar_score.apgar_score(id) ON DELETE CASCADE,
 
     -- Per-timepoint totals (0-10) for the canonical 1/5/10-minute timepoints
     total_one_minute INT,
@@ -405,39 +422,39 @@ CREATE TABLE apgar_score_grade (
 );
 
 CREATE TRIGGER trigger_apgar_score_grade_updated_at
-    BEFORE UPDATE ON apgar_score_grade
+    BEFORE UPDATE ON apgar_score.apgar_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE apgar_score_grade IS
+COMMENT ON TABLE apgar_score.apgar_score_grade IS
     'Computed Apgar grading result (1:1): per-timepoint totals and bands for the canonical 1/5/10-minute timepoints, an overall summary band, and the trend across scored timepoints.';
-COMMENT ON COLUMN apgar_score_grade.id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN apgar_score_grade.created_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN apgar_score_grade.updated_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN apgar_score_grade.deleted_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN apgar_score_grade.apgar_score_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.apgar_score_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN apgar_score_grade.total_one_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.total_one_minute IS
     'Derived total (0-10) at the 1-minute timepoint, when scored.';
-COMMENT ON COLUMN apgar_score_grade.total_five_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.total_five_minute IS
     'Derived total (0-10) at the 5-minute timepoint, when scored.';
-COMMENT ON COLUMN apgar_score_grade.total_ten_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.total_ten_minute IS
     'Derived total (0-10) at the 10-minute timepoint, when scored (expected whenever the 5-minute total is below 7).';
-COMMENT ON COLUMN apgar_score_grade.band_one_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.band_one_minute IS
     'Derived band at the 1-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3).';
-COMMENT ON COLUMN apgar_score_grade.band_five_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.band_five_minute IS
     'Derived band at the 5-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3).';
-COMMENT ON COLUMN apgar_score_grade.band_ten_minute IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.band_ten_minute IS
     'Derived band at the 10-minute timepoint: reassuring (7-10), moderately-low (4-6), or low (0-3).';
-COMMENT ON COLUMN apgar_score_grade.summary_band IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.summary_band IS
     'Overall summary band: the worst (lowest) band observed across scored timepoints.';
-COMMENT ON COLUMN apgar_score_grade.trend IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.trend IS
     'Trend across consecutive scored timepoints: improving, static, falling, or insufficient (fewer than two scored timepoints).';
-COMMENT ON COLUMN apgar_score_grade.graded_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -454,14 +471,14 @@ COMMENT ON COLUMN apgar_score_grade.graded_at IS
 -- rules (total banding, trend) leave timepoint_minutes null or use the
 -- 'total' / 'trend' sign.
 
-CREATE TABLE apgar_score_grade_rule (
+CREATE TABLE apgar_score.apgar_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     apgar_score_grade_id UUID NOT NULL
-        REFERENCES apgar_score_grade(id) ON DELETE CASCADE,
+        REFERENCES apgar_score.apgar_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     timepoint_minutes INT,
@@ -473,36 +490,36 @@ CREATE TABLE apgar_score_grade_rule (
 );
 
 CREATE INDEX apgar_score_grade_rule_grade_id_idx
-    ON apgar_score_grade_rule (apgar_score_grade_id);
+    ON apgar_score.apgar_score_grade_rule (apgar_score_grade_id);
 
 CREATE TRIGGER trigger_apgar_score_grade_rule_updated_at
-    BEFORE UPDATE ON apgar_score_grade_rule
+    BEFORE UPDATE ON apgar_score.apgar_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE apgar_score_grade_rule IS
+COMMENT ON TABLE apgar_score.apgar_score_grade_rule IS
     'Audit trail of every grading rule that fired during Apgar computation: timepoint, sign, points contributed, category, and description.';
-COMMENT ON COLUMN apgar_score_grade_rule.id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN apgar_score_grade_rule.created_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN apgar_score_grade_rule.updated_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN apgar_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN apgar_score_grade_rule.apgar_score_grade_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.apgar_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN apgar_score_grade_rule.rule_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-TOTAL-BAND-01, R-TREND-FALLING-01).';
-COMMENT ON COLUMN apgar_score_grade_rule.timepoint_minutes IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.timepoint_minutes IS
     'Timepoint in minutes the rule applies to (1, 5, 10, ...); null for cross-timepoint rules such as trend.';
-COMMENT ON COLUMN apgar_score_grade_rule.sign IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.sign IS
     'Scored sign the rule belongs to: appearance, pulse, grimace, activity, respiration, total (per-timepoint sum), or trend (across timepoints).';
-COMMENT ON COLUMN apgar_score_grade_rule.points IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.points IS
     'Points (0-2 for a sign, 0-10 for a total) contributed by this rule.';
-COMMENT ON COLUMN apgar_score_grade_rule.category IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.category IS
     'Subject category (e.g. sign-score, total-band, trend-band).';
-COMMENT ON COLUMN apgar_score_grade_rule.description IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -520,14 +537,14 @@ COMMENT ON COLUMN apgar_score_grade_rule.description IS
 -- 10-minute score, and incomplete assessment (a sign missing at a scored
 -- timepoint).
 
-CREATE TABLE apgar_score_grade_flag (
+CREATE TABLE apgar_score.apgar_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     apgar_score_grade_id UUID NOT NULL
-        REFERENCES apgar_score_grade(id) ON DELETE CASCADE,
+        REFERENCES apgar_score.apgar_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -548,34 +565,34 @@ CREATE TABLE apgar_score_grade_flag (
 );
 
 CREATE INDEX apgar_score_grade_flag_grade_id_idx
-    ON apgar_score_grade_flag (apgar_score_grade_id);
+    ON apgar_score.apgar_score_grade_flag (apgar_score_grade_id);
 
 CREATE TRIGGER trigger_apgar_score_grade_flag_updated_at
-    BEFORE UPDATE ON apgar_score_grade_flag
+    BEFORE UPDATE ON apgar_score.apgar_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION apgar_score.set_updated_at();
 
-COMMENT ON TABLE apgar_score_grade_flag IS
+COMMENT ON TABLE apgar_score.apgar_score_grade_flag IS
     'Red-flag issues that fire independently of the totals, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN apgar_score_grade_flag.id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN apgar_score_grade_flag.created_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN apgar_score_grade_flag.updated_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN apgar_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN apgar_score_grade_flag.apgar_score_grade_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.apgar_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN apgar_score_grade_flag.flag_id IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-RESUSCITATION-NEEDED-001).';
-COMMENT ON COLUMN apgar_score_grade_flag.category IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration): resuscitation-needed, continue-scoring, falling-trend, support-and-stimulation, missing-ten-minute-score, incomplete-assessment, or other.';
-COMMENT ON COLUMN apgar_score_grade_flag.priority IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN apgar_score_grade_flag.description IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN apgar_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN apgar_score.apgar_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "commence active resuscitation and obtain neonatal support").';
 
 -- ========================================================================

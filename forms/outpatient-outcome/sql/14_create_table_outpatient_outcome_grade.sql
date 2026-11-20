@@ -1,11 +1,11 @@
-CREATE TABLE outpatient_outcome_grade (
+CREATE TABLE outpatient_outcome.outpatient_outcome_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     overall_grade CHAR(1) NOT NULL DEFAULT ''
         CHECK (overall_grade IN ('A', 'B', 'C', 'D', 'E', '')),
@@ -23,34 +23,34 @@ CREATE TABLE outpatient_outcome_grade (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_grade_updated_at
-    BEFORE UPDATE ON outpatient_outcome_grade
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_grade IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_grade IS
     'Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four).';
-COMMENT ON COLUMN outpatient_outcome_grade.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_grade.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_grade.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_grade.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_grade.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_grade.overall_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.overall_grade IS
     'Overall OOCG grade A (best) - E (worst); equals the worst per-domain grade.';
-COMMENT ON COLUMN outpatient_outcome_grade.clinical_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.clinical_grade IS
     'Clinical-domain grade A-E (A=Resolved, B=Improved, C=Unchanged, D=Worsened, E=Died).';
-COMMENT ON COLUMN outpatient_outcome_grade.prom_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.prom_grade IS
     'PROM-domain composite grade A-E over EQ-5D-5L, GRC, and PROMIS.';
-COMMENT ON COLUMN outpatient_outcome_grade.prem_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.prem_grade IS
     'PREM-domain grade A-E from FFT response.';
-COMMENT ON COLUMN outpatient_outcome_grade.operational_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.operational_grade IS
     'Operational-domain grade A-E from attendance outcome + wait vs target + modality.';
-COMMENT ON COLUMN outpatient_outcome_grade.result_notes IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.result_notes IS
     'Free-text clinician notes accompanying the grading result.';
 
-COMMENT ON COLUMN outpatient_outcome_grade.graded_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.graded_at IS
     'Graded at.';

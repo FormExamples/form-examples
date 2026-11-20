@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS pulmonary_embolism_rule_out_criteria;
+
+COMMENT ON SCHEMA pulmonary_embolism_rule_out_criteria IS
+    'Namespace for the Pulmonary Embolism Rule-out Criteria (PERC) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.patient IS
     'Patient demographic information used by the PERC assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON pulmonary_embolism_rule_out_criteria.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (physician, advanced-practitioner, nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.role IS
     'Primary clinical role: physician, advanced-practitioner, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON pulmonary_embolism_rule_out_criteria.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- requires the pre-test probability to be 'low' AND all eight criteria 'yes'.
 -- The computed classification, fired rules, and flags live in child tables.
 
-CREATE TABLE pulmonary_embolism_rule_out_criteria (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES pulmonary_embolism_rule_out_criteria.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES pulmonary_embolism_rule_out_criteria.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -245,64 +262,64 @@ CREATE TABLE pulmonary_embolism_rule_out_criteria (
 );
 
 CREATE INDEX pulmonary_embolism_rule_out_criteria_patient_id_idx
-    ON pulmonary_embolism_rule_out_criteria (patient_id);
+    ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria (patient_id);
 CREATE INDEX pulmonary_embolism_rule_out_criteria_clinician_id_idx
-    ON pulmonary_embolism_rule_out_criteria (clinician_id);
+    ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria (clinician_id);
 
 CREATE TRIGGER trigger_pulmonary_embolism_rule_out_criteria_updated_at
-    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE pulmonary_embolism_rule_out_criteria IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria IS
     'Main PERC assessment record: identification, context, the pre-test probability gate, and the eight objective criterion inputs.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinician_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.status IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.patient_identifier IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.assessed_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.care_setting IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.care_setting IS
     'Care setting: emergency-department, acute-ambulatory, or other.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.presenting_complaint IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.presenting_complaint IS
     'Symptom prompting consideration of pulmonary embolism.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.age IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.age IS
     'Patient age in years; the objective measurement behind criterion 1 (age < 50).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.heart_rate IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.heart_rate IS
     'Heart rate in beats per minute; the objective measurement behind criterion 2 (heart rate < 100).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.oxygen_saturation IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.oxygen_saturation IS
     'Oxygen saturation (SpO2) as a percentage; the objective measurement behind criterion 3 (SpO2 >= 95).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pretest_probability IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.pretest_probability IS
     'Clinician gestalt pre-test probability: low or not-low. PERC applies only when low.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.age_under_50 IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.age_under_50 IS
     'Criterion 1 (satisfied when yes): age under 50 years.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.heart_rate_under_100 IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.heart_rate_under_100 IS
     'Criterion 2 (satisfied when yes): heart rate under 100 beats per minute.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.spo2_at_least_95 IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.spo2_at_least_95 IS
     'Criterion 3 (satisfied when yes): oxygen saturation at least 95 per cent.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.no_unilateral_leg_swelling IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.no_unilateral_leg_swelling IS
     'Criterion 4 (satisfied when yes): no unilateral leg swelling.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.no_haemoptysis IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.no_haemoptysis IS
     'Criterion 5 (satisfied when yes): no haemoptysis.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.no_recent_surgery_trauma IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.no_recent_surgery_trauma IS
     'Criterion 6 (satisfied when yes): no surgery or trauma within 4 weeks requiring general anaesthesia.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.no_prior_dvt_pe IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.no_prior_dvt_pe IS
     'Criterion 7 (satisfied when yes): no prior deep vein thrombosis or pulmonary embolism.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.no_oestrogen_use IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.no_oestrogen_use IS
     'Criterion 8 (satisfied when yes): no exogenous oestrogen use.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinical_notes IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';
 
 -- ========================================================================
@@ -319,14 +336,14 @@ COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.clinical_notes IS
 -- eight criteria were satisfied, and whether PERC was applicable (pre-test
 -- probability low). One-to-one with the parent assessment.
 
-CREATE TABLE pulmonary_embolism_rule_out_criteria_grade (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pulmonary_embolism_rule_out_criteria_id UUID NOT NULL UNIQUE
-        REFERENCES pulmonary_embolism_rule_out_criteria(id) ON DELETE CASCADE,
+        REFERENCES pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria(id) ON DELETE CASCADE,
 
     classification VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (classification IN ('perc-negative', 'perc-positive', '')),
@@ -339,31 +356,31 @@ CREATE TABLE pulmonary_embolism_rule_out_criteria_grade (
 );
 
 CREATE TRIGGER trigger_pulmonary_embolism_rule_out_criteria_grade_updated_at
-    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria_grade
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE pulmonary_embolism_rule_out_criteria_grade IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade IS
     'Computed PERC classification result: binary classification, all-criteria-satisfied flag, applicability, and recommended pathway. One-to-one with the parent assessment.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.pulmonary_embolism_rule_out_criteria_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.pulmonary_embolism_rule_out_criteria_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.classification IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.classification IS
     'Binary PERC classification: perc-negative (PE excluded without further testing) or perc-positive (proceed to D-dimer / imaging).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.all_criteria_satisfied IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.all_criteria_satisfied IS
     'Whether all eight criteria were satisfied (yes) or at least one failed (no).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.applicable IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.applicable IS
     'Whether PERC was applicable (yes when pre-test probability is low; otherwise no).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.recommended_pathway IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.recommended_pathway IS
     'Recommended pathway: no further testing when perc-negative, otherwise D-dimer and/or imaging per local policy.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.graded_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -379,14 +396,14 @@ COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade.graded_at IS
 -- composite classification, with the instrument that produced it, whether it was
 -- satisfied, the outcome it informed, and a human-readable description.
 
-CREATE TABLE pulmonary_embolism_rule_out_criteria_grade_rule (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pulmonary_embolism_rule_out_criteria_grade_id UUID NOT NULL
-        REFERENCES pulmonary_embolism_rule_out_criteria_grade(id) ON DELETE CASCADE,
+        REFERENCES pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -400,36 +417,36 @@ CREATE TABLE pulmonary_embolism_rule_out_criteria_grade_rule (
 );
 
 CREATE INDEX pulmonary_embolism_rule_out_criteria_grade_rule_grade_id_idx
-    ON pulmonary_embolism_rule_out_criteria_grade_rule (pulmonary_embolism_rule_out_criteria_grade_id);
+    ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule (pulmonary_embolism_rule_out_criteria_grade_id);
 
 CREATE TRIGGER trigger_pulmonary_embolism_rule_out_criteria_grade_rule_updated_at
-    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria_grade_rule
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE pulmonary_embolism_rule_out_criteria_grade_rule IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule IS
     'Audit trail of every classification rule that fired during PERC computation: instrument, satisfied flag, outcome, category, and description.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.pulmonary_embolism_rule_out_criteria_grade_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.pulmonary_embolism_rule_out_criteria_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.rule_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-AGE-UNDER-50-01).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.instrument IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.instrument IS
     'Classification instrument the rule belongs to: criterion, gate (applicability), or composite (overall classification).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.satisfied IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.satisfied IS
     'Whether the criterion was satisfied (yes) or failed (no); blank for non-criterion instruments.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.outcome IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.outcome IS
     'Outcome informed by this rule: satisfied, failed, applicable, not-applicable, perc-negative, or perc-positive.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.category IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.category IS
     'Subject category (e.g. age, heart-rate, oxygenation, clinical-sign, history, applicability).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.description IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -443,14 +460,14 @@ COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_rule.description IS
 -- Clinically significant flags that fire independently of the classification,
 -- with priority and a suggested action for the assessing team.
 
-CREATE TABLE pulmonary_embolism_rule_out_criteria_grade_flag (
+CREATE TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pulmonary_embolism_rule_out_criteria_grade_id UUID NOT NULL
-        REFERENCES pulmonary_embolism_rule_out_criteria_grade(id) ON DELETE CASCADE,
+        REFERENCES pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -471,34 +488,34 @@ CREATE TABLE pulmonary_embolism_rule_out_criteria_grade_flag (
 );
 
 CREATE INDEX pulmonary_embolism_rule_out_criteria_grade_flag_grade_id_idx
-    ON pulmonary_embolism_rule_out_criteria_grade_flag (pulmonary_embolism_rule_out_criteria_grade_id);
+    ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag (pulmonary_embolism_rule_out_criteria_grade_id);
 
 CREATE TRIGGER trigger_pulmonary_embolism_rule_out_criteria_grade_flag_updated_at
-    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria_grade_flag
+    BEFORE UPDATE ON pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pulmonary_embolism_rule_out_criteria.set_updated_at();
 
-COMMENT ON TABLE pulmonary_embolism_rule_out_criteria_grade_flag IS
+COMMENT ON TABLE pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag IS
     'Clinically significant flags that fire independently of the classification, with priority and a suggested action for the assessing team.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.created_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.updated_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.deleted_at IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.pulmonary_embolism_rule_out_criteria_grade_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.pulmonary_embolism_rule_out_criteria_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.flag_id IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-REQUIRES-WORKUP-001).';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.category IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.category IS
     'Flag category: requires-workup, not-applicable, hypoxia, tachycardia, prior-vte, incomplete, or other.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.priority IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.description IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria_grade_flag.suggested_action IS
+COMMENT ON COLUMN pulmonary_embolism_rule_out_criteria.pulmonary_embolism_rule_out_criteria_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "proceed to D-dimer and/or imaging per local policy").';
 
 -- ========================================================================

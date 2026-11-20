@@ -1,31 +1,31 @@
-CREATE TABLE assessment (
+CREATE TABLE dyslexia_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES dyslexia_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON dyslexia_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dyslexia_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE dyslexia_assessment.assessment IS
     'Dyslexia assessment form using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN dyslexia_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';

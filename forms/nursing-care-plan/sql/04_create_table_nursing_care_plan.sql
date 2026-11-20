@@ -4,14 +4,14 @@
 -- ulcer, VTE, nutrition). Nursing problems, goals, and interventions are held
 -- in child tables that cascade from this parent.
 
-CREATE TABLE nursing_care_plan (
+CREATE TABLE nursing_care_plan.nursing_care_plan (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES nursing_care_plan.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES nursing_care_plan.clinician(id) ON DELETE RESTRICT,
 
     nurse_name TEXT NOT NULL DEFAULT '',
     nurse_role VARCHAR(30) NOT NULL DEFAULT '' CHECK (nurse_role IN ('registered-nurse', 'nursing-associate', 'student', '')),
@@ -51,86 +51,86 @@ CREATE TABLE nursing_care_plan (
 );
 
 CREATE INDEX nursing_care_plan_patient_id_idx
-    ON nursing_care_plan (patient_id);
+    ON nursing_care_plan.nursing_care_plan (patient_id);
 CREATE INDEX nursing_care_plan_clinician_id_idx
-    ON nursing_care_plan (clinician_id);
+    ON nursing_care_plan.nursing_care_plan (clinician_id);
 
 CREATE TRIGGER trigger_nursing_care_plan_updated_at
-    BEFORE UPDATE ON nursing_care_plan
+    BEFORE UPDATE ON nursing_care_plan.nursing_care_plan
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION nursing_care_plan.set_updated_at();
 
-COMMENT ON TABLE nursing_care_plan IS
+COMMENT ON TABLE nursing_care_plan.nursing_care_plan IS
     'Parent nursing care plan header: authoring context, patient identification, nursing model, plan-level review date, handover summary, and the four referenced risk-assessment groups.';
-COMMENT ON COLUMN nursing_care_plan.id IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN nursing_care_plan.created_at IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN nursing_care_plan.updated_at IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN nursing_care_plan.deleted_at IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN nursing_care_plan.patient_id IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.patient_id IS
     'Foreign key to the patient this care plan is for (restricted delete).';
-COMMENT ON COLUMN nursing_care_plan.clinician_id IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.clinician_id IS
     'Foreign key to the authoring clinician (restricted delete); optional.';
-COMMENT ON COLUMN nursing_care_plan.nurse_name IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nurse_name IS
     'Name of the authoring nurse.';
-COMMENT ON COLUMN nursing_care_plan.nurse_role IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nurse_role IS
     'Role of the authoring nurse: registered-nurse, nursing-associate, or student.';
-COMMENT ON COLUMN nursing_care_plan.nmc_number IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nmc_number IS
     'Professional registration number (NMC PIN) of the authoring nurse.';
-COMMENT ON COLUMN nursing_care_plan.authored_at IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.authored_at IS
     'Date and time the care plan was authored.';
-COMMENT ON COLUMN nursing_care_plan.care_setting IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.care_setting IS
     'Care setting: ward, community, care-home, hospice, or other.';
-COMMENT ON COLUMN nursing_care_plan.plan_type IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.plan_type IS
     'Plan type: admission, ongoing, or discharge.';
-COMMENT ON COLUMN nursing_care_plan.model_used IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.model_used IS
     'Nursing model underpinning the plan: roper-logan-tierney, orem, activities-of-living, or other.';
-COMMENT ON COLUMN nursing_care_plan.patient_identifier IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.patient_identifier IS
     'Local patient identifier as entered on the plan.';
-COMMENT ON COLUMN nursing_care_plan.patient_name IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.patient_name IS
     'Patient name as entered on the plan.';
-COMMENT ON COLUMN nursing_care_plan.date_of_birth IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.date_of_birth IS
     'Patient date of birth as entered on the plan.';
-COMMENT ON COLUMN nursing_care_plan.sex IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN nursing_care_plan.ward_location IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.ward_location IS
     'Ward or location where care is delivered.';
-COMMENT ON COLUMN nursing_care_plan.handover_note IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.handover_note IS
     'Free-text handover summary for the care plan.';
-COMMENT ON COLUMN nursing_care_plan.review_date IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.review_date IS
     'Plan-level date the whole care plan is next due for review.';
-COMMENT ON COLUMN nursing_care_plan.falls_risk_done IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.falls_risk_done IS
     'Whether a falls risk assessment has been completed: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.falls_risk_level IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.falls_risk_level IS
     'Falls risk level: low, medium, or high.';
-COMMENT ON COLUMN nursing_care_plan.falls_risk_assessed_on IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.falls_risk_assessed_on IS
     'Date the falls risk assessment was carried out.';
-COMMENT ON COLUMN nursing_care_plan.falls_risk_actioned IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.falls_risk_actioned IS
     'Whether the falls risk has been actioned with an intervention: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.pressure_ulcer_risk_done IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.pressure_ulcer_risk_done IS
     'Whether a pressure ulcer risk assessment has been completed: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.pressure_ulcer_risk_level IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.pressure_ulcer_risk_level IS
     'Pressure ulcer risk level: low, medium, or high.';
-COMMENT ON COLUMN nursing_care_plan.pressure_ulcer_risk_assessed_on IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.pressure_ulcer_risk_assessed_on IS
     'Date the pressure ulcer risk assessment was carried out.';
-COMMENT ON COLUMN nursing_care_plan.pressure_ulcer_risk_actioned IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.pressure_ulcer_risk_actioned IS
     'Whether the pressure ulcer risk has been actioned with an intervention: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.vte_risk_done IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.vte_risk_done IS
     'Whether a venous thromboembolism (VTE) risk assessment has been completed: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.vte_risk_level IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.vte_risk_level IS
     'VTE risk level: low, medium, or high.';
-COMMENT ON COLUMN nursing_care_plan.vte_risk_assessed_on IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.vte_risk_assessed_on IS
     'Date the VTE risk assessment was carried out.';
-COMMENT ON COLUMN nursing_care_plan.vte_risk_actioned IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.vte_risk_actioned IS
     'Whether the VTE risk has been actioned with an intervention: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.nutrition_risk_done IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nutrition_risk_done IS
     'Whether a nutrition (MUST) risk assessment has been completed: yes or no.';
-COMMENT ON COLUMN nursing_care_plan.nutrition_risk_level IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nutrition_risk_level IS
     'Nutrition risk level: low, medium, or high.';
-COMMENT ON COLUMN nursing_care_plan.nutrition_risk_assessed_on IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nutrition_risk_assessed_on IS
     'Date the nutrition risk assessment was carried out.';
-COMMENT ON COLUMN nursing_care_plan.nutrition_risk_actioned IS
+COMMENT ON COLUMN nursing_care_plan.nursing_care_plan.nutrition_risk_actioned IS
     'Whether the nutrition risk has been actioned with an intervention: yes or no.';

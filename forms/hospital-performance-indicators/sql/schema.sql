@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (4):
+-- Source files (5):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_hospital_performance_indicators.sql
 --   - 03_create_table_hospital_performance_indicator_value.sql
@@ -24,12 +25,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hospital_performance_indicators;
+
+COMMENT ON SCHEMA hospital_performance_indicators IS
+    'Namespace for the Hospital Performance Indicators form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hospital_performance_indicators.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -37,7 +54,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hospital_performance_indicators.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -50,7 +67,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- One row per hospital Balanced Scorecard reporting period.
 
-CREATE TABLE hospital_performance_indicators (
+CREATE TABLE hospital_performance_indicators.hospital_performance_indicators (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -68,33 +85,33 @@ CREATE TABLE hospital_performance_indicators (
 );
 
 CREATE TRIGGER trigger_hospital_performance_indicators_updated_at
-    BEFORE UPDATE ON hospital_performance_indicators
+    BEFORE UPDATE ON hospital_performance_indicators.hospital_performance_indicators
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_performance_indicators.set_updated_at();
 
-COMMENT ON TABLE hospital_performance_indicators IS
+COMMENT ON TABLE hospital_performance_indicators.hospital_performance_indicators IS
     'One hospital Balanced Scorecard reporting period: hospital/site, period month/year, prepared-by, and sign-off notes.';
-COMMENT ON COLUMN hospital_performance_indicators.id IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_performance_indicators.created_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_performance_indicators.updated_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_performance_indicators.deleted_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_performance_indicators.hospital_name IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.hospital_name IS
     'Name of the hospital or facility being reported on.';
-COMMENT ON COLUMN hospital_performance_indicators.period_month IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.period_month IS
     'Reporting period month, 1-12.';
-COMMENT ON COLUMN hospital_performance_indicators.period_year IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.period_year IS
     'Reporting period year.';
-COMMENT ON COLUMN hospital_performance_indicators.prepared_by_name IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.prepared_by_name IS
     'Name of the person who compiled this scorecard.';
-COMMENT ON COLUMN hospital_performance_indicators.overall_notes IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.overall_notes IS
     'Free-text overall notes recorded at sign-off.';
-COMMENT ON COLUMN hospital_performance_indicators.status IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.status IS
     'Submission status: draft or submitted.';
-COMMENT ON COLUMN hospital_performance_indicators.signed_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicators.signed_at IS
     'Timestamp the preparer signed off this scorecard.';
 
 -- ========================================================================
@@ -112,13 +129,13 @@ COMMENT ON COLUMN hospital_performance_indicators.signed_at IS
 -- column per indicator, since 50 indicators would need over 100 flat
 -- columns (value + notes).
 
-CREATE TABLE hospital_performance_indicator_value (
+CREATE TABLE hospital_performance_indicators.hospital_performance_indicator_value (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    hospital_performance_indicators_id UUID NOT NULL REFERENCES hospital_performance_indicators(id) ON DELETE CASCADE,
+    hospital_performance_indicators_id UUID NOT NULL REFERENCES hospital_performance_indicators.hospital_performance_indicators(id) ON DELETE CASCADE,
     indicator_code VARCHAR(10) NOT NULL,
     category_number INTEGER NOT NULL CHECK (category_number BETWEEN 1 AND 4),
     category_title VARCHAR(255) NOT NULL DEFAULT '',
@@ -130,39 +147,39 @@ CREATE TABLE hospital_performance_indicator_value (
 );
 
 CREATE TRIGGER trigger_hospital_performance_indicator_value_updated_at
-    BEFORE UPDATE ON hospital_performance_indicator_value
+    BEFORE UPDATE ON hospital_performance_indicators.hospital_performance_indicator_value
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_performance_indicators.set_updated_at();
 
-COMMENT ON TABLE hospital_performance_indicator_value IS
+COMMENT ON TABLE hospital_performance_indicators.hospital_performance_indicator_value IS
     'One recorded Balanced Scorecard indicator (of 50) within a hospital performance reporting period.';
-COMMENT ON COLUMN hospital_performance_indicator_value.id IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_performance_indicator_value.created_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_performance_indicator_value.updated_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_performance_indicator_value.deleted_at IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_performance_indicator_value.hospital_performance_indicators_id IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.hospital_performance_indicators_id IS
     'Foreign key to the parent reporting period.';
-COMMENT ON COLUMN hospital_performance_indicator_value.indicator_code IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.indicator_code IS
     'Stable dotted indicator identifier from spec/index.md, e.g. 1.1, 2.15, 4.5.';
-COMMENT ON COLUMN hospital_performance_indicator_value.category_number IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.category_number IS
     'Balanced Scorecard perspective number (1=Finance, 2=Process, 3=Learning and Growth, 4=Customer).';
-COMMENT ON COLUMN hospital_performance_indicator_value.category_title IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.category_title IS
     'Balanced Scorecard perspective title, mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_performance_indicator_value.indicator_text IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.indicator_text IS
     'Full indicator name, mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_performance_indicator_value.indicator_value IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.indicator_value IS
     'Recorded numeric value for this indicator; unit is implied by the indicator name. NULL if not yet recorded.';
-COMMENT ON COLUMN hospital_performance_indicator_value.notes IS
+COMMENT ON COLUMN hospital_performance_indicators.hospital_performance_indicator_value.notes IS
     'Optional free-text note about this indicator value.';
 
 CREATE INDEX hospital_performance_indicator_value_indicators_id_idx
-    ON hospital_performance_indicator_value (hospital_performance_indicators_id);
+    ON hospital_performance_indicators.hospital_performance_indicator_value (hospital_performance_indicators_id);
 CREATE INDEX hospital_performance_indicator_value_category_idx
-    ON hospital_performance_indicator_value (category_number);
+    ON hospital_performance_indicators.hospital_performance_indicator_value (category_number);
 
 -- ========================================================================
 -- END 03_create_table_hospital_performance_indicator_value.sql

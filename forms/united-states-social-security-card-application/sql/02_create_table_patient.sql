@@ -1,7 +1,7 @@
 -- Applicant demographic information for the person who needs a Social
 -- Security card.
 
-CREATE TABLE patient (
+CREATE TABLE united_states_social_security_card_application.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,39 +19,39 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_states_social_security_card_application.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_states_social_security_card_application.patient IS
     'Applicant demographic information for the person who needs a Social Security card. The Social Security number is never stored.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.name IS
     'Full name of the applicant.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.sex IS
     'Sex recorded for the applicant: female, male, other, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.postcode IS
     'Postal code (ZIP code).';
-COMMENT ON COLUMN patient.us_state_code IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.us_state_code IS
     'Two-letter USPS code of the state or territory of residence.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON united_states_social_security_card_application.patient
     USING GIN (name gin_trgm_ops);

@@ -1,4 +1,4 @@
-CREATE TABLE respondent (
+CREATE TABLE agile_checklist.respondent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -22,29 +22,29 @@ CREATE TABLE respondent (
 );
 
 CREATE TRIGGER trigger_respondent_updated_at
-    BEFORE UPDATE ON respondent
+    BEFORE UPDATE ON agile_checklist.respondent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_checklist.set_updated_at();
 
-COMMENT ON TABLE respondent IS
+COMMENT ON TABLE agile_checklist.respondent IS
     'A single person completing an agile-checklist assessment. One respondent may submit multiple assessments over time.';
-COMMENT ON COLUMN respondent.id IS
+COMMENT ON COLUMN agile_checklist.respondent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respondent.created_at IS
+COMMENT ON COLUMN agile_checklist.respondent.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN respondent.updated_at IS
+COMMENT ON COLUMN agile_checklist.respondent.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN respondent.deleted_at IS
+COMMENT ON COLUMN agile_checklist.respondent.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN respondent.full_name IS
+COMMENT ON COLUMN agile_checklist.respondent.full_name IS
     'Full name of the respondent.';
-COMMENT ON COLUMN respondent.email IS
+COMMENT ON COLUMN agile_checklist.respondent.email IS
     'Contact email address.';
-COMMENT ON COLUMN respondent.role IS
+COMMENT ON COLUMN agile_checklist.respondent.role IS
     'Job role: team-member, team-lead, scrum-master, product-owner, engineering-manager, agile-coach, executive-sponsor, or other.';
-COMMENT ON COLUMN respondent.team_name IS
+COMMENT ON COLUMN agile_checklist.respondent.team_name IS
     'Name of the team being assessed.';
-COMMENT ON COLUMN respondent.organisation_name IS
+COMMENT ON COLUMN agile_checklist.respondent.organisation_name IS
     'Name of the broader organisation, division, or programme.';
-COMMENT ON COLUMN respondent.years_in_agile IS
+COMMENT ON COLUMN agile_checklist.respondent.years_in_agile IS
     'Number of years the respondent has worked in agile environments.';

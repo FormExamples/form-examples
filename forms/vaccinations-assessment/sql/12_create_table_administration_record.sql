@@ -1,10 +1,10 @@
-CREATE TABLE administration_record (
+CREATE TABLE vaccinations_assessment.administration_record (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     vaccine_name VARCHAR(255) NOT NULL DEFAULT '',
     batch_number VARCHAR(50) NOT NULL DEFAULT '',
     expiry_date DATE,
@@ -19,36 +19,36 @@ CREATE TABLE administration_record (
 );
 
 CREATE TRIGGER trigger_administration_record_updated_at
-    BEFORE UPDATE ON administration_record
+    BEFORE UPDATE ON vaccinations_assessment.administration_record
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE administration_record IS
+COMMENT ON TABLE vaccinations_assessment.administration_record IS
     'Vaccine administration details including batch, site, and route. One-to-one child of assessment.';
 
-COMMENT ON COLUMN administration_record.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN administration_record.vaccine_name IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.vaccine_name IS
     'Vaccine name.';
-COMMENT ON COLUMN administration_record.batch_number IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.batch_number IS
     'Batch number.';
-COMMENT ON COLUMN administration_record.expiry_date IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.expiry_date IS
     'Expiry date.';
-COMMENT ON COLUMN administration_record.administration_site IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_site IS
     'Administration site. One of: leftDeltoid, rightDeltoid, leftThigh, rightThigh, oral, nasal.';
-COMMENT ON COLUMN administration_record.administration_route IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_route IS
     'Administration route. One of: intramuscular, subcutaneous, intradermal, oral, nasal.';
-COMMENT ON COLUMN administration_record.dose_number IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.dose_number IS
     'Dose number. One of: 1, 2, 3, booster.';
-COMMENT ON COLUMN administration_record.administered_by IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administered_by IS
     'Administered by.';
-COMMENT ON COLUMN administration_record.administration_date IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_date IS
     'Administration date.';
-COMMENT ON COLUMN administration_record.id IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN administration_record.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN administration_record.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN administration_record.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.deleted_at IS
     'Timestamp when this row was deleted.';

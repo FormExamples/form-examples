@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS model_for_end_stage_liver_disease_score;
+
+COMMENT ON SCHEMA model_for_end_stage_liver_disease_score IS
+    'Namespace for the Model for End-Stage Liver Disease (MELD) Score form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION model_for_end_stage_liver_disease_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE model_for_end_stage_liver_disease_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.patient IS
     'Patient demographic information used by the MELD assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON model_for_end_stage_liver_disease_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- clinician (hepatologist, gastroenterologist, transplant-coordinator,
 -- intensivist).
 
-CREATE TABLE clinician (
+CREATE TABLE model_for_end_stage_liver_disease_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.role IS
     'Primary clinical role: hepatologist, gastroenterologist, transplant-coordinator, intensivist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON model_for_end_stage_liver_disease_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- dialysis history, serum sodium, and serum albumin). The computed
 -- score, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE model_for_end_stage_liver_disease_score (
+CREATE TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES model_for_end_stage_liver_disease_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES model_for_end_stage_liver_disease_score.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -255,64 +272,64 @@ CREATE TABLE model_for_end_stage_liver_disease_score (
 );
 
 CREATE INDEX model_for_end_stage_liver_disease_score_patient_id_idx
-    ON model_for_end_stage_liver_disease_score (patient_id);
+    ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score (patient_id);
 CREATE INDEX model_for_end_stage_liver_disease_score_clinician_id_idx
-    ON model_for_end_stage_liver_disease_score (clinician_id);
+    ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score (clinician_id);
 
 CREATE TRIGGER trigger_model_for_end_stage_liver_disease_score_updated_at
-    BEFORE UPDATE ON model_for_end_stage_liver_disease_score
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE model_for_end_stage_liver_disease_score IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score IS
     'Main MELD assessment record: assessment context, patient identification, chosen MELD variant, and the laboratory inputs (total bilirubin, INR, serum creatinine, dialysis history, serum sodium, and serum albumin).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician_name IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinician_role IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.clinician_role IS
     'Role of the assessing clinician: hepatologist, gastroenterologist, transplant-coordinator, intensivist, or other.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.assessed_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.care_setting IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.care_setting IS
     'Care setting: hepatology-clinic, transplant-unit, intensive-care, ward, or other.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.meld_variant IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.meld_variant IS
     'Chosen MELD variant: meld (original), meld-na (sodium-corrected), or meld-3 (MELD 3.0).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.patient_identifier IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.age_band IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.sex IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown (the female indicator is used by MELD 3.0).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.bilirubin IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.bilirubin IS
     'Measured total bilirubin, in the unit given by bilirubin_unit.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.bilirubin_unit IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.bilirubin_unit IS
     'Unit for the bilirubin value: mg/dL or umol/L (converted to mg/dL by the engine).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.inr IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.inr IS
     'International Normalised Ratio (INR) of prothrombin time.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.creatinine IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.creatinine IS
     'Measured serum creatinine, in the unit given by creatinine_unit.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.creatinine_unit IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.creatinine_unit IS
     'Unit for the creatinine value: mg/dL or umol/L (converted to mg/dL by the engine).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.dialysis_sessions_past_week IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.dialysis_sessions_past_week IS
     'Count of haemodialysis sessions in the past 7 days; >= 2 triggers the dialysis creatinine rule (creatinine set to 4.0 mg/dL).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.cvvhd_24h IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.cvvhd_24h IS
     'Whether the patient received >= 24 h of continuous veno-venous haemodialysis (CVVHD) in the past 7 days; yes triggers the dialysis creatinine rule.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.sodium IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.sodium IS
     'Serum sodium in mEq/L; used by the MELD-Na and MELD 3.0 variants (clamped to 125-137).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.albumin IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.albumin IS
     'Serum albumin in g/dL; used by the MELD 3.0 variant (clamped to 1.5-3.5).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinical_note IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -328,14 +345,14 @@ COMMENT ON COLUMN model_for_end_stage_liver_disease_score.clinical_note IS
 -- score (6-40 when computable), the mapped 3-month mortality band, and
 -- the estimated mortality percentage.
 
-CREATE TABLE model_for_end_stage_liver_disease_score_grade (
+CREATE TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     model_for_end_stage_liver_disease_score_id UUID NOT NULL UNIQUE
-        REFERENCES model_for_end_stage_liver_disease_score(id) ON DELETE CASCADE,
+        REFERENCES model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score(id) ON DELETE CASCADE,
 
     bilirubin_mg_dl NUMERIC(7,2),
     creatinine_mg_dl NUMERIC(7,2),
@@ -352,37 +369,37 @@ CREATE TABLE model_for_end_stage_liver_disease_score_grade (
 );
 
 CREATE TRIGGER trigger_model_for_end_stage_liver_disease_score_grade_updated_at
-    BEFORE UPDATE ON model_for_end_stage_liver_disease_score_grade
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE model_for_end_stage_liver_disease_score_grade IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade IS
     'Computed MELD grading result: derived intermediate values, the integer MELD score (6-40 when computable), the mapped 3-month mortality band, and the estimated mortality percentage.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.model_for_end_stage_liver_disease_score_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.model_for_end_stage_liver_disease_score_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.bilirubin_mg_dl IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.bilirubin_mg_dl IS
     'Total bilirubin converted to mg/dL (from umol/L when required).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.creatinine_mg_dl IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.creatinine_mg_dl IS
     'Serum creatinine converted to mg/dL (from umol/L when required), before the dialysis rule and bounds.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.creatinine_adjusted IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.creatinine_adjusted IS
     'Creatinine after the dialysis rule (set to 4.0 mg/dL when the rule applied), before the 1.0-4.0 bounds.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.dialysis_rule_applied IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.dialysis_rule_applied IS
     'True when the dialysis creatinine rule applied (>= 2 haemodialysis sessions in the past 7 days or >= 24 h CVVHD).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.meld_score IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.meld_score IS
     'Integer MELD score clamped to 6-40; NULL when a required lab input for the chosen variant is missing.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.mortality_band IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.mortality_band IS
     'Mapped estimated 3-month mortality band: low, moderate, high, very-high, or extreme.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.estimated_mortality_percent IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.estimated_mortality_percent IS
     'Estimated 3-month mortality as a percentage for the mapped band.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.graded_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -398,14 +415,14 @@ COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade.graded_at IS
 -- component it belongs to, the numeric contribution it made, and a
 -- human-readable description.
 
-CREATE TABLE model_for_end_stage_liver_disease_score_grade_rule (
+CREATE TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     model_for_end_stage_liver_disease_score_grade_id UUID NOT NULL
-        REFERENCES model_for_end_stage_liver_disease_score_grade(id) ON DELETE CASCADE,
+        REFERENCES model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     component VARCHAR(20) NOT NULL
@@ -416,34 +433,34 @@ CREATE TABLE model_for_end_stage_liver_disease_score_grade_rule (
 );
 
 CREATE INDEX model_for_end_stage_liver_disease_score_grade_rule_grade_id_idx
-    ON model_for_end_stage_liver_disease_score_grade_rule (model_for_end_stage_liver_disease_score_grade_id);
+    ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule (model_for_end_stage_liver_disease_score_grade_id);
 
 CREATE TRIGGER trigger_model_for_end_stage_liver_disease_score_grade_rule_updated_at
-    BEFORE UPDATE ON model_for_end_stage_liver_disease_score_grade_rule
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE model_for_end_stage_liver_disease_score_grade_rule IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule IS
     'Audit trail of every calculation rule that fired during MELD computation: formula component, numeric contribution, category, and description.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.model_for_end_stage_liver_disease_score_grade_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.model_for_end_stage_liver_disease_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.rule_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CREATININE-DIALYSIS-01).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.component IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.component IS
     'Formula component the rule belongs to: bilirubin, inr, creatinine, sodium, albumin, dialysis, variant, band, or other.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.contribution IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.contribution IS
     'Numeric contribution this rule made to the score (e.g. a weighted-log term or an applied bound/clamp value).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.category IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.category IS
     'Subject category (e.g. unit-conversion, dialysis-rule, bound, sodium-correction, band-map).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.description IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -457,14 +474,14 @@ COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_rule.description
 -- Red-flag issues that fire alongside the MELD score, with priority and
 -- a suggested action for the clinical team.
 
-CREATE TABLE model_for_end_stage_liver_disease_score_grade_flag (
+CREATE TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     model_for_end_stage_liver_disease_score_grade_id UUID NOT NULL
-        REFERENCES model_for_end_stage_liver_disease_score_grade(id) ON DELETE CASCADE,
+        REFERENCES model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -485,34 +502,34 @@ CREATE TABLE model_for_end_stage_liver_disease_score_grade_flag (
 );
 
 CREATE INDEX model_for_end_stage_liver_disease_score_grade_flag_grade_id_idx
-    ON model_for_end_stage_liver_disease_score_grade_flag (model_for_end_stage_liver_disease_score_grade_id);
+    ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag (model_for_end_stage_liver_disease_score_grade_id);
 
 CREATE TRIGGER trigger_model_for_end_stage_liver_disease_score_grade_flag_updated_at
-    BEFORE UPDATE ON model_for_end_stage_liver_disease_score_grade_flag
+    BEFORE UPDATE ON model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION model_for_end_stage_liver_disease_score.set_updated_at();
 
-COMMENT ON TABLE model_for_end_stage_liver_disease_score_grade_flag IS
+COMMENT ON TABLE model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag IS
     'Red-flag issues that fire alongside the MELD score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.created_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.updated_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.model_for_end_stage_liver_disease_score_grade_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.model_for_end_stage_liver_disease_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.flag_id IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-TRANSPLANT-REFERRAL-001).';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.category IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.category IS
     'Flag category: transplant-referral, urgent-review, on-dialysis, hyponatraemia, coagulopathy, incomplete, or other.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.priority IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.description IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN model_for_end_stage_liver_disease_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN model_for_end_stage_liver_disease_score.model_for_end_stage_liver_disease_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "discuss with a transplant centre").';
 
 -- ========================================================================

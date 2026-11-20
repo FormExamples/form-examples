@@ -1,10 +1,10 @@
-CREATE TABLE blood_pressure (
+CREATE TABLE heart_health_check.blood_pressure (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     systolic_bp SMALLINT
         CHECK (systolic_bp IS NULL OR (systolic_bp >= 50 AND systolic_bp <= 300)),
     systolic_bp_sd NUMERIC(5, 2),
@@ -17,30 +17,30 @@ CREATE TABLE blood_pressure (
 );
 
 CREATE TRIGGER trigger_blood_pressure_updated_at
-    BEFORE UPDATE ON blood_pressure
+    BEFORE UPDATE ON heart_health_check.blood_pressure
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE blood_pressure IS
+COMMENT ON TABLE heart_health_check.blood_pressure IS
     'Blood pressure readings and antihypertensive treatment status.';
-COMMENT ON COLUMN blood_pressure.systolic_bp IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.systolic_bp IS
     'Systolic blood pressure in mmHg.';
-COMMENT ON COLUMN blood_pressure.systolic_bp_sd IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.systolic_bp_sd IS
     'Standard deviation of systolic BP readings.';
-COMMENT ON COLUMN blood_pressure.diastolic_bp IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.diastolic_bp IS
     'Diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN blood_pressure.on_bp_treatment IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.on_bp_treatment IS
     'Whether the patient is on blood pressure treatment.';
-COMMENT ON COLUMN blood_pressure.number_of_bp_medications IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.number_of_bp_medications IS
     'Number of concurrent BP medications.';
 
-COMMENT ON COLUMN blood_pressure.assessment_id IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN blood_pressure.id IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN blood_pressure.created_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN blood_pressure.updated_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN blood_pressure.deleted_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.deleted_at IS
     'Timestamp when this row was deleted.';

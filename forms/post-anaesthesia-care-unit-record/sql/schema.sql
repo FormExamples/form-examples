@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS post_anaesthesia_care_unit_record;
+
+COMMENT ON SCHEMA post_anaesthesia_care_unit_record IS
+    'Namespace for the Post-Anaesthesia Care Unit (PACU) Record form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION post_anaesthesia_care_unit_record.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION post_anaesthesia_care_unit_record.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE post_anaesthesia_care_unit_record.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.patient IS
     'Patient demographic information used by the post-anaesthesia care unit record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient.allergies_summary IS
     'Free-text summary of known allergies recorded on admission to recovery.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON post_anaesthesia_care_unit_record.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- nurse, operating-department practitioner, or supervising
 -- anaesthetist).
 
-CREATE TABLE clinician (
+CREATE TABLE post_anaesthesia_care_unit_record.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.clinician IS
     'Clinician identifying information for the recovery staff recording the PACU observations.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.role IS
     'Primary clinical role: recovery-nurse, odp (operating-department practitioner), anaesthetist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON post_anaesthesia_care_unit_record.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- PADSS criterion inputs used for day-surgery discharge. The computed
 -- grade, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE post_anaesthesia_care_unit_record (
+CREATE TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES post_anaesthesia_care_unit_record.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES post_anaesthesia_care_unit_record.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: recovery context
     nurse_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -261,84 +278,84 @@ CREATE TABLE post_anaesthesia_care_unit_record (
 );
 
 CREATE INDEX post_anaesthesia_care_unit_record_patient_id_idx
-    ON post_anaesthesia_care_unit_record (patient_id);
+    ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record (patient_id);
 CREATE INDEX post_anaesthesia_care_unit_record_clinician_id_idx
-    ON post_anaesthesia_care_unit_record (clinician_id);
+    ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record (clinician_id);
 
 CREATE TRIGGER trigger_post_anaesthesia_care_unit_record_updated_at
-    BEFORE UPDATE ON post_anaesthesia_care_unit_record
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE post_anaesthesia_care_unit_record IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record IS
     'Main PACU recovery record: recovery context, patient identification, the five Modified Aldrete parameter inputs, airway / pain / PONV observations, and the optional PADSS criterion inputs for day-surgery discharge.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.patient_id IS
     'Foreign key to the patient in recovery (delete restricted).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.clinician_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.clinician_id IS
     'Foreign key to the recording recovery clinician (optional; delete restricted).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.nurse_name IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.nurse_name IS
     'Name of the recording recovery nurse as documented on the record.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.nurse_role IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.nurse_role IS
     'Role of the recording staff member: recovery-nurse, odp, anaesthetist, or other.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.anaesthetist_name IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.anaesthetist_name IS
     'Name of the supervising anaesthetist responsible for the case.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.admitted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.admitted_at IS
     'Date and time of admission to the post-anaesthesia care unit.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.anaesthetic_technique IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.anaesthetic_technique IS
     'Anaesthetic technique used: general, regional, sedation, or combined.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.procedure IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.procedure IS
     'Operation or procedure performed before recovery.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.patient_identifier IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.patient_identifier IS
     'Local patient identifier as recorded on the record.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.age_band IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.sex IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.sex IS
     'Patient sex recorded for the record: female, male, intersex, or unknown.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.asa_status IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.asa_status IS
     'ASA physical status (I-V) carried over from the pre-anaesthetic assessment.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.baseline_systolic_bp IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.baseline_systolic_bp IS
     'Pre-anaesthetic baseline systolic blood pressure in mmHg, used as the circulation reference.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.ambulatory_case IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.ambulatory_case IS
     'Whether this is a day-surgery (ambulatory) case: yes enables PADSS street-fitness scoring.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.activity IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.activity IS
     'Aldrete activity parameter: all-four (moves all four limbs, 2), two (moves two limbs, 1), or none (unable to move, 0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.respiration IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.respiration IS
     'Aldrete respiration parameter: deep-cough (breathes deeply and coughs freely, 2), limited (dyspnoea or limited breathing, 1), or apnoeic (0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.circulation IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.circulation IS
     'Aldrete circulation parameter versus baseline systolic BP: within-20 (within 20 mmHg, 2), within-50 (within 20-50 mmHg, 1), or over-50 (more than 50 mmHg, 0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.consciousness IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.consciousness IS
     'Aldrete consciousness parameter: awake (fully awake, 2), arousable (arousable on calling, 1), or unresponsive (0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.oxygen_saturation IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.oxygen_saturation IS
     'Aldrete oxygen-saturation parameter: room-air (SpO2 > 92% on room air, 2), needs-o2 (needs oxygen to maintain SpO2 > 90%, 1), or low-on-o2 (SpO2 < 90% even with oxygen, 0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.airway_status IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.airway_status IS
     'Airway status in recovery: patent, oral-airway (oral/nasal airway in situ), or other support.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.pain_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.pain_score IS
     'Pain score on the verbal / numeric rating scale (0-10).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.ponv_severity IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.ponv_severity IS
     'Post-operative nausea and vomiting severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.analgesia_given IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.analgesia_given IS
     'Free-text record of analgesics administered in the PACU.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.antiemetics_given IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.antiemetics_given IS
     'Free-text record of antiemetics administered in the PACU.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.padss_vital_signs IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.padss_vital_signs IS
     'PADSS vital-signs criterion versus baseline: within-20 (within 20%, 2), within-40 (20-40%, 1), or over-40 (more than 40%, 0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.padss_ambulation IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.padss_ambulation IS
     'PADSS ambulation criterion: steady (steady gait, no dizziness, 2), with-assistance (needs assistance, 1), or unable (unable / dizzy, 0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.padss_nausea_vomiting IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.padss_nausea_vomiting IS
     'PADSS nausea-and-vomiting criterion: minimal (2), moderate (1), or severe (0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.padss_pain IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.padss_pain IS
     'PADSS pain criterion: minimal (2), moderate (1), or severe (0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.padss_surgical_bleeding IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.padss_surgical_bleeding IS
     'PADSS surgical-bleeding criterion: minimal (2), moderate (1), or severe (0).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record.recovery_note IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record.recovery_note IS
     'Free-text recovery note recorded with the assessment.';
 
 -- ========================================================================
@@ -355,14 +372,14 @@ COMMENT ON COLUMN post_anaesthesia_care_unit_record.recovery_note IS
 -- parameter), and the optional PADSS total and street-fitness result
 -- for day-surgery cases.
 
-CREATE TABLE post_anaesthesia_care_unit_record_grade (
+CREATE TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     post_anaesthesia_care_unit_record_id UUID NOT NULL UNIQUE
-        REFERENCES post_anaesthesia_care_unit_record(id) ON DELETE CASCADE,
+        REFERENCES post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record(id) ON DELETE CASCADE,
 
     activity_score INT,
     respiration_score INT,
@@ -381,41 +398,41 @@ CREATE TABLE post_anaesthesia_care_unit_record_grade (
 );
 
 CREATE TRIGGER trigger_post_anaesthesia_care_unit_record_grade_updated_at
-    BEFORE UPDATE ON post_anaesthesia_care_unit_record_grade
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE post_anaesthesia_care_unit_record_grade IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade IS
     'Computed PACU grading result: per-parameter Aldrete sub-scores, the summed Aldrete total (0-10), the derived discharge-readiness band, and the optional PADSS total and street-fitness result.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.post_anaesthesia_care_unit_record_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.post_anaesthesia_care_unit_record_id IS
     'Foreign key to the parent PACU record (unique, 1:1).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.activity_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.activity_score IS
     'Aldrete activity sub-score (0-2).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.respiration_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.respiration_score IS
     'Aldrete respiration sub-score (0-2).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.circulation_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.circulation_score IS
     'Aldrete circulation sub-score (0-2).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.consciousness_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.consciousness_score IS
     'Aldrete consciousness sub-score (0-2).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.oxygen_saturation_score IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.oxygen_saturation_score IS
     'Aldrete oxygen-saturation sub-score (0-2); discharge-readiness is gated on this parameter scoring 2.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.aldrete_total IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.aldrete_total IS
     'Summed Modified Aldrete total across the five parameters (0-10 when complete).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.discharge_ready IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.discharge_ready IS
     'Derived discharge-readiness band: discharge-ready (Aldrete >= 9 and oxygen-saturation score = 2) or not-ready.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.padss_total IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.padss_total IS
     'Summed PADSS total (0-10) for ambulatory cases with all five criteria supplied; null otherwise.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.padss_street_fit IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.padss_street_fit IS
     'PADSS street-fitness result: yes (PADSS total >= 9), no, or empty when PADSS was not scored.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.graded_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -431,14 +448,14 @@ COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE post_anaesthesia_care_unit_record_grade_rule (
+CREATE TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     post_anaesthesia_care_unit_record_grade_id UUID NOT NULL
-        REFERENCES post_anaesthesia_care_unit_record_grade(id) ON DELETE CASCADE,
+        REFERENCES post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(20) NOT NULL
@@ -449,34 +466,34 @@ CREATE TABLE post_anaesthesia_care_unit_record_grade_rule (
 );
 
 CREATE INDEX post_anaesthesia_care_unit_record_grade_rule_grade_id_idx
-    ON post_anaesthesia_care_unit_record_grade_rule (post_anaesthesia_care_unit_record_grade_id);
+    ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule (post_anaesthesia_care_unit_record_grade_id);
 
 CREATE TRIGGER trigger_post_anaesthesia_care_unit_record_grade_rule_updated_at
-    BEFORE UPDATE ON post_anaesthesia_care_unit_record_grade_rule
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE post_anaesthesia_care_unit_record_grade_rule IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule IS
     'Audit trail of every grading rule that fired during PACU score computation: parameter, points contributed, category, and description.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.post_anaesthesia_care_unit_record_grade_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.post_anaesthesia_care_unit_record_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.rule_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-OXYGEN-SATURATION-2POINT-01).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.parameter IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.parameter IS
     'Scored parameter the rule belongs to: activity, respiration, circulation, consciousness, oxygen-saturation, padss, or readiness.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.points IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.points IS
     'Points (0-2) contributed by this rule for its parameter.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.category IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.category IS
     'Subject category (e.g. aldrete-level, padss-level, readiness-band).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.description IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -490,14 +507,14 @@ COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the recovery team.
 
-CREATE TABLE post_anaesthesia_care_unit_record_grade_flag (
+CREATE TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     post_anaesthesia_care_unit_record_grade_id UUID NOT NULL
-        REFERENCES post_anaesthesia_care_unit_record_grade(id) ON DELETE CASCADE,
+        REFERENCES post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -519,34 +536,34 @@ CREATE TABLE post_anaesthesia_care_unit_record_grade_flag (
 );
 
 CREATE INDEX post_anaesthesia_care_unit_record_grade_flag_grade_id_idx
-    ON post_anaesthesia_care_unit_record_grade_flag (post_anaesthesia_care_unit_record_grade_id);
+    ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag (post_anaesthesia_care_unit_record_grade_id);
 
 CREATE TRIGGER trigger_post_anaesthesia_care_unit_record_grade_flag_updated_at
-    BEFORE UPDATE ON post_anaesthesia_care_unit_record_grade_flag
+    BEFORE UPDATE ON post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION post_anaesthesia_care_unit_record.set_updated_at();
 
-COMMENT ON TABLE post_anaesthesia_care_unit_record_grade_flag IS
+COMMENT ON TABLE post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the recovery team.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.created_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.updated_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.deleted_at IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.post_anaesthesia_care_unit_record_grade_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.post_anaesthesia_care_unit_record_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.flag_id IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NOT-READY-FOR-DISCHARGE-001).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.category IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.priority IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.description IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN post_anaesthesia_care_unit_record_grade_flag.suggested_action IS
+COMMENT ON COLUMN post_anaesthesia_care_unit_record.post_anaesthesia_care_unit_record_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "continue recovery observation; do not discharge from PACU").';
 
 -- ========================================================================

@@ -1,13 +1,13 @@
 -- Safety-critical flags for an ambulatory blood pressure (ABPM) request, independent of the axes.
 
-CREATE TABLE ambulatory_blood_pressure_test_request_grade_flag (
+CREATE TABLE ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ambulatory_blood_pressure_test_request_grade_id UUID NOT NULL
-        REFERENCES ambulatory_blood_pressure_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -27,32 +27,32 @@ CREATE TABLE ambulatory_blood_pressure_test_request_grade_flag (
 );
 
 CREATE INDEX index_ambulatory_blood_pressure_test_request_grade_flag_grade_id
-    ON ambulatory_blood_pressure_test_request_grade_flag(ambulatory_blood_pressure_test_request_grade_id);
+    ON ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag(ambulatory_blood_pressure_test_request_grade_id);
 
 CREATE TRIGGER trigger_ambulatory_blood_pressure_test_request_grade_flag_updated_at
-    BEFORE UPDATE ON ambulatory_blood_pressure_test_request_grade_flag
+    BEFORE UPDATE ON ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ambulatory_blood_pressure_test_request.set_updated_at();
 
-COMMENT ON TABLE ambulatory_blood_pressure_test_request_grade_flag IS
+COMMENT ON TABLE ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the vetting team.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.id IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.created_at IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.updated_at IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.deleted_at IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.ambulatory_blood_pressure_test_request_grade_id IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.ambulatory_blood_pressure_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.flag_id IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SEVERE-HYPERTENSION-001).';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.category IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.priority IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.description IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN ambulatory_blood_pressure_test_request_grade_flag.suggested_action IS
+COMMENT ON COLUMN ambulatory_blood_pressure_test_request.ambulatory_blood_pressure_test_request_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "arrange same-day specialist review").';

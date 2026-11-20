@@ -1,10 +1,10 @@
-CREATE TABLE assessment_current_management (
+CREATE TABLE allergy_assessment.assessment_current_management (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     antihistamines VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (antihistamines IN ('yes', 'no', '')),
     antihistamine_details TEXT NOT NULL DEFAULT '',
@@ -22,40 +22,40 @@ CREATE TABLE assessment_current_management (
 );
 
 CREATE TRIGGER trigger_assessment_current_management_updated_at
-    BEFORE UPDATE ON assessment_current_management
+    BEFORE UPDATE ON allergy_assessment.assessment_current_management
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_current_management IS
+COMMENT ON TABLE allergy_assessment.assessment_current_management IS
     'Current allergy management: medications, immunotherapy, biologics, and avoidance strategies. One-to-one child of assessment.';
 
 -- Other medications (one-to-many child)
 
-COMMENT ON COLUMN assessment_current_management.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_current_management.antihistamines IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamines IS
     'Antihistamines. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.antihistamine_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamine_details IS
     'Antihistamine details.';
-COMMENT ON COLUMN assessment_current_management.nasal_steroids IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.nasal_steroids IS
     'Nasal steroids. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.adrenaline_auto_injector IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.adrenaline_auto_injector IS
     'Adrenaline auto injector. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy IS
     'Immunotherapy. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy_details IS
     'Immunotherapy details.';
-COMMENT ON COLUMN assessment_current_management.biologics IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologics IS
     'Biologics. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.biologic_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologic_details IS
     'Biologic details.';
-COMMENT ON COLUMN assessment_current_management.allergen_avoidance_strategies IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.allergen_avoidance_strategies IS
     'Allergen avoidance strategies.';
-COMMENT ON COLUMN assessment_current_management.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_management.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_management.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_current_management.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.deleted_at IS
     'Timestamp when this row was deleted.';

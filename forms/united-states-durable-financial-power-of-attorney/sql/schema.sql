@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_principal.sql
 --   - 03_create_table_agent.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_durable_financial_power_of_attorney;
+
+COMMENT ON SCHEMA united_states_durable_financial_power_of_attorney IS
+    'Namespace for the United States Durable Financial Power of Attorney form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- The principal: the person who signs the durable power of attorney and whose
 -- property and finances the agent will manage.
 
-CREATE TABLE principal (
+CREATE TABLE united_states_durable_financial_power_of_attorney.principal (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,39 +92,39 @@ CREATE TABLE principal (
 );
 
 CREATE INDEX principal_name_trgm_idx
-    ON principal
+    ON united_states_durable_financial_power_of_attorney.principal
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_principal_updated_at
-    BEFORE UPDATE ON principal
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.principal
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE principal IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.principal IS
     'The principal: the person who signs the durable financial power of attorney.';
-COMMENT ON COLUMN principal.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN principal.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN principal.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN principal.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN principal.name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.name IS
     'Full legal name of the principal.';
-COMMENT ON COLUMN principal.birth_date IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.birth_date IS
     'Date of birth of the principal.';
-COMMENT ON COLUMN principal.email IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.email IS
     'Email address.';
-COMMENT ON COLUMN principal.phone IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.phone IS
     'Phone number.';
-COMMENT ON COLUMN principal.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN principal.state_as_iso_3166_2_us IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.state_as_iso_3166_2_us IS
     'Home state as the two-letter United States postal code.';
-COMMENT ON COLUMN principal.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN principal.postcode IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal.postcode IS
     'ZIP code.';
 
 -- ========================================================================
@@ -121,7 +138,7 @@ COMMENT ON COLUMN principal.postcode IS
 -- The agent (attorney-in-fact): the person or institution the principal
 -- authorizes to act on the principal's behalf.
 
-CREATE TABLE agent (
+CREATE TABLE united_states_durable_financial_power_of_attorney.agent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -135,29 +152,29 @@ CREATE TABLE agent (
 );
 
 CREATE TRIGGER trigger_agent_updated_at
-    BEFORE UPDATE ON agent
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.agent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE agent IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.agent IS
     'The agent (attorney-in-fact) named in a durable financial power of attorney.';
-COMMENT ON COLUMN agent.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agent.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN agent.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agent.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agent.name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.name IS
     'Full name of the agent.';
-COMMENT ON COLUMN agent.email IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.email IS
     'Email address.';
-COMMENT ON COLUMN agent.phone IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.phone IS
     'Phone number.';
-COMMENT ON COLUMN agent.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN agent.relationship IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.relationship IS
     'Relationship to the principal: spouse, child, other-family, friend, professional, or financial-institution.';
 
 -- ========================================================================
@@ -175,14 +192,14 @@ COMMENT ON COLUMN agent.relationship IS
 -- readiness result, fired rules, and flagged issues live in dedicated child
 -- tables. Documentation support, not legal advice.
 
-CREATE TABLE united_states_durable_financial_power_of_attorney (
+CREATE TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    principal_id UUID NOT NULL REFERENCES principal(id) ON DELETE RESTRICT,
-    agent_id UUID REFERENCES agent(id) ON DELETE RESTRICT,
+    principal_id UUID NOT NULL REFERENCES united_states_durable_financial_power_of_attorney.principal(id) ON DELETE RESTRICT,
+    agent_id UUID REFERENCES united_states_durable_financial_power_of_attorney.agent(id) ON DELETE RESTRICT,
     principal_name TEXT NOT NULL DEFAULT '',
     date_of_birth DATE,
     state VARCHAR(2) NOT NULL DEFAULT '',
@@ -230,116 +247,116 @@ CREATE TABLE united_states_durable_financial_power_of_attorney (
 );
 
 CREATE INDEX dpoa_principal_id_idx
-    ON united_states_durable_financial_power_of_attorney (principal_id);
+    ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney (principal_id);
 CREATE INDEX dpoa_agent_id_idx
-    ON united_states_durable_financial_power_of_attorney (agent_id);
+    ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney (agent_id);
 
 CREATE TRIGGER trigger_dpoa_updated_at
-    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE united_states_durable_financial_power_of_attorney IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney IS
     'Main United States durable financial power of attorney record: principal, durability and effectiveness, agent and successor, general grants and hot powers, execution plan, and acceptance plan. Classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.principal_id IS
     'Foreign key to the principal who signs the instrument (restrict delete).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.agent_id IS
     'Foreign key to the primary agent (restrict delete); optional.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal_name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.principal_name IS
     'Full legal name of the principal as written in the instrument.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.date_of_birth IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.date_of_birth IS
     'Date of birth of the principal.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.state IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.state IS
     'Governing state as the two-letter United States postal code; empty when unanswered.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.principal_address IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.principal_address IS
     'Principal address.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.capacity_confirmed IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.capacity_confirmed IS
     'Whether the principal has capacity to sign and understands the document (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.durable_statement IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.durable_statement IS
     'Whether the instrument is durable: its authority survives the principal incapacity (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.effectiveness IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.effectiveness IS
     'When the power takes effect: immediate on signing, or springing on a later event.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.springing_trigger IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.springing_trigger IS
     'Who determines the springing event: physician-certification, named-person-declaration, or court-determination.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.statutory_notice_included IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.statutory_notice_included IS
     'Whether the mandatory statutory notice text for the governing state is included (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent_name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.agent_name IS
     'Full name of the primary agent.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent_relationship IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.agent_relationship IS
     'Relationship of the agent to the principal.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent_is_adult IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.agent_is_adult IS
     'Whether the agent is an adult individual (18 or older) or a qualifying institution (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent_signed_acknowledgment IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.agent_signed_acknowledgment IS
     'Whether the agent has signed the acknowledgment of duties required by some states (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.successor_agent_name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.successor_agent_name IS
     'Full name of the successor agent, if any.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.co_agents_mode IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.co_agents_mode IS
     'How multiple agents act: sole, jointly, or independently.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.compensation IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.compensation IS
     'Agent compensation: none, reasonable, or fixed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.compensation_amount IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.compensation_amount IS
     'Fixed annual compensation in US dollars, when compensation is fixed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_banking IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_banking IS
     'General authority granted over banking and financial institutions (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_real_estate IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_real_estate IS
     'General authority granted over real estate (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_investments IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_investments IS
     'General authority granted over stocks, bonds, and investments (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_business IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_business IS
     'General authority granted over business operations (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_insurance IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_insurance IS
     'General authority granted over insurance and annuities (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_tax_matters IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_tax_matters IS
     'General authority granted over tax matters (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_benefits IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_benefits IS
     'General authority granted over government and public benefits (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_retirement IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_retirement IS
     'General authority granted over retirement plans (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_claims IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_claims IS
     'General authority granted over claims and litigation (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.grant_personal_property IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.grant_personal_property IS
     'General authority granted over personal property (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_create_trust IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_create_trust IS
     'Express grant of the hot power to create, amend, revoke, or terminate a trust (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_gift IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_gift IS
     'Express grant of the hot power to make gifts (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_survivorship IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_survivorship IS
     'Express grant of the hot power to create or change rights of survivorship (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_beneficiary IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_beneficiary IS
     'Express grant of the hot power to create or change a beneficiary designation (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_delegate IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_delegate IS
     'Express grant of the hot power to delegate the agent authority (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_annuity_waiver IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_annuity_waiver IS
     'Express grant of the hot power to waive the principal right to a joint and survivor annuity benefit (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_disclaim IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_disclaim IS
     'Express grant of the hot power to disclaim property (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.hot_powers_initialed IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.hot_powers_initialed IS
     'Whether the principal initials beside each hot power, required in Florida (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.gift_limit_type IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.gift_limit_type IS
     'Gift limit: annual-exclusion, fixed-amount, unlimited, or none.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.gift_limit_amount IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.gift_limit_amount IS
     'Fixed per-year gift limit in US dollars, when the limit is a fixed amount.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.self_gifting_allowed IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.self_gifting_allowed IS
     'Whether the agent may make gifts to the agent (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.notary_arranged IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.notary_arranged IS
     'Whether a notary acknowledgment is arranged for the principal signature (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.witness_count IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.witness_count IS
     'Number of witnesses arranged, not counting the notary.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.witness_is_agent IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.witness_is_agent IS
     'Whether any witness is an agent or successor agent (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.used_for_real_estate IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.used_for_real_estate IS
     'Whether the instrument will be recorded for a real-estate transaction (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.bank_form_completed IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.bank_form_completed IS
     'Whether the financial institution own POA form is completed: yes, no, or not-needed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.form2848_status IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney.form2848_status IS
     'Status of IRS Form 2848 for tax representation: filed, not-filed, or not-needed.';
 
 -- ========================================================================
@@ -354,14 +371,14 @@ COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.form2848_sta
 -- attorney: ready-to-execute, incomplete, or execution-risk, plus the governing
 -- state rule applied. Not legal advice.
 
-CREATE TABLE united_states_durable_financial_power_of_attorney_grade (
+CREATE TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_durable_financial_power_of_attorney_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_durable_financial_power_of_attorney(id) ON DELETE CASCADE,
+        REFERENCES united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney(id) ON DELETE CASCADE,
     validity_class VARCHAR(20) NOT NULL DEFAULT '' CHECK (validity_class IN ('ready-to-execute', 'incomplete', 'execution-risk', '')),
     governing_state TEXT NOT NULL DEFAULT '',
     execution_risk_indicated VARCHAR(5) NOT NULL DEFAULT '' CHECK (execution_risk_indicated IN ('yes', 'no', '')),
@@ -369,29 +386,29 @@ CREATE TABLE united_states_durable_financial_power_of_attorney_grade (
 );
 
 CREATE TRIGGER trigger_dpoa_grade_updated_at
-    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney_grade
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE united_states_durable_financial_power_of_attorney_grade IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade IS
     'Computed execution-readiness classification: validity class, governing state rule applied, and whether an execution risk is indicated.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.united_states_durable_financial_power_of_attorney_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.united_states_durable_financial_power_of_attorney_id IS
     'Foreign key to the parent instrument (unique, 1:1).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.validity_class IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.validity_class IS
     'Validity classification: ready-to-execute, incomplete, or execution-risk (execution-risk takes precedence).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.governing_state IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.governing_state IS
     'Name of the state rule applied, or Uniform default (verify) for an unknown state.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.execution_risk_indicated IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.execution_risk_indicated IS
     'Whether an execution risk is indicated (yes/no).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.graded_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -405,14 +422,14 @@ COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade.graded
 -- Audit trail of every classification rule that fired: the instrument
 -- dimension, the category, and a description.
 
-CREATE TABLE united_states_durable_financial_power_of_attorney_grade_rule (
+CREATE TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_durable_financial_power_of_attorney_grade_id UUID NOT NULL
-        REFERENCES united_states_durable_financial_power_of_attorney_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT '' CHECK (dimension IN ('execution', 'effectiveness', 'authority', 'agent', 'acceptance', 'jurisdiction', 'completeness', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -420,32 +437,32 @@ CREATE TABLE united_states_durable_financial_power_of_attorney_grade_rule (
 );
 
 CREATE INDEX dpoa_grade_rule_grade_id_idx
-    ON united_states_durable_financial_power_of_attorney_grade_rule (united_states_durable_financial_power_of_attorney_grade_id);
+    ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule (united_states_durable_financial_power_of_attorney_grade_id);
 
 CREATE TRIGGER trigger_dpoa_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney_grade_rule
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE united_states_durable_financial_power_of_attorney_grade_rule IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule IS
     'Audit trail of every classification rule that fired: instrument dimension, category, and description.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.united_states_durable_financial_power_of_attorney_grade_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.united_states_durable_financial_power_of_attorney_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-NOTARY-MISSING-01).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.dimension IS
     'Instrument dimension the rule concerns: execution, effectiveness, authority, agent, acceptance, jurisdiction, completeness, or classification.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.category IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.category IS
     'Subject category of the rule.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.description IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -459,14 +476,14 @@ COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_rule.d
 -- Flagged issues raised independently of the class, with a priority and a
 -- suggested action for the principal, drafter, or notary.
 
-CREATE TABLE united_states_durable_financial_power_of_attorney_grade_flag (
+CREATE TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_durable_financial_power_of_attorney_grade_id UUID NOT NULL
-        REFERENCES united_states_durable_financial_power_of_attorney_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(25) NOT NULL DEFAULT '' CHECK (category IN ('execution-formality', 'effectiveness', 'authority-scope', 'agent', 'gifting', 'acceptance', 'tax-representation', 'jurisdiction', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -475,34 +492,34 @@ CREATE TABLE united_states_durable_financial_power_of_attorney_grade_flag (
 );
 
 CREATE INDEX dpoa_grade_flag_grade_id_idx
-    ON united_states_durable_financial_power_of_attorney_grade_flag (united_states_durable_financial_power_of_attorney_grade_id);
+    ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag (united_states_durable_financial_power_of_attorney_grade_id);
 
 CREATE TRIGGER trigger_dpoa_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney_grade_flag
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE united_states_durable_financial_power_of_attorney_grade_flag IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag IS
     'Flagged issues raised independently of the validity class, with priority and a suggested action.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.united_states_durable_financial_power_of_attorney_grade_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.united_states_durable_financial_power_of_attorney_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NOTARIZATION-REQUIRED-001).';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.category IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.category IS
     'Flag category: execution-formality, effectiveness, authority-scope, agent, gifting, acceptance, tax-representation, jurisdiction, other.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.priority IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.description IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_durable_financial_power_of_attorney_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.united_states_durable_financial_power_of_attorney_grade_flag.suggested_action IS
     'Suggested action, for example have the signature acknowledged before a notary.';
 
 -- ========================================================================

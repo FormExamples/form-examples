@@ -1,10 +1,10 @@
-CREATE TABLE prescription_substitution_options (
+CREATE TABLE prescription_request.prescription_substitution_options (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     prescription_request_id UUID NOT NULL UNIQUE
-        REFERENCES prescription_request(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.prescription_request(id) ON DELETE CASCADE,
     allow_brand_substitution VARCHAR(3) NOT NULL DEFAULT ''
         CHECK (allow_brand_substitution IN ('yes', 'no', '')),
     allow_generic_substitution VARCHAR(3) NOT NULL DEFAULT ''
@@ -15,25 +15,25 @@ CREATE TABLE prescription_substitution_options (
 );
 
 CREATE TRIGGER trigger_prescription_substitution_options_updated_at
-    BEFORE UPDATE ON prescription_substitution_options
+    BEFORE UPDATE ON prescription_request.prescription_substitution_options
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE prescription_substitution_options IS
+COMMENT ON TABLE prescription_request.prescription_substitution_options IS
     'Substitution preferences for a prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN prescription_substitution_options.allow_brand_substitution IS 'Whether a different brand name is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.allow_generic_substitution IS 'Whether a generic equivalent is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.allow_dosage_adjustment IS 'Whether a different dosage is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.substitution_notes IS 'Additional notes about substitution preferences.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_brand_substitution IS 'Whether a different brand name is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_generic_substitution IS 'Whether a generic equivalent is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_dosage_adjustment IS 'Whether a different dosage is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.substitution_notes IS 'Additional notes about substitution preferences.';
 --rollback DROP TABLE prescription_substitution_options;
 
-COMMENT ON COLUMN prescription_substitution_options.prescription_request_id IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.prescription_request_id IS
     'Foreign key to the prescription_request table.';
-COMMENT ON COLUMN prescription_substitution_options.id IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescription_substitution_options.created_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN prescription_substitution_options.updated_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN prescription_substitution_options.deleted_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.deleted_at IS
     'Timestamp when this row was deleted.';

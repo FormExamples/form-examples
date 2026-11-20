@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE patient_satisfaction_survey.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES patient_satisfaction_survey.assessment(id) ON DELETE CASCADE,
     normalized_score NUMERIC(5,1) NOT NULL DEFAULT 0
         CHECK (normalized_score >= 0 AND normalized_score <= 100),
     satisfaction_category VARCHAR(20) NOT NULL DEFAULT ''
@@ -27,40 +27,40 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON patient_satisfaction_survey.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_satisfaction_survey.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE patient_satisfaction_survey.grade IS
     'Computed satisfaction grading result. Normalized score 0-100 with domain sub-scores. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.normalized_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.normalized_score IS
     'Overall normalized satisfaction score (0-100).';
-COMMENT ON COLUMN grade.satisfaction_category IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.satisfaction_category IS
     'Satisfaction category: excellent, good, satisfactory, poor, very-poor, or empty.';
-COMMENT ON COLUMN grade.domain_access_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_access_score IS
     'Normalized score for access and waiting times domain (0-100).';
-COMMENT ON COLUMN grade.domain_communication_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_communication_score IS
     'Normalized score for communication and information domain (0-100).';
-COMMENT ON COLUMN grade.domain_clinical_care_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_clinical_care_score IS
     'Normalized score for clinical care quality domain (0-100).';
-COMMENT ON COLUMN grade.domain_staff_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_staff_score IS
     'Normalized score for staff attitude domain (0-100).';
-COMMENT ON COLUMN grade.domain_environment_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_environment_score IS
     'Normalized score for environment and facilities domain (0-100).';
-COMMENT ON COLUMN grade.domain_discharge_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_discharge_score IS
     'Normalized score for discharge and follow-up domain (0-100).';
-COMMENT ON COLUMN grade.domain_overall_score IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.domain_overall_score IS
     'Normalized score for overall experience domain (0-100).';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN patient_satisfaction_survey.grade.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -1,11 +1,11 @@
-CREATE TABLE outpatient_outcome_prom_eq5d5l (
+CREATE TABLE outpatient_outcome.outpatient_outcome_prom_eq5d5l (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     -- Each dimension is 1 (no problems) to 5 (extreme problems); null if unanswered.
     before_mobility SMALLINT CHECK (before_mobility BETWEEN 1 AND 5),
@@ -24,43 +24,43 @@ CREATE TABLE outpatient_outcome_prom_eq5d5l (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_prom_eq5d5l_updated_at
-    BEFORE UPDATE ON outpatient_outcome_prom_eq5d5l
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_prom_eq5d5l
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_prom_eq5d5l IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_prom_eq5d5l IS
     'EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_mobility IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_mobility IS
     'EQ-5D-5L mobility dimension before treatment (1 = no problems … 5 = extreme).';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_self_care IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_self_care IS
     'EQ-5D-5L self-care dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_usual_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_usual_activities IS
     'EQ-5D-5L usual-activities dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_pain_discomfort IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_pain_discomfort IS
     'EQ-5D-5L pain/discomfort dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_anxiety_depression IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_anxiety_depression IS
     'EQ-5D-5L anxiety/depression dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_vas IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_vas IS
     'EQ VAS health-rating 0-100 before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_mobility IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_mobility IS
     'EQ-5D-5L mobility dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_self_care IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_self_care IS
     'EQ-5D-5L self-care dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_usual_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_usual_activities IS
     'EQ-5D-5L usual-activities dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_pain_discomfort IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_pain_discomfort IS
     'EQ-5D-5L pain/discomfort dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_anxiety_depression IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_anxiety_depression IS
     'EQ-5D-5L anxiety/depression dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_vas IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_vas IS
     'EQ VAS health-rating 0-100 after treatment.';

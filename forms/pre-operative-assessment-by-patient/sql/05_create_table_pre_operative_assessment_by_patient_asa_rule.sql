@@ -1,4 +1,4 @@
-CREATE TABLE asa_rule (
+CREATE TABLE pre_operative_assessment_by_patient.asa_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -15,32 +15,32 @@ CREATE TABLE asa_rule (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_asa_rule_updated_at
-    BEFORE UPDATE ON asa_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.asa_rule
+    FOR EACH ROW EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE asa_rule IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.asa_rule IS
     'Reference table of ASA grading rules. Seed data mirrors asa-rules.ts. Used for audit trail.';
-COMMENT ON COLUMN asa_rule.code IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN asa_rule.system IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.system IS
     'Body system or category (e.g. Cardiovascular, Respiratory).';
-COMMENT ON COLUMN asa_rule.description IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.description IS
     'Human-readable condition description (e.g. Controlled hypertension).';
-COMMENT ON COLUMN asa_rule.grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.grade IS
     'ASA grade assigned when this rule fires: 1 (healthy) to 5 (moribund).';
-COMMENT ON COLUMN asa_rule.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN asa_rule.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN asa_rule.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN asa_rule.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 -- ──────────────────────────────────────────────────────────────
 -- Seed data: all 42 ASA rules from asa-rules.ts
 -- ──────────────────────────────────────────────────────────────
 
-INSERT INTO asa_rule (code, system, description, grade) VALUES
+INSERT INTO pre_operative_assessment_by_patient.asa_rule (code, system, description, grade) VALUES
     -- Cardiovascular (10 rules)
     ('CV-001', 'Cardiovascular',      'Controlled hypertension',                   2),
     ('CV-002', 'Cardiovascular',      'Uncontrolled hypertension',                 3),

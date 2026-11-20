@@ -1,6 +1,6 @@
 -- Attending physician who completes Part 2 of the MEDIF.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_information_form_for_air_travel.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -33,39 +33,39 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_information_form_for_air_travel.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_information_form_for_air_travel.clinician IS
     'Attending physician (MEDIF Part 2 author).';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.name IS
     'Attending physician name.';
-COMMENT ON COLUMN clinician.specialty IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.specialty IS
     'Physician specialty (free text).';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.role IS
     'Role classification: general-practitioner, cardiologist, etc.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.registration_number IS
     'Professional registration number.';
-COMMENT ON COLUMN clinician.clinic_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.clinic_name IS
     'Clinic or hospital name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.phone IS
     'Phone number including international dialling code.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country of practice as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.postcode IS
     'Postal code of the clinic.';

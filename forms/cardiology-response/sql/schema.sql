@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS cardiology_response;
+
+COMMENT ON SCHEMA cardiology_response IS
+    'Namespace for the Cardiology Response form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION cardiology_response.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION cardiology_response.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE cardiology_response.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cardiology_response.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cardiology_response.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cardiology_response.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cardiology_response.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cardiology_response.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cardiology_response.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cardiology_response.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cardiology_response.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cardiology_response.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cardiology_response.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cardiology_response.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cardiology_response.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cardiology_response.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cardiology_response.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN cardiology_response.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cardiology_response.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cardiology_response.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN cardiology_response.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN cardiology_response.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON cardiology_response.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cardiology_response.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Reporting clinician (radiologist / reporting radiographer) information.
 
-CREATE TABLE clinician (
+CREATE TABLE cardiology_response.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cardiology_response.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cardiology_response.clinician IS
     'Responding cardiology clinician (consultant cardiologist, registrar, or specialist nurse) who authors and signs the cardiology response.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cardiology_response.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cardiology_response.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cardiology_response.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cardiology_response.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cardiology_response.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cardiology_response.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cardiology_response.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cardiology_response.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cardiology_response.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cardiology_response.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cardiology_response.clinician.role IS
     'Responding cardiology clinician role: consultant-cardiologist, cardiology-registrar, specialist-nurse, physiologist, gp-with-special-interest, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cardiology_response.clinician.registration_body IS
     'Clinician registration body: GMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cardiology_response.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cardiology_response.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON cardiology_response.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -209,14 +226,14 @@ CREATE INDEX clinician_index_gto
 
 -- Cardiology response (consult reply) — the source-of-truth record.
 
-CREATE TABLE cardiology_response (
+CREATE TABLE cardiology_response.cardiology_response (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES cardiology_response.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES cardiology_response.clinician(id) ON DELETE CASCADE,
 
     -- Response identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -262,76 +279,76 @@ CREATE TABLE cardiology_response (
 );
 
 CREATE INDEX index_cardiology_response_patient_id
-    ON cardiology_response(patient_id);
+    ON cardiology_response.cardiology_response(patient_id);
 CREATE INDEX index_cardiology_response_clinician_id
-    ON cardiology_response(clinician_id);
+    ON cardiology_response.cardiology_response(clinician_id);
 
 CREATE TRIGGER trigger_cardiology_response_updated_at
-    BEFORE UPDATE ON cardiology_response
+    BEFORE UPDATE ON cardiology_response.cardiology_response
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response IS
+COMMENT ON TABLE cardiology_response.cardiology_response IS
     'Cardiology response (consult reply) authored by a cardiology clinician in answer to a cardiology referral. Captures the consultation type, clinical summary and examination, investigations performed, structured findings, the diagnosis, the key left-ventricular ejection fraction measurement, the management plan and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN cardiology_response.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cardiology_response.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response.patient_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN cardiology_response.clinician_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.clinician_id IS
     'Foreign key to the responding cardiology clinician (author / signer).';
-COMMENT ON COLUMN cardiology_response.originating_request_reference IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.originating_request_reference IS
     'Free-text reference linking this response back to the originating cardiology referral request.';
-COMMENT ON COLUMN cardiology_response.response_status IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.response_status IS
     'Response lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN cardiology_response.consultation_type IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.consultation_type IS
     'Type of cardiology consultation: clinic-review, advice-and-guidance, telephone, inpatient-review, virtual.';
-COMMENT ON COLUMN cardiology_response.assessed_date IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.assessed_date IS
     'Date the patient was assessed / reviewed.';
-COMMENT ON COLUMN cardiology_response.responded_date IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.responded_date IS
     'Date the response was authored / signed.';
-COMMENT ON COLUMN cardiology_response.clinical_summary IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.clinical_summary IS
     'Narrative clinical summary of the assessment.';
-COMMENT ON COLUMN cardiology_response.examination_findings IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.examination_findings IS
     'Cardiovascular examination findings.';
-COMMENT ON COLUMN cardiology_response.investigations_performed IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.investigations_performed IS
     'Investigations performed or reviewed (e.g. ECG, echocardiogram, stress test) and their findings.';
-COMMENT ON COLUMN cardiology_response.ischaemia_or_cad IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.ischaemia_or_cad IS
     'Structured finding: ischaemia or coronary artery disease present.';
-COMMENT ON COLUMN cardiology_response.significant_arrhythmia IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.significant_arrhythmia IS
     'Structured finding: significant arrhythmia present.';
-COMMENT ON COLUMN cardiology_response.reduced_ejection_fraction IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.reduced_ejection_fraction IS
     'Structured finding: reduced left-ventricular ejection fraction.';
-COMMENT ON COLUMN cardiology_response.significant_valve_disease IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.significant_valve_disease IS
     'Structured finding: significant (moderate or severe) valve disease.';
-COMMENT ON COLUMN cardiology_response.structural_abnormality IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.structural_abnormality IS
     'Structured finding: structural cardiac abnormality (e.g. cardiomyopathy, congenital).';
-COMMENT ON COLUMN cardiology_response.uncontrolled_hypertension IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.uncontrolled_hypertension IS
     'Structured finding: uncontrolled hypertension.';
-COMMENT ON COLUMN cardiology_response.non_cardiac_cause IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.non_cardiac_cause IS
     'Structured finding: a non-cardiac cause was identified or judged most likely.';
-COMMENT ON COLUMN cardiology_response.primary_diagnosis_category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.primary_diagnosis_category IS
     'Primary diagnosis category: coronary-artery-disease, heart-failure, arrhythmia, valve-disease, hypertension, cardiomyopathy, non-cardiac, no-abnormality, other.';
-COMMENT ON COLUMN cardiology_response.diagnosis_narrative IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.diagnosis_narrative IS
     'Narrative diagnosis answering the referral clinical question.';
-COMMENT ON COLUMN cardiology_response.lv_ejection_fraction_percent IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.lv_ejection_fraction_percent IS
     'Left-ventricular ejection fraction as a percentage (0-100), the key prognostic measurement.';
-COMMENT ON COLUMN cardiology_response.management_plan IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.management_plan IS
     'Management plan including investigations arranged and treatment.';
-COMMENT ON COLUMN cardiology_response.medication_changes IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.medication_changes IS
     'Medication changes recommended or made.';
-COMMENT ON COLUMN cardiology_response.recommended_follow_up IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.recommended_follow_up IS
     'Recommended follow-up, including who should action it and when.';
-COMMENT ON COLUMN cardiology_response.critical_result IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.critical_result IS
     'Whether a critical or unexpected significant cardiac result is present (e.g. critical arrhythmia, severe aortic stenosis, acute coronary syndrome).';
-COMMENT ON COLUMN cardiology_response.critical_result_communicated IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.critical_result_communicated IS
     'Whether the critical result was communicated directly to the referrer / responsible team.';
-COMMENT ON COLUMN cardiology_response.reported_to IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';
 
 -- ========================================================================
@@ -344,14 +361,14 @@ COMMENT ON COLUMN cardiology_response.reported_to IS
 
 -- Computed interpretation grade for a cardiology response (four-axis engine).
 
-CREATE TABLE cardiology_response_grade (
+CREATE TABLE cardiology_response.cardiology_response_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_response_id UUID NOT NULL UNIQUE
-        REFERENCES cardiology_response(id) ON DELETE CASCADE,
+        REFERENCES cardiology_response.cardiology_response(id) ON DELETE CASCADE,
 
     -- Axis A: response classification
     response_classification VARCHAR(20) NOT NULL DEFAULT ''
@@ -380,43 +397,43 @@ CREATE TABLE cardiology_response_grade (
 );
 
 CREATE TRIGGER trigger_cardiology_response_grade_updated_at
-    BEFORE UPDATE ON cardiology_response_grade
+    BEFORE UPDATE ON cardiology_response.cardiology_response_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response_grade IS
+COMMENT ON TABLE cardiology_response.cardiology_response_grade IS
     'Computed four-axis interpretation grade: response classification, condition severity / category, response completeness, and follow-up urgency. A critical result auto-escalates the follow-up urgency to critical-alert regardless of the other axes.';
-COMMENT ON COLUMN cardiology_response_grade.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response_grade.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_response_grade.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response_grade.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response_grade.cardiology_response_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.cardiology_response_id IS
     'Foreign key to the parent response (unique, 1:1).';
-COMMENT ON COLUMN cardiology_response_grade.response_classification IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.response_classification IS
     'Axis A overall classification: no-abnormality, cardiac-condition, critical, inconclusive.';
-COMMENT ON COLUMN cardiology_response_grade.severity IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.severity IS
     'Axis B condition severity: none, minor, moderate, major.';
-COMMENT ON COLUMN cardiology_response_grade.severity_category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.severity_category IS
     'Axis B structured-finding category label (e.g. the dominant finding driving severity).';
-COMMENT ON COLUMN cardiology_response_grade.completeness_percent IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.completeness_percent IS
     'Axis C response completeness as a percentage of mandatory sections (0-100).';
-COMMENT ON COLUMN cardiology_response_grade.follow_up_urgency IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.follow_up_urgency IS
     'Axis D follow-up urgency: routine, recommended, urgent, critical-alert.';
-COMMENT ON COLUMN cardiology_response_grade.target_timeframe IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.target_timeframe IS
     'Target timeframe for the recommended follow-up implied by the urgency.';
-COMMENT ON COLUMN cardiology_response_grade.recommended_action IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.recommended_action IS
     'Axis D concise recommended action derived from the urgency.';
-COMMENT ON COLUMN cardiology_response_grade.recommendation IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.recommendation IS
     'Overall recommendation: no-action, routine-follow-up, further-investigation, specialist-management, urgent-review.';
-COMMENT ON COLUMN cardiology_response_grade.clinician_notes IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.clinician_notes IS
     'Free-text interpretation / sign-off notes.';
-COMMENT ON COLUMN cardiology_response_grade.signed_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.signed_at IS
     'Timestamp of the responding clinician electronic signature.';
-COMMENT ON COLUMN cardiology_response_grade.graded_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -429,14 +446,14 @@ COMMENT ON COLUMN cardiology_response_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a cardiology response.
 
-CREATE TABLE cardiology_response_grade_rule (
+CREATE TABLE cardiology_response.cardiology_response_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_response_grade_id UUID NOT NULL
-        REFERENCES cardiology_response_grade(id) ON DELETE CASCADE,
+        REFERENCES cardiology_response.cardiology_response_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('classification', 'severity', 'completeness', 'follow-up', '')),
@@ -445,32 +462,32 @@ CREATE TABLE cardiology_response_grade_rule (
 );
 
 CREATE INDEX index_cardiology_response_grade_rule_grade_id
-    ON cardiology_response_grade_rule(cardiology_response_grade_id);
+    ON cardiology_response.cardiology_response_grade_rule(cardiology_response_grade_id);
 
 CREATE TRIGGER trigger_cardiology_response_grade_rule_updated_at
-    BEFORE UPDATE ON cardiology_response_grade_rule
+    BEFORE UPDATE ON cardiology_response.cardiology_response_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response_grade_rule IS
+COMMENT ON TABLE cardiology_response.cardiology_response_grade_rule IS
     'Audit trail of every classification / severity / completeness / follow-up rule that fired for this response.';
-COMMENT ON COLUMN cardiology_response_grade_rule.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response_grade_rule.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_response_grade_rule.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response_grade_rule.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response_grade_rule.cardiology_response_grade_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.cardiology_response_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cardiology_response_grade_rule.rule_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CLASS-CRITICAL-01).';
-COMMENT ON COLUMN cardiology_response_grade_rule.axis IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.axis IS
     'Scoring axis the rule belongs to: classification, severity, completeness, follow-up.';
-COMMENT ON COLUMN cardiology_response_grade_rule.category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.category IS
     'Category or finding the rule relates to.';
-COMMENT ON COLUMN cardiology_response_grade_rule.description IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -483,14 +500,14 @@ COMMENT ON COLUMN cardiology_response_grade_rule.description IS
 
 -- Safety-critical flags for a cardiology response, independent of the axes.
 
-CREATE TABLE cardiology_response_grade_flag (
+CREATE TABLE cardiology_response.cardiology_response_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_response_grade_id UUID NOT NULL
-        REFERENCES cardiology_response_grade(id) ON DELETE CASCADE,
+        REFERENCES cardiology_response.cardiology_response_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -510,34 +527,34 @@ CREATE TABLE cardiology_response_grade_flag (
 );
 
 CREATE INDEX index_cardiology_response_grade_flag_grade_id
-    ON cardiology_response_grade_flag(cardiology_response_grade_id);
+    ON cardiology_response.cardiology_response_grade_flag(cardiology_response_grade_id);
 
 CREATE TRIGGER trigger_cardiology_response_grade_flag_updated_at
-    BEFORE UPDATE ON cardiology_response_grade_flag
+    BEFORE UPDATE ON cardiology_response.cardiology_response_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response_grade_flag IS
+COMMENT ON TABLE cardiology_response.cardiology_response_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the responsible team.';
-COMMENT ON COLUMN cardiology_response_grade_flag.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response_grade_flag.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_response_grade_flag.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response_grade_flag.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response_grade_flag.cardiology_response_grade_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.cardiology_response_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cardiology_response_grade_flag.flag_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CRITICAL-FINDING-001).';
-COMMENT ON COLUMN cardiology_response_grade_flag.category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN cardiology_response_grade_flag.priority IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN cardiology_response_grade_flag.description IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN cardiology_response_grade_flag.suggested_action IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "communicate critical result to referrer and arrange urgent review").';
 
 -- ========================================================================

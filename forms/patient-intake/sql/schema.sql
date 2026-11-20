@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (12):
+-- Source files (13):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -35,12 +36,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS patient_intake;
+
+COMMENT ON SCHEMA patient_intake IS
+    'Namespace for the Patient Intake form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION patient_intake.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -48,7 +65,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION patient_intake.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -61,7 +78,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE patient_intake.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -84,56 +101,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON patient_intake.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE patient_intake.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN patient_intake.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN patient_intake.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN patient_intake.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN patient_intake.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN patient_intake.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN patient_intake.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN patient_intake.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN patient_intake.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN patient_intake.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN patient_intake.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN patient_intake.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN patient_intake.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN patient_intake.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN patient_intake.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN patient_intake.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN patient_intake.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN patient_intake.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON patient_intake.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN patient_intake.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN patient_intake.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -146,7 +163,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE patient_intake.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -165,46 +182,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON patient_intake.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE patient_intake.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN patient_intake.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN patient_intake.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN patient_intake.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN patient_intake.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN patient_intake.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN patient_intake.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN patient_intake.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN patient_intake.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN patient_intake.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN patient_intake.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN patient_intake.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN patient_intake.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN patient_intake.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON patient_intake.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN patient_intake.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -215,36 +232,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_patient_intake.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE patient_intake.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON patient_intake.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE patient_intake.assessment IS
     'Patient intake assessment form with risk level stratification. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN patient_intake.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN patient_intake.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN patient_intake.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN patient_intake.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -255,13 +272,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_patient_intake_medications.sql
 -- ========================================================================
 
-CREATE TABLE assessment_medications (
+CREATE TABLE patient_intake.assessment_medications (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment(id) ON DELETE CASCADE,
     takes_medications VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (takes_medications IN ('yes', 'no', '')),
     takes_over_the_counter VARCHAR(5) NOT NULL DEFAULT ''
@@ -277,38 +294,38 @@ CREATE TABLE assessment_medications (
 );
 
 CREATE TRIGGER trigger_assessment_medications_updated_at
-    BEFORE UPDATE ON assessment_medications
+    BEFORE UPDATE ON patient_intake.assessment_medications
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment_medications IS
+COMMENT ON TABLE patient_intake.assessment_medications IS
     'Current medications section header: prescription, OTC, supplements, and adherence. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_medications.assessment_id IS
+COMMENT ON COLUMN patient_intake.assessment_medications.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_medications.takes_medications IS
+COMMENT ON COLUMN patient_intake.assessment_medications.takes_medications IS
     'Whether the patient takes prescription medications: yes, no, or empty.';
-COMMENT ON COLUMN assessment_medications.takes_over_the_counter IS
+COMMENT ON COLUMN patient_intake.assessment_medications.takes_over_the_counter IS
     'Whether the patient takes over-the-counter medications: yes, no, or empty.';
-COMMENT ON COLUMN assessment_medications.takes_supplements IS
+COMMENT ON COLUMN patient_intake.assessment_medications.takes_supplements IS
     'Whether the patient takes vitamins or supplements: yes, no, or empty.';
-COMMENT ON COLUMN assessment_medications.supplement_details IS
+COMMENT ON COLUMN patient_intake.assessment_medications.supplement_details IS
     'Details of supplements and vitamins.';
-COMMENT ON COLUMN assessment_medications.medication_adherence IS
+COMMENT ON COLUMN patient_intake.assessment_medications.medication_adherence IS
     'Overall medication adherence: good, partial, poor, or empty.';
-COMMENT ON COLUMN assessment_medications.pharmacy_name IS
+COMMENT ON COLUMN patient_intake.assessment_medications.pharmacy_name IS
     'Name of the patient regular pharmacy.';
-COMMENT ON COLUMN assessment_medications.pharmacy_phone IS
+COMMENT ON COLUMN patient_intake.assessment_medications.pharmacy_phone IS
     'Telephone number of the pharmacy.';
-COMMENT ON COLUMN assessment_medications.medications_notes IS
+COMMENT ON COLUMN patient_intake.assessment_medications.medications_notes IS
     'Additional notes on medications.';
 
-COMMENT ON COLUMN assessment_medications.id IS
+COMMENT ON COLUMN patient_intake.assessment_medications.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_medications.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_medications.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_medications.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_medications.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medications.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment_medications.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual medication items (one-to-many child)
 
@@ -320,13 +337,13 @@ COMMENT ON COLUMN assessment_medications.deleted_at IS
 -- BEGIN 06_create_table_patient_intake_medication_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_medication_item (
+CREATE TABLE patient_intake.assessment_medication_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     medications_id UUID NOT NULL
-        REFERENCES assessment_medications(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment_medications(id) ON DELETE CASCADE,
     medication_name VARCHAR(255) NOT NULL DEFAULT '',
     dose VARCHAR(100) NOT NULL DEFAULT '',
     frequency VARCHAR(100) NOT NULL DEFAULT '',
@@ -339,44 +356,44 @@ CREATE TABLE assessment_medication_item (
 );
 
 CREATE TRIGGER trigger_assessment_medication_item_updated_at
-    BEFORE UPDATE ON assessment_medication_item
+    BEFORE UPDATE ON patient_intake.assessment_medication_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment_medication_item IS
+COMMENT ON TABLE patient_intake.assessment_medication_item IS
     'Individual medication entry with name, dose, frequency, and prescriber.';
-COMMENT ON COLUMN assessment_medication_item.medication_name IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.medication_name IS
     'Name of the medication.';
-COMMENT ON COLUMN assessment_medication_item.dose IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.dose IS
     'Dose of the medication.';
-COMMENT ON COLUMN assessment_medication_item.frequency IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.frequency IS
     'Frequency of administration.';
-COMMENT ON COLUMN assessment_medication_item.route IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.route IS
     'Route of administration: oral, topical, inhaled, injectable, other, or empty.';
-COMMENT ON COLUMN assessment_medication_item.prescriber IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.prescriber IS
     'Name of the prescribing clinician.';
-COMMENT ON COLUMN assessment_medication_item.reason IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.reason IS
     'Reason or indication for the medication.';
-COMMENT ON COLUMN assessment_medication_item.start_date IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.start_date IS
     'Date the medication was started.';
-COMMENT ON COLUMN assessment_medication_item.sort_order IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_medications.id IS
+COMMENT ON COLUMN patient_intake.assessment_medications.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_medications.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_medications.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_medications.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_medications.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.medications_id IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.medications_id IS
     'Foreign key to the assessment_medications table.';
-COMMENT ON COLUMN assessment_medication_item.id IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_medication_item.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_medication_item.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment_medication_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -387,13 +404,13 @@ COMMENT ON COLUMN assessment_medication_item.deleted_at IS
 -- BEGIN 07_create_table_patient_intake_allergies.sql
 -- ========================================================================
 
-CREATE TABLE assessment_allergies (
+CREATE TABLE patient_intake.assessment_allergies (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment(id) ON DELETE CASCADE,
     has_drug_allergies VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_drug_allergies IN ('yes', 'no', '')),
     has_food_allergies VARCHAR(5) NOT NULL DEFAULT ''
@@ -414,40 +431,40 @@ CREATE TABLE assessment_allergies (
 );
 
 CREATE TRIGGER trigger_assessment_allergies_updated_at
-    BEFORE UPDATE ON assessment_allergies
+    BEFORE UPDATE ON patient_intake.assessment_allergies
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment_allergies IS
+COMMENT ON TABLE patient_intake.assessment_allergies IS
     'Allergies section header: drug, food, environmental, and other allergies. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_allergies.assessment_id IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_allergies.has_drug_allergies IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_drug_allergies IS
     'Whether the patient has drug allergies: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.has_food_allergies IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_food_allergies IS
     'Whether the patient has food allergies: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.has_environmental_allergies IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_environmental_allergies IS
     'Whether the patient has environmental allergies: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.has_latex_allergy IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_latex_allergy IS
     'Whether the patient has a latex allergy: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.has_contrast_allergy IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_contrast_allergy IS
     'Whether the patient has a contrast dye allergy: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.has_anaesthetic_allergy IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.has_anaesthetic_allergy IS
     'Whether the patient has an anaesthetic allergy: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.history_of_anaphylaxis IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.history_of_anaphylaxis IS
     'Whether the patient has a history of anaphylaxis: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.carries_epipen IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.carries_epipen IS
     'Whether the patient carries an adrenaline auto-injector: yes, no, or empty.';
-COMMENT ON COLUMN assessment_allergies.allergies_notes IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.allergies_notes IS
     'Additional notes on allergies.';
 
-COMMENT ON COLUMN assessment_allergies.id IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_allergies.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_allergies.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_allergies.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual allergy items (one-to-many child)
 
@@ -459,13 +476,13 @@ COMMENT ON COLUMN assessment_allergies.deleted_at IS
 -- BEGIN 08_create_table_patient_intake_allergy_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_allergy_item (
+CREATE TABLE patient_intake.assessment_allergy_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     allergies_id UUID NOT NULL
-        REFERENCES assessment_allergies(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment_allergies(id) ON DELETE CASCADE,
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     allergy_type VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (allergy_type IN ('drug', 'food', 'environmental', 'latex', 'contrast', 'anaesthetic', 'other', '')),
@@ -476,38 +493,38 @@ CREATE TABLE assessment_allergy_item (
 );
 
 CREATE TRIGGER trigger_assessment_allergy_item_updated_at
-    BEFORE UPDATE ON assessment_allergy_item
+    BEFORE UPDATE ON patient_intake.assessment_allergy_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment_allergy_item IS
+COMMENT ON TABLE patient_intake.assessment_allergy_item IS
     'Individual allergy entry with allergen, type, reaction, and severity.';
-COMMENT ON COLUMN assessment_allergy_item.allergen IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergen IS
     'Name of the allergen.';
-COMMENT ON COLUMN assessment_allergy_item.allergy_type IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergy_type IS
     'Type of allergy: drug, food, environmental, latex, contrast, anaesthetic, other, or empty.';
-COMMENT ON COLUMN assessment_allergy_item.reaction IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.reaction IS
     'Description of the allergic reaction.';
-COMMENT ON COLUMN assessment_allergy_item.severity IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.severity IS
     'Reaction severity: mild, moderate, severe, anaphylaxis, or empty.';
-COMMENT ON COLUMN assessment_allergy_item.sort_order IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_allergies.id IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_allergies.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_allergies.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_allergy_item.allergies_id IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergies_id IS
     'Foreign key to the assessment_allergies table.';
-COMMENT ON COLUMN assessment_allergy_item.id IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_allergy_item.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_allergy_item.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_allergy_item.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -518,13 +535,13 @@ COMMENT ON COLUMN assessment_allergy_item.deleted_at IS
 -- BEGIN 09_create_table_patient_intake_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE patient_intake.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment(id) ON DELETE CASCADE,
     risk_level VARCHAR(10) NOT NULL DEFAULT 'low'
         CHECK (risk_level IN ('low', 'medium', 'high')),
     risk_factor_count INTEGER NOT NULL DEFAULT 0
@@ -533,28 +550,28 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON patient_intake.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE patient_intake.grade IS
     'Computed risk level grading result for the patient intake assessment. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.risk_level IS
+COMMENT ON COLUMN patient_intake.grade.risk_level IS
     'Overall risk level: low (minimal risk factors), medium (some risk factors), high (significant risk factors requiring attention).';
-COMMENT ON COLUMN grade.risk_factor_count IS
+COMMENT ON COLUMN patient_intake.grade.risk_factor_count IS
     'Total number of risk factors identified during intake.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN patient_intake.grade.graded_at IS
     'Timestamp when the risk grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN patient_intake.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN patient_intake.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN patient_intake.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN patient_intake.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN patient_intake.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -565,13 +582,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 10_create_table_patient_intake_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE patient_intake.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -580,30 +597,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON patient_intake.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE patient_intake.grading_fired_rule IS
     'Individual risk stratification rules that evaluated to true during grading of the patient intake assessment.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. INTAKE-MED-001, INTAKE-FAM-001).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.category IS
     'Category of the rule (e.g. Medical History, Family History, Social History, Allergies).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.description IS
     'Human-readable description of the rule and why it fired.';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.severity_level IS
     'Risk level contributed by this rule: low, medium, high, or empty.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN patient_intake.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -614,13 +631,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 11_create_table_patient_intake_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE patient_intake.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -629,30 +646,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON patient_intake.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE patient_intake.grading_additional_flag IS
     'Additional flags detected during patient intake grading, such as missing critical information, allergy alerts, or safeguarding concerns.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-ALLERGY-001, FLAG-SAFEGUARD-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.category IS
     'Category of the flag (e.g. Allergy, Medication, Social, Safeguarding).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.message IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN patient_intake.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

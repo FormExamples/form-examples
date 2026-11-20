@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS structured_medication_review;
+
+COMMENT ON SCHEMA structured_medication_review IS
+    'Namespace for the Structured Medication Review (SMR) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION structured_medication_review.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION structured_medication_review.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE structured_medication_review.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON structured_medication_review.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE structured_medication_review.patient IS
     'Patient demographic information used by the structured medication review record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN structured_medication_review.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN structured_medication_review.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN structured_medication_review.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN structured_medication_review.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN structured_medication_review.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN structured_medication_review.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN structured_medication_review.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN structured_medication_review.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN structured_medication_review.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN structured_medication_review.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN structured_medication_review.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN structured_medication_review.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN structured_medication_review.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN structured_medication_review.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN structured_medication_review.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN structured_medication_review.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN structured_medication_review.patient.allergies_summary IS
     'Free-text summary of known allergies and intolerances.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON structured_medication_review.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- carried out the structured medication review (clinical pharmacist, GP,
 -- pharmacy technician).
 
-CREATE TABLE clinician (
+CREATE TABLE structured_medication_review.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON structured_medication_review.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE structured_medication_review.clinician IS
     'Clinician identifying information for the professional who carried out the structured medication review.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN structured_medication_review.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN structured_medication_review.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN structured_medication_review.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN structured_medication_review.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN structured_medication_review.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN structured_medication_review.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN structured_medication_review.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN structured_medication_review.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN structured_medication_review.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN structured_medication_review.clinician.role IS
     'Primary role of the reviewing clinician: clinical-pharmacist, gp, pharmacy-technician, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN structured_medication_review.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN structured_medication_review.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON structured_medication_review.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- in the child table structured_medication_review_medicine, which cascades
 -- from this parent. Derived scoring lives in structured_medication_review_grade.
 
-CREATE TABLE structured_medication_review (
+CREATE TABLE structured_medication_review.structured_medication_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES structured_medication_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES structured_medication_review.clinician(id) ON DELETE RESTRICT,
 
     clinician_name TEXT NOT NULL DEFAULT '',
     clinician_role VARCHAR(30) NOT NULL DEFAULT '' CHECK (clinician_role IN ('clinical-pharmacist', 'gp', 'pharmacy-technician', 'other', '')),
@@ -244,68 +261,68 @@ CREATE TABLE structured_medication_review (
 );
 
 CREATE INDEX structured_medication_review_patient_id_idx
-    ON structured_medication_review (patient_id);
+    ON structured_medication_review.structured_medication_review (patient_id);
 CREATE INDEX structured_medication_review_clinician_id_idx
-    ON structured_medication_review (clinician_id);
+    ON structured_medication_review.structured_medication_review (clinician_id);
 
 CREATE TRIGGER trigger_structured_medication_review_updated_at
-    BEFORE UPDATE ON structured_medication_review
+    BEFORE UPDATE ON structured_medication_review.structured_medication_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE structured_medication_review IS
+COMMENT ON TABLE structured_medication_review.structured_medication_review IS
     'Parent structured medication review header: reviewing context, patient identification and frailty context, presenting problems and priorities, monitoring due, and shared decisions and follow-up plan.';
-COMMENT ON COLUMN structured_medication_review.id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN structured_medication_review.created_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN structured_medication_review.updated_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN structured_medication_review.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN structured_medication_review.patient_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.patient_id IS
     'Foreign key to the patient this review is for (restricted delete).';
-COMMENT ON COLUMN structured_medication_review.clinician_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.clinician_id IS
     'Foreign key to the reviewing clinician (restricted delete); optional.';
-COMMENT ON COLUMN structured_medication_review.clinician_name IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.clinician_name IS
     'Name of the reviewing clinician as entered on the review.';
-COMMENT ON COLUMN structured_medication_review.clinician_role IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.clinician_role IS
     'Role of the reviewing clinician: clinical-pharmacist, gp, pharmacy-technician, or other.';
-COMMENT ON COLUMN structured_medication_review.reviewed_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.reviewed_at IS
     'Date and time the review was carried out.';
-COMMENT ON COLUMN structured_medication_review.care_setting IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.care_setting IS
     'Care setting: gp-practice, pcn, care-home, community-pharmacy, or patient-home.';
-COMMENT ON COLUMN structured_medication_review.consultation_mode IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.consultation_mode IS
     'Consultation mode: face-to-face, telephone, video, or home-visit.';
-COMMENT ON COLUMN structured_medication_review.patient_identifier IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.patient_identifier IS
     'Local patient identifier as entered on the review.';
-COMMENT ON COLUMN structured_medication_review.age_band IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.age_band IS
     'Patient adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus.';
-COMMENT ON COLUMN structured_medication_review.sex IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN structured_medication_review.frailty_status IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.frailty_status IS
     'Patient frailty status: fit, mild, moderate, or severe.';
-COMMENT ON COLUMN structured_medication_review.lives_in_care_home IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.lives_in_care_home IS
     'Whether the patient lives in a care home: yes or no.';
-COMMENT ON COLUMN structured_medication_review.long_term_conditions IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.long_term_conditions IS
     'Comma-separated list of the patient long-term conditions.';
-COMMENT ON COLUMN structured_medication_review.presenting_problems IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.presenting_problems IS
     'Reasons for the review / presenting medication problems.';
-COMMENT ON COLUMN structured_medication_review.patient_reported_issues IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.patient_reported_issues IS
     'Side effects and difficulties reported by the patient.';
-COMMENT ON COLUMN structured_medication_review.what_matters_to_patient IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.what_matters_to_patient IS
     'The patient priorities and what matters most to them.';
-COMMENT ON COLUMN structured_medication_review.shared_decisions IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.shared_decisions IS
     'Decisions agreed together with the patient.';
-COMMENT ON COLUMN structured_medication_review.monitoring_due IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.monitoring_due IS
     'Tests / bloods due or outstanding for the patient medicines.';
-COMMENT ON COLUMN structured_medication_review.overdue_monitoring_count IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.overdue_monitoring_count IS
     'Count of monitoring items that are overdue; null when unanswered.';
-COMMENT ON COLUMN structured_medication_review.follow_up_plan IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.follow_up_plan IS
     'Agreed follow-up plan and actions.';
-COMMENT ON COLUMN structured_medication_review.follow_up_date IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.follow_up_date IS
     'Date the next review is due.';
-COMMENT ON COLUMN structured_medication_review.review_completed IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review.review_completed IS
     'Whether the clinician marked the review as completed: yes or no.';
 
 -- ========================================================================
@@ -325,14 +342,14 @@ COMMENT ON COLUMN structured_medication_review.review_completed IS
 -- scale), the monitoring status, whether it is a deprescribing candidate, and
 -- any STOPP or START criterion identified.
 
-CREATE TABLE structured_medication_review_medicine (
+CREATE TABLE structured_medication_review.structured_medication_review_medicine (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     structured_medication_review_id UUID NOT NULL
-        REFERENCES structured_medication_review(id) ON DELETE CASCADE,
+        REFERENCES structured_medication_review.structured_medication_review(id) ON DELETE CASCADE,
 
     drug_name TEXT NOT NULL DEFAULT '',
     form_strength TEXT NOT NULL DEFAULT '',
@@ -352,54 +369,54 @@ CREATE TABLE structured_medication_review_medicine (
 );
 
 CREATE INDEX structured_medication_review_medicine_review_id_idx
-    ON structured_medication_review_medicine (structured_medication_review_id);
+    ON structured_medication_review.structured_medication_review_medicine (structured_medication_review_id);
 
 CREATE TRIGGER trigger_structured_medication_review_medicine_updated_at
-    BEFORE UPDATE ON structured_medication_review_medicine
+    BEFORE UPDATE ON structured_medication_review.structured_medication_review_medicine
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE structured_medication_review_medicine IS
+COMMENT ON TABLE structured_medication_review.structured_medication_review_medicine IS
     'Medicines reviewed within a structured medication review: name, form and strength, dose, indication, regular/high-risk flags, adherence, anticholinergic burden, monitoring, deprescribing candidacy, and STOPP/START criteria.';
-COMMENT ON COLUMN structured_medication_review_medicine.id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN structured_medication_review_medicine.created_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN structured_medication_review_medicine.updated_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN structured_medication_review_medicine.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN structured_medication_review_medicine.structured_medication_review_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.structured_medication_review_id IS
     'Foreign key to the parent structured medication review.';
-COMMENT ON COLUMN structured_medication_review_medicine.drug_name IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.drug_name IS
     'Medicine name.';
-COMMENT ON COLUMN structured_medication_review_medicine.form_strength IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.form_strength IS
     'Form and strength of the medicine (e.g. tablet 5 mg).';
-COMMENT ON COLUMN structured_medication_review_medicine.dose_regimen IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.dose_regimen IS
     'Dose and frequency (e.g. one tablet twice daily).';
-COMMENT ON COLUMN structured_medication_review_medicine.indication IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.indication IS
     'Reason the medicine is prescribed.';
-COMMENT ON COLUMN structured_medication_review_medicine.indication_recorded IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.indication_recorded IS
     'Whether an indication is recorded for the medicine: yes or no.';
-COMMENT ON COLUMN structured_medication_review_medicine.is_regular IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.is_regular IS
     'Whether the medicine is a regular (repeat) medicine that counts toward polypharmacy: yes or no.';
-COMMENT ON COLUMN structured_medication_review_medicine.is_high_risk IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.is_high_risk IS
     'Whether the medicine is a high-risk medicine: yes or no.';
-COMMENT ON COLUMN structured_medication_review_medicine.high_risk_class IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.high_risk_class IS
     'High-risk medicine class: anticoagulant, insulin, opioid, dmard, lithium, methotrexate, or other.';
-COMMENT ON COLUMN structured_medication_review_medicine.adherence IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.adherence IS
     'Patient adherence to the medicine: good, partial, poor, or unknown.';
-COMMENT ON COLUMN structured_medication_review_medicine.anticholinergic_burden_points IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.anticholinergic_burden_points IS
     'Anticholinergic Cognitive Burden (ACB) points for the medicine, 0-3; null when unanswered (contributes 0 to the sum).';
-COMMENT ON COLUMN structured_medication_review_medicine.monitoring_required IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.monitoring_required IS
     'Whether the medicine requires monitoring: yes or no.';
-COMMENT ON COLUMN structured_medication_review_medicine.monitoring_up_to_date IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.monitoring_up_to_date IS
     'Whether required monitoring is up to date: yes, no, or na (not applicable).';
-COMMENT ON COLUMN structured_medication_review_medicine.deprescribing_candidate IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.deprescribing_candidate IS
     'Whether the medicine is a candidate for deprescribing: yes or no.';
-COMMENT ON COLUMN structured_medication_review_medicine.stopp_criterion IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.stopp_criterion IS
     'STOPP code / description for a potentially inappropriate medicine, or empty.';
-COMMENT ON COLUMN structured_medication_review_medicine.start_criterion IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_medicine.start_criterion IS
     'START code / description for a potential prescribing omission, or empty.';
 
 -- ========================================================================
@@ -415,14 +432,14 @@ COMMENT ON COLUMN structured_medication_review_medicine.start_criterion IS
 -- band, the polypharmacy band, the composite burden band, and the medicine
 -- counts derived by the engine from the parent review and its medicines.
 
-CREATE TABLE structured_medication_review_grade (
+CREATE TABLE structured_medication_review.structured_medication_review_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     structured_medication_review_id UUID NOT NULL UNIQUE
-        REFERENCES structured_medication_review(id) ON DELETE CASCADE,
+        REFERENCES structured_medication_review.structured_medication_review(id) ON DELETE CASCADE,
 
     review_status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (review_status IN ('complete', 'incomplete', '')),
@@ -439,37 +456,37 @@ CREATE TABLE structured_medication_review_grade (
 );
 
 CREATE TRIGGER trigger_structured_medication_review_grade_updated_at
-    BEFORE UPDATE ON structured_medication_review_grade
+    BEFORE UPDATE ON structured_medication_review.structured_medication_review_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE structured_medication_review_grade IS
+COMMENT ON TABLE structured_medication_review.structured_medication_review_grade IS
     'Computed scoring result for a structured medication review: review status, anticholinergic burden score and band, polypharmacy band, composite burden band, and medicine counts.';
-COMMENT ON COLUMN structured_medication_review_grade.id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN structured_medication_review_grade.created_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN structured_medication_review_grade.updated_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN structured_medication_review_grade.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN structured_medication_review_grade.structured_medication_review_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.structured_medication_review_id IS
     'Foreign key to the parent structured medication review (unique, 1:1).';
-COMMENT ON COLUMN structured_medication_review_grade.review_status IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.review_status IS
     'Overall review status: complete or incomplete.';
-COMMENT ON COLUMN structured_medication_review_grade.anticholinergic_burden_score IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.anticholinergic_burden_score IS
     'Sum of the per-medicine anticholinergic burden points (ACB scale).';
-COMMENT ON COLUMN structured_medication_review_grade.anticholinergic_band IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.anticholinergic_band IS
     'Anticholinergic burden band: low, or significant when the score is 3 or more.';
-COMMENT ON COLUMN structured_medication_review_grade.polypharmacy_band IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.polypharmacy_band IS
     'Polypharmacy band from the regular-medicine count: none (< 5), polypharmacy (5-9), or hyperpolypharmacy (>= 10).';
-COMMENT ON COLUMN structured_medication_review_grade.burden_band IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.burden_band IS
     'Composite burden band (worse of polypharmacy and anticholinergic bands): low, moderate, or high.';
-COMMENT ON COLUMN structured_medication_review_grade.medicine_count IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.medicine_count IS
     'Total count of medicines reviewed.';
-COMMENT ON COLUMN structured_medication_review_grade.regular_medicine_count IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.regular_medicine_count IS
     'Count of regular medicines that count toward polypharmacy.';
-COMMENT ON COLUMN structured_medication_review_grade.graded_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -483,14 +500,14 @@ COMMENT ON COLUMN structured_medication_review_grade.graded_at IS
 -- Audit trail of every scoring rule that fired during grading. Each row
 -- records one rule firing with a category and a human-readable description.
 
-CREATE TABLE structured_medication_review_grade_rule (
+CREATE TABLE structured_medication_review.structured_medication_review_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     structured_medication_review_grade_id UUID NOT NULL
-        REFERENCES structured_medication_review_grade(id) ON DELETE CASCADE,
+        REFERENCES structured_medication_review.structured_medication_review_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -498,30 +515,30 @@ CREATE TABLE structured_medication_review_grade_rule (
 );
 
 CREATE INDEX structured_medication_review_grade_rule_grade_id_idx
-    ON structured_medication_review_grade_rule (structured_medication_review_grade_id);
+    ON structured_medication_review.structured_medication_review_grade_rule (structured_medication_review_grade_id);
 
 CREATE TRIGGER trigger_structured_medication_review_grade_rule_updated_at
-    BEFORE UPDATE ON structured_medication_review_grade_rule
+    BEFORE UPDATE ON structured_medication_review.structured_medication_review_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE structured_medication_review_grade_rule IS
+COMMENT ON TABLE structured_medication_review.structured_medication_review_grade_rule IS
     'Audit trail of every scoring rule that fired during grading: category and description.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.created_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.updated_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.structured_medication_review_grade_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.structured_medication_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN structured_medication_review_grade_rule.rule_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-POLYPHARMACY-01).';
-COMMENT ON COLUMN structured_medication_review_grade_rule.category IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.category IS
     'Subject category (e.g. polypharmacy, anticholinergic-burden, review-status).';
-COMMENT ON COLUMN structured_medication_review_grade_rule.description IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -535,14 +552,14 @@ COMMENT ON COLUMN structured_medication_review_grade_rule.description IS
 -- Flagged issues raised independently of the burden bands, with a priority
 -- and a suggested action for the reviewing clinician.
 
-CREATE TABLE structured_medication_review_grade_flag (
+CREATE TABLE structured_medication_review.structured_medication_review_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     structured_medication_review_grade_id UUID NOT NULL
-        REFERENCES structured_medication_review_grade(id) ON DELETE CASCADE,
+        REFERENCES structured_medication_review.structured_medication_review_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -564,34 +581,34 @@ CREATE TABLE structured_medication_review_grade_flag (
 );
 
 CREATE INDEX structured_medication_review_grade_flag_grade_id_idx
-    ON structured_medication_review_grade_flag (structured_medication_review_grade_id);
+    ON structured_medication_review.structured_medication_review_grade_flag (structured_medication_review_grade_id);
 
 CREATE TRIGGER trigger_structured_medication_review_grade_flag_updated_at
-    BEFORE UPDATE ON structured_medication_review_grade_flag
+    BEFORE UPDATE ON structured_medication_review.structured_medication_review_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION structured_medication_review.set_updated_at();
 
-COMMENT ON TABLE structured_medication_review_grade_flag IS
+COMMENT ON TABLE structured_medication_review.structured_medication_review_grade_flag IS
     'Flagged issues raised independently of the burden bands, with priority and a suggested action for the reviewing clinician.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.created_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.updated_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.deleted_at IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.structured_medication_review_grade_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.structured_medication_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.flag_id IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-ACB-001).';
-COMMENT ON COLUMN structured_medication_review_grade_flag.category IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.category IS
     'Flag category: high-acb, stopp-trigger, start-omission, missing-monitoring, adherence-concern, high-risk-no-indication, incomplete, or other.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.priority IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.description IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN structured_medication_review_grade_flag.suggested_action IS
+COMMENT ON COLUMN structured_medication_review.structured_medication_review_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "review sedating and anticholinergic medicines").';
 
 -- ========================================================================

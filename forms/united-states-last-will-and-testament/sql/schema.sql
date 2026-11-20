@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_testator.sql
 --   - 03_create_table_attorney.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_last_will_and_testament;
+
+COMMENT ON SCHEMA united_states_last_will_and_testament IS
+    'Namespace for the United States Last Will and Testament form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_last_will_and_testament.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_last_will_and_testament.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Testator: the person making the will, with contact details and the
 -- state of domicile whose law governs the will.
 
-CREATE TABLE testator (
+CREATE TABLE united_states_last_will_and_testament.testator (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -76,41 +93,41 @@ CREATE TABLE testator (
 );
 
 CREATE INDEX testator_name_trgm_idx
-    ON testator
+    ON united_states_last_will_and_testament.testator
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_testator_updated_at
-    BEFORE UPDATE ON testator
+    BEFORE UPDATE ON united_states_last_will_and_testament.testator
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE testator IS
+COMMENT ON TABLE united_states_last_will_and_testament.testator IS
     'Testator: the person making the will, with contact details, state of domicile, and citizenship status.';
-COMMENT ON COLUMN testator.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN testator.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN testator.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN testator.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN testator.name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.name IS
     'Full legal name of the testator.';
-COMMENT ON COLUMN testator.birth_date IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.birth_date IS
     'Date of birth of the testator.';
-COMMENT ON COLUMN testator.email IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.email IS
     'Email address.';
-COMMENT ON COLUMN testator.phone IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.phone IS
     'Phone number.';
-COMMENT ON COLUMN testator.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN testator.state IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.state IS
     'Two-letter US state or territory code of domicile.';
-COMMENT ON COLUMN testator.postcode IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.postcode IS
     'ZIP or postal code.';
-COMMENT ON COLUMN testator.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN testator.citizenship_status IS
+COMMENT ON COLUMN united_states_last_will_and_testament.testator.citizenship_status IS
     'Citizenship status for estate-tax purposes: us-citizen, us-resident-alien, non-resident-alien, or unknown.';
 
 -- ========================================================================
@@ -123,7 +140,7 @@ COMMENT ON COLUMN testator.citizenship_status IS
 
 -- Attorney: the licensed attorney who drafts or supervises the will.
 
-CREATE TABLE attorney (
+CREATE TABLE united_states_last_will_and_testament.attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -141,41 +158,41 @@ CREATE TABLE attorney (
 );
 
 CREATE INDEX attorney_name_trgm_idx
-    ON attorney
+    ON united_states_last_will_and_testament.attorney
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_attorney_updated_at
-    BEFORE UPDATE ON attorney
+    BEFORE UPDATE ON united_states_last_will_and_testament.attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE attorney IS
+COMMENT ON TABLE united_states_last_will_and_testament.attorney IS
     'Attorney who drafts, supervises, or reviews the will, with bar admission details.';
-COMMENT ON COLUMN attorney.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN attorney.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN attorney.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN attorney.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN attorney.name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.name IS
     'Full name of the attorney.';
-COMMENT ON COLUMN attorney.email IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.email IS
     'Email address.';
-COMMENT ON COLUMN attorney.phone IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.phone IS
     'Phone number.';
-COMMENT ON COLUMN attorney.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN attorney.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN attorney.postcode IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.postcode IS
     'ZIP or postal code.';
-COMMENT ON COLUMN attorney.role IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.role IS
     'Role on this will: drafting-attorney, supervising-attorney, reviewing-attorney, or other.';
-COMMENT ON COLUMN attorney.bar_state IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.bar_state IS
     'Two-letter state of bar admission.';
-COMMENT ON COLUMN attorney.bar_number IS
+COMMENT ON COLUMN united_states_last_will_and_testament.attorney.bar_number IS
     'State bar number.';
 
 -- ========================================================================
@@ -194,14 +211,14 @@ COMMENT ON COLUMN attorney.bar_number IS
 -- dedicated child tables. This record documents a drafting plan; it is not
 -- legal advice and does not itself make a will valid.
 
-CREATE TABLE united_states_last_will_and_testament (
+CREATE TABLE united_states_last_will_and_testament.united_states_last_will_and_testament (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    testator_id UUID NOT NULL REFERENCES testator(id) ON DELETE RESTRICT,
-    attorney_id UUID REFERENCES attorney(id) ON DELETE RESTRICT,
+    testator_id UUID NOT NULL REFERENCES united_states_last_will_and_testament.testator(id) ON DELETE RESTRICT,
+    attorney_id UUID REFERENCES united_states_last_will_and_testament.attorney(id) ON DELETE RESTRICT,
     state VARCHAR(2) NOT NULL DEFAULT '',
     testator_name TEXT NOT NULL DEFAULT '',
     testator_date_of_birth DATE,
@@ -253,124 +270,124 @@ CREATE TABLE united_states_last_will_and_testament (
 );
 
 CREATE INDEX united_states_last_will_and_testament_testator_id_idx
-    ON united_states_last_will_and_testament (testator_id);
+    ON united_states_last_will_and_testament.united_states_last_will_and_testament (testator_id);
 CREATE INDEX united_states_last_will_and_testament_attorney_id_idx
-    ON united_states_last_will_and_testament (attorney_id);
+    ON united_states_last_will_and_testament.united_states_last_will_and_testament (attorney_id);
 
 CREATE TRIGGER trigger_united_states_last_will_and_testament_updated_at
-    BEFORE UPDATE ON united_states_last_will_and_testament
+    BEFORE UPDATE ON united_states_last_will_and_testament.united_states_last_will_and_testament
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_states_last_will_and_testament IS
+COMMENT ON TABLE united_states_last_will_and_testament.united_states_last_will_and_testament IS
     'Main United States Last Will and Testament record: testator and state, family and spouse, estate and bequests, personal representative and clauses, execution plan and witnesses, and the self-proving affidavit. Validity classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_states_last_will_and_testament.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_last_will_and_testament.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_last_will_and_testament.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_last_will_and_testament.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_last_will_and_testament.testator_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.testator_id IS
     'Foreign key to the testator (restrict delete).';
-COMMENT ON COLUMN united_states_last_will_and_testament.attorney_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.attorney_id IS
     'Foreign key to the drafting attorney (restrict delete); optional.';
-COMMENT ON COLUMN united_states_last_will_and_testament.state IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.state IS
     'Two-letter state code whose law governs the will; unknown states fall back to the Uniform Probate Code default.';
-COMMENT ON COLUMN united_states_last_will_and_testament.testator_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.testator_name IS
     'Full legal name of the testator as written in the will.';
-COMMENT ON COLUMN united_states_last_will_and_testament.testator_date_of_birth IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.testator_date_of_birth IS
     'Date of birth of the testator; the testator must be 18 or older on the execution date.';
-COMMENT ON COLUMN united_states_last_will_and_testament.sound_mind IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.sound_mind IS
     'Testamentary capacity: whether the testator is of sound mind: yes, no, or uncertain.';
-COMMENT ON COLUMN united_states_last_will_and_testament.undue_influence_concern IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.undue_influence_concern IS
     'Whether there is a concern of undue influence: none or possible.';
-COMMENT ON COLUMN united_states_last_will_and_testament.marital_status IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.marital_status IS
     'Marital status of the testator: single, married, divorced, or widowed.';
-COMMENT ON COLUMN united_states_last_will_and_testament.spouse_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.spouse_name IS
     'Full name of the testator''s spouse, when married.';
-COMMENT ON COLUMN united_states_last_will_and_testament.spouse_inheritance_value IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.spouse_inheritance_value IS
     'Value in US dollars left to the surviving spouse.';
-COMMENT ON COLUMN united_states_last_will_and_testament.spouse_waived_elective_share IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.spouse_waived_elective_share IS
     'Whether the spouse has waived the elective share in writing (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.has_minor_children IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.has_minor_children IS
     'Whether the testator has minor children (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.guardian_for_minors_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.guardian_for_minors_name IS
     'Nominated guardian for minor children.';
-COMMENT ON COLUMN united_states_last_will_and_testament.disinherits_child IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.disinherits_child IS
     'Whether the will leaves a child out (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.disinherited_child_named IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.disinherited_child_named IS
     'Whether the omitted child is named in the will (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.estimated_estate_value IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.estimated_estate_value IS
     'Estimated gross estate value in US dollars.';
-COMMENT ON COLUMN united_states_last_will_and_testament.specific_bequests_total IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.specific_bequests_total IS
     'Total value in US dollars of all specific bequests.';
-COMMENT ON COLUMN united_states_last_will_and_testament.specific_bequests_summary IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.specific_bequests_summary IS
     'Free-text summary of the specific bequests.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_clause_present IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_clause_present IS
     'Whether the will has a residuary clause giving away everything not otherwise given (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_1_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_1_name IS
     'Residuary beneficiary 1 name.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_1_percent IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_1_percent IS
     'Residuary beneficiary 1 share, percent.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_2_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_2_name IS
     'Residuary beneficiary 2 name.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_2_percent IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_2_percent IS
     'Residuary beneficiary 2 share, percent.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_3_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_3_name IS
     'Residuary beneficiary 3 name.';
-COMMENT ON COLUMN united_states_last_will_and_testament.residuary_3_percent IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.residuary_3_percent IS
     'Residuary beneficiary 3 share, percent.';
-COMMENT ON COLUMN united_states_last_will_and_testament.contingent_beneficiary_named IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.contingent_beneficiary_named IS
     'Whether a contingent (backup) beneficiary is named (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.personal_representative_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.personal_representative_name IS
     'Personal representative (executor) named in the will.';
-COMMENT ON COLUMN united_states_last_will_and_testament.successor_personal_representative_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.successor_personal_representative_name IS
     'Successor personal representative named in the will.';
-COMMENT ON COLUMN united_states_last_will_and_testament.bond_waived IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.bond_waived IS
     'Whether the will waives the personal representative''s bond (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.revokes_prior_wills_clause IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.revokes_prior_wills_clause IS
     'Whether the will expressly revokes all earlier wills and codicils (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.no_contest_clause IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.no_contest_clause IS
     'Whether the will has a no-contest (in terrorem) clause (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.digital_assets_clause IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.digital_assets_clause IS
     'Whether the will authorizes access to digital assets under RUFADAA (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.estate_tax_reviewed IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.estate_tax_reviewed IS
     'Whether a tax adviser has reviewed estate tax (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.original_will_location IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.original_will_location IS
     'Where the signed original will is kept.';
-COMMENT ON COLUMN united_states_last_will_and_testament.drafter_note IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.drafter_note IS
     'Free-text note from the drafter.';
-COMMENT ON COLUMN united_states_last_will_and_testament.execution_form IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.execution_form IS
     'Form of execution: witnessed, holographic, or electronic.';
-COMMENT ON COLUMN united_states_last_will_and_testament.execution_date IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.execution_date IS
     'Date the will is or was signed.';
-COMMENT ON COLUMN united_states_last_will_and_testament.signed_at_end IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.signed_at_end IS
     'Whether the testator signs at the end of the will (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.signed_in_witness_presence IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.signed_in_witness_presence IS
     'Whether the testator signs or acknowledges the signature in front of the witnesses (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.witnesses_signed_in_testator_presence IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witnesses_signed_in_testator_presence IS
     'Whether the witnesses sign in the testator''s presence (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.holographic_entirely_handwritten IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.holographic_entirely_handwritten IS
     'For a holographic will, whether the signature and material provisions are in the testator''s handwriting (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_1_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_1_name IS
     'Witness 1 name.';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_1_beneficiary IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_1_beneficiary IS
     'Whether witness 1 takes a gift under the will (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_2_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_2_name IS
     'Witness 2 name.';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_2_beneficiary IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_2_beneficiary IS
     'Whether witness 2 takes a gift under the will (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_3_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_3_name IS
     'Witness 3 name (optional extra witness).';
-COMMENT ON COLUMN united_states_last_will_and_testament.witness_3_beneficiary IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.witness_3_beneficiary IS
     'Whether witness 3 takes a gift under the will (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.self_proving_affidavit IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.self_proving_affidavit IS
     'Whether a self-proving affidavit will be signed (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament.notary_name IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.notary_name IS
     'Name of the notary on the self-proving affidavit.';
-COMMENT ON COLUMN united_states_last_will_and_testament.notary_acknowledged IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament.notary_acknowledged IS
     'Whether the notary acknowledged the signatures (yes/no).';
 
 -- ========================================================================
@@ -388,14 +405,14 @@ COMMENT ON COLUMN united_states_last_will_and_testament.notary_acknowledged IS
 -- classification, not a numeric score, and it does not replace the probate
 -- court or a licensed attorney.
 
-CREATE TABLE united_states_last_will_and_testament_grade (
+CREATE TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_last_will_and_testament_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_last_will_and_testament(id) ON DELETE CASCADE,
+        REFERENCES united_states_last_will_and_testament.united_states_last_will_and_testament(id) ON DELETE CASCADE,
     validity_class VARCHAR(25) NOT NULL DEFAULT '' CHECK (validity_class IN ('valid-ready-to-execute', 'incomplete', 'formality-risk', '')),
     residuary_percent_total NUMERIC(6,2),
     elective_share_amount NUMERIC(14,2),
@@ -408,37 +425,37 @@ CREATE TABLE united_states_last_will_and_testament_grade (
 
 
 CREATE TRIGGER trigger_united_states_last_will_and_testament_grade_updated_at
-    BEFORE UPDATE ON united_states_last_will_and_testament_grade
+    BEFORE UPDATE ON united_states_last_will_and_testament.united_states_last_will_and_testament_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_states_last_will_and_testament_grade IS
+COMMENT ON TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade IS
     'Computed completeness and validity-classification result for a will plan: validity class (valid-ready-to-execute/incomplete/formality-risk), residuary total, estimated spousal elective share, witness count, whether self-proved, federal estate-tax exposure, and the source of the state rule.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.united_states_last_will_and_testament_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.united_states_last_will_and_testament_id IS
     'Foreign key to the parent record (unique, 1:1).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.validity_class IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.validity_class IS
     'Validity classification: valid-ready-to-execute, incomplete, or formality-risk (formality-risk takes precedence).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.residuary_percent_total IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.residuary_percent_total IS
     'Sum of the named residuary percentages; must be 100 when a residuary clause is present.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.elective_share_amount IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.elective_share_amount IS
     'Estimated spousal elective share in US dollars; null when not applicable.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.witness_count IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.witness_count IS
     'Number of witnesses named.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.self_proved IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.self_proved IS
     'Whether the will is self-proved under the state rule (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.federal_estate_tax_exposure IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.federal_estate_tax_exposure IS
     'Whether the estimated estate exceeds the 2026 federal basic exclusion of $15,000,000 (yes/no).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.state_rule_source IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.state_rule_source IS
     'Where the state rule came from: state-table or uniform-default.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade.graded_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -453,14 +470,14 @@ COMMENT ON COLUMN united_states_last_will_and_testament_grade.graded_at IS
 -- row records one rule firing with the will dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE united_states_last_will_and_testament_grade_rule (
+CREATE TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_last_will_and_testament_grade_id UUID NOT NULL
-        REFERENCES united_states_last_will_and_testament_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_last_will_and_testament.united_states_last_will_and_testament_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -470,32 +487,32 @@ CREATE TABLE united_states_last_will_and_testament_grade_rule (
 );
 
 CREATE INDEX united_states_last_will_and_testament_grade_rule_grade_id_idx
-    ON united_states_last_will_and_testament_grade_rule (united_states_last_will_and_testament_grade_id);
+    ON united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule (united_states_last_will_and_testament_grade_id);
 
 CREATE TRIGGER trigger_united_states_last_will_and_testament_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_last_will_and_testament_grade_rule
+    BEFORE UPDATE ON united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_states_last_will_and_testament_grade_rule IS
+COMMENT ON TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule IS
     'Audit trail of every validity rule that fired during classification: will dimension, category, and description.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.united_states_last_will_and_testament_grade_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.united_states_last_will_and_testament_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-WITNESS-COUNT-01).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.dimension IS
     'Will dimension the rule concerns: capacity, execution, witnesses, bequests, family, fiduciary, jurisdiction, or classification.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.category IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.category IS
     'Subject category (e.g. witness-count, residuary-total, elective-share).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.description IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -510,14 +527,14 @@ COMMENT ON COLUMN united_states_last_will_and_testament_grade_rule.description I
 -- priority and a suggested action for the drafter or supervising
 -- attorney.
 
-CREATE TABLE united_states_last_will_and_testament_grade_flag (
+CREATE TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_last_will_and_testament_grade_id UUID NOT NULL
-        REFERENCES united_states_last_will_and_testament_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_last_will_and_testament.united_states_last_will_and_testament_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -543,34 +560,34 @@ CREATE TABLE united_states_last_will_and_testament_grade_flag (
 );
 
 CREATE INDEX united_states_last_will_and_testament_grade_flag_grade_id_idx
-    ON united_states_last_will_and_testament_grade_flag (united_states_last_will_and_testament_grade_id);
+    ON united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag (united_states_last_will_and_testament_grade_id);
 
 CREATE TRIGGER trigger_united_states_last_will_and_testament_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_last_will_and_testament_grade_flag
+    BEFORE UPDATE ON united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_states_last_will_and_testament_grade_flag IS
+COMMENT ON TABLE united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the drafter or supervising attorney.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.united_states_last_will_and_testament_grade_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.united_states_last_will_and_testament_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-WILL-011).';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.category IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.category IS
     'Flag category: capacity, execution-formality, witness, self-proving, bequest-arithmetic, spousal-protection, fiduciary, state-rule, digital-assets, estate-tax, incomplete, or other.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.priority IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.description IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_last_will_and_testament_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_last_will_and_testament.united_states_last_will_and_testament_grade_flag.suggested_action IS
     'Suggested drafting action (e.g. "use two disinterested witnesses", "adjust the residuary percentages so they total 100").';
 
 -- ========================================================================

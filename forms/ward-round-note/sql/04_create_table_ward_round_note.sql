@@ -9,14 +9,14 @@
 -- detected by a non-empty field or an explicit negative flag, not by
 -- semantic analysis.
 
-CREATE TABLE ward_round_note (
+CREATE TABLE ward_round_note.ward_round_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES ward_round_note.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES ward_round_note.clinician(id) ON DELETE RESTRICT,
 
     -- Review header and identification
     clinician_name TEXT NOT NULL DEFAULT '',
@@ -70,82 +70,82 @@ CREATE TABLE ward_round_note (
 );
 
 CREATE INDEX ward_round_note_patient_id_idx
-    ON ward_round_note (patient_id);
+    ON ward_round_note.ward_round_note (patient_id);
 CREATE INDEX ward_round_note_clinician_id_idx
-    ON ward_round_note (clinician_id);
+    ON ward_round_note.ward_round_note (clinician_id);
 
 CREATE TRIGGER trigger_ward_round_note_updated_at
-    BEFORE UPDATE ON ward_round_note
+    BEFORE UPDATE ON ward_round_note.ward_round_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE ward_round_note IS
+COMMENT ON TABLE ward_round_note.ward_round_note IS
     'Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN ward_round_note.id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ward_round_note.created_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ward_round_note.updated_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ward_round_note.deleted_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ward_round_note.patient_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN ward_round_note.clinician_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN ward_round_note.clinician_name IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_name IS
     'Name of the reviewing clinician (required component: header).';
-COMMENT ON COLUMN ward_round_note.clinician_grade IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_grade IS
     'Grade of the reviewing clinician: fy1, fy2, core-trainee, specialty-registrar, acp, physician-associate, or consultant (required component: header).';
-COMMENT ON COLUMN ward_round_note.reviewed_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.reviewed_at IS
     'Date and time of the review (required component: header).';
-COMMENT ON COLUMN ward_round_note.ward IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.ward IS
     'Ward or location where the review took place.';
-COMMENT ON COLUMN ward_round_note.patient_identifier IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.patient_identifier IS
     'Local patient identifier as recorded on the entry.';
-COMMENT ON COLUMN ward_round_note.admission_date IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.admission_date IS
     'Date of admission.';
-COMMENT ON COLUMN ward_round_note.primary_diagnosis IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.primary_diagnosis IS
     'Reason for admission or working diagnosis.';
-COMMENT ON COLUMN ward_round_note.overnight_events IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.overnight_events IS
     'Component 2: overnight events since the previous review (recommended component).';
-COMMENT ON COLUMN ward_round_note.no_overnight_events IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_overnight_events IS
     'Explicit "no overnight events" flag (yes/no); yes documents component 2 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.problem_list IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.problem_list IS
     'Component 3: current issues, problem list, and progress (required component: problems).';
-COMMENT ON COLUMN ward_round_note.examination_summary IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.examination_summary IS
     'Component 4: examination summary (required component: examination, with news2_total).';
-COMMENT ON COLUMN ward_round_note.news2_total IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.news2_total IS
     'Component 4: latest NEWS2 total (0..20+); NULL when unrecorded.';
-COMMENT ON COLUMN ward_round_note.news2_single_param_three IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.news2_single_param_three IS
     'Whether any single NEWS2 parameter scores 3 (yes/no); drives the deteriorating-NEWS2 flag.';
-COMMENT ON COLUMN ward_round_note.observation_trend IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.observation_trend IS
     'Component 4: observation trend: improving, stable, or deteriorating.';
-COMMENT ON COLUMN ward_round_note.investigations_reviewed IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.investigations_reviewed IS
     'Component 5: investigations and results reviewed (required component: investigations).';
-COMMENT ON COLUMN ward_round_note.no_investigations_outstanding IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_investigations_outstanding IS
     'Explicit "none outstanding" flag (yes/no); yes documents component 5 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.abnormal_result_flagged IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.abnormal_result_flagged IS
     'Whether an abnormal or critical result is present (yes/no); drives the abnormal-results-not-actioned flag.';
-COMMENT ON COLUMN ward_round_note.abnormal_result_actioned IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.abnormal_result_actioned IS
     'Whether an action was recorded for the abnormal result (yes/no).';
-COMMENT ON COLUMN ward_round_note.vte_status IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.vte_status IS
     'Component 6: VTE assessment status: assessed, not-required, or not-done (required component: vte).';
-COMMENT ON COLUMN ward_round_note.vte_prophylaxis_in_place IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.vte_prophylaxis_in_place IS
     'Whether VTE prophylaxis is in place (yes/no).';
-COMMENT ON COLUMN ward_round_note.medication_changes IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.medication_changes IS
     'Component 7: medication changes made on the review (required component: medication).';
-COMMENT ON COLUMN ward_round_note.no_medication_changes IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_medication_changes IS
     'Explicit "no medication changes" flag (yes/no); yes documents component 7 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.plan_and_jobs IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.plan_and_jobs IS
     'Component 8: plan and jobs for the day (required component: plan).';
-COMMENT ON COLUMN ward_round_note.escalation_status IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.escalation_status IS
     'Component 9: escalation / ceiling-of-care status: for-full-escalation, ward-level-ceiling, dnacpr, or not-recorded (required component: escalation).';
-COMMENT ON COLUMN ward_round_note.senior_review_present IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.senior_review_present IS
     'Whether a consultant or senior grade is named on the entry (yes/no); drives the no-senior-review flag.';
-COMMENT ON COLUMN ward_round_note.estimated_discharge_date IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.estimated_discharge_date IS
     'Component 10: estimated date of discharge; NULL when not set (recommended component).';
-COMMENT ON COLUMN ward_round_note.discharge_not_estimable IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.discharge_not_estimable IS
     'Explicit "not yet estimable" flag (yes/no); yes documents component 10 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.clinical_note IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinical_note IS
     'Optional free-text summary note shown in the summary.';

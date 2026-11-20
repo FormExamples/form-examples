@@ -7,14 +7,14 @@
 -- and readiness classification, the audit trail of fired rules and the flagged
 -- issues live in dedicated child tables. This record does not give legal advice.
 
-CREATE TABLE united_kingdom_divorce_application (
+CREATE TABLE united_kingdom_divorce_application.united_kingdom_divorce_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    caseworker_id UUID REFERENCES caseworker(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_kingdom_divorce_application.applicant(id) ON DELETE RESTRICT,
+    caseworker_id UUID REFERENCES united_kingdom_divorce_application.caseworker(id) ON DELETE RESTRICT,
     application_type VARCHAR(11) NOT NULL DEFAULT '' CHECK (application_type IN ('divorce', 'dissolution', '')),
     application_mode VARCHAR(5) NOT NULL DEFAULT '' CHECK (application_mode IN ('sole', 'joint', '')),
     stage VARCHAR(17) NOT NULL DEFAULT '' CHECK (stage IN ('application', 'conditional-order', 'final-order', '')),
@@ -58,107 +58,107 @@ CREATE TABLE united_kingdom_divorce_application (
 );
 
 CREATE INDEX united_kingdom_divorce_application_applicant_id_idx
-    ON united_kingdom_divorce_application (applicant_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application (applicant_id);
 
 CREATE INDEX united_kingdom_divorce_application_caseworker_id_idx
-    ON united_kingdom_divorce_application (caseworker_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application (caseworker_id);
 
 CREATE TRIGGER trigger_united_kingdom_divorce_application_updated_at
-    BEFORE UPDATE ON united_kingdom_divorce_application
+    BEFORE UPDATE ON united_kingdom_divorce_application.united_kingdom_divorce_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_divorce_application IS
+COMMENT ON TABLE united_kingdom_divorce_application.united_kingdom_divorce_application IS
     'Main United Kingdom divorce or dissolution application record (D8, D84, D36): application type and stage, marriage and certificate, jurisdiction facts, parties and service address, children and financial arrangements, and stage dates. Readiness classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_kingdom_divorce_application.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_divorce_application.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_divorce_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_divorce_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_id IS
     'Foreign key to the applicant (restrict delete).';
-COMMENT ON COLUMN united_kingdom_divorce_application.caseworker_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.caseworker_id IS
     'Foreign key to the caseworker (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_type IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_type IS
     'Whether the application is for a divorce (marriage) or the dissolution of a civil partnership.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_mode IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_mode IS
     'Sole application by one spouse, or joint application by both.';
-COMMENT ON COLUMN united_kingdom_divorce_application.stage IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.stage IS
     'Which stage the user is checking: application (D8 or online), conditional order (D84), or final order (D36).';
-COMMENT ON COLUMN united_kingdom_divorce_application.as_of_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.as_of_date IS
     'The date the check is made, against which the time gates are tested.';
-COMMENT ON COLUMN united_kingdom_divorce_application.domestic_abuse_risk IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.domestic_abuse_risk IS
     'Whether there is a risk of domestic abuse. A joint application is not suitable where there is (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_date IS
     'Date of the marriage or civil partnership formation.';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_place IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_place IS
     'Place where the marriage or civil partnership was formed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_country IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_country IS
     'Country where the marriage or civil partnership was formed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.legally_recognised IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.legally_recognised IS
     'Whether the marriage or civil partnership is legally recognised in the United Kingdom (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.breakdown_confirmed IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.breakdown_confirmed IS
     'Whether the applicant states that the relationship has broken down irretrievably (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_certificate_type IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_certificate_type IS
     'The marriage certificate held: original, certified-copy, or not-held.';
-COMMENT ON COLUMN united_kingdom_divorce_application.certificate_in_english IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.certificate_in_english IS
     'Whether the marriage certificate is in English (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.certified_translation IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.certified_translation IS
     'Whether a certified translation of the marriage certificate is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.name_changed IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.name_changed IS
     'Whether a name has been changed since the marriage (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.name_change_proof IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.name_change_proof IS
     'Proof of the name change: marriage-certificate, deed-poll, or none.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_habitual_resident IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_habitual_resident IS
     'Whether the applicant is habitually resident in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_residence_months IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_residence_months IS
     'Months the applicant has been habitually resident in England and Wales.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_domiciled IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_domiciled IS
     'Whether the applicant is domiciled in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_habitual_resident IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_habitual_resident IS
     'Whether the other spouse is habitually resident in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_domiciled IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_domiciled IS
     'Whether the other spouse is domiciled in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.last_habitually_resident_together IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.last_habitually_resident_together IS
     'Whether both were last habitually resident in England and Wales and one still resides there (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_name IS
     'Full name of the applicant as it appears on the application.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_address IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_address IS
     'Postal address of the applicant.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_email IS
     'Email address of the applicant.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_name IS
     'Full name of the other spouse (the respondent, or the second joint applicant).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_address IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_address IS
     'Postal address of the other spouse; the service address for a sole application.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_email IS
     'Email address of the other spouse, used to serve papers online.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_address_known IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_address_known IS
     'Whether the current address of the other spouse is known (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.service_method IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.service_method IS
     'How the application is served on the other spouse: email, post, or alternative-service.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_under_18 IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_under_18 IS
     'Whether there are children of the family under 18 (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_count IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_count IS
     'Number of children of the family under 18.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_arrangements IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_arrangements IS
     'State of the arrangements for the children: agreed, not-agreed, or undecided.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_note IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_note IS
     'Free-text note on the children arrangements.';
-COMMENT ON COLUMN united_kingdom_divorce_application.financial_order_intended IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.financial_order_intended IS
     'Whether a financial order on money and property is intended: yes, no, or undecided.';
-COMMENT ON COLUMN united_kingdom_divorce_application.financial_order_applied IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.financial_order_applied IS
     'Whether a financial order has been applied for (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.fee_status IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.fee_status IS
     'Status of the court fee: paid, help-with-fees-approved, help-with-fees-pending, or unpaid.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_issued_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_issued_date IS
     'Date the court issued the application; the 20-week reflection period runs from it.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_acknowledged IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_acknowledged IS
     'Whether the other spouse has returned the acknowledgement of service (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.conditional_order_granted_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.conditional_order_granted_date IS
     'Date the conditional order was made; the 6 weeks and 1 day wait runs from it.';
-COMMENT ON COLUMN united_kingdom_divorce_application.final_order_delay_explained IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.final_order_delay_explained IS
     'Whether the reason for waiting more than 12 months to apply for the final order is explained (yes/no).';

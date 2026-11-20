@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (14):
+-- Source files (15):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_organizer.sql
 --   - 03_create_table_meeting.sql
@@ -38,12 +39,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS meeting;
+
+COMMENT ON SCHEMA meeting IS
+    'Namespace for the Meeting form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION meeting.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -51,7 +68,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION meeting.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -66,7 +83,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- One organizer may run many meetings; the analogue of "patient" in a
 -- clinical assessment.
 
-CREATE TABLE organizer (
+CREATE TABLE meeting.organizer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -90,41 +107,41 @@ CREATE TABLE organizer (
 );
 
 CREATE TRIGGER trigger_organizer_updated_at
-    BEFORE UPDATE ON organizer
+    BEFORE UPDATE ON meeting.organizer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE organizer IS
+COMMENT ON TABLE meeting.organizer IS
     'Person who schedules a meeting and signs the record. The analogue of patient in a clinical form: the subject of the assessment is the meeting itself, but the organizer is the human who scheduled it.';
-COMMENT ON COLUMN organizer.id IS
+COMMENT ON COLUMN meeting.organizer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN organizer.created_at IS
+COMMENT ON COLUMN meeting.organizer.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN organizer.updated_at IS
+COMMENT ON COLUMN meeting.organizer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN organizer.deleted_at IS
+COMMENT ON COLUMN meeting.organizer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN organizer.name IS
+COMMENT ON COLUMN meeting.organizer.name IS
     'Organizer full name.';
-COMMENT ON COLUMN organizer.email IS
+COMMENT ON COLUMN meeting.organizer.email IS
     'Organizer email address.';
-COMMENT ON COLUMN organizer.phone IS
+COMMENT ON COLUMN meeting.organizer.phone IS
     'Organizer phone number.';
-COMMENT ON COLUMN organizer.role IS
+COMMENT ON COLUMN meeting.organizer.role IS
     'Organizer role: organizer, secretary, chair, facilitator, project-manager, scrum-master, etc.';
-COMMENT ON COLUMN organizer.organisation IS
+COMMENT ON COLUMN meeting.organizer.organisation IS
     'Organisation, company, or trust the organizer belongs to.';
-COMMENT ON COLUMN organizer.team IS
+COMMENT ON COLUMN meeting.organizer.team IS
     'Team or department within the organisation.';
-COMMENT ON COLUMN organizer.location IS
+COMMENT ON COLUMN meeting.organizer.location IS
     'Physical or virtual base location of the organizer.';
-COMMENT ON COLUMN organizer.timezone IS
+COMMENT ON COLUMN meeting.organizer.timezone IS
     'IANA timezone identifier (e.g. Europe/London).';
-COMMENT ON COLUMN organizer.preferred_contact IS
+COMMENT ON COLUMN meeting.organizer.preferred_contact IS
     'Preferred contact channel: email, phone, chat, or in-person.';
 
 CREATE INDEX organizer_index_name_trgm
-    ON organizer
+    ON meeting.organizer
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,13 +157,13 @@ CREATE INDEX organizer_index_name_trgm
 -- collections (agenda_item, participant, resource, recurring_rule,
 -- action_item, meeting_output, meeting_outcome).
 
-CREATE TABLE meeting (
+CREATE TABLE meeting.meeting (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    organizer_id UUID NOT NULL REFERENCES organizer(id) ON DELETE CASCADE,
+    organizer_id UUID NOT NULL REFERENCES meeting.organizer(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'scheduled', 'in-progress', 'completed', 'cancelled', 'no-show')),
@@ -190,78 +207,78 @@ CREATE TABLE meeting (
 );
 
 CREATE TRIGGER trigger_meeting_updated_at
-    BEFORE UPDATE ON meeting
+    BEFORE UPDATE ON meeting.meeting
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting IS
+COMMENT ON TABLE meeting.meeting IS
     'A meeting record captured via a 10-step single-page wizard. Holds the invitation metadata, the 250-character summary, and the sign-off. Variable-length collections live in child tables.';
-COMMENT ON COLUMN meeting.id IS
+COMMENT ON COLUMN meeting.meeting.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting.created_at IS
+COMMENT ON COLUMN meeting.meeting.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting.updated_at IS
+COMMENT ON COLUMN meeting.meeting.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting.deleted_at IS
+COMMENT ON COLUMN meeting.meeting.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting.organizer_id IS
+COMMENT ON COLUMN meeting.meeting.organizer_id IS
     'Foreign key to the organizer who scheduled the meeting.';
-COMMENT ON COLUMN meeting.status IS
+COMMENT ON COLUMN meeting.meeting.status IS
     'Lifecycle status: draft, scheduled, in-progress, completed, cancelled, no-show.';
-COMMENT ON COLUMN meeting.title IS
+COMMENT ON COLUMN meeting.meeting.title IS
     'Meeting title shown in calendar invites and dashboards.';
-COMMENT ON COLUMN meeting.purpose IS
+COMMENT ON COLUMN meeting.meeting.purpose IS
     'One-sentence purpose statement.';
-COMMENT ON COLUMN meeting.long_description IS
+COMMENT ON COLUMN meeting.meeting.long_description IS
     'Free-text long description of the meeting context.';
-COMMENT ON COLUMN meeting.category IS
+COMMENT ON COLUMN meeting.meeting.category IS
     'Meeting category: stand-up, review, planning, retrospective, training, one-to-one, interview, governance, multidisciplinary-team, social, kickoff, all-hands, workshop, demo, other.';
-COMMENT ON COLUMN meeting.visibility IS
+COMMENT ON COLUMN meeting.meeting.visibility IS
     'Information classification: public, internal, confidential, restricted.';
-COMMENT ON COLUMN meeting.scheduled_start_at IS
+COMMENT ON COLUMN meeting.meeting.scheduled_start_at IS
     'Scheduled start timestamp (UTC).';
-COMMENT ON COLUMN meeting.scheduled_end_at IS
+COMMENT ON COLUMN meeting.meeting.scheduled_end_at IS
     'Scheduled end timestamp (UTC).';
-COMMENT ON COLUMN meeting.timezone IS
+COMMENT ON COLUMN meeting.meeting.timezone IS
     'IANA timezone identifier the meeting is presented in (e.g. Europe/London).';
-COMMENT ON COLUMN meeting.location IS
+COMMENT ON COLUMN meeting.meeting.location IS
     'Physical location, room name, or address.';
-COMMENT ON COLUMN meeting.video_url IS
+COMMENT ON COLUMN meeting.meeting.video_url IS
     'Video conference URL (Zoom, Teams, Google Meet, Whereby, etc.).';
-COMMENT ON COLUMN meeting.phone_number IS
+COMMENT ON COLUMN meeting.meeting.phone_number IS
     'Dial-in phone number for audio attendees.';
-COMMENT ON COLUMN meeting.dial_in_code IS
+COMMENT ON COLUMN meeting.meeting.dial_in_code IS
     'Dial-in PIN or meeting code for audio attendees.';
-COMMENT ON COLUMN meeting.joining_instructions IS
+COMMENT ON COLUMN meeting.meeting.joining_instructions IS
     'Free-text joining instructions — e.g. parking, lobby access, breakout-room links.';
-COMMENT ON COLUMN meeting.calendar_uid IS
+COMMENT ON COLUMN meeting.meeting.calendar_uid IS
     'External calendar UID used when round-tripping with iCalendar / Google Calendar / Outlook.';
-COMMENT ON COLUMN meeting.summary IS
+COMMENT ON COLUMN meeting.meeting.summary IS
     'Results section: single paragraph summary, hard-capped at 250 characters per the form specification.';
-COMMENT ON COLUMN meeting.actual_start_at IS
+COMMENT ON COLUMN meeting.meeting.actual_start_at IS
     'Actual start timestamp recorded after the meeting.';
-COMMENT ON COLUMN meeting.actual_end_at IS
+COMMENT ON COLUMN meeting.meeting.actual_end_at IS
     'Actual end timestamp recorded after the meeting.';
-COMMENT ON COLUMN meeting.overall_result IS
+COMMENT ON COLUMN meeting.meeting.overall_result IS
     'Sign-off result: productive, partial, unproductive, cancelled.';
-COMMENT ON COLUMN meeting.additional_notes IS
+COMMENT ON COLUMN meeting.meeting.additional_notes IS
     'Free-text additional notes from the organizer at sign-off.';
-COMMENT ON COLUMN meeting.signed_by_name IS
+COMMENT ON COLUMN meeting.meeting.signed_by_name IS
     'Name of the person who signed the record.';
-COMMENT ON COLUMN meeting.signed_at IS
+COMMENT ON COLUMN meeting.meeting.signed_at IS
     'Timestamp the record was signed.';
 
 CREATE INDEX meeting_index_organizer_id
-    ON meeting(organizer_id);
+    ON meeting.meeting(organizer_id);
 CREATE INDEX meeting_index_status
-    ON meeting(status);
+    ON meeting.meeting(status);
 CREATE INDEX meeting_index_scheduled_start_at
-    ON meeting(scheduled_start_at);
+    ON meeting.meeting(scheduled_start_at);
 CREATE INDEX meeting_index_title_trgm
-    ON meeting
+    ON meeting.meeting
     USING GIN (title gin_trgm_ops);
 CREATE INDEX meeting_index_summary_trgm
-    ON meeting
+    ON meeting.meeting
     USING GIN (summary gin_trgm_ops);
 
 -- ========================================================================
@@ -275,13 +292,13 @@ CREATE INDEX meeting_index_summary_trgm
 -- Agenda item — one row per topic on the meeting agenda. Ordered by
 -- position to preserve the order the organizer entered.
 
-CREATE TABLE agenda_item (
+CREATE TABLE meeting.agenda_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
     title VARCHAR(255) NOT NULL DEFAULT '',
@@ -294,39 +311,39 @@ CREATE TABLE agenda_item (
 );
 
 CREATE TRIGGER trigger_agenda_item_updated_at
-    BEFORE UPDATE ON agenda_item
+    BEFORE UPDATE ON meeting.agenda_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE agenda_item IS
+COMMENT ON TABLE meeting.agenda_item IS
     'One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.';
-COMMENT ON COLUMN agenda_item.id IS
+COMMENT ON COLUMN meeting.agenda_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agenda_item.created_at IS
+COMMENT ON COLUMN meeting.agenda_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agenda_item.updated_at IS
+COMMENT ON COLUMN meeting.agenda_item.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agenda_item.deleted_at IS
+COMMENT ON COLUMN meeting.agenda_item.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agenda_item.meeting_id IS
+COMMENT ON COLUMN meeting.agenda_item.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN agenda_item.position IS
+COMMENT ON COLUMN meeting.agenda_item.position IS
     'Zero-based ordinal of the item in the agenda list.';
-COMMENT ON COLUMN agenda_item.title IS
+COMMENT ON COLUMN meeting.agenda_item.title IS
     'Title of the agenda topic.';
-COMMENT ON COLUMN agenda_item.duration_minutes IS
+COMMENT ON COLUMN meeting.agenda_item.duration_minutes IS
     'Planned duration in minutes (0 to 1440).';
-COMMENT ON COLUMN agenda_item.presenter IS
+COMMENT ON COLUMN meeting.agenda_item.presenter IS
     'Name of the person presenting or leading the discussion.';
-COMMENT ON COLUMN agenda_item.notes IS
+COMMENT ON COLUMN meeting.agenda_item.notes IS
     'Free-text notes attached to the agenda item.';
-COMMENT ON COLUMN agenda_item.status IS
+COMMENT ON COLUMN meeting.agenda_item.status IS
     'Outcome of the agenda item: planned, discussed, skipped, deferred.';
 
 CREATE INDEX agenda_item_index_meeting_id
-    ON agenda_item(meeting_id);
+    ON meeting.agenda_item(meeting_id);
 CREATE INDEX agenda_item_index_meeting_id_position
-    ON agenda_item(meeting_id, position);
+    ON meeting.agenda_item(meeting_id, position);
 
 -- ========================================================================
 -- END 04_create_table_agenda_item.sql
@@ -339,13 +356,13 @@ CREATE INDEX agenda_item_index_meeting_id_position
 -- Participant — one row per invited attendee. Captures role on the
 -- invitation, response status, and actual attendance.
 
-CREATE TABLE participant (
+CREATE TABLE meeting.participant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
     name VARCHAR(255) NOT NULL DEFAULT '',
@@ -361,45 +378,45 @@ CREATE TABLE participant (
 );
 
 CREATE TRIGGER trigger_participant_updated_at
-    BEFORE UPDATE ON participant
+    BEFORE UPDATE ON meeting.participant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE participant IS
+COMMENT ON TABLE meeting.participant IS
     'One invited attendee for a meeting. Captures role on the invitation (required/optional/observer), the RSVP response, and the actual attendance status.';
-COMMENT ON COLUMN participant.id IS
+COMMENT ON COLUMN meeting.participant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN participant.created_at IS
+COMMENT ON COLUMN meeting.participant.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN participant.updated_at IS
+COMMENT ON COLUMN meeting.participant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN participant.deleted_at IS
+COMMENT ON COLUMN meeting.participant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN participant.meeting_id IS
+COMMENT ON COLUMN meeting.participant.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN participant.position IS
+COMMENT ON COLUMN meeting.participant.position IS
     'Zero-based ordinal of the participant in the invitation list.';
-COMMENT ON COLUMN participant.name IS
+COMMENT ON COLUMN meeting.participant.name IS
     'Participant full name.';
-COMMENT ON COLUMN participant.email IS
+COMMENT ON COLUMN meeting.participant.email IS
     'Participant email address.';
-COMMENT ON COLUMN participant.organisation IS
+COMMENT ON COLUMN meeting.participant.organisation IS
     'Participant organisation or team.';
-COMMENT ON COLUMN participant.role IS
+COMMENT ON COLUMN meeting.participant.role IS
     'Role on the invitation: organizer, chair, required, optional, observer, presenter, note-taker.';
-COMMENT ON COLUMN participant.response_status IS
+COMMENT ON COLUMN meeting.participant.response_status IS
     'RSVP response: no-response, accepted, declined, tentative, delegated.';
-COMMENT ON COLUMN participant.attendance_status IS
+COMMENT ON COLUMN meeting.participant.attendance_status IS
     'Actual attendance: present, late, absent, partial, remote, unknown.';
-COMMENT ON COLUMN participant.notes IS
+COMMENT ON COLUMN meeting.participant.notes IS
     'Free-text notes — apologies, delegated representative, partial attendance window.';
 
 CREATE INDEX participant_index_meeting_id
-    ON participant(meeting_id);
+    ON meeting.participant(meeting_id);
 CREATE INDEX participant_index_meeting_id_position
-    ON participant(meeting_id, position);
+    ON meeting.participant(meeting_id, position);
 CREATE INDEX participant_index_email
-    ON participant(email);
+    ON meeting.participant(email);
 
 -- ========================================================================
 -- END 05_create_table_participant.sql
@@ -412,13 +429,13 @@ CREATE INDEX participant_index_email
 -- Resource — anything required for the meeting to succeed: a room, a piece
 -- of equipment, a document, a URL, a budget line, catering, an interpreter.
 
-CREATE TABLE resource (
+CREATE TABLE meeting.resource (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
     resource_type VARCHAR(20) NOT NULL DEFAULT ''
@@ -440,47 +457,47 @@ CREATE TABLE resource (
 );
 
 CREATE TRIGGER trigger_resource_updated_at
-    BEFORE UPDATE ON resource
+    BEFORE UPDATE ON meeting.resource
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE resource IS
+COMMENT ON TABLE meeting.resource IS
     'A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status.';
-COMMENT ON COLUMN resource.id IS
+COMMENT ON COLUMN meeting.resource.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN resource.created_at IS
+COMMENT ON COLUMN meeting.resource.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN resource.updated_at IS
+COMMENT ON COLUMN meeting.resource.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN resource.deleted_at IS
+COMMENT ON COLUMN meeting.resource.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN resource.meeting_id IS
+COMMENT ON COLUMN meeting.resource.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN resource.position IS
+COMMENT ON COLUMN meeting.resource.position IS
     'Zero-based ordinal of the resource in the list.';
-COMMENT ON COLUMN resource.resource_type IS
+COMMENT ON COLUMN meeting.resource.resource_type IS
     'Type of resource: room, equipment, document, link, budget, catering, interpreter, transport, other.';
-COMMENT ON COLUMN resource.name IS
+COMMENT ON COLUMN meeting.resource.name IS
     'Name or short identifier of the resource.';
-COMMENT ON COLUMN resource.quantity IS
+COMMENT ON COLUMN meeting.resource.quantity IS
     'Quantity required (e.g. 12 chairs, 1 projector).';
-COMMENT ON COLUMN resource.unit IS
+COMMENT ON COLUMN meeting.resource.unit IS
     'Unit of quantity (e.g. seats, licences, GBP, USD).';
-COMMENT ON COLUMN resource.url IS
+COMMENT ON COLUMN meeting.resource.url IS
     'URL of the resource (document link, room booking page, equipment record).';
-COMMENT ON COLUMN resource.cost_amount IS
+COMMENT ON COLUMN meeting.resource.cost_amount IS
     'Cost amount in the cost_currency.';
-COMMENT ON COLUMN resource.cost_currency IS
+COMMENT ON COLUMN meeting.resource.cost_currency IS
     'ISO 4217 currency code (e.g. GBP, USD, EUR).';
-COMMENT ON COLUMN resource.status IS
+COMMENT ON COLUMN meeting.resource.status IS
     'Reservation status: requested, reserved, confirmed, unavailable, cancelled.';
-COMMENT ON COLUMN resource.notes IS
+COMMENT ON COLUMN meeting.resource.notes IS
     'Free-text notes — e.g. supplier, vendor, point of contact.';
 
 CREATE INDEX resource_index_meeting_id
-    ON resource(meeting_id);
+    ON meeting.resource(meeting_id);
 CREATE INDEX resource_index_meeting_id_position
-    ON resource(meeting_id, position);
+    ON meeting.resource(meeting_id, position);
 
 -- ========================================================================
 -- END 06_create_table_resource.sql
@@ -494,13 +511,13 @@ CREATE INDEX resource_index_meeting_id_position
 -- but restricted to the seven frequencies a non-technical user is likely
 -- to need (none / daily / weekday / weekly / monthly / quarterly / yearly).
 
-CREATE TABLE recurring_rule (
+CREATE TABLE meeting.recurring_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL UNIQUE REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL UNIQUE REFERENCES meeting.meeting(id) ON DELETE CASCADE,
 
     frequency VARCHAR(20) NOT NULL DEFAULT 'none'
         CHECK (frequency IN ('none', 'daily', 'weekday', 'weekly', 'monthly', 'quarterly', 'yearly')),
@@ -525,45 +542,45 @@ CREATE TABLE recurring_rule (
 );
 
 CREATE TRIGGER trigger_recurring_rule_updated_at
-    BEFORE UPDATE ON recurring_rule
+    BEFORE UPDATE ON meeting.recurring_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE recurring_rule IS
+COMMENT ON TABLE meeting.recurring_rule IS
     'Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.';
-COMMENT ON COLUMN recurring_rule.id IS
+COMMENT ON COLUMN meeting.recurring_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recurring_rule.created_at IS
+COMMENT ON COLUMN meeting.recurring_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN recurring_rule.updated_at IS
+COMMENT ON COLUMN meeting.recurring_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN recurring_rule.deleted_at IS
+COMMENT ON COLUMN meeting.recurring_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN recurring_rule.meeting_id IS
+COMMENT ON COLUMN meeting.recurring_rule.meeting_id IS
     'Foreign key to the parent meeting; UNIQUE so at most one rule per meeting.';
-COMMENT ON COLUMN recurring_rule.frequency IS
+COMMENT ON COLUMN meeting.recurring_rule.frequency IS
     'Recurrence frequency: none, daily, weekday, weekly, monthly, quarterly, yearly.';
-COMMENT ON COLUMN recurring_rule.interval_count IS
+COMMENT ON COLUMN meeting.recurring_rule.interval_count IS
     'Interval between occurrences; e.g. interval_count = 2 with frequency = weekly means every fortnight.';
-COMMENT ON COLUMN recurring_rule.by_day_of_week IS
+COMMENT ON COLUMN meeting.recurring_rule.by_day_of_week IS
     'Comma-separated iCalendar weekday codes (MO,TU,WE,TH,FR,SA,SU). Empty when not constrained.';
-COMMENT ON COLUMN recurring_rule.by_day_of_month IS
+COMMENT ON COLUMN meeting.recurring_rule.by_day_of_month IS
     'Day of month for monthly / quarterly / yearly rules. Negative values count from the end (-1 = last day).';
-COMMENT ON COLUMN recurring_rule.by_set_position IS
+COMMENT ON COLUMN meeting.recurring_rule.by_set_position IS
     'Set position for the "nth weekday" pattern (e.g. by_set_position = 1, by_day_of_week = MO means first Monday).';
-COMMENT ON COLUMN recurring_rule.by_month_of_year IS
+COMMENT ON COLUMN meeting.recurring_rule.by_month_of_year IS
     'Month of year for yearly rules (1 = January, 12 = December).';
-COMMENT ON COLUMN recurring_rule.series_count IS
+COMMENT ON COLUMN meeting.recurring_rule.series_count IS
     'Total number of occurrences in the series, if known.';
-COMMENT ON COLUMN recurring_rule.series_until IS
+COMMENT ON COLUMN meeting.recurring_rule.series_until IS
     'Last possible occurrence in the series, exclusive.';
-COMMENT ON COLUMN recurring_rule.timezone IS
+COMMENT ON COLUMN meeting.recurring_rule.timezone IS
     'IANA timezone the rule is evaluated in.';
-COMMENT ON COLUMN recurring_rule.rrule_text IS
+COMMENT ON COLUMN meeting.recurring_rule.rrule_text IS
     'Full RFC 5545 RRULE string for verbatim round-trip with iCalendar clients.';
 
 CREATE INDEX recurring_rule_index_meeting_id
-    ON recurring_rule(meeting_id);
+    ON meeting.recurring_rule(meeting_id);
 
 -- ========================================================================
 -- END 07_create_table_recurring_rule.sql
@@ -576,13 +593,13 @@ CREATE INDEX recurring_rule_index_meeting_id
 -- Action item — task assigned to an owner during the meeting with a due
 -- date and a status. The dashboard surfaces overdue action items.
 
-CREATE TABLE action_item (
+CREATE TABLE meeting.action_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
 
@@ -600,51 +617,51 @@ CREATE TABLE action_item (
 );
 
 CREATE TRIGGER trigger_action_item_updated_at
-    BEFORE UPDATE ON action_item
+    BEFORE UPDATE ON meeting.action_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE action_item IS
+COMMENT ON TABLE meeting.action_item IS
     'A task assigned during the meeting to a named owner with a due date, priority, and status.';
-COMMENT ON COLUMN action_item.id IS
+COMMENT ON COLUMN meeting.action_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN action_item.created_at IS
+COMMENT ON COLUMN meeting.action_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN action_item.updated_at IS
+COMMENT ON COLUMN meeting.action_item.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN action_item.deleted_at IS
+COMMENT ON COLUMN meeting.action_item.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN action_item.meeting_id IS
+COMMENT ON COLUMN meeting.action_item.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN action_item.position IS
+COMMENT ON COLUMN meeting.action_item.position IS
     'Zero-based ordinal of the action item in the list.';
-COMMENT ON COLUMN action_item.title IS
+COMMENT ON COLUMN meeting.action_item.title IS
     'Short imperative title of the action.';
-COMMENT ON COLUMN action_item.description IS
+COMMENT ON COLUMN meeting.action_item.description IS
     'Free-text description, acceptance criteria, or context for the action.';
-COMMENT ON COLUMN action_item.owner_name IS
+COMMENT ON COLUMN meeting.action_item.owner_name IS
     'Name of the person responsible for completing the action.';
-COMMENT ON COLUMN action_item.owner_email IS
+COMMENT ON COLUMN meeting.action_item.owner_email IS
     'Email address of the owner for follow-up.';
-COMMENT ON COLUMN action_item.due_date IS
+COMMENT ON COLUMN meeting.action_item.due_date IS
     'Date by which the action should be completed.';
-COMMENT ON COLUMN action_item.priority IS
+COMMENT ON COLUMN meeting.action_item.priority IS
     'Priority: low, medium, high, urgent.';
-COMMENT ON COLUMN action_item.status IS
+COMMENT ON COLUMN meeting.action_item.status IS
     'Workflow status: open, in-progress, blocked, done, cancelled.';
-COMMENT ON COLUMN action_item.completed_at IS
+COMMENT ON COLUMN meeting.action_item.completed_at IS
     'Timestamp the action was marked done.';
-COMMENT ON COLUMN action_item.external_reference IS
+COMMENT ON COLUMN meeting.action_item.external_reference IS
     'External ticket or issue reference (e.g. JIRA-1234, GH-456).';
 
 CREATE INDEX action_item_index_meeting_id
-    ON action_item(meeting_id);
+    ON meeting.action_item(meeting_id);
 CREATE INDEX action_item_index_meeting_id_position
-    ON action_item(meeting_id, position);
+    ON meeting.action_item(meeting_id, position);
 CREATE INDEX action_item_index_due_date
-    ON action_item(due_date);
+    ON meeting.action_item(due_date);
 CREATE INDEX action_item_index_status
-    ON action_item(status);
+    ON meeting.action_item(status);
 
 -- ========================================================================
 -- END 08_create_table_action_item.sql
@@ -657,13 +674,13 @@ CREATE INDEX action_item_index_status
 -- Meeting output — a tangible deliverable produced by the meeting:
 -- a document, a decision, a piece of data, a recording.
 
-CREATE TABLE meeting_output (
+CREATE TABLE meeting.meeting_output (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
 
@@ -676,39 +693,39 @@ CREATE TABLE meeting_output (
 );
 
 CREATE TRIGGER trigger_meeting_output_updated_at
-    BEFORE UPDATE ON meeting_output
+    BEFORE UPDATE ON meeting.meeting_output
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_output IS
+COMMENT ON TABLE meeting.meeting_output IS
     'A tangible deliverable produced by the meeting: document, decision, data, recording, minutes, slides, agreement.';
-COMMENT ON COLUMN meeting_output.id IS
+COMMENT ON COLUMN meeting.meeting_output.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_output.created_at IS
+COMMENT ON COLUMN meeting.meeting_output.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_output.updated_at IS
+COMMENT ON COLUMN meeting.meeting_output.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_output.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_output.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_output.meeting_id IS
+COMMENT ON COLUMN meeting.meeting_output.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN meeting_output.position IS
+COMMENT ON COLUMN meeting.meeting_output.position IS
     'Zero-based ordinal of the output in the list.';
-COMMENT ON COLUMN meeting_output.title IS
+COMMENT ON COLUMN meeting.meeting_output.title IS
     'Short title of the output.';
-COMMENT ON COLUMN meeting_output.kind IS
+COMMENT ON COLUMN meeting.meeting_output.kind IS
     'Kind of output: document, decision, data, recording, minutes, slides, agreement, other.';
-COMMENT ON COLUMN meeting_output.url IS
+COMMENT ON COLUMN meeting.meeting_output.url IS
     'URL of the output artefact, if any (document, recording, repository).';
-COMMENT ON COLUMN meeting_output.description IS
+COMMENT ON COLUMN meeting.meeting_output.description IS
     'Free-text description of the output and its content.';
-COMMENT ON COLUMN meeting_output.owner_name IS
+COMMENT ON COLUMN meeting.meeting_output.owner_name IS
     'Person responsible for the output post-meeting.';
 
 CREATE INDEX meeting_output_index_meeting_id
-    ON meeting_output(meeting_id);
+    ON meeting.meeting_output(meeting_id);
 CREATE INDEX meeting_output_index_meeting_id_position
-    ON meeting_output(meeting_id, position);
+    ON meeting.meeting_output(meeting_id, position);
 
 -- ========================================================================
 -- END 09_create_table_meeting_output.sql
@@ -722,13 +739,13 @@ CREATE INDEX meeting_output_index_meeting_id_position
 -- goal reached, risk identified, alignment achieved, decision recorded.
 -- Distinct from meeting_output: outputs are *things*, outcomes are *changes*.
 
-CREATE TABLE meeting_outcome (
+CREATE TABLE meeting.meeting_outcome (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
 
@@ -742,43 +759,43 @@ CREATE TABLE meeting_outcome (
     description TEXT NOT NULL DEFAULT '',
     impact VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (impact IN ('low', 'medium', 'high', 'strategic', '')),
-    related_action_item_id UUID REFERENCES action_item(id) ON DELETE SET NULL
+    related_action_item_id UUID REFERENCES meeting.action_item(id) ON DELETE SET NULL
 );
 
 CREATE TRIGGER trigger_meeting_outcome_updated_at
-    BEFORE UPDATE ON meeting_outcome
+    BEFORE UPDATE ON meeting.meeting_outcome
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_outcome IS
+COMMENT ON TABLE meeting.meeting_outcome IS
     'The impact or change resulting from the meeting: goal reached, risk identified, alignment achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes.';
-COMMENT ON COLUMN meeting_outcome.id IS
+COMMENT ON COLUMN meeting.meeting_outcome.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_outcome.created_at IS
+COMMENT ON COLUMN meeting.meeting_outcome.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_outcome.updated_at IS
+COMMENT ON COLUMN meeting.meeting_outcome.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_outcome.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_outcome.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_outcome.meeting_id IS
+COMMENT ON COLUMN meeting.meeting_outcome.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN meeting_outcome.position IS
+COMMENT ON COLUMN meeting.meeting_outcome.position IS
     'Zero-based ordinal of the outcome in the list.';
-COMMENT ON COLUMN meeting_outcome.title IS
+COMMENT ON COLUMN meeting.meeting_outcome.title IS
     'Short title summarising the outcome.';
-COMMENT ON COLUMN meeting_outcome.category IS
+COMMENT ON COLUMN meeting.meeting_outcome.category IS
     'Outcome category: goal-reached, risk-identified, risk-mitigated, alignment-achieved, decision, blocker-cleared, blocker-raised, commitment, no-outcome, other.';
-COMMENT ON COLUMN meeting_outcome.description IS
+COMMENT ON COLUMN meeting.meeting_outcome.description IS
     'Free-text description of the outcome.';
-COMMENT ON COLUMN meeting_outcome.impact IS
+COMMENT ON COLUMN meeting.meeting_outcome.impact IS
     'Subjective impact rating: low, medium, high, strategic.';
-COMMENT ON COLUMN meeting_outcome.related_action_item_id IS
+COMMENT ON COLUMN meeting.meeting_outcome.related_action_item_id IS
     'Optional foreign key to an action_item that captures the follow-up needed for this outcome.';
 
 CREATE INDEX meeting_outcome_index_meeting_id
-    ON meeting_outcome(meeting_id);
+    ON meeting.meeting_outcome(meeting_id);
 CREATE INDEX meeting_outcome_index_meeting_id_position
-    ON meeting_outcome(meeting_id, position);
+    ON meeting.meeting_outcome(meeting_id, position);
 
 -- ========================================================================
 -- END 10_create_table_meeting_outcome.sql
@@ -792,14 +809,14 @@ CREATE INDEX meeting_outcome_index_meeting_id_position
 -- derived counts and completion status produced by validateMeeting(),
 -- plus the organiser's sign-off.
 
-CREATE TABLE meeting_grade (
+CREATE TABLE meeting.meeting_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     meeting_id UUID NOT NULL UNIQUE
-        REFERENCES meeting(id) ON DELETE CASCADE,
+        REFERENCES meeting.meeting(id) ON DELETE CASCADE,
 
     duration_minutes INTEGER
         CHECK (duration_minutes IS NULL OR duration_minutes BETWEEN 0 AND 1440),
@@ -834,57 +851,57 @@ CREATE TABLE meeting_grade (
 );
 
 CREATE TRIGGER trigger_meeting_grade_updated_at
-    BEFORE UPDATE ON meeting_grade
+    BEFORE UPDATE ON meeting.meeting_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_grade IS
+COMMENT ON TABLE meeting.meeting_grade IS
     'Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.';
-COMMENT ON COLUMN meeting_grade.id IS
+COMMENT ON COLUMN meeting.meeting_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_grade.created_at IS
+COMMENT ON COLUMN meeting.meeting_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_grade.updated_at IS
+COMMENT ON COLUMN meeting.meeting_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_grade.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_grade.meeting_id IS
+COMMENT ON COLUMN meeting.meeting_grade.meeting_id IS
     'Foreign key to the parent meeting row (unique, 1:1).';
-COMMENT ON COLUMN meeting_grade.duration_minutes IS
+COMMENT ON COLUMN meeting.meeting_grade.duration_minutes IS
     'Derived duration in minutes from actual_start_at to actual_end_at, or scheduled fallback.';
-COMMENT ON COLUMN meeting_grade.agenda_item_count IS
+COMMENT ON COLUMN meeting.meeting_grade.agenda_item_count IS
     'Derived count of agenda_item rows.';
-COMMENT ON COLUMN meeting_grade.participant_count IS
+COMMENT ON COLUMN meeting.meeting_grade.participant_count IS
     'Derived count of participant rows.';
-COMMENT ON COLUMN meeting_grade.accepted_count IS
+COMMENT ON COLUMN meeting.meeting_grade.accepted_count IS
     'Derived count of participants with response_status = accepted.';
-COMMENT ON COLUMN meeting_grade.declined_count IS
+COMMENT ON COLUMN meeting.meeting_grade.declined_count IS
     'Derived count of participants with response_status = declined.';
-COMMENT ON COLUMN meeting_grade.attended_count IS
+COMMENT ON COLUMN meeting.meeting_grade.attended_count IS
     'Derived count of participants with attendance_status = present or late or remote.';
-COMMENT ON COLUMN meeting_grade.action_item_count IS
+COMMENT ON COLUMN meeting.meeting_grade.action_item_count IS
     'Derived count of action_item rows.';
-COMMENT ON COLUMN meeting_grade.output_count IS
+COMMENT ON COLUMN meeting.meeting_grade.output_count IS
     'Derived count of meeting_output rows.';
-COMMENT ON COLUMN meeting_grade.outcome_count IS
+COMMENT ON COLUMN meeting.meeting_grade.outcome_count IS
     'Derived count of meeting_outcome rows.';
-COMMENT ON COLUMN meeting_grade.completion_status IS
+COMMENT ON COLUMN meeting.meeting_grade.completion_status IS
     'Completion status derived by validateMeeting: planned, in-progress, complete, incomplete.';
-COMMENT ON COLUMN meeting_grade.overall_health IS
+COMMENT ON COLUMN meeting.meeting_grade.overall_health IS
     'Overall health: green (no flags), amber (low/medium flags), red (high-priority flag fired).';
-COMMENT ON COLUMN meeting_grade.override_reason IS
+COMMENT ON COLUMN meeting.meeting_grade.override_reason IS
     'Reason the organiser overrode the engine-computed completion status, if any.';
-COMMENT ON COLUMN meeting_grade.notes IS
+COMMENT ON COLUMN meeting.meeting_grade.notes IS
     'Free-text organiser sign-off notes.';
-COMMENT ON COLUMN meeting_grade.signed_by IS
+COMMENT ON COLUMN meeting.meeting_grade.signed_by IS
     'Name or identifier of the organiser who signed off.';
-COMMENT ON COLUMN meeting_grade.signed_at IS
+COMMENT ON COLUMN meeting.meeting_grade.signed_at IS
     'Timestamp of the organiser electronic signature.';
-COMMENT ON COLUMN meeting_grade.graded_at IS
+COMMENT ON COLUMN meeting.meeting_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 CREATE INDEX meeting_grade_index_meeting_id
-    ON meeting_grade(meeting_id);
+    ON meeting.meeting_grade(meeting_id);
 
 -- ========================================================================
 -- END 11_create_table_meeting_grade.sql
@@ -896,14 +913,14 @@ CREATE INDEX meeting_grade_index_meeting_id
 
 -- Audit trail of every validation rule that fired for this meeting.
 
-CREATE TABLE meeting_grade_rule (
+CREATE TABLE meeting.meeting_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     meeting_grade_id UUID NOT NULL
-        REFERENCES meeting_grade(id) ON DELETE CASCADE,
+        REFERENCES meeting.meeting_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(50) NOT NULL DEFAULT '',
     instrument VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (instrument IN (
@@ -917,34 +934,34 @@ CREATE TABLE meeting_grade_rule (
 );
 
 CREATE INDEX index_meeting_grade_rule_grade_id
-    ON meeting_grade_rule(meeting_grade_id);
+    ON meeting.meeting_grade_rule(meeting_grade_id);
 
 CREATE TRIGGER trigger_meeting_grade_rule_updated_at
-    BEFORE UPDATE ON meeting_grade_rule
+    BEFORE UPDATE ON meeting.meeting_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_grade_rule IS
+COMMENT ON TABLE meeting.meeting_grade_rule IS
     'Audit trail of every validation rule that fired for this meeting, across the validation instruments (invitation, agenda, participants, resources, recurrence, summary, action-items, outputs, outcomes, composite).';
-COMMENT ON COLUMN meeting_grade_rule.id IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_grade_rule.created_at IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_grade_rule.updated_at IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_grade_rule.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_grade_rule.meeting_grade_id IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.meeting_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN meeting_grade_rule.rule_id IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-SUMMARY-OVER-LIMIT, R-NO-AGENDA).';
-COMMENT ON COLUMN meeting_grade_rule.instrument IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.instrument IS
     'Validation instrument the rule belongs to.';
-COMMENT ON COLUMN meeting_grade_rule.grade IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.grade IS
     'Grade contributed by this rule (e.g. red for blocking, amber for warning).';
-COMMENT ON COLUMN meeting_grade_rule.category IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.category IS
     'Category for grouping rules in the report (e.g. data-quality, completeness, scheduling).';
-COMMENT ON COLUMN meeting_grade_rule.description IS
+COMMENT ON COLUMN meeting.meeting_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -958,14 +975,14 @@ COMMENT ON COLUMN meeting_grade_rule.description IS
 -- Non-blocking validation flags that fire independently of the
 -- completion status. Surfaced in the dashboard.
 
-CREATE TABLE meeting_grade_flag (
+CREATE TABLE meeting.meeting_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     meeting_grade_id UUID NOT NULL
-        REFERENCES meeting_grade(id) ON DELETE CASCADE,
+        REFERENCES meeting.meeting_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL DEFAULT '',
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -993,34 +1010,34 @@ CREATE TABLE meeting_grade_flag (
 );
 
 CREATE INDEX index_meeting_grade_flag_grade_id
-    ON meeting_grade_flag(meeting_grade_id);
+    ON meeting.meeting_grade_flag(meeting_grade_id);
 
 CREATE TRIGGER trigger_meeting_grade_flag_updated_at
-    BEFORE UPDATE ON meeting_grade_flag
+    BEFORE UPDATE ON meeting.meeting_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE meeting_grade_flag IS
+COMMENT ON TABLE meeting.meeting_grade_flag IS
     'Non-blocking validation flags that fire independently of the completion status. Surfaced in the dashboard for the organiser to address.';
-COMMENT ON COLUMN meeting_grade_flag.id IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN meeting_grade_flag.created_at IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN meeting_grade_flag.updated_at IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN meeting_grade_flag.deleted_at IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN meeting_grade_flag.meeting_grade_id IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.meeting_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN meeting_grade_flag.flag_id IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SUMMARY-OVER-LIMIT-001).';
-COMMENT ON COLUMN meeting_grade_flag.category IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.category IS
     'Flag category: summary-over-limit, no-participants, no-agenda, start-after-end, etc.';
-COMMENT ON COLUMN meeting_grade_flag.priority IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.priority IS
     'Flag priority: low, medium, or high.';
-COMMENT ON COLUMN meeting_grade_flag.description IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN meeting_grade_flag.suggested_action IS
+COMMENT ON COLUMN meeting.meeting_grade_flag.suggested_action IS
     'Suggested action for the organiser (e.g. "shorten summary to 250 characters").';
 
 -- ========================================================================

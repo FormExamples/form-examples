@@ -3,14 +3,14 @@
 -- whether it was actioned. An abnormal result that was not actioned raises a
 -- high-priority safety flag and lifts the acuity band to escalate.
 
-CREATE TABLE inpatient_clinical_note_investigation (
+CREATE TABLE inpatient_clinical_note.inpatient_clinical_note_investigation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     inpatient_clinical_note_id UUID NOT NULL
-        REFERENCES inpatient_clinical_note(id) ON DELETE CASCADE,
+        REFERENCES inpatient_clinical_note.inpatient_clinical_note(id) ON DELETE CASCADE,
 
     sort_order INTEGER NOT NULL DEFAULT 0,
     test_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -24,40 +24,40 @@ CREATE TABLE inpatient_clinical_note_investigation (
 );
 
 CREATE INDEX inpatient_clinical_note_investigation_note_id_idx
-    ON inpatient_clinical_note_investigation (inpatient_clinical_note_id);
+    ON inpatient_clinical_note.inpatient_clinical_note_investigation (inpatient_clinical_note_id);
 
 CREATE TRIGGER trigger_inpatient_clinical_note_investigation_updated_at
-    BEFORE UPDATE ON inpatient_clinical_note_investigation
+    BEFORE UPDATE ON inpatient_clinical_note.inpatient_clinical_note_investigation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION inpatient_clinical_note.set_updated_at();
 
-COMMENT ON TABLE inpatient_clinical_note_investigation IS
+COMMENT ON TABLE inpatient_clinical_note.inpatient_clinical_note_investigation IS
     'Investigations-reviewed rows for an inpatient clinical note: one row per result looked at, with whether it was abnormal, whether it was actioned, and the action taken.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.id IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.created_at IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.updated_at IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.deleted_at IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.inpatient_clinical_note_id IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.inpatient_clinical_note_id IS
     'Foreign key to the parent inpatient clinical note.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.sort_order IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.sort_order IS
     'Display order of the investigation within the list, ascending.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.test_name IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.test_name IS
     'Name of the test or investigation.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.category IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.category IS
     'Investigation category: haematology, biochemistry, microbiology, imaging, histopathology, physiology, point-of-care, or other.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.requested_date IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.requested_date IS
     'Date the investigation was requested.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.result_date IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.result_date IS
     'Date the result became available.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.result_summary IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.result_summary IS
     'Summary of the result as reviewed by the clinician.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.abnormal IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.abnormal IS
     'Whether the result is abnormal.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.actioned IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.actioned IS
     'Whether the result has been actioned. An abnormal result that is not actioned raises a high-priority safety flag.';
-COMMENT ON COLUMN inpatient_clinical_note_investigation.action_taken IS
+COMMENT ON COLUMN inpatient_clinical_note.inpatient_clinical_note_investigation.action_taken IS
     'The action taken in response to the result.';

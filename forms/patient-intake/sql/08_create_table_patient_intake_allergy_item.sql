@@ -1,10 +1,10 @@
-CREATE TABLE assessment_allergy_item (
+CREATE TABLE patient_intake.assessment_allergy_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     allergies_id UUID NOT NULL
-        REFERENCES assessment_allergies(id) ON DELETE CASCADE,
+        REFERENCES patient_intake.assessment_allergies(id) ON DELETE CASCADE,
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     allergy_type VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (allergy_type IN ('drug', 'food', 'environmental', 'latex', 'contrast', 'anaesthetic', 'other', '')),
@@ -15,36 +15,36 @@ CREATE TABLE assessment_allergy_item (
 );
 
 CREATE TRIGGER trigger_assessment_allergy_item_updated_at
-    BEFORE UPDATE ON assessment_allergy_item
+    BEFORE UPDATE ON patient_intake.assessment_allergy_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_intake.set_updated_at();
 
-COMMENT ON TABLE assessment_allergy_item IS
+COMMENT ON TABLE patient_intake.assessment_allergy_item IS
     'Individual allergy entry with allergen, type, reaction, and severity.';
-COMMENT ON COLUMN assessment_allergy_item.allergen IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergen IS
     'Name of the allergen.';
-COMMENT ON COLUMN assessment_allergy_item.allergy_type IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergy_type IS
     'Type of allergy: drug, food, environmental, latex, contrast, anaesthetic, other, or empty.';
-COMMENT ON COLUMN assessment_allergy_item.reaction IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.reaction IS
     'Description of the allergic reaction.';
-COMMENT ON COLUMN assessment_allergy_item.severity IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.severity IS
     'Reaction severity: mild, moderate, severe, anaphylaxis, or empty.';
-COMMENT ON COLUMN assessment_allergy_item.sort_order IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_allergies.id IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_allergies.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_allergies.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_allergy_item.allergies_id IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.allergies_id IS
     'Foreign key to the assessment_allergies table.';
-COMMENT ON COLUMN assessment_allergy_item.id IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_allergy_item.created_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_allergy_item.updated_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_allergy_item.deleted_at IS
+COMMENT ON COLUMN patient_intake.assessment_allergy_item.deleted_at IS
     'Timestamp when this row was deleted.';

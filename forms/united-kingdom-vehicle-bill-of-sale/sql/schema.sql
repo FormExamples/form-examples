@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_seller.sql
 --   - 03_create_table_buyer.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_vehicle_bill_of_sale;
+
+COMMENT ON SCHEMA united_kingdom_vehicle_bill_of_sale IS
+    'Namespace for the United Kingdom Vehicle Bill of Sale form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- The seller of the vehicle: contact details of the person or trader selling.
 
-CREATE TABLE seller (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.seller (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -72,35 +89,35 @@ CREATE TABLE seller (
 );
 
 CREATE INDEX seller_name_trgm_idx
-    ON seller
+    ON united_kingdom_vehicle_bill_of_sale.seller
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_seller_updated_at
-    BEFORE UPDATE ON seller
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.seller
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE seller IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.seller IS
     'The seller of the vehicle: contact details of the person or trader selling.';
-COMMENT ON COLUMN seller.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN seller.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN seller.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN seller.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN seller.name IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.name IS
     'Full name of the seller.';
-COMMENT ON COLUMN seller.email IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.email IS
     'Email address.';
-COMMENT ON COLUMN seller.phone IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.phone IS
     'Phone number.';
-COMMENT ON COLUMN seller.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN seller.postcode IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.postcode IS
     'Postal code.';
-COMMENT ON COLUMN seller.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
 
 -- ========================================================================
@@ -113,7 +130,7 @@ COMMENT ON COLUMN seller.country_as_iso_3166_1_alpha_2 IS
 
 -- The buyer of the vehicle: contact details of the person buying.
 
-CREATE TABLE buyer (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.buyer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -128,35 +145,35 @@ CREATE TABLE buyer (
 );
 
 CREATE INDEX buyer_name_trgm_idx
-    ON buyer
+    ON united_kingdom_vehicle_bill_of_sale.buyer
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_buyer_updated_at
-    BEFORE UPDATE ON buyer
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.buyer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE buyer IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.buyer IS
     'The buyer of the vehicle: contact details of the person buying.';
-COMMENT ON COLUMN buyer.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN buyer.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN buyer.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN buyer.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN buyer.name IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.name IS
     'Full name of the buyer.';
-COMMENT ON COLUMN buyer.email IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.email IS
     'Email address.';
-COMMENT ON COLUMN buyer.phone IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.phone IS
     'Phone number.';
-COMMENT ON COLUMN buyer.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN buyer.postcode IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.postcode IS
     'Postal code.';
-COMMENT ON COLUMN buyer.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
 
 -- ========================================================================
@@ -175,14 +192,14 @@ COMMENT ON COLUMN buyer.country_as_iso_3166_1_alpha_2 IS
 -- rules, and the flagged issues live in dedicated child tables. This record is
 -- documentation support, not legal advice.
 
-CREATE TABLE united_kingdom_vehicle_bill_of_sale (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    seller_id UUID NOT NULL REFERENCES seller(id) ON DELETE RESTRICT,
-    buyer_id UUID REFERENCES buyer(id) ON DELETE RESTRICT,
+    seller_id UUID NOT NULL REFERENCES united_kingdom_vehicle_bill_of_sale.seller(id) ON DELETE RESTRICT,
+    buyer_id UUID REFERENCES united_kingdom_vehicle_bill_of_sale.buyer(id) ON DELETE RESTRICT,
     sale_date DATE,
     sale_place TEXT NOT NULL DEFAULT '',
     seller_capacity VARCHAR(7) NOT NULL DEFAULT '' CHECK (seller_capacity IN ('private', 'trader', '')),
@@ -218,92 +235,92 @@ CREATE TABLE united_kingdom_vehicle_bill_of_sale (
 );
 
 CREATE INDEX united_kingdom_vehicle_bill_of_sale_seller_id_idx
-    ON united_kingdom_vehicle_bill_of_sale (seller_id);
+    ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale (seller_id);
 CREATE INDEX united_kingdom_vehicle_bill_of_sale_buyer_id_idx
-    ON united_kingdom_vehicle_bill_of_sale (buyer_id);
+    ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale (buyer_id);
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_bill_of_sale_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale IS
     'Main bill of sale record for a private UK vehicle sale: sale, vehicle, V5C / MOT / finance checks, price and payment, condition terms, DVLA steps, and signatures. Classification, fired rules, and flags live in child tables. Documentation support, not legal advice.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.seller_id IS
     'Foreign key to the seller (restrict delete).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.buyer_id IS
     'Foreign key to the buyer (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.sale_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.sale_date IS
     'Date of the sale and handover.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.sale_place IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.sale_place IS
     'Where the sale took place.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller_capacity IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.seller_capacity IS
     'Whether the seller sells as a private individual or as a trader.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller_is_registered_keeper IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.seller_is_registered_keeper IS
     'Whether the seller is the registered keeper named on the V5C (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.vehicle_registration IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.vehicle_registration IS
     'Vehicle registration number (number plate).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.vehicle_make IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.vehicle_make IS
     'Vehicle make.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.vehicle_model IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.vehicle_model IS
     'Vehicle model.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.vehicle_colour IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.vehicle_colour IS
     'Vehicle colour.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.vehicle_vin IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.vehicle_vin IS
     'Vehicle identification number (VIN, chassis number).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.first_registered_year IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.first_registered_year IS
     'Year the vehicle was first registered.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.fuel_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.fuel_type IS
     'Fuel type: petrol, diesel, hybrid, electric, or other.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.mileage IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.mileage IS
     'Odometer reading in miles at the time of sale.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.mileage_accuracy IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.mileage_accuracy IS
     'Whether the mileage is a recorded reading or not known.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.v5c_present IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.v5c_present IS
     'Whether the seller has the V5C registration certificate (log book) (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.v5c_details_match IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.v5c_details_match IS
     'Whether the V5C details match the vehicle and the seller (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.mot_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.mot_status IS
     'MOT status: valid, expired, exempt, or none.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.mot_expiry_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.mot_expiry_date IS
     'MOT expiry date.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.finance_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.finance_status IS
     'Outstanding finance status: none, outstanding, or unchecked.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.finance_check_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.finance_check_date IS
     'Date a vehicle history or finance check was run.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.price_as_gbp IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.price_as_gbp IS
     'Agreed price in pounds sterling.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.deposit_as_gbp IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.deposit_as_gbp IS
     'Deposit paid in pounds sterling, if any.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.payment_method IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.payment_method IS
     'Payment method: bank-transfer, cash, cheque, card, or other.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.payment_received IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.payment_received IS
     'Whether the seller has received cleared funds (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.sale_terms IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.sale_terms IS
     'Sale terms: sold-as-seen or warranty-given.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.known_faults IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.known_faults IS
     'Faults disclosed by the seller.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.description_matches_advert IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.description_matches_advert IS
     'Whether the vehicle matches the advert and verbal description (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.new_keeper_slip_given IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.new_keeper_slip_given IS
     'Whether the seller gave the buyer the V5C/2 new keeper section (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.dvla_notification IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.dvla_notification IS
     'How the seller told DVLA of the sale: online, post, or not-yet.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.seller_signed IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.seller_signed IS
     'Whether the seller has signed (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.buyer_signed IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.buyer_signed IS
     'Whether the buyer has signed (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.signature_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.signature_date IS
     'Date of signing.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.note IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale.note IS
     'Free-text note.';
 
 -- ========================================================================
@@ -319,13 +336,13 @@ COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.note IS
 -- risk conditions. It is a classification, not a numeric score, and it does not
 -- decide ownership or legal rights.
 
-CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_vehicle_bill_of_sale_id UUID NOT NULL UNIQUE REFERENCES united_kingdom_vehicle_bill_of_sale(id) ON DELETE CASCADE,
+    united_kingdom_vehicle_bill_of_sale_id UUID NOT NULL UNIQUE REFERENCES united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale(id) ON DELETE CASCADE,
     classification VARCHAR(12) NOT NULL DEFAULT '' CHECK (classification IN ('complete', 'incomplete', 'risk-flagged', '')),
     missing_item_count INTEGER,
     risk_flag_count INTEGER,
@@ -333,29 +350,29 @@ CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_bill_of_sale_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale_grade
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale_grade IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade IS
     'Computed completeness classification for a vehicle bill of sale: classification (complete/incomplete/risk-flagged), missing item count, and risk flag count.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.united_kingdom_vehicle_bill_of_sale_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.united_kingdom_vehicle_bill_of_sale_id IS
     'Foreign key to the parent bill of sale (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.classification IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.classification IS
     'Classification: complete, incomplete, or risk-flagged (risk-flagged takes precedence).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.missing_item_count IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.missing_item_count IS
     'Number of required items still missing.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.risk_flag_count IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.risk_flag_count IS
     'Number of risk conditions that hold.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -369,13 +386,13 @@ COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade.graded_at IS
 -- Audit trail of every rule that fired during classification, with the
 -- dimension it concerns, the category, and a human-readable description.
 
-CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade_rule (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_vehicle_bill_of_sale_grade_id UUID NOT NULL REFERENCES united_kingdom_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
+    united_kingdom_vehicle_bill_of_sale_grade_id UUID NOT NULL REFERENCES united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(14) NOT NULL DEFAULT '' CHECK (dimension IN ('parties', 'vehicle', 'price', 'condition', 'dvla', 'signatures', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -383,32 +400,32 @@ CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade_rule (
 );
 
 CREATE INDEX united_kingdom_vehicle_bill_of_sale_grade_rule_grade_id_idx
-    ON united_kingdom_vehicle_bill_of_sale_grade_rule (united_kingdom_vehicle_bill_of_sale_grade_id);
+    ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule (united_kingdom_vehicle_bill_of_sale_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_bill_of_sale_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale_grade_rule
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale_grade_rule IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule IS
     'Audit trail of every rule that fired during classification: dimension, category, and description.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.united_kingdom_vehicle_bill_of_sale_grade_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.united_kingdom_vehicle_bill_of_sale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MISSING-VIN-01).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.dimension IS
     'Dimension the rule concerns: parties, vehicle, price, condition, dvla, signatures, or classification.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.category IS
     'Subject category (e.g. required-item, risk-condition).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -422,13 +439,13 @@ COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_rule.description IS
 -- Flagged issues that fire independently of the classification, with a
 -- priority and a suggested action for the seller or buyer.
 
-CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade_flag (
+CREATE TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_kingdom_vehicle_bill_of_sale_grade_id UUID NOT NULL REFERENCES united_kingdom_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
+    united_kingdom_vehicle_bill_of_sale_grade_id UUID NOT NULL REFERENCES united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(20) NOT NULL DEFAULT '' CHECK (category IN ('no-vin', 'no-mileage', 'finance-outstanding', 'finance-unchecked', 'v5c-missing', 'v5c-mismatch', 'seller-not-keeper', 'payment-risk', 'unsigned', 'description-mismatch', 'mot-issue', 'trader-sale', 'keeper-slip', 'dvla-notification', 'faults-not-recorded', 'other', '')),
     priority VARCHAR(6) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -437,34 +454,34 @@ CREATE TABLE united_kingdom_vehicle_bill_of_sale_grade_flag (
 );
 
 CREATE INDEX united_kingdom_vehicle_bill_of_sale_grade_flag_grade_id_idx
-    ON united_kingdom_vehicle_bill_of_sale_grade_flag (united_kingdom_vehicle_bill_of_sale_grade_id);
+    ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag (united_kingdom_vehicle_bill_of_sale_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_bill_of_sale_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale_grade_flag
+    BEFORE UPDATE ON united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale_grade_flag IS
+COMMENT ON TABLE united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag IS
     'Flagged issues raised independently of the classification, with a priority and a suggested action.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.united_kingdom_vehicle_bill_of_sale_grade_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.united_kingdom_vehicle_bill_of_sale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NO-VIN-001).';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.priority IS
     'Flag priority: low, medium, or high.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.description IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_vehicle_bill_of_sale.united_kingdom_vehicle_bill_of_sale_grade_flag.suggested_action IS
     'Suggested action for the seller or buyer.';
 
 -- ========================================================================

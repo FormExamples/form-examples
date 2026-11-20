@@ -4,14 +4,14 @@
 -- computed grade, fired rules, and flags live in dedicated child
 -- tables.
 
-CREATE TABLE four_a_test_for_delirium (
+CREATE TABLE four_a_test_for_delirium.four_a_test_for_delirium (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES four_a_test_for_delirium.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES four_a_test_for_delirium.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: patient and assessment identification
     patient_identifier VARCHAR(100) NOT NULL DEFAULT '',
@@ -41,54 +41,54 @@ CREATE TABLE four_a_test_for_delirium (
 );
 
 CREATE INDEX four_a_test_for_delirium_patient_id_idx
-    ON four_a_test_for_delirium (patient_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium (patient_id);
 CREATE INDEX four_a_test_for_delirium_clinician_id_idx
-    ON four_a_test_for_delirium (clinician_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium (clinician_id);
 
 CREATE TRIGGER trigger_four_a_test_for_delirium_updated_at
-    BEFORE UPDATE ON four_a_test_for_delirium
+    BEFORE UPDATE ON four_a_test_for_delirium.four_a_test_for_delirium
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE four_a_test_for_delirium IS
+COMMENT ON TABLE four_a_test_for_delirium.four_a_test_for_delirium IS
     'Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course).';
-COMMENT ON COLUMN four_a_test_for_delirium.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN four_a_test_for_delirium.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN four_a_test_for_delirium.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN four_a_test_for_delirium.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN four_a_test_for_delirium.clinician_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_identifier IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_name IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_name IS
     'Patient name as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.date_of_birth IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.date_of_birth IS
     'Patient date of birth as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessment_date IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessment_date IS
     'Date the 4AT assessment was performed.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessment_time IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessment_time IS
     'Time of day the 4AT assessment was performed.';
-COMMENT ON COLUMN four_a_test_for_delirium.setting IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.setting IS
     'Care setting: acute, ed (emergency department), periop, careHome, community, or other.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessor_name IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessor_name IS
     'Name of the practitioner who completed the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessor_role IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessor_role IS
     'Free-text role of the practitioner who completed the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.alertness IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.alertness IS
     'Item 1 — observed alertness: normal, mildTransient (brief sleepiness then normal), or abnormal (markedly drowsy or agitated).';
-COMMENT ON COLUMN four_a_test_for_delirium.amt4 IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.amt4 IS
     'Item 2 — AMT4 mistake band across age, date of birth, place, and current year: noMistakes, oneMistake, or twoOrMoreOrUntestable.';
-COMMENT ON COLUMN four_a_test_for_delirium.attention_months IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.attention_months IS
     'Item 3 — attention via reciting the months backwards: sevenOrMore correct, startsButUnderSevenOrRefuses, or untestable.';
-COMMENT ON COLUMN four_a_test_for_delirium.acute_change IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.acute_change IS
     'Item 4 — presence of acute change or fluctuating course over the last 2 weeks still evident in the last 24 hours: no or yes.';
-COMMENT ON COLUMN four_a_test_for_delirium.acute_change_source IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.acute_change_source IS
     'Source of the item 4 acute-change information: patient, collateral, records, or none.';
-COMMENT ON COLUMN four_a_test_for_delirium.clinical_notes IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.clinical_notes IS
     'Free-text clinical note recorded with the assessment.';

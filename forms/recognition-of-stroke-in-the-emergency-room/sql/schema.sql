@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS recognition_of_stroke_in_the_emergency_room;
+
+COMMENT ON SCHEMA recognition_of_stroke_in_the_emergency_room IS
+    'Namespace for the Recognition Of Stroke In the Emergency Room (ROSIER) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.patient IS
     'Patient demographic information used by the ROSIER stroke-recognition record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON recognition_of_stroke_in_the_emergency_room.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse, paramedic).
 
-CREATE TABLE clinician (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.role IS
     'Primary clinical role: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON recognition_of_stroke_in_the_emergency_room.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -209,14 +226,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- field defect). The computed grade, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE recognition_of_stroke_in_the_emergency_room (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES recognition_of_stroke_in_the_emergency_room.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES recognition_of_stroke_in_the_emergency_room.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -248,64 +265,64 @@ CREATE TABLE recognition_of_stroke_in_the_emergency_room (
 );
 
 CREATE INDEX recognition_of_stroke_in_the_emergency_room_patient_id_idx
-    ON recognition_of_stroke_in_the_emergency_room (patient_id);
+    ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room (patient_id);
 CREATE INDEX recognition_of_stroke_in_the_emergency_room_clinician_id_idx
-    ON recognition_of_stroke_in_the_emergency_room (clinician_id);
+    ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room (clinician_id);
 
 CREATE TRIGGER trigger_recognition_of_stroke_in_the_emergency_room_updated_at
-    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room IS
     'Main ROSIER assessment record: assessment context, patient identification, the blood-glucose precondition, the two mimic-exclusion criteria, and the five acute-onset neurological signs.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician_name IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinician_role IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.assessed_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.care_setting IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.care_setting IS
     'Care setting: emergency-department, acute-medical, or other.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.symptom_onset_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.symptom_onset_at IS
     'Reported date and time of symptom onset.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.patient_identifier IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.age_band IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.sex IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.blood_glucose IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.blood_glucose IS
     'Precondition — blood glucose in mmol/L measured before scoring; a value < 3.5 flags the hypoglycaemia mimic.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.hypoglycaemia_corrected IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.hypoglycaemia_corrected IS
     'Whether hypoglycaemia was corrected before applying the score: yes, no, or na (not applicable).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.loss_of_consciousness IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.loss_of_consciousness IS
     'Criterion 1 — loss of consciousness or syncope (mimic); yes scores -1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.seizure_activity IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.seizure_activity IS
     'Criterion 2 — seizure activity (mimic); yes scores -1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.facial_weakness IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.facial_weakness IS
     'Criterion 3 — asymmetric facial weakness (sign); yes scores +1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.arm_weakness IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.arm_weakness IS
     'Criterion 4 — asymmetric arm weakness (sign); yes scores +1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.leg_weakness IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.leg_weakness IS
     'Criterion 5 — asymmetric leg weakness (sign); yes scores +1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.speech_disturbance IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.speech_disturbance IS
     'Criterion 6 — speech disturbance (sign); yes scores +1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.visual_field_defect IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.visual_field_defect IS
     'Criterion 7 — visual field defect (sign); yes scores +1.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinical_note IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -321,14 +338,14 @@ COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.clinical_note IS
 -- threshold, and whether the hypoglycaemia mimic was excluded before the
 -- score was applied.
 
-CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     recognition_of_stroke_in_the_emergency_room_id UUID NOT NULL UNIQUE
-        REFERENCES recognition_of_stroke_in_the_emergency_room(id) ON DELETE CASCADE,
+        REFERENCES recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room(id) ON DELETE CASCADE,
 
     rosier_score INT,
     stroke_likely VARCHAR(20) NOT NULL DEFAULT ''
@@ -340,29 +357,29 @@ CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade (
 );
 
 CREATE TRIGGER trigger_recognition_of_stroke_in_the_emergency_room_grade_updated_at
-    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room_grade
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room_grade IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade IS
     'Computed ROSIER grading result: signed total (-2..+5), derived band against the strict > 0 threshold, and whether the hypoglycaemia mimic was excluded before scoring.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.recognition_of_stroke_in_the_emergency_room_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.recognition_of_stroke_in_the_emergency_room_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.rosier_score IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.rosier_score IS
     'Signed ROSIER total: sum of the mimic (-1) and sign (+1) criteria, range -2..+5.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.stroke_likely IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.stroke_likely IS
     'Derived band: stroke-likely when rosier_score > 0 (strict), otherwise stroke-unlikely.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.glucose_excluded IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.glucose_excluded IS
     'Whether the hypoglycaemia mimic was excluded or corrected before the score was applied.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.graded_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -377,14 +394,14 @@ COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade.graded_at IS
 -- Each row records one rule firing with the criterion it belongs to, the
 -- signed points it contributed, and a human-readable description.
 
-CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade_rule (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     recognition_of_stroke_in_the_emergency_room_grade_id UUID NOT NULL
-        REFERENCES recognition_of_stroke_in_the_emergency_room_grade(id) ON DELETE CASCADE,
+        REFERENCES recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     criterion VARCHAR(30) NOT NULL
@@ -395,34 +412,34 @@ CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade_rule (
 );
 
 CREATE INDEX recognition_of_stroke_in_the_emergency_room_grade_rule_grade_id_idx
-    ON recognition_of_stroke_in_the_emergency_room_grade_rule (recognition_of_stroke_in_the_emergency_room_grade_id);
+    ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule (recognition_of_stroke_in_the_emergency_room_grade_id);
 
 CREATE TRIGGER trigger_recognition_of_stroke_in_the_emergency_room_grade_rule_updated_at
-    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room_grade_rule
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room_grade_rule IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule IS
     'Audit trail of every grading rule that fired during ROSIER computation: criterion, signed points contributed, category, and description.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.recognition_of_stroke_in_the_emergency_room_grade_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.recognition_of_stroke_in_the_emergency_room_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.rule_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-FACIAL-WEAKNESS-01).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.criterion IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.criterion IS
     'Criterion the rule belongs to: loss-of-consciousness, seizure-activity, facial-weakness, arm-weakness, leg-weakness, speech-disturbance, visual-field-defect, or band.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.points IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.points IS
     'Signed points contributed by this rule (-1 for a mimic, +1 for a sign).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.category IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.category IS
     'Subject category (e.g. mimic, sign, band).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.description IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -436,14 +453,14 @@ COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_rule.descrip
 -- Red-flag issues that fire independently of the signed total, with
 -- priority and a suggested action for the emergency-department team.
 
-CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade_flag (
+CREATE TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     recognition_of_stroke_in_the_emergency_room_grade_id UUID NOT NULL
-        REFERENCES recognition_of_stroke_in_the_emergency_room_grade(id) ON DELETE CASCADE,
+        REFERENCES recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -463,34 +480,34 @@ CREATE TABLE recognition_of_stroke_in_the_emergency_room_grade_flag (
 );
 
 CREATE INDEX recognition_of_stroke_in_the_emergency_room_grade_flag_grade_id_idx
-    ON recognition_of_stroke_in_the_emergency_room_grade_flag (recognition_of_stroke_in_the_emergency_room_grade_id);
+    ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag (recognition_of_stroke_in_the_emergency_room_grade_id);
 
 CREATE TRIGGER trigger_recognition_of_stroke_in_the_emergency_room_grade_flag_updated_at
-    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room_grade_flag
+    BEFORE UPDATE ON recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recognition_of_stroke_in_the_emergency_room.set_updated_at();
 
-COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room_grade_flag IS
+COMMENT ON TABLE recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag IS
     'Red-flag issues that fire independently of the signed total, with priority and a suggested action for the emergency-department team.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.created_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.updated_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.deleted_at IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.recognition_of_stroke_in_the_emergency_room_grade_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.recognition_of_stroke_in_the_emergency_room_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.flag_id IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ACTIVATE-STROKE-PATHWAY-001).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.category IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.priority IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.description IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room_grade_flag.suggested_action IS
+COMMENT ON COLUMN recognition_of_stroke_in_the_emergency_room.recognition_of_stroke_in_the_emergency_room_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "activate the acute stroke pathway and start the thrombolysis clock").';
 
 -- ========================================================================

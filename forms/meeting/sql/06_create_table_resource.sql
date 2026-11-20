@@ -1,13 +1,13 @@
 -- Resource — anything required for the meeting to succeed: a room, a piece
 -- of equipment, a document, a URL, a budget line, catering, an interpreter.
 
-CREATE TABLE resource (
+CREATE TABLE meeting.resource (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
     resource_type VARCHAR(20) NOT NULL DEFAULT ''
@@ -29,44 +29,44 @@ CREATE TABLE resource (
 );
 
 CREATE TRIGGER trigger_resource_updated_at
-    BEFORE UPDATE ON resource
+    BEFORE UPDATE ON meeting.resource
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE resource IS
+COMMENT ON TABLE meeting.resource IS
     'A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status.';
-COMMENT ON COLUMN resource.id IS
+COMMENT ON COLUMN meeting.resource.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN resource.created_at IS
+COMMENT ON COLUMN meeting.resource.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN resource.updated_at IS
+COMMENT ON COLUMN meeting.resource.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN resource.deleted_at IS
+COMMENT ON COLUMN meeting.resource.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN resource.meeting_id IS
+COMMENT ON COLUMN meeting.resource.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN resource.position IS
+COMMENT ON COLUMN meeting.resource.position IS
     'Zero-based ordinal of the resource in the list.';
-COMMENT ON COLUMN resource.resource_type IS
+COMMENT ON COLUMN meeting.resource.resource_type IS
     'Type of resource: room, equipment, document, link, budget, catering, interpreter, transport, other.';
-COMMENT ON COLUMN resource.name IS
+COMMENT ON COLUMN meeting.resource.name IS
     'Name or short identifier of the resource.';
-COMMENT ON COLUMN resource.quantity IS
+COMMENT ON COLUMN meeting.resource.quantity IS
     'Quantity required (e.g. 12 chairs, 1 projector).';
-COMMENT ON COLUMN resource.unit IS
+COMMENT ON COLUMN meeting.resource.unit IS
     'Unit of quantity (e.g. seats, licences, GBP, USD).';
-COMMENT ON COLUMN resource.url IS
+COMMENT ON COLUMN meeting.resource.url IS
     'URL of the resource (document link, room booking page, equipment record).';
-COMMENT ON COLUMN resource.cost_amount IS
+COMMENT ON COLUMN meeting.resource.cost_amount IS
     'Cost amount in the cost_currency.';
-COMMENT ON COLUMN resource.cost_currency IS
+COMMENT ON COLUMN meeting.resource.cost_currency IS
     'ISO 4217 currency code (e.g. GBP, USD, EUR).';
-COMMENT ON COLUMN resource.status IS
+COMMENT ON COLUMN meeting.resource.status IS
     'Reservation status: requested, reserved, confirmed, unavailable, cancelled.';
-COMMENT ON COLUMN resource.notes IS
+COMMENT ON COLUMN meeting.resource.notes IS
     'Free-text notes — e.g. supplier, vendor, point of contact.';
 
 CREATE INDEX resource_index_meeting_id
-    ON resource(meeting_id);
+    ON meeting.resource(meeting_id);
 CREATE INDEX resource_index_meeting_id_position
-    ON resource(meeting_id, position);
+    ON meeting.resource(meeting_id, position);

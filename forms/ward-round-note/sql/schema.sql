@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS ward_round_note;
+
+COMMENT ON SCHEMA ward_round_note IS
+    'Namespace for the Ward Round Note form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION ward_round_note.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION ward_round_note.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE ward_round_note.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON ward_round_note.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE ward_round_note.patient IS
     'Patient demographic information used by the ward-round-note record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN ward_round_note.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN ward_round_note.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN ward_round_note.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN ward_round_note.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN ward_round_note.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN ward_round_note.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN ward_round_note.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN ward_round_note.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN ward_round_note.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN ward_round_note.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ward_round_note.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN ward_round_note.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN ward_round_note.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN ward_round_note.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN ward_round_note.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN ward_round_note.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN ward_round_note.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN ward_round_note.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON ward_round_note.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the reviewing
 -- clinician who documented the ward-round entry.
 
-CREATE TABLE clinician (
+CREATE TABLE ward_round_note.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON ward_round_note.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE ward_round_note.clinician IS
     'Clinician identifying information for the reviewing clinician who documented a ward-round note.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN ward_round_note.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN ward_round_note.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN ward_round_note.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN ward_round_note.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN ward_round_note.clinician.name IS
     'Clinician full name as recorded on the ward round.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN ward_round_note.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN ward_round_note.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN ward_round_note.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ward_round_note.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN ward_round_note.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN ward_round_note.clinician.role IS
     'Ward-round role: ward-doctor, acp (advanced clinical practitioner), physician-associate, consultant, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN ward_round_note.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN ward_round_note.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON ward_round_note.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- detected by a non-empty field or an explicit negative flag, not by
 -- semantic analysis.
 
-CREATE TABLE ward_round_note (
+CREATE TABLE ward_round_note.ward_round_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES ward_round_note.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES ward_round_note.clinician(id) ON DELETE RESTRICT,
 
     -- Review header and identification
     clinician_name TEXT NOT NULL DEFAULT '',
@@ -273,84 +290,84 @@ CREATE TABLE ward_round_note (
 );
 
 CREATE INDEX ward_round_note_patient_id_idx
-    ON ward_round_note (patient_id);
+    ON ward_round_note.ward_round_note (patient_id);
 CREATE INDEX ward_round_note_clinician_id_idx
-    ON ward_round_note (clinician_id);
+    ON ward_round_note.ward_round_note (clinician_id);
 
 CREATE TRIGGER trigger_ward_round_note_updated_at
-    BEFORE UPDATE ON ward_round_note
+    BEFORE UPDATE ON ward_round_note.ward_round_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE ward_round_note IS
+COMMENT ON TABLE ward_round_note.ward_round_note IS
     'Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN ward_round_note.id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ward_round_note.created_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ward_round_note.updated_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ward_round_note.deleted_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ward_round_note.patient_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN ward_round_note.clinician_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN ward_round_note.clinician_name IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_name IS
     'Name of the reviewing clinician (required component: header).';
-COMMENT ON COLUMN ward_round_note.clinician_grade IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinician_grade IS
     'Grade of the reviewing clinician: fy1, fy2, core-trainee, specialty-registrar, acp, physician-associate, or consultant (required component: header).';
-COMMENT ON COLUMN ward_round_note.reviewed_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.reviewed_at IS
     'Date and time of the review (required component: header).';
-COMMENT ON COLUMN ward_round_note.ward IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.ward IS
     'Ward or location where the review took place.';
-COMMENT ON COLUMN ward_round_note.patient_identifier IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.patient_identifier IS
     'Local patient identifier as recorded on the entry.';
-COMMENT ON COLUMN ward_round_note.admission_date IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.admission_date IS
     'Date of admission.';
-COMMENT ON COLUMN ward_round_note.primary_diagnosis IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.primary_diagnosis IS
     'Reason for admission or working diagnosis.';
-COMMENT ON COLUMN ward_round_note.overnight_events IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.overnight_events IS
     'Component 2: overnight events since the previous review (recommended component).';
-COMMENT ON COLUMN ward_round_note.no_overnight_events IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_overnight_events IS
     'Explicit "no overnight events" flag (yes/no); yes documents component 2 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.problem_list IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.problem_list IS
     'Component 3: current issues, problem list, and progress (required component: problems).';
-COMMENT ON COLUMN ward_round_note.examination_summary IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.examination_summary IS
     'Component 4: examination summary (required component: examination, with news2_total).';
-COMMENT ON COLUMN ward_round_note.news2_total IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.news2_total IS
     'Component 4: latest NEWS2 total (0..20+); NULL when unrecorded.';
-COMMENT ON COLUMN ward_round_note.news2_single_param_three IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.news2_single_param_three IS
     'Whether any single NEWS2 parameter scores 3 (yes/no); drives the deteriorating-NEWS2 flag.';
-COMMENT ON COLUMN ward_round_note.observation_trend IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.observation_trend IS
     'Component 4: observation trend: improving, stable, or deteriorating.';
-COMMENT ON COLUMN ward_round_note.investigations_reviewed IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.investigations_reviewed IS
     'Component 5: investigations and results reviewed (required component: investigations).';
-COMMENT ON COLUMN ward_round_note.no_investigations_outstanding IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_investigations_outstanding IS
     'Explicit "none outstanding" flag (yes/no); yes documents component 5 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.abnormal_result_flagged IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.abnormal_result_flagged IS
     'Whether an abnormal or critical result is present (yes/no); drives the abnormal-results-not-actioned flag.';
-COMMENT ON COLUMN ward_round_note.abnormal_result_actioned IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.abnormal_result_actioned IS
     'Whether an action was recorded for the abnormal result (yes/no).';
-COMMENT ON COLUMN ward_round_note.vte_status IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.vte_status IS
     'Component 6: VTE assessment status: assessed, not-required, or not-done (required component: vte).';
-COMMENT ON COLUMN ward_round_note.vte_prophylaxis_in_place IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.vte_prophylaxis_in_place IS
     'Whether VTE prophylaxis is in place (yes/no).';
-COMMENT ON COLUMN ward_round_note.medication_changes IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.medication_changes IS
     'Component 7: medication changes made on the review (required component: medication).';
-COMMENT ON COLUMN ward_round_note.no_medication_changes IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.no_medication_changes IS
     'Explicit "no medication changes" flag (yes/no); yes documents component 7 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.plan_and_jobs IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.plan_and_jobs IS
     'Component 8: plan and jobs for the day (required component: plan).';
-COMMENT ON COLUMN ward_round_note.escalation_status IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.escalation_status IS
     'Component 9: escalation / ceiling-of-care status: for-full-escalation, ward-level-ceiling, dnacpr, or not-recorded (required component: escalation).';
-COMMENT ON COLUMN ward_round_note.senior_review_present IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.senior_review_present IS
     'Whether a consultant or senior grade is named on the entry (yes/no); drives the no-senior-review flag.';
-COMMENT ON COLUMN ward_round_note.estimated_discharge_date IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.estimated_discharge_date IS
     'Component 10: estimated date of discharge; NULL when not set (recommended component).';
-COMMENT ON COLUMN ward_round_note.discharge_not_estimable IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.discharge_not_estimable IS
     'Explicit "not yet estimable" flag (yes/no); yes documents component 10 as a deliberate negative.';
-COMMENT ON COLUMN ward_round_note.clinical_note IS
+COMMENT ON COLUMN ward_round_note.ward_round_note.clinical_note IS
     'Optional free-text summary note shown in the summary.';
 
 -- ========================================================================
@@ -367,14 +384,14 @@ COMMENT ON COLUMN ward_round_note.clinical_note IS
 -- percentage. A completeness grade reflects the quality of the record,
 -- not the correctness of the care.
 
-CREATE TABLE ward_round_note_grade (
+CREATE TABLE ward_round_note.ward_round_note_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ward_round_note_id UUID NOT NULL UNIQUE
-        REFERENCES ward_round_note(id) ON DELETE CASCADE,
+        REFERENCES ward_round_note.ward_round_note(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'partial', 'incomplete', '')),
@@ -401,43 +418,43 @@ CREATE TABLE ward_round_note_grade (
 );
 
 CREATE TRIGGER trigger_ward_round_note_grade_updated_at
-    BEFORE UPDATE ON ward_round_note_grade
+    BEFORE UPDATE ON ward_round_note.ward_round_note_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE ward_round_note_grade IS
+COMMENT ON TABLE ward_round_note.ward_round_note_grade IS
     'Computed documentation-completeness grading result for a ward-round note: status (complete/partial/incomplete), completeness percentage over the eight required components, and per-component presence flags.';
-COMMENT ON COLUMN ward_round_note_grade.id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ward_round_note_grade.created_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ward_round_note_grade.updated_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ward_round_note_grade.deleted_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ward_round_note_grade.ward_round_note_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.ward_round_note_id IS
     'Foreign key to the parent ward-round note (unique, 1:1).';
-COMMENT ON COLUMN ward_round_note_grade.status IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.status IS
     'Completeness status: complete, partial, or incomplete.';
-COMMENT ON COLUMN ward_round_note_grade.completeness_percent IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.completeness_percent IS
     'Completeness percentage (0..100): documented required components / 8 x 100.';
-COMMENT ON COLUMN ward_round_note_grade.header_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.header_documented IS
     'Whether the header component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.problems_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.problems_documented IS
     'Whether the problems component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.examination_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.examination_documented IS
     'Whether the examination component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.investigations_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.investigations_documented IS
     'Whether the investigations component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.vte_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.vte_documented IS
     'Whether the VTE component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.medication_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.medication_documented IS
     'Whether the medication component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.plan_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.plan_documented IS
     'Whether the plan component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.escalation_documented IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.escalation_documented IS
     'Whether the escalation component is documented (yes/no).';
-COMMENT ON COLUMN ward_round_note_grade.graded_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -452,14 +469,14 @@ COMMENT ON COLUMN ward_round_note_grade.graded_at IS
 -- row records one rule firing with the component it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE ward_round_note_grade_rule (
+CREATE TABLE ward_round_note.ward_round_note_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ward_round_note_grade_id UUID NOT NULL
-        REFERENCES ward_round_note_grade(id) ON DELETE CASCADE,
+        REFERENCES ward_round_note.ward_round_note_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     component VARCHAR(20) NOT NULL DEFAULT ''
@@ -482,32 +499,32 @@ CREATE TABLE ward_round_note_grade_rule (
 );
 
 CREATE INDEX ward_round_note_grade_rule_grade_id_idx
-    ON ward_round_note_grade_rule (ward_round_note_grade_id);
+    ON ward_round_note.ward_round_note_grade_rule (ward_round_note_grade_id);
 
 CREATE TRIGGER trigger_ward_round_note_grade_rule_updated_at
-    BEFORE UPDATE ON ward_round_note_grade_rule
+    BEFORE UPDATE ON ward_round_note.ward_round_note_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE ward_round_note_grade_rule IS
+COMMENT ON TABLE ward_round_note.ward_round_note_grade_rule IS
     'Audit trail of every completeness rule that fired during grading: component, category, and description.';
-COMMENT ON COLUMN ward_round_note_grade_rule.id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ward_round_note_grade_rule.created_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ward_round_note_grade_rule.updated_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ward_round_note_grade_rule.deleted_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ward_round_note_grade_rule.ward_round_note_grade_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.ward_round_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ward_round_note_grade_rule.rule_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-PLAN-DOCUMENTED-01).';
-COMMENT ON COLUMN ward_round_note_grade_rule.component IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.component IS
     'Review component the rule concerns: header, problems, examination, investigations, vte, medication, plan, escalation, overnight-events, estimated-discharge, or completeness.';
-COMMENT ON COLUMN ward_round_note_grade_rule.category IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.category IS
     'Subject category (e.g. required-component, recommended-component).';
-COMMENT ON COLUMN ward_round_note_grade_rule.description IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -521,14 +538,14 @@ COMMENT ON COLUMN ward_round_note_grade_rule.description IS
 -- Safety flags that fire independently of the completeness status, with a
 -- priority and a suggested action for the clinician or governance team.
 
-CREATE TABLE ward_round_note_grade_flag (
+CREATE TABLE ward_round_note.ward_round_note_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ward_round_note_grade_id UUID NOT NULL
-        REFERENCES ward_round_note_grade(id) ON DELETE CASCADE,
+        REFERENCES ward_round_note.ward_round_note_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -549,34 +566,34 @@ CREATE TABLE ward_round_note_grade_flag (
 );
 
 CREATE INDEX ward_round_note_grade_flag_grade_id_idx
-    ON ward_round_note_grade_flag (ward_round_note_grade_id);
+    ON ward_round_note.ward_round_note_grade_flag (ward_round_note_grade_id);
 
 CREATE TRIGGER trigger_ward_round_note_grade_flag_updated_at
-    BEFORE UPDATE ON ward_round_note_grade_flag
+    BEFORE UPDATE ON ward_round_note.ward_round_note_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ward_round_note.set_updated_at();
 
-COMMENT ON TABLE ward_round_note_grade_flag IS
+COMMENT ON TABLE ward_round_note.ward_round_note_grade_flag IS
     'Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN ward_round_note_grade_flag.id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ward_round_note_grade_flag.created_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ward_round_note_grade_flag.updated_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ward_round_note_grade_flag.deleted_at IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ward_round_note_grade_flag.ward_round_note_grade_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.ward_round_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ward_round_note_grade_flag.flag_id IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DETERIORATING-NEWS2-001).';
-COMMENT ON COLUMN ward_round_note_grade_flag.category IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.category IS
     'Flag category: deteriorating-news2-escalation, vte-not-done, no-plan-jobs, abnormal-results-not-actioned, no-senior-review, incomplete-entry, or other.';
-COMMENT ON COLUMN ward_round_note_grade_flag.priority IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN ward_round_note_grade_flag.description IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN ward_round_note_grade_flag.suggested_action IS
+COMMENT ON COLUMN ward_round_note.ward_round_note_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "escalate to the senior on call", "complete the VTE assessment").';
 
 -- ========================================================================

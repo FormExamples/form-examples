@@ -1,10 +1,10 @@
-CREATE TABLE childhood_vaccinations (
+CREATE TABLE vaccinations_assessment.childhood_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     dtap_ipv_hib_hepb SMALLINT CHECK (dtap_ipv_hib_hepb IS NULL OR dtap_ipv_hib_hepb BETWEEN 0 AND 2),
     pneumococcal SMALLINT CHECK (pneumococcal IS NULL OR pneumococcal BETWEEN 0 AND 2),
     rotavirus SMALLINT CHECK (rotavirus IS NULL OR rotavirus BETWEEN 0 AND 2),
@@ -15,34 +15,34 @@ CREATE TABLE childhood_vaccinations (
 );
 
 CREATE TRIGGER trigger_childhood_vaccinations_updated_at
-    BEFORE UPDATE ON childhood_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.childhood_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE childhood_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.childhood_vaccinations IS
     'Childhood vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.';
 
-COMMENT ON COLUMN childhood_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN childhood_vaccinations.dtap_ipv_hib_hepb IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.dtap_ipv_hib_hepb IS
     'Dtap ipv hib hepb.';
-COMMENT ON COLUMN childhood_vaccinations.pneumococcal IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.pneumococcal IS
     'Pneumococcal.';
-COMMENT ON COLUMN childhood_vaccinations.rotavirus IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.rotavirus IS
     'Rotavirus.';
-COMMENT ON COLUMN childhood_vaccinations.meningitis_b IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.meningitis_b IS
     'Meningitis b.';
-COMMENT ON COLUMN childhood_vaccinations.mmr IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.mmr IS
     'Mmr.';
-COMMENT ON COLUMN childhood_vaccinations.hib_menc IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.hib_menc IS
     'Hib menc.';
-COMMENT ON COLUMN childhood_vaccinations.preschool_booster IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.preschool_booster IS
     'Preschool booster.';
-COMMENT ON COLUMN childhood_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN childhood_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN childhood_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN childhood_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';

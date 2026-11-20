@@ -5,13 +5,13 @@
 -- values are checked against configured limits for the physiological-
 -- derangement safety flag.
 
-CREATE TABLE anaesthetic_record_timed_observation (
+CREATE TABLE anaesthetic_record.anaesthetic_record_timed_observation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record(id) ON DELETE CASCADE,
+    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record.anaesthetic_record(id) ON DELETE CASCADE,
 
     observed_at TIMESTAMPTZ,
     systolic_blood_pressure NUMERIC(5,1) CHECK (systolic_blood_pressure IS NULL OR systolic_blood_pressure >= 0),
@@ -25,40 +25,40 @@ CREATE TABLE anaesthetic_record_timed_observation (
 );
 
 CREATE INDEX anaesthetic_record_timed_observation_record_id_idx
-    ON anaesthetic_record_timed_observation (anaesthetic_record_id);
+    ON anaesthetic_record.anaesthetic_record_timed_observation (anaesthetic_record_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_timed_observation_updated_at
-    BEFORE UPDATE ON anaesthetic_record_timed_observation
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_timed_observation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_timed_observation IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_timed_observation IS
     'Timed physiological observations charted during the anaesthetic: time plus monitored values.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.anaesthetic_record_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.anaesthetic_record_id IS
     'Foreign key to the parent anaesthetic record.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.observed_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.observed_at IS
     'Timestamp of the timed observation.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.systolic_blood_pressure IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.systolic_blood_pressure IS
     'Systolic blood pressure in mmHg.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.diastolic_blood_pressure IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.diastolic_blood_pressure IS
     'Diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.heart_rate IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.heart_rate IS
     'Heart rate in beats per minute.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.spo2 IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.spo2 IS
     'Peripheral oxygen saturation (SpO2) as a percentage.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.end_tidal_co2 IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.end_tidal_co2 IS
     'End-tidal carbon dioxide in kPa.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.temperature IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.temperature IS
     'Core temperature in degrees Celsius.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.agent_percent IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.agent_percent IS
     'Inspired or expired volatile agent concentration as a percentage.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.fresh_gas_flow_l IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.fresh_gas_flow_l IS
     'Fresh gas flow in litres per minute.';

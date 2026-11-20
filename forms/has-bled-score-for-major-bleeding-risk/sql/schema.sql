@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS has_bled_score_for_major_bleeding_risk;
+
+COMMENT ON SCHEMA has_bled_score_for_major_bleeding_risk IS
+    'Namespace for the HAS-BLED Score for Major Bleeding Risk form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.patient IS
     'Patient demographic information used by the HAS-BLED assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON has_bled_score_for_major_bleeding_risk.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.role IS
     'Primary clinical role: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON has_bled_score_for_major_bleeding_risk.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -206,14 +223,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- A-liver, S, B, L, E, D-drugs, D-alcohol). The computed grade, fired
 -- rules, and flags live in dedicated child tables.
 
-CREATE TABLE has_bled_score_for_major_bleeding_risk (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES has_bled_score_for_major_bleeding_risk.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES has_bled_score_for_major_bleeding_risk.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -259,64 +276,64 @@ CREATE TABLE has_bled_score_for_major_bleeding_risk (
 );
 
 CREATE INDEX has_bled_score_for_major_bleeding_risk_patient_id_idx
-    ON has_bled_score_for_major_bleeding_risk (patient_id);
+    ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk (patient_id);
 CREATE INDEX has_bled_score_for_major_bleeding_risk_clinician_id_idx
-    ON has_bled_score_for_major_bleeding_risk (clinician_id);
+    ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk (clinician_id);
 
 CREATE TRIGGER trigger_has_bled_score_for_major_bleeding_risk_updated_at
-    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE has_bled_score_for_major_bleeding_risk IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk IS
     'Main HAS-BLED assessment record: assessment context, patient identification, and the nine scored criterion inputs (hypertension, abnormal renal function, abnormal liver function, stroke, bleeding, labile INR, elderly, drugs, alcohol).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician_name IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinician_role IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, pharmacist, or other.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.assessed_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.care_setting IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.care_setting IS
     'Care setting: cardiology, general-practice, anticoagulation-clinic, acute-medical, or other.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.anticoagulation_status IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.anticoagulation_status IS
     'Whether the patient is already on, or is being considered for, oral anticoagulation: on or considering.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.cha_ds_vasc_score IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.cha_ds_vasc_score IS
     'Optional paired CHA2DS2-VASc stroke-risk score (0-9), recorded as context only; not computed by this form.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.patient_identifier IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.age_years IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.age_years IS
     'Patient age in whole years; drives criterion E (elderly, > 65). NULL when unanswered, contributing 0 points and raising a completeness flag.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.sex IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.hypertension_uncontrolled IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.hypertension_uncontrolled IS
     'Criterion H — uncontrolled hypertension (systolic blood pressure > 160 mmHg): yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.abnormal_renal_function IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.abnormal_renal_function IS
     'Criterion A (renal) — abnormal renal function (dialysis, transplant, or creatinine >= 200 umol/L): yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.abnormal_liver_function IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.abnormal_liver_function IS
     'Criterion A (liver) — abnormal liver function (cirrhosis, or bilirubin > 2x ULN with transaminases > 3x ULN): yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.stroke_history IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.stroke_history IS
     'Criterion S — prior stroke: yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.bleeding_history IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.bleeding_history IS
     'Criterion B — prior major bleed, bleeding diathesis, or anaemia: yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.labile_inr IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.labile_inr IS
     'Criterion L — labile INR (unstable or high INR, or time in therapeutic range < 60%): yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.antiplatelet_or_nsaid IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.antiplatelet_or_nsaid IS
     'Criterion D (drugs) — concomitant antiplatelet agents or NSAIDs: yes or no.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.alcohol_units_per_week IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.alcohol_units_per_week IS
     'Criterion D (alcohol) — alcohol consumption in units per week; >= 8 scores the criterion. NULL when unanswered, contributing 0 points and raising a completeness flag.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinical_note IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -332,14 +349,14 @@ COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.clinical_note IS
 -- free-text summary of the correctable (modifiable) bleeding-risk
 -- factors surfaced by the score.
 
-CREATE TABLE has_bled_score_for_major_bleeding_risk_grade (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     has_bled_score_for_major_bleeding_risk_id UUID NOT NULL UNIQUE
-        REFERENCES has_bled_score_for_major_bleeding_risk(id) ON DELETE CASCADE,
+        REFERENCES has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk(id) ON DELETE CASCADE,
 
     hypertension_points INT,
     renal_points INT,
@@ -360,47 +377,47 @@ CREATE TABLE has_bled_score_for_major_bleeding_risk_grade (
 );
 
 CREATE TRIGGER trigger_has_bled_score_for_major_bleeding_risk_grade_updated_at
-    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk_grade
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE has_bled_score_for_major_bleeding_risk_grade IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade IS
     'Computed HAS-BLED grading result: per-criterion 0-1 sub-scores, summed total (0-9), derived risk band, and a summary of modifiable bleeding-risk factors.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.has_bled_score_for_major_bleeding_risk_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.has_bled_score_for_major_bleeding_risk_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.hypertension_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.hypertension_points IS
     'Points (0 or 1) awarded for criterion H, uncontrolled hypertension.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.renal_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.renal_points IS
     'Points (0 or 1) awarded for criterion A, abnormal renal function.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.liver_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.liver_points IS
     'Points (0 or 1) awarded for criterion A, abnormal liver function.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.stroke_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.stroke_points IS
     'Points (0 or 1) awarded for criterion S, stroke history.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.bleeding_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.bleeding_points IS
     'Points (0 or 1) awarded for criterion B, bleeding history or predisposition.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.labile_inr_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.labile_inr_points IS
     'Points (0 or 1) awarded for criterion L, labile INR.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.elderly_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.elderly_points IS
     'Points (0 or 1) awarded for criterion E, elderly (age > 65).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.drugs_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.drugs_points IS
     'Points (0 or 1) awarded for criterion D, concomitant antiplatelets or NSAIDs.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.alcohol_points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.alcohol_points IS
     'Points (0 or 1) awarded for criterion D, alcohol >= 8 units per week.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.total_score IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.total_score IS
     'Summed HAS-BLED score across the nine criteria (0-9).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.risk_band IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.risk_band IS
     'Derived risk band: low (0), moderate (1-2), or high (>= 3, higher major-bleeding risk).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.modifiable_factors IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.modifiable_factors IS
     'Free-text summary of the correctable bleeding-risk factors surfaced by the score (uncontrolled hypertension, labile INR, antiplatelets/NSAIDs, excess alcohol).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.graded_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -416,14 +433,14 @@ COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE has_bled_score_for_major_bleeding_risk_grade_rule (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     has_bled_score_for_major_bleeding_risk_grade_id UUID NOT NULL
-        REFERENCES has_bled_score_for_major_bleeding_risk_grade(id) ON DELETE CASCADE,
+        REFERENCES has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     criterion VARCHAR(20) NOT NULL
@@ -434,34 +451,34 @@ CREATE TABLE has_bled_score_for_major_bleeding_risk_grade_rule (
 );
 
 CREATE INDEX has_bled_score_for_major_bleeding_risk_grade_rule_grade_id_idx
-    ON has_bled_score_for_major_bleeding_risk_grade_rule (has_bled_score_for_major_bleeding_risk_grade_id);
+    ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule (has_bled_score_for_major_bleeding_risk_grade_id);
 
 CREATE TRIGGER trigger_has_bled_score_for_major_bleeding_risk_grade_rule_updated_at
-    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk_grade_rule
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE has_bled_score_for_major_bleeding_risk_grade_rule IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule IS
     'Audit trail of every grading rule that fired during HAS-BLED computation: criterion, points contributed, category, and description.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.has_bled_score_for_major_bleeding_risk_grade_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.has_bled_score_for_major_bleeding_risk_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.rule_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ELDERLY-1POINT-01).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.criterion IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.criterion IS
     'Scored criterion the rule belongs to: hypertension, renal, liver, stroke, bleeding, labile-inr, elderly, drugs, alcohol, or band.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.points IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.points IS
     'Points (0 or 1) contributed by this rule for its criterion.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.category IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.category IS
     'Subject category (e.g. criterion-fired, band).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.description IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -477,14 +494,14 @@ COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_rule.description 
 -- modifiable-factor flags are the point of HAS-BLED: they surface
 -- correctable bleeding-risk factors rather than gate anticoagulation.
 
-CREATE TABLE has_bled_score_for_major_bleeding_risk_grade_flag (
+CREATE TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     has_bled_score_for_major_bleeding_risk_grade_id UUID NOT NULL
-        REFERENCES has_bled_score_for_major_bleeding_risk_grade(id) ON DELETE CASCADE,
+        REFERENCES has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -505,34 +522,34 @@ CREATE TABLE has_bled_score_for_major_bleeding_risk_grade_flag (
 );
 
 CREATE INDEX has_bled_score_for_major_bleeding_risk_grade_flag_grade_id_idx
-    ON has_bled_score_for_major_bleeding_risk_grade_flag (has_bled_score_for_major_bleeding_risk_grade_id);
+    ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag (has_bled_score_for_major_bleeding_risk_grade_id);
 
 CREATE TRIGGER trigger_has_bled_score_for_major_bleeding_risk_grade_flag_updated_at
-    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk_grade_flag
+    BEFORE UPDATE ON has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION has_bled_score_for_major_bleeding_risk.set_updated_at();
 
-COMMENT ON TABLE has_bled_score_for_major_bleeding_risk_grade_flag IS
+COMMENT ON TABLE has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team. The four modifiable-factor flags surface correctable bleeding-risk factors rather than gate anticoagulation.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.created_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.updated_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.deleted_at IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.has_bled_score_for_major_bleeding_risk_grade_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.has_bled_score_for_major_bleeding_risk_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.flag_id IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-BLEEDING-RISK-001).';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.category IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.category IS
     'Flag category: high-bleeding-risk, modifiable-hypertension, modifiable-labile-inr, modifiable-drugs, modifiable-alcohol, incomplete-assessment, or other.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.priority IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.description IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk_grade_flag.suggested_action IS
+COMMENT ON COLUMN has_bled_score_for_major_bleeding_risk.has_bled_score_for_major_bleeding_risk_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "optimise blood-pressure control", "review need for concomitant NSAID").';
 
 -- ========================================================================

@@ -1,10 +1,10 @@
-CREATE TABLE restrictions_limitations (
+CREATE TABLE medical_records_release_permission.restrictions_limitations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     exclude_hiv VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (exclude_hiv IN ('yes', 'no', '')),
     exclude_substance_abuse VARCHAR(5) NOT NULL DEFAULT ''
@@ -19,32 +19,32 @@ CREATE TABLE restrictions_limitations (
 );
 
 CREATE TRIGGER trigger_restrictions_limitations_updated_at
-    BEFORE UPDATE ON restrictions_limitations
+    BEFORE UPDATE ON medical_records_release_permission.restrictions_limitations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE restrictions_limitations IS
+COMMENT ON TABLE medical_records_release_permission.restrictions_limitations IS
     'Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.';
-COMMENT ON COLUMN restrictions_limitations.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN restrictions_limitations.exclude_hiv IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_hiv IS
     'Exclude HIV/AIDS-related records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_substance_abuse IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_substance_abuse IS
     'Exclude substance abuse records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_mental_health IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_mental_health IS
     'Exclude mental health records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_genetic_info IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_genetic_info IS
     'Exclude genetic information records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_sti IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_sti IS
     'Exclude sexually transmitted infection records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.additional_restrictions IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.additional_restrictions IS
     'Free-text additional restrictions specified by the patient.';
 
-COMMENT ON COLUMN restrictions_limitations.id IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN restrictions_limitations.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN restrictions_limitations.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN restrictions_limitations.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.deleted_at IS
     'Timestamp when this row was deleted.';

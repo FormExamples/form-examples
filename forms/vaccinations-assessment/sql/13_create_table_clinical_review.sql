@@ -1,10 +1,10 @@
-CREATE TABLE clinical_review (
+CREATE TABLE vaccinations_assessment.clinical_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     post_vaccination_observation SMALLINT CHECK (post_vaccination_observation IS NULL OR post_vaccination_observation BETWEEN 1 AND 5),
     immediate_reaction VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (immediate_reaction IN ('yes', 'no', '')),
@@ -19,36 +19,36 @@ CREATE TABLE clinical_review (
 );
 
 CREATE TRIGGER trigger_clinical_review_updated_at
-    BEFORE UPDATE ON clinical_review
+    BEFORE UPDATE ON vaccinations_assessment.clinical_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE clinical_review IS
+COMMENT ON TABLE vaccinations_assessment.clinical_review IS
     'Clinical review including post-vaccination observation and referral needs. One-to-one child of assessment.';
 
-COMMENT ON COLUMN clinical_review.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN clinical_review.post_vaccination_observation IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.post_vaccination_observation IS
     'Post vaccination observation.';
-COMMENT ON COLUMN clinical_review.immediate_reaction IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.immediate_reaction IS
     'Immediate reaction. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.reaction_details IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.reaction_details IS
     'Reaction details.';
-COMMENT ON COLUMN clinical_review.next_dose_due IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.next_dose_due IS
     'Next dose due.';
-COMMENT ON COLUMN clinical_review.catch_up_schedule_needed IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.catch_up_schedule_needed IS
     'Catch up schedule needed. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.referral_needed IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.referral_needed IS
     'Referral needed. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.clinician_notes IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.clinician_notes IS
     'Clinician notes.';
-COMMENT ON COLUMN clinical_review.reviewing_clinician IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.reviewing_clinician IS
     'Reviewing clinician.';
-COMMENT ON COLUMN clinical_review.id IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinical_review.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinical_review.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinical_review.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.deleted_at IS
     'Timestamp when this row was deleted.';

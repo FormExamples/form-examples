@@ -1,7 +1,7 @@
 -- Clinician information for the preparer or assisting staff member who helps
 -- complete this Social Security card application.
 
-CREATE TABLE clinician (
+CREATE TABLE united_states_social_security_card_application.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,35 +19,35 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON united_states_social_security_card_application.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE united_states_social_security_card_application.clinician IS
     'Clinician information for the preparer or assisting staff member who helps complete the Social Security card application.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.name IS
     'Full name of the preparer or staff member.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.postcode IS
     'Postal code (ZIP code).';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.role IS
     'Role: preparer, field-office-staff, legal-guardian, or other.';
-COMMENT ON COLUMN clinician.organization IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.organization IS
     'Organization the preparer works for, such as a school, agency, or field office.';
-COMMENT ON COLUMN clinician.staff_identifier IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.staff_identifier IS
     'Organization-assigned identifier of the preparer.';

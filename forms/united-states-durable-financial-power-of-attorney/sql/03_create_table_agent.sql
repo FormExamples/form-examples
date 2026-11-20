@@ -1,7 +1,7 @@
 -- The agent (attorney-in-fact): the person or institution the principal
 -- authorizes to act on the principal's behalf.
 
-CREATE TABLE agent (
+CREATE TABLE united_states_durable_financial_power_of_attorney.agent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -15,27 +15,27 @@ CREATE TABLE agent (
 );
 
 CREATE TRIGGER trigger_agent_updated_at
-    BEFORE UPDATE ON agent
+    BEFORE UPDATE ON united_states_durable_financial_power_of_attorney.agent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_durable_financial_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE agent IS
+COMMENT ON TABLE united_states_durable_financial_power_of_attorney.agent IS
     'The agent (attorney-in-fact) named in a durable financial power of attorney.';
-COMMENT ON COLUMN agent.id IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agent.created_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN agent.updated_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agent.deleted_at IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agent.name IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.name IS
     'Full name of the agent.';
-COMMENT ON COLUMN agent.email IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.email IS
     'Email address.';
-COMMENT ON COLUMN agent.phone IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.phone IS
     'Phone number.';
-COMMENT ON COLUMN agent.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN agent.relationship IS
+COMMENT ON COLUMN united_states_durable_financial_power_of_attorney.agent.relationship IS
     'Relationship to the principal: spouse, child, other-family, friend, professional, or financial-institution.';

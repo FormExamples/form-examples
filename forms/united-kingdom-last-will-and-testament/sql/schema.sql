@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_testator.sql
 --   - 03_create_table_united_kingdom_last_will_and_testament.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_last_will_and_testament;
+
+COMMENT ON SCHEMA united_kingdom_last_will_and_testament IS
+    'Namespace for the United Kingdom Last Will and Testament form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_last_will_and_testament.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_last_will_and_testament.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Testator: the person making the will. Held separately so one testator can
 -- have several will drafting records over time (a new will replaces an old one).
 
-CREATE TABLE testator (
+CREATE TABLE united_kingdom_last_will_and_testament.testator (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -73,37 +90,37 @@ CREATE TABLE testator (
 );
 
 CREATE TRIGGER trigger_testator_updated_at
-    BEFORE UPDATE ON testator
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.testator
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE testator IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.testator IS
     'Testator: the person making the will, with contact details.';
-COMMENT ON COLUMN testator.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN testator.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN testator.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN testator.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN testator.name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.name IS
     'Full legal name of the testator.';
-COMMENT ON COLUMN testator.birth_date IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.birth_date IS
     'Date of birth of the testator; a testator must be 18 or over.';
-COMMENT ON COLUMN testator.email IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.email IS
     'Email address.';
-COMMENT ON COLUMN testator.phone IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.phone IS
     'Phone number.';
-COMMENT ON COLUMN testator.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN testator.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN testator.postcode IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator.postcode IS
     'Postal code.';
 
 CREATE INDEX testator_name_trgm_idx
-    ON testator
+    ON united_kingdom_last_will_and_testament.testator
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -123,13 +140,13 @@ CREATE INDEX testator_name_trgm_idx
 -- flagged issues live in dedicated child tables. This is documentation
 -- support, not legal advice.
 
-CREATE TABLE united_kingdom_last_will_and_testament (
+CREATE TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    testator_id UUID NOT NULL REFERENCES testator(id) ON DELETE RESTRICT,
+    testator_id UUID NOT NULL REFERENCES united_kingdom_last_will_and_testament.testator(id) ON DELETE RESTRICT,
 
     -- Testator
     testator_name TEXT NOT NULL DEFAULT '',
@@ -209,148 +226,148 @@ CREATE TABLE united_kingdom_last_will_and_testament (
 );
 
 CREATE INDEX united_kingdom_last_will_and_testament_testator_id_idx
-    ON united_kingdom_last_will_and_testament (testator_id);
+    ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament (testator_id);
 
 CREATE TRIGGER trigger_united_kingdom_last_will_and_testament_updated_at
-    BEFORE UPDATE ON united_kingdom_last_will_and_testament
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_last_will_and_testament IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament IS
     'Main United Kingdom Last Will and Testament record (England and Wales): testator, estate, executors, beneficiaries and shares, guardians, funeral wishes, and execution formalities. Validity classification, fired rules, and flags live in child tables. Documentation support, not legal advice.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.testator_id IS
     'Foreign key to the testator this will documents (restrict delete).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.testator_name IS
     'Full legal name of the testator as it will appear in the will.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.date_of_birth IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.date_of_birth IS
     'Testator date of birth; a testator must be 18 or over (Wills Act 1837 s.7).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator_address IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.testator_address IS
     'Testator postal address as a single text block.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.domicile IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.domicile IS
     'Testator domicile for choice of law: england-wales, scotland, northern-ireland, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.marital_status IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.marital_status IS
     'Marital status: single, married, civil-partnership, cohabiting, divorced-or-dissolved, or widowed.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.marriage_expected IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.marriage_expected IS
     'Whether the testator expects to marry or form a civil partnership soon (marriage revokes a will, Wills Act 1837 s.18).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.contemplation_of_marriage_clause IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.contemplation_of_marriage_clause IS
     'Whether the will states it is made in contemplation of that marriage or civil partnership, which stops the marriage revoking it (s.18).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.has_mental_capacity IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.has_mental_capacity IS
     'Whether the testator has testamentary capacity (understands making a will, the extent of the estate, and who might claim on it).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.made_voluntarily IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.made_voluntarily IS
     'Whether the testator makes the will freely, without undue influence or pressure.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.previous_will IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.previous_will IS
     'Earlier will status: none, exists (an earlier will exists), or unsure.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.revocation_clause IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.revocation_clause IS
     'Whether the will expressly revokes all earlier wills and codicils.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.estate_value_band IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.estate_value_band IS
     'Approximate estate value band: under-325k, 325k-500k, 500k-2m, or over-2m (inheritance tax thresholds).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.owns_home IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.owns_home IS
     'Whether the testator owns a home that forms part of the estate.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.home_to_direct_descendants IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.home_to_direct_descendants IS
     'Whether the home is left to children or grandchildren (residence nil-rate band).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.charity_gift_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.charity_gift_percent IS
     'Percentage of the net estate left to charity (10% or more earns the reduced 36% inheritance tax rate).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.estate_other_jurisdictions IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.estate_other_jurisdictions IS
     'Whether the testator owns property outside England and Wales.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.other_jurisdictions_detail IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.other_jurisdictions_detail IS
     'Where and what property is held outside England and Wales.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.specific_gifts_notes IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.specific_gifts_notes IS
     'Free-text list of specific gifts (items, sums of money) left to named people.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.executor_first_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.executor_first_name IS
     'Name of the first executor.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.executor_first_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.executor_first_relationship IS
     'Relationship of the first executor to the testator.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.executor_second_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.executor_second_name IS
     'Name of the second executor.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.executor_second_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.executor_second_relationship IS
     'Relationship of the second executor to the testator.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.executors_adult_confirmed IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.executors_adult_confirmed IS
     'Whether every named executor is confirmed as 18 or over and willing to act.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_first_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_first_name IS
     'Name of the first beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_first_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_first_relationship IS
     'Relationship of the first beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_first_share_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_first_share_percent IS
     'Percentage share of the residuary estate left to the first beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_first_is_minor IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_first_is_minor IS
     'Whether the first beneficiary is under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_first_has_trustee IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_first_has_trustee IS
     'Whether a trustee is appointed to hold the first beneficiary share until they are 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_second_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_second_name IS
     'Name of the second beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_second_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_second_relationship IS
     'Relationship of the second beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_second_share_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_second_share_percent IS
     'Percentage share of the residuary estate left to the second beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_second_is_minor IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_second_is_minor IS
     'Whether the second beneficiary is under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_second_has_trustee IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_second_has_trustee IS
     'Whether a trustee is appointed to hold the second beneficiary share until they are 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_third_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_third_name IS
     'Name of the third beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_third_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_third_relationship IS
     'Relationship of the third beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_third_share_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_third_share_percent IS
     'Percentage share of the residuary estate left to the third beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_third_is_minor IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_third_is_minor IS
     'Whether the third beneficiary is under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_third_has_trustee IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_third_has_trustee IS
     'Whether a trustee is appointed to hold the third beneficiary share until they are 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_fourth_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_fourth_name IS
     'Name of the fourth beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_fourth_relationship IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_fourth_relationship IS
     'Relationship of the fourth beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_fourth_share_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_fourth_share_percent IS
     'Percentage share of the residuary estate left to the fourth beneficiary.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_fourth_is_minor IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_fourth_is_minor IS
     'Whether the fourth beneficiary is under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.beneficiary_fourth_has_trustee IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.beneficiary_fourth_has_trustee IS
     'Whether a trustee is appointed to hold the fourth beneficiary share until they are 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.residuary_clause IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.residuary_clause IS
     'Whether the will disposes of the residuary estate (everything not otherwise given away).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.dependants_considered IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.dependants_considered IS
     'Whether the testator has considered who could claim reasonable provision under the Inheritance (Provision for Family and Dependants) Act 1975.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.has_children_under_18 IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.has_children_under_18 IS
     'Whether the testator has children under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.guardian_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.guardian_name IS
     'Guardian appointed for children under 18.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.funeral_wishes IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.funeral_wishes IS
     'Funeral wishes: burial, cremation, no-preference, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.funeral_wishes_note IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.funeral_wishes_note IS
     'Free-text funeral wishes (not legally binding on the executors).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.execution_status IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.execution_status IS
     'Whether the will is still a draft or has been signed and witnessed.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.date_of_will IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.date_of_will IS
     'Date the will was signed and witnessed.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.will_in_writing IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.will_in_writing IS
     'Whether the will is in writing (Wills Act 1837 s.9).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.testator_signed IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.testator_signed IS
     'Whether the testator signed (or acknowledged their signature) with the intention of giving effect to the will.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witnesses_present_together IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witnesses_present_together IS
     'Whether two witnesses were present together when the testator signed or acknowledged.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witnesses_signed IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witnesses_signed IS
     'Whether each witness then signed or acknowledged their signature in the testator presence.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_first_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_first_name IS
     'Name of the first witness.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_first_over_18 IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_first_over_18 IS
     'Whether the first witness is 18 or over.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_first_is_beneficiary_or_spouse IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_first_is_beneficiary_or_spouse IS
     'Whether the first witness, or their spouse or civil partner, is a beneficiary (the gift fails, Wills Act 1837 s.15).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_second_name IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_second_name IS
     'Name of the second witness.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_second_over_18 IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_second_over_18 IS
     'Whether the second witness is 18 or over.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.witness_second_is_beneficiary_or_spouse IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.witness_second_is_beneficiary_or_spouse IS
     'Whether the second witness, or their spouse or civil partner, is a beneficiary (the gift fails, Wills Act 1837 s.15).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament.drafter_note IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament.drafter_note IS
     'Free-text note from the person preparing the will.';
 
 -- ========================================================================
@@ -368,14 +385,14 @@ COMMENT ON COLUMN united_kingdom_last_will_and_testament.drafter_note IS
 -- documentation classification, not a numeric score, and it is not legal
 -- advice.
 
-CREATE TABLE united_kingdom_last_will_and_testament_grade (
+CREATE TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_last_will_and_testament_id UUID NOT NULL UNIQUE
-        REFERENCES united_kingdom_last_will_and_testament(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament(id) ON DELETE CASCADE,
 
     validity_class VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (validity_class IN ('valid', 'incomplete', 'formality-risk', '')),
@@ -388,31 +405,31 @@ CREATE TABLE united_kingdom_last_will_and_testament_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_last_will_and_testament_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_last_will_and_testament_grade
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_last_will_and_testament_grade IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade IS
     'Computed completeness and validity-classification result for a United Kingdom Last Will and Testament: validity class (valid/incomplete/formality-risk), total of beneficiary shares, count of named witnesses, and whether a formality risk is indicated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.united_kingdom_last_will_and_testament_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.united_kingdom_last_will_and_testament_id IS
     'Foreign key to the parent will (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.validity_class IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.validity_class IS
     'Validity classification: valid, incomplete, or formality-risk (formality-risk takes precedence over incomplete).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.shares_total_percent IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.shares_total_percent IS
     'Sum of the beneficiary percentage shares; 100 when the residuary estate is fully allocated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.witness_count IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.witness_count IS
     'Number of witnesses named in the execution section.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.formality_risk IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.formality_risk IS
     'Whether a Wills Act 1837 formality risk is indicated (yes/no).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -427,14 +444,14 @@ COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade.graded_at IS
 -- row records one rule firing with the will dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE united_kingdom_last_will_and_testament_grade_rule (
+CREATE TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_last_will_and_testament_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -444,32 +461,32 @@ CREATE TABLE united_kingdom_last_will_and_testament_grade_rule (
 );
 
 CREATE INDEX united_kingdom_last_will_and_testament_grade_rule_grade_id_idx
-    ON united_kingdom_last_will_and_testament_grade_rule (united_kingdom_last_will_and_testament_grade_id);
+    ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule (united_kingdom_last_will_and_testament_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_last_will_and_testament_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_last_will_and_testament_grade_rule
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_last_will_and_testament_grade_rule IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule IS
     'Audit trail of every validity rule that fired during classification: will dimension, category, and description.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.united_kingdom_last_will_and_testament_grade_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.united_kingdom_last_will_and_testament_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-NO-EXECUTOR-01).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.dimension IS
     'Will dimension the rule concerns: testator, estate, executors, beneficiaries, execution, or classification.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.category IS
     'Subject category (e.g. no-executor, shares-not-100, witness-formality).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -484,14 +501,14 @@ COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_rule.description 
 -- priority and a suggested action for the testator or the person
 -- preparing the will.
 
-CREATE TABLE united_kingdom_last_will_and_testament_grade_flag (
+CREATE TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_last_will_and_testament_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -523,34 +540,34 @@ CREATE TABLE united_kingdom_last_will_and_testament_grade_flag (
 );
 
 CREATE INDEX united_kingdom_last_will_and_testament_grade_flag_grade_id_idx
-    ON united_kingdom_last_will_and_testament_grade_flag (united_kingdom_last_will_and_testament_grade_id);
+    ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag (united_kingdom_last_will_and_testament_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_last_will_and_testament_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_last_will_and_testament_grade_flag
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_last_will_and_testament_grade_flag IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the testator or the person preparing the will.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.united_kingdom_last_will_and_testament_grade_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.united_kingdom_last_will_and_testament_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NO-EXECUTOR-001).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.category IS
     'Flag category: testator-eligibility, capacity-or-voluntariness, witness-formalities, witness-is-beneficiary, no-executor, no-beneficiary, residuary-clause-missing, shares-not-100, minor-beneficiary-no-trustee, partner-not-provided-for, other-jurisdictions, marriage-revocation, previous-will, guardian-not-named, inheritance-act-provision, inheritance-tax, incomplete-details, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.suggested_action IS
     'Suggested action (e.g. "appoint at least one executor", "use two independent adult witnesses who are not beneficiaries").';
 
 -- ========================================================================

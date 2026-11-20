@@ -5,14 +5,14 @@
 -- result, and reflex cytology. The computed result classification, the audit
 -- trail of fired rules, and the safety flags live in dedicated child tables.
 
-CREATE TABLE cervical_screening (
+CREATE TABLE cervical_screening.cervical_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES cervical_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES cervical_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Encounter context
     care_setting VARCHAR(20) NOT NULL DEFAULT '' CHECK (care_setting IN ('general-practice', 'sexual-health', 'other', '')),
@@ -52,62 +52,62 @@ CREATE TABLE cervical_screening (
 );
 
 CREATE INDEX cervical_screening_patient_id_idx
-    ON cervical_screening (patient_id);
+    ON cervical_screening.cervical_screening (patient_id);
 CREATE INDEX cervical_screening_clinician_id_idx
-    ON cervical_screening (clinician_id);
+    ON cervical_screening.cervical_screening (clinician_id);
 
 CREATE TRIGGER trigger_cervical_screening_updated_at
-    BEFORE UPDATE ON cervical_screening
+    BEFORE UPDATE ON cervical_screening.cervical_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE cervical_screening IS
+COMMENT ON TABLE cervical_screening.cervical_screening IS
     'Main cervical-screening record for one HPV-primary screening encounter: encounter context, patient identification, eligibility, consent, symptoms, sample adequacy, the primary hrHPV result, and reflex cytology. Result classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN cervical_screening.id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cervical_screening.created_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cervical_screening.updated_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cervical_screening.deleted_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cervical_screening.patient_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.patient_id IS
     'Foreign key to the patient this screening documents (restrict delete).';
-COMMENT ON COLUMN cervical_screening.clinician_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.clinician_id IS
     'Foreign key to the sample-taker clinician (restrict delete); optional.';
-COMMENT ON COLUMN cervical_screening.care_setting IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.care_setting IS
     'Care setting where the sample was taken: general-practice, sexual-health, or other.';
-COMMENT ON COLUMN cervical_screening.sample_taker_role IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_taker_role IS
     'Role of the person taking the sample: practice-nurse, gp, smear-taker, or other.';
-COMMENT ON COLUMN cervical_screening.sample_taken_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_taken_at IS
     'Date and time the screening sample was taken.';
-COMMENT ON COLUMN cervical_screening.patient_identifier IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.patient_identifier IS
     'Local patient or encounter identifier as recorded on the record.';
-COMMENT ON COLUMN cervical_screening.age IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.age IS
     'Patient age in years; drives eligibility (25-64) and the recall interval.';
-COMMENT ON COLUMN cervical_screening.recall_interval IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.recall_interval IS
     'Age-appropriate routine recall interval: three-yearly (25-49), five-yearly (50-64), or not-applicable.';
-COMMENT ON COLUMN cervical_screening.screen_due_date IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.screen_due_date IS
     'Date the screen was due.';
-COMMENT ON COLUMN cervical_screening.last_screen_date IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.last_screen_date IS
     'Date of the most recent previous screening, when known.';
-COMMENT ON COLUMN cervical_screening.overdue IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.overdue IS
     'Whether the screening is overdue (yes/no); drives the patient-overdue flag.';
-COMMENT ON COLUMN cervical_screening.previously_ceased IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.previously_ceased IS
     'Whether the person has been formally ceased from screening (yes/no); yes classifies as cease-not-eligible.';
-COMMENT ON COLUMN cervical_screening.consent_given IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.consent_given IS
     'Whether informed consent to sample and process was given (yes/no); anything other than yes raises the missing-consent flag.';
-COMMENT ON COLUMN cervical_screening.symptomatic IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.symptomatic IS
     'Whether the patient reports symptoms (abnormal bleeding, discharge, pain) (yes/no); yes raises the symptomatic-refer-regardless flag.';
-COMMENT ON COLUMN cervical_screening.symptom_detail IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.symptom_detail IS
     'Free-text description of reported symptoms.';
-COMMENT ON COLUMN cervical_screening.sample_adequacy IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_adequacy IS
     'Cytological sample adequacy: adequate or inadequate; an inadequate sample is never HPV-classified and is repeated.';
-COMMENT ON COLUMN cervical_screening.inadequate_reason IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.inadequate_reason IS
     'Reason a sample was inadequate: insufficient-cells, obscuring-blood, inflammation, labelling, or other.';
-COMMENT ON COLUMN cervical_screening.hpv_result IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.hpv_result IS
     'Primary high-risk HPV (hrHPV) result: negative, positive, or not-tested.';
-COMMENT ON COLUMN cervical_screening.cytology_grade IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.cytology_grade IS
     'Reflex cytology dyskaryosis grade (recorded only when hpv_result is positive): negative, borderline, low-grade, high-grade, or not-performed.';
-COMMENT ON COLUMN cervical_screening.clinical_context IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';

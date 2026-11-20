@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS edinburgh_postnatal_depression_scale;
+
+COMMENT ON SCHEMA edinburgh_postnatal_depression_scale IS
+    'Namespace for the Edinburgh Postnatal Depression Scale (EPDS) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION edinburgh_postnatal_depression_scale.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE edinburgh_postnatal_depression_scale.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.patient IS
     'Patient demographic information used by the Edinburgh Postnatal Depression Scale assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON edinburgh_postnatal_depression_scale.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- administered the Edinburgh Postnatal Depression Scale (midwife,
 -- health visitor, GP, perinatal mental-health practitioner).
 
-CREATE TABLE clinician (
+CREATE TABLE edinburgh_postnatal_depression_scale.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.clinician IS
     'Clinician identifying information for the clinician who administered the EPDS.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.role IS
     'Primary clinical role: midwife, health-visitor, gp, perinatal-mh, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON edinburgh_postnatal_depression_scale.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- score 0-3 (higher = more symptomatic). The computed total, band,
 -- fired rules, and safety flags live in dedicated child tables.
 
-CREATE TABLE edinburgh_postnatal_depression_scale (
+CREATE TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES edinburgh_postnatal_depression_scale.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES edinburgh_postnatal_depression_scale.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -248,70 +265,70 @@ CREATE TABLE edinburgh_postnatal_depression_scale (
 );
 
 CREATE INDEX edinburgh_postnatal_depression_scale_patient_id_idx
-    ON edinburgh_postnatal_depression_scale (patient_id);
+    ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale (patient_id);
 CREATE INDEX edinburgh_postnatal_depression_scale_clinician_id_idx
-    ON edinburgh_postnatal_depression_scale (clinician_id);
+    ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale (clinician_id);
 
 CREATE TRIGGER trigger_edinburgh_postnatal_depression_scale_updated_at
-    BEFORE UPDATE ON edinburgh_postnatal_depression_scale
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE edinburgh_postnatal_depression_scale IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale IS
     'Main EPDS assessment record: assessment context, respondent identification, and the ten already-reverse-corrected item responses (0-3 each, higher = more symptomatic).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.patient_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.clinician_id IS
     'Foreign key to the administering clinician (optional; delete restricted).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician_name IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.clinician_name IS
     'Name of the administering clinician as recorded on the assessment.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinician_role IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.clinician_role IS
     'Role of the administering clinician: midwife, health-visitor, gp, perinatal-mh, or other.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.care_setting IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.care_setting IS
     'Care setting: maternity, community, general-practice, perinatal-mh, or other.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.assessed_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.perinatal_stage IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.perinatal_stage IS
     'Perinatal stage at assessment: antenatal or postnatal.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.perinatal_week IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.perinatal_week IS
     'Gestational week (antenatal) or postnatal week at assessment.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.respondent_identifier IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.respondent_identifier IS
     'Local respondent identifier as recorded on the assessment.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.age_band IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.age_band IS
     'Respondent age band: under-20, 20-29, 30-39, or 40-plus.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.preferred_language IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.preferred_language IS
     'Language the EPDS was completed in.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.assistance_needed IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.assistance_needed IS
     'Assistance used to complete the EPDS: none, interpreter, clinician-read, or other.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_1 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_1 IS
     'Item 1 (able to laugh, normal-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_2 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_2 IS
     'Item 2 (looked forward with enjoyment, normal-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_3 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_3 IS
     'Item 3 (blamed myself unnecessarily, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_4 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_4 IS
     'Item 4 (anxious or worried, normal-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_5 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_5 IS
     'Item 5 (scared or panicky, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_6 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_6 IS
     'Item 6 (things getting on top of me, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_7 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_7 IS
     'Item 7 (unhappy, difficulty sleeping, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_8 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_8 IS
     'Item 8 (sad or miserable, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_9 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_9 IS
     'Item 9 (so unhappy, crying, reverse-scored) response 0-3; NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.item_10 IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.item_10 IS
     'Item 10 (thoughts of self-harm, reverse-scored) response 0-3; any value > 0 raises the mandatory self-harm safety flag. NULL when unanswered.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinical_note IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -327,14 +344,14 @@ COMMENT ON COLUMN edinburgh_postnatal_depression_scale.clinical_note IS
 -- mandatory self-harm flag. Fired rules and red-flag issues live in
 -- dedicated child tables.
 
-CREATE TABLE edinburgh_postnatal_depression_scale_grade (
+CREATE TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     edinburgh_postnatal_depression_scale_id UUID NOT NULL UNIQUE
-        REFERENCES edinburgh_postnatal_depression_scale(id) ON DELETE CASCADE,
+        REFERENCES edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale(id) ON DELETE CASCADE,
 
     total_score INT,
     interpretation VARCHAR(10) NOT NULL DEFAULT ''
@@ -347,31 +364,31 @@ CREATE TABLE edinburgh_postnatal_depression_scale_grade (
 );
 
 CREATE TRIGGER trigger_edinburgh_postnatal_depression_scale_grade_updated_at
-    BEFORE UPDATE ON edinburgh_postnatal_depression_scale_grade
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE edinburgh_postnatal_depression_scale_grade IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade IS
     'Computed EPDS grading result: summed total (0-30), interpretation band (lower/possible/likely), item 10 self-harm score, and mandatory self-harm flag.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.edinburgh_postnatal_depression_scale_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.edinburgh_postnatal_depression_scale_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.total_score IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.total_score IS
     'Summed EPDS score across the ten items (0-30 when complete; missing items contribute 0).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.interpretation IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.interpretation IS
     'Derived interpretation band: lower (< 10), possible (>= 10), or likely (>= 13) depression.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.item_10_score IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.item_10_score IS
     'Item 10 (thoughts of self-harm) score 0-3, retained for the safety flag audit.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.self_harm_flag IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.self_harm_flag IS
     'Mandatory self-harm flag: yes when item 10 > 0 (regardless of total), otherwise no.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.graded_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -386,14 +403,14 @@ COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade.graded_at IS
 -- Each row records one rule firing with the item or aspect it belongs
 -- to, the points it contributed, and a human-readable description.
 
-CREATE TABLE edinburgh_postnatal_depression_scale_grade_rule (
+CREATE TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     edinburgh_postnatal_depression_scale_grade_id UUID NOT NULL
-        REFERENCES edinburgh_postnatal_depression_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(20) NOT NULL
@@ -404,34 +421,34 @@ CREATE TABLE edinburgh_postnatal_depression_scale_grade_rule (
 );
 
 CREATE INDEX edinburgh_postnatal_depression_scale_grade_rule_grade_id_idx
-    ON edinburgh_postnatal_depression_scale_grade_rule (edinburgh_postnatal_depression_scale_grade_id);
+    ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule (edinburgh_postnatal_depression_scale_grade_id);
 
 CREATE TRIGGER trigger_edinburgh_postnatal_depression_scale_grade_rule_updated_at
-    BEFORE UPDATE ON edinburgh_postnatal_depression_scale_grade_rule
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE edinburgh_postnatal_depression_scale_grade_rule IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule IS
     'Audit trail of every grading rule that fired during EPDS computation: parameter, points contributed, category, and description.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.edinburgh_postnatal_depression_scale_grade_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.edinburgh_postnatal_depression_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.rule_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ITEM-10-SCORE-01).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.parameter IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.parameter IS
     'Aspect the rule belongs to: item, total, band, self-harm, anxiety-subscale, or other.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.points IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.points IS
     'Points (0-3) contributed by this rule, where applicable.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.category IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.category IS
     'Subject category (e.g. item-score, band-threshold, safety).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.description IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -446,14 +463,14 @@ COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_rule.description IS
 -- and a suggested action for the clinical team. The item-10 self-harm
 -- flag is mandatory and urgent regardless of the total score.
 
-CREATE TABLE edinburgh_postnatal_depression_scale_grade_flag (
+CREATE TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     edinburgh_postnatal_depression_scale_grade_id UUID NOT NULL
-        REFERENCES edinburgh_postnatal_depression_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -473,34 +490,34 @@ CREATE TABLE edinburgh_postnatal_depression_scale_grade_flag (
 );
 
 CREATE INDEX edinburgh_postnatal_depression_scale_grade_flag_grade_id_idx
-    ON edinburgh_postnatal_depression_scale_grade_flag (edinburgh_postnatal_depression_scale_grade_id);
+    ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag (edinburgh_postnatal_depression_scale_grade_id);
 
 CREATE TRIGGER trigger_edinburgh_postnatal_depression_scale_grade_flag_updated_at
-    BEFORE UPDATE ON edinburgh_postnatal_depression_scale_grade_flag
+    BEFORE UPDATE ON edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION edinburgh_postnatal_depression_scale.set_updated_at();
 
-COMMENT ON TABLE edinburgh_postnatal_depression_scale_grade_flag IS
+COMMENT ON TABLE edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag IS
     'Red-flag issues that fire independently of the band, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.created_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.updated_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.deleted_at IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.edinburgh_postnatal_depression_scale_grade_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.edinburgh_postnatal_depression_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.flag_id IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SELF-HARM-URGENT-001).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.category IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.priority IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.priority IS
     'Priority: low, medium, high, or urgent (self-harm overrides all bands).';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.description IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN edinburgh_postnatal_depression_scale_grade_flag.suggested_action IS
+COMMENT ON COLUMN edinburgh_postnatal_depression_scale.edinburgh_postnatal_depression_scale_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "perform an immediate self-harm risk assessment").';
 
 -- ========================================================================

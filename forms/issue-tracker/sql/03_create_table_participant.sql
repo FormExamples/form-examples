@@ -2,7 +2,7 @@
 -- discoverer, affected user, assignee, stakeholder to inform.
 -- One participant row per (issue, person, role) tuple.
 
-CREATE TABLE participant (
+CREATE TABLE issue_tracker.participant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -25,31 +25,31 @@ CREATE TABLE participant (
 );
 
 CREATE TRIGGER trigger_participant_updated_at
-    BEFORE UPDATE ON participant
+    BEFORE UPDATE ON issue_tracker.participant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION issue_tracker.set_updated_at();
 
-COMMENT ON TABLE participant IS
+COMMENT ON TABLE issue_tracker.participant IS
     'A person involved with an issue. Multiple roles per person allowed via duplicate rows.';
-COMMENT ON COLUMN participant.id IS
+COMMENT ON COLUMN issue_tracker.participant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN participant.created_at IS
+COMMENT ON COLUMN issue_tracker.participant.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN participant.updated_at IS
+COMMENT ON COLUMN issue_tracker.participant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN participant.deleted_at IS
+COMMENT ON COLUMN issue_tracker.participant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN participant.name IS
+COMMENT ON COLUMN issue_tracker.participant.name IS
     'Participant full name.';
-COMMENT ON COLUMN participant.email IS
+COMMENT ON COLUMN issue_tracker.participant.email IS
     'Participant email address for notifications.';
-COMMENT ON COLUMN participant.phone IS
+COMMENT ON COLUMN issue_tracker.participant.phone IS
     'Participant phone number for notifications.';
-COMMENT ON COLUMN participant.role IS
+COMMENT ON COLUMN issue_tracker.participant.role IS
     'Participant role on this issue: discoverer, affected-user, assignee, etc.';
-COMMENT ON COLUMN participant.organisation IS
+COMMENT ON COLUMN issue_tracker.participant.organisation IS
     'Organisation the participant belongs to.';
-COMMENT ON COLUMN participant.team IS
+COMMENT ON COLUMN issue_tracker.participant.team IS
     'Team or department within the organisation.';
-COMMENT ON COLUMN participant.notify_on IS
+COMMENT ON COLUMN issue_tracker.participant.notify_on IS
     'Notification preference: all-changes, priority-change, flag-fired, resolution, sign-off, or never.';

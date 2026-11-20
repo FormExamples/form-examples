@@ -1,13 +1,13 @@
 -- Agenda item — one row per topic on the meeting agenda. Ordered by
 -- position to preserve the order the organizer entered.
 
-CREATE TABLE agenda_item (
+CREATE TABLE meeting.agenda_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL REFERENCES meeting.meeting(id) ON DELETE CASCADE,
     position INTEGER NOT NULL DEFAULT 0
         CHECK (position >= 0),
     title VARCHAR(255) NOT NULL DEFAULT '',
@@ -20,36 +20,36 @@ CREATE TABLE agenda_item (
 );
 
 CREATE TRIGGER trigger_agenda_item_updated_at
-    BEFORE UPDATE ON agenda_item
+    BEFORE UPDATE ON meeting.agenda_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE agenda_item IS
+COMMENT ON TABLE meeting.agenda_item IS
     'One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.';
-COMMENT ON COLUMN agenda_item.id IS
+COMMENT ON COLUMN meeting.agenda_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agenda_item.created_at IS
+COMMENT ON COLUMN meeting.agenda_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agenda_item.updated_at IS
+COMMENT ON COLUMN meeting.agenda_item.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agenda_item.deleted_at IS
+COMMENT ON COLUMN meeting.agenda_item.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agenda_item.meeting_id IS
+COMMENT ON COLUMN meeting.agenda_item.meeting_id IS
     'Foreign key to the parent meeting.';
-COMMENT ON COLUMN agenda_item.position IS
+COMMENT ON COLUMN meeting.agenda_item.position IS
     'Zero-based ordinal of the item in the agenda list.';
-COMMENT ON COLUMN agenda_item.title IS
+COMMENT ON COLUMN meeting.agenda_item.title IS
     'Title of the agenda topic.';
-COMMENT ON COLUMN agenda_item.duration_minutes IS
+COMMENT ON COLUMN meeting.agenda_item.duration_minutes IS
     'Planned duration in minutes (0 to 1440).';
-COMMENT ON COLUMN agenda_item.presenter IS
+COMMENT ON COLUMN meeting.agenda_item.presenter IS
     'Name of the person presenting or leading the discussion.';
-COMMENT ON COLUMN agenda_item.notes IS
+COMMENT ON COLUMN meeting.agenda_item.notes IS
     'Free-text notes attached to the agenda item.';
-COMMENT ON COLUMN agenda_item.status IS
+COMMENT ON COLUMN meeting.agenda_item.status IS
     'Outcome of the agenda item: planned, discussed, skipped, deferred.';
 
 CREATE INDEX agenda_item_index_meeting_id
-    ON agenda_item(meeting_id);
+    ON meeting.agenda_item(meeting_id);
 CREATE INDEX agenda_item_index_meeting_id_position
-    ON agenda_item(meeting_id, position);
+    ON meeting.agenda_item(meeting_id, position);

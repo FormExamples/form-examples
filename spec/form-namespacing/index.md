@@ -14,22 +14,44 @@ example `pre_operative_assessment_by_clinician`, comes from
 
 Examples use the form `forms/pre-operative-assessment-by-clinician/`.
 
-### SQL tables
+### SQL schema
 
-Every table that `forms/<slug>/sql/` creates starts with the slug in
-snake_case:
+Every table, function and domain that `forms/<slug>/sql/` creates lives in
+a Postgres schema named for the form: the slug in snake_case.
+`sql/00_create_schema.sql` creates it, and every other file qualifies its
+names with it:
 
-- `pre_operative_assessment_by_clinician` (the main table)
-- `pre_operative_assessment_by_clinician_patient`
-- `pre_operative_assessment_by_clinician_clinician`
-- `pre_operative_assessment_by_clinician_grade`,
-  `pre_operative_assessment_by_clinician_grade_rule`,
-  `pre_operative_assessment_by_clinician_grade_flag`
+```sql
+CREATE SCHEMA IF NOT EXISTS pre_operative_assessment_by_clinician;
 
-The prefix applies to every table, including shared-shape entities such as
-`patient`, `clinician`, `practitioner`, `allergy` and `medication`. It also
-applies to the names derived from tables: indexes, constraints, triggers,
-sequences, and the foreign-key columns that name a table.
+CREATE TABLE pre_operative_assessment_by_clinician.patient (...);
+CREATE TABLE pre_operative_assessment_by_clinician.patient_medication (
+    ...
+    patient_id UUID NOT NULL
+        REFERENCES pre_operative_assessment_by_clinician.patient(id),
+    ...
+);
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.patient.id IS '...';
+CREATE TRIGGER trigger_patient_updated_at
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician.patient
+    FOR EACH ROW
+    EXECUTE FUNCTION pre_operative_assessment_by_clinician.set_updated_at();
+```
+
+Table names inside the schema stay short (`patient`, `clinician`, `grade`).
+Indexes, constraints and triggers belong to their table, so they share its
+schema. Extensions (`pgcrypto`, `pg_trgm`) stay in `public`.
+
+The namespace is a schema, not a `<slug>_` name prefix, because Postgres caps
+every identifier at 63 bytes and silently truncates longer ones. A
+`<slug>_<table>` prefix would have pushed 265 tables in 59 forms over that
+limit. A schema name is the slug alone, so it must itself fit in 63 bytes;
+`bin/sql-schema-namespace` refuses a slug whose snake case does not.
+
+The generators that read `sql/` accept the qualifier and name each entity by
+its bare table name. The XML, FHIR, protobuf and OpenAPI files, the examples,
+and the Axum crates' mapping from `sql/` to their own tables therefore did not
+change when the schemas were introduced.
 
 ### Axum back-end API routes
 
@@ -68,28 +90,26 @@ The fleet had 379 forms when this spec was written (2026-11-20). Their status:
 | --- | --- | --- |
 | Svelte routes | 379 / 379 | Already nested under `src/routes/<slug>/` (`bin/route-svelte-layout`) |
 | Axum API routes | 379 / 379 | Moved from `/api/<plural>` by `bin/axum-api-namespace` (2026-11-20) |
-| SQL tables | 3 / 379 | 376 forms create unprefixed tables, most often `patient`, `clinician`, `practitioner`, `grade`, `grading_fired_rule`, `grading_additional_flag`, `assessment` |
+| SQL schema | 379 / 379 | Moved from `public` into a per-form schema by `bin/sql-schema-namespace` (2026-11-20) |
 
 New forms must conform from the start. `cargo run -- generate scaffold --api`
 emits un-namespaced `.prefix("api/<plural>/")` routes, so run
 `bin/axum-api-namespace <slug>` on a newly scaffolded crate. Its `--check`
 mode is the CI drift detector for the API layer.
 
-The SQL tables still need a fleet-wide migration tool with a `--check` CI
-drift detector, following the same pattern as the other `bin/axum-*` tools.
-Renaming a SQL table has knock-on effects, and the migration must carry each
-one in step:
+`bin/create-form` scaffolds unqualified SQL, so run
+`bin/sql-schema-namespace <slug>` on a new form's `sql/`. Its `--check` mode is
+the CI drift detector for the SQL layer.
 
-- the generated XML, FHIR, protobuf and OpenAPI representations;
-- the Axum crate's migrations, entities, controllers and tests;
-- `examples/assessment.json`, which `bin/test-examples-conformance` checks;
-- `examples/personas.json`;
-- the HTML and Svelte API clients.
+The Axum crates keep their own tables (`patients`, `clinicians`, ...) in
+their own per-crate database, unchanged. Moving those into a schema is
+separate, later work.
 
 ## Verification
 
-- `bin/test-sql-apply <slug>` and a check that every `CREATE TABLE` name
-  starts with the snake_case slug.
+- `bin/sql-schema-namespace --check <slug>`, the CI drift detector for the
+  SQL schema, and `bin/test-sql-apply <slug>`, which applies the qualified
+  migrations to a fresh database.
 - `bin/axum-api-namespace --check <slug>`, the CI drift detector for the
   API routes.
 - `bin/openapi/generate-openapi-combined.py --check <slug>`, with every

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS learning_disability_annual_health_check;
+
+COMMENT ON SCHEMA learning_disability_annual_health_check IS
+    'Namespace for the Learning Disability Annual Health Check form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION learning_disability_annual_health_check.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION learning_disability_annual_health_check.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE learning_disability_annual_health_check.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON learning_disability_annual_health_check.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE learning_disability_annual_health_check.patient IS
     'Patient demographic information used by the learning-disability annual-health-check record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN learning_disability_annual_health_check.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON learning_disability_annual_health_check.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- completed the annual health check (GP, practice nurse, healthcare
 -- assistant, learning-disability nurse, or wider learning-disability team).
 
-CREATE TABLE clinician (
+CREATE TABLE learning_disability_annual_health_check.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON learning_disability_annual_health_check.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE learning_disability_annual_health_check.clinician IS
     'Clinician identifying information for the clinician who completed the learning-disability annual health check.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.role IS
     'Primary clinical role: gp, practice-nurse, healthcare-assistant, ld-nurse, ld-team, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN learning_disability_annual_health_check.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON learning_disability_annual_health_check.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- tables. This is a documentation / completeness record: it does not
 -- diagnose or grade severity.
 
-CREATE TABLE learning_disability_annual_health_check (
+CREATE TABLE learning_disability_annual_health_check.learning_disability_annual_health_check (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES learning_disability_annual_health_check.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES learning_disability_annual_health_check.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name TEXT NOT NULL DEFAULT '',
@@ -290,124 +307,124 @@ CREATE TABLE learning_disability_annual_health_check (
 );
 
 CREATE INDEX learning_disability_annual_health_check_patient_id_idx
-    ON learning_disability_annual_health_check (patient_id);
+    ON learning_disability_annual_health_check.learning_disability_annual_health_check (patient_id);
 CREATE INDEX learning_disability_annual_health_check_clinician_id_idx
-    ON learning_disability_annual_health_check (clinician_id);
+    ON learning_disability_annual_health_check.learning_disability_annual_health_check (clinician_id);
 
 CREATE TRIGGER trigger_learning_disability_annual_health_check_updated_at
-    BEFORE UPDATE ON learning_disability_annual_health_check
+    BEFORE UPDATE ON learning_disability_annual_health_check.learning_disability_annual_health_check
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE learning_disability_annual_health_check IS
+COMMENT ON TABLE learning_disability_annual_health_check.learning_disability_annual_health_check IS
     'Main learning-disability annual-health-check record: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN learning_disability_annual_health_check.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN learning_disability_annual_health_check.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN learning_disability_annual_health_check.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN learning_disability_annual_health_check.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.patient_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.patient_id IS
     'Foreign key to the patient this check documents (restrict delete).';
-COMMENT ON COLUMN learning_disability_annual_health_check.clinician_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.clinician_id IS
     'Foreign key to the clinician who completed the check (restrict delete); optional.';
-COMMENT ON COLUMN learning_disability_annual_health_check.clinician_name IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.clinician_name IS
     'Name of the clinician completing the check.';
-COMMENT ON COLUMN learning_disability_annual_health_check.clinician_role IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.clinician_role IS
     'Role of the clinician completing the check: gp, practice-nurse, healthcare-assistant, ld-team, or other.';
-COMMENT ON COLUMN learning_disability_annual_health_check.checked_on IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.checked_on IS
     'Date the annual health check was carried out.';
-COMMENT ON COLUMN learning_disability_annual_health_check.practice_name IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.practice_name IS
     'Name of the GP practice conducting the check.';
-COMMENT ON COLUMN learning_disability_annual_health_check.easy_read_invitation_sent IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.easy_read_invitation_sent IS
     'Whether an easy-read invitation was sent to the person (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check.pre_check_done IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.pre_check_done IS
     'Whether a pre-check health questionnaire was completed beforehand (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check.person_identifier IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.person_identifier IS
     'Local identifier for the person.';
-COMMENT ON COLUMN learning_disability_annual_health_check.age_band IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.age_band IS
     'Age band of the person: 14-17, 18-24, 25-44, 45-64, or 65+.';
-COMMENT ON COLUMN learning_disability_annual_health_check.sex IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.sex IS
     'Person''s sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN learning_disability_annual_health_check.ld_register_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.ld_register_status IS
     'Learning-disability register status: on-register, not-on-register, or newly-added.';
-COMMENT ON COLUMN learning_disability_annual_health_check.main_carer IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.main_carer IS
     'Main carer or supporter for the person.';
-COMMENT ON COLUMN learning_disability_annual_health_check.communication_needs IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.communication_needs IS
     'Reasonable adjustments and communication needs (free text); required component.';
-COMMENT ON COLUMN learning_disability_annual_health_check.reasonable_adjustments_recorded IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.reasonable_adjustments_recorded IS
     'Whether reasonable adjustments were recorded (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check.health_passport IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.health_passport IS
     'Whether a hospital / health passport is in place (yes/no/not-applicable).';
-COMMENT ON COLUMN learning_disability_annual_health_check.consent_capacity_note IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.consent_capacity_note IS
     'Consent and mental-capacity note (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.weight_bmi_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.weight_bmi_status IS
     'Weight / BMI component status: recorded, not-recorded, or declined.';
-COMMENT ON COLUMN learning_disability_annual_health_check.bmi IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.bmi IS
     'Body-mass index (kg/m^2) recorded at the check.';
-COMMENT ON COLUMN learning_disability_annual_health_check.blood_pressure_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.blood_pressure_status IS
     'Blood-pressure component status: normal, raised, recorded, or not-recorded.';
-COMMENT ON COLUMN learning_disability_annual_health_check.epilepsy_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.epilepsy_status IS
     'Epilepsy review status: reviewed, not-reviewed, or not-applicable.';
-COMMENT ON COLUMN learning_disability_annual_health_check.constipation_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.constipation_status IS
     'Constipation component status: none, present, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.dysphagia_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.dysphagia_status IS
     'Dysphagia / swallowing component status: none, present, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.continence_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.continence_status IS
     'Continence component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.mobility_falls_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.mobility_falls_status IS
     'Mobility and falls component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.dental_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.dental_status IS
     'Dental / oral-health component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.vision_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.vision_status IS
     'Vision component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.hearing_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.hearing_status IS
     'Hearing component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.foot_health_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.foot_health_status IS
     'Foot-health component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.skin_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.skin_status IS
     'Skin component status: ok, issue, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.physical_health_actions IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.physical_health_actions IS
     'Actions arising from the physical-health review (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.cancer_screening_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.cancer_screening_status IS
     'National cancer-screening uptake status: up-to-date, declined, not-eligible, or not-recorded.';
-COMMENT ON COLUMN learning_disability_annual_health_check.other_screening_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.other_screening_status IS
     'Other screening uptake status: up-to-date, declined, not-eligible, or not-recorded.';
-COMMENT ON COLUMN learning_disability_annual_health_check.immunisation_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.immunisation_status IS
     'Immunisation uptake status: up-to-date, declined, or not-recorded.';
-COMMENT ON COLUMN learning_disability_annual_health_check.medication_reconciled IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.medication_reconciled IS
     'Whether the medication list was reconciled at the check (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check.psychotropic_prescribed IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.psychotropic_prescribed IS
     'Whether a psychotropic medicine is prescribed (yes/no); drives the STOMP flag.';
-COMMENT ON COLUMN learning_disability_annual_health_check.psychotropic_indication IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.psychotropic_indication IS
     'Documented indication for the psychotropic medicine (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.psychotropic_last_reviewed IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.psychotropic_last_reviewed IS
     'Date the psychotropic medicine was last reviewed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.stomp_discussed IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.stomp_discussed IS
     'Whether STOMP was discussed (yes/no/not-applicable).';
-COMMENT ON COLUMN learning_disability_annual_health_check.medication_side_effects IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.medication_side_effects IS
     'Side effects reviewed at the medication review (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.mental_health_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.mental_health_status IS
     'Mental-health component status: ok, concern, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.behaviour_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.behaviour_status IS
     'Behaviour component status: none, challenging, or not-assessed.';
-COMMENT ON COLUMN learning_disability_annual_health_check.behaviour_triggers IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.behaviour_triggers IS
     'Triggers for behaviour that challenges (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.syndrome_specific_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.syndrome_specific_status IS
     'Syndrome-specific check status: done, not-applicable, or not-done.';
-COMMENT ON COLUMN learning_disability_annual_health_check.carer_needs_status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.carer_needs_status IS
     'Carer-needs component status: assessed, not-assessed, or no-carer.';
-COMMENT ON COLUMN learning_disability_annual_health_check.social_circumstances IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.social_circumstances IS
     'Social circumstances, day activity, and employment (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.health_action_plan_produced IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.health_action_plan_produced IS
     'Whether a Health Action Plan was produced (yes/no); required output.';
-COMMENT ON COLUMN learning_disability_annual_health_check.health_action_plan_shared IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.health_action_plan_shared IS
     'Whether the Health Action Plan was shared with the person and carer (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check.health_action_plan_actions IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.health_action_plan_actions IS
     'Collated Health Action Plan actions (free text).';
-COMMENT ON COLUMN learning_disability_annual_health_check.clinician_note IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check.clinician_note IS
     'Free-text summary note for the check.';
 
 -- ========================================================================
@@ -425,14 +442,14 @@ COMMENT ON COLUMN learning_disability_annual_health_check.clinician_note IS
 -- completeness grade reflects whether the check was carried out fully, not
 -- the person's clinical severity.
 
-CREATE TABLE learning_disability_annual_health_check_grade (
+CREATE TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     learning_disability_annual_health_check_id UUID NOT NULL UNIQUE
-        REFERENCES learning_disability_annual_health_check(id) ON DELETE CASCADE,
+        REFERENCES learning_disability_annual_health_check.learning_disability_annual_health_check(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'incomplete', '')),
@@ -444,29 +461,29 @@ CREATE TABLE learning_disability_annual_health_check_grade (
 );
 
 CREATE TRIGGER trigger_learning_disability_annual_health_check_grade_updated_at
-    BEFORE UPDATE ON learning_disability_annual_health_check_grade
+    BEFORE UPDATE ON learning_disability_annual_health_check.learning_disability_annual_health_check_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE learning_disability_annual_health_check_grade IS
+COMMENT ON TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade IS
     'Computed documentation-completeness grading result for an annual health check: status (complete/incomplete), completeness percentage against required components, and Health Action Plan completeness.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.learning_disability_annual_health_check_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.learning_disability_annual_health_check_id IS
     'Foreign key to the parent annual health check (unique, 1:1).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.status IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.status IS
     'Completeness status: complete (every required component completed and the Health Action Plan complete) or incomplete.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.completeness_percent IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.completeness_percent IS
     'Completeness percentage (0..100): completed required components / total required components x 100.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.health_action_plan_complete IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.health_action_plan_complete IS
     'Whether the Health Action Plan is complete (produced and shared): yes or no.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade.graded_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -481,14 +498,14 @@ COMMENT ON COLUMN learning_disability_annual_health_check_grade.graded_at IS
 -- row records one required component, whether it was completed, the category,
 -- and a human-readable description, so the front-end can render a checklist.
 
-CREATE TABLE learning_disability_annual_health_check_grade_rule (
+CREATE TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     learning_disability_annual_health_check_grade_id UUID NOT NULL
-        REFERENCES learning_disability_annual_health_check_grade(id) ON DELETE CASCADE,
+        REFERENCES learning_disability_annual_health_check.learning_disability_annual_health_check_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     component VARCHAR(50) NOT NULL DEFAULT '',
@@ -499,34 +516,34 @@ CREATE TABLE learning_disability_annual_health_check_grade_rule (
 );
 
 CREATE INDEX learning_disability_annual_health_check_grade_rule_grade_id_idx
-    ON learning_disability_annual_health_check_grade_rule (learning_disability_annual_health_check_grade_id);
+    ON learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule (learning_disability_annual_health_check_grade_id);
 
 CREATE TRIGGER trigger_learning_disability_annual_health_check_grade_rule_updated_at
-    BEFORE UPDATE ON learning_disability_annual_health_check_grade_rule
+    BEFORE UPDATE ON learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE learning_disability_annual_health_check_grade_rule IS
+COMMENT ON TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule IS
     'Audit trail of every completeness rule that fired during grading: required component, whether it was completed, category, and description.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.learning_disability_annual_health_check_grade_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.learning_disability_annual_health_check_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.rule_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-PHYSICAL-HEALTH-01).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.component IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.component IS
     'Required component the rule concerns (e.g. reasonable-adjustments, physical-health, medication-review).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.completed IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.completed IS
     'Whether the required component was completed (yes/no).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.category IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.category IS
     'Subject category (e.g. required-component).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.description IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -540,14 +557,14 @@ COMMENT ON COLUMN learning_disability_annual_health_check_grade_rule.description
 -- Clinical flags that fire independently of the completeness status, with a
 -- priority and a suggested action for the clinician or governance team.
 
-CREATE TABLE learning_disability_annual_health_check_grade_flag (
+CREATE TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     learning_disability_annual_health_check_grade_id UUID NOT NULL
-        REFERENCES learning_disability_annual_health_check_grade(id) ON DELETE CASCADE,
+        REFERENCES learning_disability_annual_health_check.learning_disability_annual_health_check_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -569,34 +586,34 @@ CREATE TABLE learning_disability_annual_health_check_grade_flag (
 );
 
 CREATE INDEX learning_disability_annual_health_check_grade_flag_grade_id_idx
-    ON learning_disability_annual_health_check_grade_flag (learning_disability_annual_health_check_grade_id);
+    ON learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag (learning_disability_annual_health_check_grade_id);
 
 CREATE TRIGGER trigger_learning_disability_annual_health_check_grade_flag_updated_at
-    BEFORE UPDATE ON learning_disability_annual_health_check_grade_flag
+    BEFORE UPDATE ON learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION learning_disability_annual_health_check.set_updated_at();
 
-COMMENT ON TABLE learning_disability_annual_health_check_grade_flag IS
+COMMENT ON TABLE learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag IS
     'Clinical flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.created_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.updated_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.deleted_at IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.learning_disability_annual_health_check_grade_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.learning_disability_annual_health_check_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.flag_id IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-STOMP-001).';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.category IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.category IS
     'Flag category: stomp, missing-screening-uptake, unaddressed-physical-health, no-health-action-plan, reasonable-adjustments-not-recorded, dysphagia-constipation-risk, incomplete, or other.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.priority IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.description IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN learning_disability_annual_health_check_grade_flag.suggested_action IS
+COMMENT ON COLUMN learning_disability_annual_health_check.learning_disability_annual_health_check_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "arrange a STOMP medication review", "produce a Health Action Plan").';
 
 -- ========================================================================

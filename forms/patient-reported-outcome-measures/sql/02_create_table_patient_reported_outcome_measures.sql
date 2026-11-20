@@ -4,7 +4,7 @@
 -- Computed scores live in the sibling
 -- patient_reported_outcome_measures_score table (1:1).
 
-CREATE TABLE patient_reported_outcome_measures (
+CREATE TABLE patient_reported_outcome_measures.patient_reported_outcome_measures (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -83,139 +83,139 @@ CREATE TABLE patient_reported_outcome_measures (
 );
 
 CREATE TRIGGER trigger_patient_reported_outcome_measures_updated_at
-    BEFORE UPDATE ON patient_reported_outcome_measures
+    BEFORE UPDATE ON patient_reported_outcome_measures.patient_reported_outcome_measures
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_reported_outcome_measures.set_updated_at();
 
-COMMENT ON TABLE patient_reported_outcome_measures IS
+COMMENT ON TABLE patient_reported_outcome_measures.patient_reported_outcome_measures IS
     'One completed PRO-measure battery (SF-36v2, NDI, mJOA, EQ-5D-3L) at one patient visit; raw responses only, computed scores are in the sibling _score table.';
-COMMENT ON COLUMN patient_reported_outcome_measures.id IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient_reported_outcome_measures.created_at IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN patient_reported_outcome_measures.updated_at IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN patient_reported_outcome_measures.deleted_at IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN patient_reported_outcome_measures.subject_id IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.subject_id IS
     'Research subject / patient identifier.';
-COMMENT ON COLUMN patient_reported_outcome_measures.visit IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.visit IS
     'Visit label, e.g. Baseline, 6-week, 3-month, 1-year.';
-COMMENT ON COLUMN patient_reported_outcome_measures.assessment_date IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.assessment_date IS
     'Date this battery was completed.';
-COMMENT ON COLUMN patient_reported_outcome_measures.general_health IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.general_health IS
     'SF-36 Q1: in general, would you say your health is (1 Excellent .. 5 Poor).';
-COMMENT ON COLUMN patient_reported_outcome_measures.health_change_vs_year_ago IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.health_change_vs_year_ago IS
     'SF-36 Q2: compared to one year ago, health in general now (1 Much better .. 5 Much worse).';
-COMMENT ON COLUMN patient_reported_outcome_measures.vigorous_activities IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.vigorous_activities IS
     'SF-36 Q3a: vigorous activities limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.moderate_activities IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.moderate_activities IS
     'SF-36 Q3b: moderate activities limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.lifting_carrying_groceries IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.lifting_carrying_groceries IS
     'SF-36 Q3c: lifting or carrying groceries limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.climbing_several_flights IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.climbing_several_flights IS
     'SF-36 Q3d: climbing several flights of stairs limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.climbing_one_flight IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.climbing_one_flight IS
     'SF-36 Q3e: climbing one flight of stairs limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.bending_kneeling_stooping IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.bending_kneeling_stooping IS
     'SF-36 Q3f: bending, kneeling, or stooping limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.walking_more_than_mile IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.walking_more_than_mile IS
     'SF-36 Q3g: walking more than a mile limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.walking_several_hundred_yards IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.walking_several_hundred_yards IS
     'SF-36 Q3h: walking several hundred yards limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.walking_one_hundred_yards IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.walking_one_hundred_yards IS
     'SF-36 Q3i: walking one hundred yards limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.bathing_dressing IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.bathing_dressing IS
     'SF-36 Q3j: bathing or dressing yourself limitation (1 limited a lot .. 3 not limited).';
-COMMENT ON COLUMN patient_reported_outcome_measures.cut_down_time_physical IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.cut_down_time_physical IS
     'SF-36 Q4a: cut down time on work/activities due to physical health (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.accomplished_less_physical IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.accomplished_less_physical IS
     'SF-36 Q4b: accomplished less than would like, due to physical health (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.limited_in_kind_physical IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.limited_in_kind_physical IS
     'SF-36 Q4c: limited in the kind of work or activities, due to physical health (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.difficulty_performing_physical IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.difficulty_performing_physical IS
     'SF-36 Q4d: had difficulty performing work/activities, due to physical health (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.cut_down_time_emotional IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.cut_down_time_emotional IS
     'SF-36 Q5a: cut down time on work/activities due to emotional problems (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.accomplished_less_emotional IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.accomplished_less_emotional IS
     'SF-36 Q5b: accomplished less than would like, due to emotional problems (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.less_careful_than_usual IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.less_careful_than_usual IS
     'SF-36 Q5c: did work/activities less carefully than usual, due to emotional problems (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.social_activities_interference IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.social_activities_interference IS
     'SF-36 Q6: extent physical/emotional problems interfered with normal social activities (1 Not at all .. 5 Extremely).';
-COMMENT ON COLUMN patient_reported_outcome_measures.bodily_pain IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.bodily_pain IS
     'SF-36 Q7: bodily pain in the past 4 weeks (1 None .. 6 Very severe).';
-COMMENT ON COLUMN patient_reported_outcome_measures.pain_interference_with_work IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.pain_interference_with_work IS
     'SF-36 Q8: how much pain interfered with normal work (1 Not at all .. 5 Extremely).';
-COMMENT ON COLUMN patient_reported_outcome_measures.felt_full_of_life IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.felt_full_of_life IS
     'SF-36 Q9a: did you feel full of life (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.very_nervous IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.very_nervous IS
     'SF-36 Q9b: have you been very nervous (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.so_down_in_dumps IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.so_down_in_dumps IS
     'SF-36 Q9c: felt so down in the dumps nothing could cheer you up (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.felt_calm_peaceful IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.felt_calm_peaceful IS
     'SF-36 Q9d: have you felt calm and peaceful (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.lot_of_energy IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.lot_of_energy IS
     'SF-36 Q9e: did you have a lot of energy (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.downhearted_depressed IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.downhearted_depressed IS
     'SF-36 Q9f: have you felt downhearted and depressed (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.felt_worn_out IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.felt_worn_out IS
     'SF-36 Q9g: did you feel worn out (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.been_happy IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.been_happy IS
     'SF-36 Q9h: have you been happy (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.felt_tired IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.felt_tired IS
     'SF-36 Q9i: did you feel tired (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.social_activities_interference_time IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.social_activities_interference_time IS
     'SF-36 Q10: how much of the time has health interfered with social activities (1 All of the time .. 5 None of the time).';
-COMMENT ON COLUMN patient_reported_outcome_measures.get_sick_easier IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.get_sick_easier IS
     'SF-36 Q11a: I seem to get sick a little easier than other people (1 Definitely true .. 5 Definitely false).';
-COMMENT ON COLUMN patient_reported_outcome_measures.as_healthy_as_anybody IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.as_healthy_as_anybody IS
     'SF-36 Q11b: I am as healthy as anybody I know (1 Definitely true .. 5 Definitely false).';
-COMMENT ON COLUMN patient_reported_outcome_measures.expect_health_worse IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.expect_health_worse IS
     'SF-36 Q11c: I expect my health to get worse (1 Definitely true .. 5 Definitely false).';
-COMMENT ON COLUMN patient_reported_outcome_measures.health_excellent IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.health_excellent IS
     'SF-36 Q11d: my health is excellent (1 Definitely true .. 5 Definitely false).';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_pain_intensity IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_pain_intensity IS
     'NDI Section 1 (Pain Intensity), 0 (no pain) - 5 (worst imaginable).';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_personal_care IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_personal_care IS
     'NDI Section 2 (Personal Care: washing, dressing, etc.), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_lifting IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_lifting IS
     'NDI Section 3 (Lifting), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_reading IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_reading IS
     'NDI Section 4 (Reading), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_headache IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_headache IS
     'NDI Section 5 (Headache), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_concentration IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_concentration IS
     'NDI Section 6 (Concentration), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_work IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_work IS
     'NDI Section 7 (Work), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_driving IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_driving IS
     'NDI Section 8 (Driving), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_sleeping IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_sleeping IS
     'NDI Section 9 (Sleeping), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.ndi_recreation IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.ndi_recreation IS
     'NDI Section 10 (Recreation), 0-5.';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_motor_arms IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_motor_arms IS
     'mJOA Motor, arms subscale, 0 (unable to feed oneself) - 4 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_motor_legs IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_motor_legs IS
     'mJOA Motor, legs subscale, 0 (unable to walk) - 4 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_sensation_arms IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_sensation_arms IS
     'mJOA Sensation, arms subscale, 0 (severe loss/pain) - 2 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_sensation_legs IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_sensation_legs IS
     'mJOA Sensation, legs subscale, 0 (severe loss/pain) - 2 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_sensation_trunk IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_sensation_trunk IS
     'mJOA Sensation, trunk subscale, 0 (severe loss/pain) - 2 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.mjoa_bladder_function IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.mjoa_bladder_function IS
     'mJOA Bladder function subscale, 0 (unable to void) - 3 (no deficit).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_mobility IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_mobility IS
     'EQ-5D-3L Mobility dimension, 1 (no problems) - 3 (confined to bed).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_self_care IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_self_care IS
     'EQ-5D-3L Self-Care dimension, 1 (no problems) - 3 (unable to wash/dress).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_usual_activities IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_usual_activities IS
     'EQ-5D-3L Usual Activities dimension, 1 (no problems) - 3 (unable to perform).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_pain_discomfort IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_pain_discomfort IS
     'EQ-5D-3L Pain/Discomfort dimension, 1 (none) - 3 (extreme).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_anxiety_depression IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_anxiety_depression IS
     'EQ-5D-3L Anxiety/Depression dimension, 1 (not anxious/depressed) - 3 (extremely anxious/depressed).';
-COMMENT ON COLUMN patient_reported_outcome_measures.eq5d_vas_score IS
+COMMENT ON COLUMN patient_reported_outcome_measures.patient_reported_outcome_measures.eq5d_vas_score IS
     'EQ VAS: patient-rated current health state, 0 (worst imaginable) - 100 (best imaginable).';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS predicting_risk_of_cardiovascular_disease_events;
+
+COMMENT ON SCHEMA predicting_risk_of_cardiovascular_disease_events IS
+    'Namespace for the Predicting Risk of Cardiovascular Disease Events (PREVENT) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,56 +98,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON predicting_risk_of_cardiovascular_disease_events.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -143,7 +160,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -162,46 +179,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON predicting_risk_of_cardiovascular_disease_events.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -212,39 +229,39 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_predicting_risk_of_cardiovascular_disease_events.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Foreign key to the patient this assessment belongs to
-    patient_id          UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id          UUID NOT NULL REFERENCES predicting_risk_of_cardiovascular_disease_events.patient(id) ON DELETE CASCADE,
     -- Assessment status tracking
     status              TEXT NOT NULL DEFAULT 'in_progress'
                         CHECK (status IN ('in_progress', 'completed', 'reviewed'))
 );
 
 -- Index for the most common query: all assessments for a patient
-CREATE INDEX index_assessment_patient_id ON assessment(patient_id);
+CREATE INDEX index_assessment_patient_id ON predicting_risk_of_cardiovascular_disease_events.assessment(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.assessment
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.assessment IS
     'A single PREVENT CVD risk assessment. Child tables hold section-specific clinical data.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.patient_id IS
     'FK to patient. One patient may have many assessments over time.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.status IS
     'Workflow status: in_progress (patient filling in), completed (submitted), reviewed (clinician signed off).';
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -255,7 +272,7 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_pvt_rule.sql
 -- ========================================================================
 
-CREATE TABLE pvt_rule (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.pvt_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -270,15 +287,15 @@ CREATE TABLE pvt_rule (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_pvt_rule_updated_at
-    BEFORE UPDATE ON pvt_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.pvt_rule
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
 -- ──────────────────────────────────────────────────────────────
 -- Seed all 20 PVT risk rules
 -- ──────────────────────────────────────────────────────────────
 
 -- HIGH RISK (PVT-001 to PVT-005)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-001', 'Overall Risk',       'Estimated 10-year CVD risk >= 20%',                                                                  'high'),
     ('PVT-002', 'Renal / Diabetes',   'Diabetes with eGFR < 30 (severe CKD with diabetes)',                                                 'high'),
     ('PVT-003', 'Blood Pressure',     'Systolic BP >= 180 mmHg (hypertensive crisis)',                                                      'high'),
@@ -286,7 +303,7 @@ INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-005', 'Diabetes / Smoking', 'HbA1c >= 10% with current smoking',                                                                 'high');
 
 -- MEDIUM RISK (PVT-006 to PVT-015)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-006', 'Overall Risk',    '10-year risk 7.5-19.9% (intermediate risk)',         'medium'),
     ('PVT-007', 'Smoking',         'Current smoker',                                     'medium'),
     ('PVT-008', 'Diabetes',        'Diabetes present',                                   'medium'),
@@ -299,30 +316,30 @@ INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-015', 'Renal Function',  'Albuminuria (uACR > 30 mg/g)',                      'medium');
 
 -- LOW RISK / PROTECTIVE (PVT-016 to PVT-020)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-016', 'Cholesterol',     'HDL cholesterol >= 60 mg/dL (protective)',           'low'),
     ('PVT-017', 'Smoking',         'Non-smoker',                                         'low'),
     ('PVT-018', 'Blood Pressure',  'Normal BP (< 120/80 mmHg), no treatment',           'low'),
     ('PVT-019', 'Renal Function',  'eGFR >= 90 mL/min (normal renal function)',          'low'),
     ('PVT-020', 'BMI',             'BMI 18.5-24.9 (normal weight)',                      'low');
 
-COMMENT ON TABLE pvt_rule IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.pvt_rule IS
     'Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.';
-COMMENT ON COLUMN pvt_rule.code IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN pvt_rule.category IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.category IS
     'Clinical category (e.g. Blood Pressure, Cholesterol, Renal Function).';
-COMMENT ON COLUMN pvt_rule.description IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN pvt_rule.risk_level IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.risk_level IS
     'Risk level: high, medium, or low.';
-COMMENT ON COLUMN pvt_rule.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pvt_rule.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pvt_rule.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN pvt_rule.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -333,13 +350,13 @@ COMMENT ON COLUMN pvt_rule.deleted_at IS
 -- BEGIN 06_create_table_predicting_risk_of_cardiovascular_disease_events_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with assessment
-    assessment_id               UUID NOT NULL UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
+    assessment_id               UUID NOT NULL UNIQUE REFERENCES predicting_risk_of_cardiovascular_disease_events.assessment(id) ON DELETE CASCADE,
     -- Risk category determined by 10-year risk percentage
     risk_category               TEXT NOT NULL
                                 CHECK (risk_category IN ('draft', 'low', 'borderline', 'intermediate', 'high')),
@@ -356,32 +373,32 @@ CREATE TABLE grade (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.grade
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.grade IS
     '1:1 with assessment. Stores computed PREVENT risk category, 10-year and 30-year risk percentages, and optional clinician override.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.assessment_id IS
     'FK to assessment (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN grade.risk_category IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.risk_category IS
     'Computed risk category: draft (insufficient data), low (<5%), borderline (5-7.4%), intermediate (7.5-19.9%), high (>=20%).';
-COMMENT ON COLUMN grade.ten_year_risk_percent IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.ten_year_risk_percent IS
     'Estimated 10-year CVD risk percentage (0.0-95.0).';
-COMMENT ON COLUMN grade.thirty_year_risk_percent IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.thirty_year_risk_percent IS
     'Estimated 30-year CVD risk percentage (0.0-95.0). Calculated as 10-year risk * 2.5, capped at 95%.';
-COMMENT ON COLUMN grade.risk_category_override IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.risk_category_override IS
     'Clinician-assigned risk category override. NULL means no override.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.override_reason IS
     'Free-text justification for overriding the computed risk category. Required when override is set.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.graded_at IS
     'Timestamp when the grading engine produced this result.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -392,15 +409,15 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 07_create_table_predicting_risk_of_cardiovascular_disease_events_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many fired rules
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES predicting_risk_of_cardiovascular_disease_events.grade(id) ON DELETE CASCADE,
     -- FK to the rule catalogue (may be NULL if rule is retired)
-    rule_code         TEXT REFERENCES pvt_rule(code) ON DELETE SET NULL,
+    rule_code         TEXT REFERENCES predicting_risk_of_cardiovascular_disease_events.pvt_rule(code) ON DELETE SET NULL,
     -- Denormalized snapshot of the rule at grading time
     rule_category       TEXT NOT NULL,
     rule_description    TEXT NOT NULL,
@@ -409,32 +426,32 @@ CREATE TABLE grading_fired_rule (
 
 -- Index for fetching all fired rules for a grading result
 CREATE INDEX index_grading_fired_rule_grade_id
-    ON grading_fired_rule(grade_id);
+    ON predicting_risk_of_cardiovascular_disease_events.grading_fired_rule(grade_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.grading_fired_rule
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.grading_fired_rule IS
     'Many-to-one with grade. Each row is one PVT risk rule that fired. Denormalized for audit.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.grade_id IS
     'FK to grade. One result may have many fired rules.';
-COMMENT ON COLUMN grading_fired_rule.rule_code IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.rule_code IS
     'FK to pvt_rule catalogue. SET NULL on delete so audit rows survive rule removal.';
-COMMENT ON COLUMN grading_fired_rule.rule_category IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.rule_category IS
     'Clinical category at grading time (denormalized from pvt_rule).';
-COMMENT ON COLUMN grading_fired_rule.rule_description IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.rule_description IS
     'Rule description at grading time (denormalized from pvt_rule).';
-COMMENT ON COLUMN grading_fired_rule.rule_risk_level IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.rule_risk_level IS
     'Risk level at grading time: high, medium, or low (denormalized from pvt_rule).';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -445,13 +462,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 08_create_table_predicting_risk_of_cardiovascular_disease_events_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Many-to-one: one grading result can have many flags
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES predicting_risk_of_cardiovascular_disease_events.grade(id) ON DELETE CASCADE,
     -- Flag identification (matches the application-side flag id)
     flag_id             TEXT NOT NULL,
     -- Flag details
@@ -462,36 +479,36 @@ CREATE TABLE grading_additional_flag (
 
 -- Index for fetching all flags for a grading result
 CREATE INDEX index_grading_additional_flag_grade_id
-    ON grading_additional_flag(grade_id);
+    ON predicting_risk_of_cardiovascular_disease_events.grading_additional_flag(grade_id);
 
 -- Prevent duplicate flags per grading result
 CREATE UNIQUE INDEX idx_grading_additional_flag_unique
-    ON grading_additional_flag(grade_id, flag_id);
+    ON predicting_risk_of_cardiovascular_disease_events.grading_additional_flag(grade_id, flag_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.grading_additional_flag
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.grading_additional_flag IS
     'Many-to-one with grade. Safety-critical alerts detected by the flagged issues engine.';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.grade_id IS
     'FK to grade. One result may have many flags.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.flag_id IS
     'Application-side flag identifier (e.g. FLAG-CVD-001, FLAG-BP-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.category IS
     'Flag category (e.g. Eligibility, Blood Pressure, Cholesterol, Diabetes, Renal Function).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.message IS
     'Human-readable alert message for the clinician.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.priority IS
     'Alert priority: high, medium, or low.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

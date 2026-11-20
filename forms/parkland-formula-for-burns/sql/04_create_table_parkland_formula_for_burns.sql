@@ -4,14 +4,14 @@
 -- phase split, infusion rates, urine-output target, fired rules, and safety
 -- flags live in dedicated child tables.
 
-CREATE TABLE parkland_formula_for_burns (
+CREATE TABLE parkland_formula_for_burns.parkland_formula_for_burns (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES parkland_formula_for_burns.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES parkland_formula_for_burns.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -36,56 +36,56 @@ CREATE TABLE parkland_formula_for_burns (
 );
 
 CREATE INDEX parkland_formula_for_burns_patient_id_idx
-    ON parkland_formula_for_burns (patient_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns (patient_id);
 CREATE INDEX parkland_formula_for_burns_clinician_id_idx
-    ON parkland_formula_for_burns (clinician_id);
+    ON parkland_formula_for_burns.parkland_formula_for_burns (clinician_id);
 
 CREATE TRIGGER trigger_parkland_formula_for_burns_updated_at
-    BEFORE UPDATE ON parkland_formula_for_burns
+    BEFORE UPDATE ON parkland_formula_for_burns.parkland_formula_for_burns
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION parkland_formula_for_burns.set_updated_at();
 
-COMMENT ON TABLE parkland_formula_for_burns IS
+COMMENT ON TABLE parkland_formula_for_burns.parkland_formula_for_burns IS
     'Main Parkland-formula burns record: context and identification, plus the body weight, %TBSA, and time-of-injury inputs and the injury-feature flags.';
-COMMENT ON COLUMN parkland_formula_for_burns.id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN parkland_formula_for_burns.created_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN parkland_formula_for_burns.updated_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN parkland_formula_for_burns.deleted_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN parkland_formula_for_burns.patient_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.patient_id IS
     'Foreign key to the patient this calculation is for (restricted delete).';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_id IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_id IS
     'Foreign key to the clinician who recorded the calculation (optional, restricted delete).';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_name IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_name IS
     'Assessing clinician name as recorded on the form.';
-COMMENT ON COLUMN parkland_formula_for_burns.clinician_role IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.clinician_role IS
     'Assessing clinician role: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.care_setting IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.care_setting IS
     'Care setting: emergency-department, burns-unit, intensive-care, retrieval, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.assessed_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.assessed_at IS
     'Date and time the calculation was assessed (used with injury_at to derive hours since injury).';
-COMMENT ON COLUMN parkland_formula_for_burns.patient_identifier IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.patient_identifier IS
     'Local patient identifier as recorded on the form.';
-COMMENT ON COLUMN parkland_formula_for_burns.age_band IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.age_band IS
     'Age band that selects the major-burn referral threshold: adult (>=15% TBSA) or child (>=10% TBSA).';
-COMMENT ON COLUMN parkland_formula_for_burns.sex IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.sex IS
     'Patient sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN parkland_formula_for_burns.weight_kg IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.weight_kg IS
     'Body weight in kilograms used in the Parkland formula (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.tbsa_percent IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.tbsa_percent IS
     'Percentage total body surface area burned (partial-thickness or deeper; superficial excluded), 0-100 (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.tbsa_method IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.tbsa_method IS
     'Method used to estimate %TBSA: rule-of-nines, lund-browder, or other.';
-COMMENT ON COLUMN parkland_formula_for_burns.injury_at IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.injury_at IS
     'Date and time the burn occurred; the 8h/16h phase split is measured from this instant (null when unanswered).';
-COMMENT ON COLUMN parkland_formula_for_burns.injury_time_known IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.injury_time_known IS
     'Whether the time of injury is known or estimated.';
-COMMENT ON COLUMN parkland_formula_for_burns.inhalation_suspected IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.inhalation_suspected IS
     'Whether inhalation / airway injury is suspected: yes or no.';
-COMMENT ON COLUMN parkland_formula_for_burns.circumferential_or_deep IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.circumferential_or_deep IS
     'Whether a circumferential or deep burn is present (escharotomy risk): yes or no.';
-COMMENT ON COLUMN parkland_formula_for_burns.mechanism IS
+COMMENT ON COLUMN parkland_formula_for_burns.parkland_formula_for_burns.mechanism IS
     'Burn mechanism: thermal, electrical, chemical, or other.';

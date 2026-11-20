@@ -1,6 +1,6 @@
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE who_surgical_safety_checklist.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -15,35 +15,35 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON who_surgical_safety_checklist.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE who_surgical_safety_checklist.patient IS
     'Patient receiving the surgical procedure.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.name IS
     'Patient full name as recorded on the consent form.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.sex IS
     'Recorded sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.medical_record_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.medical_record_number IS
     'Local medical record number (MRN) at the operating facility.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.weight_as_kg IS
     'Patient weight in kilograms, used for the paediatric blood-loss threshold (7 ml/kg).';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON who_surgical_safety_checklist.patient
     USING GIN ((
         name
     ) gin_trgm_ops);

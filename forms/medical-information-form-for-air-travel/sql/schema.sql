@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -28,12 +29,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_information_form_for_air_travel;
+
+COMMENT ON SCHEMA medical_information_form_for_air_travel IS
+    'Namespace for the Medical Information Form for Air Travel (MEDIF) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_information_form_for_air_travel.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -41,7 +58,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_information_form_for_air_travel.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -54,7 +71,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Passenger demographic information (the MEDIF subject).
 
-CREATE TABLE patient (
+CREATE TABLE medical_information_form_for_air_travel.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,53 +98,53 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON medical_information_form_for_air_travel.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE medical_information_form_for_air_travel.patient IS
     'Passenger (MEDIF subject) demographic and identity information.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.name IS
     'Passenger full legal name as on travel document.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex_at_birth IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.sex_at_birth IS
     'Sex at birth: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.nationality_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.nationality_as_iso_3166_1_alpha_2 IS
     'Nationality as ISO 3166-1 alpha-2 country code.';
-COMMENT ON COLUMN patient.passport_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.passport_number IS
     'Passport number used for the booking.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, if applicable.';
-COMMENT ON COLUMN patient.national_health_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.national_health_id IS
     'National health identifier other than UK NHS, if applicable.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.phone IS
     'Phone number including international dialling code.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.country_as_iso_3166_1_alpha_2 IS
     'Country of residence as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.postcode IS
     'Postal code of residence.';
-COMMENT ON COLUMN patient.emergency_contact_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.emergency_contact_name IS
     'Emergency contact name.';
-COMMENT ON COLUMN patient.emergency_contact_relationship IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.emergency_contact_relationship IS
     'Emergency contact relationship to the passenger.';
-COMMENT ON COLUMN patient.emergency_contact_phone IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.emergency_contact_phone IS
     'Emergency contact phone number.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.weight_as_kg IS
     'Body weight in kilograms (for stretcher / seat planning).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.patient.height_as_cm IS
     'Body height in centimetres.';
 
 -- ========================================================================
@@ -140,7 +157,7 @@ COMMENT ON COLUMN patient.height_as_cm IS
 
 -- Attending physician who completes Part 2 of the MEDIF.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_information_form_for_air_travel.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -173,41 +190,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_information_form_for_air_travel.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_information_form_for_air_travel.clinician IS
     'Attending physician (MEDIF Part 2 author).';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.name IS
     'Attending physician name.';
-COMMENT ON COLUMN clinician.specialty IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.specialty IS
     'Physician specialty (free text).';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.role IS
     'Role classification: general-practitioner, cardiologist, etc.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.registration_number IS
     'Professional registration number.';
-COMMENT ON COLUMN clinician.clinic_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.clinic_name IS
     'Clinic or hospital name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.phone IS
     'Phone number including international dialling code.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country of practice as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.clinician.postcode IS
     'Postal code of the clinic.';
 
 -- ========================================================================
@@ -220,14 +237,14 @@ COMMENT ON COLUMN clinician.postcode IS
 
 -- Medical Information Form for Air Travel (MEDIF) — single assessment row.
 
-CREATE TABLE medical_information_form_for_air_travel (
+CREATE TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES medical_information_form_for_air_travel.patient(id) ON DELETE CASCADE,
+    clinician_id UUID REFERENCES medical_information_form_for_air_travel.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'cleared', 'declined', 'urgent')),
@@ -408,213 +425,213 @@ CREATE TABLE medical_information_form_for_air_travel (
 );
 
 CREATE TRIGGER trigger_medical_information_form_for_air_travel_updated_at
-    BEFORE UPDATE ON medical_information_form_for_air_travel
+    BEFORE UPDATE ON medical_information_form_for_air_travel.medical_information_form_for_air_travel
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE medical_information_form_for_air_travel IS
+COMMENT ON TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel IS
     'One MEDIF row per submission: passenger identity, trip details, attending-physician clinical evaluation, and requested in-flight accommodations for an airline medical-desk decision.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.deleted_at IS
     'Timestamp when this row was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.patient_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.patient_id IS
     'Foreign key to the passenger (MEDIF subject).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.clinician_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.clinician_id IS
     'Foreign key to the attending physician (Part 2 author).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.status IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.status IS
     'Lifecycle status: draft, submitted, reviewed, cleared, declined, or urgent.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.submitter_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.submitter_name IS
     'Name of the person submitting Part 1.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.submitter_role IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.submitter_role IS
     'Role of the submitter: passenger, agent, clinician, or family-member.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.submitter_email IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.submitter_email IS
     'Email address of the submitter.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.submitter_phone IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.submitter_phone IS
     'Phone of the submitter.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.submitter_organisation IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.submitter_organisation IS
     'Organisation submitting on behalf of the passenger (e.g. accessible-travel agent).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.airline_booking_reference IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.airline_booking_reference IS
     'Airline booking reference (PNR).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.airline_iata_code IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.airline_iata_code IS
     'Airline two-letter IATA code (e.g. EK, BA, QR).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.airline_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.airline_name IS
     'Airline full name.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.outbound_flight_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.outbound_flight_number IS
     'Outbound flight number including airline prefix.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.outbound_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.outbound_date IS
     'Outbound flight date.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.outbound_origin_iata IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.outbound_origin_iata IS
     'Outbound origin airport IATA code.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.outbound_destination_iata IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.outbound_destination_iata IS
     'Outbound destination airport IATA code.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.return_flight_number IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.return_flight_number IS
     'Return flight number if applicable.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.return_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.return_date IS
     'Return flight date if applicable.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.cabin_class IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.cabin_class IS
     'Cabin class: economy, premium-economy, business, or first.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.sector_duration_minutes IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.sector_duration_minutes IS
     'Longest sector duration in minutes (drives oxygen battery planning).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.transit_airports_iata IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.transit_airports_iata IS
     'Comma-separated transit airport IATA codes.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.special_assistance_codes IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.special_assistance_codes IS
     'Comma-separated IATA SSR codes requested (e.g. WCHR,OXYG,MEDA).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_equipment IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_equipment IS
     'Reason: passenger requires in-flight medical equipment.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_recent_acute_event IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_recent_acute_event IS
     'Reason: passenger had a recent acute medical event (surgery, MI, stroke, fracture).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_unstable_condition IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_unstable_condition IS
     'Reason: passenger has an unstable chronic condition.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_communicable_disease IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_communicable_disease IS
     'Reason: passenger has a communicable disease.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_pregnancy IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_pregnancy IS
     'Reason: passenger is pregnant beyond carrier threshold.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_mobility_escort IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_mobility_escort IS
     'Reason: passenger requires mobility assistance or an escort.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.reason_psychiatric IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.reason_psychiatric IS
     'Reason: passenger has a recent psychiatric event requiring clearance.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.primary_diagnosis IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.primary_diagnosis IS
     'Primary diagnosis text.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.icd10_codes IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.icd10_codes IS
     'Comma-separated ICD-10 codes.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.diagnosis_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.diagnosis_date IS
     'Date the primary diagnosis was established.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.current_treatment IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.current_treatment IS
     'Current treatment summary.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_admission_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_admission_date IS
     'Date of most recent hospital admission, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_discharge_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_discharge_date IS
     'Date of most recent hospital discharge, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_specialist_review_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_specialist_review_date IS
     'Date of most recent specialist review.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.resting_systolic_bp IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.resting_systolic_bp IS
     'Resting systolic blood pressure in mmHg.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.resting_diastolic_bp IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.resting_diastolic_bp IS
     'Resting diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.resting_heart_rate IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.resting_heart_rate IS
     'Resting heart rate in beats per minute.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.nyha_class IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.nyha_class IS
     'New York Heart Association functional class I-IV.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_mi_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_mi_date IS
     'Date of most recent myocardial infarction, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_stent_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_stent_date IS
     'Date of most recent coronary stent, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.on_anticoagulant IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.on_anticoagulant IS
     'Whether the passenger is on anticoagulant therapy.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.pacemaker_or_icd IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.pacemaker_or_icd IS
     'Implanted pacemaker or ICD present.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.exercise_tolerance_metres IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.exercise_tolerance_metres IS
     'Exercise tolerance on flat ground in metres before symptoms.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.unstable_angina IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.unstable_angina IS
     'Current unstable angina present.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.resting_spo2_percent IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.resting_spo2_percent IS
     'Resting oxygen saturation on room air as a percentage.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.predicted_inflight_spo2_percent IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.predicted_inflight_spo2_percent IS
     'Predicted in-flight oxygen saturation as a percentage.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.hypoxic_challenge_result IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.hypoxic_challenge_result IS
     'Hypoxic challenge test result: pass, borderline, fail, or not-performed.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_pneumothorax_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_pneumothorax_date IS
     'Date of most recent pneumothorax, if any (gas-expansion risk).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.asthma_severity IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.asthma_severity IS
     'Asthma severity: none, mild-controlled, moderate, or severe-uncontrolled.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.copd_severity IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.copd_severity IS
     'COPD severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.cpap_or_bipap_use IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.cpap_or_bipap_use IS
     'CPAP or BiPAP use at home: none, cpap, bipap, or both.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_pulmonary_embolism_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_pulmonary_embolism_date IS
     'Date of most recent pulmonary embolism, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_surgery_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_surgery_date IS
     'Date of most recent surgery, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_surgery_site IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_surgery_site IS
     'Anatomical site of the most recent surgery.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.cabin_gas_risk IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.cabin_gas_risk IS
     'Trapped gas risk category for cabin pressure: intra-ocular-gas, intra-cranial-gas, intra-abdominal-gas, plaster-cast, pneumothorax, other, or none.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_fracture_cast IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_fracture_cast IS
     'Recent fracture with plaster cast in situ.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_dvt_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_dvt_date IS
     'Date of most recent deep vein thrombosis, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.scuba_diving_within_24h IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.scuba_diving_within_24h IS
     'Scuba diving within 24 hours of departure (decompression risk).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.recent_stroke_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.recent_stroke_date IS
     'Date of most recent stroke, if any.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.is_pregnant IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.is_pregnant IS
     'Whether the passenger is currently pregnant.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.gestation_weeks IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.gestation_weeks IS
     'Current gestation in completed weeks, if pregnant.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.pregnancy_type IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.pregnancy_type IS
     'Pregnancy type: singleton, twins, or multiple.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.pregnancy_complications IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.pregnancy_complications IS
     'Free-text pregnancy complications.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.expected_delivery_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.expected_delivery_date IS
     'Expected delivery date.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.obstetrician_contact IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.obstetrician_contact IS
     'Obstetrician name and contact details.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.communicable_disease_status IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.communicable_disease_status IS
     'Communicable disease status: none, infectious, convalescent, or cleared.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.last_symptom_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.last_symptom_date IS
     'Date of last symptoms of a communicable disease.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.isolation_required IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.isolation_required IS
     'Whether isolation precautions are required.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.vaccination_status IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.vaccination_status IS
     'Vaccination status summary.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.current_antimicrobials IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.current_antimicrobials IS
     'Current antimicrobial therapy summary.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_supplemental_oxygen IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_supplemental_oxygen IS
     'Whether supplemental oxygen is required in-flight.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.oxygen_flow_rate_lpm IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.oxygen_flow_rate_lpm IS
     'Supplemental oxygen flow rate in litres per minute.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.oxygen_duration IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.oxygen_duration IS
     'Oxygen requirement duration: continuous, as-required, on-exertion, or sleep-only.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_poc IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_poc IS
     'Whether a portable oxygen concentrator is required.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.poc_make_model IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.poc_make_model IS
     'Make and model of the portable oxygen concentrator.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.poc_battery_hours IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.poc_battery_hours IS
     'Total battery duration in hours (must exceed sector duration + 50%).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_stretcher IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_stretcher IS
     'Whether a stretcher is required (sector-specific approval).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_incubator IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_incubator IS
     'Whether an infant incubator is required.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_iv_pump IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_iv_pump IS
     'Whether an IV pump is required in cabin.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_medical_escort IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_medical_escort IS
     'Whether a medical escort accompanies the passenger.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_extra_seat IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_extra_seat IS
     'Whether an extra seat is required for medical reasons.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.requires_accessible_lavatory IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.requires_accessible_lavatory IS
     'Whether an accessible lavatory or aisle wheelchair is required.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.wheelchair_type IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.wheelchair_type IS
     'Wheelchair assistance level: WCHR (ramp), WCHS (steps), WCHC (cabin), or none.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.accompanying_carer IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.accompanying_carer IS
     'Whether a non-medical carer accompanies the passenger.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.regular_medications IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.regular_medications IS
     'Regular medications carried in cabin.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.controlled_drugs IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.controlled_drugs IS
     'Controlled drugs carried in cabin (with customs documentation).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.dangerous_goods_battery_declaration IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.dangerous_goods_battery_declaration IS
     'Whether a dangerous-goods battery declaration is required.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.sharps_in_cabin IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.sharps_in_cabin IS
     'Whether syringes or sharps are carried in cabin.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.refrigerated_medication IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.refrigerated_medication IS
     'Whether refrigerated medication is carried.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.customs_documentation_available IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.customs_documentation_available IS
     'Whether customs documentation for medications is available.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.haemoglobin_g_per_l IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.haemoglobin_g_per_l IS
     'Haemoglobin in grams per litre (drives severe-anaemia rule).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.physician_declaration IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.physician_declaration IS
     'Attending physician declaration: fit, fit-with-conditions, unfit, or unable-to-determine.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.physician_signature_name IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.physician_signature_name IS
     'Physician name as printed on the signature.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.physician_signature_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.physician_signature_date IS
     'Date the physician signed the form.';
-COMMENT ON COLUMN medical_information_form_for_air_travel.valid_until_date IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.valid_until_date IS
     'Date the MEDIF expires (typically signature date + 10 to 14 days).';
-COMMENT ON COLUMN medical_information_form_for_air_travel.additional_notes IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel.additional_notes IS
     'Free-text additional notes for the airline medical desk.';
 
 -- ========================================================================
@@ -627,14 +644,14 @@ COMMENT ON COLUMN medical_information_form_for_air_travel.additional_notes IS
 
 -- Computed grading result for a MEDIF: fitness-to-fly band and submission summary.
 
-CREATE TABLE medical_information_form_for_air_travel_grade (
+CREATE TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_information_form_for_air_travel_id UUID NOT NULL UNIQUE
-        REFERENCES medical_information_form_for_air_travel(id) ON DELETE CASCADE,
+        REFERENCES medical_information_form_for_air_travel.medical_information_form_for_air_travel(id) ON DELETE CASCADE,
 
     computed_fitness_band VARCHAR(25) NOT NULL DEFAULT ''
         CHECK (computed_fitness_band IN (
@@ -661,37 +678,37 @@ CREATE TABLE medical_information_form_for_air_travel_grade (
 );
 
 CREATE TRIGGER trigger_medical_information_form_for_air_travel_grade_updated_at
-    BEFORE UPDATE ON medical_information_form_for_air_travel_grade
+    BEFORE UPDATE ON medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE medical_information_form_for_air_travel_grade IS
+COMMENT ON TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade IS
     'Computed and signed-off MEDIF result. Stores both the engine-computed fitness-to-fly band and the physician-final band with an override reason.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.deleted_at IS
     'Timestamp when this row was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.medical_information_form_for_air_travel_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.medical_information_form_for_air_travel_id IS
     'Foreign key to the parent MEDIF assessment (unique, 1:1).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.computed_fitness_band IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.computed_fitness_band IS
     'Fitness-to-fly band computed by the engine.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.final_fitness_band IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.final_fitness_band IS
     'Fitness-to-fly band signed off by the attending physician.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.override_reason IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.override_reason IS
     'Reason the physician set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.desk_recommendation IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.desk_recommendation IS
     'Recommendation for the airline medical desk (free text).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.physician_notes IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.physician_notes IS
     'Free-text physician summary notes.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.valid_until IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.valid_until IS
     'Date the MEDIF expires.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.signed_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.signed_at IS
     'Timestamp of physician electronic signature.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade.graded_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -704,14 +721,14 @@ COMMENT ON COLUMN medical_information_form_for_air_travel_grade.graded_at IS
 
 -- Audit trail of every fitness-to-fly rule that fired for a MEDIF.
 
-CREATE TABLE medical_information_form_for_air_travel_grade_rule (
+CREATE TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_information_form_for_air_travel_grade_id UUID NOT NULL
-        REFERENCES medical_information_form_for_air_travel_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (instrument IN (
@@ -739,34 +756,34 @@ CREATE TABLE medical_information_form_for_air_travel_grade_rule (
 );
 
 CREATE INDEX index_medical_information_form_for_air_travel_grade_rule_grade_id
-    ON medical_information_form_for_air_travel_grade_rule(medical_information_form_for_air_travel_grade_id);
+    ON medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule(medical_information_form_for_air_travel_grade_id);
 
 CREATE TRIGGER trigger_medical_information_form_for_air_travel_grade_rule_updated_at
-    BEFORE UPDATE ON medical_information_form_for_air_travel_grade_rule
+    BEFORE UPDATE ON medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE medical_information_form_for_air_travel_grade_rule IS
+COMMENT ON TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule IS
     'Audit trail of every fitness-to-fly rule that fired for this MEDIF, including the contributing instrument and resulting band.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.deleted_at IS
     'Timestamp when this row was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.medical_information_form_for_air_travel_grade_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.medical_information_form_for_air_travel_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.rule_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-PNEUMOTHORAX-14D-01).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.instrument IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.instrument IS
     'Source instrument: cardiovascular, respiratory, recent-event, pregnancy, communicable, equipment, haematology, gas-expansion, or composite.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.fitness_band IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.fitness_band IS
     'Fitness band contributed by this rule.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.category IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.category IS
     'Body-system or risk category (e.g. cardiac, pulmonary).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.description IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -779,14 +796,14 @@ COMMENT ON COLUMN medical_information_form_for_air_travel_grade_rule.description
 
 -- Safety-critical flags that fire independently of the fitness-to-fly band.
 
-CREATE TABLE medical_information_form_for_air_travel_grade_flag (
+CREATE TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_information_form_for_air_travel_grade_id UUID NOT NULL
-        REFERENCES medical_information_form_for_air_travel_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -815,34 +832,34 @@ CREATE TABLE medical_information_form_for_air_travel_grade_flag (
 );
 
 CREATE INDEX index_medical_information_form_for_air_travel_grade_flag_grade_id
-    ON medical_information_form_for_air_travel_grade_flag(medical_information_form_for_air_travel_grade_id);
+    ON medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag(medical_information_form_for_air_travel_grade_id);
 
 CREATE TRIGGER trigger_medical_information_form_for_air_travel_grade_flag_updated_at
-    BEFORE UPDATE ON medical_information_form_for_air_travel_grade_flag
+    BEFORE UPDATE ON medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_information_form_for_air_travel.set_updated_at();
 
-COMMENT ON TABLE medical_information_form_for_air_travel_grade_flag IS
+COMMENT ON TABLE medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag IS
     'Safety-critical flags that fire independently of the fitness-to-fly band, with priority and a suggested action for the airline medical desk.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.created_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.updated_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.deleted_at IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.deleted_at IS
     'Timestamp when this row was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.medical_information_form_for_air_travel_grade_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.medical_information_form_for_air_travel_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.flag_id IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CARDIAC-ACUTE-MI-7D).';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.category IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.priority IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.priority IS
     'Priority: low, medium, or high.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.description IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN medical_information_form_for_air_travel_grade_flag.suggested_action IS
+COMMENT ON COLUMN medical_information_form_for_air_travel.medical_information_form_for_air_travel_grade_flag.suggested_action IS
     'Suggested airline-desk action (e.g. "request medical-desk reissue", "arrange dangerous-goods clearance").';
 
 -- ========================================================================

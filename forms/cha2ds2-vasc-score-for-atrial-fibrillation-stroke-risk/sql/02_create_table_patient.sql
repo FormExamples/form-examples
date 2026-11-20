@@ -1,6 +1,6 @@
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -23,49 +23,49 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient IS
     'Patient demographic information used by the CHA2DS2-VASc assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk.patient
     USING GIN (name gin_trgm_ops);

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (20):
+-- Source files (21):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_donor.sql
 --   - 03_create_table_attorney.sql
@@ -40,12 +41,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_lpa_for_health_and_care_decisions;
+
+COMMENT ON SCHEMA united_kingdom_lpa_for_health_and_care_decisions IS
+    'Namespace for the United Kingdom Lasting Power of Attorney for Health and Care Decisions form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -53,7 +70,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -67,7 +84,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Donor: the person creating the Lasting Power of Attorney for Health and Welfare.
 -- Mental Capacity Act 2005 s.9: the donor must be ≥ 18 and have capacity at signing.
 
-CREATE TABLE donor (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.donor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -94,49 +111,49 @@ CREATE TABLE donor (
 );
 
 CREATE TRIGGER trigger_donor_updated_at
-    BEFORE UPDATE ON donor
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.donor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE donor IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.donor IS
     'The person creating the LPA. Must be ≥ 18 with mental capacity at signing per Mental Capacity Act 2005 s.9.';
-COMMENT ON COLUMN donor.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN donor.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN donor.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN donor.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN donor.title IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.title IS
     'Honorific title (Mr, Mrs, Dr, …).';
-COMMENT ON COLUMN donor.given_names IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.given_names IS
     'Given names of the donor.';
-COMMENT ON COLUMN donor.family_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.family_name IS
     'Family name of the donor.';
-COMMENT ON COLUMN donor.other_names_used IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.other_names_used IS
     'Any other names the donor uses (LP1H s.1 requires this be listed).';
-COMMENT ON COLUMN donor.birth_date IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.birth_date IS
     'Date of birth. Used to verify donor age ≥ 18 at signing (R-MCA-S9-AGE).';
-COMMENT ON COLUMN donor.email IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.email IS
     'Email address.';
-COMMENT ON COLUMN donor.phone IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.phone IS
     'Phone number.';
-COMMENT ON COLUMN donor.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN donor.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 (expected GB for England and Wales).';
-COMMENT ON COLUMN donor.postcode IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.postcode IS
     'Postal code.';
-COMMENT ON COLUMN donor.united_kingdom_nhs_number IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.united_kingdom_nhs_number IS
     'United Kingdom NHS number, optional but useful for cross-form ADRT check.';
-COMMENT ON COLUMN donor.jurisdiction IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.jurisdiction IS
     'Jurisdiction within the UK: england or wales. Scotland and Northern Ireland use different schemes.';
-COMMENT ON COLUMN donor.preferred_language IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.preferred_language IS
     'Preferred language: en (English) or cy (Cymraeg / Welsh).';
-COMMENT ON COLUMN donor.capacity_declared IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.capacity_declared IS
     'Whether the donor has declared capacity at the point of signing the LPA.';
-COMMENT ON COLUMN donor.capacity_declared_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.donor.capacity_declared_at IS
     'Timestamp at which capacity was declared.';
 
 -- ========================================================================
@@ -151,7 +168,7 @@ COMMENT ON COLUMN donor.capacity_declared_at IS
 -- on their behalf once the LPA is registered and the donor has lost capacity.
 -- Mental Capacity Act 2005 s.10: attorney must be ≥ 18 and have capacity.
 
-CREATE TABLE attorney (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -178,43 +195,43 @@ CREATE TABLE attorney (
 );
 
 CREATE TRIGGER trigger_attorney_updated_at
-    BEFORE UPDATE ON attorney
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE attorney IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.attorney IS
     'A person nominated as an attorney by the donor. Must be ≥ 18 with capacity per MCA 2005 s.10.';
-COMMENT ON COLUMN attorney.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN attorney.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN attorney.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN attorney.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN attorney.title IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.title IS
     'Honorific title.';
-COMMENT ON COLUMN attorney.given_names IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.given_names IS
     'Given names of the attorney.';
-COMMENT ON COLUMN attorney.family_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.family_name IS
     'Family name of the attorney.';
-COMMENT ON COLUMN attorney.birth_date IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.birth_date IS
     'Date of birth. Used to verify attorney age ≥ 18 (R-MCA-ATT-AGE).';
-COMMENT ON COLUMN attorney.email IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.email IS
     'Email address.';
-COMMENT ON COLUMN attorney.phone IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.phone IS
     'Phone number.';
-COMMENT ON COLUMN attorney.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN attorney.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN attorney.postcode IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.postcode IS
     'Postal code.';
-COMMENT ON COLUMN attorney.relationship_to_donor IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.relationship_to_donor IS
     'Stated relationship to the donor.';
-COMMENT ON COLUMN attorney.is_bankrupt IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.is_bankrupt IS
     'Whether the attorney is currently bankrupt. Informational for H&W LPAs (statutory bar applies only to property/financial LPAs).';
-COMMENT ON COLUMN attorney.capacity_declared IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.attorney.capacity_declared IS
     'Whether the attorney has declared capacity to act.';
 
 -- ========================================================================
@@ -228,7 +245,7 @@ COMMENT ON COLUMN attorney.capacity_declared IS
 -- Replacement attorney: stands in if a named attorney is unable or unwilling
 -- to act. Same statutory requirements as a primary attorney.
 
-CREATE TABLE replacement_attorney (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -255,43 +272,43 @@ CREATE TABLE replacement_attorney (
 );
 
 CREATE TRIGGER trigger_replacement_attorney_updated_at
-    BEFORE UPDATE ON replacement_attorney
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE replacement_attorney IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney IS
     'Replacement attorney: steps in if a primary attorney cannot act. Same MCA 2005 s.10 eligibility rules apply.';
-COMMENT ON COLUMN replacement_attorney.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN replacement_attorney.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN replacement_attorney.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN replacement_attorney.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN replacement_attorney.title IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.title IS
     'Honorific title.';
-COMMENT ON COLUMN replacement_attorney.given_names IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.given_names IS
     'Given names.';
-COMMENT ON COLUMN replacement_attorney.family_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.family_name IS
     'Family name.';
-COMMENT ON COLUMN replacement_attorney.birth_date IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.birth_date IS
     'Date of birth. Used to verify age ≥ 18.';
-COMMENT ON COLUMN replacement_attorney.email IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.email IS
     'Email address.';
-COMMENT ON COLUMN replacement_attorney.phone IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.phone IS
     'Phone number.';
-COMMENT ON COLUMN replacement_attorney.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN replacement_attorney.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN replacement_attorney.postcode IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.postcode IS
     'Postal code.';
-COMMENT ON COLUMN replacement_attorney.relationship_to_donor IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.relationship_to_donor IS
     'Stated relationship to the donor.';
-COMMENT ON COLUMN replacement_attorney.is_bankrupt IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.is_bankrupt IS
     'Whether the replacement attorney is currently bankrupt.';
-COMMENT ON COLUMN replacement_attorney.capacity_declared IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney.capacity_declared IS
     'Whether the replacement attorney has declared capacity to act.';
 
 -- ========================================================================
@@ -310,7 +327,7 @@ COMMENT ON COLUMN replacement_attorney.capacity_declared IS
 -- Must not be a family member, business partner, or employee of the donor
 -- or any attorney; must not be an attorney.
 
-CREATE TABLE certificate_provider (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.certificate_provider (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -347,51 +364,51 @@ CREATE TABLE certificate_provider (
 );
 
 CREATE TRIGGER trigger_certificate_provider_updated_at
-    BEFORE UPDATE ON certificate_provider
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.certificate_provider
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE certificate_provider IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.certificate_provider IS
     'Independent certificate provider per Lasting Powers of Attorney Regulations 2007 Sch.1 Pt.2.';
-COMMENT ON COLUMN certificate_provider.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN certificate_provider.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN certificate_provider.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN certificate_provider.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN certificate_provider.title IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.title IS
     'Honorific title.';
-COMMENT ON COLUMN certificate_provider.given_names IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.given_names IS
     'Given names.';
-COMMENT ON COLUMN certificate_provider.family_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.family_name IS
     'Family name.';
-COMMENT ON COLUMN certificate_provider.email IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.email IS
     'Email address.';
-COMMENT ON COLUMN certificate_provider.phone IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.phone IS
     'Phone number.';
-COMMENT ON COLUMN certificate_provider.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN certificate_provider.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN certificate_provider.postcode IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.postcode IS
     'Postal code.';
-COMMENT ON COLUMN certificate_provider.route IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.route IS
     'Eligibility route: skill-based (registered profession) or knowledge-based (known donor ≥ 2 years).';
-COMMENT ON COLUMN certificate_provider.profession IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.profession IS
     'Profession when route = skill-based.';
-COMMENT ON COLUMN certificate_provider.profession_registration_number IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.profession_registration_number IS
     'Professional registration number (e.g. SRA, GMC, NMC, HCPC number).';
-COMMENT ON COLUMN certificate_provider.years_known_donor IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.years_known_donor IS
     'Years known the donor personally. Must be ≥ 2 when route = knowledge-based (R-MCA-CP-ROUTE).';
-COMMENT ON COLUMN certificate_provider.relationship_to_donor IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.relationship_to_donor IS
     'Nature of the relationship with the donor.';
-COMMENT ON COLUMN certificate_provider.declared_not_family IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.declared_not_family IS
     'Self-declaration that the certificate provider is not a family member of donor or attorney (R-MCA-CP-FAM).';
-COMMENT ON COLUMN certificate_provider.declared_not_employee IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.declared_not_employee IS
     'Self-declaration that the certificate provider is not a business partner or employee of donor or attorney (R-MCA-CP-EMP).';
-COMMENT ON COLUMN certificate_provider.declared_not_attorney IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.certificate_provider.declared_not_attorney IS
     'Self-declaration that the certificate provider is not an attorney named in this LPA.';
 
 -- ========================================================================
@@ -406,7 +423,7 @@ COMMENT ON COLUMN certificate_provider.declared_not_attorney IS
 -- apply to register the LPA with the Office of the Public Guardian.
 -- LP1H s.6: 0 to 5 persons may be named.
 
-CREATE TABLE person_to_notify (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.person_to_notify (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -428,37 +445,37 @@ CREATE TABLE person_to_notify (
 );
 
 CREATE TRIGGER trigger_person_to_notify_updated_at
-    BEFORE UPDATE ON person_to_notify
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.person_to_notify
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE person_to_notify IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.person_to_notify IS
     'Person to be notified when the LPA is being registered (LP1H s.6, max 5).';
-COMMENT ON COLUMN person_to_notify.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN person_to_notify.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN person_to_notify.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN person_to_notify.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN person_to_notify.title IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.title IS
     'Honorific title.';
-COMMENT ON COLUMN person_to_notify.given_names IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.given_names IS
     'Given names.';
-COMMENT ON COLUMN person_to_notify.family_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.family_name IS
     'Family name.';
-COMMENT ON COLUMN person_to_notify.email IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.email IS
     'Email address.';
-COMMENT ON COLUMN person_to_notify.phone IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.phone IS
     'Phone number.';
-COMMENT ON COLUMN person_to_notify.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN person_to_notify.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN person_to_notify.postcode IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.postcode IS
     'Postal code.';
-COMMENT ON COLUMN person_to_notify.relationship_to_donor IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.person_to_notify.relationship_to_donor IS
     'Stated relationship to the donor.';
 
 -- ========================================================================
@@ -473,16 +490,16 @@ COMMENT ON COLUMN person_to_notify.relationship_to_donor IS
 -- The header row that ties together donor, certificate provider, attorneys,
 -- replacement attorneys, persons to notify, signatures, and registration.
 
-CREATE TABLE lpa (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     donor_id UUID NOT NULL
-        REFERENCES donor(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.donor(id) ON DELETE CASCADE,
     certificate_provider_id UUID
-        REFERENCES certificate_provider(id) ON DELETE SET NULL,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.certificate_provider(id) ON DELETE SET NULL,
 
     form_version VARCHAR(20) NOT NULL DEFAULT 'LP1H-2024',
     jurisdiction VARCHAR(20) NOT NULL DEFAULT ''
@@ -498,42 +515,42 @@ CREATE TABLE lpa (
     notes TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_lpa_donor_id ON lpa(donor_id);
-CREATE INDEX index_lpa_certificate_provider_id ON lpa(certificate_provider_id);
-CREATE INDEX index_lpa_status ON lpa(status);
+CREATE INDEX index_lpa_donor_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa(donor_id);
+CREATE INDEX index_lpa_certificate_provider_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa(certificate_provider_id);
+CREATE INDEX index_lpa_status ON united_kingdom_lpa_for_health_and_care_decisions.lpa(status);
 
 CREATE TRIGGER trigger_lpa_updated_at
-    BEFORE UPDATE ON lpa
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa IS
     'Header row for a Lasting Power of Attorney for Health and Welfare under the Mental Capacity Act 2005.';
-COMMENT ON COLUMN lpa.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa.donor_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.donor_id IS
     'Foreign key to the donor.';
-COMMENT ON COLUMN lpa.certificate_provider_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.certificate_provider_id IS
     'Foreign key to the certificate provider. Nullable while the LPA is still in draft and the certificate provider has not been chosen.';
-COMMENT ON COLUMN lpa.form_version IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.form_version IS
     'Version of the LP1H form template used (e.g. LP1H-2024).';
-COMMENT ON COLUMN lpa.jurisdiction IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.jurisdiction IS
     'Jurisdiction: england or wales (Mental Capacity Act 2005 applies to both).';
-COMMENT ON COLUMN lpa.status IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.status IS
     'Lifecycle status of the LPA instrument.';
-COMMENT ON COLUMN lpa.opg_reference IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.opg_reference IS
     'Office of the Public Guardian reference number once registered.';
-COMMENT ON COLUMN lpa.registered_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.registered_at IS
     'Timestamp at which the OPG registered this LPA.';
-COMMENT ON COLUMN lpa.effective_from IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.effective_from IS
     'Earliest date the LPA can be used (after registration and loss of capacity).';
-COMMENT ON COLUMN lpa.notes IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa.notes IS
     'Free-text notes from the donor, solicitor, or case manager.';
 
 -- ========================================================================
@@ -546,16 +563,16 @@ COMMENT ON COLUMN lpa.notes IS
 
 -- Join table: LPA to attorney. 1 to 4 attorneys per LPA.
 
-CREATE TABLE lpa_attorney (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     attorney_id UUID NOT NULL
-        REFERENCES attorney(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.attorney(id) ON DELETE CASCADE,
     order_position INTEGER NOT NULL
         CHECK (order_position BETWEEN 1 AND 4),
 
@@ -563,29 +580,29 @@ CREATE TABLE lpa_attorney (
     UNIQUE (lpa_id, attorney_id)
 );
 
-CREATE INDEX index_lpa_attorney_lpa_id ON lpa_attorney(lpa_id);
-CREATE INDEX index_lpa_attorney_attorney_id ON lpa_attorney(attorney_id);
+CREATE INDEX index_lpa_attorney_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney(lpa_id);
+CREATE INDEX index_lpa_attorney_attorney_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney(attorney_id);
 
 CREATE TRIGGER trigger_lpa_attorney_updated_at
-    BEFORE UPDATE ON lpa_attorney
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_attorney IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney IS
     'Join table linking an LPA to its 1-4 named attorneys, with their order on the form.';
-COMMENT ON COLUMN lpa_attorney.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_attorney.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_attorney.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_attorney.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_attorney.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_attorney.attorney_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.attorney_id IS
     'Foreign key to the attorney.';
-COMMENT ON COLUMN lpa_attorney.order_position IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_attorney.order_position IS
     'Order position 1-4 in which this attorney appears on the LP1H form.';
 
 -- ========================================================================
@@ -598,16 +615,16 @@ COMMENT ON COLUMN lpa_attorney.order_position IS
 
 -- Join table: LPA to replacement attorney. 0 to 4 replacement attorneys per LPA.
 
-CREATE TABLE lpa_replacement_attorney (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     replacement_attorney_id UUID NOT NULL
-        REFERENCES replacement_attorney(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.replacement_attorney(id) ON DELETE CASCADE,
     order_position INTEGER NOT NULL
         CHECK (order_position BETWEEN 1 AND 4),
     replacement_trigger TEXT NOT NULL DEFAULT '',
@@ -616,31 +633,31 @@ CREATE TABLE lpa_replacement_attorney (
     UNIQUE (lpa_id, replacement_attorney_id)
 );
 
-CREATE INDEX index_lpa_replacement_attorney_lpa_id ON lpa_replacement_attorney(lpa_id);
-CREATE INDEX index_lpa_replacement_attorney_replacement_attorney_id ON lpa_replacement_attorney(replacement_attorney_id);
+CREATE INDEX index_lpa_replacement_attorney_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney(lpa_id);
+CREATE INDEX index_lpa_replacement_attorney_replacement_attorney_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney(replacement_attorney_id);
 
 CREATE TRIGGER trigger_lpa_replacement_attorney_updated_at
-    BEFORE UPDATE ON lpa_replacement_attorney
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_replacement_attorney IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney IS
     'Join table linking an LPA to its replacement attorneys.';
-COMMENT ON COLUMN lpa_replacement_attorney.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_replacement_attorney.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_replacement_attorney.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_replacement_attorney.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_replacement_attorney.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_replacement_attorney.replacement_attorney_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.replacement_attorney_id IS
     'Foreign key to the replacement attorney.';
-COMMENT ON COLUMN lpa_replacement_attorney.order_position IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.order_position IS
     'Order position 1-4 in which this replacement appears on the LP1H form.';
-COMMENT ON COLUMN lpa_replacement_attorney.replacement_trigger IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_replacement_attorney.replacement_trigger IS
     'Free-text description of the conditions under which this replacement steps in. OPG accepts free text but unusual triggers raise R-MCA-INSTR-LAW.';
 
 -- ========================================================================
@@ -653,16 +670,16 @@ COMMENT ON COLUMN lpa_replacement_attorney.replacement_trigger IS
 
 -- Join table: LPA to person to notify. 0 to 5 persons per LPA.
 
-CREATE TABLE lpa_person_to_notify (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     person_to_notify_id UUID NOT NULL
-        REFERENCES person_to_notify(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.person_to_notify(id) ON DELETE CASCADE,
     order_position INTEGER NOT NULL
         CHECK (order_position BETWEEN 1 AND 5),
 
@@ -670,29 +687,29 @@ CREATE TABLE lpa_person_to_notify (
     UNIQUE (lpa_id, person_to_notify_id)
 );
 
-CREATE INDEX index_lpa_person_to_notify_lpa_id ON lpa_person_to_notify(lpa_id);
-CREATE INDEX index_lpa_person_to_notify_person_to_notify_id ON lpa_person_to_notify(person_to_notify_id);
+CREATE INDEX index_lpa_person_to_notify_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify(lpa_id);
+CREATE INDEX index_lpa_person_to_notify_person_to_notify_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify(person_to_notify_id);
 
 CREATE TRIGGER trigger_lpa_person_to_notify_updated_at
-    BEFORE UPDATE ON lpa_person_to_notify
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_person_to_notify IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify IS
     'Join table linking an LPA to the (up to 5) persons to notify on registration (R-MCA-NOTIFY-MAX).';
-COMMENT ON COLUMN lpa_person_to_notify.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_person_to_notify.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_person_to_notify.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_person_to_notify.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_person_to_notify.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_person_to_notify.person_to_notify_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.person_to_notify_id IS
     'Foreign key to the person to notify.';
-COMMENT ON COLUMN lpa_person_to_notify.order_position IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_person_to_notify.order_position IS
     'Order position 1-5 in which this person appears on the LP1H form.';
 
 -- ========================================================================
@@ -709,14 +726,14 @@ COMMENT ON COLUMN lpa_person_to_notify.order_position IS
 --   mixed                         — joint for the listed decisions, severally for the rest
 -- 1:1 with lpa.
 
-CREATE TABLE lpa_decision_rule (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL UNIQUE
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     decision_rule VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (decision_rule IN (
             'jointly',
@@ -728,25 +745,25 @@ CREATE TABLE lpa_decision_rule (
 );
 
 CREATE TRIGGER trigger_lpa_decision_rule_updated_at
-    BEFORE UPDATE ON lpa_decision_rule
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_decision_rule IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule IS
     'How the attorneys must act together when making decisions (LP1H s.3, MCA 2005 s.10(4)).';
-COMMENT ON COLUMN lpa_decision_rule.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_decision_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_decision_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_decision_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_decision_rule.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.lpa_id IS
     'Foreign key to the parent LPA (unique, 1:1).';
-COMMENT ON COLUMN lpa_decision_rule.decision_rule IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.decision_rule IS
     'Decision-making rule: jointly, jointly-and-severally, or mixed.';
-COMMENT ON COLUMN lpa_decision_rule.joint_decision_set IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_decision_rule.joint_decision_set IS
     'When decision_rule = mixed: list of decisions that must be made jointly. Required when mixed (R-MCA-JOINT-MIXED-SCOPE).';
 
 -- ========================================================================
@@ -764,14 +781,14 @@ COMMENT ON COLUMN lpa_decision_rule.joint_decision_set IS
 -- no authority over life-sustaining treatment.
 -- 1:1 with lpa.
 
-CREATE TABLE lpa_lst_choice (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL UNIQUE
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     lst_choice VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (lst_choice IN ('option-a', 'option-b', '')),
     donor_initialled VARCHAR(5) NOT NULL DEFAULT ''
@@ -780,27 +797,27 @@ CREATE TABLE lpa_lst_choice (
 );
 
 CREATE TRIGGER trigger_lpa_lst_choice_updated_at
-    BEFORE UPDATE ON lpa_lst_choice
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_lst_choice IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice IS
     'Donor election under MCA 2005 s.11(7) on life-sustaining treatment authority for attorneys.';
-COMMENT ON COLUMN lpa_lst_choice.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_lst_choice.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_lst_choice.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_lst_choice.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_lst_choice.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.lpa_id IS
     'Foreign key to the parent LPA (unique, 1:1).';
-COMMENT ON COLUMN lpa_lst_choice.lst_choice IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.lst_choice IS
     'option-a: attorneys may decide; option-b: donor reserves the decision. Empty until donor selects (R-MCA-LST-CHOICE fires fatal until set).';
-COMMENT ON COLUMN lpa_lst_choice.donor_initialled IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.donor_initialled IS
     'Whether the donor has personally initialled the chosen option as required by the statutory form.';
-COMMENT ON COLUMN lpa_lst_choice.initialled_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_lst_choice.initialled_at IS
     'Timestamp when the donor initialled the option.';
 
 -- ========================================================================
@@ -815,14 +832,14 @@ COMMENT ON COLUMN lpa_lst_choice.initialled_at IS
 -- LP1H s.7 (Preferences). Attorneys should have regard to preferences but
 -- are not legally bound to follow them. 0 to many statements per LPA.
 
-CREATE TABLE lpa_preference (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_preference (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     order_position INTEGER NOT NULL DEFAULT 1
         CHECK (order_position >= 1),
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -840,30 +857,30 @@ CREATE TABLE lpa_preference (
     statement TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_lpa_preference_lpa_id ON lpa_preference(lpa_id);
+CREATE INDEX index_lpa_preference_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_preference(lpa_id);
 
 CREATE TRIGGER trigger_lpa_preference_updated_at
-    BEFORE UPDATE ON lpa_preference
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_preference
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_preference IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_preference IS
     'Non-binding preference statement guiding the attorneys. LP1H s.7 (preferences).';
-COMMENT ON COLUMN lpa_preference.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_preference.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_preference.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_preference.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_preference.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_preference.order_position IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.order_position IS
     'Order in which the preference appears in the LP1H s.7 block.';
-COMMENT ON COLUMN lpa_preference.category IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.category IS
     'Topical category for the preference; informational only, not statutory.';
-COMMENT ON COLUMN lpa_preference.statement IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_preference.statement IS
     'The preference statement itself.';
 
 -- ========================================================================
@@ -879,14 +896,14 @@ COMMENT ON COLUMN lpa_preference.statement IS
 -- must be lawful, possible, and consistent with the donor's best interests.
 -- Cannot contradict an Advance Decision to Refuse Treatment (MCA 2005 s.25).
 
-CREATE TABLE lpa_instruction (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     order_position INTEGER NOT NULL DEFAULT 1
         CHECK (order_position >= 1),
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -907,34 +924,34 @@ CREATE TABLE lpa_instruction (
         CHECK (contradicts_adrt IN ('yes', 'no', ''))
 );
 
-CREATE INDEX index_lpa_instruction_lpa_id ON lpa_instruction(lpa_id);
+CREATE INDEX index_lpa_instruction_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction(lpa_id);
 
 CREATE TRIGGER trigger_lpa_instruction_updated_at
-    BEFORE UPDATE ON lpa_instruction
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_instruction IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction IS
     'Binding instruction the attorneys must follow. LP1H s.7 (instructions), MCA 2005 s.9(4).';
-COMMENT ON COLUMN lpa_instruction.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_instruction.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_instruction.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_instruction.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_instruction.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_instruction.order_position IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.order_position IS
     'Order in which the instruction appears in the LP1H s.7 block.';
-COMMENT ON COLUMN lpa_instruction.category IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.category IS
     'Topical category for the instruction.';
-COMMENT ON COLUMN lpa_instruction.statement IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.statement IS
     'The binding instruction text.';
-COMMENT ON COLUMN lpa_instruction.lawfulness_assessed IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.lawfulness_assessed IS
     'Whether a solicitor or certificate provider has assessed the instruction as lawful (R-MCA-INSTR-LAW).';
-COMMENT ON COLUMN lpa_instruction.contradicts_adrt IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_instruction.contradicts_adrt IS
     'Whether this instruction is known to contradict a paired ADRT (R-MCA-INSTR-ADRT fires when yes).';
 
 -- ========================================================================
@@ -949,14 +966,14 @@ COMMENT ON COLUMN lpa_instruction.contradicts_adrt IS
 -- engine (R-MCA-ORDER): donor → certificate provider → attorneys.
 -- Each row also records the witness (R-MCA-WIT-NOT-ATT: witness ≠ attorney).
 
-CREATE TABLE lpa_signature (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_signature (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     signer_role VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (signer_role IN (
             'donor',
@@ -978,43 +995,43 @@ CREATE TABLE lpa_signature (
         CHECK (witness_is_attorney IN ('yes', 'no', ''))
 );
 
-CREATE INDEX index_lpa_signature_lpa_id ON lpa_signature(lpa_id);
-CREATE INDEX index_lpa_signature_signer_role ON lpa_signature(signer_role);
+CREATE INDEX index_lpa_signature_lpa_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_signature(lpa_id);
+CREATE INDEX index_lpa_signature_signer_role ON united_kingdom_lpa_for_health_and_care_decisions.lpa_signature(signer_role);
 
 CREATE TRIGGER trigger_lpa_signature_updated_at
-    BEFORE UPDATE ON lpa_signature
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_signature
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_signature IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_signature IS
     'Captured signatures and witness details. Sign-order donor → certificate provider → attorneys is enforced by the validity engine (R-MCA-ORDER).';
-COMMENT ON COLUMN lpa_signature.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_signature.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_signature.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_signature.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_signature.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.lpa_id IS
     'Foreign key to the parent LPA.';
-COMMENT ON COLUMN lpa_signature.signer_role IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.signer_role IS
     'Role of the signer: donor, certificate-provider, attorney, replacement-attorney.';
-COMMENT ON COLUMN lpa_signature.signer_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.signer_id IS
     'UUID of the signer in the corresponding role table (donor, certificate_provider, attorney, replacement_attorney). Not foreign-keyed because the referent table varies by role.';
-COMMENT ON COLUMN lpa_signature.signed_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.signed_at IS
     'Timestamp at which the signer signed. Used by R-MCA-ORDER to verify statutory sign-order.';
-COMMENT ON COLUMN lpa_signature.signature_method IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.signature_method IS
     'How the signature was captured: wet-ink, electronic (post Powers of Attorney Act 2023), or mark-with-witness (donor unable to sign).';
-COMMENT ON COLUMN lpa_signature.signature_data IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.signature_data IS
     'Raw signature bytes (SVG path, PNG, or PKCS#7 envelope) when signature_method = electronic.';
-COMMENT ON COLUMN lpa_signature.witness_name IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.witness_name IS
     'Name of the witness.';
-COMMENT ON COLUMN lpa_signature.witness_address IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.witness_address IS
     'Postal address of the witness.';
-COMMENT ON COLUMN lpa_signature.witness_signed_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.witness_signed_at IS
     'Timestamp at which the witness signed.';
-COMMENT ON COLUMN lpa_signature.witness_is_attorney IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_signature.witness_is_attorney IS
     'Whether the witness is also a named attorney. Must be no (R-MCA-WIT-NOT-ATT).';
 
 -- ========================================================================
@@ -1030,14 +1047,14 @@ COMMENT ON COLUMN lpa_signature.witness_is_attorney IS
 -- Guardian to register the LPA. Includes the £82 fee and any remission /
 -- exemption claim. 1:1 with lpa.
 
-CREATE TABLE lpa_registration_application (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL UNIQUE
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     applicant_role VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (applicant_role IN ('donor', 'attorney', 'attorneys-jointly', '')),
     applicant_signed_at TIMESTAMPTZ,
@@ -1057,35 +1074,35 @@ CREATE TABLE lpa_registration_application (
 );
 
 CREATE TRIGGER trigger_lpa_registration_application_updated_at
-    BEFORE UPDATE ON lpa_registration_application
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_registration_application IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application IS
     'OPG registration application (LP1H Part C). 1:1 with lpa.';
-COMMENT ON COLUMN lpa_registration_application.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_registration_application.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_registration_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_registration_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_registration_application.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.lpa_id IS
     'Foreign key to the parent LPA (unique, 1:1).';
-COMMENT ON COLUMN lpa_registration_application.applicant_role IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.applicant_role IS
     'Who is applying to register: donor, attorney (one), or attorneys-jointly (all).';
-COMMENT ON COLUMN lpa_registration_application.applicant_signed_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.applicant_signed_at IS
     'Timestamp at which the applicant signed Part C.';
-COMMENT ON COLUMN lpa_registration_application.fee_amount_pounds IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.fee_amount_pounds IS
     'Application fee in GBP. Standard £82 (2026); zero when full exemption applies.';
-COMMENT ON COLUMN lpa_registration_application.fee_remission IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.fee_remission IS
     'Remission level: none, half (50% off), or full-exempt.';
-COMMENT ON COLUMN lpa_registration_application.fee_remission_reason IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.fee_remission_reason IS
     'Statutory basis for the remission or exemption claim.';
-COMMENT ON COLUMN lpa_registration_application.submitted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.submitted_at IS
     'Timestamp at which the application was submitted to the OPG.';
-COMMENT ON COLUMN lpa_registration_application.submission_channel IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_registration_application.submission_channel IS
     'Channel: post, opg-digital (Powers of Attorney Act 2023), or solicitor-portal.';
 
 -- ========================================================================
@@ -1100,14 +1117,14 @@ COMMENT ON COLUMN lpa_registration_application.submission_channel IS
 -- calculate_lpa_validity() in the SvelteKit, static-HTML, and Rust
 -- implementations. Engines share rule identifiers so this row is portable.
 
-CREATE TABLE lpa_validity (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_id UUID NOT NULL UNIQUE
-        REFERENCES lpa(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa(id) ON DELETE CASCADE,
     validity_status VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (validity_status IN (
             'ready-to-register',
@@ -1123,36 +1140,36 @@ CREATE TABLE lpa_validity (
     notes TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_lpa_validity_validity_status ON lpa_validity(validity_status);
+CREATE INDEX index_lpa_validity_validity_status ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity(validity_status);
 
 CREATE TRIGGER trigger_lpa_validity_updated_at
-    BEFORE UPDATE ON lpa_validity
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_validity IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity IS
     'Computed validity result for an LPA. One row per LPA (1:1). Engine output is reproducible from the LPA inputs and engine_version.';
-COMMENT ON COLUMN lpa_validity.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_validity.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_validity.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_validity.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_validity.lpa_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.lpa_id IS
     'Foreign key to the parent LPA (unique, 1:1).';
-COMMENT ON COLUMN lpa_validity.validity_status IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.validity_status IS
     'Overall status: ready-to-register, needs-correction, or invalid.';
-COMMENT ON COLUMN lpa_validity.completeness_score IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.completeness_score IS
     'Percent of statutorily required fields populated, 0..100.';
-COMMENT ON COLUMN lpa_validity.effective_date IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.effective_date IS
     'Earliest date the LPA could be submitted to the OPG after the last fatal rule clears.';
-COMMENT ON COLUMN lpa_validity.computed_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.computed_at IS
     'Timestamp at which the engine last computed this result.';
-COMMENT ON COLUMN lpa_validity.engine_version IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.engine_version IS
     'Engine version used for the computation (semver). Lets a future result be recomputed deterministically.';
-COMMENT ON COLUMN lpa_validity.notes IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity.notes IS
     'Human-readable engine notes.';
 
 -- ========================================================================
@@ -1167,14 +1184,14 @@ COMMENT ON COLUMN lpa_validity.notes IS
 -- stable rule identifier, severity, source citation, and the human-readable
 -- description that surfaced to the user.
 
-CREATE TABLE lpa_validity_fired_rule (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_validity_id UUID NOT NULL
-        REFERENCES lpa_validity(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa_validity(id) ON DELETE CASCADE,
     rule_id VARCHAR(50) NOT NULL,
     severity VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (severity IN ('fatal', 'high', 'medium', 'informational', '')),
@@ -1193,37 +1210,37 @@ CREATE TABLE lpa_validity_fired_rule (
     suggested_correction TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_lpa_validity_fired_rule_validity_id ON lpa_validity_fired_rule(lpa_validity_id);
-CREATE INDEX index_lpa_validity_fired_rule_rule_id ON lpa_validity_fired_rule(rule_id);
+CREATE INDEX index_lpa_validity_fired_rule_validity_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule(lpa_validity_id);
+CREATE INDEX index_lpa_validity_fired_rule_rule_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule(rule_id);
 
 CREATE TRIGGER trigger_lpa_validity_fired_rule_updated_at
-    BEFORE UPDATE ON lpa_validity_fired_rule
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_validity_fired_rule IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule IS
     'Audit trail of every statutory rule that fired during the most recent validity computation.';
-COMMENT ON COLUMN lpa_validity_fired_rule.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_validity_fired_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_validity_fired_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_validity_fired_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_validity_fired_rule.lpa_validity_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.lpa_validity_id IS
     'Foreign key to the parent validity result.';
-COMMENT ON COLUMN lpa_validity_fired_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.rule_id IS
     'Stable rule identifier (e.g. R-MCA-S9-AGE, R-MCA-CP-FAM, R-MCA-LST-CHOICE).';
-COMMENT ON COLUMN lpa_validity_fired_rule.severity IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.severity IS
     'Severity: fatal invalidates the LPA; high requires correction before registration; medium and informational do not block.';
-COMMENT ON COLUMN lpa_validity_fired_rule.rule_family IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.rule_family IS
     'Engine rule family the rule belongs to.';
-COMMENT ON COLUMN lpa_validity_fired_rule.source_citation IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.source_citation IS
     'Statute / regulation / OPG note that the rule encodes (e.g. "MCA 2005 s.9(2)(c)").';
-COMMENT ON COLUMN lpa_validity_fired_rule.description IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.description IS
     'Human-readable description of why the rule fired.';
-COMMENT ON COLUMN lpa_validity_fired_rule.suggested_correction IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_fired_rule.suggested_correction IS
     'Hint to the user about how to fix the underlying field.';
 
 -- ========================================================================
@@ -1238,14 +1255,14 @@ COMMENT ON COLUMN lpa_validity_fired_rule.suggested_correction IS
 -- These do not block submission but surface concerns to the donor / solicitor
 -- (capacity-concern, coercion-concern, ADRT conflict, foreign domicile, …).
 
-CREATE TABLE lpa_validity_additional_flag (
+CREATE TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     lpa_validity_id UUID NOT NULL
-        REFERENCES lpa_validity(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_lpa_for_health_and_care_decisions.lpa_validity(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -1268,34 +1285,34 @@ CREATE TABLE lpa_validity_additional_flag (
     suggested_action TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_lpa_validity_additional_flag_validity_id ON lpa_validity_additional_flag(lpa_validity_id);
+CREATE INDEX index_lpa_validity_additional_flag_validity_id ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag(lpa_validity_id);
 
 CREATE TRIGGER trigger_lpa_validity_additional_flag_updated_at
-    BEFORE UPDATE ON lpa_validity_additional_flag
+    BEFORE UPDATE ON united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_lpa_for_health_and_care_decisions.set_updated_at();
 
-COMMENT ON TABLE lpa_validity_additional_flag IS
+COMMENT ON TABLE united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag IS
     'Non-statutory ambiguity and risk flags surfaced alongside the validity result.';
-COMMENT ON COLUMN lpa_validity_additional_flag.id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN lpa_validity_additional_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN lpa_validity_additional_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN lpa_validity_additional_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN lpa_validity_additional_flag.lpa_validity_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.lpa_validity_id IS
     'Foreign key to the parent validity result.';
-COMMENT ON COLUMN lpa_validity_additional_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.flag_id IS
     'Stable flag identifier (e.g. F-CAPACITY-CONCERN-001).';
-COMMENT ON COLUMN lpa_validity_additional_flag.category IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN lpa_validity_additional_flag.priority IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN lpa_validity_additional_flag.description IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.description IS
     'Human-readable description of what the flag indicates.';
-COMMENT ON COLUMN lpa_validity_additional_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_lpa_for_health_and_care_decisions.lpa_validity_additional_flag.suggested_action IS
     'Suggested next step (e.g. "request a capacity assessment under MCA s.2").';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (10):
+-- Source files (11):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_reporter.sql
 --   - 03_create_table_participant.sql
@@ -37,13 +38,29 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS objectives_and_key_results_tracker;
+
+COMMENT ON SCHEMA objectives_and_key_results_tracker IS
+    'Namespace for the Objectives and Key Results tracker form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 --liquibase formatted sql
 
 --changeset author:1
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION objectives_and_key_results_tracker.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -52,7 +69,7 @@ END;
 $$ LANGUAGE plpgsql;
 --rollback DROP FUNCTION IF EXISTS set_updated_at();
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION objectives_and_key_results_tracker.set_updated_at() IS
     'Trigger function: set NEW.updated_at = now() on every row update.';
 
 -- ========================================================================
@@ -66,7 +83,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE reporter (
+CREATE TABLE objectives_and_key_results_tracker.reporter (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -78,19 +95,19 @@ CREATE TABLE reporter (
 );
 
 CREATE TRIGGER trigger_reporter_updated_at
-    BEFORE UPDATE ON reporter
+    BEFORE UPDATE ON objectives_and_key_results_tracker.reporter
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-COMMENT ON TABLE reporter IS
+COMMENT ON TABLE objectives_and_key_results_tracker.reporter IS
     'Person who submitted an OKR objective via the wizard.';
-COMMENT ON COLUMN reporter.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN reporter.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN reporter.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN reporter.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN reporter.name IS 'Display name of the reporter.';
-COMMENT ON COLUMN reporter.email IS 'Email address of the reporter.';
-COMMENT ON COLUMN reporter.role IS 'Free-text role label (e.g. team lead, OKR coach, executive).';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.name IS 'Display name of the reporter.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.email IS 'Email address of the reporter.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.reporter.role IS 'Free-text role label (e.g. team lead, OKR coach, executive).';
 
 --rollback DROP TABLE reporter;
 
@@ -105,7 +122,7 @@ COMMENT ON COLUMN reporter.role IS 'Free-text role label (e.g. team lead, OKR co
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE participant (
+CREATE TABLE objectives_and_key_results_tracker.participant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -120,25 +137,25 @@ CREATE TABLE participant (
 );
 
 CREATE TRIGGER trigger_participant_updated_at
-    BEFORE UPDATE ON participant
+    BEFORE UPDATE ON objectives_and_key_results_tracker.participant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-CREATE INDEX participant_index_okr_objective_id ON participant(okr_objective_id);
+CREATE INDEX participant_index_okr_objective_id ON objectives_and_key_results_tracker.participant(okr_objective_id);
 
-COMMENT ON TABLE participant IS
+COMMENT ON TABLE objectives_and_key_results_tracker.participant IS
     'A participant linked to an OKR objective: DRI, contributor, reviewer, stakeholder, or observer.';
-COMMENT ON COLUMN participant.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN participant.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN participant.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN participant.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN participant.okr_objective_id IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.okr_objective_id IS
     'Foreign key to okr_objective. The FK constraint is added in the okr_objective migration via ALTER TABLE.';
-COMMENT ON COLUMN participant.role IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.role IS
     'Participant role: dri (Directly Responsible Individual), contributor, reviewer, stakeholder, or observer.';
-COMMENT ON COLUMN participant.name IS 'Display name of the participant.';
-COMMENT ON COLUMN participant.email IS 'Email address of the participant.';
-COMMENT ON COLUMN participant.notes IS 'Free-text notes about the participant role.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.name IS 'Display name of the participant.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.email IS 'Email address of the participant.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.participant.notes IS 'Free-text notes about the participant role.';
 
 --rollback DROP TABLE participant;
 
@@ -153,14 +170,14 @@ COMMENT ON COLUMN participant.notes IS 'Free-text notes about the participant ro
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_objective (
+CREATE TABLE objectives_and_key_results_tracker.okr_objective (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    reporter_id UUID NOT NULL REFERENCES reporter(id) ON DELETE CASCADE,
-    parent_objective_id UUID REFERENCES okr_objective(id) ON DELETE SET NULL,
+    reporter_id UUID NOT NULL REFERENCES objectives_and_key_results_tracker.reporter(id) ON DELETE CASCADE,
+    parent_objective_id UUID REFERENCES objectives_and_key_results_tracker.okr_objective(id) ON DELETE SET NULL,
 
     status TEXT NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft','active','at-risk','achieved','missed','retired','cancelled')),
@@ -215,72 +232,72 @@ CREATE TABLE okr_objective (
 );
 
 CREATE TRIGGER trigger_okr_objective_updated_at
-    BEFORE UPDATE ON okr_objective
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_objective
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-ALTER TABLE participant
+ALTER TABLE objectives_and_key_results_tracker.participant
     ADD CONSTRAINT participant_okr_objective_id_fkey
-    FOREIGN KEY (okr_objective_id) REFERENCES okr_objective(id) ON DELETE CASCADE;
+    FOREIGN KEY (okr_objective_id) REFERENCES objectives_and_key_results_tracker.okr_objective(id) ON DELETE CASCADE;
 
-CREATE INDEX okr_objective_index_reporter_id ON okr_objective(reporter_id);
-CREATE INDEX okr_objective_index_parent_objective_id ON okr_objective(parent_objective_id);
-CREATE INDEX okr_objective_index_status ON okr_objective(status);
-CREATE INDEX okr_objective_index_level ON okr_objective(level);
-CREATE INDEX okr_objective_index_cycle ON okr_objective(cycle);
+CREATE INDEX okr_objective_index_reporter_id ON objectives_and_key_results_tracker.okr_objective(reporter_id);
+CREATE INDEX okr_objective_index_parent_objective_id ON objectives_and_key_results_tracker.okr_objective(parent_objective_id);
+CREATE INDEX okr_objective_index_status ON objectives_and_key_results_tracker.okr_objective(status);
+CREATE INDEX okr_objective_index_level ON objectives_and_key_results_tracker.okr_objective(level);
+CREATE INDEX okr_objective_index_cycle ON objectives_and_key_results_tracker.okr_objective(cycle);
 CREATE INDEX okr_objective_index_obj_title_trgm
-    ON okr_objective
+    ON objectives_and_key_results_tracker.okr_objective
     USING GIN (obj_title gin_trgm_ops);
 
-COMMENT ON TABLE okr_objective IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_objective IS
     'Main OKR objective row. Holds reporter and metadata, all step fields, and the seven raw input scores. Computed scores live in okr_grade.';
-COMMENT ON COLUMN okr_objective.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_objective.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_objective.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_objective.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_objective.reporter_id IS 'Foreign key to the reporter who submitted the objective.';
-COMMENT ON COLUMN okr_objective.parent_objective_id IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.reporter_id IS 'Foreign key to the reporter who submitted the objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.parent_objective_id IS
     'Self-referential foreign key: the parent objective this one ladders up to. NULL for top-level objectives.';
-COMMENT ON COLUMN okr_objective.status IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.status IS
     'Lifecycle status: draft, active, at-risk, achieved, missed, retired, cancelled.';
-COMMENT ON COLUMN okr_objective.level IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.level IS
     'Organisational level: individual, team, department, company.';
-COMMENT ON COLUMN okr_objective.cycle IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.cycle IS
     'Time horizon: monthly, quarterly, half-yearly, annual, custom.';
-COMMENT ON COLUMN okr_objective.cycle_start_date IS 'First day of the OKR cycle.';
-COMMENT ON COLUMN okr_objective.cycle_end_date IS 'Last day of the OKR cycle.';
-COMMENT ON COLUMN okr_objective.team_or_org_name IS 'Owning team or organisational unit name.';
-COMMENT ON COLUMN okr_objective.strategic_theme IS 'Strategic theme or pillar this objective ladders to.';
-COMMENT ON COLUMN okr_objective.external_reference IS 'External tracker id, ticket, or strategy doc reference.';
-COMMENT ON COLUMN okr_objective.obj_title IS 'Step 2: one-sentence qualitative objective statement.';
-COMMENT ON COLUMN okr_objective.obj_long_description IS 'Step 2: free-text long description of the objective.';
-COMMENT ON COLUMN okr_objective.sa_parent_summary IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.cycle_start_date IS 'First day of the OKR cycle.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.cycle_end_date IS 'Last day of the OKR cycle.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.team_or_org_name IS 'Owning team or organisational unit name.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.strategic_theme IS 'Strategic theme or pillar this objective ladders to.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.external_reference IS 'External tracker id, ticket, or strategy doc reference.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.obj_title IS 'Step 2: one-sentence qualitative objective statement.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.obj_long_description IS 'Step 2: free-text long description of the objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.sa_parent_summary IS
     'Step 4: how this objective ladders to the parent or to the mission.';
-COMMENT ON COLUMN okr_objective.sa_business_value_statement IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.sa_business_value_statement IS
     'Step 4: business value statement — why this objective matters.';
-COMMENT ON COLUMN okr_objective.in_initiatives IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.in_initiatives IS
     'Step 6: planned actions, projects, programmes that drive each KR.';
-COMMENT ON COLUMN okr_objective.in_supporting_links IS 'Step 6: free-text supporting links and references.';
-COMMENT ON COLUMN okr_objective.rk_known_risks IS 'Step 7: known risks to achieving the objective.';
-COMMENT ON COLUMN okr_objective.rk_dependencies IS 'Step 7: external dependencies.';
-COMMENT ON COLUMN okr_objective.rk_blockers IS 'Step 7: current blockers.';
-COMMENT ON COLUMN okr_objective.rk_mitigation_plans IS 'Step 7: planned mitigations for the risks above.';
-COMMENT ON COLUMN okr_objective.fc_expected_end_state IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.in_supporting_links IS 'Step 6: free-text supporting links and references.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.rk_known_risks IS 'Step 7: known risks to achieving the objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.rk_dependencies IS 'Step 7: external dependencies.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.rk_blockers IS 'Step 7: current blockers.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.rk_mitigation_plans IS 'Step 7: planned mitigations for the risks above.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.fc_expected_end_state IS
     'Step 9: forecast — expected end-of-cycle state per KR (free text).';
-COMMENT ON COLUMN okr_objective.fc_residual_risk IS 'Step 9: residual risk to the objective at end-of-cycle.';
-COMMENT ON COLUMN okr_objective.score_by_progress_percent IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.fc_residual_risk IS 'Step 9: residual risk to the objective at end-of-cycle.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_progress_percent IS
     'Score 1 of 7: progress percent 0-100. Mean of per-KR progress_fraction (clamped) expressed as percent.';
-COMMENT ON COLUMN okr_objective.score_by_confidence_decile IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_confidence_decile IS
     'Score 2 of 7: owner confidence decile 1-10.';
-COMMENT ON COLUMN okr_objective.score_by_stretch_tier IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_stretch_tier IS
     'Score 3 of 7: stretch tier 1-3 — 1=committed, 2=aspirational, 3=moonshot.';
-COMMENT ON COLUMN okr_objective.score_by_alignment_grade IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_alignment_grade IS
     'Score 4 of 7: alignment grade 1-5 to parent or strategic theme.';
-COMMENT ON COLUMN okr_objective.score_by_impact_tier IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_impact_tier IS
     'Score 5 of 7: impact tier 1-5 — business value if achieved.';
-COMMENT ON COLUMN okr_objective.score_by_smart_quality IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_smart_quality IS
     'Score 6 of 7: SMART criteria count 0-5 (Specific, Measurable, Achievable, Relevant, Time-bound).';
-COMMENT ON COLUMN okr_objective.score_by_pace_deviation_percent IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_objective.score_by_pace_deviation_percent IS
     'Score 7 of 7: pace deviation percent -100..+100 from expected linear pace at this point in the cycle.';
 
 --rollback DROP TABLE okr_objective CASCADE;
@@ -296,13 +313,13 @@ COMMENT ON COLUMN okr_objective.score_by_pace_deviation_percent IS
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_key_result (
+CREATE TABLE objectives_and_key_results_tracker.okr_key_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    okr_objective_id UUID NOT NULL REFERENCES okr_objective(id) ON DELETE CASCADE,
+    okr_objective_id UUID NOT NULL REFERENCES objectives_and_key_results_tracker.okr_objective(id) ON DELETE CASCADE,
     position INTEGER NOT NULL CHECK (position BETWEEN 1 AND 5),
 
     title TEXT NOT NULL DEFAULT '',
@@ -323,34 +340,34 @@ CREATE TABLE okr_key_result (
 );
 
 CREATE TRIGGER trigger_okr_key_result_updated_at
-    BEFORE UPDATE ON okr_key_result
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_key_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-CREATE INDEX okr_key_result_index_okr_objective_id ON okr_key_result(okr_objective_id);
+CREATE INDEX okr_key_result_index_okr_objective_id ON objectives_and_key_results_tracker.okr_key_result(okr_objective_id);
 
-COMMENT ON TABLE okr_key_result IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_key_result IS
     'A Key Result for an objective. 1-5 rows per okr_objective; UNIQUE on (okr_objective_id, position).';
-COMMENT ON COLUMN okr_key_result.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_key_result.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_key_result.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_key_result.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_key_result.okr_objective_id IS 'Foreign key to the parent okr_objective.';
-COMMENT ON COLUMN okr_key_result.position IS 'Display order 1-5; UNIQUE per objective.';
-COMMENT ON COLUMN okr_key_result.title IS 'One-sentence Key Result statement.';
-COMMENT ON COLUMN okr_key_result.kr_type IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.okr_objective_id IS 'Foreign key to the parent okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.position IS 'Display order 1-5; UNIQUE per objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.title IS 'One-sentence Key Result statement.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.kr_type IS
     'Key Result type: numeric (start/current/target), milestone (ordered list), or binary (done flag).';
-COMMENT ON COLUMN okr_key_result.unit IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.unit IS
     'Unit of measure for numeric KRs: USD, users, percent, count, etc.';
-COMMENT ON COLUMN okr_key_result.start_value IS 'Numeric KR: starting value at cycle start.';
-COMMENT ON COLUMN okr_key_result.current_value IS 'Numeric KR: latest observed value.';
-COMMENT ON COLUMN okr_key_result.target_value IS 'Numeric KR: target value at cycle end.';
-COMMENT ON COLUMN okr_key_result.milestones_json IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.start_value IS 'Numeric KR: starting value at cycle start.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.current_value IS 'Numeric KR: latest observed value.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.target_value IS 'Numeric KR: target value at cycle end.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.milestones_json IS
     'Milestone KR: ordered JSONB list, each {name, done, completed_at}.';
-COMMENT ON COLUMN okr_key_result.binary_done IS 'Binary KR: done flag.';
-COMMENT ON COLUMN okr_key_result.owner_name IS 'Optional KR-level owner name (may differ from objective DRI).';
-COMMENT ON COLUMN okr_key_result.due_date IS 'Optional due date for this KR (defaults to objective cycle_end_date).';
-COMMENT ON COLUMN okr_key_result.progress_fraction IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.binary_done IS 'Binary KR: done flag.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.owner_name IS 'Optional KR-level owner name (may differ from objective DRI).';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.due_date IS 'Optional due date for this KR (defaults to objective cycle_end_date).';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_key_result.progress_fraction IS
     'Computed progress fraction 0.0-1.0; numeric → (cur-start)/(target-start) clamped, milestone → done/total, binary → 0 or 1.';
 
 --rollback DROP TABLE okr_key_result;
@@ -366,13 +383,13 @@ COMMENT ON COLUMN okr_key_result.progress_fraction IS
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_check_in (
+CREATE TABLE objectives_and_key_results_tracker.okr_check_in (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    okr_objective_id UUID NOT NULL REFERENCES okr_objective(id) ON DELETE CASCADE,
+    okr_objective_id UUID NOT NULL REFERENCES objectives_and_key_results_tracker.okr_objective(id) ON DELETE CASCADE,
     checked_in_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     narrative TEXT NOT NULL DEFAULT '',
     since_last_changes TEXT NOT NULL DEFAULT '',
@@ -383,26 +400,26 @@ CREATE TABLE okr_check_in (
 );
 
 CREATE TRIGGER trigger_okr_check_in_updated_at
-    BEFORE UPDATE ON okr_check_in
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_check_in
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-CREATE INDEX okr_check_in_index_okr_objective_id ON okr_check_in(okr_objective_id);
-CREATE INDEX okr_check_in_index_checked_in_at ON okr_check_in(checked_in_at);
+CREATE INDEX okr_check_in_index_okr_objective_id ON objectives_and_key_results_tracker.okr_check_in(okr_objective_id);
+CREATE INDEX okr_check_in_index_checked_in_at ON objectives_and_key_results_tracker.okr_check_in(checked_in_at);
 
-COMMENT ON TABLE okr_check_in IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_check_in IS
     'Periodic progress check-in narrative for an objective. Many rows per okr_objective.';
-COMMENT ON COLUMN okr_check_in.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_check_in.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_check_in.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_check_in.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_check_in.okr_objective_id IS 'Foreign key to the parent okr_objective.';
-COMMENT ON COLUMN okr_check_in.checked_in_at IS 'When this check-in was made.';
-COMMENT ON COLUMN okr_check_in.narrative IS 'Free-text update narrative.';
-COMMENT ON COLUMN okr_check_in.since_last_changes IS 'Summary of what changed since the previous check-in.';
-COMMENT ON COLUMN okr_check_in.blockers IS 'Current blockers as of this check-in.';
-COMMENT ON COLUMN okr_check_in.asks IS 'Asks for help / decisions / resources at this check-in.';
-COMMENT ON COLUMN okr_check_in.confidence_decile_at_check_in IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.okr_objective_id IS 'Foreign key to the parent okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.checked_in_at IS 'When this check-in was made.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.narrative IS 'Free-text update narrative.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.since_last_changes IS 'Summary of what changed since the previous check-in.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.blockers IS 'Current blockers as of this check-in.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.asks IS 'Asks for help / decisions / resources at this check-in.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_check_in.confidence_decile_at_check_in IS
     'Confidence decile snapshot 1-10 at this check-in; used by the confidence-collapse flag.';
 
 --rollback DROP TABLE okr_check_in;
@@ -418,13 +435,13 @@ COMMENT ON COLUMN okr_check_in.confidence_decile_at_check_in IS
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_grade (
+CREATE TABLE objectives_and_key_results_tracker.okr_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    okr_objective_id UUID NOT NULL UNIQUE REFERENCES okr_objective(id) ON DELETE CASCADE,
+    okr_objective_id UUID NOT NULL UNIQUE REFERENCES objectives_and_key_results_tracker.okr_objective(id) ON DELETE CASCADE,
 
     score_by_progress_percent NUMERIC(5,2)
         CHECK (score_by_progress_percent IS NULL OR score_by_progress_percent BETWEEN 0 AND 100),
@@ -457,36 +474,36 @@ CREATE TABLE okr_grade (
 );
 
 CREATE TRIGGER trigger_okr_grade_updated_at
-    BEFORE UPDATE ON okr_grade
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-COMMENT ON TABLE okr_grade IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_grade IS
     'Computed and signed-off grading result for an objective. 1:1 with okr_objective.';
-COMMENT ON COLUMN okr_grade.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_grade.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_grade.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_grade.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_grade.okr_objective_id IS 'Foreign key to the parent okr_objective row (UNIQUE, 1:1).';
-COMMENT ON COLUMN okr_grade.score_by_progress_percent IS 'Score 1 of 7: echoed from okr_objective for dashboard joins.';
-COMMENT ON COLUMN okr_grade.score_by_confidence_decile IS 'Score 2 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.score_by_stretch_tier IS 'Score 3 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.score_by_alignment_grade IS 'Score 4 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.score_by_impact_tier IS 'Score 5 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.score_by_smart_quality IS 'Score 6 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.score_by_pace_deviation_percent IS 'Score 7 of 7: echoed from okr_objective.';
-COMMENT ON COLUMN okr_grade.computed_composite_rag IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.okr_objective_id IS 'Foreign key to the parent okr_objective row (UNIQUE, 1:1).';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_progress_percent IS 'Score 1 of 7: echoed from okr_objective for dashboard joins.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_confidence_decile IS 'Score 2 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_stretch_tier IS 'Score 3 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_alignment_grade IS 'Score 4 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_impact_tier IS 'Score 5 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_smart_quality IS 'Score 6 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.score_by_pace_deviation_percent IS 'Score 7 of 7: echoed from okr_objective.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.computed_composite_rag IS
     'Composite RAG computed by the engine using the worst-band-finding algorithm: green, amber, or red.';
-COMMENT ON COLUMN okr_grade.final_composite_rag IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.final_composite_rag IS
     'Composite RAG signed off by the reviewer (may equal or differ from computed).';
-COMMENT ON COLUMN okr_grade.override_reason IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.override_reason IS
     'Reason the reviewer set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN okr_grade.recommendation IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.recommendation IS
     'Overall recommendation: continue, escalate, re-scope, retire, split, merge.';
-COMMENT ON COLUMN okr_grade.triage_notes IS 'Free-text reviewer summary notes.';
-COMMENT ON COLUMN okr_grade.signed_by IS 'Name or identifier of the reviewer who signed off.';
-COMMENT ON COLUMN okr_grade.signed_at IS 'Timestamp of the reviewer electronic signature.';
-COMMENT ON COLUMN okr_grade.graded_at IS 'Timestamp when the engine last computed the result.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.triage_notes IS 'Free-text reviewer summary notes.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.signed_by IS 'Name or identifier of the reviewer who signed off.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.signed_at IS 'Timestamp of the reviewer electronic signature.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade.graded_at IS 'Timestamp when the engine last computed the result.';
 
 --rollback DROP TABLE okr_grade;
 
@@ -501,13 +518,13 @@ COMMENT ON COLUMN okr_grade.graded_at IS 'Timestamp when the engine last compute
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_grade_rule (
+CREATE TABLE objectives_and_key_results_tracker.okr_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    okr_grade_id UUID NOT NULL REFERENCES okr_grade(id) ON DELETE CASCADE,
+    okr_grade_id UUID NOT NULL REFERENCES objectives_and_key_results_tracker.okr_grade(id) ON DELETE CASCADE,
     rule_id TEXT NOT NULL DEFAULT '',
     instrument TEXT NOT NULL DEFAULT ''
         CHECK (instrument IN (
@@ -520,25 +537,25 @@ CREATE TABLE okr_grade_rule (
 );
 
 CREATE TRIGGER trigger_okr_grade_rule_updated_at
-    BEFORE UPDATE ON okr_grade_rule
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-CREATE INDEX okr_grade_rule_index_okr_grade_id ON okr_grade_rule(okr_grade_id);
+CREATE INDEX okr_grade_rule_index_okr_grade_id ON objectives_and_key_results_tracker.okr_grade_rule(okr_grade_id);
 
-COMMENT ON TABLE okr_grade_rule IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_grade_rule IS
     'A grading rule that fired during composite RAG computation. Many rows per okr_grade.';
-COMMENT ON COLUMN okr_grade_rule.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_grade_rule.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_grade_rule.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_grade_rule.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_grade_rule.okr_grade_id IS 'Foreign key to the parent okr_grade.';
-COMMENT ON COLUMN okr_grade_rule.rule_id IS 'Stable rule identifier (e.g. R-PROGRESS-RED-COMMITTED).';
-COMMENT ON COLUMN okr_grade_rule.instrument IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.okr_grade_id IS 'Foreign key to the parent okr_grade.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.rule_id IS 'Stable rule identifier (e.g. R-PROGRESS-RED-COMMITTED).';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.instrument IS
     'Which scoring instrument fired the rule: progress, confidence, stretch, alignment, impact, smart, pace, or composite.';
-COMMENT ON COLUMN okr_grade_rule.grade IS 'Grade band the rule attached: green, amber, red.';
-COMMENT ON COLUMN okr_grade_rule.category IS 'Free-text category, e.g. progress, alignment, smart.';
-COMMENT ON COLUMN okr_grade_rule.description IS 'Human-readable rule description.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.grade IS 'Grade band the rule attached: green, amber, red.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.category IS 'Free-text category, e.g. progress, alignment, smart.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_rule.description IS 'Human-readable rule description.';
 
 --rollback DROP TABLE okr_grade_rule;
 
@@ -553,13 +570,13 @@ COMMENT ON COLUMN okr_grade_rule.description IS 'Human-readable rule description
 --liquibase formatted sql
 
 --changeset author:1
-CREATE TABLE okr_grade_flag (
+CREATE TABLE objectives_and_key_results_tracker.okr_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    okr_grade_id UUID NOT NULL REFERENCES okr_grade(id) ON DELETE CASCADE,
+    okr_grade_id UUID NOT NULL REFERENCES objectives_and_key_results_tracker.okr_grade(id) ON DELETE CASCADE,
     flag_code TEXT NOT NULL DEFAULT ''
         CHECK (flag_code IN (
             'mis-aligned','orphaned','non-smart','unmeasurable','no-dri',
@@ -572,24 +589,24 @@ CREATE TABLE okr_grade_flag (
 );
 
 CREATE TRIGGER trigger_okr_grade_flag_updated_at
-    BEFORE UPDATE ON okr_grade_flag
+    BEFORE UPDATE ON objectives_and_key_results_tracker.okr_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION objectives_and_key_results_tracker.set_updated_at();
 
-CREATE INDEX okr_grade_flag_index_okr_grade_id ON okr_grade_flag(okr_grade_id);
-CREATE INDEX okr_grade_flag_index_flag_code ON okr_grade_flag(flag_code);
+CREATE INDEX okr_grade_flag_index_okr_grade_id ON objectives_and_key_results_tracker.okr_grade_flag(okr_grade_id);
+CREATE INDEX okr_grade_flag_index_flag_code ON objectives_and_key_results_tracker.okr_grade_flag(flag_code);
 
-COMMENT ON TABLE okr_grade_flag IS
+COMMENT ON TABLE objectives_and_key_results_tracker.okr_grade_flag IS
     'A risk flag attached to an OKR grade. Computed independently of the composite RAG.';
-COMMENT ON COLUMN okr_grade_flag.id IS 'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN okr_grade_flag.created_at IS 'Timestamp when this row was created.';
-COMMENT ON COLUMN okr_grade_flag.updated_at IS 'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN okr_grade_flag.deleted_at IS 'Timestamp when the record was soft-deleted.';
-COMMENT ON COLUMN okr_grade_flag.okr_grade_id IS 'Foreign key to the parent okr_grade.';
-COMMENT ON COLUMN okr_grade_flag.flag_code IS
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.id IS 'Primary key UUID, auto-generated.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.created_at IS 'Timestamp when this row was created.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.updated_at IS 'Timestamp when the record was updated most-recently.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.deleted_at IS 'Timestamp when the record was soft-deleted.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.okr_grade_id IS 'Foreign key to the parent okr_grade.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.flag_code IS
     'Flag code: mis-aligned, orphaned, non-smart, unmeasurable, no-dri, committed-at-risk, pace-collapse, confidence-collapse, stale-check-in, cascading-broken, over-scoped, moonshot-progress.';
-COMMENT ON COLUMN okr_grade_flag.priority IS 'Flag priority: high, medium, low.';
-COMMENT ON COLUMN okr_grade_flag.description IS 'Human-readable description of why the flag fired.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.priority IS 'Flag priority: high, medium, low.';
+COMMENT ON COLUMN objectives_and_key_results_tracker.okr_grade_flag.description IS 'Human-readable description of why the flag fired.';
 
 --rollback DROP TABLE okr_grade_flag;
 

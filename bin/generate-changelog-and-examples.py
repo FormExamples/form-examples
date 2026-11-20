@@ -184,7 +184,7 @@ COLUMN_LINE_RE = re.compile(
 )
 
 CREATE_TABLE_RE = re.compile(
-    r"CREATE\s+TABLE\s+(?P<name>[a-z_][a-z0-9_]*)\s*\((?P<body>[\s\S]*?)\)\s*;",
+    r"CREATE\s+TABLE\s+(?:\w+\.)?(?P<name>[a-z_][a-z0-9_]*)\s*\((?P<body>[\s\S]*?)\)\s*;",
     re.IGNORECASE,
 )
 

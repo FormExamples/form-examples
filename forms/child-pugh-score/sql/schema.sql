@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS child_pugh_score;
+
+COMMENT ON SCHEMA child_pugh_score IS
+    'Namespace for the Child-Pugh Score (Child-Turcotte-Pugh) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION child_pugh_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION child_pugh_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE child_pugh_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON child_pugh_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE child_pugh_score.patient IS
     'Patient demographic information used by the Child-Pugh assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN child_pugh_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN child_pugh_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN child_pugh_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN child_pugh_score.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN child_pugh_score.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN child_pugh_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN child_pugh_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN child_pugh_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN child_pugh_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_pugh_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN child_pugh_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN child_pugh_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN child_pugh_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN child_pugh_score.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN child_pugh_score.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN child_pugh_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN child_pugh_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON child_pugh_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (hepatologist, surgeon, anaesthetist, physician, nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE child_pugh_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON child_pugh_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE child_pugh_score.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN child_pugh_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN child_pugh_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN child_pugh_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN child_pugh_score.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN child_pugh_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN child_pugh_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN child_pugh_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_pugh_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN child_pugh_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN child_pugh_score.clinician.role IS
     'Primary clinical role: hepatologist, surgeon, anaesthetist, physician, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN child_pugh_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN child_pugh_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON child_pugh_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- encephalopathy). The computed grade, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE child_pugh_score (
+CREATE TABLE child_pugh_score.child_pugh_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES child_pugh_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES child_pugh_score.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -249,58 +266,58 @@ CREATE TABLE child_pugh_score (
 );
 
 CREATE INDEX child_pugh_score_patient_id_idx
-    ON child_pugh_score (patient_id);
+    ON child_pugh_score.child_pugh_score (patient_id);
 CREATE INDEX child_pugh_score_clinician_id_idx
-    ON child_pugh_score (clinician_id);
+    ON child_pugh_score.child_pugh_score (clinician_id);
 
 CREATE TRIGGER trigger_child_pugh_score_updated_at
-    BEFORE UPDATE ON child_pugh_score
+    BEFORE UPDATE ON child_pugh_score.child_pugh_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE child_pugh_score IS
+COMMENT ON TABLE child_pugh_score.child_pugh_score IS
     'Main Child-Pugh assessment record: assessment context, patient identification, and the five scored parameter inputs (total bilirubin, serum albumin, coagulation, ascites, hepatic encephalopathy).';
-COMMENT ON COLUMN child_pugh_score.id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_pugh_score.created_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN child_pugh_score.updated_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN child_pugh_score.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN child_pugh_score.patient_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN child_pugh_score.clinician_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN child_pugh_score.clinician_name IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN child_pugh_score.clinician_role IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinician_role IS
     'Role of the assessing clinician: hepatologist, surgeon, anaesthetist, physician, nurse, or other.';
-COMMENT ON COLUMN child_pugh_score.assessed_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN child_pugh_score.care_setting IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.care_setting IS
     'Care setting: hepatology-clinic, ward, pre-operative, intensive-care, or other.';
-COMMENT ON COLUMN child_pugh_score.aetiology IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.aetiology IS
     'Aetiology of liver disease: alcohol, viral-hepatitis, nafld, autoimmune, cholestatic, or other.';
-COMMENT ON COLUMN child_pugh_score.patient_identifier IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN child_pugh_score.age_band IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN child_pugh_score.sex IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN child_pugh_score.total_bilirubin_umol_l IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.total_bilirubin_umol_l IS
     'Parameter 1 — measured total bilirubin in micromoles per litre (umol/L).';
-COMMENT ON COLUMN child_pugh_score.serum_albumin_g_l IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.serum_albumin_g_l IS
     'Parameter 2 — measured serum albumin in grams per litre (g/L).';
-COMMENT ON COLUMN child_pugh_score.inr IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.inr IS
     'Parameter 3 — International Normalised Ratio (INR); preferred coagulation measure.';
-COMMENT ON COLUMN child_pugh_score.prothrombin_time_seconds IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.prothrombin_time_seconds IS
     'Parameter 3 — prothrombin-time prolongation in seconds; fallback used when INR is unavailable.';
-COMMENT ON COLUMN child_pugh_score.ascites IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.ascites IS
     'Parameter 4 — clinical ascites grade: none, mild (diuretic-responsive), or moderate-severe (refractory).';
-COMMENT ON COLUMN child_pugh_score.hepatic_encephalopathy IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.hepatic_encephalopathy IS
     'Parameter 5 — hepatic encephalopathy grade: none, grade-1-2, or grade-3-4.';
-COMMENT ON COLUMN child_pugh_score.clinical_note IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -315,14 +332,14 @@ COMMENT ON COLUMN child_pugh_score.clinical_note IS
 -- points, the summed total (5-15), and the derived class (A/B/C) with
 -- banded survival and surgical-risk estimates.
 
-CREATE TABLE child_pugh_score_grade (
+CREATE TABLE child_pugh_score.child_pugh_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_pugh_score_id UUID NOT NULL UNIQUE
-        REFERENCES child_pugh_score(id) ON DELETE CASCADE,
+        REFERENCES child_pugh_score.child_pugh_score(id) ON DELETE CASCADE,
 
     bilirubin_points INT,
     albumin_points INT,
@@ -342,43 +359,43 @@ CREATE TABLE child_pugh_score_grade (
 );
 
 CREATE TRIGGER trigger_child_pugh_score_grade_updated_at
-    BEFORE UPDATE ON child_pugh_score_grade
+    BEFORE UPDATE ON child_pugh_score.child_pugh_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE child_pugh_score_grade IS
+COMMENT ON TABLE child_pugh_score.child_pugh_score_grade IS
     'Computed Child-Pugh grading result: per-parameter points, summed total (5-15), derived class (A/B/C), and banded survival and surgical-risk estimates.';
-COMMENT ON COLUMN child_pugh_score_grade.id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_pugh_score_grade.created_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_pugh_score_grade.updated_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_pugh_score_grade.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_pugh_score_grade.child_pugh_score_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.child_pugh_score_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN child_pugh_score_grade.bilirubin_points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.bilirubin_points IS
     'Points (1-3) awarded for parameter 1, total bilirubin.';
-COMMENT ON COLUMN child_pugh_score_grade.albumin_points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.albumin_points IS
     'Points (1-3) awarded for parameter 2, serum albumin.';
-COMMENT ON COLUMN child_pugh_score_grade.coagulation_points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.coagulation_points IS
     'Points (1-3) awarded for parameter 3, coagulation (INR or prothrombin time).';
-COMMENT ON COLUMN child_pugh_score_grade.ascites_points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.ascites_points IS
     'Points (1-3) awarded for parameter 4, ascites.';
-COMMENT ON COLUMN child_pugh_score_grade.encephalopathy_points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.encephalopathy_points IS
     'Points (1-3) awarded for parameter 5, hepatic encephalopathy.';
-COMMENT ON COLUMN child_pugh_score_grade.total_score IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.total_score IS
     'Summed Child-Pugh score across the five parameters (5-15 when complete).';
-COMMENT ON COLUMN child_pugh_score_grade.child_pugh_class IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.child_pugh_class IS
     'Derived class: A (5-6), B (7-9), or C (10-15).';
-COMMENT ON COLUMN child_pugh_score_grade.one_year_survival IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.one_year_survival IS
     'Banded one-year survival estimate for the class (e.g. ~100%).';
-COMMENT ON COLUMN child_pugh_score_grade.two_year_survival IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.two_year_survival IS
     'Banded two-year survival estimate for the class (e.g. ~85%).';
-COMMENT ON COLUMN child_pugh_score_grade.surgical_risk IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.surgical_risk IS
     'Banded peri-operative risk for the class: low, moderate, or high.';
-COMMENT ON COLUMN child_pugh_score_grade.graded_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -394,14 +411,14 @@ COMMENT ON COLUMN child_pugh_score_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE child_pugh_score_grade_rule (
+CREATE TABLE child_pugh_score.child_pugh_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_pugh_score_grade_id UUID NOT NULL
-        REFERENCES child_pugh_score_grade(id) ON DELETE CASCADE,
+        REFERENCES child_pugh_score.child_pugh_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(20) NOT NULL
@@ -412,34 +429,34 @@ CREATE TABLE child_pugh_score_grade_rule (
 );
 
 CREATE INDEX child_pugh_score_grade_rule_grade_id_idx
-    ON child_pugh_score_grade_rule (child_pugh_score_grade_id);
+    ON child_pugh_score.child_pugh_score_grade_rule (child_pugh_score_grade_id);
 
 CREATE TRIGGER trigger_child_pugh_score_grade_rule_updated_at
-    BEFORE UPDATE ON child_pugh_score_grade_rule
+    BEFORE UPDATE ON child_pugh_score.child_pugh_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE child_pugh_score_grade_rule IS
+COMMENT ON TABLE child_pugh_score.child_pugh_score_grade_rule IS
     'Audit trail of every grading rule that fired during Child-Pugh computation: parameter, points contributed, category, and description.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.created_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.updated_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.child_pugh_score_grade_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.child_pugh_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.rule_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-BILIRUBIN-3POINT-01).';
-COMMENT ON COLUMN child_pugh_score_grade_rule.parameter IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.parameter IS
     'Scored parameter the rule belongs to: bilirubin, albumin, coagulation, ascites, encephalopathy, or class.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.points IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.points IS
     'Points (1-3) contributed by this rule for its parameter.';
-COMMENT ON COLUMN child_pugh_score_grade_rule.category IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.category IS
     'Subject category (e.g. threshold-band, class-band).';
-COMMENT ON COLUMN child_pugh_score_grade_rule.description IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -453,14 +470,14 @@ COMMENT ON COLUMN child_pugh_score_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE child_pugh_score_grade_flag (
+CREATE TABLE child_pugh_score.child_pugh_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_pugh_score_grade_id UUID NOT NULL
-        REFERENCES child_pugh_score_grade(id) ON DELETE CASCADE,
+        REFERENCES child_pugh_score.child_pugh_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -480,34 +497,34 @@ CREATE TABLE child_pugh_score_grade_flag (
 );
 
 CREATE INDEX child_pugh_score_grade_flag_grade_id_idx
-    ON child_pugh_score_grade_flag (child_pugh_score_grade_id);
+    ON child_pugh_score.child_pugh_score_grade_flag (child_pugh_score_grade_id);
 
 CREATE TRIGGER trigger_child_pugh_score_grade_flag_updated_at
-    BEFORE UPDATE ON child_pugh_score_grade_flag
+    BEFORE UPDATE ON child_pugh_score.child_pugh_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_pugh_score.set_updated_at();
 
-COMMENT ON TABLE child_pugh_score_grade_flag IS
+COMMENT ON TABLE child_pugh_score.child_pugh_score_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.created_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.updated_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.child_pugh_score_grade_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.child_pugh_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.flag_id IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CLASS-C-DECOMPENSATED-001).';
-COMMENT ON COLUMN child_pugh_score_grade_flag.category IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN child_pugh_score_grade_flag.priority IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.description IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN child_pugh_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN child_pugh_score.child_pugh_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "refer for transplant assessment").';
 
 -- ========================================================================

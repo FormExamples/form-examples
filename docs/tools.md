@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-121 tools.
+122 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -78,6 +78,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/oxford-spelling-sweep`](#oxford-spelling-sweep)
 - [`bin/page-header-layout-refactor`](#page-header-layout-refactor)
 - [`bin/route-svelte-layout`](#route-svelte-layout)
+- [`bin/sql-schema-namespace`](#sql-schema-namespace)
 - [`bin/svelte-autosave-restore-fix`](#svelte-autosave-restore-fix)
 - [`bin/svelte-date-time-picker-vendor`](#svelte-date-time-picker-vendor)
 - [`bin/svelte-helpers-chooser-rename`](#svelte-helpers-chooser-rename)
@@ -2273,6 +2274,58 @@ route-svelte-layout <slug> : nest a form's SvelteKit routes under
  front-end-with-svelte/src/routes/<form-kebab-case>/  and prefix internal
  absolute route links (href / goto / redirect, plus the "/" home link) with
  /<slug>. /api/ fetch paths are left untouched. Idempotent (skips if routed).
+```
+
+<h2 id="sql-schema-namespace"><code>bin/sql-schema-namespace</code></h2>
+
+```text
+bin/sql-schema-namespace — put each form's sql/ objects in its own Postgres schema.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form subproject
+is fully namespaced by its slug. For `sql/` that is a Postgres schema named for
+the form: the slug in snake_case, for example `pre_operative_assessment_by_clinician`.
+Table names stay short (`patient`, `clinician`, `grade`) and the schema is the
+namespace:
+
+    CREATE SCHEMA IF NOT EXISTS pre_operative_assessment_by_clinician;
+    CREATE TABLE pre_operative_assessment_by_clinician.patient (...);
+
+A schema, rather than a `<slug>_` name prefix, because Postgres caps every
+identifier at 63 bytes and silently truncates longer ones: prefixing would push
+265 tables in 59 forms over the cap. Two snake slugs are themselves longer than
+63 bytes, so those two forms use the registered short schema names in
+`SCHEMA_OVERRIDES` below (also listed in the spec).
+
+For each form the tool writes `sql/00_create_schema.sql` and, in every other
+numbered `sql/NN_*.sql` file, qualifies each reference to the form's own
+tables, functions and domains with the schema:
+
+    CREATE TABLE t / ALTER TABLE t / INSERT INTO t / DROP TABLE t
+    REFERENCES t (...)
+    ... ON t (...)                    CREATE INDEX, CREATE TRIGGER
+    COMMENT ON TABLE t / COMMENT ON COLUMN t.c
+    f(...)                            a function the form creates (set_updated_at)
+    d                                 a domain the form creates, and its uses
+
+Only SQL code is rewritten, never text inside a '...' string literal, a `--`
+comment, or a `$$ ... $$` function body. A reference already qualified is
+left alone, so the tool is idempotent. `sql/schema.sql` is generated; rebuild
+it afterwards with `python3 bin/sql/generate-sql-combined.py`.
+
+The generators that read `sql/` (XML, FHIR, protobuf, OpenAPI, the Axum tools,
+the examples) accept an optional `schema.` qualifier and name entities by
+the bare table name, so their output does not change.
+
+This is an ongoing convention: run the tool on a new form's `sql/` (it writes
+the schema file and qualifies what `bin/create-form` and hand authoring
+produce). `--check` is the CI drift detector.
+
+Usage:
+  bin/sql-schema-namespace <slug>...        # named forms
+  bin/sql-schema-namespace --all            # every form with sql/
+  bin/sql-schema-namespace --dry-run --all  # show what would change
+  bin/sql-schema-namespace --check --all    # CI drift check (non-zero on drift)
+  bin/sql-schema-namespace --schema <slug>  # print a form's schema name
 ```
 
 <h2 id="svelte-autosave-restore-fix"><code>bin/svelte-autosave-restore-fix</code></h2>

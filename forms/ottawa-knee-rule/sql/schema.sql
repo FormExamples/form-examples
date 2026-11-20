@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS ottawa_knee_rule;
+
+COMMENT ON SCHEMA ottawa_knee_rule IS
+    'Namespace for the Ottawa Knee Rule form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION ottawa_knee_rule.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION ottawa_knee_rule.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE ottawa_knee_rule.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON ottawa_knee_rule.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE ottawa_knee_rule.patient IS
     'Patient demographic information used by the Ottawa Knee Rule assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN ottawa_knee_rule.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON ottawa_knee_rule.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse-practitioner, physiotherapist, paramedic).
 
-CREATE TABLE clinician (
+CREATE TABLE ottawa_knee_rule.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON ottawa_knee_rule.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE ottawa_knee_rule.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.role IS
     'Primary clinical role: doctor, nurse-practitioner, physiotherapist, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN ottawa_knee_rule.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON ottawa_knee_rule.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- Each criterion input is a yes/no/'' enum (age uses a nullable year value).
 -- The computed decision, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE ottawa_knee_rule (
+CREATE TABLE ottawa_knee_rule.ottawa_knee_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES ottawa_knee_rule.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES ottawa_knee_rule.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -239,58 +256,58 @@ CREATE TABLE ottawa_knee_rule (
 );
 
 CREATE INDEX ottawa_knee_rule_patient_id_idx
-    ON ottawa_knee_rule (patient_id);
+    ON ottawa_knee_rule.ottawa_knee_rule (patient_id);
 CREATE INDEX ottawa_knee_rule_clinician_id_idx
-    ON ottawa_knee_rule (clinician_id);
+    ON ottawa_knee_rule.ottawa_knee_rule (clinician_id);
 
 CREATE TRIGGER trigger_ottawa_knee_rule_updated_at
-    BEFORE UPDATE ON ottawa_knee_rule
+    BEFORE UPDATE ON ottawa_knee_rule.ottawa_knee_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE ottawa_knee_rule IS
+COMMENT ON TABLE ottawa_knee_rule.ottawa_knee_rule IS
     'Main Ottawa Knee Rule assessment record: identification, context, and the five objective bedside criterion inputs. A decision rule (ANY-of), not a score.';
-COMMENT ON COLUMN ottawa_knee_rule.id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_knee_rule.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ottawa_knee_rule.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ottawa_knee_rule.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ottawa_knee_rule.patient_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN ottawa_knee_rule.clinician_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN ottawa_knee_rule.status IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN ottawa_knee_rule.patient_identifier IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN ottawa_knee_rule.assessed_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN ottawa_knee_rule.care_setting IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.care_setting IS
     'Care setting: emergency-department, minor-injuries-unit, urgent-care, or other.';
-COMMENT ON COLUMN ottawa_knee_rule.injury_mechanism IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.injury_mechanism IS
     'Mechanism of injury: blunt-trauma, twisting, fall, or other.';
-COMMENT ON COLUMN ottawa_knee_rule.hours_since_injury IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.hours_since_injury IS
     'Hours elapsed since the injury; supports the applicability check (the rule is validated for acute injury).';
-COMMENT ON COLUMN ottawa_knee_rule.sex IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.sex IS
     'Patient sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN ottawa_knee_rule.injured_side IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.injured_side IS
     'Injured knee side: left or right.';
-COMMENT ON COLUMN ottawa_knee_rule.age_years IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.age_years IS
     'Criterion 1: patient age in years; the criterion fires when age >= 55. Null when unanswered.';
-COMMENT ON COLUMN ottawa_knee_rule.patellar_tenderness IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.patellar_tenderness IS
     'Criterion 2 input: tenderness at the patella. Fires the isolated-patellar criterion only when other_bony_tenderness is no.';
-COMMENT ON COLUMN ottawa_knee_rule.other_bony_tenderness IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.other_bony_tenderness IS
     'Criterion 2 modifier: bony tenderness other than the patella; when yes it prevents the isolated-patellar criterion from firing and raises a flag.';
-COMMENT ON COLUMN ottawa_knee_rule.fibular_head_tenderness IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.fibular_head_tenderness IS
     'Criterion 3: tenderness at the head of the fibula.';
-COMMENT ON COLUMN ottawa_knee_rule.unable_to_flex_90 IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.unable_to_flex_90 IS
     'Criterion 4: inability to flex the knee to 90 degrees.';
-COMMENT ON COLUMN ottawa_knee_rule.unable_to_bear_weight IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.unable_to_bear_weight IS
     'Criterion 5: inability to bear weight (take four steps) both immediately after injury and in the emergency department.';
-COMMENT ON COLUMN ottawa_knee_rule.clinical_notes IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';
 
 -- ========================================================================
@@ -306,14 +323,14 @@ COMMENT ON COLUMN ottawa_knee_rule.clinical_notes IS
 -- the resulting decision label. This is a decision rule, not a score, so there
 -- is no total. One-to-one with the parent assessment.
 
-CREATE TABLE ottawa_knee_rule_grade (
+CREATE TABLE ottawa_knee_rule.ottawa_knee_rule_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_knee_rule_id UUID NOT NULL UNIQUE
-        REFERENCES ottawa_knee_rule(id) ON DELETE CASCADE,
+        REFERENCES ottawa_knee_rule.ottawa_knee_rule(id) ON DELETE CASCADE,
 
     xray_indicated VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (xray_indicated IN ('yes', 'no', '')),
@@ -324,29 +341,29 @@ CREATE TABLE ottawa_knee_rule_grade (
 );
 
 CREATE TRIGGER trigger_ottawa_knee_rule_grade_updated_at
-    BEFORE UPDATE ON ottawa_knee_rule_grade
+    BEFORE UPDATE ON ottawa_knee_rule.ottawa_knee_rule_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE ottawa_knee_rule_grade IS
+COMMENT ON TABLE ottawa_knee_rule.ottawa_knee_rule_grade IS
     'Computed Ottawa Knee Rule grading result: the binary imaging decision (xray_indicated) and decision label. One-to-one with the parent assessment.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.ottawa_knee_rule_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.ottawa_knee_rule_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN ottawa_knee_rule_grade.xray_indicated IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.xray_indicated IS
     'Whether a knee radiograph is indicated: yes when any one criterion fires, no when all five are absent.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.decision IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.decision IS
     'Decision label: xray-indicated or xray-not-indicated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.recommended_action IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.recommended_action IS
     'Recommended action: obtain a knee radiograph per local protocol when indicated, otherwise imaging is not required by the rule.';
-COMMENT ON COLUMN ottawa_knee_rule_grade.graded_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -363,14 +380,14 @@ COMMENT ON COLUMN ottawa_knee_rule_grade.graded_at IS
 -- relates to, and a human-readable description. Because this is an ANY-of
 -- decision rule there is no score; the audit records which criteria fired.
 
-CREATE TABLE ottawa_knee_rule_grade_rule (
+CREATE TABLE ottawa_knee_rule.ottawa_knee_rule_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_knee_rule_grade_id UUID NOT NULL
-        REFERENCES ottawa_knee_rule_grade(id) ON DELETE CASCADE,
+        REFERENCES ottawa_knee_rule.ottawa_knee_rule_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -392,36 +409,36 @@ CREATE TABLE ottawa_knee_rule_grade_rule (
 );
 
 CREATE INDEX ottawa_knee_rule_grade_rule_grade_id_idx
-    ON ottawa_knee_rule_grade_rule (ottawa_knee_rule_grade_id);
+    ON ottawa_knee_rule.ottawa_knee_rule_grade_rule (ottawa_knee_rule_grade_id);
 
 CREATE TRIGGER trigger_ottawa_knee_rule_grade_rule_updated_at
-    BEFORE UPDATE ON ottawa_knee_rule_grade_rule
+    BEFORE UPDATE ON ottawa_knee_rule.ottawa_knee_rule_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE ottawa_knee_rule_grade_rule IS
+COMMENT ON TABLE ottawa_knee_rule.ottawa_knee_rule_grade_rule IS
     'Audit trail of every decision rule evaluated during Ottawa Knee Rule computation: instrument, criterion, whether it fired, category, and description.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.ottawa_knee_rule_grade_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.ottawa_knee_rule_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.rule_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-AGE-01, R-ISOLATED-PATELLAR-01).';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.instrument IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.instrument IS
     'Decision instrument the rule belongs to: criterion (one of the five) or composite (the ANY-of decision).';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.criterion IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.criterion IS
     'Criterion the rule relates to: age, isolated-patellar-tenderness, fibular-head-tenderness, flexion, weight-bearing, or decision.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.fired IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.fired IS
     'Whether this criterion was present (true) and therefore contributed to indicating imaging.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.category IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.category IS
     'Subject category (e.g. age, bony-tenderness, range-of-motion, weight-bearing, decision).';
-COMMENT ON COLUMN ottawa_knee_rule_grade_rule.description IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_rule.description IS
     'Human-readable description of why the rule fired or did not fire.';
 
 -- ========================================================================
@@ -435,14 +452,14 @@ COMMENT ON COLUMN ottawa_knee_rule_grade_rule.description IS
 -- Clinically significant flags that fire independently of the imaging decision,
 -- each with a priority and a suggested action for the assessing team.
 
-CREATE TABLE ottawa_knee_rule_grade_flag (
+CREATE TABLE ottawa_knee_rule.ottawa_knee_rule_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_knee_rule_grade_id UUID NOT NULL
-        REFERENCES ottawa_knee_rule_grade(id) ON DELETE CASCADE,
+        REFERENCES ottawa_knee_rule.ottawa_knee_rule_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -462,34 +479,34 @@ CREATE TABLE ottawa_knee_rule_grade_flag (
 );
 
 CREATE INDEX ottawa_knee_rule_grade_flag_grade_id_idx
-    ON ottawa_knee_rule_grade_flag (ottawa_knee_rule_grade_id);
+    ON ottawa_knee_rule.ottawa_knee_rule_grade_flag (ottawa_knee_rule_grade_id);
 
 CREATE TRIGGER trigger_ottawa_knee_rule_grade_flag_updated_at
-    BEFORE UPDATE ON ottawa_knee_rule_grade_flag
+    BEFORE UPDATE ON ottawa_knee_rule.ottawa_knee_rule_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_knee_rule.set_updated_at();
 
-COMMENT ON TABLE ottawa_knee_rule_grade_flag IS
+COMMENT ON TABLE ottawa_knee_rule.ottawa_knee_rule_grade_flag IS
     'Clinically significant flags that fire independently of the imaging decision, with priority and a suggested action for the assessing team.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.created_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.updated_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.deleted_at IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.ottawa_knee_rule_grade_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.ottawa_knee_rule_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.flag_id IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-XRAY-INDICATED-001).';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.category IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.category IS
     'Flag category: xray-indicated, unable-to-bear-weight, other-bony-tenderness, applicability, incomplete, or other.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.priority IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.description IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN ottawa_knee_rule_grade_flag.suggested_action IS
+COMMENT ON COLUMN ottawa_knee_rule.ottawa_knee_rule_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "obtain a knee radiograph per local protocol", "complete the outstanding criterion inputs").';
 
 -- ========================================================================

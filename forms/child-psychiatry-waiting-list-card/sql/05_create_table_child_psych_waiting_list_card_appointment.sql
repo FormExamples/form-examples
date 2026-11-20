@@ -1,12 +1,12 @@
 -- Upcoming or scheduled appointment(s) attached to a waiting list card.
 
-CREATE TABLE child_psych_waiting_list_card_appointment (
+CREATE TABLE child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     child_psych_waiting_list_card_id UUID NOT NULL
-        REFERENCES child_psych_waiting_list_card(id) ON DELETE CASCADE,
+        REFERENCES child_psychiatry_waiting_list_card.child_psych_waiting_list_card(id) ON DELETE CASCADE,
 
     appointment_date DATE,
     appointment_time TIME,
@@ -39,51 +39,51 @@ CREATE TABLE child_psych_waiting_list_card_appointment (
 );
 
 CREATE TRIGGER trigger_child_psych_waiting_list_card_appointment_updated_at
-    BEFORE UPDATE ON child_psych_waiting_list_card_appointment
+    BEFORE UPDATE ON child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_psychiatry_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_child_psych_waiting_list_card_appointment_card_id
-    ON child_psych_waiting_list_card_appointment(child_psych_waiting_list_card_id);
+    ON child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment(child_psych_waiting_list_card_id);
 
 CREATE INDEX index_child_psych_waiting_list_card_appointment_date
-    ON child_psych_waiting_list_card_appointment(appointment_date);
+    ON child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment(appointment_date);
 
-COMMENT ON TABLE child_psych_waiting_list_card_appointment IS
+COMMENT ON TABLE child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment IS
     'Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.id IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.created_at IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.updated_at IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.deleted_at IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.child_psych_waiting_list_card_id IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.child_psych_waiting_list_card_id IS
     'Foreign key to the parent waiting list card.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.appointment_date IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.appointment_date IS
     'Date of the appointment.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.appointment_time IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.appointment_time IS
     'Start time of the appointment.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.duration_minutes IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.duration_minutes IS
     'Planned duration in minutes.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.appointment_type IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.appointment_type IS
     'Appointment type: first-outpatient, follow-up, pre-assessment, diagnostic, treatment, procedure, admission, telephone, video, other.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.site_name IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.site_name IS
     'Name of the site (hospital, clinic, or community location).';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.site_address IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.site_address IS
     'Postal address of the site, suitable for printing on a patient letter.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.clinic_name IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.clinic_name IS
     'Name of the clinic within the site.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.room IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.room IS
     'Room or location reference within the clinic.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.clinician_name IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.clinician_name IS
     'Name of the attending clinician, if known.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.clinician_team IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.clinician_team IS
     'Name of the clinical team, if assignment is by team rather than individual.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.status IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.status IS
     'Appointment status: scheduled, confirmed, rebooked, cancelled, attended, did-not-attend.';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.travel_notes IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.travel_notes IS
     'Free-text travel information for the patient (transport, parking).';
-COMMENT ON COLUMN child_psych_waiting_list_card_appointment.access_notes IS
+COMMENT ON COLUMN child_psychiatry_waiting_list_card.child_psych_waiting_list_card_appointment.access_notes IS
     'Free-text accessibility notes (step-free access, BSL interpreter booked, etc.).';

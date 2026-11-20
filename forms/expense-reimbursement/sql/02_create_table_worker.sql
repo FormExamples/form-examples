@@ -1,6 +1,6 @@
 -- Worker (e.g. a clinician) who paid a work-related expense from their own money and claims repayment.
 
-CREATE TABLE worker (
+CREATE TABLE expense_reimbursement.worker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,38 +19,38 @@ CREATE TABLE worker (
 );
 
 CREATE TRIGGER trigger_worker_updated_at
-    BEFORE UPDATE ON worker
+    BEFORE UPDATE ON expense_reimbursement.worker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION expense_reimbursement.set_updated_at();
 
-COMMENT ON TABLE worker IS
+COMMENT ON TABLE expense_reimbursement.worker IS
     'Worker (e.g. a clinician) who paid a work-related expense personally and claims to be repaid.';
 
-COMMENT ON COLUMN worker.id IS
+COMMENT ON COLUMN expense_reimbursement.worker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN worker.created_at IS
+COMMENT ON COLUMN expense_reimbursement.worker.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN worker.updated_at IS
+COMMENT ON COLUMN expense_reimbursement.worker.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN worker.deleted_at IS
+COMMENT ON COLUMN expense_reimbursement.worker.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN worker.name IS
+COMMENT ON COLUMN expense_reimbursement.worker.name IS
     'Name.';
-COMMENT ON COLUMN worker.email IS
+COMMENT ON COLUMN expense_reimbursement.worker.email IS
     'Email.';
-COMMENT ON COLUMN worker.phone IS
+COMMENT ON COLUMN expense_reimbursement.worker.phone IS
     'Phone.';
-COMMENT ON COLUMN worker.postal_address_as_full_text IS
+COMMENT ON COLUMN expense_reimbursement.worker.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN worker.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN expense_reimbursement.worker.country_as_iso_3166_1_alpha_2 IS
     'Country as iso 3166 1 alpha 2.';
-COMMENT ON COLUMN worker.postcode IS
+COMMENT ON COLUMN expense_reimbursement.worker.postcode IS
     'Postcode.';
-COMMENT ON COLUMN worker.employee_reference IS
+COMMENT ON COLUMN expense_reimbursement.worker.employee_reference IS
     'Employee reference.';
-COMMENT ON COLUMN worker.job_title IS
+COMMENT ON COLUMN expense_reimbursement.worker.job_title IS
     'Job title.';
-COMMENT ON COLUMN worker.department IS
+COMMENT ON COLUMN expense_reimbursement.worker.department IS
     'Department.';
-COMMENT ON COLUMN worker.cost_centre IS
+COMMENT ON COLUMN expense_reimbursement.worker.cost_centre IS
     'Cost centre.';

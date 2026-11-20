@@ -1,7 +1,7 @@
 -- Applicant who gives notice of marriage or civil partnership and submits
 -- the application, with contact details.
 
-CREATE TABLE applicant (
+CREATE TABLE united_kingdom_marriage_certificate_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -16,29 +16,29 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_kingdom_marriage_certificate_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_marriage_certificate_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_kingdom_marriage_certificate_application.applicant IS
     'Applicant who gives notice of marriage or civil partnership and submits the United Kingdom marriage certificate application, with contact details.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.name IS
     'Full name of the applicant who submits the application.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.email IS
     'Email address of the applicant.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.phone IS
     'Telephone number of the applicant.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.postal_address_as_full_text IS
     'Postal address of the applicant as full text; a UK contact address if the home address is overseas.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant.postcode IS
     'Postcode of the applicant.';

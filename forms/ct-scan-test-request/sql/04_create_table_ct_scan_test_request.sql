@@ -1,13 +1,13 @@
 -- CT (computed tomography) scan request (referral) — the source-of-truth record.
 
-CREATE TABLE ct_scan_test_request (
+CREATE TABLE ct_scan_test_request.ct_scan_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES ct_scan_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES ct_scan_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'scheduled', 'rejected', '')),
@@ -51,72 +51,72 @@ CREATE TABLE ct_scan_test_request (
 );
 
 CREATE INDEX index_ct_scan_test_request_patient_id
-    ON ct_scan_test_request(patient_id);
+    ON ct_scan_test_request.ct_scan_test_request(patient_id);
 CREATE INDEX index_ct_scan_test_request_clinician_id
-    ON ct_scan_test_request(clinician_id);
+    ON ct_scan_test_request.ct_scan_test_request(clinician_id);
 
 CREATE TRIGGER trigger_ct_scan_test_request_updated_at
-    BEFORE UPDATE ON ct_scan_test_request
+    BEFORE UPDATE ON ct_scan_test_request.ct_scan_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ct_scan_test_request.set_updated_at();
 
-COMMENT ON TABLE ct_scan_test_request IS
+COMMENT ON TABLE ct_scan_test_request.ct_scan_test_request IS
     'CT (computed tomography) scan request (referral). Captures the requested body region, the clinical indication and question, relevant history, contrast and radiation-safety factors (eGFR, allergy, metformin, pregnancy), the IR(ME)R radiation justification, and triage urgency.';
-COMMENT ON COLUMN ct_scan_test_request.id IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ct_scan_test_request.created_at IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ct_scan_test_request.updated_at IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ct_scan_test_request.deleted_at IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ct_scan_test_request.patient_id IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN ct_scan_test_request.clinician_id IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN ct_scan_test_request.status IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, scheduled, rejected.';
-COMMENT ON COLUMN ct_scan_test_request.site_name IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN ct_scan_test_request.setting IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN ct_scan_test_request.referral_date IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN ct_scan_test_request.requested_by_date IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.requested_by_date IS
     'Date by which the scan is requested to be performed.';
-COMMENT ON COLUMN ct_scan_test_request.body_region IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.body_region IS
     'Requested CT body region: head, neck, chest, abdomen, pelvis, abdomen-pelvis, spine, ct-angiogram, ct-colonography, whole-body, extremity, other.';
-COMMENT ON COLUMN ct_scan_test_request.primary_indication IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.primary_indication IS
     'Primary clinical indication, used for ACR appropriateness scoring.';
-COMMENT ON COLUMN ct_scan_test_request.clinical_question IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.clinical_question IS
     'Specific clinical question the scan should answer (highest-value field).';
-COMMENT ON COLUMN ct_scan_test_request.relevant_history IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.relevant_history IS
     'Relevant medical, surgical, and oncological history.';
-COMMENT ON COLUMN ct_scan_test_request.contrast_required IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.contrast_required IS
     'Contrast requirement: none, iv-iodinated, oral, both, unknown.';
-COMMENT ON COLUMN ct_scan_test_request.pregnancy_status IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.pregnancy_status IS
     'Pregnancy status for radiation justification: not-pregnant, pregnant, possible, unknown, not-applicable.';
-COMMENT ON COLUMN ct_scan_test_request.egfr IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.egfr IS
     'Estimated glomerular filtration rate (mL/min/1.73m2), for contrast nephropathy risk.';
-COMMENT ON COLUMN ct_scan_test_request.previous_contrast_reaction IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.previous_contrast_reaction IS
     'Severity of any previous iodinated contrast reaction: none, mild, moderate, severe, unknown.';
-COMMENT ON COLUMN ct_scan_test_request.iodine_contrast_allergy IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.iodine_contrast_allergy IS
     'Whether the patient has a known iodinated contrast allergy.';
-COMMENT ON COLUMN ct_scan_test_request.metformin IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.metformin IS
     'Whether the patient is taking metformin (contrast / renal interaction).';
-COMMENT ON COLUMN ct_scan_test_request.diabetes IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.diabetes IS
     'Whether the patient has diabetes.';
-COMMENT ON COLUMN ct_scan_test_request.renal_impairment IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.renal_impairment IS
     'Whether the patient has known renal impairment.';
-COMMENT ON COLUMN ct_scan_test_request.weight_kg IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.weight_kg IS
     'Patient weight in kilograms, affecting dose and scanner table limits.';
-COMMENT ON COLUMN ct_scan_test_request.relevant_previous_imaging IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.relevant_previous_imaging IS
     'Details of relevant previous imaging being followed up or compared.';
-COMMENT ON COLUMN ct_scan_test_request.urgency IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.urgency IS
     'Requested triage urgency: routine, urgent, emergency.';
-COMMENT ON COLUMN ct_scan_test_request.supervising_consultant IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN ct_scan_test_request.ir_me_r_justification IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.ir_me_r_justification IS
     'IR(ME)R radiation justification: why the benefit of the exposure outweighs the radiation detriment.';
-COMMENT ON COLUMN ct_scan_test_request.notes IS
+COMMENT ON COLUMN ct_scan_test_request.ct_scan_test_request.notes IS
     'Free-text additional notes.';

@@ -2,7 +2,7 @@
 -- service, pharmacy, etc.) responsible for the fit note. DWP policy 3.7
 -- requires the practice address to appear on the form.
 
-CREATE TABLE medical_practice (
+CREATE TABLE united_kingdom_statement_of_fitness_for_work.medical_practice (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -29,39 +29,39 @@ CREATE TABLE medical_practice (
 );
 
 CREATE TRIGGER trigger_medical_practice_updated_at
-    BEFORE UPDATE ON medical_practice
+    BEFORE UPDATE ON united_kingdom_statement_of_fitness_for_work.medical_practice
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_statement_of_fitness_for_work.set_updated_at();
 
-COMMENT ON TABLE medical_practice IS
+COMMENT ON TABLE united_kingdom_statement_of_fitness_for_work.medical_practice IS
     'The medical practice that owns the fit note (mandatory per DWP policy 3.7).';
-COMMENT ON COLUMN medical_practice.id IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_practice.created_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN medical_practice.updated_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medical_practice.deleted_at IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_practice.name IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.name IS
     'Practice or organisation name as printed on the fit note.';
-COMMENT ON COLUMN medical_practice.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.postal_address_as_full_text IS
     'Practice postal address.';
-COMMENT ON COLUMN medical_practice.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 (typically GB).';
-COMMENT ON COLUMN medical_practice.postcode IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.postcode IS
     'Practice postcode.';
-COMMENT ON COLUMN medical_practice.phone IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.phone IS
     'Practice phone number.';
-COMMENT ON COLUMN medical_practice.email IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.email IS
     'Practice email address.';
-COMMENT ON COLUMN medical_practice.ods_code IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.ods_code IS
     'NHS Organisation Data Service (ODS) code identifying the practice.';
-COMMENT ON COLUMN medical_practice.setting IS
+COMMENT ON COLUMN united_kingdom_statement_of_fitness_for_work.medical_practice.setting IS
     'Care setting: primary_care, secondary_care_inpatient, secondary_care_discharge, occupational_health, pharmacy, community_clinic, or private_practice.';
 
 CREATE INDEX medical_practice_index_gto
-    ON medical_practice
+    ON united_kingdom_statement_of_fitness_for_work.medical_practice
     USING GIN ((
         name
     ) gin_trgm_ops);

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS wells_score_for_pulmonary_embolism;
+
+COMMENT ON SCHEMA wells_score_for_pulmonary_embolism IS
+    'Namespace for the Wells Score for Pulmonary Embolism form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION wells_score_for_pulmonary_embolism.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE wells_score_for_pulmonary_embolism.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.patient IS
     'Patient demographic information used by the Wells PE assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON wells_score_for_pulmonary_embolism.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse, physician-associate).
 
-CREATE TABLE clinician (
+CREATE TABLE wells_score_for_pulmonary_embolism.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.role IS
     'Primary clinical role: doctor, nurse, physician-associate, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON wells_score_for_pulmonary_embolism.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- +1). The computed score, bands, fired rules, and flags live in dedicated
 -- child tables.
 
-CREATE TABLE wells_score_for_pulmonary_embolism (
+CREATE TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES wells_score_for_pulmonary_embolism.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES wells_score_for_pulmonary_embolism.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -238,56 +255,56 @@ CREATE TABLE wells_score_for_pulmonary_embolism (
 );
 
 CREATE INDEX wells_score_for_pulmonary_embolism_patient_id_idx
-    ON wells_score_for_pulmonary_embolism (patient_id);
+    ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism (patient_id);
 CREATE INDEX wells_score_for_pulmonary_embolism_clinician_id_idx
-    ON wells_score_for_pulmonary_embolism (clinician_id);
+    ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism (clinician_id);
 
 CREATE TRIGGER trigger_wells_score_for_pulmonary_embolism_updated_at
-    BEFORE UPDATE ON wells_score_for_pulmonary_embolism
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_pulmonary_embolism IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism IS
     'Main Wells PE assessment record: identification, context, and the seven weighted clinical criterion inputs.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinician_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.status IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.patient_identifier IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.assessed_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.care_setting IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.care_setting IS
     'Care setting: emergency-department, acute-medical-unit, ambulatory, or other.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.age_band IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.age_band IS
     'Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.haemodynamic_status IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.haemodynamic_status IS
     'Haemodynamic status: stable or unstable (unstable suggests massive PE).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinical_signs_of_dvt IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.clinical_signs_of_dvt IS
     'Criterion 1 (+3): clinical signs and symptoms of DVT.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.pe_most_likely IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.pe_most_likely IS
     'Criterion 2 (+3): PE is the number-one diagnosis, or equally likely.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.heart_rate_over_100 IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.heart_rate_over_100 IS
     'Criterion 3 (+1.5): heart rate greater than 100 beats per minute.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.immobilisation_or_surgery IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.immobilisation_or_surgery IS
     'Criterion 4 (+1.5): immobilisation for at least 3 days, or surgery in the previous 4 weeks.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.previous_dvt_pe IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.previous_dvt_pe IS
     'Criterion 5 (+1.5): previous, objectively diagnosed DVT or PE.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.haemoptysis IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.haemoptysis IS
     'Criterion 6 (+1): haemoptysis.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.malignancy IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.malignancy IS
     'Criterion 7 (+1): malignancy on treatment, treated within 6 months, or palliative.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinical_notes IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';
 
 -- ========================================================================
@@ -303,14 +320,14 @@ COMMENT ON COLUMN wells_score_for_pulmonary_embolism.clinical_notes IS
 -- the informational three-level band (low/moderate/high), and the recommended
 -- diagnostic pathway. One-to-one with the parent assessment.
 
-CREATE TABLE wells_score_for_pulmonary_embolism_grade (
+CREATE TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_pulmonary_embolism_id UUID NOT NULL UNIQUE
-        REFERENCES wells_score_for_pulmonary_embolism(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism(id) ON DELETE CASCADE,
 
     wells_score NUMERIC(4,1),
     two_level_band VARCHAR(10) NOT NULL DEFAULT ''
@@ -322,31 +339,31 @@ CREATE TABLE wells_score_for_pulmonary_embolism_grade (
 );
 
 CREATE TRIGGER trigger_wells_score_for_pulmonary_embolism_grade_updated_at
-    BEFORE UPDATE ON wells_score_for_pulmonary_embolism_grade
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_pulmonary_embolism_grade IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade IS
     'Computed Wells PE grading result: total score, two-level band, three-level band, and recommended diagnostic pathway. One-to-one with the parent assessment.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.wells_score_for_pulmonary_embolism_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.wells_score_for_pulmonary_embolism_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.wells_score IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.wells_score IS
     'Total Wells score computed by the engine, range 0..12.5 (weights include 1.5-point items).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.two_level_band IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.two_level_band IS
     'Two-level band: likely (score > 4) or unlikely (score <= 4).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.three_level_band IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.three_level_band IS
     'Informational three-level band: low (< 2), moderate (2-6), or high (> 6).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.recommended_pathway IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.recommended_pathway IS
     'Recommended diagnostic pathway: CTPA when PE likely, otherwise D-dimer.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.graded_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -362,14 +379,14 @@ COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade.graded_at IS
 -- instrument that produced it, the points it contributed, the band it
 -- informed, and a human-readable description.
 
-CREATE TABLE wells_score_for_pulmonary_embolism_grade_rule (
+CREATE TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_pulmonary_embolism_grade_id UUID NOT NULL
-        REFERENCES wells_score_for_pulmonary_embolism_grade(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -382,36 +399,36 @@ CREATE TABLE wells_score_for_pulmonary_embolism_grade_rule (
 );
 
 CREATE INDEX wells_score_for_pulmonary_embolism_grade_rule_grade_id_idx
-    ON wells_score_for_pulmonary_embolism_grade_rule (wells_score_for_pulmonary_embolism_grade_id);
+    ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule (wells_score_for_pulmonary_embolism_grade_id);
 
 CREATE TRIGGER trigger_wells_score_for_pulmonary_embolism_grade_rule_updated_at
-    BEFORE UPDATE ON wells_score_for_pulmonary_embolism_grade_rule
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_pulmonary_embolism_grade_rule IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule IS
     'Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.wells_score_for_pulmonary_embolism_grade_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.wells_score_for_pulmonary_embolism_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.rule_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-DVT-SIGNS-01).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.instrument IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: criterion, two-level, three-level, or composite.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.points IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.points IS
     'Points contributed by this rule (+3, +1.5, or +1 for a criterion).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.band IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.band IS
     'Stratification band informed by this rule: likely, unlikely, low, moderate, or high.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.category IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.category IS
     'Subject category (e.g. clinical-sign, gestalt, tachycardia, immobilisation, malignancy).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.description IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -425,14 +442,14 @@ COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_rule.description IS
 -- Clinically significant flags that fire independently of the total score,
 -- with priority and a suggested action for the assessing team.
 
-CREATE TABLE wells_score_for_pulmonary_embolism_grade_flag (
+CREATE TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_pulmonary_embolism_grade_id UUID NOT NULL
-        REFERENCES wells_score_for_pulmonary_embolism_grade(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -451,34 +468,34 @@ CREATE TABLE wells_score_for_pulmonary_embolism_grade_flag (
 );
 
 CREATE INDEX wells_score_for_pulmonary_embolism_grade_flag_grade_id_idx
-    ON wells_score_for_pulmonary_embolism_grade_flag (wells_score_for_pulmonary_embolism_grade_id);
+    ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag (wells_score_for_pulmonary_embolism_grade_id);
 
 CREATE TRIGGER trigger_wells_score_for_pulmonary_embolism_grade_flag_updated_at
-    BEFORE UPDATE ON wells_score_for_pulmonary_embolism_grade_flag
+    BEFORE UPDATE ON wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_pulmonary_embolism.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_pulmonary_embolism_grade_flag IS
+COMMENT ON TABLE wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag IS
     'Clinically significant flags that fire independently of the total score, with priority and a suggested action for the assessing team.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.created_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.updated_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.deleted_at IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.wells_score_for_pulmonary_embolism_grade_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.wells_score_for_pulmonary_embolism_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.flag_id IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-PE-LIKELY-CTPA-001).';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.category IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.category IS
     'Flag category: pe-likely-ctpa, pe-unlikely-d-dimer, haemodynamic-instability, incomplete-assessment, or other.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.priority IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.description IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN wells_score_for_pulmonary_embolism_grade_flag.suggested_action IS
+COMMENT ON COLUMN wells_score_for_pulmonary_embolism.wells_score_for_pulmonary_embolism_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "arrange immediate CTPA", "arrange a D-dimer and consider the PERC rule").';
 
 -- ========================================================================

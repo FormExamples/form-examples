@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE hematology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with assessment
-    assessment_id               UUID NOT NULL UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
+    assessment_id               UUID NOT NULL UNIQUE REFERENCES hematology_assessment.assessment(id) ON DELETE CASCADE,
     -- Abnormality classification
     abnormality_level           TEXT NOT NULL
                                 CHECK (abnormality_level IN ('draft', 'normal', 'mildAbnormality', 'moderateAbnormality', 'severeAbnormality', 'critical')),
@@ -20,28 +20,28 @@ CREATE TABLE grade (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON hematology_assessment.grade
+    FOR EACH ROW EXECUTE FUNCTION hematology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE hematology_assessment.grade IS
     '1:1 with assessment. Stores computed hematology abnormality level, score, and optional clinician override.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN hematology_assessment.grade.assessment_id IS
     'FK to assessment (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN grade.abnormality_level IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_level IS
     'Computed abnormality level: draft (insufficient data), normal (0%), mildAbnormality (1-20%), moderateAbnormality (21-50%), severeAbnormality (51-75%), critical (76-100%).';
-COMMENT ON COLUMN grade.abnormality_score IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_score IS
     'Composite abnormality score as percentage (0.0-100.0).';
-COMMENT ON COLUMN grade.abnormality_level_override IS
+COMMENT ON COLUMN hematology_assessment.grade.abnormality_level_override IS
     'Clinician-assigned abnormality level override. NULL means no override.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN hematology_assessment.grade.override_reason IS
     'Free-text justification for overriding the computed level. Required when override is set.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN hematology_assessment.grade.graded_at IS
     'Timestamp when the grading engine produced this result.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN hematology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN hematology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN hematology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN hematology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

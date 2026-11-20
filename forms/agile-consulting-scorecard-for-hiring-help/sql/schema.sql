@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_organization.sql
 --   - 03_create_table_respondent.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS agile_consulting_scorecard_for_hiring_help;
+
+COMMENT ON SCHEMA agile_consulting_scorecard_for_hiring_help IS
+    'Namespace for the Agile consulting scorecard for hiring help form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -61,7 +78,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- assessment: the subject of the scorecard is the *organization*, evaluated
 -- from the perspective of one or more respondents.
 
-CREATE TABLE organization (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.organization (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -87,46 +104,46 @@ CREATE TABLE organization (
 );
 
 CREATE TRIGGER trigger_organization_updated_at
-    BEFORE UPDATE ON organization
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.organization
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE organization IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.organization IS
     'Organization being assessed for agile-consulting readiness. The subject of the scorecard.';
-COMMENT ON COLUMN organization.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN organization.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN organization.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN organization.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN organization.name IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.name IS
     'Trading name of the organization.';
-COMMENT ON COLUMN organization.legal_name IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.legal_name IS
     'Registered legal name (may differ from trading name).';
-COMMENT ON COLUMN organization.sector IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.sector IS
     'Sector: healthcare, pharmaceuticals, medtech, public-sector, finance, insurance, retail, manufacturing, etc.';
-COMMENT ON COLUMN organization.size_band IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.size_band IS
     'Size band: micro (<10), small (10-49), medium (50-249), large (250-999), enterprise (1000+).';
-COMMENT ON COLUMN organization.headcount IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.headcount IS
     'Approximate number of staff (full-time-equivalent).';
-COMMENT ON COLUMN organization.country IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.country IS
     'ISO 3166-1 alpha-2 country code (e.g. GB, US, DE).';
-COMMENT ON COLUMN organization.region IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.region IS
     'Region, state, or sub-national area within the country.';
-COMMENT ON COLUMN organization.website IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.website IS
     'Public website URL.';
-COMMENT ON COLUMN organization.notes IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization.notes IS
     'Free-text notes about the organization.';
 
 CREATE INDEX organization_index_name_trgm
-    ON organization
+    ON agile_consulting_scorecard_for_hiring_help.organization
     USING GIN (name gin_trgm_ops);
 CREATE INDEX organization_index_sector
-    ON organization(sector);
+    ON agile_consulting_scorecard_for_hiring_help.organization(sector);
 CREATE INDEX organization_index_size_band
-    ON organization(size_band);
+    ON agile_consulting_scorecard_for_hiring_help.organization(size_band);
 
 -- ========================================================================
 -- END 02_create_table_organization.sql
@@ -140,13 +157,13 @@ CREATE INDEX organization_index_size_band
 -- organization. Typically a buyer-side leader: CXO, VP, programme director,
 -- head of product, head of engineering, or transformation lead.
 
-CREATE TABLE respondent (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.respondent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    organization_id UUID NOT NULL REFERENCES organization(id) ON DELETE CASCADE,
+    organization_id UUID NOT NULL REFERENCES agile_consulting_scorecard_for_hiring_help.organization(id) ON DELETE CASCADE,
 
     name VARCHAR(255) NOT NULL DEFAULT '',
     email TEXT NOT NULL DEFAULT '',
@@ -170,43 +187,43 @@ CREATE TABLE respondent (
 );
 
 CREATE TRIGGER trigger_respondent_updated_at
-    BEFORE UPDATE ON respondent
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.respondent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE respondent IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.respondent IS
     'Person who fills out the agile-consulting scorecard on behalf of an organization. Typically a buyer-side leader.';
-COMMENT ON COLUMN respondent.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respondent.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN respondent.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN respondent.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN respondent.organization_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.organization_id IS
     'Foreign key to the organization this respondent represents.';
-COMMENT ON COLUMN respondent.name IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.name IS
     'Respondent full name.';
-COMMENT ON COLUMN respondent.email IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.email IS
     'Respondent email address for follow-up.';
-COMMENT ON COLUMN respondent.phone IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.phone IS
     'Respondent phone number for follow-up.';
-COMMENT ON COLUMN respondent.role IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.role IS
     'Job role: cxo, vp, director, head-of-product, head-of-engineering, transformation-lead, etc.';
-COMMENT ON COLUMN respondent.department IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.department IS
     'Department or function within the organization.';
-COMMENT ON COLUMN respondent.seniority IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.seniority IS
     'Seniority band: board, executive, senior-leader, middle-manager, team-lead, individual-contributor.';
-COMMENT ON COLUMN respondent.timezone IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.timezone IS
     'IANA timezone identifier (e.g. Europe/London).';
-COMMENT ON COLUMN respondent.preferred_contact IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent.preferred_contact IS
     'Preferred follow-up channel: email, phone, chat, or in-person.';
 
 CREATE INDEX respondent_index_organization_id
-    ON respondent(organization_id);
+    ON agile_consulting_scorecard_for_hiring_help.respondent(organization_id);
 CREATE INDEX respondent_index_name_trgm
-    ON respondent
+    ON agile_consulting_scorecard_for_hiring_help.respondent
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -223,14 +240,14 @@ CREATE INDEX respondent_index_name_trgm
 -- per-item evidence note. Computed scores live in the
 -- agile_consulting_scorecard_for_hiring_help_grade child table.
 
-CREATE TABLE agile_consulting_scorecard_for_hiring_help (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    organization_id UUID NOT NULL REFERENCES organization(id) ON DELETE CASCADE,
-    respondent_id UUID NOT NULL REFERENCES respondent(id) ON DELETE CASCADE,
+    organization_id UUID NOT NULL REFERENCES agile_consulting_scorecard_for_hiring_help.organization(id) ON DELETE CASCADE,
+    respondent_id UUID NOT NULL REFERENCES agile_consulting_scorecard_for_hiring_help.respondent(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'in-progress', 'submitted', 'finalized', 'cancelled')),
@@ -304,105 +321,105 @@ CREATE TABLE agile_consulting_scorecard_for_hiring_help (
 );
 
 CREATE TRIGGER trigger_agile_consulting_scorecard_for_hiring_help_updated_at
-    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help IS
     'A single agile-consulting readiness scorecard for an organization, captured via a 6-step single-page wizard. Holds organization/respondent FKs, the 16 yes/no items (4 manifesto + 12 principles), and per-item evidence text. Computed scores live in the *_grade child table.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.organization_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.organization_id IS
     'Foreign key to the organization being assessed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.respondent_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.respondent_id IS
     'Foreign key to the respondent who filled out the scorecard.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.status IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.status IS
     'Lifecycle status: draft, in-progress, submitted, finalized, cancelled.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.assessment_date IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.assessment_date IS
     'Date the scorecard was completed (defaults to today).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.submitted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.submitted_at IS
     'Timestamp the respondent submitted the scorecard.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.finalized_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.finalized_at IS
     'Timestamp the scorecard was finalized (signed off).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m1_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m1_done IS
     'Manifesto 1 (Individuals and interactions): every leader is in conversation with customers >=1 hour/week, with weekly results radiated to stakeholders. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m1_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m1_evidence IS
     'Manifesto 1: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m2_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m2_done IS
     'Manifesto 2 (Working software): the team has launched a brand-new "hello world" program to production and discussed the experience. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m2_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m2_evidence IS
     'Manifesto 2: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m3_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m3_done IS
     'Manifesto 3 (Customer collaboration): the organization has bought copies of the customer''s favourite book and shared with the team (org spend, not personal). NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m3_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m3_evidence IS
     'Manifesto 3: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m4_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m4_done IS
     'Manifesto 4 (Responding to change): every senior leader (BoD/CXO/VP/Dir) has read one agile change-management book and shared three takeaways. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.m4_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.m4_evidence IS
     'Manifesto 4: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p1_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p1_done IS
     'Principle 1 (Customer satisfaction): every product lead measures customer Net Promoter Score (NPS). NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p1_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p1_evidence IS
     'Principle 1: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p2_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p2_done IS
     'Principle 2 (Welcome change): the "hello world" program has been internationalized to >=1 additional language using the user locale. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p2_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p2_evidence IS
     'Principle 2: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p3_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p3_done IS
     'Principle 3 (Deliver frequently): the internationalized "hello world" version has been launched to production and verified by a native speaker. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p3_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p3_evidence IS
     'Principle 3: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p4_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p4_done IS
     'Principle 4 (Business and developers together): commitment is in place from every product/project/programme/practice lead. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p4_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p4_evidence IS
     'Principle 4: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p5_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p5_done IS
     'Principle 5 (Motivated individuals): a 3-amigos team (business+dev+test) has shipped a real new MVP within 30 days and on budget. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p5_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p5_evidence IS
     'Principle 5: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p6_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p6_done IS
     'Principle 6 (Face-to-face): every product owner has committed to >=50% face-to-face time (or weekly-video equivalent for remote teams). NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p6_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p6_evidence IS
     'Principle 6: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p7_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p7_done IS
     'Principle 7 (Working software is primary measure): a new "fizz buzz" program has been created and shipped to production. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p7_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p7_evidence IS
     'Principle 7: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p8_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p8_done IS
     'Principle 8 (Sustainable pace): all staff have a sustaining budget for >=1 year secured. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p8_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p8_evidence IS
     'Principle 8: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p9_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p9_done IS
     'Principle 9 (Technical excellence): quality-attribute metrics are wired into pre-commit hooks and CI. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p9_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p9_evidence IS
     'Principle 9: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p10_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p10_done IS
     'Principle 10 (Simplicity): every product team has >=2 people with process-improvement skills (Lean/Six Sigma/VSM/TPS/TPC). NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p10_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p10_evidence IS
     'Principle 10: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p11_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p11_done IS
     'Principle 11 (Self-organizing teams): a 5-point Likert "our team is self-organizing" averages "Agree" or better. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p11_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p11_evidence IS
     'Principle 11: free-text evidence supporting the answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p12_done IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p12_done IS
     'Principle 12 (Reflection): every leader has shared their previous 2 retrospectives with all stakeholders. NULL = unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.p12_evidence IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help.p12_evidence IS
     'Principle 12: free-text evidence supporting the answer.';
 
 CREATE INDEX agile_consulting_scorecard_index_organization_id
-    ON agile_consulting_scorecard_for_hiring_help(organization_id);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help(organization_id);
 CREATE INDEX agile_consulting_scorecard_index_respondent_id
-    ON agile_consulting_scorecard_for_hiring_help(respondent_id);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help(respondent_id);
 CREATE INDEX agile_consulting_scorecard_index_status
-    ON agile_consulting_scorecard_for_hiring_help(status);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help(status);
 CREATE INDEX agile_consulting_scorecard_index_assessment_date
-    ON agile_consulting_scorecard_for_hiring_help(assessment_date);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help(assessment_date);
 
 -- ========================================================================
 -- END 04_create_table_agile_consulting_scorecard_for_hiring_help.sql
@@ -416,14 +433,14 @@ CREATE INDEX agile_consulting_scorecard_index_assessment_date
 -- Stores the engine-computed total and band, the manifesto and principles
 -- subtotals, and the respondent-final band with an optional override reason.
 
-CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     agile_consulting_scorecard_id UUID NOT NULL UNIQUE
-        REFERENCES agile_consulting_scorecard_for_hiring_help(id) ON DELETE CASCADE,
+        REFERENCES agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help(id) ON DELETE CASCADE,
 
     score_total INTEGER
         CHECK (score_total IS NULL OR score_total BETWEEN 0 AND 16),
@@ -452,45 +469,45 @@ CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade (
 );
 
 CREATE TRIGGER trigger_agile_consulting_scorecard_for_hiring_help_grade_upd
-    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help_grade
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help_grade IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade IS
     'Computed and signed-off grading result for an agile-consulting scorecard. One-to-one with agile_consulting_scorecard_for_hiring_help. Stores total score (0-16), manifesto subtotal (0-4), principles subtotal (0-12), the engine-computed and respondent-final readiness bands (low/borderline/medium/high), and a recommendation.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.agile_consulting_scorecard_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.agile_consulting_scorecard_id IS
     'Foreign key to the parent agile_consulting_scorecard_for_hiring_help row (unique, 1:1).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.score_total IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.score_total IS
     'Total points across all 16 items, 0 to 16. One point per "yes" answer.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.manifesto_subtotal IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.manifesto_subtotal IS
     'Subtotal across the four Manifesto items (m1..m4), 0 to 4.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.principles_subtotal IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.principles_subtotal IS
     'Subtotal across the twelve Principles items (p1..p12), 0 to 12.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.computed_band IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.computed_band IS
     'Readiness band computed by the engine: low (0-4), borderline (5), medium (6-10), high (11-16).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.final_band IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.final_band IS
     'Readiness band signed off by the respondent or sponsor (may equal or differ from computed).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.override_reason IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.override_reason IS
     'Reason the final band differs from the computed band (mandatory when they differ).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.recommendation IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.recommendation IS
     'Procurement recommendation: do-not-hire-yet, do-homework-first, trial-engagement, hire-with-focus-areas, reassess-in-3-months.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.recommended_focus_areas IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.recommended_focus_areas IS
     'Free-text list of focus areas the consultant should prioritize, derived from any flags that fired.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.review_notes IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.review_notes IS
     'Free-text reviewer summary notes.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.signed_by IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.signed_by IS
     'Name or identifier of the person who signed off the grade.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.signed_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.signed_at IS
     'Timestamp of the electronic signature.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.graded_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -505,14 +522,14 @@ COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade.graded_at IS
 -- One row per item: records whether the rule scored a point, the manifesto
 -- vs principles instrument, and a human-readable description.
 
-CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade_rule (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     agile_consulting_scorecard_grade_id UUID NOT NULL
-        REFERENCES agile_consulting_scorecard_for_hiring_help_grade(id) ON DELETE CASCADE,
+        REFERENCES agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(50) NOT NULL DEFAULT '',
     instrument VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (instrument IN (
@@ -529,38 +546,38 @@ CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade_rule (
 );
 
 CREATE INDEX idx_agile_consulting_scorecard_grade_rule_grade_id
-    ON agile_consulting_scorecard_for_hiring_help_grade_rule(agile_consulting_scorecard_grade_id);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule(agile_consulting_scorecard_grade_id);
 
 CREATE TRIGGER trigger_agile_consulting_scorecard_for_hiring_help_grule_upd
-    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help_grade_rule
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help_grade_rule IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule IS
     'Audit trail of every scoring rule that fired for an agile-consulting scorecard. Typically 16 rows per grade (one per item) plus optional composite rows for the band determination.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.agile_consulting_scorecard_grade_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.agile_consulting_scorecard_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.rule_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MANIFESTO-1, R-PRINCIPLES-7, R-COMPOSITE-BAND).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.instrument IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.instrument IS
     'Scoring instrument: manifesto (items 1-4), principles (items 5-16), or composite (band determination).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.item_number IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.item_number IS
     'Item number 1-16; NULL for composite rules.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.grade IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.grade IS
     'Answer recorded for this item: yes, no, or unanswered.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.points_awarded IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.points_awarded IS
     'Points awarded by this rule: 0 or 1.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.category IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.category IS
     'Category for grouping rules in the report (e.g. customer-contact, working-software, leadership-buyin).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.description IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_rule.description IS
     'Human-readable description of the rule and why it fired.';
 
 -- ========================================================================
@@ -575,14 +592,14 @@ COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_rule.descript
 -- a specific gap in the organization's agile readiness that would block a
 -- successful consulting engagement until addressed.
 
-CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade_flag (
+CREATE TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     agile_consulting_scorecard_grade_id UUID NOT NULL
-        REFERENCES agile_consulting_scorecard_for_hiring_help_grade(id) ON DELETE CASCADE,
+        REFERENCES agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL DEFAULT '',
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -602,34 +619,34 @@ CREATE TABLE agile_consulting_scorecard_for_hiring_help_grade_flag (
 );
 
 CREATE INDEX idx_agile_consulting_scorecard_grade_flag_grade_id
-    ON agile_consulting_scorecard_for_hiring_help_grade_flag(agile_consulting_scorecard_grade_id);
+    ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag(agile_consulting_scorecard_grade_id);
 
 CREATE TRIGGER trigger_agile_consulting_scorecard_for_hiring_help_gflag_upd
-    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help_grade_flag
+    BEFORE UPDATE ON agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_consulting_scorecard_for_hiring_help.set_updated_at();
 
-COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help_grade_flag IS
+COMMENT ON TABLE agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag IS
     'Readiness flags that fire independently of the band: each identifies a specific gap that would block a successful consulting engagement until addressed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.created_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.updated_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.deleted_at IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.agile_consulting_scorecard_grade_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.agile_consulting_scorecard_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.flag_id IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NO-SENIOR-LEADERSHIP-BUYIN-001).';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.category IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.category IS
     'Flag category: no-senior-leadership-buyin, no-customer-contact, no-working-software, no-sustainable-budget, no-self-organization, no-reflection-culture.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.priority IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.priority IS
     'Flag priority: low, medium, or high.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.description IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help_grade_flag.suggested_action IS
+COMMENT ON COLUMN agile_consulting_scorecard_for_hiring_help.agile_consulting_scorecard_for_hiring_help_grade_flag.suggested_action IS
     'Suggested action for the buyer-side reviewer to address the flagged gap before hiring.';
 
 -- ========================================================================

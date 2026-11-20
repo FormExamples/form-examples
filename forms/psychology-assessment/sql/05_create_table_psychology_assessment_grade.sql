@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE psychology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES psychology_assessment.assessment(id) ON DELETE CASCADE,
     depression_score INTEGER
         CHECK (depression_score IS NULL OR (depression_score >= 0 AND depression_score <= 42)),
     depression_severity VARCHAR(20) NOT NULL DEFAULT ''
@@ -21,34 +21,34 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON psychology_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION psychology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE psychology_assessment.grade IS
     'Computed DASS-21 grading result. Each subscale raw score (0-21) is doubled to align with DASS-42 norms, yielding a 0-42 range, and mapped to a severity category. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN psychology_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.depression_score IS
+COMMENT ON COLUMN psychology_assessment.grade.depression_score IS
     'Depression subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
-COMMENT ON COLUMN grade.depression_severity IS
+COMMENT ON COLUMN psychology_assessment.grade.depression_severity IS
     'Depression severity category: normal, mild, moderate, severe, or extremely_severe.';
-COMMENT ON COLUMN grade.anxiety_score IS
+COMMENT ON COLUMN psychology_assessment.grade.anxiety_score IS
     'Anxiety subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
-COMMENT ON COLUMN grade.anxiety_severity IS
+COMMENT ON COLUMN psychology_assessment.grade.anxiety_severity IS
     'Anxiety severity category: normal, mild, moderate, severe, or extremely_severe.';
-COMMENT ON COLUMN grade.stress_score IS
+COMMENT ON COLUMN psychology_assessment.grade.stress_score IS
     'Stress subscale score, 0-42 (raw 0-21 doubled). NULL if incomplete.';
-COMMENT ON COLUMN grade.stress_severity IS
+COMMENT ON COLUMN psychology_assessment.grade.stress_severity IS
     'Stress severity category: normal, mild, moderate, severe, or extremely_severe.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN psychology_assessment.grade.graded_at IS
     'Timestamp when the DASS-21 grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN psychology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN psychology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN psychology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN psychology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

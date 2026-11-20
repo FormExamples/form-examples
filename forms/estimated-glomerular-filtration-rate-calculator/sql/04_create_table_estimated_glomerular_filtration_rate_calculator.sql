@@ -4,14 +4,14 @@
 -- its CKD G-stage classification, fired rules, and safety flags live in
 -- dedicated child tables.
 
-CREATE TABLE estimated_glomerular_filtration_rate_calculator (
+CREATE TABLE estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES estimated_glomerular_filtration_rate_calculator.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES estimated_glomerular_filtration_rate_calculator.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -30,48 +30,48 @@ CREATE TABLE estimated_glomerular_filtration_rate_calculator (
 );
 
 CREATE INDEX estimated_glomerular_filtration_rate_calculator_patient_id_idx
-    ON estimated_glomerular_filtration_rate_calculator (patient_id);
+    ON estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator (patient_id);
 CREATE INDEX estimated_glomerular_filtration_rate_calculator_clinician_id_idx
-    ON estimated_glomerular_filtration_rate_calculator (clinician_id);
+    ON estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator (clinician_id);
 
 CREATE TRIGGER trigger_estimated_glomerular_filtration_rate_calculator_updated_at
-    BEFORE UPDATE ON estimated_glomerular_filtration_rate_calculator
+    BEFORE UPDATE ON estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION estimated_glomerular_filtration_rate_calculator.set_updated_at();
 
-COMMENT ON TABLE estimated_glomerular_filtration_rate_calculator IS
+COMMENT ON TABLE estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator IS
     'Main eGFR calculation record: context and identification, plus the serum creatinine, age, sex, specimen date, and steady-state inputs and the chosen estimating equation.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.id IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.created_at IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.updated_at IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.deleted_at IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.patient_id IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.patient_id IS
     'Foreign key to the patient this calculation is for (restricted delete).';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.clinician_id IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.clinician_id IS
     'Foreign key to the clinician who recorded the calculation (optional, restricted delete).';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.clinician_name IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.clinician_name IS
     'Requesting or interpreting clinician name as recorded on the form.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.clinician_role IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.clinician_role IS
     'Clinician role: doctor, nurse, pharmacist, laboratory, or other.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.assessed_at IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.assessed_at IS
     'Date and time the calculation was assessed.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.care_setting IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.care_setting IS
     'Care setting: primary-care, secondary-care, laboratory, pharmacy, or other.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.equation IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.equation IS
     'Estimating equation: ckd-epi-2021-creatinine (default), ckd-epi-2021-cystatin-c, or mdrd. The engine computes the CKD-EPI 2021 creatinine equation; the others are named for context.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.patient_identifier IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.patient_identifier IS
     'Local patient identifier as recorded on the form.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.serum_creatinine_umol_l IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.serum_creatinine_umol_l IS
     'Standardised (IDMS-traceable) serum creatinine in micromoles per litre (null when unanswered).';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.age_years IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.age_years IS
     'Patient age in whole years (null when unanswered).';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.sex IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.sex IS
     'Patient sex driving the equation parameters (kappa, alpha, female multiplier): female or male.';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.specimen_date IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.specimen_date IS
     'Date the serum creatinine specimen was taken (null when unanswered).';
-COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.steady_state IS
+COMMENT ON COLUMN estimated_glomerular_filtration_rate_calculator.estimated_glomerular_filtration_rate_calculator.steady_state IS
     'Whether renal function is at steady state: yes or no.';

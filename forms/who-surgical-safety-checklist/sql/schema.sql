@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (6):
+-- Source files (7):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -29,12 +30,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS who_surgical_safety_checklist;
+
+COMMENT ON SCHEMA who_surgical_safety_checklist IS
+    'Namespace for the WHO Surgical Safety Checklist form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION who_surgical_safety_checklist.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -42,7 +59,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION who_surgical_safety_checklist.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -55,7 +72,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE who_surgical_safety_checklist.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -70,35 +87,35 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON who_surgical_safety_checklist.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE who_surgical_safety_checklist.patient IS
     'Patient receiving the surgical procedure.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.name IS
     'Patient full name as recorded on the consent form.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.sex IS
     'Recorded sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.medical_record_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.medical_record_number IS
     'Local medical record number (MRN) at the operating facility.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN who_surgical_safety_checklist.patient.weight_as_kg IS
     'Patient weight in kilograms, used for the paediatric blood-loss threshold (7 ml/kg).';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON who_surgical_safety_checklist.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -113,7 +130,7 @@ CREATE INDEX patient_index_gto
 
 -- Clinician (operating-team member) who can sign off a checklist phase.
 
-CREATE TABLE clinician (
+CREATE TABLE who_surgical_safety_checklist.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -130,39 +147,39 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON who_surgical_safety_checklist.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE who_surgical_safety_checklist.clinician IS
     'Operating-room clinician who can fill in or sign off the WHO Surgical Safety Checklist.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.email IS
     'Work email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.phone IS
     'Work phone number.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.role IS
     'Operating-room role. One of: surgeon, assistant-surgeon, anaesthetist, circulating-nurse, scrub-nurse, anaesthetic-assistant, perfusionist, technician, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.registration_body IS
     'Professional registration body. One of: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.registration_number IS
     'Registration number issued by the registration body.';
-COMMENT ON COLUMN clinician.employee_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.employee_number IS
     'Local employee or smart-card number at the operating facility.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN who_surgical_safety_checklist.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON who_surgical_safety_checklist.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -180,17 +197,17 @@ CREATE INDEX clinician_index_gto
 -- Sign In (before induction of anaesthesia), Time Out (before skin incision),
 -- and Sign Out (before patient leaves the operating room).
 
-CREATE TABLE who_surgical_safety_checklist (
+CREATE TABLE who_surgical_safety_checklist.who_surgical_safety_checklist (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     -- Case identification
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    surgeon_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
-    anaesthetist_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
-    lead_nurse_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES who_surgical_safety_checklist.patient(id) ON DELETE CASCADE,
+    surgeon_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
+    anaesthetist_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
+    lead_nurse_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
     status VARCHAR(30) NOT NULL DEFAULT 'not-started' CHECK (status IN ('not-started', 'sign-in-complete', 'time-out-complete', 'sign-out-complete', 'completed', 'abandoned')),
     site_name VARCHAR(255) NOT NULL DEFAULT '',
     operating_room VARCHAR(50) NOT NULL DEFAULT '',
@@ -213,7 +230,7 @@ CREATE TABLE who_surgical_safety_checklist (
     sign_in_known_allergy_detail VARCHAR(500) NOT NULL DEFAULT '',
     sign_in_difficult_airway_aspiration_risk VARCHAR(30) NOT NULL DEFAULT '' CHECK (sign_in_difficult_airway_aspiration_risk IN ('no', 'yes-equipment-available', '')),
     sign_in_blood_loss_risk VARCHAR(40) NOT NULL DEFAULT '' CHECK (sign_in_blood_loss_risk IN ('no', 'yes-two-ivs-and-fluids-planned', '')),
-    sign_in_coordinator_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    sign_in_coordinator_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
     sign_in_completed_at TIMESTAMPTZ,
 
     -- Phase 2 — Time Out (before skin incision)
@@ -227,7 +244,7 @@ CREATE TABLE who_surgical_safety_checklist (
     time_out_nursing_sterility_confirmed VARCHAR(5) NOT NULL DEFAULT '' CHECK (time_out_nursing_sterility_confirmed IN ('yes', '')),
     time_out_nursing_equipment_concerns VARCHAR(1000) NOT NULL DEFAULT '',
     time_out_essential_imaging_displayed VARCHAR(20) NOT NULL DEFAULT '' CHECK (time_out_essential_imaging_displayed IN ('yes', 'not-applicable', '')),
-    time_out_coordinator_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    time_out_coordinator_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
     time_out_completed_at TIMESTAMPTZ,
 
     -- Phase 3 — Sign Out (before patient leaves operating room)
@@ -236,125 +253,125 @@ CREATE TABLE who_surgical_safety_checklist (
     sign_out_specimens_labelled VARCHAR(20) NOT NULL DEFAULT '' CHECK (sign_out_specimens_labelled IN ('yes', 'no', 'not-applicable', '')),
     sign_out_equipment_problems VARCHAR(1000) NOT NULL DEFAULT '',
     sign_out_recovery_concerns VARCHAR(1000) NOT NULL DEFAULT '',
-    sign_out_coordinator_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    sign_out_coordinator_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
     sign_out_completed_at TIMESTAMPTZ
 );
 
 CREATE TRIGGER trigger_who_surgical_safety_checklist_updated_at
-    BEFORE UPDATE ON who_surgical_safety_checklist
+    BEFORE UPDATE ON who_surgical_safety_checklist.who_surgical_safety_checklist
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE who_surgical_safety_checklist IS
+COMMENT ON TABLE who_surgical_safety_checklist.who_surgical_safety_checklist IS
     'WHO Surgical Safety Checklist case record. One row per surgical case, holding all items of the three phases (Sign In, Time Out, Sign Out) and the case identification.';
-COMMENT ON COLUMN who_surgical_safety_checklist.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN who_surgical_safety_checklist.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN who_surgical_safety_checklist.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN who_surgical_safety_checklist.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN who_surgical_safety_checklist.patient_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.patient_id IS
     'Foreign key to the patient receiving the procedure.';
-COMMENT ON COLUMN who_surgical_safety_checklist.surgeon_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.surgeon_id IS
     'Foreign key to the lead surgeon for this case.';
-COMMENT ON COLUMN who_surgical_safety_checklist.anaesthetist_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.anaesthetist_id IS
     'Foreign key to the lead anaesthetist for this case.';
-COMMENT ON COLUMN who_surgical_safety_checklist.lead_nurse_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.lead_nurse_id IS
     'Foreign key to the lead (circulating) nurse for this case.';
-COMMENT ON COLUMN who_surgical_safety_checklist.status IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.status IS
     'Overall checklist lifecycle status. One of: not-started, sign-in-complete, time-out-complete, sign-out-complete, completed, abandoned.';
-COMMENT ON COLUMN who_surgical_safety_checklist.site_name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.site_name IS
     'Operating facility or hospital site name.';
-COMMENT ON COLUMN who_surgical_safety_checklist.operating_room IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.operating_room IS
     'Operating-room identifier (number, letter, or name).';
-COMMENT ON COLUMN who_surgical_safety_checklist.case_date IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.case_date IS
     'Date of the surgical procedure.';
-COMMENT ON COLUMN who_surgical_safety_checklist.case_start_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.case_start_at IS
     'Timestamp of wheels-in or induction.';
-COMMENT ON COLUMN who_surgical_safety_checklist.case_end_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.case_end_at IS
     'Timestamp of wheels-out from the operating room.';
-COMMENT ON COLUMN who_surgical_safety_checklist.planned_procedure IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.planned_procedure IS
     'Description of the planned surgical procedure.';
-COMMENT ON COLUMN who_surgical_safety_checklist.surgical_specialty IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.surgical_specialty IS
     'Surgical specialty responsible for the procedure.';
-COMMENT ON COLUMN who_surgical_safety_checklist.urgency IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.urgency IS
     'Procedure urgency (NCEPOD). One of: elective, urgent, emergency, immediate.';
-COMMENT ON COLUMN who_surgical_safety_checklist.laterality IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.laterality IS
     'Side of the body. One of: left, right, bilateral, midline, na.';
-COMMENT ON COLUMN who_surgical_safety_checklist.is_paediatric IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.is_paediatric IS
     'Whether the patient is paediatric (drives the 7 ml/kg blood-loss threshold).';
-COMMENT ON COLUMN who_surgical_safety_checklist.abandoned_reason IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.abandoned_reason IS
     'Free-text reason when the case is abandoned before sign-out.';
 
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_identity_site_procedure_consent IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_identity_site_procedure_consent IS
     'Sign In #1: patient has confirmed identity, site, procedure, and consent.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_site_marked IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_site_marked IS
     'Sign In #2: surgical site marked. One of: yes, not-applicable.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_anaesthesia_check_complete IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_anaesthesia_check_complete IS
     'Sign In #3: anaesthesia machine and medication check complete.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_pulse_oximeter_on_patient IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_pulse_oximeter_on_patient IS
     'Sign In #4: pulse oximeter on the patient and functioning.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_known_allergy IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_known_allergy IS
     'Sign In #5: known allergy. One of: no, yes.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_known_allergy_detail IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_known_allergy_detail IS
     'Sign In #5: free-text description of known allergies.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_difficult_airway_aspiration_risk IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_difficult_airway_aspiration_risk IS
     'Sign In #6: difficult airway or aspiration risk. One of: no, yes-equipment-available.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_blood_loss_risk IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_blood_loss_risk IS
     'Sign In #7: risk of >500 ml (7 ml/kg in children) blood loss. One of: no, yes-two-ivs-and-fluids-planned.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_coordinator_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_coordinator_id IS
     'Foreign key to the clinician who signed off the Sign In phase.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_in_completed_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_in_completed_at IS
     'Timestamp when Sign In phase was signed off.';
 
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_team_introductions_confirmed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_team_introductions_confirmed IS
     'Time Out #1: all team members have introduced themselves by name and role.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_patient_procedure_incision_confirmed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_patient_procedure_incision_confirmed IS
     'Time Out #2: patient name, procedure, and incision site confirmed.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_antibiotic_prophylaxis_within_60min IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_antibiotic_prophylaxis_within_60min IS
     'Time Out #3: antibiotic prophylaxis given within the last 60 minutes. One of: yes, not-applicable.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_surgeon_critical_steps IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_surgeon_critical_steps IS
     'Time Out #4 (surgeon): critical or non-routine steps.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_surgeon_case_duration_minutes IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_surgeon_case_duration_minutes IS
     'Time Out #5 (surgeon): anticipated case duration in minutes.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_surgeon_anticipated_blood_loss_ml IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_surgeon_anticipated_blood_loss_ml IS
     'Time Out #6 (surgeon): anticipated blood loss in millilitres.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_anaesthetist_patient_concerns IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_anaesthetist_patient_concerns IS
     'Time Out #7 (anaesthetist): patient-specific concerns.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_nursing_sterility_confirmed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_nursing_sterility_confirmed IS
     'Time Out #8 (nursing): sterility (including indicator results) confirmed.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_nursing_equipment_concerns IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_nursing_equipment_concerns IS
     'Time Out #9 (nursing): equipment issues or concerns.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_essential_imaging_displayed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_essential_imaging_displayed IS
     'Time Out #10: essential imaging displayed. One of: yes, not-applicable.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_coordinator_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_coordinator_id IS
     'Foreign key to the clinician who signed off the Time Out phase.';
-COMMENT ON COLUMN who_surgical_safety_checklist.time_out_completed_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.time_out_completed_at IS
     'Timestamp when Time Out phase was signed off.';
 
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_procedure_name_confirmed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_procedure_name_confirmed IS
     'Sign Out #1: name of the procedure recorded confirmed by the nurse.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_counts_confirmed IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_counts_confirmed IS
     'Sign Out #2: instrument, sponge, and needle counts confirmed. One of: yes, no.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_specimens_labelled IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_specimens_labelled IS
     'Sign Out #3: specimen labelling (read aloud, including patient name) confirmed. One of: yes, no, not-applicable.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_equipment_problems IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_equipment_problems IS
     'Sign Out #4: equipment problems to be addressed.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_recovery_concerns IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_recovery_concerns IS
     'Sign Out #5: key concerns for recovery and management of this patient.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_coordinator_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_coordinator_id IS
     'Foreign key to the clinician who signed off the Sign Out phase.';
-COMMENT ON COLUMN who_surgical_safety_checklist.sign_out_completed_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.who_surgical_safety_checklist.sign_out_completed_at IS
     'Timestamp when Sign Out phase was signed off.';
 
 CREATE INDEX who_surgical_safety_checklist_index_patient_id
-    ON who_surgical_safety_checklist (patient_id);
+    ON who_surgical_safety_checklist.who_surgical_safety_checklist (patient_id);
 CREATE INDEX who_surgical_safety_checklist_index_case_date
-    ON who_surgical_safety_checklist (case_date);
+    ON who_surgical_safety_checklist.who_surgical_safety_checklist (case_date);
 CREATE INDEX who_surgical_safety_checklist_index_status
-    ON who_surgical_safety_checklist (status);
+    ON who_surgical_safety_checklist.who_surgical_safety_checklist (status);
 
 -- ========================================================================
 -- END 04_create_table_who_surgical_safety_checklist.sql
@@ -366,14 +383,14 @@ CREATE INDEX who_surgical_safety_checklist_index_status
 
 -- Operating-team roster captured during the Time Out introductions step.
 
-CREATE TABLE team_member (
+CREATE TABLE who_surgical_safety_checklist.team_member (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    checklist_id UUID NOT NULL REFERENCES who_surgical_safety_checklist(id) ON DELETE CASCADE,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    checklist_id UUID NOT NULL REFERENCES who_surgical_safety_checklist.who_surgical_safety_checklist(id) ON DELETE CASCADE,
+    clinician_id UUID REFERENCES who_surgical_safety_checklist.clinician(id) ON DELETE RESTRICT,
     name VARCHAR(255) NOT NULL DEFAULT '',
     role VARCHAR(30) NOT NULL DEFAULT '' CHECK (role IN ('surgeon', 'assistant-surgeon', 'anaesthetist', 'circulating-nurse', 'scrub-nurse', 'anaesthetic-assistant', 'perfusionist', 'technician', 'observer', 'other', '')),
     introduced_during_time_out VARCHAR(5) NOT NULL DEFAULT '' CHECK (introduced_during_time_out IN ('yes', 'no', '')),
@@ -381,35 +398,35 @@ CREATE TABLE team_member (
 );
 
 CREATE TRIGGER trigger_team_member_updated_at
-    BEFORE UPDATE ON team_member
+    BEFORE UPDATE ON who_surgical_safety_checklist.team_member
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION who_surgical_safety_checklist.set_updated_at();
 
-COMMENT ON TABLE team_member IS
+COMMENT ON TABLE who_surgical_safety_checklist.team_member IS
     'Operating-team roster row captured during the Time Out introductions step. Each row represents one team member present in the operating room for a given case.';
-COMMENT ON COLUMN team_member.id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN team_member.created_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN team_member.updated_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN team_member.deleted_at IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.deleted_at IS
     'Timestamp when this row was deleted (soft delete).';
-COMMENT ON COLUMN team_member.checklist_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.checklist_id IS
     'Foreign key to the parent who_surgical_safety_checklist row.';
-COMMENT ON COLUMN team_member.clinician_id IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.clinician_id IS
     'Optional foreign key to the clinician table for known staff.';
-COMMENT ON COLUMN team_member.name IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.name IS
     'Team member name as introduced during the Time Out.';
-COMMENT ON COLUMN team_member.role IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.role IS
     'Operating-room role. One of: surgeon, assistant-surgeon, anaesthetist, circulating-nurse, scrub-nurse, anaesthetic-assistant, perfusionist, technician, observer, other.';
-COMMENT ON COLUMN team_member.introduced_during_time_out IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.introduced_during_time_out IS
     'Whether this team member was introduced during the Time Out (yes/no).';
-COMMENT ON COLUMN team_member.notes IS
+COMMENT ON COLUMN who_surgical_safety_checklist.team_member.notes IS
     'Free-text notes (e.g., trainee, visiting consultant, observer institution).';
 
 CREATE INDEX team_member_index_checklist_id
-    ON team_member (checklist_id);
+    ON who_surgical_safety_checklist.team_member (checklist_id);
 
 -- ========================================================================
 -- END 05_create_table_team_member.sql

@@ -1,13 +1,13 @@
 -- Toxicology / poisons / therapeutic-drug-level test result (report) — the source-of-truth record.
 
-CREATE TABLE toxicology_test_result (
+CREATE TABLE toxicology_test_result.toxicology_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES toxicology_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES toxicology_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -57,76 +57,76 @@ CREATE TABLE toxicology_test_result (
 );
 
 CREATE INDEX index_toxicology_test_result_patient_id
-    ON toxicology_test_result(patient_id);
+    ON toxicology_test_result.toxicology_test_result(patient_id);
 CREATE INDEX index_toxicology_test_result_clinician_id
-    ON toxicology_test_result(clinician_id);
+    ON toxicology_test_result.toxicology_test_result(clinician_id);
 
 CREATE TRIGGER trigger_toxicology_test_result_updated_at
-    BEFORE UPDATE ON toxicology_test_result
+    BEFORE UPDATE ON toxicology_test_result.toxicology_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION toxicology_test_result.set_updated_at();
 
-COMMENT ON TABLE toxicology_test_result IS
+COMMENT ON TABLE toxicology_test_result.toxicology_test_result IS
     'Toxicology / poisons / therapeutic-drug-level test result (report). Captures the specimen condition, clinical history and suspected agent, the assay result values (paracetamol, salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, drugs-of-abuse screen, named specific drug), the paracetamol-nomogram interpretation, the overall result status, the narrative findings and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN toxicology_test_result.id IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN toxicology_test_result.created_at IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN toxicology_test_result.updated_at IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN toxicology_test_result.deleted_at IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN toxicology_test_result.patient_id IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN toxicology_test_result.clinician_id IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.clinician_id IS
     'Foreign key to the reporting clinician (clinical biochemist / toxicologist / emergency physician).';
-COMMENT ON COLUMN toxicology_test_result.originating_request_reference IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating toxicology test request (referral).';
-COMMENT ON COLUMN toxicology_test_result.report_status IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN toxicology_test_result.performed_date IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.performed_date IS
     'Date the toxicology assay was performed.';
-COMMENT ON COLUMN toxicology_test_result.reported_date IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN toxicology_test_result.specimen_condition IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.specimen_condition IS
     'Condition of the specimen on receipt: satisfactory, insufficient, delayed.';
-COMMENT ON COLUMN toxicology_test_result.clinical_history IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.clinical_history IS
     'Clinical history and the question the assay was performed to answer.';
-COMMENT ON COLUMN toxicology_test_result.suspected_agent IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.suspected_agent IS
     'Suspected agent(s) ingested or implicated.';
-COMMENT ON COLUMN toxicology_test_result.time_since_ingestion_hours IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.time_since_ingestion_hours IS
     'Hours elapsed between ingestion and specimen collection, for nomogram and timing interpretation.';
-COMMENT ON COLUMN toxicology_test_result.paracetamol_level_mg_l IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.paracetamol_level_mg_l IS
     'Paracetamol (acetaminophen) level in mg/L; interpretable on the UK treatment nomogram only at >= 4 h post-ingestion.';
-COMMENT ON COLUMN toxicology_test_result.salicylate_level_mg_l IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.salicylate_level_mg_l IS
     'Salicylate (aspirin) level in mg/L.';
-COMMENT ON COLUMN toxicology_test_result.ethanol_level IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.ethanol_level IS
     'Blood ethanol (alcohol) level in the reporting laboratory units (e.g. mg/dL or mmol/L).';
-COMMENT ON COLUMN toxicology_test_result.lithium_level_mmol_l IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.lithium_level_mmol_l IS
     'Lithium level in mmol/L; therapeutic range is narrow, toxicity at modest elevation.';
-COMMENT ON COLUMN toxicology_test_result.digoxin_level IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.digoxin_level IS
     'Digoxin level in the reporting laboratory units (e.g. ng/mL or nmol/L).';
-COMMENT ON COLUMN toxicology_test_result.carboxyhaemoglobin_percent IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.carboxyhaemoglobin_percent IS
     'Carboxyhaemoglobin saturation as a percentage, for carbon-monoxide exposure.';
-COMMENT ON COLUMN toxicology_test_result.drugs_of_abuse_screen IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.drugs_of_abuse_screen IS
     'Drugs-of-abuse screen result narrative (opiates, benzodiazepines, cocaine, amphetamines, etc.).';
-COMMENT ON COLUMN toxicology_test_result.specific_drug_level IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.specific_drug_level IS
     'Named specific drug level result narrative for an agent not captured by a dedicated column.';
-COMMENT ON COLUMN toxicology_test_result.paracetamol_nomogram IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.paracetamol_nomogram IS
     'Paracetamol treatment-nomogram interpretation: above-treatment-line, below-treatment-line, not-applicable.';
-COMMENT ON COLUMN toxicology_test_result.overall_result_status IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.overall_result_status IS
     'Overall result status: normal, abnormal, critical.';
-COMMENT ON COLUMN toxicology_test_result.toxic_level_present IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.toxic_level_present IS
     'Whether any reported level is in a toxic range requiring action.';
-COMMENT ON COLUMN toxicology_test_result.findings_narrative IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.findings_narrative IS
     'Narrative description of the result values and their significance (the body of the report).';
-COMMENT ON COLUMN toxicology_test_result.impression IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN toxicology_test_result.reporting_category IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.reporting_category IS
     'Structured-reporting category label (e.g. a nomogram band or therapeutic / toxic descriptor).';
-COMMENT ON COLUMN toxicology_test_result.recommended_follow_up IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.recommended_follow_up IS
     'Recommended follow-up assay, antidote, or management.';
-COMMENT ON COLUMN toxicology_test_result.critical_result_communicated IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the requester.';
-COMMENT ON COLUMN toxicology_test_result.reported_to IS
+COMMENT ON COLUMN toxicology_test_result.toxicology_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

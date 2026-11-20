@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS diabetes_podiatry_assessment;
+
+COMMENT ON SCHEMA diabetes_podiatry_assessment IS
+    'Namespace for the Diabetes Podiatry Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION diabetes_podiatry_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION diabetes_podiatry_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE diabetes_podiatry_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON diabetes_podiatry_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE diabetes_podiatry_assessment.patient IS
     'Patient demographic information used by the diabetes-podiatry-assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON diabetes_podiatry_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- physician, or other member of the foot protection / multidisciplinary
 -- foot care team).
 
-CREATE TABLE clinician (
+CREATE TABLE diabetes_podiatry_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON diabetes_podiatry_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE diabetes_podiatry_assessment.clinician IS
     'Clinician identifying information for the professional who performed the diabetic foot risk assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.name IS
     'Assessor full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.role IS
     'Assessor role: podiatrist, diabetes-specialist-nurse, physician, orthotist, vascular-specialist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON diabetes_podiatry_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- computed per-foot and overall risk classification, the audit trail of fired
 -- rules, and the flagged issues live in dedicated child tables.
 
-CREATE TABLE diabetes_podiatry_assessment (
+CREATE TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES diabetes_podiatry_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES diabetes_podiatry_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Assessment context
     assessed_at DATE,
@@ -262,86 +279,86 @@ CREATE TABLE diabetes_podiatry_assessment (
 );
 
 CREATE INDEX diabetes_podiatry_assessment_patient_id_idx
-    ON diabetes_podiatry_assessment (patient_id);
+    ON diabetes_podiatry_assessment.diabetes_podiatry_assessment (patient_id);
 CREATE INDEX diabetes_podiatry_assessment_clinician_id_idx
-    ON diabetes_podiatry_assessment (clinician_id);
+    ON diabetes_podiatry_assessment.diabetes_podiatry_assessment (clinician_id);
 
 CREATE TRIGGER trigger_diabetes_podiatry_assessment_updated_at
-    BEFORE UPDATE ON diabetes_podiatry_assessment
+    BEFORE UPDATE ON diabetes_podiatry_assessment.diabetes_podiatry_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE diabetes_podiatry_assessment IS
+COMMENT ON TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment IS
     'Main diabetes-podiatry-assessment record for one diabetic foot risk-screening episode: assessment context, patient-wide risk factors, and the right-foot and left-foot examination blocks. The per-foot and overall risk classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.patient_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.patient_id IS
     'Foreign key to the patient this assessment documents (restrict delete).';
-COMMENT ON COLUMN diabetes_podiatry_assessment.clinician_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.clinician_id IS
     'Foreign key to the assessing clinician (restrict delete); optional.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.assessed_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.assessed_at IS
     'Date the assessment was performed; drives the review-overdue comparison.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.assessment_setting IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.assessment_setting IS
     'Setting: annual-review, foot-protection-clinic, hospital-admission, pre-discharge, or other.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_type IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.diabetes_type IS
     'Diabetes type: type-1, type-2, other, or unknown.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.years_since_diagnosis IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.years_since_diagnosis IS
     'Years since diabetes diagnosis.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.on_renal_replacement_therapy IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.on_renal_replacement_therapy IS
     'Whether the patient is on renal replacement therapy (dialysis): yes or no; yes is an automatic high-risk factor per NICE NG19.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.visual_acuity_impairment IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.visual_acuity_impairment IS
     'Whether the patient has a visual acuity impairment that limits foot self-inspection: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.self_care_ability IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.self_care_ability IS
     'Patient''s ability to self-inspect and self-care for their feet: independent, partial, or unable.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.footwear_appropriate IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.footwear_appropriate IS
     'Whether current footwear is appropriate for the patient''s risk level: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_neuropathy_status IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_neuropathy_status IS
     'Right-foot sensory neuropathy test result (e.g. 10g monofilament): sensate, insensate, or not-tested.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_pulses_status IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_pulses_status IS
     'Right-foot pedal pulses (dorsalis pedis / posterior tibial): normal, diminished, absent, or not-tested.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_deformity IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_deformity IS
     'Right-foot structural deformity present (e.g. claw toes, bunion, prominent metatarsal heads): yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_callus IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_callus IS
     'Right-foot callus present: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_skin_breakdown IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_skin_breakdown IS
     'Right-foot skin breakdown / fissure present (short of an active ulcer): yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_active_ulcer IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_active_ulcer IS
     'Right-foot active ulceration present: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_ulcer_severity IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_ulcer_severity IS
     'Right-foot active ulcer severity when present: superficial, deep, infected, or critical-ischaemia.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_previous_ulcer IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_previous_ulcer IS
     'History of previous right-foot ulceration: yes or no; yes is an automatic high-risk factor.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_previous_amputation IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_previous_amputation IS
     'History of previous right-foot amputation: none, minor (toe / partial foot), or major (below / above knee).';
-COMMENT ON COLUMN diabetes_podiatry_assessment.right_suspected_charcot IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.right_suspected_charcot IS
     'Suspected acute Charcot foot on the right (unexplained hot, red, swollen foot, with or without deformity or pain): yes or no; yes requires urgent same-day / next-working-day referral.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_neuropathy_status IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_neuropathy_status IS
     'Left-foot sensory neuropathy test result (e.g. 10g monofilament): sensate, insensate, or not-tested.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_pulses_status IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_pulses_status IS
     'Left-foot pedal pulses (dorsalis pedis / posterior tibial): normal, diminished, absent, or not-tested.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_deformity IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_deformity IS
     'Left-foot structural deformity present (e.g. claw toes, bunion, prominent metatarsal heads): yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_callus IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_callus IS
     'Left-foot callus present: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_skin_breakdown IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_skin_breakdown IS
     'Left-foot skin breakdown / fissure present (short of an active ulcer): yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_active_ulcer IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_active_ulcer IS
     'Left-foot active ulceration present: yes or no.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_ulcer_severity IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_ulcer_severity IS
     'Left-foot active ulcer severity when present: superficial, deep, infected, or critical-ischaemia.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_previous_ulcer IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_previous_ulcer IS
     'History of previous left-foot ulceration: yes or no; yes is an automatic high-risk factor.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_previous_amputation IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_previous_amputation IS
     'History of previous left-foot amputation: none, minor (toe / partial foot), or major (below / above knee).';
-COMMENT ON COLUMN diabetes_podiatry_assessment.left_suspected_charcot IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.left_suspected_charcot IS
     'Suspected acute Charcot foot on the left (unexplained hot, red, swollen foot, with or without deformity or pain): yes or no; yes requires urgent same-day / next-working-day referral.';
-COMMENT ON COLUMN diabetes_podiatry_assessment.clinical_context IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment.clinical_context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -360,14 +377,14 @@ COMMENT ON COLUMN diabetes_podiatry_assessment.clinical_context IS
 -- active/urgent override (active ulcer, suspected Charcot foot) to reach an
 -- overall risk category, review pathway, and review interval.
 
-CREATE TABLE diabetes_podiatry_assessment_grade (
+CREATE TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_podiatry_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES diabetes_podiatry_assessment(id) ON DELETE CASCADE,
+        REFERENCES diabetes_podiatry_assessment.diabetes_podiatry_assessment(id) ON DELETE CASCADE,
 
     right_foot_risk VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (right_foot_risk IN ('low', 'moderate', 'high', 'active-urgent', '')),
@@ -393,37 +410,37 @@ CREATE TABLE diabetes_podiatry_assessment_grade (
 );
 
 CREATE TRIGGER trigger_diabetes_podiatry_assessment_grade_updated_at
-    BEFORE UPDATE ON diabetes_podiatry_assessment_grade
+    BEFORE UPDATE ON diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE diabetes_podiatry_assessment_grade IS
+COMMENT ON TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade IS
     'Computed per-foot and overall diabetic foot risk classification for a diabetes-podiatry-assessment record: per-foot risk, overall risk, review pathway, referral, review interval, and completeness status.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.diabetes_podiatry_assessment_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.diabetes_podiatry_assessment_id IS
     'Foreign key to the parent diabetes-podiatry-assessment record (unique, 1:1).';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.right_foot_risk IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.right_foot_risk IS
     'Right-foot risk category from its own examination findings: low, moderate, high, or active-urgent.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.left_foot_risk IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.left_foot_risk IS
     'Left-foot risk category from its own examination findings: low, moderate, high, or active-urgent.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.overall_risk IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.overall_risk IS
     'Overall risk category: the worse of the two feet, raised to high by patient-wide factors (previous ulcer/amputation, dialysis) or to active-urgent by an active ulcer or suspected Charcot foot on either foot.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.review_pathway IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.review_pathway IS
     'Review / referral pathway (most urgent wins): urgent-mdt-referral, high-risk-review, moderate-risk-review, or annual-review.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.referral IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.referral IS
     'Referral destination derived from the pathway: none, foot-protection-service, multidisciplinary-foot-team, or urgent-mdt.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.review_interval_months IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.review_interval_months IS
     'Recommended review interval in months (1, 3, 6, or 12); null for the urgent-mdt-referral pathway, which has no routine interval.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.status IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.status IS
     'Completeness status: complete when both feet have a neuropathy and pulses status recorded; otherwise incomplete.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade.graded_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -438,14 +455,14 @@ COMMENT ON COLUMN diabetes_podiatry_assessment_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE diabetes_podiatry_assessment_grade_rule (
+CREATE TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_podiatry_assessment_grade_id UUID NOT NULL
-        REFERENCES diabetes_podiatry_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -455,32 +472,32 @@ CREATE TABLE diabetes_podiatry_assessment_grade_rule (
 );
 
 CREATE INDEX diabetes_podiatry_assessment_grade_rule_grade_id_idx
-    ON diabetes_podiatry_assessment_grade_rule (diabetes_podiatry_assessment_grade_id);
+    ON diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule (diabetes_podiatry_assessment_grade_id);
 
 CREATE TRIGGER trigger_diabetes_podiatry_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON diabetes_podiatry_assessment_grade_rule
+    BEFORE UPDATE ON diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE diabetes_podiatry_assessment_grade_rule IS
+COMMENT ON TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.diabetes_podiatry_assessment_grade_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.diabetes_podiatry_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-OVERALL-ACTIVE-ULCER-01).';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.stage IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.stage IS
     'Pathway stage the rule concerns: per-foot, patient-wide, urgent-override, review, or completeness.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.category IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.category IS
     'Subject category (e.g. gate, classification, conditional-requirement).';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.description IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -494,14 +511,14 @@ COMMENT ON COLUMN diabetes_podiatry_assessment_grade_rule.description IS
 -- Flagged issues that fire independently of the review pathway, each with a
 -- priority and a suggested action for the assessor or foot care service.
 
-CREATE TABLE diabetes_podiatry_assessment_grade_flag (
+CREATE TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_podiatry_assessment_grade_id UUID NOT NULL
-        REFERENCES diabetes_podiatry_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -525,34 +542,34 @@ CREATE TABLE diabetes_podiatry_assessment_grade_flag (
 );
 
 CREATE INDEX diabetes_podiatry_assessment_grade_flag_grade_id_idx
-    ON diabetes_podiatry_assessment_grade_flag (diabetes_podiatry_assessment_grade_id);
+    ON diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag (diabetes_podiatry_assessment_grade_id);
 
 CREATE TRIGGER trigger_diabetes_podiatry_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON diabetes_podiatry_assessment_grade_flag
+    BEFORE UPDATE ON diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_podiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE diabetes_podiatry_assessment_grade_flag IS
+COMMENT ON TABLE diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag IS
     'Flagged issues that fire independently of the review pathway, with priority and a suggested action for the assessor or foot care service.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.diabetes_podiatry_assessment_grade_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.diabetes_podiatry_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ACTIVE-ULCER-001).';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.category IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.category IS
     'Flag category: active-ulcer, suspected-charcot, critical-ischaemia, previous-major-amputation, renal-replacement-therapy, combined-risk-factors, footwear, self-care, incomplete, or other.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.priority IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.description IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN diabetes_podiatry_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN diabetes_podiatry_assessment.diabetes_podiatry_assessment_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "urgent same/next-working-day referral to multidisciplinary foot care team").';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (17):
+-- Source files (18):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -40,12 +41,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS heart_health_check;
+
+COMMENT ON SCHEMA heart_health_check IS
+    'Namespace for the Heart Health Check form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION heart_health_check.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -53,7 +70,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION heart_health_check.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -66,7 +83,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE heart_health_check.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -89,56 +106,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON heart_health_check.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE heart_health_check.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN heart_health_check.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN heart_health_check.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN heart_health_check.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN heart_health_check.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN heart_health_check.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN heart_health_check.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN heart_health_check.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN heart_health_check.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN heart_health_check.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN heart_health_check.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN heart_health_check.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN heart_health_check.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN heart_health_check.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN heart_health_check.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN heart_health_check.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN heart_health_check.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN heart_health_check.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON heart_health_check.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN heart_health_check.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN heart_health_check.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -151,7 +168,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE heart_health_check.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -170,46 +187,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON heart_health_check.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE heart_health_check.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN heart_health_check.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN heart_health_check.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN heart_health_check.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN heart_health_check.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN heart_health_check.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN heart_health_check.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN heart_health_check.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN heart_health_check.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN heart_health_check.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN heart_health_check.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN heart_health_check.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN heart_health_check.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN heart_health_check.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON heart_health_check.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN heart_health_check.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -220,36 +237,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_heart_health_check.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE heart_health_check.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON heart_health_check.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE heart_health_check.assessment IS
     'Heart Health Check assessment form. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN heart_health_check.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN heart_health_check.assessment.status IS
     'Lifecycle status: draft, submitted, or reviewed.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN heart_health_check.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN heart_health_check.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN heart_health_check.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN heart_health_check.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -260,13 +277,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_demographics_ethnicity.sql
 -- ========================================================================
 
-CREATE TABLE demographics_ethnicity (
+CREATE TABLE heart_health_check.demographics_ethnicity (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     age SMALLINT
         CHECK (age IS NULL OR (age >= 0 AND age <= 120)),
     sex VARCHAR(10) NOT NULL DEFAULT ''
@@ -276,30 +293,30 @@ CREATE TABLE demographics_ethnicity (
 );
 
 CREATE TRIGGER trigger_demographics_ethnicity_updated_at
-    BEFORE UPDATE ON demographics_ethnicity
+    BEFORE UPDATE ON heart_health_check.demographics_ethnicity
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE demographics_ethnicity IS
+COMMENT ON TABLE heart_health_check.demographics_ethnicity IS
     'Demographics and ethnicity for QRISK3 risk calculation.';
-COMMENT ON COLUMN demographics_ethnicity.age IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.age IS
     'Patient age in years.';
-COMMENT ON COLUMN demographics_ethnicity.sex IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.sex IS
     'Patient sex: male, female, or empty string if unanswered.';
-COMMENT ON COLUMN demographics_ethnicity.ethnicity IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.ethnicity IS
     'Ethnicity category for risk calculation.';
-COMMENT ON COLUMN demographics_ethnicity.townsend_deprivation IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.townsend_deprivation IS
     'Townsend deprivation score (-8 to 12).';
 
-COMMENT ON COLUMN demographics_ethnicity.assessment_id IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN demographics_ethnicity.id IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN demographics_ethnicity.created_at IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN demographics_ethnicity.updated_at IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN demographics_ethnicity.deleted_at IS
+COMMENT ON COLUMN heart_health_check.demographics_ethnicity.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -310,13 +327,13 @@ COMMENT ON COLUMN demographics_ethnicity.deleted_at IS
 -- BEGIN 06_create_table_blood_pressure.sql
 -- ========================================================================
 
-CREATE TABLE blood_pressure (
+CREATE TABLE heart_health_check.blood_pressure (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     systolic_bp SMALLINT
         CHECK (systolic_bp IS NULL OR (systolic_bp >= 50 AND systolic_bp <= 300)),
     systolic_bp_sd NUMERIC(5, 2),
@@ -329,32 +346,32 @@ CREATE TABLE blood_pressure (
 );
 
 CREATE TRIGGER trigger_blood_pressure_updated_at
-    BEFORE UPDATE ON blood_pressure
+    BEFORE UPDATE ON heart_health_check.blood_pressure
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE blood_pressure IS
+COMMENT ON TABLE heart_health_check.blood_pressure IS
     'Blood pressure readings and antihypertensive treatment status.';
-COMMENT ON COLUMN blood_pressure.systolic_bp IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.systolic_bp IS
     'Systolic blood pressure in mmHg.';
-COMMENT ON COLUMN blood_pressure.systolic_bp_sd IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.systolic_bp_sd IS
     'Standard deviation of systolic BP readings.';
-COMMENT ON COLUMN blood_pressure.diastolic_bp IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.diastolic_bp IS
     'Diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN blood_pressure.on_bp_treatment IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.on_bp_treatment IS
     'Whether the patient is on blood pressure treatment.';
-COMMENT ON COLUMN blood_pressure.number_of_bp_medications IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.number_of_bp_medications IS
     'Number of concurrent BP medications.';
 
-COMMENT ON COLUMN blood_pressure.assessment_id IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN blood_pressure.id IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN blood_pressure.created_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN blood_pressure.updated_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN blood_pressure.deleted_at IS
+COMMENT ON COLUMN heart_health_check.blood_pressure.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -365,13 +382,13 @@ COMMENT ON COLUMN blood_pressure.deleted_at IS
 -- BEGIN 07_create_table_cholesterol.sql
 -- ========================================================================
 
-CREATE TABLE cholesterol (
+CREATE TABLE heart_health_check.cholesterol (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     total_cholesterol NUMERIC(5, 2)
         CHECK (total_cholesterol IS NULL OR (total_cholesterol >= 0 AND total_cholesterol <= 20)),
     hdl_cholesterol NUMERIC(5, 2)
@@ -383,30 +400,30 @@ CREATE TABLE cholesterol (
 );
 
 CREATE TRIGGER trigger_cholesterol_updated_at
-    BEFORE UPDATE ON cholesterol
+    BEFORE UPDATE ON heart_health_check.cholesterol
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE cholesterol IS
+COMMENT ON TABLE heart_health_check.cholesterol IS
     'Cholesterol lipid profile and statin therapy status.';
-COMMENT ON COLUMN cholesterol.total_cholesterol IS
+COMMENT ON COLUMN heart_health_check.cholesterol.total_cholesterol IS
     'Total cholesterol in mmol/L.';
-COMMENT ON COLUMN cholesterol.hdl_cholesterol IS
+COMMENT ON COLUMN heart_health_check.cholesterol.hdl_cholesterol IS
     'HDL cholesterol in mmol/L.';
-COMMENT ON COLUMN cholesterol.total_hdl_ratio IS
+COMMENT ON COLUMN heart_health_check.cholesterol.total_hdl_ratio IS
     'TC/HDL ratio (can be overridden or calculated).';
-COMMENT ON COLUMN cholesterol.on_statin IS
+COMMENT ON COLUMN heart_health_check.cholesterol.on_statin IS
     'Whether the patient is currently on statin therapy.';
 
-COMMENT ON COLUMN cholesterol.assessment_id IS
+COMMENT ON COLUMN heart_health_check.cholesterol.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN cholesterol.id IS
+COMMENT ON COLUMN heart_health_check.cholesterol.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cholesterol.created_at IS
+COMMENT ON COLUMN heart_health_check.cholesterol.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cholesterol.updated_at IS
+COMMENT ON COLUMN heart_health_check.cholesterol.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN cholesterol.deleted_at IS
+COMMENT ON COLUMN heart_health_check.cholesterol.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -417,13 +434,13 @@ COMMENT ON COLUMN cholesterol.deleted_at IS
 -- BEGIN 08_create_table_medical_conditions.sql
 -- ========================================================================
 
-CREATE TABLE medical_conditions (
+CREATE TABLE heart_health_check.medical_conditions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     has_diabetes VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (has_diabetes IN ('no', 'type1', 'type2', '')),
     has_atrial_fibrillation VARCHAR(5) NOT NULL DEFAULT ''
@@ -445,40 +462,40 @@ CREATE TABLE medical_conditions (
 );
 
 CREATE TRIGGER trigger_medical_conditions_updated_at
-    BEFORE UPDATE ON medical_conditions
+    BEFORE UPDATE ON heart_health_check.medical_conditions
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE medical_conditions IS
+COMMENT ON TABLE heart_health_check.medical_conditions IS
     'Pre-existing medical conditions and medications relevant to cardiovascular risk.';
-COMMENT ON COLUMN medical_conditions.has_diabetes IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_diabetes IS
     'Diabetes status: no, type1, type2, or empty string.';
-COMMENT ON COLUMN medical_conditions.has_atrial_fibrillation IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_atrial_fibrillation IS
     'Whether patient has atrial fibrillation.';
-COMMENT ON COLUMN medical_conditions.has_chronic_kidney_disease IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_chronic_kidney_disease IS
     'Whether patient has CKD stage 3+.';
-COMMENT ON COLUMN medical_conditions.has_erectile_dysfunction IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_erectile_dysfunction IS
     'Whether patient has erectile dysfunction (male only).';
-COMMENT ON COLUMN medical_conditions.on_atypical_antipsychotic IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.on_atypical_antipsychotic IS
     'Whether patient is on atypical antipsychotic medication.';
-COMMENT ON COLUMN medical_conditions.on_corticosteroids IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.on_corticosteroids IS
     'Whether patient is on regular corticosteroids.';
 
-COMMENT ON COLUMN medical_conditions.assessment_id IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN medical_conditions.has_rheumatoid_arthritis IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_rheumatoid_arthritis IS
     'Has rheumatoid arthritis. One of: yes, no.';
-COMMENT ON COLUMN medical_conditions.has_migraine IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_migraine IS
     'Has migraine. One of: yes, no.';
-COMMENT ON COLUMN medical_conditions.has_severe_mental_illness IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.has_severe_mental_illness IS
     'Has severe mental illness. One of: yes, no.';
-COMMENT ON COLUMN medical_conditions.id IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_conditions.created_at IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_conditions.updated_at IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_conditions.deleted_at IS
+COMMENT ON COLUMN heart_health_check.medical_conditions.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -489,13 +506,13 @@ COMMENT ON COLUMN medical_conditions.deleted_at IS
 -- BEGIN 09_create_table_family_history.sql
 -- ========================================================================
 
-CREATE TABLE family_history (
+CREATE TABLE heart_health_check.family_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     family_cvd_under_60 VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (family_cvd_under_60 IN ('yes', 'no', '')),
     family_cvd_relationship VARCHAR(20) NOT NULL DEFAULT ''
@@ -505,28 +522,28 @@ CREATE TABLE family_history (
 );
 
 CREATE TRIGGER trigger_family_history_updated_at
-    BEFORE UPDATE ON family_history
+    BEFORE UPDATE ON heart_health_check.family_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE family_history IS
+COMMENT ON TABLE heart_health_check.family_history IS
     'Family history of cardiovascular disease and diabetes.';
-COMMENT ON COLUMN family_history.family_cvd_under_60 IS
+COMMENT ON COLUMN heart_health_check.family_history.family_cvd_under_60 IS
     'Whether a first-degree relative had CVD under age 60.';
-COMMENT ON COLUMN family_history.family_cvd_relationship IS
+COMMENT ON COLUMN heart_health_check.family_history.family_cvd_relationship IS
     'Relationship of the affected relative.';
-COMMENT ON COLUMN family_history.family_diabetes_history IS
+COMMENT ON COLUMN heart_health_check.family_history.family_diabetes_history IS
     'Whether there is a family history of diabetes.';
 
-COMMENT ON COLUMN family_history.assessment_id IS
+COMMENT ON COLUMN heart_health_check.family_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN family_history.id IS
+COMMENT ON COLUMN heart_health_check.family_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN family_history.created_at IS
+COMMENT ON COLUMN heart_health_check.family_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN family_history.updated_at IS
+COMMENT ON COLUMN heart_health_check.family_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN family_history.deleted_at IS
+COMMENT ON COLUMN heart_health_check.family_history.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -537,13 +554,13 @@ COMMENT ON COLUMN family_history.deleted_at IS
 -- BEGIN 10_create_table_smoking_alcohol.sql
 -- ========================================================================
 
-CREATE TABLE smoking_alcohol (
+CREATE TABLE heart_health_check.smoking_alcohol (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     smoking_status VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (smoking_status IN ('nonSmoker', 'exSmoker', 'lightSmoker', 'moderateSmoker', 'heavySmoker', '')),
     cigarettes_per_day SMALLINT
@@ -557,32 +574,32 @@ CREATE TABLE smoking_alcohol (
 );
 
 CREATE TRIGGER trigger_smoking_alcohol_updated_at
-    BEFORE UPDATE ON smoking_alcohol
+    BEFORE UPDATE ON heart_health_check.smoking_alcohol
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE smoking_alcohol IS
+COMMENT ON TABLE heart_health_check.smoking_alcohol IS
     'Tobacco and alcohol consumption data.';
-COMMENT ON COLUMN smoking_alcohol.smoking_status IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.smoking_status IS
     'Smoking status: nonSmoker, exSmoker, lightSmoker, moderateSmoker, heavySmoker, or empty.';
-COMMENT ON COLUMN smoking_alcohol.cigarettes_per_day IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.cigarettes_per_day IS
     'Number of cigarettes smoked per day (current smokers only).';
-COMMENT ON COLUMN smoking_alcohol.years_since_quit IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.years_since_quit IS
     'Years since quitting smoking (ex-smokers only).';
-COMMENT ON COLUMN smoking_alcohol.alcohol_units_per_week IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.alcohol_units_per_week IS
     'Alcohol consumption in UK units per week.';
-COMMENT ON COLUMN smoking_alcohol.alcohol_frequency IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.alcohol_frequency IS
     'Frequency of alcohol consumption.';
 
-COMMENT ON COLUMN smoking_alcohol.assessment_id IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN smoking_alcohol.id IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN smoking_alcohol.created_at IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN smoking_alcohol.updated_at IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN smoking_alcohol.deleted_at IS
+COMMENT ON COLUMN heart_health_check.smoking_alcohol.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -593,13 +610,13 @@ COMMENT ON COLUMN smoking_alcohol.deleted_at IS
 -- BEGIN 11_create_table_physical_activity_diet.sql
 -- ========================================================================
 
-CREATE TABLE physical_activity_diet (
+CREATE TABLE heart_health_check.physical_activity_diet (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     physical_activity_minutes_per_week SMALLINT
         CHECK (physical_activity_minutes_per_week IS NULL OR (physical_activity_minutes_per_week >= 0 AND physical_activity_minutes_per_week <= 5000)),
     activity_intensity VARCHAR(10) NOT NULL DEFAULT ''
@@ -613,32 +630,32 @@ CREATE TABLE physical_activity_diet (
 );
 
 CREATE TRIGGER trigger_physical_activity_diet_updated_at
-    BEFORE UPDATE ON physical_activity_diet
+    BEFORE UPDATE ON heart_health_check.physical_activity_diet
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE physical_activity_diet IS
+COMMENT ON TABLE heart_health_check.physical_activity_diet IS
     'Physical activity and dietary habit data.';
-COMMENT ON COLUMN physical_activity_diet.physical_activity_minutes_per_week IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.physical_activity_minutes_per_week IS
     'Total minutes of physical activity per week.';
-COMMENT ON COLUMN physical_activity_diet.activity_intensity IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.activity_intensity IS
     'Typical exercise intensity: light, moderate, vigorous, or empty.';
-COMMENT ON COLUMN physical_activity_diet.fruit_veg_portions_per_day IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.fruit_veg_portions_per_day IS
     'Number of fruit and vegetable portions consumed per day.';
-COMMENT ON COLUMN physical_activity_diet.diet_quality IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.diet_quality IS
     'Self-reported overall diet quality.';
-COMMENT ON COLUMN physical_activity_diet.salt_intake IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.salt_intake IS
     'Self-reported salt intake level.';
 
-COMMENT ON COLUMN physical_activity_diet.assessment_id IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN physical_activity_diet.id IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN physical_activity_diet.created_at IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN physical_activity_diet.updated_at IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN physical_activity_diet.deleted_at IS
+COMMENT ON COLUMN heart_health_check.physical_activity_diet.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -649,13 +666,13 @@ COMMENT ON COLUMN physical_activity_diet.deleted_at IS
 -- BEGIN 12_create_table_body_measurements.sql
 -- ========================================================================
 
-CREATE TABLE body_measurements (
+CREATE TABLE heart_health_check.body_measurements (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     height_cm NUMERIC(5, 1)
         CHECK (height_cm IS NULL OR (height_cm >= 50 AND height_cm <= 300)),
     weight_kg NUMERIC(5, 1)
@@ -667,30 +684,30 @@ CREATE TABLE body_measurements (
 );
 
 CREATE TRIGGER trigger_body_measurements_updated_at
-    BEFORE UPDATE ON body_measurements
+    BEFORE UPDATE ON heart_health_check.body_measurements
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE body_measurements IS
+COMMENT ON TABLE heart_health_check.body_measurements IS
     'Body measurements for cardiovascular risk assessment.';
-COMMENT ON COLUMN body_measurements.height_cm IS
+COMMENT ON COLUMN heart_health_check.body_measurements.height_cm IS
     'Patient height in centimetres.';
-COMMENT ON COLUMN body_measurements.weight_kg IS
+COMMENT ON COLUMN heart_health_check.body_measurements.weight_kg IS
     'Patient weight in kilograms.';
-COMMENT ON COLUMN body_measurements.bmi IS
+COMMENT ON COLUMN heart_health_check.body_measurements.bmi IS
     'Body mass index (can be overridden or calculated from height/weight).';
-COMMENT ON COLUMN body_measurements.waist_circumference_cm IS
+COMMENT ON COLUMN heart_health_check.body_measurements.waist_circumference_cm IS
     'Waist circumference in centimetres.';
 
-COMMENT ON COLUMN body_measurements.assessment_id IS
+COMMENT ON COLUMN heart_health_check.body_measurements.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN body_measurements.id IS
+COMMENT ON COLUMN heart_health_check.body_measurements.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN body_measurements.created_at IS
+COMMENT ON COLUMN heart_health_check.body_measurements.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN body_measurements.updated_at IS
+COMMENT ON COLUMN heart_health_check.body_measurements.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN body_measurements.deleted_at IS
+COMMENT ON COLUMN heart_health_check.body_measurements.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -701,13 +718,13 @@ COMMENT ON COLUMN body_measurements.deleted_at IS
 -- BEGIN 13_create_table_review_calculate.sql
 -- ========================================================================
 
-CREATE TABLE review_calculate (
+CREATE TABLE heart_health_check.review_calculate (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
     review_date DATE,
     clinical_notes TEXT NOT NULL DEFAULT '',
@@ -716,30 +733,30 @@ CREATE TABLE review_calculate (
 );
 
 CREATE TRIGGER trigger_review_calculate_updated_at
-    BEFORE UPDATE ON review_calculate
+    BEFORE UPDATE ON heart_health_check.review_calculate
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE review_calculate IS
+COMMENT ON TABLE heart_health_check.review_calculate IS
     'Clinician review information and AUDIT alcohol screening score.';
-COMMENT ON COLUMN review_calculate.clinician_name IS
+COMMENT ON COLUMN heart_health_check.review_calculate.clinician_name IS
     'Name of the reviewing clinician.';
-COMMENT ON COLUMN review_calculate.review_date IS
+COMMENT ON COLUMN heart_health_check.review_calculate.review_date IS
     'Date of the clinical review.';
-COMMENT ON COLUMN review_calculate.clinical_notes IS
+COMMENT ON COLUMN heart_health_check.review_calculate.clinical_notes IS
     'Free-text clinical notes from the reviewing clinician.';
-COMMENT ON COLUMN review_calculate.audit_score IS
+COMMENT ON COLUMN heart_health_check.review_calculate.audit_score IS
     'AUDIT (Alcohol Use Disorders Identification Test) score (0-40).';
 
-COMMENT ON COLUMN review_calculate.assessment_id IS
+COMMENT ON COLUMN heart_health_check.review_calculate.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN review_calculate.id IS
+COMMENT ON COLUMN heart_health_check.review_calculate.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN review_calculate.created_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN review_calculate.updated_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN review_calculate.deleted_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -750,13 +767,13 @@ COMMENT ON COLUMN review_calculate.deleted_at IS
 -- BEGIN 14_create_table_heart_health_check_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE heart_health_check.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     risk_category VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (risk_category IN ('draft', 'low', 'moderate', 'high')),
     ten_year_risk_percent NUMERIC(5, 1) NOT NULL DEFAULT 0
@@ -767,30 +784,30 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON heart_health_check.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE heart_health_check.grade IS
     'Grading result summarizing 10-year CVD risk and heart age. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN heart_health_check.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.risk_category IS
+COMMENT ON COLUMN heart_health_check.grade.risk_category IS
     'Risk classification: draft, low, moderate, or high.';
-COMMENT ON COLUMN grade.ten_year_risk_percent IS
+COMMENT ON COLUMN heart_health_check.grade.ten_year_risk_percent IS
     'Estimated 10-year cardiovascular disease risk percentage.';
-COMMENT ON COLUMN grade.heart_age IS
+COMMENT ON COLUMN heart_health_check.grade.heart_age IS
     'Estimated heart age in years.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN heart_health_check.grade.graded_at IS
     'Timestamp when the grading was last performed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN heart_health_check.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN heart_health_check.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN heart_health_check.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN heart_health_check.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -801,13 +818,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 15_create_table_heart_health_check_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE heart_health_check.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
@@ -816,28 +833,28 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE INDEX index_grading_fired_rule_result
-    ON grading_fired_rule(grade_id);
+    ON heart_health_check.grading_fired_rule(grade_id);
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE heart_health_check.grading_fired_rule IS
     'Individual risk rules that fired during the Heart Health Check grading. Many-to-one child of grade.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.rule_id IS
     'Rule identifier (e.g. HHC-001).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.category IS
     'Risk factor category (e.g. Blood Pressure, Diabetes).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.description IS
     'Human-readable description of the fired rule.';
-COMMENT ON COLUMN grading_fired_rule.risk_level IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.risk_level IS
     'Risk level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN heart_health_check.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -848,13 +865,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 16_create_table_heart_health_check_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE heart_health_check.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL,
     message TEXT NOT NULL,
@@ -863,28 +880,28 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE INDEX index_grading_additional_flag_result
-    ON grading_additional_flag(grade_id);
+    ON heart_health_check.grading_additional_flag(grade_id);
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE heart_health_check.grading_additional_flag IS
     'Additional clinical flags raised during the Heart Health Check grading. Many-to-one child of grade.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.flag_id IS
     'Flag identifier (e.g. FLAG-BP-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.category IS
     'Clinical category of the flag (e.g. Blood Pressure, Eligibility).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.message IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.priority IS
     'Flag priority: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN heart_health_check.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS caprini_venous_thromboembolism_risk_assessment;
+
+COMMENT ON SCHEMA caprini_venous_thromboembolism_risk_assessment IS
+    'Namespace for the Caprini Venous Thromboembolism Risk Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.patient IS
     'Patient demographic information used by the Caprini VTE risk-assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON caprini_venous_thromboembolism_risk_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, surgeon, nurse, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.role IS
     'Primary clinical role: doctor, surgeon, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON caprini_venous_thromboembolism_risk_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- bleeding-risk input. The computed score, fired rules, and flags live
 -- in dedicated child tables.
 
-CREATE TABLE caprini_venous_thromboembolism_risk_assessment (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES caprini_venous_thromboembolism_risk_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES caprini_venous_thromboembolism_risk_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -280,120 +297,120 @@ CREATE TABLE caprini_venous_thromboembolism_risk_assessment (
 );
 
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_patient_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment (patient_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (patient_id);
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_clinician_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment (clinician_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (clinician_id);
 
 CREATE TRIGGER trigger_caprini_venous_thromboembolism_risk_assessment_updated_at
-    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment IS
     'Main Caprini VTE risk-assessment record: assessment context, patient identification, age band, weighted yes/no risk-factor inputs (1-, 2-, 3-, and 5-point groups), and the bleeding-risk input.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_name IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_role IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_role IS
     'Role of the assessing clinician: doctor, surgeon, nurse, pharmacist, or other.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.assessed_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.care_setting IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.care_setting IS
     'Care setting: surgical-ward, medical-ward, pre-operative-clinic, or other.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.admission_type IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.admission_type IS
     'Admission type: surgical or medical.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient_identifier IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.age_band IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.age_band IS
     'Age band contributing weight: under-41 (0), 41-60 (1), 61-74 (2), or 75-plus (3).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.sex IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.minor_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.minor_surgery IS
     '1-point factor — minor surgery planned or performed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.recent_major_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.recent_major_surgery IS
     '1-point factor — major surgery within the past month.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.varicose_veins IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.varicose_veins IS
     '1-point factor — varicose veins.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.inflammatory_bowel_disease IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.inflammatory_bowel_disease IS
     '1-point factor — inflammatory bowel disease.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.swollen_legs IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.swollen_legs IS
     '1-point factor — swollen legs (current).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.obesity IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.obesity IS
     '1-point factor — obesity (BMI >= 30).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.acute_myocardial_infarction IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.acute_myocardial_infarction IS
     '1-point factor — acute myocardial infarction.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.congestive_heart_failure IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.congestive_heart_failure IS
     '1-point factor — congestive heart failure (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.sepsis IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.sepsis IS
     '1-point factor — sepsis (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.serious_lung_disease IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.serious_lung_disease IS
     '1-point factor — serious lung disease including pneumonia (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.abnormal_pulmonary_function IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.abnormal_pulmonary_function IS
     '1-point factor — abnormal pulmonary function (e.g. COPD).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.medical_patient_bed_rest IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.medical_patient_bed_rest IS
     '1-point factor — medical patient currently on bed rest.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.oral_contraceptive_or_hrt IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.oral_contraceptive_or_hrt IS
     '1-point factor — oral contraceptive or hormone replacement therapy.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.pregnancy_or_postpartum IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.pregnancy_or_postpartum IS
     '1-point factor — pregnancy or postpartum (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.adverse_pregnancy_history IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.adverse_pregnancy_history IS
     '1-point factor — history of unexplained or recurrent spontaneous abortion.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.arthroscopic_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.arthroscopic_surgery IS
     '2-point factor — arthroscopic surgery.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.major_open_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.major_open_surgery IS
     '2-point factor — major open surgery (> 45 minutes).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.laparoscopic_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.laparoscopic_surgery IS
     '2-point factor — laparoscopic surgery (> 45 minutes).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.malignancy IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.malignancy IS
     '2-point factor — malignancy (present or previous).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.confined_to_bed IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.confined_to_bed IS
     '2-point factor — confined to bed (> 72 hours).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.immobilising_cast IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.immobilising_cast IS
     '2-point factor — immobilising plaster cast.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.central_venous_access IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.central_venous_access IS
     '2-point factor — central venous access.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.history_of_vte IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.history_of_vte IS
     '3-point factor — personal history of venous thromboembolism.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.family_history_of_thrombosis IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.family_history_of_thrombosis IS
     '3-point factor — family history of thrombosis.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.factor_v_leiden IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.factor_v_leiden IS
     '3-point factor — Factor V Leiden mutation.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.prothrombin_20210a IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.prothrombin_20210a IS
     '3-point factor — prothrombin 20210A mutation.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.lupus_anticoagulant IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.lupus_anticoagulant IS
     '3-point factor — lupus anticoagulant positive.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.anticardiolipin_antibodies IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.anticardiolipin_antibodies IS
     '3-point factor — elevated anticardiolipin antibodies.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.elevated_homocysteine IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.elevated_homocysteine IS
     '3-point factor — elevated serum homocysteine.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.heparin_induced_thrombocytopenia IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.heparin_induced_thrombocytopenia IS
     '3-point factor — heparin-induced thrombocytopenia (HIT).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.other_thrombophilia IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.other_thrombophilia IS
     '3-point factor — other congenital or acquired thrombophilia.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.stroke IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.stroke IS
     '5-point factor — stroke (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.elective_arthroplasty IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.elective_arthroplasty IS
     '5-point factor — elective major lower-extremity arthroplasty.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.hip_pelvis_leg_fracture IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.hip_pelvis_leg_fracture IS
     '5-point factor — hip, pelvis, or leg fracture.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.acute_spinal_cord_injury IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.acute_spinal_cord_injury IS
     '5-point factor — acute spinal cord injury with paralysis (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.multiple_trauma IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.multiple_trauma IS
     '5-point factor — multiple trauma (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
     'Bleeding-risk input — an active or high risk of bleeding that contraindicates pharmacological prophylaxis.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinical_note IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -410,14 +427,14 @@ COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinical_note I
 -- bleeding risk is high). The fired rules and flags live in dedicated
 -- child tables.
 
-CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     caprini_venous_thromboembolism_risk_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES caprini_venous_thromboembolism_risk_assessment(id) ON DELETE CASCADE,
+        REFERENCES caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment(id) ON DELETE CASCADE,
 
     total_score INT,
     risk_band VARCHAR(10) NOT NULL DEFAULT ''
@@ -428,29 +445,29 @@ CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade (
 );
 
 CREATE TRIGGER trigger_caprini_venous_thromboembolism_risk_assessment_grade_updated_at
-    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment_grade
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment_grade IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade IS
     'Computed Caprini grading result: summed total score, derived risk band (very-low / low / moderate / high), and the recommended prophylaxis strategy.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.caprini_venous_thromboembolism_risk_assessment_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.caprini_venous_thromboembolism_risk_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.total_score IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.total_score IS
     'Summed Caprini score: age-band weight plus the fixed weight of every fired factor (0..40+).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.risk_band IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.risk_band IS
     'Derived risk band: very-low (0-1), low (2), moderate (3-4), or high (>= 5).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.prophylaxis_recommendation IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.prophylaxis_recommendation IS
     'Recommended prophylaxis strategy: early-ambulation, mechanical, pharmacological-or-mechanical, or pharmacological-plus-mechanical (downgraded to mechanical when the bleeding risk is high).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.graded_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -466,14 +483,14 @@ COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade.graded_at
 -- the weight group it belongs to, the points it contributed, and a
 -- human-readable description.
 
-CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade_rule (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     caprini_venous_thromboembolism_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES caprini_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     factor VARCHAR(60) NOT NULL DEFAULT '',
@@ -485,36 +502,36 @@ CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade_rule (
 );
 
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_grade_rule_grade_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment_grade_rule (caprini_venous_thromboembolism_risk_assessment_grade_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule (caprini_venous_thromboembolism_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_caprini_venous_thromboembolism_risk_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment_grade_rule
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment_grade_rule IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule IS
     'Audit trail of every grading rule that fired during Caprini computation: fired factor (or age band), weight group, points contributed, category, and description.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.caprini_venous_thromboembolism_risk_assessment_grade_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.caprini_venous_thromboembolism_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-HISTORY-OF-VTE-3POINT-01).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.factor IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.factor IS
     'Fired factor key (e.g. history_of_vte) or age_band that contributed the points.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.weight_group IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.weight_group IS
     'Weight group the rule belongs to: age, 1-point, 2-point, 3-point, or 5-point.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.points IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.points IS
     'Points contributed by this rule (1, 2, 3, 5, or the 0-3 age-band weight).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.category IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.category IS
     'Subject category (e.g. surgical, thrombophilia, mobility, age-band).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.description IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -528,14 +545,14 @@ COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_rule.desc
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade_flag (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     caprini_venous_thromboembolism_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES caprini_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -555,34 +572,34 @@ CREATE TABLE caprini_venous_thromboembolism_risk_assessment_grade_flag (
 );
 
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_grade_flag_grade_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment_grade_flag (caprini_venous_thromboembolism_risk_assessment_grade_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag (caprini_venous_thromboembolism_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_caprini_venous_thromboembolism_risk_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment_grade_flag
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment_grade_flag IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.caprini_venous_thromboembolism_risk_assessment_grade_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.caprini_venous_thromboembolism_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-VTE-RISK-001).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.category IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.category IS
     'Flag category: high-vte-risk, bleeding-contraindication, prior-vte, known-thrombophilia, incomplete-assessment, or other.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.priority IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.description IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "commence pharmacological prophylaxis after bleeding-risk review").';
 
 -- ========================================================================

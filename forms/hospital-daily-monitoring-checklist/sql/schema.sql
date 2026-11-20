@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (4):
+-- Source files (5):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_hospital_daily_monitoring_checklist.sql
 --   - 03_create_table_hospital_daily_monitoring_checklist_item.sql
@@ -24,12 +25,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hospital_daily_monitoring_checklist;
+
+COMMENT ON SCHEMA hospital_daily_monitoring_checklist IS
+    'Namespace for the Hospital Daily Monitoring Checklist form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hospital_daily_monitoring_checklist.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -37,7 +54,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hospital_daily_monitoring_checklist.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -50,7 +67,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- One row per daily-monitoring inspection round at one hospital site.
 
-CREATE TABLE hospital_daily_monitoring_checklist (
+CREATE TABLE hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -70,37 +87,37 @@ CREATE TABLE hospital_daily_monitoring_checklist (
 );
 
 CREATE TRIGGER trigger_hospital_daily_monitoring_checklist_updated_at
-    BEFORE UPDATE ON hospital_daily_monitoring_checklist
+    BEFORE UPDATE ON hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_daily_monitoring_checklist.set_updated_at();
 
-COMMENT ON TABLE hospital_daily_monitoring_checklist IS
+COMMENT ON TABLE hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist IS
     'One daily-monitoring inspection round at one hospital site: who inspected, when, and the sign-off notes.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.id IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.created_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.updated_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.deleted_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_name IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.hospital_name IS
     'Name of the hospital or facility being inspected.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.department_or_site IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.department_or_site IS
     'Specific department, ward, or site visited during this round, if narrower than the whole hospital.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.inspection_date IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.inspection_date IS
     'Date the inspection round was carried out.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.inspecting_officer_name IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.inspecting_officer_name IS
     'Name of the inspecting officer (e.g. RMO, Medical Superintendent, hospital administrator).';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.inspecting_officer_designation IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.inspecting_officer_designation IS
     'Designation / job title of the inspecting officer.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.overall_notes IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.overall_notes IS
     'Free-text overall notes recorded at sign-off.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.action_plan IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.action_plan IS
     'Free-text action plan recorded at sign-off, addressing needs-attention checkpoints.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.status IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.status IS
     'Submission status: draft or submitted.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist.signed_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist.signed_at IS
     'Timestamp the inspecting officer signed off this round.';
 
 -- ========================================================================
@@ -119,13 +136,13 @@ COMMENT ON COLUMN hospital_daily_monitoring_checklist.signed_at IS
 -- one wide column per checkpoint, since 97 checkpoints would need ~200
 -- flat columns.
 
-CREATE TABLE hospital_daily_monitoring_checklist_item (
+CREATE TABLE hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    hospital_daily_monitoring_checklist_id UUID NOT NULL REFERENCES hospital_daily_monitoring_checklist(id) ON DELETE CASCADE,
+    hospital_daily_monitoring_checklist_id UUID NOT NULL REFERENCES hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist(id) ON DELETE CASCADE,
     item_code VARCHAR(10) NOT NULL,
     section_number INTEGER NOT NULL CHECK (section_number BETWEEN 1 AND 22),
     section_title VARCHAR(255) NOT NULL DEFAULT '',
@@ -137,39 +154,39 @@ CREATE TABLE hospital_daily_monitoring_checklist_item (
 );
 
 CREATE TRIGGER trigger_hospital_daily_monitoring_checklist_item_updated_at
-    BEFORE UPDATE ON hospital_daily_monitoring_checklist_item
+    BEFORE UPDATE ON hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_daily_monitoring_checklist.set_updated_at();
 
-COMMENT ON TABLE hospital_daily_monitoring_checklist_item IS
+COMMENT ON TABLE hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item IS
     'One answered checkpoint (of 97) within a daily-monitoring inspection round.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.id IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.created_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.updated_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.deleted_at IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.hospital_daily_monitoring_checklist_id IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.hospital_daily_monitoring_checklist_id IS
     'Foreign key to the parent inspection round.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.item_code IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.item_code IS
     'Stable dotted checkpoint identifier from spec/index.md, e.g. 1.1, 6.1.1, 20.10, or a bare section number such as 15.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.section_number IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.section_number IS
     'Top-level area number (1-22) this checkpoint belongs to.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.section_title IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.section_title IS
     'Top-level area title (e.g. OPD, Causality, Diagnostic Facility) mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.item_text IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.item_text IS
     'Full checkpoint text mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.status IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.status IS
     'Checkpoint status: satisfactory, needs-attention, not-applicable, or unanswered.';
-COMMENT ON COLUMN hospital_daily_monitoring_checklist_item.remarks IS
+COMMENT ON COLUMN hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item.remarks IS
     'Optional free-text remark, most useful when status is needs-attention.';
 
 CREATE INDEX hospital_daily_monitoring_checklist_item_checklist_id_idx
-    ON hospital_daily_monitoring_checklist_item (hospital_daily_monitoring_checklist_id);
+    ON hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item (hospital_daily_monitoring_checklist_id);
 CREATE INDEX hospital_daily_monitoring_checklist_item_status_idx
-    ON hospital_daily_monitoring_checklist_item (status);
+    ON hospital_daily_monitoring_checklist.hospital_daily_monitoring_checklist_item (status);
 
 -- ========================================================================
 -- END 03_create_table_hospital_daily_monitoring_checklist_item.sql

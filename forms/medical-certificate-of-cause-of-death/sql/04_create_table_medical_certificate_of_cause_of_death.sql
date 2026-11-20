@@ -8,14 +8,14 @@
 -- flagged issues live in dedicated child tables. This record documents the
 -- certifying doctor's statutory judgement; it does not itself diagnose.
 
-CREATE TABLE medical_certificate_of_cause_of_death (
+CREATE TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES medical_certificate_of_cause_of_death.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES medical_certificate_of_cause_of_death.clinician(id) ON DELETE RESTRICT,
 
     -- Certification context
     certifying_doctor_name TEXT NOT NULL DEFAULT '',
@@ -68,100 +68,100 @@ CREATE TABLE medical_certificate_of_cause_of_death (
 );
 
 CREATE INDEX medical_certificate_of_cause_of_death_patient_id_idx
-    ON medical_certificate_of_cause_of_death (patient_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (patient_id);
 CREATE INDEX medical_certificate_of_cause_of_death_clinician_id_idx
-    ON medical_certificate_of_cause_of_death (clinician_id);
+    ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death (clinician_id);
 
 CREATE TRIGGER trigger_medical_certificate_of_cause_of_death_updated_at
-    BEFORE UPDATE ON medical_certificate_of_cause_of_death
+    BEFORE UPDATE ON medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_certificate_of_cause_of_death.set_updated_at();
 
-COMMENT ON TABLE medical_certificate_of_cause_of_death IS
+COMMENT ON TABLE medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death IS
     'Main Medical Certificate of Cause of Death (MCCD) record: certification context, deceased death details, the Part I direct causal sequence (I(a) -> I(b) -> I(c)) with onset-to-death intervals, the Part II contributory conditions, and the coroner / medical-examiner referral status. Validity classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.created_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.updated_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.deleted_at IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.patient_id IS
     'Foreign key to the deceased this certificate documents (restrict delete).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.clinician_id IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.clinician_id IS
     'Foreign key to the certifying doctor (restrict delete); optional.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifying_doctor_name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifying_doctor_name IS
     'Name of the attending practitioner certifying the cause of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifying_doctor_grade IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifying_doctor_grade IS
     'Grade of the certifying doctor: consultant, sas, registrar, foundation, gp, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.gmc_reference IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.gmc_reference IS
     'GMC registration number of the certifying doctor.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.place_of_certification IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.place_of_certification IS
     'Place where the certificate is completed: hospital, practice, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certification_date IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certification_date IS
     'Date the certificate was completed.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.attended_deceased IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.attended_deceased IS
     'Whether the certifier attended the deceased during the last illness (yes/no).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.last_seen_alive_date IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.last_seen_alive_date IS
     'Date the certifier last saw the deceased alive.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.deceased_name IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.deceased_name IS
     'Full name of the deceased as recorded on the certificate.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.sex IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.sex IS
     'Sex of the deceased: female, male, other, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.date_of_birth IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.date_of_birth IS
     'Date of birth of the deceased.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.age_years IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.age_years IS
     'Age of the deceased at death, in whole years.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.patient_identifier IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.patient_identifier IS
     'NHS number or local identifier of the deceased as recorded on the certificate.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.date_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.date_of_death IS
     'Date of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.time_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.time_of_death IS
     'Time of death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.place_of_death IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.place_of_death IS
     'Place of death: ward, home, hospice, or other.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.seen_after_death_by IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.seen_after_death_by IS
     'Who saw the body after death: certifier, another-practitioner, or not-seen.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ia_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ia_condition IS
     'Part I(a): the disease or condition directly leading to death (required).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ia_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ia_interval IS
     'Part I(a): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ib_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ib_condition IS
     'Part I(b): the antecedent condition giving rise to I(a).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ib_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ib_interval IS
     'Part I(b): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ic_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ic_condition IS
     'Part I(c): the underlying condition giving rise to I(b).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_ic_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_ic_interval IS
     'Part I(c): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.part_ii_conditions IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.part_ii_conditions IS
     'Part II: other significant conditions contributing to death but not part of the Part I sequence.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.part_ii_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.part_ii_interval IS
     'Part II: approximate interval between onset and death (optional).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.referred_to_coroner IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.referred_to_coroner IS
     'Whether the death has been referred to the coroner (yes/no).';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.coroner_reason IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.coroner_reason IS
     'Coroner-referral criterion, if any: unnatural, violent, suspicious, unknown-cause, industrial-disease, medical-procedure, custody, no-attending-practitioner, neglect, self-harm, poisoning, other, or none.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_examiner_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.medical_examiner_status IS
     'Medical-examiner scrutiny status: scrutinised, discussed, pending, or not-required.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.certifier_note IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.certifier_note IS
     'Free-text note from the certifying doctor.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.qualifications IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.qualifications IS
     'Certifier primary medical qualifications, stated alongside the signature in the declaration.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.attendance_mode IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.attendance_mode IS
     'How the certifier attended the deceased during life: in-person, video, telephone, or none. Telephone alone does not qualify.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.ethnicity IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.ethnicity IS
     'Self-declared ethnicity copied from the medical record; unknown if not documented. Never guessed or asked of the family.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.pregnancy_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.pregnancy_status IS
     'Pregnancy status: not-applicable, not-pregnant, pregnant-at-death, pregnant-within-12-months, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_device_status IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.implanted_device_status IS
     'Whether hazardous implantable devices are present, checked in the records and on the body for cremation safety: none, present, or unknown.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.implanted_devices IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.implanted_devices IS
     'Description of hazardous implantable devices, for example pacemaker, ICD, neurostimulator, or radioactive implant.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_condition IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_id_condition IS
     'Part I(d): the underlying condition giving rise to I(c), when the sequence has four steps.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.cause_id_interval IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.cause_id_interval IS
     'Part I(d): approximate interval between onset and death.';
-COMMENT ON COLUMN medical_certificate_of_cause_of_death.bereaved_family_discussed IS
+COMMENT ON COLUMN medical_certificate_of_cause_of_death.medical_certificate_of_cause_of_death.bereaved_family_discussed IS
     'Whether the medical examiner has discussed the cause of death with the bereaved family (yes/no).';

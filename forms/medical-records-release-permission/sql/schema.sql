@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (15):
+-- Source files (16):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -38,12 +39,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_records_release_permission;
+
+COMMENT ON SCHEMA medical_records_release_permission IS
+    'Namespace for the Medical Records Release Permission form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_records_release_permission.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -51,7 +68,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_records_release_permission.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -64,7 +81,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE medical_records_release_permission.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -87,56 +104,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON medical_records_release_permission.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE medical_records_release_permission.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN medical_records_release_permission.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN medical_records_release_permission.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN medical_records_release_permission.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN medical_records_release_permission.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN medical_records_release_permission.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_records_release_permission.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_records_release_permission.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN medical_records_release_permission.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_records_release_permission.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN medical_records_release_permission.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN medical_records_release_permission.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN medical_records_release_permission.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN medical_records_release_permission.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN medical_records_release_permission.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON medical_records_release_permission.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN medical_records_release_permission.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -149,7 +166,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_records_release_permission.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -168,46 +185,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_records_release_permission.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_records_release_permission.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON medical_records_release_permission.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -218,36 +235,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_release_form.sql
 -- ========================================================================
 
-CREATE TABLE release_form (
+CREATE TABLE medical_records_release_permission.release_form (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'approved', 'expired', 'revoked'))
 );
 
 CREATE TRIGGER trigger_release_form_updated_at
-    BEFORE UPDATE ON release_form
+    BEFORE UPDATE ON medical_records_release_permission.release_form
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE release_form IS
+COMMENT ON TABLE medical_records_release_permission.release_form IS
     'Medical records release permission form. Parent entity for all form sections.';
-COMMENT ON COLUMN release_form.patient_id IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.patient_id IS
     'Foreign key to the patient who owns this release form.';
-COMMENT ON COLUMN release_form.status IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.status IS
     'Lifecycle status: draft, submitted, approved, expired, or revoked.';
 
-COMMENT ON COLUMN release_form.id IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN release_form.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN release_form.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN release_form.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.release_form.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -258,13 +275,13 @@ COMMENT ON COLUMN release_form.deleted_at IS
 -- BEGIN 05_create_table_authorized_recipient.sql
 -- ========================================================================
 
-CREATE TABLE authorized_recipient (
+CREATE TABLE medical_records_release_permission.authorized_recipient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     recipient_name VARCHAR(255) NOT NULL DEFAULT '',
     recipient_organization VARCHAR(255) NOT NULL DEFAULT '',
     recipient_address TEXT NOT NULL DEFAULT '',
@@ -274,34 +291,34 @@ CREATE TABLE authorized_recipient (
 );
 
 CREATE TRIGGER trigger_authorized_recipient_updated_at
-    BEFORE UPDATE ON authorized_recipient
+    BEFORE UPDATE ON medical_records_release_permission.authorized_recipient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE authorized_recipient IS
+COMMENT ON TABLE medical_records_release_permission.authorized_recipient IS
     'Authorized recipient of released medical records. One-to-one child of release_form.';
-COMMENT ON COLUMN authorized_recipient.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN authorized_recipient.recipient_name IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_name IS
     'Full name of the authorized recipient.';
-COMMENT ON COLUMN authorized_recipient.recipient_organization IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_organization IS
     'Organization the recipient belongs to.';
-COMMENT ON COLUMN authorized_recipient.recipient_role IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_role IS
     'Professional role or title of the recipient.';
 
-COMMENT ON COLUMN authorized_recipient.recipient_address IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_address IS
     'Recipient address.';
-COMMENT ON COLUMN authorized_recipient.recipient_phone IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_phone IS
     'Recipient phone.';
-COMMENT ON COLUMN authorized_recipient.recipient_email IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_email IS
     'Recipient email.';
-COMMENT ON COLUMN authorized_recipient.id IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN authorized_recipient.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN authorized_recipient.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN authorized_recipient.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -312,13 +329,13 @@ COMMENT ON COLUMN authorized_recipient.deleted_at IS
 -- BEGIN 06_create_table_records_to_release.sql
 -- ========================================================================
 
-CREATE TABLE records_to_release (
+CREATE TABLE medical_records_release_permission.records_to_release (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     record_types TEXT[] NOT NULL DEFAULT '{}',
     specific_date_range VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (specific_date_range IN ('yes', 'no', '')),
@@ -329,32 +346,32 @@ CREATE TABLE records_to_release (
 );
 
 CREATE TRIGGER trigger_records_to_release_updated_at
-    BEFORE UPDATE ON records_to_release
+    BEFORE UPDATE ON medical_records_release_permission.records_to_release
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE records_to_release IS
+COMMENT ON TABLE medical_records_release_permission.records_to_release IS
     'Types and date range of medical records to be released. One-to-one child of release_form.';
-COMMENT ON COLUMN records_to_release.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN records_to_release.record_types IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.record_types IS
     'Array of record type identifiers selected for release.';
-COMMENT ON COLUMN records_to_release.specific_date_range IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.specific_date_range IS
     'Whether a specific date range applies: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN records_to_release.date_from IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.date_from IS
     'Start date of the records date range (nullable).';
-COMMENT ON COLUMN records_to_release.date_to IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.date_to IS
     'End date of the records date range (nullable). Must be >= date_from when both are set.';
-COMMENT ON COLUMN records_to_release.specific_record_details IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.specific_record_details IS
     'Free-text description of specific records requested.';
 
-COMMENT ON COLUMN records_to_release.id IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN records_to_release.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN records_to_release.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN records_to_release.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.records_to_release.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -365,13 +382,13 @@ COMMENT ON COLUMN records_to_release.deleted_at IS
 -- BEGIN 07_create_table_purpose_of_release.sql
 -- ========================================================================
 
-CREATE TABLE purpose_of_release (
+CREATE TABLE medical_records_release_permission.purpose_of_release (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     purpose VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (purpose IN (
             'continuing-care',
@@ -389,26 +406,26 @@ CREATE TABLE purpose_of_release (
 );
 
 CREATE TRIGGER trigger_purpose_of_release_updated_at
-    BEFORE UPDATE ON purpose_of_release
+    BEFORE UPDATE ON medical_records_release_permission.purpose_of_release
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE purpose_of_release IS
+COMMENT ON TABLE medical_records_release_permission.purpose_of_release IS
     'Stated purpose for the medical records release. One-to-one child of release_form.';
-COMMENT ON COLUMN purpose_of_release.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN purpose_of_release.purpose IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.purpose IS
     'Release purpose: continuing-care, second-opinion, insurance, legal, personal, research, employment, other, or empty string.';
-COMMENT ON COLUMN purpose_of_release.other_details IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.other_details IS
     'Free-text details required when purpose is other. Must not be NULL when purpose is other.';
 
-COMMENT ON COLUMN purpose_of_release.id IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN purpose_of_release.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN purpose_of_release.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN purpose_of_release.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.purpose_of_release.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -419,13 +436,13 @@ COMMENT ON COLUMN purpose_of_release.deleted_at IS
 -- BEGIN 08_create_table_authorization_period.sql
 -- ========================================================================
 
-CREATE TABLE authorization_period (
+CREATE TABLE medical_records_release_permission.authorization_period (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     single_use VARCHAR(5) NOT NULL DEFAULT ''
@@ -434,28 +451,28 @@ CREATE TABLE authorization_period (
 );
 
 CREATE TRIGGER trigger_authorization_period_updated_at
-    BEFORE UPDATE ON authorization_period
+    BEFORE UPDATE ON medical_records_release_permission.authorization_period
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE authorization_period IS
+COMMENT ON TABLE medical_records_release_permission.authorization_period IS
     'Authorization validity period for the records release. One-to-one child of release_form.';
-COMMENT ON COLUMN authorization_period.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN authorization_period.start_date IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.start_date IS
     'Date from which the authorization is valid.';
-COMMENT ON COLUMN authorization_period.end_date IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.end_date IS
     'Date until which the authorization is valid. Must be >= start_date.';
-COMMENT ON COLUMN authorization_period.single_use IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.single_use IS
     'Whether the authorization is for a single use only: yes, no, or empty string.';
 
-COMMENT ON COLUMN authorization_period.id IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN authorization_period.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN authorization_period.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN authorization_period.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorization_period.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -466,13 +483,13 @@ COMMENT ON COLUMN authorization_period.deleted_at IS
 -- BEGIN 09_create_table_restrictions_limitations.sql
 -- ========================================================================
 
-CREATE TABLE restrictions_limitations (
+CREATE TABLE medical_records_release_permission.restrictions_limitations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     exclude_hiv VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (exclude_hiv IN ('yes', 'no', '')),
     exclude_substance_abuse VARCHAR(5) NOT NULL DEFAULT ''
@@ -487,34 +504,34 @@ CREATE TABLE restrictions_limitations (
 );
 
 CREATE TRIGGER trigger_restrictions_limitations_updated_at
-    BEFORE UPDATE ON restrictions_limitations
+    BEFORE UPDATE ON medical_records_release_permission.restrictions_limitations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE restrictions_limitations IS
+COMMENT ON TABLE medical_records_release_permission.restrictions_limitations IS
     'Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.';
-COMMENT ON COLUMN restrictions_limitations.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN restrictions_limitations.exclude_hiv IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_hiv IS
     'Exclude HIV/AIDS-related records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_substance_abuse IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_substance_abuse IS
     'Exclude substance abuse records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_mental_health IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_mental_health IS
     'Exclude mental health records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_genetic_info IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_genetic_info IS
     'Exclude genetic information records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.exclude_sti IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.exclude_sti IS
     'Exclude sexually transmitted infection records: yes, no, or empty string.';
-COMMENT ON COLUMN restrictions_limitations.additional_restrictions IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.additional_restrictions IS
     'Free-text additional restrictions specified by the patient.';
 
-COMMENT ON COLUMN restrictions_limitations.id IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN restrictions_limitations.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN restrictions_limitations.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN restrictions_limitations.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.restrictions_limitations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -525,13 +542,13 @@ COMMENT ON COLUMN restrictions_limitations.deleted_at IS
 -- BEGIN 10_create_table_patient_rights.sql
 -- ========================================================================
 
-CREATE TABLE patient_rights (
+CREATE TABLE medical_records_release_permission.patient_rights (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     acknowledged_right_to_revoke VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (acknowledged_right_to_revoke IN ('yes', 'no', '')),
     acknowledged_no_charge_for_access VARCHAR(5) NOT NULL DEFAULT ''
@@ -541,28 +558,28 @@ CREATE TABLE patient_rights (
 );
 
 CREATE TRIGGER trigger_patient_rights_updated_at
-    BEFORE UPDATE ON patient_rights
+    BEFORE UPDATE ON medical_records_release_permission.patient_rights
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE patient_rights IS
+COMMENT ON TABLE medical_records_release_permission.patient_rights IS
     'Patient acknowledgements of rights regarding records release. One-to-one child of release_form.';
-COMMENT ON COLUMN patient_rights.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN patient_rights.acknowledged_right_to_revoke IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.acknowledged_right_to_revoke IS
     'Patient acknowledged their right to revoke consent: yes, no, or empty string.';
-COMMENT ON COLUMN patient_rights.acknowledged_no_charge_for_access IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.acknowledged_no_charge_for_access IS
     'Patient acknowledged no charge for access to records: yes, no, or empty string.';
-COMMENT ON COLUMN patient_rights.acknowledged_data_protection IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.acknowledged_data_protection IS
     'Patient acknowledged data protection rights: yes, no, or empty string.';
 
-COMMENT ON COLUMN patient_rights.id IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient_rights.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN patient_rights.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN patient_rights.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.patient_rights.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -573,13 +590,13 @@ COMMENT ON COLUMN patient_rights.deleted_at IS
 -- BEGIN 11_create_table_signature_consent.sql
 -- ========================================================================
 
-CREATE TABLE signature_consent (
+CREATE TABLE medical_records_release_permission.signature_consent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     patient_signature_confirmed VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (patient_signature_confirmed IN ('yes', 'no', '')),
     signature_date DATE,
@@ -591,34 +608,34 @@ CREATE TABLE signature_consent (
 );
 
 CREATE TRIGGER trigger_signature_consent_updated_at
-    BEFORE UPDATE ON signature_consent
+    BEFORE UPDATE ON medical_records_release_permission.signature_consent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE signature_consent IS
+COMMENT ON TABLE medical_records_release_permission.signature_consent IS
     'Signature and consent confirmations for the release form. One-to-one child of release_form.';
-COMMENT ON COLUMN signature_consent.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN signature_consent.patient_signature_confirmed IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.patient_signature_confirmed IS
     'Whether the patient has confirmed their signature: yes, no, or empty string.';
-COMMENT ON COLUMN signature_consent.signature_date IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.signature_date IS
     'Date the patient signed the consent form.';
-COMMENT ON COLUMN signature_consent.witness_name IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.witness_name IS
     'Full name of the witness.';
-COMMENT ON COLUMN signature_consent.witness_signature_confirmed IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.witness_signature_confirmed IS
     'Whether the witness has confirmed their signature: yes, no, or empty string.';
-COMMENT ON COLUMN signature_consent.witness_date IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.witness_date IS
     'Date the witness signed.';
-COMMENT ON COLUMN signature_consent.parent_guardian_name IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.parent_guardian_name IS
     'Name of parent or guardian if patient is a minor or lacks capacity.';
 
-COMMENT ON COLUMN signature_consent.id IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN signature_consent.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN signature_consent.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN signature_consent.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.signature_consent.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -629,13 +646,13 @@ COMMENT ON COLUMN signature_consent.deleted_at IS
 -- BEGIN 12_create_table_validation_result.sql
 -- ========================================================================
 
-CREATE TABLE validation_result (
+CREATE TABLE medical_records_release_permission.validation_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     completeness_score SMALLINT NOT NULL DEFAULT 0
         CHECK (completeness_score >= 0 AND completeness_score <= 100),
     completeness_status VARCHAR(30) NOT NULL DEFAULT '',
@@ -644,30 +661,30 @@ CREATE TABLE validation_result (
 );
 
 CREATE TRIGGER trigger_validation_result_updated_at
-    BEFORE UPDATE ON validation_result
+    BEFORE UPDATE ON medical_records_release_permission.validation_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE validation_result IS
+COMMENT ON TABLE medical_records_release_permission.validation_result IS
     'Validation result summarizing completeness and status of the release form. One-to-one child of release_form.';
-COMMENT ON COLUMN validation_result.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN validation_result.completeness_score IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.completeness_score IS
     'Percentage score (0-100) indicating form completeness.';
-COMMENT ON COLUMN validation_result.completeness_status IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.completeness_status IS
     'Human-readable completeness status label.';
-COMMENT ON COLUMN validation_result.validation_status IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.validation_status IS
     'Overall validation status label.';
-COMMENT ON COLUMN validation_result.validated_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.validated_at IS
     'Timestamp when the validation was last performed.';
 
-COMMENT ON COLUMN validation_result.id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN validation_result.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN validation_result.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN validation_result.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_result.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -678,13 +695,13 @@ COMMENT ON COLUMN validation_result.deleted_at IS
 -- BEGIN 13_create_table_validation_fired_rule.sql
 -- ========================================================================
 
-CREATE TABLE validation_fired_rule (
+CREATE TABLE medical_records_release_permission.validation_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     validation_result_id UUID NOT NULL
-        REFERENCES validation_result(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.validation_result(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     domain VARCHAR(50) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -692,30 +709,30 @@ CREATE TABLE validation_fired_rule (
 );
 
 CREATE TRIGGER trigger_validation_fired_rule_updated_at
-    BEFORE UPDATE ON validation_fired_rule
+    BEFORE UPDATE ON medical_records_release_permission.validation_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE validation_fired_rule IS
+COMMENT ON TABLE medical_records_release_permission.validation_fired_rule IS
     'Validation rules that fired during assessment. Many-to-one child of validation_result.';
-COMMENT ON COLUMN validation_fired_rule.validation_result_id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.validation_result_id IS
     'Foreign key to the parent validation result.';
-COMMENT ON COLUMN validation_fired_rule.rule_id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.rule_id IS
     'Identifier of the validation rule that fired.';
-COMMENT ON COLUMN validation_fired_rule.domain IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.domain IS
     'Domain or category the rule belongs to.';
-COMMENT ON COLUMN validation_fired_rule.description IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.description IS
     'Human-readable description of what the rule checks.';
-COMMENT ON COLUMN validation_fired_rule.score IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.score IS
     'Score contribution from this fired rule.';
 
-COMMENT ON COLUMN validation_fired_rule.id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN validation_fired_rule.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN validation_fired_rule.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN validation_fired_rule.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -726,13 +743,13 @@ COMMENT ON COLUMN validation_fired_rule.deleted_at IS
 -- BEGIN 14_create_table_validation_additional_flag.sql
 -- ========================================================================
 
-CREATE TABLE validation_additional_flag (
+CREATE TABLE medical_records_release_permission.validation_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     validation_result_id UUID NOT NULL
-        REFERENCES validation_result(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.validation_result(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -741,30 +758,30 @@ CREATE TABLE validation_additional_flag (
 );
 
 CREATE TRIGGER trigger_validation_additional_flag_updated_at
-    BEFORE UPDATE ON validation_additional_flag
+    BEFORE UPDATE ON medical_records_release_permission.validation_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE validation_additional_flag IS
+COMMENT ON TABLE medical_records_release_permission.validation_additional_flag IS
     'Additional flags raised during validation. Many-to-one child of validation_result.';
-COMMENT ON COLUMN validation_additional_flag.validation_result_id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.validation_result_id IS
     'Foreign key to the parent validation result.';
-COMMENT ON COLUMN validation_additional_flag.flag_id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.flag_id IS
     'Identifier of the additional flag.';
-COMMENT ON COLUMN validation_additional_flag.category IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.category IS
     'Category grouping for the flag.';
-COMMENT ON COLUMN validation_additional_flag.message IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.message IS
     'Human-readable message describing the flag.';
-COMMENT ON COLUMN validation_additional_flag.priority IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.priority IS
     'Flag priority: high, medium, or low.';
 
-COMMENT ON COLUMN validation_additional_flag.id IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN validation_additional_flag.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN validation_additional_flag.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN validation_additional_flag.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.validation_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

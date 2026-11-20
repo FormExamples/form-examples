@@ -1,10 +1,10 @@
-CREATE TABLE occupational_vaccinations (
+CREATE TABLE vaccinations_assessment.occupational_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     occupation VARCHAR(255) NOT NULL DEFAULT '',
     healthcare_worker VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (healthcare_worker IN ('yes', 'no', '')),
@@ -15,32 +15,32 @@ CREATE TABLE occupational_vaccinations (
 );
 
 CREATE TRIGGER trigger_occupational_vaccinations_updated_at
-    BEFORE UPDATE ON occupational_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.occupational_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE occupational_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.occupational_vaccinations IS
     'Occupational vaccination status including healthcare worker screening. One-to-one child of assessment.';
 
-COMMENT ON COLUMN occupational_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN occupational_vaccinations.occupation IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.occupation IS
     'Occupation.';
-COMMENT ON COLUMN occupational_vaccinations.healthcare_worker IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.healthcare_worker IS
     'Healthcare worker. One of: yes, no.';
-COMMENT ON COLUMN occupational_vaccinations.hepatitis_b_occupational IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.hepatitis_b_occupational IS
     'Hepatitis b occupational.';
-COMMENT ON COLUMN occupational_vaccinations.influenza_occupational IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.influenza_occupational IS
     'Influenza occupational.';
-COMMENT ON COLUMN occupational_vaccinations.varicella IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.varicella IS
     'Varicella.';
-COMMENT ON COLUMN occupational_vaccinations.bcg_tuberculosis IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.bcg_tuberculosis IS
     'Bcg tuberculosis.';
-COMMENT ON COLUMN occupational_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN occupational_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN occupational_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN occupational_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';

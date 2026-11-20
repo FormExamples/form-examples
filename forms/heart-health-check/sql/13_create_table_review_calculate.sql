@@ -1,10 +1,10 @@
-CREATE TABLE review_calculate (
+CREATE TABLE heart_health_check.review_calculate (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES heart_health_check.assessment(id) ON DELETE CASCADE,
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
     review_date DATE,
     clinical_notes TEXT NOT NULL DEFAULT '',
@@ -13,28 +13,28 @@ CREATE TABLE review_calculate (
 );
 
 CREATE TRIGGER trigger_review_calculate_updated_at
-    BEFORE UPDATE ON review_calculate
+    BEFORE UPDATE ON heart_health_check.review_calculate
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_health_check.set_updated_at();
 
-COMMENT ON TABLE review_calculate IS
+COMMENT ON TABLE heart_health_check.review_calculate IS
     'Clinician review information and AUDIT alcohol screening score.';
-COMMENT ON COLUMN review_calculate.clinician_name IS
+COMMENT ON COLUMN heart_health_check.review_calculate.clinician_name IS
     'Name of the reviewing clinician.';
-COMMENT ON COLUMN review_calculate.review_date IS
+COMMENT ON COLUMN heart_health_check.review_calculate.review_date IS
     'Date of the clinical review.';
-COMMENT ON COLUMN review_calculate.clinical_notes IS
+COMMENT ON COLUMN heart_health_check.review_calculate.clinical_notes IS
     'Free-text clinical notes from the reviewing clinician.';
-COMMENT ON COLUMN review_calculate.audit_score IS
+COMMENT ON COLUMN heart_health_check.review_calculate.audit_score IS
     'AUDIT (Alcohol Use Disorders Identification Test) score (0-40).';
 
-COMMENT ON COLUMN review_calculate.assessment_id IS
+COMMENT ON COLUMN heart_health_check.review_calculate.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN review_calculate.id IS
+COMMENT ON COLUMN heart_health_check.review_calculate.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN review_calculate.created_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN review_calculate.updated_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN review_calculate.deleted_at IS
+COMMENT ON COLUMN heart_health_check.review_calculate.deleted_at IS
     'Timestamp when this row was deleted.';

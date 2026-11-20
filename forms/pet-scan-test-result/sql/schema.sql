@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS pet_scan_test_result;
+
+COMMENT ON SCHEMA pet_scan_test_result IS
+    'Namespace for the PET Scan Test Result form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION pet_scan_test_result.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION pet_scan_test_result.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE pet_scan_test_result.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON pet_scan_test_result.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE pet_scan_test_result.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN pet_scan_test_result.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN pet_scan_test_result.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN pet_scan_test_result.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN pet_scan_test_result.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN pet_scan_test_result.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN pet_scan_test_result.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pet_scan_test_result.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN pet_scan_test_result.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN pet_scan_test_result.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN pet_scan_test_result.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN pet_scan_test_result.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN pet_scan_test_result.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN pet_scan_test_result.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN pet_scan_test_result.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON pet_scan_test_result.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN pet_scan_test_result.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Reporting clinician (nuclear-medicine physician / radiologist) information.
 
-CREATE TABLE clinician (
+CREATE TABLE pet_scan_test_result.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON pet_scan_test_result.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE pet_scan_test_result.clinician IS
     'Reporting clinician (nuclear-medicine physician or radiologist) who authors and signs the PET-CT scan result report.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.role IS
     'Reporting clinician role: nuclear-medicine-physician, radiologist, consultant, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.registration_body IS
     'Clinician registration body: GMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN pet_scan_test_result.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON pet_scan_test_result.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -209,14 +226,14 @@ CREATE INDEX clinician_index_gto
 
 -- PET-CT (positron emission tomography) scan result (report) — the source-of-truth record.
 
-CREATE TABLE pet_scan_test_result (
+CREATE TABLE pet_scan_test_result.pet_scan_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES pet_scan_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES pet_scan_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -265,78 +282,78 @@ CREATE TABLE pet_scan_test_result (
 );
 
 CREATE INDEX index_pet_scan_test_result_patient_id
-    ON pet_scan_test_result(patient_id);
+    ON pet_scan_test_result.pet_scan_test_result(patient_id);
 CREATE INDEX index_pet_scan_test_result_clinician_id
-    ON pet_scan_test_result(clinician_id);
+    ON pet_scan_test_result.pet_scan_test_result(clinician_id);
 
 CREATE TRIGGER trigger_pet_scan_test_result_updated_at
-    BEFORE UPDATE ON pet_scan_test_result
+    BEFORE UPDATE ON pet_scan_test_result.pet_scan_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE pet_scan_test_result IS
+COMMENT ON TABLE pet_scan_test_result.pet_scan_test_result IS
     'PET-CT (positron emission tomography) scan result (report). Captures the tracer / scan type, the clinical history and acquisition data (blood glucose, injected activity), the narrative and structured metabolic findings, key measurements (SUVmax, largest lesion size), comparison and treatment response, the impression, the structured reporting category (e.g. Deauville score or PERCIST category), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN pet_scan_test_result.id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pet_scan_test_result.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN pet_scan_test_result.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pet_scan_test_result.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pet_scan_test_result.patient_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN pet_scan_test_result.clinician_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.clinician_id IS
     'Foreign key to the reporting clinician (nuclear-medicine physician / radiologist).';
-COMMENT ON COLUMN pet_scan_test_result.originating_request_reference IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating PET-CT scan request (referral).';
-COMMENT ON COLUMN pet_scan_test_result.scan_type IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.scan_type IS
     'PET tracer / scan type reported: fdg-pet-ct, psma-pet, dotatate-pet, amyloid-pet, cardiac-pet, other.';
-COMMENT ON COLUMN pet_scan_test_result.report_status IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN pet_scan_test_result.performed_date IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.performed_date IS
     'Date the PET-CT examination was performed.';
-COMMENT ON COLUMN pet_scan_test_result.reported_date IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN pet_scan_test_result.clinical_history IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.clinical_history IS
     'Clinical history and the question the examination was performed to answer.';
-COMMENT ON COLUMN pet_scan_test_result.blood_glucose_mmol_l IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.blood_glucose_mmol_l IS
     'Pre-injection blood glucose in mmol/L; FDG uptake quality depends on glucose control, typically below 11 mmol/L.';
-COMMENT ON COLUMN pet_scan_test_result.injected_activity_mbq IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.injected_activity_mbq IS
     'Administered radiopharmaceutical activity in megabecquerels (MBq), for dose audit.';
-COMMENT ON COLUMN pet_scan_test_result.examination_adequacy IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.examination_adequacy IS
     'Diagnostic adequacy of the examination: adequate, limited, non-diagnostic.';
-COMMENT ON COLUMN pet_scan_test_result.findings_narrative IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.findings_narrative IS
     'Narrative description of the metabolic and CT findings (the body of the report).';
-COMMENT ON COLUMN pet_scan_test_result.hypermetabolic_lesion IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.hypermetabolic_lesion IS
     'Whether one or more abnormally hypermetabolic (FDG / tracer-avid) lesions are present.';
-COMMENT ON COLUMN pet_scan_test_result.nodal_uptake IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.nodal_uptake IS
     'Whether abnormal nodal (lymph-node) tracer uptake is present.';
-COMMENT ON COLUMN pet_scan_test_result.distant_metastasis IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.distant_metastasis IS
     'Whether distant metastatic tracer-avid disease is present.';
-COMMENT ON COLUMN pet_scan_test_result.no_abnormal_uptake IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.no_abnormal_uptake IS
     'Whether the study shows no abnormal tracer uptake (negative / complete metabolic response).';
-COMMENT ON COLUMN pet_scan_test_result.physiological_uptake_only IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.physiological_uptake_only IS
     'Whether only normal physiological tracer uptake is present (e.g. brain, myocardium, bowel, urinary tract).';
-COMMENT ON COLUMN pet_scan_test_result.incidental_finding IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.incidental_finding IS
     'Whether one or more incidental findings warranting documentation are present.';
-COMMENT ON COLUMN pet_scan_test_result.suv_max IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.suv_max IS
     'Maximum standardised uptake value (SUVmax) of the most-avid reference lesion.';
-COMMENT ON COLUMN pet_scan_test_result.largest_lesion_size_mm IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.largest_lesion_size_mm IS
     'Largest lesion long-axis size in millimetres, for surveillance and categorisation.';
-COMMENT ON COLUMN pet_scan_test_result.comparison_with_previous IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.comparison_with_previous IS
     'Comparison with relevant previous PET-CT or other imaging studies.';
-COMMENT ON COLUMN pet_scan_test_result.treatment_response IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.treatment_response IS
     'Metabolic treatment-response category: complete, partial, stable, progressive, not-applicable.';
-COMMENT ON COLUMN pet_scan_test_result.impression IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN pet_scan_test_result.reporting_category IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.reporting_category IS
     'Free-text structured-reporting label, e.g. a Deauville score (1-5) for lymphoma or a PERCIST response category.';
-COMMENT ON COLUMN pet_scan_test_result.recommended_follow_up IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.recommended_follow_up IS
     'Recommended follow-up imaging, referral, or management.';
-COMMENT ON COLUMN pet_scan_test_result.critical_result_communicated IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the referrer.';
-COMMENT ON COLUMN pet_scan_test_result.reported_to IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';
 
 -- ========================================================================
@@ -349,14 +366,14 @@ COMMENT ON COLUMN pet_scan_test_result.reported_to IS
 
 -- Computed interpretation grade for a PET-CT scan result (four-axis engine).
 
-CREATE TABLE pet_scan_test_result_grade (
+CREATE TABLE pet_scan_test_result.pet_scan_test_result_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pet_scan_test_result_id UUID NOT NULL UNIQUE
-        REFERENCES pet_scan_test_result(id) ON DELETE CASCADE,
+        REFERENCES pet_scan_test_result.pet_scan_test_result(id) ON DELETE CASCADE,
 
     -- Axis A: result classification
     result_classification VARCHAR(15) NOT NULL DEFAULT ''
@@ -385,43 +402,43 @@ CREATE TABLE pet_scan_test_result_grade (
 );
 
 CREATE TRIGGER trigger_pet_scan_test_result_grade_updated_at
-    BEFORE UPDATE ON pet_scan_test_result_grade
+    BEFORE UPDATE ON pet_scan_test_result.pet_scan_test_result_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE pet_scan_test_result_grade IS
+COMMENT ON TABLE pet_scan_test_result.pet_scan_test_result_grade IS
     'Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. distant metastasis or progressive disease) auto-escalates the follow-up urgency to critical-alert regardless of the other axes.';
-COMMENT ON COLUMN pet_scan_test_result_grade.id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pet_scan_test_result_grade.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pet_scan_test_result_grade.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pet_scan_test_result_grade.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pet_scan_test_result_grade.pet_scan_test_result_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.pet_scan_test_result_id IS
     'Foreign key to the parent result (unique, 1:1).';
-COMMENT ON COLUMN pet_scan_test_result_grade.result_classification IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.result_classification IS
     'Axis A overall classification: normal, abnormal, critical, inconclusive.';
-COMMENT ON COLUMN pet_scan_test_result_grade.abnormality_severity IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.abnormality_severity IS
     'Axis B abnormality severity: none, minor, moderate, major.';
-COMMENT ON COLUMN pet_scan_test_result_grade.reporting_category IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.reporting_category IS
     'Axis B structured-reporting score / category label (e.g. a Deauville score 1-5 for lymphoma or a PERCIST response category).';
-COMMENT ON COLUMN pet_scan_test_result_grade.report_completeness_percent IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.report_completeness_percent IS
     'Axis C report completeness as a percentage of mandatory report sections (0-100).';
-COMMENT ON COLUMN pet_scan_test_result_grade.follow_up_urgency IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.follow_up_urgency IS
     'Axis D follow-up urgency: routine, recommended, urgent, critical-alert.';
-COMMENT ON COLUMN pet_scan_test_result_grade.target_timeframe IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.target_timeframe IS
     'Target timeframe for the recommended follow-up implied by the urgency.';
-COMMENT ON COLUMN pet_scan_test_result_grade.recommended_action IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.recommended_action IS
     'Axis D concise recommended action derived from the urgency.';
-COMMENT ON COLUMN pet_scan_test_result_grade.recommendation IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.recommendation IS
     'Overall recommendation: no-action, routine-follow-up, further-imaging, specialist-referral, urgent-review.';
-COMMENT ON COLUMN pet_scan_test_result_grade.clinician_notes IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.clinician_notes IS
     'Free-text interpretation / sign-off notes.';
-COMMENT ON COLUMN pet_scan_test_result_grade.signed_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.signed_at IS
     'Timestamp of the reporting clinician electronic signature.';
-COMMENT ON COLUMN pet_scan_test_result_grade.graded_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -434,14 +451,14 @@ COMMENT ON COLUMN pet_scan_test_result_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a PET-CT scan result.
 
-CREATE TABLE pet_scan_test_result_grade_rule (
+CREATE TABLE pet_scan_test_result.pet_scan_test_result_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pet_scan_test_result_grade_id UUID NOT NULL
-        REFERENCES pet_scan_test_result_grade(id) ON DELETE CASCADE,
+        REFERENCES pet_scan_test_result.pet_scan_test_result_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('classification', 'severity', 'completeness', 'follow-up', '')),
@@ -450,32 +467,32 @@ CREATE TABLE pet_scan_test_result_grade_rule (
 );
 
 CREATE INDEX index_pet_scan_test_result_grade_rule_grade_id
-    ON pet_scan_test_result_grade_rule(pet_scan_test_result_grade_id);
+    ON pet_scan_test_result.pet_scan_test_result_grade_rule(pet_scan_test_result_grade_id);
 
 CREATE TRIGGER trigger_pet_scan_test_result_grade_rule_updated_at
-    BEFORE UPDATE ON pet_scan_test_result_grade_rule
+    BEFORE UPDATE ON pet_scan_test_result.pet_scan_test_result_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE pet_scan_test_result_grade_rule IS
+COMMENT ON TABLE pet_scan_test_result.pet_scan_test_result_grade_rule IS
     'Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.pet_scan_test_result_grade_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.pet_scan_test_result_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.rule_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CLASS-CRITICAL-01).';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.axis IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.axis IS
     'Scoring axis the rule belongs to: classification, severity, completeness, follow-up.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.category IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.category IS
     'Category or finding the rule relates to.';
-COMMENT ON COLUMN pet_scan_test_result_grade_rule.description IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -488,14 +505,14 @@ COMMENT ON COLUMN pet_scan_test_result_grade_rule.description IS
 
 -- Safety-critical flags for a PET-CT scan result, independent of the axes.
 
-CREATE TABLE pet_scan_test_result_grade_flag (
+CREATE TABLE pet_scan_test_result.pet_scan_test_result_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     pet_scan_test_result_grade_id UUID NOT NULL
-        REFERENCES pet_scan_test_result_grade(id) ON DELETE CASCADE,
+        REFERENCES pet_scan_test_result.pet_scan_test_result_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -518,34 +535,34 @@ CREATE TABLE pet_scan_test_result_grade_flag (
 );
 
 CREATE INDEX index_pet_scan_test_result_grade_flag_grade_id
-    ON pet_scan_test_result_grade_flag(pet_scan_test_result_grade_id);
+    ON pet_scan_test_result.pet_scan_test_result_grade_flag(pet_scan_test_result_grade_id);
 
 CREATE TRIGGER trigger_pet_scan_test_result_grade_flag_updated_at
-    BEFORE UPDATE ON pet_scan_test_result_grade_flag
+    BEFORE UPDATE ON pet_scan_test_result.pet_scan_test_result_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pet_scan_test_result.set_updated_at();
 
-COMMENT ON TABLE pet_scan_test_result_grade_flag IS
+COMMENT ON TABLE pet_scan_test_result.pet_scan_test_result_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.created_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.updated_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.deleted_at IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.pet_scan_test_result_grade_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.pet_scan_test_result_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.flag_id IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CRITICAL-RESULT-001).';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.category IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.priority IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.description IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN pet_scan_test_result_grade_flag.suggested_action IS
+COMMENT ON COLUMN pet_scan_test_result.pet_scan_test_result_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "communicate critical result to referrer and document").';
 
 -- ========================================================================

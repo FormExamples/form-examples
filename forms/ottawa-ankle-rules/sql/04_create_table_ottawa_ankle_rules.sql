@@ -6,14 +6,14 @@
 -- two independent imaging decisions, the fired criteria, and the flags live in
 -- dedicated child tables.
 
-CREATE TABLE ottawa_ankle_rules (
+CREATE TABLE ottawa_ankle_rules.ottawa_ankle_rules (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES ottawa_ankle_rules.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES ottawa_ankle_rules.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -43,62 +43,62 @@ CREATE TABLE ottawa_ankle_rules (
 );
 
 CREATE INDEX ottawa_ankle_rules_patient_id_idx
-    ON ottawa_ankle_rules (patient_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules (patient_id);
 CREATE INDEX ottawa_ankle_rules_clinician_id_idx
-    ON ottawa_ankle_rules (clinician_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules (clinician_id);
 
 CREATE TRIGGER trigger_ottawa_ankle_rules_updated_at
-    BEFORE UPDATE ON ottawa_ankle_rules
+    BEFORE UPDATE ON ottawa_ankle_rules.ottawa_ankle_rules
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE ottawa_ankle_rules IS
+COMMENT ON TABLE ottawa_ankle_rules.ottawa_ankle_rules IS
     'Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs.';
-COMMENT ON COLUMN ottawa_ankle_rules.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_ankle_rules.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ottawa_ankle_rules.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ottawa_ankle_rules.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ottawa_ankle_rules.patient_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN ottawa_ankle_rules.clinician_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN ottawa_ankle_rules.status IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN ottawa_ankle_rules.patient_identifier IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN ottawa_ankle_rules.assessed_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN ottawa_ankle_rules.care_setting IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.care_setting IS
     'Care setting: emergency-department, minor-injury-unit, urgent-care, or other.';
-COMMENT ON COLUMN ottawa_ankle_rules.injured_side IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.injured_side IS
     'Injured side: left or right.';
-COMMENT ON COLUMN ottawa_ankle_rules.hours_since_injury IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.hours_since_injury IS
     'Time elapsed since the injury, in hours.';
-COMMENT ON COLUMN ottawa_ankle_rules.age_years IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.age_years IS
     'Patient age in years; ages below 18 raise an applicability flag.';
-COMMENT ON COLUMN ottawa_ankle_rules.sex IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN ottawa_ankle_rules.assessment_reliable IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.assessment_reliable IS
     'Applicability: no intoxication, distracting injury, or sensory deficit that could invalidate the rule (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.malleolar_zone_pain IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.malleolar_zone_pain IS
     'Ankle precondition: pain in the malleolar zone (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.lateral_malleolus_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.lateral_malleolus_tenderness IS
     'Ankle criterion A1: bone tenderness at the posterior edge or tip of the lateral malleolus (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.medial_malleolus_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.medial_malleolus_tenderness IS
     'Ankle criterion A2: bone tenderness at the posterior edge or tip of the medial malleolus (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.midfoot_zone_pain IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.midfoot_zone_pain IS
     'Foot precondition: pain in the midfoot zone (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.fifth_metatarsal_base_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.fifth_metatarsal_base_tenderness IS
     'Foot criterion F1: bone tenderness at the base of the fifth metatarsal (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.navicular_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.navicular_tenderness IS
     'Foot criterion F2: bone tenderness at the navicular (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.able_to_bear_weight_immediately IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.able_to_bear_weight_immediately IS
     'Able to bear weight (take four steps) immediately after the injury (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.able_to_bear_weight_now IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.able_to_bear_weight_now IS
     'Able to bear weight (take four steps) at the time of assessment (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.clinical_notes IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';

@@ -2,7 +2,7 @@
 -- a clinical assessment: the subject of the assessment is the *issue*, but the
 -- reporter is the human who described it.
 
-CREATE TABLE reporter (
+CREATE TABLE issue_tracker.reporter (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -27,39 +27,39 @@ CREATE TABLE reporter (
 );
 
 CREATE TRIGGER trigger_reporter_updated_at
-    BEFORE UPDATE ON reporter
+    BEFORE UPDATE ON issue_tracker.reporter
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION issue_tracker.set_updated_at();
 
-COMMENT ON TABLE reporter IS
+COMMENT ON TABLE issue_tracker.reporter IS
     'Person who reported an issue. Records identity, role, and preferred contact channel.';
-COMMENT ON COLUMN reporter.id IS
+COMMENT ON COLUMN issue_tracker.reporter.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN reporter.created_at IS
+COMMENT ON COLUMN issue_tracker.reporter.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN reporter.updated_at IS
+COMMENT ON COLUMN issue_tracker.reporter.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN reporter.deleted_at IS
+COMMENT ON COLUMN issue_tracker.reporter.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN reporter.name IS
+COMMENT ON COLUMN issue_tracker.reporter.name IS
     'Reporter full name.';
-COMMENT ON COLUMN reporter.email IS
+COMMENT ON COLUMN issue_tracker.reporter.email IS
     'Reporter email address for follow-up.';
-COMMENT ON COLUMN reporter.phone IS
+COMMENT ON COLUMN issue_tracker.reporter.phone IS
     'Reporter phone number for follow-up.';
-COMMENT ON COLUMN reporter.role IS
+COMMENT ON COLUMN issue_tracker.reporter.role IS
     'Reporter role: engineer, sre, product-manager, customer-success, etc.';
-COMMENT ON COLUMN reporter.organisation IS
+COMMENT ON COLUMN issue_tracker.reporter.organisation IS
     'Organisation, company, or hospital trust the reporter belongs to.';
-COMMENT ON COLUMN reporter.team IS
+COMMENT ON COLUMN issue_tracker.reporter.team IS
     'Team or department within the organisation.';
-COMMENT ON COLUMN reporter.location IS
+COMMENT ON COLUMN issue_tracker.reporter.location IS
     'Physical or virtual location of the reporter at the time of report.';
-COMMENT ON COLUMN reporter.timezone IS
+COMMENT ON COLUMN issue_tracker.reporter.timezone IS
     'IANA timezone identifier (e.g. Europe/London).';
-COMMENT ON COLUMN reporter.preferred_contact IS
+COMMENT ON COLUMN issue_tracker.reporter.preferred_contact IS
     'Preferred follow-up channel: email, phone, chat, or in-person.';
 
 CREATE INDEX reporter_index_name_trgm
-    ON reporter
+    ON issue_tracker.reporter
     USING GIN (name gin_trgm_ops);

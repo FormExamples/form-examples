@@ -5,13 +5,13 @@
 -- columns are NULL. See ../index.md for the wizard table and ../spec/index.md
 -- for the contract.
 
-CREATE TABLE dietic_assessment (
+CREATE TABLE dietic_assessment.dietic_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    dietitian_id UUID NOT NULL REFERENCES dietitian(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES dietic_assessment.patient(id) ON DELETE CASCADE,
+    dietitian_id UUID NOT NULL REFERENCES dietic_assessment.dietitian(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
 
     -- Step 1: dietitian identification
@@ -291,521 +291,521 @@ CREATE TABLE dietic_assessment (
 );
 
 CREATE INDEX dietic_assessment_patient_id_index
-    ON dietic_assessment (patient_id);
+    ON dietic_assessment.dietic_assessment (patient_id);
 
 CREATE INDEX dietic_assessment_dietitian_id_index
-    ON dietic_assessment (dietitian_id);
+    ON dietic_assessment.dietic_assessment (dietitian_id);
 
 CREATE INDEX dietic_assessment_status_index
-    ON dietic_assessment (status);
+    ON dietic_assessment.dietic_assessment (status);
 
 CREATE INDEX dietic_assessment_assessment_date_index
-    ON dietic_assessment (assessment_date);
+    ON dietic_assessment.dietic_assessment (assessment_date);
 
 CREATE TRIGGER trigger_dietic_assessment_updated_at
-    BEFORE UPDATE ON dietic_assessment
+    BEFORE UPDATE ON dietic_assessment.dietic_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dietic_assessment.set_updated_at();
 
-COMMENT ON TABLE dietic_assessment IS
+COMMENT ON TABLE dietic_assessment.dietic_assessment IS
     'Dietetic assessment: the payload of the 16-step single-page wizard, covering medical history, medication and supplements, dietary recall, lifestyle and food environment, and physical measurements.';
-COMMENT ON COLUMN dietic_assessment.id IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dietic_assessment.created_at IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN dietic_assessment.updated_at IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN dietic_assessment.deleted_at IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN dietic_assessment.patient_id IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN dietic_assessment.dietitian_id IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dietitian_id IS
     'Foreign key to the dietitian table, i.e. the registered practitioner conducting the assessment.';
-COMMENT ON COLUMN dietic_assessment.status IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.status IS
     'Workflow status of the assessment: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN dietic_assessment.assessment_date IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.assessment_date IS
     'Date the assessment was conducted.';
-COMMENT ON COLUMN dietic_assessment.assessment_time IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.assessment_time IS
     'Time the assessment was conducted.';
-COMMENT ON COLUMN dietic_assessment.site_name IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.site_name IS
     'Site where the assessment was conducted, such as the hospital, clinic, or care home.';
-COMMENT ON COLUMN dietic_assessment.service_name IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.service_name IS
     'Dietetic service conducting the assessment, such as the acute dietetics team or the community nutrition service.';
-COMMENT ON COLUMN dietic_assessment.setting IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.setting IS
     'Setting of the appointment, such as outpatient clinic, inpatient ward, home visit, or video consultation.';
-COMMENT ON COLUMN dietic_assessment.appointment_type IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.appointment_type IS
     'Type of appointment, where an initial appointment typically runs 45 to 60 minutes and a specialist programme up to 90 minutes.';
-COMMENT ON COLUMN dietic_assessment.planned_duration_minutes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.planned_duration_minutes IS
     'Planned appointment duration in minutes, such as 45 to 60 for an initial general clinical or outpatient visit.';
-COMMENT ON COLUMN dietic_assessment.interpreter_required IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.interpreter_required IS
     'Whether an interpreter is required for the consultation.';
-COMMENT ON COLUMN dietic_assessment.interpreter_language IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.interpreter_language IS
     'Language the interpreter is required for.';
-COMMENT ON COLUMN dietic_assessment.referral_source IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.referral_source IS
     'Who referred the patient to the dietetic service.';
-COMMENT ON COLUMN dietic_assessment.referral_date IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN dietic_assessment.referral_reason IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.referral_reason IS
     'Reason for referral, as stated by the referrer.';
-COMMENT ON COLUMN dietic_assessment.primary_condition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.primary_condition IS
     'Primary presenting condition that the dietetic assessment addresses.';
-COMMENT ON COLUMN dietic_assessment.consent_to_record IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.consent_to_record IS
     'Whether the patient consented to the assessment being recorded.';
-COMMENT ON COLUMN dietic_assessment.accompanied_by IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.accompanied_by IS
     'Who accompanied the patient to the appointment, such as a relative, carer, or advocate.';
-COMMENT ON COLUMN dietic_assessment.condition_diabetes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_diabetes IS
     'Diabetes diagnosis and type, because carbohydrate and energy advice differs by type.';
-COMMENT ON COLUMN dietic_assessment.condition_coeliac IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_coeliac IS
     'Whether the patient has coeliac disease, which requires a strict gluten-free diet and satisfies the GLIM reduced-assimilation etiologic criterion.';
-COMMENT ON COLUMN dietic_assessment.condition_inflammatory_bowel_disease IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_inflammatory_bowel_disease IS
     'Whether the patient has inflammatory bowel disease, i.e. Crohn disease or ulcerative colitis.';
-COMMENT ON COLUMN dietic_assessment.condition_chronic_kidney_disease IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_chronic_kidney_disease IS
     'Whether the patient has chronic kidney disease, which constrains protein, potassium, and phosphate advice.';
-COMMENT ON COLUMN dietic_assessment.condition_liver_disease IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_liver_disease IS
     'Whether the patient has liver disease, which changes protein and sodium targets and can mask weight loss behind ascites.';
-COMMENT ON COLUMN dietic_assessment.condition_cancer IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_cancer IS
     'Whether the patient has a cancer diagnosis, which satisfies the GLIM inflammation and disease burden etiologic criterion.';
-COMMENT ON COLUMN dietic_assessment.condition_cardiovascular_disease IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_cardiovascular_disease IS
     'Whether the patient has cardiovascular disease.';
-COMMENT ON COLUMN dietic_assessment.condition_respiratory_disease IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_respiratory_disease IS
     'Whether the patient has respiratory disease such as chronic obstructive pulmonary disease, which raises energy expenditure.';
-COMMENT ON COLUMN dietic_assessment.condition_stroke IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_stroke IS
     'Whether the patient has had a stroke, which commonly brings dysphagia and feeding dependence.';
-COMMENT ON COLUMN dietic_assessment.condition_dementia IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_dementia IS
     'Whether the patient has dementia, which affects appetite, capacity, and the ability to self-feed.';
-COMMENT ON COLUMN dietic_assessment.condition_eating_disorder IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_eating_disorder IS
     'Whether the patient has a diagnosed eating disorder, which fires the disordered-eating-concern safety flag.';
-COMMENT ON COLUMN dietic_assessment.condition_other IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.condition_other IS
     'Any other diagnosed condition relevant to the nutritional assessment.';
-COMMENT ON COLUMN dietic_assessment.recent_surgery IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recent_surgery IS
     'Whether the patient has had recent surgery.';
-COMMENT ON COLUMN dietic_assessment.recent_surgery_type IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recent_surgery_type IS
     'Type of recent surgery.';
-COMMENT ON COLUMN dietic_assessment.recent_surgery_date IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recent_surgery_date IS
     'Date of the recent surgery.';
-COMMENT ON COLUMN dietic_assessment.gastrointestinal_surgery IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.gastrointestinal_surgery IS
     'Any gastrointestinal surgery the patient has had, because resection, bypass, and stoma formation each change absorption.';
-COMMENT ON COLUMN dietic_assessment.current_symptoms IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.current_symptoms IS
     'Current symptoms the patient reports that bear on nutrition.';
-COMMENT ON COLUMN dietic_assessment.family_history IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.family_history IS
     'Relevant family history, such as coeliac disease, diabetes, or inherited metabolic disease.';
-COMMENT ON COLUMN dietic_assessment.pregnancy_status IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pregnancy_status IS
     'Pregnancy and lactation status, because energy, protein, and micronutrient requirements differ.';
-COMMENT ON COLUMN dietic_assessment.takes_prescription_medicines IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_prescription_medicines IS
     'Whether the patient takes prescription medicines.';
-COMMENT ON COLUMN dietic_assessment.takes_over_the_counter_medicines IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_over_the_counter_medicines IS
     'Whether the patient takes over-the-counter medicines.';
-COMMENT ON COLUMN dietic_assessment.takes_vitamin_supplements IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_vitamin_supplements IS
     'Whether the patient takes vitamin supplements.';
-COMMENT ON COLUMN dietic_assessment.takes_mineral_supplements IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_mineral_supplements IS
     'Whether the patient takes mineral supplements.';
-COMMENT ON COLUMN dietic_assessment.takes_herbal_products IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_herbal_products IS
     'Whether the patient takes herbal or complementary products, which can interact with prescribed medicines.';
-COMMENT ON COLUMN dietic_assessment.takes_oral_nutritional_supplements IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takes_oral_nutritional_supplements IS
     'Whether the patient is already taking oral nutritional supplements.';
-COMMENT ON COLUMN dietic_assessment.oral_nutritional_supplement_detail IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.oral_nutritional_supplement_detail IS
     'Which oral nutritional supplements the patient takes, at what dose, and how well they are tolerated.';
-COMMENT ON COLUMN dietic_assessment.enteral_nutrition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.enteral_nutrition IS
     'Whether the patient is receiving enteral tube feeding.';
-COMMENT ON COLUMN dietic_assessment.enteral_route IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.enteral_route IS
     'Route of enteral feeding, such as nasogastric, gastrostomy, or jejunostomy.';
-COMMENT ON COLUMN dietic_assessment.enteral_tube_problem IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.enteral_tube_problem IS
     'Whether there is a tube or tolerance problem, which fires the enteral-tube-complication safety flag.';
-COMMENT ON COLUMN dietic_assessment.parenteral_nutrition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.parenteral_nutrition IS
     'Whether the patient is receiving parenteral nutrition.';
-COMMENT ON COLUMN dietic_assessment.drug_nutrient_interaction IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.drug_nutrient_interaction IS
     'Whether a drug-nutrient interaction was identified during the medication review.';
-COMMENT ON COLUMN dietic_assessment.drug_nutrient_interaction_detail IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.drug_nutrient_interaction_detail IS
     'Description of the drug-nutrient interaction identified.';
-COMMENT ON COLUMN dietic_assessment.medication_adherence IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.medication_adherence IS
     'Reported adherence to prescribed medicines and supplements.';
-COMMENT ON COLUMN dietic_assessment.medication_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.medication_notes IS
     'Free-text notes from the medication and supplement review.';
-COMMENT ON COLUMN dietic_assessment.measurement_method IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.measurement_method IS
     'How height and weight were obtained: measured, self-reported, estimated, or declined. Declined is a first-class answer; the MUST body mass index component is then estimated from mid-upper-arm circumference.';
-COMMENT ON COLUMN dietic_assessment.height_as_cm IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.height_as_cm IS
     'Height in cm, such as for calculating body mass index.';
-COMMENT ON COLUMN dietic_assessment.weight_as_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_as_kg IS
     'Weight in kg, such as for calculating body mass index and percentage weight loss.';
-COMMENT ON COLUMN dietic_assessment.body_mass_index IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.body_mass_index IS
     'Body mass index in kg per square metre, auto-computed from height and weight, and scored as MUST step 1.';
-COMMENT ON COLUMN dietic_assessment.mid_upper_arm_circumference_as_cm IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.mid_upper_arm_circumference_as_cm IS
     'Mid-upper-arm circumference in cm. Below 23.5 suggests body mass index below 20; above 32.0 suggests body mass index above 30. Used to estimate the MUST body mass index component when weighing is declined or impractical.';
-COMMENT ON COLUMN dietic_assessment.calf_circumference_as_cm IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.calf_circumference_as_cm IS
     'Calf circumference in cm, supporting the GLIM reduced-muscle-mass phenotypic criterion.';
-COMMENT ON COLUMN dietic_assessment.waist_as_cm IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.waist_as_cm IS
     'Waist circumference in cm, such as for assessing central adiposity.';
-COMMENT ON COLUMN dietic_assessment.usual_weight_as_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.usual_weight_as_kg IS
     'The patient''s usual or pre-illness weight in kg, i.e. the baseline for percentage weight loss.';
-COMMENT ON COLUMN dietic_assessment.weight_3_months_ago_as_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_3_months_ago_as_kg IS
     'Weight in kg three months ago, where known.';
-COMMENT ON COLUMN dietic_assessment.weight_6_months_ago_as_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_6_months_ago_as_kg IS
     'Weight in kg six months ago, i.e. the outer bound of the MUST weight-loss window.';
-COMMENT ON COLUMN dietic_assessment.weight_loss_percent IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_loss_percent IS
     'Percentage unplanned weight loss over the last three to six months, auto-computed, and scored as MUST step 2.';
-COMMENT ON COLUMN dietic_assessment.weight_loss_is_intentional IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_loss_is_intentional IS
     'Whether the weight loss was intentional. Only unplanned loss scores in MUST, so intentional loss is recorded but scored zero.';
-COMMENT ON COLUMN dietic_assessment.weight_trend IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.weight_trend IS
     'Direction of the weight trend: losing, stable, gaining, fluctuating, or unknown.';
-COMMENT ON COLUMN dietic_assessment.clothes_or_jewellery_looser IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.clothes_or_jewellery_looser IS
     'Whether clothes or jewellery have become looser, i.e. the MUST subjective criterion used when no usual weight is available.';
-COMMENT ON COLUMN dietic_assessment.oedema_present IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.oedema_present IS
     'Whether oedema is present, because fluid weight masks true weight loss.';
-COMMENT ON COLUMN dietic_assessment.oedema_adjustment_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.oedema_adjustment_kg IS
     'Weight adjustment in kg subtracted for oedema before body mass index is computed.';
-COMMENT ON COLUMN dietic_assessment.ascites_present IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.ascites_present IS
     'Whether ascites is present, because fluid weight masks true weight loss.';
-COMMENT ON COLUMN dietic_assessment.amputation_present IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.amputation_present IS
     'Whether the patient has an amputation, which changes the interpretation of weight and body mass index.';
-COMMENT ON COLUMN dietic_assessment.amputation_adjustment_percent IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.amputation_adjustment_percent IS
     'Percentage of body weight attributed to the absent limb, used to interpret weight and body mass index.';
-COMMENT ON COLUMN dietic_assessment.anthropometry_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.anthropometry_notes IS
     'Free-text notes about the measurements, such as why weighing was declined.';
-COMMENT ON COLUMN dietic_assessment.bloods_sample_date IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.bloods_sample_date IS
     'Date the blood sample was taken, so the report can say how current the biochemistry is.';
-COMMENT ON COLUMN dietic_assessment.albumin_g_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.albumin_g_per_l IS
     'Serum albumin in g per litre. A marker of inflammation rather than of protein intake, so it supports the GLIM inflammation criterion rather than diagnosing malnutrition.';
-COMMENT ON COLUMN dietic_assessment.c_reactive_protein_mg_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.c_reactive_protein_mg_per_l IS
     'C-reactive protein in mg per litre, supporting the GLIM inflammation and disease burden etiologic criterion.';
-COMMENT ON COLUMN dietic_assessment.haemoglobin_g_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.haemoglobin_g_per_l IS
     'Haemoglobin in g per litre.';
-COMMENT ON COLUMN dietic_assessment.ferritin_ug_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.ferritin_ug_per_l IS
     'Ferritin in micrograms per litre, i.e. the iron store marker.';
-COMMENT ON COLUMN dietic_assessment.vitamin_b12_ng_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.vitamin_b12_ng_per_l IS
     'Vitamin B12 in nanograms per litre.';
-COMMENT ON COLUMN dietic_assessment.folate_ug_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.folate_ug_per_l IS
     'Serum folate in micrograms per litre.';
-COMMENT ON COLUMN dietic_assessment.vitamin_d_nmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.vitamin_d_nmol_per_l IS
     '25-hydroxyvitamin D in nmol per litre.';
-COMMENT ON COLUMN dietic_assessment.hba1c_mmol_per_mol IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.hba1c_mmol_per_mol IS
     'Glycated haemoglobin in mmol per mol. Above 75 fires the uncontrolled-diabetes safety flag.';
-COMMENT ON COLUMN dietic_assessment.sodium_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sodium_mmol_per_l IS
     'Serum sodium in mmol per litre.';
-COMMENT ON COLUMN dietic_assessment.potassium_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.potassium_mmol_per_l IS
     'Serum potassium in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.';
-COMMENT ON COLUMN dietic_assessment.magnesium_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.magnesium_mmol_per_l IS
     'Serum magnesium in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.';
-COMMENT ON COLUMN dietic_assessment.phosphate_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.phosphate_mmol_per_l IS
     'Serum phosphate in mmol per litre. A low pre-feeding value is a NICE CG32 refeeding-syndrome high-risk criterion.';
-COMMENT ON COLUMN dietic_assessment.corrected_calcium_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.corrected_calcium_mmol_per_l IS
     'Albumin-corrected calcium in mmol per litre.';
-COMMENT ON COLUMN dietic_assessment.urea_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.urea_mmol_per_l IS
     'Serum urea in mmol per litre.';
-COMMENT ON COLUMN dietic_assessment.creatinine_umol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.creatinine_umol_per_l IS
     'Serum creatinine in micromol per litre.';
-COMMENT ON COLUMN dietic_assessment.egfr_ml_per_min IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.egfr_ml_per_min IS
     'Estimated glomerular filtration rate in ml per minute per 1.73 square metres. Below 30 with a high-protein or high-potassium plan fires the renal-dietary-conflict safety flag.';
-COMMENT ON COLUMN dietic_assessment.alanine_aminotransferase_u_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.alanine_aminotransferase_u_per_l IS
     'Alanine aminotransferase in units per litre.';
-COMMENT ON COLUMN dietic_assessment.bilirubin_umol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.bilirubin_umol_per_l IS
     'Total bilirubin in micromol per litre.';
-COMMENT ON COLUMN dietic_assessment.total_cholesterol_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.total_cholesterol_mmol_per_l IS
     'Total cholesterol in mmol per litre.';
-COMMENT ON COLUMN dietic_assessment.triglycerides_mmol_per_l IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.triglycerides_mmol_per_l IS
     'Triglycerides in mmol per litre.';
-COMMENT ON COLUMN dietic_assessment.biochemistry_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.biochemistry_notes IS
     'Free-text notes about the biochemistry results.';
-COMMENT ON COLUMN dietic_assessment.subcutaneous_fat_loss IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.subcutaneous_fat_loss IS
     'Severity of subcutaneous fat loss on physical examination, such as at the orbital, triceps, and rib regions.';
-COMMENT ON COLUMN dietic_assessment.muscle_wasting_temples IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.muscle_wasting_temples IS
     'Whether temporal muscle wasting is present on physical examination.';
-COMMENT ON COLUMN dietic_assessment.muscle_wasting_clavicles IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.muscle_wasting_clavicles IS
     'Whether clavicular muscle wasting is present on physical examination.';
-COMMENT ON COLUMN dietic_assessment.muscle_wasting_quadriceps IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.muscle_wasting_quadriceps IS
     'Whether quadriceps muscle wasting is present on physical examination.';
-COMMENT ON COLUMN dietic_assessment.muscle_wasting_severity IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.muscle_wasting_severity IS
     'Overall severity of muscle wasting, which satisfies the GLIM reduced-muscle-mass phenotypic criterion when body-composition measurement is unavailable.';
-COMMENT ON COLUMN dietic_assessment.peripheral_oedema_severity IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.peripheral_oedema_severity IS
     'Severity of peripheral oedema on physical examination.';
-COMMENT ON COLUMN dietic_assessment.oral_health IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.oral_health IS
     'Overall oral health, because poor oral health limits what can be eaten.';
-COMMENT ON COLUMN dietic_assessment.dentition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dentition IS
     'State of the dentition, including whether dentures fit, because chewing capacity constrains texture.';
-COMMENT ON COLUMN dietic_assessment.chewing_ability IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.chewing_ability IS
     'Ability to chew: normal, reduced, or unable.';
-COMMENT ON COLUMN dietic_assessment.tongue_and_mucosa IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.tongue_and_mucosa IS
     'Tongue and oral mucosa findings, such as glossitis or angular cheilitis, which suggest micronutrient deficiency.';
-COMMENT ON COLUMN dietic_assessment.skin_condition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.skin_condition IS
     'Skin findings relevant to nutrition, such as poor wound healing or easy bruising.';
-COMMENT ON COLUMN dietic_assessment.hair_condition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.hair_condition IS
     'Hair findings relevant to nutrition, such as thin or easily plucked hair.';
-COMMENT ON COLUMN dietic_assessment.nail_condition IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.nail_condition IS
     'Nail findings relevant to nutrition, such as spoon-shaped nails suggesting iron deficiency.';
-COMMENT ON COLUMN dietic_assessment.pressure_ulcer_present IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pressure_ulcer_present IS
     'Whether a pressure ulcer is present.';
-COMMENT ON COLUMN dietic_assessment.pressure_ulcer_category IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pressure_ulcer_category IS
     'Pressure ulcer category, where category 2 or above fires the pressure-ulcer safety flag and raises protein and energy requirements.';
-COMMENT ON COLUMN dietic_assessment.hand_grip_strength_kg IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.hand_grip_strength_kg IS
     'Hand-grip strength in kg by dynamometer, compared against sex-adjusted cut-offs to support the sarcopenia-risk safety flag.';
-COMMENT ON COLUMN dietic_assessment.physical_exam_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.physical_exam_notes IS
     'Free-text notes from the nutrition-focused physical examination.';
-COMMENT ON COLUMN dietic_assessment.meals_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.meals_per_day IS
     'Number of meals the patient eats in a typical day.';
-COMMENT ON COLUMN dietic_assessment.snacks_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.snacks_per_day IS
     'Number of snacks the patient eats in a typical day.';
-COMMENT ON COLUMN dietic_assessment.recall_breakfast IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_breakfast IS
     '24-hour recall: what the patient ate and drank at breakfast.';
-COMMENT ON COLUMN dietic_assessment.recall_mid_morning IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_mid_morning IS
     '24-hour recall: what the patient ate and drank mid-morning.';
-COMMENT ON COLUMN dietic_assessment.recall_lunch IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_lunch IS
     '24-hour recall: what the patient ate and drank at lunch.';
-COMMENT ON COLUMN dietic_assessment.recall_afternoon IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_afternoon IS
     '24-hour recall: what the patient ate and drank in the afternoon.';
-COMMENT ON COLUMN dietic_assessment.recall_dinner IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_dinner IS
     '24-hour recall: what the patient ate and drank at dinner.';
-COMMENT ON COLUMN dietic_assessment.recall_evening IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.recall_evening IS
     '24-hour recall: what the patient ate and drank in the evening.';
-COMMENT ON COLUMN dietic_assessment.portion_size IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.portion_size IS
     'Typical portion size the patient describes.';
-COMMENT ON COLUMN dietic_assessment.appetite IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.appetite IS
     'Overall appetite: good, fair, poor, or absent.';
-COMMENT ON COLUMN dietic_assessment.appetite_score_0_10 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.appetite_score_0_10 IS
     'Appetite rated by the patient from 0 for none to 10 for normal.';
-COMMENT ON COLUMN dietic_assessment.proportion_of_usual_intake_percent IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.proportion_of_usual_intake_percent IS
     'Current intake as a percentage of the patient''s usual intake. Below 50 fires the inadequate-oral-intake safety flag and supports the GLIM reduced-intake etiologic criterion.';
-COMMENT ON COLUMN dietic_assessment.meals_out_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.meals_out_per_week IS
     'Number of meals eaten out per week.';
-COMMENT ON COLUMN dietic_assessment.takeaways_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.takeaways_per_week IS
     'Number of takeaway meals per week.';
-COMMENT ON COLUMN dietic_assessment.food_diary_completed IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.food_diary_completed IS
     'Whether the patient completed a food diary before the appointment.';
-COMMENT ON COLUMN dietic_assessment.estimated_energy_intake_kcal IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.estimated_energy_intake_kcal IS
     'Estimated current daily energy intake in kilocalories, from the recall or food diary.';
-COMMENT ON COLUMN dietic_assessment.estimated_protein_intake_g IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.estimated_protein_intake_g IS
     'Estimated current daily protein intake in grams, from the recall or food diary.';
-COMMENT ON COLUMN dietic_assessment.eats_alone IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.eats_alone IS
     'Whether the patient usually eats alone, which is associated with reduced intake in older adults.';
-COMMENT ON COLUMN dietic_assessment.dietary_recall_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dietary_recall_notes IS
     'Free-text notes about the dietary recall.';
-COMMENT ON COLUMN dietic_assessment.fluid_intake_ml_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fluid_intake_ml_per_day IS
     'Usual daily fluid intake in ml.';
-COMMENT ON COLUMN dietic_assessment.fluid_types IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fluid_types IS
     'Types of drink the patient consumes, such as water, tea, juice, or milk-based drinks.';
-COMMENT ON COLUMN dietic_assessment.caffeinated_drinks_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.caffeinated_drinks_per_day IS
     'Number of caffeinated drinks per day.';
-COMMENT ON COLUMN dietic_assessment.alcohol_units_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.alcohol_units_per_week IS
     'Alcohol consumption in United Kingdom units per week. Above 14 fires the alcohol-excess safety flag and is a NICE CG32 refeeding-risk criterion.';
-COMMENT ON COLUMN dietic_assessment.thickened_fluids IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.thickened_fluids IS
     'Whether the patient takes thickened fluids for dysphagia.';
-COMMENT ON COLUMN dietic_assessment.thickened_fluids_iddsi_level IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.thickened_fluids_iddsi_level IS
     'IDDSI drink level 0 to 4, where 0 is thin and 4 is extremely thick.';
-COMMENT ON COLUMN dietic_assessment.hydration_signs IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.hydration_signs IS
     'Clinical hydration status observed, from well-hydrated through severe dehydration to fluid overload.';
-COMMENT ON COLUMN dietic_assessment.fluid_restriction IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fluid_restriction IS
     'Whether a fluid restriction is in place, such as for heart failure or dialysis.';
-COMMENT ON COLUMN dietic_assessment.fluid_restriction_ml_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fluid_restriction_ml_per_day IS
     'Prescribed daily fluid restriction in ml.';
-COMMENT ON COLUMN dietic_assessment.hydration_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.hydration_notes IS
     'Free-text notes about fluid intake and hydration.';
-COMMENT ON COLUMN dietic_assessment.has_food_allergy IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_food_allergy IS
     'Whether the patient has any food allergy.';
-COMMENT ON COLUMN dietic_assessment.has_food_intolerance IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_food_intolerance IS
     'Whether the patient has any food intolerance.';
-COMMENT ON COLUMN dietic_assessment.foods_avoided IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.foods_avoided IS
     'Foods the patient avoids, whatever the reason.';
-COMMENT ON COLUMN dietic_assessment.avoidance_reason IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.avoidance_reason IS
     'Why the patient avoids those foods, because allergy, medical advice, cost, and preference lead to different dietetic responses.';
-COMMENT ON COLUMN dietic_assessment.dislikes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dislikes IS
     'Foods the patient dislikes, which constrain what a care plan can realistically suggest.';
-COMMENT ON COLUMN dietic_assessment.therapeutic_diet IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.therapeutic_diet IS
     'Any therapeutic diet already in place, such as gluten-free, renal, or low-FODMAP.';
-COMMENT ON COLUMN dietic_assessment.dietary_pattern IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dietary_pattern IS
     'Overall dietary pattern, such as omnivore, vegetarian, vegan, halal, or kosher.';
-COMMENT ON COLUMN dietic_assessment.religious_or_cultural_requirement IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.religious_or_cultural_requirement IS
     'Religious or cultural dietary requirements the care plan must respect.';
-COMMENT ON COLUMN dietic_assessment.fasting_practice IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fasting_practice IS
     'Fasting practices the patient observes, such as Ramadan, which change the timing of intake.';
-COMMENT ON COLUMN dietic_assessment.texture_modified_diet IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.texture_modified_diet IS
     'Whether the patient is on a texture-modified diet.';
-COMMENT ON COLUMN dietic_assessment.texture_modified_iddsi_level IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.texture_modified_iddsi_level IS
     'IDDSI food level 3 to 7, where 3 is liquidised and 7 is regular.';
-COMMENT ON COLUMN dietic_assessment.preferences_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.preferences_notes IS
     'Free-text notes about preferences, allergies, and cultural requirements.';
-COMMENT ON COLUMN dietic_assessment.appetite_change IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.appetite_change IS
     'Whether appetite has changed recently, and in which direction.';
-COMMENT ON COLUMN dietic_assessment.early_satiety IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.early_satiety IS
     'Whether the patient feels full soon after starting to eat.';
-COMMENT ON COLUMN dietic_assessment.nausea IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.nausea IS
     'Whether the patient has nausea.';
-COMMENT ON COLUMN dietic_assessment.vomiting IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.vomiting IS
     'Whether the patient is vomiting.';
-COMMENT ON COLUMN dietic_assessment.dysphagia IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dysphagia IS
     'Whether the patient has difficulty swallowing. Recorded dysphagia without a speech-and-language-therapy assessment fires the dysphagia-aspiration-risk safety flag.';
-COMMENT ON COLUMN dietic_assessment.dysphagia_screen_outcome IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.dysphagia_screen_outcome IS
     'Outcome of the swallow screen: pass, fail, or not done.';
-COMMENT ON COLUMN dietic_assessment.speech_and_language_therapy IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.speech_and_language_therapy IS
     'Whether speech and language therapy is involved in the patient''s care.';
-COMMENT ON COLUMN dietic_assessment.reflux IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.reflux IS
     'Whether the patient has gastro-oesophageal reflux.';
-COMMENT ON COLUMN dietic_assessment.abdominal_pain IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.abdominal_pain IS
     'Whether the patient has abdominal pain.';
-COMMENT ON COLUMN dietic_assessment.bloating IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.bloating IS
     'Whether the patient has bloating.';
-COMMENT ON COLUMN dietic_assessment.bowel_frequency_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.bowel_frequency_per_week IS
     'Number of bowel movements per week.';
-COMMENT ON COLUMN dietic_assessment.bristol_stool_type IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.bristol_stool_type IS
     'Bristol Stool Form Scale type 1 to 7, where 1 to 2 suggests constipation and 6 to 7 suggests diarrhoea.';
-COMMENT ON COLUMN dietic_assessment.constipation IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.constipation IS
     'Whether the patient has constipation.';
-COMMENT ON COLUMN dietic_assessment.diarrhoea IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.diarrhoea IS
     'Whether the patient has diarrhoea.';
-COMMENT ON COLUMN dietic_assessment.stoma_present IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.stoma_present IS
     'Whether the patient has a stoma or enterocutaneous fistula.';
-COMMENT ON COLUMN dietic_assessment.stoma_output_ml_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.stoma_output_ml_per_day IS
     'Stoma or fistula output in ml per day, where a high output impairs absorption and fluid balance.';
-COMMENT ON COLUMN dietic_assessment.malabsorption_signs IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.malabsorption_signs IS
     'Whether signs of malabsorption are present, such as steatorrhoea, which satisfies the GLIM reduced-assimilation etiologic criterion.';
-COMMENT ON COLUMN dietic_assessment.gastrointestinal_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.gastrointestinal_notes IS
     'Free-text notes about gastrointestinal and swallowing findings.';
-COMMENT ON COLUMN dietic_assessment.living_situation IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.living_situation IS
     'The patient''s living situation, because it determines who provides food.';
-COMMENT ON COLUMN dietic_assessment.who_shops IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.who_shops IS
     'Who does the food shopping.';
-COMMENT ON COLUMN dietic_assessment.who_cooks IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.who_cooks IS
     'Who prepares the meals.';
-COMMENT ON COLUMN dietic_assessment.cooking_skills IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.cooking_skills IS
     'The patient''s cooking skills, because a care plan must be achievable with them.';
-COMMENT ON COLUMN dietic_assessment.cooking_confidence_0_10 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.cooking_confidence_0_10 IS
     'The patient''s confidence in cooking, from 0 for none to 10 for fully confident.';
-COMMENT ON COLUMN dietic_assessment.has_cooker IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_cooker IS
     'Whether the patient has a working cooker.';
-COMMENT ON COLUMN dietic_assessment.has_fridge IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_fridge IS
     'Whether the patient has a working fridge.';
-COMMENT ON COLUMN dietic_assessment.has_freezer IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_freezer IS
     'Whether the patient has a working freezer.';
-COMMENT ON COLUMN dietic_assessment.has_microwave IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_microwave IS
     'Whether the patient has a working microwave.';
-COMMENT ON COLUMN dietic_assessment.food_budget_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.food_budget_per_week IS
     'Weekly food budget in the local currency, because a care plan must be affordable.';
-COMMENT ON COLUMN dietic_assessment.worried_food_would_run_out IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.worried_food_would_run_out IS
     'Whether the patient worried that food would run out before there was money to buy more, i.e. the first food-insecurity screening question.';
-COMMENT ON COLUMN dietic_assessment.skipped_meals_for_money IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.skipped_meals_for_money IS
     'Whether the patient skipped meals because there was not enough money for food, i.e. the second food-insecurity screening question.';
-COMMENT ON COLUMN dietic_assessment.uses_food_bank IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.uses_food_bank IS
     'Whether the patient uses a food bank.';
-COMMENT ON COLUMN dietic_assessment.access_to_shops IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.access_to_shops IS
     'How easily the patient can reach food shops.';
-COMMENT ON COLUMN dietic_assessment.has_transport IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.has_transport IS
     'Whether the patient has transport for food shopping.';
-COMMENT ON COLUMN dietic_assessment.work_pattern IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.work_pattern IS
     'The patient''s work pattern, because shift and night work disrupt meal timing.';
-COMMENT ON COLUMN dietic_assessment.meal_support IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.meal_support IS
     'What meal support the patient receives, such as family, a care worker, or meals on wheels.';
-COMMENT ON COLUMN dietic_assessment.social_support IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.social_support IS
     'Level of social support available to the patient.';
-COMMENT ON COLUMN dietic_assessment.environment_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.environment_notes IS
     'Free-text notes about lifestyle and food environment.';
-COMMENT ON COLUMN dietic_assessment.activity_level IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.activity_level IS
     'Overall physical activity level, which feeds the energy requirement estimate.';
-COMMENT ON COLUMN dietic_assessment.exercise_type IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.exercise_type IS
     'Type of exercise the patient does.';
-COMMENT ON COLUMN dietic_assessment.exercise_minutes_per_week IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.exercise_minutes_per_week IS
     'Minutes of exercise per week.';
-COMMENT ON COLUMN dietic_assessment.sedentary_hours_per_day IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sedentary_hours_per_day IS
     'Hours per day spent sedentary.';
-COMMENT ON COLUMN dietic_assessment.mobility IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.mobility IS
     'Mobility status, from independent through walking aid and wheelchair to bed-bound.';
-COMMENT ON COLUMN dietic_assessment.falls_in_last_12_months IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.falls_in_last_12_months IS
     'Number of falls in the last 12 months, which is the SARC-F falls component and a sarcopenia indicator.';
-COMMENT ON COLUMN dietic_assessment.sarcf_strength IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sarcf_strength IS
     'SARC-F component: difficulty lifting and carrying 4.5 kg, scored 0 for none, 1 for some, 2 for a lot or unable.';
-COMMENT ON COLUMN dietic_assessment.sarcf_walking IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sarcf_walking IS
     'SARC-F component: difficulty walking across a room, scored 0 for none, 1 for some, 2 for a lot, uses aids, or unable.';
-COMMENT ON COLUMN dietic_assessment.sarcf_rising_from_chair IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sarcf_rising_from_chair IS
     'SARC-F component: difficulty transferring from a chair or bed, scored 0 for none, 1 for some, 2 for a lot or unable without help.';
-COMMENT ON COLUMN dietic_assessment.sarcf_climbing_stairs IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sarcf_climbing_stairs IS
     'SARC-F component: difficulty climbing a flight of ten stairs, scored 0 for none, 1 for some, 2 for a lot or unable.';
-COMMENT ON COLUMN dietic_assessment.sarcf_falls IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.sarcf_falls IS
     'SARC-F component: number of falls in the past year, scored 0 for none, 1 for one to three, 2 for four or more.';
-COMMENT ON COLUMN dietic_assessment.eats_independently IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.eats_independently IS
     'Whether the patient can eat and drink without assistance.';
-COMMENT ON COLUMN dietic_assessment.feeding_assistance_required IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.feeding_assistance_required IS
     'Level of feeding assistance required: none, prompting, partial, or full.';
-COMMENT ON COLUMN dietic_assessment.function_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.function_notes IS
     'Free-text notes about physical activity and function.';
-COMMENT ON COLUMN dietic_assessment.motivation_0_10 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.motivation_0_10 IS
     'The patient''s motivation to change, from 0 for none to 10 for fully motivated.';
-COMMENT ON COLUMN dietic_assessment.stage_of_change IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.stage_of_change IS
     'Stage of change in the transtheoretical model, which sets how directive the intervention should be.';
-COMMENT ON COLUMN dietic_assessment.self_efficacy_0_10 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.self_efficacy_0_10 IS
     'The patient''s confidence in their ability to change, from 0 for none to 10 for fully confident.';
-COMMENT ON COLUMN dietic_assessment.previous_attempts IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.previous_attempts IS
     'Previous dietary changes the patient has attempted, and what happened.';
-COMMENT ON COLUMN dietic_assessment.barriers IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.barriers IS
     'Barriers the patient identifies to making dietary changes.';
-COMMENT ON COLUMN dietic_assessment.scoff_make_yourself_sick IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.scoff_make_yourself_sick IS
     'SCOFF question: do you make yourself sick because you feel uncomfortably full?';
-COMMENT ON COLUMN dietic_assessment.scoff_lost_control IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.scoff_lost_control IS
     'SCOFF question: do you worry that you have lost control over how much you eat?';
-COMMENT ON COLUMN dietic_assessment.scoff_lost_one_stone IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.scoff_lost_one_stone IS
     'SCOFF question: have you recently lost more than one stone, about 6 kg, in a three-month period?';
-COMMENT ON COLUMN dietic_assessment.scoff_believe_yourself_fat IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.scoff_believe_yourself_fat IS
     'SCOFF question: do you believe yourself to be fat when others say you are too thin?';
-COMMENT ON COLUMN dietic_assessment.scoff_food_dominates IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.scoff_food_dominates IS
     'SCOFF question: would you say that food dominates your life?';
-COMMENT ON COLUMN dietic_assessment.mood IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.mood IS
     'The patient''s mood, because low mood reduces appetite and adherence.';
-COMMENT ON COLUMN dietic_assessment.anxiety IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.anxiety IS
     'The patient''s anxiety level.';
-COMMENT ON COLUMN dietic_assessment.cognitive_impairment IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.cognitive_impairment IS
     'Degree of cognitive impairment, which affects recall accuracy and the ability to follow a plan.';
-COMMENT ON COLUMN dietic_assessment.capacity_concern IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.capacity_concern IS
     'Whether there is a concern about the patient''s capacity to consent to or follow the plan, which fires the capacity-concern safety flag.';
-COMMENT ON COLUMN dietic_assessment.safeguarding_concern IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.safeguarding_concern IS
     'Whether there is a safeguarding concern, such as self-neglect or malnutrition in a care setting, which fires the safeguarding safety flag.';
-COMMENT ON COLUMN dietic_assessment.health_literacy IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.health_literacy IS
     'The patient''s health literacy, which sets the reading level of the resources given.';
-COMMENT ON COLUMN dietic_assessment.preferred_learning_style IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.preferred_learning_style IS
     'How the patient prefers to receive information, such as verbal, written, visual, or by demonstration.';
-COMMENT ON COLUMN dietic_assessment.patient_goal_in_own_words IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.patient_goal_in_own_words IS
     'The patient''s own goal, recorded verbatim, so the care plan can be written against what the patient actually wants.';
-COMMENT ON COLUMN dietic_assessment.acutely_ill IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.acutely_ill IS
     'Whether the patient is acutely ill, i.e. the first half of the MUST step 3 acute disease effect criterion.';
-COMMENT ON COLUMN dietic_assessment.no_nutritional_intake_over_5_days IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.no_nutritional_intake_over_5_days IS
     'Whether there has been, or is likely to be, no nutritional intake for more than five days, i.e. the second half of the MUST step 3 acute disease effect criterion.';
-COMMENT ON COLUMN dietic_assessment.days_of_negligible_intake IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.days_of_negligible_intake IS
     'Number of days of little or no nutritional intake, used for the NICE CG32 refeeding-syndrome risk criteria.';
-COMMENT ON COLUMN dietic_assessment.nrs_2002_score IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.nrs_2002_score IS
     'Nutritional Risk Screening 2002 total score, 0 to 7, where 3 or more indicates nutritional risk in the acute inpatient setting.';
-COMMENT ON COLUMN dietic_assessment.energy_requirement_kcal IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.energy_requirement_kcal IS
     'Estimated daily energy requirement in kilocalories, entered by the dietitian using the equation named below.';
-COMMENT ON COLUMN dietic_assessment.protein_requirement_g IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.protein_requirement_g IS
     'Estimated daily protein requirement in grams, entered by the dietitian.';
-COMMENT ON COLUMN dietic_assessment.fluid_requirement_ml IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.fluid_requirement_ml IS
     'Estimated daily fluid requirement in ml, entered by the dietitian.';
-COMMENT ON COLUMN dietic_assessment.requirement_equation IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.requirement_equation IS
     'Which equation or method was used to estimate requirements, because local policy governs the choice and the form does not compute it.';
-COMMENT ON COLUMN dietic_assessment.pes_problem IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pes_problem IS
     'PES statement problem, i.e. the nutrition and dietetic diagnosis.';
-COMMENT ON COLUMN dietic_assessment.pes_etiology IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pes_etiology IS
     'PES statement etiology, i.e. what is causing the problem.';
-COMMENT ON COLUMN dietic_assessment.pes_signs_symptoms IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.pes_signs_symptoms IS
     'PES statement signs and symptoms, i.e. the evidence for the problem.';
-COMMENT ON COLUMN dietic_assessment.intervention_type IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.intervention_type IS
     'Type of nutrition intervention chosen, from dietary counselling through food fortification and oral nutritional supplements to enteral or parenteral nutrition.';
-COMMENT ON COLUMN dietic_assessment.prescribed_supplement IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.prescribed_supplement IS
     'Oral nutritional supplement prescribed, where one is prescribed.';
-COMMENT ON COLUMN dietic_assessment.prescribed_supplement_dose IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.prescribed_supplement_dose IS
     'Dose and frequency of the prescribed supplement.';
-COMMENT ON COLUMN dietic_assessment.texture_modification_plan IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.texture_modification_plan IS
     'Texture modification plan, stated in IDDSI levels where applicable.';
-COMMENT ON COLUMN dietic_assessment.goal_1 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.goal_1 IS
     'First SMART goal, with its target, measure, and review date.';
-COMMENT ON COLUMN dietic_assessment.goal_2 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.goal_2 IS
     'Second SMART goal, with its target, measure, and review date.';
-COMMENT ON COLUMN dietic_assessment.goal_3 IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.goal_3 IS
     'Third SMART goal, with its target, measure, and review date.';
-COMMENT ON COLUMN dietic_assessment.education_provided IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.education_provided IS
     'Education provided to the patient during the consultation.';
-COMMENT ON COLUMN dietic_assessment.resources_given IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.resources_given IS
     'Written or digital resources given to the patient.';
-COMMENT ON COLUMN dietic_assessment.monitoring_indicators IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.monitoring_indicators IS
     'What will be monitored to evaluate the intervention, such as weight, intake, or a biochemical marker.';
-COMMENT ON COLUMN dietic_assessment.review_interval_weeks IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.review_interval_weeks IS
     'Interval in weeks until the next review.';
-COMMENT ON COLUMN dietic_assessment.review_date IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.review_date IS
     'Date of the next planned review.';
-COMMENT ON COLUMN dietic_assessment.onward_referral IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.onward_referral IS
     'Onward referrals made, such as to speech and language therapy, the nutrition support team, or social prescribing.';
-COMMENT ON COLUMN dietic_assessment.additional_notes IS
+COMMENT ON COLUMN dietic_assessment.dietic_assessment.additional_notes IS
     'Any additional notes the dietitian records.';

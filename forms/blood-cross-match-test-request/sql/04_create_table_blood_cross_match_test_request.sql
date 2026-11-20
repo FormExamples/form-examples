@@ -1,13 +1,13 @@
 -- Blood cross-match / transfusion compatibility request (referral) — the source-of-truth record.
 
-CREATE TABLE blood_cross_match_test_request (
+CREATE TABLE blood_cross_match_test_request.blood_cross_match_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES blood_cross_match_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES blood_cross_match_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'scheduled', 'rejected', '')),
@@ -53,74 +53,74 @@ CREATE TABLE blood_cross_match_test_request (
 );
 
 CREATE INDEX index_blood_cross_match_test_request_patient_id
-    ON blood_cross_match_test_request(patient_id);
+    ON blood_cross_match_test_request.blood_cross_match_test_request(patient_id);
 CREATE INDEX index_blood_cross_match_test_request_clinician_id
-    ON blood_cross_match_test_request(clinician_id);
+    ON blood_cross_match_test_request.blood_cross_match_test_request(clinician_id);
 
 CREATE TRIGGER trigger_blood_cross_match_test_request_updated_at
-    BEFORE UPDATE ON blood_cross_match_test_request
+    BEFORE UPDATE ON blood_cross_match_test_request.blood_cross_match_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION blood_cross_match_test_request.set_updated_at();
 
-COMMENT ON TABLE blood_cross_match_test_request IS
+COMMENT ON TABLE blood_cross_match_test_request.blood_cross_match_test_request IS
     'Blood cross-match / transfusion compatibility request (referral). Captures the requested test type and component, the clinical indication, the patient blood group, antibody and transfusion history, sample collection and two-sample-rule status, and triage urgency.';
-COMMENT ON COLUMN blood_cross_match_test_request.id IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN blood_cross_match_test_request.created_at IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN blood_cross_match_test_request.updated_at IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN blood_cross_match_test_request.deleted_at IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN blood_cross_match_test_request.patient_id IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN blood_cross_match_test_request.clinician_id IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN blood_cross_match_test_request.status IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, scheduled, rejected.';
-COMMENT ON COLUMN blood_cross_match_test_request.site_name IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN blood_cross_match_test_request.setting IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN blood_cross_match_test_request.referral_date IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN blood_cross_match_test_request.requested_by_date IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.requested_by_date IS
     'Date by which the test / component is requested to be available.';
-COMMENT ON COLUMN blood_cross_match_test_request.request_type IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.request_type IS
     'Requested test type: group-and-save, crossmatch, emergency-o-negative, antibody-screen, other.';
-COMMENT ON COLUMN blood_cross_match_test_request.component IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.component IS
     'Requested blood component: red-cells, platelets, fresh-frozen-plasma, cryoprecipitate, none.';
-COMMENT ON COLUMN blood_cross_match_test_request.units_required IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.units_required IS
     'Number of units of the requested component (0-50).';
-COMMENT ON COLUMN blood_cross_match_test_request.primary_indication IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring against NICE NG24 thresholds.';
-COMMENT ON COLUMN blood_cross_match_test_request.clinical_details IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.clinical_details IS
     'Clinical details supporting the request (highest-value free-text field).';
-COMMENT ON COLUMN blood_cross_match_test_request.patient_blood_group IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.patient_blood_group IS
     'Known patient ABO/Rh blood group: a-pos, a-neg, b-pos, b-neg, o-pos, o-neg, ab-pos, ab-neg, unknown.';
-COMMENT ON COLUMN blood_cross_match_test_request.known_antibodies IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.known_antibodies IS
     'Whether the patient has known red-cell alloantibodies (requires extra crossmatch time).';
-COMMENT ON COLUMN blood_cross_match_test_request.antibody_detail IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.antibody_detail IS
     'Detail of any known antibodies (specificity, source, antigen-negative requirements).';
-COMMENT ON COLUMN blood_cross_match_test_request.previous_transfusion IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.previous_transfusion IS
     'Whether the patient has been transfused previously.';
-COMMENT ON COLUMN blood_cross_match_test_request.previous_transfusion_reaction IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.previous_transfusion_reaction IS
     'Whether the patient has had a previous transfusion reaction.';
-COMMENT ON COLUMN blood_cross_match_test_request.pregnant IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.pregnant IS
     'Whether the patient is currently pregnant (alloimmunisation / anti-D relevance).';
-COMMENT ON COLUMN blood_cross_match_test_request.sample_collected IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.sample_collected IS
     'Whether a pre-transfusion sample has been collected: yes, no.';
-COMMENT ON COLUMN blood_cross_match_test_request.collection_datetime IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.collection_datetime IS
     'Date and time the pre-transfusion sample was collected.';
-COMMENT ON COLUMN blood_cross_match_test_request.two_sample_rule_met IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.two_sample_rule_met IS
     'Whether the BSH/SHOT two-sample (group-check) rule has been satisfied for this patient.';
-COMMENT ON COLUMN blood_cross_match_test_request.required_by_datetime IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.required_by_datetime IS
     'Date and time by which compatible blood is required.';
-COMMENT ON COLUMN blood_cross_match_test_request.urgency IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.urgency IS
     'Requested triage urgency: routine, urgent, emergency, stat.';
-COMMENT ON COLUMN blood_cross_match_test_request.supervising_consultant IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN blood_cross_match_test_request.requester_contact IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN blood_cross_match_test_request.notes IS
+COMMENT ON COLUMN blood_cross_match_test_request.blood_cross_match_test_request.notes IS
     'Free-text additional notes.';

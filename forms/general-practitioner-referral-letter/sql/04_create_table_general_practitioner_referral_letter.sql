@@ -8,14 +8,14 @@
 -- content is free text; presence of a field is detected by a non-empty
 -- value, not by semantic analysis.
 
-CREATE TABLE general_practitioner_referral_letter (
+CREATE TABLE general_practitioner_referral_letter.general_practitioner_referral_letter (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES general_practitioner_referral_letter.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES general_practitioner_referral_letter.clinician(id) ON DELETE RESTRICT,
 
     -- Identification and referral context
     patient_identifier VARCHAR(100) NOT NULL DEFAULT '',
@@ -52,76 +52,76 @@ CREATE TABLE general_practitioner_referral_letter (
 );
 
 CREATE INDEX general_practitioner_referral_letter_patient_id_idx
-    ON general_practitioner_referral_letter (patient_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter (patient_id);
 CREATE INDEX general_practitioner_referral_letter_clinician_id_idx
-    ON general_practitioner_referral_letter (clinician_id);
+    ON general_practitioner_referral_letter.general_practitioner_referral_letter (clinician_id);
 
 CREATE TRIGGER trigger_general_practitioner_referral_letter_updated_at
-    BEFORE UPDATE ON general_practitioner_referral_letter
+    BEFORE UPDATE ON general_practitioner_referral_letter.general_practitioner_referral_letter
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION general_practitioner_referral_letter.set_updated_at();
 
-COMMENT ON TABLE general_practitioner_referral_letter IS
+COMMENT ON TABLE general_practitioner_referral_letter.general_practitioner_referral_letter IS
     'Main general-practitioner referral letter record: referral destination, urgency, reason and history, examination and investigation findings, medications and allergies, and the patient''s expectations, consent, and safety-netting, plus patient and referrer identification. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN general_practitioner_referral_letter.id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN general_practitioner_referral_letter.created_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN general_practitioner_referral_letter.updated_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN general_practitioner_referral_letter.deleted_at IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_id IS
     'Foreign key to the patient being referred (restrict delete).';
-COMMENT ON COLUMN general_practitioner_referral_letter.clinician_id IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.clinician_id IS
     'Foreign key to the referring clinician (restrict delete); optional.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_identifier IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_identifier IS
     'NHS number or local patient identifier as recorded on the letter.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referrer_role IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referrer_role IS
     'Referrer role: gp, gp-registrar, nurse-practitioner, pharmacist, paramedic, or other.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referring_practice IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referring_practice IS
     'Referring practice name.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referral_date IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referral_date IS
     'Date of referral.';
-COMMENT ON COLUMN general_practitioner_referral_letter.access_needs IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.access_needs IS
     'Interpreter or accessibility needs recorded for the patient.';
-COMMENT ON COLUMN general_practitioner_referral_letter.referral_specialty IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.referral_specialty IS
     'Specialty or service being referred to (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.named_clinician IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.named_clinician IS
     'Named consultant or team being referred to (optional).';
-COMMENT ON COLUMN general_practitioner_referral_letter.receiving_organisation IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.receiving_organisation IS
     'Receiving hospital, trust, or community provider.';
-COMMENT ON COLUMN general_practitioner_referral_letter.urgency IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.urgency IS
     'Urgency classification: routine, urgent, two-week-wait, or emergency (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.urgency_reason IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.urgency_reason IS
     'Why the referral is urgent; mandatory for urgent and two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.suspected_cancer_criterion IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.suspected_cancer_criterion IS
     'Named NICE NG12 criterion; mandatory for two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.suspected_cancer_pathway IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.suspected_cancer_pathway IS
     'Tumour-site suspected-cancer pathway; mandatory for two-week-wait.';
-COMMENT ON COLUMN general_practitioner_referral_letter.reason_for_referral IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.reason_for_referral IS
     'Primary reason for the referral (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.relevant_history IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.relevant_history IS
     'Relevant clinical history (always mandatory).';
-COMMENT ON COLUMN general_practitioner_referral_letter.presenting_problem IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.presenting_problem IS
     'Presenting problem.';
-COMMENT ON COLUMN general_practitioner_referral_letter.symptom_duration IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.symptom_duration IS
     'Duration of symptoms.';
-COMMENT ON COLUMN general_practitioner_referral_letter.red_flag_symptoms IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.red_flag_symptoms IS
     'Documented red-flag symptoms; presence drives the emergency-features flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.examination_findings IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.examination_findings IS
     'Examination findings.';
-COMMENT ON COLUMN general_practitioner_referral_letter.investigation_results IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.investigation_results IS
     'Bloods, imaging, or other investigations already done.';
-COMMENT ON COLUMN general_practitioner_referral_letter.current_medications IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.current_medications IS
     'Current medications.';
-COMMENT ON COLUMN general_practitioner_referral_letter.allergies IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.allergies IS
     'Allergies and reactions.';
-COMMENT ON COLUMN general_practitioner_referral_letter.patient_expectations IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.patient_expectations IS
     'Patient''s expectations or question to the specialist.';
-COMMENT ON COLUMN general_practitioner_referral_letter.consent_to_share IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.consent_to_share IS
     'Whether consent to share information is documented (yes/no); anything other than yes raises the consent-not-documented flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.safety_netting IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.safety_netting IS
     'Safety-netting advice given to the patient while waiting; absence raises the no-safety-netting flag.';
-COMMENT ON COLUMN general_practitioner_referral_letter.clinical_note IS
+COMMENT ON COLUMN general_practitioner_referral_letter.general_practitioner_referral_letter.clinical_note IS
     'Optional free-text note shown in the summary.';

@@ -1,10 +1,10 @@
-CREATE TABLE assessment_medication_item (
+CREATE TABLE psychiatry_assessment.assessment_medication_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     current_medications_id UUID NOT NULL
-        REFERENCES assessment_current_medications(id) ON DELETE CASCADE,
+        REFERENCES psychiatry_assessment.assessment_current_medications(id) ON DELETE CASCADE,
     medication_name VARCHAR(255) NOT NULL DEFAULT '',
     dose VARCHAR(100) NOT NULL DEFAULT '',
     frequency VARCHAR(100) NOT NULL DEFAULT '',
@@ -16,46 +16,46 @@ CREATE TABLE assessment_medication_item (
 );
 
 CREATE TRIGGER trigger_assessment_medication_item_updated_at
-    BEFORE UPDATE ON assessment_medication_item
+    BEFORE UPDATE ON psychiatry_assessment.assessment_medication_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION psychiatry_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_medication_item IS
+COMMENT ON TABLE psychiatry_assessment.assessment_medication_item IS
     'Individual medication entry with name, dose, frequency, and classification.';
-COMMENT ON COLUMN assessment_medication_item.medication_name IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.medication_name IS
     'Name of the medication.';
-COMMENT ON COLUMN assessment_medication_item.dose IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.dose IS
     'Dosage amount and unit (e.g. 20mg, 100mg).';
-COMMENT ON COLUMN assessment_medication_item.frequency IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.frequency IS
     'Dosing frequency (e.g. once daily, twice daily, as needed).';
-COMMENT ON COLUMN assessment_medication_item.medication_type IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.medication_type IS
     'Medication classification: antidepressant, antipsychotic, anxiolytic, mood-stabiliser, hypnotic, stimulant, other, or empty.';
-COMMENT ON COLUMN assessment_medication_item.indication IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.indication IS
     'Clinical indication for the medication.';
-COMMENT ON COLUMN assessment_medication_item.sort_order IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.sort_order IS
     'Display order of the medication in the list.';
 
-COMMENT ON COLUMN assessment_current_medications.id IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_medications.depot_details IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.depot_details IS
     'Depot details.';
-COMMENT ON COLUMN assessment_current_medications.adverse_drug_reactions IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.adverse_drug_reactions IS
     'Adverse drug reactions.';
-COMMENT ON COLUMN assessment_current_medications.additional_notes IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.additional_notes IS
     'Additional notes.';
-COMMENT ON COLUMN assessment_current_medications.created_at IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_medications.updated_at IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_current_medications.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.current_medications_id IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.current_medications_id IS
     'Foreign key to the assessment_current_medications table.';
-COMMENT ON COLUMN assessment_medication_item.prescribing_clinician IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.prescribing_clinician IS
     'Prescribing clinician.';
-COMMENT ON COLUMN assessment_medication_item.id IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_medication_item.created_at IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_medication_item.updated_at IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_medication_item.deleted_at IS
+COMMENT ON COLUMN psychiatry_assessment.assessment_medication_item.deleted_at IS
     'Timestamp when this row was deleted.';

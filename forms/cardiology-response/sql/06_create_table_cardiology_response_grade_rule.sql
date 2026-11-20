@@ -1,13 +1,13 @@
 -- Audit trail of every scoring rule that fired for a cardiology response.
 
-CREATE TABLE cardiology_response_grade_rule (
+CREATE TABLE cardiology_response.cardiology_response_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_response_grade_id UUID NOT NULL
-        REFERENCES cardiology_response_grade(id) ON DELETE CASCADE,
+        REFERENCES cardiology_response.cardiology_response_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('classification', 'severity', 'completeness', 'follow-up', '')),
@@ -16,30 +16,30 @@ CREATE TABLE cardiology_response_grade_rule (
 );
 
 CREATE INDEX index_cardiology_response_grade_rule_grade_id
-    ON cardiology_response_grade_rule(cardiology_response_grade_id);
+    ON cardiology_response.cardiology_response_grade_rule(cardiology_response_grade_id);
 
 CREATE TRIGGER trigger_cardiology_response_grade_rule_updated_at
-    BEFORE UPDATE ON cardiology_response_grade_rule
+    BEFORE UPDATE ON cardiology_response.cardiology_response_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response_grade_rule IS
+COMMENT ON TABLE cardiology_response.cardiology_response_grade_rule IS
     'Audit trail of every classification / severity / completeness / follow-up rule that fired for this response.';
-COMMENT ON COLUMN cardiology_response_grade_rule.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response_grade_rule.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_response_grade_rule.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response_grade_rule.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response_grade_rule.cardiology_response_grade_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.cardiology_response_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cardiology_response_grade_rule.rule_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CLASS-CRITICAL-01).';
-COMMENT ON COLUMN cardiology_response_grade_rule.axis IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.axis IS
     'Scoring axis the rule belongs to: classification, severity, completeness, follow-up.';
-COMMENT ON COLUMN cardiology_response_grade_rule.category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.category IS
     'Category or finding the rule relates to.';
-COMMENT ON COLUMN cardiology_response_grade_rule.description IS
+COMMENT ON COLUMN cardiology_response.cardiology_response_grade_rule.description IS
     'Human-readable description of why the rule fired.';

@@ -5,7 +5,7 @@
 -- cremation, Tell Us Once, and ordering certified copies. The completeness
 -- classification, rules fired and flags live in child tables. Not legal advice.
 
-CREATE TABLE united_kingdom_death_registration (
+CREATE TABLE united_kingdom_death_registration.united_kingdom_death_registration (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -13,8 +13,8 @@ CREATE TABLE united_kingdom_death_registration (
 
 
     -- Parties
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    informant_id UUID REFERENCES informant(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES united_kingdom_death_registration.patient(id) ON DELETE RESTRICT,
+    informant_id UUID REFERENCES united_kingdom_death_registration.informant(id) ON DELETE RESTRICT,
 
     -- The deceased and the death
     deceased_name TEXT NOT NULL DEFAULT '',
@@ -59,84 +59,84 @@ CREATE TABLE united_kingdom_death_registration (
 );
 
 CREATE INDEX united_kingdom_death_registration_patient_id_idx
-    ON united_kingdom_death_registration (patient_id);
+    ON united_kingdom_death_registration.united_kingdom_death_registration (patient_id);
 CREATE INDEX united_kingdom_death_registration_informant_id_idx
-    ON united_kingdom_death_registration (informant_id);
+    ON united_kingdom_death_registration.united_kingdom_death_registration (informant_id);
 
 CREATE TRIGGER trigger_united_kingdom_death_registration_updated_at
-    BEFORE UPDATE ON united_kingdom_death_registration
+    BEFORE UPDATE ON united_kingdom_death_registration.united_kingdom_death_registration
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_death_registration.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_death_registration IS
+COMMENT ON TABLE united_kingdom_death_registration.united_kingdom_death_registration IS
     'Main death-registration record: the registrar-side and family-side process in England and Wales after an MCCD. Classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_kingdom_death_registration.id IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_death_registration.created_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_death_registration.updated_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_death_registration.deleted_at IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_death_registration.patient_id IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.patient_id IS
     'Foreign key to the deceased whose death is being registered (restrict delete).';
-COMMENT ON COLUMN united_kingdom_death_registration.informant_id IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.informant_id IS
     'Foreign key to the informant (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_death_registration.deceased_name IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.deceased_name IS
     'Name of the deceased as given for the register entry.';
-COMMENT ON COLUMN united_kingdom_death_registration.sex IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.sex IS
     'Sex of the deceased: female, male, other, or unknown.';
-COMMENT ON COLUMN united_kingdom_death_registration.date_of_birth IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.date_of_birth IS
     'Date of birth of the deceased; null when unknown.';
-COMMENT ON COLUMN united_kingdom_death_registration.date_of_death IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.date_of_death IS
     'Date of death; null when not yet stated.';
-COMMENT ON COLUMN united_kingdom_death_registration.place_of_death IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.place_of_death IS
     'Place where the death occurred.';
-COMMENT ON COLUMN united_kingdom_death_registration.death_jurisdiction IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.death_jurisdiction IS
     'Where the death occurred; this form covers england-wales only.';
-COMMENT ON COLUMN united_kingdom_death_registration.deceased_particulars_known IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.deceased_particulars_known IS
     'Whether the informant can give the deceased''s full particulars (names, birth date and place, address, occupation, marital status).';
-COMMENT ON COLUMN united_kingdom_death_registration.mccd_received IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.mccd_received IS
     'Whether the register office has received the medical certificate of cause of death (MCCD).';
-COMMENT ON COLUMN united_kingdom_death_registration.medical_examiner_status IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.medical_examiner_status IS
     'Whether the medical examiner''s office has confirmed that the death can be registered.';
-COMMENT ON COLUMN united_kingdom_death_registration.medical_examiner_confirmation_date IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.medical_examiner_confirmation_date IS
     'Date the medical examiner''s office confirmed; starts the 5-day clock. Null when unconfirmed.';
-COMMENT ON COLUMN united_kingdom_death_registration.referred_to_coroner IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.referred_to_coroner IS
     'Whether the death has been reported to a coroner.';
-COMMENT ON COLUMN united_kingdom_death_registration.coroner_stage IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.coroner_stage IS
     'Stage of the coroner''s involvement.';
-COMMENT ON COLUMN united_kingdom_death_registration.coroner_certificate_received IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.coroner_certificate_received IS
     'Whether the registrar has the coroner''s certificate (form CN2, or the certificate after inquest) needed to register.';
-COMMENT ON COLUMN united_kingdom_death_registration.informant_name IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.informant_name IS
     'Name of the person who will register the death.';
-COMMENT ON COLUMN united_kingdom_death_registration.informant_relationship IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.informant_relationship IS
     'Basis on which the informant qualifies under section 16 of the 1953 Act, or not-qualified.';
-COMMENT ON COLUMN united_kingdom_death_registration.informant_address IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.informant_address IS
     'Address of the informant.';
-COMMENT ON COLUMN united_kingdom_death_registration.register_office IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.register_office IS
     'Register office where the death is or will be registered.';
-COMMENT ON COLUMN united_kingdom_death_registration.appointment_booked IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.appointment_booked IS
     'Whether an appointment with the registrar has been booked.';
-COMMENT ON COLUMN united_kingdom_death_registration.supporting_documents_available IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.supporting_documents_available IS
     'Whether supporting documents (birth or marriage certificate, passport, proof of address) are to hand; helpful but not mandatory.';
-COMMENT ON COLUMN united_kingdom_death_registration.registration_date IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.registration_date IS
     'Date the death was registered; null while unregistered.';
-COMMENT ON COLUMN united_kingdom_death_registration.as_of_date IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.as_of_date IS
     'Assessment date used to count days since confirmation; supplied explicitly so grading is deterministic.';
-COMMENT ON COLUMN united_kingdom_death_registration.disposal_method IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.disposal_method IS
     'Intended method of disposal of the body.';
-COMMENT ON COLUMN united_kingdom_death_registration.disposal_certificate_issued IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.disposal_certificate_issued IS
     'Whether the certificate for burial or cremation (the green form) has been issued.';
-COMMENT ON COLUMN united_kingdom_death_registration.tell_us_once_status IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.tell_us_once_status IS
     'Whether the Tell Us Once reference number was issued, not offered, or declined.';
-COMMENT ON COLUMN united_kingdom_death_registration.tell_us_once_reference IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.tell_us_once_reference IS
     'Tell Us Once reference number given at registration; used to report the death to government departments.';
-COMMENT ON COLUMN united_kingdom_death_registration.copies_requested IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.copies_requested IS
     'Number of certified copies of the death certificate requested; null when undecided.';
-COMMENT ON COLUMN united_kingdom_death_registration.copy_order_channel IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.copy_order_channel IS
     'How copies are ordered.';
-COMMENT ON COLUMN united_kingdom_death_registration.gro_index_reference IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.gro_index_reference IS
     'General Register Office index reference; avoids the GBP 3.50 search fee when ordering online.';
-COMMENT ON COLUMN united_kingdom_death_registration.priority_service IS
+COMMENT ON COLUMN united_kingdom_death_registration.united_kingdom_death_registration.priority_service IS
     'Whether the GRO priority service (next-working-day dispatch) is requested; online orders only.';

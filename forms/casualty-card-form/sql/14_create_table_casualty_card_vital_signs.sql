@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_vital_signs (
+CREATE TABLE casualty_card_form.casualty_card_vital_signs (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Cardiovascular
     heart_rate              INTEGER
                             CHECK (heart_rate IS NULL OR (heart_rate >= 0 AND heart_rate <= 300)),
@@ -46,50 +46,50 @@ CREATE TABLE casualty_card_vital_signs (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_vital_signs_updated_at
-    BEFORE UPDATE ON casualty_card_vital_signs
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_vital_signs
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_vital_signs IS
+COMMENT ON TABLE casualty_card_form.casualty_card_vital_signs IS
     '1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.';
-COMMENT ON COLUMN casualty_card_vital_signs.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_vital_signs.heart_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.heart_rate IS
     'Heart rate in beats per minute. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.systolic_bp IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.systolic_bp IS
     'Systolic blood pressure in mmHg. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.diastolic_bp IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.diastolic_bp IS
     'Diastolic blood pressure in mmHg. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.respiratory_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.respiratory_rate IS
     'Respiratory rate in breaths per minute. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.oxygen_saturation IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.oxygen_saturation IS
     'Peripheral oxygen saturation (SpO2) as a percentage. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.supplemental_oxygen IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.supplemental_oxygen IS
     'Whether patient is on supplemental oxygen: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.oxygen_flow_rate IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.oxygen_flow_rate IS
     'Oxygen flow rate (e.g. 2L/min, 15L NRB).';
-COMMENT ON COLUMN casualty_card_vital_signs.temperature IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.temperature IS
     'Core temperature in degrees Celsius. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.blood_glucose IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.blood_glucose IS
     'Blood glucose in mmol/L. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.consciousness_level IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.consciousness_level IS
     'AVPU consciousness level: alert, verbal, pain, unresponsive, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_left_size IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_left_size IS
     'Left pupil size in mm (1-9). NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_left_reactive IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_left_reactive IS
     'Whether the left pupil is reactive to light: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_right_size IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_right_size IS
     'Right pupil size in mm (1-9). NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.pupil_right_reactive IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.pupil_right_reactive IS
     'Whether the right pupil is reactive to light: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_vital_signs.capillary_refill_time IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.capillary_refill_time IS
     'Capillary refill time (e.g. less than 2 seconds, 3 seconds).';
-COMMENT ON COLUMN casualty_card_vital_signs.weight IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.weight IS
     'Patient weight in kilograms. NULL if not recorded.';
-COMMENT ON COLUMN casualty_card_vital_signs.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_vital_signs.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_vital_signs.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_vital_signs.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_vital_signs.deleted_at IS
     'Timestamp when this row was deleted.';

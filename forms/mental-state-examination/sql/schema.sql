@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS mental_state_examination;
+
+COMMENT ON SCHEMA mental_state_examination IS
+    'Namespace for the Mental State Examination (MSE) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION mental_state_examination.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION mental_state_examination.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE mental_state_examination.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON mental_state_examination.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE mental_state_examination.patient IS
     'Patient demographic information used by the mental state examination record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN mental_state_examination.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN mental_state_examination.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN mental_state_examination.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN mental_state_examination.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN mental_state_examination.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN mental_state_examination.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN mental_state_examination.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN mental_state_examination.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN mental_state_examination.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN mental_state_examination.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN mental_state_examination.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN mental_state_examination.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN mental_state_examination.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN mental_state_examination.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN mental_state_examination.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN mental_state_examination.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN mental_state_examination.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON mental_state_examination.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing clinician
 -- who performed the mental state examination.
 
-CREATE TABLE clinician (
+CREATE TABLE mental_state_examination.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON mental_state_examination.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE mental_state_examination.clinician IS
     'Clinician identifying information for the clinician who performed the mental state examination.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN mental_state_examination.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN mental_state_examination.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN mental_state_examination.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN mental_state_examination.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN mental_state_examination.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN mental_state_examination.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN mental_state_examination.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN mental_state_examination.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN mental_state_examination.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN mental_state_examination.clinician.role IS
     'Primary clinical role: psychiatrist, mental-health-nurse, gp, liaison, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN mental_state_examination.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN mental_state_examination.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON mental_state_examination.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -211,14 +228,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- any of its findings fields is non-empty; presence is detected by a
 -- non-empty field, not by semantic analysis.
 
-CREATE TABLE mental_state_examination (
+CREATE TABLE mental_state_examination.mental_state_examination (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES mental_state_examination.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES mental_state_examination.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name TEXT NOT NULL DEFAULT '',
@@ -288,124 +305,124 @@ CREATE TABLE mental_state_examination (
 );
 
 CREATE INDEX mental_state_examination_patient_id_idx
-    ON mental_state_examination (patient_id);
+    ON mental_state_examination.mental_state_examination (patient_id);
 CREATE INDEX mental_state_examination_clinician_id_idx
-    ON mental_state_examination (clinician_id);
+    ON mental_state_examination.mental_state_examination (clinician_id);
 
 CREATE TRIGGER trigger_mental_state_examination_updated_at
-    BEFORE UPDATE ON mental_state_examination
+    BEFORE UPDATE ON mental_state_examination.mental_state_examination
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE mental_state_examination IS
+COMMENT ON TABLE mental_state_examination.mental_state_examination IS
     'Main mental state examination (MSE) record: assessment context, patient and clinician identification, and the seven ASEPTIC domains (appearance and behaviour, speech, emotion, perception, thought, insight and judgement, cognition). Completeness-and-risk grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN mental_state_examination.id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_state_examination.created_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN mental_state_examination.updated_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN mental_state_examination.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN mental_state_examination.patient_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.patient_id IS
     'Foreign key to the patient this examination documents (restrict delete).';
-COMMENT ON COLUMN mental_state_examination.clinician_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.clinician_id IS
     'Foreign key to the assessing clinician (restrict delete); optional.';
-COMMENT ON COLUMN mental_state_examination.clinician_name IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.clinician_name IS
     'Name of the assessing clinician as recorded on the examination.';
-COMMENT ON COLUMN mental_state_examination.clinician_role IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.clinician_role IS
     'Assessing clinician role: psychiatrist, mental-health-nurse, gp, liaison, or other.';
-COMMENT ON COLUMN mental_state_examination.assessed_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.assessed_at IS
     'Date and time the mental state examination was performed.';
-COMMENT ON COLUMN mental_state_examination.care_setting IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.care_setting IS
     'Care setting: outpatient, inpatient, liaison, crisis, primary-care, or other.';
-COMMENT ON COLUMN mental_state_examination.assessment_reason IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.assessment_reason IS
     'Reason for assessment or referral.';
-COMMENT ON COLUMN mental_state_examination.patient_identifier IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.patient_identifier IS
     'Local patient or encounter identifier as recorded on the examination.';
-COMMENT ON COLUMN mental_state_examination.age_band IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.age_band IS
     'Patient age band: under-18, 18-25, 26-39, 40-64, or 65-plus.';
-COMMENT ON COLUMN mental_state_examination.sex IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN mental_state_examination.appearance_grooming IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_grooming IS
     'Domain 1 (appearance and behaviour): grooming — well-kempt, dishevelled, or other.';
-COMMENT ON COLUMN mental_state_examination.appearance_eye_contact IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_eye_contact IS
     'Domain 1: eye contact — normal, reduced, intense, or avoidant.';
-COMMENT ON COLUMN mental_state_examination.appearance_rapport IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_rapport IS
     'Domain 1: rapport — good, guarded, hostile, or withdrawn.';
-COMMENT ON COLUMN mental_state_examination.appearance_psychomotor IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_psychomotor IS
     'Domain 1: psychomotor activity — normal, agitation, or retardation; agitation drives the agitation flag.';
-COMMENT ON COLUMN mental_state_examination.appearance_abnormal_movements IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_abnormal_movements IS
     'Domain 1: abnormal movements (tics, tremor, dystonia, etc.); free text.';
-COMMENT ON COLUMN mental_state_examination.appearance_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.appearance_notes IS
     'Domain 1: free-text notes on appearance and behaviour.';
-COMMENT ON COLUMN mental_state_examination.speech_rate IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.speech_rate IS
     'Domain 2 (speech): rate — normal, slow, rapid, or pressured.';
-COMMENT ON COLUMN mental_state_examination.speech_volume IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.speech_volume IS
     'Domain 2: volume — normal, quiet, or loud.';
-COMMENT ON COLUMN mental_state_examination.speech_quantity IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.speech_quantity IS
     'Domain 2: quantity — normal, poverty, or excessive.';
-COMMENT ON COLUMN mental_state_examination.speech_fluency IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.speech_fluency IS
     'Domain 2: fluency — fluent, hesitant, dysarthric, or mute.';
-COMMENT ON COLUMN mental_state_examination.speech_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.speech_notes IS
     'Domain 2: free-text notes on speech.';
-COMMENT ON COLUMN mental_state_examination.mood_subjective IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.mood_subjective IS
     'Domain 3 (emotion): subjective mood in the patient''s own words; free text.';
-COMMENT ON COLUMN mental_state_examination.mood_descriptor IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.mood_descriptor IS
     'Domain 3: objective mood descriptor — euthymic, low, elevated, anxious, irritable, or other; low drives the low-mood flag.';
-COMMENT ON COLUMN mental_state_examination.affect_range IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.affect_range IS
     'Domain 3: affect range — full, restricted, blunted, or flat.';
-COMMENT ON COLUMN mental_state_examination.affect_congruence IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.affect_congruence IS
     'Domain 3: affect congruence — congruent or incongruent.';
-COMMENT ON COLUMN mental_state_examination.affect_reactivity IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.affect_reactivity IS
     'Domain 3: affect reactivity — reactive or non-reactive.';
-COMMENT ON COLUMN mental_state_examination.emotion_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.emotion_notes IS
     'Domain 3: free-text notes on mood and affect.';
-COMMENT ON COLUMN mental_state_examination.hallucinations_present IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.hallucinations_present IS
     'Domain 4 (perception): hallucination modality — none, auditory, visual, olfactory, gustatory, tactile, or multiple; contributes to the psychosis-with-risk flag.';
-COMMENT ON COLUMN mental_state_examination.command_hallucinations IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.command_hallucinations IS
     'Domain 4: command hallucinations — yes, no, or not-applicable; yes drives the command-hallucinations flag.';
-COMMENT ON COLUMN mental_state_examination.illusions IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.illusions IS
     'Domain 4: illusions — present or absent.';
-COMMENT ON COLUMN mental_state_examination.depersonalisation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.depersonalisation IS
     'Domain 4: depersonalisation — present or absent.';
-COMMENT ON COLUMN mental_state_examination.derealisation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.derealisation IS
     'Domain 4: derealisation — present or absent.';
-COMMENT ON COLUMN mental_state_examination.perception_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.perception_notes IS
     'Domain 4: free-text notes on perception.';
-COMMENT ON COLUMN mental_state_examination.thought_form IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.thought_form IS
     'Domain 5 (thought): thought form — linear, circumstantial, tangential, flight-of-ideas, thought-block, or loosening.';
-COMMENT ON COLUMN mental_state_examination.delusions IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.delusions IS
     'Domain 5: delusional content — none, persecutory, grandiose, reference, nihilistic, or other; any value other than none drives the delusional-content flag.';
-COMMENT ON COLUMN mental_state_examination.obsessions IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.obsessions IS
     'Domain 5: obsessions — present or absent.';
-COMMENT ON COLUMN mental_state_examination.suicidal_ideation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.suicidal_ideation IS
     'Domain 5: suicidal ideation — none, passive, active-no-plan, or active-with-plan; active values drive the suicidal-ideation flag, passive the thoughts-of-self-harm flag.';
-COMMENT ON COLUMN mental_state_examination.homicidal_ideation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.homicidal_ideation IS
     'Domain 5: homicidal ideation — none, thoughts, or intent; thoughts or intent drive the homicidal-ideation flag.';
-COMMENT ON COLUMN mental_state_examination.self_harm_thoughts IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.self_harm_thoughts IS
     'Domain 5: self-harm — none, thoughts, or recent-acts; recent-acts drives the recent-self-harm flag, thoughts the thoughts-of-self-harm flag.';
-COMMENT ON COLUMN mental_state_examination.thought_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.thought_notes IS
     'Domain 5: free-text notes on thought form and content.';
-COMMENT ON COLUMN mental_state_examination.insight_level IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.insight_level IS
     'Domain 6 (insight and judgement): insight level — full, partial, or none; none contributes to the lack-of-insight-with-risk flag.';
-COMMENT ON COLUMN mental_state_examination.treatment_understanding IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.treatment_understanding IS
     'Domain 6: understanding of and attitude to treatment — accepts, ambivalent, or refuses; refuses contributes to the lack-of-insight-with-risk flag.';
-COMMENT ON COLUMN mental_state_examination.judgement IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.judgement IS
     'Domain 6: judgement — intact or impaired.';
-COMMENT ON COLUMN mental_state_examination.insight_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.insight_notes IS
     'Domain 6: free-text notes on insight and judgement.';
-COMMENT ON COLUMN mental_state_examination.orientation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.orientation IS
     'Domain 7 (cognition): orientation — orientated, disorientated-time, disorientated-place, disorientated-person, or global; global contributes to the cognitive-impairment flag.';
-COMMENT ON COLUMN mental_state_examination.attention IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.attention IS
     'Domain 7: attention — normal or impaired.';
-COMMENT ON COLUMN mental_state_examination.memory IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.memory IS
     'Domain 7: memory — intact, short-term-impaired, long-term-impaired, or global-impairment.';
-COMMENT ON COLUMN mental_state_examination.cognitive_impression IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.cognitive_impression IS
     'Domain 7: overall cognitive impression — no-concern, mild-concern, or significant-concern; significant-concern contributes to the cognitive-impairment flag.';
-COMMENT ON COLUMN mental_state_examination.cognition_notes IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.cognition_notes IS
     'Domain 7: free-text notes on cognition.';
-COMMENT ON COLUMN mental_state_examination.clinical_formulation IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination.clinical_formulation IS
     'Summary: free-text clinical formulation drawing the domains together.';
 
 -- ========================================================================
@@ -423,14 +440,14 @@ COMMENT ON COLUMN mental_state_examination.clinical_formulation IS
 -- flag raised. A grade reflects the completeness of the record and the risk
 -- signalled by the findings, not a diagnosis or a full risk assessment.
 
-CREATE TABLE mental_state_examination_grade (
+CREATE TABLE mental_state_examination.mental_state_examination_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_state_examination_id UUID NOT NULL UNIQUE
-        REFERENCES mental_state_examination(id) ON DELETE CASCADE,
+        REFERENCES mental_state_examination.mental_state_examination(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'partial', '')),
@@ -457,43 +474,43 @@ CREATE TABLE mental_state_examination_grade (
 );
 
 CREATE TRIGGER trigger_mental_state_examination_grade_updated_at
-    BEFORE UPDATE ON mental_state_examination_grade
+    BEFORE UPDATE ON mental_state_examination.mental_state_examination_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE mental_state_examination_grade IS
+COMMENT ON TABLE mental_state_examination.mental_state_examination_grade IS
     'Computed documentation-completeness and risk grading result for a mental state examination: status (complete/partial), risk level (none/low/moderate/high), completeness percentage, and per-domain documented flags.';
-COMMENT ON COLUMN mental_state_examination_grade.id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_state_examination_grade.created_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_state_examination_grade.updated_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_state_examination_grade.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_state_examination_grade.mental_state_examination_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.mental_state_examination_id IS
     'Foreign key to the parent mental state examination (unique, 1:1).';
-COMMENT ON COLUMN mental_state_examination_grade.status IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.status IS
     'Completeness status: complete (all seven domains documented) or partial.';
-COMMENT ON COLUMN mental_state_examination_grade.risk_level IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.risk_level IS
     'Risk level derived from the highest-priority flag raised: none, low, moderate, or high.';
-COMMENT ON COLUMN mental_state_examination_grade.completeness_percent IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.completeness_percent IS
     'Completeness percentage (0..100): documented domains / 7 x 100.';
-COMMENT ON COLUMN mental_state_examination_grade.appearance_behaviour_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.appearance_behaviour_documented IS
     'Whether Domain 1 (appearance and behaviour) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.speech_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.speech_documented IS
     'Whether Domain 2 (speech) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.emotion_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.emotion_documented IS
     'Whether Domain 3 (emotion) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.perception_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.perception_documented IS
     'Whether Domain 4 (perception) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.thought_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.thought_documented IS
     'Whether Domain 5 (thought) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.insight_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.insight_documented IS
     'Whether Domain 6 (insight and judgement) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.cognition_documented IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.cognition_documented IS
     'Whether Domain 7 (cognition) has any non-blank finding (yes/no).';
-COMMENT ON COLUMN mental_state_examination_grade.graded_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -508,14 +525,14 @@ COMMENT ON COLUMN mental_state_examination_grade.graded_at IS
 -- Each row records one rule firing with the domain it concerns, the category,
 -- and a human-readable description.
 
-CREATE TABLE mental_state_examination_grade_rule (
+CREATE TABLE mental_state_examination.mental_state_examination_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_state_examination_grade_id UUID NOT NULL
-        REFERENCES mental_state_examination_grade(id) ON DELETE CASCADE,
+        REFERENCES mental_state_examination.mental_state_examination_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     domain VARCHAR(30) NOT NULL DEFAULT ''
@@ -536,32 +553,32 @@ CREATE TABLE mental_state_examination_grade_rule (
 );
 
 CREATE INDEX mental_state_examination_grade_rule_grade_id_idx
-    ON mental_state_examination_grade_rule (mental_state_examination_grade_id);
+    ON mental_state_examination.mental_state_examination_grade_rule (mental_state_examination_grade_id);
 
 CREATE TRIGGER trigger_mental_state_examination_grade_rule_updated_at
-    BEFORE UPDATE ON mental_state_examination_grade_rule
+    BEFORE UPDATE ON mental_state_examination.mental_state_examination_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE mental_state_examination_grade_rule IS
+COMMENT ON TABLE mental_state_examination.mental_state_examination_grade_rule IS
     'Audit trail of every completeness-and-risk rule that fired during grading: domain, category, and description.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.created_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.updated_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.mental_state_examination_grade_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.mental_state_examination_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.rule_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-THOUGHT-DOCUMENTED-01).';
-COMMENT ON COLUMN mental_state_examination_grade_rule.domain IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.domain IS
     'ASEPTIC domain the rule concerns: appearance-behaviour, speech, emotion, perception, thought, insight, cognition, or the cross-cutting completeness or risk.';
-COMMENT ON COLUMN mental_state_examination_grade_rule.category IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.category IS
     'Subject category (e.g. domain-documented, risk-flag, completeness).';
-COMMENT ON COLUMN mental_state_examination_grade_rule.description IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -576,14 +593,14 @@ COMMENT ON COLUMN mental_state_examination_grade_rule.description IS
 -- priority and a suggested action for the clinician or crisis / safeguarding
 -- team. The risk level on the grade is the highest priority present here.
 
-CREATE TABLE mental_state_examination_grade_flag (
+CREATE TABLE mental_state_examination.mental_state_examination_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_state_examination_grade_id UUID NOT NULL
-        REFERENCES mental_state_examination_grade(id) ON DELETE CASCADE,
+        REFERENCES mental_state_examination.mental_state_examination_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -606,34 +623,34 @@ CREATE TABLE mental_state_examination_grade_flag (
 );
 
 CREATE INDEX mental_state_examination_grade_flag_grade_id_idx
-    ON mental_state_examination_grade_flag (mental_state_examination_grade_id);
+    ON mental_state_examination.mental_state_examination_grade_flag (mental_state_examination_grade_id);
 
 CREATE TRIGGER trigger_mental_state_examination_grade_flag_updated_at
-    BEFORE UPDATE ON mental_state_examination_grade_flag
+    BEFORE UPDATE ON mental_state_examination.mental_state_examination_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_state_examination.set_updated_at();
 
-COMMENT ON TABLE mental_state_examination_grade_flag IS
+COMMENT ON TABLE mental_state_examination.mental_state_examination_grade_flag IS
     'Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or crisis / safeguarding team. The risk level on the grade is the highest priority present here.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.created_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.updated_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.deleted_at IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.mental_state_examination_grade_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.mental_state_examination_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.flag_id IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SUICIDAL-IDEATION-001).';
-COMMENT ON COLUMN mental_state_examination_grade_flag.category IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.category IS
     'Flag category: suicidal-ideation, homicidal-ideation, command-hallucinations, self-harm, psychosis-with-risk, lack-of-insight-with-risk, cognitive-impairment, incomplete, or other.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.priority IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.priority IS
     'Priority: low, moderate, high.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.description IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN mental_state_examination_grade_flag.suggested_action IS
+COMMENT ON COLUMN mental_state_examination.mental_state_examination_grade_flag.suggested_action IS
     'Suggested clinical or safeguarding action (e.g. "complete a full risk assessment and escalate").';
 
 -- ========================================================================

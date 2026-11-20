@@ -1,10 +1,10 @@
-CREATE TABLE grading_additional_flag (
+CREATE TABLE pre_operative_assessment_by_patient.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_patient.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -40,33 +40,33 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE INDEX index_grading_additional_flag_grade_id
-    ON grading_additional_flag(grade_id);
+    ON pre_operative_assessment_by_patient.grading_additional_flag(grade_id);
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.grading_additional_flag IS
     'Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.flag_id IS
     'Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN grading_additional_flag.description IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN grading_additional_flag.suggested_action IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.suggested_action IS
     'Suggested clinical action (e.g. "prepare difficult-airway trolley").';
 
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';

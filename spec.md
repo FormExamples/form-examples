@@ -133,9 +133,9 @@ own bands map onto ESI where the mapping is not self-evident.
 
 `bin/test-form <slug>` asserts every required path exists and is non-empty.
 
-Every form is fully namespaced by its slug. Its SQL tables start with
-`<slug_snake_case>_`, its Axum API routes with `/api/<slug>/`, and its
-Svelte routes with `/<slug>/`. See
+Every form is fully namespaced by its slug. Its SQL objects live in the
+Postgres schema `<slug_snake_case>`, its Axum API routes start with
+`/api/<slug>/`, and its Svelte routes with `/<slug>/`. See
 [`spec/form-namespacing/`](spec/form-namespacing/) for the rules and the
 fleet's current conformance.
 

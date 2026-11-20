@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_worker.sql
 --   - 03_create_table_manager.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS neurodiversity_adjustment_response;
+
+COMMENT ON SCHEMA neurodiversity_adjustment_response IS
+    'Namespace for the Neurodiversity Adjustment Response form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION neurodiversity_adjustment_response.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION neurodiversity_adjustment_response.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Worker (the neurodivergent employee) requesting workplace reasonable adjustments.
 
-CREATE TABLE worker (
+CREATE TABLE neurodiversity_adjustment_response.worker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,49 +98,49 @@ CREATE TABLE worker (
 );
 
 CREATE TRIGGER trigger_worker_updated_at
-    BEFORE UPDATE ON worker
+    BEFORE UPDATE ON neurodiversity_adjustment_response.worker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE worker IS
+COMMENT ON TABLE neurodiversity_adjustment_response.worker IS
     'Worker (the neurodivergent employee) who requests, or on whose behalf a manager requests, workplace reasonable adjustments.';
-COMMENT ON COLUMN worker.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN worker.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN worker.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN worker.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN worker.name IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.name IS
     'Name.';
-COMMENT ON COLUMN worker.email IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.email IS
     'Email address.';
-COMMENT ON COLUMN worker.phone IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.phone IS
     'Phone number.';
-COMMENT ON COLUMN worker.postal_address_as_full_text IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN worker.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN worker.postcode IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN worker.employee_reference IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.employee_reference IS
     'Employer-assigned employee / payroll reference, unique per worker.';
-COMMENT ON COLUMN worker.job_title IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.job_title IS
     'Job title / role of the worker.';
-COMMENT ON COLUMN worker.department IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.department IS
     'Department / team the worker belongs to.';
-COMMENT ON COLUMN worker.employment_type IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.employment_type IS
     'Employment type: permanent, fixed-term, agency, contractor, apprentice, volunteer, other.';
-COMMENT ON COLUMN worker.work_pattern IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.work_pattern IS
     'Working pattern: full-time, part-time, shift, flexible, other.';
-COMMENT ON COLUMN worker.work_location IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.work_location IS
     'Primary work location: office, remote, hybrid, field, other.';
-COMMENT ON COLUMN worker.employment_start_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.worker.employment_start_date IS
     'Date the worker started employment.';
 
 CREATE INDEX worker_index_gto
-    ON worker
+    ON neurodiversity_adjustment_response.worker
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -138,7 +155,7 @@ CREATE INDEX worker_index_gto
 
 -- Manager / HR contact who receives and handles the reasonable-adjustments request.
 
-CREATE TABLE manager (
+CREATE TABLE neurodiversity_adjustment_response.manager (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE manager (
 );
 
 CREATE TRIGGER trigger_manager_updated_at
-    BEFORE UPDATE ON manager
+    BEFORE UPDATE ON neurodiversity_adjustment_response.manager
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE manager IS
+COMMENT ON TABLE neurodiversity_adjustment_response.manager IS
     'Manager / HR contact who receives and handles the worker''s reasonable-adjustments request.';
-COMMENT ON COLUMN manager.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN manager.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN manager.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN manager.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN manager.name IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.name IS
     'Name.';
-COMMENT ON COLUMN manager.email IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.email IS
     'Email address.';
-COMMENT ON COLUMN manager.phone IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.phone IS
     'Phone number.';
-COMMENT ON COLUMN manager.postal_address_as_full_text IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN manager.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN manager.postcode IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN manager.role IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.role IS
     'Manager role handling the request: line-manager, hr-adviser, occupational-health, diversity-lead, senior-manager, other.';
-COMMENT ON COLUMN manager.job_title IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.job_title IS
     'Job title of the manager / HR contact.';
-COMMENT ON COLUMN manager.department IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.manager.department IS
     'Department the manager / HR contact belongs to.';
 
 CREATE INDEX manager_index_gto
-    ON manager
+    ON neurodiversity_adjustment_response.manager
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -205,14 +222,14 @@ CREATE INDEX manager_index_gto
 
 -- Neurodiversity reasonable-adjustments response (employer decision, confirmation, and review) — the source-of-truth record.
 
-CREATE TABLE neurodiversity_adjustment_response (
+CREATE TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    worker_id UUID NOT NULL REFERENCES worker(id) ON DELETE CASCADE,
-    manager_id UUID NOT NULL REFERENCES manager(id) ON DELETE CASCADE,
+    worker_id UUID NOT NULL REFERENCES neurodiversity_adjustment_response.worker(id) ON DELETE CASCADE,
+    manager_id UUID NOT NULL REFERENCES neurodiversity_adjustment_response.manager(id) ON DELETE CASCADE,
 
     -- Response lifecycle and provenance
     response_status VARCHAR(20) NOT NULL DEFAULT 'draft'
@@ -265,90 +282,90 @@ CREATE TABLE neurodiversity_adjustment_response (
 );
 
 CREATE INDEX index_neurodiversity_adjustment_response_worker_id
-    ON neurodiversity_adjustment_response(worker_id);
+    ON neurodiversity_adjustment_response.neurodiversity_adjustment_response(worker_id);
 CREATE INDEX index_neurodiversity_adjustment_response_manager_id
-    ON neurodiversity_adjustment_response(manager_id);
+    ON neurodiversity_adjustment_response.neurodiversity_adjustment_response(manager_id);
 
 CREATE TRIGGER trigger_neurodiversity_adjustment_response_updated_at
-    BEFORE UPDATE ON neurodiversity_adjustment_response
+    BEFORE UPDATE ON neurodiversity_adjustment_response.neurodiversity_adjustment_response
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE neurodiversity_adjustment_response IS
+COMMENT ON TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response IS
     'Neurodiversity reasonable-adjustments response: the employer''s decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.worker_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.worker_id IS
     'Foreign key to the worker the response is for.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.manager_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.manager_id IS
     'Foreign key to the manager / HR contact authoring the response.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.response_status IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.response_status IS
     'Response lifecycle status: draft, agreed, partially-agreed, trial, declined, deferred, cancelled.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.request_reference IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.request_reference IS
     'Reference to the originating reasonable-adjustments request.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.handling_method IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.handling_method IS
     'How the request was handled: meeting, occupational-health-referral, email, hr-review, other.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.assessed_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.assessed_date IS
     'Date the request was assessed / discussed with the worker.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.responded_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.responded_date IS
     'Date the response was issued to the worker.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.effective_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.effective_date IS
     'Date the agreed adjustments take effect.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.overall_decision IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.overall_decision IS
     'Overall decision: agreed, partially-agreed, alternative-offered, declined, deferred.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.decision_rationale IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.decision_rationale IS
     'Rationale for the decision, including the reasonableness justification where any adjustment is declined.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.decline_reason_category IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.decline_reason_category IS
     'Where an adjustment is declined, the reasonableness category: not-reasonable, disproportionate-cost, health-and-safety, operational-impact, alternative-provided, insufficient-information, none.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_working_environment IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_working_environment IS
     'Agreed adjustment category: changes to the physical working environment.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_equipment_technology IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_equipment_technology IS
     'Agreed adjustment category: equipment or assistive technology.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_working_arrangements IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_working_arrangements IS
     'Agreed adjustment category: changes to working arrangements.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_communication IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_communication IS
     'Agreed adjustment category: changes to communication.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_support_mentoring IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_support_mentoring IS
     'Agreed adjustment category: additional support / mentoring.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_recruitment_process IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_recruitment_process IS
     'Agreed adjustment category: adjustments to a recruitment / assessment process.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_policy_dress IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_policy_dress IS
     'Agreed adjustment category: changes to policies (dress code / uniform, absence policy).';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_other IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_other IS
     'Agreed adjustment category: another adjustment not separately listed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.agreed_adjustments_detail IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.agreed_adjustments_detail IS
     'Free-text detail of the specific adjustments agreed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.alternative_adjustments_detail IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.alternative_adjustments_detail IS
     'Free-text detail of any alternative adjustments offered where the original request was not agreed as-is.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.trial_period IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.trial_period IS
     'Whether the agreed adjustments are being tried for a time-limited trial period before permanent implementation.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.trial_period_weeks IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.trial_period_weeks IS
     'Length of the trial period in weeks, if a trial applies (0-104).';
-COMMENT ON COLUMN neurodiversity_adjustment_response.review_scheduled IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.review_scheduled IS
     'Whether a review of the adjustments has been scheduled.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.review_date IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.review_date IS
     'Date the adjustments will be reviewed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.occupational_health_referred IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.occupational_health_referred IS
     'Whether the worker has been referred to occupational health.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.access_to_work_referred IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.access_to_work_referred IS
     'Whether the worker has been signposted / referred to the government Access to Work scheme.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.support_resources_detail IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.support_resources_detail IS
     'Free-text detail of support resources allocated (budget, equipment orders, training).';
-COMMENT ON COLUMN neurodiversity_adjustment_response.responsibilities_detail IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.responsibilities_detail IS
     'Free-text detail of who is responsible for implementing each agreed adjustment.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.point_of_contact IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.point_of_contact IS
     'Named point of contact for the worker to raise concerns about the adjustments.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.escalated IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.escalated IS
     'Whether the matter has been escalated (e.g. dispute, grievance, or appeal).';
-COMMENT ON COLUMN neurodiversity_adjustment_response.escalation_detail IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.escalation_detail IS
     'Free-text detail of any escalation, dispute, or appeal.';
-COMMENT ON COLUMN neurodiversity_adjustment_response.notes IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response.notes IS
     'Free-text notes accompanying the response.';
 
 -- ========================================================================
@@ -361,14 +378,14 @@ COMMENT ON COLUMN neurodiversity_adjustment_response.notes IS
 
 -- Computed grade for a neurodiversity reasonable-adjustments response (four-axis engine).
 
-CREATE TABLE neurodiversity_adjustment_response_grade (
+CREATE TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     neurodiversity_adjustment_response_id UUID NOT NULL UNIQUE
-        REFERENCES neurodiversity_adjustment_response(id) ON DELETE CASCADE,
+        REFERENCES neurodiversity_adjustment_response.neurodiversity_adjustment_response(id) ON DELETE CASCADE,
 
     -- Axis A: outcome classification
     outcome_classification VARCHAR(20) NOT NULL DEFAULT ''
@@ -395,39 +412,39 @@ CREATE TABLE neurodiversity_adjustment_response_grade (
 );
 
 CREATE TRIGGER trigger_neurodiversity_adjustment_response_grade_updated_at
-    BEFORE UPDATE ON neurodiversity_adjustment_response_grade
+    BEFORE UPDATE ON neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE neurodiversity_adjustment_response_grade IS
+COMMENT ON TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade IS
     'Computed four-axis grade for a neurodiversity reasonable-adjustments response: outcome classification, legal / discrimination risk (reasonableness), response completeness, and follow-up / review urgency. Declining adjustments for a worker likely covered by the Equality Act 2010 without an adequate reasonableness justification or alternatives drives the legal-risk axis to high-risk and raises the discrimination-risk flag regardless of the other axes.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.neurodiversity_adjustment_response_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.neurodiversity_adjustment_response_id IS
     'Foreign key to the parent response (unique, 1:1).';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.outcome_classification IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.outcome_classification IS
     'Axis A outcome classification: fully-agreed, partially-agreed, alternative-offered, declined, deferred.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.legal_risk_band IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.legal_risk_band IS
     'Axis B legal / discrimination risk band (reasonableness): ok, caution, high-risk.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.completeness_percent IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.completeness_percent IS
     'Axis C response completeness as a percentage of mandatory sections (0-100).';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.follow_up_urgency IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.follow_up_urgency IS
     'Axis D follow-up / review urgency: none, review-scheduled, urgent-review, escalation-needed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.target_timeframe IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.target_timeframe IS
     'Target timeframe for the next review or action, implied by the follow-up urgency.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.recommendation IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.recommendation IS
     'Overall recommendation: implement, schedule-review, seek-occupational-health, reconsider-decision, escalate-to-hr, record-decline.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.manager_notes IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.manager_notes IS
     'Free-text sign-off notes from the manager or HR contact.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.signed_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.signed_at IS
     'Timestamp of the manager / HR electronic signature.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade.graded_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -440,14 +457,14 @@ COMMENT ON COLUMN neurodiversity_adjustment_response_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a neurodiversity reasonable-adjustments response.
 
-CREATE TABLE neurodiversity_adjustment_response_grade_rule (
+CREATE TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     neurodiversity_adjustment_response_grade_id UUID NOT NULL
-        REFERENCES neurodiversity_adjustment_response_grade(id) ON DELETE CASCADE,
+        REFERENCES neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('outcome', 'legal-risk', 'completeness', 'follow-up', '')),
@@ -456,32 +473,32 @@ CREATE TABLE neurodiversity_adjustment_response_grade_rule (
 );
 
 CREATE INDEX index_neurodiversity_adjustment_response_grade_rule_grade_id
-    ON neurodiversity_adjustment_response_grade_rule(neurodiversity_adjustment_response_grade_id);
+    ON neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule(neurodiversity_adjustment_response_grade_id);
 
 CREATE TRIGGER trigger_neurodiversity_adjustment_response_grade_rule_updated_at
-    BEFORE UPDATE ON neurodiversity_adjustment_response_grade_rule
+    BEFORE UPDATE ON neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE neurodiversity_adjustment_response_grade_rule IS
+COMMENT ON TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule IS
     'Audit trail of every outcome / legal-risk / completeness / follow-up rule that fired for this response.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.neurodiversity_adjustment_response_grade_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.neurodiversity_adjustment_response_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.rule_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-LEGAL-DECLINE-NO-RATIONALE-01).';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.axis IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.axis IS
     'Scoring axis the rule belongs to: outcome, legal-risk, completeness, follow-up.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.category IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.category IS
     'Category or reason the rule relates to.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.description IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -494,14 +511,14 @@ COMMENT ON COLUMN neurodiversity_adjustment_response_grade_rule.description IS
 
 -- Compliance / risk flags for a neurodiversity reasonable-adjustments response, independent of the axes.
 
-CREATE TABLE neurodiversity_adjustment_response_grade_flag (
+CREATE TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     neurodiversity_adjustment_response_grade_id UUID NOT NULL
-        REFERENCES neurodiversity_adjustment_response_grade(id) ON DELETE CASCADE,
+        REFERENCES neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -522,34 +539,34 @@ CREATE TABLE neurodiversity_adjustment_response_grade_flag (
 );
 
 CREATE INDEX index_neurodiversity_adjustment_response_grade_flag_grade_id
-    ON neurodiversity_adjustment_response_grade_flag(neurodiversity_adjustment_response_grade_id);
+    ON neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag(neurodiversity_adjustment_response_grade_id);
 
 CREATE TRIGGER trigger_neurodiversity_adjustment_response_grade_flag_updated_at
-    BEFORE UPDATE ON neurodiversity_adjustment_response_grade_flag
+    BEFORE UPDATE ON neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION neurodiversity_adjustment_response.set_updated_at();
 
-COMMENT ON TABLE neurodiversity_adjustment_response_grade_flag IS
+COMMENT ON TABLE neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag IS
     'Compliance and risk flags that fire independently of the four axes, with priority and a suggested action. The discrimination-risk flag (adjustments declined for a worker likely covered by the Equality Act 2010 without adequate justification or alternatives) is the highest-priority signal of a failure-to-make-reasonable-adjustments claim.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.created_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.updated_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.deleted_at IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.neurodiversity_adjustment_response_grade_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.neurodiversity_adjustment_response_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.flag_id IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DISCRIMINATION-RISK-001).';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.category IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.priority IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.description IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN neurodiversity_adjustment_response_grade_flag.suggested_action IS
+COMMENT ON COLUMN neurodiversity_adjustment_response.neurodiversity_adjustment_response_grade_flag.suggested_action IS
     'Suggested action (e.g. "reconsider the decision or record a reasonableness justification and offer alternatives before finalising").';
 
 -- ========================================================================

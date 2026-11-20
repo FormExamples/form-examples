@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS history_and_physical_examination;
+
+COMMENT ON SCHEMA history_and_physical_examination IS
+    'Namespace for the History and Physical Examination (H&P) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION history_and_physical_examination.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION history_and_physical_examination.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE history_and_physical_examination.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON history_and_physical_examination.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE history_and_physical_examination.patient IS
     'Patient demographic information used by the history-and-physical-examination clerking record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN history_and_physical_examination.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN history_and_physical_examination.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN history_and_physical_examination.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN history_and_physical_examination.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN history_and_physical_examination.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN history_and_physical_examination.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN history_and_physical_examination.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN history_and_physical_examination.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN history_and_physical_examination.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN history_and_physical_examination.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN history_and_physical_examination.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN history_and_physical_examination.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN history_and_physical_examination.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN history_and_physical_examination.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN history_and_physical_examination.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON history_and_physical_examination.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clerking clinician
 -- who authored the history-and-physical-examination record.
 
-CREATE TABLE clinician (
+CREATE TABLE history_and_physical_examination.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON history_and_physical_examination.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE history_and_physical_examination.clinician IS
     'Clinician identifying information for the clerking clinician who authored a history-and-physical-examination record.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.role IS
     'Primary clinical role: doctor, acp (advanced clinical practitioner), physician-associate, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN history_and_physical_examination.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON history_and_physical_examination.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- child tables. All clinical content is free text; presence of a
 -- component is detected by a non-empty field, not by semantic analysis.
 
-CREATE TABLE history_and_physical_examination (
+CREATE TABLE history_and_physical_examination.history_and_physical_examination (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES history_and_physical_examination.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES history_and_physical_examination.clinician(id) ON DELETE RESTRICT,
 
     -- Encounter context and identification
     clerked_at TIMESTAMPTZ,
@@ -267,94 +284,94 @@ CREATE TABLE history_and_physical_examination (
 );
 
 CREATE INDEX history_and_physical_examination_patient_id_idx
-    ON history_and_physical_examination (patient_id);
+    ON history_and_physical_examination.history_and_physical_examination (patient_id);
 CREATE INDEX history_and_physical_examination_clinician_id_idx
-    ON history_and_physical_examination (clinician_id);
+    ON history_and_physical_examination.history_and_physical_examination (clinician_id);
 
 CREATE TRIGGER trigger_history_and_physical_examination_updated_at
-    BEFORE UPDATE ON history_and_physical_examination
+    BEFORE UPDATE ON history_and_physical_examination.history_and_physical_examination
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE history_and_physical_examination IS
+COMMENT ON TABLE history_and_physical_examination.history_and_physical_examination IS
     'Main H&P clerking record for one patient encounter: encounter context, patient and clinician identification, the full history, vital signs, examination by body system, investigations, impression, and management plan as free text. Completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN history_and_physical_examination.id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN history_and_physical_examination.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN history_and_physical_examination.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN history_and_physical_examination.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN history_and_physical_examination.patient_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.patient_id IS
     'Foreign key to the patient this clerking documents (restrict delete).';
-COMMENT ON COLUMN history_and_physical_examination.clinician_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.clinician_id IS
     'Foreign key to the clerking clinician (restrict delete); optional.';
-COMMENT ON COLUMN history_and_physical_examination.clerked_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.clerked_at IS
     'Date and time of clerking.';
-COMMENT ON COLUMN history_and_physical_examination.clinician_role IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.clinician_role IS
     'Clerking clinician role: doctor, acp, physician-associate, or other.';
-COMMENT ON COLUMN history_and_physical_examination.registration_number IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.registration_number IS
     'Clerking clinician professional registration number (GMC / NMC / HCPC).';
-COMMENT ON COLUMN history_and_physical_examination.care_setting IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.care_setting IS
     'Care setting: emergency-department, acute-medical-unit, ward, or other.';
-COMMENT ON COLUMN history_and_physical_examination.admission_source IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.admission_source IS
     'Admission source: self, gp, ambulance, transfer, or other.';
-COMMENT ON COLUMN history_and_physical_examination.patient_identifier IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.patient_identifier IS
     'Local patient or encounter identifier as recorded on the clerking.';
-COMMENT ON COLUMN history_and_physical_examination.age_band IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.age_band IS
     'Adult age band: 18-39, 40-64, 65-79, or 80-plus.';
-COMMENT ON COLUMN history_and_physical_examination.sex IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.sex IS
     'Patient sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN history_and_physical_examination.presenting_complaint IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.presenting_complaint IS
     'History: the presenting complaint (required component).';
-COMMENT ON COLUMN history_and_physical_examination.history_of_presenting_complaint IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.history_of_presenting_complaint IS
     'History: the history of the presenting complaint (required component).';
-COMMENT ON COLUMN history_and_physical_examination.past_medical_surgical_history IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.past_medical_surgical_history IS
     'History: past medical and surgical history, or an explicit "nil" (required component).';
-COMMENT ON COLUMN history_and_physical_examination.drug_history IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.drug_history IS
     'History: current medications / drug history (required component).';
-COMMENT ON COLUMN history_and_physical_examination.allergy_status IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.allergy_status IS
     'Allergy status: none-known, has-allergies, or not-documented; not-documented (or empty) is a blocking flag.';
-COMMENT ON COLUMN history_and_physical_examination.allergy_detail IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.allergy_detail IS
     'Allergy detail: reactions recorded when allergy_status is has-allergies.';
-COMMENT ON COLUMN history_and_physical_examination.family_history IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.family_history IS
     'History: family history, or an explicit "nil" (optional component).';
-COMMENT ON COLUMN history_and_physical_examination.social_history IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.social_history IS
     'History: social history — smoking, alcohol, occupation, living situation (required component).';
-COMMENT ON COLUMN history_and_physical_examination.systems_review IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.systems_review IS
     'History: systems review narrative or structured findings (required component).';
-COMMENT ON COLUMN history_and_physical_examination.temperature IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.temperature IS
     'Vital sign: temperature in degrees Celsius; normal range 36.1-38.0. Null when not measured.';
-COMMENT ON COLUMN history_and_physical_examination.heart_rate IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.heart_rate IS
     'Vital sign: heart rate in beats per minute; normal range 51-90. Null when not measured.';
-COMMENT ON COLUMN history_and_physical_examination.respiratory_rate IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.respiratory_rate IS
     'Vital sign: respiratory rate in breaths per minute; normal range 12-20. Null when not measured.';
-COMMENT ON COLUMN history_and_physical_examination.systolic_blood_pressure IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.systolic_blood_pressure IS
     'Vital sign: systolic blood pressure in mmHg; normal range 111-219. Null when not measured.';
-COMMENT ON COLUMN history_and_physical_examination.oxygen_saturation IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.oxygen_saturation IS
     'Vital sign: oxygen saturation as a percentage; normal >= 96. Null when not measured.';
-COMMENT ON COLUMN history_and_physical_examination.consciousness_level IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.consciousness_level IS
     'Vital sign: consciousness level (AVPU) — alert, voice, pain, or unresponsive; anything other than alert is flagged.';
-COMMENT ON COLUMN history_and_physical_examination.exam_cardiovascular IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.exam_cardiovascular IS
     'Examination: cardiovascular system findings, or explicit "deferred" (core system).';
-COMMENT ON COLUMN history_and_physical_examination.exam_respiratory IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.exam_respiratory IS
     'Examination: respiratory system findings, or explicit "deferred" (core system).';
-COMMENT ON COLUMN history_and_physical_examination.exam_abdominal IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.exam_abdominal IS
     'Examination: abdominal system findings, or explicit "deferred" (core system).';
-COMMENT ON COLUMN history_and_physical_examination.exam_neurological IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.exam_neurological IS
     'Examination: neurological system findings, or explicit "deferred" (core system).';
-COMMENT ON COLUMN history_and_physical_examination.exam_other IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.exam_other IS
     'Examination: other systems / general inspection findings (optional).';
-COMMENT ON COLUMN history_and_physical_examination.investigations IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.investigations IS
     'Investigations: bedside, laboratory, and imaging results (optional).';
-COMMENT ON COLUMN history_and_physical_examination.impression IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.impression IS
     'Working impression / problem list (required component).';
-COMMENT ON COLUMN history_and_physical_examination.red_flag_findings IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.red_flag_findings IS
     'Red-flag examination or history findings; drives the red-flag-no-plan flag.';
-COMMENT ON COLUMN history_and_physical_examination.management_plan IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.management_plan IS
     'Management plan: treatment, referrals, escalation, disposition (required component).';
-COMMENT ON COLUMN history_and_physical_examination.clinical_note IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination.clinical_note IS
     'Optional free-text narrative shown in the summary.';
 
 -- ========================================================================
@@ -371,14 +388,14 @@ COMMENT ON COLUMN history_and_physical_examination.clinical_note IS
 -- components. A completeness grade reflects the quality of the record, not
 -- the correctness of the care.
 
-CREATE TABLE history_and_physical_examination_grade (
+CREATE TABLE history_and_physical_examination.history_and_physical_examination_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     history_and_physical_examination_id UUID NOT NULL UNIQUE
-        REFERENCES history_and_physical_examination(id) ON DELETE CASCADE,
+        REFERENCES history_and_physical_examination.history_and_physical_examination(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'partial', 'incomplete', '')),
@@ -388,27 +405,27 @@ CREATE TABLE history_and_physical_examination_grade (
 );
 
 CREATE TRIGGER trigger_history_and_physical_examination_grade_updated_at
-    BEFORE UPDATE ON history_and_physical_examination_grade
+    BEFORE UPDATE ON history_and_physical_examination.history_and_physical_examination_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE history_and_physical_examination_grade IS
+COMMENT ON TABLE history_and_physical_examination.history_and_physical_examination_grade IS
     'Computed documentation-completeness grading result for an H&P clerking record: status (complete/partial/incomplete) and completeness percentage over the ten required components.';
-COMMENT ON COLUMN history_and_physical_examination_grade.id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN history_and_physical_examination_grade.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN history_and_physical_examination_grade.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN history_and_physical_examination_grade.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN history_and_physical_examination_grade.history_and_physical_examination_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.history_and_physical_examination_id IS
     'Foreign key to the parent H&P clerking record (unique, 1:1).';
-COMMENT ON COLUMN history_and_physical_examination_grade.status IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.status IS
     'Completeness status: complete, partial, or incomplete.';
-COMMENT ON COLUMN history_and_physical_examination_grade.completeness_percent IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.completeness_percent IS
     'Completeness percentage (0..100): satisfied required components / ten total x 100.';
-COMMENT ON COLUMN history_and_physical_examination_grade.graded_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -423,14 +440,14 @@ COMMENT ON COLUMN history_and_physical_examination_grade.graded_at IS
 -- row records one rule firing with the section it concerns, the category,
 -- and a human-readable description.
 
-CREATE TABLE history_and_physical_examination_grade_rule (
+CREATE TABLE history_and_physical_examination.history_and_physical_examination_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     history_and_physical_examination_grade_id UUID NOT NULL
-        REFERENCES history_and_physical_examination_grade(id) ON DELETE CASCADE,
+        REFERENCES history_and_physical_examination.history_and_physical_examination_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -440,32 +457,32 @@ CREATE TABLE history_and_physical_examination_grade_rule (
 );
 
 CREATE INDEX history_and_physical_examination_grade_rule_grade_id_idx
-    ON history_and_physical_examination_grade_rule (history_and_physical_examination_grade_id);
+    ON history_and_physical_examination.history_and_physical_examination_grade_rule (history_and_physical_examination_grade_id);
 
 CREATE TRIGGER trigger_history_and_physical_examination_grade_rule_updated_at
-    BEFORE UPDATE ON history_and_physical_examination_grade_rule
+    BEFORE UPDATE ON history_and_physical_examination.history_and_physical_examination_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE history_and_physical_examination_grade_rule IS
+COMMENT ON TABLE history_and_physical_examination.history_and_physical_examination_grade_rule IS
     'Audit trail of every completeness rule that fired during grading: section, category, and description.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.history_and_physical_examination_grade_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.history_and_physical_examination_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.rule_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-HISTORY-PRESENT-01).';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.section IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.section IS
     'Clerking section the rule concerns: history, examination, vitals, impression, plan, or completeness.';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.category IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.category IS
     'Subject category (e.g. required-component, blocking-flag).';
-COMMENT ON COLUMN history_and_physical_examination_grade_rule.description IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -481,14 +498,14 @@ COMMENT ON COLUMN history_and_physical_examination_grade_rule.description IS
 -- team. Two categories are blocking (they force an incomplete status):
 -- allergies-not-documented and no-impression-or-plan.
 
-CREATE TABLE history_and_physical_examination_grade_flag (
+CREATE TABLE history_and_physical_examination.history_and_physical_examination_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     history_and_physical_examination_grade_id UUID NOT NULL
-        REFERENCES history_and_physical_examination_grade(id) ON DELETE CASCADE,
+        REFERENCES history_and_physical_examination.history_and_physical_examination_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -509,34 +526,34 @@ CREATE TABLE history_and_physical_examination_grade_flag (
 );
 
 CREATE INDEX history_and_physical_examination_grade_flag_grade_id_idx
-    ON history_and_physical_examination_grade_flag (history_and_physical_examination_grade_id);
+    ON history_and_physical_examination.history_and_physical_examination_grade_flag (history_and_physical_examination_grade_id);
 
 CREATE TRIGGER trigger_history_and_physical_examination_grade_flag_updated_at
-    BEFORE UPDATE ON history_and_physical_examination_grade_flag
+    BEFORE UPDATE ON history_and_physical_examination.history_and_physical_examination_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION history_and_physical_examination.set_updated_at();
 
-COMMENT ON TABLE history_and_physical_examination_grade_flag IS
+COMMENT ON TABLE history_and_physical_examination.history_and_physical_examination_grade_flag IS
     'Safety flags that fire independently of the completeness status, with priority and a suggested action. The allergies-not-documented and no-impression-or-plan categories are blocking (they force an incomplete status).';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.created_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.updated_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.deleted_at IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.history_and_physical_examination_grade_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.history_and_physical_examination_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.flag_id IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ALLERGIES-NOT-DOCUMENTED-001).';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.category IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.category IS
     'Flag category: allergies-not-documented, no-impression-or-plan, red-flag-no-plan, abnormal-vitals, incomplete-systems-exam, incomplete-history, or other.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.priority IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.description IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN history_and_physical_examination_grade_flag.suggested_action IS
+COMMENT ON COLUMN history_and_physical_examination.history_and_physical_examination_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "document allergy status", "record an impression and management plan").';
 
 -- ========================================================================

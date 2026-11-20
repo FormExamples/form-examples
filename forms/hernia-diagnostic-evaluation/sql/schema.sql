@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hernia_diagnostic_evaluation;
+
+COMMENT ON SCHEMA hernia_diagnostic_evaluation IS
+    'Namespace for the Hernia Diagnostic Evaluation form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hernia_diagnostic_evaluation.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hernia_diagnostic_evaluation.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information and anthropometrics.
 
-CREATE TABLE patient (
+CREATE TABLE hernia_diagnostic_evaluation.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -77,47 +94,47 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON hernia_diagnostic_evaluation.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hernia_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE hernia_diagnostic_evaluation.patient IS
     'Patient.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.birth_date IS
     'Birth date, such as for calculating age and for the paediatric safety flag.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.sex IS
     'Sex, such as for interpreting groin-hernia epidemiology.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating body mass index (BMI).';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.weight_as_kg IS
     'Weight measurement in kg, such as for calculating body mass index (BMI).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.patient.body_mass_index IS
     'Body mass index (BMI) measurement, such as for supporting the obesity risk-factor field.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON hernia_diagnostic_evaluation.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -132,7 +149,7 @@ CREATE INDEX patient_index_gto
 
 -- Clinician who conducts the hernia diagnostic evaluation.
 
-CREATE TABLE clinician (
+CREATE TABLE hernia_diagnostic_evaluation.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -151,43 +168,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON hernia_diagnostic_evaluation.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hernia_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE hernia_diagnostic_evaluation.clinician IS
     'Clinician, i.e. the GP, surgical registrar, or general surgeon who conducts the hernia diagnostic evaluation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.role IS
     'Clinician role, i.e. the job role the practitioner holds when performing the evaluation.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.registration_body IS
     'Professional registration body, such as GMC for a registered doctor in the United Kingdom.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
-COMMENT ON COLUMN clinician.employer IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician.employer IS
     'Employer, such as the NHS trust, health board, or general practice.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON hernia_diagnostic_evaluation.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -207,13 +224,13 @@ CREATE INDEX clinician_index_gto
 -- columns are NULL. See ../index.md for the wizard table and ../spec/index.md
 -- for the contract.
 
-CREATE TABLE hernia_diagnostic_evaluation (
+CREATE TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES hernia_diagnostic_evaluation.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES hernia_diagnostic_evaluation.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
 
     -- Step 1: clinician identification
@@ -324,197 +341,197 @@ CREATE TABLE hernia_diagnostic_evaluation (
 );
 
 CREATE INDEX hernia_diagnostic_evaluation_patient_id_index
-    ON hernia_diagnostic_evaluation (patient_id);
+    ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation (patient_id);
 
 CREATE INDEX hernia_diagnostic_evaluation_clinician_id_index
-    ON hernia_diagnostic_evaluation (clinician_id);
+    ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation (clinician_id);
 
 CREATE INDEX hernia_diagnostic_evaluation_status_index
-    ON hernia_diagnostic_evaluation (status);
+    ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation (status);
 
 CREATE INDEX hernia_diagnostic_evaluation_assessment_date_index
-    ON hernia_diagnostic_evaluation (assessment_date);
+    ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation (assessment_date);
 
 CREATE TRIGGER trigger_hernia_diagnostic_evaluation_updated_at
-    BEFORE UPDATE ON hernia_diagnostic_evaluation
+    BEFORE UPDATE ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hernia_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE hernia_diagnostic_evaluation IS
+COMMENT ON TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation IS
     'Hernia diagnostic evaluation: the payload of the 14-step single-page wizard used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.created_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.updated_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.deleted_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.patient_id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.clinician_id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.clinician_id IS
     'Foreign key to the clinician table, i.e. the practitioner conducting the evaluation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.status IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.status IS
     'Workflow status of the evaluation: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.assessment_date IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.assessment_date IS
     'Date the evaluation was conducted.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.assessment_time IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.assessment_time IS
     'Time the evaluation was conducted.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.site_name IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.site_name IS
     'Site where the evaluation was conducted, such as the GP practice, surgical assessment unit, or emergency department.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.duration_of_bulge IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.duration_of_bulge IS
     'How long the bulge has been present, such as for distinguishing an acute from a longstanding hernia.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.pain_score_0_10 IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.pain_score_0_10 IS
     'Pain intensity rated by the patient from 0 for none to 10 for the worst imaginable, contributing to the soon urgency band and the functional impact.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.pain_onset IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.pain_onset IS
     'Onset of the presenting pain: sudden or gradual, because a sudden onset is more suggestive of incarceration or strangulation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.aggravated_by_straining IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.aggravated_by_straining IS
     'Whether the bulge or pain is aggravated by straining.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.aggravated_by_lifting IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.aggravated_by_lifting IS
     'Whether the bulge or pain is aggravated by lifting.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.aggravated_by_coughing IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.aggravated_by_coughing IS
     'Whether the bulge or pain is aggravated by coughing.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.prior_hernia_history IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.prior_hernia_history IS
     'Whether the patient has a history of a hernia at this or another site.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.prior_hernia_repair IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.prior_hernia_repair IS
     'Whether the patient has had a prior hernia repair, such as for the recurrent-hernia safety flag.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.prior_hernia_repair_mesh IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.prior_hernia_repair_mesh IS
     'Whether the prior hernia repair used mesh, no mesh, or is unknown.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.prior_hernia_repair_site IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.prior_hernia_repair_site IS
     'Site and approximate date of the prior hernia repair, used to judge whether the current presentation is a recurrence at the same site.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.history_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.history_notes IS
     'Free-text notes about the presenting complaint and history.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_chronic_cough IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_chronic_cough IS
     'Whether the patient has a chronic cough, a recognised hernia risk factor that raises intra-abdominal pressure.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_constipation_or_straining IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_constipation_or_straining IS
     'Whether the patient has chronic constipation or straining at stool.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_heavy_lifting_occupation IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_heavy_lifting_occupation IS
     'Whether the patient has an occupation involving heavy lifting.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_obesity IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_obesity IS
     'Whether the patient is obese.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_smoking IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_smoking IS
     'Whether the patient smokes, which impairs collagen synthesis and wound healing.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_family_history IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_family_history IS
     'Whether the patient has a family history of hernia.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_prior_abdominal_surgery IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_prior_abdominal_surgery IS
     'Whether the patient has had prior abdominal surgery, relevant to incisional hernia risk.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_pregnancy IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_pregnancy IS
     'Whether the patient is pregnant, relevant to umbilical and inguinal hernia risk and to management options.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_connective_tissue_disorder IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_connective_tissue_disorder IS
     'Whether the patient has a known connective-tissue disorder such as Ehlers-Danlos syndrome.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_ascites IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_ascites IS
     'Whether the patient has ascites, which raises intra-abdominal pressure and complicates repair.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.risk_factors_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.risk_factors_notes IS
     'Free-text notes about risk factors.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.inspection_location IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.inspection_location IS
     'Anatomical location of the bulge on visual inspection.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.inspection_location_other IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.inspection_location_other IS
     'Location detail when inspection_location is other.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.bulge_visible_at_rest IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.bulge_visible_at_rest IS
     'Whether the bulge is visible with the patient at rest.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.bulge_enlarges_on_standing_or_straining IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.bulge_enlarges_on_standing_or_straining IS
     'Whether the bulge enlarges on standing or straining, the classic dynamic sign of a hernia.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.skin_changes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.skin_changes IS
     'Skin changes over the bulge, such as erythema or discolouration, which are red-flag findings.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.inspection_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.inspection_notes IS
     'Free-text notes from the visual inspection.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.palpable_mass IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.palpable_mass IS
     'Whether a mass is palpable on examination.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.cough_impulse_positive IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.cough_impulse_positive IS
     'Whether a cough impulse is elicited, i.e. a positive expansile impulse on coughing or Valsalva.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.tenderness IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.tenderness IS
     'Whether the mass is tender on palpation, which raises concern for incarceration or strangulation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.mass_size_as_cm IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.mass_size_as_cm IS
     'Size of the palpable mass in cm, contributing to the EHS size grade.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.palpation_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.palpation_notes IS
     'Free-text notes from palpation and the cough-impulse test.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.reducibility_status IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.reducibility_status IS
     'Clinician judgement of reducibility: reducible, irreducible, or incarcerated. Drives the computed urgency band.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.reduces_spontaneously IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.reduces_spontaneously IS
     'Whether the hernia reduces spontaneously, such as on lying flat.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.reduces_with_manual_pressure IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.reduces_with_manual_pressure IS
     'Whether the hernia reduces with gentle manual pressure.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.does_not_reduce IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.does_not_reduce IS
     'Whether the hernia does not reduce despite manual pressure.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.reducibility_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.reducibility_notes IS
     'Free-text notes about the reducibility assessment.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_severe_pain IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_severe_pain IS
     'Red flag: severe pain out of proportion to examination findings. Any positive red flag forces the computed urgency to emergency.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_vomiting IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_vomiting IS
     'Red flag: vomiting, suggestive of bowel obstruction.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_fever IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_fever IS
     'Red flag: fever, suggestive of strangulation or bowel ischaemia.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_absolute_constipation IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_absolute_constipation IS
     'Red flag: absolute constipation with no passage of flatus, suggestive of complete bowel obstruction.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_erythema_or_discolouration IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_erythema_or_discolouration IS
     'Red flag: erythema or skin discolouration over the hernia, suggestive of strangulation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_previously_reducible_now_irreducible IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_previously_reducible_now_irreducible IS
     'Red flag: a previously reducible hernia that is now irreducible, a classic sign of new incarceration.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_tachycardia IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_tachycardia IS
     'Red flag: tachycardia, a systemic sign of strangulation or sepsis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.red_flag_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.red_flag_notes IS
     'Free-text notes about the red-flag screen.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_type IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.hernia_type IS
     'Clinical hernia type: inguinal, femoral, umbilical, epigastric, incisional, paraumbilical, spigelian, or other.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_type_other IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.hernia_type_other IS
     'Hernia type detail when hernia_type is other.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.inguinal_subtype IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.inguinal_subtype IS
     'European Hernia Society inguinal subtype: direct, indirect, pantaloon, or uncertain. Applies only when hernia_type is inguinal.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.laterality IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.laterality IS
     'Laterality: left, right, or bilateral.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.ehs_size_grade IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.ehs_size_grade IS
     'European Hernia Society size grade: 1 for less than 2 cm, 2 for 2 to 4 cm, 3 for more than 4 cm.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.classification_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.classification_notes IS
     'Free-text notes about the clinical classification.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.ultrasound_performed IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.ultrasound_performed IS
     'Whether an ultrasound scan was performed.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.ultrasound_findings IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.ultrasound_findings IS
     'Ultrasound findings: confirms the hernia, no hernia seen, or inconclusive.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.ct_performed IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.ct_performed IS
     'Whether a CT scan was performed.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.ct_findings IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.ct_findings IS
     'CT findings: confirms the hernia, no hernia seen, or inconclusive.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.mri_performed IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.mri_performed IS
     'Whether an MRI scan was performed.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.mri_findings IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.mri_findings IS
     'MRI findings: confirms the hernia, no hernia seen, or inconclusive.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.imaging_indication IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.imaging_indication IS
     'Reason imaging was requested: atypical presentation, occult-hernia suspicion, inconclusive examination, or pre-operative planning.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.imaging_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.imaging_notes IS
     'Free-text notes about imaging.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_lipoma IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_lipoma IS
     'Whether lipoma was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_lymphadenopathy IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_lymphadenopathy IS
     'Whether lymphadenopathy was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_hydrocele IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_hydrocele IS
     'Whether hydrocele was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_undescended_testis IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_undescended_testis IS
     'Whether undescended testis was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_femoral_aneurysm IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_femoral_aneurysm IS
     'Whether femoral aneurysm was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_abscess IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_abscess IS
     'Whether abscess was considered in the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_other IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_other IS
     'Any other differential diagnosis considered.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.differential_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.differential_notes IS
     'Free-text notes about the differential diagnosis.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.pain_interferes_with_work_or_activity IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.pain_interferes_with_work_or_activity IS
     'Whether pain interferes with work or activity.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.functional_impact_scale_0_10 IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.functional_impact_scale_0_10 IS
     'Overall functional impact rated from 0 for none to 10 for total, contributing to the soon urgency band.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.activity_limitation IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.activity_limitation IS
     'Free-text description of activities the hernia limits.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.management_plan IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.management_plan IS
     'Management plan: watchful waiting, elective repair referral, urgent referral, emergency referral, or conservative.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.conservative_detail IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.conservative_detail IS
     'Detail of conservative management, such as a truss or lifestyle advice.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.referral_made IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.referral_made IS
     'Whether a referral was made.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.referral_target_timeframe IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.referral_target_timeframe IS
     'Target timeframe for the referral to be seen, such as within 2 weeks or immediate.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.management_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.management_notes IS
     'Free-text notes about the management plan.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation.additional_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation.additional_notes IS
     'Additional free-text notes for the summary and sign-off.';
 
 -- ========================================================================
@@ -530,13 +547,13 @@ COMMENT ON COLUMN hernia_diagnostic_evaluation.additional_notes IS
 -- clinician-final values with an override reason, so the override is
 -- auditable rather than silent.
 
-CREATE TABLE hernia_diagnostic_evaluation_grade (
+CREATE TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     hernia_diagnostic_evaluation_id UUID NOT NULL UNIQUE
-        REFERENCES hernia_diagnostic_evaluation(id) ON DELETE CASCADE,
+        REFERENCES hernia_diagnostic_evaluation.hernia_diagnostic_evaluation(id) ON DELETE CASCADE,
 
     hernia_type VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (hernia_type IN ('inguinal', 'femoral', 'umbilical', 'epigastric', 'incisional', 'paraumbilical', 'spigelian', 'other', '')),
@@ -563,47 +580,47 @@ CREATE TABLE hernia_diagnostic_evaluation_grade (
 );
 
 CREATE TRIGGER trigger_hernia_diagnostic_evaluation_grade_updated_at
-    BEFORE UPDATE ON hernia_diagnostic_evaluation_grade
+    BEFORE UPDATE ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hernia_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE hernia_diagnostic_evaluation_grade IS
+COMMENT ON TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade IS
     'Computed and signed-off classification and urgency result for one hernia diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.created_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.updated_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.deleted_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.hernia_diagnostic_evaluation_id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.hernia_diagnostic_evaluation_id IS
     'Foreign key to the hernia_diagnostic_evaluation table, unique because grading is one-to-one with the evaluation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.hernia_type IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.hernia_type IS
     'Hernia type as classified by the engine from the clinical classification step.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.hernia_subtype IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.hernia_subtype IS
     'European Hernia Society inguinal subtype when the hernia type is inguinal, otherwise not-applicable.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.ehs_classification IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.ehs_classification IS
     'Human-readable European Hernia Society classification string, such as "Inguinal, indirect, right, EHS grade 2 (2-4cm)".';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.ehs_size_grade IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.ehs_size_grade IS
     'European Hernia Society size grade carried through from the classification step: 1, 2, or 3.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.reducibility_status IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.reducibility_status IS
     'Reducibility status carried through from the reducibility assessment step.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.computed_urgency IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.computed_urgency IS
     'Urgency band computed by the engine: routine, soon, urgent, or emergency. Emergency is forced by any positive red flag.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.final_urgency IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.final_urgency IS
     'Urgency band signed off by the clinician, which may equal or differ from the computed value.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.override_reason IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.override_reason IS
     'Reason the clinician set a final urgency differently from the computed value, mandatory when they differ.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.recommendation IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.recommendation IS
     'Overall recommendation derived from the final urgency band, mirroring the management_plan options.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.clinician_notes IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.signed_by_name IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.signed_by_name IS
     'Name of the clinician who signed the evaluation.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.signed_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.signed_at IS
     'Timestamp of the clinician electronic signature.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.graded_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -618,13 +635,13 @@ COMMENT ON COLUMN hernia_diagnostic_evaluation_grade.graded_at IS
 -- with a priority and a suggested action for the surgical or referring team.
 -- Flags are never suppressed by a clinician override of the urgency band.
 
-CREATE TABLE hernia_diagnostic_evaluation_grade_flag (
+CREATE TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     hernia_diagnostic_evaluation_grade_id UUID NOT NULL
-        REFERENCES hernia_diagnostic_evaluation_grade(id) ON DELETE CASCADE,
+        REFERENCES hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -647,34 +664,34 @@ CREATE TABLE hernia_diagnostic_evaluation_grade_flag (
 );
 
 CREATE INDEX hernia_diagnostic_evaluation_grade_flag_grade_id_index
-    ON hernia_diagnostic_evaluation_grade_flag (hernia_diagnostic_evaluation_grade_id);
+    ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag (hernia_diagnostic_evaluation_grade_id);
 
 CREATE TRIGGER trigger_hernia_diagnostic_evaluation_grade_flag_updated_at
-    BEFORE UPDATE ON hernia_diagnostic_evaluation_grade_flag
+    BEFORE UPDATE ON hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hernia_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE hernia_diagnostic_evaluation_grade_flag IS
+COMMENT ON TABLE hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag IS
     'Safety-critical flags that fire independently of the computed urgency band, with a priority and a suggested action for the surgical or referring team.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.created_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.updated_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.deleted_at IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.hernia_diagnostic_evaluation_grade_id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.hernia_diagnostic_evaluation_grade_id IS
     'Foreign key to the parent hernia_diagnostic_evaluation_grade table.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.flag_id IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.flag_id IS
     'Stable flag identifier, such as F-STRANGULATION-SUSPECTED-001.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.category IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.category IS
     'Flag category, such as strangulation-suspected or emergency-surgical-referral.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.priority IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.priority IS
     'Priority: low, medium, or high.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.description IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN hernia_diagnostic_evaluation_grade_flag.suggested_action IS
+COMMENT ON COLUMN hernia_diagnostic_evaluation.hernia_diagnostic_evaluation_grade_flag.suggested_action IS
     'Suggested clinical action, such as "refer for emergency surgical assessment today".';
 
 -- ========================================================================

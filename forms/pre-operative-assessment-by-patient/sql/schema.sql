@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS pre_operative_assessment_by_patient;
+
+COMMENT ON SCHEMA pre_operative_assessment_by_patient IS
+    'Namespace for the Pre-operative Assessment by Patient form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION pre_operative_assessment_by_patient.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION pre_operative_assessment_by_patient.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE pre_operative_assessment_by_patient.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,56 +98,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON pre_operative_assessment_by_patient.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -143,7 +160,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE pre_operative_assessment_by_patient.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -162,46 +179,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON pre_operative_assessment_by_patient.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -212,12 +229,12 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_pre_operative_assessment_by_patient.sql
 -- ========================================================================
 
-CREATE TABLE pre_operative_assessment_by_patient (
+CREATE TABLE pre_operative_assessment_by_patient.pre_operative_assessment_by_patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES pre_operative_assessment_by_patient.patient(id) ON DELETE CASCADE,
     weight NUMERIC(5,1) CHECK (weight IS NULL OR weight > 0),
     height NUMERIC(5,1) CHECK (height IS NULL OR height > 0),
     bmi NUMERIC(4,1) CHECK (bmi IS NULL OR (bmi >= 10 AND bmi <= 100)),
@@ -353,11 +370,11 @@ CREATE TABLE pre_operative_assessment_by_patient (
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON pre_operative_assessment_by_patient
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.pre_operative_assessment_by_patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE pre_operative_assessment_by_patient IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.pre_operative_assessment_by_patient IS
     'Flat assessment table: parent assessment merged with every assessment_<section> child. Generated by bin/generate-sql-flat.py.';
 
 -- Renamed columns (section prefix applied on conflict):
@@ -378,282 +395,282 @@ COMMENT ON TABLE pre_operative_assessment_by_patient IS
 -- table preserves the rule catalogue for audit and reporting.
 -- ============================================================
 
-COMMENT ON TABLE pre_operative_assessment_by_patient IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.pre_operative_assessment_by_patient IS
     'Pre operative assessment by patient.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.patient_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.weight IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.weight IS
     'Weight.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.height IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.height IS
     'Height.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.bmi IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.bmi IS
     'BMI.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.planned_procedure IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.planned_procedure IS
     'Planned procedure.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.procedure_urgency IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.procedure_urgency IS
     'Procedure urgency. One of: elective, urgent, emergency.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.status IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hypertension IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hypertension IS
     'Hypertension. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hypertension_controlled IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hypertension_controlled IS
     'Hypertension controlled. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.ischemic_heart_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.ischemic_heart_disease IS
     'Ischemic heart disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.ihd_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.ihd_details IS
     'IHD details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.heart_failure IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.heart_failure IS
     'Heart failure. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.heart_failure_nyha IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.heart_failure_nyha IS
     'Heart failure nyha. One of: 1, 2, 3, 4.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.valvular_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.valvular_disease IS
     'Valvular disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.valvular_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.valvular_details IS
     'Valvular details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.arrhythmia IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.arrhythmia IS
     'Arrhythmia. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.arrhythmia_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.arrhythmia_type IS
     'Arrhythmia type.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.pacemaker IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.pacemaker IS
     'Pacemaker. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_mi IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recent_mi IS
     'Recent MI. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_mi_weeks IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recent_mi_weeks IS
     'Recent MI weeks.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.asthma IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.asthma IS
     'Asthma. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.asthma_frequency IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.asthma_frequency IS
     'Asthma frequency. One of: intermittent, mild-persistent, moderate-persistent, severe-persistent.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.copd IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.copd IS
     'COPD. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.copd_severity IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.copd_severity IS
     'COPD severity. One of: mild, moderate, severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.osa IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.osa IS
     'Osa. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.osa_cpap IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.osa_cpap IS
     'Osa cpap. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.smoking IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.smoking IS
     'Smoking. One of: current, ex, never.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.smoking_pack_years IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.smoking_pack_years IS
     'Smoking pack years.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_urti IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recent_urti IS
     'Recent urti. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.ckd IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.ckd IS
     'CKD. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.ckd_stage IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.ckd_stage IS
     'CKD stage. One of: 1, 2, 3, 4, 5.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dialysis IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dialysis IS
     'Dialysis. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dialysis_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dialysis_type IS
     'Dialysis type. One of: haemodialysis, peritoneal.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.liver_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.liver_disease IS
     'Liver disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.cirrhosis IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.cirrhosis IS
     'Cirrhosis. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.child_pugh_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.child_pugh_score IS
     'Child pugh score. One of: A, B, C.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hepatitis IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hepatitis IS
     'Hepatitis. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hepatitis_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hepatitis_type IS
     'Hepatitis type.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.diabetes IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.diabetes IS
     'Diabetes. One of: type1, type2, gestational, none.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.diabetes_control IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.diabetes_control IS
     'Diabetes control. One of: well-controlled, poorly-controlled.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.diabetes_on_insulin IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.diabetes_on_insulin IS
     'Diabetes on insulin. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.thyroid_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.thyroid_disease IS
     'Thyroid disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.thyroid_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.thyroid_type IS
     'Thyroid type. One of: hypothyroid, hyperthyroid.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.adrenal_insufficiency IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.adrenal_insufficiency IS
     'Adrenal insufficiency. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.stroke_or_tia IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.stroke_or_tia IS
     'Stroke or TIA. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.stroke_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.stroke_details IS
     'Stroke details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.epilepsy IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.epilepsy IS
     'Epilepsy. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.epilepsy_controlled IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.epilepsy_controlled IS
     'Epilepsy controlled. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.neuromuscular_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.neuromuscular_disease IS
     'Neuromuscular disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.neuromuscular_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.neuromuscular_details IS
     'Neuromuscular details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.raised_icp IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.raised_icp IS
     'Raised icp. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.bleeding_disorder IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.bleeding_disorder IS
     'Bleeding disorder. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.bleeding_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.bleeding_details IS
     'Bleeding details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.on_anticoagulants IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.on_anticoagulants IS
     'On anticoagulants. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.anticoagulant_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.anticoagulant_type IS
     'Anticoagulant type.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.sickle_cell_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.sickle_cell_disease IS
     'Sickle cell disease. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.sickle_cell_trait IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.sickle_cell_trait IS
     'Sickle cell trait. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.anaemia IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.anaemia IS
     'Anaemia. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.rheumatoid_arthritis IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.rheumatoid_arthritis IS
     'Rheumatoid arthritis. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.cervical_spine_issues IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.cervical_spine_issues IS
     'Cervical spine issues. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.limited_neck_movement IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.limited_neck_movement IS
     'Limited neck movement. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.limited_mouth_opening IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.limited_mouth_opening IS
     'Limited mouth opening. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dental_issues IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dental_issues IS
     'Dental issues. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dental_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dental_details IS
     'Dental details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.previous_difficult_airway IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.previous_difficult_airway IS
     'Previous difficult airway. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.mallampati_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.mallampati_score IS
     'Mallampati score. One of: 1, 2, 3, 4.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.gord IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.gord IS
     'Gord. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hiatus_hernia IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hiatus_hernia IS
     'Hiatus hernia. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.nausea IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.nausea IS
     'Nausea. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.name IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.name IS
     'Name.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dose IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dose IS
     'Dose.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.frequency IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.frequency IS
     'Frequency.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.sort_order IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.allergen IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.allergen IS
     'Allergen.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.reaction IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.reaction IS
     'Reaction.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.severity IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.severity IS
     'Severity. One of: mild, moderate, anaphylaxis.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.allergy_sort_order IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.allergy_sort_order IS
     'Allergy sort order.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.previous_anaesthesia IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.previous_anaesthesia IS
     'Previous anaesthesia. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.anaesthesia_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.anaesthesia_problems IS
     'Anaesthesia problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.anaesthesia_problem_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.anaesthesia_problem_details IS
     'Anaesthesia problem details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.family_mh_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.family_mh_history IS
     'Family mh history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.family_mh_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.family_mh_details IS
     'Family mh details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.ponv IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.ponv IS
     'Ponv. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.alcohol IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.alcohol IS
     'Alcohol. One of: none, occasional, moderate, heavy.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.alcohol_units_per_week IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.alcohol_units_per_week IS
     'Alcohol units per week.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recreational_drugs IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recreational_drugs IS
     'Recreational drugs. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.drug_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.drug_details IS
     'Drug details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.exercise_tolerance IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.exercise_tolerance IS
     'Exercise tolerance. One of: unable, light-housework, climb-stairs, moderate-exercise, vigorous-exercise.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.estimated_mets IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.estimated_mets IS
     'Estimated METS.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.mobility_aids IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.mobility_aids IS
     'Mobility aids. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_decline IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recent_decline IS
     'Recent decline. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.possibly_pregnant IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.possibly_pregnant IS
     'Possibly pregnant. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.pregnancy_confirmed IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.pregnancy_confirmed IS
     'Pregnancy confirmed. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.gestation_weeks IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.gestation_weeks IS
     'Gestation weeks.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.deleted_at IS
     'Timestamp when this row was deleted.';
 
-COMMENT ON COLUMN pre_operative_assessment_by_patient.cancer_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.cancer_history IS
     'Cancer history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.cancer_history_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.cancer_history_details IS
     'Cancer history details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.mrsa_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.mrsa_history IS
     'MRSA history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.recent_hospital_or_care_home_admission IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.recent_hospital_or_care_home_admission IS
     'Recent hospital or care home admission. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.palpitations_or_blackouts IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.palpitations_or_blackouts IS
     'Palpitations or blackouts. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.heart_or_artery_surgery IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.heart_or_artery_surgery IS
     'Heart or artery surgery. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.swollen_ankles IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.swollen_ankles IS
     'Swollen ankles. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.snoring IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.snoring IS
     'Snoring. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.snoring_loud IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.snoring_loud IS
     'Loud snoring. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.collar_size_inches IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.collar_size_inches IS
     'Collar size in inches.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.daytime_sleepiness IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.daytime_sleepiness IS
     'Daytime sleepiness. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.observed_apnoea_episodes IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.observed_apnoea_episodes IS
     'Observed apnoea episodes. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.urinary_symptoms IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.urinary_symptoms IS
     'Urinary symptoms. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.urinary_catheter_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.urinary_catheter_history IS
     'Urinary catheter history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.prostate_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.prostate_problems IS
     'Prostate problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.personal_vte_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.personal_vte_history IS
     'Personal VTE (venous thromboembolism) history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.family_vte_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.family_vte_history IS
     'Family VTE (venous thromboembolism) history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.blood_transfusion_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.blood_transfusion_history IS
     'Blood transfusion history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.joint_or_arthritis_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.joint_or_arthritis_problems IS
     'Joint or arthritis problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.back_or_neck_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.back_or_neck_problems IS
     'Back or neck problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.skin_conditions IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.skin_conditions IS
     'Skin conditions. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.pressure_sore_risk IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.pressure_sore_risk IS
     'Pressure sore risk. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.bowel_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.bowel_problems IS
     'Bowel problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.food_intolerances IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.food_intolerances IS
     'Food intolerances. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.food_intolerances_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.food_intolerances_details IS
     'Food intolerances details.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.blood_donor IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.blood_donor IS
     'Blood donor. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.body_piercings IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.body_piercings IS
     'Body piercings. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.hearing_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.hearing_problems IS
     'Hearing problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.vision_problems IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.vision_problems IS
     'Vision problems. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.balance_issues IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.balance_issues IS
     'Balance issues. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.contraceptive_or_hrt_use IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.contraceptive_or_hrt_use IS
     'Contraceptive or HRT use. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.last_menstrual_period IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.last_menstrual_period IS
     'Last menstrual period.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.head_injury_requiring_hospitalisation IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.head_injury_requiring_hospitalisation IS
     'Head injury requiring hospitalisation. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.memory_concerns IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.memory_concerns IS
     'Memory concerns. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.dementia_diagnosis IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.dementia_diagnosis IS
     'Dementia diagnosis. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_or_anxiety_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.depression_or_anxiety_history IS
     'Depression or anxiety history. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_anxiety_impacts_daily_life IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.depression_anxiety_impacts_daily_life IS
     'Depression/anxiety impacts daily life. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.depression_anxiety_seen_doctor IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.depression_anxiety_seen_doctor IS
     'Depression/anxiety seen by a doctor. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_patient.learning_difficulties IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.pre_operative_assessment_by_patient.learning_difficulties IS
     'Learning difficulties. One of: yes, no.';
 
 -- ========================================================================
@@ -664,7 +681,7 @@ COMMENT ON COLUMN pre_operative_assessment_by_patient.learning_difficulties IS
 -- BEGIN 05_create_table_pre_operative_assessment_by_patient_asa_rule.sql
 -- ========================================================================
 
-CREATE TABLE asa_rule (
+CREATE TABLE pre_operative_assessment_by_patient.asa_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -681,32 +698,32 @@ CREATE TABLE asa_rule (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_asa_rule_updated_at
-    BEFORE UPDATE ON asa_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.asa_rule
+    FOR EACH ROW EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE asa_rule IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.asa_rule IS
     'Reference table of ASA grading rules. Seed data mirrors asa-rules.ts. Used for audit trail.';
-COMMENT ON COLUMN asa_rule.code IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN asa_rule.system IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.system IS
     'Body system or category (e.g. Cardiovascular, Respiratory).';
-COMMENT ON COLUMN asa_rule.description IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.description IS
     'Human-readable condition description (e.g. Controlled hypertension).';
-COMMENT ON COLUMN asa_rule.grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.grade IS
     'ASA grade assigned when this rule fires: 1 (healthy) to 5 (moribund).';
-COMMENT ON COLUMN asa_rule.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN asa_rule.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN asa_rule.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN asa_rule.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.asa_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 -- ──────────────────────────────────────────────────────────────
 -- Seed data: all 42 ASA rules from asa-rules.ts
 -- ──────────────────────────────────────────────────────────────
 
-INSERT INTO asa_rule (code, system, description, grade) VALUES
+INSERT INTO pre_operative_assessment_by_patient.asa_rule (code, system, description, grade) VALUES
     -- Cardiovascular (10 rules)
     ('CV-001', 'Cardiovascular',      'Controlled hypertension',                   2),
     ('CV-002', 'Cardiovascular',      'Uncontrolled hypertension',                 3),
@@ -792,13 +809,13 @@ INSERT INTO asa_rule (code, system, description, grade) VALUES
 -- BEGIN 06_create_table_pre_operative_assessment_by_patient_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE pre_operative_assessment_by_patient.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     pre_operative_assessment_by_patient_id UUID NOT NULL UNIQUE
-        REFERENCES pre_operative_assessment_by_patient(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_patient.pre_operative_assessment_by_patient(id) ON DELETE CASCADE,
     computed_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (computed_asa_grade IN ('I', 'II', 'III', 'IV', 'V', 'VI', '')),
     final_asa_grade VARCHAR(5) NOT NULL DEFAULT ''
@@ -824,48 +841,48 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.grade IS
     'Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason.';
-COMMENT ON COLUMN grade.computed_asa_grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.computed_asa_grade IS
     'ASA grade computed by the engine from clinician-observed data.';
-COMMENT ON COLUMN grade.final_asa_grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.final_asa_grade IS
     'ASA grade signed off by the clinician (may equal or differ from computed).';
-COMMENT ON COLUMN grade.asa_emergency_suffix IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.asa_emergency_suffix IS
     'Emergency suffix: E if the procedure is emergency, empty otherwise.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.override_reason IS
     'Reason the clinician set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN grade.mallampati_class IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.mallampati_class IS
     'Mallampati airway class as per step 4.';
-COMMENT ON COLUMN grade.rcri_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.rcri_score IS
     'Revised Cardiac Risk Index score (0-6).';
-COMMENT ON COLUMN grade.stopbang_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.stopbang_score IS
     'STOP-BANG score (0-8).';
-COMMENT ON COLUMN grade.frailty_scale IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.frailty_scale IS
     'Clinical Frailty Scale score (1-9).';
-COMMENT ON COLUMN grade.composite_risk IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.composite_risk IS
     'Composite perioperative risk: low, moderate, high, critical.';
-COMMENT ON COLUMN grade.recommendation IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.recommendation IS
     'Overall recommendation: proceed, optimise-first, mdt-review, cancel.';
-COMMENT ON COLUMN grade.clinician_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.clinician_notes IS
     'Free-text clinician summary notes.';
-COMMENT ON COLUMN grade.signed_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.signed_at IS
     'Timestamp of clinician electronic signature.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
-COMMENT ON COLUMN grade.pre_operative_assessment_by_patient_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.pre_operative_assessment_by_patient_id IS
     'Foreign key to the pre_operative_assessment_by_patient table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -876,13 +893,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 07_create_table_pre_operative_assessment_by_patient_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE pre_operative_assessment_by_patient.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_patient.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     instrument VARCHAR(20) NOT NULL
         CHECK (instrument IN ('asa', 'mallampati', 'rcri', 'stopbang', 'frailty')),
@@ -892,35 +909,35 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE INDEX index_grading_fired_rule_grade_id
-    ON grading_fired_rule(grade_id);
+    ON pre_operative_assessment_by_patient.grading_fired_rule(grade_id);
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.grading_fired_rule IS
     'Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.rule_id IS
     'Stable rule identifier (e.g. R-ASA-III-02).';
-COMMENT ON COLUMN grading_fired_rule.instrument IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.instrument IS
     'Scoring instrument the rule belongs to: asa, mallampati, rcri, stopbang, frailty.';
-COMMENT ON COLUMN grading_fired_rule.grade IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.grade IS
     'Grade contributed by this rule (e.g. III for ASA).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.category IS
     'Body-system or risk category (e.g. cardiovascular, respiratory).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.description IS
     'Human-readable description of why the rule fired.';
 
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -931,13 +948,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 08_create_table_pre_operative_assessment_by_patient_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE pre_operative_assessment_by_patient.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES pre_operative_assessment_by_patient.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -973,35 +990,35 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE INDEX index_grading_additional_flag_grade_id
-    ON grading_additional_flag(grade_id);
+    ON pre_operative_assessment_by_patient.grading_additional_flag(grade_id);
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON pre_operative_assessment_by_patient.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_patient.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE pre_operative_assessment_by_patient.grading_additional_flag IS
     'Safety-critical flags that fire independently of the ASA grade, with priority and a suggested action for the perioperative team.';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.flag_id IS
     'Stable flag identifier (e.g. F-DIFFICULT-AIRWAY-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN grading_additional_flag.description IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN grading_additional_flag.suggested_action IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.suggested_action IS
     'Suggested clinical action (e.g. "prepare difficult-airway trolley").';
 
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_patient.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

@@ -1,10 +1,10 @@
-CREATE TABLE pre_operative_assessment_by_clinician (
+CREATE TABLE pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES pre_operative_assessment_by_clinician.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES pre_operative_assessment_by_clinician.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
     site_name VARCHAR(255) NOT NULL DEFAULT '',
     assessment_date DATE,
@@ -256,518 +256,518 @@ CREATE TABLE pre_operative_assessment_by_clinician (
 );
 
 CREATE TRIGGER trigger_pre_operative_assessment_by_clinician_updated_at
-    BEFORE UPDATE ON pre_operative_assessment_by_clinician
+    BEFORE UPDATE ON pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION pre_operative_assessment_by_clinician.set_updated_at();
 
-COMMENT ON TABLE pre_operative_assessment_by_clinician IS
+COMMENT ON TABLE pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician IS
     'Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.id IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.created_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.updated_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.deleted_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.patient_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.patient_id IS
     'Foreign key to the patient being assessed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.clinician_id IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.clinician_id IS
     'Foreign key to the clinician performing the assessment.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.site_name IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.site_name IS
     'Site or hospital where the assessment is performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.assessment_date IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.assessment_date IS
     'Date the assessment was performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.assessment_time IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.assessment_time IS
     'Time of day the assessment was performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.planned_procedure IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.planned_procedure IS
     'Description of the planned surgical procedure.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.surgical_specialty IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.surgical_specialty IS
     'Surgical specialty responsible for the procedure.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.urgency IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.urgency IS
     'Procedure urgency (NCEPOD): elective, urgent, emergency, or immediate.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.laterality IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.laterality IS
     'Side of the body: left, right, bilateral, midline, or na.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.surgical_severity IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.surgical_severity IS
     'Surgical severity grade (NICE): minor, intermediate, major, or major-plus.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anticipated_blood_loss_ml IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anticipated_blood_loss_ml IS
     'Expected intraoperative blood loss in millilitres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anticipated_duration_minutes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anticipated_duration_minutes IS
     'Expected operative duration in minutes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.consultant_surgeon IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.consultant_surgeon IS
     'Name of the responsible consultant surgeon.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.planned_date IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.planned_date IS
     'Planned date of the operation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.systolic_bp IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.systolic_bp IS
     'Resting systolic blood pressure in mmHg.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.diastolic_bp IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.diastolic_bp IS
     'Resting diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.heart_rate IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.heart_rate IS
     'Resting heart rate in beats per minute.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.respiratory_rate IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.respiratory_rate IS
     'Resting respiratory rate in breaths per minute.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.spo2_percent IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.spo2_percent IS
     'Peripheral oxygen saturation as a percentage.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.temperature_celsius IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.temperature_celsius IS
     'Core body temperature in degrees Celsius.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.capillary_refill_seconds IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.capillary_refill_seconds IS
     'Capillary refill time in seconds.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pain_score_0_10 IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pain_score_0_10 IS
     'Patient-reported resting pain on a 0-10 numeric rating scale.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.on_room_air IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.on_room_air IS
     'Whether SpO2 was measured on room air (yes/no).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.supplemental_oxygen_litres IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.supplemental_oxygen_litres IS
     'Supplemental oxygen flow rate in litres per minute, if given.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mallampati_class IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mallampati_class IS
     'Mallampati airway classification I-IV.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.thyromental_distance_cm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.thyromental_distance_cm IS
     'Thyromental distance in centimetres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mouth_opening_cm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mouth_opening_cm IS
     'Maximal mouth opening in centimetres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.inter_incisor_gap_cm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.inter_incisor_gap_cm IS
     'Inter-incisor gap at maximal mouth opening in centimetres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.neck_rom IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.neck_rom IS
     'Cervical range of motion for airway assessment: full, reduced, or severely-limited.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cervical_spine_stability IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cervical_spine_stability IS
     'Cervical spine stability: stable, limited, or unstable.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.dentition IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.dentition IS
     'Dentition assessment: good, loose-teeth, caps-crowns, edentulous, or dentures.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.beard IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.beard IS
     'Presence of a beard that may impede mask seal.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.upper_lip_bite_test IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.upper_lip_bite_test IS
     'Upper lip bite test grade I, II, or III.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.prior_difficult_intubation IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.prior_difficult_intubation IS
     'Documented history of previous difficult intubation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_snoring IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_snoring IS
     'STOP-BANG item: loud snoring.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_tired IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_tired IS
     'STOP-BANG item: daytime tiredness or fatigue.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_observed_apnoea IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_observed_apnoea IS
     'STOP-BANG item: observed apnoea during sleep.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_pressure IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_pressure IS
     'STOP-BANG item: high blood pressure (treated or untreated).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_bmi_gt35 IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_bmi_gt35 IS
     'STOP-BANG item: BMI greater than 35 kg/m2.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_age_gt50 IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_age_gt50 IS
     'STOP-BANG item: age greater than 50 years.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_neck_gt40 IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_neck_gt40 IS
     'STOP-BANG item: neck circumference greater than 40 cm.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stopbang_male IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stopbang_male IS
     'STOP-BANG item: male sex.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.airway_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.airway_notes IS
     'Free-text clinician notes on airway assessment.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.heart_rhythm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.heart_rhythm IS
     'Observed cardiac rhythm on examination.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.murmur_present IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.murmur_present IS
     'Presence of a cardiac murmur on auscultation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.murmur_description IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.murmur_description IS
     'Free-text description of any cardiac murmur.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.peripheral_pulses IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.peripheral_pulses IS
     'Peripheral pulses: normal, reduced, or absent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.jvp_raised IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.jvp_raised IS
     'Whether the jugular venous pressure is elevated.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.peripheral_oedema IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.peripheral_oedema IS
     'Severity of peripheral oedema: none, mild, moderate, or severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_performed IS
     'Whether a 12-lead ECG was performed for this assessment.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_rhythm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_rhythm IS
     'Reported ECG rhythm.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_rate_bpm IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_rate_bpm IS
     'ECG ventricular rate in beats per minute.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_axis IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_axis IS
     'ECG electrical axis: normal, left, right, or extreme.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_ischaemic_changes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_ischaemic_changes IS
     'Whether ischaemic changes are present on the ECG.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecg_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecg_notes IS
     'Free-text ECG interpretation notes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.echo_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.echo_performed IS
     'Whether a transthoracic echocardiogram was performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.echo_ef_percent IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.echo_ef_percent IS
     'Left ventricular ejection fraction as a percentage.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.echo_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.echo_notes IS
     'Free-text echocardiogram interpretation notes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.history_ihd IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.history_ihd IS
     'History of ischaemic heart disease (RCRI criterion).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.history_chf IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.history_chf IS
     'History of congestive heart failure (RCRI criterion).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.history_stroke_tia IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.history_stroke_tia IS
     'History of stroke or transient ischaemic attack (RCRI criterion).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.recent_mi_within_3_months IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.recent_mi_within_3_months IS
     'Myocardial infarction within the past three months.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pacemaker_or_icd IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pacemaker_or_icd IS
     'Implanted pacemaker or implantable cardioverter-defibrillator present.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.severe_valve_dysfunction IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.severe_valve_dysfunction IS
     'Documented severe valvular dysfunction.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.active_angina IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.active_angina IS
     'Active unstable anginal symptoms.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.breath_sounds IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.breath_sounds IS
     'Auscultated breath sounds: normal, reduced, bronchial, or silent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.wheeze IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.wheeze IS
     'Audible wheeze on auscultation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.crackles IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.crackles IS
     'Audible crackles on auscultation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.crepitations IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.crepitations IS
     'Audible crepitations on auscultation.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.chest_wall_deformity IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.chest_wall_deformity IS
     'Presence of chest wall deformity.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.asthma IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.asthma IS
     'Asthma status: none, controlled, or uncontrolled.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.copd IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.copd IS
     'COPD severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cxr_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cxr_performed IS
     'Whether a chest X-ray was performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cxr_findings IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cxr_findings IS
     'Free-text chest X-ray findings.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pft_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pft_performed IS
     'Whether pulmonary function tests were performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pft_fev1_percent_predicted IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pft_fev1_percent_predicted IS
     'FEV1 as a percentage of predicted.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pft_fev1_fvc_ratio IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pft_fev1_fvc_ratio IS
     'FEV1/FVC ratio.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.smoking_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.smoking_status IS
     'Smoking status: never, ex, or current.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pack_years IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pack_years IS
     'Lifetime smoking exposure in pack-years.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.covid_history IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.covid_history IS
     'COVID-19 history category: never, recovered, recent, or long-covid.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.days_since_covid IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.days_since_covid IS
     'Days since onset of acute COVID-19.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.covid_unresolved_symptoms IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.covid_unresolved_symptoms IS
     'Whether post-COVID symptoms remain unresolved.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.gcs_total IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.gcs_total IS
     'Total Glasgow Coma Scale score, range 3-15.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.gcs_eye IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.gcs_eye IS
     'GCS eye-opening component, range 1-4.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.gcs_verbal IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.gcs_verbal IS
     'GCS verbal component, range 1-5.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.gcs_motor IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.gcs_motor IS
     'GCS motor component, range 1-6.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cognition_tool IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cognition_tool IS
     'Cognitive screening tool used: AMT-4, MOCA, MMSE, or none.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cognition_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cognition_score IS
     'Raw score reported by the cognitive screening tool.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cognitive_impairment IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cognitive_impairment IS
     'Clinical grade of cognitive impairment: none, mild, moderate, or severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.capacity_concern IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.capacity_concern IS
     'Concern about the patient capacity to consent to the procedure.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cranial_nerves_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cranial_nerves_notes IS
     'Free-text notes on cranial nerve examination.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.motor_power IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.motor_power IS
     'Global motor power grading: normal, reduced, or severely-reduced.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.sensory_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.sensory_notes IS
     'Free-text notes on sensory examination.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reflexes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reflexes IS
     'Reflex findings: normal, hyperreflexic, hyporeflexic, or absent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.recent_stroke_tia IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.recent_stroke_tia IS
     'Recent stroke or TIA relevant to perioperative risk.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.days_since_stroke_tia IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.days_since_stroke_tia IS
     'Days since the most recent stroke or TIA.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.seizure_disorder IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.seizure_disorder IS
     'Active seizure disorder.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.creatinine_umol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.creatinine_umol_l IS
     'Serum creatinine in micromoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.egfr_ml_min_1_73m2 IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.egfr_ml_min_1_73m2 IS
     'Estimated glomerular filtration rate in mL/min/1.73 m2.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.urea_mmol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.urea_mmol_l IS
     'Serum urea in millimoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.potassium_mmol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.potassium_mmol_l IS
     'Serum potassium in millimoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.sodium_mmol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.sodium_mmol_l IS
     'Serum sodium in millimoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.dialysis_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.dialysis_status IS
     'Dialysis modality: none, peritoneal, haemodialysis, or haemofiltration.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ckd_stage IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ckd_stage IS
     'Chronic kidney disease stage 1, 2, 3a, 3b, 4, or 5.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.bilirubin_umol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.bilirubin_umol_l IS
     'Serum bilirubin in micromoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.alt_u_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.alt_u_l IS
     'Alanine aminotransferase in units per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ast_u_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ast_u_l IS
     'Aspartate aminotransferase in units per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.alp_u_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.alp_u_l IS
     'Alkaline phosphatase in units per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.albumin_g_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.albumin_g_l IS
     'Serum albumin in grams per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.chronic_liver_disease IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.chronic_liver_disease IS
     'Chronic liver disease status: none, compensated, or decompensated.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.child_pugh_class IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.child_pugh_class IS
     'Child-Pugh class A, B, or C.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.hb_g_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.hb_g_l IS
     'Haemoglobin in grams per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.wcc_10_9_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.wcc_10_9_l IS
     'White cell count in 10^9/L.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.platelets_10_9_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.platelets_10_9_l IS
     'Platelet count in 10^9/L.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mcv_fl IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mcv_fl IS
     'Mean corpuscular volume in femtolitres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ferritin_ug_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ferritin_ug_l IS
     'Serum ferritin in micrograms per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.transferrin_saturation_percent IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.transferrin_saturation_percent IS
     'Transferrin saturation as a percentage.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.inr IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.inr IS
     'International normalised ratio.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.aptt_seconds IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.aptt_seconds IS
     'Activated partial thromboplastin time in seconds.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fibrinogen_g_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fibrinogen_g_l IS
     'Fibrinogen concentration in grams per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.on_anticoagulant IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.on_anticoagulant IS
     'Whether the patient is on an anticoagulant or antiplatelet agent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anticoagulant_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anticoagulant_type IS
     'Primary anticoagulant or antiplatelet agent in use.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anticoagulant_hold_plan IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anticoagulant_hold_plan IS
     'Perioperative hold or bridging plan for the anticoagulant.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.group_and_save IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.group_and_save IS
     'Group-and-save status: not-required, ordered, valid, or expired.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.crossmatch_units IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.crossmatch_units IS
     'Number of crossmatched red cell units requested.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.last_transfusion_date IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.last_transfusion_date IS
     'Date of the most recent blood transfusion.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anaemia_severity IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anaemia_severity IS
     'Anaemia severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.diabetes_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.diabetes_type IS
     'Diabetes classification: none, type-1, type-2, gestational, or other.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.diabetes_on_insulin IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.diabetes_on_insulin IS
     'Whether the patient uses insulin.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.hba1c_mmol_mol IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.hba1c_mmol_mol IS
     'HbA1c in mmol/mol.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fasting_glucose_mmol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fasting_glucose_mmol_l IS
     'Fasting plasma glucose in millimoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.random_glucose_mmol_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.random_glucose_mmol_l IS
     'Random plasma glucose in millimoles per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.diabetes_control IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.diabetes_control IS
     'Clinical judgement of glycaemic control: well-controlled, suboptimal, or poor.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.diabetes_complications IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.diabetes_complications IS
     'Free-text list of diabetic complications.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.thyroid_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.thyroid_status IS
     'Thyroid functional status: euthyroid, hypothyroid, or hyperthyroid.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.tsh_mu_l IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.tsh_mu_l IS
     'Thyroid-stimulating hormone in milli-units per litre.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.adrenal_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.adrenal_status IS
     'Adrenal functional status: normal, addisons, cushings, or on-steroid-cover.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.on_long_term_steroids IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.on_long_term_steroids IS
     'Whether the patient takes long-term corticosteroids.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.steroid_dose_mg IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.steroid_dose_mg IS
     'Current steroid dose in milligrams prednisolone equivalent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.steroid_cover_plan IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.steroid_cover_plan IS
     'Perioperative steroid cover plan.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.abdominal_exam IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.abdominal_exam IS
     'Abdominal examination findings: normal, distended, tender, organomegaly, or other.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.abdominal_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.abdominal_notes IS
     'Free-text abdominal examination notes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reflux_symptoms IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reflux_symptoms IS
     'Severity of gastro-oesophageal reflux symptoms: none, occasional, frequent, or severe.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.hiatus_hernia IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.hiatus_hernia IS
     'Documented hiatus hernia.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_gastric_surgery IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.previous_gastric_surgery IS
     'History of previous gastric surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ng_tube IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ng_tube IS
     'Nasogastric tube currently in situ.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.stoma IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.stoma IS
     'Stoma type, if any: colostomy, ileostomy, urostomy, gastrostomy, or none.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fasting_confirmed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fasting_confirmed IS
     'Whether pre-operative fasting has been confirmed as adequate.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.last_solid_food_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.last_solid_food_at IS
     'Timestamp of last solid food intake.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.last_clear_fluid_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.last_clear_fluid_at IS
     'Timestamp of last clear fluid intake.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.rapid_sequence_induction_needed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.rapid_sequence_induction_needed IS
     'Whether rapid sequence induction is required because of aspiration risk.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.spine_exam IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.spine_exam IS
     'Spinal examination findings relevant to neuraxial access.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.spine_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.spine_notes IS
     'Free-text spinal examination notes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.neuraxial_suitable IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.neuraxial_suitable IS
     'Clinician judgement of suitability for neuraxial block: yes, no, or unsure.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.joint_rom_hip IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.joint_rom_hip IS
     'Hip range of motion for positioning planning.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.joint_rom_shoulder IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.joint_rom_shoulder IS
     'Shoulder range of motion for positioning planning.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.joint_rom_neck IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.joint_rom_neck IS
     'Cervical range of motion for positioning planning (distinct from airway-focused neck_rom).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.skin_iv_access IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.skin_iv_access IS
     'Ease of peripheral intravenous access: good, difficult, or very-difficult.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.skin_block_site IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.skin_block_site IS
     'Condition of planned regional block skin site: intact, infected, tattooed, or scarred.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.pressure_ulcer_risk IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.pressure_ulcer_risk IS
     'Pressure ulcer risk category: low, moderate, high, or very-high.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.name IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.name IS
     'Regular medication name (current medication review item).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.dose IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.dose IS
     'Regular medication dose.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.route IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.route IS
     'Medication route of administration.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.frequency IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.frequency IS
     'Medication dosing frequency.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.indication IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.indication IS
     'Clinical indication for the medication.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.class IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.class IS
     'Medication class for perioperative decision-making.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.perioperative_action IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.perioperative_action IS
     'Perioperative action for this medication: continue, hold-on-day, hold-n-days, stop, switch, or bridge.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.perioperative_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.perioperative_notes IS
     'Perioperative instructions or caveats for this medication.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.last_dose_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.last_dose_at IS
     'Timestamp of the most recent recorded dose.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.on_glp1_receptor_agonist IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.on_glp1_receptor_agonist IS
     'Whether the patient is currently prescribed a GLP-1 receptor agonist (semaglutide, tirzepatide and related drugs), which delays gastric emptying and raises aspiration risk under anaesthesia.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_agonist_name IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_agonist_name IS
     'Which GLP-1 receptor agonist the patient is prescribed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_formulation IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_formulation IS
     'Dosing formulation: daily or weekly. Drives the hold window — hold daily formulations day-of, hold weekly formulations one week before surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_last_dose_at IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_last_dose_at IS
     'Timestamp of the most recent recorded GLP-1 receptor agonist dose.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_held_per_guideline IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_held_per_guideline IS
     'Whether the GLP-1 receptor agonist was held per the agreed perioperative schedule (daily formulation held day-of; weekly formulation held one week prior).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_extended_clear_fluids_confirmed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_extended_clear_fluids_confirmed IS
     'Whether the patient instead followed the extended-fasting alternative: 24-hour solid fast plus 4-8 hour clear-liquid fast, when the medication could not be held.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gi_symptoms IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_gi_symptoms IS
     'Whether the patient reports active GLP-1-related gastrointestinal symptoms (nausea, vomiting, early satiety, reflux, bloating) at the time of assessment.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gi_symptoms_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_gi_symptoms_details IS
     'Free-text description of the reported GLP-1-related gastrointestinal symptoms and their severity.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_performed IS
     'Whether point-of-care gastric ultrasound was performed to assess residual gastric content.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_findings IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_gastric_ultrasound_findings IS
     'Gastric ultrasound finding: empty, low-risk, or full-stomach.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_full_stomach_precautions_planned IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_full_stomach_precautions_planned IS
     'Whether full-stomach precautions (rapid-sequence induction, regional anaesthesia preference, or delaying surgery) are planned because the medication was not held or the patient remains symptomatic.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.glp1_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.glp1_notes IS
     'Free-text clinician notes on GLP-1 receptor agonist perioperative management.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.allergen IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.allergen IS
     'Known allergen or trigger.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.category IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.category IS
     'Allergy category: drug, latex, food, adhesive, contrast, environment, or other.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reaction_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reaction_type IS
     'Type of reported allergic reaction.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reaction_severity IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reaction_severity IS
     'Allergic reaction severity: mild, moderate, severe, or life-threatening.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reaction_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reaction_notes IS
     'Free-text notes describing the allergic reaction.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.verified IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.verified IS
     'Whether the allergy history has been verified.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mets_estimate IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mets_estimate IS
     'Estimated exercise capacity in metabolic equivalents (METs).';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.dasi_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.dasi_score IS
     'Duke Activity Status Index (DASI) score.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.ecog_performance_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.ecog_performance_status IS
     'ECOG performance status 0-4.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.clinical_frailty_scale IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.clinical_frailty_scale IS
     'Rockwood Clinical Frailty Scale 1-9.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.six_minute_walk_metres IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.six_minute_walk_metres IS
     'Six-minute walk test distance in metres.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.sts_one_minute_reps IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.sts_one_minute_reps IS
     'One-minute sit-to-stand test repetitions.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.tug_seconds IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.tug_seconds IS
     'Timed Up and Go test duration in seconds.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cpet_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cpet_performed IS
     'Whether cardiopulmonary exercise testing was performed.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cpet_vo2_peak_ml_kg_min IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cpet_vo2_peak_ml_kg_min IS
     'Peak VO2 on CPET in mL/kg/min.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cpet_anaerobic_threshold_ml_kg_min IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cpet_anaerobic_threshold_ml_kg_min IS
     'Anaerobic threshold on CPET in mL/kg/min.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.cpet_notes IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.cpet_notes IS
     'Free-text CPET interpretation notes.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.malnutrition_risk IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.malnutrition_risk IS
     'Malnutrition risk category: none, low, medium, or high.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.unintentional_weight_loss_kg IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.unintentional_weight_loss_kg IS
     'Recent unintentional weight loss in kilograms.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_weakness IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fried_weakness IS
     'Fried Frailty Phenotype criterion: weakness, i.e. reduced grip strength for sex and BMI.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_slowness IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fried_slowness IS
     'Fried Frailty Phenotype criterion: slowness, i.e. reduced walking speed for sex and height.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_low_physical_activity IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fried_low_physical_activity IS
     'Fried Frailty Phenotype criterion: low physical activity level.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_exhaustion IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fried_exhaustion IS
     'Fried Frailty Phenotype criterion: self-reported exhaustion.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.fried_unintentional_weight_loss IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.fried_unintentional_weight_loss IS
     'Fried Frailty Phenotype criterion: unintentional weight loss, distinct from the free-text kilogram figure recorded in unintentional_weight_loss_kg.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.risk_analysis_index_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.risk_analysis_index_score IS
     'Risk Analysis Index (RAI) score; higher scores indicate greater frailty.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mini_cog_performed IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mini_cog_performed IS
     'Whether the Mini-Cog cognitive screen was performed, indicated when the Clinical Frailty Scale is 5 or above.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mini_cog_score IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mini_cog_score IS
     'Mini-Cog total score 0-5 (three-item recall plus clock-draw test). A score of 0-2 suggests cognitive impairment.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_indicated IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.prehabilitation_indicated IS
     'Whether multimodal prehabilitation (nutrition, aerobic and resistance exercise) is indicated before surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_type IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.prehabilitation_type IS
     'Type of prehabilitation planned: nutrition, aerobic, resistance, multimodal, or other.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.prehabilitation_start_date IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.prehabilitation_start_date IS
     'Date prehabilitation started or is planned to start, ideally 2-6 weeks before surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.protein_supplementation_recommended IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.protein_supplementation_recommended IS
     'Whether protein supplementation is recommended, particularly for frail patients on a GLP-1 receptor agonist at risk of accelerated sarcopenia.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.technique IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.technique IS
     'Planned primary anaesthetic technique.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.airway_plan IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.airway_plan IS
     'Planned airway management strategy.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.rsi_planned IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.rsi_planned IS
     'Whether rapid sequence induction is planned.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.monitoring_level IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.monitoring_level IS
     'Planned intraoperative monitoring level: standard, invasive-arterial, invasive-cvc, or cardiac-output.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.analgesia_plan IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.analgesia_plan IS
     'Planned postoperative analgesia strategy.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.regional_block_planned IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.regional_block_planned IS
     'Regional block planned, if any.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.dvt_prophylaxis IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.dvt_prophylaxis IS
     'Planned venous thromboembolism prophylaxis.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.antibiotic_prophylaxis IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.antibiotic_prophylaxis IS
     'Planned surgical antibiotic prophylaxis.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.post_op_disposition IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.post_op_disposition IS
     'Planned postoperative destination: day-case, ward, enhanced-care, hdu, or icu.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anticipated_length_of_stay_days IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anticipated_length_of_stay_days IS
     'Anticipated length of hospital stay in days.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.special_equipment IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.special_equipment IS
     'Special equipment required for the procedure.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.blood_products_required IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.blood_products_required IS
     'Blood products required for the procedure.';
 
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.hospital_number IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.hospital_number IS
     'Hospital number.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.indication_for_surgery IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.indication_for_surgery IS
     'Indication for surgery.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.anaesthetist_name IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.anaesthetist_name IS
     'Anaesthetist name.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_surgeries IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.previous_surgeries IS
     'Previous surgeries.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_anaesthetic_issues IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.previous_anaesthetic_issues IS
     'Previous anaesthetic issues. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.previous_anaesthetic_issues_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.previous_anaesthetic_issues_details IS
     'Previous anaesthetic issues details.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.family_history_anaesthetic_complications IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.family_history_anaesthetic_complications IS
     'Family history of anaesthetic complications. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.family_history_anaesthetic_complications_details IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.family_history_anaesthetic_complications_details IS
     'Family history of anaesthetic complications details.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.urinalysis_findings IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.urinalysis_findings IS
     'Urinalysis findings.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.living_situation IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.living_situation IS
     'Living situation. One of: independent, lives-with-family, sheltered-housing, residential-care, nursing-home.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.support_at_home IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.support_at_home IS
     'Support at home. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.mobility_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.mobility_status IS
     'Mobility status.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.falls_risk_within_year IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.falls_risk_within_year IS
     'Falls risk within year. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.vte_risk_level IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.vte_risk_level IS
     'VTE (venous thromboembolism) risk level. One of: low, medium, high.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.covid_screening_result IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.covid_screening_result IS
     'COVID-19 screening result. One of: not-tested, negative, positive, pending.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.discharge_destination IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.discharge_destination IS
     'Discharge destination. One of: home, home-with-support, residential-care, nursing-home, rehabilitation, other.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.follow_up_requirements IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.follow_up_requirements IS
     'Follow-up requirements.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.social_services_involvement IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.social_services_involvement IS
     'Social services involvement. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.reablement_physiotherapy_needs IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.reablement_physiotherapy_needs IS
     'Reablement / physiotherapy needs. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.consent_status IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.consent_status IS
     'Consent status. One of: obtained, pending, declined, unable-to-consent.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.interpreter_required IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.interpreter_required IS
     'Interpreter required. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_procedure IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.discussion_procedure IS
     'Discussed the procedure with the patient. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_anaesthetic IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.discussion_anaesthetic IS
     'Discussed the anaesthetic with the patient. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_risks_benefits IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.discussion_risks_benefits IS
     'Discussed risks and benefits with the patient. One of: yes, no.';
-COMMENT ON COLUMN pre_operative_assessment_by_clinician.discussion_alternatives IS
+COMMENT ON COLUMN pre_operative_assessment_by_clinician.pre_operative_assessment_by_clinician.discussion_alternatives IS
     'Discussed alternatives with the patient. One of: yes, no.';

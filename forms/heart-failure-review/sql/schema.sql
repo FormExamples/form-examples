@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS heart_failure_review;
+
+COMMENT ON SCHEMA heart_failure_review IS
+    'Namespace for the Heart Failure Annual Review form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION heart_failure_review.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION heart_failure_review.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE heart_failure_review.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON heart_failure_review.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE heart_failure_review.patient IS
     'Patient demographic information used by the heart-failure annual-review record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN heart_failure_review.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN heart_failure_review.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN heart_failure_review.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN heart_failure_review.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN heart_failure_review.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN heart_failure_review.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN heart_failure_review.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN heart_failure_review.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN heart_failure_review.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN heart_failure_review.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN heart_failure_review.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN heart_failure_review.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN heart_failure_review.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN heart_failure_review.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN heart_failure_review.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN heart_failure_review.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN heart_failure_review.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON heart_failure_review.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clinician who
 -- conducted the heart-failure annual review.
 
-CREATE TABLE clinician (
+CREATE TABLE heart_failure_review.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON heart_failure_review.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE heart_failure_review.clinician IS
     'Clinician identifying information for the clinician who conducted the heart-failure annual review.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN heart_failure_review.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN heart_failure_review.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN heart_failure_review.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN heart_failure_review.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN heart_failure_review.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN heart_failure_review.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN heart_failure_review.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN heart_failure_review.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN heart_failure_review.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN heart_failure_review.clinician.role IS
     'Primary clinical role of the reviewer: gp, practice-nurse, hf-nurse (heart-failure specialist nurse), pharmacist, cardiologist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN heart_failure_review.clinician.registration_body IS
     'Professional registration body: GMC, NMC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN heart_failure_review.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON heart_failure_review.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- flags live in dedicated child tables. This is a documentation and
 -- status-classification record, not a diagnostic or prescribing instrument.
 
-CREATE TABLE heart_failure_review (
+CREATE TABLE heart_failure_review.heart_failure_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES heart_failure_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES heart_failure_review.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -329,182 +346,182 @@ CREATE TABLE heart_failure_review (
 );
 
 CREATE INDEX heart_failure_review_patient_id_idx
-    ON heart_failure_review (patient_id);
+    ON heart_failure_review.heart_failure_review (patient_id);
 CREATE INDEX heart_failure_review_clinician_id_idx
-    ON heart_failure_review (clinician_id);
+    ON heart_failure_review.heart_failure_review (clinician_id);
 
 CREATE TRIGGER trigger_heart_failure_review_updated_at
-    BEFORE UPDATE ON heart_failure_review
+    BEFORE UPDATE ON heart_failure_review.heart_failure_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE heart_failure_review IS
+COMMENT ON TABLE heart_failure_review.heart_failure_review IS
     'Main heart-failure annual-review record (NICE NG106): patient and clinician identification, review context, diagnosis and subtype, functional status (NYHA), fluid balance and observations, monitoring bloods, the four pillars of guideline-directed medical therapy plus loop diuretic and other medications, devices, vaccinations, and self-management. The computed functional status, medication-optimisation status, completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN heart_failure_review.id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN heart_failure_review.created_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN heart_failure_review.updated_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN heart_failure_review.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN heart_failure_review.patient_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN heart_failure_review.clinician_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN heart_failure_review.clinician_name IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.clinician_name IS
     'Name of the reviewing clinician as recorded on the review.';
-COMMENT ON COLUMN heart_failure_review.clinician_role IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.clinician_role IS
     'Reviewing clinician role: gp, practice-nurse, hf-nurse, pharmacist, cardiologist, or other.';
-COMMENT ON COLUMN heart_failure_review.review_date IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.review_date IS
     'Date this annual review was conducted.';
-COMMENT ON COLUMN heart_failure_review.care_setting IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.care_setting IS
     'Care setting of the review: general-practice, community-hf-service, hospital-clinic, or other.';
-COMMENT ON COLUMN heart_failure_review.review_type IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.review_type IS
     'Type of review: routine-annual, post-discharge, or medication-titration.';
-COMMENT ON COLUMN heart_failure_review.last_review_date IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.last_review_date IS
     'Date of the previous review, used to assess change over time.';
-COMMENT ON COLUMN heart_failure_review.patient_identifier IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.patient_identifier IS
     'NHS number or local patient identifier as recorded on the review.';
-COMMENT ON COLUMN heart_failure_review.age_band IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.age_band IS
     'Adult age band: 18-39, 40-59, 60-79, or >=80.';
-COMMENT ON COLUMN heart_failure_review.sex IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN heart_failure_review.year_of_diagnosis IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.year_of_diagnosis IS
     'Calendar year the heart failure was diagnosed.';
-COMMENT ON COLUMN heart_failure_review.heart_failure_type IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.heart_failure_type IS
     'Heart-failure subtype by ejection fraction: reduced (HFrEF), mildly-reduced (HFmrEF), preserved (HFpEF), or unknown. Drives the indicated medication-pillar set.';
-COMMENT ON COLUMN heart_failure_review.latest_lvef IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.latest_lvef IS
     'Most recent left-ventricular ejection fraction as a percentage.';
-COMMENT ON COLUMN heart_failure_review.last_echo_date IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.last_echo_date IS
     'Date of the last echocardiogram.';
-COMMENT ON COLUMN heart_failure_review.aetiology IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.aetiology IS
     'Underlying aetiology: ischaemic, hypertensive, valvular, other, or unknown.';
-COMMENT ON COLUMN heart_failure_review.nyha_class IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.nyha_class IS
     'New York Heart Association functional class 1-4 (null if not assessed); drives the functional-status classification.';
-COMMENT ON COLUMN heart_failure_review.breathlessness IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.breathlessness IS
     'Breathlessness severity: none, on-exertion, or at-rest.';
-COMMENT ON COLUMN heart_failure_review.orthopnoea IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.orthopnoea IS
     'Whether orthopnoea is present (yes/no).';
-COMMENT ON COLUMN heart_failure_review.paroxysmal_nocturnal_dyspnoea IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.paroxysmal_nocturnal_dyspnoea IS
     'Whether paroxysmal nocturnal dyspnoea is present (yes/no).';
-COMMENT ON COLUMN heart_failure_review.fatigue IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.fatigue IS
     'Fatigue severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN heart_failure_review.change_since_last_review IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.change_since_last_review IS
     'Overall change in symptoms since the last review: improved, unchanged, or worse.';
-COMMENT ON COLUMN heart_failure_review.decompensation IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.decompensation IS
     'Whether a documented decompensation has occurred since the last review (yes/no).';
-COMMENT ON COLUMN heart_failure_review.weight_kg IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.weight_kg IS
     'Current body weight in kilograms.';
-COMMENT ON COLUMN heart_failure_review.weight_change_kg IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.weight_change_kg IS
     'Change in weight in kilograms since the last review (positive = gain).';
-COMMENT ON COLUMN heart_failure_review.peripheral_oedema IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.peripheral_oedema IS
     'Peripheral oedema severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN heart_failure_review.raised_jvp IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raised_jvp IS
     'Whether the jugular venous pressure is raised (yes/no).';
-COMMENT ON COLUMN heart_failure_review.lung_crackles IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.lung_crackles IS
     'Whether pulmonary crackles are present on auscultation (yes/no).';
-COMMENT ON COLUMN heart_failure_review.systolic_blood_pressure IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.systolic_blood_pressure IS
     'Systolic blood pressure in mmHg.';
-COMMENT ON COLUMN heart_failure_review.diastolic_blood_pressure IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.diastolic_blood_pressure IS
     'Diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN heart_failure_review.heart_rate IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.heart_rate IS
     'Heart rate in beats per minute.';
-COMMENT ON COLUMN heart_failure_review.heart_rhythm IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.heart_rhythm IS
     'Heart rhythm: sinus, atrial-fibrillation, paced, or other.';
-COMMENT ON COLUMN heart_failure_review.nt_pro_bnp IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.nt_pro_bnp IS
     'NT-proBNP natriuretic peptide in ng/L.';
-COMMENT ON COLUMN heart_failure_review.sodium IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sodium IS
     'Serum sodium in mmol/L (U&E).';
-COMMENT ON COLUMN heart_failure_review.potassium IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.potassium IS
     'Serum potassium in mmol/L (U&E); RAAS-inhibitor / MRA monitoring value.';
-COMMENT ON COLUMN heart_failure_review.urea IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.urea IS
     'Serum urea in mmol/L (U&E).';
-COMMENT ON COLUMN heart_failure_review.creatinine IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.creatinine IS
     'Serum creatinine in micromol/L (U&E).';
-COMMENT ON COLUMN heart_failure_review.egfr IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.egfr IS
     'Estimated glomerular filtration rate in mL/min/1.73m^2; RAAS-inhibitor / MRA safety value.';
-COMMENT ON COLUMN heart_failure_review.haemoglobin IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.haemoglobin IS
     'Haemoglobin in g/L.';
-COMMENT ON COLUMN heart_failure_review.ferritin IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.ferritin IS
     'Serum ferritin in micrograms/L (iron status).';
-COMMENT ON COLUMN heart_failure_review.transferrin_saturation IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.transferrin_saturation IS
     'Transferrin saturation as a percentage (iron status).';
-COMMENT ON COLUMN heart_failure_review.hba1c IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.hba1c IS
     'HbA1c in mmol/mol (glycaemic control).';
-COMMENT ON COLUMN heart_failure_review.bloods_date IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.bloods_date IS
     'Date the monitoring bloods were taken.';
-COMMENT ON COLUMN heart_failure_review.raas_inhibitor_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raas_inhibitor_status IS
     'RAAS-inhibitor (ACEi/ARB/ARNI) pillar prescribing status: prescribed, not-prescribed, contraindicated, or not-tolerated.';
-COMMENT ON COLUMN heart_failure_review.raas_inhibitor_agent IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raas_inhibitor_agent IS
     'RAAS-inhibitor agent name.';
-COMMENT ON COLUMN heart_failure_review.raas_inhibitor_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raas_inhibitor_dose IS
     'RAAS-inhibitor current dose.';
-COMMENT ON COLUMN heart_failure_review.raas_inhibitor_at_target_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raas_inhibitor_at_target_dose IS
     'Whether the RAAS inhibitor is at guideline target dose (yes/no).';
-COMMENT ON COLUMN heart_failure_review.raas_inhibitor_adherence IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.raas_inhibitor_adherence IS
     'RAAS-inhibitor self-reported adherence: good, partial, or poor.';
-COMMENT ON COLUMN heart_failure_review.beta_blocker_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.beta_blocker_status IS
     'Beta-blocker pillar prescribing status: prescribed, not-prescribed, contraindicated, or not-tolerated.';
-COMMENT ON COLUMN heart_failure_review.beta_blocker_agent IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.beta_blocker_agent IS
     'Beta-blocker agent name.';
-COMMENT ON COLUMN heart_failure_review.beta_blocker_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.beta_blocker_dose IS
     'Beta-blocker current dose.';
-COMMENT ON COLUMN heart_failure_review.beta_blocker_at_target_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.beta_blocker_at_target_dose IS
     'Whether the beta-blocker is at guideline target dose (yes/no).';
-COMMENT ON COLUMN heart_failure_review.beta_blocker_adherence IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.beta_blocker_adherence IS
     'Beta-blocker self-reported adherence: good, partial, or poor.';
-COMMENT ON COLUMN heart_failure_review.mra_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.mra_status IS
     'MRA (mineralocorticoid-receptor antagonist) pillar prescribing status: prescribed, not-prescribed, contraindicated, or not-tolerated.';
-COMMENT ON COLUMN heart_failure_review.mra_agent IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.mra_agent IS
     'MRA agent name.';
-COMMENT ON COLUMN heart_failure_review.mra_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.mra_dose IS
     'MRA current dose.';
-COMMENT ON COLUMN heart_failure_review.mra_at_target_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.mra_at_target_dose IS
     'Whether the MRA is at guideline target dose (yes/no).';
-COMMENT ON COLUMN heart_failure_review.mra_adherence IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.mra_adherence IS
     'MRA self-reported adherence: good, partial, or poor.';
-COMMENT ON COLUMN heart_failure_review.sglt2_inhibitor_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sglt2_inhibitor_status IS
     'SGLT2-inhibitor pillar prescribing status: prescribed, not-prescribed, contraindicated, or not-tolerated.';
-COMMENT ON COLUMN heart_failure_review.sglt2_inhibitor_agent IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sglt2_inhibitor_agent IS
     'SGLT2-inhibitor agent name.';
-COMMENT ON COLUMN heart_failure_review.sglt2_inhibitor_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sglt2_inhibitor_dose IS
     'SGLT2-inhibitor current dose.';
-COMMENT ON COLUMN heart_failure_review.sglt2_inhibitor_at_target_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sglt2_inhibitor_at_target_dose IS
     'Whether the SGLT2 inhibitor is at guideline target dose (yes/no).';
-COMMENT ON COLUMN heart_failure_review.sglt2_inhibitor_adherence IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.sglt2_inhibitor_adherence IS
     'SGLT2-inhibitor self-reported adherence: good, partial, or poor.';
-COMMENT ON COLUMN heart_failure_review.loop_diuretic_agent IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.loop_diuretic_agent IS
     'Loop-diuretic agent name (symptom control, not a disease-modifying pillar).';
-COMMENT ON COLUMN heart_failure_review.loop_diuretic_dose IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.loop_diuretic_dose IS
     'Loop-diuretic current dose.';
-COMMENT ON COLUMN heart_failure_review.other_medications IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.other_medications IS
     'Free-text list of other relevant medications.';
-COMMENT ON COLUMN heart_failure_review.icd IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.icd IS
     'Whether the patient has an implantable cardioverter-defibrillator (yes/no).';
-COMMENT ON COLUMN heart_failure_review.crt IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.crt IS
     'Whether the patient has cardiac resynchronisation therapy (yes/no).';
-COMMENT ON COLUMN heart_failure_review.pacemaker IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.pacemaker IS
     'Whether the patient has a pacemaker (yes/no).';
-COMMENT ON COLUMN heart_failure_review.device_check_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.device_check_status IS
     'Cardiac-device check status: up-to-date, overdue, or not-applicable.';
-COMMENT ON COLUMN heart_failure_review.influenza_vaccination IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.influenza_vaccination IS
     'Whether seasonal influenza vaccination is up to date (yes/no).';
-COMMENT ON COLUMN heart_failure_review.pneumococcal_vaccination IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.pneumococcal_vaccination IS
     'Whether pneumococcal vaccination is up to date (yes/no).';
-COMMENT ON COLUMN heart_failure_review.covid_vaccination IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.covid_vaccination IS
     'Whether COVID-19 vaccination is up to date (yes/no).';
-COMMENT ON COLUMN heart_failure_review.smoking_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.smoking_status IS
     'Smoking status: never, ex, or current.';
-COMMENT ON COLUMN heart_failure_review.alcohol_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.alcohol_status IS
     'Alcohol use: none, within-limits, or above-limits.';
-COMMENT ON COLUMN heart_failure_review.daily_weights IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.daily_weights IS
     'Whether the patient monitors daily weights (yes/no).';
-COMMENT ON COLUMN heart_failure_review.self_management_plan IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.self_management_plan IS
     'Whether a self-management plan is documented and in place (yes/no).';
-COMMENT ON COLUMN heart_failure_review.cardiac_rehab IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.cardiac_rehab IS
     'Whether the patient has attended or been referred to cardiac rehabilitation (yes/no).';
-COMMENT ON COLUMN heart_failure_review.review_context IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review.review_context IS
     'Optional free-text review context or narrative shown in the summary.';
 
 -- ========================================================================
@@ -522,14 +539,14 @@ COMMENT ON COLUMN heart_failure_review.review_context IS
 -- and score. A grade reflects the recorded classification and the completeness
 -- of the review, not a diagnostic judgement.
 
-CREATE TABLE heart_failure_review_grade (
+CREATE TABLE heart_failure_review.heart_failure_review_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     heart_failure_review_id UUID NOT NULL UNIQUE
-        REFERENCES heart_failure_review(id) ON DELETE CASCADE,
+        REFERENCES heart_failure_review.heart_failure_review(id) ON DELETE CASCADE,
 
     nyha_status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (nyha_status IN ('stable', 'symptomatic', 'advanced', 'unknown', '')),
@@ -547,37 +564,37 @@ CREATE TABLE heart_failure_review_grade (
 );
 
 CREATE TRIGGER trigger_heart_failure_review_grade_updated_at
-    BEFORE UPDATE ON heart_failure_review_grade
+    BEFORE UPDATE ON heart_failure_review.heart_failure_review_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE heart_failure_review_grade IS
+COMMENT ON TABLE heart_failure_review.heart_failure_review_grade IS
     'Computed classification and completeness grading result for a heart-failure annual review: NYHA functional status, medication-optimisation status against the indicated pillar set, review-completeness status and score, and the indicated / prescribed / missing pillar breakdown. 1:1 with the parent review.';
-COMMENT ON COLUMN heart_failure_review_grade.id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN heart_failure_review_grade.created_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN heart_failure_review_grade.updated_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN heart_failure_review_grade.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN heart_failure_review_grade.heart_failure_review_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.heart_failure_review_id IS
     'Foreign key to the parent heart-failure review (unique, 1:1).';
-COMMENT ON COLUMN heart_failure_review_grade.nyha_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.nyha_status IS
     'NYHA functional status: stable (NYHA I-II), symptomatic (NYHA III), advanced (NYHA IV), or unknown (class not recorded).';
-COMMENT ON COLUMN heart_failure_review_grade.medication_optimisation_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.medication_optimisation_status IS
     'Medication-optimisation status against the indicated pillar set: optimised, partial, suboptimal, or not-applicable.';
-COMMENT ON COLUMN heart_failure_review_grade.review_status IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.review_status IS
     'Review completeness: complete, partial, or incomplete.';
-COMMENT ON COLUMN heart_failure_review_grade.indicated_pillars IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.indicated_pillars IS
     'Count of medication pillars indicated for this heart-failure subtype (4 for HFrEF, 1 for HFmrEF/HFpEF, 0 for unknown).';
-COMMENT ON COLUMN heart_failure_review_grade.prescribed_pillars IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.prescribed_pillars IS
     'Count of indicated pillars whose status is prescribed.';
-COMMENT ON COLUMN heart_failure_review_grade.missing_pillars IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.missing_pillars IS
     'Comma-separated list of indicated pillars documented as not-prescribed without a contraindication.';
-COMMENT ON COLUMN heart_failure_review_grade.completeness_score IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.completeness_score IS
     'Review-completeness score 0-100 (round of 100 * documented domains / 6).';
-COMMENT ON COLUMN heart_failure_review_grade.graded_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -592,14 +609,14 @@ COMMENT ON COLUMN heart_failure_review_grade.graded_at IS
 -- grading. Each row records one rule firing with the section it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE heart_failure_review_grade_rule (
+CREATE TABLE heart_failure_review.heart_failure_review_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     heart_failure_review_grade_id UUID NOT NULL
-        REFERENCES heart_failure_review_grade(id) ON DELETE CASCADE,
+        REFERENCES heart_failure_review.heart_failure_review_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -609,32 +626,32 @@ CREATE TABLE heart_failure_review_grade_rule (
 );
 
 CREATE INDEX heart_failure_review_grade_rule_grade_id_idx
-    ON heart_failure_review_grade_rule (heart_failure_review_grade_id);
+    ON heart_failure_review.heart_failure_review_grade_rule (heart_failure_review_grade_id);
 
 CREATE TRIGGER trigger_heart_failure_review_grade_rule_updated_at
-    BEFORE UPDATE ON heart_failure_review_grade_rule
+    BEFORE UPDATE ON heart_failure_review.heart_failure_review_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE heart_failure_review_grade_rule IS
+COMMENT ON TABLE heart_failure_review.heart_failure_review_grade_rule IS
     'Audit trail of every classification or completeness rule that fired during grading: section, category, and description.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.created_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.updated_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.heart_failure_review_grade_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.heart_failure_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.rule_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-FUNCTIONAL-NYHA-III-01).';
-COMMENT ON COLUMN heart_failure_review_grade_rule.section IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.section IS
     'Section the rule concerns: functional, medication, or completeness.';
-COMMENT ON COLUMN heart_failure_review_grade_rule.category IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.category IS
     'Subject category (e.g. functional-status, optimisation-status, required-domain).';
-COMMENT ON COLUMN heart_failure_review_grade_rule.description IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -649,14 +666,14 @@ COMMENT ON COLUMN heart_failure_review_grade_rule.description IS
 -- each with a priority and a suggested action for the clinician or governance
 -- team.
 
-CREATE TABLE heart_failure_review_grade_flag (
+CREATE TABLE heart_failure_review.heart_failure_review_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     heart_failure_review_grade_id UUID NOT NULL
-        REFERENCES heart_failure_review_grade(id) ON DELETE CASCADE,
+        REFERENCES heart_failure_review.heart_failure_review_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(35) NOT NULL DEFAULT ''
@@ -677,34 +694,34 @@ CREATE TABLE heart_failure_review_grade_flag (
 );
 
 CREATE INDEX heart_failure_review_grade_flag_grade_id_idx
-    ON heart_failure_review_grade_flag (heart_failure_review_grade_id);
+    ON heart_failure_review.heart_failure_review_grade_flag (heart_failure_review_grade_id);
 
 CREATE TRIGGER trigger_heart_failure_review_grade_flag_updated_at
-    BEFORE UPDATE ON heart_failure_review_grade_flag
+    BEFORE UPDATE ON heart_failure_review.heart_failure_review_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION heart_failure_review.set_updated_at();
 
-COMMENT ON TABLE heart_failure_review_grade_flag IS
+COMMENT ON TABLE heart_failure_review.heart_failure_review_grade_flag IS
     'Flags that fire independently of the classification and completeness status, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.created_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.updated_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.deleted_at IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.heart_failure_review_grade_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.heart_failure_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.flag_id IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-URGENT-REVIEW-001).';
-COMMENT ON COLUMN heart_failure_review_grade_flag.category IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.category IS
     'Flag category: urgent-review, optimisation-gap, deranged-u-e-hyperkalaemia, fluid-overload, missing-monitoring, incomplete, or other.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.priority IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.description IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN heart_failure_review_grade_flag.suggested_action IS
+COMMENT ON COLUMN heart_failure_review.heart_failure_review_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "arrange prompt clinical review", "review RAAS inhibitor and MRA dosing").';
 
 -- ========================================================================

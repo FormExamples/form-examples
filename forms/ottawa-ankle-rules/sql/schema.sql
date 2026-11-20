@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS ottawa_ankle_rules;
+
+COMMENT ON SCHEMA ottawa_ankle_rules IS
+    'Namespace for the Ottawa Ankle Rules (and Ottawa Foot Rules) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION ottawa_ankle_rules.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION ottawa_ankle_rules.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE ottawa_ankle_rules.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON ottawa_ankle_rules.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE ottawa_ankle_rules.patient IS
     'Patient demographic information used by the Ottawa Ankle Rules assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN ottawa_ankle_rules.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON ottawa_ankle_rules.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse-practitioner, paramedic, physiotherapist).
 
-CREATE TABLE clinician (
+CREATE TABLE ottawa_ankle_rules.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON ottawa_ankle_rules.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE ottawa_ankle_rules.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.role IS
     'Primary clinical role: doctor, nurse-practitioner, paramedic, physiotherapist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN ottawa_ankle_rules.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON ottawa_ankle_rules.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -209,14 +226,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- two independent imaging decisions, the fired criteria, and the flags live in
 -- dedicated child tables.
 
-CREATE TABLE ottawa_ankle_rules (
+CREATE TABLE ottawa_ankle_rules.ottawa_ankle_rules (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES ottawa_ankle_rules.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES ottawa_ankle_rules.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -246,64 +263,64 @@ CREATE TABLE ottawa_ankle_rules (
 );
 
 CREATE INDEX ottawa_ankle_rules_patient_id_idx
-    ON ottawa_ankle_rules (patient_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules (patient_id);
 CREATE INDEX ottawa_ankle_rules_clinician_id_idx
-    ON ottawa_ankle_rules (clinician_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules (clinician_id);
 
 CREATE TRIGGER trigger_ottawa_ankle_rules_updated_at
-    BEFORE UPDATE ON ottawa_ankle_rules
+    BEFORE UPDATE ON ottawa_ankle_rules.ottawa_ankle_rules
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE ottawa_ankle_rules IS
+COMMENT ON TABLE ottawa_ankle_rules.ottawa_ankle_rules IS
     'Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs.';
-COMMENT ON COLUMN ottawa_ankle_rules.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_ankle_rules.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ottawa_ankle_rules.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ottawa_ankle_rules.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ottawa_ankle_rules.patient_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN ottawa_ankle_rules.clinician_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN ottawa_ankle_rules.status IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN ottawa_ankle_rules.patient_identifier IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN ottawa_ankle_rules.assessed_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN ottawa_ankle_rules.care_setting IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.care_setting IS
     'Care setting: emergency-department, minor-injury-unit, urgent-care, or other.';
-COMMENT ON COLUMN ottawa_ankle_rules.injured_side IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.injured_side IS
     'Injured side: left or right.';
-COMMENT ON COLUMN ottawa_ankle_rules.hours_since_injury IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.hours_since_injury IS
     'Time elapsed since the injury, in hours.';
-COMMENT ON COLUMN ottawa_ankle_rules.age_years IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.age_years IS
     'Patient age in years; ages below 18 raise an applicability flag.';
-COMMENT ON COLUMN ottawa_ankle_rules.sex IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN ottawa_ankle_rules.assessment_reliable IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.assessment_reliable IS
     'Applicability: no intoxication, distracting injury, or sensory deficit that could invalidate the rule (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.malleolar_zone_pain IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.malleolar_zone_pain IS
     'Ankle precondition: pain in the malleolar zone (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.lateral_malleolus_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.lateral_malleolus_tenderness IS
     'Ankle criterion A1: bone tenderness at the posterior edge or tip of the lateral malleolus (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.medial_malleolus_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.medial_malleolus_tenderness IS
     'Ankle criterion A2: bone tenderness at the posterior edge or tip of the medial malleolus (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.midfoot_zone_pain IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.midfoot_zone_pain IS
     'Foot precondition: pain in the midfoot zone (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.fifth_metatarsal_base_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.fifth_metatarsal_base_tenderness IS
     'Foot criterion F1: bone tenderness at the base of the fifth metatarsal (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.navicular_tenderness IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.navicular_tenderness IS
     'Foot criterion F2: bone tenderness at the navicular (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.able_to_bear_weight_immediately IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.able_to_bear_weight_immediately IS
     'Able to bear weight (take four steps) immediately after the injury (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.able_to_bear_weight_now IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.able_to_bear_weight_now IS
     'Able to bear weight (take four steps) at the time of assessment (yes/no).';
-COMMENT ON COLUMN ottawa_ankle_rules.clinical_notes IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';
 
 -- ========================================================================
@@ -321,14 +338,14 @@ COMMENT ON COLUMN ottawa_ankle_rules.clinical_notes IS
 -- criteria that fired live in the grade_rule child table; the flags live in the
 -- grade_flag child table.
 
-CREATE TABLE ottawa_ankle_rules_grade (
+CREATE TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_ankle_rules_id UUID NOT NULL UNIQUE
-        REFERENCES ottawa_ankle_rules(id) ON DELETE CASCADE,
+        REFERENCES ottawa_ankle_rules.ottawa_ankle_rules(id) ON DELETE CASCADE,
 
     unable_to_bear_weight VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (unable_to_bear_weight IN ('yes', 'no', '')),
@@ -341,31 +358,31 @@ CREATE TABLE ottawa_ankle_rules_grade (
 );
 
 CREATE TRIGGER trigger_ottawa_ankle_rules_grade_updated_at
-    BEFORE UPDATE ON ottawa_ankle_rules_grade
+    BEFORE UPDATE ON ottawa_ankle_rules.ottawa_ankle_rules_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE ottawa_ankle_rules_grade IS
+COMMENT ON TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade IS
     'Computed Ottawa Ankle Rules decision result: the derived unable-to-bear-weight finding and the two independent imaging decisions. One-to-one with the parent assessment.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.ottawa_ankle_rules_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.ottawa_ankle_rules_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.unable_to_bear_weight IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.unable_to_bear_weight IS
     'Derived: patient cannot take four steps both immediately after injury and at assessment (yes/no); contributes to both the ankle and foot decisions.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.ankle_xray_indicated IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.ankle_xray_indicated IS
     'Decision: an ankle X-ray series is indicated (yes/no), true when malleolar-zone pain plus any of lateral tenderness, medial tenderness, or unable-to-bear-weight.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.foot_xray_indicated IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.foot_xray_indicated IS
     'Decision: a foot X-ray series is indicated (yes/no), true when midfoot-zone pain plus any of fifth-metatarsal-base tenderness, navicular tenderness, or unable-to-bear-weight.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.recommended_action IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.recommended_action IS
     'Recommended imaging action derived from the two decisions (e.g. request ankle and foot radiographs, no imaging indicated).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade.graded_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade.graded_at IS
     'Timestamp when the engine last computed the decision.';
 
 -- ========================================================================
@@ -382,14 +399,14 @@ COMMENT ON COLUMN ottawa_ankle_rules_grade.graded_at IS
 -- and a human-readable description. Because this is a boolean decision rule
 -- there are no points.
 
-CREATE TABLE ottawa_ankle_rules_grade_rule (
+CREATE TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_ankle_rules_grade_id UUID NOT NULL
-        REFERENCES ottawa_ankle_rules_grade(id) ON DELETE CASCADE,
+        REFERENCES ottawa_ankle_rules.ottawa_ankle_rules_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -401,34 +418,34 @@ CREATE TABLE ottawa_ankle_rules_grade_rule (
 );
 
 CREATE INDEX ottawa_ankle_rules_grade_rule_grade_id_idx
-    ON ottawa_ankle_rules_grade_rule (ottawa_ankle_rules_grade_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules_grade_rule (ottawa_ankle_rules_grade_id);
 
 CREATE TRIGGER trigger_ottawa_ankle_rules_grade_rule_updated_at
-    BEFORE UPDATE ON ottawa_ankle_rules_grade_rule
+    BEFORE UPDATE ON ottawa_ankle_rules.ottawa_ankle_rules_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE ottawa_ankle_rules_grade_rule IS
+COMMENT ON TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade_rule IS
     'Audit trail of every decision-rule criterion that fired during the Ottawa Ankle Rules computation: instrument, imaging region, category, and description.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.ottawa_ankle_rules_grade_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.ottawa_ankle_rules_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.rule_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ANKLE-A1-LATERAL-MALLEOLUS-01).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.instrument IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.instrument IS
     'Decision instrument the criterion belongs to: precondition, ankle-criterion, foot-criterion, weight-bearing, or decision.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.region IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.region IS
     'Imaging region the criterion informs: ankle, foot, or both (unable-to-bear-weight feeds both).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.category IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.category IS
     'Subject category (e.g. zone-pain, bone-tenderness, weight-bearing).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.description IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_rule.description IS
     'Human-readable description of why the criterion fired.';
 
 -- ========================================================================
@@ -442,14 +459,14 @@ COMMENT ON COLUMN ottawa_ankle_rules_grade_rule.description IS
 -- Clinically significant flags that fire independently of the imaging
 -- decisions, with priority and a suggested action for the assessing team.
 
-CREATE TABLE ottawa_ankle_rules_grade_flag (
+CREATE TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ottawa_ankle_rules_grade_id UUID NOT NULL
-        REFERENCES ottawa_ankle_rules_grade(id) ON DELETE CASCADE,
+        REFERENCES ottawa_ankle_rules.ottawa_ankle_rules_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -470,34 +487,34 @@ CREATE TABLE ottawa_ankle_rules_grade_flag (
 );
 
 CREATE INDEX ottawa_ankle_rules_grade_flag_grade_id_idx
-    ON ottawa_ankle_rules_grade_flag (ottawa_ankle_rules_grade_id);
+    ON ottawa_ankle_rules.ottawa_ankle_rules_grade_flag (ottawa_ankle_rules_grade_id);
 
 CREATE TRIGGER trigger_ottawa_ankle_rules_grade_flag_updated_at
-    BEFORE UPDATE ON ottawa_ankle_rules_grade_flag
+    BEFORE UPDATE ON ottawa_ankle_rules.ottawa_ankle_rules_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ottawa_ankle_rules.set_updated_at();
 
-COMMENT ON TABLE ottawa_ankle_rules_grade_flag IS
+COMMENT ON TABLE ottawa_ankle_rules.ottawa_ankle_rules_grade_flag IS
     'Clinically significant flags that fire independently of the imaging decisions, with priority and a suggested action for the assessing team.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.created_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.updated_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.deleted_at IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.ottawa_ankle_rules_grade_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.ottawa_ankle_rules_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.flag_id IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ANKLE-XRAY-INDICATED-001).';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.category IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.category IS
     'Flag category: ankle-xray-indicated, foot-xray-indicated, unable-to-bear-weight, applicability-age, unreliable-assessment, incomplete-assessment, or other.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.priority IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.description IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN ottawa_ankle_rules_grade_flag.suggested_action IS
+COMMENT ON COLUMN ottawa_ankle_rules.ottawa_ankle_rules_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "request an ankle radiograph series", "apply paediatric caution or local guidance").';
 
 -- ========================================================================

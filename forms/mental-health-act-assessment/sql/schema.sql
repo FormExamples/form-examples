@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS mental_health_act_assessment;
+
+COMMENT ON SCHEMA mental_health_act_assessment IS
+    'Namespace for the Mental Health Act Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION mental_health_act_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION mental_health_act_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE mental_health_act_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON mental_health_act_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE mental_health_act_assessment.patient IS
     'Patient demographic information for the person assessed under the Mental Health Act.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN mental_health_act_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON mental_health_act_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Health Professional (AMHP) and the medical practitioners who carry out the
 -- assessment and make the medical recommendations.
 
-CREATE TABLE clinician (
+CREATE TABLE mental_health_act_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON mental_health_act_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE mental_health_act_assessment.clinician IS
     'Professional identifying information for the AMHP and the medical practitioners who conduct a Mental Health Act assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.name IS
     'Professional full name as recorded on the assessment.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.role IS
     'Professional role on the assessment: amhp (Approved Mental Health Professional), s12-doctor (Section 12(2) approved doctor), psychiatrist, doctor, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, SWE (Social Work England), or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN mental_health_act_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON mental_health_act_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- legal-completeness instrument, not a numeric score and not an automated
 -- decision to detain.
 
-CREATE TABLE mental_health_act_assessment (
+CREATE TABLE mental_health_act_assessment.mental_health_act_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES mental_health_act_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES mental_health_act_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     assessed_at TIMESTAMPTZ,
@@ -272,106 +289,106 @@ CREATE TABLE mental_health_act_assessment (
 );
 
 CREATE INDEX mental_health_act_assessment_patient_id_idx
-    ON mental_health_act_assessment (patient_id);
+    ON mental_health_act_assessment.mental_health_act_assessment (patient_id);
 CREATE INDEX mental_health_act_assessment_clinician_id_idx
-    ON mental_health_act_assessment (clinician_id);
+    ON mental_health_act_assessment.mental_health_act_assessment (clinician_id);
 
 CREATE TRIGGER trigger_mental_health_act_assessment_updated_at
-    BEFORE UPDATE ON mental_health_act_assessment
+    BEFORE UPDATE ON mental_health_act_assessment.mental_health_act_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE mental_health_act_assessment IS
+COMMENT ON TABLE mental_health_act_assessment.mental_health_act_assessment IS
     'Main Mental Health Act assessment record: context and identification, assessing professionals, statutory criteria, nearest-relative consultation, and recommendation and outcome. Legal-completeness status, classification, fired rules, and flags live in child tables. Not a numeric score and not an automated detention decision.';
-COMMENT ON COLUMN mental_health_act_assessment.id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_health_act_assessment.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN mental_health_act_assessment.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN mental_health_act_assessment.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN mental_health_act_assessment.patient_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.patient_id IS
     'Foreign key to the patient assessed (restrict delete).';
-COMMENT ON COLUMN mental_health_act_assessment.clinician_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.clinician_id IS
     'Foreign key to the coordinating clinician / AMHP (restrict delete); optional.';
-COMMENT ON COLUMN mental_health_act_assessment.assessed_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.assessed_at IS
     'Date and time of the assessment.';
-COMMENT ON COLUMN mental_health_act_assessment.location IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.location IS
     'Assessment location: hospital-ward, emergency-department, place-of-safety, care-home, community, or other.';
-COMMENT ON COLUMN mental_health_act_assessment.referral_source IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.referral_source IS
     'Who requested the assessment.';
-COMMENT ON COLUMN mental_health_act_assessment.reason_for_assessment IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.reason_for_assessment IS
     'Presenting concern that prompted the assessment.';
-COMMENT ON COLUMN mental_health_act_assessment.person_identifier IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.person_identifier IS
     'Local identifier for the person assessed.';
-COMMENT ON COLUMN mental_health_act_assessment.age_band IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.age_band IS
     'Age band: child, adolescent, adult, or older-adult.';
-COMMENT ON COLUMN mental_health_act_assessment.sex IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.sex IS
     'Sex recorded for the person: female, male, intersex, or unknown.';
-COMMENT ON COLUMN mental_health_act_assessment.first_language IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.first_language IS
     'First language; records interpreter need when not English.';
-COMMENT ON COLUMN mental_health_act_assessment.amhp_name IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.amhp_name IS
     'Name of the Approved Mental Health Professional (AMHP).';
-COMMENT ON COLUMN mental_health_act_assessment.amhp_approved IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.amhp_approved IS
     'Whether AMHP approval is confirmed (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.doctor1_name IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor1_name IS
     'Name of the first medical practitioner.';
-COMMENT ON COLUMN mental_health_act_assessment.doctor1_gmc_number IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor1_gmc_number IS
     'GMC registration number of the first medical practitioner.';
-COMMENT ON COLUMN mental_health_act_assessment.doctor1_section12_approved IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor1_section12_approved IS
     'Whether the first doctor is Section 12(2) approved (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.doctor1_examined_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor1_examined_at IS
     'Date and time the first doctor examined the patient.';
-COMMENT ON COLUMN mental_health_act_assessment.doctor2_name IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor2_name IS
     'Name of the second medical practitioner (may be absent for s4/s5/s136).';
-COMMENT ON COLUMN mental_health_act_assessment.doctor2_gmc_number IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor2_gmc_number IS
     'GMC registration number of the second medical practitioner.';
-COMMENT ON COLUMN mental_health_act_assessment.doctor2_section12_approved IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor2_section12_approved IS
     'Whether the second doctor is Section 12(2) approved (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.doctor2_examined_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.doctor2_examined_at IS
     'Date and time the second doctor examined the patient.';
-COMMENT ON COLUMN mental_health_act_assessment.prior_acquaintance IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.prior_acquaintance IS
     'Whether at least one doctor was previously acquainted with the patient (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.mental_disorder_present IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.mental_disorder_present IS
     'Criterion 1 — mental disorder of a nature or degree: met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.mental_disorder_evidence IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.mental_disorder_evidence IS
     'Supporting evidence for the mental-disorder criterion.';
-COMMENT ON COLUMN mental_health_act_assessment.risk_to_own_health IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.risk_to_own_health IS
     'Criterion 2 — risk to the patient''s own health: met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.risk_to_own_safety IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.risk_to_own_safety IS
     'Criterion 2 — risk to the patient''s own safety: met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.risk_to_others IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.risk_to_others IS
     'Criterion 2 — risk to the protection of others: met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.risk_evidence IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.risk_evidence IS
     'Supporting evidence for the risk criteria.';
-COMMENT ON COLUMN mental_health_act_assessment.risk_imminence IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.risk_imminence IS
     'Imminence of risk: none, low, moderate, or imminent (drives urgency).';
-COMMENT ON COLUMN mental_health_act_assessment.least_restrictive_met IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.least_restrictive_met IS
     'Criterion 3 — no less restrictive alternative available: met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.alternatives_considered IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.alternatives_considered IS
     'Informal, community, or Mental Capacity Act options considered.';
-COMMENT ON COLUMN mental_health_act_assessment.appropriate_treatment_available IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.appropriate_treatment_available IS
     'Criterion 4 — appropriate medical treatment available (required for s3): met, not-met, or not-applicable.';
-COMMENT ON COLUMN mental_health_act_assessment.treatment_plan_summary IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.treatment_plan_summary IS
     'Proposed treatment and where it would be provided.';
-COMMENT ON COLUMN mental_health_act_assessment.nearest_relative_identified IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.nearest_relative_identified IS
     'Whether the nearest relative has been identified (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.nearest_relative_consulted IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.nearest_relative_consulted IS
     'Whether the nearest relative was consulted: yes, no, or not-practicable.';
-COMMENT ON COLUMN mental_health_act_assessment.nearest_relative_objection IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.nearest_relative_objection IS
     'Whether the nearest relative objects to a s3 application: yes, no, or unknown.';
-COMMENT ON COLUMN mental_health_act_assessment.consultation_record IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.consultation_record IS
     'AMHP consultation notes.';
-COMMENT ON COLUMN mental_health_act_assessment.recommended_section IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.recommended_section IS
     'Recommended section: 2, 3, 4, 5-2, 5-4, 136, or none.';
-COMMENT ON COLUMN mental_health_act_assessment.outcome IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.outcome IS
     'Assessment outcome: detain-under-section, informal-admission, community, or no-action.';
-COMMENT ON COLUMN mental_health_act_assessment.bed_identified IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.bed_identified IS
     'Whether a receiving bed is confirmed (yes/no).';
-COMMENT ON COLUMN mental_health_act_assessment.conveyance IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.conveyance IS
     'Means of conveyance: ambulance, police, self, or other.';
-COMMENT ON COLUMN mental_health_act_assessment.clinical_legal_note IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment.clinical_legal_note IS
     'Free-text clinical and legal note.';
 
 -- ========================================================================
@@ -388,14 +405,14 @@ COMMENT ON COLUMN mental_health_act_assessment.clinical_legal_note IS
 -- recommended-section and urgency. It makes no automated detention decision;
 -- the prescribed statutory forms remain the definitive legal record.
 
-CREATE TABLE mental_health_act_assessment_grade (
+CREATE TABLE mental_health_act_assessment.mental_health_act_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_health_act_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES mental_health_act_assessment(id) ON DELETE CASCADE,
+        REFERENCES mental_health_act_assessment.mental_health_act_assessment(id) ON DELETE CASCADE,
 
     completeness_status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (completeness_status IN ('valid', 'incomplete', '')),
@@ -417,29 +434,29 @@ CREATE TABLE mental_health_act_assessment_grade (
 );
 
 CREATE TRIGGER trigger_mental_health_act_assessment_grade_updated_at
-    BEFORE UPDATE ON mental_health_act_assessment_grade
+    BEFORE UPDATE ON mental_health_act_assessment.mental_health_act_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE mental_health_act_assessment_grade IS
+COMMENT ON TABLE mental_health_act_assessment.mental_health_act_assessment_grade IS
     'Computed legal-completeness and classification result for a Mental Health Act assessment: completeness status (valid/incomplete), recommended-section class, and urgency class. No automated detention decision is made.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.mental_health_act_assessment_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.mental_health_act_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN mental_health_act_assessment_grade.completeness_status IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.completeness_status IS
     'Legal-completeness status: valid or incomplete.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.recommended_section_class IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.recommended_section_class IS
     'Recommended-section classification: section-2, section-3, section-4, section-5-2, section-5-4, section-136, or none.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.urgency IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.urgency IS
     'Urgency classification: routine, urgent, or emergency.';
-COMMENT ON COLUMN mental_health_act_assessment_grade.graded_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -454,14 +471,14 @@ COMMENT ON COLUMN mental_health_act_assessment_grade.graded_at IS
 -- row records one rule firing with the area of the assessment it concerns,
 -- the category, and a human-readable description.
 
-CREATE TABLE mental_health_act_assessment_grade_rule (
+CREATE TABLE mental_health_act_assessment.mental_health_act_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_health_act_assessment_grade_id UUID NOT NULL
-        REFERENCES mental_health_act_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES mental_health_act_assessment.mental_health_act_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -471,32 +488,32 @@ CREATE TABLE mental_health_act_assessment_grade_rule (
 );
 
 CREATE INDEX mental_health_act_assessment_grade_rule_grade_id_idx
-    ON mental_health_act_assessment_grade_rule (mental_health_act_assessment_grade_id);
+    ON mental_health_act_assessment.mental_health_act_assessment_grade_rule (mental_health_act_assessment_grade_id);
 
 CREATE TRIGGER trigger_mental_health_act_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON mental_health_act_assessment_grade_rule
+    BEFORE UPDATE ON mental_health_act_assessment.mental_health_act_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE mental_health_act_assessment_grade_rule IS
+COMMENT ON TABLE mental_health_act_assessment.mental_health_act_assessment_grade_rule IS
     'Audit trail of every classification rule that fired during grading: assessment area, category, and description.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.mental_health_act_assessment_grade_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.mental_health_act_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-SIGNATORIES-S2-01).';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.section IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.section IS
     'Assessment area the rule concerns: signatories, criteria, completeness, urgency, time-limits, or other.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.category IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.category IS
     'Subject category (e.g. required-signatory, required-criterion, classification).';
-COMMENT ON COLUMN mental_health_act_assessment_grade_rule.description IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -510,14 +527,14 @@ COMMENT ON COLUMN mental_health_act_assessment_grade_rule.description IS
 -- Flagged issues that fire independently of the completeness status, with a
 -- priority and a suggested action for the AMHP, clinician, or governance team.
 
-CREATE TABLE mental_health_act_assessment_grade_flag (
+CREATE TABLE mental_health_act_assessment.mental_health_act_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     mental_health_act_assessment_grade_id UUID NOT NULL
-        REFERENCES mental_health_act_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES mental_health_act_assessment.mental_health_act_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -542,34 +559,34 @@ CREATE TABLE mental_health_act_assessment_grade_flag (
 );
 
 CREATE INDEX mental_health_act_assessment_grade_flag_grade_id_idx
-    ON mental_health_act_assessment_grade_flag (mental_health_act_assessment_grade_id);
+    ON mental_health_act_assessment.mental_health_act_assessment_grade_flag (mental_health_act_assessment_grade_id);
 
 CREATE TRIGGER trigger_mental_health_act_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON mental_health_act_assessment_grade_flag
+    BEFORE UPDATE ON mental_health_act_assessment.mental_health_act_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mental_health_act_assessment.set_updated_at();
 
-COMMENT ON TABLE mental_health_act_assessment_grade_flag IS
+COMMENT ON TABLE mental_health_act_assessment.mental_health_act_assessment_grade_flag IS
     'Flagged issues that fire independently of the completeness status, with priority and a suggested action for the AMHP, clinician, or governance team.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.mental_health_act_assessment_grade_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.mental_health_act_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CRITERIA-NOT-MET-001).';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.category IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.category IS
     'Flag category: criteria-not-met, missing-second-recommendation, s12-doctor-absent, least-restrictive-concern, appropriate-treatment-unavailable, nearest-relative-not-consulted, time-limit-exceeded, no-prior-acquaintance, no-bed-identified, incomplete, or other.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.priority IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.description IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN mental_health_act_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN mental_health_act_assessment.mental_health_act_assessment_grade_flag.suggested_action IS
     'Suggested action (e.g. "obtain a second medical recommendation", "document a less restrictive alternative").';
 
 -- ========================================================================

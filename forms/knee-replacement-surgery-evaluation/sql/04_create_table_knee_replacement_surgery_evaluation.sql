@@ -6,13 +6,13 @@
 -- columns are NULL. See ../index.md for the wizard table and
 -- ../spec/index.md for the contract.
 
-CREATE TABLE knee_replacement_surgery_evaluation (
+CREATE TABLE knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES knee_replacement_surgery_evaluation.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES knee_replacement_surgery_evaluation.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
 
     -- Step 1: clinician identification
@@ -123,189 +123,189 @@ CREATE TABLE knee_replacement_surgery_evaluation (
 );
 
 CREATE TRIGGER trigger_knee_replacement_surgery_evaluation_updated_at
-    BEFORE UPDATE ON knee_replacement_surgery_evaluation
+    BEFORE UPDATE ON knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION knee_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE knee_replacement_surgery_evaluation IS
+COMMENT ON TABLE knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation IS
     'Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.id IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.created_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.updated_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.deleted_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.patient_id IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician_id IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.clinician_id IS
     'Foreign key to the clinician table.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.status IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.status IS
     'Evaluation lifecycle status: draft, submitted, reviewed, or urgent.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.site_name IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.site_name IS
     'Site or clinic name where the evaluation took place.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.assessment_date IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.assessment_date IS
     'Date the evaluation was carried out.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.assessment_time IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.assessment_time IS
     'Time the evaluation was carried out.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_side IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.knee_side IS
     'Affected knee: left, right, or bilateral. Bilateral drives the bilateral-symptomatic safety flag.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.symptom_duration_months IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.symptom_duration_months IS
     'Duration of knee symptoms in months.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.pain_at_rest_0_to_10 IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.pain_at_rest_0_to_10 IS
     'Pain severity at rest, 0 (none) to 10 (worst possible).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.pain_on_activity_0_to_10 IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.pain_on_activity_0_to_10 IS
     'Pain severity on activity, 0 (none) to 10 (worst possible).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.night_pain IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.night_pain IS
     'Whether pain wakes the patient at night.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.prior_knee_surgery IS
     'Whether the patient has had prior surgery to the affected knee.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery_type IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.prior_knee_surgery_type IS
     'Type of prior knee surgery: arthroscopy, ligament repair, previous partial replacement, or other.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_knee_surgery_date IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.prior_knee_surgery_date IS
     'Date of the most recent prior knee surgery.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_injury IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.prior_injury IS
     'Whether the patient has had a prior injury to the affected knee.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.prior_injury_detail IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.prior_injury_detail IS
     'Free-text description of the prior knee injury.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_severity IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_pain_severity IS
     'Oxford Knee Score item 1: usual knee pain severity, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_washing_and_drying IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_washing_and_drying IS
     'Oxford Knee Score item 2: difficulty washing and drying, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_transport IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_transport IS
     'Oxford Knee Score item 3: difficulty getting in or out of a car, or using public transport, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_walking_distance IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_walking_distance IS
     'Oxford Knee Score item 4: walking distance before knee pain becomes severe, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_sitting_or_lying IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_pain_sitting_or_lying IS
     'Oxford Knee Score item 5: pain sitting or lying, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_limping IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_limping IS
     'Oxford Knee Score item 6: limping when walking, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_kneeling IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_kneeling IS
     'Oxford Knee Score item 7: difficulty kneeling, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_night_pain_frequency IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_night_pain_frequency IS
     'Oxford Knee Score item 8: night pain frequency, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_pain_interfering_with_work IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_pain_interfering_with_work IS
     'Oxford Knee Score item 9: pain interfering with usual work (including housework), 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_giving_way IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_giving_way IS
     'Oxford Knee Score item 10: feeling the knee might suddenly "give way" or let the patient down, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_shopping IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_shopping IS
     'Oxford Knee Score item 11: ability to do the household shopping alone, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.oks_stairs IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.oks_stairs IS
     'Oxford Knee Score item 12: ability to walk down a flight of stairs, 0 (worst) to 4 (best).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_distance_before_pain IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.walking_distance_before_pain IS
     'Walking distance before pain: unlimited, over 1km, 100m to 1km, under 100m, or housebound.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.stair_climbing_ability IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.stair_climbing_ability IS
     'Stair-climbing ability: normal, with a rail, one step at a time, or unable.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.stand_from_chair_unaided IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.stand_from_chair_unaided IS
     'Whether the patient can stand from a chair unaided.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_aid IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.walking_aid IS
     'Walking aid in use: none, stick, frame, or wheelchair.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.flexion_degrees IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.flexion_degrees IS
     'Active knee flexion in degrees, measured on examination.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.extension_deficit_degrees IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.extension_deficit_degrees IS
     'Extension deficit in degrees; 0 indicates full extension.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.fixed_flexion_deformity_present IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.fixed_flexion_deformity_present IS
     'Whether a fixed flexion deformity is present on examination.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.fixed_flexion_deformity_degrees IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.fixed_flexion_deformity_degrees IS
     'Fixed flexion deformity in degrees; above 15 degrees fires the fixed-flexion-deformity safety flag because it affects surgical planning.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.coronal_deformity_type IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.coronal_deformity_type IS
     'Coronal-plane deformity type: none, varus (bow-legged), or valgus (knock-kneed).';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.coronal_deformity_severity IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.coronal_deformity_severity IS
     'Coronal-plane deformity severity: none, mild, moderate, or severe.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_acl IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ligament_acl IS
     'Anterior cruciate ligament stability on examination: stable or lax.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_pcl IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ligament_pcl IS
     'Posterior cruciate ligament stability on examination: stable or lax.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_mcl IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ligament_mcl IS
     'Medial collateral ligament stability on examination: stable or lax.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ligament_lcl IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ligament_lcl IS
     'Lateral collateral ligament stability on examination: stable or lax.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.patellar_tracking IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.patellar_tracking IS
     'Patellar tracking on examination: normal or maltracking.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.quadriceps_strength_mrc IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.quadriceps_strength_mrc IS
     'Quadriceps strength on the Medical Research Council (MRC) 0 to 5 scale.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.effusion_present IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.effusion_present IS
     'Whether a joint effusion is present on examination.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.crepitus_present IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.crepitus_present IS
     'Whether crepitus is present on examination.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.weight_bearing_xray_performed IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.weight_bearing_xray_performed IS
     'Whether a weight-bearing X-ray of the knee has been performed.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_medial IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.kellgren_lawrence_grade_medial IS
     'Kellgren-Lawrence radiographic osteoarthritis grade of the medial compartment, 0 to 4.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_lateral IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.kellgren_lawrence_grade_lateral IS
     'Kellgren-Lawrence radiographic osteoarthritis grade of the lateral compartment, 0 to 4.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.kellgren_lawrence_grade_patellofemoral IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.kellgren_lawrence_grade_patellofemoral IS
     'Kellgren-Lawrence radiographic osteoarthritis grade of the patellofemoral compartment, 0 to 4.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.mri_performed IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.mri_performed IS
     'Whether an MRI scan has been performed.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.mri_findings IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.mri_findings IS
     'Free-text summary of MRI findings.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ct_performed IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ct_performed IS
     'Whether a CT scan has been performed.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ct_indication IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ct_indication IS
     'Indication for the CT scan: robotic-assisted surgical planning, bone-loss assessment, or other.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.physiotherapy_tried IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.physiotherapy_tried IS
     'Whether physiotherapy has been tried as a conservative measure.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.physiotherapy_duration_weeks IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.physiotherapy_duration_weeks IS
     'Duration of physiotherapy in weeks.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.weight_management_advice_given IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.weight_management_advice_given IS
     'Whether weight-management advice has been given as a conservative measure.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_given IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.injection_given IS
     'Whether an intra-articular injection (corticosteroid or hyaluronic acid) has been given.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_type IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.injection_type IS
     'Type of intra-articular injection given: corticosteroid, hyaluronic acid, both, or other.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_count IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.injection_count IS
     'Number of intra-articular injections given.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.injection_response IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.injection_response IS
     'Response to the intra-articular injection: good, partial, or none.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.nsaid_analgesic_trial IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.nsaid_analgesic_trial IS
     'Whether an NSAID or analgesic trial has been undertaken as a conservative measure.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.nsaid_analgesic_response IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.nsaid_analgesic_response IS
     'Response to the NSAID or analgesic trial: good, partial, or none.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.walking_aid_trial IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.walking_aid_trial IS
     'Whether a walking-aid trial has been undertaken as a conservative measure.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.conservative_measures_exhausted IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.conservative_measures_exhausted IS
     'Whether all appropriate conservative measures have been exhausted. Drives the computed-candidacy recommendation and the conservative-treatment-not-exhausted safety flag.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.diabetes_controlled IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.diabetes_controlled IS
     'Diabetes control status: not diabetic, well controlled, or poorly controlled.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.cardiac_disease IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.cardiac_disease IS
     'Whether cardiac disease is present.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.bleeding_disorder_or_anticoagulant IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.bleeding_disorder_or_anticoagulant IS
     'Whether a bleeding disorder is present or the patient is taking an anticoagulant.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.smoking_status IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.smoking_status IS
     'Smoking status: never, ex-smoker, or current.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.general_fitness_note IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.general_fitness_note IS
     'Free-text general-fitness note. This is a high-level screen only; it does not grade ASA physical status, which belongs to the ASA-grading pre-operative sibling forms.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.fbc_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.fbc_done IS
     'Whether a full blood count (FBC) has been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.renal_function_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.renal_function_done IS
     'Whether renal function tests have been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.clotting_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.clotting_done IS
     'Whether clotting or INR tests have been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.ecg_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.ecg_done IS
     'Whether an electrocardiogram (ECG) has been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.mrsa_screen_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.mrsa_screen_done IS
     'Whether an MRSA screen has been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.urinalysis_done IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.urinalysis_done IS
     'Whether urinalysis has been done.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.risks_benefits_discussed IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.risks_benefits_discussed IS
     'Whether the risks and benefits of surgery have been discussed with the patient.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.realistic_expectations_discussed IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.realistic_expectations_discussed IS
     'Whether realistic expectations of surgical outcome have been discussed with the patient.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.patient_decision_aid_given IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.patient_decision_aid_given IS
     'Whether a patient decision aid has been given.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.interpreter_required IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.interpreter_required IS
     'Whether an interpreter was required for the shared decision-making discussion.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.plan_recommendation IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.plan_recommendation IS
     'Clinician recommendation: total knee replacement, partial knee replacement, continue conservative management, MDT review, or not currently a candidate.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.target_list_date IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.target_list_date IS
     'Target date to add the patient to the surgical waiting list, if applicable.';
-COMMENT ON COLUMN knee_replacement_surgery_evaluation.responsible_surgeon IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation.responsible_surgeon IS
     'Name of the surgeon responsible for the operation, if a surgical recommendation is made.';
 
 CREATE INDEX knee_replacement_surgery_evaluation_patient_id_index
-    ON knee_replacement_surgery_evaluation (patient_id);
+    ON knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation (patient_id);
 
 CREATE INDEX knee_replacement_surgery_evaluation_clinician_id_index
-    ON knee_replacement_surgery_evaluation (clinician_id);
+    ON knee_replacement_surgery_evaluation.knee_replacement_surgery_evaluation (clinician_id);

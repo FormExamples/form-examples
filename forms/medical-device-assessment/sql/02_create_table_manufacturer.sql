@@ -1,6 +1,6 @@
 -- Manufacturer (or authorized representative) of the medical device.
 
-CREATE TABLE manufacturer (
+CREATE TABLE medical_device_assessment.manufacturer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,41 +18,41 @@ CREATE TABLE manufacturer (
 );
 
 CREATE TRIGGER trigger_manufacturer_updated_at
-    BEFORE UPDATE ON manufacturer
+    BEFORE UPDATE ON medical_device_assessment.manufacturer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
 CREATE INDEX manufacturer_index_gto
-    ON manufacturer
+    ON medical_device_assessment.manufacturer
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE manufacturer IS
+COMMENT ON TABLE medical_device_assessment.manufacturer IS
     'Manufacturer.';
-COMMENT ON COLUMN manufacturer.id IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN manufacturer.created_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN manufacturer.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN manufacturer.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN manufacturer.name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.name IS
     'Name.';
-COMMENT ON COLUMN manufacturer.email IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.email IS
     'Email.';
-COMMENT ON COLUMN manufacturer.phone IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.phone IS
     'Phone.';
-COMMENT ON COLUMN manufacturer.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN manufacturer.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.country_as_iso_3166_1_alpha_2 IS
     'Country as iso 3166 1 alpha 2.';
-COMMENT ON COLUMN manufacturer.postcode IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.postcode IS
     'Postcode.';
-COMMENT ON COLUMN manufacturer.single_registration_number IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.single_registration_number IS
     'Single registration number.';
-COMMENT ON COLUMN manufacturer.authorized_representative_name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.authorized_representative_name IS
     'Authorized representative name.';
-COMMENT ON COLUMN manufacturer.united_kingdom_responsible_person_name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.united_kingdom_responsible_person_name IS
     'United kingdom responsible person name.';

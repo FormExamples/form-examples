@@ -1,9 +1,9 @@
-CREATE TABLE agile_principles_assessment (
+CREATE TABLE agile_principles_assessment.agile_principles_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    respondent_id UUID NOT NULL REFERENCES respondent(id) ON DELETE CASCADE,
+    respondent_id UUID NOT NULL REFERENCES agile_principles_assessment.respondent(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed')),
     is_anonymous BOOLEAN NOT NULL DEFAULT FALSE,
@@ -80,101 +80,101 @@ CREATE TABLE agile_principles_assessment (
 );
 
 CREATE TRIGGER trigger_agile_principles_assessment_updated_at
-    BEFORE UPDATE ON agile_principles_assessment
+    BEFORE UPDATE ON agile_principles_assessment.agile_principles_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE agile_principles_assessment IS
+COMMENT ON TABLE agile_principles_assessment.agile_principles_assessment IS
     'One row per submission. Stores the 12 Agile Manifesto principle Likert scores (1-5, nullable when unanswered) and free-text comments per principle. Composite maturity is computed in agile_principles_assessment_grade.';
-COMMENT ON COLUMN agile_principles_assessment.id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_principles_assessment.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_principles_assessment.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_principles_assessment.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_principles_assessment.respondent_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.respondent_id IS
     'Foreign key to the respondent who completed this assessment.';
-COMMENT ON COLUMN agile_principles_assessment.status IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.status IS
     'Lifecycle status: draft, submitted, or reviewed.';
-COMMENT ON COLUMN agile_principles_assessment.is_anonymous IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.is_anonymous IS
     'TRUE when the respondent chose to submit anonymously; renderers must mask name, email, and role for these rows.';
-COMMENT ON COLUMN agile_principles_assessment.assessment_date IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.assessment_date IS
     'Date on which the assessment was completed.';
-COMMENT ON COLUMN agile_principles_assessment.assessment_period IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.assessment_period IS
     'Cadence of the assessment: sprint, quarter, half-year, annual, or ad-hoc.';
-COMMENT ON COLUMN agile_principles_assessment.p01_customer_satisfaction IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_customer_satisfaction IS
     'Likert 1-5 for principle 1: highest priority is to satisfy the customer through early and continuous delivery of valuable software.';
-COMMENT ON COLUMN agile_principles_assessment.p01_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_comment IS
     'Free-text comment for principle 1.';
-COMMENT ON COLUMN agile_principles_assessment.p02_welcome_change IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_welcome_change IS
     'Likert 1-5 for principle 2: changing requirements are welcomed, even late in development, to harness competitive advantage.';
-COMMENT ON COLUMN agile_principles_assessment.p02_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_comment IS
     'Free-text comment for principle 2.';
-COMMENT ON COLUMN agile_principles_assessment.p03_deliver_frequently IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_deliver_frequently IS
     'Likert 1-5 for principle 3: deliver working software frequently, within a few weeks or months.';
-COMMENT ON COLUMN agile_principles_assessment.p03_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_comment IS
     'Free-text comment for principle 3.';
-COMMENT ON COLUMN agile_principles_assessment.p04_collaboration IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_collaboration IS
     'Likert 1-5 for principle 4: business stakeholders and developers must work together daily.';
-COMMENT ON COLUMN agile_principles_assessment.p04_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_comment IS
     'Free-text comment for principle 4.';
-COMMENT ON COLUMN agile_principles_assessment.p05_motivated_individuals IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_motivated_individuals IS
     'Likert 1-5 for principle 5: build projects around motivated individuals, providing them with the environment and support needed.';
-COMMENT ON COLUMN agile_principles_assessment.p05_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_comment IS
     'Free-text comment for principle 5.';
-COMMENT ON COLUMN agile_principles_assessment.p06_face_to_face IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_face_to_face IS
     'Likert 1-5 for principle 6: the most efficient method for conveying information within a development team is face-to-face communication.';
-COMMENT ON COLUMN agile_principles_assessment.p06_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_comment IS
     'Free-text comment for principle 6.';
-COMMENT ON COLUMN agile_principles_assessment.p07_working_software IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_working_software IS
     'Likert 1-5 for principle 7: working software is the primary measure of progress.';
-COMMENT ON COLUMN agile_principles_assessment.p07_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_comment IS
     'Free-text comment for principle 7.';
-COMMENT ON COLUMN agile_principles_assessment.p08_sustainable_development IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_sustainable_development IS
     'Likert 1-5 for principle 8: agile processes promote a sustainable, consistent pace for developers and users.';
-COMMENT ON COLUMN agile_principles_assessment.p08_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_comment IS
     'Free-text comment for principle 8.';
-COMMENT ON COLUMN agile_principles_assessment.p09_technical_excellence IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_technical_excellence IS
     'Likert 1-5 for principle 9: continuous attention to technical excellence and good design enhances agility.';
-COMMENT ON COLUMN agile_principles_assessment.p09_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_comment IS
     'Free-text comment for principle 9.';
-COMMENT ON COLUMN agile_principles_assessment.p10_simplicity IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_simplicity IS
     'Likert 1-5 for principle 10: the art of maximising the amount of work not done is essential.';
-COMMENT ON COLUMN agile_principles_assessment.p10_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_comment IS
     'Free-text comment for principle 10.';
-COMMENT ON COLUMN agile_principles_assessment.p11_self_organising_teams IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_self_organising_teams IS
     'Likert 1-5 for principle 11: the best architectures, requirements, and designs emerge from self-organising teams.';
-COMMENT ON COLUMN agile_principles_assessment.p11_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_comment IS
     'Free-text comment for principle 11.';
-COMMENT ON COLUMN agile_principles_assessment.p12_regular_reflection IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_regular_reflection IS
     'Likert 1-5 for principle 12: at regular intervals, the team reflects on how to become more effective, then adjusts behaviour accordingly.';
-COMMENT ON COLUMN agile_principles_assessment.p12_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_comment IS
     'Free-text comment for principle 12.';
-COMMENT ON COLUMN agile_principles_assessment.p01_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_weight IS
     'Configurable weight for principle 1, range 0.50-2.00, default 1.00. Affects the weighted-mean composite maturity.';
-COMMENT ON COLUMN agile_principles_assessment.p02_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_weight IS
     'Configurable weight for principle 2, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p03_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_weight IS
     'Configurable weight for principle 3, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p04_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_weight IS
     'Configurable weight for principle 4, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p05_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_weight IS
     'Configurable weight for principle 5, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p06_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_weight IS
     'Configurable weight for principle 6, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p07_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_weight IS
     'Configurable weight for principle 7, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p08_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_weight IS
     'Configurable weight for principle 8, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p09_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_weight IS
     'Configurable weight for principle 9, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p10_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_weight IS
     'Configurable weight for principle 10, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p11_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_weight IS
     'Configurable weight for principle 11, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p12_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_weight IS
     'Configurable weight for principle 12, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.overall_notes IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.overall_notes IS
     'Free-text overall notes captured on the summary step.';

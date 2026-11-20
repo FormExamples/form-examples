@@ -3,7 +3,7 @@
 -- local formulary guidance so the front-end surfaces the right prompt per drug.
 -- See ../doc/medication-hold-rules.md.
 
-CREATE TABLE medication (
+CREATE TABLE perioperative_optimization.medication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -35,41 +35,41 @@ CREATE TABLE medication (
 );
 
 CREATE TRIGGER trigger_medication_updated_at
-    BEFORE UPDATE ON medication
+    BEFORE UPDATE ON perioperative_optimization.medication
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION perioperative_optimization.set_updated_at();
 
-COMMENT ON TABLE medication IS
+COMMENT ON TABLE perioperative_optimization.medication IS
     'Medication catalogue, carrying the perioperative hold guidance that drives the medication optimization domain.';
-COMMENT ON COLUMN medication.id IS
+COMMENT ON COLUMN perioperative_optimization.medication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication.created_at IS
+COMMENT ON COLUMN perioperative_optimization.medication.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medication.updated_at IS
+COMMENT ON COLUMN perioperative_optimization.medication.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN medication.deleted_at IS
+COMMENT ON COLUMN perioperative_optimization.medication.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN medication.international_nonproprietary_name IS
+COMMENT ON COLUMN perioperative_optimization.medication.international_nonproprietary_name IS
     'International Nonproprietary Name (INN) of the medication, as designated by the WHO.';
-COMMENT ON COLUMN medication.brand_name IS
+COMMENT ON COLUMN perioperative_optimization.medication.brand_name IS
     'Brand name as the patient knows the product, such as for reconciling a patient-reported medicine to its ingredient.';
-COMMENT ON COLUMN medication.kind IS
+COMMENT ON COLUMN perioperative_optimization.medication.kind IS
     'Kind of product, such as prescription, over-the-counter, or herbal.';
-COMMENT ON COLUMN medication.hold_class IS
+COMMENT ON COLUMN perioperative_optimization.medication.hold_class IS
     'Perioperative hold class, such as anticoagulant, sglt2-inhibitor, or glp1-agonist. Drives which prompt the front-end shows and which safety flag can fire.';
-COMMENT ON COLUMN medication.hold_required IS
+COMMENT ON COLUMN perioperative_optimization.medication.hold_required IS
     'Whether this product normally requires a perioperative hold-and-restart plan.';
-COMMENT ON COLUMN medication.default_hold_start_before_days IS
+COMMENT ON COLUMN perioperative_optimization.medication.default_hold_start_before_days IS
     'Default number of days before surgery to stop the product, for reference only. The prescriber owns the decision.';
-COMMENT ON COLUMN medication.default_restart_after_days IS
+COMMENT ON COLUMN perioperative_optimization.medication.default_restart_after_days IS
     'Default number of days after surgery to restart the product, for reference only. The prescriber owns the decision.';
-COMMENT ON COLUMN medication.perioperative_hold_guidance IS
+COMMENT ON COLUMN perioperative_optimization.medication.perioperative_hold_guidance IS
     'Free-text local guidance for holding and restarting this product around surgery.';
-COMMENT ON COLUMN medication.description IS
+COMMENT ON COLUMN perioperative_optimization.medication.description IS
     'Description of the medication, including its uses and properties.';
 
 CREATE INDEX medication_index_gto
-    ON medication
+    ON perioperative_optimization.medication
     USING GIN ((
         international_nonproprietary_name
     ) gin_trgm_ops);

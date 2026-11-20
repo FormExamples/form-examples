@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS wells_score_for_deep_vein_thrombosis;
+
+COMMENT ON SCHEMA wells_score_for_deep_vein_thrombosis IS
+    'Namespace for the Wells Score for Deep Vein Thrombosis (DVT) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.patient IS
     'Patient demographic information used by the Wells DVT assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON wells_score_for_deep_vein_thrombosis.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse-practitioner, physician-associate).
 
-CREATE TABLE clinician (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.role IS
     'Primary clinical role: doctor, nurse-practitioner, physician-associate, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON wells_score_for_deep_vein_thrombosis.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- alternative-diagnosis input subtracts 2. The computed score, bands, fired
 -- rules, and flags live in dedicated child tables.
 
-CREATE TABLE wells_score_for_deep_vein_thrombosis (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES wells_score_for_deep_vein_thrombosis.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES wells_score_for_deep_vein_thrombosis.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', '')),
 
@@ -241,62 +258,62 @@ CREATE TABLE wells_score_for_deep_vein_thrombosis (
 );
 
 CREATE INDEX wells_score_for_deep_vein_thrombosis_patient_id_idx
-    ON wells_score_for_deep_vein_thrombosis (patient_id);
+    ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis (patient_id);
 CREATE INDEX wells_score_for_deep_vein_thrombosis_clinician_id_idx
-    ON wells_score_for_deep_vein_thrombosis (clinician_id);
+    ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis (clinician_id);
 
 CREATE TRIGGER trigger_wells_score_for_deep_vein_thrombosis_updated_at
-    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_deep_vein_thrombosis IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis IS
     'Main Wells DVT assessment record: identification, context, and the nine clinical criterion inputs plus the alternative-diagnosis adjustment.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.patient_id IS
     'Foreign key to the patient being assessed (restricts delete).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinician_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.clinician_id IS
     'Foreign key to the assessing clinician (restricts delete).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.status IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.patient_identifier IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.patient_identifier IS
     'Local patient identifier as recorded at the point of assessment.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.assessed_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.assessed_at IS
     'Date and time the assessment was carried out.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.care_setting IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.care_setting IS
     'Care setting: emergency-department, ambulatory, acute-medical-unit, dvt-clinic, or other.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.age_band IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.age_band IS
     'Adult age band: 18-39, 40-64, 65-74, 75-84, or 85-plus.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.symptomatic_leg IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.symptomatic_leg IS
     'Symptomatic leg: left or right.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.active_cancer IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.active_cancer IS
     'Criterion 1 (+1): active cancer, ongoing, within 6 months, or palliative.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.paralysis_or_immobilisation IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.paralysis_or_immobilisation IS
     'Criterion 2 (+1): paralysis, paresis, or recent plaster immobilisation of the lower limb.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.recently_bedridden_or_surgery IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.recently_bedridden_or_surgery IS
     'Criterion 3 (+1): recently bedridden >= 3 days or major surgery within 12 weeks.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.localised_tenderness IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.localised_tenderness IS
     'Criterion 4 (+1): localised tenderness along the distribution of the deep venous system.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.entire_leg_swollen IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.entire_leg_swollen IS
     'Criterion 5 (+1): entire leg swollen.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.calf_swelling_over_3cm IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.calf_swelling_over_3cm IS
     'Criterion 6 (+1): calf swelling >= 3 cm compared with the asymptomatic side.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.pitting_oedema IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.pitting_oedema IS
     'Criterion 7 (+1): pitting oedema confined to the symptomatic leg.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.collateral_superficial_veins IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.collateral_superficial_veins IS
     'Criterion 8 (+1): collateral (non-varicose) superficial veins.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.previously_documented_dvt IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.previously_documented_dvt IS
     'Criterion 9 (+1): previously documented DVT.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.alternative_diagnosis_as_likely IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.alternative_diagnosis_as_likely IS
     'Adjustment (-2): an alternative diagnosis is at least as likely as DVT.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinical_notes IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis.clinical_notes IS
     'Free-text clinical notes captured alongside the assessment.';
 
 -- ========================================================================
@@ -312,14 +329,14 @@ COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.clinical_notes IS
 -- the informational three-level band (low/moderate/high), and the recommended
 -- investigation pathway. One-to-one with the parent assessment.
 
-CREATE TABLE wells_score_for_deep_vein_thrombosis_grade (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_deep_vein_thrombosis_id UUID NOT NULL UNIQUE
-        REFERENCES wells_score_for_deep_vein_thrombosis(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis(id) ON DELETE CASCADE,
 
     wells_score INT,
     two_level_band VARCHAR(10) NOT NULL DEFAULT ''
@@ -331,31 +348,31 @@ CREATE TABLE wells_score_for_deep_vein_thrombosis_grade (
 );
 
 CREATE TRIGGER trigger_wells_score_for_deep_vein_thrombosis_grade_updated_at
-    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis_grade
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_deep_vein_thrombosis_grade IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade IS
     'Computed Wells DVT grading result: total score, two-level band, three-level band, and recommended investigation pathway. One-to-one with the parent assessment.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.wells_score_for_deep_vein_thrombosis_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.wells_score_for_deep_vein_thrombosis_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.wells_score IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.wells_score IS
     'Total Wells score computed by the engine, range -2..9.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.two_level_band IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.two_level_band IS
     'Two-level band: likely (score >= 2) or unlikely (score <= 1).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.three_level_band IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.three_level_band IS
     'Informational three-level band: low (<= 0), moderate (1-2), or high (>= 3).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.recommended_pathway IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.recommended_pathway IS
     'Recommended investigation pathway: proximal leg vein ultrasound when likely, otherwise D-dimer.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.graded_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -371,14 +388,14 @@ COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade.graded_at IS
 -- instrument that produced it, the points it contributed, the band it
 -- informed, and a human-readable description.
 
-CREATE TABLE wells_score_for_deep_vein_thrombosis_grade_rule (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_deep_vein_thrombosis_grade_id UUID NOT NULL
-        REFERENCES wells_score_for_deep_vein_thrombosis_grade(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL
@@ -391,36 +408,36 @@ CREATE TABLE wells_score_for_deep_vein_thrombosis_grade_rule (
 );
 
 CREATE INDEX wells_score_for_deep_vein_thrombosis_grade_rule_grade_id_idx
-    ON wells_score_for_deep_vein_thrombosis_grade_rule (wells_score_for_deep_vein_thrombosis_grade_id);
+    ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule (wells_score_for_deep_vein_thrombosis_grade_id);
 
 CREATE TRIGGER trigger_wells_score_for_deep_vein_thrombosis_grade_rule_updated_at
-    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis_grade_rule
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_deep_vein_thrombosis_grade_rule IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule IS
     'Audit trail of every grading rule that fired during Wells-score computation: instrument, points, band, category, and description.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.wells_score_for_deep_vein_thrombosis_grade_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.wells_score_for_deep_vein_thrombosis_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.rule_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ACTIVE-CANCER-01).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.instrument IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: criterion, adjustment, two-level, three-level, or composite.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.points IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.points IS
     'Points contributed by this rule (+1 for a criterion, -2 for the alternative-diagnosis adjustment).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.band IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.band IS
     'Stratification band informed by this rule: likely, unlikely, low, moderate, or high.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.category IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.category IS
     'Subject category (e.g. malignancy, immobilisation, clinical-sign, alternative-diagnosis).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.description IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -434,14 +451,14 @@ COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_rule.description IS
 -- Clinically significant flags that fire independently of the total score,
 -- with priority and a suggested action for the assessing team.
 
-CREATE TABLE wells_score_for_deep_vein_thrombosis_grade_flag (
+CREATE TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     wells_score_for_deep_vein_thrombosis_grade_id UUID NOT NULL
-        REFERENCES wells_score_for_deep_vein_thrombosis_grade(id) ON DELETE CASCADE,
+        REFERENCES wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -461,34 +478,34 @@ CREATE TABLE wells_score_for_deep_vein_thrombosis_grade_flag (
 );
 
 CREATE INDEX wells_score_for_deep_vein_thrombosis_grade_flag_grade_id_idx
-    ON wells_score_for_deep_vein_thrombosis_grade_flag (wells_score_for_deep_vein_thrombosis_grade_id);
+    ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag (wells_score_for_deep_vein_thrombosis_grade_id);
 
 CREATE TRIGGER trigger_wells_score_for_deep_vein_thrombosis_grade_flag_updated_at
-    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis_grade_flag
+    BEFORE UPDATE ON wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION wells_score_for_deep_vein_thrombosis.set_updated_at();
 
-COMMENT ON TABLE wells_score_for_deep_vein_thrombosis_grade_flag IS
+COMMENT ON TABLE wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag IS
     'Clinically significant flags that fire independently of the total score, with priority and a suggested action for the assessing team.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.created_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.updated_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.deleted_at IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.wells_score_for_deep_vein_thrombosis_grade_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.wells_score_for_deep_vein_thrombosis_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.flag_id IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-DVT-LIKELY-ULTRASOUND-001).';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.category IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.category IS
     'Flag category: dvt-likely-ultrasound, dvt-unlikely-d-dimer, active-cancer, previous-dvt, incomplete-assessment, or other.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.priority IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.description IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis_grade_flag.suggested_action IS
+COMMENT ON COLUMN wells_score_for_deep_vein_thrombosis.wells_score_for_deep_vein_thrombosis_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "offer proximal leg vein ultrasound within 4 hours", "offer D-dimer test").';
 
 -- ========================================================================

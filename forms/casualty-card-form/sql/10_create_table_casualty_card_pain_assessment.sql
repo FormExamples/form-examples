@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_pain_assessment (
+CREATE TABLE casualty_card_form.casualty_card_pain_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id        UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- Pain presence
     pain_present            TEXT NOT NULL DEFAULT ''
                             CHECK (pain_present IN ('yes', 'no', '')),
@@ -22,30 +22,30 @@ CREATE TABLE casualty_card_pain_assessment (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_pain_assessment_updated_at
-    BEFORE UPDATE ON casualty_card_pain_assessment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_pain_assessment
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_pain_assessment IS
+COMMENT ON TABLE casualty_card_form.casualty_card_pain_assessment IS
     '1:1 with casualty_card. Structured pain assessment using NRS and descriptive characterisation.';
-COMMENT ON COLUMN casualty_card_pain_assessment.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_present IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_present IS
     'Whether pain is present: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_score IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_score IS
     'Numeric Rating Scale 0-10 (0 = no pain, 10 = worst pain imaginable). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_location IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_location IS
     'Anatomical location of the pain.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_character IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_character IS
     'Nature of the pain (e.g. sharp, dull, burning, throbbing).';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_onset IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_onset IS
     'When the pain started.';
-COMMENT ON COLUMN casualty_card_pain_assessment.pain_severity_category IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.pain_severity_category IS
     'Severity category: mild, moderate, severe, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_pain_assessment.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_pain_assessment.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_pain_assessment.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_pain_assessment.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_pain_assessment.deleted_at IS
     'Timestamp when this row was deleted.';

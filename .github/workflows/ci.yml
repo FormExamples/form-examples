@@ -193,6 +193,9 @@ jobs:
       - name: Every Axum crate migrates the CHECK constraints from sql/
         run: bin/axum-check-constraints --check --all
 
+      - name: Every form's sql/ objects live in its own schema
+        run: bin/sql-schema-namespace --check --all
+
       - name: Every Axum crate serves its API under /api/<slug>/
         run: bin/axum-api-namespace --check --all
 

@@ -1,13 +1,13 @@
 -- Bronchoscopy (airway endoscopy) result (procedure report) — the source-of-truth record.
 
-CREATE TABLE bronchoscopy_test_result (
+CREATE TABLE bronchoscopy_test_result.bronchoscopy_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES bronchoscopy_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES bronchoscopy_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -57,74 +57,74 @@ CREATE TABLE bronchoscopy_test_result (
 );
 
 CREATE INDEX index_bronchoscopy_test_result_patient_id
-    ON bronchoscopy_test_result(patient_id);
+    ON bronchoscopy_test_result.bronchoscopy_test_result(patient_id);
 CREATE INDEX index_bronchoscopy_test_result_clinician_id
-    ON bronchoscopy_test_result(clinician_id);
+    ON bronchoscopy_test_result.bronchoscopy_test_result(clinician_id);
 
 CREATE TRIGGER trigger_bronchoscopy_test_result_updated_at
-    BEFORE UPDATE ON bronchoscopy_test_result
+    BEFORE UPDATE ON bronchoscopy_test_result.bronchoscopy_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bronchoscopy_test_result.set_updated_at();
 
-COMMENT ON TABLE bronchoscopy_test_result IS
+COMMENT ON TABLE bronchoscopy_test_result.bronchoscopy_test_result IS
     'Bronchoscopy (airway endoscopy) result (procedure report). Captures the performed procedure, sedation and extent examined, the clinical history, the narrative and structured findings, samples taken, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN bronchoscopy_test_result.id IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bronchoscopy_test_result.created_at IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN bronchoscopy_test_result.updated_at IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN bronchoscopy_test_result.deleted_at IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN bronchoscopy_test_result.patient_id IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN bronchoscopy_test_result.clinician_id IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.clinician_id IS
     'Foreign key to the operating / reporting clinician (bronchoscopist).';
-COMMENT ON COLUMN bronchoscopy_test_result.originating_request_reference IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating bronchoscopy request (referral).';
-COMMENT ON COLUMN bronchoscopy_test_result.report_status IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN bronchoscopy_test_result.performed_date IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.performed_date IS
     'Date the bronchoscopy procedure was performed.';
-COMMENT ON COLUMN bronchoscopy_test_result.reported_date IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN bronchoscopy_test_result.procedure IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.procedure IS
     'Performed procedure: flexible-bronchoscopy, ebus, rigid-bronchoscopy, bronchoalveolar-lavage, other.';
-COMMENT ON COLUMN bronchoscopy_test_result.sedation_used IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.sedation_used IS
     'Sedation actually used: none, local, conscious, deep, general.';
-COMMENT ON COLUMN bronchoscopy_test_result.extent_examined IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.extent_examined IS
     'Extent of the airway examined (e.g. trachea, carina, lobar and segmental bronchi reached).';
-COMMENT ON COLUMN bronchoscopy_test_result.clinical_history IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.clinical_history IS
     'Clinical history and the question the procedure was performed to answer.';
-COMMENT ON COLUMN bronchoscopy_test_result.endobronchial_lesion IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.endobronchial_lesion IS
     'Whether an endobronchial lesion (e.g. tumour, mass) is present.';
-COMMENT ON COLUMN bronchoscopy_test_result.mucosal_abnormality IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.mucosal_abnormality IS
     'Whether a mucosal abnormality (e.g. erythema, infiltration, nodularity) is present.';
-COMMENT ON COLUMN bronchoscopy_test_result.extrinsic_compression IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.extrinsic_compression IS
     'Whether extrinsic compression of the airway is present.';
-COMMENT ON COLUMN bronchoscopy_test_result.bleeding IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.bleeding IS
     'Whether active bleeding or haemorrhage was observed.';
-COMMENT ON COLUMN bronchoscopy_test_result.foreign_body IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.foreign_body IS
     'Whether a foreign body is present in the airway.';
-COMMENT ON COLUMN bronchoscopy_test_result.secretions_purulent IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.secretions_purulent IS
     'Whether purulent secretions are present (suggesting infection).';
-COMMENT ON COLUMN bronchoscopy_test_result.normal_examination IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.normal_examination IS
     'Whether the examination was entirely normal with no abnormal findings.';
-COMMENT ON COLUMN bronchoscopy_test_result.lesion_location IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.lesion_location IS
     'Anatomical location of the lesion or abnormality (e.g. right upper lobe bronchus).';
-COMMENT ON COLUMN bronchoscopy_test_result.samples_taken IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.samples_taken IS
     'Samples taken during the procedure (e.g. biopsy, BAL, brushings, EBUS-TBNA).';
-COMMENT ON COLUMN bronchoscopy_test_result.complication IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.complication IS
     'Procedural complication: none, bleeding, pneumothorax, hypoxia, other.';
-COMMENT ON COLUMN bronchoscopy_test_result.findings_narrative IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.findings_narrative IS
     'Narrative description of the procedure findings (the body of the report).';
-COMMENT ON COLUMN bronchoscopy_test_result.impression IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN bronchoscopy_test_result.reporting_category IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.reporting_category IS
     'Structured-reporting score / category label (e.g. a lung-cancer-pathway or endobronchial-findings category).';
-COMMENT ON COLUMN bronchoscopy_test_result.recommended_follow_up IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.recommended_follow_up IS
     'Recommended follow-up, referral (e.g. lung-cancer MDT), or management.';
-COMMENT ON COLUMN bronchoscopy_test_result.critical_result_communicated IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the referrer / team.';
-COMMENT ON COLUMN bronchoscopy_test_result.reported_to IS
+COMMENT ON COLUMN bronchoscopy_test_result.bronchoscopy_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

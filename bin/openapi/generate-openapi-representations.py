@@ -27,7 +27,7 @@ FORMS_DIR = Path(__file__).resolve().parent.parent.parent / "forms"
 def parse_create_table(sql_text):
     """Parse CREATE TABLE statements. Mirrors bin/protobuf/."""
     tables = []
-    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s*\((.*?)\);'
+    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:\w+\.)?(\w+)\s*\((.*?)\);'
     matches = re.findall(pattern, sql_text, re.DOTALL | re.IGNORECASE)
 
     for table_name, body in matches:
@@ -59,7 +59,7 @@ def parse_create_table(sql_text):
             ):
                 continue
             col_match = re.match(
-                r'^(\w+)\s+([A-Za-z][\w]*(?:\s*\([^)]*\))?)',
+                r'^(\w+)\s+(?:[a-z_]\w*\.)?([A-Za-z][\w]*(?:\s*\([^)]*\))?)',
                 col_def,
             )
             if not col_match:
@@ -84,7 +84,7 @@ def parse_create_table(sql_text):
             not_null = ' NOT NULL' in upper_def
             references = None
             ref_match = re.search(
-                r'REFERENCES\s+(\w+)\s*\(',
+                r'REFERENCES\s+(?:\w+\.)?(\w+)\s*\(',
                 col_def, re.IGNORECASE,
             )
             if ref_match:
@@ -116,11 +116,11 @@ def parse_comments(sql_text):
     column_comments = {}
 
     table_re = re.compile(
-        r"COMMENT\s+ON\s+TABLE\s+(\w+)\s+IS\s*'((?:[^']|'')*)'\s*;",
+        r"COMMENT\s+ON\s+TABLE\s+(?:\w+\.)?(\w+)\s+IS\s*'((?:[^']|'')*)'\s*;",
         re.IGNORECASE | re.DOTALL,
     )
     col_re = re.compile(
-        r"COMMENT\s+ON\s+COLUMN\s+(\w+)\.(\w+)\s+IS\s*'((?:[^']|'')*)'\s*;",
+        r"COMMENT\s+ON\s+COLUMN\s+(?:\w+\.)?(\w+)\.(\w+)\s+IS\s*'((?:[^']|'')*)'\s*;",
         re.IGNORECASE | re.DOTALL,
     )
 

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS glasgow_blatchford_bleeding_score;
+
+COMMENT ON SCHEMA glasgow_blatchford_bleeding_score IS
+    'Namespace for the Glasgow-Blatchford Bleeding Score (GBS) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION glasgow_blatchford_bleeding_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE glasgow_blatchford_bleeding_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.patient IS
     'Patient demographic information used by the Glasgow-Blatchford Bleeding Score assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON glasgow_blatchford_bleeding_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (emergency department, gastroenterology, acute medicine).
 
-CREATE TABLE clinician (
+CREATE TABLE glasgow_blatchford_bleeding_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.role IS
     'Primary clinical role or specialty: ed (emergency department), gastroenterology, acute-medicine, surgery, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON glasgow_blatchford_bleeding_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- cardiac failure). The computed grade, fired rules, and flags live in
 -- dedicated child tables.
 
-CREATE TABLE glasgow_blatchford_bleeding_score (
+CREATE TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES glasgow_blatchford_bleeding_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES glasgow_blatchford_bleeding_score.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -258,62 +275,62 @@ CREATE TABLE glasgow_blatchford_bleeding_score (
 );
 
 CREATE INDEX glasgow_blatchford_bleeding_score_patient_id_idx
-    ON glasgow_blatchford_bleeding_score (patient_id);
+    ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score (patient_id);
 CREATE INDEX glasgow_blatchford_bleeding_score_clinician_id_idx
-    ON glasgow_blatchford_bleeding_score (clinician_id);
+    ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score (clinician_id);
 
 CREATE TRIGGER trigger_glasgow_blatchford_bleeding_score_updated_at
-    BEFORE UPDATE ON glasgow_blatchford_bleeding_score
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE glasgow_blatchford_bleeding_score IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score IS
     'Main Glasgow-Blatchford Bleeding Score assessment record: assessment context, patient identification, and the eight weighted admission parameter inputs (blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, cardiac failure).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician_name IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinician_role IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, advanced-practitioner, or other.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.assessed_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.care_setting IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.care_setting IS
     'Care setting: emergency-department, acute-medical-unit, ward, or other.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.presenting_complaint IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.presenting_complaint IS
     'Presenting complaint: haematemesis, coffee-ground (vomit), melaena, or other.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.patient_identifier IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.age_band IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.sex IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown. Selects the haemoglobin band table; unknown falls back to the female table.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.blood_urea_mmol_l IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.blood_urea_mmol_l IS
     'Parameter 1 — measured blood urea in millimoles per litre (mmol/L).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.haemoglobin_g_l IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.haemoglobin_g_l IS
     'Parameters 2/3 — measured haemoglobin in grams per litre (g/L); scored against sex-specific bands.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.systolic_blood_pressure_mmhg IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.systolic_blood_pressure_mmhg IS
     'Parameter 4 — measured systolic blood pressure in millimetres of mercury (mmHg).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.pulse_beats_per_min IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.pulse_beats_per_min IS
     'Parameter 5 — measured pulse rate in beats per minute.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.melaena_present IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.melaena_present IS
     'Parameter 6 — melaena (black tarry stool) present: yes or no.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.syncope IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.syncope IS
     'Parameter 7 — syncope (fainting) present: yes or no.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.hepatic_disease IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.hepatic_disease IS
     'Parameter 8 — history of hepatic (liver) disease: yes or no.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.cardiac_failure IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.cardiac_failure IS
     'Parameter 9 — history of cardiac failure: yes or no.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinical_note IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score.clinical_note IS
     'Free-text clinical context note recorded with the assessment.';
 
 -- ========================================================================
@@ -328,14 +345,14 @@ COMMENT ON COLUMN glasgow_blatchford_bleeding_score.clinical_note IS
 -- awarded points, the summed total (0-23), the derived risk band, and
 -- the recommended management for that band.
 
-CREATE TABLE glasgow_blatchford_bleeding_score_grade (
+CREATE TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_blatchford_bleeding_score_id UUID NOT NULL UNIQUE
-        REFERENCES glasgow_blatchford_bleeding_score(id) ON DELETE CASCADE,
+        REFERENCES glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score(id) ON DELETE CASCADE,
 
     blood_urea_points INT,
     haemoglobin_points INT,
@@ -355,45 +372,45 @@ CREATE TABLE glasgow_blatchford_bleeding_score_grade (
 );
 
 CREATE TRIGGER trigger_glasgow_blatchford_bleeding_score_grade_updated_at
-    BEFORE UPDATE ON glasgow_blatchford_bleeding_score_grade
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE glasgow_blatchford_bleeding_score_grade IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade IS
     'Computed Glasgow-Blatchford grading result: per-parameter points, summed total (0-23), derived risk band, and recommended management.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.glasgow_blatchford_bleeding_score_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.glasgow_blatchford_bleeding_score_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.blood_urea_points IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.blood_urea_points IS
     'Points awarded for parameter 1, blood urea (0, 2, 3, 4, or 6).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.haemoglobin_points IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.haemoglobin_points IS
     'Points awarded for parameters 2/3, haemoglobin (0, 1, 3, or 6; sex-specific bands).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.systolic_blood_pressure_points IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.systolic_blood_pressure_points IS
     'Points awarded for parameter 4, systolic blood pressure (0, 1, 2, or 3).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.pulse_point IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.pulse_point IS
     'Point awarded for parameter 5, pulse >= 100 (0 or 1).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.melaena_point IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.melaena_point IS
     'Point awarded for parameter 6, melaena present (0 or 1).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.syncope_point IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.syncope_point IS
     'Points awarded for parameter 7, syncope present (0 or 2).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.hepatic_disease_point IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.hepatic_disease_point IS
     'Points awarded for parameter 8, hepatic disease (0 or 2).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.cardiac_failure_point IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.cardiac_failure_point IS
     'Points awarded for parameter 9, cardiac failure (0 or 2).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.total_score IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.total_score IS
     'Summed Glasgow-Blatchford score across all parameters (0-23 when complete).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.risk_band IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.risk_band IS
     'Derived risk band: very-low (0), low-moderate (1-5), or high (>= 6).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.recommended_management IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.recommended_management IS
     'Recommended management for the band (e.g. consider outpatient management; admit and arrange urgent endoscopy).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.graded_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -409,14 +426,14 @@ COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE glasgow_blatchford_bleeding_score_grade_rule (
+CREATE TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_blatchford_bleeding_score_grade_id UUID NOT NULL
-        REFERENCES glasgow_blatchford_bleeding_score_grade(id) ON DELETE CASCADE,
+        REFERENCES glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(30) NOT NULL
@@ -437,34 +454,34 @@ CREATE TABLE glasgow_blatchford_bleeding_score_grade_rule (
 );
 
 CREATE INDEX glasgow_blatchford_bleeding_score_grade_rule_grade_id_idx
-    ON glasgow_blatchford_bleeding_score_grade_rule (glasgow_blatchford_bleeding_score_grade_id);
+    ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule (glasgow_blatchford_bleeding_score_grade_id);
 
 CREATE TRIGGER trigger_glasgow_blatchford_bleeding_score_grade_rule_updated_at
-    BEFORE UPDATE ON glasgow_blatchford_bleeding_score_grade_rule
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE glasgow_blatchford_bleeding_score_grade_rule IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule IS
     'Audit trail of every grading rule that fired during Glasgow-Blatchford computation: parameter, points contributed, category, and description.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.glasgow_blatchford_bleeding_score_grade_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.glasgow_blatchford_bleeding_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.rule_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-BLOOD-UREA-6POINT-01).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.parameter IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.parameter IS
     'Scored parameter the rule belongs to: blood-urea, haemoglobin, systolic-blood-pressure, pulse, melaena, syncope, hepatic-disease, cardiac-failure, or band.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.points IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.points IS
     'Points contributed by this rule for its parameter.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.category IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.category IS
     'Subject category (e.g. threshold-band, band-band).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.description IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -478,14 +495,14 @@ COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE glasgow_blatchford_bleeding_score_grade_flag (
+CREATE TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_blatchford_bleeding_score_grade_id UUID NOT NULL
-        REFERENCES glasgow_blatchford_bleeding_score_grade(id) ON DELETE CASCADE,
+        REFERENCES glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -505,34 +522,34 @@ CREATE TABLE glasgow_blatchford_bleeding_score_grade_flag (
 );
 
 CREATE INDEX glasgow_blatchford_bleeding_score_grade_flag_grade_id_idx
-    ON glasgow_blatchford_bleeding_score_grade_flag (glasgow_blatchford_bleeding_score_grade_id);
+    ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag (glasgow_blatchford_bleeding_score_grade_id);
 
 CREATE TRIGGER trigger_glasgow_blatchford_bleeding_score_grade_flag_updated_at
-    BEFORE UPDATE ON glasgow_blatchford_bleeding_score_grade_flag
+    BEFORE UPDATE ON glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_blatchford_bleeding_score.set_updated_at();
 
-COMMENT ON TABLE glasgow_blatchford_bleeding_score_grade_flag IS
+COMMENT ON TABLE glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.created_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.updated_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.glasgow_blatchford_bleeding_score_grade_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.glasgow_blatchford_bleeding_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.flag_id IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-SCORE-ADMIT-001).';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.category IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.category IS
     'Flag category: high-score-admit, low-risk-discharge, shock, low-hb-transfusion, incomplete, or other.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.priority IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.priority IS
     'Priority: info, low, medium, or high.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.description IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN glasgow_blatchford_bleeding_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN glasgow_blatchford_bleeding_score.glasgow_blatchford_bleeding_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "admit and arrange urgent endoscopy").';
 
 -- ========================================================================

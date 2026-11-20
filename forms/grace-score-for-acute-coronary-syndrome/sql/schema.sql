@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS grace_score_for_acute_coronary_syndrome;
+
+COMMENT ON SCHEMA grace_score_for_acute_coronary_syndrome IS
+    'Namespace for the GRACE Score for Acute Coronary Syndrome form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.patient IS
     'Patient demographic information used by the GRACE assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON grace_score_for_acute_coronary_syndrome.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (emergency physician, acute physician, cardiologist, nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.role IS
     'Primary clinical role: emergency-physician, acute-physician, cardiologist, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON grace_score_for_acute_coronary_syndrome.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- The computed grade, fired rules, and flags live in dedicated child
 -- tables.
 
-CREATE TABLE grace_score_for_acute_coronary_syndrome (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES grace_score_for_acute_coronary_syndrome.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES grace_score_for_acute_coronary_syndrome.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -256,62 +273,62 @@ CREATE TABLE grace_score_for_acute_coronary_syndrome (
 );
 
 CREATE INDEX grace_score_for_acute_coronary_syndrome_patient_id_idx
-    ON grace_score_for_acute_coronary_syndrome (patient_id);
+    ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome (patient_id);
 CREATE INDEX grace_score_for_acute_coronary_syndrome_clinician_id_idx
-    ON grace_score_for_acute_coronary_syndrome (clinician_id);
+    ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome (clinician_id);
 
 CREATE TRIGGER trigger_grace_score_for_acute_coronary_syndrome_updated_at
-    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE grace_score_for_acute_coronary_syndrome IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome IS
     'Main GRACE assessment record: assessment context, patient identification, and the eight GRACE variable inputs (age, heart rate, systolic blood pressure, serum creatinine, Killip class, cardiac arrest at admission, ST-segment deviation, elevated cardiac enzymes).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician_name IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinician_role IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.clinician_role IS
     'Role of the assessing clinician: emergency-physician, acute-physician, cardiologist, nurse, or other.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.assessed_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.care_setting IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.care_setting IS
     'Care setting: emergency-department, acute-medical-unit, coronary-care-unit, cardiology-ward, or other.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.presentation_type IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.presentation_type IS
     'Acute coronary syndrome presentation: nstemi, unstable-angina, or stemi.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.patient_identifier IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.age_years IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.age_years IS
     'Variable 1 — patient age in whole years.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.sex IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.heart_rate IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.heart_rate IS
     'Variable 2 — admission heart rate in beats per minute.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.systolic_blood_pressure IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.systolic_blood_pressure IS
     'Variable 3 — admission systolic blood pressure in mmHg (inverse weight: lower pressure scores higher).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.serum_creatinine IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.serum_creatinine IS
     'Variable 4 — measured serum creatinine (raw value; unit held separately). Normalised to mg/dL before banding.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.serum_creatinine_unit IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.serum_creatinine_unit IS
     'Unit for the serum creatinine value: mg/dL or umol/L (umol/L divided by 88.4 to obtain mg/dL).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.killip_class IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.killip_class IS
     'Variable 5 — Killip class of heart-failure severity: I, II, III, or IV.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.cardiac_arrest_at_admission IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.cardiac_arrest_at_admission IS
     'Variable 6 — cardiac arrest at admission: yes or no.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.st_segment_deviation IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.st_segment_deviation IS
     'Variable 7 — ST-segment deviation on the admission ECG: yes or no.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.elevated_cardiac_enzymes IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.elevated_cardiac_enzymes IS
     'Variable 8 — elevated cardiac enzymes / troponin: yes or no.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinical_note IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -327,14 +344,14 @@ COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.clinical_note IS
 -- category (worse of the two, max-band rule), and the derived
 -- invasive-strategy recommendation.
 
-CREATE TABLE grace_score_for_acute_coronary_syndrome_grade (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grace_score_for_acute_coronary_syndrome_id UUID NOT NULL UNIQUE
-        REFERENCES grace_score_for_acute_coronary_syndrome(id) ON DELETE CASCADE,
+        REFERENCES grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome(id) ON DELETE CASCADE,
 
     grace_score INT,
     in_hospital_risk_band VARCHAR(15) NOT NULL DEFAULT ''
@@ -349,33 +366,33 @@ CREATE TABLE grace_score_for_acute_coronary_syndrome_grade (
 );
 
 CREATE TRIGGER trigger_grace_score_for_acute_coronary_syndrome_grade_updated_at
-    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome_grade
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE grace_score_for_acute_coronary_syndrome_grade IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade IS
     'Computed GRACE grading result: weighted point total, in-hospital and 6-month mortality risk bands, overall risk category (max-band rule), and the derived invasive-strategy recommendation.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.grace_score_for_acute_coronary_syndrome_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.grace_score_for_acute_coronary_syndrome_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.grace_score IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.grace_score IS
     'Weighted GRACE point total summed across the eight variable contributions.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.in_hospital_risk_band IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.in_hospital_risk_band IS
     'In-hospital mortality band: low (<=108), intermediate (109-140), or high (>140).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.six_month_risk_band IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.six_month_risk_band IS
     'Six-month mortality band: low (<=88), intermediate (89-118), or high (>118).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.overall_band IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.overall_band IS
     'Overall risk category: the worse of the in-hospital and six-month bands (max-band rule).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.invasive_strategy IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.invasive_strategy IS
     'Derived invasive-strategy recommendation keyed on the overall risk category (e.g. early angiography within 24 h for high risk).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.graded_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -391,14 +408,14 @@ COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade.graded_at IS
 -- with the GRACE variable it belongs to, the points it contributed, and
 -- a human-readable description.
 
-CREATE TABLE grace_score_for_acute_coronary_syndrome_grade_rule (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grace_score_for_acute_coronary_syndrome_grade_id UUID NOT NULL
-        REFERENCES grace_score_for_acute_coronary_syndrome_grade(id) ON DELETE CASCADE,
+        REFERENCES grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     variable VARCHAR(20) NOT NULL
@@ -409,34 +426,34 @@ CREATE TABLE grace_score_for_acute_coronary_syndrome_grade_rule (
 );
 
 CREATE INDEX grace_score_for_acute_coronary_syndrome_grade_rule_grade_id_idx
-    ON grace_score_for_acute_coronary_syndrome_grade_rule (grace_score_for_acute_coronary_syndrome_grade_id);
+    ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule (grace_score_for_acute_coronary_syndrome_grade_id);
 
 CREATE TRIGGER trigger_grace_score_for_acute_coronary_syndrome_grade_rule_updated_at
-    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome_grade_rule
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE grace_score_for_acute_coronary_syndrome_grade_rule IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule IS
     'Audit trail of every grading rule (per-variable point contributor) that fired during GRACE computation: GRACE variable, points contributed, category, and description.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.grace_score_for_acute_coronary_syndrome_grade_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.grace_score_for_acute_coronary_syndrome_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.rule_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-AGE-BAND-04).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.variable IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.variable IS
     'GRACE variable the contributor belongs to: age, heart-rate, systolic-bp, creatinine, killip, cardiac-arrest, st-deviation, cardiac-enzymes, or band.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.points IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.points IS
     'Weighted points contributed by this variable to the GRACE total.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.category IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.category IS
     'Subject category (e.g. weighted-band, mortality-band).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.description IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -450,14 +467,14 @@ COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_rule.description
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE grace_score_for_acute_coronary_syndrome_grade_flag (
+CREATE TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grace_score_for_acute_coronary_syndrome_grade_id UUID NOT NULL
-        REFERENCES grace_score_for_acute_coronary_syndrome_grade(id) ON DELETE CASCADE,
+        REFERENCES grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -479,34 +496,34 @@ CREATE TABLE grace_score_for_acute_coronary_syndrome_grade_flag (
 );
 
 CREATE INDEX grace_score_for_acute_coronary_syndrome_grade_flag_grade_id_idx
-    ON grace_score_for_acute_coronary_syndrome_grade_flag (grace_score_for_acute_coronary_syndrome_grade_id);
+    ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag (grace_score_for_acute_coronary_syndrome_grade_id);
 
 CREATE TRIGGER trigger_grace_score_for_acute_coronary_syndrome_grade_flag_updated_at
-    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome_grade_flag
+    BEFORE UPDATE ON grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION grace_score_for_acute_coronary_syndrome.set_updated_at();
 
-COMMENT ON TABLE grace_score_for_acute_coronary_syndrome_grade_flag IS
+COMMENT ON TABLE grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.created_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.updated_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.deleted_at IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.grace_score_for_acute_coronary_syndrome_grade_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.grace_score_for_acute_coronary_syndrome_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.flag_id IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-RISK-EARLY-ANGIOGRAPHY-001).';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.category IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration): high-risk-early-angiography, cardiac-arrest, killip-2-plus, hypotension, renal-impairment, st-segment-deviation, incomplete, or other.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.priority IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.description IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome_grade_flag.suggested_action IS
+COMMENT ON COLUMN grace_score_for_acute_coronary_syndrome.grace_score_for_acute_coronary_syndrome_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "arrange coronary angiography within 24 h").';
 
 -- ========================================================================

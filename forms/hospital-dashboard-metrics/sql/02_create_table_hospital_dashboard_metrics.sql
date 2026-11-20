@@ -1,6 +1,6 @@
 -- One row per hospital KPI reporting period (typically monthly).
 
-CREATE TABLE hospital_dashboard_metrics (
+CREATE TABLE hospital_dashboard_metrics.hospital_dashboard_metrics (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -18,31 +18,31 @@ CREATE TABLE hospital_dashboard_metrics (
 );
 
 CREATE TRIGGER trigger_hospital_dashboard_metrics_updated_at
-    BEFORE UPDATE ON hospital_dashboard_metrics
+    BEFORE UPDATE ON hospital_dashboard_metrics.hospital_dashboard_metrics
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_dashboard_metrics.set_updated_at();
 
-COMMENT ON TABLE hospital_dashboard_metrics IS
+COMMENT ON TABLE hospital_dashboard_metrics.hospital_dashboard_metrics IS
     'One hospital KPI reporting period: hospital/site, period month/year, prepared-by, and sign-off notes.';
-COMMENT ON COLUMN hospital_dashboard_metrics.id IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_dashboard_metrics.created_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_dashboard_metrics.updated_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_dashboard_metrics.deleted_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_dashboard_metrics.hospital_name IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.hospital_name IS
     'Name of the hospital or facility being reported on.';
-COMMENT ON COLUMN hospital_dashboard_metrics.period_month IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.period_month IS
     'Reporting period month, 1-12.';
-COMMENT ON COLUMN hospital_dashboard_metrics.period_year IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.period_year IS
     'Reporting period year.';
-COMMENT ON COLUMN hospital_dashboard_metrics.prepared_by_name IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.prepared_by_name IS
     'Name of the person who compiled this report.';
-COMMENT ON COLUMN hospital_dashboard_metrics.overall_notes IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.overall_notes IS
     'Free-text overall notes recorded at sign-off.';
-COMMENT ON COLUMN hospital_dashboard_metrics.status IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.status IS
     'Submission status: draft or submitted.';
-COMMENT ON COLUMN hospital_dashboard_metrics.signed_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.signed_at IS
     'Timestamp the preparer signed off this report.';

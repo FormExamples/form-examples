@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_manufacturer.sql
 --   - 03_create_table_assessor.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_device_assessment;
+
+COMMENT ON SCHEMA medical_device_assessment IS
+    'Namespace for the Medical Device Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_device_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_device_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Manufacturer (or authorized representative) of the medical device.
 
-CREATE TABLE manufacturer (
+CREATE TABLE medical_device_assessment.manufacturer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,43 +92,43 @@ CREATE TABLE manufacturer (
 );
 
 CREATE TRIGGER trigger_manufacturer_updated_at
-    BEFORE UPDATE ON manufacturer
+    BEFORE UPDATE ON medical_device_assessment.manufacturer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
 CREATE INDEX manufacturer_index_gto
-    ON manufacturer
+    ON medical_device_assessment.manufacturer
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE manufacturer IS
+COMMENT ON TABLE medical_device_assessment.manufacturer IS
     'Manufacturer.';
-COMMENT ON COLUMN manufacturer.id IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN manufacturer.created_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN manufacturer.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN manufacturer.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN manufacturer.name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.name IS
     'Name.';
-COMMENT ON COLUMN manufacturer.email IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.email IS
     'Email.';
-COMMENT ON COLUMN manufacturer.phone IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.phone IS
     'Phone.';
-COMMENT ON COLUMN manufacturer.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN manufacturer.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.country_as_iso_3166_1_alpha_2 IS
     'Country as iso 3166 1 alpha 2.';
-COMMENT ON COLUMN manufacturer.postcode IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.postcode IS
     'Postcode.';
-COMMENT ON COLUMN manufacturer.single_registration_number IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.single_registration_number IS
     'Single registration number.';
-COMMENT ON COLUMN manufacturer.authorized_representative_name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.authorized_representative_name IS
     'Authorized representative name.';
-COMMENT ON COLUMN manufacturer.united_kingdom_responsible_person_name IS
+COMMENT ON COLUMN medical_device_assessment.manufacturer.united_kingdom_responsible_person_name IS
     'United kingdom responsible person name.';
 
 -- ========================================================================
@@ -124,7 +141,7 @@ COMMENT ON COLUMN manufacturer.united_kingdom_responsible_person_name IS
 
 -- Assessor (regulatory affairs professional, clinical engineer, or quality manager) who completes the assessment.
 
-CREATE TABLE assessor (
+CREATE TABLE medical_device_assessment.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -138,35 +155,35 @@ CREATE TABLE assessor (
 );
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON medical_device_assessment.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
 CREATE INDEX assessor_index_gto
-    ON assessor
+    ON medical_device_assessment.assessor
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE medical_device_assessment.assessor IS
     'Assessor.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN medical_device_assessment.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.assessor.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN medical_device_assessment.assessor.name IS
     'Name.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN medical_device_assessment.assessor.email IS
     'Email.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN medical_device_assessment.assessor.phone IS
     'Phone.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN medical_device_assessment.assessor.role IS
     'Role. One of: regulatory-affairs, clinical-engineer, quality-manager, clinical-safety-officer, notified-body-reviewer, other.';
-COMMENT ON COLUMN assessor.organization IS
+COMMENT ON COLUMN medical_device_assessment.assessor.organization IS
     'Organization.';
 
 -- ========================================================================
@@ -179,13 +196,13 @@ COMMENT ON COLUMN assessor.organization IS
 
 -- Medical device regulatory and risk assessment inputs (EU MDR 2017/745 Annex VIII and UK MDR 2002 classification rules).
 
-CREATE TABLE medical_device_assessment (
+CREATE TABLE medical_device_assessment.medical_device_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    manufacturer_id UUID NOT NULL REFERENCES manufacturer(id) ON DELETE CASCADE,
-    assessor_id UUID NOT NULL REFERENCES assessor(id) ON DELETE CASCADE,
+    manufacturer_id UUID NOT NULL REFERENCES medical_device_assessment.manufacturer(id) ON DELETE CASCADE,
+    assessor_id UUID NOT NULL REFERENCES medical_device_assessment.assessor(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
     assessment_date DATE,
     device_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -229,108 +246,108 @@ CREATE TABLE medical_device_assessment (
 );
 
 CREATE TRIGGER trigger_medical_device_assessment_updated_at
-    BEFORE UPDATE ON medical_device_assessment
+    BEFORE UPDATE ON medical_device_assessment.medical_device_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
 CREATE INDEX index_medical_device_assessment_manufacturer_id
-    ON medical_device_assessment(manufacturer_id);
+    ON medical_device_assessment.medical_device_assessment(manufacturer_id);
 CREATE INDEX index_medical_device_assessment_assessor_id
-    ON medical_device_assessment(assessor_id);
+    ON medical_device_assessment.medical_device_assessment(assessor_id);
 
-COMMENT ON TABLE medical_device_assessment IS
+COMMENT ON TABLE medical_device_assessment.medical_device_assessment IS
     'Medical device assessment.';
-COMMENT ON COLUMN medical_device_assessment.id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_device_assessment.created_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_device_assessment.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_device_assessment.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_device_assessment.manufacturer_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.manufacturer_id IS
     'Foreign key to the manufacturer table.';
-COMMENT ON COLUMN medical_device_assessment.assessor_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.assessor_id IS
     'Foreign key to the assessor table.';
-COMMENT ON COLUMN medical_device_assessment.status IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN medical_device_assessment.assessment_date IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.assessment_date IS
     'Assessment date.';
-COMMENT ON COLUMN medical_device_assessment.device_name IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.device_name IS
     'Device name.';
-COMMENT ON COLUMN medical_device_assessment.model_or_catalogue_number IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.model_or_catalogue_number IS
     'Model or catalogue number.';
-COMMENT ON COLUMN medical_device_assessment.unique_device_identifier IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.unique_device_identifier IS
     'Unique device identifier.';
-COMMENT ON COLUMN medical_device_assessment.intended_purpose IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.intended_purpose IS
     'Intended purpose.';
-COMMENT ON COLUMN medical_device_assessment.intended_user IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.intended_user IS
     'Intended user. One of: professional, lay-person, both.';
-COMMENT ON COLUMN medical_device_assessment.target_jurisdiction IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.target_jurisdiction IS
     'Target jurisdiction. One of: eu-mdr, uk-mdr, both.';
-COMMENT ON COLUMN medical_device_assessment.is_in_vitro_diagnostic IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.is_in_vitro_diagnostic IS
     'Is in vitro diagnostic. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.device_kind IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.device_kind IS
     'Device kind. One of: non-invasive, invasive-body-orifice, surgically-invasive, implantable, active, software, other.';
-COMMENT ON COLUMN medical_device_assessment.contact_duration IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.contact_duration IS
     'Contact duration. One of: transient, short-term, long-term.';
-COMMENT ON COLUMN medical_device_assessment.body_site IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.body_site IS
     'Body site. One of: intact-skin, wounded-skin, oral-nasal-ear, other-orifice, tissue, central-circulatory-system, central-nervous-system, heart, ….';
-COMMENT ON COLUMN medical_device_assessment.channels_or_stores_body_substances IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.channels_or_stores_body_substances IS
     'Channels or stores body substances. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.connected_to_active_device_class_iia_or_higher IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.connected_to_active_device_class_iia_or_higher IS
     'Connected to active device class iia or higher. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.reusable_surgical_instrument IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.reusable_surgical_instrument IS
     'Reusable surgical instrument. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.active_therapeutic IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.active_therapeutic IS
     'Active therapeutic. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.active_diagnostic IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.active_diagnostic IS
     'Active diagnostic. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.administers_or_exchanges_energy IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.administers_or_exchanges_energy IS
     'Administers or exchanges energy. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.energy_potentially_hazardous IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.energy_potentially_hazardous IS
     'Energy potentially hazardous. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.administers_or_removes_medicinal_substances IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.administers_or_removes_medicinal_substances IS
     'Administers or removes medicinal substances. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.administration_potentially_hazardous IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.administration_potentially_hazardous IS
     'Administration potentially hazardous. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.monitors_vital_physiological_parameters IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.monitors_vital_physiological_parameters IS
     'Monitors vital physiological parameters. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.closed_loop_therapy IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.closed_loop_therapy IS
     'Closed loop therapy. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.software_purpose IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.software_purpose IS
     'Software purpose. One of: none, provides-information-for-decisions, monitors-physiological-processes, other.';
-COMMENT ON COLUMN medical_device_assessment.software_worst_case_harm IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.software_worst_case_harm IS
     'Software worst case harm. One of: death-or-irreversible-deterioration, serious-deterioration-or-surgical-intervention, other.';
-COMMENT ON COLUMN medical_device_assessment.contains_medicinal_substance IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.contains_medicinal_substance IS
     'Contains medicinal substance. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.contains_human_or_animal_tissue IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.contains_human_or_animal_tissue IS
     'Contains human or animal tissue. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.contains_nanomaterial_with_high_exposure_potential IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.contains_nanomaterial_with_high_exposure_potential IS
     'Contains nanomaterial with high exposure potential. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.composed_of_absorbed_substances IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.composed_of_absorbed_substances IS
     'Composed of absorbed substances. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.contraception_or_sti_prevention IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.contraception_or_sti_prevention IS
     'Contraception or sti prevention. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.disinfects_or_cleans_devices IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.disinfects_or_cleans_devices IS
     'Disinfects or cleans devices. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.supplied_sterile IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.supplied_sterile IS
     'Supplied sterile. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.has_measuring_function IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.has_measuring_function IS
     'Has measuring function. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.clinical_evidence_status IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.clinical_evidence_status IS
     'Clinical evidence status. One of: complete, partial, none.';
-COMMENT ON COLUMN medical_device_assessment.risk_management_file_iso_14971 IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.risk_management_file_iso_14971 IS
     'Risk management file iso 14971. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.quality_management_system_iso_13485 IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.quality_management_system_iso_13485 IS
     'Quality management system iso 13485. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.cybersecurity_assessment_done IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.cybersecurity_assessment_done IS
     'Cybersecurity assessment done. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.post_market_surveillance_plan IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.post_market_surveillance_plan IS
     'Post market surveillance plan. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.unique_device_identifier_assigned IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.unique_device_identifier_assigned IS
     'Unique device identifier assigned. One of: yes, no.';
-COMMENT ON COLUMN medical_device_assessment.assessor_notes IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment.assessor_notes IS
     'Assessor notes.';
 
 -- ========================================================================
@@ -343,13 +360,13 @@ COMMENT ON COLUMN medical_device_assessment.assessor_notes IS
 
 -- Computed classification result for a medical device assessment.
 
-CREATE TABLE medical_device_assessment_grade (
+CREATE TABLE medical_device_assessment.medical_device_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     medical_device_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES medical_device_assessment(id) ON DELETE CASCADE,
+        REFERENCES medical_device_assessment.medical_device_assessment(id) ON DELETE CASCADE,
     computed_device_class VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (computed_device_class IN ('I', 'IIa', 'IIb', 'III', '')),
     final_device_class VARCHAR(5) NOT NULL DEFAULT ''
@@ -368,41 +385,41 @@ CREATE TABLE medical_device_assessment_grade (
 );
 
 CREATE TRIGGER trigger_medical_device_assessment_grade_updated_at
-    BEFORE UPDATE ON medical_device_assessment_grade
+    BEFORE UPDATE ON medical_device_assessment.medical_device_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
-COMMENT ON TABLE medical_device_assessment_grade IS
+COMMENT ON TABLE medical_device_assessment.medical_device_assessment_grade IS
     'Medical device assessment grade.';
-COMMENT ON COLUMN medical_device_assessment_grade.id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_device_assessment_grade.created_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_device_assessment_grade.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_device_assessment_grade.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_device_assessment_grade.medical_device_assessment_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.medical_device_assessment_id IS
     'Foreign key to the medical_device_assessment table.';
-COMMENT ON COLUMN medical_device_assessment_grade.computed_device_class IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.computed_device_class IS
     'Computed device class. One of: I, IIa, IIb, III.';
-COMMENT ON COLUMN medical_device_assessment_grade.final_device_class IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.final_device_class IS
     'Final device class. One of: I, IIa, IIb, III.';
-COMMENT ON COLUMN medical_device_assessment_grade.class_suffix IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.class_suffix IS
     'Class suffix. One of: s, m, r, sm, sr, mr, smr.';
-COMMENT ON COLUMN medical_device_assessment_grade.override_reason IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.override_reason IS
     'Override reason.';
-COMMENT ON COLUMN medical_device_assessment_grade.conformity_route IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.conformity_route IS
     'Conformity route. One of: self-declaration, notified-body-partial, notified-body-full.';
-COMMENT ON COLUMN medical_device_assessment_grade.determining_rule IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.determining_rule IS
     'Determining rule.';
-COMMENT ON COLUMN medical_device_assessment_grade.regulatory_readiness IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.regulatory_readiness IS
     'Regulatory readiness. One of: ready, gaps, blocked.';
-COMMENT ON COLUMN medical_device_assessment_grade.assessor_notes IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.assessor_notes IS
     'Assessor notes.';
-COMMENT ON COLUMN medical_device_assessment_grade.signed_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.signed_at IS
     'Signed at.';
-COMMENT ON COLUMN medical_device_assessment_grade.graded_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade.graded_at IS
     'Graded at.';
 
 -- ========================================================================
@@ -413,13 +430,13 @@ COMMENT ON COLUMN medical_device_assessment_grade.graded_at IS
 -- BEGIN 06_create_table_medical_device_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE medical_device_assessment_grade_rule (
+CREATE TABLE medical_device_assessment.medical_device_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES medical_device_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_device_assessment.medical_device_assessment_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     annex_viii_rule INTEGER NOT NULL CHECK (annex_viii_rule BETWEEN 1 AND 22),
     device_class VARCHAR(5) NOT NULL DEFAULT ''
@@ -429,34 +446,34 @@ CREATE TABLE medical_device_assessment_grade_rule (
 );
 
 CREATE INDEX index_medical_device_assessment_grade_rule_grade_id
-    ON medical_device_assessment_grade_rule(grade_id);
+    ON medical_device_assessment.medical_device_assessment_grade_rule(grade_id);
 
 CREATE TRIGGER trigger_medical_device_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON medical_device_assessment_grade_rule
+    BEFORE UPDATE ON medical_device_assessment.medical_device_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
-COMMENT ON TABLE medical_device_assessment_grade_rule IS
+COMMENT ON TABLE medical_device_assessment.medical_device_assessment_grade_rule IS
     'Medical device assessment grade rule.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.grade_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.grade_id IS
     'Foreign key to the medical_device_assessment_grade table.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.rule_id IS
     'Rule ID.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.annex_viii_rule IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.annex_viii_rule IS
     'Annex viii rule.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.device_class IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.device_class IS
     'Device class. One of: I, IIa, IIb, III.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.category IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.category IS
     'Category.';
-COMMENT ON COLUMN medical_device_assessment_grade_rule.description IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_rule.description IS
     'Description.';
 
 -- ========================================================================
@@ -467,13 +484,13 @@ COMMENT ON COLUMN medical_device_assessment_grade_rule.description IS
 -- BEGIN 07_create_table_medical_device_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE medical_device_assessment_grade_flag (
+CREATE TABLE medical_device_assessment.medical_device_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     medical_device_assessment_grade_id UUID NOT NULL
-        REFERENCES medical_device_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_device_assessment.medical_device_assessment_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -501,34 +518,34 @@ CREATE TABLE medical_device_assessment_grade_flag (
 );
 
 CREATE INDEX index_medical_device_assessment_grade_flag_grade_id
-    ON medical_device_assessment_grade_flag(medical_device_assessment_grade_id);
+    ON medical_device_assessment.medical_device_assessment_grade_flag(medical_device_assessment_grade_id);
 
 CREATE TRIGGER trigger_medical_device_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON medical_device_assessment_grade_flag
+    BEFORE UPDATE ON medical_device_assessment.medical_device_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_device_assessment.set_updated_at();
 
-COMMENT ON TABLE medical_device_assessment_grade_flag IS
+COMMENT ON TABLE medical_device_assessment.medical_device_assessment_grade_flag IS
     'Medical device assessment grade flag.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.medical_device_assessment_grade_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.medical_device_assessment_grade_id IS
     'Foreign key to the medical_device_assessment_grade table.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.flag_id IS
     'Flag ID.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.category IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.category IS
     'Category. One of: missing-intended-purpose, clinical-evidence-gap, risk-management-gap, quality-system-gap, cybersecurity-gap, post-market-surveillance-gap, udi-gap, notified-body-required, ….';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.priority IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.priority IS
     'Priority. One of: low, medium, high.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.description IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.description IS
     'Description.';
-COMMENT ON COLUMN medical_device_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN medical_device_assessment.medical_device_assessment_grade_flag.suggested_action IS
     'Suggested action.';
 
 -- ========================================================================

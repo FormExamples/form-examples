@@ -20,6 +20,7 @@ are created before referencing tables.
 ```
 sql/
   00_create_extensions.sql                            # Required PostgreSQL extensions (pgcrypto)
+  00_create_schema.sql                         # The form's own schema (bin/sql-schema-namespace)
   01_create_function_set_updated_at.sql        # Trigger function for updated_at
   02_create_table_patient.sql                  # Shared patient table
   03_create_table_clinician.sql                # Clinician identity (optional, per form)
@@ -34,6 +35,27 @@ sql/
 Each form must have `00_create_extensions.sql` as the first migration so that
 `pgcrypto` (for `gen_random_uuid()`) is available before any table is created.
 `bin/test-form` asserts that `00_create_extensions.sql` exists.
+
+## Form schema
+
+Every form's tables, functions and domains live in a Postgres schema named for
+the form: the slug in snake_case, created by `sql/00_create_schema.sql`. Every
+reference to the form's own objects is qualified with it, per
+[`spec/form-namespacing/`](../spec/form-namespacing/):
+
+```sql
+CREATE TABLE <form_snake_case>.patient (...);
+    ... REFERENCES <form_snake_case>.patient(id) ...
+CREATE INDEX patient_name_index ON <form_snake_case>.patient (name);
+COMMENT ON COLUMN <form_snake_case>.patient.id IS '...';
+    EXECUTE FUNCTION <form_snake_case>.set_updated_at();
+```
+
+Write new SQL unqualified if that is easier, then run
+`bin/sql-schema-namespace <slug>`: it writes `00_create_schema.sql` and
+qualifies every reference, outside string literals, comments and `$$` bodies.
+`bin/sql-schema-namespace --check --all` is the CI drift detector. The
+examples below are unqualified for brevity.
 
 ## Schema conventions
 

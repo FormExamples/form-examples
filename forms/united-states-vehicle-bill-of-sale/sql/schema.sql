@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_seller.sql
 --   - 03_create_table_buyer.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_vehicle_bill_of_sale;
+
+COMMENT ON SCHEMA united_states_vehicle_bill_of_sale IS
+    'Namespace for the United States Vehicle Bill of Sale form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_vehicle_bill_of_sale.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- The per-sale copy of the party details lives on the main bill of sale
 -- record; this table holds the reusable contact record.
 
-CREATE TABLE seller (
+CREATE TABLE united_states_vehicle_bill_of_sale.seller (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,37 +92,37 @@ CREATE TABLE seller (
 );
 
 CREATE TRIGGER trigger_seller_updated_at
-    BEFORE UPDATE ON seller
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.seller
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
 CREATE INDEX seller_name_trgm_idx
-    ON seller
+    ON united_states_vehicle_bill_of_sale.seller
     USING GIN (name gin_trgm_ops);
 
-COMMENT ON TABLE seller IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.seller IS
     'Seller (transferor) contact record for a United States vehicle bill of sale: name, contact details, ZIP code, and whether an individual or a business.';
-COMMENT ON COLUMN seller.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN seller.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN seller.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN seller.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN seller.name IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.name IS
     'Full printed name of the seller as it appears on the certificate of title.';
-COMMENT ON COLUMN seller.email IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.email IS
     'Email address.';
-COMMENT ON COLUMN seller.phone IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.phone IS
     'Telephone number.';
-COMMENT ON COLUMN seller.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.postal_address_as_full_text IS
     'Full postal address as free text.';
-COMMENT ON COLUMN seller.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.country_as_iso_3166_1_alpha_2 IS
     'Country as an ISO 3166-1 alpha-2 code.';
-COMMENT ON COLUMN seller.postcode IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.postcode IS
     'ZIP or ZIP+4 code.';
-COMMENT ON COLUMN seller.party_type IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller.party_type IS
     'Whether the party is an individual or a business.';
 
 -- ========================================================================
@@ -120,7 +137,7 @@ COMMENT ON COLUMN seller.party_type IS
 -- The per-sale copy of the party details lives on the main bill of sale
 -- record; this table holds the reusable contact record.
 
-CREATE TABLE buyer (
+CREATE TABLE united_states_vehicle_bill_of_sale.buyer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -136,37 +153,37 @@ CREATE TABLE buyer (
 );
 
 CREATE TRIGGER trigger_buyer_updated_at
-    BEFORE UPDATE ON buyer
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.buyer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
 CREATE INDEX buyer_name_trgm_idx
-    ON buyer
+    ON united_states_vehicle_bill_of_sale.buyer
     USING GIN (name gin_trgm_ops);
 
-COMMENT ON TABLE buyer IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.buyer IS
     'Buyer (transferee) contact record for a United States vehicle bill of sale: name, contact details, ZIP code, and whether an individual or a business.';
-COMMENT ON COLUMN buyer.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN buyer.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN buyer.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN buyer.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN buyer.name IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.name IS
     'Full printed name of the buyer as it appears on the certificate of title.';
-COMMENT ON COLUMN buyer.email IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.email IS
     'Email address.';
-COMMENT ON COLUMN buyer.phone IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.phone IS
     'Telephone number.';
-COMMENT ON COLUMN buyer.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.postal_address_as_full_text IS
     'Full postal address as free text.';
-COMMENT ON COLUMN buyer.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.country_as_iso_3166_1_alpha_2 IS
     'Country as an ISO 3166-1 alpha-2 code.';
-COMMENT ON COLUMN buyer.postcode IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.postcode IS
     'ZIP or ZIP+4 code.';
-COMMENT ON COLUMN buyer.party_type IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer.party_type IS
     'Whether the party is an individual or a business.';
 
 -- ========================================================================
@@ -187,14 +204,14 @@ COMMENT ON COLUMN buyer.party_type IS
 -- and the flagged issues live in dedicated child tables. This record supports
 -- documentation; it is not legal advice, and the issuing state agency decides.
 
-CREATE TABLE united_states_vehicle_bill_of_sale (
+CREATE TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    seller_id UUID NOT NULL REFERENCES seller(id) ON DELETE RESTRICT,
-    buyer_id UUID REFERENCES buyer(id) ON DELETE RESTRICT,
+    seller_id UUID NOT NULL REFERENCES united_states_vehicle_bill_of_sale.seller(id) ON DELETE RESTRICT,
+    buyer_id UUID REFERENCES united_states_vehicle_bill_of_sale.buyer(id) ON DELETE RESTRICT,
 
 
     -- Sale transaction
@@ -260,124 +277,124 @@ CREATE TABLE united_states_vehicle_bill_of_sale (
 );
 
 CREATE INDEX united_states_vehicle_bill_of_sale_seller_id_idx
-    ON united_states_vehicle_bill_of_sale (seller_id);
+    ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale (seller_id);
 CREATE INDEX united_states_vehicle_bill_of_sale_buyer_id_idx
-    ON united_states_vehicle_bill_of_sale (buyer_id);
+    ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale (buyer_id);
 CREATE INDEX united_states_vehicle_bill_of_sale_vin_idx
-    ON united_states_vehicle_bill_of_sale (vin);
+    ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale (vin);
 
 CREATE TRIGGER trigger_united_states_vehicle_bill_of_sale_updated_at
-    BEFORE UPDATE ON united_states_vehicle_bill_of_sale
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_states_vehicle_bill_of_sale IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale IS
     'Main United States vehicle bill of sale record: sale transaction, seller, buyer, vehicle, the federal odometer disclosure (49 CFR 580), as-is clause, title and lien status, notarization, and post-sale release of liability. Completeness classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_id IS
     'Foreign key to the seller (restrict delete).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_id IS
     'Foreign key to the buyer (restrict delete); optional until the buyer is known.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.state IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.state IS
     'Two-letter USPS code of the state whose rules govern the sale (the state that will title and register the vehicle); empty when unanswered.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.sale_date IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.sale_date IS
     'Date the vehicle changed hands (date of sale and of odometer transfer).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.sale_price_as_usd IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.sale_price_as_usd IS
     'Purchase price in US dollars; 0 for a gift; null when unanswered.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.payment_method IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.payment_method IS
     'How the price was paid: cash, check, wire, financing, trade, or gift.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.tax_basis IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.tax_basis IS
     'Basis on which the buyer will pay sales or use tax: purchase price, state standard presumptive value, fair market value, or a claimed gift or family exemption.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_name IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_name IS
     'Seller printed name as it appears on the title.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_type IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_type IS
     'Whether the seller is an individual or a business.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_street_address IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_street_address IS
     'Seller current street address (required by 49 CFR 580.5 for the odometer disclosure).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_city IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_city IS
     'Seller city.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_state IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_state IS
     'Seller two-letter state code.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_postal_code IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_postal_code IS
     'Seller ZIP or ZIP+4 code.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_phone IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_phone IS
     'Seller telephone number.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_signed IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_signed IS
     'Whether the seller signed the bill of sale.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_name IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_name IS
     'Buyer printed name.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_type IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_type IS
     'Whether the buyer is an individual or a business.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_street_address IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_street_address IS
     'Buyer current street address (required by 49 CFR 580.5 for the odometer disclosure).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_city IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_city IS
     'Buyer city.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_state IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_state IS
     'Buyer two-letter state code.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_postal_code IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_postal_code IS
     'Buyer ZIP or ZIP+4 code.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_phone IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_phone IS
     'Buyer telephone number.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_signed IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_signed IS
     'Whether the buyer signed the bill of sale.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.vehicle_year IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.vehicle_year IS
     'Model year of the vehicle.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.vehicle_make IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.vehicle_make IS
     'Vehicle make.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.vehicle_model IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.vehicle_model IS
     'Vehicle model.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.body_type IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.body_type IS
     'Vehicle body type (required by 49 CFR 580.5).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.vin IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.vin IS
     'Vehicle Identification Number; 17 characters for a 1981 or newer vehicle.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.vehicle_color IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.vehicle_color IS
     'Vehicle color.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.title_number IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.title_number IS
     'Certificate of title number.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.title_brand IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.title_brand IS
     'Brand on the title: clean, salvage, rebuilt, flood, lemon-law buyback, junk, or unknown.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.gvwr_over_16000 IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.gvwr_over_16000 IS
     'Whether the gross vehicle weight rating exceeds 16,000 pounds (exempt from the federal odometer rule).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.self_propelled IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.self_propelled IS
     'Whether the vehicle is self-propelled (a trailer is not, and is exempt from the federal odometer rule).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.odometer_reading_miles IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.odometer_reading_miles IS
     'Odometer reading in whole miles at transfer, without tenths; null when unanswered.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.odometer_status IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.odometer_status IS
     'Seller certification under 49 CFR 580.5: actual mileage, mileage exceeds the odometer mechanical limits, or the reading is not the actual mileage (warning odometer discrepancy).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.odometer_seller_certified IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.odometer_seller_certified IS
     'Whether the seller signed the odometer disclosure statement.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.odometer_buyer_acknowledged IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.odometer_buyer_acknowledged IS
     'Whether the buyer signed the odometer disclosure acknowledgement.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.seller_holds_title IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.seller_holds_title IS
     'Whether the seller holds the certificate of title in hand at the sale.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.title_signed IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.title_signed IS
     'Whether the seller has signed the title over to the buyer.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.lien_status IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.lien_status IS
     'Lien status: none, released (lien release in hand), or outstanding.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.lienholder_name IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.lienholder_name IS
     'Name of the lienholder, if any.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.lien_release_date IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.lien_release_date IS
     'Date the lienholder released the lien.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.as_is_clause IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.as_is_clause IS
     'Warranty terms: sold as is with no warranty, or with a written warranty.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.warranty_note IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.warranty_note IS
     'Description of any written warranty; empty for an as-is sale.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.notarized IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.notarized IS
     'Whether the bill of sale or title assignment was notarized, or notarization is not required.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.release_of_liability_filed IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.release_of_liability_filed IS
     'Whether the seller filed the release of liability or notice of transfer with the state agency.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.release_filed_date IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.release_filed_date IS
     'Date the seller filed the release of liability.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.plates_removed IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.plates_removed IS
     'Whether the seller removed the license plates (relevant where plates stay with the seller).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_title_application_date IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale.buyer_title_application_date IS
     'Date the buyer applied to title and register the vehicle.';
 
 -- ========================================================================
@@ -394,14 +411,14 @@ COMMENT ON COLUMN united_states_vehicle_bill_of_sale.buyer_title_application_dat
 -- under 49 CFR 580.17. This is a documentation classification, not a numeric
 -- score, and it is not legal advice: the state motor vehicle agency decides.
 
-CREATE TABLE united_states_vehicle_bill_of_sale_grade (
+CREATE TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_vehicle_bill_of_sale_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_vehicle_bill_of_sale(id) ON DELETE CASCADE,
+        REFERENCES united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale(id) ON DELETE CASCADE,
 
     completeness_class VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (completeness_class IN ('complete', 'incomplete', 'risk-flagged', '')),
@@ -414,29 +431,29 @@ CREATE TABLE united_states_vehicle_bill_of_sale_grade (
 );
 
 CREATE TRIGGER trigger_united_states_vehicle_bill_of_sale_grade_updated_at
-    BEFORE UPDATE ON united_states_vehicle_bill_of_sale_grade
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_states_vehicle_bill_of_sale_grade IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade IS
     'Computed completeness and risk classification for a vehicle bill of sale: complete, incomplete, or risk-flagged; whether the federal odometer disclosure is exempt; and whether the state rule was in the engine table.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.united_states_vehicle_bill_of_sale_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.united_states_vehicle_bill_of_sale_id IS
     'Foreign key to the parent bill of sale (unique, 1:1).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.completeness_class IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.completeness_class IS
     'Classification: complete, incomplete, or risk-flagged (risk-flagged takes precedence over incomplete).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.odometer_disclosure_exempt IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.odometer_disclosure_exempt IS
     'Whether the federal odometer disclosure is exempt under 49 CFR 580.17 (yes/no).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.state_rule_known IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.state_rule_known IS
     'Whether the state rule was found in the engine STATE_RULES table (yes) or the uniform default was used (no).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.graded_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -451,14 +468,14 @@ COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade.graded_at IS
 -- classification. Each row records one rule firing with the bill-of-sale
 -- dimension it concerns, the category, and a human-readable description.
 
-CREATE TABLE united_states_vehicle_bill_of_sale_grade_rule (
+CREATE TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_vehicle_bill_of_sale_grade_id UUID NOT NULL
-        REFERENCES united_states_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -468,32 +485,32 @@ CREATE TABLE united_states_vehicle_bill_of_sale_grade_rule (
 );
 
 CREATE INDEX united_states_vehicle_bill_of_sale_grade_rule_grade_id_idx
-    ON united_states_vehicle_bill_of_sale_grade_rule (united_states_vehicle_bill_of_sale_grade_id);
+    ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule (united_states_vehicle_bill_of_sale_grade_id);
 
 CREATE TRIGGER trigger_united_states_vehicle_bill_of_sale_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_vehicle_bill_of_sale_grade_rule
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_states_vehicle_bill_of_sale_grade_rule IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule IS
     'Audit trail of every rule that fired during classification: bill-of-sale dimension, category, and description.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.united_states_vehicle_bill_of_sale_grade_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.united_states_vehicle_bill_of_sale_grade_id IS
     'Foreign key to the parent grade (cascade delete).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.rule_id IS
     'Stable rule identifier (for example R-ODO-001).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.dimension IS
     'Dimension the rule concerns: parties, vehicle, odometer, title-lien, terms, state-rules, after-sale, or classification.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.category IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.category IS
     'Machine-readable category of the rule.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.description IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -507,14 +524,14 @@ COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_rule.description IS
 -- Flagged issues that fire independently of the completeness class, with a
 -- priority and a suggested action for the seller, buyer, or notary.
 
-CREATE TABLE united_states_vehicle_bill_of_sale_grade_flag (
+CREATE TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_vehicle_bill_of_sale_grade_id UUID NOT NULL
-        REFERENCES united_states_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -547,34 +564,34 @@ CREATE TABLE united_states_vehicle_bill_of_sale_grade_flag (
 );
 
 CREATE INDEX united_states_vehicle_bill_of_sale_grade_flag_grade_id_idx
-    ON united_states_vehicle_bill_of_sale_grade_flag (united_states_vehicle_bill_of_sale_grade_id);
+    ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag (united_states_vehicle_bill_of_sale_grade_id);
 
 CREATE TRIGGER trigger_united_states_vehicle_bill_of_sale_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_vehicle_bill_of_sale_grade_flag
+    BEFORE UPDATE ON united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_vehicle_bill_of_sale.set_updated_at();
 
-COMMENT ON TABLE united_states_vehicle_bill_of_sale_grade_flag IS
+COMMENT ON TABLE united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag IS
     'Flagged issues that fire independently of the completeness class, with priority and a suggested action for the seller, buyer, or notary.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.united_states_vehicle_bill_of_sale_grade_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.united_states_vehicle_bill_of_sale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.flag_id IS
     'Stable flag identifier (for example F-BOS-001).';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.category IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.category IS
     'Flag category: odometer-disclosure-missing, odometer-discrepancy, odometer-exempt-note, invalid-vin, lien-outstanding, title-problem, title-brand, notarization-required, missing-party-details, missing-signature, missing-terms, release-of-liability, buyer-title-deadline, sales-tax-basis, verify-state-rule, state-form, implausible-data, disclaimer, or other.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.priority IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.description IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_vehicle_bill_of_sale_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_vehicle_bill_of_sale.united_states_vehicle_bill_of_sale_grade_flag.suggested_action IS
     'Suggested action (for example "obtain the lienholder release before transfer", "complete the federal odometer disclosure").';
 
 -- ========================================================================

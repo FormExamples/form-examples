@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS qrisk3_cardiovascular_disease_risk_score;
+
+COMMENT ON SCHEMA qrisk3_cardiovascular_disease_risk_score IS
+    'Namespace for the QRISK3 Cardiovascular Disease Risk Score form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.patient IS
     'Patient demographic information used by the QRISK3 assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON qrisk3_cardiovascular_disease_risk_score.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (GP, nurse, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.role IS
     'Primary clinical role: gp, nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON qrisk3_cardiovascular_disease_risk_score.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- history, and medication). The computed grade, fired rules, and flags
 -- live in dedicated child tables.
 
-CREATE TABLE qrisk3_cardiovascular_disease_risk_score (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES qrisk3_cardiovascular_disease_risk_score.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES qrisk3_cardiovascular_disease_risk_score.clinician(id) ON DELETE RESTRICT,
 
     -- Assessment context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -264,88 +281,88 @@ CREATE TABLE qrisk3_cardiovascular_disease_risk_score (
 );
 
 CREATE INDEX qrisk3_cardiovascular_disease_risk_score_patient_id_idx
-    ON qrisk3_cardiovascular_disease_risk_score (patient_id);
+    ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score (patient_id);
 CREATE INDEX qrisk3_cardiovascular_disease_risk_score_clinician_id_idx
-    ON qrisk3_cardiovascular_disease_risk_score (clinician_id);
+    ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score (clinician_id);
 
 CREATE TRIGGER trigger_qrisk3_cardiovascular_disease_risk_score_updated_at
-    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score IS
     'Main QRISK3 assessment record: assessment context, patient identification, eligibility flags, and every QRISK3 model input (demographics, lifestyle, cardiometabolic measurements, comorbidity history, and medication).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician_name IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinician_role IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.clinician_role IS
     'Role of the assessing clinician: gp, nurse, pharmacist, or other.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.assessed_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.care_setting IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.care_setting IS
     'Care setting: general-practice, pharmacy, nhs-health-check, or other.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.patient_identifier IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.age IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.age IS
     'Age in years; QRISK3 is valid for ages 25-84.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.sex IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.sex IS
     'Sex selecting the sex-specific QRISK3 model: female or male.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.ethnicity IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.ethnicity IS
     'Nine-category QRISK3 ethnicity: white-or-not-stated, indian, pakistani, bangladeshi, other-asian, black-caribbean, black-african, chinese, or other.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.townsend_score IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.townsend_score IS
     'Townsend deprivation score derived from postcode; optional (defaults to the cohort mean when null).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.postcode IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.postcode IS
     'Postcode used to look up the Townsend deprivation score.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.smoking_status IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.smoking_status IS
     'Smoking status: non, ex, light, moderate, or heavy.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.body_mass_index IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.body_mass_index IS
     'Body mass index (BMI), kg/m^2; may be derived from height and weight.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.diabetes_status IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.diabetes_status IS
     'Diabetes status: none, type1, or type2.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.cholesterol_hdl_ratio IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.cholesterol_hdl_ratio IS
     'Total-cholesterol to HDL-cholesterol ratio.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.systolic_blood_pressure IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.systolic_blood_pressure IS
     'Mean systolic blood pressure in mmHg.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.systolic_blood_pressure_sd IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.systolic_blood_pressure_sd IS
     'Standard deviation of at least two systolic blood pressure readings (visit-to-visit variability), mmHg.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.on_blood_pressure_treatment IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.on_blood_pressure_treatment IS
     'Whether the patient is on antihypertensive treatment.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.family_history_chd IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.family_history_chd IS
     'First-degree relative with coronary heart disease before age 60.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.atrial_fibrillation IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.atrial_fibrillation IS
     'Whether the patient has atrial fibrillation.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.chronic_kidney_disease_stage IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.chronic_kidney_disease_stage IS
     'Chronic kidney disease stage: none, stage3, stage4, or stage5.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.migraine IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.migraine IS
     'Whether the patient has migraine.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.rheumatoid_arthritis IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.rheumatoid_arthritis IS
     'Whether the patient has rheumatoid arthritis.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.systemic_lupus_erythematosus IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.systemic_lupus_erythematosus IS
     'Whether the patient has systemic lupus erythematosus (SLE).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.severe_mental_illness IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.severe_mental_illness IS
     'Whether the patient has a severe mental illness.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.erectile_dysfunction IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.erectile_dysfunction IS
     'Whether the patient has erectile dysfunction (men only; ignored for the female model).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.on_atypical_antipsychotics IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.on_atypical_antipsychotics IS
     'Whether the patient is on atypical antipsychotic medication.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.on_corticosteroids IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.on_corticosteroids IS
     'Whether the patient is on regular oral corticosteroids.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.has_established_cvd IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.has_established_cvd IS
     'Eligibility flag (not a model input): established cardiovascular disease makes QRISK3 inappropriate.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.has_familial_hypercholesterolaemia IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.has_familial_hypercholesterolaemia IS
     'Eligibility flag (not a model input): familial hypercholesterolaemia makes QRISK3 inappropriate.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinical_note IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -360,14 +377,14 @@ COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.clinical_note IS
 -- Cox proportional-hazards model, the 10-year CVD risk percentage, the
 -- derived risk band, and the estimated heart age.
 
-CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     qrisk3_cardiovascular_disease_risk_score_id UUID NOT NULL UNIQUE
-        REFERENCES qrisk3_cardiovascular_disease_risk_score(id) ON DELETE CASCADE,
+        REFERENCES qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score(id) ON DELETE CASCADE,
 
     ten_year_risk_percent NUMERIC(4,1),
     risk_band VARCHAR(10) NOT NULL DEFAULT ''
@@ -379,31 +396,31 @@ CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade (
 );
 
 CREATE TRIGGER trigger_qrisk3_cardiovascular_disease_risk_score_grade_updated_at
-    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score_grade
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score_grade IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade IS
     'Computed QRISK3 grading result: the linear predictor, the 10-year CVD risk percentage, the derived risk band, and the estimated heart age.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.qrisk3_cardiovascular_disease_risk_score_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.qrisk3_cardiovascular_disease_risk_score_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.ten_year_risk_percent IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.ten_year_risk_percent IS
     'Ten-year cardiovascular disease risk percentage (0.0-99.9, one decimal place).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.risk_band IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.risk_band IS
     'Derived risk band: low (< 10%), raised (>= 10%), or high (>= 20%).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.heart_age IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.heart_age IS
     'Estimated heart age in years for the same risk with modifiable factors optimal (null when not computable).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.linear_predictor IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.linear_predictor IS
     'Linear predictor from the sex-specific Cox proportional-hazards model.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.graded_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -419,14 +436,14 @@ COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade.graded_at IS
 -- predictor with the transformed contribution it added and a
 -- human-readable description.
 
-CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade_rule (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     qrisk3_cardiovascular_disease_risk_score_grade_id UUID NOT NULL
-        REFERENCES qrisk3_cardiovascular_disease_risk_score_grade(id) ON DELETE CASCADE,
+        REFERENCES qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     component VARCHAR(30) NOT NULL
@@ -460,34 +477,34 @@ CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade_rule (
 );
 
 CREATE INDEX qrisk3_cardiovascular_disease_risk_score_grade_rule_grade_id_idx
-    ON qrisk3_cardiovascular_disease_risk_score_grade_rule (qrisk3_cardiovascular_disease_risk_score_grade_id);
+    ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule (qrisk3_cardiovascular_disease_risk_score_grade_id);
 
 CREATE TRIGGER trigger_qrisk3_cardiovascular_disease_risk_score_grade_rule_updated_at
-    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score_grade_rule
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score_grade_rule IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule IS
     'Audit trail of every model term that contributed during QRISK3 computation: component, transformed contribution to the linear predictor, category, and description.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.qrisk3_cardiovascular_disease_risk_score_grade_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.qrisk3_cardiovascular_disease_risk_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.rule_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-SMOKING-HEAVY-01).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.component IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.component IS
     'Model component the term belongs to (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.contribution IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.contribution IS
     'Transformed value multiplied by its fitted coefficient, contributed to the linear predictor.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.category IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.category IS
     'Subject category (e.g. continuous-term, categorical-term, interaction-term).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.description IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_rule.description IS
     'Human-readable description of how the component contributed.';
 
 -- ========================================================================
@@ -501,14 +518,14 @@ COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_rule.descriptio
 -- Red-flag issues that fire independently of the numeric risk result,
 -- with priority and a suggested action for the clinical team.
 
-CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade_flag (
+CREATE TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     qrisk3_cardiovascular_disease_risk_score_grade_id UUID NOT NULL
-        REFERENCES qrisk3_cardiovascular_disease_risk_score_grade(id) ON DELETE CASCADE,
+        REFERENCES qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -529,34 +546,34 @@ CREATE TABLE qrisk3_cardiovascular_disease_risk_score_grade_flag (
 );
 
 CREATE INDEX qrisk3_cardiovascular_disease_risk_score_grade_flag_grade_id_idx
-    ON qrisk3_cardiovascular_disease_risk_score_grade_flag (qrisk3_cardiovascular_disease_risk_score_grade_id);
+    ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag (qrisk3_cardiovascular_disease_risk_score_grade_id);
 
 CREATE TRIGGER trigger_qrisk3_cardiovascular_disease_risk_score_grade_flag_updated_at
-    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score_grade_flag
+    BEFORE UPDATE ON qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION qrisk3_cardiovascular_disease_risk_score.set_updated_at();
 
-COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score_grade_flag IS
+COMMENT ON TABLE qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag IS
     'Red-flag issues that fire independently of the numeric risk result, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.created_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.updated_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.deleted_at IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.qrisk3_cardiovascular_disease_risk_score_grade_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.qrisk3_cardiovascular_disease_risk_score_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.flag_id IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-STATIN-RECOMMENDED-001).';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.category IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.category IS
     'Flag category: statin-recommended, severe-risk, not-eligible, missing-cholesterol, incomplete, severe-hypertension, or other.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.priority IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.description IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score_grade_flag.suggested_action IS
+COMMENT ON COLUMN qrisk3_cardiovascular_disease_risk_score.qrisk3_cardiovascular_disease_risk_score_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "offer atorvastatin 20 mg plus lifestyle advice after informed discussion").';
 
 -- ========================================================================

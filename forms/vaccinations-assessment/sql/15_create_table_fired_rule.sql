@@ -1,10 +1,10 @@
-CREATE TABLE fired_rule (
+CREATE TABLE vaccinations_assessment.fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -13,28 +13,28 @@ CREATE TABLE fired_rule (
 );
 
 CREATE TRIGGER trigger_fired_rule_updated_at
-    BEFORE UPDATE ON fired_rule
+    BEFORE UPDATE ON vaccinations_assessment.fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE fired_rule IS
+COMMENT ON TABLE vaccinations_assessment.fired_rule IS
     'Vaccination rules that fired during assessment grading. Many-to-one child of grade.';
-COMMENT ON COLUMN fired_rule.rule_id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.rule_id IS
     'Identifier of the vaccination rule that fired (e.g. VAX-001).';
-COMMENT ON COLUMN fired_rule.category IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.category IS
     'Category the rule belongs to (e.g. Childhood, Adult, Contraindication).';
-COMMENT ON COLUMN fired_rule.concern_level IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.concern_level IS
     'Concern level: high, medium, or low.';
 
-COMMENT ON COLUMN fired_rule.grade_id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN fired_rule.description IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.description IS
     'Description.';
-COMMENT ON COLUMN fired_rule.id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fired_rule.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN fired_rule.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN fired_rule.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS cage_alcohol_questionnaire;
+
+COMMENT ON SCHEMA cage_alcohol_questionnaire IS
+    'Namespace for the CAGE Alcohol Questionnaire form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION cage_alcohol_questionnaire.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION cage_alcohol_questionnaire.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE cage_alcohol_questionnaire.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cage_alcohol_questionnaire.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cage_alcohol_questionnaire.patient IS
     'Patient demographic information used by the CAGE alcohol questionnaire record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON cage_alcohol_questionnaire.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the screening
 -- clinician (doctor, nurse, midwife, other).
 
-CREATE TABLE clinician (
+CREATE TABLE cage_alcohol_questionnaire.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cage_alcohol_questionnaire.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cage_alcohol_questionnaire.clinician IS
     'Clinician identifying information for the screening clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.role IS
     'Primary clinical role: doctor, nurse, midwife, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON cage_alcohol_questionnaire.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -206,14 +223,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- annoyed, guilty, eye-opener). The computed grade, fired rules, and
 -- flags live in dedicated child tables.
 
-CREATE TABLE cage_alcohol_questionnaire (
+CREATE TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES cage_alcohol_questionnaire.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES cage_alcohol_questionnaire.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -243,52 +260,52 @@ CREATE TABLE cage_alcohol_questionnaire (
 );
 
 CREATE INDEX cage_alcohol_questionnaire_patient_id_idx
-    ON cage_alcohol_questionnaire (patient_id);
+    ON cage_alcohol_questionnaire.cage_alcohol_questionnaire (patient_id);
 CREATE INDEX cage_alcohol_questionnaire_clinician_id_idx
-    ON cage_alcohol_questionnaire (clinician_id);
+    ON cage_alcohol_questionnaire.cage_alcohol_questionnaire (clinician_id);
 
 CREATE TRIGGER trigger_cage_alcohol_questionnaire_updated_at
-    BEFORE UPDATE ON cage_alcohol_questionnaire
+    BEFORE UPDATE ON cage_alcohol_questionnaire.cage_alcohol_questionnaire
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE cage_alcohol_questionnaire IS
+COMMENT ON TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire IS
     'Main CAGE alcohol questionnaire record: assessment context, patient identification, and the four scored criterion inputs (cut down, annoyed, guilty, eye-opener).';
-COMMENT ON COLUMN cage_alcohol_questionnaire.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.patient_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.patient_id IS
     'Foreign key to the patient being screened (delete restricted).';
-COMMENT ON COLUMN cage_alcohol_questionnaire.clinician_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.clinician_id IS
     'Foreign key to the screening clinician (optional; delete restricted).';
-COMMENT ON COLUMN cage_alcohol_questionnaire.clinician_name IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.clinician_name IS
     'Name of the screening clinician as recorded on the assessment.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.clinician_role IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.clinician_role IS
     'Role of the screening clinician: doctor, nurse, midwife, or other.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.assessed_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.care_setting IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.care_setting IS
     'Care setting: primary-care, ward, emergency-department, antenatal, or other.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.patient_identifier IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.age_band IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.sex IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.cut_down IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.cut_down IS
     'Criterion C — has the patient felt they should cut down on their drinking: yes, no, or unanswered.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.annoyed IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.annoyed IS
     'Criterion A — have people annoyed the patient by criticising their drinking: yes, no, or unanswered.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.guilty IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.guilty IS
     'Criterion G — has the patient felt bad or guilty about their drinking: yes, no, or unanswered.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.eye_opener IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.eye_opener IS
     'Criterion E — has the patient had a morning drink to steady nerves or cure a hangover (eye-opener): yes, no, or unanswered.';
-COMMENT ON COLUMN cage_alcohol_questionnaire.clinical_note IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -303,14 +320,14 @@ COMMENT ON COLUMN cage_alcohol_questionnaire.clinical_note IS
 -- summed total (0-4), and the derived binary interpretation
 -- (negative/positive) against the >= 2 cut-off.
 
-CREATE TABLE cage_alcohol_questionnaire_grade (
+CREATE TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cage_alcohol_questionnaire_id UUID NOT NULL UNIQUE
-        REFERENCES cage_alcohol_questionnaire(id) ON DELETE CASCADE,
+        REFERENCES cage_alcohol_questionnaire.cage_alcohol_questionnaire(id) ON DELETE CASCADE,
 
     cut_down_point INT,
     annoyed_point INT,
@@ -324,35 +341,35 @@ CREATE TABLE cage_alcohol_questionnaire_grade (
 );
 
 CREATE TRIGGER trigger_cage_alcohol_questionnaire_grade_updated_at
-    BEFORE UPDATE ON cage_alcohol_questionnaire_grade
+    BEFORE UPDATE ON cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE cage_alcohol_questionnaire_grade IS
+COMMENT ON TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade IS
     'Computed CAGE grading result: per-criterion points, summed total (0-4), and derived binary interpretation (negative/positive) against the >= 2 cut-off.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.cage_alcohol_questionnaire_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.cage_alcohol_questionnaire_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.cut_down_point IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.cut_down_point IS
     'Point (0-1) awarded for criterion C, cut down.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.annoyed_point IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.annoyed_point IS
     'Point (0-1) awarded for criterion A, annoyed.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.guilty_point IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.guilty_point IS
     'Point (0-1) awarded for criterion G, guilty.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.eye_opener_point IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.eye_opener_point IS
     'Point (0-1) awarded for criterion E, eye-opener.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.total_score IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.total_score IS
     'Summed CAGE score across the four criteria (0-4).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.interpretation IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.interpretation IS
     'Derived binary interpretation: positive (total >= 2) or negative (total < 2).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade.graded_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -367,14 +384,14 @@ COMMENT ON COLUMN cage_alcohol_questionnaire_grade.graded_at IS
 -- Each row records one rule firing with the criterion it belongs to, the
 -- point it contributed, and a human-readable description.
 
-CREATE TABLE cage_alcohol_questionnaire_grade_rule (
+CREATE TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cage_alcohol_questionnaire_grade_id UUID NOT NULL
-        REFERENCES cage_alcohol_questionnaire_grade(id) ON DELETE CASCADE,
+        REFERENCES cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     parameter VARCHAR(20) NOT NULL
@@ -385,34 +402,34 @@ CREATE TABLE cage_alcohol_questionnaire_grade_rule (
 );
 
 CREATE INDEX cage_alcohol_questionnaire_grade_rule_grade_id_idx
-    ON cage_alcohol_questionnaire_grade_rule (cage_alcohol_questionnaire_grade_id);
+    ON cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule (cage_alcohol_questionnaire_grade_id);
 
 CREATE TRIGGER trigger_cage_alcohol_questionnaire_grade_rule_updated_at
-    BEFORE UPDATE ON cage_alcohol_questionnaire_grade_rule
+    BEFORE UPDATE ON cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE cage_alcohol_questionnaire_grade_rule IS
+COMMENT ON TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule IS
     'Audit trail of every grading rule that fired during CAGE computation: criterion, point contributed, category, and description.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.cage_alcohol_questionnaire_grade_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.cage_alcohol_questionnaire_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.rule_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-EYE-OPENER-1POINT-01).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.parameter IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.parameter IS
     'Scored criterion the rule belongs to: cut-down, annoyed, guilty, eye-opener, or total.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.points IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.points IS
     'Point (0-1) contributed by this rule for its criterion.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.category IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.category IS
     'Subject category (e.g. criterion-positive, total-band).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.description IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -426,14 +443,14 @@ COMMENT ON COLUMN cage_alcohol_questionnaire_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE cage_alcohol_questionnaire_grade_flag (
+CREATE TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cage_alcohol_questionnaire_grade_id UUID NOT NULL
-        REFERENCES cage_alcohol_questionnaire_grade(id) ON DELETE CASCADE,
+        REFERENCES cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -452,34 +469,34 @@ CREATE TABLE cage_alcohol_questionnaire_grade_flag (
 );
 
 CREATE INDEX cage_alcohol_questionnaire_grade_flag_grade_id_idx
-    ON cage_alcohol_questionnaire_grade_flag (cage_alcohol_questionnaire_grade_id);
+    ON cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag (cage_alcohol_questionnaire_grade_id);
 
 CREATE TRIGGER trigger_cage_alcohol_questionnaire_grade_flag_updated_at
-    BEFORE UPDATE ON cage_alcohol_questionnaire_grade_flag
+    BEFORE UPDATE ON cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cage_alcohol_questionnaire.set_updated_at();
 
-COMMENT ON TABLE cage_alcohol_questionnaire_grade_flag IS
+COMMENT ON TABLE cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.created_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.updated_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.deleted_at IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.cage_alcohol_questionnaire_grade_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.cage_alcohol_questionnaire_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.flag_id IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-POSITIVE-SCREEN-001).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.category IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.priority IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.description IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN cage_alcohol_questionnaire_grade_flag.suggested_action IS
+COMMENT ON COLUMN cage_alcohol_questionnaire.cage_alcohol_questionnaire_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "undertake a fuller assessment of drinking").';
 
 -- ========================================================================

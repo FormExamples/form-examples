@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS centor_score_for_streptococcal_pharyngitis;
+
+COMMENT ON SCHEMA centor_score_for_streptococcal_pharyngitis IS
+    'Namespace for the Centor Score for Streptococcal Pharyngitis form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.patient IS
     'Patient demographic information used by the Centor score assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON centor_score_for_streptococcal_pharyngitis.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information used to identify the assessing clinician
 -- (GP, nurse practitioner, pharmacist).
 
-CREATE TABLE clinician (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.role IS
     'Primary clinical role: gp, nurse-practitioner, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON centor_score_for_streptococcal_pharyngitis.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- modifier, and the airway / quinsy red-flag inputs. The computed grade,
 -- fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE centor_score_for_streptococcal_pharyngitis (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES centor_score_for_streptococcal_pharyngitis.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES centor_score_for_streptococcal_pharyngitis.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -253,64 +270,64 @@ CREATE TABLE centor_score_for_streptococcal_pharyngitis (
 );
 
 CREATE INDEX centor_score_for_streptococcal_pharyngitis_patient_id_idx
-    ON centor_score_for_streptococcal_pharyngitis (patient_id);
+    ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis (patient_id);
 CREATE INDEX centor_score_for_streptococcal_pharyngitis_clinician_id_idx
-    ON centor_score_for_streptococcal_pharyngitis (clinician_id);
+    ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis (clinician_id);
 
 CREATE TRIGGER trigger_centor_score_for_streptococcal_pharyngitis_updated_at
-    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis IS
     'Main Centor score assessment record: assessment context, patient identification, the four Centor criterion inputs, the optional measured temperature, the patient age driving the McIsaac modifier, and the airway / quinsy red-flag inputs.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician_name IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinician_role IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.clinician_role IS
     'Role of the assessing clinician: gp, nurse-practitioner, pharmacist, or other.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.assessed_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.care_setting IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.care_setting IS
     'Care setting: general-practice, urgent-care, pharmacy, emergency-department, or other.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.patient_identifier IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.age_years IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.age_years IS
     'Patient age in whole years; drives the McIsaac age modifier (+1 ages 3-14, 0 ages 15-44, -1 ages 45+). Null raises a data-completeness flag and applies a modifier of 0.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.sex IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.tonsillar_exudate IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.tonsillar_exudate IS
     'Centor criterion 1 — tonsillar exudate or swelling present: yes scores 1 point.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.tender_anterior_cervical_nodes IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.tender_anterior_cervical_nodes IS
     'Centor criterion 2 — tender anterior cervical lymphadenopathy present: yes scores 1 point.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.fever_over_38 IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.fever_over_38 IS
     'Centor criterion 3 — temperature > 38 C or a history of fever: yes scores 1 point (also set when measured_temperature_celsius exceeds 38).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.measured_temperature_celsius IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.measured_temperature_celsius IS
     'Optional measured temperature in degrees Celsius; a value above 38.0 sets the fever criterion.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.absence_of_cough IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.absence_of_cough IS
     'Centor criterion 4 — cough absent: yes (cough absent) scores 1 point.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.stridor_or_breathing_difficulty IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.stridor_or_breathing_difficulty IS
     'Red-flag input — stridor or difficulty breathing (airway compromise): yes.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.drooling_or_cannot_swallow IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.drooling_or_cannot_swallow IS
     'Red-flag input — drooling or inability to swallow (airway / peritonsillar abscess): yes.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.trismus IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.trismus IS
     'Red-flag input — trismus (peritonsillar abscess / quinsy): yes.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.muffled_voice IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.muffled_voice IS
     'Red-flag input — muffled ("hot potato") voice (peritonsillar abscess / quinsy): yes.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.unilateral_neck_swelling IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.unilateral_neck_swelling IS
     'Red-flag input — unilateral neck swelling (peritonsillar abscess / quinsy): yes.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinical_note IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -325,14 +342,14 @@ COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.clinical_note IS
 -- (0-4), the McIsaac age modifier (-1..+1), the modified McIsaac score
 -- (-1..5), the derived risk band, and the free-text management guidance.
 
-CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     centor_score_for_streptococcal_pharyngitis_id UUID NOT NULL UNIQUE
-        REFERENCES centor_score_for_streptococcal_pharyngitis(id) ON DELETE CASCADE,
+        REFERENCES centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis(id) ON DELETE CASCADE,
 
     centor_score INT,
     age_modifier INT,
@@ -345,33 +362,33 @@ CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade (
 );
 
 CREATE TRIGGER trigger_centor_score_for_streptococcal_pharyngitis_grade_updated_at
-    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis_grade
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis_grade IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade IS
     'Computed Centor / McIsaac grading result: raw Centor total (0-4), age modifier (-1..+1), modified McIsaac score (-1..5), derived risk band, and management guidance.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.centor_score_for_streptococcal_pharyngitis_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.centor_score_for_streptococcal_pharyngitis_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.centor_score IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.centor_score IS
     'Raw Centor total across the four criteria (0-4 when complete).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.age_modifier IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.age_modifier IS
     'McIsaac age modifier: +1 for ages 3-14, 0 for ages 15-44, -1 for ages 45+.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.mcisaac_score IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.mcisaac_score IS
     'Modified McIsaac score: Centor total plus age modifier (-1..5).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.risk_band IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.risk_band IS
     'Derived risk band from the McIsaac score: low (<=1), moderate (2-3), or high (4-5).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.management IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.management IS
     'Free-text testing / antibiotic management guidance for the derived band.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.graded_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -387,14 +404,14 @@ COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade_rule (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     centor_score_for_streptococcal_pharyngitis_grade_id UUID NOT NULL
-        REFERENCES centor_score_for_streptococcal_pharyngitis_grade(id) ON DELETE CASCADE,
+        REFERENCES centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     criterion VARCHAR(30) NOT NULL
@@ -405,34 +422,34 @@ CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade_rule (
 );
 
 CREATE INDEX centor_score_for_streptococcal_pharyngitis_grade_rule_grade_id_idx
-    ON centor_score_for_streptococcal_pharyngitis_grade_rule (centor_score_for_streptococcal_pharyngitis_grade_id);
+    ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule (centor_score_for_streptococcal_pharyngitis_grade_id);
 
 CREATE TRIGGER trigger_centor_score_for_streptococcal_pharyngitis_grade_rule_updated_at
-    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis_grade_rule
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis_grade_rule IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule IS
     'Audit trail of every grading rule that fired during Centor / McIsaac computation: criterion, points contributed, category, and description.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.centor_score_for_streptococcal_pharyngitis_grade_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.centor_score_for_streptococcal_pharyngitis_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.rule_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-FEVER-01).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.criterion IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.criterion IS
     'Scored criterion the rule belongs to: tonsillar-exudate, tender-nodes, fever, cough-absent, age-modifier, or band.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.points IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.points IS
     'Points contributed by this rule (0 or 1 per criterion; -1..+1 for the age modifier).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.category IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.category IS
     'Subject category (e.g. criterion-point, age-band, risk-band).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.description IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -446,14 +463,14 @@ COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_rule.descript
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade_flag (
+CREATE TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     centor_score_for_streptococcal_pharyngitis_grade_id UUID NOT NULL
-        REFERENCES centor_score_for_streptococcal_pharyngitis_grade(id) ON DELETE CASCADE,
+        REFERENCES centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -473,34 +490,34 @@ CREATE TABLE centor_score_for_streptococcal_pharyngitis_grade_flag (
 );
 
 CREATE INDEX centor_score_for_streptococcal_pharyngitis_grade_flag_grade_id_idx
-    ON centor_score_for_streptococcal_pharyngitis_grade_flag (centor_score_for_streptococcal_pharyngitis_grade_id);
+    ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag (centor_score_for_streptococcal_pharyngitis_grade_id);
 
 CREATE TRIGGER trigger_centor_score_for_streptococcal_pharyngitis_grade_flag_updated_at
-    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis_grade_flag
+    BEFORE UPDATE ON centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION centor_score_for_streptococcal_pharyngitis.set_updated_at();
 
-COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis_grade_flag IS
+COMMENT ON TABLE centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.created_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.updated_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.deleted_at IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.centor_score_for_streptococcal_pharyngitis_grade_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.centor_score_for_streptococcal_pharyngitis_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.flag_id IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-AIRWAY-RED-FLAG-001).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.category IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.category IS
     'Flag category: airway-red-flag, quinsy, test-or-antibiotic, stewardship, incomplete, or other (see CHECK constraint).';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.priority IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.description IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis_grade_flag.suggested_action IS
+COMMENT ON COLUMN centor_score_for_streptococcal_pharyngitis.centor_score_for_streptococcal_pharyngitis_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "arrange urgent same-day assessment").';
 
 -- ========================================================================

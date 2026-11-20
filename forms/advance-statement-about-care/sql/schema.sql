@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS advance_statement_about_care;
+
+COMMENT ON SCHEMA advance_statement_about_care IS
+    'Namespace for the Advance Statement About Care form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION advance_statement_about_care.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION advance_statement_about_care.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE advance_statement_about_care.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,56 +97,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON advance_statement_about_care.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE advance_statement_about_care.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN advance_statement_about_care.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN advance_statement_about_care.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN advance_statement_about_care.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN advance_statement_about_care.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN advance_statement_about_care.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN advance_statement_about_care.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN advance_statement_about_care.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN advance_statement_about_care.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN advance_statement_about_care.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN advance_statement_about_care.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN advance_statement_about_care.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN advance_statement_about_care.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN advance_statement_about_care.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN advance_statement_about_care.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON advance_statement_about_care.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN advance_statement_about_care.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -142,7 +159,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE advance_statement_about_care.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -161,46 +178,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON advance_statement_about_care.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE advance_statement_about_care.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON advance_statement_about_care.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -211,12 +228,12 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_advance_statement_about_care.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE advance_statement_about_care.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES advance_statement_about_care.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
     full_name VARCHAR(255) NOT NULL DEFAULT '',
     address TEXT NOT NULL DEFAULT '',
@@ -293,168 +310,168 @@ CREATE TABLE assessment (
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON advance_statement_about_care.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE advance_statement_about_care.assessment IS
     'Flat assessment table: parent assessment merged with every assessment_<section> child. Generated by bin/generate-sql-flat.py.';
 
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN assessment.full_name IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.full_name IS
     'Full name.';
-COMMENT ON COLUMN assessment.address IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.address IS
     'Address.';
-COMMENT ON COLUMN assessment.postcode IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.postcode IS
     'Postcode.';
-COMMENT ON COLUMN assessment.date_of_birth IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.date_of_birth IS
     'Date of birth.';
-COMMENT ON COLUMN assessment.nhs_number IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.nhs_number IS
     'NHS number.';
-COMMENT ON COLUMN assessment.phone IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.phone IS
     'Phone.';
-COMMENT ON COLUMN assessment.email IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.email IS
     'Email.';
-COMMENT ON COLUMN assessment.gp_name IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.gp_name IS
     'GP name.';
-COMMENT ON COLUMN assessment.gp_practice IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.gp_practice IS
     'GP practice.';
-COMMENT ON COLUMN assessment.reason_for_statement IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.reason_for_statement IS
     'Reason for statement.';
-COMMENT ON COLUMN assessment.current_health_status IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.current_health_status IS
     'Current health status.';
-COMMENT ON COLUMN assessment.current_diagnoses IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.current_diagnoses IS
     'Current diagnoses.';
-COMMENT ON COLUMN assessment.has_discussed_with_family IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.has_discussed_with_family IS
     'Has discussed with family. One of: yes, no.';
-COMMENT ON COLUMN assessment.has_discussed_with_clinician IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.has_discussed_with_clinician IS
     'Has discussed with clinician. One of: yes, no.';
-COMMENT ON COLUMN assessment.discussion_details IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.discussion_details IS
     'Discussion details.';
-COMMENT ON COLUMN assessment.personal_values IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.personal_values IS
     'Personal values.';
-COMMENT ON COLUMN assessment.quality_of_life_priorities IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.quality_of_life_priorities IS
     'Quality of life priorities.';
-COMMENT ON COLUMN assessment.religious_beliefs IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.religious_beliefs IS
     'Religious beliefs.';
-COMMENT ON COLUMN assessment.spiritual_needs IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.spiritual_needs IS
     'Spiritual needs.';
-COMMENT ON COLUMN assessment.cultural_considerations IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.cultural_considerations IS
     'Cultural considerations.';
-COMMENT ON COLUMN assessment.fears_and_concerns IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.fears_and_concerns IS
     'Fears and concerns.';
-COMMENT ON COLUMN assessment.things_that_matter_most IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.things_that_matter_most IS
     'Things that matter most.';
-COMMENT ON COLUMN assessment.preferred_place_of_care IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.preferred_place_of_care IS
     'Preferred place of care.';
-COMMENT ON COLUMN assessment.preferred_place_of_death IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.preferred_place_of_death IS
     'Preferred place of death.';
-COMMENT ON COLUMN assessment.daily_routine_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.daily_routine_preferences IS
     'Daily routine preferences.';
-COMMENT ON COLUMN assessment.personal_care_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.personal_care_preferences IS
     'Personal care preferences.';
-COMMENT ON COLUMN assessment.food_and_drink_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.food_and_drink_preferences IS
     'Food and drink preferences.';
-COMMENT ON COLUMN assessment.sleep_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.sleep_preferences IS
     'Sleep preferences.';
-COMMENT ON COLUMN assessment.clothing_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.clothing_preferences IS
     'Clothing preferences.';
-COMMENT ON COLUMN assessment.environment_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.environment_preferences IS
     'Environment preferences.';
-COMMENT ON COLUMN assessment.pet_care_wishes IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.pet_care_wishes IS
     'Pet care wishes.';
-COMMENT ON COLUMN assessment.pain_management_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.pain_management_preferences IS
     'Pain management preferences.';
-COMMENT ON COLUMN assessment.attitude_to_hospital_admission IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.attitude_to_hospital_admission IS
     'Attitude to hospital admission.';
-COMMENT ON COLUMN assessment.attitude_to_intensive_care IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.attitude_to_intensive_care IS
     'Attitude to intensive care.';
-COMMENT ON COLUMN assessment.attitude_to_artificial_nutrition IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.attitude_to_artificial_nutrition IS
     'Attitude to artificial nutrition.';
-COMMENT ON COLUMN assessment.attitude_to_artificial_hydration IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.attitude_to_artificial_hydration IS
     'Attitude to artificial hydration.';
-COMMENT ON COLUMN assessment.medication_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.medication_preferences IS
     'Medication preferences.';
-COMMENT ON COLUMN assessment.complementary_therapy_preferences IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.complementary_therapy_preferences IS
     'Complementary therapy preferences.';
-COMMENT ON COLUMN assessment.other_treatment_wishes IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.other_treatment_wishes IS
     'Other treatment wishes.';
-COMMENT ON COLUMN assessment.preferred_language IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.preferred_language IS
     'Preferred language.';
-COMMENT ON COLUMN assessment.communication_aids IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.communication_aids IS
     'Communication aids.';
-COMMENT ON COLUMN assessment.how_to_share_information IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.how_to_share_information IS
     'How to share information.';
-COMMENT ON COLUMN assessment.who_to_involve_in_decisions IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.who_to_involve_in_decisions IS
     'WHO to involve in decisions.';
-COMMENT ON COLUMN assessment.information_sharing_restrictions IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.information_sharing_restrictions IS
     'Information sharing restrictions.';
-COMMENT ON COLUMN assessment.preferred_communication_style IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.preferred_communication_style IS
     'Preferred communication style.';
-COMMENT ON COLUMN assessment.primary_contact_name IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.primary_contact_name IS
     'Primary contact name.';
-COMMENT ON COLUMN assessment.primary_contact_relationship IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.primary_contact_relationship IS
     'Primary contact relationship.';
-COMMENT ON COLUMN assessment.primary_contact_phone IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.primary_contact_phone IS
     'Primary contact phone.';
-COMMENT ON COLUMN assessment.primary_contact_email IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.primary_contact_email IS
     'Primary contact email.';
-COMMENT ON COLUMN assessment.secondary_contact_name IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.secondary_contact_name IS
     'Secondary contact name.';
-COMMENT ON COLUMN assessment.secondary_contact_relationship IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.secondary_contact_relationship IS
     'Secondary contact relationship.';
-COMMENT ON COLUMN assessment.secondary_contact_phone IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.secondary_contact_phone IS
     'Secondary contact phone.';
-COMMENT ON COLUMN assessment.people_who_should_visit IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.people_who_should_visit IS
     'People WHO should visit.';
-COMMENT ON COLUMN assessment.people_who_should_not_visit IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.people_who_should_not_visit IS
     'People WHO should not visit.';
-COMMENT ON COLUMN assessment.support_network_details IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.support_network_details IS
     'Support network details.';
-COMMENT ON COLUMN assessment.financial_arrangements IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.financial_arrangements IS
     'Financial arrangements.';
-COMMENT ON COLUMN assessment.property_arrangements IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.property_arrangements IS
     'Property arrangements.';
-COMMENT ON COLUMN assessment.insurance_details IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.insurance_details IS
     'Insurance details.';
-COMMENT ON COLUMN assessment.will_location IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.will_location IS
     'Will location.';
-COMMENT ON COLUMN assessment.has_lasting_power_of_attorney IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.has_lasting_power_of_attorney IS
     'Has lasting power of attorney. One of: yes, no.';
-COMMENT ON COLUMN assessment.lpa_details IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.lpa_details IS
     'Lpa details.';
-COMMENT ON COLUMN assessment.funeral_wishes IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.funeral_wishes IS
     'Funeral wishes.';
-COMMENT ON COLUMN assessment.burial_or_cremation IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.burial_or_cremation IS
     'Burial or cremation. One of: burial, cremation, other.';
-COMMENT ON COLUMN assessment.other_practical_matters IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.other_practical_matters IS
     'Other practical matters.';
-COMMENT ON COLUMN assessment.maker_signature_obtained IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.maker_signature_obtained IS
     'Maker signature obtained. One of: yes, no.';
-COMMENT ON COLUMN assessment.maker_signature_date IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.maker_signature_date IS
     'Maker signature date.';
-COMMENT ON COLUMN assessment.witness_name IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.witness_name IS
     'Witness name.';
-COMMENT ON COLUMN assessment.witness_address IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.witness_address IS
     'Witness address.';
-COMMENT ON COLUMN assessment.witness_signature_obtained IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.witness_signature_obtained IS
     'Witness signature obtained. One of: yes, no.';
-COMMENT ON COLUMN assessment.witness_signature_date IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.witness_signature_date IS
     'Witness signature date.';
-COMMENT ON COLUMN assessment.review_date IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.review_date IS
     'Review date.';
-COMMENT ON COLUMN assessment.review_notes IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.review_notes IS
     'Review notes.';
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -465,14 +482,14 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_advance_statement_about_care_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE advance_statement_about_care.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES advance_statement_about_care.assessment(id) ON DELETE CASCADE,
 
     completeness_level VARCHAR(12) NOT NULL DEFAULT 'incomplete'
         CHECK (completeness_level IN ('complete', 'partial', 'incomplete')),
@@ -484,29 +501,29 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON advance_statement_about_care.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE advance_statement_about_care.grade IS
     'Computed completeness grading result for the advance statement about care. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN advance_statement_about_care.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.grade.deleted_at IS
     'Timestamp when this row was deleted.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN advance_statement_about_care.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.completeness_level IS
+COMMENT ON COLUMN advance_statement_about_care.grade.completeness_level IS
     'Overall completeness classification: complete, partial, or incomplete.';
-COMMENT ON COLUMN grade.sections_completed IS
+COMMENT ON COLUMN advance_statement_about_care.grade.sections_completed IS
     'Number of sections that have been adequately completed.';
-COMMENT ON COLUMN grade.total_sections IS
+COMMENT ON COLUMN advance_statement_about_care.grade.total_sections IS
     'Total number of sections in the advance statement.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN advance_statement_about_care.grade.graded_at IS
     'Timestamp when the completeness grading was computed.';
 
 -- ========================================================================
@@ -517,13 +534,13 @@ COMMENT ON COLUMN grade.graded_at IS
 -- BEGIN 06_create_table_advance_statement_about_care_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE advance_statement_about_care.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES advance_statement_about_care.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -532,30 +549,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON advance_statement_about_care.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE advance_statement_about_care.grading_fired_rule IS
     'Individual completeness rules that evaluated to true during advance statement grading.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. CMP-001, VAL-002).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.category IS
     'Category of the rule (e.g. Personal Information, Values, Care Preferences, Signatures).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN grading_fired_rule.completeness_level IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.completeness_level IS
     'Completeness level contributed by this rule: complete, partial, or incomplete.';
 
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -566,13 +583,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 92_create_table_advance_statement_about_care_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE advance_statement_about_care.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES advance_statement_about_care.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -581,30 +598,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON advance_statement_about_care.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION advance_statement_about_care.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE advance_statement_about_care.grading_additional_flag IS
     'Additional flags detected during advance statement completeness grading (e.g. missing contacts, unsigned statement, outdated review date).';
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-SIG-001, FLAG-REV-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.category IS
     'Category of the flag (e.g. Signature Missing, Review Overdue, Contact Incomplete).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.message IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN advance_statement_about_care.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

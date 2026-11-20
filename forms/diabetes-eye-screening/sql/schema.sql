@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS diabetes_eye_screening;
+
+COMMENT ON SCHEMA diabetes_eye_screening IS
+    'Namespace for the Diabetes Eye Screening record form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION diabetes_eye_screening.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION diabetes_eye_screening.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE diabetes_eye_screening.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON diabetes_eye_screening.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE diabetes_eye_screening.patient IS
     'Patient demographic information used by the diabetes-eye-screening record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN diabetes_eye_screening.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON diabetes_eye_screening.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- retinal grade for the diabetes eye screening episode (screener, primary or
 -- secondary grader, or ophthalmologist).
 
-CREATE TABLE clinician (
+CREATE TABLE diabetes_eye_screening.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON diabetes_eye_screening.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE diabetes_eye_screening.clinician IS
     'Clinician identifying information for the screener / grader who assigned the retinal grade for the diabetes eye screening episode.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.name IS
     'Screener / grader full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.role IS
     'Grader role: screener, primary-grader, secondary-grader, ophthalmologist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN diabetes_eye_screening.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON diabetes_eye_screening.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- classification and recall / referral outcome, the audit trail of fired rules,
 -- and the flagged issues live in dedicated child tables.
 
-CREATE TABLE diabetes_eye_screening (
+CREATE TABLE diabetes_eye_screening.diabetes_eye_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES diabetes_eye_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES diabetes_eye_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Grading context
     grader_name TEXT NOT NULL DEFAULT '',
@@ -253,72 +270,72 @@ CREATE TABLE diabetes_eye_screening (
 );
 
 CREATE INDEX diabetes_eye_screening_patient_id_idx
-    ON diabetes_eye_screening (patient_id);
+    ON diabetes_eye_screening.diabetes_eye_screening (patient_id);
 CREATE INDEX diabetes_eye_screening_clinician_id_idx
-    ON diabetes_eye_screening (clinician_id);
+    ON diabetes_eye_screening.diabetes_eye_screening (clinician_id);
 
 CREATE TRIGGER trigger_diabetes_eye_screening_updated_at
-    BEFORE UPDATE ON diabetes_eye_screening
+    BEFORE UPDATE ON diabetes_eye_screening.diabetes_eye_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE diabetes_eye_screening IS
+COMMENT ON TABLE diabetes_eye_screening.diabetes_eye_screening IS
     'Main diabetes-eye-screening record for one DESP retinal screening episode: grading context, patient identification, and the right-eye and left-eye grading blocks (R grade, M grade, P marker, U marker, visual acuity). The worst-eye classification and recall / referral outcome, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN diabetes_eye_screening.id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_eye_screening.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN diabetes_eye_screening.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN diabetes_eye_screening.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN diabetes_eye_screening.patient_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.patient_id IS
     'Foreign key to the patient this screening documents (restrict delete).';
-COMMENT ON COLUMN diabetes_eye_screening.clinician_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.clinician_id IS
     'Foreign key to the screener / grader clinician (restrict delete); optional.';
-COMMENT ON COLUMN diabetes_eye_screening.grader_name IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.grader_name IS
     'Name of the screener / grader who assigned the grade.';
-COMMENT ON COLUMN diabetes_eye_screening.grader_role IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.grader_role IS
     'Grader role: screener, primary-grader, secondary-grader, ophthalmologist, or other.';
-COMMENT ON COLUMN diabetes_eye_screening.graded_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.graded_at IS
     'Date the grade was assigned; drives the patient-overdue comparison.';
-COMMENT ON COLUMN diabetes_eye_screening.image_captured_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.image_captured_at IS
     'Date the retinal images were captured.';
-COMMENT ON COLUMN diabetes_eye_screening.imaging_media IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.imaging_media IS
     'Imaging modality: digital-fundus, mydriatic, non-mydriatic, oct, or other.';
-COMMENT ON COLUMN diabetes_eye_screening.patient_identifier IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.patient_identifier IS
     'Local or NHS patient identifier as recorded on the record.';
-COMMENT ON COLUMN diabetes_eye_screening.age_band IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.age_band IS
     'Screening-eligible age band (>= 12); under-12 is outside programme eligibility.';
-COMMENT ON COLUMN diabetes_eye_screening.diabetes_type IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.diabetes_type IS
     'Diabetes type: type-1, type-2, other, or unknown.';
-COMMENT ON COLUMN diabetes_eye_screening.years_since_diagnosis IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.years_since_diagnosis IS
     'Years since diabetes diagnosis.';
-COMMENT ON COLUMN diabetes_eye_screening.previous_screen_date IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.previous_screen_date IS
     'Date of the most recent previous screen; drives overdue and low-risk eligibility.';
-COMMENT ON COLUMN diabetes_eye_screening.previous_screen_result IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.previous_screen_result IS
     'Result of the previous screen: r0m0, background, referable, none, or unknown; r0m0 is required for low-risk 24-month recall.';
-COMMENT ON COLUMN diabetes_eye_screening.right_retinopathy_grade IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.right_retinopathy_grade IS
     'Right-eye retinopathy (R) grade: R0, R1, R2, R3A, or R3S.';
-COMMENT ON COLUMN diabetes_eye_screening.right_maculopathy_grade IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.right_maculopathy_grade IS
     'Right-eye maculopathy (M) grade: M0 or M1.';
-COMMENT ON COLUMN diabetes_eye_screening.right_photocoagulation IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.right_photocoagulation IS
     'Right-eye photocoagulation (P) marker: yes or no; contextual, does not change the pathway.';
-COMMENT ON COLUMN diabetes_eye_screening.right_ungradable IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.right_ungradable IS
     'Right-eye ungradable (U) marker: yes or no; yes routes to slit-lamp unless referable disease routes to HES.';
-COMMENT ON COLUMN diabetes_eye_screening.right_visual_acuity IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.right_visual_acuity IS
     'Right-eye visual acuity as recorded (e.g. logMAR or Snellen); optional.';
-COMMENT ON COLUMN diabetes_eye_screening.left_retinopathy_grade IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.left_retinopathy_grade IS
     'Left-eye retinopathy (R) grade: R0, R1, R2, R3A, or R3S.';
-COMMENT ON COLUMN diabetes_eye_screening.left_maculopathy_grade IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.left_maculopathy_grade IS
     'Left-eye maculopathy (M) grade: M0 or M1.';
-COMMENT ON COLUMN diabetes_eye_screening.left_photocoagulation IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.left_photocoagulation IS
     'Left-eye photocoagulation (P) marker: yes or no; contextual, does not change the pathway.';
-COMMENT ON COLUMN diabetes_eye_screening.left_ungradable IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.left_ungradable IS
     'Left-eye ungradable (U) marker: yes or no; yes routes to slit-lamp unless referable disease routes to HES.';
-COMMENT ON COLUMN diabetes_eye_screening.left_visual_acuity IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.left_visual_acuity IS
     'Left-eye visual acuity as recorded (e.g. logMAR or Snellen); optional.';
-COMMENT ON COLUMN diabetes_eye_screening.clinical_context IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -335,14 +352,14 @@ COMMENT ON COLUMN diabetes_eye_screening.clinical_context IS
 -- referral pathway by clinical urgency (most urgent wins). This is a
 -- result-classification outcome, not a numeric score.
 
-CREATE TABLE diabetes_eye_screening_grade (
+CREATE TABLE diabetes_eye_screening.diabetes_eye_screening_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_eye_screening_id UUID NOT NULL UNIQUE
-        REFERENCES diabetes_eye_screening(id) ON DELETE CASCADE,
+        REFERENCES diabetes_eye_screening.diabetes_eye_screening(id) ON DELETE CASCADE,
 
     worst_retinopathy VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (worst_retinopathy IN ('R0', 'R1', 'R2', 'R3A', 'R3S', '')),
@@ -370,37 +387,37 @@ CREATE TABLE diabetes_eye_screening_grade (
 );
 
 CREATE TRIGGER trigger_diabetes_eye_screening_grade_updated_at
-    BEFORE UPDATE ON diabetes_eye_screening_grade
+    BEFORE UPDATE ON diabetes_eye_screening.diabetes_eye_screening_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE diabetes_eye_screening_grade IS
+COMMENT ON TABLE diabetes_eye_screening.diabetes_eye_screening_grade IS
     'Computed worst-eye classification and outcome for a diabetes-eye-screening record: worst retinopathy and maculopathy grade, any-ungradable marker, recall / referral pathway, recall interval, and completeness status.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.diabetes_eye_screening_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.diabetes_eye_screening_id IS
     'Foreign key to the parent diabetes-eye-screening record (unique, 1:1).';
-COMMENT ON COLUMN diabetes_eye_screening_grade.worst_retinopathy IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.worst_retinopathy IS
     'Worst retinopathy (R) grade across both eyes by severity R0 < R1 < R2 < R3S < R3A: R0, R1, R2, R3A, or R3S.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.worst_maculopathy IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.worst_maculopathy IS
     'Worst maculopathy (M) grade across both eyes: M1 if either eye is M1, otherwise M0.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.any_ungradable IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.any_ungradable IS
     'Whether either eye is ungradable (yes/no); yes routes to slit-lamp unless referable disease routes to HES.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.outcome IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.outcome IS
     'Recall / referral pathway (most urgent wins): refer-hes-urgent, refer-hes, refer-slit-lamp, surveillance-6-month, routine-12-month, or routine-24-month.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.referral IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.referral IS
     'Referral destination derived from the outcome: none, hes-routine, hes-urgent, or slit-lamp.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.recall_interval_months IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.recall_interval_months IS
     'Recall interval in months (6, 12, or 24); null for referral pathways with no routine recall interval.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.status IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.status IS
     'Completeness status: complete when both eyes have an R and M grade (or are marked ungradable); otherwise incomplete.';
-COMMENT ON COLUMN diabetes_eye_screening_grade.graded_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -415,14 +432,14 @@ COMMENT ON COLUMN diabetes_eye_screening_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE diabetes_eye_screening_grade_rule (
+CREATE TABLE diabetes_eye_screening.diabetes_eye_screening_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_eye_screening_grade_id UUID NOT NULL
-        REFERENCES diabetes_eye_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES diabetes_eye_screening.diabetes_eye_screening_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -432,32 +449,32 @@ CREATE TABLE diabetes_eye_screening_grade_rule (
 );
 
 CREATE INDEX diabetes_eye_screening_grade_rule_grade_id_idx
-    ON diabetes_eye_screening_grade_rule (diabetes_eye_screening_grade_id);
+    ON diabetes_eye_screening.diabetes_eye_screening_grade_rule (diabetes_eye_screening_grade_id);
 
 CREATE TRIGGER trigger_diabetes_eye_screening_grade_rule_updated_at
-    BEFORE UPDATE ON diabetes_eye_screening_grade_rule
+    BEFORE UPDATE ON diabetes_eye_screening.diabetes_eye_screening_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE diabetes_eye_screening_grade_rule IS
+COMMENT ON TABLE diabetes_eye_screening.diabetes_eye_screening_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.diabetes_eye_screening_grade_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.diabetes_eye_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.rule_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-RECALL-R3A-01).';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.stage IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.stage IS
     'Pathway stage the rule concerns: eligibility, retinopathy, maculopathy, ungradable, recall, or completeness.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.category IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.category IS
     'Subject category (e.g. gate, classification, conditional-requirement).';
-COMMENT ON COLUMN diabetes_eye_screening_grade_rule.description IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -471,14 +488,14 @@ COMMENT ON COLUMN diabetes_eye_screening_grade_rule.description IS
 -- Flagged issues that fire independently of the recall / referral pathway, each
 -- with a priority and a suggested action for the grader or screening service.
 
-CREATE TABLE diabetes_eye_screening_grade_flag (
+CREATE TABLE diabetes_eye_screening.diabetes_eye_screening_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     diabetes_eye_screening_grade_id UUID NOT NULL
-        REFERENCES diabetes_eye_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES diabetes_eye_screening.diabetes_eye_screening_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -501,34 +518,34 @@ CREATE TABLE diabetes_eye_screening_grade_flag (
 );
 
 CREATE INDEX diabetes_eye_screening_grade_flag_grade_id_idx
-    ON diabetes_eye_screening_grade_flag (diabetes_eye_screening_grade_id);
+    ON diabetes_eye_screening.diabetes_eye_screening_grade_flag (diabetes_eye_screening_grade_id);
 
 CREATE TRIGGER trigger_diabetes_eye_screening_grade_flag_updated_at
-    BEFORE UPDATE ON diabetes_eye_screening_grade_flag
+    BEFORE UPDATE ON diabetes_eye_screening.diabetes_eye_screening_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION diabetes_eye_screening.set_updated_at();
 
-COMMENT ON TABLE diabetes_eye_screening_grade_flag IS
+COMMENT ON TABLE diabetes_eye_screening.diabetes_eye_screening_grade_flag IS
     'Flagged issues that fire independently of the recall / referral pathway, with priority and a suggested action for the grader or screening service.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.created_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.updated_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.deleted_at IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.diabetes_eye_screening_grade_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.diabetes_eye_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.flag_id IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ACTIVE-PROLIFERATIVE-001).';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.category IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.category IS
     'Flag category: active-proliferative, maculopathy, stable-proliferative, pre-proliferative, ungradable, patient-overdue, incomplete, eligibility, or other.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.priority IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.description IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN diabetes_eye_screening_grade_flag.suggested_action IS
+COMMENT ON COLUMN diabetes_eye_screening.diabetes_eye_screening_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "fast-track referral to ophthalmology", "re-screen or refer for slit-lamp biomicroscopy").';
 
 -- ========================================================================

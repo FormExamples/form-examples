@@ -282,14 +282,14 @@ def migrations(crate: str) -> str:
 def unique_columns(sql: str, table: str) -> list[str] | None:
     """The columns of `table` a unique constraint covers, or None when one of them
     cannot be null, so a copy of a row cannot be made unique by nulling them."""
-    create = re.search(rf'CREATE TABLE (?:IF NOT EXISTS )?"?{table}"? \((.*?)\n\);', sql, re.S)
+    create = re.search(rf'CREATE TABLE (?:IF NOT EXISTS )?(?:\w+\.)?"?{table}"? \((.*?)\n\);', sql, re.S)
     if not create:
         return None
     lines = {m[1]: m[0] for m in re.finditer(r'^\s*"?(\w+)"? [^\n]*', create[1], re.M)}
     columns = [m[1] for m in re.finditer(r'^\s*"?(\w+)"? [^\n]*\bUNIQUE\b', create[1], re.M)]
-    for index in re.finditer(rf'CREATE UNIQUE INDEX [^;]*? ON "?{table}"? \(([^)]*)\)', sql):
+    for index in re.finditer(rf'CREATE UNIQUE INDEX [^;]*? ON (?:\w+\.)?"?{table}"? \(([^)]*)\)', sql):
         columns += [c.strip().strip('"') for c in index[1].split(",")]
-    if re.search(rf'ALTER TABLE "?{table}"? [^;]*UNIQUE', sql):
+    if re.search(rf'ALTER TABLE (?:\w+\.)?"?{table}"? [^;]*UNIQUE', sql):
         return None
     columns = sorted(set(columns))
     if any(c not in lines or "NOT NULL" in lines[c] or "PRIMARY KEY" in lines[c] for c in columns):

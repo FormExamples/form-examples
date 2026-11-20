@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_county_clerk.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_marriage_license_application;
+
+COMMENT ON SCHEMA united_states_marriage_license_application IS
+    'Namespace for the United States Marriage License Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_marriage_license_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_marriage_license_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- One person applying for a marriage license. The main application references two
 -- of these rows, the first and the second applicant.
 
-CREATE TABLE applicant (
+CREATE TABLE united_states_marriage_license_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,39 +92,39 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_states_marriage_license_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_states_marriage_license_application.applicant IS
     'One person applying for a marriage license; the application references two of these rows.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.name IS
     'Full legal name of the applicant.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.sex IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.sex IS
     'Sex or gender recorded for the applicant: female, male, nonbinary, or unknown.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN applicant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_states_marriage_license_application.applicant.postcode IS
     'ZIP or postal code.';
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_states_marriage_license_application.applicant
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -121,7 +138,7 @@ CREATE INDEX applicant_name_trgm_idx
 -- The county clerk, recorder, or registrar office that issues the marriage
 -- license and records the certified marriage certificate.
 
-CREATE TABLE county_clerk (
+CREATE TABLE united_states_marriage_license_application.county_clerk (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -139,41 +156,41 @@ CREATE TABLE county_clerk (
 );
 
 CREATE TRIGGER trigger_county_clerk_updated_at
-    BEFORE UPDATE ON county_clerk
+    BEFORE UPDATE ON united_states_marriage_license_application.county_clerk
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE county_clerk IS
+COMMENT ON TABLE united_states_marriage_license_application.county_clerk IS
     'The county clerk, recorder, or registrar office that issues the marriage license and records the certificate.';
-COMMENT ON COLUMN county_clerk.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN county_clerk.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN county_clerk.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN county_clerk.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN county_clerk.name IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.name IS
     'Name of the county clerk or recorder office that issues marriage licenses.';
-COMMENT ON COLUMN county_clerk.state IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.state IS
     'Two-letter USPS code of the state the office serves.';
-COMMENT ON COLUMN county_clerk.county IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.county IS
     'County the office serves.';
-COMMENT ON COLUMN county_clerk.email IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.email IS
     'Email address.';
-COMMENT ON COLUMN county_clerk.phone IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.phone IS
     'Phone number.';
-COMMENT ON COLUMN county_clerk.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN county_clerk.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN county_clerk.postcode IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.postcode IS
     'ZIP or postal code.';
-COMMENT ON COLUMN county_clerk.website IS
+COMMENT ON COLUMN united_states_marriage_license_application.county_clerk.website IS
     'Website with the office fee schedule and appointment rules.';
 
 CREATE INDEX county_clerk_name_trgm_idx
-    ON county_clerk
+    ON united_states_marriage_license_application.county_clerk
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -193,15 +210,15 @@ CREATE INDEX county_clerk_name_trgm_idx
 -- rules, and the flagged issues live in dedicated child tables. This is
 -- documentation support, not legal advice; the issuing clerk or court decides.
 
-CREATE TABLE united_states_marriage_license_application (
+CREATE TABLE united_states_marriage_license_application.united_states_marriage_license_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    first_applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    second_applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    county_clerk_id UUID REFERENCES county_clerk(id) ON DELETE RESTRICT,
+    first_applicant_id UUID NOT NULL REFERENCES united_states_marriage_license_application.applicant(id) ON DELETE RESTRICT,
+    second_applicant_id UUID NOT NULL REFERENCES united_states_marriage_license_application.applicant(id) ON DELETE RESTRICT,
+    county_clerk_id UUID REFERENCES united_states_marriage_license_application.county_clerk(id) ON DELETE RESTRICT,
     state VARCHAR(2) NOT NULL DEFAULT '',
     county TEXT NOT NULL DEFAULT '',
     application_date DATE,
@@ -244,107 +261,107 @@ CREATE TABLE united_states_marriage_license_application (
 );
 
 CREATE TRIGGER trigger_united_states_marriage_license_application_updated_at
-    BEFORE UPDATE ON united_states_marriage_license_application
+    BEFORE UPDATE ON united_states_marriage_license_application.united_states_marriage_license_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE united_states_marriage_license_application IS
+COMMENT ON TABLE united_states_marriage_license_application.united_states_marriage_license_application IS
     'One United States marriage license application, covering the issuing jurisdiction, both applicants, eligibility, the ceremony, and the certified marriage certificate. Documentation support, not legal advice.';
-COMMENT ON COLUMN united_states_marriage_license_application.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_marriage_license_application.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_marriage_license_application.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_marriage_license_application.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_id IS
     'Foreign key to the first applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_id IS
     'Foreign key to the second applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.county_clerk_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.county_clerk_id IS
     'Foreign key to the issuing county clerk office, if known.';
-COMMENT ON COLUMN united_states_marriage_license_application.state IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.state IS
     'Two-letter USPS code of the issuing state; selects the state rule table in the engine.';
-COMMENT ON COLUMN united_states_marriage_license_application.county IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.county IS
     'County (or issuing clerk jurisdiction) where the application is made.';
-COMMENT ON COLUMN united_states_marriage_license_application.application_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.application_date IS
     'Date the application is made to the clerk.';
-COMMENT ON COLUMN united_states_marriage_license_application.license_type IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.license_type IS
     'License type: standard (public) or confidential (for example California).';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_name IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_name IS
     'Full legal name of the first applicant as it will appear on the license.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_sex IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_sex IS
     'Sex or gender recorded for the first applicant: female, male, nonbinary, or unknown. Informational only; it never affects eligibility (Obergefell v. Hodges).';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_date_of_birth IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_date_of_birth IS
     'Date of birth of the first applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_place_of_birth IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_place_of_birth IS
     'City, state, and country of birth of the first applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_residence_state IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_residence_state IS
     'Two-letter state or territory of residence of the first applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_id_presented IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_id_presented IS
     'Whether the first applicant presented acceptable government photo identification (yes/no).';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_ssn_status IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_ssn_status IS
     'Social Security number status of the first applicant: provided, none-issued, or declined. Never stores the number itself.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_marital_status IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_marital_status IS
     'Marital status of the first applicant before this marriage: never-married, divorced, widowed, annulled, or currently-married.';
-COMMENT ON COLUMN united_states_marriage_license_application.first_applicant_prior_marriage_ended_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.first_applicant_prior_marriage_ended_date IS
     'Date the first applicant''s most recent prior marriage ended by divorce, death, or annulment.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_name IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_name IS
     'Full legal name of the second applicant as it will appear on the license.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_sex IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_sex IS
     'Sex or gender recorded for the second applicant: female, male, nonbinary, or unknown. Informational only; it never affects eligibility (Obergefell v. Hodges).';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_date_of_birth IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_date_of_birth IS
     'Date of birth of the second applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_place_of_birth IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_place_of_birth IS
     'City, state, and country of birth of the second applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_residence_state IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_residence_state IS
     'Two-letter state or territory of residence of the second applicant.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_id_presented IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_id_presented IS
     'Whether the second applicant presented acceptable government photo identification (yes/no).';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_ssn_status IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_ssn_status IS
     'Social Security number status of the second applicant: provided, none-issued, or declined. Never stores the number itself.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_marital_status IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_marital_status IS
     'Marital status of the second applicant before this marriage: never-married, divorced, widowed, annulled, or currently-married.';
-COMMENT ON COLUMN united_states_marriage_license_application.second_applicant_prior_marriage_ended_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.second_applicant_prior_marriage_ended_date IS
     'Date the second applicant''s most recent prior marriage ended by divorce, death, or annulment.';
-COMMENT ON COLUMN united_states_marriage_license_application.relationship_between_applicants IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.relationship_between_applicants IS
     'Whether the applicants are related within a degree the state prohibits: not-related or related-prohibited.';
-COMMENT ON COLUMN united_states_marriage_license_application.minor_consent IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.minor_consent IS
     'Consent for an applicant under 18: not-applicable, parental-consent, court-order, or none.';
-COMMENT ON COLUMN united_states_marriage_license_application.active_duty_military IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.active_duty_military IS
     'Whether either applicant is on active military duty (a waiting-period waiver in some states and the basis for proxy marriage).';
-COMMENT ON COLUMN united_states_marriage_license_application.appear_in_person IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.appear_in_person IS
     'Whether both applicants will appear in person before the clerk (yes/no).';
-COMMENT ON COLUMN united_states_marriage_license_application.proxy_requested IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.proxy_requested IS
     'Whether a proxy marriage is requested because one applicant cannot attend (yes/no).';
-COMMENT ON COLUMN united_states_marriage_license_application.premarital_course_completed IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.premarital_course_completed IS
     'Whether the couple completed a state-approved premarital education course (yes/no); waives the waiting period and reduces the fee in some states.';
-COMMENT ON COLUMN united_states_marriage_license_application.blood_test_evidence IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.blood_test_evidence IS
     'Premarital blood-test evidence: provided, not-required, or not-provided. No US state currently requires a test.';
-COMMENT ON COLUMN united_states_marriage_license_application.fee_paid_usd IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.fee_paid_usd IS
     'License fee paid, in US dollars; null when not yet paid.';
-COMMENT ON COLUMN united_states_marriage_license_application.license_issued_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.license_issued_date IS
     'Date the clerk issued the license; the waiting period and validity period run from here.';
-COMMENT ON COLUMN united_states_marriage_license_application.ceremony_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.ceremony_date IS
     'Date of the marriage ceremony.';
-COMMENT ON COLUMN united_states_marriage_license_application.officiant_type IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.officiant_type IS
     'Who solemnizes the marriage: clergy, judge, clerk, notary, self-uniting, or other.';
-COMMENT ON COLUMN united_states_marriage_license_application.officiant_name IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.officiant_name IS
     'Name of the person who solemnized the marriage.';
-COMMENT ON COLUMN united_states_marriage_license_application.officiant_authorized IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.officiant_authorized IS
     'Whether the officiant is authorized to solemnize marriages in the state (yes/no).';
-COMMENT ON COLUMN united_states_marriage_license_application.witness_count IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.witness_count IS
     'Number of witnesses present at the ceremony; null when unanswered.';
-COMMENT ON COLUMN united_states_marriage_license_application.license_returned_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.license_returned_date IS
     'Date the signed license was returned to the clerk for recording; starts the certified marriage certificate.';
-COMMENT ON COLUMN united_states_marriage_license_application.certified_copies_requested IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.certified_copies_requested IS
     'Number of certified copies of the marriage certificate requested; null when unanswered.';
-COMMENT ON COLUMN united_states_marriage_license_application.clerk_note IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application.clerk_note IS
     'Free-text note from the applicants or the clerk.';
 
 CREATE INDEX united_states_marriage_license_application_state_idx
-    ON united_states_marriage_license_application (state);
+    ON united_states_marriage_license_application.united_states_marriage_license_application (state);
 
 -- ========================================================================
 -- END 04_create_table_united_states_marriage_license_application.sql
@@ -360,14 +377,14 @@ CREATE INDEX united_states_marriage_license_application_state_idx
 -- license expiry date from the state rule. This is a documentation
 -- classification, not legal advice; the issuing clerk or court decides.
 
-CREATE TABLE united_states_marriage_license_application_grade (
+CREATE TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_marriage_license_application_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_marriage_license_application(id) ON DELETE CASCADE,
+        REFERENCES united_states_marriage_license_application.united_states_marriage_license_application(id) ON DELETE CASCADE,
     application_class VARCHAR(14) NOT NULL DEFAULT '' CHECK (application_class IN ('ready-to-apply', 'incomplete', 'not-eligible', '')),
     earliest_ceremony_date DATE,
     license_expiry_date DATE,
@@ -375,29 +392,29 @@ CREATE TABLE united_states_marriage_license_application_grade (
 );
 
 CREATE TRIGGER trigger_united_states_marriage_license_application_grade_updated_at
-    BEFORE UPDATE ON united_states_marriage_license_application_grade
+    BEFORE UPDATE ON united_states_marriage_license_application.united_states_marriage_license_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE united_states_marriage_license_application_grade IS
+COMMENT ON TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade IS
     'Computed eligibility classification for a marriage license application: ready-to-apply, incomplete, or not-eligible, plus the derived earliest ceremony date and license expiry date.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.united_states_marriage_license_application_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.united_states_marriage_license_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.application_class IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.application_class IS
     'Eligibility classification: ready-to-apply, incomplete, or not-eligible (not-eligible takes precedence).';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.earliest_ceremony_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.earliest_ceremony_date IS
     'Derived earliest permitted ceremony date: license issue date plus the state waiting period; null when the issue date is unknown.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.license_expiry_date IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.license_expiry_date IS
     'Derived last valid ceremony date: license issue date plus the state validity period; null when the issue date is unknown.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade.graded_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -412,14 +429,14 @@ COMMENT ON COLUMN united_states_marriage_license_application_grade.graded_at IS
 -- row records one rule firing with the application dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE united_states_marriage_license_application_grade_rule (
+CREATE TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_marriage_license_application_grade_id UUID NOT NULL
-        REFERENCES united_states_marriage_license_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_marriage_license_application.united_states_marriage_license_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(14) NOT NULL DEFAULT '' CHECK (dimension IN ('jurisdiction', 'applicants', 'eligibility', 'consent', 'ceremony', 'certificate', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -427,33 +444,33 @@ CREATE TABLE united_states_marriage_license_application_grade_rule (
 );
 
 CREATE TRIGGER trigger_united_states_marriage_license_application_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_marriage_license_application_grade_rule
+    BEFORE UPDATE ON united_states_marriage_license_application.united_states_marriage_license_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE united_states_marriage_license_application_grade_rule IS
+COMMENT ON TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade_rule IS
     'Audit trail of every eligibility rule that fired during classification: application dimension, category, and description.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.united_states_marriage_license_application_grade_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.united_states_marriage_license_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MINIMUM-AGE-01).';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.dimension IS
     'Application dimension the rule concerns: jurisdiction, applicants, eligibility, consent, ceremony, certificate, or classification.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.category IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.category IS
     'Subject category (e.g. underage, existing-marriage, waiting-period).';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_rule.description IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 CREATE INDEX united_states_marriage_license_application_rule_grade_id_idx
-    ON united_states_marriage_license_application_grade_rule (united_states_marriage_license_application_grade_id);
+    ON united_states_marriage_license_application.united_states_marriage_license_application_grade_rule (united_states_marriage_license_application_grade_id);
 
 -- ========================================================================
 -- END 06_create_table_united_states_marriage_license_application_grade_rule.sql
@@ -466,14 +483,14 @@ CREATE INDEX united_states_marriage_license_application_rule_grade_id_idx
 -- Flagged issues that fire independently of the eligibility class, with a
 -- priority and a suggested action for the applicants and the clerk.
 
-CREATE TABLE united_states_marriage_license_application_grade_flag (
+CREATE TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_states_marriage_license_application_grade_id UUID NOT NULL
-        REFERENCES united_states_marriage_license_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_marriage_license_application.united_states_marriage_license_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -506,35 +523,35 @@ CREATE TABLE united_states_marriage_license_application_grade_flag (
 );
 
 CREATE TRIGGER trigger_united_states_marriage_license_application_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_marriage_license_application_grade_flag
+    BEFORE UPDATE ON united_states_marriage_license_application.united_states_marriage_license_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_marriage_license_application.set_updated_at();
 
-COMMENT ON TABLE united_states_marriage_license_application_grade_flag IS
+COMMENT ON TABLE united_states_marriage_license_application.united_states_marriage_license_application_grade_flag IS
     'Flagged issues that fire independently of the eligibility class, with priority and a suggested action.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.united_states_marriage_license_application_grade_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.united_states_marriage_license_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-USMLA-001).';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.category IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.priority IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.description IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_marriage_license_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_marriage_license_application.united_states_marriage_license_application_grade_flag.suggested_action IS
     'Suggested action for the applicants or the clerk (for example "wait until the 72-hour waiting period has passed").';
 
 CREATE INDEX united_states_marriage_license_application_flag_grade_id_idx
-    ON united_states_marriage_license_application_grade_flag (united_states_marriage_license_application_grade_id);
+    ON united_states_marriage_license_application.united_states_marriage_license_application_grade_flag (united_states_marriage_license_application_grade_id);
 
 -- ========================================================================
 -- END 07_create_table_united_states_marriage_license_application_grade_flag.sql

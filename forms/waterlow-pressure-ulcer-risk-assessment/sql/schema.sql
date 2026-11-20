@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS waterlow_pressure_ulcer_risk_assessment;
+
+COMMENT ON SCHEMA waterlow_pressure_ulcer_risk_assessment IS
+    'Namespace for the Waterlow Pressure Ulcer Risk Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.patient IS
     'Patient demographic information used by the Waterlow pressure ulcer risk assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON waterlow_pressure_ulcer_risk_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- clinician (registered nurse, healthcare assistant, tissue-viability
 -- nurse, or other).
 
-CREATE TABLE clinician (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.role IS
     'Primary clinical role: registered-nurse, healthcare-assistant, tissue-viability, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON waterlow_pressure_ulcer_risk_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- medication), plus the existing-pressure-damage flag. The computed
 -- grade, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE waterlow_pressure_ulcer_risk_assessment (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES waterlow_pressure_ulcer_risk_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES waterlow_pressure_ulcer_risk_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context and identification
     nurse_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -261,64 +278,64 @@ CREATE TABLE waterlow_pressure_ulcer_risk_assessment (
 );
 
 CREATE INDEX waterlow_pressure_ulcer_risk_assessment_patient_id_idx
-    ON waterlow_pressure_ulcer_risk_assessment (patient_id);
+    ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment (patient_id);
 CREATE INDEX waterlow_pressure_ulcer_risk_assessment_clinician_id_idx
-    ON waterlow_pressure_ulcer_risk_assessment (clinician_id);
+    ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment (clinician_id);
 
 CREATE TRIGGER trigger_waterlow_pressure_ulcer_risk_assessment_updated_at
-    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment IS
     'Main Waterlow pressure ulcer risk assessment record: assessment context, patient identification, the five weighted core category inputs, the four special-risk group inputs, and the existing-pressure-damage flag.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinician_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.nurse_name IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.nurse_name IS
     'Name of the assessing nurse as recorded on the assessment.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.nurse_role IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.nurse_role IS
     'Role of the assessing nurse: registered-nurse, healthcare-assistant, tissue-viability, or other.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.assessed_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.care_setting IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.care_setting IS
     'Care setting: acute-ward, community, care-home, hospice, or other.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.assessment_reason IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.assessment_reason IS
     'Reason the assessment was performed: admission, routine, or change-in-condition.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.patient_identifier IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.age_band IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.age_band IS
     'Adult age band scoring the age category: 14-49, 50-64, 65-74, 75-80, or 81-plus.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.sex IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.sex IS
     'Patient sex scoring the sex category: female or male.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.build_weight_for_height IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.build_weight_for_height IS
     'Core category — build / weight for height (BMI proxy): average, above-average, obese, or below-average.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.skin_type IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.skin_type IS
     'Core category — skin type / visual risk area: healthy, tissue-paper, dry, oedematous, clammy-pyrexial, discoloured, or broken.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.continence IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.continence IS
     'Core category — continence: complete-catheterised, incontinent-urine, incontinent-faeces, or doubly-incontinent.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.mobility IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.mobility IS
     'Core category — mobility: fully-mobile, restless, apathetic, restricted, bedbound, or chairbound.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.tissue_malnutrition IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.tissue_malnutrition IS
     'Special-risk group — tissue malnutrition: none, smoking, anaemia, peripheral-vascular-disease, single-organ-failure, multiple-organ-failure, or terminal-cachexia.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.neurological_deficit IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.neurological_deficit IS
     'Special-risk group — neurological deficit: none, mild, moderate, or severe.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.major_surgery_trauma IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.major_surgery_trauma IS
     'Special-risk group — major surgery or trauma: none, orthopaedic-spinal, on-table-over-2h, or on-table-over-6h.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.medication IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.medication IS
     'Special-risk group — medication: none, or high-dose-steroids-cytotoxics-anti-inflammatory.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.existing_pressure_damage IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.existing_pressure_damage IS
     'Whether existing pressure damage is present: no or yes. Drives an existing-pressure-damage flag.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinical_note IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -333,14 +350,14 @@ COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.clinical_note IS
 -- points, the summed Waterlow total, the derived risk band, and the
 -- recommended prevention actions for the band.
 
-CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     waterlow_pressure_ulcer_risk_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES waterlow_pressure_ulcer_risk_assessment(id) ON DELETE CASCADE,
+        REFERENCES waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment(id) ON DELETE CASCADE,
 
     build_points INT,
     skin_points INT,
@@ -362,49 +379,49 @@ CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade (
 );
 
 CREATE TRIGGER trigger_waterlow_pressure_ulcer_risk_assessment_grade_updated_at
-    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment_grade
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment_grade IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade IS
     'Computed Waterlow grading result: per-category points, summed Waterlow total, derived risk band, and recommended prevention actions.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.waterlow_pressure_ulcer_risk_assessment_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.waterlow_pressure_ulcer_risk_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.build_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.build_points IS
     'Points contributed by the build / weight for height category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.skin_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.skin_points IS
     'Points contributed by the skin type category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.sex_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.sex_points IS
     'Points contributed by the sex sub-category of the sex-and-age category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.age_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.age_points IS
     'Points contributed by the age sub-category of the sex-and-age category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.continence_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.continence_points IS
     'Points contributed by the continence category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.mobility_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.mobility_points IS
     'Points contributed by the mobility category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.tissue_malnutrition_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.tissue_malnutrition_points IS
     'Points contributed by the tissue malnutrition special-risk group.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.neurological_deficit_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.neurological_deficit_points IS
     'Points contributed by the neurological deficit special-risk group.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.major_surgery_trauma_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.major_surgery_trauma_points IS
     'Points contributed by the major surgery or trauma special-risk group.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.medication_points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.medication_points IS
     'Points contributed by the medication special-risk group.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.total_score IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.total_score IS
     'Summed Waterlow score across all core categories and special-risk groups (higher means higher risk).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.risk_band IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.risk_band IS
     'Derived risk band: low (< 10), at-risk (10-14), high-risk (15-19), or very-high-risk (>= 20).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.prevention_actions IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.prevention_actions IS
     'Recommended prevention actions (support surface, repositioning, skin care) for the derived band.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.graded_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -420,14 +437,14 @@ COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade.graded_at IS
 -- belongs to, the points it contributed, and a human-readable
 -- description.
 
-CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade_rule (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     waterlow_pressure_ulcer_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES waterlow_pressure_ulcer_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(30) NOT NULL
@@ -450,34 +467,34 @@ CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade_rule (
 );
 
 CREATE INDEX waterlow_pressure_ulcer_risk_assessment_grade_rule_grade_id_idx
-    ON waterlow_pressure_ulcer_risk_assessment_grade_rule (waterlow_pressure_ulcer_risk_assessment_grade_id);
+    ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule (waterlow_pressure_ulcer_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_waterlow_pressure_ulcer_risk_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment_grade_rule
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment_grade_rule IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule IS
     'Audit trail of every grading rule that fired during Waterlow computation: category, points contributed, label, and description.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.waterlow_pressure_ulcer_risk_assessment_grade_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.waterlow_pressure_ulcer_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MOBILITY-BEDBOUND-01).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.category IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.category IS
     'Scored category the rule belongs to: build, skin, sex, age, continence, mobility, tissue-malnutrition, neurological-deficit, major-surgery-trauma, medication, or band.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.points IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.points IS
     'Points contributed by this rule for its category.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.label IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.label IS
     'Human-readable label of the selected option that contributed the points.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.description IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -491,14 +508,14 @@ COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_rule.description
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade_flag (
+CREATE TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     waterlow_pressure_ulcer_risk_assessment_grade_id UUID NOT NULL
-        REFERENCES waterlow_pressure_ulcer_risk_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -519,34 +536,34 @@ CREATE TABLE waterlow_pressure_ulcer_risk_assessment_grade_flag (
 );
 
 CREATE INDEX waterlow_pressure_ulcer_risk_assessment_grade_flag_grade_id_idx
-    ON waterlow_pressure_ulcer_risk_assessment_grade_flag (waterlow_pressure_ulcer_risk_assessment_grade_id);
+    ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag (waterlow_pressure_ulcer_risk_assessment_grade_id);
 
 CREATE TRIGGER trigger_waterlow_pressure_ulcer_risk_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment_grade_flag
+    BEFORE UPDATE ON waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION waterlow_pressure_ulcer_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment_grade_flag IS
+COMMENT ON TABLE waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.waterlow_pressure_ulcer_risk_assessment_grade_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.waterlow_pressure_ulcer_risk_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-VERY-HIGH-RISK-001).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.category IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.priority IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.description IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN waterlow_pressure_ulcer_risk_assessment.waterlow_pressure_ulcer_risk_assessment_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "institute high-specification dynamic support surface").';
 
 -- ========================================================================

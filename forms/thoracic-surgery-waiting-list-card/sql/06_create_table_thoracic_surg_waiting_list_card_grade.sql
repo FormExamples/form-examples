@@ -1,12 +1,12 @@
 -- Computed grading result for a waiting list card.
 
-CREATE TABLE thoracic_surg_waiting_list_card_grade (
+CREATE TABLE thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     thoracic_surg_waiting_list_card_id UUID NOT NULL UNIQUE
-        REFERENCES thoracic_surg_waiting_list_card(id) ON DELETE CASCADE,
+        REFERENCES thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card(id) ON DELETE CASCADE,
 
     waiting_time_status VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (waiting_time_status IN (
@@ -31,42 +31,42 @@ CREATE TABLE thoracic_surg_waiting_list_card_grade (
 );
 
 CREATE TRIGGER trigger_thoracic_surg_waiting_list_card_grade_updated_at
-    BEFORE UPDATE ON thoracic_surg_waiting_list_card_grade
+    BEFORE UPDATE ON thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION thoracic_surgery_waiting_list_card.set_updated_at();
 
 CREATE INDEX index_thoracic_surg_waiting_list_card_grade_card_id
-    ON thoracic_surg_waiting_list_card_grade(thoracic_surg_waiting_list_card_id);
+    ON thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade(thoracic_surg_waiting_list_card_id);
 
-COMMENT ON TABLE thoracic_surg_waiting_list_card_grade IS
+COMMENT ON TABLE thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade IS
     'Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.id IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.created_at IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.updated_at IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.deleted_at IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.thoracic_surg_waiting_list_card_id IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.thoracic_surg_waiting_list_card_id IS
     'Foreign key to the parent waiting list card (unique, 1:1).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.waiting_time_status IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.waiting_time_status IS
     'Waiting Time Status band: within-target, approaching-breach, breached, long-wait.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.clinical_priority IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.clinical_priority IS
     'Clinical priority that drove the calculation (echo of the input).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.target_wait_weeks IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.target_wait_weeks IS
     'Maximum permitted wait in weeks for the recorded clinical priority.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.days_waited IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.days_waited IS
     'Days elapsed since the RTT clock-start date.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.weeks_waited IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.weeks_waited IS
     'Weeks elapsed since the RTT clock-start date.';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.days_to_target IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.days_to_target IS
     'Days remaining until the priority-driven target wait is reached (negative if exceeded).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.days_to_breach IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.days_to_breach IS
     'Days remaining until the 18-week RTT breach threshold is reached (negative if breached).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.days_to_appointment IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.days_to_appointment IS
     'Days until the next scheduled appointment (negative if in the past).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.grader_notes IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.grader_notes IS
     'Free-text grader notes (typically empty; populated when the engine cannot compute).';
-COMMENT ON COLUMN thoracic_surg_waiting_list_card_grade.graded_at IS
+COMMENT ON COLUMN thoracic_surgery_waiting_list_card.thoracic_surg_waiting_list_card_grade.graded_at IS
     'Timestamp when the engine last computed the result.';

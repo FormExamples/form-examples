@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_caseworker.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_divorce_application;
+
+COMMENT ON SCHEMA united_kingdom_divorce_application IS
+    'Namespace for the United Kingdom Divorce Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_divorce_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_divorce_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- The applicant: the spouse or civil partner who makes the application (or one of
 -- two joint applicants) for a divorce or the dissolution of a civil partnership.
 
-CREATE TABLE applicant (
+CREATE TABLE united_kingdom_divorce_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -74,37 +91,37 @@ CREATE TABLE applicant (
 );
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_kingdom_divorce_application.applicant
     USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_kingdom_divorce_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_kingdom_divorce_application.applicant IS
     'The applicant: the spouse or civil partner who makes the application (or one of two joint applicants).';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.name IS
     'Full name of the applicant (the person making the application).';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN applicant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_kingdom_divorce_application.applicant.postcode IS
     'Postal code.';
 
 -- ========================================================================
@@ -118,7 +135,7 @@ COMMENT ON COLUMN applicant.postcode IS
 -- Caseworker information for the legal adviser or court officer who prepares or
 -- checks this divorce or dissolution application.
 
-CREATE TABLE caseworker (
+CREATE TABLE united_kingdom_divorce_application.caseworker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -136,37 +153,37 @@ CREATE TABLE caseworker (
 );
 
 CREATE TRIGGER trigger_caseworker_updated_at
-    BEFORE UPDATE ON caseworker
+    BEFORE UPDATE ON united_kingdom_divorce_application.caseworker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE caseworker IS
+COMMENT ON TABLE united_kingdom_divorce_application.caseworker IS
     'Caseworker information for the legal adviser or court officer who prepares or checks the application.';
-COMMENT ON COLUMN caseworker.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caseworker.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN caseworker.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN caseworker.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN caseworker.name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.name IS
     'Full name of the caseworker who prepares or checks the application.';
-COMMENT ON COLUMN caseworker.email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.email IS
     'Email address.';
-COMMENT ON COLUMN caseworker.phone IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.phone IS
     'Phone number.';
-COMMENT ON COLUMN caseworker.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN caseworker.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN caseworker.postcode IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.postcode IS
     'Postal code.';
-COMMENT ON COLUMN caseworker.role IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.role IS
     'Role of the caseworker: solicitor, legal-adviser, court-officer, mckenzie-friend, or other.';
-COMMENT ON COLUMN caseworker.registration_body IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.registration_body IS
     'Professional regulator: SRA, CILEx, BSB, or other.';
-COMMENT ON COLUMN caseworker.registration_number IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.registration_number IS
     'Professional registration number, where the caseworker is regulated.';
 
 -- ========================================================================
@@ -186,14 +203,14 @@ COMMENT ON COLUMN caseworker.registration_number IS
 -- and readiness classification, the audit trail of fired rules and the flagged
 -- issues live in dedicated child tables. This record does not give legal advice.
 
-CREATE TABLE united_kingdom_divorce_application (
+CREATE TABLE united_kingdom_divorce_application.united_kingdom_divorce_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    caseworker_id UUID REFERENCES caseworker(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_kingdom_divorce_application.applicant(id) ON DELETE RESTRICT,
+    caseworker_id UUID REFERENCES united_kingdom_divorce_application.caseworker(id) ON DELETE RESTRICT,
     application_type VARCHAR(11) NOT NULL DEFAULT '' CHECK (application_type IN ('divorce', 'dissolution', '')),
     application_mode VARCHAR(5) NOT NULL DEFAULT '' CHECK (application_mode IN ('sole', 'joint', '')),
     stage VARCHAR(17) NOT NULL DEFAULT '' CHECK (stage IN ('application', 'conditional-order', 'final-order', '')),
@@ -237,109 +254,109 @@ CREATE TABLE united_kingdom_divorce_application (
 );
 
 CREATE INDEX united_kingdom_divorce_application_applicant_id_idx
-    ON united_kingdom_divorce_application (applicant_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application (applicant_id);
 
 CREATE INDEX united_kingdom_divorce_application_caseworker_id_idx
-    ON united_kingdom_divorce_application (caseworker_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application (caseworker_id);
 
 CREATE TRIGGER trigger_united_kingdom_divorce_application_updated_at
-    BEFORE UPDATE ON united_kingdom_divorce_application
+    BEFORE UPDATE ON united_kingdom_divorce_application.united_kingdom_divorce_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_divorce_application IS
+COMMENT ON TABLE united_kingdom_divorce_application.united_kingdom_divorce_application IS
     'Main United Kingdom divorce or dissolution application record (D8, D84, D36): application type and stage, marriage and certificate, jurisdiction facts, parties and service address, children and financial arrangements, and stage dates. Readiness classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_kingdom_divorce_application.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_divorce_application.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_divorce_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_divorce_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_id IS
     'Foreign key to the applicant (restrict delete).';
-COMMENT ON COLUMN united_kingdom_divorce_application.caseworker_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.caseworker_id IS
     'Foreign key to the caseworker (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_type IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_type IS
     'Whether the application is for a divorce (marriage) or the dissolution of a civil partnership.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_mode IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_mode IS
     'Sole application by one spouse, or joint application by both.';
-COMMENT ON COLUMN united_kingdom_divorce_application.stage IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.stage IS
     'Which stage the user is checking: application (D8 or online), conditional order (D84), or final order (D36).';
-COMMENT ON COLUMN united_kingdom_divorce_application.as_of_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.as_of_date IS
     'The date the check is made, against which the time gates are tested.';
-COMMENT ON COLUMN united_kingdom_divorce_application.domestic_abuse_risk IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.domestic_abuse_risk IS
     'Whether there is a risk of domestic abuse. A joint application is not suitable where there is (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_date IS
     'Date of the marriage or civil partnership formation.';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_place IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_place IS
     'Place where the marriage or civil partnership was formed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_country IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_country IS
     'Country where the marriage or civil partnership was formed.';
-COMMENT ON COLUMN united_kingdom_divorce_application.legally_recognised IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.legally_recognised IS
     'Whether the marriage or civil partnership is legally recognised in the United Kingdom (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.breakdown_confirmed IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.breakdown_confirmed IS
     'Whether the applicant states that the relationship has broken down irretrievably (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.marriage_certificate_type IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.marriage_certificate_type IS
     'The marriage certificate held: original, certified-copy, or not-held.';
-COMMENT ON COLUMN united_kingdom_divorce_application.certificate_in_english IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.certificate_in_english IS
     'Whether the marriage certificate is in English (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.certified_translation IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.certified_translation IS
     'Whether a certified translation of the marriage certificate is held (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.name_changed IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.name_changed IS
     'Whether a name has been changed since the marriage (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.name_change_proof IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.name_change_proof IS
     'Proof of the name change: marriage-certificate, deed-poll, or none.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_habitual_resident IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_habitual_resident IS
     'Whether the applicant is habitually resident in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_residence_months IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_residence_months IS
     'Months the applicant has been habitually resident in England and Wales.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_domiciled IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_domiciled IS
     'Whether the applicant is domiciled in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_habitual_resident IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_habitual_resident IS
     'Whether the other spouse is habitually resident in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_domiciled IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_domiciled IS
     'Whether the other spouse is domiciled in England and Wales (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.last_habitually_resident_together IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.last_habitually_resident_together IS
     'Whether both were last habitually resident in England and Wales and one still resides there (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_name IS
     'Full name of the applicant as it appears on the application.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_address IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_address IS
     'Postal address of the applicant.';
-COMMENT ON COLUMN united_kingdom_divorce_application.applicant_email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.applicant_email IS
     'Email address of the applicant.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_name IS
     'Full name of the other spouse (the respondent, or the second joint applicant).';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_address IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_address IS
     'Postal address of the other spouse; the service address for a sole application.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_email IS
     'Email address of the other spouse, used to serve papers online.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_address_known IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_address_known IS
     'Whether the current address of the other spouse is known (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.service_method IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.service_method IS
     'How the application is served on the other spouse: email, post, or alternative-service.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_under_18 IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_under_18 IS
     'Whether there are children of the family under 18 (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_count IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_count IS
     'Number of children of the family under 18.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_arrangements IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_arrangements IS
     'State of the arrangements for the children: agreed, not-agreed, or undecided.';
-COMMENT ON COLUMN united_kingdom_divorce_application.children_note IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.children_note IS
     'Free-text note on the children arrangements.';
-COMMENT ON COLUMN united_kingdom_divorce_application.financial_order_intended IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.financial_order_intended IS
     'Whether a financial order on money and property is intended: yes, no, or undecided.';
-COMMENT ON COLUMN united_kingdom_divorce_application.financial_order_applied IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.financial_order_applied IS
     'Whether a financial order has been applied for (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.fee_status IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.fee_status IS
     'Status of the court fee: paid, help-with-fees-approved, help-with-fees-pending, or unpaid.';
-COMMENT ON COLUMN united_kingdom_divorce_application.application_issued_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.application_issued_date IS
     'Date the court issued the application; the 20-week reflection period runs from it.';
-COMMENT ON COLUMN united_kingdom_divorce_application.respondent_acknowledged IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.respondent_acknowledged IS
     'Whether the other spouse has returned the acknowledgement of service (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application.conditional_order_granted_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.conditional_order_granted_date IS
     'Date the conditional order was made; the 6 weeks and 1 day wait runs from it.';
-COMMENT ON COLUMN united_kingdom_divorce_application.final_order_delay_explained IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application.final_order_delay_explained IS
     'Whether the reason for waiting more than 12 months to apply for the final order is explained (yes/no).';
 
 -- ========================================================================
@@ -357,14 +374,14 @@ COMMENT ON COLUMN united_kingdom_divorce_application.final_order_delay_explained
 -- This is a completeness and validity classification, not a score, and it is
 -- not legal advice.
 
-CREATE TABLE united_kingdom_divorce_application_grade (
+CREATE TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_divorce_application_id UUID NOT NULL UNIQUE
-        REFERENCES united_kingdom_divorce_application(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_divorce_application.united_kingdom_divorce_application(id) ON DELETE CASCADE,
     application_class VARCHAR(16) NOT NULL DEFAULT '' CHECK (application_class IN ('ready-to-apply', 'incomplete', 'not-eligible-yet', '')),
     earliest_eligible_date DATE,
     jurisdiction_met VARCHAR(5) NOT NULL DEFAULT '' CHECK (jurisdiction_met IN ('yes', 'no', '')),
@@ -372,29 +389,29 @@ CREATE TABLE united_kingdom_divorce_application_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_divorce_application_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_divorce_application_grade
+    BEFORE UPDATE ON united_kingdom_divorce_application.united_kingdom_divorce_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_divorce_application_grade IS
+COMMENT ON TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade IS
     'Computed readiness classification for a divorce or dissolution application: application class (ready-to-apply/incomplete/not-eligible-yet), earliest eligible date for the stage, and whether a jurisdiction ground is met.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.united_kingdom_divorce_application_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.united_kingdom_divorce_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.application_class IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.application_class IS
     'Readiness classification: ready-to-apply, incomplete, or not-eligible-yet (not-eligible-yet takes precedence).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.earliest_eligible_date IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.earliest_eligible_date IS
     'Earliest date the checked stage can be applied for; empty when no time gate applies or the dates are missing.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.jurisdiction_met IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.jurisdiction_met IS
     'Whether at least one England and Wales jurisdiction ground is met (yes/no).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -409,14 +426,14 @@ COMMENT ON COLUMN united_kingdom_divorce_application_grade.graded_at IS
 -- row records one rule firing with the application dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE united_kingdom_divorce_application_grade_rule (
+CREATE TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_divorce_application_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_divorce_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_divorce_application.united_kingdom_divorce_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(14) NOT NULL DEFAULT '' CHECK (dimension IN ('eligibility', 'jurisdiction', 'documents', 'service', 'children', 'finances', 'timing', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -424,32 +441,32 @@ CREATE TABLE united_kingdom_divorce_application_grade_rule (
 );
 
 CREATE INDEX united_kingdom_divorce_application_grade_rule_grade_id_idx
-    ON united_kingdom_divorce_application_grade_rule (united_kingdom_divorce_application_grade_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule (united_kingdom_divorce_application_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_divorce_application_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_divorce_application_grade_rule
+    BEFORE UPDATE ON united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_divorce_application_grade_rule IS
+COMMENT ON TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule IS
     'Audit trail of every readiness rule that fired during classification: application dimension, category, and description.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.united_kingdom_divorce_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.united_kingdom_divorce_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MARRIAGE-DATE-MISSING-01).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.dimension IS
     'Application dimension the rule concerns: eligibility, jurisdiction, documents, service, children, finances, timing, or classification.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.category IS
     'Subject category (e.g. required-field, stage-gate, jurisdiction-ground).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -463,14 +480,14 @@ COMMENT ON COLUMN united_kingdom_divorce_application_grade_rule.description IS
 -- Flagged issues that fire independently of the application class, with a
 -- priority and a suggested action for the applicant or caseworker.
 
-CREATE TABLE united_kingdom_divorce_application_grade_flag (
+CREATE TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_divorce_application_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_divorce_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_divorce_application.united_kingdom_divorce_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT '' CHECK (category IN ('jurisdiction', 'marriage-certificate', 'translation', 'service-address', 'children-arrangements', 'financial-order', 'domestic-abuse', 'timing', 'final-order-delay', 'name-change-proof', 'fee', 'relationship-status', 'acknowledgement', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -479,34 +496,34 @@ CREATE TABLE united_kingdom_divorce_application_grade_flag (
 );
 
 CREATE INDEX united_kingdom_divorce_application_grade_flag_grade_id_idx
-    ON united_kingdom_divorce_application_grade_flag (united_kingdom_divorce_application_grade_id);
+    ON united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag (united_kingdom_divorce_application_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_divorce_application_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_divorce_application_grade_flag
+    BEFORE UPDATE ON united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_divorce_application_grade_flag IS
+COMMENT ON TABLE united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag IS
     'Flagged issues that fire independently of the application class, with priority and a suggested action for the applicant or caseworker.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.united_kingdom_divorce_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.united_kingdom_divorce_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-JURISDICTION-NOT-MET-001).';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.category IS
     'Flag category: jurisdiction, marriage-certificate, translation, service-address, children-arrangements, financial-order, domestic-abuse, timing, final-order-delay, name-change-proof, fee, relationship-status, acknowledgement, other.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.priority IS
     'Priority of the flag: low, medium, or high.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.description IS
     'Human-readable description of the issue.';
-COMMENT ON COLUMN united_kingdom_divorce_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_divorce_application.united_kingdom_divorce_application_grade_flag.suggested_action IS
     'Suggested action for the applicant or caseworker.';
 
 -- ========================================================================

@@ -1,10 +1,10 @@
-CREATE TABLE authorized_recipient (
+CREATE TABLE medical_records_release_permission.authorized_recipient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     release_form_id UUID NOT NULL UNIQUE
-        REFERENCES release_form(id) ON DELETE CASCADE,
+        REFERENCES medical_records_release_permission.release_form(id) ON DELETE CASCADE,
     recipient_name VARCHAR(255) NOT NULL DEFAULT '',
     recipient_organization VARCHAR(255) NOT NULL DEFAULT '',
     recipient_address TEXT NOT NULL DEFAULT '',
@@ -14,32 +14,32 @@ CREATE TABLE authorized_recipient (
 );
 
 CREATE TRIGGER trigger_authorized_recipient_updated_at
-    BEFORE UPDATE ON authorized_recipient
+    BEFORE UPDATE ON medical_records_release_permission.authorized_recipient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_records_release_permission.set_updated_at();
 
-COMMENT ON TABLE authorized_recipient IS
+COMMENT ON TABLE medical_records_release_permission.authorized_recipient IS
     'Authorized recipient of released medical records. One-to-one child of release_form.';
-COMMENT ON COLUMN authorized_recipient.release_form_id IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.release_form_id IS
     'Foreign key to the parent release form (unique, enforcing 1:1).';
-COMMENT ON COLUMN authorized_recipient.recipient_name IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_name IS
     'Full name of the authorized recipient.';
-COMMENT ON COLUMN authorized_recipient.recipient_organization IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_organization IS
     'Organization the recipient belongs to.';
-COMMENT ON COLUMN authorized_recipient.recipient_role IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_role IS
     'Professional role or title of the recipient.';
 
-COMMENT ON COLUMN authorized_recipient.recipient_address IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_address IS
     'Recipient address.';
-COMMENT ON COLUMN authorized_recipient.recipient_phone IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_phone IS
     'Recipient phone.';
-COMMENT ON COLUMN authorized_recipient.recipient_email IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.recipient_email IS
     'Recipient email.';
-COMMENT ON COLUMN authorized_recipient.id IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN authorized_recipient.created_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN authorized_recipient.updated_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN authorized_recipient.deleted_at IS
+COMMENT ON COLUMN medical_records_release_permission.authorized_recipient.deleted_at IS
     'Timestamp when this row was deleted.';

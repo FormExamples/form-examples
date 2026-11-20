@@ -1,10 +1,10 @@
-CREATE TABLE grading_fired_rule (
+CREATE TABLE allergy_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -13,28 +13,28 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON allergy_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE allergy_assessment.grading_fired_rule IS
     'Individual allergy severity classification rules that evaluated to true during grading.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. AN-001, DA-002).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Anaphylaxis, Drug Allergy, Environmental).';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.severity_level IS
     'Severity level contributed by this rule: mild, moderate, or severe.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.description IS
     'Description.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';

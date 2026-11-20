@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS bhutani_bilirubin_nomogram;
+
+COMMENT ON SCHEMA bhutani_bilirubin_nomogram IS
+    'Namespace for the Bhutani Bilirubin Nomogram form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION bhutani_bilirubin_nomogram.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION bhutani_bilirubin_nomogram.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the newborn infant being assessed.
 
-CREATE TABLE patient (
+CREATE TABLE bhutani_bilirubin_nomogram.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.patient IS
     'Patient demographic information for the newborn infant used by the Bhutani bilirubin nomogram assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.name IS
     'Full infant name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.email IS
     'Email address (of the parent or guardian).';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.phone IS
     'Phone number (of the parent or guardian).';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.height_as_cm IS
     'Length in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.weight_as_kg IS
     'Birth or current weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON bhutani_bilirubin_nomogram.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information used to identify the assessing clinician
 -- (midwife, neonatal nurse, paediatrician).
 
-CREATE TABLE clinician (
+CREATE TABLE bhutani_bilirubin_nomogram.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.role IS
     'Primary clinical role: midwife, neonatal-nurse, paediatrician, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON bhutani_bilirubin_nomogram.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -207,14 +224,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- hyperbilirubinaemia risk factors. The computed risk zone, threshold
 -- comparison, fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE bhutani_bilirubin_nomogram (
+CREATE TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES bhutani_bilirubin_nomogram.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES bhutani_bilirubin_nomogram.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context and identification
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -244,64 +261,64 @@ CREATE TABLE bhutani_bilirubin_nomogram (
 );
 
 CREATE INDEX bhutani_bilirubin_nomogram_patient_id_idx
-    ON bhutani_bilirubin_nomogram (patient_id);
+    ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram (patient_id);
 CREATE INDEX bhutani_bilirubin_nomogram_clinician_id_idx
-    ON bhutani_bilirubin_nomogram (clinician_id);
+    ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram (clinician_id);
 
 CREATE TRIGGER trigger_bhutani_bilirubin_nomogram_updated_at
-    BEFORE UPDATE ON bhutani_bilirubin_nomogram
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE bhutani_bilirubin_nomogram IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram IS
     'Main Bhutani bilirubin nomogram assessment record: assessment context, infant identification, measurement inputs (age in hours, total serum bilirubin, measurement method, gestational age), and neonatal hyperbilirubinaemia risk factors.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.patient_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.patient_id IS
     'Foreign key to the infant being assessed (delete restricted).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician_name IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinician_role IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.clinician_role IS
     'Role of the assessing clinician: midwife, neonatal-nurse, paediatrician, or other.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.assessed_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.care_setting IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.care_setting IS
     'Care setting: postnatal-ward, neonatal-unit, midwife-led-unit, community, or other.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.infant_identifier IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.infant_identifier IS
     'Local infant identifier as recorded on the assessment.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.sex IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.sex IS
     'Infant sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.born_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.born_at IS
     'Date and time of birth; used with assessed_at to derive age in hours.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.gestational_age_weeks IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.gestational_age_weeks IS
     'Gestational age at birth in completed weeks; selects the gestation-specific threshold curve.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.age_hours IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.age_hours IS
     'Age at measurement in hours; the nomogram x-axis (may be derived from born_at and assessed_at or entered directly).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.total_serum_bilirubin_umol_l IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.total_serum_bilirubin_umol_l IS
     'Measured total serum bilirubin (TSB) in micromoles per litre (umol/L); the nomogram y-axis.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.measurement_method IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.measurement_method IS
     'Bilirubin measurement method: serum or transcutaneous.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.preterm_under_38 IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.preterm_under_38 IS
     'Risk factor (yes/no): gestational age below 38 weeks.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.previous_sibling_jaundice IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.previous_sibling_jaundice IS
     'Risk factor (yes/no): previous sibling required phototherapy or had neonatal jaundice.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.exclusive_breastfeeding IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.exclusive_breastfeeding IS
     'Risk factor (yes/no): infant is exclusively breastfed.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.bruising IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.bruising IS
     'Risk factor (yes/no): significant bruising or cephalohaematoma.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.blood_group_incompatibility IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.blood_group_incompatibility IS
     'Risk factor (yes/no): ABO or Rhesus incompatibility, or positive direct antiglobulin test (DAT).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.early_onset_under_24h IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.early_onset_under_24h IS
     'Risk factor (yes/no): jaundice onset before 24 hours of age.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinical_note IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -319,14 +336,14 @@ COMMENT ON COLUMN bhutani_bilirubin_nomogram.clinical_note IS
 -- for whether the measured TSB is at or above each treatment threshold. Fired
 -- rules and red-flag issues live in dedicated child tables.
 
-CREATE TABLE bhutani_bilirubin_nomogram_grade (
+CREATE TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bhutani_bilirubin_nomogram_id UUID NOT NULL UNIQUE
-        REFERENCES bhutani_bilirubin_nomogram(id) ON DELETE CASCADE,
+        REFERENCES bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram(id) ON DELETE CASCADE,
 
     risk_zone VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (risk_zone IN ('low', 'low-intermediate', 'high-intermediate', 'high', '')),
@@ -345,35 +362,35 @@ CREATE TABLE bhutani_bilirubin_nomogram_grade (
 );
 
 CREATE TRIGGER trigger_bhutani_bilirubin_nomogram_grade_updated_at
-    BEFORE UPDATE ON bhutani_bilirubin_nomogram_grade
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE bhutani_bilirubin_nomogram_grade IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade IS
     'Computed Bhutani bilirubin nomogram classification result (1:1): percentile risk zone, mirrored percentile band, interpolated gestation-specific phototherapy and exchange thresholds, and the yes/no above-threshold signals.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.bhutani_bilirubin_nomogram_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.bhutani_bilirubin_nomogram_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.risk_zone IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.risk_zone IS
     'Percentile risk zone assigned by the nomogram: low, low-intermediate, high-intermediate, or high (empty when age or TSB is missing).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.percentile_band IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.percentile_band IS
     'Percentile band mirroring the risk zone: <40, 40-75, 75-95, or >=95.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.phototherapy_threshold_umol_l IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.phototherapy_threshold_umol_l IS
     'Interpolated gestation-specific phototherapy threshold at the infant age in micromoles per litre (umol/L).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.exchange_threshold_umol_l IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.exchange_threshold_umol_l IS
     'Interpolated gestation-specific exchange-transfusion threshold at the infant age in micromoles per litre (umol/L).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.above_phototherapy_threshold IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.above_phototherapy_threshold IS
     'Whether the measured TSB is at or above the phototherapy threshold: yes or no.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.above_exchange_threshold IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.above_exchange_threshold IS
     'Whether the measured TSB is at or above the exchange-transfusion threshold: yes or no.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.graded_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -389,14 +406,14 @@ COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade.graded_at IS
 -- lookup or a threshold comparison) with its category and a human-readable
 -- description.
 
-CREATE TABLE bhutani_bilirubin_nomogram_grade_rule (
+CREATE TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bhutani_bilirubin_nomogram_grade_id UUID NOT NULL
-        REFERENCES bhutani_bilirubin_nomogram_grade(id) ON DELETE CASCADE,
+        REFERENCES bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -404,30 +421,30 @@ CREATE TABLE bhutani_bilirubin_nomogram_grade_rule (
 );
 
 CREATE INDEX bhutani_bilirubin_nomogram_grade_rule_grade_id_idx
-    ON bhutani_bilirubin_nomogram_grade_rule (bhutani_bilirubin_nomogram_grade_id);
+    ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule (bhutani_bilirubin_nomogram_grade_id);
 
 CREATE TRIGGER trigger_bhutani_bilirubin_nomogram_grade_rule_updated_at
-    BEFORE UPDATE ON bhutani_bilirubin_nomogram_grade_rule
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE bhutani_bilirubin_nomogram_grade_rule IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule IS
     'Audit trail of every classification rule that fired during Bhutani bilirubin nomogram computation: rule identifier, category, and description.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.bhutani_bilirubin_nomogram_grade_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.bhutani_bilirubin_nomogram_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.rule_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ZONE-HIGH-INTERMEDIATE-01).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.category IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.category IS
     'Rule category (e.g. zone-lookup, phototherapy-threshold, exchange-threshold).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.description IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -441,14 +458,14 @@ COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_rule.description IS
 -- Red-flag issues that fire independently of the risk zone, with priority
 -- and a suggested action for the clinical team.
 
-CREATE TABLE bhutani_bilirubin_nomogram_grade_flag (
+CREATE TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     bhutani_bilirubin_nomogram_grade_id UUID NOT NULL
-        REFERENCES bhutani_bilirubin_nomogram_grade(id) ON DELETE CASCADE,
+        REFERENCES bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -470,34 +487,34 @@ CREATE TABLE bhutani_bilirubin_nomogram_grade_flag (
 );
 
 CREATE INDEX bhutani_bilirubin_nomogram_grade_flag_grade_id_idx
-    ON bhutani_bilirubin_nomogram_grade_flag (bhutani_bilirubin_nomogram_grade_id);
+    ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag (bhutani_bilirubin_nomogram_grade_id);
 
 CREATE TRIGGER trigger_bhutani_bilirubin_nomogram_grade_flag_updated_at
-    BEFORE UPDATE ON bhutani_bilirubin_nomogram_grade_flag
+    BEFORE UPDATE ON bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bhutani_bilirubin_nomogram.set_updated_at();
 
-COMMENT ON TABLE bhutani_bilirubin_nomogram_grade_flag IS
+COMMENT ON TABLE bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag IS
     'Red-flag issues that fire independently of the risk zone, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.created_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.updated_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.deleted_at IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.bhutani_bilirubin_nomogram_grade_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.bhutani_bilirubin_nomogram_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.flag_id IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ABOVE-EXCHANGE-001).';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.category IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.category IS
     'Flag category: above-exchange, above-phototherapy, high-risk-zone, rapid-rise, early-jaundice, risk-factors, incomplete, or other.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.priority IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.description IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN bhutani_bilirubin_nomogram_grade_flag.suggested_action IS
+COMMENT ON COLUMN bhutani_bilirubin_nomogram.bhutani_bilirubin_nomogram_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "urgent neonatal review and prepare for exchange transfusion").';
 
 -- ========================================================================

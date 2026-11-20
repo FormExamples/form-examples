@@ -1,30 +1,30 @@
-CREATE TABLE bone_marrow_donation_assessment (
+CREATE TABLE bone_marrow_donation_assessment.bone_marrow_donation_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES bone_marrow_donation_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
-COMMENT ON COLUMN bone_marrow_donation_assessment.id IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN bone_marrow_donation_assessment.created_at IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN bone_marrow_donation_assessment.updated_at IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN bone_marrow_donation_assessment.deleted_at IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 CREATE TRIGGER trigger_bone_marrow_donation_assessment_updated_at
-    BEFORE UPDATE ON bone_marrow_donation_assessment
+    BEFORE UPDATE ON bone_marrow_donation_assessment.bone_marrow_donation_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION bone_marrow_donation_assessment.set_updated_at();
 
-COMMENT ON TABLE bone_marrow_donation_assessment IS
+COMMENT ON TABLE bone_marrow_donation_assessment.bone_marrow_donation_assessment IS
     'Bone marrow donation assessment form evaluating haematopoietic stem cell donor eligibility. Parent entity for all assessment sections.';
-COMMENT ON COLUMN bone_marrow_donation_assessment.patient_id IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN bone_marrow_donation_assessment.status IS
+COMMENT ON COLUMN bone_marrow_donation_assessment.bone_marrow_donation_assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';

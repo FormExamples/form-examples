@@ -2,13 +2,13 @@
 -- but restricted to the seven frequencies a non-technical user is likely
 -- to need (none / daily / weekday / weekly / monthly / quarterly / yearly).
 
-CREATE TABLE recurring_rule (
+CREATE TABLE meeting.recurring_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    meeting_id UUID NOT NULL UNIQUE REFERENCES meeting(id) ON DELETE CASCADE,
+    meeting_id UUID NOT NULL UNIQUE REFERENCES meeting.meeting(id) ON DELETE CASCADE,
 
     frequency VARCHAR(20) NOT NULL DEFAULT 'none'
         CHECK (frequency IN ('none', 'daily', 'weekday', 'weekly', 'monthly', 'quarterly', 'yearly')),
@@ -33,42 +33,42 @@ CREATE TABLE recurring_rule (
 );
 
 CREATE TRIGGER trigger_recurring_rule_updated_at
-    BEFORE UPDATE ON recurring_rule
+    BEFORE UPDATE ON meeting.recurring_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION meeting.set_updated_at();
 
-COMMENT ON TABLE recurring_rule IS
+COMMENT ON TABLE meeting.recurring_rule IS
     'Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.';
-COMMENT ON COLUMN recurring_rule.id IS
+COMMENT ON COLUMN meeting.recurring_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN recurring_rule.created_at IS
+COMMENT ON COLUMN meeting.recurring_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN recurring_rule.updated_at IS
+COMMENT ON COLUMN meeting.recurring_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN recurring_rule.deleted_at IS
+COMMENT ON COLUMN meeting.recurring_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN recurring_rule.meeting_id IS
+COMMENT ON COLUMN meeting.recurring_rule.meeting_id IS
     'Foreign key to the parent meeting; UNIQUE so at most one rule per meeting.';
-COMMENT ON COLUMN recurring_rule.frequency IS
+COMMENT ON COLUMN meeting.recurring_rule.frequency IS
     'Recurrence frequency: none, daily, weekday, weekly, monthly, quarterly, yearly.';
-COMMENT ON COLUMN recurring_rule.interval_count IS
+COMMENT ON COLUMN meeting.recurring_rule.interval_count IS
     'Interval between occurrences; e.g. interval_count = 2 with frequency = weekly means every fortnight.';
-COMMENT ON COLUMN recurring_rule.by_day_of_week IS
+COMMENT ON COLUMN meeting.recurring_rule.by_day_of_week IS
     'Comma-separated iCalendar weekday codes (MO,TU,WE,TH,FR,SA,SU). Empty when not constrained.';
-COMMENT ON COLUMN recurring_rule.by_day_of_month IS
+COMMENT ON COLUMN meeting.recurring_rule.by_day_of_month IS
     'Day of month for monthly / quarterly / yearly rules. Negative values count from the end (-1 = last day).';
-COMMENT ON COLUMN recurring_rule.by_set_position IS
+COMMENT ON COLUMN meeting.recurring_rule.by_set_position IS
     'Set position for the "nth weekday" pattern (e.g. by_set_position = 1, by_day_of_week = MO means first Monday).';
-COMMENT ON COLUMN recurring_rule.by_month_of_year IS
+COMMENT ON COLUMN meeting.recurring_rule.by_month_of_year IS
     'Month of year for yearly rules (1 = January, 12 = December).';
-COMMENT ON COLUMN recurring_rule.series_count IS
+COMMENT ON COLUMN meeting.recurring_rule.series_count IS
     'Total number of occurrences in the series, if known.';
-COMMENT ON COLUMN recurring_rule.series_until IS
+COMMENT ON COLUMN meeting.recurring_rule.series_until IS
     'Last possible occurrence in the series, exclusive.';
-COMMENT ON COLUMN recurring_rule.timezone IS
+COMMENT ON COLUMN meeting.recurring_rule.timezone IS
     'IANA timezone the rule is evaluated in.';
-COMMENT ON COLUMN recurring_rule.rrule_text IS
+COMMENT ON COLUMN meeting.recurring_rule.rrule_text IS
     'Full RFC 5545 RRULE string for verbatim round-trip with iCalendar clients.';
 
 CREATE INDEX recurring_rule_index_meeting_id
-    ON recurring_rule(meeting_id);
+    ON meeting.recurring_rule(meeting_id);

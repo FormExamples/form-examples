@@ -1,12 +1,12 @@
 -- Fit note (Statement of Fitness for Work): a clinician's signed advice on an employee's sick leave.
 
-CREATE TABLE medical_fit_note (
+CREATE TABLE medical_fit_note.medical_fit_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    employee_id UUID NOT NULL REFERENCES employee(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    employee_id UUID NOT NULL REFERENCES medical_fit_note.employee(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES medical_fit_note.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'signed', 'issued', 'cancelled')),
     assessment_date DATE,
     assessment_method VARCHAR(20) NOT NULL DEFAULT '' CHECK (assessment_method IN ('face-to-face', 'video', 'telephone', 'records-review', '')),
@@ -30,62 +30,62 @@ CREATE TABLE medical_fit_note (
 );
 
 CREATE TRIGGER trigger_medical_fit_note_updated_at
-    BEFORE UPDATE ON medical_fit_note
+    BEFORE UPDATE ON medical_fit_note.medical_fit_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
-CREATE INDEX index_medical_fit_note_employee_id ON medical_fit_note(employee_id);
-CREATE INDEX index_medical_fit_note_clinician_id ON medical_fit_note(clinician_id);
+CREATE INDEX index_medical_fit_note_employee_id ON medical_fit_note.medical_fit_note(employee_id);
+CREATE INDEX index_medical_fit_note_clinician_id ON medical_fit_note.medical_fit_note(clinician_id);
 
-COMMENT ON TABLE medical_fit_note IS
+COMMENT ON TABLE medical_fit_note.medical_fit_note IS
     'Medical fit note.';
-COMMENT ON COLUMN medical_fit_note.id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_fit_note.created_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN medical_fit_note.updated_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN medical_fit_note.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN medical_fit_note.employee_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.employee_id IS
     'Foreign key to the employee table.';
-COMMENT ON COLUMN medical_fit_note.clinician_id IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.clinician_id IS
     'Foreign key to the clinician table.';
-COMMENT ON COLUMN medical_fit_note.status IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN medical_fit_note.assessment_date IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.assessment_date IS
     'Assessment date.';
-COMMENT ON COLUMN medical_fit_note.assessment_method IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.assessment_method IS
     'Assessment method. One of: face-to-face, video, telephone, records-review.';
-COMMENT ON COLUMN medical_fit_note.diagnosis_primary IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.diagnosis_primary IS
     'Diagnosis primary.';
-COMMENT ON COLUMN medical_fit_note.diagnosis_additional IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.diagnosis_additional IS
     'Diagnosis additional.';
-COMMENT ON COLUMN medical_fit_note.fitness_advice IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.fitness_advice IS
     'Fitness advice. One of: not-fit-for-work, may-be-fit-for-work.';
-COMMENT ON COLUMN medical_fit_note.period_from IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_from IS
     'Period from.';
-COMMENT ON COLUMN medical_fit_note.period_to IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_to IS
     'Period to.';
-COMMENT ON COLUMN medical_fit_note.period_duration_days IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.period_duration_days IS
     'Period duration days.';
-COMMENT ON COLUMN medical_fit_note.reassessment_required IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.reassessment_required IS
     'Reassessment required. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_phased_return IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_phased_return IS
     'Adjustment phased return. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_altered_hours IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_altered_hours IS
     'Adjustment altered hours. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_amended_duties IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_amended_duties IS
     'Adjustment amended duties. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.adjustment_workplace_adaptations IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.adjustment_workplace_adaptations IS
     'Adjustment workplace adaptations. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.functional_effects IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.functional_effects IS
     'Functional effects.';
-COMMENT ON COLUMN medical_fit_note.comments IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.comments IS
     'Comments.';
-COMMENT ON COLUMN medical_fit_note.employee_consent_to_share IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.employee_consent_to_share IS
     'Employee consent to share. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.clinician_declaration IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.clinician_declaration IS
     'Clinician declaration. One of: yes, no.';
-COMMENT ON COLUMN medical_fit_note.signed_at IS
+COMMENT ON COLUMN medical_fit_note.medical_fit_note.signed_at IS
     'Signed at.';

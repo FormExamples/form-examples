@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_keeper.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_vehicle_registration_application;
+
+COMMENT ON SCHEMA united_kingdom_vehicle_registration_application IS
+    'Namespace for the United Kingdom Vehicle Registration Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_vehicle_registration_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- registration application: name, date of birth, address, and the identity
 -- documents supplied to prove who they are.
 
-CREATE TABLE applicant (
+CREATE TABLE united_kingdom_vehicle_registration_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -78,43 +95,43 @@ CREATE TABLE applicant (
 );
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.applicant IS
     'Applicant (person making the application to the DVLA) for a vehicle registration application: name, date of birth, address, and identity documents supplied.';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.name IS
     'Full name of the applicant as it appears on their identity document.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.email IS
     'Email address.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.phone IS
     'Phone number.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN applicant.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN applicant.postcode IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.postcode IS
     'Postal code.';
-COMMENT ON COLUMN applicant.driving_licence_number IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.driving_licence_number IS
     'Great Britain driving licence number (16 characters) when the applicant holds a photocard licence, else empty.';
-COMMENT ON COLUMN applicant.identity_document_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.identity_document_type IS
     'Identity document supplied: photocard-driving-licence, passport, other-name-document, or none.';
-COMMENT ON COLUMN applicant.address_document_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant.address_document_type IS
     'Proof-of-address document supplied: photocard-driving-licence, utility-bill, bank-statement, council-tax-bill, or none.';
 
 CREATE INDEX applicant_name_trgm_idx
-    ON applicant
+    ON united_kingdom_vehicle_registration_application.applicant
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -128,7 +145,7 @@ CREATE INDEX applicant_name_trgm_idx
 -- Registered keeper of the vehicle: the person or organization responsible
 -- for registering and taxing it, who may differ from the applicant and the owner.
 
-CREATE TABLE keeper (
+CREATE TABLE united_kingdom_vehicle_registration_application.keeper (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -145,39 +162,39 @@ CREATE TABLE keeper (
 );
 
 CREATE TRIGGER trigger_keeper_updated_at
-    BEFORE UPDATE ON keeper
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.keeper
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
-COMMENT ON TABLE keeper IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.keeper IS
     'Registered keeper of the vehicle: the person or organization responsible for registering and taxing it, who may differ from the applicant and the owner.';
-COMMENT ON COLUMN keeper.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN keeper.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN keeper.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN keeper.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN keeper.name IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.name IS
     'Registered keeper full name, or the organization name for a company keeper.';
-COMMENT ON COLUMN keeper.keeper_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.keeper_type IS
     'Kind of keeper: individual, company, organization, trade, or other.';
-COMMENT ON COLUMN keeper.company_registration_number IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.company_registration_number IS
     'Companies House registration number for a company keeper, else empty.';
-COMMENT ON COLUMN keeper.email IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.email IS
     'Email address.';
-COMMENT ON COLUMN keeper.phone IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.phone IS
     'Phone number.';
-COMMENT ON COLUMN keeper.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN keeper.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN keeper.postcode IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper.postcode IS
     'Postal code.';
 
 CREATE INDEX keeper_name_trgm_idx
-    ON keeper
+    ON united_kingdom_vehicle_registration_application.keeper
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -197,15 +214,15 @@ CREATE INDEX keeper_name_trgm_idx
 -- completeness and validity classification, the audit trail of fired rules,
 -- and the flagged issues live in dedicated child tables.
 
-CREATE TABLE united_kingdom_vehicle_registration_application (
+CREATE TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     -- Foreign keys
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    keeper_id UUID REFERENCES keeper(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_kingdom_vehicle_registration_application.applicant(id) ON DELETE RESTRICT,
+    keeper_id UUID REFERENCES united_kingdom_vehicle_registration_application.keeper(id) ON DELETE RESTRICT,
     -- Application
     application_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (application_type IN ('v62-replacement-v5c', 'v62-acquired-without-v5c', 'v55-4-new-vehicle', 'v55-5-used-vehicle', 'imported-vehicle', 'v627-1-rebuilt-or-kit', '')),
     application_date DATE,
@@ -252,98 +269,98 @@ CREATE TABLE united_kingdom_vehicle_registration_application (
 );
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_registration_application_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_registration_application
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
 CREATE INDEX united_kingdom_vehicle_registration_application_applicant_id_idx
-    ON united_kingdom_vehicle_registration_application (applicant_id);
+    ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application (applicant_id);
 CREATE INDEX united_kingdom_vehicle_registration_application_keeper_id_idx
-    ON united_kingdom_vehicle_registration_application (keeper_id);
+    ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application (keeper_id);
 
-COMMENT ON TABLE united_kingdom_vehicle_registration_application IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application IS
     'Main vehicle registration application record: V62 replacement V5C, V55/4 or V55/5 first registration, imported vehicle, or V627/1 rebuilt or kit vehicle, with keeper, vehicle identity, supporting evidence, fee, and declaration.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.applicant_id IS
     'Foreign key to the applicant.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.keeper_id IS
     'Foreign key to the registered keeper when different from the applicant.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.application_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.application_type IS
     'Application variant: v62-replacement-v5c, v62-acquired-without-v5c, v55-4-new-vehicle, v55-5-used-vehicle, imported-vehicle, or v627-1-rebuilt-or-kit.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.application_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.application_date IS
     'Date the application was completed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.v5c_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.v5c_status IS
     'Why a V5C is needed: lost, stolen, destroyed, not-received, damaged, never-had (acquired without one), or has-v5c.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.weeks_since_change_of_keeper IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.weeks_since_change_of_keeper IS
     'Whole weeks since the keeper change, used for the 6-week not-received replacement window.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.new_keeper_slip_provided IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.new_keeper_slip_provided IS
     'Whether the green new-keeper slip from the most recent V5C is enclosed (yes/no); it waives the V62 fee.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.owner_differs_from_keeper IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.owner_differs_from_keeper IS
     'Whether the legal owner differs from the registered keeper (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.owner_name IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.owner_name IS
     'Name of the owner when the owner differs from the keeper.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.keeper_address_in_northern_ireland IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.keeper_address_in_northern_ireland IS
     'Whether the keeper address is in Northern Ireland (yes/no); insurance and a 4-year MOT threshold apply.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.registration_number IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.registration_number IS
     'Vehicle registration mark (number plate), blank for a first registration where the DVLA assigns one.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.vehicle_identification_number IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.vehicle_identification_number IS
     'Vehicle identification number (VIN, chassis number).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.engine_number IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.engine_number IS
     'Engine number as stamped on the engine.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.make IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.make IS
     'Vehicle make (manufacturer).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.model IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.model IS
     'Vehicle model.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.colour IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.colour IS
     'Vehicle colour.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.vehicle_category IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.vehicle_category IS
     'Vehicle category: car, motorcycle, light-goods, heavy-goods, bus, or other.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.fuel_type IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.fuel_type IS
     'Fuel type: petrol, diesel, electric, hybrid, lpg, or other.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.engine_capacity_as_cc IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.engine_capacity_as_cc IS
     'Engine capacity in cubic centimetres, null for electric vehicles.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.date_of_manufacture IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.date_of_manufacture IS
     'Date the vehicle was manufactured.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.date_first_used IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.date_first_used IS
     'Date the vehicle was first used, anywhere.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.seriously_damaged IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.seriously_damaged IS
     'Whether the vehicle is seriously damaged and cannot be repaired (yes/no); such a vehicle cannot be registered.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.certificate_of_newness_provided IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.certificate_of_newness_provided IS
     'Whether a certificate of newness (or declaration for imports) is enclosed (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.type_approval IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.type_approval IS
     'Type approval evidence: ecwvta, gb-type-approval, ni-type-approval, iva, msva, exempt-over-10-years, or none.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.mot_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.mot_status IS
     'MOT evidence: valid, not-required, or missing.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.insurance_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.insurance_status IS
     'Insurance evidence: in-force or none.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.country_of_export IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.country_of_export IS
     'Country the vehicle was imported from.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.import_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.import_date IS
     'Date the vehicle arrived in Great Britain.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.nova_status IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.nova_status IS
     'HMRC Notification of Vehicle Arrivals (NOVA) status: notified, not-notified, or not-applicable.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.nova_reference IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.nova_reference IS
     'NOVA reference given by HMRC.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.build_evidence_provided IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.build_evidence_provided IS
     'Whether receipts and build evidence for a rebuilt or kit vehicle are enclosed (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.donor_vehicle_count IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.donor_vehicle_count IS
     'Number of donor vehicles whose parts were used, for a rebuilt vehicle.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.fee_payment_method IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.fee_payment_method IS
     'Payment method for the fee: cheque, postal-order, post-office-card, online-card, or none.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.fee_paid_as_pence IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.fee_paid_as_pence IS
     'Fee enclosed or paid, in pence.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.declaration_signed IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.declaration_signed IS
     'Whether the applicant signed the declaration (yes/no).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.declaration_date IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.declaration_date IS
     'Date the declaration was signed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant_note IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application.applicant_note IS
     'Free-text note from the applicant.';
 
 -- ========================================================================
@@ -359,7 +376,7 @@ COMMENT ON COLUMN united_kingdom_vehicle_registration_application.applicant_note
 -- supporting documents, with the fee the DVLA requires. This is a validity
 -- check, not a decision; the DVLA decides every application.
 
-CREATE TABLE united_kingdom_vehicle_registration_application_grade (
+CREATE TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -367,7 +384,7 @@ CREATE TABLE united_kingdom_vehicle_registration_application_grade (
 
     -- Parent
     united_kingdom_vehicle_registration_application_id UUID NOT NULL UNIQUE
-        REFERENCES united_kingdom_vehicle_registration_application(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application(id) ON DELETE CASCADE,
     validity_class VARCHAR(30) NOT NULL DEFAULT '' CHECK (validity_class IN ('ready-to-submit', 'incomplete', 'needs-supporting-documents', '')),
     fee_due_as_pence INTEGER,
     missing_item_count INTEGER NOT NULL DEFAULT 0,
@@ -375,29 +392,29 @@ CREATE TABLE united_kingdom_vehicle_registration_application_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_registration_application_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_registration_application_grade
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_vehicle_registration_application_grade IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade IS
     'Computed completeness and validity classification for a vehicle registration application (ready-to-submit, incomplete, needs-supporting-documents), the fee due, and the count of missing items.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.united_kingdom_vehicle_registration_application_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.united_kingdom_vehicle_registration_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.validity_class IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.validity_class IS
     'Validity classification: ready-to-submit, incomplete, or needs-supporting-documents (incomplete takes precedence).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.fee_due_as_pence IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.fee_due_as_pence IS
     'Fee the DVLA requires for this application, in pence.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.missing_item_count IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.missing_item_count IS
     'Number of missing data items and documents found.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -412,14 +429,14 @@ COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade.graded_a
 -- with the application dimension it concerns, the category, and a
 -- human-readable description.
 
-CREATE TABLE united_kingdom_vehicle_registration_application_grade_rule (
+CREATE TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_vehicle_registration_application_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_vehicle_registration_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT '' CHECK (dimension IN ('applicant', 'keeper', 'vehicle', 'documents', 'fee', 'import', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -427,32 +444,32 @@ CREATE TABLE united_kingdom_vehicle_registration_application_grade_rule (
 );
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_registration_application_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_registration_application_grade_rule
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
 CREATE INDEX united_kingdom_vehicle_registration_application_grade_rule_grade_id_idx
-    ON united_kingdom_vehicle_registration_application_grade_rule (united_kingdom_vehicle_registration_application_grade_id);
+    ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule (united_kingdom_vehicle_registration_application_grade_id);
 
-COMMENT ON TABLE united_kingdom_vehicle_registration_application_grade_rule IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule IS
     'Audit trail of every validity rule that fired during classification: application dimension, category, and description.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.united_kingdom_vehicle_registration_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.united_kingdom_vehicle_registration_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MISSING-VIN-01).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.dimension IS
     'Application dimension the rule concerns: applicant, keeper, vehicle, documents, fee, import, or classification.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.category IS
     'Subject category (e.g. required-field, evidence, fee).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -466,14 +483,14 @@ COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_rule.des
 -- Flagged issues that fire independently of the validity class, with a
 -- priority and a suggested action for the applicant.
 
-CREATE TABLE united_kingdom_vehicle_registration_application_grade_flag (
+CREATE TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_vehicle_registration_application_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_vehicle_registration_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT '' CHECK (category IN ('identity-evidence-missing', 'entitlement-missing', 'mot-missing', 'type-approval-missing', 'insurance-missing', 'fee-incorrect', 'keeper-owner-mismatch', 'v5c-lost-stolen-destroyed', 'nova-missing', 'vin-invalid', 'registration-number-invalid', 'seriously-damaged', 'declaration-unsigned', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -482,34 +499,34 @@ CREATE TABLE united_kingdom_vehicle_registration_application_grade_flag (
 );
 
 CREATE TRIGGER trigger_united_kingdom_vehicle_registration_application_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_vehicle_registration_application_grade_flag
+    BEFORE UPDATE ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_vehicle_registration_application.set_updated_at();
 
 CREATE INDEX united_kingdom_vehicle_registration_application_grade_flag_grade_id_idx
-    ON united_kingdom_vehicle_registration_application_grade_flag (united_kingdom_vehicle_registration_application_grade_id);
+    ON united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag (united_kingdom_vehicle_registration_application_grade_id);
 
-COMMENT ON TABLE united_kingdom_vehicle_registration_application_grade_flag IS
+COMMENT ON TABLE united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the applicant.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.united_kingdom_vehicle_registration_application_grade_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.united_kingdom_vehicle_registration_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NOVA-MISSING-001).';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.category IS
     'Flag category: identity-evidence-missing, entitlement-missing, mot-missing, type-approval-missing, insurance-missing, fee-incorrect, keeper-owner-mismatch, v5c-lost-stolen-destroyed, nova-missing, vin-invalid, registration-number-invalid, seriously-damaged, declaration-unsigned, or other.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_kingdom_vehicle_registration_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_vehicle_registration_application.united_kingdom_vehicle_registration_application_grade_flag.suggested_action IS
     'Suggested action for the applicant before posting the application to the DVLA.';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_author.sql
 --   - 03_create_table_organization.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS architecture_decision_record;
+
+COMMENT ON SCHEMA architecture_decision_record IS
+    'Namespace for the Architecture Decision Record (Tyree & Akerman) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION architecture_decision_record.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION architecture_decision_record.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Author of an architecture decision record.
 
-CREATE TABLE author (
+CREATE TABLE architecture_decision_record.author (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -83,35 +100,35 @@ CREATE TABLE author (
 );
 
 CREATE TRIGGER trigger_author_updated_at
-    BEFORE UPDATE ON author
+    BEFORE UPDATE ON architecture_decision_record.author
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION architecture_decision_record.set_updated_at();
 
-COMMENT ON TABLE author IS
+COMMENT ON TABLE architecture_decision_record.author IS
     'Author of an architecture decision record (the architect or decision-maker).';
-COMMENT ON COLUMN author.id IS
+COMMENT ON COLUMN architecture_decision_record.author.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN author.created_at IS
+COMMENT ON COLUMN architecture_decision_record.author.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN author.updated_at IS
+COMMENT ON COLUMN architecture_decision_record.author.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN author.deleted_at IS
+COMMENT ON COLUMN architecture_decision_record.author.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN author.name IS
+COMMENT ON COLUMN architecture_decision_record.author.name IS
     'Author name.';
-COMMENT ON COLUMN author.email IS
+COMMENT ON COLUMN architecture_decision_record.author.email IS
     'Author email address.';
-COMMENT ON COLUMN author.phone IS
+COMMENT ON COLUMN architecture_decision_record.author.phone IS
     'Author phone number.';
-COMMENT ON COLUMN author.role IS
+COMMENT ON COLUMN architecture_decision_record.author.role IS
     'Author role within the organization.';
-COMMENT ON COLUMN author.organization_name IS
+COMMENT ON COLUMN architecture_decision_record.author.organization_name IS
     'Free-text organization name; for richer context use the organization table.';
-COMMENT ON COLUMN author.team_name IS
+COMMENT ON COLUMN architecture_decision_record.author.team_name IS
     'Team within the organization.';
 
 CREATE INDEX author_name_index_gin_trgm
-    ON author
+    ON architecture_decision_record.author
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -124,7 +141,7 @@ CREATE INDEX author_name_index_gin_trgm
 
 -- Organization context for an architecture decision record.
 
-CREATE TABLE organization (
+CREATE TABLE architecture_decision_record.organization (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -139,35 +156,35 @@ CREATE TABLE organization (
 );
 
 CREATE TRIGGER trigger_organization_updated_at
-    BEFORE UPDATE ON organization
+    BEFORE UPDATE ON architecture_decision_record.organization
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION architecture_decision_record.set_updated_at();
 
-COMMENT ON TABLE organization IS
+COMMENT ON TABLE architecture_decision_record.organization IS
     'Organization context (company, team, or program) under which an ADR is written.';
-COMMENT ON COLUMN organization.id IS
+COMMENT ON COLUMN architecture_decision_record.organization.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN organization.created_at IS
+COMMENT ON COLUMN architecture_decision_record.organization.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN organization.updated_at IS
+COMMENT ON COLUMN architecture_decision_record.organization.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN organization.deleted_at IS
+COMMENT ON COLUMN architecture_decision_record.organization.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN organization.name IS
+COMMENT ON COLUMN architecture_decision_record.organization.name IS
     'Organization display name.';
-COMMENT ON COLUMN organization.legal_name IS
+COMMENT ON COLUMN architecture_decision_record.organization.legal_name IS
     'Organization legal name, if different from display name.';
-COMMENT ON COLUMN organization.industry IS
+COMMENT ON COLUMN architecture_decision_record.organization.industry IS
     'Industry such as healthcare, fintech, retail, public-sector.';
-COMMENT ON COLUMN organization.domain IS
+COMMENT ON COLUMN architecture_decision_record.organization.domain IS
     'Primary internet domain such as example.com.';
-COMMENT ON COLUMN organization.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN architecture_decision_record.organization.country_as_iso_3166_1_alpha_2 IS
     'Country of registration as ISO 3166-1 alpha-2 code.';
-COMMENT ON COLUMN organization.description IS
+COMMENT ON COLUMN architecture_decision_record.organization.description IS
     'Free-text description of the organization, e.g. mission or scope.';
 
 CREATE INDEX organization_name_index_gin_trgm
-    ON organization
+    ON architecture_decision_record.organization
     USING GIN ((name) gin_trgm_ops);
 
 -- ========================================================================
@@ -192,14 +209,14 @@ CREATE INDEX organization_name_index_gin_trgm
 --   positions  -> architecture_decision_record_position
 --   notes      -> architecture_decision_record_note
 
-CREATE TABLE architecture_decision_record (
+CREATE TABLE architecture_decision_record.architecture_decision_record (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    author_id UUID REFERENCES author(id) ON DELETE SET NULL,
-    organization_id UUID REFERENCES organization(id) ON DELETE SET NULL,
+    author_id UUID REFERENCES architecture_decision_record.author(id) ON DELETE SET NULL,
+    organization_id UUID REFERENCES architecture_decision_record.organization(id) ON DELETE SET NULL,
 
     -- Identification
     slug TEXT NOT NULL DEFAULT '',
@@ -267,76 +284,76 @@ CREATE TABLE architecture_decision_record (
 );
 
 CREATE TRIGGER trigger_architecture_decision_record_updated_at
-    BEFORE UPDATE ON architecture_decision_record
+    BEFORE UPDATE ON architecture_decision_record.architecture_decision_record
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION architecture_decision_record.set_updated_at();
 
-COMMENT ON TABLE architecture_decision_record IS
+COMMENT ON TABLE architecture_decision_record.architecture_decision_record IS
     'Architecture decision record (Tyree & Akerman 14-section template).';
-COMMENT ON COLUMN architecture_decision_record.id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN architecture_decision_record.created_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN architecture_decision_record.updated_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN architecture_decision_record.deleted_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN architecture_decision_record.author_id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.author_id IS
     'Foreign key to author.id; the architect or decision-maker.';
-COMMENT ON COLUMN architecture_decision_record.organization_id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.organization_id IS
     'Foreign key to organization.id; the org context.';
-COMMENT ON COLUMN architecture_decision_record.slug IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.slug IS
     'URL-safe identifier such as "use-postgres-for-primary-storage".';
-COMMENT ON COLUMN architecture_decision_record.number IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.number IS
     'Sequential ADR number, e.g. 0042; optional, may be assigned post-merge.';
-COMMENT ON COLUMN architecture_decision_record.title IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.title IS
     'Short human-readable title summarising the decision.';
-COMMENT ON COLUMN architecture_decision_record.decision_date IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.decision_date IS
     'Date on which the decision was made (status transitions to decided/approved).';
-COMMENT ON COLUMN architecture_decision_record.status IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.status IS
     'Status: pending, decided, approved, superseded, deprecated.';
-COMMENT ON COLUMN architecture_decision_record.decision_group IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.decision_group IS
     'Tyree & Akerman section 4: organising group such as data, integration, security.';
-COMMENT ON COLUMN architecture_decision_record.issue IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.issue IS
     'Tyree & Akerman section 1: the architectural design issue being addressed.';
-COMMENT ON COLUMN architecture_decision_record.decision IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.decision IS
     'Tyree & Akerman section 2: the position chosen, stated clearly.';
-COMMENT ON COLUMN architecture_decision_record.assumptions IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.assumptions IS
     'Tyree & Akerman section 5: environmental factors influencing the decision.';
-COMMENT ON COLUMN architecture_decision_record.constraints IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.constraints IS
     'Tyree & Akerman section 6: environmental limits imposed by the decision.';
-COMMENT ON COLUMN architecture_decision_record.argument IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.argument IS
     'Tyree & Akerman section 8: rationale for the chosen position.';
-COMMENT ON COLUMN architecture_decision_record.implications IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.implications IS
     'Tyree & Akerman section 9: consequences, follow-on decisions, scope/schedule impact.';
-COMMENT ON COLUMN architecture_decision_record.related_decisions IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.related_decisions IS
     'Tyree & Akerman section 10: other ADRs this one depends on or supersedes.';
-COMMENT ON COLUMN architecture_decision_record.related_requirements IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.related_requirements IS
     'Tyree & Akerman section 11: business or functional requirements addressed.';
-COMMENT ON COLUMN architecture_decision_record.related_artifacts IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.related_artifacts IS
     'Tyree & Akerman section 12: designs, models, scope documents impacted.';
-COMMENT ON COLUMN architecture_decision_record.related_principles IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.related_principles IS
     'Tyree & Akerman section 13: enterprise principles this aligns with or breaks.';
-COMMENT ON COLUMN architecture_decision_record.signed_off_by IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.signed_off_by IS
     'Name of the person who signed off the decision.';
-COMMENT ON COLUMN architecture_decision_record.signed_off_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record.signed_off_at IS
     'Timestamp when the decision was signed off.';
 
 CREATE INDEX architecture_decision_record_author_id_index
-    ON architecture_decision_record(author_id);
+    ON architecture_decision_record.architecture_decision_record(author_id);
 
 CREATE INDEX architecture_decision_record_organization_id_index
-    ON architecture_decision_record(organization_id);
+    ON architecture_decision_record.architecture_decision_record(organization_id);
 
 CREATE INDEX architecture_decision_record_status_index
-    ON architecture_decision_record(status);
+    ON architecture_decision_record.architecture_decision_record(status);
 
 CREATE UNIQUE INDEX architecture_decision_record_slug_unique_index
-    ON architecture_decision_record(slug)
+    ON architecture_decision_record.architecture_decision_record(slug)
     WHERE slug <> '' AND deleted_at IS NULL;
 
 CREATE INDEX architecture_decision_record_title_index_gin_trgm
-    ON architecture_decision_record
+    ON architecture_decision_record.architecture_decision_record
     USING GIN ((title) gin_trgm_ops);
 
 -- ========================================================================
@@ -353,13 +370,13 @@ CREATE INDEX architecture_decision_record_title_index_gin_trgm
 -- (this is enforced at the application layer, not by SQL constraint, because
 -- a draft ADR may legitimately have zero chosen positions).
 
-CREATE TABLE architecture_decision_record_position (
+CREATE TABLE architecture_decision_record.architecture_decision_record_position (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
     architecture_decision_record_id UUID NOT NULL
-        REFERENCES architecture_decision_record(id) ON DELETE CASCADE,
+        REFERENCES architecture_decision_record.architecture_decision_record(id) ON DELETE CASCADE,
 
     ordinal INTEGER NOT NULL DEFAULT 0,
     name TEXT NOT NULL,
@@ -371,40 +388,40 @@ CREATE TABLE architecture_decision_record_position (
 );
 
 CREATE TRIGGER trigger_architecture_decision_record_position_updated_at
-    BEFORE UPDATE ON architecture_decision_record_position
+    BEFORE UPDATE ON architecture_decision_record.architecture_decision_record_position
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION architecture_decision_record.set_updated_at();
 
-COMMENT ON TABLE architecture_decision_record_position IS
+COMMENT ON TABLE architecture_decision_record.architecture_decision_record_position IS
     'Tyree & Akerman section 7: a viable alternative considered for the decision.';
-COMMENT ON COLUMN architecture_decision_record_position.id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN architecture_decision_record_position.created_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN architecture_decision_record_position.updated_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN architecture_decision_record_position.architecture_decision_record_id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.architecture_decision_record_id IS
     'Foreign key to architecture_decision_record.id.';
-COMMENT ON COLUMN architecture_decision_record_position.ordinal IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.ordinal IS
     'Display order; lower numbers appear first.';
-COMMENT ON COLUMN architecture_decision_record_position.name IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.name IS
     'Short name of the position, e.g. "Use PostgreSQL".';
-COMMENT ON COLUMN architecture_decision_record_position.description IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.description IS
     'Description of what this alternative would entail.';
-COMMENT ON COLUMN architecture_decision_record_position.model_or_diagram_url IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.model_or_diagram_url IS
     'URL to a supporting model, diagram, or prototype.';
-COMMENT ON COLUMN architecture_decision_record_position.is_chosen IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.is_chosen IS
     'TRUE if this is the position selected by the decision.';
-COMMENT ON COLUMN architecture_decision_record_position.pros IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.pros IS
     'Newline-separated list of advantages.';
-COMMENT ON COLUMN architecture_decision_record_position.cons IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_position.cons IS
     'Newline-separated list of disadvantages.';
 
 CREATE INDEX architecture_decision_record_position_adr_id_index
-    ON architecture_decision_record_position(architecture_decision_record_id);
+    ON architecture_decision_record.architecture_decision_record_position(architecture_decision_record_id);
 
 CREATE INDEX architecture_decision_record_position_chosen_index
-    ON architecture_decision_record_position(architecture_decision_record_id, is_chosen);
+    ON architecture_decision_record.architecture_decision_record_position(architecture_decision_record_id, is_chosen);
 
 -- ========================================================================
 -- END 05_create_table_architecture_decision_record_position.sql
@@ -418,13 +435,13 @@ CREATE INDEX architecture_decision_record_position_chosen_index
 -- Append-only discussion log captured during socialisation of the decision.
 -- Each note is timestamped and attributed; notes are not edited after writing.
 
-CREATE TABLE architecture_decision_record_note (
+CREATE TABLE architecture_decision_record.architecture_decision_record_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
     architecture_decision_record_id UUID NOT NULL
-        REFERENCES architecture_decision_record(id) ON DELETE CASCADE,
+        REFERENCES architecture_decision_record.architecture_decision_record(id) ON DELETE CASCADE,
 
     noted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     noted_by TEXT NOT NULL DEFAULT '',
@@ -432,32 +449,32 @@ CREATE TABLE architecture_decision_record_note (
 );
 
 CREATE TRIGGER trigger_architecture_decision_record_note_updated_at
-    BEFORE UPDATE ON architecture_decision_record_note
+    BEFORE UPDATE ON architecture_decision_record.architecture_decision_record_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION architecture_decision_record.set_updated_at();
 
-COMMENT ON TABLE architecture_decision_record_note IS
+COMMENT ON TABLE architecture_decision_record.architecture_decision_record_note IS
     'Tyree & Akerman section 14: append-only discussion notes captured during socialisation.';
-COMMENT ON COLUMN architecture_decision_record_note.id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN architecture_decision_record_note.created_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN architecture_decision_record_note.updated_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN architecture_decision_record_note.architecture_decision_record_id IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.architecture_decision_record_id IS
     'Foreign key to architecture_decision_record.id.';
-COMMENT ON COLUMN architecture_decision_record_note.noted_at IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.noted_at IS
     'Timestamp when the note was made (may differ from created_at if backdated).';
-COMMENT ON COLUMN architecture_decision_record_note.noted_by IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.noted_by IS
     'Name of the person who made the note.';
-COMMENT ON COLUMN architecture_decision_record_note.body IS
+COMMENT ON COLUMN architecture_decision_record.architecture_decision_record_note.body IS
     'Note body text.';
 
 CREATE INDEX architecture_decision_record_note_adr_id_index
-    ON architecture_decision_record_note(architecture_decision_record_id);
+    ON architecture_decision_record.architecture_decision_record_note(architecture_decision_record_id);
 
 CREATE INDEX architecture_decision_record_note_noted_at_index
-    ON architecture_decision_record_note(architecture_decision_record_id, noted_at);
+    ON architecture_decision_record.architecture_decision_record_note(architecture_decision_record_id, noted_at);
 
 -- ========================================================================
 -- END 06_create_table_architecture_decision_record_note.sql

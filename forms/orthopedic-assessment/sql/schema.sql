@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (16):
+-- Source files (17):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -39,12 +40,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS orthopedic_assessment;
+
+COMMENT ON SCHEMA orthopedic_assessment IS
+    'Namespace for the Orthopaedic Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION orthopedic_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -52,7 +69,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION orthopedic_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -65,7 +82,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE orthopedic_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -88,56 +105,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON orthopedic_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE orthopedic_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN orthopedic_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN orthopedic_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN orthopedic_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN orthopedic_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN orthopedic_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN orthopedic_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN orthopedic_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN orthopedic_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN orthopedic_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN orthopedic_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN orthopedic_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN orthopedic_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN orthopedic_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN orthopedic_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON orthopedic_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN orthopedic_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -150,7 +167,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE orthopedic_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -169,46 +186,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON orthopedic_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE orthopedic_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON orthopedic_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -219,36 +236,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_orthopedic_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE orthopedic_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON orthopedic_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE orthopedic_assessment.assessment IS
     'Orthopaedic assessment form using DASH score. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -259,13 +276,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_orthopedic_assessment_range_of_motion.sql
 -- ========================================================================
 
-CREATE TABLE assessment_range_of_motion (
+CREATE TABLE orthopedic_assessment.assessment_range_of_motion (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment(id) ON DELETE CASCADE,
     joint_assessed VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (joint_assessed IN ('shoulder', 'elbow', 'wrist', 'hand', 'hip', 'knee', 'ankle', 'spine-cervical', 'spine-lumbar', 'other', '')),
     side_assessed VARCHAR(10) NOT NULL DEFAULT ''
@@ -276,30 +293,30 @@ CREATE TABLE assessment_range_of_motion (
 );
 
 CREATE TRIGGER trigger_assessment_range_of_motion_updated_at
-    BEFORE UPDATE ON assessment_range_of_motion
+    BEFORE UPDATE ON orthopedic_assessment.assessment_range_of_motion
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_range_of_motion IS
+COMMENT ON TABLE orthopedic_assessment.assessment_range_of_motion IS
     'Range of motion section header: joint, side, and overall status. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_range_of_motion.assessment_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_range_of_motion.joint_assessed IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.joint_assessed IS
     'Primary joint being assessed for range of motion.';
-COMMENT ON COLUMN assessment_range_of_motion.side_assessed IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.side_assessed IS
     'Side assessed: left, right, bilateral, or empty.';
-COMMENT ON COLUMN assessment_range_of_motion.overall_rom_status IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.overall_rom_status IS
     'Overall range of motion status: full, mildly-restricted, moderately-restricted, severely-restricted, or empty.';
-COMMENT ON COLUMN assessment_range_of_motion.range_of_motion_notes IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.range_of_motion_notes IS
     'Additional notes on range of motion assessment.';
 
-COMMENT ON COLUMN assessment_range_of_motion.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_range_of_motion.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_range_of_motion.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_range_of_motion.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual ROM measurements (one-to-many child)
 
@@ -311,13 +328,13 @@ COMMENT ON COLUMN assessment_range_of_motion.deleted_at IS
 -- BEGIN 06_create_table_orthopedic_assessment_rom_measurement.sql
 -- ========================================================================
 
-CREATE TABLE assessment_rom_measurement (
+CREATE TABLE orthopedic_assessment.assessment_rom_measurement (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     range_of_motion_id UUID NOT NULL
-        REFERENCES assessment_range_of_motion(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment_range_of_motion(id) ON DELETE CASCADE,
     movement VARCHAR(50) NOT NULL DEFAULT '',
     active_degrees INTEGER
         CHECK (active_degrees IS NULL OR (active_degrees >= 0 AND active_degrees <= 360)),
@@ -333,42 +350,42 @@ CREATE TABLE assessment_rom_measurement (
 );
 
 CREATE TRIGGER trigger_assessment_rom_measurement_updated_at
-    BEFORE UPDATE ON assessment_rom_measurement
+    BEFORE UPDATE ON orthopedic_assessment.assessment_rom_measurement
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_rom_measurement IS
+COMMENT ON TABLE orthopedic_assessment.assessment_rom_measurement IS
     'Individual range of motion measurement for a specific movement (e.g. flexion, extension, abduction).';
-COMMENT ON COLUMN assessment_rom_measurement.movement IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.movement IS
     'Name of the movement being measured (e.g. flexion, extension, abduction, internal rotation).';
-COMMENT ON COLUMN assessment_rom_measurement.active_degrees IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.active_degrees IS
     'Active range of motion in degrees.';
-COMMENT ON COLUMN assessment_rom_measurement.passive_degrees IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.passive_degrees IS
     'Passive range of motion in degrees.';
-COMMENT ON COLUMN assessment_rom_measurement.normal_degrees IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.normal_degrees IS
     'Expected normal range of motion in degrees for comparison.';
-COMMENT ON COLUMN assessment_rom_measurement.end_feel IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.end_feel IS
     'End feel on passive movement: firm, hard, soft, empty, springy, or empty string.';
-COMMENT ON COLUMN assessment_rom_measurement.pain_on_movement IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.pain_on_movement IS
     'Whether pain is present during this movement: yes, no, or empty.';
-COMMENT ON COLUMN assessment_rom_measurement.sort_order IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.sort_order IS
     'Display order of the measurement within the list.';
 
-COMMENT ON COLUMN assessment_range_of_motion.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_range_of_motion.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_range_of_motion.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_range_of_motion.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_rom_measurement.range_of_motion_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.range_of_motion_id IS
     'Foreign key to the assessment_range_of_motion table.';
-COMMENT ON COLUMN assessment_rom_measurement.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_rom_measurement.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_rom_measurement.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_rom_measurement.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_rom_measurement.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -379,13 +396,13 @@ COMMENT ON COLUMN assessment_rom_measurement.deleted_at IS
 -- BEGIN 07_create_table_orthopedic_assessment_strength_testing.sql
 -- ========================================================================
 
-CREATE TABLE assessment_strength_testing (
+CREATE TABLE orthopedic_assessment.assessment_strength_testing (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment(id) ON DELETE CASCADE,
     grip_strength_affected_kg NUMERIC(5,1)
         CHECK (grip_strength_affected_kg IS NULL OR grip_strength_affected_kg >= 0),
     grip_strength_unaffected_kg NUMERIC(5,1)
@@ -396,30 +413,30 @@ CREATE TABLE assessment_strength_testing (
 );
 
 CREATE TRIGGER trigger_assessment_strength_testing_updated_at
-    BEFORE UPDATE ON assessment_strength_testing
+    BEFORE UPDATE ON orthopedic_assessment.assessment_strength_testing
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_strength_testing IS
+COMMENT ON TABLE orthopedic_assessment.assessment_strength_testing IS
     'Strength testing section header: grip strength and overall status. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_strength_testing.assessment_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_strength_testing.grip_strength_affected_kg IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.grip_strength_affected_kg IS
     'Grip strength of the affected side in kilograms.';
-COMMENT ON COLUMN assessment_strength_testing.grip_strength_unaffected_kg IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.grip_strength_unaffected_kg IS
     'Grip strength of the unaffected side in kilograms.';
-COMMENT ON COLUMN assessment_strength_testing.overall_strength_status IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.overall_strength_status IS
     'Overall strength assessment: normal, mildly-reduced, moderately-reduced, severely-reduced, or empty.';
-COMMENT ON COLUMN assessment_strength_testing.strength_testing_notes IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.strength_testing_notes IS
     'Additional notes on strength testing.';
 
-COMMENT ON COLUMN assessment_strength_testing.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_strength_testing.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_strength_testing.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_strength_testing.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual muscle strength tests (one-to-many child)
 
@@ -431,13 +448,13 @@ COMMENT ON COLUMN assessment_strength_testing.deleted_at IS
 -- BEGIN 08_create_table_orthopedic_assessment_strength_test_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_strength_test_item (
+CREATE TABLE orthopedic_assessment.assessment_strength_test_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     strength_testing_id UUID NOT NULL
-        REFERENCES assessment_strength_testing(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment_strength_testing(id) ON DELETE CASCADE,
     muscle_group VARCHAR(100) NOT NULL DEFAULT '',
     movement VARCHAR(100) NOT NULL DEFAULT '',
     mrc_grade INTEGER
@@ -448,38 +465,38 @@ CREATE TABLE assessment_strength_test_item (
 );
 
 CREATE TRIGGER trigger_assessment_strength_test_item_updated_at
-    BEFORE UPDATE ON assessment_strength_test_item
+    BEFORE UPDATE ON orthopedic_assessment.assessment_strength_test_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_strength_test_item IS
+COMMENT ON TABLE orthopedic_assessment.assessment_strength_test_item IS
     'Individual manual muscle testing result using MRC scale (0-5).';
-COMMENT ON COLUMN assessment_strength_test_item.muscle_group IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.muscle_group IS
     'Muscle group tested (e.g. deltoid, biceps, quadriceps).';
-COMMENT ON COLUMN assessment_strength_test_item.movement IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.movement IS
     'Movement tested (e.g. shoulder abduction, elbow flexion).';
-COMMENT ON COLUMN assessment_strength_test_item.mrc_grade IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.mrc_grade IS
     'MRC muscle strength grade: 0 = no contraction, 1 = flicker, 2 = movement with gravity eliminated, 3 = movement against gravity, 4 = movement against resistance, 5 = normal.';
-COMMENT ON COLUMN assessment_strength_test_item.pain_on_testing IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.pain_on_testing IS
     'Whether pain occurred during strength testing: yes, no, or empty.';
-COMMENT ON COLUMN assessment_strength_test_item.sort_order IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_strength_testing.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_strength_testing.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_strength_testing.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_testing.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_strength_test_item.strength_testing_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.strength_testing_id IS
     'Foreign key to the assessment_strength_testing table.';
-COMMENT ON COLUMN assessment_strength_test_item.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_strength_test_item.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_strength_test_item.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_strength_test_item.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_strength_test_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -490,13 +507,13 @@ COMMENT ON COLUMN assessment_strength_test_item.deleted_at IS
 -- BEGIN 09_create_table_orthopedic_assessment_imaging_history.sql
 -- ========================================================================
 
-CREATE TABLE assessment_imaging_history (
+CREATE TABLE orthopedic_assessment.assessment_imaging_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment(id) ON DELETE CASCADE,
     has_previous_imaging VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_previous_imaging IN ('yes', 'no', '')),
     imaging_requested VARCHAR(5) NOT NULL DEFAULT ''
@@ -506,30 +523,30 @@ CREATE TABLE assessment_imaging_history (
 );
 
 CREATE TRIGGER trigger_assessment_imaging_history_updated_at
-    BEFORE UPDATE ON assessment_imaging_history
+    BEFORE UPDATE ON orthopedic_assessment.assessment_imaging_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_imaging_history IS
+COMMENT ON TABLE orthopedic_assessment.assessment_imaging_history IS
     'Imaging history section header: prior imaging and new requests. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_imaging_history.assessment_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_imaging_history.has_previous_imaging IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.has_previous_imaging IS
     'Whether the patient has had previous imaging: yes, no, or empty.';
-COMMENT ON COLUMN assessment_imaging_history.imaging_requested IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.imaging_requested IS
     'Whether new imaging has been requested: yes, no, or empty.';
-COMMENT ON COLUMN assessment_imaging_history.imaging_requested_details IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.imaging_requested_details IS
     'Details of newly requested imaging.';
-COMMENT ON COLUMN assessment_imaging_history.imaging_notes IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.imaging_notes IS
     'Additional notes on imaging history.';
 
-COMMENT ON COLUMN assessment_imaging_history.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_imaging_history.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_imaging_history.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_imaging_history.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual imaging study items (one-to-many child)
 
@@ -541,13 +558,13 @@ COMMENT ON COLUMN assessment_imaging_history.deleted_at IS
 -- BEGIN 10_create_table_orthopedic_assessment_imaging_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_imaging_item (
+CREATE TABLE orthopedic_assessment.assessment_imaging_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     imaging_history_id UUID NOT NULL
-        REFERENCES assessment_imaging_history(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment_imaging_history(id) ON DELETE CASCADE,
     modality VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (modality IN ('x-ray', 'mri', 'ct', 'ultrasound', 'bone-scan', 'dexa', 'other', '')),
     body_region VARCHAR(100) NOT NULL DEFAULT '',
@@ -557,38 +574,38 @@ CREATE TABLE assessment_imaging_item (
 );
 
 CREATE TRIGGER trigger_assessment_imaging_item_updated_at
-    BEFORE UPDATE ON assessment_imaging_item
+    BEFORE UPDATE ON orthopedic_assessment.assessment_imaging_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_imaging_item IS
+COMMENT ON TABLE orthopedic_assessment.assessment_imaging_item IS
     'Individual imaging study with modality, region, date, and findings.';
-COMMENT ON COLUMN assessment_imaging_item.modality IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.modality IS
     'Imaging modality: x-ray, mri, ct, ultrasound, bone-scan, dexa, other, or empty.';
-COMMENT ON COLUMN assessment_imaging_item.body_region IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.body_region IS
     'Body region imaged.';
-COMMENT ON COLUMN assessment_imaging_item.date_performed IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.date_performed IS
     'Date the imaging was performed.';
-COMMENT ON COLUMN assessment_imaging_item.findings IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.findings IS
     'Summary of imaging findings.';
-COMMENT ON COLUMN assessment_imaging_item.sort_order IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_imaging_history.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_imaging_history.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_imaging_history.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_imaging_item.imaging_history_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.imaging_history_id IS
     'Foreign key to the assessment_imaging_history table.';
-COMMENT ON COLUMN assessment_imaging_item.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_imaging_item.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_imaging_item.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_imaging_item.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_imaging_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -599,13 +616,13 @@ COMMENT ON COLUMN assessment_imaging_item.deleted_at IS
 -- BEGIN 11_create_table_orthopedic_assessment_surgical_history.sql
 -- ========================================================================
 
-CREATE TABLE assessment_surgical_history (
+CREATE TABLE orthopedic_assessment.assessment_surgical_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment(id) ON DELETE CASCADE,
     has_previous_surgery VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_previous_surgery IN ('yes', 'no', '')),
     surgery_considered VARCHAR(5) NOT NULL DEFAULT ''
@@ -623,40 +640,40 @@ CREATE TABLE assessment_surgical_history (
 );
 
 CREATE TRIGGER trigger_assessment_surgical_history_updated_at
-    BEFORE UPDATE ON assessment_surgical_history
+    BEFORE UPDATE ON orthopedic_assessment.assessment_surgical_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_surgical_history IS
+COMMENT ON TABLE orthopedic_assessment.assessment_surgical_history IS
     'Surgical history section header: previous surgeries, surgical candidacy, and patient preference. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_surgical_history.assessment_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_surgical_history.has_previous_surgery IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.has_previous_surgery IS
     'Whether the patient has had previous orthopedic surgery: yes, no, or empty.';
-COMMENT ON COLUMN assessment_surgical_history.surgery_considered IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.surgery_considered IS
     'Whether surgery is being considered for the current condition: yes, no, or empty.';
-COMMENT ON COLUMN assessment_surgical_history.surgery_considered_details IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.surgery_considered_details IS
     'Details of surgery being considered.';
-COMMENT ON COLUMN assessment_surgical_history.patient_preference IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.patient_preference IS
     'Patient preference regarding surgical intervention: conservative, open-to-surgery, prefers-surgery, undecided, or empty.';
-COMMENT ON COLUMN assessment_surgical_history.comorbidities_affecting_surgery IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.comorbidities_affecting_surgery IS
     'Comorbidities that may affect surgical candidacy.';
-COMMENT ON COLUMN assessment_surgical_history.anaesthetic_risk IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.anaesthetic_risk IS
     'Estimated anaesthetic risk: low, moderate, high, or empty.';
-COMMENT ON COLUMN assessment_surgical_history.anticoagulant_use IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.anticoagulant_use IS
     'Whether the patient takes anticoagulants: yes, no, or empty.';
-COMMENT ON COLUMN assessment_surgical_history.anticoagulant_details IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.anticoagulant_details IS
     'Details of anticoagulant use.';
-COMMENT ON COLUMN assessment_surgical_history.surgical_history_notes IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.surgical_history_notes IS
     'Additional clinician notes on surgical history and candidacy.';
 
-COMMENT ON COLUMN assessment_surgical_history.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_surgical_history.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_surgical_history.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_surgical_history.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.deleted_at IS
     'Timestamp when this row was deleted.';
 -- Individual previous surgery items (one-to-many child)
 
@@ -668,13 +685,13 @@ COMMENT ON COLUMN assessment_surgical_history.deleted_at IS
 -- BEGIN 12_create_table_orthopedic_assessment_surgery_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_surgery_item (
+CREATE TABLE orthopedic_assessment.assessment_surgery_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     surgical_history_id UUID NOT NULL
-        REFERENCES assessment_surgical_history(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment_surgical_history(id) ON DELETE CASCADE,
     procedure_name VARCHAR(255) NOT NULL DEFAULT '',
     date_performed DATE,
     surgeon VARCHAR(255) NOT NULL DEFAULT '',
@@ -686,42 +703,42 @@ CREATE TABLE assessment_surgery_item (
 );
 
 CREATE TRIGGER trigger_assessment_surgery_item_updated_at
-    BEFORE UPDATE ON assessment_surgery_item
+    BEFORE UPDATE ON orthopedic_assessment.assessment_surgery_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_surgery_item IS
+COMMENT ON TABLE orthopedic_assessment.assessment_surgery_item IS
     'Individual previous orthopedic surgery entry with procedure, date, and outcome.';
-COMMENT ON COLUMN assessment_surgery_item.procedure_name IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.procedure_name IS
     'Name of the surgical procedure.';
-COMMENT ON COLUMN assessment_surgery_item.date_performed IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.date_performed IS
     'Date the surgery was performed.';
-COMMENT ON COLUMN assessment_surgery_item.surgeon IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.surgeon IS
     'Name of the operating surgeon.';
-COMMENT ON COLUMN assessment_surgery_item.hospital IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.hospital IS
     'Hospital where the surgery was performed.';
-COMMENT ON COLUMN assessment_surgery_item.outcome IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.outcome IS
     'Outcome of the surgery: good, fair, poor, complication, or empty.';
-COMMENT ON COLUMN assessment_surgery_item.outcome_details IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.outcome_details IS
     'Details of the surgical outcome.';
-COMMENT ON COLUMN assessment_surgery_item.sort_order IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.sort_order IS
     'Display order of the item within the list.';
 
-COMMENT ON COLUMN assessment_surgical_history.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_surgical_history.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_surgical_history.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgical_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_surgery_item.surgical_history_id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.surgical_history_id IS
     'Foreign key to the assessment_surgical_history table.';
-COMMENT ON COLUMN assessment_surgery_item.id IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_surgery_item.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_surgery_item.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_surgery_item.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.assessment_surgery_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -732,13 +749,13 @@ COMMENT ON COLUMN assessment_surgery_item.deleted_at IS
 -- BEGIN 13_create_table_orthopedic_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE orthopedic_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.assessment(id) ON DELETE CASCADE,
     dash_score NUMERIC(5,1) NOT NULL DEFAULT 0
         CHECK (dash_score >= 0 AND dash_score <= 100),
     disability_category VARCHAR(20) NOT NULL DEFAULT ''
@@ -747,28 +764,28 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON orthopedic_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE orthopedic_assessment.grade IS
     'Computed DASH grading result for the orthopedic assessment. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.dash_score IS
+COMMENT ON COLUMN orthopedic_assessment.grade.dash_score IS
     'DASH score: 0 = no disability, 100 = most severe disability.';
-COMMENT ON COLUMN grade.disability_category IS
+COMMENT ON COLUMN orthopedic_assessment.grade.disability_category IS
     'Disability category: none (0), mild (1-33), moderate (34-66), severe (67-100), or empty.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN orthopedic_assessment.grade.graded_at IS
     'Timestamp when the DASH grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN orthopedic_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN orthopedic_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -779,13 +796,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 14_create_table_orthopedic_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE orthopedic_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -794,30 +811,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON orthopedic_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE orthopedic_assessment.grading_fired_rule IS
     'Individual DASH classification rules that evaluated to true during grading of the orthopedic assessment.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. DASH-FUNC-001, DASH-PAIN-001).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Functional Limitation, Pain, Range of Motion, Strength).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.description IS
     'Human-readable description of the rule and why it fired.';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.severity_level IS
     'DASH disability category contributed by this rule: none, mild, moderate, severe, or empty.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -828,13 +845,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 15_create_table_orthopedic_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE orthopedic_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES orthopedic_assessment.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -843,30 +860,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON orthopedic_assessment.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION orthopedic_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE orthopedic_assessment.grading_additional_flag IS
     'Additional flags detected during orthopedic assessment grading, such as red flag symptoms or surgical urgency indicators.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-RED-FLAG-001, FLAG-NERVE-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.category IS
     'Category of the flag (e.g. Red Flag, Neurological, Vascular, Surgical).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.message IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN orthopedic_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

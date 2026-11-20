@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS chronic_obstructive_pulmonary_disease_review;
+
+COMMENT ON SCHEMA chronic_obstructive_pulmonary_disease_review IS
+    'Namespace for the Chronic Obstructive Pulmonary Disease Review (COPD Annual Review) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.patient IS
     'Patient demographic information used by the COPD annual-review record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON chronic_obstructive_pulmonary_disease_review.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clinician who
 -- conducted the COPD annual review.
 
-CREATE TABLE clinician (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.clinician IS
     'Clinician identifying information for the clinician who conducted the COPD annual review.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.role IS
     'Primary clinical role of the reviewer: gp, practice-nurse, respiratory-nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.registration_body IS
     'Professional registration body: GMC, NMC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON chronic_obstructive_pulmonary_disease_review.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- child tables. This is a documentation, completeness and
 -- severity-classification record, not a diagnostic or prescribing instrument.
 
-CREATE TABLE chronic_obstructive_pulmonary_disease_review (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES chronic_obstructive_pulmonary_disease_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES chronic_obstructive_pulmonary_disease_review.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_name TEXT NOT NULL DEFAULT '',
@@ -283,110 +300,110 @@ CREATE TABLE chronic_obstructive_pulmonary_disease_review (
 );
 
 CREATE INDEX chronic_obstructive_pulmonary_disease_review_patient_id_idx
-    ON chronic_obstructive_pulmonary_disease_review (patient_id);
+    ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review (patient_id);
 CREATE INDEX chronic_obstructive_pulmonary_disease_review_clinician_id_idx
-    ON chronic_obstructive_pulmonary_disease_review (clinician_id);
+    ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review (clinician_id);
 
 CREATE TRIGGER trigger_chronic_obstructive_pulmonary_disease_review_updated_at
-    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review IS
     'Main COPD annual-review record (NICE NG115, GOLD 2023+): patient and clinician identification, review context, diagnosis and exposure history, post-bronchodilator spirometry, symptom burden (MRC / mMRC / CAT), exacerbation history, smoking and cessation, inhaler therapy, technique and adherence, vaccinations, pulmonary rehabilitation, oxygen, comorbidities, and self-management plan. The computed GOLD airflow grade, ABE group, review-completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician_name IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.clinician_name IS
     'Name of the reviewing clinician as recorded on the review.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician_role IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.clinician_role IS
     'Reviewing clinician role: gp, practice-nurse, respiratory-nurse, pharmacist, or other.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.reviewed_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.reviewed_at IS
     'Date the annual review was conducted.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.review_type IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.review_type IS
     'Type of review: routine-annual, post-exacerbation, or opportunistic.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.patient_identifier IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.patient_identifier IS
     'NHS number or local patient identifier as recorded on the review.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.age_band IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.age_band IS
     'Adult age band: 18-39, 40-59, 60-79, or >=80.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.sex IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.diagnosis_year IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.diagnosis_year IS
     'Year the COPD diagnosis was made.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.spirometry_confirmed IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.spirometry_confirmed IS
     'Whether the COPD diagnosis was confirmed on spirometry (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.exposure_notes IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.exposure_notes IS
     'Free-text record of occupational or environmental exposures.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.fev1_litres IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.fev1_litres IS
     'Post-bronchodilator FEV1 in litres.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.fev1_percent_predicted IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.fev1_percent_predicted IS
     'Post-bronchodilator FEV1 as a percentage of predicted; drives the GOLD airflow-limitation grade.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.fvc_litres IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.fvc_litres IS
     'Forced vital capacity (FVC) in litres.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.fev1_fvc_ratio IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.fev1_fvc_ratio IS
     'FEV1/FVC ratio; airflow obstruction is confirmed when < 0.70.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.spirometry_date IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.spirometry_date IS
     'Date the spirometry was performed.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.mrc_grade IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.mrc_grade IS
     'MRC dyspnoea grade (1-5); >= 3 is a pulmonary-rehabilitation trigger.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.mmrc_grade IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.mmrc_grade IS
     'mMRC dyspnoea grade (0-4); >= 2 drives the high symptom axis.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.cat_score IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.cat_score IS
     'COPD Assessment Test (CAT) total (0-40); >= 10 drives the high symptom axis.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.exacerbations_last_12m IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.exacerbations_last_12m IS
     'Count of moderate exacerbations in the past 12 months; >= 2 drives high exacerbation risk.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.hospitalisations_last_12m IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.hospitalisations_last_12m IS
     'Count of exacerbations needing hospital admission in the past 12 months; >= 1 drives high exacerbation risk.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.last_exacerbation_date IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.last_exacerbation_date IS
     'Date of the most recent exacerbation.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.rescue_pack_courses IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.rescue_pack_courses IS
     'Count of rescue-pack courses used in the past 12 months.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.smoking_status IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.smoking_status IS
     'Smoking status: current, ex, or never.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.pack_years IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.pack_years IS
     'Cumulative smoking exposure in pack-years.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.cessation_support_offered IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.cessation_support_offered IS
     'Whether brief advice or a stop-smoking referral was offered (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.inhaled_therapy IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.inhaled_therapy IS
     'Free-text record of the current SABA/LABA/LAMA/ICS inhaled regimen.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.device_type IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.device_type IS
     'Free-text record of the inhaler device(s) in use.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.inhaler_technique_checked IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.inhaler_technique_checked IS
     'Whether inhaler technique was checked this review (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.inhaler_technique_adequate IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.inhaler_technique_adequate IS
     'Whether inhaler technique was assessed as adequate (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.adherence IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.adherence IS
     'Self-reported medication adherence: good, partial, or poor.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.influenza_vaccine IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.influenza_vaccine IS
     'Influenza vaccination status: up-to-date, due, or declined.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.pneumococcal_vaccine IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.pneumococcal_vaccine IS
     'Pneumococcal vaccination status: up-to-date, due, or declined.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.covid_vaccine IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.covid_vaccine IS
     'COVID-19 vaccination status: up-to-date, due, or declined.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.pulmonary_rehab_status IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.pulmonary_rehab_status IS
     'Pulmonary-rehabilitation status: completed, referred, eligible-not-referred, or not-indicated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.oxygen_use IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.oxygen_use IS
     'Home-oxygen use: none, long-term, or ambulatory.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.resting_spo2 IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.resting_spo2 IS
     'Resting oxygen saturation (SpO2) on room air, as a percentage.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.comorbidities IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.comorbidities IS
     'Free-text record of recorded comorbidities.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.self_management_plan IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.self_management_plan IS
     'Whether a personalised self-management plan is in place (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.rescue_pack_supplied IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.rescue_pack_supplied IS
     'Whether a rescue pack was supplied (yes/no).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.next_review_interval IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.next_review_interval IS
     'Free-text interval (months) to the next scheduled review.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician_note IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review.clinician_note IS
     'Free-text clinician summary shown in the report.';
 
 -- ========================================================================
@@ -404,14 +421,14 @@ COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.clinician_note IS
 -- reflects the recorded classification and the completeness of the review, not
 -- a diagnostic judgement.
 
-CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     chronic_obstructive_pulmonary_disease_review_id UUID NOT NULL UNIQUE
-        REFERENCES chronic_obstructive_pulmonary_disease_review(id) ON DELETE CASCADE,
+        REFERENCES chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review(id) ON DELETE CASCADE,
 
     gold_airflow_grade VARCHAR(1) NOT NULL DEFAULT ''
         CHECK (gold_airflow_grade IN ('1', '2', '3', '4', '')),
@@ -428,33 +445,33 @@ CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade (
 );
 
 CREATE TRIGGER trigger_chronic_obstructive_pulmonary_disease_review_grade_updated_at
-    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review_grade
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review_grade IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade IS
     'Computed GOLD airflow-grade, ABE-group and completeness grading result for a COPD annual review: GOLD airflow-limitation grade (1-4), symptom and exacerbation axes, combined ABE assessment group, and review-completeness status. 1:1 with the parent review.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.chronic_obstructive_pulmonary_disease_review_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.chronic_obstructive_pulmonary_disease_review_id IS
     'Foreign key to the parent COPD review (unique, 1:1).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.gold_airflow_grade IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.gold_airflow_grade IS
     'GOLD airflow-limitation grade banded from FEV1 % predicted: 1 (>=80), 2 (>=50), 3 (>=30), 4 (<30); empty when FEV1 % predicted is unrecorded.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.symptom_burden IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.symptom_burden IS
     'Symptom axis: high when mMRC >= 2 or CAT >= 10, else low.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.exacerbation_risk IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.exacerbation_risk IS
     'Exacerbation axis: high when >= 2 moderate or >= 1 hospitalised exacerbation in 12 months, else low.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.abe_group IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.abe_group IS
     'Combined ABE assessment group: E when exacerbation risk high; else B when symptom burden high; else A; empty when no symptom/exacerbation data.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.review_status IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.review_status IS
     'Review completeness: complete, partial, or incomplete.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.graded_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -469,14 +486,14 @@ COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade.graded_at I
 -- grading. Each row records one rule firing with the section it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade_rule (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     chronic_obstructive_pulmonary_disease_review_grade_id UUID NOT NULL
-        REFERENCES chronic_obstructive_pulmonary_disease_review_grade(id) ON DELETE CASCADE,
+        REFERENCES chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -486,32 +503,32 @@ CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade_rule (
 );
 
 CREATE INDEX chronic_obstructive_pulmonary_disease_review_grade_rule_grade_id_idx
-    ON chronic_obstructive_pulmonary_disease_review_grade_rule (chronic_obstructive_pulmonary_disease_review_grade_id);
+    ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule (chronic_obstructive_pulmonary_disease_review_grade_id);
 
 CREATE TRIGGER trigger_chronic_obstructive_pulmonary_disease_review_grade_rule_updated_at
-    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review_grade_rule
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review_grade_rule IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule IS
     'Audit trail of every classification or completeness rule that fired during grading: section, category, and description.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.chronic_obstructive_pulmonary_disease_review_grade_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.chronic_obstructive_pulmonary_disease_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.rule_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-GOLD-GRADE-2-01).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.section IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.section IS
     'Section the rule concerns: gold, symptom, exacerbation, abe, or completeness.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.category IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.category IS
     'Subject category (e.g. airflow-grading, symptom-axis, exacerbation-axis, abe-grouping, required-component).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.description IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -525,14 +542,14 @@ COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_rule.descri
 -- Flags that fire independently of the grades, each with a priority and a
 -- suggested action for the clinician or governance team.
 
-CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade_flag (
+CREATE TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     chronic_obstructive_pulmonary_disease_review_grade_id UUID NOT NULL
-        REFERENCES chronic_obstructive_pulmonary_disease_review_grade(id) ON DELETE CASCADE,
+        REFERENCES chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -553,34 +570,34 @@ CREATE TABLE chronic_obstructive_pulmonary_disease_review_grade_flag (
 );
 
 CREATE INDEX chronic_obstructive_pulmonary_disease_review_grade_flag_grade_id_idx
-    ON chronic_obstructive_pulmonary_disease_review_grade_flag (chronic_obstructive_pulmonary_disease_review_grade_id);
+    ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag (chronic_obstructive_pulmonary_disease_review_grade_id);
 
 CREATE TRIGGER trigger_chronic_obstructive_pulmonary_disease_review_grade_flag_updated_at
-    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review_grade_flag
+    BEFORE UPDATE ON chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION chronic_obstructive_pulmonary_disease_review.set_updated_at();
 
-COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review_grade_flag IS
+COMMENT ON TABLE chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag IS
     'Flags that fire independently of the grades, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.created_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.updated_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.deleted_at IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.chronic_obstructive_pulmonary_disease_review_grade_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.chronic_obstructive_pulmonary_disease_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.flag_id IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SMOKING-CESSATION-001).';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.category IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.category IS
     'Flag category: escalate-therapy, smoking-cessation, poor-inhaler-technique, missing-vaccinations, pulmonary-rehab, incomplete, or other.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.priority IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.description IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review_grade_flag.suggested_action IS
+COMMENT ON COLUMN chronic_obstructive_pulmonary_disease_review.chronic_obstructive_pulmonary_disease_review_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "refer to stop-smoking support", "recall for missing vaccinations").';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS zarit_burden_interview;
+
+COMMENT ON SCHEMA zarit_burden_interview IS
+    'Namespace for the Zarit Burden Interview (ZBI) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION zarit_burden_interview.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION zarit_burden_interview.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Patient demographic information for the care recipient (the person
 -- cared for by the carer completing the Zarit Burden Interview).
 
-CREATE TABLE patient (
+CREATE TABLE zarit_burden_interview.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON zarit_burden_interview.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE zarit_burden_interview.patient IS
     'Patient demographic information for the care recipient assessed by the Zarit Burden Interview record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN zarit_burden_interview.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN zarit_burden_interview.patient.name IS
     'Full name of the care recipient.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN zarit_burden_interview.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN zarit_burden_interview.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN zarit_burden_interview.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN zarit_burden_interview.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN zarit_burden_interview.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN zarit_burden_interview.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN zarit_burden_interview.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN zarit_burden_interview.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN zarit_burden_interview.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN zarit_burden_interview.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN zarit_burden_interview.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN zarit_burden_interview.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN zarit_burden_interview.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON zarit_burden_interview.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -140,7 +157,7 @@ CREATE INDEX patient_name_trgm_idx
 -- administering the Zarit Burden Interview (clinician, nurse, social-care
 -- worker, carer-support worker, or other).
 
-CREATE TABLE clinician (
+CREATE TABLE zarit_burden_interview.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,41 +175,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON zarit_burden_interview.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE zarit_burden_interview.clinician IS
     'Clinician / practitioner identifying information for the practitioner administering the assessment.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.name IS
     'Practitioner full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.role IS
     'Primary role of the administering practitioner: clinician, nurse, social-care, carer-support, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN zarit_burden_interview.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON zarit_burden_interview.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- a 0-4 frequency scale). The computed total, burden band, fired items,
 -- and flags live in dedicated child tables.
 
-CREATE TABLE zarit_burden_interview (
+CREATE TABLE zarit_burden_interview.zarit_burden_interview (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES zarit_burden_interview.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES zarit_burden_interview.clinician(id) ON DELETE RESTRICT,
 
     -- Assessment context
     practitioner_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -263,96 +280,96 @@ CREATE TABLE zarit_burden_interview (
 );
 
 CREATE INDEX zarit_burden_interview_patient_id_idx
-    ON zarit_burden_interview (patient_id);
+    ON zarit_burden_interview.zarit_burden_interview (patient_id);
 CREATE INDEX zarit_burden_interview_clinician_id_idx
-    ON zarit_burden_interview (clinician_id);
+    ON zarit_burden_interview.zarit_burden_interview (clinician_id);
 
 CREATE TRIGGER trigger_zarit_burden_interview_updated_at
-    BEFORE UPDATE ON zarit_burden_interview
+    BEFORE UPDATE ON zarit_burden_interview.zarit_burden_interview
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE zarit_burden_interview IS
+COMMENT ON TABLE zarit_burden_interview.zarit_burden_interview IS
     'Main Zarit Burden Interview record: assessment context, carer and care-recipient identification, and the twenty-two 0-4 item ratings.';
-COMMENT ON COLUMN zarit_burden_interview.id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN zarit_burden_interview.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN zarit_burden_interview.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN zarit_burden_interview.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN zarit_burden_interview.patient_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.patient_id IS
     'Foreign key to the care recipient being cared for (delete restricted).';
-COMMENT ON COLUMN zarit_burden_interview.clinician_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.clinician_id IS
     'Foreign key to the administering practitioner (optional; delete restricted).';
-COMMENT ON COLUMN zarit_burden_interview.practitioner_name IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.practitioner_name IS
     'Name of the administering practitioner as recorded on the assessment.';
-COMMENT ON COLUMN zarit_burden_interview.practitioner_role IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.practitioner_role IS
     'Role of the administering practitioner: clinician, nurse, social-care, carer-support, or other.';
-COMMENT ON COLUMN zarit_burden_interview.assessed_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN zarit_burden_interview.care_setting IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.care_setting IS
     'Care setting: memory-service, community, general-practice, social-care, or other.';
-COMMENT ON COLUMN zarit_burden_interview.instrument_form IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.instrument_form IS
     'Which item set is scored: zbi22 (full 22-item, default) or zbi12 (12-item short form).';
-COMMENT ON COLUMN zarit_burden_interview.carer_identifier IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.carer_identifier IS
     'Local identifier for the carer completing the questionnaire.';
-COMMENT ON COLUMN zarit_burden_interview.carer_relationship IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.carer_relationship IS
     'Carer relationship to the care recipient: spouse-partner, adult-child, other-relative, friend, or other.';
-COMMENT ON COLUMN zarit_burden_interview.carer_co_resident IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.carer_co_resident IS
     'Whether the carer lives with the care recipient: yes or no.';
-COMMENT ON COLUMN zarit_burden_interview.care_hours_per_week IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.care_hours_per_week IS
     'Approximate hours of care provided per week.';
-COMMENT ON COLUMN zarit_burden_interview.recipient_identifier IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.recipient_identifier IS
     'Local identifier for the care recipient.';
-COMMENT ON COLUMN zarit_burden_interview.recipient_condition IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.recipient_condition IS
     'Primary condition of the care recipient: dementia, chronic-illness, disability, or other.';
-COMMENT ON COLUMN zarit_burden_interview.item_1 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_1 IS
     'Item 1 rating (0-4): feel asked to do more than you should for the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_2 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_2 IS
     'Item 2 rating (0-4): not enough time for yourself.';
-COMMENT ON COLUMN zarit_burden_interview.item_3 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_3 IS
     'Item 3 rating (0-4): stressed between caring and other responsibilities.';
-COMMENT ON COLUMN zarit_burden_interview.item_4 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_4 IS
     'Item 4 rating (0-4): embarrassed by the relative''s behaviour.';
-COMMENT ON COLUMN zarit_burden_interview.item_5 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_5 IS
     'Item 5 rating (0-4): angry when around the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_6 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_6 IS
     'Item 6 rating (0-4): relative affects your relationships with others negatively.';
-COMMENT ON COLUMN zarit_burden_interview.item_7 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_7 IS
     'Item 7 rating (0-4): afraid about what the future holds for the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_8 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_8 IS
     'Item 8 rating (0-4): the relative is dependent on you.';
-COMMENT ON COLUMN zarit_burden_interview.item_9 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_9 IS
     'Item 9 rating (0-4): strained when around the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_10 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_10 IS
     'Item 10 rating (0-4): your health has suffered because of caring.';
-COMMENT ON COLUMN zarit_burden_interview.item_11 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_11 IS
     'Item 11 rating (0-4): not as much privacy as you would like.';
-COMMENT ON COLUMN zarit_burden_interview.item_12 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_12 IS
     'Item 12 rating (0-4): social life has suffered.';
-COMMENT ON COLUMN zarit_burden_interview.item_13 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_13 IS
     'Item 13 rating (0-4): uncomfortable having friends over because of the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_14 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_14 IS
     'Item 14 rating (0-4): relative expects you to care as the only one they can depend on.';
-COMMENT ON COLUMN zarit_burden_interview.item_15 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_15 IS
     'Item 15 rating (0-4): not enough money to care in addition to other expenses.';
-COMMENT ON COLUMN zarit_burden_interview.item_16 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_16 IS
     'Item 16 rating (0-4): unable to care for the relative much longer.';
-COMMENT ON COLUMN zarit_burden_interview.item_17 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_17 IS
     'Item 17 rating (0-4): lost control of your life since the relative''s illness.';
-COMMENT ON COLUMN zarit_burden_interview.item_18 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_18 IS
     'Item 18 rating (0-4): wish you could leave the care to someone else.';
-COMMENT ON COLUMN zarit_burden_interview.item_19 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_19 IS
     'Item 19 rating (0-4): uncertain about what to do for the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_20 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_20 IS
     'Item 20 rating (0-4): feel you should be doing more for the relative.';
-COMMENT ON COLUMN zarit_burden_interview.item_21 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_21 IS
     'Item 21 rating (0-4): feel you could do a better job caring.';
-COMMENT ON COLUMN zarit_burden_interview.item_22 IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.item_22 IS
     'Item 22 rating (0-4): global burden — overall how burdened you feel caring.';
-COMMENT ON COLUMN zarit_burden_interview.clinical_note IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -367,14 +384,14 @@ COMMENT ON COLUMN zarit_burden_interview.clinical_note IS
 -- over the active item set, the maximum attainable score, the derived
 -- burden band, and the 12-item short-form subtotal.
 
-CREATE TABLE zarit_burden_interview_grade (
+CREATE TABLE zarit_burden_interview.zarit_burden_interview_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     zarit_burden_interview_id UUID NOT NULL UNIQUE
-        REFERENCES zarit_burden_interview(id) ON DELETE CASCADE,
+        REFERENCES zarit_burden_interview.zarit_burden_interview(id) ON DELETE CASCADE,
 
     total_score INT,
     max_score INT,
@@ -386,31 +403,31 @@ CREATE TABLE zarit_burden_interview_grade (
 );
 
 CREATE TRIGGER trigger_zarit_burden_interview_grade_updated_at
-    BEFORE UPDATE ON zarit_burden_interview_grade
+    BEFORE UPDATE ON zarit_burden_interview.zarit_burden_interview_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE zarit_burden_interview_grade IS
+COMMENT ON TABLE zarit_burden_interview.zarit_burden_interview_grade IS
     'Computed Zarit Burden Interview grading result: total over the active item set, maximum score, derived burden band, and 12-item short-form subtotal.';
-COMMENT ON COLUMN zarit_burden_interview_grade.id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN zarit_burden_interview_grade.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN zarit_burden_interview_grade.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN zarit_burden_interview_grade.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN zarit_burden_interview_grade.zarit_burden_interview_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.zarit_burden_interview_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN zarit_burden_interview_grade.total_score IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.total_score IS
     'Summed rating over the active item set: 0-88 for zbi22, 0-48 for zbi12.';
-COMMENT ON COLUMN zarit_burden_interview_grade.max_score IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.max_score IS
     'Maximum attainable score for the active item set: 88 for zbi22, 48 for zbi12.';
-COMMENT ON COLUMN zarit_burden_interview_grade.burden_band IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.burden_band IS
     'Derived burden band: little-or-none, mild-to-moderate, moderate-to-severe, or severe (zbi22); lower or high (zbi12).';
-COMMENT ON COLUMN zarit_burden_interview_grade.short_form_score IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.short_form_score IS
     'Summed rating over the 12-item short-form subset (items 1,2,3,6,9,10,11,12,17,20,21,22); 0-48 when complete, or NULL when not computed.';
-COMMENT ON COLUMN zarit_burden_interview_grade.graded_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -426,14 +443,14 @@ COMMENT ON COLUMN zarit_burden_interview_grade.graded_at IS
 -- with a rating of 1 or more) with the item number, the points it
 -- contributed, and a human-readable description.
 
-CREATE TABLE zarit_burden_interview_grade_rule (
+CREATE TABLE zarit_burden_interview.zarit_burden_interview_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     zarit_burden_interview_grade_id UUID NOT NULL
-        REFERENCES zarit_burden_interview_grade(id) ON DELETE CASCADE,
+        REFERENCES zarit_burden_interview.zarit_burden_interview_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     item_number SMALLINT,
@@ -443,34 +460,34 @@ CREATE TABLE zarit_burden_interview_grade_rule (
 );
 
 CREATE INDEX zarit_burden_interview_grade_rule_grade_id_idx
-    ON zarit_burden_interview_grade_rule (zarit_burden_interview_grade_id);
+    ON zarit_burden_interview.zarit_burden_interview_grade_rule (zarit_burden_interview_grade_id);
 
 CREATE TRIGGER trigger_zarit_burden_interview_grade_rule_updated_at
-    BEFORE UPDATE ON zarit_burden_interview_grade_rule
+    BEFORE UPDATE ON zarit_burden_interview.zarit_burden_interview_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE zarit_burden_interview_grade_rule IS
+COMMENT ON TABLE zarit_burden_interview.zarit_burden_interview_grade_rule IS
     'Audit trail of every grading rule that fired during Zarit Burden Interview computation: item number, points contributed, category, and description.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.zarit_burden_interview_grade_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.zarit_burden_interview_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.rule_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ITEM-22-FIRED-01).';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.item_number IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.item_number IS
     'Item number (1-22) the fired rule belongs to, or NULL for a whole-form rule.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.points IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.points IS
     'Points (0-4) contributed by this item to the total.';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.category IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.category IS
     'Subject category (e.g. item-rating, short-form-item).';
-COMMENT ON COLUMN zarit_burden_interview_grade_rule.description IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -484,14 +501,14 @@ COMMENT ON COLUMN zarit_burden_interview_grade_rule.description IS
 -- Red-flag issues that fire independently of the burden band, with
 -- priority and a suggested action for the carer-support team.
 
-CREATE TABLE zarit_burden_interview_grade_flag (
+CREATE TABLE zarit_burden_interview.zarit_burden_interview_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     zarit_burden_interview_grade_id UUID NOT NULL
-        REFERENCES zarit_burden_interview_grade(id) ON DELETE CASCADE,
+        REFERENCES zarit_burden_interview.zarit_burden_interview_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -510,34 +527,34 @@ CREATE TABLE zarit_burden_interview_grade_flag (
 );
 
 CREATE INDEX zarit_burden_interview_grade_flag_grade_id_idx
-    ON zarit_burden_interview_grade_flag (zarit_burden_interview_grade_id);
+    ON zarit_burden_interview.zarit_burden_interview_grade_flag (zarit_burden_interview_grade_id);
 
 CREATE TRIGGER trigger_zarit_burden_interview_grade_flag_updated_at
-    BEFORE UPDATE ON zarit_burden_interview_grade_flag
+    BEFORE UPDATE ON zarit_burden_interview.zarit_burden_interview_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION zarit_burden_interview.set_updated_at();
 
-COMMENT ON TABLE zarit_burden_interview_grade_flag IS
+COMMENT ON TABLE zarit_burden_interview.zarit_burden_interview_grade_flag IS
     'Red-flag issues that fire independently of the burden band, with priority and a suggested action for the carer-support team.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.created_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.updated_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.deleted_at IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.zarit_burden_interview_grade_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.zarit_burden_interview_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.flag_id IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SEVERE-BURDEN-001).';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.category IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.category IS
     'Flag category: severe-burden, carer-support-respite, carer-mental-health-screen, incomplete, or other.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.priority IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.description IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN zarit_burden_interview_grade_flag.suggested_action IS
+COMMENT ON COLUMN zarit_burden_interview.zarit_burden_interview_grade_flag.suggested_action IS
     'Suggested action (e.g. "arrange urgent carer support and respite").';
 
 -- ========================================================================

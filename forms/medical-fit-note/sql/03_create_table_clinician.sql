@@ -1,6 +1,6 @@
 -- Clinician who assesses the employee and signs the fit note.
 
-CREATE TABLE clinician (
+CREATE TABLE medical_fit_note.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -16,37 +16,37 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_fit_note.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_fit_note.set_updated_at();
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON medical_fit_note.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_fit_note.clinician IS
     'Clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_fit_note.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_fit_note.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_fit_note.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_fit_note.clinician.email IS
     'Email.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_fit_note.clinician.phone IS
     'Phone.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_fit_note.clinician.role IS
     'Role. One of: gp, hospital-doctor, nurse, occupational-therapist, pharmacist, physiotherapist, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_fit_note.clinician.registration_body IS
     'Registration body. One of: GMC, NMC, HCPC, GPhC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_fit_note.clinician.registration_number IS
     'Registration number.';
-COMMENT ON COLUMN clinician.practice_name IS
+COMMENT ON COLUMN medical_fit_note.clinician.practice_name IS
     'Practice name.';

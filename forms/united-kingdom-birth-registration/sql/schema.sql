@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_kingdom_birth_registration;
+
+COMMENT ON SCHEMA united_kingdom_birth_registration IS
+    'Namespace for the United Kingdom Birth Registration form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_kingdom_birth_registration.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_kingdom_birth_registration.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the child whose birth is being registered.
 
-CREATE TABLE patient (
+CREATE TABLE united_kingdom_birth_registration.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_kingdom_birth_registration.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_kingdom_birth_registration.patient IS
     'Patient demographic information for the child whose birth is being registered.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.name IS
     'Full name of the child.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.birth_date IS
     'Date of birth of the child.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.sex IS
     'Sex recorded for the child: female, male, or indeterminate.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN united_kingdom_birth_registration.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON united_kingdom_birth_registration.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information for the registrar or staff member who handles
 -- this United Kingdom Birth Registration.
 
-CREATE TABLE clinician (
+CREATE TABLE united_kingdom_birth_registration.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON united_kingdom_birth_registration.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE united_kingdom_birth_registration.clinician IS
     'Clinician information for the registrar or staff member handling the United Kingdom Birth Registration.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.name IS
     'Full name of the registrar or staff member.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.role IS
     'Role of the staff member: registrar, deputy-registrar, superintendent-registrar, gro-caseworker, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.registration_body IS
     'Registration body: GRO, local-authority, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN united_kingdom_birth_registration.clinician.registration_number IS
     'Staff or registrar reference number.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON united_kingdom_birth_registration.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- fired rules, and the flagged issues live in dedicated child tables. The
 -- statutory register entry made by the registrar remains the legal record.
 
-CREATE TABLE united_kingdom_birth_registration (
+CREATE TABLE united_kingdom_birth_registration.united_kingdom_birth_registration (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES united_kingdom_birth_registration.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES united_kingdom_birth_registration.clinician(id) ON DELETE RESTRICT,
 
 
     -- Child
@@ -273,108 +290,108 @@ CREATE TABLE united_kingdom_birth_registration (
 );
 
 CREATE INDEX united_kingdom_birth_registration_patient_id_idx
-    ON united_kingdom_birth_registration (patient_id);
+    ON united_kingdom_birth_registration.united_kingdom_birth_registration (patient_id);
 CREATE INDEX united_kingdom_birth_registration_clinician_id_idx
-    ON united_kingdom_birth_registration (clinician_id);
+    ON united_kingdom_birth_registration.united_kingdom_birth_registration (clinician_id);
 
 CREATE TRIGGER trigger_united_kingdom_birth_registration_updated_at
-    BEFORE UPDATE ON united_kingdom_birth_registration
+    BEFORE UPDATE ON united_kingdom_birth_registration.united_kingdom_birth_registration
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_birth_registration IS
+COMMENT ON TABLE united_kingdom_birth_registration.united_kingdom_birth_registration IS
     'Main United Kingdom Birth Registration record: the child, mother, parentage basis for a second parent, informant and identity evidence, and the birth-certificate order for registering a birth in England and Wales. Readiness classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_kingdom_birth_registration.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_birth_registration.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_birth_registration.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_birth_registration.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_birth_registration.patient_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.patient_id IS
     'Foreign key to the child whose birth is being registered (restrict delete).';
-COMMENT ON COLUMN united_kingdom_birth_registration.clinician_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.clinician_id IS
     'Foreign key to the registrar or staff member handling the application (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_birth_registration.child_forenames IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.child_forenames IS
     'Forename(s) the parents wish to register for the child.';
-COMMENT ON COLUMN united_kingdom_birth_registration.child_surname IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.child_surname IS
     'Surname to be registered for the child.';
-COMMENT ON COLUMN united_kingdom_birth_registration.sex IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.sex IS
     'Sex of the child as it will be registered: female, male or indeterminate (rare; registrar guidance applies).';
-COMMENT ON COLUMN united_kingdom_birth_registration.date_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.date_of_birth IS
     'Date of birth of the child.';
-COMMENT ON COLUMN united_kingdom_birth_registration.time_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.time_of_birth IS
     'Time of birth; recorded for multiple births.';
-COMMENT ON COLUMN united_kingdom_birth_registration.place_of_birth_type IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.place_of_birth_type IS
     'Type of place of birth: hospital, home, birth-centre or other.';
-COMMENT ON COLUMN united_kingdom_birth_registration.place_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.place_of_birth IS
     'Name and address of the place of birth (determines the registration district).';
-COMMENT ON COLUMN united_kingdom_birth_registration.birth_country IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.birth_country IS
     'Country where the child was born; only england and wales are registered under this service.';
-COMMENT ON COLUMN united_kingdom_birth_registration.multiple_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.multiple_birth IS
     'Whether the child was a single or multiple birth; each child of a multiple birth is registered separately.';
-COMMENT ON COLUMN united_kingdom_birth_registration.stillbirth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.stillbirth IS
     'Whether the child was born dead after the 24th week of pregnancy (a stillbirth, registered separately).';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_name IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_name IS
     'Full name of the mother (the person who gave birth) at the time of registration.';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_maiden_surname IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_maiden_surname IS
     'Mothers surname at birth (maiden surname), if different from her current surname.';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_date_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_date_of_birth IS
     'Date of birth of the mother.';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_place_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_place_of_birth IS
     'Town and country of birth of the mother.';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_occupation IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_occupation IS
     'Occupation of the mother.';
-COMMENT ON COLUMN united_kingdom_birth_registration.mother_address IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.mother_address IS
     'Usual address of the mother.';
-COMMENT ON COLUMN united_kingdom_birth_registration.parents_relationship IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.parents_relationship IS
     'Legal relationship of the parents: married or civil partners, unmarried, female couple (married or unmarried), male couple, or mother only.';
-COMMENT ON COLUMN united_kingdom_birth_registration.marriage_date IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.marriage_date IS
     'Date of the parents marriage or civil partnership, if any.';
-COMMENT ON COLUMN united_kingdom_birth_registration.second_parent_included IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.second_parent_included IS
     'Whether a second parent (father or female parent) is to be recorded on the entry.';
-COMMENT ON COLUMN united_kingdom_birth_registration.second_parent_name IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.second_parent_name IS
     'Full name of the second parent.';
-COMMENT ON COLUMN united_kingdom_birth_registration.second_parent_date_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.second_parent_date_of_birth IS
     'Date of birth of the second parent.';
-COMMENT ON COLUMN united_kingdom_birth_registration.second_parent_place_of_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.second_parent_place_of_birth IS
     'Town and country of birth of the second parent.';
-COMMENT ON COLUMN united_kingdom_birth_registration.second_parent_occupation IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.second_parent_occupation IS
     'Occupation of the second parent.';
-COMMENT ON COLUMN united_kingdom_birth_registration.paternity_basis IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.paternity_basis IS
     'Basis on which the second parent may be recorded: marriage/civil partnership, joint registration, statutory declaration, court order, parental order, or none.';
-COMMENT ON COLUMN united_kingdom_birth_registration.paternity_evidence_held IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.paternity_evidence_held IS
     'Whether the signed declaration or court document required by the basis is in hand.';
-COMMENT ON COLUMN united_kingdom_birth_registration.licensed_clinic_treatment IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.licensed_clinic_treatment IS
     'For a female couple not married or civil partners: whether both were treated together by a UK licensed clinic under a parenthood agreement.';
-COMMENT ON COLUMN united_kingdom_birth_registration.informant_relationship IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.informant_relationship IS
     'Relationship of the informant to the child; only the qualified informants may register.';
-COMMENT ON COLUMN united_kingdom_birth_registration.informant_name IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.informant_name IS
     'Full name of the informant who will attend or sign.';
-COMMENT ON COLUMN united_kingdom_birth_registration.parents_unable_to_register IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.parents_unable_to_register IS
     'Whether the parents are unable to register (for example for medical reasons); required for a non-parent informant.';
-COMMENT ON COLUMN united_kingdom_birth_registration.registration_route IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.registration_route IS
     'Where the birth is to be registered: the local register office for the birth area, the hospital, or any other register office.';
-COMMENT ON COLUMN united_kingdom_birth_registration.registration_date IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.registration_date IS
     'Date the birth is, or is intended to be, registered; the 42-day period runs from the date of birth.';
-COMMENT ON COLUMN united_kingdom_birth_registration.identity_primary_document IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.identity_primary_document IS
     'Accepted single identity document the informant will bring, or none.';
-COMMENT ON COLUMN united_kingdom_birth_registration.identity_secondary_count IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.identity_secondary_count IS
     'Number of acceptable secondary documents (utility bill, bank statement, council tax and so on) the informant will bring if no single document is held.';
-COMMENT ON COLUMN united_kingdom_birth_registration.identity_originals IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.identity_originals IS
     'Whether the identity documents are originals (photocopies are not accepted).';
-COMMENT ON COLUMN united_kingdom_birth_registration.red_book_presented IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.red_book_presented IS
     'Whether the personal child health record (red book) will be brought; a registrar may ask to see it.';
-COMMENT ON COLUMN united_kingdom_birth_registration.certificates_requested IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.certificates_requested IS
     'Number of birth certificates ordered with the registration.';
-COMMENT ON COLUMN united_kingdom_birth_registration.service_level IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.service_level IS
     'Certificate service level: standard or priority (next working day if ordered by 4pm).';
-COMMENT ON COLUMN united_kingdom_birth_registration.delivery_address IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.delivery_address IS
     'Postal address to which the ordered certificates are sent.';
-COMMENT ON COLUMN united_kingdom_birth_registration.payment_confirmed IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.payment_confirmed IS
     'Whether payment of the certificate fee by debit or credit card is confirmed.';
-COMMENT ON COLUMN united_kingdom_birth_registration.applicant_note IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration.applicant_note IS
     'Free-text note from the applicant to the registrar.';
 
 -- ========================================================================
@@ -393,14 +410,14 @@ COMMENT ON COLUMN united_kingdom_birth_registration.applicant_note IS
 -- This is a readiness classification, not a numeric score; the registrar's
 -- decision and the register entry remain the legal record.
 
-CREATE TABLE united_kingdom_birth_registration_grade (
+CREATE TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_birth_registration_id UUID NOT NULL UNIQUE
-        REFERENCES united_kingdom_birth_registration(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_birth_registration.united_kingdom_birth_registration(id) ON DELETE CASCADE,
 
     readiness_class VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (readiness_class IN ('ready-to-submit', 'incomplete', 'needs-additional-evidence', 'out-of-scope', '')),
@@ -413,31 +430,31 @@ CREATE TABLE united_kingdom_birth_registration_grade (
 );
 
 CREATE TRIGGER trigger_united_kingdom_birth_registration_grade_updated_at
-    BEFORE UPDATE ON united_kingdom_birth_registration_grade
+    BEFORE UPDATE ON united_kingdom_birth_registration.united_kingdom_birth_registration_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_birth_registration_grade IS
+COMMENT ON TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade IS
     'Computed completeness and validity classification for a United Kingdom Birth Registration application: readiness class (ready-to-submit/incomplete/needs-additional-evidence/out-of-scope), days from birth to registration, late-registration indicator, and count of missing items.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.united_kingdom_birth_registration_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.united_kingdom_birth_registration_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.readiness_class IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.readiness_class IS
     'Readiness classification: ready-to-submit, incomplete, needs-additional-evidence, or out-of-scope (out-of-scope takes precedence, then incomplete).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.days_since_birth IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.days_since_birth IS
     'Whole days from the date of birth to the registration date; null when either date is missing.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.late_registration IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.late_registration IS
     'Whether registration falls after the 42-day statutory period (yes/no).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.missing_item_count IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.missing_item_count IS
     'Number of required items still missing.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade.graded_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -452,14 +469,14 @@ COMMENT ON COLUMN united_kingdom_birth_registration_grade.graded_at IS
 -- row records one rule firing with the application dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE united_kingdom_birth_registration_grade_rule (
+CREATE TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_birth_registration_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_birth_registration_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_birth_registration.united_kingdom_birth_registration_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -469,32 +486,32 @@ CREATE TABLE united_kingdom_birth_registration_grade_rule (
 );
 
 CREATE INDEX united_kingdom_birth_registration_grade_rule_grade_id_idx
-    ON united_kingdom_birth_registration_grade_rule (united_kingdom_birth_registration_grade_id);
+    ON united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule (united_kingdom_birth_registration_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_birth_registration_grade_rule_updated_at
-    BEFORE UPDATE ON united_kingdom_birth_registration_grade_rule
+    BEFORE UPDATE ON united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_birth_registration_grade_rule IS
+COMMENT ON TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule IS
     'Audit trail of every validity rule that fired during classification: application dimension, category, and description.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.united_kingdom_birth_registration_grade_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.united_kingdom_birth_registration_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.rule_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MISSING-CHILD-NAME-01).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.dimension IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.dimension IS
     'Application dimension the rule concerns: child, mother, parentage, informant, evidence, certificate, deadline, or classification.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.category IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.category IS
     'Subject category (e.g. required-component, paternity-route, out-of-scope).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.description IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -508,14 +525,14 @@ COMMENT ON COLUMN united_kingdom_birth_registration_grade_rule.description IS
 -- Flagged issues that fire independently of the validity class, with a
 -- priority and a suggested action for the applicant or registrar.
 
-CREATE TABLE united_kingdom_birth_registration_grade_flag (
+CREATE TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_birth_registration_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_birth_registration_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_birth_registration.united_kingdom_birth_registration_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -542,34 +559,34 @@ CREATE TABLE united_kingdom_birth_registration_grade_flag (
 );
 
 CREATE INDEX united_kingdom_birth_registration_grade_flag_grade_id_idx
-    ON united_kingdom_birth_registration_grade_flag (united_kingdom_birth_registration_grade_id);
+    ON united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag (united_kingdom_birth_registration_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_birth_registration_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_birth_registration_grade_flag
+    BEFORE UPDATE ON united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_birth_registration.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_birth_registration_grade_flag IS
+COMMENT ON TABLE united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the applicant or registrar.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.united_kingdom_birth_registration_grade_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.united_kingdom_birth_registration_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-LATE-REGISTRATION-001).';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.category IS
     'Flag category: out-of-scope, missing-required, late-registration, deadline-approaching, date-inconsistent, informant-not-qualified, paternity-evidence, paternity-route, identity-evidence, certificate-order, multiple-birth, unmarried-father, or other.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_kingdom_birth_registration_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_birth_registration.united_kingdom_birth_registration_grade_flag.suggested_action IS
     'Suggested action (e.g. "bring a signed statutory declaration of parentage", "register without delay").';
 
 -- ========================================================================

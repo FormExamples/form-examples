@@ -1,28 +1,28 @@
-CREATE TABLE assessment (
+CREATE TABLE code_of_conduct_notice.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES code_of_conduct_notice.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON code_of_conduct_notice.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION code_of_conduct_notice.set_updated_at();
 
-COMMENT ON TABLE assessment IS 'Top-level assessment instance for code-of-conduct-notice. Parent entity for domain-specific sections and the grading result.';
-COMMENT ON COLUMN assessment.patient_id IS 'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS 'Lifecycle status: draft, submitted, reviewed, or urgent.';
+COMMENT ON TABLE code_of_conduct_notice.assessment IS 'Top-level assessment instance for code-of-conduct-notice. Parent entity for domain-specific sections and the grading result.';
+COMMENT ON COLUMN code_of_conduct_notice.assessment.patient_id IS 'Foreign key to the patient who owns this assessment.';
+COMMENT ON COLUMN code_of_conduct_notice.assessment.status IS 'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN code_of_conduct_notice.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN code_of_conduct_notice.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN code_of_conduct_notice.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN code_of_conduct_notice.assessment.deleted_at IS
     'Timestamp when this row was deleted.';

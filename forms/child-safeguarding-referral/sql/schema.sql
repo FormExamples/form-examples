@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS child_safeguarding_referral;
+
+COMMENT ON SCHEMA child_safeguarding_referral IS
+    'Namespace for the Child Safeguarding Referral form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION child_safeguarding_referral.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION child_safeguarding_referral.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Child demographic information for the safeguarding referral. The
 -- "patient" is the child the referral concerns.
 
-CREATE TABLE patient (
+CREATE TABLE child_safeguarding_referral.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON child_safeguarding_referral.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE child_safeguarding_referral.patient IS
     'Child demographic information for the child the safeguarding referral concerns.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.name IS
     'Full name of the child.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.birth_date IS
     'Date of birth of the child.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.sex IS
     'Sex recorded for the child: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.email IS
     'Email address, where held.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.phone IS
     'Phone number, where held.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.postal_address_as_full_text IS
     'Home address of the child as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.hospital_mrn IS
     'Local hospital or unique reference number for the child.';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN child_safeguarding_referral.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON child_safeguarding_referral.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Referrer information used to identify the professional making the
 -- safeguarding referral to children's social care.
 
-CREATE TABLE clinician (
+CREATE TABLE child_safeguarding_referral.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON child_safeguarding_referral.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE child_safeguarding_referral.clinician IS
     'Referrer identifying information for the professional making the child safeguarding referral.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.name IS
     'Referrer full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.email IS
     'Referrer email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.phone IS
     'Referrer phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.role IS
     'Referrer professional sector: education, health, social-care, police, early-years, allied-health, voluntary-sector, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.registration_body IS
     'Professional registration body, where applicable: GMC, NMC, HCPC, GPhC, SWE, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN child_safeguarding_referral.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON child_safeguarding_referral.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -213,14 +230,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- tables. This is a documentation-completeness and risk-classification
 -- record, not a numeric score.
 
-CREATE TABLE child_safeguarding_referral (
+CREATE TABLE child_safeguarding_referral.child_safeguarding_referral (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES child_safeguarding_referral.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES child_safeguarding_referral.clinician(id) ON DELETE RESTRICT,
 
     -- Referrer context (identity lives in the clinician table)
     referrer_organisation TEXT NOT NULL DEFAULT '',
@@ -278,100 +295,100 @@ CREATE TABLE child_safeguarding_referral (
 );
 
 CREATE INDEX child_safeguarding_referral_patient_id_idx
-    ON child_safeguarding_referral (patient_id);
+    ON child_safeguarding_referral.child_safeguarding_referral (patient_id);
 CREATE INDEX child_safeguarding_referral_clinician_id_idx
-    ON child_safeguarding_referral (clinician_id);
+    ON child_safeguarding_referral.child_safeguarding_referral (clinician_id);
 
 CREATE TRIGGER trigger_child_safeguarding_referral_updated_at
-    BEFORE UPDATE ON child_safeguarding_referral
+    BEFORE UPDATE ON child_safeguarding_referral.child_safeguarding_referral
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE child_safeguarding_referral IS
+COMMENT ON TABLE child_safeguarding_referral.child_safeguarding_referral IS
     'Main child-safeguarding-referral record: referrer context, child details, family and household, the concern or allegation, category of abuse, presenting evidence, immediate risk and safety, consent and information-sharing basis, who else is informed, and the action requested. Grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN child_safeguarding_referral.id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_safeguarding_referral.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN child_safeguarding_referral.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN child_safeguarding_referral.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN child_safeguarding_referral.patient_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.patient_id IS
     'Foreign key to the child this referral concerns (restrict delete).';
-COMMENT ON COLUMN child_safeguarding_referral.clinician_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.clinician_id IS
     'Foreign key to the referrer making the referral (restrict delete); optional.';
-COMMENT ON COLUMN child_safeguarding_referral.referrer_organisation IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.referrer_organisation IS
     'Employing organisation of the referrer.';
-COMMENT ON COLUMN child_safeguarding_referral.referred_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.referred_at IS
     'Date and time the referral was made.';
-COMMENT ON COLUMN child_safeguarding_referral.relationship_to_child IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.relationship_to_child IS
     'How the referrer knows the child.';
-COMMENT ON COLUMN child_safeguarding_referral.child_age IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_age IS
     'Age of the child in years, used as a fallback when the date of birth is unknown.';
-COMMENT ON COLUMN child_safeguarding_referral.child_setting IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_setting IS
     'Education or care setting the child attends (school, nursery, college).';
-COMMENT ON COLUMN child_safeguarding_referral.child_reference IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_reference IS
     'NHS number or local unique reference for the child.';
-COMMENT ON COLUMN child_safeguarding_referral.child_ethnicity IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_ethnicity IS
     'Self-described ethnicity of the child where known.';
-COMMENT ON COLUMN child_safeguarding_referral.child_first_language IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_first_language IS
     'First language of the child, recorded for any interpreter need.';
-COMMENT ON COLUMN child_safeguarding_referral.child_disability IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_disability IS
     'Disability or communication need of the child.';
-COMMENT ON COLUMN child_safeguarding_referral.carers IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.carers IS
     'Parents or carers with parental responsibility.';
-COMMENT ON COLUMN child_safeguarding_referral.household_members IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.household_members IS
     'Other members of the household.';
-COMMENT ON COLUMN child_safeguarding_referral.other_children IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.other_children IS
     'Siblings or other children in the household.';
-COMMENT ON COLUMN child_safeguarding_referral.professionals_involved IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.professionals_involved IS
     'Professionals already involved (GP, school, existing social worker).';
-COMMENT ON COLUMN child_safeguarding_referral.concern_description IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.concern_description IS
     'What the concern or allegation is (mandatory for a valid referral).';
-COMMENT ON COLUMN child_safeguarding_referral.concern_onset IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.concern_onset IS
     'When and how the concern came to light.';
-COMMENT ON COLUMN child_safeguarding_referral.child_disclosed IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_disclosed IS
     'Whether the child disclosed abuse (yes/no); yes raises the disclosure-of-abuse flag and drives urgent classification.';
-COMMENT ON COLUMN child_safeguarding_referral.referrer_observations IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.referrer_observations IS
     'Direct observations recorded by the referrer.';
-COMMENT ON COLUMN child_safeguarding_referral.primary_category IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.primary_category IS
     'Primary category of abuse (mandatory): physical, emotional, sexual, or neglect.';
-COMMENT ON COLUMN child_safeguarding_referral.additional_categories IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.additional_categories IS
     'Any further categories of abuse beyond the primary category.';
-COMMENT ON COLUMN child_safeguarding_referral.presenting_evidence IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.presenting_evidence IS
     'Indicators and evidence presenting the concern.';
-COMMENT ON COLUMN child_safeguarding_referral.immediate_danger IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.immediate_danger IS
     'Whether the child is in immediate danger (mandatory, yes/no); yes classifies the referral as an emergency.';
-COMMENT ON COLUMN child_safeguarding_referral.child_whereabouts IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.child_whereabouts IS
     'Where the child is now.';
-COMMENT ON COLUMN child_safeguarding_referral.who_with_child IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.who_with_child IS
     'Who is currently with the child.';
-COMMENT ON COLUMN child_safeguarding_referral.alleged_person_in_contact IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.alleged_person_in_contact IS
     'Whether the alleged person is in contact with the child (yes/no/unknown); yes drives urgent classification.';
-COMMENT ON COLUMN child_safeguarding_referral.other_children_at_risk IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.other_children_at_risk IS
     'Whether siblings or other children are at risk (yes/no/unknown); yes raises the other-children-at-risk flag and drives urgent classification.';
-COMMENT ON COLUMN child_safeguarding_referral.consent_sought IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.consent_sought IS
     'Whether consent to refer was sought (yes/no).';
-COMMENT ON COLUMN child_safeguarding_referral.consent_status IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.consent_status IS
     'Consent status: given, refused, or not-sought.';
-COMMENT ON COLUMN child_safeguarding_referral.sharing_basis_without_consent IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.sharing_basis_without_consent IS
     'Lawful basis for sharing without consent (mandatory when consent is not given): risk-of-serious-harm, seeking-consent-increases-risk, or not-applicable.';
-COMMENT ON COLUMN child_safeguarding_referral.family_aware IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.family_aware IS
     'Whether the child or family is aware of the referral (yes/no).';
-COMMENT ON COLUMN child_safeguarding_referral.unsafe_to_inform_reason IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.unsafe_to_inform_reason IS
     'Why informing the child or family would increase risk.';
-COMMENT ON COLUMN child_safeguarding_referral.agencies_contacted IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.agencies_contacted IS
     'Agencies already contacted (police, health, education).';
-COMMENT ON COLUMN child_safeguarding_referral.strategy_discussion_held IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.strategy_discussion_held IS
     'Whether a strategy discussion has already been held (yes/no).';
-COMMENT ON COLUMN child_safeguarding_referral.previous_safeguarding_history IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.previous_safeguarding_history IS
     'Prior safeguarding involvement if known; non-empty raises the previous-history flag.';
-COMMENT ON COLUMN child_safeguarding_referral.requested_action IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.requested_action IS
     'Action requested of children''s social care.';
-COMMENT ON COLUMN child_safeguarding_referral.referrer_declaration IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.referrer_declaration IS
     'Whether the referrer confirms the accuracy of the referral (yes/no).';
-COMMENT ON COLUMN child_safeguarding_referral.notes IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral.notes IS
     'Free-text notes shown in the summary.';
 
 -- ========================================================================
@@ -388,14 +405,14 @@ COMMENT ON COLUMN child_safeguarding_referral.notes IS
 -- standard), and reports a completeness percentage. A grade reflects the
 -- quality and routing of the referral record, not a clinical judgement.
 
-CREATE TABLE child_safeguarding_referral_grade (
+CREATE TABLE child_safeguarding_referral.child_safeguarding_referral_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_safeguarding_referral_id UUID NOT NULL UNIQUE
-        REFERENCES child_safeguarding_referral(id) ON DELETE CASCADE,
+        REFERENCES child_safeguarding_referral.child_safeguarding_referral(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'partial', 'incomplete', '')),
@@ -407,29 +424,29 @@ CREATE TABLE child_safeguarding_referral_grade (
 );
 
 CREATE TRIGGER trigger_child_safeguarding_referral_grade_updated_at
-    BEFORE UPDATE ON child_safeguarding_referral_grade
+    BEFORE UPDATE ON child_safeguarding_referral.child_safeguarding_referral_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE child_safeguarding_referral_grade IS
+COMMENT ON TABLE child_safeguarding_referral.child_safeguarding_referral_grade IS
     'Computed grading result for a child safeguarding referral: completeness/validity status (complete/partial/incomplete), urgency classification (emergency/urgent/standard), and completeness percentage.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.child_safeguarding_referral_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.child_safeguarding_referral_id IS
     'Foreign key to the parent referral (unique, 1:1).';
-COMMENT ON COLUMN child_safeguarding_referral_grade.status IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.status IS
     'Completeness/validity status: complete, partial, or incomplete.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.urgency IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.urgency IS
     'Urgency classification: emergency (s47 + emergency services), urgent (s47 enquiry), or standard (s17 assessment). Always computed, even when the referral is incomplete.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.completeness_percent IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.completeness_percent IS
     'Completeness percentage (0..100): answered mandatory and recommended fields / total mandatory and recommended fields x 100.';
-COMMENT ON COLUMN child_safeguarding_referral_grade.graded_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -444,14 +461,14 @@ COMMENT ON COLUMN child_safeguarding_referral_grade.graded_at IS
 -- records one rule firing with the section it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE child_safeguarding_referral_grade_rule (
+CREATE TABLE child_safeguarding_referral.child_safeguarding_referral_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_safeguarding_referral_grade_id UUID NOT NULL
-        REFERENCES child_safeguarding_referral_grade(id) ON DELETE CASCADE,
+        REFERENCES child_safeguarding_referral.child_safeguarding_referral_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -461,32 +478,32 @@ CREATE TABLE child_safeguarding_referral_grade_rule (
 );
 
 CREATE INDEX child_safeguarding_referral_grade_rule_grade_id_idx
-    ON child_safeguarding_referral_grade_rule (child_safeguarding_referral_grade_id);
+    ON child_safeguarding_referral.child_safeguarding_referral_grade_rule (child_safeguarding_referral_grade_id);
 
 CREATE TRIGGER trigger_child_safeguarding_referral_grade_rule_updated_at
-    BEFORE UPDATE ON child_safeguarding_referral_grade_rule
+    BEFORE UPDATE ON child_safeguarding_referral.child_safeguarding_referral_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE child_safeguarding_referral_grade_rule IS
+COMMENT ON TABLE child_safeguarding_referral.child_safeguarding_referral_grade_rule IS
     'Audit trail of every grading rule that fired during grading: section, category, and description.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.child_safeguarding_referral_grade_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.child_safeguarding_referral_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.rule_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CONSENT-BASIS-01).';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.section IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.section IS
     'Referral section the rule concerns: referrer, child, concern, category, risk, consent, informed, completeness, or urgency.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.category IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.category IS
     'Subject category (e.g. mandatory-field, consent-basis, urgency-trigger).';
-COMMENT ON COLUMN child_safeguarding_referral_grade_rule.description IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -501,14 +518,14 @@ COMMENT ON COLUMN child_safeguarding_referral_grade_rule.description IS
 -- and urgency, each with a priority and a suggested action for the
 -- referrer or the receiving social-care team.
 
-CREATE TABLE child_safeguarding_referral_grade_flag (
+CREATE TABLE child_safeguarding_referral.child_safeguarding_referral_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     child_safeguarding_referral_grade_id UUID NOT NULL
-        REFERENCES child_safeguarding_referral_grade(id) ON DELETE CASCADE,
+        REFERENCES child_safeguarding_referral.child_safeguarding_referral_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -531,34 +548,34 @@ CREATE TABLE child_safeguarding_referral_grade_flag (
 );
 
 CREATE INDEX child_safeguarding_referral_grade_flag_grade_id_idx
-    ON child_safeguarding_referral_grade_flag (child_safeguarding_referral_grade_id);
+    ON child_safeguarding_referral.child_safeguarding_referral_grade_flag (child_safeguarding_referral_grade_id);
 
 CREATE TRIGGER trigger_child_safeguarding_referral_grade_flag_updated_at
-    BEFORE UPDATE ON child_safeguarding_referral_grade_flag
+    BEFORE UPDATE ON child_safeguarding_referral.child_safeguarding_referral_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION child_safeguarding_referral.set_updated_at();
 
-COMMENT ON TABLE child_safeguarding_referral_grade_flag IS
+COMMENT ON TABLE child_safeguarding_referral.child_safeguarding_referral_grade_flag IS
     'Safeguarding flags that fire independently of the completeness status and urgency, each with a priority and a suggested action for the referrer or receiving social-care team.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.created_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.updated_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.deleted_at IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.child_safeguarding_referral_grade_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.child_safeguarding_referral_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.flag_id IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-IMMEDIATE-DANGER-001).';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.category IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.category IS
     'Flag category: immediate-danger, disclosure-of-abuse, sexual-abuse-category, other-children-at-risk, no-consent-basis, mandatory-field-missing, child-unaware-unsafe, previous-history, or other.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.priority IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.description IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN child_safeguarding_referral_grade_flag.suggested_action IS
+COMMENT ON COLUMN child_safeguarding_referral.child_safeguarding_referral_grade_flag.suggested_action IS
     'Suggested safeguarding action (e.g. "escalate to emergency services now", "record a lawful basis for sharing without consent").';
 
 -- ========================================================================

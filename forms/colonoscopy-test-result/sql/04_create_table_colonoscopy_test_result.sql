@@ -1,13 +1,13 @@
 -- Colonoscopy procedure result (report) — the source-of-truth record.
 
-CREATE TABLE colonoscopy_test_result (
+CREATE TABLE colonoscopy_test_result.colonoscopy_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES colonoscopy_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES colonoscopy_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -61,80 +61,80 @@ CREATE TABLE colonoscopy_test_result (
 );
 
 CREATE INDEX index_colonoscopy_test_result_patient_id
-    ON colonoscopy_test_result(patient_id);
+    ON colonoscopy_test_result.colonoscopy_test_result(patient_id);
 CREATE INDEX index_colonoscopy_test_result_clinician_id
-    ON colonoscopy_test_result(clinician_id);
+    ON colonoscopy_test_result.colonoscopy_test_result(clinician_id);
 
 CREATE TRIGGER trigger_colonoscopy_test_result_updated_at
-    BEFORE UPDATE ON colonoscopy_test_result
+    BEFORE UPDATE ON colonoscopy_test_result.colonoscopy_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION colonoscopy_test_result.set_updated_at();
 
-COMMENT ON TABLE colonoscopy_test_result IS
+COMMENT ON TABLE colonoscopy_test_result.colonoscopy_test_result IS
     'Colonoscopy procedure result (report). Captures the performed procedure, extent reached, bowel-preparation quality and sedation, clinical history, the narrative and structured findings, polyp count and size, biopsy / polypectomy and any complication, the impression and structured-reporting label, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN colonoscopy_test_result.id IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN colonoscopy_test_result.created_at IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN colonoscopy_test_result.updated_at IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN colonoscopy_test_result.deleted_at IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN colonoscopy_test_result.patient_id IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN colonoscopy_test_result.clinician_id IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.clinician_id IS
     'Foreign key to the reporting clinician (endoscopist).';
-COMMENT ON COLUMN colonoscopy_test_result.originating_request_reference IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating colonoscopy request (referral).';
-COMMENT ON COLUMN colonoscopy_test_result.report_status IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN colonoscopy_test_result.performed_date IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.performed_date IS
     'Date the colonoscopy procedure was performed.';
-COMMENT ON COLUMN colonoscopy_test_result.reported_date IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN colonoscopy_test_result.procedure IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.procedure IS
     'Performed procedure: colonoscopy, flexible-sigmoidoscopy, ct-colonography, other.';
-COMMENT ON COLUMN colonoscopy_test_result.extent_reached IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.extent_reached IS
     'Most proximal extent reached: caecum, terminal-ileum, hepatic-flexure, splenic-flexure, descending-colon, rectum-sigmoid, incomplete. Caecal / terminal-ileal intubation is the completeness key performance indicator (BSG / JAG target rate 90%).';
-COMMENT ON COLUMN colonoscopy_test_result.bowel_preparation_quality IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.bowel_preparation_quality IS
     'Bowel-preparation quality (e.g. mapped from a Boston Bowel Preparation Scale assessment): excellent, good, adequate, poor.';
-COMMENT ON COLUMN colonoscopy_test_result.sedation_used IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.sedation_used IS
     'Whether sedation / analgesia was administered for the procedure.';
-COMMENT ON COLUMN colonoscopy_test_result.clinical_history IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.clinical_history IS
     'Clinical history and the question the procedure was performed to answer.';
-COMMENT ON COLUMN colonoscopy_test_result.polyps_found IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.polyps_found IS
     'Whether one or more polyps were found.';
-COMMENT ON COLUMN colonoscopy_test_result.mass_lesion IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.mass_lesion IS
     'Whether a mass lesion (suspicious for malignancy) was found.';
-COMMENT ON COLUMN colonoscopy_test_result.diverticulosis IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.diverticulosis IS
     'Whether diverticulosis is present.';
-COMMENT ON COLUMN colonoscopy_test_result.inflammation_ibd IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.inflammation_ibd IS
     'Whether mucosal inflammation suggestive of inflammatory bowel disease (IBD) is present.';
-COMMENT ON COLUMN colonoscopy_test_result.angiodysplasia IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.angiodysplasia IS
     'Whether angiodysplasia (vascular ectasia) is present.';
-COMMENT ON COLUMN colonoscopy_test_result.bleeding_source_identified IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.bleeding_source_identified IS
     'Whether a source of lower-GI bleeding was identified.';
-COMMENT ON COLUMN colonoscopy_test_result.normal_examination IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.normal_examination IS
     'Whether the examination was normal (no significant abnormality detected).';
-COMMENT ON COLUMN colonoscopy_test_result.polyp_count IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.polyp_count IS
     'Number of polyps detected, for surveillance interval determination.';
-COMMENT ON COLUMN colonoscopy_test_result.largest_polyp_mm IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.largest_polyp_mm IS
     'Largest polyp size in millimetres, for surveillance and categorisation (BSG / ACPGBI / PHE polyp surveillance).';
-COMMENT ON COLUMN colonoscopy_test_result.biopsy_taken IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.biopsy_taken IS
     'Whether one or more biopsies were taken for histopathology.';
-COMMENT ON COLUMN colonoscopy_test_result.polypectomy_performed IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.polypectomy_performed IS
     'Whether a polypectomy was performed.';
-COMMENT ON COLUMN colonoscopy_test_result.complication IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.complication IS
     'Procedural complication: none, bleeding, perforation, other.';
-COMMENT ON COLUMN colonoscopy_test_result.findings_narrative IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.findings_narrative IS
     'Narrative description of the procedure findings (the body of the report).';
-COMMENT ON COLUMN colonoscopy_test_result.impression IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN colonoscopy_test_result.reporting_category IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.reporting_category IS
     'Free-text structured-reporting category label (e.g. a BSG / ACPGBI / PHE polyp-surveillance risk band, a Paris morphology class, or a histology pending note).';
-COMMENT ON COLUMN colonoscopy_test_result.recommended_follow_up IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.recommended_follow_up IS
     'Recommended follow-up surveillance interval, repeat procedure, referral, or management.';
-COMMENT ON COLUMN colonoscopy_test_result.critical_result_communicated IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the referrer / responsible team.';
-COMMENT ON COLUMN colonoscopy_test_result.reported_to IS
+COMMENT ON COLUMN colonoscopy_test_result.colonoscopy_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

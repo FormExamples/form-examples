@@ -4,7 +4,7 @@
 -- The list is closed - it is the exact list printed on the FP92A. Each row is
 -- selectable as a qualifying condition for an application.
 
-CREATE TABLE eligible_condition (
+CREATE TABLE united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -34,37 +34,37 @@ CREATE TABLE eligible_condition (
 );
 
 CREATE TRIGGER trigger_eligible_condition_updated_at
-    BEFORE UPDATE ON eligible_condition
+    BEFORE UPDATE ON united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_nhs_england_medical_exemption_certificate.set_updated_at();
 
-COMMENT ON TABLE eligible_condition IS
+COMMENT ON TABLE united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition IS
     'Closed list of the ten NHSBSA-recognised qualifying conditions for FP92A.';
-COMMENT ON COLUMN eligible_condition.id IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eligible_condition.created_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eligible_condition.updated_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eligible_condition.deleted_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eligible_condition.code IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.code IS
     'Machine-readable condition code from the closed NHSBSA list.';
-COMMENT ON COLUMN eligible_condition.label IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.label IS
     'Human-readable label matching the FP92A wording.';
-COMMENT ON COLUMN eligible_condition.description IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.description IS
     'Long-form description with NHSBSA inclusion / exclusion criteria.';
-COMMENT ON COLUMN eligible_condition.requires_appliance_detail IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.requires_appliance_detail IS
     'Whether the application must capture appliance / dressing detail (fistula).';
-COMMENT ON COLUMN eligible_condition.requires_substitution_therapy_detail IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.requires_substitution_therapy_detail IS
     'Whether the application must capture substitution-therapy detail (hypoadrenalism, hypopituitarism, hypoparathyroidism, myxoedema).';
-COMMENT ON COLUMN eligible_condition.requires_disability_attestation IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.requires_disability_attestation IS
     'Whether the practitioner must attest that the patient cannot leave home unaided.';
-COMMENT ON COLUMN eligible_condition.requires_cancer_detail IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.requires_cancer_detail IS
     'Whether the application must capture cancer site and treatment phase.';
-COMMENT ON COLUMN eligible_condition.excludes_diet_only_diabetes IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.excludes_diet_only_diabetes IS
     'Whether diet-only diabetes is explicitly excluded (true for diabetes mellitus).';
-COMMENT ON COLUMN eligible_condition.snomed_ct_reference IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.snomed_ct_reference IS
     'Optional SNOMED CT concept identifier for the condition.';
-COMMENT ON COLUMN eligible_condition.icd10_reference IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition.icd10_reference IS
     'Optional ICD-10 code for the condition.';

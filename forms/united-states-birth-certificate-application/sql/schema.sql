@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_applicant.sql
 --   - 03_create_table_registrant.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_birth_certificate_application;
+
+COMMENT ON SCHEMA united_states_birth_certificate_application IS
+    'Namespace for the United States Birth Certificate Application form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_birth_certificate_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_birth_certificate_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- The person completing and signing the request for a certified copy of a birth certificate.
 
-CREATE TABLE applicant (
+CREATE TABLE united_states_birth_certificate_application.applicant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -72,29 +89,29 @@ CREATE TABLE applicant (
 
 
 CREATE TRIGGER trigger_applicant_updated_at
-    BEFORE UPDATE ON applicant
+    BEFORE UPDATE ON united_states_birth_certificate_application.applicant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE applicant IS
+COMMENT ON TABLE united_states_birth_certificate_application.applicant IS
     'The person completing and signing a birth certificate copy request (the requester).';
-COMMENT ON COLUMN applicant.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN applicant.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN applicant.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN applicant.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN applicant.name IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.name IS
     'Full legal name of the requester.';
-COMMENT ON COLUMN applicant.birth_date IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.birth_date IS
     'Date of birth of the requester, used to test minimum-age rules for self-requests.';
-COMMENT ON COLUMN applicant.email IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.email IS
     'Email address of the requester.';
-COMMENT ON COLUMN applicant.phone IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.phone IS
     'Phone number of the requester.';
-COMMENT ON COLUMN applicant.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_birth_certificate_application.applicant.postal_address_as_full_text IS
     'Mailing address for delivery, as a single text block.';
 
 -- ========================================================================
@@ -108,7 +125,7 @@ COMMENT ON COLUMN applicant.postal_address_as_full_text IS
 -- The person named on the birth certificate (the registrant): the data of the
 -- US Standard Certificate of Live Birth needed to locate the record.
 
-CREATE TABLE registrant (
+CREATE TABLE united_states_birth_certificate_application.registrant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -129,41 +146,41 @@ CREATE TABLE registrant (
 
 
 CREATE TRIGGER trigger_registrant_updated_at
-    BEFORE UPDATE ON registrant
+    BEFORE UPDATE ON united_states_birth_certificate_application.registrant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE registrant IS
+COMMENT ON TABLE united_states_birth_certificate_application.registrant IS
     'The person named on the birth certificate being requested, with the Standard Certificate of Live Birth data needed to locate the record.';
-COMMENT ON COLUMN registrant.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN registrant.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN registrant.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN registrant.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN registrant.name IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.name IS
     'Full name of the registrant as it appears on the birth certificate.';
-COMMENT ON COLUMN registrant.birth_date IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.birth_date IS
     'Date of birth of the registrant.';
-COMMENT ON COLUMN registrant.sex IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.sex IS
     'Sex recorded on the certificate: female, male, other, or unknown.';
-COMMENT ON COLUMN registrant.place_of_birth IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.place_of_birth IS
     'City or town of birth.';
-COMMENT ON COLUMN registrant.county_of_birth IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.county_of_birth IS
     'County of birth.';
-COMMENT ON COLUMN registrant.birth_state IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.birth_state IS
     'Two-letter postal code of the state or territory where the birth occurred; the issuing vital records office.';
-COMMENT ON COLUMN registrant.birth_facility IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.birth_facility IS
     'Hospital or facility of birth, or street address for a home birth.';
-COMMENT ON COLUMN registrant.mother_name_before_first_marriage IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.mother_name_before_first_marriage IS
     'Mother full name before first marriage, as on the certificate.';
-COMMENT ON COLUMN registrant.father_name IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.father_name IS
     'Father or second parent full name as on the certificate, if recorded.';
-COMMENT ON COLUMN registrant.is_deceased IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.is_deceased IS
     'Whether the registrant is deceased (yes/no).';
-COMMENT ON COLUMN registrant.is_adopted IS
+COMMENT ON COLUMN united_states_birth_certificate_application.registrant.is_adopted IS
     'Whether the registrant was adopted, so an amended record may exist and the original may be sealed (yes/no).';
 
 -- ========================================================================
@@ -181,14 +198,14 @@ COMMENT ON COLUMN registrant.is_adopted IS
 -- The completeness / eligibility classification lives in dedicated child tables.
 -- The issuing agency decides; this record is documentation support, not legal advice.
 
-CREATE TABLE united_states_birth_certificate_application (
+CREATE TABLE united_states_birth_certificate_application.united_states_birth_certificate_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID REFERENCES applicant(id) ON DELETE RESTRICT,
-    registrant_id UUID NOT NULL REFERENCES registrant(id) ON DELETE RESTRICT,
+    applicant_id UUID REFERENCES united_states_birth_certificate_application.applicant(id) ON DELETE RESTRICT,
+    registrant_id UUID NOT NULL REFERENCES united_states_birth_certificate_application.registrant(id) ON DELETE RESTRICT,
     requester_relationship VARCHAR(25) NOT NULL DEFAULT '' CHECK (requester_relationship IN ('self', 'parent', 'legal-guardian', 'legal-representative', 'spouse', 'child', 'sibling', 'grandparent', 'grandchild', 'government-agency', 'other', '')),
     purpose VARCHAR(20) NOT NULL DEFAULT '' CHECK (purpose IN ('passport', 'real-id', 'school', 'employment', 'benefits', 'genealogy', 'foreign-use', 'other', '')),
     needs_apostille VARCHAR(5) NOT NULL DEFAULT '' CHECK (needs_apostille IN ('yes', 'no', '')),
@@ -207,58 +224,58 @@ CREATE TABLE united_states_birth_certificate_application (
 );
 
 CREATE INDEX united_states_birth_certificate_application_applicant_id_idx
-    ON united_states_birth_certificate_application (applicant_id);
+    ON united_states_birth_certificate_application.united_states_birth_certificate_application (applicant_id);
 CREATE INDEX united_states_birth_certificate_application_registrant_id_idx
-    ON united_states_birth_certificate_application (registrant_id);
+    ON united_states_birth_certificate_application.united_states_birth_certificate_application (registrant_id);
 
 CREATE TRIGGER trigger_united_states_birth_certificate_application_updated_at
-    BEFORE UPDATE ON united_states_birth_certificate_application
+    BEFORE UPDATE ON united_states_birth_certificate_application.united_states_birth_certificate_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE united_states_birth_certificate_application IS
+COMMENT ON TABLE united_states_birth_certificate_application.united_states_birth_certificate_application IS
     'A request for a certified copy of a US birth certificate from a state or territory vital records office, with eligibility, identification, fee, apostille, and declaration data.';
-COMMENT ON COLUMN united_states_birth_certificate_application.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_birth_certificate_application.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_birth_certificate_application.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_birth_certificate_application.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_birth_certificate_application.applicant_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.applicant_id IS
     'Foreign key to the requester.';
-COMMENT ON COLUMN united_states_birth_certificate_application.registrant_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.registrant_id IS
     'Foreign key to the person named on the certificate.';
-COMMENT ON COLUMN united_states_birth_certificate_application.requester_relationship IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.requester_relationship IS
     'Relationship of the requester to the registrant, which decides eligibility in restricted-access states.';
-COMMENT ON COLUMN united_states_birth_certificate_application.purpose IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.purpose IS
     'Intended use of the certificate (passport, REAL ID, school, employment, benefits, genealogy, foreign use, other).';
-COMMENT ON COLUMN united_states_birth_certificate_application.needs_apostille IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.needs_apostille IS
     'Whether the certificate will be used abroad and needs an apostille (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.apostille_country IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.apostille_country IS
     'Destination country for an apostille or legalization.';
-COMMENT ON COLUMN united_states_birth_certificate_application.certificate_type IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.certificate_type IS
     'Kind of copy requested: certified long form (full image), certified short form (abstract), or informational (not valid for identity).';
-COMMENT ON COLUMN united_states_birth_certificate_application.copies IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.copies IS
     'Number of copies requested (1 to 20).';
-COMMENT ON COLUMN united_states_birth_certificate_application.delivery_method IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.delivery_method IS
     'How the application is submitted: online, mail, or in person.';
-COMMENT ON COLUMN united_states_birth_certificate_application.fee_enclosed_usd IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.fee_enclosed_usd IS
     'Total fee in US dollars included with the request.';
-COMMENT ON COLUMN united_states_birth_certificate_application.id_type IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.id_type IS
     'Type of identification presented by the requester.';
-COMMENT ON COLUMN united_states_birth_certificate_application.id_unexpired IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.id_unexpired IS
     'Whether the identification is current and unexpired (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.proof_of_relationship IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.proof_of_relationship IS
     'Whether documents proving the relationship to the registrant are included (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.authority_document IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.authority_document IS
     'Whether a court order, guardianship letters, or legal-representation authority is included (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.notarized_sworn_statement IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.notarized_sworn_statement IS
     'Whether a notarized sworn statement of identity is included, required by some states for mail requests (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.declaration_signed IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.declaration_signed IS
     'Whether the applicant has signed the declaration under penalty of perjury (yes/no).';
-COMMENT ON COLUMN united_states_birth_certificate_application.application_note IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application.application_note IS
     'Free-text note from the applicant.';
 
 -- ========================================================================
@@ -273,13 +290,13 @@ COMMENT ON COLUMN united_states_birth_certificate_application.application_note I
 -- application: ready-to-submit, incomplete, or ineligible-requester. Not legal
 -- advice; the issuing agency decides.
 
-CREATE TABLE united_states_birth_certificate_application_grade (
+CREATE TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_states_birth_certificate_application_id UUID NOT NULL UNIQUE REFERENCES united_states_birth_certificate_application(id) ON DELETE CASCADE,
+    united_states_birth_certificate_application_id UUID NOT NULL UNIQUE REFERENCES united_states_birth_certificate_application.united_states_birth_certificate_application(id) ON DELETE CASCADE,
     application_class VARCHAR(25) NOT NULL DEFAULT '' CHECK (application_class IN ('ready-to-submit', 'incomplete', 'ineligible-requester', '')),
     state_rule_applied VARCHAR(20) NOT NULL DEFAULT '' CHECK (state_rule_applied IN ('state','default','')),
     expected_fee_usd NUMERIC(8,2),
@@ -288,29 +305,29 @@ CREATE TABLE united_states_birth_certificate_application_grade (
 
 
 CREATE TRIGGER trigger_united_states_birth_certificate_application_grade_updated_at
-    BEFORE UPDATE ON united_states_birth_certificate_application_grade
+    BEFORE UPDATE ON united_states_birth_certificate_application.united_states_birth_certificate_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE united_states_birth_certificate_application_grade IS
+COMMENT ON TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade IS
     'Computed classification for a birth certificate application: ready-to-submit, incomplete, or ineligible-requester, with the applicable state and expected fee.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.united_states_birth_certificate_application_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.united_states_birth_certificate_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.application_class IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.application_class IS
     'Classification: ready-to-submit, incomplete, or ineligible-requester (ineligible-requester takes precedence).';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.state_rule_applied IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.state_rule_applied IS
     'Whether a verified state rule row or the uniform default rule was applied.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.expected_fee_usd IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.expected_fee_usd IS
     'Expected total fee in US dollars under the applied rule; null when the state fee is unknown.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade.graded_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -323,13 +340,13 @@ COMMENT ON COLUMN united_states_birth_certificate_application_grade.graded_at IS
 
 -- Audit trail of every rule that fired during classification.
 
-CREATE TABLE united_states_birth_certificate_application_grade_rule (
+CREATE TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_states_birth_certificate_application_grade_id UUID NOT NULL REFERENCES united_states_birth_certificate_application_grade(id) ON DELETE CASCADE,
+    united_states_birth_certificate_application_grade_id UUID NOT NULL REFERENCES united_states_birth_certificate_application.united_states_birth_certificate_application_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT '' CHECK (dimension IN ('eligibility', 'identity', 'registrant', 'order', 'apostille', 'declaration', 'classification', '')),
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -337,32 +354,32 @@ CREATE TABLE united_states_birth_certificate_application_grade_rule (
 );
 
 CREATE INDEX united_states_birth_certificate_application_grade_rule_grade_id_idx
-    ON united_states_birth_certificate_application_grade_rule (united_states_birth_certificate_application_grade_id);
+    ON united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule (united_states_birth_certificate_application_grade_id);
 
 CREATE TRIGGER trigger_united_states_birth_certificate_application_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_birth_certificate_application_grade_rule
+    BEFORE UPDATE ON united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE united_states_birth_certificate_application_grade_rule IS
+COMMENT ON TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule IS
     'Audit trail of every eligibility or completeness rule that fired during classification: dimension, category, and description.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.united_states_birth_certificate_application_grade_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.united_states_birth_certificate_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-INELIGIBLE-REQUESTER-01).';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.dimension IS
     'Application dimension the rule concerns.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.category IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.category IS
     'Subject category (e.g. ineligible-requester, missing-id).';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.description IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -375,13 +392,13 @@ COMMENT ON COLUMN united_states_birth_certificate_application_grade_rule.descrip
 
 -- Flagged issues with a priority and a suggested action for the applicant.
 
-CREATE TABLE united_states_birth_certificate_application_grade_flag (
+CREATE TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    united_states_birth_certificate_application_grade_id UUID NOT NULL REFERENCES united_states_birth_certificate_application_grade(id) ON DELETE CASCADE,
+    united_states_birth_certificate_application_grade_id UUID NOT NULL REFERENCES united_states_birth_certificate_application.united_states_birth_certificate_application_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '' CHECK (category IN ('ineligible-requester', 'requester-underage', 'missing-id', 'missing-proof', 'missing-authority', 'missing-notarization', 'missing-registrant-data', 'certificate-type-unacceptable', 'fee-shortfall', 'adopted-registrant', 'apostille', 'deceased-registrant', 'state-rule-unverified', 'missing-declaration', 'other', '')),
     priority VARCHAR(10) NOT NULL DEFAULT '' CHECK (priority IN ('low', 'medium', 'high', '')),
@@ -390,34 +407,34 @@ CREATE TABLE united_states_birth_certificate_application_grade_flag (
 );
 
 CREATE INDEX united_states_birth_certificate_application_grade_flag_grade_id_idx
-    ON united_states_birth_certificate_application_grade_flag (united_states_birth_certificate_application_grade_id);
+    ON united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag (united_states_birth_certificate_application_grade_id);
 
 CREATE TRIGGER trigger_united_states_birth_certificate_application_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_birth_certificate_application_grade_flag
+    BEFORE UPDATE ON united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_birth_certificate_application.set_updated_at();
 
-COMMENT ON TABLE united_states_birth_certificate_application_grade_flag IS
+COMMENT ON TABLE united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag IS
     'Flagged issues that fire independently of the classification, with priority and a suggested action for the applicant.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.united_states_birth_certificate_application_grade_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.united_states_birth_certificate_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-BIRTH-INELIGIBLE-001).';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.category IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.priority IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.description IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_states_birth_certificate_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_birth_certificate_application.united_states_birth_certificate_application_grade_flag.suggested_action IS
     'Suggested action for the applicant (e.g. add a notarized sworn statement).';
 
 -- ========================================================================

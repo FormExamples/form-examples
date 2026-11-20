@@ -3,16 +3,16 @@
 -- Each row also carries condition-specific detail (diagnosis date, treatment,
 -- appliance, cancer site / phase, disability home-care attestation).
 
-CREATE TABLE application_eligible_condition (
+CREATE TABLE united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     application_id UUID NOT NULL
-        REFERENCES application(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_nhs_england_medical_exemption_certificate.application(id) ON DELETE CASCADE,
     eligible_condition_id UUID NOT NULL
-        REFERENCES eligible_condition(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_nhs_england_medical_exemption_certificate.eligible_condition(id) ON DELETE CASCADE,
 
     diagnosis_date DATE,
     snomed_ct_code VARCHAR(50) NOT NULL DEFAULT '',
@@ -48,61 +48,61 @@ CREATE TABLE application_eligible_condition (
 );
 
 CREATE TRIGGER trigger_application_eligible_condition_updated_at
-    BEFORE UPDATE ON application_eligible_condition
+    BEFORE UPDATE ON united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_nhs_england_medical_exemption_certificate.set_updated_at();
 
 CREATE UNIQUE INDEX application_eligible_condition_unique
-    ON application_eligible_condition(application_id, eligible_condition_id)
+    ON united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition(application_id, eligible_condition_id)
     WHERE deleted_at IS NULL;
 
-COMMENT ON TABLE application_eligible_condition IS
+COMMENT ON TABLE united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition IS
     'Per-application qualifying conditions with condition-specific detail.';
-COMMENT ON COLUMN application_eligible_condition.id IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN application_eligible_condition.created_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN application_eligible_condition.updated_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN application_eligible_condition.deleted_at IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN application_eligible_condition.application_id IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.application_id IS
     'Foreign key to the parent application.';
-COMMENT ON COLUMN application_eligible_condition.eligible_condition_id IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.eligible_condition_id IS
     'Foreign key to the eligible condition (one of the ten NHSBSA-recognised conditions).';
-COMMENT ON COLUMN application_eligible_condition.diagnosis_date IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.diagnosis_date IS
     'Date the qualifying condition was diagnosed.';
-COMMENT ON COLUMN application_eligible_condition.snomed_ct_code IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.snomed_ct_code IS
     'Optional SNOMED CT code for the patient-specific diagnosis.';
-COMMENT ON COLUMN application_eligible_condition.icd10_code IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.icd10_code IS
     'Optional ICD-10 code for the patient-specific diagnosis.';
-COMMENT ON COLUMN application_eligible_condition.treatment_detail IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.treatment_detail IS
     'Free-text description of the current treatment regimen.';
-COMMENT ON COLUMN application_eligible_condition.fistula_site IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.fistula_site IS
     'Anatomical site of the fistula (for the fistula condition).';
-COMMENT ON COLUMN application_eligible_condition.appliance_type IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.appliance_type IS
     'Appliance worn for the fistula (bag, dressing, irrigation kit).';
-COMMENT ON COLUMN application_eligible_condition.substitution_therapy IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.substitution_therapy IS
     'Substitution therapy drug and dose (e.g. hydrocortisone 20mg AM / 10mg PM).';
-COMMENT ON COLUMN application_eligible_condition.on_substitution_therapy IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.on_substitution_therapy IS
     'Whether the patient is on the substitution therapy required for eligibility.';
-COMMENT ON COLUMN application_eligible_condition.diabetes_treatment_mode IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.diabetes_treatment_mode IS
     'How diabetes is being treated; diet-only excludes the patient from FP92A.';
-COMMENT ON COLUMN application_eligible_condition.anticonvulsant IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.anticonvulsant IS
     'Anticonvulsant drug and dose (for epilepsy).';
-COMMENT ON COLUMN application_eligible_condition.continuous_anticonvulsant_therapy IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.continuous_anticonvulsant_therapy IS
     'Whether the patient receives continuous anticonvulsant therapy.';
-COMMENT ON COLUMN application_eligible_condition.cannot_leave_home_unaided IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.cannot_leave_home_unaided IS
     'Whether the patient is unable to leave home without the help of another person.';
-COMMENT ON COLUMN application_eligible_condition.disability_carer_detail IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.disability_carer_detail IS
     'Description of the help / carer the patient depends on.';
-COMMENT ON COLUMN application_eligible_condition.disability_expected_to_be_permanent IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.disability_expected_to_be_permanent IS
     'Practitioner judgement that the disability is permanent, not temporary.';
-COMMENT ON COLUMN application_eligible_condition.cancer_site IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.cancer_site IS
     'Anatomical site or type of cancer.';
-COMMENT ON COLUMN application_eligible_condition.cancer_treatment_phase IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.cancer_treatment_phase IS
     'Phase of cancer care - active treatment, effects of cancer, effects of treatment, etc.';
-COMMENT ON COLUMN application_eligible_condition.histology_confirmed IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.histology_confirmed IS
     'Whether a histological diagnosis has been confirmed for the cancer.';
-COMMENT ON COLUMN application_eligible_condition.practitioner_attestation_notes IS
+COMMENT ON COLUMN united_kingdom_nhs_england_medical_exemption_certificate.application_eligible_condition.practitioner_attestation_notes IS
     'Free-text notes from the practitioner supporting the attestation.';

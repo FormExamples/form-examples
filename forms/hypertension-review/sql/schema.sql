@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hypertension_review;
+
+COMMENT ON SCHEMA hypertension_review IS
+    'Namespace for the Hypertension Annual Review form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hypertension_review.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hypertension_review.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE hypertension_review.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON hypertension_review.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE hypertension_review.patient IS
     'Patient demographic information used by the hypertension annual-review record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN hypertension_review.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN hypertension_review.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN hypertension_review.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN hypertension_review.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN hypertension_review.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN hypertension_review.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN hypertension_review.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN hypertension_review.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN hypertension_review.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN hypertension_review.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hypertension_review.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN hypertension_review.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN hypertension_review.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN hypertension_review.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN hypertension_review.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN hypertension_review.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN hypertension_review.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN hypertension_review.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON hypertension_review.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the clinician who
 -- conducted the hypertension annual review.
 
-CREATE TABLE clinician (
+CREATE TABLE hypertension_review.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON hypertension_review.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE hypertension_review.clinician IS
     'Clinician identifying information for the clinician who conducted the hypertension annual review.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN hypertension_review.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN hypertension_review.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN hypertension_review.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN hypertension_review.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN hypertension_review.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN hypertension_review.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN hypertension_review.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN hypertension_review.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN hypertension_review.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN hypertension_review.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN hypertension_review.clinician.role IS
     'Primary clinical role of the reviewer: gp, practice-nurse, pharmacist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN hypertension_review.clinician.registration_body IS
     'Professional registration body: GMC, NMC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN hypertension_review.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON hypertension_review.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- documentation and control-classification record, not a diagnostic or
 -- prescribing instrument.
 
-CREATE TABLE hypertension_review (
+CREATE TABLE hypertension_review.hypertension_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES hypertension_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES hypertension_review.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_role VARCHAR(20) NOT NULL DEFAULT '' CHECK (clinician_role IN ('gp', 'practice-nurse', 'pharmacist', 'other', '')),
@@ -274,98 +291,98 @@ CREATE TABLE hypertension_review (
 );
 
 CREATE INDEX hypertension_review_patient_id_idx
-    ON hypertension_review (patient_id);
+    ON hypertension_review.hypertension_review (patient_id);
 CREATE INDEX hypertension_review_clinician_id_idx
-    ON hypertension_review (clinician_id);
+    ON hypertension_review.hypertension_review (clinician_id);
 
 CREATE TRIGGER trigger_hypertension_review_updated_at
-    BEFORE UPDATE ON hypertension_review
+    BEFORE UPDATE ON hypertension_review.hypertension_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE hypertension_review IS
+COMMENT ON TABLE hypertension_review.hypertension_review IS
     'Main hypertension annual-review record (NICE NG136): patient and clinician identification, review context, diagnosis and comorbidity target drivers, clinic and home/ambulatory blood pressure, medication and adherence, cardiovascular risk, annual bloods, urine ACR, lifestyle, and complications. The computed control classification, completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN hypertension_review.id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hypertension_review.created_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN hypertension_review.updated_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hypertension_review.deleted_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hypertension_review.patient_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN hypertension_review.clinician_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN hypertension_review.clinician_role IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinician_role IS
     'Reviewing clinician role: gp, practice-nurse, pharmacist, or other.';
-COMMENT ON COLUMN hypertension_review.reviewed_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.reviewed_at IS
     'Date the annual review was conducted.';
-COMMENT ON COLUMN hypertension_review.practice_site IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.practice_site IS
     'Practice or site where the review was conducted.';
-COMMENT ON COLUMN hypertension_review.patient_identifier IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.patient_identifier IS
     'NHS number or local patient identifier as recorded on the review.';
-COMMENT ON COLUMN hypertension_review.age_band IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.age_band IS
     'Adult age band that drives the blood-pressure target: 18-39, 40-59, 60-79, or >=80 (>=80 relaxes the clinic target to 150/90).';
-COMMENT ON COLUMN hypertension_review.sex IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN hypertension_review.ethnicity IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.ethnicity IS
     'Patient ethnicity: white, black-african-caribbean, south-asian, mixed, or other.';
-COMMENT ON COLUMN hypertension_review.diagnosis_date IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.diagnosis_date IS
     'Date of hypertension diagnosis.';
-COMMENT ON COLUMN hypertension_review.type2_diabetes IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.type2_diabetes IS
     'Whether the patient has type 2 diabetes (yes/no); a blood-pressure target driver.';
-COMMENT ON COLUMN hypertension_review.chronic_kidney_disease IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.chronic_kidney_disease IS
     'Whether the patient has chronic kidney disease (yes/no); with diabetes or ACR >= 70 it tightens the target to 130/80.';
-COMMENT ON COLUMN hypertension_review.established_cvd IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.established_cvd IS
     'Whether the patient has established cardiovascular disease (yes/no).';
-COMMENT ON COLUMN hypertension_review.atrial_fibrillation IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.atrial_fibrillation IS
     'Whether the patient has atrial fibrillation (yes/no).';
-COMMENT ON COLUMN hypertension_review.clinic_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinic_systolic IS
     'Clinic systolic blood pressure in mmHg (best of repeated seated readings).';
-COMMENT ON COLUMN hypertension_review.clinic_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinic_diastolic IS
     'Clinic diastolic blood pressure in mmHg (best of repeated seated readings).';
-COMMENT ON COLUMN hypertension_review.home_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.home_systolic IS
     'Home/ambulatory (HBPM/ABPM) daytime-average systolic blood pressure in mmHg.';
-COMMENT ON COLUMN hypertension_review.home_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.home_diastolic IS
     'Home/ambulatory (HBPM/ABPM) daytime-average diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN hypertension_review.monitoring_method IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.monitoring_method IS
     'Blood-pressure monitoring method: clinic-only, hbpm (home), or abpm (ambulatory).';
-COMMENT ON COLUMN hypertension_review.postural_drop IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.postural_drop IS
     'Whether a symptomatic postural systolic fall >= 20 mmHg is present (yes/no).';
-COMMENT ON COLUMN hypertension_review.antihypertensive_agents IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.antihypertensive_agents IS
     'Count of current antihypertensive agents.';
-COMMENT ON COLUMN hypertension_review.adherence IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.adherence IS
     'Self-reported medication adherence: good, partial, or poor.';
-COMMENT ON COLUMN hypertension_review.side_effects IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.side_effects IS
     'Whether troublesome medication side effects are present (yes/no).';
-COMMENT ON COLUMN hypertension_review.qrisk_percent IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.qrisk_percent IS
     'QRISK 10-year cardiovascular risk as a percentage.';
-COMMENT ON COLUMN hypertension_review.smoking_status IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.smoking_status IS
     'Smoking status: never, ex, or current.';
-COMMENT ON COLUMN hypertension_review.statin_therapy IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.statin_therapy IS
     'Whether the patient is on a statin (yes/no).';
-COMMENT ON COLUMN hypertension_review.bmi IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.bmi IS
     'Body mass index in kg/m^2.';
-COMMENT ON COLUMN hypertension_review.lifestyle_advice IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.lifestyle_advice IS
     'Free-text record of lifestyle advice given (diet, exercise, alcohol, salt, smoking cessation).';
-COMMENT ON COLUMN hypertension_review.serum_creatinine IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.serum_creatinine IS
     'Serum creatinine in micromol/L (U&E).';
-COMMENT ON COLUMN hypertension_review.egfr IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.egfr IS
     'Estimated glomerular filtration rate in mL/min/1.73m^2 (U&E).';
-COMMENT ON COLUMN hypertension_review.serum_potassium IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.serum_potassium IS
     'Serum potassium in mmol/L (U&E).';
-COMMENT ON COLUMN hypertension_review.hba1c IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.hba1c IS
     'HbA1c in mmol/mol (glycaemic control).';
-COMMENT ON COLUMN hypertension_review.total_cholesterol IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.total_cholesterol IS
     'Total cholesterol in mmol/L (lipids).';
-COMMENT ON COLUMN hypertension_review.hdl_cholesterol IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.hdl_cholesterol IS
     'HDL cholesterol in mmol/L (lipids).';
-COMMENT ON COLUMN hypertension_review.urine_acr IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.urine_acr IS
     'Urine albumin:creatinine ratio in mg/mmol.';
-COMMENT ON COLUMN hypertension_review.complications IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.complications IS
     'Free-text record of hypertension-related complications or target-organ damage.';
-COMMENT ON COLUMN hypertension_review.review_context IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.review_context IS
     'Optional free-text review context or narrative shown in the summary.';
 
 -- ========================================================================
@@ -383,14 +400,14 @@ COMMENT ON COLUMN hypertension_review.review_context IS
 -- completeness. A grade reflects the recorded classification and the
 -- completeness of the review, not a diagnostic judgement.
 
-CREATE TABLE hypertension_review_grade (
+CREATE TABLE hypertension_review.hypertension_review_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     hypertension_review_id UUID NOT NULL UNIQUE
-        REFERENCES hypertension_review(id) ON DELETE CASCADE,
+        REFERENCES hypertension_review.hypertension_review(id) ON DELETE CASCADE,
 
     control_status VARCHAR(25) NOT NULL DEFAULT ''
         CHECK (control_status IN ('controlled', 'uncontrolled', 'severe-uncontrolled', '')),
@@ -411,41 +428,41 @@ CREATE TABLE hypertension_review_grade (
 );
 
 CREATE TRIGGER trigger_hypertension_review_grade_updated_at
-    BEFORE UPDATE ON hypertension_review_grade
+    BEFORE UPDATE ON hypertension_review.hypertension_review_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE hypertension_review_grade IS
+COMMENT ON TABLE hypertension_review.hypertension_review_grade IS
     'Computed control-classification and completeness grading result for a hypertension annual review: control status, hypertension stage, review status, the primary reading source, the selected blood-pressure target and its driving group. 1:1 with the parent review.';
-COMMENT ON COLUMN hypertension_review_grade.id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hypertension_review_grade.created_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hypertension_review_grade.updated_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hypertension_review_grade.deleted_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hypertension_review_grade.hypertension_review_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.hypertension_review_id IS
     'Foreign key to the parent hypertension review (unique, 1:1).';
-COMMENT ON COLUMN hypertension_review_grade.control_status IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.control_status IS
     'Blood-pressure control class against the target: controlled, uncontrolled, or severe-uncontrolled.';
-COMMENT ON COLUMN hypertension_review_grade.hypertension_stage IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.hypertension_stage IS
     'Hypertension stage from the raw readings: none, stage-1, stage-2, or stage-3-severe.';
-COMMENT ON COLUMN hypertension_review_grade.review_status IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.review_status IS
     'Review completeness: complete, partial, or incomplete.';
-COMMENT ON COLUMN hypertension_review_grade.primary_source IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.primary_source IS
     'Primary reading source used for control classification: home (if present) else clinic, or none.';
-COMMENT ON COLUMN hypertension_review_grade.target_group IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.target_group IS
     'Label of the comorbidity/age group that selected the tightest applicable target (e.g. default, over-80, ckd-tight).';
-COMMENT ON COLUMN hypertension_review_grade.clinic_target_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.clinic_target_systolic IS
     'Selected clinic systolic target in mmHg.';
-COMMENT ON COLUMN hypertension_review_grade.clinic_target_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.clinic_target_diastolic IS
     'Selected clinic diastolic target in mmHg.';
-COMMENT ON COLUMN hypertension_review_grade.home_target_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.home_target_systolic IS
     'Selected home/ambulatory systolic target in mmHg (5 mmHg below the clinic target).';
-COMMENT ON COLUMN hypertension_review_grade.home_target_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.home_target_diastolic IS
     'Selected home/ambulatory diastolic target in mmHg (5 mmHg below the clinic target).';
-COMMENT ON COLUMN hypertension_review_grade.graded_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -460,14 +477,14 @@ COMMENT ON COLUMN hypertension_review_grade.graded_at IS
 -- grading. Each row records one rule firing with the section it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE hypertension_review_grade_rule (
+CREATE TABLE hypertension_review.hypertension_review_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     hypertension_review_grade_id UUID NOT NULL
-        REFERENCES hypertension_review_grade(id) ON DELETE CASCADE,
+        REFERENCES hypertension_review.hypertension_review_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -477,32 +494,32 @@ CREATE TABLE hypertension_review_grade_rule (
 );
 
 CREATE INDEX hypertension_review_grade_rule_grade_id_idx
-    ON hypertension_review_grade_rule (hypertension_review_grade_id);
+    ON hypertension_review.hypertension_review_grade_rule (hypertension_review_grade_id);
 
 CREATE TRIGGER trigger_hypertension_review_grade_rule_updated_at
-    BEFORE UPDATE ON hypertension_review_grade_rule
+    BEFORE UPDATE ON hypertension_review.hypertension_review_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE hypertension_review_grade_rule IS
+COMMENT ON TABLE hypertension_review.hypertension_review_grade_rule IS
     'Audit trail of every classification or completeness rule that fired during grading: section, category, and description.';
-COMMENT ON COLUMN hypertension_review_grade_rule.id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hypertension_review_grade_rule.created_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hypertension_review_grade_rule.updated_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hypertension_review_grade_rule.deleted_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hypertension_review_grade_rule.hypertension_review_grade_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.hypertension_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN hypertension_review_grade_rule.rule_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-TARGET-CKD-TIGHT-01).';
-COMMENT ON COLUMN hypertension_review_grade_rule.section IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.section IS
     'Section the rule concerns: target, control, stage, or completeness.';
-COMMENT ON COLUMN hypertension_review_grade_rule.category IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.category IS
     'Subject category (e.g. target-selection, control-classification, staging, required-component).';
-COMMENT ON COLUMN hypertension_review_grade_rule.description IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -517,14 +534,14 @@ COMMENT ON COLUMN hypertension_review_grade_rule.description IS
 -- each with a priority and a suggested action for the clinician or governance
 -- team.
 
-CREATE TABLE hypertension_review_grade_flag (
+CREATE TABLE hypertension_review.hypertension_review_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     hypertension_review_grade_id UUID NOT NULL
-        REFERENCES hypertension_review_grade(id) ON DELETE CASCADE,
+        REFERENCES hypertension_review.hypertension_review_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -547,34 +564,34 @@ CREATE TABLE hypertension_review_grade_flag (
 );
 
 CREATE INDEX hypertension_review_grade_flag_grade_id_idx
-    ON hypertension_review_grade_flag (hypertension_review_grade_id);
+    ON hypertension_review.hypertension_review_grade_flag (hypertension_review_grade_id);
 
 CREATE TRIGGER trigger_hypertension_review_grade_flag_updated_at
-    BEFORE UPDATE ON hypertension_review_grade_flag
+    BEFORE UPDATE ON hypertension_review.hypertension_review_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE hypertension_review_grade_flag IS
+COMMENT ON TABLE hypertension_review.hypertension_review_grade_flag IS
     'Flags that fire independently of the control class and completeness status, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN hypertension_review_grade_flag.id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hypertension_review_grade_flag.created_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hypertension_review_grade_flag.updated_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hypertension_review_grade_flag.deleted_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hypertension_review_grade_flag.hypertension_review_grade_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.hypertension_review_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN hypertension_review_grade_flag.flag_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SEVERE-HYPERTENSION-001).';
-COMMENT ON COLUMN hypertension_review_grade_flag.category IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.category IS
     'Flag category: severe-hypertension, uncontrolled-bp, missing-bloods, missing-acr, high-cv-risk-untreated, adherence-concern, postural-drop, incomplete, or other.';
-COMMENT ON COLUMN hypertension_review_grade_flag.priority IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN hypertension_review_grade_flag.description IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN hypertension_review_grade_flag.suggested_action IS
+COMMENT ON COLUMN hypertension_review.hypertension_review_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "arrange same-day assessment", "step up antihypertensive medication").';
 
 -- ========================================================================

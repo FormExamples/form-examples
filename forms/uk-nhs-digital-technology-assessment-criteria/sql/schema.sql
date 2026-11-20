@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_supplier.sql
 --   - 03_create_table_assessor.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS uk_nhs_digital_technology_assessment_criteria;
+
+COMMENT ON SCHEMA uk_nhs_digital_technology_assessment_criteria IS
+    'Namespace for the UK NHS Digital Technology Assessment Criteria (DTAC) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- BEGIN 02_create_table_supplier.sql
 -- ========================================================================
 
-CREATE TABLE supplier (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.supplier (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -74,44 +91,44 @@ CREATE TABLE supplier (
     contact_phone TEXT
 );
 
-CREATE INDEX index_supplier_name_trgm ON supplier USING GIN (name gin_trgm_ops);
+CREATE INDEX index_supplier_name_trgm ON uk_nhs_digital_technology_assessment_criteria.supplier USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_supplier_updated_at
-    BEFORE UPDATE ON supplier
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.supplier
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE supplier IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.supplier IS
     'Supplier of the digital health technology being assessed.';
-COMMENT ON COLUMN supplier.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN supplier.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN supplier.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN supplier.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN supplier.name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.name IS
     'Registered name of the supplier company.';
-COMMENT ON COLUMN supplier.trading_name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.trading_name IS
     'Trading name, if different from the registered name.';
-COMMENT ON COLUMN supplier.company_registration_number IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.company_registration_number IS
     'Companies House (or equivalent) registration number.';
-COMMENT ON COLUMN supplier.country_of_registration_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.country_of_registration_as_iso_3166_1_alpha_2 IS
     'Country of registration as an ISO 3166-1 alpha-2 code.';
-COMMENT ON COLUMN supplier.ico_registration_number IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.ico_registration_number IS
     'Information Commissioner''s Office data protection fee registration number.';
-COMMENT ON COLUMN supplier.website IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.website IS
     'Supplier website URL.';
-COMMENT ON COLUMN supplier.postal_address_as_full_text IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.postal_address_as_full_text IS
     'Registered postal address as free text.';
-COMMENT ON COLUMN supplier.postcode IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.postcode IS
     'Postcode of the registered address.';
-COMMENT ON COLUMN supplier.contact_name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.contact_name IS
     'Named contact for the assessment.';
-COMMENT ON COLUMN supplier.contact_email IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.contact_email IS
     'Contact email address.';
-COMMENT ON COLUMN supplier.contact_phone IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier.contact_phone IS
     'Contact telephone number.';
 
 -- ========================================================================
@@ -122,7 +139,7 @@ COMMENT ON COLUMN supplier.contact_phone IS
 -- BEGIN 03_create_table_assessor.sql
 -- ========================================================================
 
-CREATE TABLE assessor (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -134,32 +151,32 @@ CREATE TABLE assessor (
     role TEXT NOT NULL DEFAULT '' CHECK (role IN ('commissioner','procurement-lead','clinical-safety-officer','information-governance-lead','information-security-lead','digital-lead','other',''))
 );
 
-CREATE INDEX index_assessor_name_trgm ON assessor USING GIN (name gin_trgm_ops);
+CREATE INDEX index_assessor_name_trgm ON uk_nhs_digital_technology_assessment_criteria.assessor USING GIN (name gin_trgm_ops);
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.assessor IS
     'Person carrying out the DTAC assessment on behalf of an NHS or care organisation.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.name IS
     'Name of the assessor.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.email IS
     'Email address.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.phone IS
     'Telephone number.';
-COMMENT ON COLUMN assessor.organisation IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.organisation IS
     'Commissioning or assuring organisation the assessor works for.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor.role IS
     'Assessor role.';
 
 -- ========================================================================
@@ -170,12 +187,12 @@ COMMENT ON COLUMN assessor.role IS
 -- BEGIN 04_create_table_product.sql
 -- ========================================================================
 
-CREATE TABLE product (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.product (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    supplier_id UUID NOT NULL REFERENCES supplier(id) ON DELETE CASCADE,
+    supplier_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.supplier(id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     version TEXT NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -186,40 +203,40 @@ CREATE TABLE product (
     is_patient_facing TEXT NOT NULL DEFAULT '' CHECK (is_patient_facing IN ('yes','no',''))
 );
 
-CREATE INDEX index_product_supplier_id ON product(supplier_id);
+CREATE INDEX index_product_supplier_id ON uk_nhs_digital_technology_assessment_criteria.product(supplier_id);
 
 CREATE TRIGGER trigger_product_updated_at
-    BEFORE UPDATE ON product
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.product
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE product IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.product IS
     'Digital health technology product under assessment.';
-COMMENT ON COLUMN product.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN product.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN product.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN product.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN product.supplier_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.supplier_id IS
     'Foreign key to the supplier table.';
-COMMENT ON COLUMN product.name IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.name IS
     'Product name.';
-COMMENT ON COLUMN product.version IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.version IS
     'Product version or release assessed.';
-COMMENT ON COLUMN product.description IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.description IS
     'Short description of the product.';
-COMMENT ON COLUMN product.intended_purpose IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.intended_purpose IS
     'Intended purpose as stated by the supplier.';
-COMMENT ON COLUMN product.product_type IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.product_type IS
     'Kind of digital health technology.';
-COMMENT ON COLUMN product.medical_device_class IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.medical_device_class IS
     'UK MDR 2002 medical device classification.';
-COMMENT ON COLUMN product.handles_patient_data IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.handles_patient_data IS
     'Whether the product processes patient-identifiable data.';
-COMMENT ON COLUMN product.is_patient_facing IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product.is_patient_facing IS
     'Whether patients or the public use the product directly.';
 
 -- ========================================================================
@@ -230,14 +247,14 @@ COMMENT ON COLUMN product.is_patient_facing IS
 -- BEGIN 05_create_table_uk_nhs_digital_technology_assessment_criteria.sql
 -- ========================================================================
 
-CREATE TABLE uk_nhs_digital_technology_assessment_criteria (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    supplier_id UUID NOT NULL REFERENCES supplier(id) ON DELETE CASCADE,
-    product_id UUID NOT NULL REFERENCES product(id) ON DELETE CASCADE,
-    assessor_id UUID NOT NULL REFERENCES assessor(id) ON DELETE CASCADE,
+    supplier_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.supplier(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.product(id) ON DELETE CASCADE,
+    assessor_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.assessor(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','submitted','reviewed','approved','rejected')),
     assessment_date DATE,
     review_due_date DATE,
@@ -300,148 +317,148 @@ CREATE TABLE uk_nhs_digital_technology_assessment_criteria (
     assessor_notes TEXT NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_product_id ON uk_nhs_digital_technology_assessment_criteria(product_id);
+CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_product_id ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria(product_id);
 
 CREATE TRIGGER trigger_uk_nhs_digital_technology_assessment_criteria_updated_at
-    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria IS
     'A DTAC assessment of one digital health technology product by one assessor.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.supplier_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.supplier_id IS
     'Foreign key to the supplier table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.product_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.product_id IS
     'Foreign key to the product table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.assessor_id IS
     'Foreign key to the assessor table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.status IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.status IS
     'Workflow status of the assessment.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessment_date IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.assessment_date IS
     'Date the assessment was carried out.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.review_due_date IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.review_due_date IS
     'Date the assessment must next be reviewed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.dtac_version IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.dtac_version IS
     'Version of the NHS England DTAC the assessment was made against.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.commissioning_organisation IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.commissioning_organisation IS
     'Organisation commissioning or procuring the product.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.a1_company_registered_in_uk IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.a1_company_registered_in_uk IS
     'Criterion A1 (mandatory): The supplier is a registered company or legal entity with a verifiable registration number.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.a2_ico_registration_current IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.a2_ico_registration_current IS
     'Criterion A2 (mandatory): The supplier has a current ICO data protection fee registration (or a documented exemption).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.a3_senior_responsible_owner_named IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.a3_senior_responsible_owner_named IS
     'Criterion A3 (mandatory): A named senior individual is accountable for the product''s compliance.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.a4_incident_contact_published IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.a4_incident_contact_published IS
     'Criterion A4 (advisory): A contact point for incident and safety reports is published to commissioners and users.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_a_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_a_notes IS
     'Assessor notes and evidence references for section A (Company information).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.b1_intended_use_and_users_defined IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.b1_intended_use_and_users_defined IS
     'Criterion B1 (mandatory): The intended purpose, target users and care setting are clearly defined.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.b2_evidence_of_benefit IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.b2_evidence_of_benefit IS
     'Criterion B2 (mandatory): Evidence demonstrates the product''s benefit to patients, staff or the system.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.b3_outcome_measures_defined IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.b3_outcome_measures_defined IS
     'Criterion B3 (advisory): Measurable outcomes and an evaluation plan are defined.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.b4_cost_effectiveness_evidence IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.b4_cost_effectiveness_evidence IS
     'Criterion B4 (advisory): Evidence of cost-effectiveness or economic value is available.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_b_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_b_notes IS
     'Assessor notes and evidence references for section B (Value proposition).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c1_clinical_safety_officer_named IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c1_clinical_safety_officer_named IS
     'Criterion C1 (mandatory): A named Clinical Safety Officer (a registered clinician with clinical risk management training) is appointed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c2_clinical_risk_management_plan IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c2_clinical_risk_management_plan IS
     'Criterion C2 (mandatory): A DCB0129 Clinical Risk Management Plan exists and is current.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c3_hazard_log_maintained IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c3_hazard_log_maintained IS
     'Criterion C3 (mandatory): A DCB0129 Hazard Log is maintained and hazards are mitigated to acceptable levels.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c4_clinical_safety_case_report IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c4_clinical_safety_case_report IS
     'Criterion C4 (mandatory): A DCB0129 Clinical Safety Case Report is complete and signed off by the Clinical Safety Officer.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c5_clinical_safety_officer_registration_verified IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c5_clinical_safety_officer_registration_verified IS
     'Criterion C5 (mandatory): The Clinical Safety Officer''s professional registration has been verified.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c6_medical_device_registration_if_applicable IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c6_medical_device_registration_if_applicable IS
     'Criterion C6 (mandatory): If the product is a medical device, it is correctly classified and has UKCA/CE marking and MHRA registration.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.c7_post_market_surveillance IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.c7_post_market_surveillance IS
     'Criterion C7 (advisory): A process exists to monitor safety in live use and to report incidents.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_c_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_c_notes IS
     'Assessor notes and evidence references for section C (Clinical safety).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d1_data_protection_officer_or_lead IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d1_data_protection_officer_or_lead IS
     'Criterion D1 (mandatory): A Data Protection Officer or named data protection lead is appointed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d2_dpia_completed IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d2_dpia_completed IS
     'Criterion D2 (mandatory): A Data Protection Impact Assessment has been completed and is kept under review.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d3_dspt_standards_met IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d3_dspt_standards_met IS
     'Criterion D3 (mandatory): The Data Security and Protection Toolkit assessment meets or exceeds standards.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d4_lawful_basis_documented IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d4_lawful_basis_documented IS
     'Criterion D4 (mandatory): The lawful basis for each processing purpose (UK GDPR Art. 6 and Art. 9) is documented.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d5_controller_processor_roles_defined IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d5_controller_processor_roles_defined IS
     'Criterion D5 (mandatory): Controller, joint controller and processor roles are defined in contracts.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d6_data_location_and_transfers IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d6_data_location_and_transfers IS
     'Criterion D6 (mandatory): Data is processed in the UK, or international transfers have lawful safeguards.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d7_retention_and_deletion_policy IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d7_retention_and_deletion_policy IS
     'Criterion D7 (mandatory): A retention and secure-deletion policy aligned with NHS records guidance is in place.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d8_privacy_notice_published IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d8_privacy_notice_published IS
     'Criterion D8 (mandatory): A clear, accessible privacy notice is published to users.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.d9_data_subject_rights_supported IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.d9_data_subject_rights_supported IS
     'Criterion D9 (advisory): Processes support data subject rights (access, rectification, erasure, objection, portability).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_d_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_d_notes IS
     'Assessor notes and evidence references for section D (Data protection).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e1_cyber_essentials_plus_or_iso27001 IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e1_cyber_essentials_plus_or_iso27001 IS
     'Criterion E1 (mandatory): The supplier holds Cyber Essentials Plus or ISO 27001 certification (or equivalent assured evidence).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e2_penetration_test_within_12_months IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e2_penetration_test_within_12_months IS
     'Criterion E2 (mandatory): An independent penetration test was completed within the last 12 months and findings addressed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e3_vulnerability_management IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e3_vulnerability_management IS
     'Criterion E3 (mandatory): A vulnerability management and patching process is operated with defined timescales.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e4_encryption_in_transit_and_at_rest IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e4_encryption_in_transit_and_at_rest IS
     'Criterion E4 (mandatory): Data is encrypted in transit and at rest using current standards.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e5_access_control_and_mfa IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e5_access_control_and_mfa IS
     'Criterion E5 (mandatory): Role-based access control with multi-factor authentication for privileged and remote access.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e6_audit_logging IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e6_audit_logging IS
     'Criterion E6 (mandatory): Security-relevant events and access to patient data are logged and monitored.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e7_business_continuity_and_backup IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e7_business_continuity_and_backup IS
     'Criterion E7 (mandatory): Tested backup, disaster recovery and business continuity arrangements exist.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e8_secure_development_lifecycle IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e8_secure_development_lifecycle IS
     'Criterion E8 (advisory): A secure software development lifecycle, including dependency and supply-chain controls, is followed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.e9_incident_response_and_breach_notification IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.e9_incident_response_and_breach_notification IS
     'Criterion E9 (mandatory): A security incident response plan with breach notification timescales exists.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_e_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_e_notes IS
     'Assessor notes and evidence references for section E (Technical security).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f1_open_standards_apis IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f1_open_standards_apis IS
     'Criterion F1 (mandatory): The product exposes documented APIs that use open standards.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f2_fhir_or_nhs_standard_apis IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f2_fhir_or_nhs_standard_apis IS
     'Criterion F2 (advisory): The product supports HL7 FHIR or other relevant NHS interoperability standards.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f3_nhs_number_supported IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f3_nhs_number_supported IS
     'Criterion F3 (mandatory): The NHS Number is supported as the primary patient identifier where patient data is held.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f4_clinical_terminology_standards IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f4_clinical_terminology_standards IS
     'Criterion F4 (advisory): SNOMED CT, dm+d or other mandated clinical terminologies are used where relevant.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f5_nhs_login_integration IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f5_nhs_login_integration IS
     'Criterion F5 (advisory): NHS login is supported for patient-facing authentication where relevant.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f6_nhs_systems_integration_documented IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f6_nhs_systems_integration_documented IS
     'Criterion F6 (advisory): Integration with NHS systems (for example NHS App, GP Connect, national services) is documented.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.f7_data_portability_export IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.f7_data_portability_export IS
     'Criterion F7 (mandatory): Patient and organisational data can be exported in a structured, machine-readable format.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_f_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_f_notes IS
     'Assessor notes and evidence references for section F (Interoperability).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g1_user_research_with_target_users IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g1_user_research_with_target_users IS
     'Criterion G1 (mandatory): User research with the intended users has informed the design.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g2_wcag_aa_conformance IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g2_wcag_aa_conformance IS
     'Criterion G2 (mandatory): The product conforms to the WCAG level AA version specified by DTAC.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g3_accessibility_statement_published IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g3_accessibility_statement_published IS
     'Criterion G3 (mandatory): An accessibility statement meeting UK public-sector requirements is published.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g4_nhs_service_manual_followed IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g4_nhs_service_manual_followed IS
     'Criterion G4 (advisory): The NHS digital service manual design guidance is followed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g5_assistive_technology_tested IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g5_assistive_technology_tested IS
     'Criterion G5 (mandatory): The product has been tested with assistive technologies.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g6_digital_inclusion_considered IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g6_digital_inclusion_considered IS
     'Criterion G6 (advisory): Digital inclusion and non-digital alternatives are considered.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.g7_user_feedback_mechanism IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.g7_user_feedback_mechanism IS
     'Criterion G7 (advisory): A mechanism exists for users to give feedback and report accessibility problems.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.section_g_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.section_g_notes IS
     'Assessor notes and evidence references for section G (Usability and accessibility).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor_notes IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria.assessor_notes IS
     'Overall assessor notes.';
 
 -- ========================================================================
@@ -452,12 +469,12 @@ COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.assessor_notes I
 -- BEGIN 06_create_table_uk_nhs_digital_technology_assessment_criteria_grade.sql
 -- ========================================================================
 
-CREATE TABLE uk_nhs_digital_technology_assessment_criteria_grade (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    uk_nhs_digital_technology_assessment_criteria_id UUID NOT NULL UNIQUE REFERENCES uk_nhs_digital_technology_assessment_criteria(id) ON DELETE CASCADE,
+    uk_nhs_digital_technology_assessment_criteria_id UUID NOT NULL UNIQUE REFERENCES uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria(id) ON DELETE CASCADE,
     outcome VARCHAR(20) NOT NULL DEFAULT '' CHECK (outcome IN ('meets','conditional','does-not-meet','incomplete','')),
     mandatory_total INTEGER NOT NULL DEFAULT 0 CHECK (mandatory_total >= 0),
     mandatory_met INTEGER NOT NULL DEFAULT 0 CHECK (mandatory_met >= 0),
@@ -477,53 +494,53 @@ CREATE TABLE uk_nhs_digital_technology_assessment_criteria_grade (
 );
 
 CREATE TRIGGER trigger_uk_nhs_digital_technology_assessment_criteria_grade_updated_at
-    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria_grade
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria_grade IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade IS
     'Computed and signed-off DTAC outcome for an assessment.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.uk_nhs_digital_technology_assessment_criteria_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.uk_nhs_digital_technology_assessment_criteria_id IS
     'Foreign key to the uk_nhs_digital_technology_assessment_criteria table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.outcome IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.outcome IS
     'Overall DTAC outcome computed by the engine.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.mandatory_total IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.mandatory_total IS
     'Number of mandatory criteria that apply (not-applicable excluded).';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.mandatory_met IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.mandatory_met IS
     'Number of applicable mandatory criteria rated met.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.advisory_total IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.advisory_total IS
     'Number of advisory criteria that apply.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.advisory_met IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.advisory_met IS
     'Number of applicable advisory criteria rated met.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_a_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_a_result IS
     'Section A (Company information) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_b_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_b_result IS
     'Section B (Value proposition) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_c_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_c_result IS
     'Section C (Clinical safety) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_d_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_d_result IS
     'Section D (Data protection) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_e_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_e_result IS
     'Section E (Technical security) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_f_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_f_result IS
     'Section F (Interoperability) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.section_g_result IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.section_g_result IS
     'Section G (Usability and accessibility) result.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.assessor_override_reason IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.assessor_override_reason IS
     'Reason the assessor''s final decision differs from the computed outcome.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.final_outcome IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.final_outcome IS
     'Outcome signed off by the assessor.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.signed_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.signed_at IS
     'Timestamp when the assessor signed off.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.graded_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade.graded_at IS
     'Timestamp when the outcome was computed.';
 
 -- ========================================================================
@@ -534,12 +551,12 @@ COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade.graded_at 
 -- BEGIN 07_create_table_uk_nhs_digital_technology_assessment_criteria_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE uk_nhs_digital_technology_assessment_criteria_grade_rule (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grade_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria_grade(id) ON DELETE CASCADE,
+    grade_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     section CHAR(1) NOT NULL CHECK (section IN ('a','b','c','d','e','f','g')),
     criterion_id VARCHAR(5) NOT NULL CHECK (criterion_id IN ('a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8', 'e9', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7')),
@@ -548,36 +565,36 @@ CREATE TABLE uk_nhs_digital_technology_assessment_criteria_grade_rule (
     description VARCHAR(500) NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_grade_rule_grade_id ON uk_nhs_digital_technology_assessment_criteria_grade_rule(grade_id);
+CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_grade_rule_grade_id ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule(grade_id);
 
 CREATE TRIGGER trigger_uk_nhs_digital_technology_assessment_criteria_grade_rule_updated_at
-    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria_grade_rule
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria_grade_rule IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule IS
     'Audit trail of every criterion rule that fired for this assessment.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.grade_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.rule_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.rule_id IS
     'Identifier of the rule that fired.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.section IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.section IS
     'DTAC section letter.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.criterion_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.criterion_id IS
     'Criterion identifier, for example c2.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.status IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.status IS
     'Status of the criterion when the rule fired.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.mandatory IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.mandatory IS
     'Whether the criterion is mandatory.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.description IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_rule.description IS
     'Human-readable rule description.';
 
 -- ========================================================================
@@ -588,44 +605,44 @@ COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_rule.descr
 -- BEGIN 08_create_table_uk_nhs_digital_technology_assessment_criteria_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE uk_nhs_digital_technology_assessment_criteria_grade_flag (
+CREATE TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    uk_nhs_digital_technology_assessment_criteria_grade_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria_grade(id) ON DELETE CASCADE,
+    uk_nhs_digital_technology_assessment_criteria_grade_id UUID NOT NULL REFERENCES uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT '' CHECK (category IN ('company', 'value-proposition', 'clinical-safety', 'data-protection', 'technical-security', 'interoperability', 'accessibility', 'completeness', '')),
     severity VARCHAR(10) NOT NULL DEFAULT '' CHECK (severity IN ('info','warning','critical','')),
     message VARCHAR(500) NOT NULL DEFAULT ''
 );
 
-CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_grade_flag_grade_id ON uk_nhs_digital_technology_assessment_criteria_grade_flag(uk_nhs_digital_technology_assessment_criteria_grade_id);
+CREATE INDEX index_uk_nhs_digital_technology_assessment_criteria_grade_flag_grade_id ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag(uk_nhs_digital_technology_assessment_criteria_grade_id);
 
 CREATE TRIGGER trigger_uk_nhs_digital_technology_assessment_criteria_grade_flag_updated_at
-    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria_grade_flag
+    BEFORE UPDATE ON uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION uk_nhs_digital_technology_assessment_criteria.set_updated_at();
 
-COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria_grade_flag IS
+COMMENT ON TABLE uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag IS
     'Flagged issues raised for this assessment.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.created_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.updated_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.deleted_at IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.uk_nhs_digital_technology_assessment_criteria_grade_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.uk_nhs_digital_technology_assessment_criteria_grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.flag_id IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.flag_id IS
     'Identifier of the flag.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.category IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.severity IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.severity IS
     'Flag severity.';
-COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria_grade_flag.message IS
+COMMENT ON COLUMN uk_nhs_digital_technology_assessment_criteria.uk_nhs_digital_technology_assessment_criteria_grade_flag.message IS
     'Human-readable flag message.';
 
 -- ========================================================================

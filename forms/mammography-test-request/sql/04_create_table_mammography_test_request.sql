@@ -1,13 +1,13 @@
 -- Breast mammography imaging request (referral) — the source-of-truth record.
 
-CREATE TABLE mammography_test_request (
+CREATE TABLE mammography_test_request.mammography_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES mammography_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES mammography_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'scheduled', 'rejected', '')),
@@ -53,76 +53,76 @@ CREATE TABLE mammography_test_request (
 );
 
 CREATE INDEX index_mammography_test_request_patient_id
-    ON mammography_test_request(patient_id);
+    ON mammography_test_request.mammography_test_request(patient_id);
 CREATE INDEX index_mammography_test_request_clinician_id
-    ON mammography_test_request(clinician_id);
+    ON mammography_test_request.mammography_test_request(clinician_id);
 
 CREATE TRIGGER trigger_mammography_test_request_updated_at
-    BEFORE UPDATE ON mammography_test_request
+    BEFORE UPDATE ON mammography_test_request.mammography_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION mammography_test_request.set_updated_at();
 
-COMMENT ON TABLE mammography_test_request IS
+COMMENT ON TABLE mammography_test_request.mammography_test_request IS
     'Breast mammography imaging request (referral). Captures the requested examination, the clinical indication and question, symptoms, breast history / risk factors, and triage urgency.';
-COMMENT ON COLUMN mammography_test_request.id IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN mammography_test_request.created_at IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN mammography_test_request.updated_at IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN mammography_test_request.deleted_at IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN mammography_test_request.patient_id IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN mammography_test_request.clinician_id IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN mammography_test_request.status IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, scheduled, rejected.';
-COMMENT ON COLUMN mammography_test_request.site_name IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN mammography_test_request.setting IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.setting IS
     'Care setting: outpatient, inpatient, community, screening-unit, emergency.';
-COMMENT ON COLUMN mammography_test_request.referral_date IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN mammography_test_request.requested_by_date IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.requested_by_date IS
     'Date by which the examination is requested to be performed.';
-COMMENT ON COLUMN mammography_test_request.exam_type IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.exam_type IS
     'Type of mammography requested: screening, diagnostic, symptomatic, surveillance, other.';
-COMMENT ON COLUMN mammography_test_request.primary_indication IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring.';
-COMMENT ON COLUMN mammography_test_request.clinical_question IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.clinical_question IS
     'Specific clinical question the examination should answer (highest-value field).';
-COMMENT ON COLUMN mammography_test_request.relevant_history IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.relevant_history IS
     'Relevant medical, surgical, and breast history.';
-COMMENT ON COLUMN mammography_test_request.laterality IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.laterality IS
     'Affected side: left, right, bilateral, not-applicable.';
-COMMENT ON COLUMN mammography_test_request.symptom_lump IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.symptom_lump IS
     'Whether the patient reports a breast lump.';
-COMMENT ON COLUMN mammography_test_request.symptom_pain IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.symptom_pain IS
     'Whether the patient reports breast pain.';
-COMMENT ON COLUMN mammography_test_request.symptom_nipple_discharge IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.symptom_nipple_discharge IS
     'Whether the patient reports nipple discharge.';
-COMMENT ON COLUMN mammography_test_request.symptom_skin_change IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.symptom_skin_change IS
     'Whether the patient reports a skin change (dimpling, peau d''orange, erythema).';
-COMMENT ON COLUMN mammography_test_request.symptom_nipple_inversion IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.symptom_nipple_inversion IS
     'Whether the patient reports new nipple inversion or retraction.';
-COMMENT ON COLUMN mammography_test_request.previous_mammogram IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.previous_mammogram IS
     'Previous mammogram outcome: none, normal, abnormal, unknown.';
-COMMENT ON COLUMN mammography_test_request.previous_mammogram_date IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.previous_mammogram_date IS
     'Date of the most recent previous mammogram.';
-COMMENT ON COLUMN mammography_test_request.family_history_breast_cancer IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.family_history_breast_cancer IS
     'Whether there is a family history of breast cancer.';
-COMMENT ON COLUMN mammography_test_request.breast_implants IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.breast_implants IS
     'Whether the patient has breast implants (affects technique and views).';
-COMMENT ON COLUMN mammography_test_request.pregnancy_or_lactating IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.pregnancy_or_lactating IS
     'Pregnancy / lactation status: no, pregnant, lactating, unknown (affects radiation justification).';
-COMMENT ON COLUMN mammography_test_request.hormone_replacement_therapy IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.hormone_replacement_therapy IS
     'Whether the patient is on hormone replacement therapy (affects breast density).';
-COMMENT ON COLUMN mammography_test_request.urgency IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.urgency IS
     'Requested triage urgency: routine, urgent, two-week-wait, emergency.';
-COMMENT ON COLUMN mammography_test_request.supervising_consultant IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN mammography_test_request.requester_contact IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN mammography_test_request.notes IS
+COMMENT ON COLUMN mammography_test_request.mammography_test_request.notes IS
     'Free-text additional notes.';

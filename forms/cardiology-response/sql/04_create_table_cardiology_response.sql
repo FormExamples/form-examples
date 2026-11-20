@@ -1,13 +1,13 @@
 -- Cardiology response (consult reply) — the source-of-truth record.
 
-CREATE TABLE cardiology_response (
+CREATE TABLE cardiology_response.cardiology_response (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES cardiology_response.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES cardiology_response.clinician(id) ON DELETE CASCADE,
 
     -- Response identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -53,74 +53,74 @@ CREATE TABLE cardiology_response (
 );
 
 CREATE INDEX index_cardiology_response_patient_id
-    ON cardiology_response(patient_id);
+    ON cardiology_response.cardiology_response(patient_id);
 CREATE INDEX index_cardiology_response_clinician_id
-    ON cardiology_response(clinician_id);
+    ON cardiology_response.cardiology_response(clinician_id);
 
 CREATE TRIGGER trigger_cardiology_response_updated_at
-    BEFORE UPDATE ON cardiology_response
+    BEFORE UPDATE ON cardiology_response.cardiology_response
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_response.set_updated_at();
 
-COMMENT ON TABLE cardiology_response IS
+COMMENT ON TABLE cardiology_response.cardiology_response IS
     'Cardiology response (consult reply) authored by a cardiology clinician in answer to a cardiology referral. Captures the consultation type, clinical summary and examination, investigations performed, structured findings, the diagnosis, the key left-ventricular ejection fraction measurement, the management plan and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN cardiology_response.id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_response.created_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cardiology_response.updated_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_response.deleted_at IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_response.patient_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN cardiology_response.clinician_id IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.clinician_id IS
     'Foreign key to the responding cardiology clinician (author / signer).';
-COMMENT ON COLUMN cardiology_response.originating_request_reference IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.originating_request_reference IS
     'Free-text reference linking this response back to the originating cardiology referral request.';
-COMMENT ON COLUMN cardiology_response.response_status IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.response_status IS
     'Response lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN cardiology_response.consultation_type IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.consultation_type IS
     'Type of cardiology consultation: clinic-review, advice-and-guidance, telephone, inpatient-review, virtual.';
-COMMENT ON COLUMN cardiology_response.assessed_date IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.assessed_date IS
     'Date the patient was assessed / reviewed.';
-COMMENT ON COLUMN cardiology_response.responded_date IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.responded_date IS
     'Date the response was authored / signed.';
-COMMENT ON COLUMN cardiology_response.clinical_summary IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.clinical_summary IS
     'Narrative clinical summary of the assessment.';
-COMMENT ON COLUMN cardiology_response.examination_findings IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.examination_findings IS
     'Cardiovascular examination findings.';
-COMMENT ON COLUMN cardiology_response.investigations_performed IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.investigations_performed IS
     'Investigations performed or reviewed (e.g. ECG, echocardiogram, stress test) and their findings.';
-COMMENT ON COLUMN cardiology_response.ischaemia_or_cad IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.ischaemia_or_cad IS
     'Structured finding: ischaemia or coronary artery disease present.';
-COMMENT ON COLUMN cardiology_response.significant_arrhythmia IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.significant_arrhythmia IS
     'Structured finding: significant arrhythmia present.';
-COMMENT ON COLUMN cardiology_response.reduced_ejection_fraction IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.reduced_ejection_fraction IS
     'Structured finding: reduced left-ventricular ejection fraction.';
-COMMENT ON COLUMN cardiology_response.significant_valve_disease IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.significant_valve_disease IS
     'Structured finding: significant (moderate or severe) valve disease.';
-COMMENT ON COLUMN cardiology_response.structural_abnormality IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.structural_abnormality IS
     'Structured finding: structural cardiac abnormality (e.g. cardiomyopathy, congenital).';
-COMMENT ON COLUMN cardiology_response.uncontrolled_hypertension IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.uncontrolled_hypertension IS
     'Structured finding: uncontrolled hypertension.';
-COMMENT ON COLUMN cardiology_response.non_cardiac_cause IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.non_cardiac_cause IS
     'Structured finding: a non-cardiac cause was identified or judged most likely.';
-COMMENT ON COLUMN cardiology_response.primary_diagnosis_category IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.primary_diagnosis_category IS
     'Primary diagnosis category: coronary-artery-disease, heart-failure, arrhythmia, valve-disease, hypertension, cardiomyopathy, non-cardiac, no-abnormality, other.';
-COMMENT ON COLUMN cardiology_response.diagnosis_narrative IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.diagnosis_narrative IS
     'Narrative diagnosis answering the referral clinical question.';
-COMMENT ON COLUMN cardiology_response.lv_ejection_fraction_percent IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.lv_ejection_fraction_percent IS
     'Left-ventricular ejection fraction as a percentage (0-100), the key prognostic measurement.';
-COMMENT ON COLUMN cardiology_response.management_plan IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.management_plan IS
     'Management plan including investigations arranged and treatment.';
-COMMENT ON COLUMN cardiology_response.medication_changes IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.medication_changes IS
     'Medication changes recommended or made.';
-COMMENT ON COLUMN cardiology_response.recommended_follow_up IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.recommended_follow_up IS
     'Recommended follow-up, including who should action it and when.';
-COMMENT ON COLUMN cardiology_response.critical_result IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.critical_result IS
     'Whether a critical or unexpected significant cardiac result is present (e.g. critical arrhythmia, severe aortic stenosis, acute coronary syndrome).';
-COMMENT ON COLUMN cardiology_response.critical_result_communicated IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.critical_result_communicated IS
     'Whether the critical result was communicated directly to the referrer / responsible team.';
-COMMENT ON COLUMN cardiology_response.reported_to IS
+COMMENT ON COLUMN cardiology_response.cardiology_response.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

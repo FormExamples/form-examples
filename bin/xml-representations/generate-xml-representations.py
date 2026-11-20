@@ -241,7 +241,7 @@ def parse_create_table(sql_text):
     tables = []
 
     # Match CREATE TABLE statements
-    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s*\((.*?)\);'
+    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:\w+\.)?(\w+)\s*\((.*?)\);'
     matches = re.findall(pattern, sql_text, re.DOTALL | re.IGNORECASE)
 
     for table_name, body in matches:
@@ -275,7 +275,7 @@ def parse_create_table(sql_text):
                 continue
 
             # Parse column: name type [constraints...]
-            col_match = re.match(r'^(\w+)\s+([\w(),.]+(?:\s*\([^)]*\))?)', col_def, re.IGNORECASE)
+            col_match = re.match(r'^(\w+)\s+(?:[a-z_]\w*\.(?=[a-z_]))?([\w(),.]+(?:\s*\([^)]*\))?)', col_def, re.IGNORECASE)
             if col_match:
                 col_name = col_match.group(1)
                 col_type = col_match.group(2)

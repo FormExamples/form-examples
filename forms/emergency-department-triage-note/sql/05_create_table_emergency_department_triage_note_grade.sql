@@ -5,14 +5,14 @@
 -- and target time from that level. The audit trail of fired rules and the
 -- red-flag issues live in sibling child tables.
 
-CREATE TABLE emergency_department_triage_note_grade (
+CREATE TABLE emergency_department_triage_note.emergency_department_triage_note_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     emergency_department_triage_note_id UUID NOT NULL UNIQUE
-        REFERENCES emergency_department_triage_note(id) ON DELETE CASCADE,
+        REFERENCES emergency_department_triage_note.emergency_department_triage_note(id) ON DELETE CASCADE,
 
     news2_total INT,
     news2_any_parameter_three VARCHAR(5) NOT NULL DEFAULT ''
@@ -31,33 +31,33 @@ CREATE TABLE emergency_department_triage_note_grade (
 );
 
 CREATE TRIGGER trigger_emergency_department_triage_note_grade_updated_at
-    BEFORE UPDATE ON emergency_department_triage_note_grade
+    BEFORE UPDATE ON emergency_department_triage_note.emergency_department_triage_note_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION emergency_department_triage_note.set_updated_at();
 
-COMMENT ON TABLE emergency_department_triage_note_grade IS
+COMMENT ON TABLE emergency_department_triage_note.emergency_department_triage_note_grade IS
     'Computed triage classification result (1:1 with the triage note): supporting NEWS2 aggregate, the selected MTS priority level, and the fixed colour, name, and target time derived from that level.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.created_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.updated_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.deleted_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.emergency_department_triage_note_id IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.emergency_department_triage_note_id IS
     'Foreign key to the parent triage note (unique, 1:1).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.news2_total IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.news2_total IS
     'Supporting NEWS2 aggregate computed from the recorded vital signs; NULL when not computed.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.news2_any_parameter_three IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.news2_any_parameter_three IS
     'Whether any single NEWS2 parameter scored 3 (drives escalation to at least Level 2).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_level IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_level IS
     'Selected MTS priority level: 1 (most urgent) to 5 (least urgent); NULL when not classified.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_colour IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_colour IS
     'Colour derived from the level: red (1), orange (2), yellow (3), green (4), blue (5).';
-COMMENT ON COLUMN emergency_department_triage_note_grade.priority_name IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.priority_name IS
     'Name derived from the level: Immediate, Very urgent, Urgent, Standard, or Non-urgent.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.target_minutes IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.target_minutes IS
     'Target minutes to first clinical assessment derived from the level: 0, 10, 60, 120, or 240.';
-COMMENT ON COLUMN emergency_department_triage_note_grade.graded_at IS
+COMMENT ON COLUMN emergency_department_triage_note.emergency_department_triage_note_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';

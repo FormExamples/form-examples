@@ -1,6 +1,6 @@
 -- Dietitian employee information provided by the employer.
 
-CREATE TABLE dietitian (
+CREATE TABLE dietic_assessment.dietitian (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -21,47 +21,47 @@ CREATE TABLE dietitian (
 );
 
 CREATE TRIGGER trigger_dietitian_updated_at
-    BEFORE UPDATE ON dietitian
+    BEFORE UPDATE ON dietic_assessment.dietitian
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dietic_assessment.set_updated_at();
 
-COMMENT ON TABLE dietitian IS
+COMMENT ON TABLE dietic_assessment.dietitian IS
     'Dietitian, i.e. the registered practitioner who conducts the dietetic assessment.';
-COMMENT ON COLUMN dietitian.id IS
+COMMENT ON COLUMN dietic_assessment.dietitian.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dietitian.created_at IS
+COMMENT ON COLUMN dietic_assessment.dietitian.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN dietitian.updated_at IS
+COMMENT ON COLUMN dietic_assessment.dietitian.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN dietitian.deleted_at IS
+COMMENT ON COLUMN dietic_assessment.dietitian.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN dietitian.name IS
+COMMENT ON COLUMN dietic_assessment.dietitian.name IS
     'Name.';
-COMMENT ON COLUMN dietitian.email IS
+COMMENT ON COLUMN dietic_assessment.dietitian.email IS
     'Email address.';
-COMMENT ON COLUMN dietitian.phone IS
+COMMENT ON COLUMN dietic_assessment.dietitian.phone IS
     'Phone number.';
-COMMENT ON COLUMN dietitian.postal_address_as_full_text IS
+COMMENT ON COLUMN dietic_assessment.dietitian.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN dietitian.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN dietic_assessment.dietitian.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN dietitian.postcode IS
+COMMENT ON COLUMN dietic_assessment.dietitian.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN dietitian.role IS
+COMMENT ON COLUMN dietic_assessment.dietitian.role IS
     'Dietitian role, i.e. the job role the practitioner holds.';
-COMMENT ON COLUMN dietitian.specialty IS
+COMMENT ON COLUMN dietic_assessment.dietitian.specialty IS
     'Dietetic specialty, i.e. the clinical area the practitioner works in.';
-COMMENT ON COLUMN dietitian.registration_body IS
+COMMENT ON COLUMN dietic_assessment.dietitian.registration_body IS
     'Professional registration body, such as HCPC for a registered dietitian in the United Kingdom.';
-COMMENT ON COLUMN dietitian.registration_number IS
+COMMENT ON COLUMN dietic_assessment.dietitian.registration_number IS
     'Professional registration number issued by the registration body.';
-COMMENT ON COLUMN dietitian.employer IS
+COMMENT ON COLUMN dietic_assessment.dietitian.employer IS
     'Employer, such as the NHS trust, health board, or private practice.';
-COMMENT ON COLUMN dietitian.united_kingdom_nhs_number IS
+COMMENT ON COLUMN dietic_assessment.dietitian.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX dietitian_index_gto
-    ON dietitian
+    ON dietic_assessment.dietitian
     USING GIN ((
         name
     ) gin_trgm_ops);

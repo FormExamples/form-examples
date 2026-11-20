@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (17):
+-- Source files (18):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -40,12 +41,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS outpatient_outcome;
+
+COMMENT ON SCHEMA outpatient_outcome IS
+    'Namespace for the Outpatient Outcome Report form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION outpatient_outcome.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -53,7 +70,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION outpatient_outcome.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -66,7 +83,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE outpatient_outcome.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -89,54 +106,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON outpatient_outcome.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE outpatient_outcome.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN outpatient_outcome.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN outpatient_outcome.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN outpatient_outcome.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN outpatient_outcome.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN outpatient_outcome.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN outpatient_outcome.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN outpatient_outcome.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN outpatient_outcome.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN outpatient_outcome.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN outpatient_outcome.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN outpatient_outcome.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN outpatient_outcome.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN outpatient_outcome.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN outpatient_outcome.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN outpatient_outcome.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON outpatient_outcome.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN outpatient_outcome.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -149,7 +166,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE outpatient_outcome.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -168,43 +185,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON outpatient_outcome.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE outpatient_outcome.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN outpatient_outcome.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN outpatient_outcome.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN outpatient_outcome.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN outpatient_outcome.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN outpatient_outcome.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN outpatient_outcome.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN outpatient_outcome.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN outpatient_outcome.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN outpatient_outcome.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN outpatient_outcome.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN outpatient_outcome.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN outpatient_outcome.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON outpatient_outcome.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -217,37 +234,37 @@ CREATE INDEX clinician_index_gto
 -- BEGIN 04_create_table_outpatient_outcome.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome (
+CREATE TABLE outpatient_outcome.outpatient_outcome (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.patient(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_updated_at
-    BEFORE UPDATE ON outpatient_outcome
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome IS
     'Top-level assessment instance for outpatient-outcome-report. Parent entity for domain-specific sections and the grading result.';
-COMMENT ON COLUMN outpatient_outcome.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome.patient_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN outpatient_outcome.status IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
 -- ========================================================================
@@ -258,18 +275,18 @@ COMMENT ON COLUMN outpatient_outcome.status IS
 -- BEGIN 05_create_table_outpatient_outcome_encounter.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_encounter (
+CREATE TABLE outpatient_outcome.outpatient_outcome_encounter (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     clinic_date DATE,
     specialty VARCHAR(100) NOT NULL DEFAULT '',
-    clinician_id UUID REFERENCES clinician(id) ON DELETE SET NULL,
+    clinician_id UUID REFERENCES outpatient_outcome.clinician(id) ON DELETE SET NULL,
     modality VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (modality IN ('in_person', 'telephone', 'video', '')),
     appointment_type VARCHAR(20) NOT NULL DEFAULT ''
@@ -277,31 +294,31 @@ CREATE TABLE outpatient_outcome_encounter (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_encounter_updated_at
-    BEFORE UPDATE ON outpatient_outcome_encounter
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_encounter
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_encounter IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_encounter IS
     'Outpatient encounter metadata: clinic date, specialty, clinician, modality, appointment type.';
-COMMENT ON COLUMN outpatient_outcome_encounter.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_encounter.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_encounter.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_encounter.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_encounter.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_encounter.clinic_date IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.clinic_date IS
     'Date of the outpatient clinic attendance.';
-COMMENT ON COLUMN outpatient_outcome_encounter.specialty IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.specialty IS
     'Clinical specialty (e.g., cardiology, orthopaedics).';
-COMMENT ON COLUMN outpatient_outcome_encounter.clinician_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.clinician_id IS
     'Foreign key to the clinician who saw the patient.';
-COMMENT ON COLUMN outpatient_outcome_encounter.modality IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.modality IS
     'Consultation modality: in_person, telephone, video, or empty.';
-COMMENT ON COLUMN outpatient_outcome_encounter.appointment_type IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_encounter.appointment_type IS
     'Appointment type: new, follow_up, pifu (patient initiated follow up), or empty.';
 
 -- ========================================================================
@@ -312,14 +329,14 @@ COMMENT ON COLUMN outpatient_outcome_encounter.appointment_type IS
 -- BEGIN 06_create_table_outpatient_outcome_operational.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_operational (
+CREATE TABLE outpatient_outcome.outpatient_outcome_operational (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     referral_date DATE,
     appointment_date DATE,
@@ -340,31 +357,31 @@ CREATE TABLE outpatient_outcome_operational (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_operational_updated_at
-    BEFORE UPDATE ON outpatient_outcome_operational
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_operational
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_operational IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_operational IS
     'Operational efficiency data: referral-to-appointment wait time vs service target, NHS Attendance Outcome code.';
-COMMENT ON COLUMN outpatient_outcome_operational.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_operational.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_operational.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_operational.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_operational.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_operational.referral_date IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.referral_date IS
     'Date the patient was referred to the outpatient service.';
-COMMENT ON COLUMN outpatient_outcome_operational.appointment_date IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.appointment_date IS
     'Date of the appointment the patient attended (or was booked for).';
-COMMENT ON COLUMN outpatient_outcome_operational.wait_time_days IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.wait_time_days IS
     'Days between referral and appointment; null if unknown.';
-COMMENT ON COLUMN outpatient_outcome_operational.service_target_days IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.service_target_days IS
     'Service-level-agreement target wait time in days; null if not set.';
-COMMENT ON COLUMN outpatient_outcome_operational.nhs_attendance_outcome IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_operational.nhs_attendance_outcome IS
     'NHS Data Dictionary Attendance Outcome classification.';
 
 -- ========================================================================
@@ -375,14 +392,14 @@ COMMENT ON COLUMN outpatient_outcome_operational.nhs_attendance_outcome IS
 -- BEGIN 07_create_table_outpatient_outcome_clinical.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_clinical (
+CREATE TABLE outpatient_outcome.outpatient_outcome_clinical (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     presenting_complaint TEXT NOT NULL DEFAULT '',
     diagnosis TEXT NOT NULL DEFAULT '',
@@ -399,29 +416,29 @@ CREATE TABLE outpatient_outcome_clinical (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_clinical_updated_at
-    BEFORE UPDATE ON outpatient_outcome_clinical
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_clinical
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_clinical IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_clinical IS
     'Clinician-rated clinical outcome for this encounter: presenting complaint, diagnosis, treatment, and five-level outcome classification.';
-COMMENT ON COLUMN outpatient_outcome_clinical.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_clinical.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_clinical.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_clinical.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_clinical.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_clinical.presenting_complaint IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.presenting_complaint IS
     'Presenting complaint at the outpatient encounter.';
-COMMENT ON COLUMN outpatient_outcome_clinical.diagnosis IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.diagnosis IS
     'Diagnosis confirmed or updated at this encounter.';
-COMMENT ON COLUMN outpatient_outcome_clinical.treatment_delivered IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.treatment_delivered IS
     'Treatment, procedure, or intervention delivered at this encounter.';
-COMMENT ON COLUMN outpatient_outcome_clinical.outcome_classification IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_clinical.outcome_classification IS
     'Clinician-rated outcome: resolved, improved, unchanged, worsened, died, or empty.';
 
 -- ========================================================================
@@ -432,14 +449,14 @@ COMMENT ON COLUMN outpatient_outcome_clinical.outcome_classification IS
 -- BEGIN 08_create_table_outpatient_outcome_prom_eq5d5l.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_prom_eq5d5l (
+CREATE TABLE outpatient_outcome.outpatient_outcome_prom_eq5d5l (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     -- Each dimension is 1 (no problems) to 5 (extreme problems); null if unanswered.
     before_mobility SMALLINT CHECK (before_mobility BETWEEN 1 AND 5),
@@ -458,45 +475,45 @@ CREATE TABLE outpatient_outcome_prom_eq5d5l (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_prom_eq5d5l_updated_at
-    BEFORE UPDATE ON outpatient_outcome_prom_eq5d5l
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_prom_eq5d5l
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_prom_eq5d5l IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_prom_eq5d5l IS
     'EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_mobility IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_mobility IS
     'EQ-5D-5L mobility dimension before treatment (1 = no problems … 5 = extreme).';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_self_care IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_self_care IS
     'EQ-5D-5L self-care dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_usual_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_usual_activities IS
     'EQ-5D-5L usual-activities dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_pain_discomfort IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_pain_discomfort IS
     'EQ-5D-5L pain/discomfort dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_anxiety_depression IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_anxiety_depression IS
     'EQ-5D-5L anxiety/depression dimension before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.before_vas IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.before_vas IS
     'EQ VAS health-rating 0-100 before treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_mobility IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_mobility IS
     'EQ-5D-5L mobility dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_self_care IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_self_care IS
     'EQ-5D-5L self-care dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_usual_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_usual_activities IS
     'EQ-5D-5L usual-activities dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_pain_discomfort IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_pain_discomfort IS
     'EQ-5D-5L pain/discomfort dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_anxiety_depression IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_anxiety_depression IS
     'EQ-5D-5L anxiety/depression dimension after treatment.';
-COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_vas IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_eq5d5l.after_vas IS
     'EQ VAS health-rating 0-100 after treatment.';
 
 -- ========================================================================
@@ -507,14 +524,14 @@ COMMENT ON COLUMN outpatient_outcome_prom_eq5d5l.after_vas IS
 -- BEGIN 09_create_table_outpatient_outcome_prom_grc.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_prom_grc (
+CREATE TABLE outpatient_outcome.outpatient_outcome_prom_grc (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     -- -3 = much worse, 0 = unchanged, +3 = much better
     global_rating_of_change SMALLINT CHECK (global_rating_of_change BETWEEN -3 AND 3),
@@ -523,25 +540,25 @@ CREATE TABLE outpatient_outcome_prom_grc (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_prom_grc_updated_at
-    BEFORE UPDATE ON outpatient_outcome_prom_grc
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_prom_grc
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_prom_grc IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_prom_grc IS
     'Global Rating of Change (7-point -3..+3) and self-rated health (5-level) PROM responses. Unlicensed, public-domain instruments.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.global_rating_of_change IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.global_rating_of_change IS
     'GRC 7-point Likert: -3 much worse, 0 unchanged, +3 much better.';
-COMMENT ON COLUMN outpatient_outcome_prom_grc.self_rated_health IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_grc.self_rated_health IS
     'Self-rated health: excellent, very_good, good, fair, poor, or empty.';
 
 -- ========================================================================
@@ -552,14 +569,14 @@ COMMENT ON COLUMN outpatient_outcome_prom_grc.self_rated_health IS
 -- BEGIN 10_create_table_outpatient_outcome_prom_promis.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_prom_promis (
+CREATE TABLE outpatient_outcome.outpatient_outcome_prom_promis (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     -- 10 items, each Likert 1..5 (physical) or 1..5 (mental). Null when unanswered.
     -- Items 1-4 feed Global Physical Health (GPH); items 5-10 feed Global Mental Health (GMH).
@@ -580,45 +597,45 @@ CREATE TABLE outpatient_outcome_prom_promis (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_prom_promis_updated_at
-    BEFORE UPDATE ON outpatient_outcome_prom_promis
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_prom_promis
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_prom_promis IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_prom_promis IS
     'PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores. Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official IRT calibration tables.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item1_general_health IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item1_general_health IS
     'PROMIS item 1: general health (1 poor - 5 excellent).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item2_quality_of_life IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item2_quality_of_life IS
     'PROMIS item 2: quality of life (1 poor - 5 excellent).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item3_physical_health IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item3_physical_health IS
     'PROMIS item 3: physical health (1 poor - 5 excellent).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item4_mental_health IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item4_mental_health IS
     'PROMIS item 4: mental health (1 poor - 5 excellent).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item5_social_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item5_social_activities IS
     'PROMIS item 5: satisfaction with social activities.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item6_carry_out_physical IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item6_carry_out_physical IS
     'PROMIS item 6: ability to carry out physical activities.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item7_emotional_problems IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item7_emotional_problems IS
     'PROMIS item 7: how often bothered by emotional problems (reverse scored in UI).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item8_fatigue IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item8_fatigue IS
     'PROMIS item 8: fatigue (reverse scored).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item9_pain IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item9_pain IS
     'PROMIS item 9: pain 0-10 numeric rating (reverse scored).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.item10_everyday_activities IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.item10_everyday_activities IS
     'PROMIS item 10: ability to carry out everyday activities.';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.global_physical_health_t_score IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.global_physical_health_t_score IS
     'Derived Global Physical Health T-score (mean 50, SD 10).';
-COMMENT ON COLUMN outpatient_outcome_prom_promis.global_mental_health_t_score IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prom_promis.global_mental_health_t_score IS
     'Derived Global Mental Health T-score (mean 50, SD 10).';
 
 -- ========================================================================
@@ -629,14 +646,14 @@ COMMENT ON COLUMN outpatient_outcome_prom_promis.global_mental_health_t_score IS
 -- BEGIN 11_create_table_outpatient_outcome_prem_fft.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_prem_fft (
+CREATE TABLE outpatient_outcome.outpatient_outcome_prem_fft (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     fft_response VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (fft_response IN (
@@ -652,25 +669,25 @@ CREATE TABLE outpatient_outcome_prem_fft (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_prem_fft_updated_at
-    BEFORE UPDATE ON outpatient_outcome_prem_fft
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_prem_fft
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_prem_fft IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_prem_fft IS
     'NHS Friends and Family Test PREM response and free-text comment. Open Government Licence v3.0.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.fft_response IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.fft_response IS
     'FFT response: very_good, good, neither, poor, very_poor, dont_know, or empty.';
-COMMENT ON COLUMN outpatient_outcome_prem_fft.fft_comment IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_prem_fft.fft_comment IS
     'Free-text comment accompanying the FFT response.';
 
 -- ========================================================================
@@ -681,14 +698,14 @@ COMMENT ON COLUMN outpatient_outcome_prem_fft.fft_comment IS
 -- BEGIN 12_create_table_outpatient_outcome_followup.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_followup (
+CREATE TABLE outpatient_outcome.outpatient_outcome_followup (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     disposition VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (disposition IN (
@@ -704,29 +721,29 @@ CREATE TABLE outpatient_outcome_followup (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_followup_updated_at
-    BEFORE UPDATE ON outpatient_outcome_followup
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_followup
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_followup IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_followup IS
     'Follow-up plan: disposition, next appointment date, onward referral, and clinician notes.';
-COMMENT ON COLUMN outpatient_outcome_followup.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_followup.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_followup.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_followup.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_followup.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_followup.disposition IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.disposition IS
     'Disposition: discharge, pifu (patient-initiated follow-up), follow_up_booked, onward_referral, or empty.';
-COMMENT ON COLUMN outpatient_outcome_followup.next_appointment_date IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.next_appointment_date IS
     'Date of the next booked appointment, if any.';
-COMMENT ON COLUMN outpatient_outcome_followup.onward_referral_specialty IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.onward_referral_specialty IS
     'Specialty referred to, if disposition is onward_referral.';
-COMMENT ON COLUMN outpatient_outcome_followup.followup_notes IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_followup.followup_notes IS
     'Free-text clinician notes about the follow-up plan.';
 
 -- ========================================================================
@@ -737,45 +754,45 @@ COMMENT ON COLUMN outpatient_outcome_followup.followup_notes IS
 -- BEGIN 13_create_table_outpatient_outcome_signoff.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_signoff (
+CREATE TABLE outpatient_outcome.outpatient_outcome_signoff (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
-    reporting_clinician_id UUID REFERENCES clinician(id) ON DELETE SET NULL,
+    reporting_clinician_id UUID REFERENCES outpatient_outcome.clinician(id) ON DELETE SET NULL,
     reporting_clinician_name VARCHAR(255) NOT NULL DEFAULT '',
     reporting_clinician_role VARCHAR(100) NOT NULL DEFAULT '',
     signed_off_at TIMESTAMPTZ
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_signoff_updated_at
-    BEFORE UPDATE ON outpatient_outcome_signoff
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_signoff
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_signoff IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_signoff IS
     'Reporting clinician sign-off: who completed the report and when.';
-COMMENT ON COLUMN outpatient_outcome_signoff.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_signoff.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_signoff.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_signoff.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_signoff.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_signoff.reporting_clinician_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.reporting_clinician_id IS
     'Foreign key to the clinician who signed off; null if not linked.';
-COMMENT ON COLUMN outpatient_outcome_signoff.reporting_clinician_name IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.reporting_clinician_name IS
     'Typed name of the reporting clinician (redundant with clinician.name for audit).';
-COMMENT ON COLUMN outpatient_outcome_signoff.reporting_clinician_role IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.reporting_clinician_role IS
     'Role of the reporting clinician at time of sign-off.';
-COMMENT ON COLUMN outpatient_outcome_signoff.signed_off_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_signoff.signed_off_at IS
     'Timestamp of sign-off; null when the report is still a draft.';
 
 -- ========================================================================
@@ -786,14 +803,14 @@ COMMENT ON COLUMN outpatient_outcome_signoff.signed_off_at IS
 -- BEGIN 14_create_table_outpatient_outcome_grade.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_grade (
+CREATE TABLE outpatient_outcome.outpatient_outcome_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     outpatient_outcome_id UUID NOT NULL UNIQUE
-        REFERENCES outpatient_outcome(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome(id) ON DELETE CASCADE,
 
     overall_grade CHAR(1) NOT NULL DEFAULT ''
         CHECK (overall_grade IN ('A', 'B', 'C', 'D', 'E', '')),
@@ -811,36 +828,36 @@ CREATE TABLE outpatient_outcome_grade (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_grade_updated_at
-    BEFORE UPDATE ON outpatient_outcome_grade
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_grade IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_grade IS
     'Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four).';
-COMMENT ON COLUMN outpatient_outcome_grade.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_grade.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_grade.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_grade.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_grade.outpatient_outcome_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.outpatient_outcome_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN outpatient_outcome_grade.overall_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.overall_grade IS
     'Overall OOCG grade A (best) - E (worst); equals the worst per-domain grade.';
-COMMENT ON COLUMN outpatient_outcome_grade.clinical_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.clinical_grade IS
     'Clinical-domain grade A-E (A=Resolved, B=Improved, C=Unchanged, D=Worsened, E=Died).';
-COMMENT ON COLUMN outpatient_outcome_grade.prom_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.prom_grade IS
     'PROM-domain composite grade A-E over EQ-5D-5L, GRC, and PROMIS.';
-COMMENT ON COLUMN outpatient_outcome_grade.prem_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.prem_grade IS
     'PREM-domain grade A-E from FFT response.';
-COMMENT ON COLUMN outpatient_outcome_grade.operational_grade IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.operational_grade IS
     'Operational-domain grade A-E from attendance outcome + wait vs target + modality.';
-COMMENT ON COLUMN outpatient_outcome_grade.result_notes IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.result_notes IS
     'Free-text clinician notes accompanying the grading result.';
 
-COMMENT ON COLUMN outpatient_outcome_grade.graded_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade.graded_at IS
     'Graded at.';
 
 -- ========================================================================
@@ -851,14 +868,14 @@ COMMENT ON COLUMN outpatient_outcome_grade.graded_at IS
 -- BEGIN 15_create_table_outpatient_outcome_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_grade_rule (
+CREATE TABLE outpatient_outcome.outpatient_outcome_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -868,29 +885,29 @@ CREATE TABLE outpatient_outcome_grade_rule (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_grade_rule_updated_at
-    BEFORE UPDATE ON outpatient_outcome_grade_rule
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
-COMMENT ON TABLE outpatient_outcome_grade_rule IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_grade_rule IS
     'Individual OOCG rules that evaluated to true during grading.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.grade_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.rule_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.rule_id IS
     'Stable identifier of the rule that fired.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.category IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.category IS
     'Category / domain of the rule (clinical, prom, prem, operational).';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.description IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN outpatient_outcome_grade_rule.severity_level IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_rule.severity_level IS
     'Severity of the finding: low, medium, high, critical, or empty for non-severity rules.';
 
 -- ========================================================================
@@ -901,14 +918,14 @@ COMMENT ON COLUMN outpatient_outcome_grade_rule.severity_level IS
 -- BEGIN 16_create_table_outpatient_outcome_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE outpatient_outcome_grade_flag (
+CREATE TABLE outpatient_outcome.outpatient_outcome_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     grade_id UUID NOT NULL
-        REFERENCES outpatient_outcome_grade(id) ON DELETE CASCADE,
+        REFERENCES outpatient_outcome.outpatient_outcome_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
@@ -918,32 +935,32 @@ CREATE TABLE outpatient_outcome_grade_flag (
 );
 
 CREATE TRIGGER trigger_outpatient_outcome_grade_flag_updated_at
-    BEFORE UPDATE ON outpatient_outcome_grade_flag
+    BEFORE UPDATE ON outpatient_outcome.outpatient_outcome_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION outpatient_outcome.set_updated_at();
 
 CREATE UNIQUE INDEX idx_grade_flag_unique
-    ON outpatient_outcome_grade_flag (grade_id, flag_id);
+    ON outpatient_outcome.outpatient_outcome_grade_flag (grade_id, flag_id);
 
-COMMENT ON TABLE outpatient_outcome_grade_flag IS
+COMMENT ON TABLE outpatient_outcome.outpatient_outcome_grade_flag IS
     'Safety / data-quality flags raised alongside the OOCG grading result (DNA, PROM worsening, FFT Poor/Very Poor, wait-over-target, Worsened/Died, missing data).';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.created_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.updated_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.updated_at IS
     'Timestamp when this row was updated most-recently.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.deleted_at IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.deleted_at IS
     'Timestamp when this row was deleted i.e. soft-removed.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.grade_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.grade_id IS
     'Foreign key to the parent grading result.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.flag_id IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.flag_id IS
     'Stable identifier of the flag.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.category IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.category IS
     'Category / domain of the flag.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.description IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.description IS
     'Human-readable description of the flag.';
-COMMENT ON COLUMN outpatient_outcome_grade_flag.priority IS
+COMMENT ON COLUMN outpatient_outcome.outpatient_outcome_grade_flag.priority IS
     'Priority: low, medium, high, critical.';
 
 -- ========================================================================

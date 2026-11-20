@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (4):
+-- Source files (5):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_hospital_dashboard_metrics.sql
 --   - 03_create_table_hospital_dashboard_metric_value.sql
@@ -24,12 +25,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS hospital_dashboard_metrics;
+
+COMMENT ON SCHEMA hospital_dashboard_metrics IS
+    'Namespace for the Hospital Dashboard Metrics form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION hospital_dashboard_metrics.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -37,7 +54,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION hospital_dashboard_metrics.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -50,7 +67,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- One row per hospital KPI reporting period (typically monthly).
 
-CREATE TABLE hospital_dashboard_metrics (
+CREATE TABLE hospital_dashboard_metrics.hospital_dashboard_metrics (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -68,33 +85,33 @@ CREATE TABLE hospital_dashboard_metrics (
 );
 
 CREATE TRIGGER trigger_hospital_dashboard_metrics_updated_at
-    BEFORE UPDATE ON hospital_dashboard_metrics
+    BEFORE UPDATE ON hospital_dashboard_metrics.hospital_dashboard_metrics
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_dashboard_metrics.set_updated_at();
 
-COMMENT ON TABLE hospital_dashboard_metrics IS
+COMMENT ON TABLE hospital_dashboard_metrics.hospital_dashboard_metrics IS
     'One hospital KPI reporting period: hospital/site, period month/year, prepared-by, and sign-off notes.';
-COMMENT ON COLUMN hospital_dashboard_metrics.id IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_dashboard_metrics.created_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_dashboard_metrics.updated_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_dashboard_metrics.deleted_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_dashboard_metrics.hospital_name IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.hospital_name IS
     'Name of the hospital or facility being reported on.';
-COMMENT ON COLUMN hospital_dashboard_metrics.period_month IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.period_month IS
     'Reporting period month, 1-12.';
-COMMENT ON COLUMN hospital_dashboard_metrics.period_year IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.period_year IS
     'Reporting period year.';
-COMMENT ON COLUMN hospital_dashboard_metrics.prepared_by_name IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.prepared_by_name IS
     'Name of the person who compiled this report.';
-COMMENT ON COLUMN hospital_dashboard_metrics.overall_notes IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.overall_notes IS
     'Free-text overall notes recorded at sign-off.';
-COMMENT ON COLUMN hospital_dashboard_metrics.status IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.status IS
     'Submission status: draft or submitted.';
-COMMENT ON COLUMN hospital_dashboard_metrics.signed_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metrics.signed_at IS
     'Timestamp the preparer signed off this report.';
 
 -- ========================================================================
@@ -111,13 +128,13 @@ COMMENT ON COLUMN hospital_dashboard_metrics.signed_at IS
 -- normalised child table is used instead of one wide column per metric,
 -- since 67 metrics would need well over 130 flat columns (value + notes).
 
-CREATE TABLE hospital_dashboard_metric_value (
+CREATE TABLE hospital_dashboard_metrics.hospital_dashboard_metric_value (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    hospital_dashboard_metrics_id UUID NOT NULL REFERENCES hospital_dashboard_metrics(id) ON DELETE CASCADE,
+    hospital_dashboard_metrics_id UUID NOT NULL REFERENCES hospital_dashboard_metrics.hospital_dashboard_metrics(id) ON DELETE CASCADE,
     metric_code VARCHAR(10) NOT NULL,
     category_number INTEGER NOT NULL CHECK (category_number BETWEEN 1 AND 14),
     category_title VARCHAR(255) NOT NULL DEFAULT '',
@@ -129,39 +146,39 @@ CREATE TABLE hospital_dashboard_metric_value (
 );
 
 CREATE TRIGGER trigger_hospital_dashboard_metric_value_updated_at
-    BEFORE UPDATE ON hospital_dashboard_metric_value
+    BEFORE UPDATE ON hospital_dashboard_metrics.hospital_dashboard_metric_value
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hospital_dashboard_metrics.set_updated_at();
 
-COMMENT ON TABLE hospital_dashboard_metric_value IS
+COMMENT ON TABLE hospital_dashboard_metrics.hospital_dashboard_metric_value IS
     'One recorded metric (of 67) within a hospital dashboard reporting period.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.id IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.created_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.updated_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.deleted_at IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.hospital_dashboard_metrics_id IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.hospital_dashboard_metrics_id IS
     'Foreign key to the parent reporting period.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.metric_code IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.metric_code IS
     'Stable dotted metric identifier from spec/index.md, e.g. 1.1, 4.3, 14.6.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.category_number IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.category_number IS
     'Top-level category number (1-14) this metric belongs to.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.category_title IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.category_title IS
     'Top-level category title, mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.metric_text IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.metric_text IS
     'Full metric name, mirrored from the catalogue for reporting convenience.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.metric_value IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.metric_value IS
     'Recorded numeric value for this metric; unit is implied by the metric name. NULL if not yet recorded.';
-COMMENT ON COLUMN hospital_dashboard_metric_value.notes IS
+COMMENT ON COLUMN hospital_dashboard_metrics.hospital_dashboard_metric_value.notes IS
     'Optional free-text note about this metric value.';
 
 CREATE INDEX hospital_dashboard_metric_value_metrics_id_idx
-    ON hospital_dashboard_metric_value (hospital_dashboard_metrics_id);
+    ON hospital_dashboard_metrics.hospital_dashboard_metric_value (hospital_dashboard_metrics_id);
 CREATE INDEX hospital_dashboard_metric_value_category_idx
-    ON hospital_dashboard_metric_value (category_number);
+    ON hospital_dashboard_metrics.hospital_dashboard_metric_value (category_number);
 
 -- ========================================================================
 -- END 03_create_table_hospital_dashboard_metric_value.sql

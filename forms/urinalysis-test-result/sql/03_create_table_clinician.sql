@@ -1,6 +1,6 @@
 -- Reporting clinician (biomedical scientist / microbiologist / reporting clinician) information.
 
-CREATE TABLE clinician (
+CREATE TABLE urinalysis_test_result.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,43 +19,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON urinalysis_test_result.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_result.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE urinalysis_test_result.clinician IS
     'Reporting clinician (biomedical scientist, microbiologist, reporting clinician, or GP) who authors and signs the urinalysis result report.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.role IS
     'Reporting clinician role: biomedical-scientist, microbiologist, reporting-clinician, gp, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.registration_body IS
     'Clinician registration body: GMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN urinalysis_test_result.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON urinalysis_test_result.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);

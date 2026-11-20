@@ -1,7 +1,7 @@
 -- Reporting clinician (optometrist / ophthalmologist) who performs the
 -- cataract diagnostic evaluation.
 
-CREATE TABLE clinician (
+CREATE TABLE cataract_diagnostic_evaluation.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -21,45 +21,45 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cataract_diagnostic_evaluation.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cataract_diagnostic_evaluation.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cataract_diagnostic_evaluation.clinician IS
     'Reporting clinician (optometrist or ophthalmologist) who performs and signs the cataract diagnostic evaluation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.role IS
     'Reporting clinician role: optometrist, ophthalmologist, orthoptist, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.registration_body IS
     'Clinician registration body: GOC (optometrist), GMC (ophthalmologist), HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.site_name IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.site_name IS
     'Clinic or hospital site name where the evaluation is performed.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cataract_diagnostic_evaluation.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON cataract_diagnostic_evaluation.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);

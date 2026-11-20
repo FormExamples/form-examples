@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS ergonomic_assessment;
+
+COMMENT ON SCHEMA ergonomic_assessment IS
+    'Namespace for the Ergonomic Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION ergonomic_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION ergonomic_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE ergonomic_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,56 +98,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON ergonomic_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ergonomic_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE ergonomic_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN ergonomic_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN ergonomic_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN ergonomic_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN ergonomic_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN ergonomic_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN ergonomic_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ergonomic_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN ergonomic_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN ergonomic_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN ergonomic_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN ergonomic_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN ergonomic_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN ergonomic_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN ergonomic_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON ergonomic_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN ergonomic_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -143,7 +160,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE ergonomic_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -162,46 +179,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON ergonomic_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION ergonomic_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE ergonomic_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON ergonomic_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -212,39 +229,39 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_ergonomic_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE ergonomic_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- Foreign key to the patient this assessment belongs to
-    patient_id          UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id          UUID NOT NULL REFERENCES ergonomic_assessment.patient(id) ON DELETE CASCADE,
     -- Assessment status tracking
     status              TEXT NOT NULL DEFAULT 'in_progress'
                         CHECK (status IN ('in_progress', 'completed', 'reviewed'))
 );
 
 -- Index for the most common query: all assessments for a patient
-CREATE INDEX index_assessment_patient_id ON assessment(patient_id);
+CREATE INDEX index_assessment_patient_id ON ergonomic_assessment.assessment(patient_id);
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON ergonomic_assessment.assessment
+    FOR EACH ROW EXECUTE FUNCTION ergonomic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE ergonomic_assessment.assessment IS
     'A single ergonomic assessment visit. Child tables hold section-specific data.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.patient_id IS
     'FK to patient. One patient may have many assessments.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.status IS
     'Workflow status: in_progress (patient filling in), completed (submitted), reviewed (clinician signed off).';
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -255,7 +272,7 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_reba_rule.sql
 -- ========================================================================
 
-CREATE TABLE reba_rule (
+CREATE TABLE ergonomic_assessment.reba_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -270,27 +287,27 @@ CREATE TABLE reba_rule (
     score           INTEGER NOT NULL CHECK (score >= 0 AND score <= 15)
 );
 
-COMMENT ON TABLE reba_rule IS
+COMMENT ON TABLE ergonomic_assessment.reba_rule IS
     'Reference table of REBA scoring rules. Each rule has an ID, system, description, and score contribution.';
-COMMENT ON COLUMN reba_rule.code IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN reba_rule.system IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.system IS
     'Body system or assessment category, e.g. Neck, Trunk, Workstation, Repetition, Manual Handling.';
-COMMENT ON COLUMN reba_rule.description IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.description IS
     'Human-readable description of the condition this rule detects.';
-COMMENT ON COLUMN reba_rule.score IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.score IS
     'REBA score contribution when the rule fires (0-15).';
 
-COMMENT ON COLUMN reba_rule.id IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN reba_rule.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN reba_rule.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN reba_rule.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.reba_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 -- ─── Seed REBA rules ─────────────────────────────────────
-INSERT INTO reba_rule (code, system, description, score) VALUES
+INSERT INTO ergonomic_assessment.reba_rule (code, system, description, score) VALUES
     ('NECK-001', 'Neck', 'Neck flexed 0-20 degrees', 1),
     ('NECK-002', 'Neck', 'Neck flexed >20 degrees', 2),
     ('NECK-003', 'Neck', 'Neck extended', 2),
@@ -336,12 +353,12 @@ INSERT INTO reba_rule (code, system, description, score) VALUES
 -- BEGIN 06_create_table_ergonomic_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE ergonomic_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    assessment_id           UUID NOT NULL UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
+    assessment_id           UUID NOT NULL UNIQUE REFERENCES ergonomic_assessment.assessment(id) ON DELETE CASCADE,
     -- Computed REBA score (1-15)
     reba_score              INTEGER NOT NULL CHECK (reba_score >= 1 AND reba_score <= 15),
     -- Risk level derived from REBA score
@@ -362,31 +379,31 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON ergonomic_assessment.grade
+    FOR EACH ROW EXECUTE FUNCTION ergonomic_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE ergonomic_assessment.grade IS
     'Computed REBA grading result for an assessment. Includes optional clinician override.';
-COMMENT ON COLUMN grade.reba_score IS
+COMMENT ON COLUMN ergonomic_assessment.grade.reba_score IS
     'Computed REBA score (1-15), sum of fired rule scores clamped to range.';
-COMMENT ON COLUMN grade.risk_level IS
+COMMENT ON COLUMN ergonomic_assessment.grade.risk_level IS
     'Risk level derived from REBA score: Negligible, Low, Medium, High, or Very high risk.';
-COMMENT ON COLUMN grade.reba_score_override IS
+COMMENT ON COLUMN ergonomic_assessment.grade.reba_score_override IS
     'Clinician override of the computed REBA score. NULL if no override.';
-COMMENT ON COLUMN grade.override_reason IS
+COMMENT ON COLUMN ergonomic_assessment.grade.override_reason IS
     'Required reason text when reba_score_override is set.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN ergonomic_assessment.grade.graded_at IS
     'Timestamp when the REBA grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN ergonomic_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN ergonomic_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -397,14 +414,14 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 07_create_table_ergonomic_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE ergonomic_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES ergonomic_assessment.grade(id) ON DELETE CASCADE,
     -- The rule that fired
-    rule_id             TEXT NOT NULL REFERENCES reba_rule(code),
+    rule_id             TEXT NOT NULL REFERENCES ergonomic_assessment.reba_rule(code),
     -- Denormalized fields from the rule at time of grading
     system              TEXT NOT NULL,
     description         TEXT NOT NULL,
@@ -413,28 +430,28 @@ CREATE TABLE grading_fired_rule (
     CONSTRAINT uq_grading_fired_rule UNIQUE (grade_id, rule_id)
 );
 
-CREATE INDEX index_grading_fired_rule_result ON grading_fired_rule(grade_id);
+CREATE INDEX index_grading_fired_rule_result ON ergonomic_assessment.grading_fired_rule(grade_id);
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE ergonomic_assessment.grading_fired_rule IS
     'Denormalized record of each REBA rule that fired during grading. Preserves exact context for clinical audit.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.grade_id IS
     'FK to the grading result this fired rule belongs to.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.rule_id IS
     'FK to the REBA rule that fired.';
-COMMENT ON COLUMN grading_fired_rule.system IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.system IS
     'Body system or category (denormalized from reba_rule at grading time).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.description IS
     'Rule description (denormalized from reba_rule at grading time).';
-COMMENT ON COLUMN grading_fired_rule.score IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.score IS
     'Score contribution (denormalized from reba_rule at grading time).';
 
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -445,12 +462,12 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 08_create_table_ergonomic_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE ergonomic_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES ergonomic_assessment.grade(id) ON DELETE CASCADE,
     -- Flag identifier (e.g. FLAG-POSTURE-001, FLAG-RSI-001)
     flag_id             TEXT NOT NULL,
     -- Category of the flag
@@ -464,28 +481,28 @@ CREATE TABLE grading_additional_flag (
     CONSTRAINT uq_grading_additional_flag UNIQUE (grade_id, flag_id)
 );
 
-CREATE INDEX index_grading_additional_flag_result ON grading_additional_flag(grade_id);
+CREATE INDEX index_grading_additional_flag_result ON ergonomic_assessment.grading_additional_flag(grade_id);
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE ergonomic_assessment.grading_additional_flag IS
     'Additional safety flags raised during grading, independent of REBA score. Actionable alerts for clinician review.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.flag_id IS
     'Flag identifier, e.g. FLAG-POSTURE-001, FLAG-RSI-001, FLAG-MANUAL-001.';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.category IS
     'Category of the flag, e.g. Posture, Medical History, Manual Handling, Symptoms, Psychosocial.';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.message IS
     'Human-readable alert message describing the flagged condition.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.priority IS
     'Flag priority: high (urgent action), medium (review needed), low (informational).';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -23,11 +24,27 @@
 -- pgcrypto provides gen_random_uuid() for UUID primary key generation.
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- pg_trgm provides trigram operators used by free-text search GIN indexes.
+-- pg_trgm provides trigram matching for the GIN name-search indexes.
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 -- ========================================================================
 -- END 00_create_extensions.sql
+-- ========================================================================
+
+-- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_standard_certificate_of_death;
+
+COMMENT ON SCHEMA united_states_standard_certificate_of_death IS
+    'Namespace for the US Standard Certificate of Death (NCHS 2003 revision) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
 -- ========================================================================
 
 -- ========================================================================
@@ -36,7 +53,7 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_standard_certificate_of_death.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_standard_certificate_of_death.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Patient demographic information for the deceased whose cause of death
 -- this death certificate records.
 
-CREATE TABLE patient (
+CREATE TABLE united_states_standard_certificate_of_death.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -76,41 +93,41 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.patient IS
     'Patient demographic information for the deceased whose cause of death this death certificate records.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.name IS
     'Full name of the deceased.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.birth_date IS
     'Date of birth of the deceased.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.sex IS
     'Sex recorded for the deceased: female, male, other, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON united_states_standard_certificate_of_death.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -124,7 +141,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information for the medical certifier who completes the
 -- US Standard Certificate of Death.
 
-CREATE TABLE clinician (
+CREATE TABLE united_states_standard_certificate_of_death.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -142,41 +159,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.clinician IS
     'Clinician information for the medical certifier (physician, medical examiner, or coroner) who completes the cause-of-death section of the US Standard Certificate of Death.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.name IS
     'Certifier full name as licensed by the state.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.role IS
     'Role of the certifier: attending-physician, pronouncing-physician, medical-examiner, coroner, funeral-director, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.registration_body IS
     'Licensing body: state-medical-board, state-funeral-board, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician.registration_number IS
     'Professional registration number (state license number).';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON united_states_standard_certificate_of_death.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -194,13 +211,13 @@ CREATE INDEX clinician_name_trgm_idx
 -- audit trail of fired rules, and the flagged issues live in child tables.
 -- Documentation support only: the registering state agency decides.
 
-CREATE TABLE united_states_standard_certificate_of_death (
+CREATE TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES united_states_standard_certificate_of_death.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES united_states_standard_certificate_of_death.clinician(id) ON DELETE RESTRICT,
     state CHAR(2) NOT NULL DEFAULT '' CHECK (state = '' OR state ~ '^[A-Z]{2}$'),
     decedent_name TEXT NOT NULL DEFAULT '',
     sex VARCHAR(9) NOT NULL DEFAULT '' CHECK (sex IN ('female', 'male', 'unknown', '')),
@@ -256,132 +273,132 @@ CREATE TABLE united_states_standard_certificate_of_death (
 );
 
 CREATE INDEX usscd_patient_id_idx
-    ON united_states_standard_certificate_of_death (patient_id);
+    ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death (patient_id);
 CREATE INDEX usscd_clinician_id_idx
-    ON united_states_standard_certificate_of_death (clinician_id);
+    ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death (clinician_id);
 
 CREATE TRIGGER trigger_united_states_standard_certificate_of_death_updated_at
-    BEFORE UPDATE ON united_states_standard_certificate_of_death
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE united_states_standard_certificate_of_death IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death IS
     'Main US Standard Certificate of Death record (NCHS 2003 revision): decedent facts, the certifier''s Part I and Part II cause-of-death chain, manner of death, tobacco, pregnancy and injury items, medical examiner or coroner referral, the funeral director''s disposition, and the certified-copy order. Validity classification, fired rules and flags live in child tables.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.patient_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.patient_id IS
     'Foreign key to the decedent this certificate documents (restrict delete).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.clinician_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.clinician_id IS
     'Foreign key to the certifier (restrict delete); optional.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.state IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.state IS
     'Two-letter USPS code of the state (or territory) whose vital-records office registers the death; selects the STATE_RULES row.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.decedent_name IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.decedent_name IS
     'Legal name of the decedent as recorded on the certificate (item 1).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.sex IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.sex IS
     'Sex of the decedent (item 2): female, male, or unknown.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.date_of_birth IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.date_of_birth IS
     'Date of birth of the decedent (item 5).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.age_years IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.age_years IS
     'Age of the decedent at death in whole years (item 4); 0 for an infant under one year.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.marital_status IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.marital_status IS
     'Marital status at time of death (item 8).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.veteran_status IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.veteran_status IS
     'Whether the decedent ever served in the US Armed Forces (item 10).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.state_of_residence IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.state_of_residence IS
     'Two-letter USPS code of the decedent''s state of residence (item 14).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.place_of_death_type IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.place_of_death_type IS
     'Place of death type (item 20): inpatient, ER/outpatient, DOA, home, hospice, nursing home, or other.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.place_of_death_facility IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.place_of_death_facility IS
     'Name and address of the facility or location where death occurred or the body was found (items 20 to 26).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.date_of_death IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.date_of_death IS
     'Date of death, actual or presumed (item 29).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.time_of_death IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.time_of_death IS
     'Time of death, actual or presumed (item 30).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certifier_name IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certifier_name IS
     'Name of the person completing the cause-of-death section (item 32 / certifier block).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certifier_type IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certifier_type IS
     'Certifier type (item 32): certifying physician, pronouncing and certifying physician, medical examiner, coroner, or other.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certifier_license_number IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certifier_license_number IS
     'State license number of the certifier (item 33 / 34).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certification_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certification_date IS
     'Date the certifier signed the cause-of-death section (item 35).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.attended_deceased IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.attended_deceased IS
     'Whether the certifier attended the decedent during the last illness (yes/no).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.last_seen_alive_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.last_seen_alive_date IS
     'Date the certifier last saw the decedent alive.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ia_condition IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ia_condition IS
     'Part I line (a): the immediate cause, the final disease or condition resulting in death (required).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ia_interval IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ia_interval IS
     'Part I line (a): approximate interval between onset and death (item 32).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ib_condition IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ib_condition IS
     'Part I line (b): the condition, if any, giving rise to line (a) (due to, or as a consequence of).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ib_interval IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ib_interval IS
     'Part I line (b): approximate interval between onset and death (item 32).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ic_condition IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ic_condition IS
     'Part I line (c): the condition, if any, giving rise to line (b).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_ic_interval IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_ic_interval IS
     'Part I line (c): approximate interval between onset and death (item 32).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_id_condition IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_id_condition IS
     'Part I line (d): the underlying cause, the condition that initiated the chain, when four steps are needed.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.cause_id_interval IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.cause_id_interval IS
     'Part I line (d): approximate interval between onset and death (item 32).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.part_ii_conditions IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.part_ii_conditions IS
     'Part II: other significant conditions contributing to death but not resulting in the underlying cause given in Part I.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.autopsy_performed IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.autopsy_performed IS
     'Whether an autopsy was performed (item 34 / 35).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.autopsy_findings_available IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.autopsy_findings_available IS
     'Whether autopsy findings were available to complete the cause of death.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.manner_of_death IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.manner_of_death IS
     'Manner of death (item 41): natural, accident, suicide, homicide, pending investigation, or could not be determined.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.tobacco_use_contributed IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.tobacco_use_contributed IS
     'Did tobacco use contribute to death (item 37): yes, probably, no, or unknown.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.pregnancy_status IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.pregnancy_status IS
     'Pregnancy status (item 36), asked for females; not applicable for males and for females outside the age band.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_date IS
     'Date of injury (item 43).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_time IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_time IS
     'Time of injury (item 44).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_place IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_place IS
     'Place of injury, for example decedent''s home, construction site, or restaurant (item 45).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_at_work IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_at_work IS
     'Whether the injury occurred at work (item 46).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_location IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_location IS
     'Location of injury: state, city, street and number, apartment, zip code (item 47).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.injury_description IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.injury_description IS
     'Description of how the injury occurred (item 48): specific enough to code the external cause.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.transportation_injury_role IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.transportation_injury_role IS
     'Role of the decedent if a transportation injury (item 49).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.referred_to_medical_examiner IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.referred_to_medical_examiner IS
     'Whether the death was referred to the medical examiner or coroner.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.referral_reason IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.referral_reason IS
     'Medical-examiner or coroner referral criterion, if any; any listed circumstance other than none requires referral.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.funeral_director_name IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.funeral_director_name IS
     'Name of the funeral director or person acting as such (items 27 and 28).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.funeral_director_license_number IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.funeral_director_license_number IS
     'State license number of the funeral director.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.disposition_method IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.disposition_method IS
     'Method of disposition (item 19): burial, cremation, entombment, donation, removal from state, or other.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.disposition_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.disposition_date IS
     'Date of disposition (item 19).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.disposition_place IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.disposition_place IS
     'Place of disposition: name of cemetery, crematory, or other place (item 20).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.filed_date IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.filed_date IS
     'Date the certificate was filed with the local or state registrar.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certified_copies_requested IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certified_copies_requested IS
     'Number of certified copies ordered.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.requester_relationship IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.requester_relationship IS
     'Relationship of the person ordering certified copies to the decedent; most states restrict who may obtain them.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.requester_identity_verified IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.requester_identity_verified IS
     'Whether the requester''s identity and eligibility were verified before certified copies were issued.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.fee_paid_in_usd IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.fee_paid_in_usd IS
     'Total fee paid in US dollars for the certified copies.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death.certifier_note IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death.certifier_note IS
     'Free-text note from the certifier or funeral director.';
 
 -- ========================================================================
@@ -394,13 +411,13 @@ COMMENT ON COLUMN united_states_standard_certificate_of_death.certifier_note IS
 
 -- Classification result for one US Standard Certificate of Death (1:1 with the certificate).
 
-CREATE TABLE united_states_standard_certificate_of_death_grade (
+CREATE TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     united_states_standard_certificate_of_death_id UUID NOT NULL UNIQUE
-        REFERENCES united_states_standard_certificate_of_death(id) ON DELETE CASCADE,
+        REFERENCES united_states_standard_certificate_of_death.united_states_standard_certificate_of_death(id) ON DELETE CASCADE,
     validity_class VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (validity_class IN ('valid', 'incomplete', 'refer-to-medical-examiner-or-coroner', '')),
     underlying_cause TEXT NOT NULL DEFAULT '',
@@ -410,29 +427,29 @@ CREATE TABLE united_states_standard_certificate_of_death_grade (
 );
 
 CREATE TRIGGER trigger_united_states_standard_certificate_of_death_grade_updated_at
-    BEFORE UPDATE ON united_states_standard_certificate_of_death_grade
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE united_states_standard_certificate_of_death_grade IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade IS
     'Computed completeness and validity-classification result for a US Standard Certificate of Death: validity class (valid/incomplete/refer-to-medical-examiner-or-coroner), derived underlying cause, and whether a referral criterion is indicated.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.united_states_standard_certificate_of_death_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.united_states_standard_certificate_of_death_id IS
     'Foreign key to the parent certificate (unique, 1:1).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.validity_class IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.validity_class IS
     'Validity classification: valid, incomplete, or refer-to-medical-examiner-or-coroner (referral takes precedence).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.underlying_cause IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.underlying_cause IS
     'Derived underlying cause of death: the lowest completed Part I line (d, else c, else b, else a); empty when Part I is empty.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.referral_indicated IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.referral_indicated IS
     'Whether a medical-examiner or coroner referral criterion is indicated (yes/no).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.graded_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -445,13 +462,13 @@ COMMENT ON COLUMN united_states_standard_certificate_of_death_grade.graded_at IS
 
 -- Rules that fired while classifying one certificate.
 
-CREATE TABLE united_states_standard_certificate_of_death_grade_rule (
+CREATE TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     united_states_standard_certificate_of_death_grade_id UUID NOT NULL
-        REFERENCES united_states_standard_certificate_of_death_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (dimension IN ('part-i', 'part-ii', 'manner', 'referral', 'decedent', 'certifier', 'disposition', 'copies', 'classification', '')),
@@ -460,32 +477,32 @@ CREATE TABLE united_states_standard_certificate_of_death_grade_rule (
 );
 
 CREATE INDEX usscd_grade_rule_grade_id_idx
-    ON united_states_standard_certificate_of_death_grade_rule (united_states_standard_certificate_of_death_grade_id);
+    ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule (united_states_standard_certificate_of_death_grade_id);
 
 CREATE TRIGGER trigger_united_states_standard_certificate_of_death_grade_rule_updated_at
-    BEFORE UPDATE ON united_states_standard_certificate_of_death_grade_rule
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE united_states_standard_certificate_of_death_grade_rule IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule IS
     'Audit trail of every validity rule that fired during classification: certificate dimension, category, and description.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.united_states_standard_certificate_of_death_grade_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.united_states_standard_certificate_of_death_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-MISSING-PART-IA-01).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.dimension IS
     'Certificate dimension the rule concerns: part-i, part-ii, manner, referral, decedent, certifier, disposition, copies, or classification.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.category IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.category IS
     'Subject category (e.g. required-component, mechanism-of-death, referral-criterion).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.description IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -498,13 +515,13 @@ COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_rule.descrip
 
 -- Prioritized flagged issues for one certificate.
 
-CREATE TABLE united_states_standard_certificate_of_death_grade_flag (
+CREATE TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     united_states_standard_certificate_of_death_grade_id UUID NOT NULL
-        REFERENCES united_states_standard_certificate_of_death_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
         CHECK (category IN ('medical-examiner-referral-required', 'mechanism-of-death', 'missing-part-i', 'missing-manner', 'illogical-sequence', 'abbreviation-used', 'nonspecific-cause', 'missing-interval', 'pregnancy-item', 'tobacco-item', 'injury-items', 'manner-mismatch', 'pending-determination', 'incomplete-certifier', 'incomplete-decedent', 'incomplete-funeral-director', 'date-inconsistency', 'filing-deadline', 'disposition', 'certified-copies', 'verify-state-rule', 'other', '')),
@@ -515,34 +532,34 @@ CREATE TABLE united_states_standard_certificate_of_death_grade_flag (
 );
 
 CREATE INDEX usscd_grade_flag_grade_id_idx
-    ON united_states_standard_certificate_of_death_grade_flag (united_states_standard_certificate_of_death_grade_id);
+    ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag (united_states_standard_certificate_of_death_grade_id);
 
 CREATE TRIGGER trigger_united_states_standard_certificate_of_death_grade_flag_updated_at
-    BEFORE UPDATE ON united_states_standard_certificate_of_death_grade_flag
+    BEFORE UPDATE ON united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_standard_certificate_of_death.set_updated_at();
 
-COMMENT ON TABLE united_states_standard_certificate_of_death_grade_flag IS
+COMMENT ON TABLE united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag IS
     'Flagged issues raised for a certificate, with category, priority, description, and suggested action.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.united_states_standard_certificate_of_death_grade_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.united_states_standard_certificate_of_death_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-ME-REFERRAL-001).';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.category IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.priority IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.priority IS
     'Flag priority: low, medium, or high.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.description IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.description IS
     'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN united_states_standard_certificate_of_death_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_standard_certificate_of_death.united_states_standard_certificate_of_death_grade_flag.suggested_action IS
     'Suggested corrective action.';
 
 -- ========================================================================

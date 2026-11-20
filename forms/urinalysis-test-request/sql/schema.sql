@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS urinalysis_test_request;
+
+COMMENT ON SCHEMA urinalysis_test_request IS
+    'Namespace for the Urinalysis Test Request form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION urinalysis_test_request.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION urinalysis_test_request.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE urinalysis_test_request.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON urinalysis_test_request.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE urinalysis_test_request.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN urinalysis_test_request.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN urinalysis_test_request.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN urinalysis_test_request.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN urinalysis_test_request.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN urinalysis_test_request.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN urinalysis_test_request.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN urinalysis_test_request.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN urinalysis_test_request.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN urinalysis_test_request.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN urinalysis_test_request.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN urinalysis_test_request.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN urinalysis_test_request.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN urinalysis_test_request.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN urinalysis_test_request.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON urinalysis_test_request.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN urinalysis_test_request.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Requesting clinician (referrer) information.
 
-CREATE TABLE clinician (
+CREATE TABLE urinalysis_test_request.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON urinalysis_test_request.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE urinalysis_test_request.clinician IS
     'Requesting clinician (referrer) who completes the urinalysis test request.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.role IS
     'Clinician role: gp, hospital-doctor, nurse, urologist, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.registration_body IS
     'Clinician registration body: GMC, NMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN urinalysis_test_request.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON urinalysis_test_request.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -212,14 +229,14 @@ CREATE INDEX clinician_index_gto
 -- BOOLEAN column. At least one test should be selected; a request with no test
 -- selected fires a safety flag.
 
-CREATE TABLE urinalysis_test_request (
+CREATE TABLE urinalysis_test_request.urinalysis_test_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES urinalysis_test_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES urinalysis_test_request.clinician(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'vetted', 'scheduled', 'rejected', '')),
@@ -271,86 +288,86 @@ CREATE TABLE urinalysis_test_request (
 );
 
 CREATE INDEX index_urinalysis_test_request_patient_id
-    ON urinalysis_test_request(patient_id);
+    ON urinalysis_test_request.urinalysis_test_request(patient_id);
 CREATE INDEX index_urinalysis_test_request_clinician_id
-    ON urinalysis_test_request(clinician_id);
+    ON urinalysis_test_request.urinalysis_test_request(clinician_id);
 
 CREATE TRIGGER trigger_urinalysis_test_request_updated_at
-    BEFORE UPDATE ON urinalysis_test_request
+    BEFORE UPDATE ON urinalysis_test_request.urinalysis_test_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE urinalysis_test_request IS
+COMMENT ON TABLE urinalysis_test_request.urinalysis_test_request IS
     'Urinalysis (urine pathology) test request (order). Captures the requested urine test panel, the clinical indication and details, symptoms / red flags, specimen preanalytical data, modifiers, and triage urgency.';
-COMMENT ON COLUMN urinalysis_test_request.id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN urinalysis_test_request.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN urinalysis_test_request.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN urinalysis_test_request.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN urinalysis_test_request.patient_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN urinalysis_test_request.clinician_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.clinician_id IS
     'Foreign key to the requesting clinician (referrer).';
-COMMENT ON COLUMN urinalysis_test_request.status IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.status IS
     'Request lifecycle status: draft, submitted, vetted, scheduled, rejected.';
-COMMENT ON COLUMN urinalysis_test_request.site_name IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.site_name IS
     'Name of the requesting site or clinic.';
-COMMENT ON COLUMN urinalysis_test_request.setting IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.setting IS
     'Care setting: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN urinalysis_test_request.referral_date IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.referral_date IS
     'Date the request was made.';
-COMMENT ON COLUMN urinalysis_test_request.dipstick IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.dipstick IS
     'Requested test: urine dipstick (reagent strip) for leucocytes, nitrites, blood, protein, glucose.';
-COMMENT ON COLUMN urinalysis_test_request.microscopy_culture_sensitivity IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.microscopy_culture_sensitivity IS
     'Requested test: microscopy, culture and sensitivity (MC&S) for confirmed / complicated UTI.';
-COMMENT ON COLUMN urinalysis_test_request.albumin_creatinine_ratio IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.albumin_creatinine_ratio IS
     'Requested test: urine albumin-to-creatinine ratio (ACR) for albuminuria / CKD / diabetes monitoring.';
-COMMENT ON COLUMN urinalysis_test_request.protein_creatinine_ratio IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.protein_creatinine_ratio IS
     'Requested test: urine protein-to-creatinine ratio (PCR) for proteinuria quantification.';
-COMMENT ON COLUMN urinalysis_test_request.pregnancy_test IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.pregnancy_test IS
     'Requested test: urine pregnancy test (hCG).';
-COMMENT ON COLUMN urinalysis_test_request.drug_screen IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.drug_screen IS
     'Requested test: urine drug screen / toxicology.';
-COMMENT ON COLUMN urinalysis_test_request.cytology IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.cytology IS
     'Requested test: urine cytology for suspected urothelial malignancy.';
-COMMENT ON COLUMN urinalysis_test_request.twenty_four_hour_collection IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.twenty_four_hour_collection IS
     'Requested test: 24-hour urine collection (e.g. protein, creatinine clearance, metanephrines).';
-COMMENT ON COLUMN urinalysis_test_request.primary_indication IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.primary_indication IS
     'Primary clinical indication, used for appropriateness scoring: suspected-uti, haematuria, proteinuria, diabetes-monitoring, renal-monitoring, pregnancy-screen, pre-operative, catheter-related, suspected-malignancy, drug-monitoring, other.';
-COMMENT ON COLUMN urinalysis_test_request.clinical_details IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.clinical_details IS
     'Relevant clinical details and history supporting the request (highest-value field).';
-COMMENT ON COLUMN urinalysis_test_request.symptom_dysuria IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.symptom_dysuria IS
     'Whether the patient reports dysuria (painful urination).';
-COMMENT ON COLUMN urinalysis_test_request.symptom_frequency IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.symptom_frequency IS
     'Whether the patient reports urinary frequency / urgency.';
-COMMENT ON COLUMN urinalysis_test_request.symptom_visible_haematuria IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.symptom_visible_haematuria IS
     'Whether the patient reports visible (macroscopic) haematuria (red flag).';
-COMMENT ON COLUMN urinalysis_test_request.symptom_loin_pain IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.symptom_loin_pain IS
     'Whether the patient reports loin / flank pain (possible upper-tract involvement).';
-COMMENT ON COLUMN urinalysis_test_request.symptom_fever IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.symptom_fever IS
     'Whether the patient reports fever / systemic symptoms (possible pyelonephritis / urosepsis).';
-COMMENT ON COLUMN urinalysis_test_request.specimen_type IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.specimen_type IS
     'Specimen type: midstream (MSU), catheter (CSU), clean-catch, 24h, random.';
-COMMENT ON COLUMN urinalysis_test_request.specimen_collected IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.specimen_collected IS
     'Whether the specimen has already been collected: yes, no.';
-COMMENT ON COLUMN urinalysis_test_request.collection_datetime IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.collection_datetime IS
     'Date and time the specimen was collected (preanalytical timing).';
-COMMENT ON COLUMN urinalysis_test_request.pregnant IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.pregnant IS
     'Whether the patient is pregnant (alters UTI MSU / culture pathway).';
-COMMENT ON COLUMN urinalysis_test_request.catheterised IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.catheterised IS
     'Whether the patient is catheterised (CSU; asymptomatic bacteriuria caveats).';
-COMMENT ON COLUMN urinalysis_test_request.current_antibiotics IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.current_antibiotics IS
     'Whether the patient is currently taking antibiotics (may suppress culture growth).';
-COMMENT ON COLUMN urinalysis_test_request.urgency IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.urgency IS
     'Requested triage urgency: routine, urgent, stat.';
-COMMENT ON COLUMN urinalysis_test_request.supervising_consultant IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.supervising_consultant IS
     'Name of the supervising / responsible consultant.';
-COMMENT ON COLUMN urinalysis_test_request.requester_contact IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.requester_contact IS
     'Contact details (bleep / phone) for the requester.';
-COMMENT ON COLUMN urinalysis_test_request.notes IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request.notes IS
     'Free-text additional notes.';
 
 -- ========================================================================
@@ -363,14 +380,14 @@ COMMENT ON COLUMN urinalysis_test_request.notes IS
 
 -- Computed grading result for a urinalysis test request (four-axis engine).
 
-CREATE TABLE urinalysis_test_request_grade (
+CREATE TABLE urinalysis_test_request.urinalysis_test_request_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     urinalysis_test_request_id UUID NOT NULL UNIQUE
-        REFERENCES urinalysis_test_request(id) ON DELETE CASCADE,
+        REFERENCES urinalysis_test_request.urinalysis_test_request(id) ON DELETE CASCADE,
 
     -- Axis A: appropriateness (indication match / NICE UTI; 1-9 ordinal).
     -- Note: there is no single published 1-9 score for urinalysis. The 1-9 is
@@ -404,43 +421,43 @@ CREATE TABLE urinalysis_test_request_grade (
 );
 
 CREATE TRIGGER trigger_urinalysis_test_request_grade_updated_at
-    BEFORE UPDATE ON urinalysis_test_request_grade
+    BEFORE UPDATE ON urinalysis_test_request.urinalysis_test_request_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE urinalysis_test_request_grade IS
+COMMENT ON TABLE urinalysis_test_request.urinalysis_test_request_grade IS
     'Computed four-axis grading result: appropriateness (indication match / NICE UTI, 1-9), preanalytical specimen suitability, request completeness, and triage priority.';
-COMMENT ON COLUMN urinalysis_test_request_grade.id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN urinalysis_test_request_grade.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN urinalysis_test_request_grade.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN urinalysis_test_request_grade.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN urinalysis_test_request_grade.urinalysis_test_request_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.urinalysis_test_request_id IS
     'Foreign key to the parent request (unique, 1:1).';
-COMMENT ON COLUMN urinalysis_test_request_grade.appropriateness_score IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.appropriateness_score IS
     'Appropriateness score (1-9) anchored on indication-to-test match and guideline appropriateness (no single published urinalysis score exists).';
-COMMENT ON COLUMN urinalysis_test_request_grade.appropriateness_band IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.appropriateness_band IS
     'Appropriateness band: usually-appropriate (7-9), may-be-appropriate (4-6), usually-not-appropriate (1-3).';
-COMMENT ON COLUMN urinalysis_test_request_grade.preanalytical_band IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.preanalytical_band IS
     'Preanalytical specimen-suitability band: ok, caution, reject-risk (driven by specimen type / collected / timing / contamination risk per UK SMI B41).';
-COMMENT ON COLUMN urinalysis_test_request_grade.fasting_or_specimen IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.fasting_or_specimen IS
     'Specimen / preanalytical advisory note (e.g. "MSU not yet collected; refrigerate or use boric acid if >4 h to lab").';
-COMMENT ON COLUMN urinalysis_test_request_grade.completeness_percent IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.completeness_percent IS
     'Request completeness as a percentage of mandatory fields, clinical details and indication weighted highest (0-100).';
-COMMENT ON COLUMN urinalysis_test_request_grade.triage_tier IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.triage_tier IS
     'Assigned triage tier: routine, urgent, stat.';
-COMMENT ON COLUMN urinalysis_test_request_grade.target_timeframe IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.target_timeframe IS
     'Target timeframe for the test implied by the triage tier.';
-COMMENT ON COLUMN urinalysis_test_request_grade.recommendation IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.recommendation IS
     'Vetting recommendation: accept, query-referrer, redirect, reject.';
-COMMENT ON COLUMN urinalysis_test_request_grade.clinician_notes IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.clinician_notes IS
     'Free-text vetting notes.';
-COMMENT ON COLUMN urinalysis_test_request_grade.signed_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.signed_at IS
     'Timestamp of vetting clinician electronic signature.';
-COMMENT ON COLUMN urinalysis_test_request_grade.graded_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -453,14 +470,14 @@ COMMENT ON COLUMN urinalysis_test_request_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a urinalysis test request.
 
-CREATE TABLE urinalysis_test_request_grade_rule (
+CREATE TABLE urinalysis_test_request.urinalysis_test_request_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     urinalysis_test_request_grade_id UUID NOT NULL
-        REFERENCES urinalysis_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES urinalysis_test_request.urinalysis_test_request_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('appropriateness', 'preanalytical', 'completeness', 'triage', '')),
@@ -469,32 +486,32 @@ CREATE TABLE urinalysis_test_request_grade_rule (
 );
 
 CREATE INDEX index_urinalysis_test_request_grade_rule_grade_id
-    ON urinalysis_test_request_grade_rule(urinalysis_test_request_grade_id);
+    ON urinalysis_test_request.urinalysis_test_request_grade_rule(urinalysis_test_request_grade_id);
 
 CREATE TRIGGER trigger_urinalysis_test_request_grade_rule_updated_at
-    BEFORE UPDATE ON urinalysis_test_request_grade_rule
+    BEFORE UPDATE ON urinalysis_test_request.urinalysis_test_request_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE urinalysis_test_request_grade_rule IS
+COMMENT ON TABLE urinalysis_test_request.urinalysis_test_request_grade_rule IS
     'Audit trail of every appropriateness / preanalytical / completeness / triage rule that fired for this request.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.urinalysis_test_request_grade_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.urinalysis_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.rule_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-APPROP-UTI-01).';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.axis IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.axis IS
     'Scoring axis the rule belongs to: appropriateness, preanalytical, completeness, triage.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.category IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.category IS
     'Category or indication the rule relates to.';
-COMMENT ON COLUMN urinalysis_test_request_grade_rule.description IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -507,14 +524,14 @@ COMMENT ON COLUMN urinalysis_test_request_grade_rule.description IS
 
 -- Safety-critical flags for a urinalysis test request, independent of the axes.
 
-CREATE TABLE urinalysis_test_request_grade_flag (
+CREATE TABLE urinalysis_test_request.urinalysis_test_request_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     urinalysis_test_request_grade_id UUID NOT NULL
-        REFERENCES urinalysis_test_request_grade(id) ON DELETE CASCADE,
+        REFERENCES urinalysis_test_request.urinalysis_test_request_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -534,34 +551,34 @@ CREATE TABLE urinalysis_test_request_grade_flag (
 );
 
 CREATE INDEX index_urinalysis_test_request_grade_flag_grade_id
-    ON urinalysis_test_request_grade_flag(urinalysis_test_request_grade_id);
+    ON urinalysis_test_request.urinalysis_test_request_grade_flag(urinalysis_test_request_grade_id);
 
 CREATE TRIGGER trigger_urinalysis_test_request_grade_flag_updated_at
-    BEFORE UPDATE ON urinalysis_test_request_grade_flag
+    BEFORE UPDATE ON urinalysis_test_request.urinalysis_test_request_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION urinalysis_test_request.set_updated_at();
 
-COMMENT ON TABLE urinalysis_test_request_grade_flag IS
+COMMENT ON TABLE urinalysis_test_request.urinalysis_test_request_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology / vetting team.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.created_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.updated_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.deleted_at IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.urinalysis_test_request_grade_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.urinalysis_test_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.flag_id IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-VISIBLE-HAEMATURIA-2WW-001).';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.category IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.category IS
     'Flag category: visible-haematuria-2ww, suspected-pyelonephritis, specimen-not-collected, missing-clinical-details, missing-indication, no-test-selected, other.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.priority IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.description IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN urinalysis_test_request_grade_flag.suggested_action IS
+COMMENT ON COLUMN urinalysis_test_request.urinalysis_test_request_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "consider NICE NG12 suspected-cancer (2WW) referral").';
 
 -- ========================================================================

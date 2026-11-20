@@ -37,7 +37,7 @@ def parse_create_table(sql_text):
     bin/fhir-r5/generate-fhir-r5-representations.py so the two stay in
     sync on how the schema is interpreted."""
     tables = []
-    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s*\((.*?)\);'
+    pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:\w+\.)?(\w+)\s*\((.*?)\);'
     matches = re.findall(pattern, sql_text, re.DOTALL | re.IGNORECASE)
 
     for table_name, body in matches:
@@ -69,7 +69,7 @@ def parse_create_table(sql_text):
             ):
                 continue
             col_match = re.match(
-                r'^(\w+)\s+([A-Za-z][\w]*(?:\s*\([^)]*\))?)',
+                r'^(\w+)\s+(?:[a-z_]\w*\.)?([A-Za-z][\w]*(?:\s*\([^)]*\))?)',
                 col_def,
             )
             if col_match:

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS cervical_screening;
+
+COMMENT ON SCHEMA cervical_screening IS
+    'Namespace for the Cervical Screening record form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION cervical_screening.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION cervical_screening.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE cervical_screening.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cervical_screening.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cervical_screening.patient IS
     'Patient demographic information used by the cervical-screening record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cervical_screening.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cervical_screening.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cervical_screening.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cervical_screening.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cervical_screening.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cervical_screening.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN cervical_screening.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cervical_screening.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cervical_screening.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cervical_screening.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cervical_screening.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cervical_screening.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cervical_screening.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN cervical_screening.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cervical_screening.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cervical_screening.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cervical_screening.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN cervical_screening.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON cervical_screening.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- the cervical screening (smear) sample (practice nurse, GP, or other
 -- trained smear-taker).
 
-CREATE TABLE clinician (
+CREATE TABLE cervical_screening.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cervical_screening.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cervical_screening.clinician IS
     'Clinician identifying information for the sample-taker who performed the cervical screening sample.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cervical_screening.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cervical_screening.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cervical_screening.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cervical_screening.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cervical_screening.clinician.name IS
     'Sample-taker full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cervical_screening.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cervical_screening.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cervical_screening.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cervical_screening.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cervical_screening.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cervical_screening.clinician.role IS
     'Sample-taker role: practice-nurse, gp, smear-taker, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cervical_screening.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cervical_screening.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON cervical_screening.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -209,14 +226,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- result, and reflex cytology. The computed result classification, the audit
 -- trail of fired rules, and the safety flags live in dedicated child tables.
 
-CREATE TABLE cervical_screening (
+CREATE TABLE cervical_screening.cervical_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES cervical_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES cervical_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Encounter context
     care_setting VARCHAR(20) NOT NULL DEFAULT '' CHECK (care_setting IN ('general-practice', 'sexual-health', 'other', '')),
@@ -256,64 +273,64 @@ CREATE TABLE cervical_screening (
 );
 
 CREATE INDEX cervical_screening_patient_id_idx
-    ON cervical_screening (patient_id);
+    ON cervical_screening.cervical_screening (patient_id);
 CREATE INDEX cervical_screening_clinician_id_idx
-    ON cervical_screening (clinician_id);
+    ON cervical_screening.cervical_screening (clinician_id);
 
 CREATE TRIGGER trigger_cervical_screening_updated_at
-    BEFORE UPDATE ON cervical_screening
+    BEFORE UPDATE ON cervical_screening.cervical_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE cervical_screening IS
+COMMENT ON TABLE cervical_screening.cervical_screening IS
     'Main cervical-screening record for one HPV-primary screening encounter: encounter context, patient identification, eligibility, consent, symptoms, sample adequacy, the primary hrHPV result, and reflex cytology. Result classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN cervical_screening.id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cervical_screening.created_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cervical_screening.updated_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cervical_screening.deleted_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cervical_screening.patient_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.patient_id IS
     'Foreign key to the patient this screening documents (restrict delete).';
-COMMENT ON COLUMN cervical_screening.clinician_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.clinician_id IS
     'Foreign key to the sample-taker clinician (restrict delete); optional.';
-COMMENT ON COLUMN cervical_screening.care_setting IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.care_setting IS
     'Care setting where the sample was taken: general-practice, sexual-health, or other.';
-COMMENT ON COLUMN cervical_screening.sample_taker_role IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_taker_role IS
     'Role of the person taking the sample: practice-nurse, gp, smear-taker, or other.';
-COMMENT ON COLUMN cervical_screening.sample_taken_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_taken_at IS
     'Date and time the screening sample was taken.';
-COMMENT ON COLUMN cervical_screening.patient_identifier IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.patient_identifier IS
     'Local patient or encounter identifier as recorded on the record.';
-COMMENT ON COLUMN cervical_screening.age IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.age IS
     'Patient age in years; drives eligibility (25-64) and the recall interval.';
-COMMENT ON COLUMN cervical_screening.recall_interval IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.recall_interval IS
     'Age-appropriate routine recall interval: three-yearly (25-49), five-yearly (50-64), or not-applicable.';
-COMMENT ON COLUMN cervical_screening.screen_due_date IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.screen_due_date IS
     'Date the screen was due.';
-COMMENT ON COLUMN cervical_screening.last_screen_date IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.last_screen_date IS
     'Date of the most recent previous screening, when known.';
-COMMENT ON COLUMN cervical_screening.overdue IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.overdue IS
     'Whether the screening is overdue (yes/no); drives the patient-overdue flag.';
-COMMENT ON COLUMN cervical_screening.previously_ceased IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.previously_ceased IS
     'Whether the person has been formally ceased from screening (yes/no); yes classifies as cease-not-eligible.';
-COMMENT ON COLUMN cervical_screening.consent_given IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.consent_given IS
     'Whether informed consent to sample and process was given (yes/no); anything other than yes raises the missing-consent flag.';
-COMMENT ON COLUMN cervical_screening.symptomatic IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.symptomatic IS
     'Whether the patient reports symptoms (abnormal bleeding, discharge, pain) (yes/no); yes raises the symptomatic-refer-regardless flag.';
-COMMENT ON COLUMN cervical_screening.symptom_detail IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.symptom_detail IS
     'Free-text description of reported symptoms.';
-COMMENT ON COLUMN cervical_screening.sample_adequacy IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.sample_adequacy IS
     'Cytological sample adequacy: adequate or inadequate; an inadequate sample is never HPV-classified and is repeated.';
-COMMENT ON COLUMN cervical_screening.inadequate_reason IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.inadequate_reason IS
     'Reason a sample was inadequate: insufficient-cells, obscuring-blood, inflammation, labelling, or other.';
-COMMENT ON COLUMN cervical_screening.hpv_result IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.hpv_result IS
     'Primary high-risk HPV (hrHPV) result: negative, positive, or not-tested.';
-COMMENT ON COLUMN cervical_screening.cytology_grade IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.cytology_grade IS
     'Reflex cytology dyskaryosis grade (recorded only when hpv_result is positive): negative, borderline, low-grade, high-grade, or not-performed.';
-COMMENT ON COLUMN cervical_screening.clinical_context IS
+COMMENT ON COLUMN cervical_screening.cervical_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -330,14 +347,14 @@ COMMENT ON COLUMN cervical_screening.clinical_context IS
 -- the recommended management action. This is a result-classification outcome,
 -- not a numeric score.
 
-CREATE TABLE cervical_screening_grade (
+CREATE TABLE cervical_screening.cervical_screening_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cervical_screening_id UUID NOT NULL UNIQUE
-        REFERENCES cervical_screening(id) ON DELETE CASCADE,
+        REFERENCES cervical_screening.cervical_screening(id) ON DELETE CASCADE,
 
     result_class VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (result_class IN (
@@ -370,29 +387,29 @@ CREATE TABLE cervical_screening_grade (
 );
 
 CREATE TRIGGER trigger_cervical_screening_grade_updated_at
-    BEFORE UPDATE ON cervical_screening_grade
+    BEFORE UPDATE ON cervical_screening.cervical_screening_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE cervical_screening_grade IS
+COMMENT ON TABLE cervical_screening.cervical_screening_grade IS
     'Computed result classification for a cervical-screening record: result class, recommended management action, and completeness status.';
-COMMENT ON COLUMN cervical_screening_grade.id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cervical_screening_grade.created_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cervical_screening_grade.updated_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cervical_screening_grade.deleted_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cervical_screening_grade.cervical_screening_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.cervical_screening_id IS
     'Foreign key to the parent cervical-screening record (unique, 1:1).';
-COMMENT ON COLUMN cervical_screening_grade.result_class IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.result_class IS
     'Result classification: inadequate, hpv-negative, hpv-positive-cytology-normal, hpv-positive-cytology-abnormal-low, hpv-positive-cytology-abnormal-high, hpv-positive-cytology-pending, cease-not-eligible, or pending.';
-COMMENT ON COLUMN cervical_screening_grade.management_action IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.management_action IS
     'Recommended management action: routine-recall, early-repeat-12-months, colposcopy-referral, urgent-colposcopy-referral, repeat-sample-3-months, cease-screening, awaiting-cytology, or awaiting-result.';
-COMMENT ON COLUMN cervical_screening_grade.status IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.status IS
     'Completeness status: complete when eligibility, consent, adequacy, and the required result fields for the reached branch are all present; otherwise incomplete.';
-COMMENT ON COLUMN cervical_screening_grade.graded_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -407,14 +424,14 @@ COMMENT ON COLUMN cervical_screening_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE cervical_screening_grade_rule (
+CREATE TABLE cervical_screening.cervical_screening_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cervical_screening_grade_id UUID NOT NULL
-        REFERENCES cervical_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES cervical_screening.cervical_screening_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -424,32 +441,32 @@ CREATE TABLE cervical_screening_grade_rule (
 );
 
 CREATE INDEX cervical_screening_grade_rule_grade_id_idx
-    ON cervical_screening_grade_rule (cervical_screening_grade_id);
+    ON cervical_screening.cervical_screening_grade_rule (cervical_screening_grade_id);
 
 CREATE TRIGGER trigger_cervical_screening_grade_rule_updated_at
-    BEFORE UPDATE ON cervical_screening_grade_rule
+    BEFORE UPDATE ON cervical_screening.cervical_screening_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE cervical_screening_grade_rule IS
+COMMENT ON TABLE cervical_screening.cervical_screening_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN cervical_screening_grade_rule.id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cervical_screening_grade_rule.created_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cervical_screening_grade_rule.updated_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cervical_screening_grade_rule.deleted_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cervical_screening_grade_rule.cervical_screening_grade_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.cervical_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cervical_screening_grade_rule.rule_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ELIGIBILITY-CEASE-01).';
-COMMENT ON COLUMN cervical_screening_grade_rule.stage IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.stage IS
     'Pathway stage the rule concerns: eligibility, adequacy, hpv, cytology, or completeness.';
-COMMENT ON COLUMN cervical_screening_grade_rule.category IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.category IS
     'Subject category (e.g. gate, classification, conditional-requirement).';
-COMMENT ON COLUMN cervical_screening_grade_rule.description IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -463,14 +480,14 @@ COMMENT ON COLUMN cervical_screening_grade_rule.description IS
 -- Safety flags that fire independently of the result class, each with a
 -- priority and a suggested action for the sample-taker or screening service.
 
-CREATE TABLE cervical_screening_grade_flag (
+CREATE TABLE cervical_screening.cervical_screening_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cervical_screening_grade_id UUID NOT NULL
-        REFERENCES cervical_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES cervical_screening.cervical_screening_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -492,34 +509,34 @@ CREATE TABLE cervical_screening_grade_flag (
 );
 
 CREATE INDEX cervical_screening_grade_flag_grade_id_idx
-    ON cervical_screening_grade_flag (cervical_screening_grade_id);
+    ON cervical_screening.cervical_screening_grade_flag (cervical_screening_grade_id);
 
 CREATE TRIGGER trigger_cervical_screening_grade_flag_updated_at
-    BEFORE UPDATE ON cervical_screening_grade_flag
+    BEFORE UPDATE ON cervical_screening.cervical_screening_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cervical_screening.set_updated_at();
 
-COMMENT ON TABLE cervical_screening_grade_flag IS
+COMMENT ON TABLE cervical_screening.cervical_screening_grade_flag IS
     'Safety flags that fire independently of the result class, with priority and a suggested action for the sample-taker or screening service.';
-COMMENT ON COLUMN cervical_screening_grade_flag.id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cervical_screening_grade_flag.created_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN cervical_screening_grade_flag.updated_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN cervical_screening_grade_flag.deleted_at IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN cervical_screening_grade_flag.cervical_screening_grade_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.cervical_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cervical_screening_grade_flag.flag_id IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-URGENT-COLPOSCOPY-001).';
-COMMENT ON COLUMN cervical_screening_grade_flag.category IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.category IS
     'Flag category: urgent-colposcopy, symptomatic-refer-regardless, missing-consent, inadequate-sample, patient-overdue, age-outside-range, incomplete, or other.';
-COMMENT ON COLUMN cervical_screening_grade_flag.priority IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN cervical_screening_grade_flag.description IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN cervical_screening_grade_flag.suggested_action IS
+COMMENT ON COLUMN cervical_screening.cervical_screening_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "refer urgently for colposcopy", "record informed consent").';
 
 -- ========================================================================

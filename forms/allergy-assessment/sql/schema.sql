@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (18):
+-- Source files (19):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -41,12 +42,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS allergy_assessment;
+
+COMMENT ON SCHEMA allergy_assessment IS
+    'Namespace for the Allergy Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION allergy_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -54,7 +71,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION allergy_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -67,7 +84,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE allergy_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -90,56 +107,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON allergy_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE allergy_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN allergy_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN allergy_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN allergy_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN allergy_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN allergy_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN allergy_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN allergy_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN allergy_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN allergy_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN allergy_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN allergy_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN allergy_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN allergy_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN allergy_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN allergy_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN allergy_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN allergy_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON allergy_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN allergy_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -152,7 +169,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE allergy_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -171,46 +188,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON allergy_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE allergy_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN allergy_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN allergy_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN allergy_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN allergy_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN allergy_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN allergy_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN allergy_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN allergy_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN allergy_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN allergy_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN allergy_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN allergy_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN allergy_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON allergy_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -221,12 +238,12 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_allergy_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE allergy_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES allergy_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent')),
     age_of_onset INTEGER CHECK (age_of_onset IS NULL OR (age_of_onset >= 0 AND age_of_onset <= 120)),
     known_allergens TEXT NOT NULL DEFAULT '',
@@ -264,90 +281,90 @@ CREATE TABLE assessment (
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON allergy_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE allergy_assessment.assessment IS
     'Flat assessment table: parent assessment merged with every assessment_<section> child. Generated by bin/generate-sql-flat.py.';
 
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN allergy_assessment.assessment.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN allergy_assessment.assessment.status IS
     'Lifecycle status of this row.';
-COMMENT ON COLUMN assessment.age_of_onset IS
+COMMENT ON COLUMN allergy_assessment.assessment.age_of_onset IS
     'Age of onset.';
-COMMENT ON COLUMN assessment.known_allergens IS
+COMMENT ON COLUMN allergy_assessment.assessment.known_allergens IS
     'Known allergens.';
-COMMENT ON COLUMN assessment.family_history_of_atopy IS
+COMMENT ON COLUMN allergy_assessment.assessment.family_history_of_atopy IS
     'Family history of atopy. One of: yes, no.';
-COMMENT ON COLUMN assessment.family_atopy_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.family_atopy_details IS
     'Family atopy details.';
-COMMENT ON COLUMN assessment.family_history_of_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.family_history_of_allergy IS
     'Family history of allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.family_allergy_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.family_allergy_details IS
     'Family allergy details.';
-COMMENT ON COLUMN assessment.pollen_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.pollen_allergy IS
     'Pollen allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.dust_mite_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.dust_mite_allergy IS
     'Dust mite allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.mould_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.mould_allergy IS
     'Mould allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.animal_dander_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.animal_dander_allergy IS
     'Animal dander allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.latex_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.latex_allergy IS
     'Latex allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.insect_sting_allergy IS
+COMMENT ON COLUMN allergy_assessment.assessment.insect_sting_allergy IS
     'Insect sting allergy. One of: yes, no.';
-COMMENT ON COLUMN assessment.insect_sting_severity IS
+COMMENT ON COLUMN allergy_assessment.assessment.insect_sting_severity IS
     'Insect sting severity. One of: mild, moderate, severe, anaphylaxis.';
-COMMENT ON COLUMN assessment.seasonal_pattern IS
+COMMENT ON COLUMN allergy_assessment.assessment.seasonal_pattern IS
     'Seasonal pattern. One of: perennial, spring, summer, autumn, winter, multiple.';
-COMMENT ON COLUMN assessment.other_environmental_allergens IS
+COMMENT ON COLUMN allergy_assessment.assessment.other_environmental_allergens IS
     'Other environmental allergens.';
-COMMENT ON COLUMN assessment.asthma IS
+COMMENT ON COLUMN allergy_assessment.assessment.asthma IS
     'Asthma. One of: yes, no.';
-COMMENT ON COLUMN assessment.asthma_severity IS
+COMMENT ON COLUMN allergy_assessment.assessment.asthma_severity IS
     'Asthma severity. One of: mild, moderate, severe.';
-COMMENT ON COLUMN assessment.eczema IS
+COMMENT ON COLUMN allergy_assessment.assessment.eczema IS
     'Eczema. One of: yes, no.';
-COMMENT ON COLUMN assessment.eczema_severity IS
+COMMENT ON COLUMN allergy_assessment.assessment.eczema_severity IS
     'Eczema severity. One of: mild, moderate, severe.';
-COMMENT ON COLUMN assessment.rhinitis IS
+COMMENT ON COLUMN allergy_assessment.assessment.rhinitis IS
     'Rhinitis. One of: yes, no.';
-COMMENT ON COLUMN assessment.rhinitis_severity IS
+COMMENT ON COLUMN allergy_assessment.assessment.rhinitis_severity IS
     'Rhinitis severity. One of: mild, moderate, severe.';
-COMMENT ON COLUMN assessment.eosinophilic_oesophagitis IS
+COMMENT ON COLUMN allergy_assessment.assessment.eosinophilic_oesophagitis IS
     'Eosinophilic oesophagitis. One of: yes, no.';
-COMMENT ON COLUMN assessment.mast_cell_disorders IS
+COMMENT ON COLUMN allergy_assessment.assessment.mast_cell_disorders IS
     'Mast cell disorders. One of: yes, no.';
-COMMENT ON COLUMN assessment.mast_cell_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.mast_cell_details IS
     'Mast cell details.';
-COMMENT ON COLUMN assessment.mental_health_impact IS
+COMMENT ON COLUMN allergy_assessment.assessment.mental_health_impact IS
     'Mental health impact. One of: yes, no.';
-COMMENT ON COLUMN assessment.mental_health_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.mental_health_details IS
     'Mental health details.';
-COMMENT ON COLUMN assessment.quality_of_life_score IS
+COMMENT ON COLUMN allergy_assessment.assessment.quality_of_life_score IS
     'Quality of life score.';
-COMMENT ON COLUMN assessment.school_work_impact IS
+COMMENT ON COLUMN allergy_assessment.assessment.school_work_impact IS
     'School work impact. One of: yes, no.';
-COMMENT ON COLUMN assessment.school_work_impact_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.school_work_impact_details IS
     'School work impact details.';
-COMMENT ON COLUMN assessment.emergency_action_plan_status IS
+COMMENT ON COLUMN allergy_assessment.assessment.emergency_action_plan_status IS
     'Emergency action plan status. One of: in-place, not-in-place, needs-update.';
-COMMENT ON COLUMN assessment.training_provided IS
+COMMENT ON COLUMN allergy_assessment.assessment.training_provided IS
     'Training provided. One of: yes, no.';
-COMMENT ON COLUMN assessment.training_details IS
+COMMENT ON COLUMN allergy_assessment.assessment.training_details IS
     'Training details.';
-COMMENT ON COLUMN assessment.follow_up_schedule IS
+COMMENT ON COLUMN allergy_assessment.assessment.follow_up_schedule IS
     'Follow up schedule.';
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN allergy_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -358,41 +375,41 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_allergy_assessment_drug_allergies.sql
 -- ========================================================================
 
-CREATE TABLE assessment_drug_allergies (
+CREATE TABLE allergy_assessment.assessment_drug_allergies (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     has_drug_allergies VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_drug_allergies IN ('yes', 'no', '')),
     cross_reactivity_concerns TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TRIGGER trigger_assessment_drug_allergies_updated_at
-    BEFORE UPDATE ON assessment_drug_allergies
+    BEFORE UPDATE ON allergy_assessment.assessment_drug_allergies
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_drug_allergies IS
+COMMENT ON TABLE allergy_assessment.assessment_drug_allergies IS
     'Drug allergies section header. One-to-one child of assessment.';
 
 -- Individual drug allergy items (one-to-many child)
 
-COMMENT ON COLUMN assessment_drug_allergies.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_drug_allergies.has_drug_allergies IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.has_drug_allergies IS
     'Has drug allergies. One of: yes, no.';
-COMMENT ON COLUMN assessment_drug_allergies.cross_reactivity_concerns IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.cross_reactivity_concerns IS
     'Cross reactivity concerns.';
-COMMENT ON COLUMN assessment_drug_allergies.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_drug_allergies.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_drug_allergies.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_drug_allergies.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -403,13 +420,13 @@ COMMENT ON COLUMN assessment_drug_allergies.deleted_at IS
 -- BEGIN 06_create_table_allergy_assessment_drug_allergy_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_drug_allergy_item (
+CREATE TABLE allergy_assessment.assessment_drug_allergy_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     drug_allergies_id UUID NOT NULL
-        REFERENCES assessment_drug_allergies(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_drug_allergies(id) ON DELETE CASCADE,
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     reaction_type VARCHAR(255) NOT NULL DEFAULT '',
     severity VARCHAR(20) NOT NULL DEFAULT ''
@@ -420,46 +437,46 @@ CREATE TABLE assessment_drug_allergy_item (
 );
 
 CREATE TRIGGER trigger_assessment_drug_allergy_item_updated_at
-    BEFORE UPDATE ON assessment_drug_allergy_item
+    BEFORE UPDATE ON allergy_assessment.assessment_drug_allergy_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_drug_allergy_item IS
+COMMENT ON TABLE allergy_assessment.assessment_drug_allergy_item IS
     'Individual drug allergy entry with allergen, reaction type, and severity.';
-COMMENT ON COLUMN assessment_drug_allergy_item.severity IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.severity IS
     'Reaction severity: mild, moderate, severe, anaphylaxis, or empty string.';
 
-COMMENT ON COLUMN assessment_drug_allergies.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_drug_allergies.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_drug_allergies.has_drug_allergies IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.has_drug_allergies IS
     'Has drug allergies. One of: yes, no.';
-COMMENT ON COLUMN assessment_drug_allergies.cross_reactivity_concerns IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.cross_reactivity_concerns IS
     'Cross reactivity concerns.';
-COMMENT ON COLUMN assessment_drug_allergies.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_drug_allergies.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_drug_allergy_item.drug_allergies_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.drug_allergies_id IS
     'Foreign key to the assessment_drug_allergies table.';
-COMMENT ON COLUMN assessment_drug_allergy_item.allergen IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.allergen IS
     'Allergen.';
-COMMENT ON COLUMN assessment_drug_allergy_item.reaction_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.reaction_type IS
     'Reaction type.';
-COMMENT ON COLUMN assessment_drug_allergy_item.timing IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.timing IS
     'Timing.';
-COMMENT ON COLUMN assessment_drug_allergy_item.alternatives_tolerated IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.alternatives_tolerated IS
     'Alternatives tolerated.';
-COMMENT ON COLUMN assessment_drug_allergy_item.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_drug_allergy_item.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_drug_allergy_item.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_drug_allergy_item.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_drug_allergy_item.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_drug_allergy_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -470,13 +487,13 @@ COMMENT ON COLUMN assessment_drug_allergy_item.deleted_at IS
 -- BEGIN 07_create_table_allergy_assessment_food_allergies.sql
 -- ========================================================================
 
-CREATE TABLE assessment_food_allergies (
+CREATE TABLE allergy_assessment.assessment_food_allergies (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     has_food_allergies VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_food_allergies IN ('yes', 'no', '')),
     ige_type VARCHAR(20) NOT NULL DEFAULT ''
@@ -487,32 +504,32 @@ CREATE TABLE assessment_food_allergies (
 );
 
 CREATE TRIGGER trigger_assessment_food_allergies_updated_at
-    BEFORE UPDATE ON assessment_food_allergies
+    BEFORE UPDATE ON allergy_assessment.assessment_food_allergies
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_food_allergies IS
+COMMENT ON TABLE allergy_assessment.assessment_food_allergies IS
     'Food allergies section header including IgE classification. One-to-one child of assessment.';
 
 -- Individual food allergy items (one-to-many child)
 
-COMMENT ON COLUMN assessment_food_allergies.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_food_allergies.has_food_allergies IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.has_food_allergies IS
     'Has food allergies. One of: yes, no.';
-COMMENT ON COLUMN assessment_food_allergies.ige_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.ige_type IS
     'Ige type. One of: IgE-mediated, non-IgE-mediated, mixed, unknown.';
-COMMENT ON COLUMN assessment_food_allergies.oral_allergy_syndrome IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.oral_allergy_syndrome IS
     'Oral allergy syndrome. One of: yes, no.';
-COMMENT ON COLUMN assessment_food_allergies.dietary_restrictions IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.dietary_restrictions IS
     'Dietary restrictions.';
-COMMENT ON COLUMN assessment_food_allergies.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_food_allergies.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_food_allergies.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_food_allergies.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -523,13 +540,13 @@ COMMENT ON COLUMN assessment_food_allergies.deleted_at IS
 -- BEGIN 08_create_table_allergy_assessment_food_allergy_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_food_allergy_item (
+CREATE TABLE allergy_assessment.assessment_food_allergy_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     food_allergies_id UUID NOT NULL
-        REFERENCES assessment_food_allergies(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_food_allergies(id) ON DELETE CASCADE,
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     reaction_type VARCHAR(255) NOT NULL DEFAULT '',
     severity VARCHAR(20) NOT NULL DEFAULT ''
@@ -540,50 +557,50 @@ CREATE TABLE assessment_food_allergy_item (
 );
 
 CREATE TRIGGER trigger_assessment_food_allergy_item_updated_at
-    BEFORE UPDATE ON assessment_food_allergy_item
+    BEFORE UPDATE ON allergy_assessment.assessment_food_allergy_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_food_allergy_item IS
+COMMENT ON TABLE allergy_assessment.assessment_food_allergy_item IS
     'Individual food allergy entry with allergen, reaction type, and severity.';
 
-COMMENT ON COLUMN assessment_food_allergies.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_food_allergies.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_food_allergies.has_food_allergies IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.has_food_allergies IS
     'Has food allergies. One of: yes, no.';
-COMMENT ON COLUMN assessment_food_allergies.ige_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.ige_type IS
     'Ige type. One of: IgE-mediated, non-IgE-mediated, mixed, unknown.';
-COMMENT ON COLUMN assessment_food_allergies.oral_allergy_syndrome IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.oral_allergy_syndrome IS
     'Oral allergy syndrome. One of: yes, no.';
-COMMENT ON COLUMN assessment_food_allergies.dietary_restrictions IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.dietary_restrictions IS
     'Dietary restrictions.';
-COMMENT ON COLUMN assessment_food_allergies.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_food_allergies.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_food_allergy_item.food_allergies_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.food_allergies_id IS
     'Foreign key to the assessment_food_allergies table.';
-COMMENT ON COLUMN assessment_food_allergy_item.allergen IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.allergen IS
     'Allergen.';
-COMMENT ON COLUMN assessment_food_allergy_item.reaction_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.reaction_type IS
     'Reaction type.';
-COMMENT ON COLUMN assessment_food_allergy_item.severity IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.severity IS
     'Severity. One of: mild, moderate, severe, anaphylaxis.';
-COMMENT ON COLUMN assessment_food_allergy_item.timing IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.timing IS
     'Timing.';
-COMMENT ON COLUMN assessment_food_allergy_item.alternatives_tolerated IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.alternatives_tolerated IS
     'Alternatives tolerated.';
-COMMENT ON COLUMN assessment_food_allergy_item.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_food_allergy_item.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_food_allergy_item.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_food_allergy_item.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_food_allergy_item.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_food_allergy_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -594,13 +611,13 @@ COMMENT ON COLUMN assessment_food_allergy_item.deleted_at IS
 -- BEGIN 09_create_table_allergy_assessment_anaphylaxis_history.sql
 -- ========================================================================
 
-CREATE TABLE assessment_anaphylaxis_history (
+CREATE TABLE allergy_assessment.assessment_anaphylaxis_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     has_anaphylaxis_history VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (has_anaphylaxis_history IN ('yes', 'no', '')),
     number_of_episodes INTEGER
@@ -612,32 +629,32 @@ CREATE TABLE assessment_anaphylaxis_history (
 );
 
 CREATE TRIGGER trigger_assessment_anaphylaxis_history_updated_at
-    BEFORE UPDATE ON assessment_anaphylaxis_history
+    BEFORE UPDATE ON allergy_assessment.assessment_anaphylaxis_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_anaphylaxis_history IS
+COMMENT ON TABLE allergy_assessment.assessment_anaphylaxis_history IS
     'Anaphylaxis history section including auto-injector and action plan status. One-to-one child of assessment.';
 
 -- Individual anaphylaxis episode items (one-to-many child)
 
-COMMENT ON COLUMN assessment_anaphylaxis_history.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.has_anaphylaxis_history IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.has_anaphylaxis_history IS
     'Has anaphylaxis history. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.number_of_episodes IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.number_of_episodes IS
     'Number of episodes.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.adrenaline_auto_injector_prescribed IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.adrenaline_auto_injector_prescribed IS
     'Adrenaline auto injector prescribed. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.action_plan_in_place IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.action_plan_in_place IS
     'Action plan in place. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -648,13 +665,13 @@ COMMENT ON COLUMN assessment_anaphylaxis_history.deleted_at IS
 -- BEGIN 10_create_table_allergy_assessment_anaphylaxis_episode.sql
 -- ========================================================================
 
-CREATE TABLE assessment_anaphylaxis_episode (
+CREATE TABLE allergy_assessment.assessment_anaphylaxis_episode (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     anaphylaxis_history_id UUID NOT NULL
-        REFERENCES assessment_anaphylaxis_history(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_anaphylaxis_history(id) ON DELETE CASCADE,
     trigger_description TEXT NOT NULL DEFAULT '',
     symptoms TEXT NOT NULL DEFAULT '',
     treatment_required TEXT NOT NULL DEFAULT '',
@@ -662,46 +679,46 @@ CREATE TABLE assessment_anaphylaxis_episode (
 );
 
 CREATE TRIGGER trigger_assessment_anaphylaxis_episode_updated_at
-    BEFORE UPDATE ON assessment_anaphylaxis_episode
+    BEFORE UPDATE ON allergy_assessment.assessment_anaphylaxis_episode
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_anaphylaxis_episode IS
+COMMENT ON TABLE allergy_assessment.assessment_anaphylaxis_episode IS
     'Individual anaphylaxis episode with trigger, symptoms, and treatment details.';
 
-COMMENT ON COLUMN assessment_anaphylaxis_history.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.has_anaphylaxis_history IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.has_anaphylaxis_history IS
     'Has anaphylaxis history. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.number_of_episodes IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.number_of_episodes IS
     'Number of episodes.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.adrenaline_auto_injector_prescribed IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.adrenaline_auto_injector_prescribed IS
     'Adrenaline auto injector prescribed. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.action_plan_in_place IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.action_plan_in_place IS
     'Action plan in place. One of: yes, no.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_anaphylaxis_history.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.anaphylaxis_history_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.anaphylaxis_history_id IS
     'Foreign key to the assessment_anaphylaxis_history table.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.trigger_description IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.trigger_description IS
     'Trigger description.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.symptoms IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.symptoms IS
     'Symptoms.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.treatment_required IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.treatment_required IS
     'Treatment required.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_anaphylaxis_episode.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_anaphylaxis_episode.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -712,13 +729,13 @@ COMMENT ON COLUMN assessment_anaphylaxis_episode.deleted_at IS
 -- BEGIN 11_create_table_allergy_assessment_testing_results.sql
 -- ========================================================================
 
-CREATE TABLE assessment_testing_results (
+CREATE TABLE allergy_assessment.assessment_testing_results (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     skin_prick_tests_done VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (skin_prick_tests_done IN ('yes', 'no', '')),
     specific_ige_done VARCHAR(5) NOT NULL DEFAULT ''
@@ -732,34 +749,34 @@ CREATE TABLE assessment_testing_results (
 );
 
 CREATE TRIGGER trigger_assessment_testing_results_updated_at
-    BEFORE UPDATE ON assessment_testing_results
+    BEFORE UPDATE ON allergy_assessment.assessment_testing_results
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_testing_results IS
+COMMENT ON TABLE allergy_assessment.assessment_testing_results IS
     'Testing results section: which allergy tests have been performed. One-to-one child of assessment.';
 
 -- Individual test result items (one-to-many child)
 
-COMMENT ON COLUMN assessment_testing_results.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_testing_results.skin_prick_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.skin_prick_tests_done IS
     'Skin prick tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.specific_ige_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.specific_ige_done IS
     'Specific ige done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.component_resolved_diagnostics_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.component_resolved_diagnostics_done IS
     'Component resolved diagnostics done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.challenge_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.challenge_tests_done IS
     'Challenge tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.patch_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.patch_tests_done IS
     'Patch tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_testing_results.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_testing_results.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_testing_results.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -770,13 +787,13 @@ COMMENT ON COLUMN assessment_testing_results.deleted_at IS
 -- BEGIN 12_create_table_allergy_assessment_test_result_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_test_result_item (
+CREATE TABLE allergy_assessment.assessment_test_result_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     testing_results_id UUID NOT NULL
-        REFERENCES assessment_testing_results(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_testing_results(id) ON DELETE CASCADE,
     test_type VARCHAR(255) NOT NULL DEFAULT '',
     allergen VARCHAR(255) NOT NULL DEFAULT '',
     result VARCHAR(255) NOT NULL DEFAULT '',
@@ -784,48 +801,48 @@ CREATE TABLE assessment_test_result_item (
 );
 
 CREATE TRIGGER trigger_assessment_test_result_item_updated_at
-    BEFORE UPDATE ON assessment_test_result_item
+    BEFORE UPDATE ON allergy_assessment.assessment_test_result_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_test_result_item IS
+COMMENT ON TABLE allergy_assessment.assessment_test_result_item IS
     'Individual test result entry with test type, allergen tested, and result.';
 
-COMMENT ON COLUMN assessment_testing_results.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_testing_results.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_testing_results.skin_prick_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.skin_prick_tests_done IS
     'Skin prick tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.specific_ige_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.specific_ige_done IS
     'Specific ige done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.component_resolved_diagnostics_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.component_resolved_diagnostics_done IS
     'Component resolved diagnostics done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.challenge_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.challenge_tests_done IS
     'Challenge tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.patch_tests_done IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.patch_tests_done IS
     'Patch tests done. One of: yes, no.';
-COMMENT ON COLUMN assessment_testing_results.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_testing_results.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_testing_results.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_test_result_item.testing_results_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.testing_results_id IS
     'Foreign key to the assessment_testing_results table.';
-COMMENT ON COLUMN assessment_test_result_item.test_type IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.test_type IS
     'Test type.';
-COMMENT ON COLUMN assessment_test_result_item.allergen IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.allergen IS
     'Allergen.';
-COMMENT ON COLUMN assessment_test_result_item.result IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.result IS
     'Result.';
-COMMENT ON COLUMN assessment_test_result_item.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_test_result_item.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_test_result_item.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_test_result_item.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_test_result_item.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_test_result_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -836,13 +853,13 @@ COMMENT ON COLUMN assessment_test_result_item.deleted_at IS
 -- BEGIN 13_create_table_allergy_assessment_current_management.sql
 -- ========================================================================
 
-CREATE TABLE assessment_current_management (
+CREATE TABLE allergy_assessment.assessment_current_management (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     antihistamines VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (antihistamines IN ('yes', 'no', '')),
     antihistamine_details TEXT NOT NULL DEFAULT '',
@@ -860,42 +877,42 @@ CREATE TABLE assessment_current_management (
 );
 
 CREATE TRIGGER trigger_assessment_current_management_updated_at
-    BEFORE UPDATE ON assessment_current_management
+    BEFORE UPDATE ON allergy_assessment.assessment_current_management
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_current_management IS
+COMMENT ON TABLE allergy_assessment.assessment_current_management IS
     'Current allergy management: medications, immunotherapy, biologics, and avoidance strategies. One-to-one child of assessment.';
 
 -- Other medications (one-to-many child)
 
-COMMENT ON COLUMN assessment_current_management.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_current_management.antihistamines IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamines IS
     'Antihistamines. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.antihistamine_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamine_details IS
     'Antihistamine details.';
-COMMENT ON COLUMN assessment_current_management.nasal_steroids IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.nasal_steroids IS
     'Nasal steroids. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.adrenaline_auto_injector IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.adrenaline_auto_injector IS
     'Adrenaline auto injector. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy IS
     'Immunotherapy. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy_details IS
     'Immunotherapy details.';
-COMMENT ON COLUMN assessment_current_management.biologics IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologics IS
     'Biologics. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.biologic_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologic_details IS
     'Biologic details.';
-COMMENT ON COLUMN assessment_current_management.allergen_avoidance_strategies IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.allergen_avoidance_strategies IS
     'Allergen avoidance strategies.';
-COMMENT ON COLUMN assessment_current_management.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_management.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_management.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_current_management.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -906,13 +923,13 @@ COMMENT ON COLUMN assessment_current_management.deleted_at IS
 -- BEGIN 14_create_table_allergy_assessment_other_medication.sql
 -- ========================================================================
 
-CREATE TABLE assessment_other_medication (
+CREATE TABLE allergy_assessment.assessment_other_medication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     current_management_id UUID NOT NULL
-        REFERENCES assessment_current_management(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment_current_management(id) ON DELETE CASCADE,
     medication_name VARCHAR(255) NOT NULL DEFAULT '',
     dose VARCHAR(255) NOT NULL DEFAULT '',
     frequency VARCHAR(255) NOT NULL DEFAULT '',
@@ -920,56 +937,56 @@ CREATE TABLE assessment_other_medication (
 );
 
 CREATE TRIGGER trigger_assessment_other_medication_updated_at
-    BEFORE UPDATE ON assessment_other_medication
+    BEFORE UPDATE ON allergy_assessment.assessment_other_medication
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_other_medication IS
+COMMENT ON TABLE allergy_assessment.assessment_other_medication IS
     'Other medications the patient is taking, with name, dose, and frequency.';
 
-COMMENT ON COLUMN assessment_current_management.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_current_management.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_current_management.antihistamines IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamines IS
     'Antihistamines. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.antihistamine_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.antihistamine_details IS
     'Antihistamine details.';
-COMMENT ON COLUMN assessment_current_management.nasal_steroids IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.nasal_steroids IS
     'Nasal steroids. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.adrenaline_auto_injector IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.adrenaline_auto_injector IS
     'Adrenaline auto injector. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy IS
     'Immunotherapy. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.immunotherapy_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.immunotherapy_details IS
     'Immunotherapy details.';
-COMMENT ON COLUMN assessment_current_management.biologics IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologics IS
     'Biologics. One of: yes, no.';
-COMMENT ON COLUMN assessment_current_management.biologic_details IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.biologic_details IS
     'Biologic details.';
-COMMENT ON COLUMN assessment_current_management.allergen_avoidance_strategies IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.allergen_avoidance_strategies IS
     'Allergen avoidance strategies.';
-COMMENT ON COLUMN assessment_current_management.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_current_management.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_current_management.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_other_medication.current_management_id IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.current_management_id IS
     'Foreign key to the assessment_current_management table.';
-COMMENT ON COLUMN assessment_other_medication.medication_name IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.medication_name IS
     'Medication name.';
-COMMENT ON COLUMN assessment_other_medication.dose IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.dose IS
     'Dose.';
-COMMENT ON COLUMN assessment_other_medication.frequency IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.frequency IS
     'Frequency.';
-COMMENT ON COLUMN assessment_other_medication.sort_order IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.sort_order IS
     'Sort order.';
-COMMENT ON COLUMN assessment_other_medication.id IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_other_medication.created_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_other_medication.updated_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_other_medication.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.assessment_other_medication.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -980,13 +997,13 @@ COMMENT ON COLUMN assessment_other_medication.deleted_at IS
 -- BEGIN 15_create_table_allergy_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE allergy_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.assessment(id) ON DELETE CASCADE,
     severity_level VARCHAR(10) NOT NULL DEFAULT 'mild'
         CHECK (severity_level IN ('mild', 'moderate', 'severe')),
     allergy_burden_score INTEGER NOT NULL DEFAULT 0
@@ -995,28 +1012,28 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON allergy_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE allergy_assessment.grade IS
     'Computed allergy severity grading result. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.severity_level IS
+COMMENT ON COLUMN allergy_assessment.grade.severity_level IS
     'Overall severity classification: mild, moderate, or severe.';
-COMMENT ON COLUMN grade.allergy_burden_score IS
+COMMENT ON COLUMN allergy_assessment.grade.allergy_burden_score IS
     'Weighted allergy burden score across all allergen categories.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN allergy_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN allergy_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN allergy_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN allergy_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN allergy_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1027,13 +1044,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 16_create_table_allergy_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE allergy_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -1042,30 +1059,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON allergy_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE allergy_assessment.grading_fired_rule IS
     'Individual allergy severity classification rules that evaluated to true during grading.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. AN-001, DA-002).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Anaphylaxis, Drug Allergy, Environmental).';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.severity_level IS
     'Severity level contributed by this rule: mild, moderate, or severe.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.description IS
     'Description.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -1076,13 +1093,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 17_create_table_allergy_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE allergy_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES allergy_assessment.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -1091,30 +1108,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON allergy_assessment.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION allergy_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE allergy_assessment.grading_additional_flag IS
     'Additional safety-critical flags detected during allergy assessment grading.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-ANAPH-001, FLAG-LATEX-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.category IS
     'Category of the flag (e.g. Anaphylaxis, Drug Allergy, Environmental).';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.message IS
     'Message.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN allergy_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

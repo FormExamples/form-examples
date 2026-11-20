@@ -92,15 +92,16 @@ def split_top_level_commas(body: str):
 
 
 def parse_create_tables(sql_text: str):
-    """Return [(table_name, [column_dict])] in source order."""
+    """Return [(table_name, [column_dict], "schema." or "")] in source order."""
     tables = []
     for m in re.finditer(
-        r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s*\((.*?)\)\s*;",
+        r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+\.)?(\w+)\s*\((.*?)\)\s*;",
         sql_text,
         re.DOTALL | re.IGNORECASE,
     ):
-        name = m.group(1)
-        body = m.group(2)
+        schema = m.group(1) or ""
+        name = m.group(2)
+        body = m.group(3)
         cols = []
         for piece in split_top_level_commas(body):
             if not piece:
@@ -122,7 +123,7 @@ def parse_create_tables(sql_text: str):
 
             fk_target = None
             fk_match = re.search(
-                r"REFERENCES\s+(\w+)\s*\(\s*\w+\s*\)",
+                r"REFERENCES\s+(?:\w+\.)?(\w+)\s*\(\s*\w+\s*\)",
                 piece,
                 re.IGNORECASE,
             )
@@ -144,7 +145,7 @@ def parse_create_tables(sql_text: str):
                 "fk_target": fk_target,
                 "check_values": check_values,
             })
-        tables.append((name, cols))
+        tables.append((name, cols, schema))
     return tables
 
 
@@ -152,13 +153,13 @@ def find_existing_comments(sql_text: str):
     tables = set()
     cols = set()
     for m in re.finditer(
-        r"COMMENT\s+ON\s+TABLE\s+(\w+)",
+        r"COMMENT\s+ON\s+TABLE\s+(?:\w+\.)?(\w+)",
         sql_text,
         re.IGNORECASE,
     ):
         tables.add(m.group(1).lower())
     for m in re.finditer(
-        r"COMMENT\s+ON\s+COLUMN\s+(\w+)\.(\w+)",
+        r"COMMENT\s+ON\s+COLUMN\s+(?:\w+\.)?(\w+)\.(\w+)",
         sql_text,
         re.IGNORECASE,
     ):
@@ -194,10 +195,10 @@ def comment_for_column(col) -> str:
 
 def render_missing_comments(tables, existing_tables, existing_cols):
     out_lines = []
-    for table_name, cols in tables:
+    for table_name, cols, schema in tables:
         if table_name.lower() not in existing_tables:
             out_lines.append(
-                f"COMMENT ON TABLE {table_name} IS\n"
+                f"COMMENT ON TABLE {schema}{table_name} IS\n"
                 f"    '{sql_escape(comment_for_table(table_name))}';"
             )
         for col in cols:
@@ -205,7 +206,7 @@ def render_missing_comments(tables, existing_tables, existing_cols):
             if key in existing_cols:
                 continue
             out_lines.append(
-                f"COMMENT ON COLUMN {table_name}.{col['name']} IS\n"
+                f"COMMENT ON COLUMN {schema}{table_name}.{col['name']} IS\n"
                 f"    '{sql_escape(comment_for_column(col))}';"
             )
     return out_lines

@@ -4,14 +4,14 @@
 -- bleeding-risk input. The computed score, fired rules, and flags live
 -- in dedicated child tables.
 
-CREATE TABLE caprini_venous_thromboembolism_risk_assessment (
+CREATE TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES caprini_venous_thromboembolism_risk_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES caprini_venous_thromboembolism_risk_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -77,118 +77,118 @@ CREATE TABLE caprini_venous_thromboembolism_risk_assessment (
 );
 
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_patient_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment (patient_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (patient_id);
 CREATE INDEX caprini_venous_thromboembolism_risk_assessment_clinician_id_idx
-    ON caprini_venous_thromboembolism_risk_assessment (clinician_id);
+    ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment (clinician_id);
 
 CREATE TRIGGER trigger_caprini_venous_thromboembolism_risk_assessment_updated_at
-    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment
+    BEFORE UPDATE ON caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION caprini_venous_thromboembolism_risk_assessment.set_updated_at();
 
-COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment IS
+COMMENT ON TABLE caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment IS
     'Main Caprini VTE risk-assessment record: assessment context, patient identification, age band, weighted yes/no risk-factor inputs (1-, 2-, 3-, and 5-point groups), and the bleeding-risk input.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.created_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.updated_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.deleted_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_id IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_name IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinician_role IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinician_role IS
     'Role of the assessing clinician: doctor, surgeon, nurse, pharmacist, or other.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.assessed_at IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.care_setting IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.care_setting IS
     'Care setting: surgical-ward, medical-ward, pre-operative-clinic, or other.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.admission_type IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.admission_type IS
     'Admission type: surgical or medical.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.patient_identifier IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.age_band IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.age_band IS
     'Age band contributing weight: under-41 (0), 41-60 (1), 61-74 (2), or 75-plus (3).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.sex IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.minor_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.minor_surgery IS
     '1-point factor — minor surgery planned or performed.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.recent_major_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.recent_major_surgery IS
     '1-point factor — major surgery within the past month.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.varicose_veins IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.varicose_veins IS
     '1-point factor — varicose veins.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.inflammatory_bowel_disease IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.inflammatory_bowel_disease IS
     '1-point factor — inflammatory bowel disease.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.swollen_legs IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.swollen_legs IS
     '1-point factor — swollen legs (current).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.obesity IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.obesity IS
     '1-point factor — obesity (BMI >= 30).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.acute_myocardial_infarction IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.acute_myocardial_infarction IS
     '1-point factor — acute myocardial infarction.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.congestive_heart_failure IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.congestive_heart_failure IS
     '1-point factor — congestive heart failure (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.sepsis IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.sepsis IS
     '1-point factor — sepsis (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.serious_lung_disease IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.serious_lung_disease IS
     '1-point factor — serious lung disease including pneumonia (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.abnormal_pulmonary_function IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.abnormal_pulmonary_function IS
     '1-point factor — abnormal pulmonary function (e.g. COPD).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.medical_patient_bed_rest IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.medical_patient_bed_rest IS
     '1-point factor — medical patient currently on bed rest.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.oral_contraceptive_or_hrt IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.oral_contraceptive_or_hrt IS
     '1-point factor — oral contraceptive or hormone replacement therapy.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.pregnancy_or_postpartum IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.pregnancy_or_postpartum IS
     '1-point factor — pregnancy or postpartum (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.adverse_pregnancy_history IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.adverse_pregnancy_history IS
     '1-point factor — history of unexplained or recurrent spontaneous abortion.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.arthroscopic_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.arthroscopic_surgery IS
     '2-point factor — arthroscopic surgery.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.major_open_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.major_open_surgery IS
     '2-point factor — major open surgery (> 45 minutes).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.laparoscopic_surgery IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.laparoscopic_surgery IS
     '2-point factor — laparoscopic surgery (> 45 minutes).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.malignancy IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.malignancy IS
     '2-point factor — malignancy (present or previous).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.confined_to_bed IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.confined_to_bed IS
     '2-point factor — confined to bed (> 72 hours).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.immobilising_cast IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.immobilising_cast IS
     '2-point factor — immobilising plaster cast.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.central_venous_access IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.central_venous_access IS
     '2-point factor — central venous access.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.history_of_vte IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.history_of_vte IS
     '3-point factor — personal history of venous thromboembolism.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.family_history_of_thrombosis IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.family_history_of_thrombosis IS
     '3-point factor — family history of thrombosis.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.factor_v_leiden IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.factor_v_leiden IS
     '3-point factor — Factor V Leiden mutation.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.prothrombin_20210a IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.prothrombin_20210a IS
     '3-point factor — prothrombin 20210A mutation.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.lupus_anticoagulant IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.lupus_anticoagulant IS
     '3-point factor — lupus anticoagulant positive.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.anticardiolipin_antibodies IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.anticardiolipin_antibodies IS
     '3-point factor — elevated anticardiolipin antibodies.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.elevated_homocysteine IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.elevated_homocysteine IS
     '3-point factor — elevated serum homocysteine.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.heparin_induced_thrombocytopenia IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.heparin_induced_thrombocytopenia IS
     '3-point factor — heparin-induced thrombocytopenia (HIT).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.other_thrombophilia IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.other_thrombophilia IS
     '3-point factor — other congenital or acquired thrombophilia.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.stroke IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.stroke IS
     '5-point factor — stroke (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.elective_arthroplasty IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.elective_arthroplasty IS
     '5-point factor — elective major lower-extremity arthroplasty.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.hip_pelvis_leg_fracture IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.hip_pelvis_leg_fracture IS
     '5-point factor — hip, pelvis, or leg fracture.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.acute_spinal_cord_injury IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.acute_spinal_cord_injury IS
     '5-point factor — acute spinal cord injury with paralysis (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.multiple_trauma IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.multiple_trauma IS
     '5-point factor — multiple trauma (within the past month).';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.high_bleeding_risk IS
     'Bleeding-risk input — an active or high risk of bleeding that contraindicates pharmacological prophylaxis.';
-COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.clinical_note IS
+COMMENT ON COLUMN caprini_venous_thromboembolism_risk_assessment.caprini_venous_thromboembolism_risk_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';

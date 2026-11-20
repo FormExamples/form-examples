@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS four_a_test_for_delirium;
+
+COMMENT ON SCHEMA four_a_test_for_delirium IS
+    'Namespace for the 4AT — Rapid Delirium and Cognitive-Impairment Screen form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION four_a_test_for_delirium.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION four_a_test_for_delirium.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE four_a_test_for_delirium.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON four_a_test_for_delirium.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE four_a_test_for_delirium.patient IS
     'Patient demographic information used by the 4AT delirium screen record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN four_a_test_for_delirium.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON four_a_test_for_delirium.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- practitioner who completed the 4AT screen (doctor, nurse, healthcare
 -- assistant, allied health professional).
 
-CREATE TABLE clinician (
+CREATE TABLE four_a_test_for_delirium.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON four_a_test_for_delirium.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE four_a_test_for_delirium.clinician IS
     'Clinician identifying information for the practitioner who completed the 4AT screen.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.role IS
     'Primary clinical role: doctor, nurse, healthcare-assistant, allied-health-professional, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN four_a_test_for_delirium.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON four_a_test_for_delirium.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- computed grade, fired rules, and flags live in dedicated child
 -- tables.
 
-CREATE TABLE four_a_test_for_delirium (
+CREATE TABLE four_a_test_for_delirium.four_a_test_for_delirium (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES four_a_test_for_delirium.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES four_a_test_for_delirium.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: patient and assessment identification
     patient_identifier VARCHAR(100) NOT NULL DEFAULT '',
@@ -245,56 +262,56 @@ CREATE TABLE four_a_test_for_delirium (
 );
 
 CREATE INDEX four_a_test_for_delirium_patient_id_idx
-    ON four_a_test_for_delirium (patient_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium (patient_id);
 CREATE INDEX four_a_test_for_delirium_clinician_id_idx
-    ON four_a_test_for_delirium (clinician_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium (clinician_id);
 
 CREATE TRIGGER trigger_four_a_test_for_delirium_updated_at
-    BEFORE UPDATE ON four_a_test_for_delirium
+    BEFORE UPDATE ON four_a_test_for_delirium.four_a_test_for_delirium
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE four_a_test_for_delirium IS
+COMMENT ON TABLE four_a_test_for_delirium.four_a_test_for_delirium IS
     'Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course).';
-COMMENT ON COLUMN four_a_test_for_delirium.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN four_a_test_for_delirium.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN four_a_test_for_delirium.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN four_a_test_for_delirium.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN four_a_test_for_delirium.clinician_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_identifier IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.patient_name IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.patient_name IS
     'Patient name as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.date_of_birth IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.date_of_birth IS
     'Patient date of birth as recorded on the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessment_date IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessment_date IS
     'Date the 4AT assessment was performed.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessment_time IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessment_time IS
     'Time of day the 4AT assessment was performed.';
-COMMENT ON COLUMN four_a_test_for_delirium.setting IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.setting IS
     'Care setting: acute, ed (emergency department), periop, careHome, community, or other.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessor_name IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessor_name IS
     'Name of the practitioner who completed the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.assessor_role IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.assessor_role IS
     'Free-text role of the practitioner who completed the assessment.';
-COMMENT ON COLUMN four_a_test_for_delirium.alertness IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.alertness IS
     'Item 1 — observed alertness: normal, mildTransient (brief sleepiness then normal), or abnormal (markedly drowsy or agitated).';
-COMMENT ON COLUMN four_a_test_for_delirium.amt4 IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.amt4 IS
     'Item 2 — AMT4 mistake band across age, date of birth, place, and current year: noMistakes, oneMistake, or twoOrMoreOrUntestable.';
-COMMENT ON COLUMN four_a_test_for_delirium.attention_months IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.attention_months IS
     'Item 3 — attention via reciting the months backwards: sevenOrMore correct, startsButUnderSevenOrRefuses, or untestable.';
-COMMENT ON COLUMN four_a_test_for_delirium.acute_change IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.acute_change IS
     'Item 4 — presence of acute change or fluctuating course over the last 2 weeks still evident in the last 24 hours: no or yes.';
-COMMENT ON COLUMN four_a_test_for_delirium.acute_change_source IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.acute_change_source IS
     'Source of the item 4 acute-change information: patient, collateral, records, or none.';
-COMMENT ON COLUMN four_a_test_for_delirium.clinical_notes IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium.clinical_notes IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -308,14 +325,14 @@ COMMENT ON COLUMN four_a_test_for_delirium.clinical_notes IS
 -- Computed 4AT grading result. Stores each item's sub-score, the summed
 -- total (0-12), and the derived interpretation band.
 
-CREATE TABLE four_a_test_for_delirium_grade (
+CREATE TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     four_a_test_for_delirium_id UUID NOT NULL UNIQUE
-        REFERENCES four_a_test_for_delirium(id) ON DELETE CASCADE,
+        REFERENCES four_a_test_for_delirium.four_a_test_for_delirium(id) ON DELETE CASCADE,
 
     item1_score INT,
     item2_score INT,
@@ -329,35 +346,35 @@ CREATE TABLE four_a_test_for_delirium_grade (
 );
 
 CREATE TRIGGER trigger_four_a_test_for_delirium_grade_updated_at
-    BEFORE UPDATE ON four_a_test_for_delirium_grade
+    BEFORE UPDATE ON four_a_test_for_delirium.four_a_test_for_delirium_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE four_a_test_for_delirium_grade IS
+COMMENT ON TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade IS
     'Computed 4AT grading result: per-item sub-scores, summed total (0-12), and derived interpretation band.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.four_a_test_for_delirium_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.four_a_test_for_delirium_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.item1_score IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.item1_score IS
     'Sub-score for item 1, alertness (0 or 4).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.item2_score IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.item2_score IS
     'Sub-score for item 2, AMT4 (0, 1, or 2).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.item3_score IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.item3_score IS
     'Sub-score for item 3, attention via months backwards (0, 1, or 2).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.item4_score IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.item4_score IS
     'Sub-score for item 4, acute change or fluctuating course (0 or 4).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.total_score IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.total_score IS
     'Summed 4AT score across the four items (0-12 when complete).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.interpretation IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.interpretation IS
     'Derived interpretation band: delirium-unlikely (0), possible-cognitive-impairment (1-3), or possible-delirium (>= 4).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade.graded_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -372,14 +389,14 @@ COMMENT ON COLUMN four_a_test_for_delirium_grade.graded_at IS
 -- Each row records one rule firing with the item it belongs to, the
 -- points it contributed, and a human-readable description.
 
-CREATE TABLE four_a_test_for_delirium_grade_rule (
+CREATE TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     four_a_test_for_delirium_grade_id UUID NOT NULL
-        REFERENCES four_a_test_for_delirium_grade(id) ON DELETE CASCADE,
+        REFERENCES four_a_test_for_delirium.four_a_test_for_delirium_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     item VARCHAR(20) NOT NULL
@@ -390,34 +407,34 @@ CREATE TABLE four_a_test_for_delirium_grade_rule (
 );
 
 CREATE INDEX four_a_test_for_delirium_grade_rule_grade_id_idx
-    ON four_a_test_for_delirium_grade_rule (four_a_test_for_delirium_grade_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium_grade_rule (four_a_test_for_delirium_grade_id);
 
 CREATE TRIGGER trigger_four_a_test_for_delirium_grade_rule_updated_at
-    BEFORE UPDATE ON four_a_test_for_delirium_grade_rule
+    BEFORE UPDATE ON four_a_test_for_delirium.four_a_test_for_delirium_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE four_a_test_for_delirium_grade_rule IS
+COMMENT ON TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade_rule IS
     'Audit trail of every grading rule that fired during 4AT computation: item, points contributed, category, and description.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.four_a_test_for_delirium_grade_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.four_a_test_for_delirium_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.rule_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ALERTNESS-4POINT-01).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.item IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.item IS
     'Scored item the rule belongs to: alertness, amt4, attention, acute-change, or band.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.points IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.points IS
     'Points contributed by this rule for its item.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.category IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.category IS
     'Subject category (e.g. item-score, band-assignment).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.description IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -431,14 +448,14 @@ COMMENT ON COLUMN four_a_test_for_delirium_grade_rule.description IS
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE four_a_test_for_delirium_grade_flag (
+CREATE TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     four_a_test_for_delirium_grade_id UUID NOT NULL
-        REFERENCES four_a_test_for_delirium_grade(id) ON DELETE CASCADE,
+        REFERENCES four_a_test_for_delirium.four_a_test_for_delirium_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -458,34 +475,34 @@ CREATE TABLE four_a_test_for_delirium_grade_flag (
 );
 
 CREATE INDEX four_a_test_for_delirium_grade_flag_grade_id_idx
-    ON four_a_test_for_delirium_grade_flag (four_a_test_for_delirium_grade_id);
+    ON four_a_test_for_delirium.four_a_test_for_delirium_grade_flag (four_a_test_for_delirium_grade_id);
 
 CREATE TRIGGER trigger_four_a_test_for_delirium_grade_flag_updated_at
-    BEFORE UPDATE ON four_a_test_for_delirium_grade_flag
+    BEFORE UPDATE ON four_a_test_for_delirium.four_a_test_for_delirium_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION four_a_test_for_delirium.set_updated_at();
 
-COMMENT ON TABLE four_a_test_for_delirium_grade_flag IS
+COMMENT ON TABLE four_a_test_for_delirium.four_a_test_for_delirium_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.created_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.updated_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.deleted_at IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.four_a_test_for_delirium_grade_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.four_a_test_for_delirium_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.flag_id IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-POSSIBLE-DELIRIUM-001).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.category IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.priority IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.description IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN four_a_test_for_delirium_grade_flag.suggested_action IS
+COMMENT ON COLUMN four_a_test_for_delirium.four_a_test_for_delirium_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "arrange full delirium work-up and precipitant search").';
 
 -- ========================================================================

@@ -1,11 +1,11 @@
-CREATE TABLE grading_fired_rule (
+CREATE TABLE ergonomic_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    grade_id   UUID NOT NULL REFERENCES grade(id) ON DELETE CASCADE,
+    grade_id   UUID NOT NULL REFERENCES ergonomic_assessment.grade(id) ON DELETE CASCADE,
     -- The rule that fired
-    rule_id             TEXT NOT NULL REFERENCES reba_rule(code),
+    rule_id             TEXT NOT NULL REFERENCES ergonomic_assessment.reba_rule(code),
     -- Denormalized fields from the rule at time of grading
     system              TEXT NOT NULL,
     description         TEXT NOT NULL,
@@ -14,26 +14,26 @@ CREATE TABLE grading_fired_rule (
     CONSTRAINT uq_grading_fired_rule UNIQUE (grade_id, rule_id)
 );
 
-CREATE INDEX index_grading_fired_rule_result ON grading_fired_rule(grade_id);
+CREATE INDEX index_grading_fired_rule_result ON ergonomic_assessment.grading_fired_rule(grade_id);
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE ergonomic_assessment.grading_fired_rule IS
     'Denormalized record of each REBA rule that fired during grading. Preserves exact context for clinical audit.';
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.grade_id IS
     'FK to the grading result this fired rule belongs to.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.rule_id IS
     'FK to the REBA rule that fired.';
-COMMENT ON COLUMN grading_fired_rule.system IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.system IS
     'Body system or category (denormalized from reba_rule at grading time).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.description IS
     'Rule description (denormalized from reba_rule at grading time).';
-COMMENT ON COLUMN grading_fired_rule.score IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.score IS
     'Score contribution (denormalized from reba_rule at grading time).';
 
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN ergonomic_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';

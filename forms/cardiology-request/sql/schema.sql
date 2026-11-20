@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS cardiology_request;
+
+COMMENT ON SCHEMA cardiology_request IS
+    'Namespace for the Cardiology Request form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION cardiology_request.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION cardiology_request.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE cardiology_request.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON cardiology_request.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE cardiology_request.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN cardiology_request.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN cardiology_request.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN cardiology_request.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN cardiology_request.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN cardiology_request.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN cardiology_request.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN cardiology_request.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN cardiology_request.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN cardiology_request.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cardiology_request.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN cardiology_request.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cardiology_request.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN cardiology_request.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN cardiology_request.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN cardiology_request.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN cardiology_request.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN cardiology_request.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON cardiology_request.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN cardiology_request.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Referring clinician (referrer into cardiology) information.
 
-CREATE TABLE clinician (
+CREATE TABLE cardiology_request.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON cardiology_request.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE cardiology_request.clinician IS
     'Referring clinician (referrer) who completes the cardiology referral request.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN cardiology_request.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN cardiology_request.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN cardiology_request.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN cardiology_request.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN cardiology_request.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN cardiology_request.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN cardiology_request.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN cardiology_request.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN cardiology_request.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN cardiology_request.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN cardiology_request.clinician.role IS
     'Clinician role: cardiologist, gp, hospital-doctor, physiologist, nurse, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN cardiology_request.clinician.registration_body IS
     'Clinician registration body: GMC, NMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN cardiology_request.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN cardiology_request.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON cardiology_request.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -209,14 +226,14 @@ CREATE INDEX clinician_index_gto
 
 -- Cardiology referral / consult request (referral into cardiology) — the source-of-truth record.
 
-CREATE TABLE cardiology_request (
+CREATE TABLE cardiology_request.cardiology_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES cardiology_request.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES cardiology_request.clinician(id) ON DELETE CASCADE,
 
     -- Referral lifecycle
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
@@ -278,98 +295,98 @@ CREATE TABLE cardiology_request (
 );
 
 CREATE INDEX index_cardiology_request_patient_id
-    ON cardiology_request(patient_id);
+    ON cardiology_request.cardiology_request(patient_id);
 CREATE INDEX index_cardiology_request_clinician_id
-    ON cardiology_request(clinician_id);
+    ON cardiology_request.cardiology_request(clinician_id);
 
 CREATE TRIGGER trigger_cardiology_request_updated_at
-    BEFORE UPDATE ON cardiology_request
+    BEFORE UPDATE ON cardiology_request.cardiology_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE cardiology_request IS
+COMMENT ON TABLE cardiology_request.cardiology_request IS
     'Cardiology referral / consult request (referral into cardiology). Captures the requested cardiology service and reason, the specific clinical question, presenting symptoms and functional class, acute red flags, investigations already performed (ECG, troponin, BNP), cardiac history and risk factors, and triage details. This is the source-of-truth record that the four-axis vetting grade is computed from.';
-COMMENT ON COLUMN cardiology_request.id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_request.created_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN cardiology_request.updated_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_request.deleted_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_request.patient_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.patient_id IS
     'Foreign key to the patient being referred.';
-COMMENT ON COLUMN cardiology_request.clinician_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.clinician_id IS
     'Foreign key to the referring clinician (referrer).';
-COMMENT ON COLUMN cardiology_request.status IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.status IS
     'Referral lifecycle status: draft, submitted, triaged, accepted, redirected, rejected.';
-COMMENT ON COLUMN cardiology_request.site_name IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.site_name IS
     'Name of the referring site / practice / ward.';
-COMMENT ON COLUMN cardiology_request.setting IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.setting IS
     'Care setting the referral originates from: outpatient, inpatient, community, emergency.';
-COMMENT ON COLUMN cardiology_request.referral_date IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.referral_date IS
     'Date the referral was made.';
-COMMENT ON COLUMN cardiology_request.requested_by_date IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.requested_by_date IS
     'Date by which the referrer requests the patient be seen.';
-COMMENT ON COLUMN cardiology_request.requested_service IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.requested_service IS
     'Requested cardiology service: general-cardiology, rapid-access-chest-pain, heart-failure, arrhythmia-ep, valve-clinic, inherited-cardiac-conditions, pre-operative-cardiac, other.';
-COMMENT ON COLUMN cardiology_request.referral_reason IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.referral_reason IS
     'Primary reason for referral: chest-pain, breathlessness, palpitations, syncope, heart-failure-symptoms, murmur-or-valve, abnormal-ecg, hypertension, arrhythmia, pre-operative-assessment, other.';
-COMMENT ON COLUMN cardiology_request.clinical_question IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.clinical_question IS
     'Specific clinical question the cardiology team is asked to answer.';
-COMMENT ON COLUMN cardiology_request.relevant_history IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.relevant_history IS
     'Relevant clinical history and context for the referral.';
-COMMENT ON COLUMN cardiology_request.symptom_chest_pain IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.symptom_chest_pain IS
     'Whether the patient has chest pain.';
-COMMENT ON COLUMN cardiology_request.chest_pain_character IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.chest_pain_character IS
     'Character of chest pain per the angina typicality model: typical-angina, atypical, non-anginal, none.';
-COMMENT ON COLUMN cardiology_request.symptom_breathlessness IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.symptom_breathlessness IS
     'Whether the patient has breathlessness / dyspnoea.';
-COMMENT ON COLUMN cardiology_request.nyha_class IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.nyha_class IS
     'New York Heart Association functional class for breathlessness: i, ii, iii, iv.';
-COMMENT ON COLUMN cardiology_request.symptom_palpitations IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.symptom_palpitations IS
     'Whether the patient has palpitations.';
-COMMENT ON COLUMN cardiology_request.symptom_syncope IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.symptom_syncope IS
     'Whether the patient has had syncope or blackout.';
-COMMENT ON COLUMN cardiology_request.symptom_oedema IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.symptom_oedema IS
     'Whether the patient has peripheral oedema.';
-COMMENT ON COLUMN cardiology_request.suspected_acs IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.suspected_acs IS
     'Red flag: suspected acute coronary syndrome (warrants emergency pathway, not routine referral).';
-COMMENT ON COLUMN cardiology_request.exertional_syncope IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.exertional_syncope IS
     'Red flag: syncope on exertion (possible structural / arrhythmic cause requiring urgent assessment).';
-COMMENT ON COLUMN cardiology_request.new_onset_heart_failure IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.new_onset_heart_failure IS
     'Red flag: new-onset heart failure (warrants urgent assessment per NICE).';
-COMMENT ON COLUMN cardiology_request.ecg_done IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.ecg_done IS
     'Whether a resting ECG has been performed prior to referral.';
-COMMENT ON COLUMN cardiology_request.ecg_findings IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.ecg_findings IS
     'Resting ECG findings, if performed.';
-COMMENT ON COLUMN cardiology_request.troponin_status IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.troponin_status IS
     'Troponin result status: elevated, normal, not-done.';
-COMMENT ON COLUMN cardiology_request.bnp_status IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.bnp_status IS
     'BNP / NT-proBNP result status: elevated, normal, not-done.';
-COMMENT ON COLUMN cardiology_request.known_coronary_artery_disease IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.known_coronary_artery_disease IS
     'History: known coronary artery disease.';
-COMMENT ON COLUMN cardiology_request.previous_mi IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.previous_mi IS
     'History: previous myocardial infarction.';
-COMMENT ON COLUMN cardiology_request.heart_failure IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.heart_failure IS
     'History: established heart failure.';
-COMMENT ON COLUMN cardiology_request.valve_disease IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.valve_disease IS
     'History: known valve disease.';
-COMMENT ON COLUMN cardiology_request.arrhythmia IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.arrhythmia IS
     'History: known arrhythmia.';
-COMMENT ON COLUMN cardiology_request.hypertension IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.hypertension IS
     'History: hypertension.';
-COMMENT ON COLUMN cardiology_request.diabetes IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.diabetes IS
     'History: diabetes mellitus.';
-COMMENT ON COLUMN cardiology_request.current_medications IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.current_medications IS
     'Current cardiac and other relevant medications.';
-COMMENT ON COLUMN cardiology_request.urgency IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.urgency IS
     'Requested triage urgency: routine, urgent, emergency.';
-COMMENT ON COLUMN cardiology_request.supervising_consultant IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.supervising_consultant IS
     'Name of the supervising consultant, if the referrer is in training.';
-COMMENT ON COLUMN cardiology_request.requester_contact IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.requester_contact IS
     'Contact details for the referrer for any vetting queries.';
-COMMENT ON COLUMN cardiology_request.notes IS
+COMMENT ON COLUMN cardiology_request.cardiology_request.notes IS
     'Free-text notes accompanying the referral.';
 
 -- ========================================================================
@@ -382,14 +399,14 @@ COMMENT ON COLUMN cardiology_request.notes IS
 
 -- Computed vetting grade for a cardiology referral request (four-axis engine).
 
-CREATE TABLE cardiology_request_grade (
+CREATE TABLE cardiology_request.cardiology_request_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_request_id UUID NOT NULL UNIQUE
-        REFERENCES cardiology_request(id) ON DELETE CASCADE,
+        REFERENCES cardiology_request.cardiology_request(id) ON DELETE CASCADE,
 
     -- Axis A: appropriateness of referral to cardiology
     appropriateness_band VARCHAR(25) NOT NULL DEFAULT ''
@@ -416,39 +433,39 @@ CREATE TABLE cardiology_request_grade (
 );
 
 CREATE TRIGGER trigger_cardiology_request_grade_updated_at
-    BEFORE UPDATE ON cardiology_request_grade
+    BEFORE UPDATE ON cardiology_request.cardiology_request_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE cardiology_request_grade IS
+COMMENT ON TABLE cardiology_request.cardiology_request_grade IS
     'Computed four-axis vetting grade: referral appropriateness, safety / red-flag, request completeness, and triage priority. A red flag (suspected acute coronary syndrome, exertional syncope, new-onset heart failure) drives the safety axis and auto-escalates the triage tier regardless of the other axes.';
-COMMENT ON COLUMN cardiology_request_grade.id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_request_grade.created_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_request_grade.updated_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_request_grade.deleted_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_request_grade.cardiology_request_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.cardiology_request_id IS
     'Foreign key to the parent request (unique, 1:1).';
-COMMENT ON COLUMN cardiology_request_grade.appropriateness_band IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.appropriateness_band IS
     'Axis A appropriateness of referral to cardiology: usually-appropriate, may-be-appropriate, usually-not-appropriate.';
-COMMENT ON COLUMN cardiology_request_grade.safety_band IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.safety_band IS
     'Axis B safety / red-flag band: ok, caution, red-flag.';
-COMMENT ON COLUMN cardiology_request_grade.completeness_percent IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.completeness_percent IS
     'Axis C request completeness as a percentage of mandatory fields (0-100).';
-COMMENT ON COLUMN cardiology_request_grade.triage_tier IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.triage_tier IS
     'Axis D triage priority: routine, urgent, emergency.';
-COMMENT ON COLUMN cardiology_request_grade.target_timeframe IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.target_timeframe IS
     'Target timeframe for the patient to be seen, implied by the triage tier.';
-COMMENT ON COLUMN cardiology_request_grade.recommendation IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.recommendation IS
     'Overall vetting recommendation: accept, query-referrer, redirect, reject.';
-COMMENT ON COLUMN cardiology_request_grade.clinician_notes IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.clinician_notes IS
     'Free-text vetting / sign-off notes from the cardiology triage clinician.';
-COMMENT ON COLUMN cardiology_request_grade.signed_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.signed_at IS
     'Timestamp of the triage clinician electronic signature.';
-COMMENT ON COLUMN cardiology_request_grade.graded_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -461,14 +478,14 @@ COMMENT ON COLUMN cardiology_request_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a cardiology referral request.
 
-CREATE TABLE cardiology_request_grade_rule (
+CREATE TABLE cardiology_request.cardiology_request_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_request_grade_id UUID NOT NULL
-        REFERENCES cardiology_request_grade(id) ON DELETE CASCADE,
+        REFERENCES cardiology_request.cardiology_request_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('appropriateness', 'safety', 'completeness', 'triage', '')),
@@ -477,32 +494,32 @@ CREATE TABLE cardiology_request_grade_rule (
 );
 
 CREATE INDEX index_cardiology_request_grade_rule_grade_id
-    ON cardiology_request_grade_rule(cardiology_request_grade_id);
+    ON cardiology_request.cardiology_request_grade_rule(cardiology_request_grade_id);
 
 CREATE TRIGGER trigger_cardiology_request_grade_rule_updated_at
-    BEFORE UPDATE ON cardiology_request_grade_rule
+    BEFORE UPDATE ON cardiology_request.cardiology_request_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE cardiology_request_grade_rule IS
+COMMENT ON TABLE cardiology_request.cardiology_request_grade_rule IS
     'Audit trail of every appropriateness / safety / completeness / triage rule that fired for this referral.';
-COMMENT ON COLUMN cardiology_request_grade_rule.id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_request_grade_rule.created_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_request_grade_rule.updated_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_request_grade_rule.deleted_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_request_grade_rule.cardiology_request_grade_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.cardiology_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cardiology_request_grade_rule.rule_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-APPROP-CHEST-PAIN-01).';
-COMMENT ON COLUMN cardiology_request_grade_rule.axis IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.axis IS
     'Scoring axis the rule belongs to: appropriateness, safety, completeness, triage.';
-COMMENT ON COLUMN cardiology_request_grade_rule.category IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.category IS
     'Category or reason the rule relates to.';
-COMMENT ON COLUMN cardiology_request_grade_rule.description IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -515,14 +532,14 @@ COMMENT ON COLUMN cardiology_request_grade_rule.description IS
 
 -- Safety-critical flags for a cardiology referral request, independent of the axes.
 
-CREATE TABLE cardiology_request_grade_flag (
+CREATE TABLE cardiology_request.cardiology_request_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     cardiology_request_grade_id UUID NOT NULL
-        REFERENCES cardiology_request_grade(id) ON DELETE CASCADE,
+        REFERENCES cardiology_request.cardiology_request_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -542,34 +559,34 @@ CREATE TABLE cardiology_request_grade_flag (
 );
 
 CREATE INDEX index_cardiology_request_grade_flag_grade_id
-    ON cardiology_request_grade_flag(cardiology_request_grade_id);
+    ON cardiology_request.cardiology_request_grade_flag(cardiology_request_grade_id);
 
 CREATE TRIGGER trigger_cardiology_request_grade_flag_updated_at
-    BEFORE UPDATE ON cardiology_request_grade_flag
+    BEFORE UPDATE ON cardiology_request.cardiology_request_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION cardiology_request.set_updated_at();
 
-COMMENT ON TABLE cardiology_request_grade_flag IS
+COMMENT ON TABLE cardiology_request.cardiology_request_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the cardiology triage team.';
-COMMENT ON COLUMN cardiology_request_grade_flag.id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN cardiology_request_grade_flag.created_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN cardiology_request_grade_flag.updated_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN cardiology_request_grade_flag.deleted_at IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN cardiology_request_grade_flag.cardiology_request_grade_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.cardiology_request_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN cardiology_request_grade_flag.flag_id IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SUSPECTED-ACS-001).';
-COMMENT ON COLUMN cardiology_request_grade_flag.category IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN cardiology_request_grade_flag.priority IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN cardiology_request_grade_flag.description IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN cardiology_request_grade_flag.suggested_action IS
+COMMENT ON COLUMN cardiology_request.cardiology_request_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "divert to emergency ACS pathway; do not wait for routine clinic").';
 
 -- ========================================================================

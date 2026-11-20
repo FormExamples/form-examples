@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE organ_donation_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES organ_donation_assessment.assessment(id) ON DELETE CASCADE,
     eligibility VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (eligibility IN ('suitable', 'conditionally-suitable', 'unsuitable', '')),
     overall_risk_level VARCHAR(10) NOT NULL DEFAULT ''
@@ -14,28 +14,28 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON organ_donation_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION organ_donation_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE organ_donation_assessment.grade IS
     'Computed organ donation eligibility grading result. Eligibility: suitable, conditionally-suitable, unsuitable. Risk: low, moderate, high, critical. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN organ_donation_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.eligibility IS
+COMMENT ON COLUMN organ_donation_assessment.grade.eligibility IS
     'Donor eligibility: suitable, conditionally-suitable, unsuitable, or empty.';
-COMMENT ON COLUMN grade.overall_risk_level IS
+COMMENT ON COLUMN organ_donation_assessment.grade.overall_risk_level IS
     'Overall donor risk level: low, moderate, high, critical, or empty.';
-COMMENT ON COLUMN grade.donor_risk_index IS
+COMMENT ON COLUMN organ_donation_assessment.grade.donor_risk_index IS
     'Calculated donor risk index score.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN organ_donation_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN organ_donation_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN organ_donation_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN organ_donation_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN organ_donation_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -8,14 +8,14 @@
 -- Social Security number itself is deliberately never stored. This record
 -- documents an application; the Social Security Administration decides it.
 
-CREATE TABLE ss5_application (
+CREATE TABLE united_states_social_security_card_application.ss5_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES united_states_social_security_card_application.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES united_states_social_security_card_application.clinician(id) ON DELETE RESTRICT,
 
     -- Request (SS-5 items 12-15 and replacement history)
     application_date DATE,
@@ -67,106 +67,106 @@ CREATE TABLE ss5_application (
 );
 
 CREATE INDEX ss5_application_patient_id_idx
-    ON ss5_application (patient_id);
+    ON united_states_social_security_card_application.ss5_application (patient_id);
 CREATE INDEX ss5_application_clinician_id_idx
-    ON ss5_application (clinician_id);
+    ON united_states_social_security_card_application.ss5_application (clinician_id);
 
 CREATE TRIGGER trigger_ss5_application_updated_at
-    BEFORE UPDATE ON ss5_application
+    BEFORE UPDATE ON united_states_social_security_card_application.ss5_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE ss5_application IS
+COMMENT ON TABLE united_states_social_security_card_application.ss5_application IS
     'Main Form SS-5 application record: request type, applicant items, evidence documents presented, filer and signature, and death-related Tell-SSA items. Classification, fired rules, and flags live in child tables. The Social Security number is never stored.';
-COMMENT ON COLUMN ss5_application.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ss5_application.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ss5_application.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ss5_application.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ss5_application.patient_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.patient_id IS
     'Foreign key to the applicant (the person named in item 1; restrict delete).';
-COMMENT ON COLUMN ss5_application.clinician_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.clinician_id IS
     'Foreign key to the preparer or assisting staff member (restrict delete); optional.';
-COMMENT ON COLUMN ss5_application.application_date IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.application_date IS
     'Date the application is signed and submitted (SS-5 item 15); the reference date for age rules.';
-COMMENT ON COLUMN ss5_application.request_type IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.request_type IS
     'What the applicant asks SSA for: an original card, a replacement card, or a corrected card.';
-COMMENT ON COLUMN ss5_application.channel IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.channel IS
     'How the application is submitted; applicants aged 12 or older for an original card must apply in person.';
-COMMENT ON COLUMN ss5_application.previously_applied IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.previously_applied IS
     'Whether the person has ever applied for or received an SSN or card (SS-5 item 12).';
-COMMENT ON COLUMN ss5_application.name_change IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change IS
     'Whether the name on the card differs because of a legal name change.';
-COMMENT ON COLUMN ss5_application.name_change_reason IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change_reason IS
     'Reason for the legal name change.';
-COMMENT ON COLUMN ss5_application.date_of_birth_correction IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.date_of_birth_correction IS
     'Whether the request corrects the date of birth recorded by SSA.';
-COMMENT ON COLUMN ss5_application.replacements_this_year IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.replacements_this_year IS
     'Replacement cards already issued in the current calendar year (limit 3).';
-COMMENT ON COLUMN ss5_application.replacements_lifetime IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.replacements_lifetime IS
     'Replacement cards already issued in the lifetime of the number holder (limit 10).';
-COMMENT ON COLUMN ss5_application.limit_exception_reason IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.limit_exception_reason IS
     'Exception reason claimed when a replacement limit is reached.';
-COMMENT ON COLUMN ss5_application.limit_exception_evidence IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.limit_exception_evidence IS
     'Whether documentation supporting the claimed exception reason is available.';
-COMMENT ON COLUMN ss5_application.name_on_card IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_on_card IS
     'Full name to be shown on the card (item 1).';
-COMMENT ON COLUMN ss5_application.name_at_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_at_birth IS
     'Full name at birth (item 2).';
-COMMENT ON COLUMN ss5_application.other_names_used IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.other_names_used IS
     'Other names used (item 3).';
-COMMENT ON COLUMN ss5_application.name_on_most_recent_card IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_on_most_recent_card IS
     'Name on the most recent Social Security card (item 13).';
-COMMENT ON COLUMN ss5_application.date_of_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.date_of_birth IS
     'Date of birth (item 7).';
-COMMENT ON COLUMN ss5_application.place_of_birth_city IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.place_of_birth_city IS
     'City or town of birth (item 6).';
-COMMENT ON COLUMN ss5_application.place_of_birth_region IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.place_of_birth_region IS
     'State, province, or country of birth (item 6).';
-COMMENT ON COLUMN ss5_application.sex IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.sex IS
     'Sex as recorded on the SS-5 (item 11): female or male.';
-COMMENT ON COLUMN ss5_application.citizenship IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship IS
     'Citizenship or alien status (item 8).';
-COMMENT ON COLUMN ss5_application.non_work_reason_valid IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.non_work_reason_valid IS
     'For a lawfully admitted noncitizen not allowed to work: whether a valid non-work reason (federal or state benefit or law) is documented.';
-COMMENT ON COLUMN ss5_application.mother_name_at_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.mother_name_at_birth IS
     'Mother name at her birth (item 4); write unknown if not known.';
-COMMENT ON COLUMN ss5_application.father_name IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.father_name IS
     'Father name (item 5); write unknown if not known.';
-COMMENT ON COLUMN ss5_application.state_of_residence IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.state_of_residence IS
     'Two-letter USPS code of the state or territory of residence.';
-COMMENT ON COLUMN ss5_application.mailing_address IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.mailing_address IS
     'Mailing address where the card is sent (item 17).';
-COMMENT ON COLUMN ss5_application.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.phone IS
     'Daytime telephone number (item 16).';
-COMMENT ON COLUMN ss5_application.identity_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.identity_document IS
     'Primary proof of identity presented; must be current, unexpired, and show name, identifying information, and preferably a photograph.';
-COMMENT ON COLUMN ss5_application.identity_document_expired IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.identity_document_expired IS
     'Whether the identity document is expired.';
-COMMENT ON COLUMN ss5_application.age_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.age_document IS
     'Proof of age presented; a birth certificate is preferred.';
-COMMENT ON COLUMN ss5_application.citizenship_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship_document IS
     'Proof of US citizenship or lawful alien status presented.';
-COMMENT ON COLUMN ss5_application.citizenship_on_file IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship_on_file IS
     'Whether SSA already holds citizenship or status evidence for this number (relevant to replacement cards).';
-COMMENT ON COLUMN ss5_application.name_change_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change_document IS
     'Document proving the legal name change.';
-COMMENT ON COLUMN ss5_application.documents_original_or_certified IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.documents_original_or_certified IS
     'Whether every document is an original or a copy certified by the issuing agency; photocopies and notarized copies are not accepted.';
-COMMENT ON COLUMN ss5_application.signer_relationship IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_relationship IS
     'Relationship of the person signing to the person in item 1 (item 18).';
-COMMENT ON COLUMN ss5_application.signer_name IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_name IS
     'Name of the person signing when not the applicant.';
-COMMENT ON COLUMN ss5_application.signer_identity_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_identity_document IS
     'Whether the signer, when not the applicant, presented their own proof of identity.';
-COMMENT ON COLUMN ss5_application.signature_present IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signature_present IS
     'Whether the application is signed (item 19).';
-COMMENT ON COLUMN ss5_application.applicant_deceased IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.applicant_deceased IS
     'Tell SSA: whether the person in item 1 has died; a card cannot be issued and the death must be reported instead.';
-COMMENT ON COLUMN ss5_application.death_reported_to_ssa IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.death_reported_to_ssa IS
     'Whether the death has already been reported to SSA (funeral home, family, or 1-800-772-1213).';
-COMMENT ON COLUMN ss5_application.preparer_note IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.preparer_note IS
     'Free-text note from the person preparing the application.';

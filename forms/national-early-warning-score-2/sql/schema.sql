@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS national_early_warning_score_2;
+
+COMMENT ON SCHEMA national_early_warning_score_2 IS
+    'Namespace for the National Early Warning Score 2 (NEWS2) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION national_early_warning_score_2.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION national_early_warning_score_2.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE national_early_warning_score_2.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON national_early_warning_score_2.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE national_early_warning_score_2.patient IS
     'Patient demographic information used by the NEWS2 observation record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN national_early_warning_score_2.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON national_early_warning_score_2.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- recorded the NEWS2 observation set and (for Scale 2) endorsed the
 -- prescribed SpO2 target range.
 
-CREATE TABLE clinician (
+CREATE TABLE national_early_warning_score_2.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON national_early_warning_score_2.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE national_early_warning_score_2.clinician IS
     'Clinician identifying information for the person who recorded the NEWS2 observation set.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.role IS
     'Primary clinical role: consultant, registrar, foundation-trainee, staff-nurse, charge-nurse, nursing-associate, healthcare-assistant, ward-coordinator, medical-student, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN national_early_warning_score_2.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON national_early_warning_score_2.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -210,14 +227,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- dedicated child tables. Raw numeric observations use NULL when a
 -- measurement was not recorded.
 
-CREATE TABLE national_early_warning_score_2 (
+CREATE TABLE national_early_warning_score_2.national_early_warning_score_2 (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES national_early_warning_score_2.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES national_early_warning_score_2.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'amended', 'signed')),
@@ -271,66 +288,66 @@ CREATE TABLE national_early_warning_score_2 (
 );
 
 CREATE INDEX national_early_warning_score_2_patient_id_idx
-    ON national_early_warning_score_2 (patient_id);
+    ON national_early_warning_score_2.national_early_warning_score_2 (patient_id);
 CREATE INDEX national_early_warning_score_2_clinician_id_idx
-    ON national_early_warning_score_2 (clinician_id);
+    ON national_early_warning_score_2.national_early_warning_score_2 (clinician_id);
 
 CREATE TRIGGER trigger_national_early_warning_score_2_updated_at
-    BEFORE UPDATE ON national_early_warning_score_2
+    BEFORE UPDATE ON national_early_warning_score_2.national_early_warning_score_2
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE national_early_warning_score_2 IS
+COMMENT ON TABLE national_early_warning_score_2.national_early_warning_score_2 IS
     'Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables.';
-COMMENT ON COLUMN national_early_warning_score_2.id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN national_early_warning_score_2.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN national_early_warning_score_2.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN national_early_warning_score_2.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN national_early_warning_score_2.patient_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.patient_id IS
     'Foreign key to the patient observed (RESTRICT: patients are not deleted while observations exist).';
-COMMENT ON COLUMN national_early_warning_score_2.clinician_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.clinician_id IS
     'Foreign key to the clinician who recorded the observation set (RESTRICT); NULL until assigned.';
-COMMENT ON COLUMN national_early_warning_score_2.status IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.status IS
     'Workflow status: draft, submitted, amended, or signed.';
-COMMENT ON COLUMN national_early_warning_score_2.observation_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.observation_at IS
     'Date and time the observation set was taken; NULL when not yet recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.ward_or_location IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.ward_or_location IS
     'Ward or clinical location where the observations were recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.spo2_scale IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2_scale IS
     'SpO2 scoring scale: scale-1 (default) or scale-2 (prescribed 88-92% target, e.g. hypercapnic respiratory failure).';
-COMMENT ON COLUMN national_early_warning_score_2.spo2_scale2_endorsed IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2_scale2_endorsed IS
     'Whether a clinician has endorsed use of Scale 2 for this patient.';
-COMMENT ON COLUMN national_early_warning_score_2.respiratory_rate IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.respiratory_rate IS
     'Respiration rate in breaths per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.spo2 IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.spo2 IS
     'Oxygen saturation as a percentage; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.on_oxygen IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.on_oxygen IS
     'Whether the patient is breathing air or receiving supplemental oxygen.';
-COMMENT ON COLUMN national_early_warning_score_2.oxygen_device IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.oxygen_device IS
     'Supplemental-oxygen delivery device when on oxygen.';
-COMMENT ON COLUMN national_early_warning_score_2.oxygen_flow_rate_l_min IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.oxygen_flow_rate_l_min IS
     'Supplemental-oxygen flow rate in litres per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.inspired_oxygen_fraction_percent IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.inspired_oxygen_fraction_percent IS
     'Fraction of inspired oxygen (FiO2) as a percentage; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.systolic_blood_pressure IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.systolic_blood_pressure IS
     'Systolic blood pressure in mmHg; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.pulse IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.pulse IS
     'Pulse rate in beats per minute; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.consciousness_acvpu IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.consciousness_acvpu IS
     'Consciousness level on the ACVPU scale: A (alert), C (new confusion), V (voice), P (pain), U (unresponsive).';
-COMMENT ON COLUMN national_early_warning_score_2.temperature IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.temperature IS
     'Body temperature in degrees Celsius; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2.is_under_16 IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.is_under_16 IS
     'Whether the patient is under 16 years old (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.is_pregnant IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.is_pregnant IS
     'Whether the patient is pregnant (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.has_spinal_cord_injury IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.has_spinal_cord_injury IS
     'Whether the patient has a spinal-cord injury (NEWS2 not validated; raises out-of-scope flag).';
-COMMENT ON COLUMN national_early_warning_score_2.clinical_notes IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2.clinical_notes IS
     'Free-text clinical notes accompanying the observation set.';
 
 -- ========================================================================
@@ -347,14 +364,14 @@ COMMENT ON COLUMN national_early_warning_score_2.clinical_notes IS
 -- monitoring frequency and escalation response. One row per observation
 -- record (1:1).
 
-CREATE TABLE national_early_warning_score_2_grade (
+CREATE TABLE national_early_warning_score_2.national_early_warning_score_2_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     national_early_warning_score_2_id UUID NOT NULL UNIQUE
-        REFERENCES national_early_warning_score_2(id) ON DELETE CASCADE,
+        REFERENCES national_early_warning_score_2.national_early_warning_score_2(id) ON DELETE CASCADE,
 
     -- Aggregate total across the six parameters plus the oxygen weighting
     aggregate_score INTEGER,
@@ -383,47 +400,47 @@ CREATE TABLE national_early_warning_score_2_grade (
 );
 
 CREATE TRIGGER trigger_national_early_warning_score_2_grade_updated_at
-    BEFORE UPDATE ON national_early_warning_score_2_grade
+    BEFORE UPDATE ON national_early_warning_score_2.national_early_warning_score_2_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE national_early_warning_score_2_grade IS
+COMMENT ON TABLE national_early_warning_score_2.national_early_warning_score_2_grade IS
     'Computed NEWS2 grading result: per-parameter subscores, aggregate total (0-20+), red-score indicator, derived clinical-risk band, and RCP-recommended monitoring frequency and escalation response. One row per observation record (1:1).';
-COMMENT ON COLUMN national_early_warning_score_2_grade.id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.national_early_warning_score_2_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.national_early_warning_score_2_id IS
     'Foreign key to the parent observation record (unique, 1:1).';
-COMMENT ON COLUMN national_early_warning_score_2_grade.aggregate_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.aggregate_score IS
     'Aggregate NEWS2 total (0-20+): sum of the six parameter subscores plus the supplemental-oxygen weighting; NULL until computed.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.respiratory_rate_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.respiratory_rate_score IS
     'Respiration-rate subscore (0-3); NULL when the observation was not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.spo2_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.spo2_score IS
     'Oxygen-saturation subscore (0-3), scored against the selected SpO2 scale; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.oxygen_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.oxygen_score IS
     'Supplemental-oxygen weighting: 2 when on oxygen, otherwise 0.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.blood_pressure_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.blood_pressure_score IS
     'Systolic-blood-pressure subscore (0-3); NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.pulse_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.pulse_score IS
     'Pulse subscore (0-3); NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.consciousness_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.consciousness_score IS
     'Consciousness (ACVPU) subscore: 3 for any value other than A (alert), otherwise 0; NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.temperature_score IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.temperature_score IS
     'Temperature subscore (0-3); NULL when not recorded.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.any_single_parameter_three IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.any_single_parameter_three IS
     'Red score: whether any single parameter scored 3, which escalates the band to at least low-medium.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.risk_band IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.risk_band IS
     'Derived clinical-risk band (worst of aggregate band and red-score band): low, low-medium, medium, or high.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.monitoring_frequency IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.monitoring_frequency IS
     'RCP-recommended monitoring frequency (e.g. 12-hourly, 4-6 hourly, 1-hourly, continuous).';
-COMMENT ON COLUMN national_early_warning_score_2_grade.recommendation IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.recommendation IS
     'RCP-recommended clinical response and escalation for the risk band.';
-COMMENT ON COLUMN national_early_warning_score_2_grade.graded_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -439,14 +456,14 @@ COMMENT ON COLUMN national_early_warning_score_2_grade.graded_at IS
 -- instrument that produced it, the subscore or band it contributed, and
 -- a human-readable description.
 
-CREATE TABLE national_early_warning_score_2_grade_rule (
+CREATE TABLE national_early_warning_score_2.national_early_warning_score_2_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     national_early_warning_score_2_grade_id UUID NOT NULL
-        REFERENCES national_early_warning_score_2_grade(id) ON DELETE CASCADE,
+        REFERENCES national_early_warning_score_2.national_early_warning_score_2_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(30) NOT NULL
@@ -459,36 +476,36 @@ CREATE TABLE national_early_warning_score_2_grade_rule (
 );
 
 CREATE INDEX national_early_warning_score_2_grade_rule_grade_id_idx
-    ON national_early_warning_score_2_grade_rule (national_early_warning_score_2_grade_id);
+    ON national_early_warning_score_2.national_early_warning_score_2_grade_rule (national_early_warning_score_2_grade_id);
 
 CREATE TRIGGER trigger_national_early_warning_score_2_grade_rule_updated_at
-    BEFORE UPDATE ON national_early_warning_score_2_grade_rule
+    BEFORE UPDATE ON national_early_warning_score_2.national_early_warning_score_2_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE national_early_warning_score_2_grade_rule IS
+COMMENT ON TABLE national_early_warning_score_2.national_early_warning_score_2_grade_rule IS
     'Audit trail of every grading rule that fired during NEWS2 computation: instrument, band, points contributed, category, and description.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.national_early_warning_score_2_grade_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.national_early_warning_score_2_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.rule_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-RESP-RATE-3-HIGH-01).';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.instrument IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: respiratory-rate, spo2, oxygen, blood-pressure, pulse, consciousness, temperature, aggregate, or red-score.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.band IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.band IS
     'Clinical-risk band contributed by this rule: low, low-medium, medium, or high.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.points IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.points IS
     'Subscore points contributed by this rule (0-3); NULL for non-scoring rules.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.category IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.category IS
     'Subject category (e.g. tachypnoea, hypoxia, hypotension, new-confusion).';
-COMMENT ON COLUMN national_early_warning_score_2_grade_rule.description IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -503,14 +520,14 @@ COMMENT ON COLUMN national_early_warning_score_2_grade_rule.description IS
 -- band, with priority and a suggested action for the ward and
 -- escalation team.
 
-CREATE TABLE national_early_warning_score_2_grade_flag (
+CREATE TABLE national_early_warning_score_2.national_early_warning_score_2_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     national_early_warning_score_2_grade_id UUID NOT NULL
-        REFERENCES national_early_warning_score_2_grade(id) ON DELETE CASCADE,
+        REFERENCES national_early_warning_score_2.national_early_warning_score_2_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -530,34 +547,34 @@ CREATE TABLE national_early_warning_score_2_grade_flag (
 );
 
 CREATE INDEX national_early_warning_score_2_grade_flag_grade_id_idx
-    ON national_early_warning_score_2_grade_flag (national_early_warning_score_2_grade_id);
+    ON national_early_warning_score_2.national_early_warning_score_2_grade_flag (national_early_warning_score_2_grade_id);
 
 CREATE TRIGGER trigger_national_early_warning_score_2_grade_flag_updated_at
-    BEFORE UPDATE ON national_early_warning_score_2_grade_flag
+    BEFORE UPDATE ON national_early_warning_score_2.national_early_warning_score_2_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION national_early_warning_score_2.set_updated_at();
 
-COMMENT ON TABLE national_early_warning_score_2_grade_flag IS
+COMMENT ON TABLE national_early_warning_score_2.national_early_warning_score_2_grade_flag IS
     'Safety-critical flags that fire independently of the aggregate risk band, with priority and a suggested action for the ward and escalation team.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.created_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.updated_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.deleted_at IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.national_early_warning_score_2_grade_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.national_early_warning_score_2_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.flag_id IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SINGLE-PARAMETER-3-001).';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.category IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.category IS
     'Flag category: high-score-escalate, single-parameter-3, deteriorating-trend, out-of-scope-population, incomplete-observation, or other.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.priority IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.description IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN national_early_warning_score_2_grade_flag.suggested_action IS
+COMMENT ON COLUMN national_early_warning_score_2.national_early_warning_score_2_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "escalate to the acute-illness team", "review SpO2 target against Scale 2").';
 
 -- ========================================================================

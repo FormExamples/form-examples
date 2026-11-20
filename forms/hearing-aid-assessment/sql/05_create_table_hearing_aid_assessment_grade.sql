@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE hearing_aid_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES hearing_aid_assessment.assessment(id) ON DELETE CASCADE,
     handicap_level VARCHAR(20) NOT NULL DEFAULT 'no-handicap'
         CHECK (handicap_level IN ('no-handicap', 'mild-moderate', 'significant')),
     hhies_total_score INTEGER NOT NULL DEFAULT 0
@@ -19,32 +19,32 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON hearing_aid_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hearing_aid_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE hearing_aid_assessment.grade IS
     'Computed HHIE-S grading result. 0-8 = No handicap, 10-24 = Mild-moderate, 26-40 = Significant. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.handicap_level IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.handicap_level IS
     'Hearing handicap classification: no-handicap, mild-moderate, or significant.';
-COMMENT ON COLUMN grade.hhies_total_score IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.hhies_total_score IS
     'Total HHIE-S score (0-40).';
-COMMENT ON COLUMN grade.hearing_aid_candidacy IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.hearing_aid_candidacy IS
     'Overall hearing aid candidacy: recommended, consider, not-indicated, or empty string.';
-COMMENT ON COLUMN grade.left_ear_recommendation IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.left_ear_recommendation IS
     'Left ear recommendation: hearing-aid, medical-referral, monitoring, no-action, or empty string.';
-COMMENT ON COLUMN grade.right_ear_recommendation IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.right_ear_recommendation IS
     'Right ear recommendation: hearing-aid, medical-referral, monitoring, no-action, or empty string.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN hearing_aid_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (11):
+-- Source files (12):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -34,12 +35,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS anaesthetic_record;
+
+COMMENT ON SCHEMA anaesthetic_record IS
+    'Namespace for the Anaesthetic Record form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION anaesthetic_record.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -47,7 +64,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION anaesthetic_record.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -60,7 +77,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE anaesthetic_record.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -83,51 +100,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON anaesthetic_record.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE anaesthetic_record.patient IS
     'Patient demographic information used by the anaesthetic record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN anaesthetic_record.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN anaesthetic_record.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN anaesthetic_record.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN anaesthetic_record.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN anaesthetic_record.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN anaesthetic_record.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN anaesthetic_record.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN anaesthetic_record.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN anaesthetic_record.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN anaesthetic_record.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN anaesthetic_record.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN anaesthetic_record.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN anaesthetic_record.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN anaesthetic_record.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN anaesthetic_record.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN anaesthetic_record.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at WHO Sign-In.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON anaesthetic_record.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -142,7 +159,7 @@ CREATE INDEX patient_name_trgm_idx
 -- (consultant anaesthetist, anaesthetic registrar, ODP / anaesthetic
 -- assistant, operating surgeon, recovery practitioner).
 
-CREATE TABLE clinician (
+CREATE TABLE anaesthetic_record.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -160,41 +177,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON anaesthetic_record.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE anaesthetic_record.clinician IS
     'Clinician identifying information for members of the anaesthetic team.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN anaesthetic_record.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN anaesthetic_record.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN anaesthetic_record.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN anaesthetic_record.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN anaesthetic_record.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN anaesthetic_record.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN anaesthetic_record.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN anaesthetic_record.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN anaesthetic_record.clinician.role IS
     'Primary clinical role: consultant-anaesthetist, anaesthetic-registrar, anaesthetic-sho, anaesthesia-associate, odp, anaesthetic-nurse, recovery-practitioner, operating-surgeon, medical-student, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN anaesthetic_record.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN anaesthetic_record.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON anaesthetic_record.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -212,14 +229,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- sign-off. Drug administrations, timed physiological observations, and
 -- intra-operative events live in dedicated child tables.
 
-CREATE TABLE anaesthetic_record (
+CREATE TABLE anaesthetic_record.anaesthetic_record (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES anaesthetic_record.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES anaesthetic_record.clinician(id) ON DELETE RESTRICT,
 
     -- Case identification
     theatre VARCHAR(100) NOT NULL DEFAULT '',
@@ -297,137 +314,137 @@ CREATE TABLE anaesthetic_record (
 );
 
 CREATE TRIGGER trigger_anaesthetic_record_updated_at
-    BEFORE UPDATE ON anaesthetic_record
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record IS
     'Contemporaneous intra-operative anaesthesia chart: case identification, pre-induction checks, ASA and airway assessment, airway management, monitoring, technique, fluids, regional technique, recovery handover, and sign-off.';
-COMMENT ON COLUMN anaesthetic_record.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record.patient_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.patient_id IS
     'Foreign key to the patient who received the anaesthetic.';
-COMMENT ON COLUMN anaesthetic_record.clinician_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.clinician_id IS
     'Foreign key to the responsible anaesthetist (primary author of the record).';
-COMMENT ON COLUMN anaesthetic_record.theatre IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.theatre IS
     'Theatre or location where the anaesthetic was delivered.';
-COMMENT ON COLUMN anaesthetic_record.operation_date IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.operation_date IS
     'Date of the anaesthetic.';
-COMMENT ON COLUMN anaesthetic_record.anaesthetist_name IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.anaesthetist_name IS
     'Name of the responsible anaesthetist as recorded on the chart.';
-COMMENT ON COLUMN anaesthetic_record.assistant_name IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.assistant_name IS
     'Name of the ODP or anaesthetic assistant.';
-COMMENT ON COLUMN anaesthetic_record.surgeon_name IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.surgeon_name IS
     'Name of the operating surgeon.';
-COMMENT ON COLUMN anaesthetic_record.planned_procedure IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.planned_procedure IS
     'Planned operation or procedure.';
-COMMENT ON COLUMN anaesthetic_record.urgency IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.urgency IS
     'Case urgency: elective, urgent, emergency, or immediate.';
-COMMENT ON COLUMN anaesthetic_record.machine_checked IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.machine_checked IS
     'Whether the anaesthetic machine check was performed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.who_sign_in IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.who_sign_in IS
     'Whether the WHO Sign In was performed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.who_time_out IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.who_time_out IS
     'Whether the WHO Time Out was performed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.consent_confirmed IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.consent_confirmed IS
     'Whether consent was confirmed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.fasting_confirmed IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.fasting_confirmed IS
     'Whether fasting status was confirmed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.iv_access IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.iv_access IS
     'Intravenous access sites established.';
-COMMENT ON COLUMN anaesthetic_record.allergy_band_checked IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.allergy_band_checked IS
     'Whether the allergy band was checked: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.documented_allergies IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.documented_allergies IS
     'Documented allergies used for the drug allergy-conflict safety check.';
-COMMENT ON COLUMN anaesthetic_record.asa_status IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.asa_status IS
     'ASA Physical Status classification: I, II, III, IV, V, or VI.';
-COMMENT ON COLUMN anaesthetic_record.asa_emergency_modifier IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.asa_emergency_modifier IS
     'Whether the ASA E (emergency) modifier applies: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.mallampati_class IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.mallampati_class IS
     'Modified Mallampati class (1-4).';
-COMMENT ON COLUMN anaesthetic_record.mouth_opening_cm IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.mouth_opening_cm IS
     'Inter-incisor gap (mouth opening) in centimetres.';
-COMMENT ON COLUMN anaesthetic_record.thyromental_distance_cm IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.thyromental_distance_cm IS
     'Thyromental distance in centimetres.';
-COMMENT ON COLUMN anaesthetic_record.dentition IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.dentition IS
     'Dentition notes, including loose or capped teeth.';
-COMMENT ON COLUMN anaesthetic_record.anticipated_difficult_airway IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.anticipated_difficult_airway IS
     'Whether a difficult airway was anticipated: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.prior_difficult_intubation IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.prior_difficult_intubation IS
     'Whether there is a history of prior difficult intubation: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.airway_technique IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.airway_technique IS
     'Airway technique used: facemask, supraglottic, tracheal-tube, tracheostomy, or awake-foi.';
-COMMENT ON COLUMN anaesthetic_record.device_size IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.device_size IS
     'Airway device or tube size.';
-COMMENT ON COLUMN anaesthetic_record.tube_depth_cm IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.tube_depth_cm IS
     'Tracheal tube depth at the teeth in centimetres.';
-COMMENT ON COLUMN anaesthetic_record.cuffed IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.cuffed IS
     'Whether the airway device was cuffed: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.cormack_lehane_grade IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.cormack_lehane_grade IS
     'Cormack-Lehane grade of the laryngoscopic view (1-4).';
-COMMENT ON COLUMN anaesthetic_record.intubation_attempts IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.intubation_attempts IS
     'Number of intubation attempts.';
-COMMENT ON COLUMN anaesthetic_record.capnography_confirmed IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.capnography_confirmed IS
     'Whether airway placement was confirmed by capnography: yes or no.';
-COMMENT ON COLUMN anaesthetic_record.monitoring_modalities IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.monitoring_modalities IS
     'Monitoring modalities in use as a space-separated token list (e.g. ecg nibp spo2 capnography temperature neuromuscular depth-of-anaesthesia arterial-line cvp urine-output).';
-COMMENT ON COLUMN anaesthetic_record.anaesthetic_technique IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.anaesthetic_technique IS
     'Primary anaesthetic technique: general, regional, sedation, mac, or combined.';
-COMMENT ON COLUMN anaesthetic_record.crystalloid_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.crystalloid_ml IS
     'Crystalloid volume administered in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.colloid_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.colloid_ml IS
     'Colloid volume administered in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.blood_products_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.blood_products_ml IS
     'Blood products volume administered in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.estimated_blood_loss_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.estimated_blood_loss_ml IS
     'Estimated blood loss in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.urine_output_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.urine_output_ml IS
     'Urine output in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.cell_salvage_ml IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.cell_salvage_ml IS
     'Cell-salvaged blood returned to the patient in millilitres.';
-COMMENT ON COLUMN anaesthetic_record.regional_technique IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.regional_technique IS
     'Regional / neuraxial technique: none, spinal, epidural, cse, or peripheral-block.';
-COMMENT ON COLUMN anaesthetic_record.regional_level IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.regional_level IS
     'Interspace or anatomical target of the regional technique.';
-COMMENT ON COLUMN anaesthetic_record.regional_drug IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.regional_drug IS
     'Local anaesthetic agent used for the regional technique.';
-COMMENT ON COLUMN anaesthetic_record.regional_dose_mg IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.regional_dose_mg IS
     'Regional local anaesthetic dose in milligrams.';
-COMMENT ON COLUMN anaesthetic_record.block_height IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.block_height IS
     'Achieved block height or clinical effect.';
-COMMENT ON COLUMN anaesthetic_record.regional_complications IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.regional_complications IS
     'Complications of the regional technique.';
-COMMENT ON COLUMN anaesthetic_record.recovery_destination IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.recovery_destination IS
     'Post-anaesthetic destination: recovery, hdu, icu, or ward.';
-COMMENT ON COLUMN anaesthetic_record.handover_airway_status IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.handover_airway_status IS
     'Airway status at handover to the recovery team.';
-COMMENT ON COLUMN anaesthetic_record.analgesia_plan IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.analgesia_plan IS
     'Post-operative analgesia plan.';
-COMMENT ON COLUMN anaesthetic_record.antiemetic_plan IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.antiemetic_plan IS
     'Post-operative antiemetic plan.';
-COMMENT ON COLUMN anaesthetic_record.oxygen_plan IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.oxygen_plan IS
     'Post-operative oxygen therapy plan.';
-COMMENT ON COLUMN anaesthetic_record.outstanding_tasks IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.outstanding_tasks IS
     'Outstanding tasks handed over to the recovery team.';
-COMMENT ON COLUMN anaesthetic_record.handover_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.handover_at IS
     'Timestamp of handover to the recovery team.';
-COMMENT ON COLUMN anaesthetic_record.receiving_practitioner IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.receiving_practitioner IS
     'Name of the practitioner receiving the patient at handover.';
-COMMENT ON COLUMN anaesthetic_record.anaesthetist_signature IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.anaesthetist_signature IS
     'Electronic signature of the anaesthetist at sign-off.';
-COMMENT ON COLUMN anaesthetic_record.signed_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record.signed_at IS
     'Timestamp when the record was signed.';
 
 CREATE INDEX anaesthetic_record_patient_id_idx
-    ON anaesthetic_record (patient_id);
+    ON anaesthetic_record.anaesthetic_record (patient_id);
 CREATE INDEX anaesthetic_record_clinician_id_idx
-    ON anaesthetic_record (clinician_id);
+    ON anaesthetic_record.anaesthetic_record (clinician_id);
 
 -- ========================================================================
 -- END 04_create_table_anaesthetic_record.sql
@@ -443,13 +460,13 @@ CREATE INDEX anaesthetic_record_clinician_id_idx
 -- administration. The drug names are matched against documented_allergies on
 -- the parent record to raise the allergy-conflict safety flag.
 
-CREATE TABLE anaesthetic_record_drug_administration (
+CREATE TABLE anaesthetic_record.anaesthetic_record_drug_administration (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record(id) ON DELETE CASCADE,
+    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record.anaesthetic_record(id) ON DELETE CASCADE,
 
     drug_name VARCHAR(255) NOT NULL DEFAULT '',
     dose NUMERIC(10,3) CHECK (dose IS NULL OR dose >= 0),
@@ -460,36 +477,36 @@ CREATE TABLE anaesthetic_record_drug_administration (
 );
 
 CREATE INDEX anaesthetic_record_drug_administration_record_id_idx
-    ON anaesthetic_record_drug_administration (anaesthetic_record_id);
+    ON anaesthetic_record.anaesthetic_record_drug_administration (anaesthetic_record_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_drug_administration_updated_at
-    BEFORE UPDATE ON anaesthetic_record_drug_administration
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_drug_administration
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_drug_administration IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_drug_administration IS
     'Drug administrations recorded during the anaesthetic: drug, dose, unit, route, category, and time.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.anaesthetic_record_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.anaesthetic_record_id IS
     'Foreign key to the parent anaesthetic record.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.drug_name IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.drug_name IS
     'Name of the administered drug.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.dose IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.dose IS
     'Dose administered, in the accompanying dose unit.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.dose_unit IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.dose_unit IS
     'Dose unit: mg, mcg, g, ml, units, mmol, puff, or other.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.route IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.route IS
     'Route of administration: iv, im, subcutaneous, inhalational, oral, topical, neuraxial, infusion, or other.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.category IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.category IS
     'Therapeutic category: induction, neuromuscular-blocker, maintenance, reversal, analgesia, antiemetic, antibiotic, vasoactive, local-anaesthetic, or other.';
-COMMENT ON COLUMN anaesthetic_record_drug_administration.administered_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_drug_administration.administered_at IS
     'Timestamp when the drug was administered.';
 
 -- ========================================================================
@@ -507,13 +524,13 @@ COMMENT ON COLUMN anaesthetic_record_drug_administration.administered_at IS
 -- values are checked against configured limits for the physiological-
 -- derangement safety flag.
 
-CREATE TABLE anaesthetic_record_timed_observation (
+CREATE TABLE anaesthetic_record.anaesthetic_record_timed_observation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record(id) ON DELETE CASCADE,
+    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record.anaesthetic_record(id) ON DELETE CASCADE,
 
     observed_at TIMESTAMPTZ,
     systolic_blood_pressure NUMERIC(5,1) CHECK (systolic_blood_pressure IS NULL OR systolic_blood_pressure >= 0),
@@ -527,42 +544,42 @@ CREATE TABLE anaesthetic_record_timed_observation (
 );
 
 CREATE INDEX anaesthetic_record_timed_observation_record_id_idx
-    ON anaesthetic_record_timed_observation (anaesthetic_record_id);
+    ON anaesthetic_record.anaesthetic_record_timed_observation (anaesthetic_record_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_timed_observation_updated_at
-    BEFORE UPDATE ON anaesthetic_record_timed_observation
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_timed_observation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_timed_observation IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_timed_observation IS
     'Timed physiological observations charted during the anaesthetic: time plus monitored values.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.anaesthetic_record_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.anaesthetic_record_id IS
     'Foreign key to the parent anaesthetic record.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.observed_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.observed_at IS
     'Timestamp of the timed observation.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.systolic_blood_pressure IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.systolic_blood_pressure IS
     'Systolic blood pressure in mmHg.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.diastolic_blood_pressure IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.diastolic_blood_pressure IS
     'Diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.heart_rate IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.heart_rate IS
     'Heart rate in beats per minute.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.spo2 IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.spo2 IS
     'Peripheral oxygen saturation (SpO2) as a percentage.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.end_tidal_co2 IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.end_tidal_co2 IS
     'End-tidal carbon dioxide in kPa.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.temperature IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.temperature IS
     'Core temperature in degrees Celsius.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.agent_percent IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.agent_percent IS
     'Inspired or expired volatile agent concentration as a percentage.';
-COMMENT ON COLUMN anaesthetic_record_timed_observation.fresh_gas_flow_l IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_timed_observation.fresh_gas_flow_l IS
     'Fresh gas flow in litres per minute.';
 
 -- ========================================================================
@@ -578,13 +595,13 @@ COMMENT ON COLUMN anaesthetic_record_timed_observation.fresh_gas_flow_l IS
 -- type, the time it occurred, and how it was managed. An anaphylaxis event
 -- raises the drug / anaphylaxis safety flag.
 
-CREATE TABLE anaesthetic_record_intra_operative_event (
+CREATE TABLE anaesthetic_record.anaesthetic_record_intra_operative_event (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record(id) ON DELETE CASCADE,
+    anaesthetic_record_id UUID NOT NULL REFERENCES anaesthetic_record.anaesthetic_record(id) ON DELETE CASCADE,
 
     event_type VARCHAR(20) NOT NULL DEFAULT '' CHECK (event_type IN ('desaturation', 'hypotension', 'arrhythmia', 'laryngospasm', 'bronchospasm', 'anaphylaxis', 'difficult-airway', 'awareness', 'other', '')),
     occurred_at TIMESTAMPTZ,
@@ -592,30 +609,30 @@ CREATE TABLE anaesthetic_record_intra_operative_event (
 );
 
 CREATE INDEX anaesthetic_record_intra_operative_event_record_id_idx
-    ON anaesthetic_record_intra_operative_event (anaesthetic_record_id);
+    ON anaesthetic_record.anaesthetic_record_intra_operative_event (anaesthetic_record_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_intra_operative_event_updated_at
-    BEFORE UPDATE ON anaesthetic_record_intra_operative_event
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_intra_operative_event
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_intra_operative_event IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_intra_operative_event IS
     'Intra-operative events recorded during the anaesthetic: event type, time, and management.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.anaesthetic_record_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.anaesthetic_record_id IS
     'Foreign key to the parent anaesthetic record.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.event_type IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.event_type IS
     'Event type: desaturation, hypotension, arrhythmia, laryngospasm, bronchospasm, anaphylaxis, difficult-airway, awareness, or other.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.occurred_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.occurred_at IS
     'Timestamp when the event occurred.';
-COMMENT ON COLUMN anaesthetic_record_intra_operative_event.management IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_intra_operative_event.management IS
     'How the event was managed.';
 
 -- ========================================================================
@@ -630,14 +647,14 @@ COMMENT ON COLUMN anaesthetic_record_intra_operative_event.management IS
 -- overall completeness status (Complete / Partial / Incomplete) and the
 -- completeness percent derived by the engine from the mandatory-item rules.
 
-CREATE TABLE anaesthetic_record_grade (
+CREATE TABLE anaesthetic_record.anaesthetic_record_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anaesthetic_record_id UUID NOT NULL UNIQUE
-        REFERENCES anaesthetic_record(id) ON DELETE CASCADE,
+        REFERENCES anaesthetic_record.anaesthetic_record(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'partial', 'incomplete', '')),
@@ -647,27 +664,27 @@ CREATE TABLE anaesthetic_record_grade (
 );
 
 CREATE TRIGGER trigger_anaesthetic_record_grade_updated_at
-    BEFORE UPDATE ON anaesthetic_record_grade
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_grade IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_grade IS
     'Computed completeness grading result for an anaesthetic record: overall status and completeness percent.';
-COMMENT ON COLUMN anaesthetic_record_grade.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_grade.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_grade.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_grade.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_grade.anaesthetic_record_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.anaesthetic_record_id IS
     'Foreign key to the parent anaesthetic record (unique, 1:1).';
-COMMENT ON COLUMN anaesthetic_record_grade.status IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.status IS
     'Overall completeness status: complete, partial, or incomplete.';
-COMMENT ON COLUMN anaesthetic_record_grade.completeness_percent IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.completeness_percent IS
     'Proportion (0-100) of mandatory-item rules satisfied.';
-COMMENT ON COLUMN anaesthetic_record_grade.graded_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -682,14 +699,14 @@ COMMENT ON COLUMN anaesthetic_record_grade.graded_at IS
 -- records one rule with its criticality, whether it was satisfied, and a
 -- human-readable description so the UI can show exactly what is missing.
 
-CREATE TABLE anaesthetic_record_grade_rule (
+CREATE TABLE anaesthetic_record.anaesthetic_record_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anaesthetic_record_grade_id UUID NOT NULL
-        REFERENCES anaesthetic_record_grade(id) ON DELETE CASCADE,
+        REFERENCES anaesthetic_record.anaesthetic_record_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -700,34 +717,34 @@ CREATE TABLE anaesthetic_record_grade_rule (
 );
 
 CREATE INDEX anaesthetic_record_grade_rule_grade_id_idx
-    ON anaesthetic_record_grade_rule (anaesthetic_record_grade_id);
+    ON anaesthetic_record.anaesthetic_record_grade_rule (anaesthetic_record_grade_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_grade_rule_updated_at
-    BEFORE UPDATE ON anaesthetic_record_grade_rule
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_grade_rule IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_grade_rule IS
     'Audit trail of every mandatory-item rule evaluated during grading: criticality, satisfied state, and description.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.anaesthetic_record_grade_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.anaesthetic_record_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.rule_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ASA-STATUS-01).';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.category IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.category IS
     'Subject category (e.g. identification, airway, monitoring, sign-off).';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.criticality IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.criticality IS
     'Rule criticality: critical (missing implies incomplete) or noncritical (missing implies partial).';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.satisfied IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.satisfied IS
     'Whether the mandatory item was present and valid.';
-COMMENT ON COLUMN anaesthetic_record_grade_rule.description IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_rule.description IS
     'Human-readable label describing the mandatory item.';
 
 -- ========================================================================
@@ -741,14 +758,14 @@ COMMENT ON COLUMN anaesthetic_record_grade_rule.description IS
 -- Safety flags raised independently of the completeness status, each with a
 -- priority and a suggested action for the anaesthetic team.
 
-CREATE TABLE anaesthetic_record_grade_flag (
+CREATE TABLE anaesthetic_record.anaesthetic_record_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     anaesthetic_record_grade_id UUID NOT NULL
-        REFERENCES anaesthetic_record_grade(id) ON DELETE CASCADE,
+        REFERENCES anaesthetic_record.anaesthetic_record_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -770,34 +787,34 @@ CREATE TABLE anaesthetic_record_grade_flag (
 );
 
 CREATE INDEX anaesthetic_record_grade_flag_grade_id_idx
-    ON anaesthetic_record_grade_flag (anaesthetic_record_grade_id);
+    ON anaesthetic_record.anaesthetic_record_grade_flag (anaesthetic_record_grade_id);
 
 CREATE TRIGGER trigger_anaesthetic_record_grade_flag_updated_at
-    BEFORE UPDATE ON anaesthetic_record_grade_flag
+    BEFORE UPDATE ON anaesthetic_record.anaesthetic_record_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION anaesthetic_record.set_updated_at();
 
-COMMENT ON TABLE anaesthetic_record_grade_flag IS
+COMMENT ON TABLE anaesthetic_record.anaesthetic_record_grade_flag IS
     'Safety flags raised independently of the completeness status, with priority and a suggested action for the anaesthetic team.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.created_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.updated_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.deleted_at IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.anaesthetic_record_grade_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.anaesthetic_record_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.flag_id IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-WHO-CHECKLIST-NOT-DONE-001).';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.category IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.category IS
     'Flag category: who-checklist-not-done, allergy-conflict, difficult-airway, drug-anaphylaxis, unlogged-consent, physiological-derangement, incomplete, or other.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.priority IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.description IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN anaesthetic_record_grade_flag.suggested_action IS
+COMMENT ON COLUMN anaesthetic_record.anaesthetic_record_grade_flag.suggested_action IS
     'Suggested anaesthetic action (e.g. "complete the WHO Time Out before proceeding").';
 
 -- ========================================================================

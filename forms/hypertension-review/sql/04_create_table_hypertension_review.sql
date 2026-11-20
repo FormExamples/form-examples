@@ -9,14 +9,14 @@
 -- documentation and control-classification record, not a diagnostic or
 -- prescribing instrument.
 
-CREATE TABLE hypertension_review (
+CREATE TABLE hypertension_review.hypertension_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES hypertension_review.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES hypertension_review.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     clinician_role VARCHAR(20) NOT NULL DEFAULT '' CHECK (clinician_role IN ('gp', 'practice-nurse', 'pharmacist', 'other', '')),
@@ -71,96 +71,96 @@ CREATE TABLE hypertension_review (
 );
 
 CREATE INDEX hypertension_review_patient_id_idx
-    ON hypertension_review (patient_id);
+    ON hypertension_review.hypertension_review (patient_id);
 CREATE INDEX hypertension_review_clinician_id_idx
-    ON hypertension_review (clinician_id);
+    ON hypertension_review.hypertension_review (clinician_id);
 
 CREATE TRIGGER trigger_hypertension_review_updated_at
-    BEFORE UPDATE ON hypertension_review
+    BEFORE UPDATE ON hypertension_review.hypertension_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION hypertension_review.set_updated_at();
 
-COMMENT ON TABLE hypertension_review IS
+COMMENT ON TABLE hypertension_review.hypertension_review IS
     'Main hypertension annual-review record (NICE NG136): patient and clinician identification, review context, diagnosis and comorbidity target drivers, clinic and home/ambulatory blood pressure, medication and adherence, cardiovascular risk, annual bloods, urine ACR, lifestyle, and complications. The computed control classification, completeness grade, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN hypertension_review.id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN hypertension_review.created_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN hypertension_review.updated_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN hypertension_review.deleted_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN hypertension_review.patient_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.patient_id IS
     'Foreign key to the patient this review documents (restrict delete).';
-COMMENT ON COLUMN hypertension_review.clinician_id IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinician_id IS
     'Foreign key to the reviewing clinician (restrict delete); optional.';
-COMMENT ON COLUMN hypertension_review.clinician_role IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinician_role IS
     'Reviewing clinician role: gp, practice-nurse, pharmacist, or other.';
-COMMENT ON COLUMN hypertension_review.reviewed_at IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.reviewed_at IS
     'Date the annual review was conducted.';
-COMMENT ON COLUMN hypertension_review.practice_site IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.practice_site IS
     'Practice or site where the review was conducted.';
-COMMENT ON COLUMN hypertension_review.patient_identifier IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.patient_identifier IS
     'NHS number or local patient identifier as recorded on the review.';
-COMMENT ON COLUMN hypertension_review.age_band IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.age_band IS
     'Adult age band that drives the blood-pressure target: 18-39, 40-59, 60-79, or >=80 (>=80 relaxes the clinic target to 150/90).';
-COMMENT ON COLUMN hypertension_review.sex IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.sex IS
     'Patient sex: female, male, intersex, or unknown.';
-COMMENT ON COLUMN hypertension_review.ethnicity IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.ethnicity IS
     'Patient ethnicity: white, black-african-caribbean, south-asian, mixed, or other.';
-COMMENT ON COLUMN hypertension_review.diagnosis_date IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.diagnosis_date IS
     'Date of hypertension diagnosis.';
-COMMENT ON COLUMN hypertension_review.type2_diabetes IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.type2_diabetes IS
     'Whether the patient has type 2 diabetes (yes/no); a blood-pressure target driver.';
-COMMENT ON COLUMN hypertension_review.chronic_kidney_disease IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.chronic_kidney_disease IS
     'Whether the patient has chronic kidney disease (yes/no); with diabetes or ACR >= 70 it tightens the target to 130/80.';
-COMMENT ON COLUMN hypertension_review.established_cvd IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.established_cvd IS
     'Whether the patient has established cardiovascular disease (yes/no).';
-COMMENT ON COLUMN hypertension_review.atrial_fibrillation IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.atrial_fibrillation IS
     'Whether the patient has atrial fibrillation (yes/no).';
-COMMENT ON COLUMN hypertension_review.clinic_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinic_systolic IS
     'Clinic systolic blood pressure in mmHg (best of repeated seated readings).';
-COMMENT ON COLUMN hypertension_review.clinic_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.clinic_diastolic IS
     'Clinic diastolic blood pressure in mmHg (best of repeated seated readings).';
-COMMENT ON COLUMN hypertension_review.home_systolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.home_systolic IS
     'Home/ambulatory (HBPM/ABPM) daytime-average systolic blood pressure in mmHg.';
-COMMENT ON COLUMN hypertension_review.home_diastolic IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.home_diastolic IS
     'Home/ambulatory (HBPM/ABPM) daytime-average diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN hypertension_review.monitoring_method IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.monitoring_method IS
     'Blood-pressure monitoring method: clinic-only, hbpm (home), or abpm (ambulatory).';
-COMMENT ON COLUMN hypertension_review.postural_drop IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.postural_drop IS
     'Whether a symptomatic postural systolic fall >= 20 mmHg is present (yes/no).';
-COMMENT ON COLUMN hypertension_review.antihypertensive_agents IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.antihypertensive_agents IS
     'Count of current antihypertensive agents.';
-COMMENT ON COLUMN hypertension_review.adherence IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.adherence IS
     'Self-reported medication adherence: good, partial, or poor.';
-COMMENT ON COLUMN hypertension_review.side_effects IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.side_effects IS
     'Whether troublesome medication side effects are present (yes/no).';
-COMMENT ON COLUMN hypertension_review.qrisk_percent IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.qrisk_percent IS
     'QRISK 10-year cardiovascular risk as a percentage.';
-COMMENT ON COLUMN hypertension_review.smoking_status IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.smoking_status IS
     'Smoking status: never, ex, or current.';
-COMMENT ON COLUMN hypertension_review.statin_therapy IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.statin_therapy IS
     'Whether the patient is on a statin (yes/no).';
-COMMENT ON COLUMN hypertension_review.bmi IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.bmi IS
     'Body mass index in kg/m^2.';
-COMMENT ON COLUMN hypertension_review.lifestyle_advice IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.lifestyle_advice IS
     'Free-text record of lifestyle advice given (diet, exercise, alcohol, salt, smoking cessation).';
-COMMENT ON COLUMN hypertension_review.serum_creatinine IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.serum_creatinine IS
     'Serum creatinine in micromol/L (U&E).';
-COMMENT ON COLUMN hypertension_review.egfr IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.egfr IS
     'Estimated glomerular filtration rate in mL/min/1.73m^2 (U&E).';
-COMMENT ON COLUMN hypertension_review.serum_potassium IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.serum_potassium IS
     'Serum potassium in mmol/L (U&E).';
-COMMENT ON COLUMN hypertension_review.hba1c IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.hba1c IS
     'HbA1c in mmol/mol (glycaemic control).';
-COMMENT ON COLUMN hypertension_review.total_cholesterol IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.total_cholesterol IS
     'Total cholesterol in mmol/L (lipids).';
-COMMENT ON COLUMN hypertension_review.hdl_cholesterol IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.hdl_cholesterol IS
     'HDL cholesterol in mmol/L (lipids).';
-COMMENT ON COLUMN hypertension_review.urine_acr IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.urine_acr IS
     'Urine albumin:creatinine ratio in mg/mmol.';
-COMMENT ON COLUMN hypertension_review.complications IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.complications IS
     'Free-text record of hypertension-related complications or target-organ damage.';
-COMMENT ON COLUMN hypertension_review.review_context IS
+COMMENT ON COLUMN hypertension_review.hypertension_review.review_context IS
     'Optional free-text review context or narrative shown in the summary.';

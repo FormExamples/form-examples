@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (12):
+-- Source files (13):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -35,12 +36,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS genetic_assessment;
+
+COMMENT ON SCHEMA genetic_assessment IS
+    'Namespace for the Genetic Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION genetic_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -48,7 +65,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION genetic_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -61,7 +78,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE genetic_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -84,56 +101,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON genetic_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE genetic_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN genetic_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN genetic_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN genetic_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN genetic_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN genetic_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN genetic_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN genetic_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN genetic_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN genetic_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN genetic_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN genetic_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN genetic_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN genetic_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN genetic_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN genetic_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN genetic_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN genetic_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON genetic_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN genetic_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -146,7 +163,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE genetic_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -165,46 +182,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON genetic_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE genetic_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN genetic_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN genetic_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN genetic_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN genetic_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN genetic_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN genetic_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN genetic_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN genetic_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN genetic_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN genetic_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN genetic_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN genetic_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN genetic_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON genetic_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -215,36 +232,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_genetic_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE genetic_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'urgent'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON genetic_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE genetic_assessment.assessment IS
     'Genetic counselling referral assessment. Parent entity for all assessment sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN genetic_assessment.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN genetic_assessment.assessment.status IS
     'Lifecycle status: draft, submitted, reviewed, or urgent.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN genetic_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -255,13 +272,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_genetic_assessment_cancer_history.sql
 -- ========================================================================
 
-CREATE TABLE assessment_cancer_history (
+CREATE TABLE genetic_assessment.assessment_cancer_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.assessment(id) ON DELETE CASCADE,
     family_cancer_history VARCHAR(5) NOT NULL DEFAULT ''
         CHECK (family_cancer_history IN ('yes', 'no', '')),
     multiple_family_cancers VARCHAR(5) NOT NULL DEFAULT ''
@@ -281,41 +298,41 @@ CREATE TABLE assessment_cancer_history (
 );
 
 CREATE TRIGGER trigger_assessment_cancer_history_updated_at
-    BEFORE UPDATE ON assessment_cancer_history
+    BEFORE UPDATE ON genetic_assessment.assessment_cancer_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
 -- Individual family cancer entries (one-to-many child)
 
-COMMENT ON TABLE assessment_cancer_history IS
+COMMENT ON TABLE genetic_assessment.assessment_cancer_history IS
     'Assessment cancer history.';
-COMMENT ON COLUMN assessment_cancer_history.assessment_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_cancer_history.family_cancer_history IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.family_cancer_history IS
     'Family cancer history. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.multiple_family_cancers IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.multiple_family_cancers IS
     'Multiple family cancers. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.early_onset_cancer IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.early_onset_cancer IS
     'Early onset cancer. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.bilateral_cancer IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.bilateral_cancer IS
     'Bilateral cancer. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.rare_tumour_types IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.rare_tumour_types IS
     'Rare tumour types. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.rare_tumour_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.rare_tumour_details IS
     'Rare tumour details.';
-COMMENT ON COLUMN assessment_cancer_history.known_cancer_syndrome IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.known_cancer_syndrome IS
     'Known cancer syndrome. One of: yes, no.';
-COMMENT ON COLUMN assessment_cancer_history.cancer_syndrome_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.cancer_syndrome_details IS
     'Cancer syndrome details.';
-COMMENT ON COLUMN assessment_cancer_history.cancer_risk_score IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.cancer_risk_score IS
     'Cancer risk score.';
-COMMENT ON COLUMN assessment_cancer_history.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_cancer_history.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_cancer_history.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_cancer_history.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -326,13 +343,13 @@ COMMENT ON COLUMN assessment_cancer_history.deleted_at IS
 -- BEGIN 06_create_table_genetic_assessment_cancer_history_item.sql
 -- ========================================================================
 
-CREATE TABLE assessment_cancer_history_item (
+CREATE TABLE genetic_assessment.assessment_cancer_history_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     cancer_history_id UUID NOT NULL
-        REFERENCES assessment_cancer_history(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.assessment_cancer_history(id) ON DELETE CASCADE,
     relative_relationship VARCHAR(50) NOT NULL DEFAULT '',
     cancer_type VARCHAR(255) NOT NULL DEFAULT '',
     age_at_diagnosis INTEGER
@@ -343,60 +360,60 @@ CREATE TABLE assessment_cancer_history_item (
 );
 
 CREATE TRIGGER trigger_assessment_cancer_history_item_updated_at
-    BEFORE UPDATE ON assessment_cancer_history_item
+    BEFORE UPDATE ON genetic_assessment.assessment_cancer_history_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_cancer_history IS
+COMMENT ON TABLE genetic_assessment.assessment_cancer_history IS
     'Cancer history section: family cancer patterns, early onset, bilateral cancers, and known syndromes. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_cancer_history.assessment_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_cancer_history.family_cancer_history IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.family_cancer_history IS
     'Whether there is a family history of cancer: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.multiple_family_cancers IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.multiple_family_cancers IS
     'Whether multiple family members have had cancer: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.early_onset_cancer IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.early_onset_cancer IS
     'Whether any family member had cancer diagnosed before age 50: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.bilateral_cancer IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.bilateral_cancer IS
     'Whether any family member had bilateral cancer (both sides of a paired organ): yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.rare_tumour_types IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.rare_tumour_types IS
     'Whether any family member had a rare tumour type: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.rare_tumour_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.rare_tumour_details IS
     'Details of rare tumour types reported.';
-COMMENT ON COLUMN assessment_cancer_history.known_cancer_syndrome IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.known_cancer_syndrome IS
     'Whether a cancer predisposition syndrome is known in the family (e.g. BRCA, Lynch): yes, no, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history.cancer_syndrome_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.cancer_syndrome_details IS
     'Details of known cancer predisposition syndromes.';
-COMMENT ON COLUMN assessment_cancer_history.cancer_risk_score IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.cancer_risk_score IS
     'Computed cancer genetics risk sub-score, NULL if not yet scored.';
-COMMENT ON TABLE assessment_cancer_history_item IS
+COMMENT ON TABLE genetic_assessment.assessment_cancer_history_item IS
     'Individual family cancer entry with relative, cancer type, age at diagnosis, and outcome.';
-COMMENT ON COLUMN assessment_cancer_history_item.relative_relationship IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.relative_relationship IS
     'Relationship to the patient (e.g. mother, father, sister, maternal aunt).';
-COMMENT ON COLUMN assessment_cancer_history_item.cancer_type IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.cancer_type IS
     'Type of cancer diagnosed.';
-COMMENT ON COLUMN assessment_cancer_history_item.age_at_diagnosis IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.age_at_diagnosis IS
     'Age at cancer diagnosis in years, NULL if unknown.';
-COMMENT ON COLUMN assessment_cancer_history_item.outcome IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.outcome IS
     'Outcome: alive, deceased, unknown, or empty string.';
-COMMENT ON COLUMN assessment_cancer_history_item.sort_order IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.sort_order IS
     'Display order within the list.';
 
-COMMENT ON COLUMN assessment_cancer_history.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_cancer_history.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_cancer_history.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_cancer_history_item.cancer_history_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.cancer_history_id IS
     'Foreign key to the assessment_cancer_history table.';
-COMMENT ON COLUMN assessment_cancer_history_item.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_cancer_history_item.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_cancer_history_item.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_cancer_history_item.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_cancer_history_item.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -407,13 +424,13 @@ COMMENT ON COLUMN assessment_cancer_history_item.deleted_at IS
 -- BEGIN 07_create_table_genetic_assessment_family_pedigree.sql
 -- ========================================================================
 
-CREATE TABLE assessment_family_pedigree (
+CREATE TABLE genetic_assessment.assessment_family_pedigree (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.assessment(id) ON DELETE CASCADE,
     total_first_degree_relatives INTEGER
         CHECK (total_first_degree_relatives IS NULL OR total_first_degree_relatives >= 0),
     total_second_degree_relatives INTEGER
@@ -429,37 +446,37 @@ CREATE TABLE assessment_family_pedigree (
 );
 
 CREATE TRIGGER trigger_assessment_family_pedigree_updated_at
-    BEFORE UPDATE ON assessment_family_pedigree
+    BEFORE UPDATE ON genetic_assessment.assessment_family_pedigree
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
 -- Individual family member entries for the pedigree (one-to-many child)
 
-COMMENT ON TABLE assessment_family_pedigree IS
+COMMENT ON TABLE genetic_assessment.assessment_family_pedigree IS
     'Assessment family pedigree.';
-COMMENT ON COLUMN assessment_family_pedigree.assessment_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN assessment_family_pedigree.total_first_degree_relatives IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.total_first_degree_relatives IS
     'Total first degree relatives.';
-COMMENT ON COLUMN assessment_family_pedigree.total_second_degree_relatives IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.total_second_degree_relatives IS
     'Total second degree relatives.';
-COMMENT ON COLUMN assessment_family_pedigree.consanguinity_in_family IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.consanguinity_in_family IS
     'Consanguinity in family. One of: yes, no.';
-COMMENT ON COLUMN assessment_family_pedigree.consanguinity_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.consanguinity_details IS
     'Consanguinity details.';
-COMMENT ON COLUMN assessment_family_pedigree.adoption_status IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.adoption_status IS
     'Adoption status. One of: not-adopted, adopted-known-history, adopted-unknown-history.';
-COMMENT ON COLUMN assessment_family_pedigree.pedigree_notes IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.pedigree_notes IS
     'Pedigree notes.';
-COMMENT ON COLUMN assessment_family_pedigree.three_generation_pedigree_drawn IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.three_generation_pedigree_drawn IS
     'Three generation pedigree drawn. One of: yes, no.';
-COMMENT ON COLUMN assessment_family_pedigree.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_family_pedigree.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_family_pedigree.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_family_pedigree.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -470,13 +487,13 @@ COMMENT ON COLUMN assessment_family_pedigree.deleted_at IS
 -- BEGIN 08_create_table_genetic_assessment_family_pedigree_member.sql
 -- ========================================================================
 
-CREATE TABLE assessment_family_pedigree_member (
+CREATE TABLE genetic_assessment.assessment_family_pedigree_member (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     family_pedigree_id UUID NOT NULL
-        REFERENCES assessment_family_pedigree(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.assessment_family_pedigree(id) ON DELETE CASCADE,
     relationship VARCHAR(50) NOT NULL DEFAULT '',
     sex VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (sex IN ('male', 'female', 'other', '')),
@@ -492,62 +509,62 @@ CREATE TABLE assessment_family_pedigree_member (
 );
 
 CREATE TRIGGER trigger_assessment_family_pedigree_member_updated_at
-    BEFORE UPDATE ON assessment_family_pedigree_member
+    BEFORE UPDATE ON genetic_assessment.assessment_family_pedigree_member
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment_family_pedigree IS
+COMMENT ON TABLE genetic_assessment.assessment_family_pedigree IS
     'Family pedigree section: family structure, consanguinity, and adoption status. One-to-one child of assessment.';
-COMMENT ON COLUMN assessment_family_pedigree.assessment_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN assessment_family_pedigree.total_first_degree_relatives IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.total_first_degree_relatives IS
     'Number of first-degree relatives (parents, siblings, children).';
-COMMENT ON COLUMN assessment_family_pedigree.total_second_degree_relatives IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.total_second_degree_relatives IS
     'Number of second-degree relatives (grandparents, aunts, uncles, nieces, nephews).';
-COMMENT ON COLUMN assessment_family_pedigree.consanguinity_in_family IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.consanguinity_in_family IS
     'Whether consanguinity (blood relatives marrying) exists in the family: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_family_pedigree.consanguinity_details IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.consanguinity_details IS
     'Details of consanguineous relationships.';
-COMMENT ON COLUMN assessment_family_pedigree.adoption_status IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.adoption_status IS
     'Adoption status: not-adopted, adopted-known-history, adopted-unknown-history, or empty string.';
-COMMENT ON COLUMN assessment_family_pedigree.pedigree_notes IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.pedigree_notes IS
     'Free-text notes about the family pedigree.';
-COMMENT ON COLUMN assessment_family_pedigree.three_generation_pedigree_drawn IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.three_generation_pedigree_drawn IS
     'Whether a three-generation pedigree has been drawn: yes, no, or empty string.';
-COMMENT ON TABLE assessment_family_pedigree_member IS
+COMMENT ON TABLE genetic_assessment.assessment_family_pedigree_member IS
     'Individual family member within the pedigree.';
-COMMENT ON COLUMN assessment_family_pedigree_member.relationship IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.relationship IS
     'Relationship to the patient (e.g. mother, paternal grandfather).';
-COMMENT ON COLUMN assessment_family_pedigree_member.sex IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.sex IS
     'Sex: male, female, other, or empty string.';
-COMMENT ON COLUMN assessment_family_pedigree_member.age IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.age IS
     'Current age in years, NULL if unknown.';
-COMMENT ON COLUMN assessment_family_pedigree_member.alive IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.alive IS
     'Whether the relative is alive: yes, no, or empty string.';
-COMMENT ON COLUMN assessment_family_pedigree_member.age_at_death IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.age_at_death IS
     'Age at death in years, NULL if alive or unknown.';
-COMMENT ON COLUMN assessment_family_pedigree_member.cause_of_death IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.cause_of_death IS
     'Cause of death if deceased.';
-COMMENT ON COLUMN assessment_family_pedigree_member.medical_conditions IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.medical_conditions IS
     'Free-text list of medical conditions relevant to genetics.';
-COMMENT ON COLUMN assessment_family_pedigree_member.sort_order IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.sort_order IS
     'Display order within the pedigree list.';
 
-COMMENT ON COLUMN assessment_family_pedigree.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_family_pedigree.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_family_pedigree.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_family_pedigree_member.family_pedigree_id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.family_pedigree_id IS
     'Foreign key to the assessment_family_pedigree table.';
-COMMENT ON COLUMN assessment_family_pedigree_member.id IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment_family_pedigree_member.created_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment_family_pedigree_member.updated_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment_family_pedigree_member.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.assessment_family_pedigree_member.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -558,13 +575,13 @@ COMMENT ON COLUMN assessment_family_pedigree_member.deleted_at IS
 -- BEGIN 09_create_table_genetic_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE genetic_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.assessment(id) ON DELETE CASCADE,
     risk_level VARCHAR(10) NOT NULL DEFAULT 'low'
         CHECK (risk_level IN ('low', 'moderate', 'high')),
     total_risk_score INTEGER NOT NULL DEFAULT 0
@@ -581,36 +598,36 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON genetic_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE genetic_assessment.grade IS
     'Computed genetic risk stratification result. 0-2 = Low, 3-5 = Moderate, 6+ = High. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.risk_level IS
+COMMENT ON COLUMN genetic_assessment.grade.risk_level IS
     'Overall risk classification: low, moderate, or high.';
-COMMENT ON COLUMN grade.total_risk_score IS
+COMMENT ON COLUMN genetic_assessment.grade.total_risk_score IS
     'Total weighted risk score across all genetics domains (0-6+).';
-COMMENT ON COLUMN grade.cancer_genetics_score IS
+COMMENT ON COLUMN genetic_assessment.grade.cancer_genetics_score IS
     'Risk sub-score for cancer genetics domain.';
-COMMENT ON COLUMN grade.cardiovascular_genetics_score IS
+COMMENT ON COLUMN genetic_assessment.grade.cardiovascular_genetics_score IS
     'Risk sub-score for cardiovascular genetics domain.';
-COMMENT ON COLUMN grade.neurogenetics_score IS
+COMMENT ON COLUMN genetic_assessment.grade.neurogenetics_score IS
     'Risk sub-score for neurogenetics domain.';
-COMMENT ON COLUMN grade.reproductive_genetics_score IS
+COMMENT ON COLUMN genetic_assessment.grade.reproductive_genetics_score IS
     'Risk sub-score for reproductive genetics domain.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN genetic_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN genetic_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN genetic_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN genetic_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN genetic_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -621,13 +638,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 10_create_table_genetic_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE genetic_assessment.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -636,30 +653,30 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON genetic_assessment.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE genetic_assessment.grading_fired_rule IS
     'Individual genetic risk rules that evaluated to true during grading.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.rule_id IS
     'Identifier of the rule that fired (e.g. CG-001, CV-002, NG-003).';
-COMMENT ON COLUMN grading_fired_rule.category IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.category IS
     'Category of the rule (e.g. Cancer Genetics, Cardiovascular Genetics, Neurogenetics, Reproductive Genetics).';
-COMMENT ON COLUMN grading_fired_rule.description IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.description IS
     'Human-readable description of the rule.';
-COMMENT ON COLUMN grading_fired_rule.risk_level IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.risk_level IS
     'Risk level contributed by this rule: low, moderate, high, or empty string.';
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -670,13 +687,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 11_create_table_genetic_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE genetic_assessment.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES genetic_assessment.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -685,30 +702,30 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON genetic_assessment.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION genetic_assessment.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE genetic_assessment.grading_additional_flag IS
     'Additional safety-critical flags detected during genetic assessment grading (e.g. urgent referral needed, pregnancy with known carrier status).';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.flag_id IS
     'Identifier of the flag (e.g. FLAG-PREG-001, FLAG-BRCA-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.category IS
     'Category of the flag (e.g. Cancer Genetics, Reproductive Genetics, Urgent Referral).';
-COMMENT ON COLUMN grading_additional_flag.message IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.message IS
     'Human-readable message describing the flagged concern.';
-COMMENT ON COLUMN grading_additional_flag.priority IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.priority IS
     'Priority level: high, medium, or low.';
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN genetic_assessment.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

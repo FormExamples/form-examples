@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (11):
+-- Source files (12):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -34,12 +35,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS prescription_request;
+
+COMMENT ON SCHEMA prescription_request IS
+    'Namespace for the Prescription Request form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION prescription_request.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -47,7 +64,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION prescription_request.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -60,7 +77,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE prescription_request.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -83,56 +100,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON prescription_request.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE prescription_request.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN prescription_request.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN prescription_request.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN prescription_request.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN prescription_request.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN prescription_request.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN prescription_request.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN prescription_request.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN prescription_request.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN prescription_request.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN prescription_request.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN prescription_request.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN prescription_request.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN prescription_request.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN prescription_request.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN prescription_request.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN prescription_request.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN prescription_request.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON prescription_request.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN prescription_request.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN prescription_request.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -145,7 +162,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE prescription_request.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -164,46 +181,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON prescription_request.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE prescription_request.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN prescription_request.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN prescription_request.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN prescription_request.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN prescription_request.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN prescription_request.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN prescription_request.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN prescription_request.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN prescription_request.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN prescription_request.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN prescription_request.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN prescription_request.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN prescription_request.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN prescription_request.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON prescription_request.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN prescription_request.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -214,36 +231,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_prescription_request.sql
 -- ========================================================================
 
-CREATE TABLE prescription_request (
+CREATE TABLE prescription_request.prescription_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.patient(id) ON DELETE CASCADE,
     clinician_id UUID NOT NULL
-        REFERENCES clinician(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.clinician(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'approved', 'rejected'))
 );
 
 CREATE TRIGGER trigger_prescription_request_updated_at
-    BEFORE UPDATE ON prescription_request
+    BEFORE UPDATE ON prescription_request.prescription_request
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE prescription_request IS
+COMMENT ON TABLE prescription_request.prescription_request IS
     'Top-level prescription request linking patient and clinician. Parent entity for all prescription sections.';
-COMMENT ON COLUMN prescription_request.patient_id IS 'Foreign key to the patient requesting the prescription.';
-COMMENT ON COLUMN prescription_request.clinician_id IS 'Foreign key to the prescribing clinician.';
-COMMENT ON COLUMN prescription_request.status IS 'Lifecycle status: draft, submitted, reviewed, approved, or rejected.';
-COMMENT ON COLUMN prescription_request.id IS
+COMMENT ON COLUMN prescription_request.prescription_request.patient_id IS 'Foreign key to the patient requesting the prescription.';
+COMMENT ON COLUMN prescription_request.prescription_request.clinician_id IS 'Foreign key to the prescribing clinician.';
+COMMENT ON COLUMN prescription_request.prescription_request.status IS 'Lifecycle status: draft, submitted, reviewed, approved, or rejected.';
+COMMENT ON COLUMN prescription_request.prescription_request.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescription_request.created_at IS
+COMMENT ON COLUMN prescription_request.prescription_request.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN prescription_request.updated_at IS
+COMMENT ON COLUMN prescription_request.prescription_request.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN prescription_request.deleted_at IS
+COMMENT ON COLUMN prescription_request.prescription_request.deleted_at IS
     'Timestamp when this row was deleted.';
 --rollback DROP TABLE prescription_request;
 
@@ -255,13 +272,13 @@ COMMENT ON COLUMN prescription_request.deleted_at IS
 -- BEGIN 05_create_table_prescription_details.sql
 -- ========================================================================
 
-CREATE TABLE prescription_details (
+CREATE TABLE prescription_request.prescription_details (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     prescription_request_id UUID NOT NULL UNIQUE
-        REFERENCES prescription_request(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.prescription_request(id) ON DELETE CASCADE,
     request_date DATE NOT NULL DEFAULT CURRENT_DATE,
     medication_name VARCHAR(500) NOT NULL DEFAULT '',
     dosage VARCHAR(255) NOT NULL DEFAULT '',
@@ -272,29 +289,29 @@ CREATE TABLE prescription_details (
 );
 
 CREATE TRIGGER trigger_prescription_details_updated_at
-    BEFORE UPDATE ON prescription_details
+    BEFORE UPDATE ON prescription_request.prescription_details
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE prescription_details IS
+COMMENT ON TABLE prescription_request.prescription_details IS
     'Medication, dosage, and treatment details for a prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN prescription_details.request_date IS 'Date the prescription is requested for.';
-COMMENT ON COLUMN prescription_details.medication_name IS 'Name of the medication being prescribed.';
-COMMENT ON COLUMN prescription_details.dosage IS 'Dosage amount and unit (e.g. 500mg, 10ml).';
-COMMENT ON COLUMN prescription_details.frequency IS 'How often the medication should be taken (e.g. BD, TDS, OD).';
-COMMENT ON COLUMN prescription_details.route_of_administration IS 'Route: oral, topical, intravenous, intramuscular, subcutaneous, inhaled, rectal, sublingual, transdermal, other, or empty.';
-COMMENT ON COLUMN prescription_details.treatment_instructions IS 'Free-text treatment instructions for the patient.';
+COMMENT ON COLUMN prescription_request.prescription_details.request_date IS 'Date the prescription is requested for.';
+COMMENT ON COLUMN prescription_request.prescription_details.medication_name IS 'Name of the medication being prescribed.';
+COMMENT ON COLUMN prescription_request.prescription_details.dosage IS 'Dosage amount and unit (e.g. 500mg, 10ml).';
+COMMENT ON COLUMN prescription_request.prescription_details.frequency IS 'How often the medication should be taken (e.g. BD, TDS, OD).';
+COMMENT ON COLUMN prescription_request.prescription_details.route_of_administration IS 'Route: oral, topical, intravenous, intramuscular, subcutaneous, inhaled, rectal, sublingual, transdermal, other, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_details.treatment_instructions IS 'Free-text treatment instructions for the patient.';
 --rollback DROP TABLE prescription_details;
 
-COMMENT ON COLUMN prescription_details.prescription_request_id IS
+COMMENT ON COLUMN prescription_request.prescription_details.prescription_request_id IS
     'Foreign key to the prescription_request table.';
-COMMENT ON COLUMN prescription_details.id IS
+COMMENT ON COLUMN prescription_request.prescription_details.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescription_details.created_at IS
+COMMENT ON COLUMN prescription_request.prescription_details.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN prescription_details.updated_at IS
+COMMENT ON COLUMN prescription_request.prescription_details.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN prescription_details.deleted_at IS
+COMMENT ON COLUMN prescription_request.prescription_details.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -305,13 +322,13 @@ COMMENT ON COLUMN prescription_details.deleted_at IS
 -- BEGIN 06_create_table_prescription_substitution_options.sql
 -- ========================================================================
 
-CREATE TABLE prescription_substitution_options (
+CREATE TABLE prescription_request.prescription_substitution_options (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     prescription_request_id UUID NOT NULL UNIQUE
-        REFERENCES prescription_request(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.prescription_request(id) ON DELETE CASCADE,
     allow_brand_substitution VARCHAR(3) NOT NULL DEFAULT ''
         CHECK (allow_brand_substitution IN ('yes', 'no', '')),
     allow_generic_substitution VARCHAR(3) NOT NULL DEFAULT ''
@@ -322,27 +339,27 @@ CREATE TABLE prescription_substitution_options (
 );
 
 CREATE TRIGGER trigger_prescription_substitution_options_updated_at
-    BEFORE UPDATE ON prescription_substitution_options
+    BEFORE UPDATE ON prescription_request.prescription_substitution_options
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE prescription_substitution_options IS
+COMMENT ON TABLE prescription_request.prescription_substitution_options IS
     'Substitution preferences for a prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN prescription_substitution_options.allow_brand_substitution IS 'Whether a different brand name is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.allow_generic_substitution IS 'Whether a generic equivalent is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.allow_dosage_adjustment IS 'Whether a different dosage is acceptable: yes, no, or empty.';
-COMMENT ON COLUMN prescription_substitution_options.substitution_notes IS 'Additional notes about substitution preferences.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_brand_substitution IS 'Whether a different brand name is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_generic_substitution IS 'Whether a generic equivalent is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.allow_dosage_adjustment IS 'Whether a different dosage is acceptable: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.substitution_notes IS 'Additional notes about substitution preferences.';
 --rollback DROP TABLE prescription_substitution_options;
 
-COMMENT ON COLUMN prescription_substitution_options.prescription_request_id IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.prescription_request_id IS
     'Foreign key to the prescription_request table.';
-COMMENT ON COLUMN prescription_substitution_options.id IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescription_substitution_options.created_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN prescription_substitution_options.updated_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN prescription_substitution_options.deleted_at IS
+COMMENT ON COLUMN prescription_request.prescription_substitution_options.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -353,13 +370,13 @@ COMMENT ON COLUMN prescription_substitution_options.deleted_at IS
 -- BEGIN 07_create_table_prescription_request_type.sql
 -- ========================================================================
 
-CREATE TABLE prescription_request_type (
+CREATE TABLE prescription_request.prescription_request_type (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     prescription_request_id UUID NOT NULL UNIQUE
-        REFERENCES prescription_request(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.prescription_request(id) ON DELETE CASCADE,
     is_new_prescription VARCHAR(3) NOT NULL DEFAULT ''
         CHECK (is_new_prescription IN ('yes', 'no', '')),
     is_emergency VARCHAR(3) NOT NULL DEFAULT ''
@@ -368,26 +385,26 @@ CREATE TABLE prescription_request_type (
 );
 
 CREATE TRIGGER trigger_prescription_request_type_updated_at
-    BEFORE UPDATE ON prescription_request_type
+    BEFORE UPDATE ON prescription_request.prescription_request_type
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE prescription_request_type IS
+COMMENT ON TABLE prescription_request.prescription_request_type IS
     'Request type flags for a prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN prescription_request_type.is_new_prescription IS 'Whether this is a new prescription (yes) or a refill (no).';
-COMMENT ON COLUMN prescription_request_type.is_emergency IS 'Whether this is an emergency prescription request: yes, no, or empty.';
-COMMENT ON COLUMN prescription_request_type.additional_notes IS 'Additional notes about the request.';
+COMMENT ON COLUMN prescription_request.prescription_request_type.is_new_prescription IS 'Whether this is a new prescription (yes) or a refill (no).';
+COMMENT ON COLUMN prescription_request.prescription_request_type.is_emergency IS 'Whether this is an emergency prescription request: yes, no, or empty.';
+COMMENT ON COLUMN prescription_request.prescription_request_type.additional_notes IS 'Additional notes about the request.';
 --rollback DROP TABLE prescription_request_type;
 
-COMMENT ON COLUMN prescription_request_type.prescription_request_id IS
+COMMENT ON COLUMN prescription_request.prescription_request_type.prescription_request_id IS
     'Foreign key to the prescription_request table.';
-COMMENT ON COLUMN prescription_request_type.id IS
+COMMENT ON COLUMN prescription_request.prescription_request_type.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescription_request_type.created_at IS
+COMMENT ON COLUMN prescription_request.prescription_request_type.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN prescription_request_type.updated_at IS
+COMMENT ON COLUMN prescription_request.prescription_request_type.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN prescription_request_type.deleted_at IS
+COMMENT ON COLUMN prescription_request.prescription_request_type.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -398,13 +415,13 @@ COMMENT ON COLUMN prescription_request_type.deleted_at IS
 -- BEGIN 08_create_table_prescription_request_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE prescription_request.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     prescription_request_id UUID NOT NULL UNIQUE
-        REFERENCES prescription_request(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.prescription_request(id) ON DELETE CASCADE,
     priority_level VARCHAR(10) NOT NULL DEFAULT 'routine'
         CHECK (priority_level IN ('routine', 'urgent', 'emergency')),
     rule_count INTEGER NOT NULL DEFAULT 0
@@ -413,26 +430,26 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON prescription_request.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE prescription_request.grade IS
     'Computed priority classification result for the prescription request. One-to-one child of prescription_request.';
-COMMENT ON COLUMN grade.priority_level IS 'Overall priority: routine, urgent, or emergency.';
-COMMENT ON COLUMN grade.rule_count IS 'Total number of classification rules that fired.';
-COMMENT ON COLUMN grade.graded_at IS 'Timestamp when the priority classification was computed.';
+COMMENT ON COLUMN prescription_request.grade.priority_level IS 'Overall priority: routine, urgent, or emergency.';
+COMMENT ON COLUMN prescription_request.grade.rule_count IS 'Total number of classification rules that fired.';
+COMMENT ON COLUMN prescription_request.grade.graded_at IS 'Timestamp when the priority classification was computed.';
 --rollback DROP TABLE grade;
 
-COMMENT ON COLUMN grade.prescription_request_id IS
+COMMENT ON COLUMN prescription_request.grade.prescription_request_id IS
     'Foreign key to the prescription_request table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN prescription_request.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN prescription_request.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN prescription_request.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN prescription_request.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -443,13 +460,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 09_create_table_prescription_request_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE grading_fired_rule (
+CREATE TABLE prescription_request.grading_fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(20) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -458,27 +475,27 @@ CREATE TABLE grading_fired_rule (
 );
 
 CREATE TRIGGER trigger_grading_fired_rule_updated_at
-    BEFORE UPDATE ON grading_fired_rule
+    BEFORE UPDATE ON prescription_request.grading_fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE grading_fired_rule IS
+COMMENT ON TABLE prescription_request.grading_fired_rule IS
     'Individual priority classification rules that fired during grading of the prescription request.';
-COMMENT ON COLUMN grading_fired_rule.rule_id IS 'Identifier of the rule that fired (e.g. RX-EM-001).';
-COMMENT ON COLUMN grading_fired_rule.category IS 'Category of the rule (e.g. Emergency, Substitution, Completeness).';
-COMMENT ON COLUMN grading_fired_rule.description IS 'Human-readable description of the rule.';
-COMMENT ON COLUMN grading_fired_rule.severity_level IS 'Priority level contributed by this rule: routine, urgent, emergency, or empty.';
+COMMENT ON COLUMN prescription_request.grading_fired_rule.rule_id IS 'Identifier of the rule that fired (e.g. RX-EM-001).';
+COMMENT ON COLUMN prescription_request.grading_fired_rule.category IS 'Category of the rule (e.g. Emergency, Substitution, Completeness).';
+COMMENT ON COLUMN prescription_request.grading_fired_rule.description IS 'Human-readable description of the rule.';
+COMMENT ON COLUMN prescription_request.grading_fired_rule.severity_level IS 'Priority level contributed by this rule: routine, urgent, emergency, or empty.';
 --rollback DROP TABLE grading_fired_rule;
 
-COMMENT ON COLUMN grading_fired_rule.grade_id IS
+COMMENT ON COLUMN prescription_request.grading_fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_fired_rule.id IS
+COMMENT ON COLUMN prescription_request.grading_fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_fired_rule.created_at IS
+COMMENT ON COLUMN prescription_request.grading_fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_fired_rule.updated_at IS
+COMMENT ON COLUMN prescription_request.grading_fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_fired_rule.deleted_at IS
+COMMENT ON COLUMN prescription_request.grading_fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -489,13 +506,13 @@ COMMENT ON COLUMN grading_fired_rule.deleted_at IS
 -- BEGIN 10_create_table_prescription_request_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE grading_additional_flag (
+CREATE TABLE prescription_request.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -504,27 +521,27 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON prescription_request.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE prescription_request.grading_additional_flag IS
     'Additional flags detected during prescription request grading.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS 'Identifier of the flag (e.g. FLAG-NOSUB-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS 'Category of the flag (e.g. Substitution, Completeness, Emergency).';
-COMMENT ON COLUMN grading_additional_flag.message IS 'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS 'Priority level: high, medium, or low.';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.flag_id IS 'Identifier of the flag (e.g. FLAG-NOSUB-001).';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.category IS 'Category of the flag (e.g. Substitution, Completeness, Emergency).';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.message IS 'Human-readable description of the flagged issue.';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.priority IS 'Priority level: high, medium, or low.';
 --rollback DROP TABLE grading_additional_flag;
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

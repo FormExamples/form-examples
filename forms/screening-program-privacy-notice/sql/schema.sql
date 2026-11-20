@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (5):
+-- Source files (6):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -28,12 +29,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS screening_program_privacy_notice;
+
+COMMENT ON SCHEMA screening_program_privacy_notice IS
+    'Namespace for the Screening Program Privacy Notice form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION screening_program_privacy_notice.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -41,7 +58,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION screening_program_privacy_notice.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -54,7 +71,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE screening_program_privacy_notice.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -77,56 +94,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON screening_program_privacy_notice.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION screening_program_privacy_notice.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE screening_program_privacy_notice.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON screening_program_privacy_notice.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN screening_program_privacy_notice.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE screening_program_privacy_notice.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,46 +175,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON screening_program_privacy_notice.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION screening_program_privacy_notice.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE screening_program_privacy_notice.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON screening_program_privacy_notice.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -208,34 +225,34 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_acknowledgment.sql
 -- ========================================================================
 
-CREATE TABLE acknowledgment (
+CREATE TABLE screening_program_privacy_notice.acknowledgment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES screening_program_privacy_notice.patient(id) ON DELETE CASCADE,
     confirmed BOOLEAN NOT NULL DEFAULT FALSE,
     full_name TEXT NOT NULL DEFAULT '',
     acknowledged_date DATE
 );
 
 CREATE TRIGGER trigger_acknowledgment_updated_at
-    BEFORE UPDATE ON acknowledgment
+    BEFORE UPDATE ON screening_program_privacy_notice.acknowledgment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION screening_program_privacy_notice.set_updated_at();
 
-COMMENT ON TABLE acknowledgment IS 'Patient acknowledgment of the screening program privacy notice.';
-COMMENT ON COLUMN acknowledgment.patient_id IS 'Foreign key referencing the patient who acknowledged the notice.';
-COMMENT ON COLUMN acknowledgment.confirmed IS 'Whether the patient confirmed they have read and understood the privacy notice.';
-COMMENT ON COLUMN acknowledgment.full_name IS 'Full name typed by the patient as their acknowledgment signature.';
-COMMENT ON COLUMN acknowledgment.acknowledged_date IS 'Date the patient acknowledged the privacy notice.';
-COMMENT ON COLUMN acknowledgment.id IS
+COMMENT ON TABLE screening_program_privacy_notice.acknowledgment IS 'Patient acknowledgment of the screening program privacy notice.';
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.patient_id IS 'Foreign key referencing the patient who acknowledged the notice.';
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.confirmed IS 'Whether the patient confirmed they have read and understood the privacy notice.';
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.full_name IS 'Full name typed by the patient as their acknowledgment signature.';
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.acknowledged_date IS 'Date the patient acknowledged the privacy notice.';
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN acknowledgment.created_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN acknowledgment.updated_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN acknowledgment.deleted_at IS
+COMMENT ON COLUMN screening_program_privacy_notice.acknowledgment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

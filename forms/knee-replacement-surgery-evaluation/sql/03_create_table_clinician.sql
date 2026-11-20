@@ -2,7 +2,7 @@
 -- clinician is the joint-replacement assessor, who may be an orthopaedic
 -- surgeon or an extended-scope physiotherapist.
 
-CREATE TABLE clinician (
+CREATE TABLE knee_replacement_surgery_evaluation.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -22,45 +22,45 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON knee_replacement_surgery_evaluation.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION knee_replacement_surgery_evaluation.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE knee_replacement_surgery_evaluation.clinician IS
     'Clinician, i.e. the orthopaedic surgeon or extended-scope physiotherapist who conducts the knee-replacement surgery evaluation.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.role IS
     'Clinician role within the joint-replacement pathway.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.registration_body IS
     'Professional registration body, such as GMC for a doctor or HCPC for a physiotherapist in the United Kingdom.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.registration_number IS
     'Professional registration number issued by the registration body, such as the GMC number.';
-COMMENT ON COLUMN clinician.employer IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.employer IS
     'Employer, such as the NHS trust, health board, or private practice.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN knee_replacement_surgery_evaluation.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON knee_replacement_surgery_evaluation.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);

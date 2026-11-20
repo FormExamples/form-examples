@@ -2,14 +2,14 @@
 -- priority and a suggested action for the testator or the person
 -- preparing the will.
 
-CREATE TABLE united_kingdom_last_will_and_testament_grade_flag (
+CREATE TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     united_kingdom_last_will_and_testament_grade_id UUID NOT NULL
-        REFERENCES united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
+        REFERENCES united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -41,32 +41,32 @@ CREATE TABLE united_kingdom_last_will_and_testament_grade_flag (
 );
 
 CREATE INDEX united_kingdom_last_will_and_testament_grade_flag_grade_id_idx
-    ON united_kingdom_last_will_and_testament_grade_flag (united_kingdom_last_will_and_testament_grade_id);
+    ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag (united_kingdom_last_will_and_testament_grade_id);
 
 CREATE TRIGGER trigger_united_kingdom_last_will_and_testament_grade_flag_updated_at
-    BEFORE UPDATE ON united_kingdom_last_will_and_testament_grade_flag
+    BEFORE UPDATE ON united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_last_will_and_testament.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_last_will_and_testament_grade_flag IS
+COMMENT ON TABLE united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag IS
     'Flagged issues that fire independently of the validity class, with priority and a suggested action for the testator or the person preparing the will.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.created_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.updated_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.united_kingdom_last_will_and_testament_grade_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.united_kingdom_last_will_and_testament_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.flag_id IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-NO-EXECUTOR-001).';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.category IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.category IS
     'Flag category: testator-eligibility, capacity-or-voluntariness, witness-formalities, witness-is-beneficiary, no-executor, no-beneficiary, residuary-clause-missing, shares-not-100, minor-beneficiary-no-trustee, partner-not-provided-for, other-jurisdictions, marriage-revocation, previous-will, guardian-not-named, inheritance-act-provision, inheritance-tax, incomplete-details, or other.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.priority IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.description IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN united_kingdom_last_will_and_testament_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_kingdom_last_will_and_testament.united_kingdom_last_will_and_testament_grade_flag.suggested_action IS
     'Suggested action (e.g. "appoint at least one executor", "use two independent adult witnesses who are not beneficiaries").';

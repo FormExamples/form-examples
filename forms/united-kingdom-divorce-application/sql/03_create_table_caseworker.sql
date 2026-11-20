@@ -1,7 +1,7 @@
 -- Caseworker information for the legal adviser or court officer who prepares or
 -- checks this divorce or dissolution application.
 
-CREATE TABLE caseworker (
+CREATE TABLE united_kingdom_divorce_application.caseworker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -19,35 +19,35 @@ CREATE TABLE caseworker (
 );
 
 CREATE TRIGGER trigger_caseworker_updated_at
-    BEFORE UPDATE ON caseworker
+    BEFORE UPDATE ON united_kingdom_divorce_application.caseworker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_divorce_application.set_updated_at();
 
-COMMENT ON TABLE caseworker IS
+COMMENT ON TABLE united_kingdom_divorce_application.caseworker IS
     'Caseworker information for the legal adviser or court officer who prepares or checks the application.';
-COMMENT ON COLUMN caseworker.id IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN caseworker.created_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN caseworker.updated_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN caseworker.deleted_at IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN caseworker.name IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.name IS
     'Full name of the caseworker who prepares or checks the application.';
-COMMENT ON COLUMN caseworker.email IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.email IS
     'Email address.';
-COMMENT ON COLUMN caseworker.phone IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.phone IS
     'Phone number.';
-COMMENT ON COLUMN caseworker.postal_address_as_full_text IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN caseworker.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN caseworker.postcode IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.postcode IS
     'Postal code.';
-COMMENT ON COLUMN caseworker.role IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.role IS
     'Role of the caseworker: solicitor, legal-adviser, court-officer, mckenzie-friend, or other.';
-COMMENT ON COLUMN caseworker.registration_body IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.registration_body IS
     'Professional regulator: SRA, CILEx, BSB, or other.';
-COMMENT ON COLUMN caseworker.registration_number IS
+COMMENT ON COLUMN united_kingdom_divorce_application.caseworker.registration_number IS
     'Professional registration number, where the caseworker is regulated.';

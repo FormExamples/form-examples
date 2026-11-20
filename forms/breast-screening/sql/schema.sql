@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS breast_screening;
+
+COMMENT ON SCHEMA breast_screening IS
+    'Namespace for the Breast Screening Record (NHS Breast Screening Programme) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION breast_screening.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION breast_screening.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE breast_screening.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON breast_screening.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE breast_screening.patient IS
     'Patient demographic information used by the breast-screening record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN breast_screening.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN breast_screening.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN breast_screening.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN breast_screening.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN breast_screening.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN breast_screening.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN breast_screening.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN breast_screening.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN breast_screening.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN breast_screening.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN breast_screening.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN breast_screening.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN breast_screening.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN breast_screening.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN breast_screening.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN breast_screening.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN breast_screening.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN breast_screening.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON breast_screening.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- the mammogram and reported the breast-screening outcome (mammographer,
 -- advanced practitioner, breast radiologist, or screening-office staff).
 
-CREATE TABLE clinician (
+CREATE TABLE breast_screening.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON breast_screening.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE breast_screening.clinician IS
     'Clinician identifying information for the reporting professional who read the mammogram and reported the breast-screening outcome.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN breast_screening.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN breast_screening.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN breast_screening.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN breast_screening.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN breast_screening.clinician.name IS
     'Reporting clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN breast_screening.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN breast_screening.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN breast_screening.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN breast_screening.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN breast_screening.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN breast_screening.clinician.role IS
     'Reporting clinician role: mammographer, advanced-practitioner, breast-radiologist, screening-office, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN breast_screening.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN breast_screening.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON breast_screening.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -211,14 +228,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- flags live in dedicated child tables. This is a documentation and
 -- result-classification record, not a numeric score.
 
-CREATE TABLE breast_screening (
+CREATE TABLE breast_screening.breast_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES breast_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES breast_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     reporting_clinician_role VARCHAR(25) NOT NULL DEFAULT '' CHECK (reporting_clinician_role IN ('mammographer', 'advanced-practitioner', 'breast-radiologist', 'screening-office', 'other', '')),
@@ -256,68 +273,68 @@ CREATE TABLE breast_screening (
 );
 
 CREATE INDEX breast_screening_patient_id_idx
-    ON breast_screening (patient_id);
+    ON breast_screening.breast_screening (patient_id);
 CREATE INDEX breast_screening_clinician_id_idx
-    ON breast_screening (clinician_id);
+    ON breast_screening.breast_screening (clinician_id);
 
 CREATE TRIGGER trigger_breast_screening_updated_at
-    BEFORE UPDATE ON breast_screening
+    BEFORE UPDATE ON breast_screening.breast_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE breast_screening IS
+COMMENT ON TABLE breast_screening.breast_screening IS
     'Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN breast_screening.id IS
+COMMENT ON COLUMN breast_screening.breast_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN breast_screening.created_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN breast_screening.updated_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN breast_screening.deleted_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN breast_screening.patient_id IS
+COMMENT ON COLUMN breast_screening.breast_screening.patient_id IS
     'Foreign key to the patient this screening documents (restrict delete).';
-COMMENT ON COLUMN breast_screening.clinician_id IS
+COMMENT ON COLUMN breast_screening.breast_screening.clinician_id IS
     'Foreign key to the reporting clinician (restrict delete); optional.';
-COMMENT ON COLUMN breast_screening.reporting_clinician_role IS
+COMMENT ON COLUMN breast_screening.breast_screening.reporting_clinician_role IS
     'Role of the reporting clinician: mammographer, advanced-practitioner, breast-radiologist, screening-office, or other.';
-COMMENT ON COLUMN breast_screening.reported_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.reported_at IS
     'Date and time the screening outcome was reported.';
-COMMENT ON COLUMN breast_screening.screening_unit IS
+COMMENT ON COLUMN breast_screening.breast_screening.screening_unit IS
     'Screening unit where the mammogram was taken: static or mobile unit.';
-COMMENT ON COLUMN breast_screening.episode_type IS
+COMMENT ON COLUMN breast_screening.breast_screening.episode_type IS
     'Screening episode type: routine-recall, very-first-call, self-referral, or higher-risk-surveillance.';
-COMMENT ON COLUMN breast_screening.patient_identifier IS
+COMMENT ON COLUMN breast_screening.breast_screening.patient_identifier IS
     'NHS number or local patient identifier as recorded on the record.';
-COMMENT ON COLUMN breast_screening.age_years IS
+COMMENT ON COLUMN breast_screening.breast_screening.age_years IS
     'Patient age in years; drives eligibility and the age-range flag (routine eligible range 50-70).';
-COMMENT ON COLUMN breast_screening.last_screened_date IS
+COMMENT ON COLUMN breast_screening.breast_screening.last_screened_date IS
     'Date of the most recent previous screen, when known; drives the overdue flag (~36 months).';
-COMMENT ON COLUMN breast_screening.higher_risk_surveillance IS
+COMMENT ON COLUMN breast_screening.breast_screening.higher_risk_surveillance IS
     'Whether the woman is on the separate higher-risk surveillance pathway (yes/no); yes classifies eligibility as higher-risk-surveillance.';
-COMMENT ON COLUMN breast_screening.symptomatic IS
+COMMENT ON COLUMN breast_screening.breast_screening.symptomatic IS
     'Whether the woman reports a breast symptom (yes/no); yes routes to the symptomatic breast pathway rather than screening.';
-COMMENT ON COLUMN breast_screening.consent_given IS
+COMMENT ON COLUMN breast_screening.breast_screening.consent_given IS
     'Whether informed consent to image was given: yes, no, or declined; anything other than yes raises the consent flag.';
-COMMENT ON COLUMN breast_screening.views_taken IS
+COMMENT ON COLUMN breast_screening.breast_screening.views_taken IS
     'Mammogram views taken: standard-four-view, additional-views, or unable-to-image.';
-COMMENT ON COLUMN breast_screening.image_adequacy IS
+COMMENT ON COLUMN breast_screening.breast_screening.image_adequacy IS
     'Image adequacy: adequate or inadequate; an inadequate image drives the technical-repeat flag.';
-COMMENT ON COLUMN breast_screening.first_read_opinion IS
+COMMENT ON COLUMN breast_screening.breast_screening.first_read_opinion IS
     'First reader opinion: normal, recall, or technical.';
-COMMENT ON COLUMN breast_screening.second_read_opinion IS
+COMMENT ON COLUMN breast_screening.breast_screening.second_read_opinion IS
     'Second reader opinion: normal, recall, or technical.';
-COMMENT ON COLUMN breast_screening.arbitration_outcome IS
+COMMENT ON COLUMN breast_screening.breast_screening.arbitration_outcome IS
     'Arbitration outcome when the two reads disagree: normal, recall, technical, or not-required.';
-COMMENT ON COLUMN breast_screening.reading_outcome IS
+COMMENT ON COLUMN breast_screening.breast_screening.reading_outcome IS
     'Overall film-reading outcome: normal-routine-recall, technical-repeat, or recall-for-assessment.';
-COMMENT ON COLUMN breast_screening.assessment_performed IS
+COMMENT ON COLUMN breast_screening.breast_screening.assessment_performed IS
     'Whether the recall assessment clinic was attended (yes/no); required before an imaging classification can be recorded.';
-COMMENT ON COLUMN breast_screening.assessment_modalities IS
+COMMENT ON COLUMN breast_screening.breast_screening.assessment_modalities IS
     'Assessment modalities used, serialised multi-select from mammography, ultrasound, and biopsy.';
-COMMENT ON COLUMN breast_screening.imaging_classification IS
+COMMENT ON COLUMN breast_screening.breast_screening.imaging_classification IS
     'Five-point breast imaging classification recorded at assessment (1 normal, 2 benign, 3 indeterminate, 4 suspicious, 5 malignant); null until assessed.';
-COMMENT ON COLUMN breast_screening.clinical_context IS
+COMMENT ON COLUMN breast_screening.breast_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';
 
 -- ========================================================================
@@ -334,14 +351,14 @@ COMMENT ON COLUMN breast_screening.clinical_context IS
 -- status, the outcome band, and the recommended screening outcome / next action.
 -- This is a result-classification outcome, not a numeric score.
 
-CREATE TABLE breast_screening_grade (
+CREATE TABLE breast_screening.breast_screening_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     breast_screening_id UUID NOT NULL UNIQUE
-        REFERENCES breast_screening(id) ON DELETE CASCADE,
+        REFERENCES breast_screening.breast_screening(id) ON DELETE CASCADE,
 
     eligibility_status VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (eligibility_status IN (
@@ -378,31 +395,31 @@ CREATE TABLE breast_screening_grade (
 );
 
 CREATE TRIGGER trigger_breast_screening_grade_updated_at
-    BEFORE UPDATE ON breast_screening_grade
+    BEFORE UPDATE ON breast_screening.breast_screening_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE breast_screening_grade IS
+COMMENT ON TABLE breast_screening.breast_screening_grade IS
     'Computed result classification for a breast-screening record: eligibility status, outcome band (result class), the recommended screening outcome / next action, and completeness status.';
-COMMENT ON COLUMN breast_screening_grade.id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN breast_screening_grade.created_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN breast_screening_grade.updated_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN breast_screening_grade.deleted_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN breast_screening_grade.breast_screening_id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.breast_screening_id IS
     'Foreign key to the parent breast-screening record (unique, 1:1).';
-COMMENT ON COLUMN breast_screening_grade.eligibility_status IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.eligibility_status IS
     'Derived eligibility status: eligible, outside-age-range, higher-risk-surveillance, or symptomatic-referral.';
-COMMENT ON COLUMN breast_screening_grade.result_class IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.result_class IS
     'Outcome band classifying the screening outcome: routine, repeat, assessment, urgent, referral, or incomplete.';
-COMMENT ON COLUMN breast_screening_grade.management_action IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.management_action IS
     'Recommended screening outcome / next action: routine-recall, technical-repeat, recall-to-assessment-clinic, short-interval-follow-up, urgent-breast-clinic, or symptomatic-pathway-referral.';
-COMMENT ON COLUMN breast_screening_grade.status IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.status IS
     'Completeness status: complete when eligibility, consent, views, image adequacy, the reading outcome, and (after a recall) the imaging classification are all present; otherwise incomplete.';
-COMMENT ON COLUMN breast_screening_grade.graded_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -417,14 +434,14 @@ COMMENT ON COLUMN breast_screening_grade.graded_at IS
 -- records one rule firing with the pathway stage it concerns, the category, and
 -- a human-readable description.
 
-CREATE TABLE breast_screening_grade_rule (
+CREATE TABLE breast_screening.breast_screening_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     breast_screening_grade_id UUID NOT NULL
-        REFERENCES breast_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES breast_screening.breast_screening_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     stage VARCHAR(20) NOT NULL DEFAULT ''
@@ -434,32 +451,32 @@ CREATE TABLE breast_screening_grade_rule (
 );
 
 CREATE INDEX breast_screening_grade_rule_grade_id_idx
-    ON breast_screening_grade_rule (breast_screening_grade_id);
+    ON breast_screening.breast_screening_grade_rule (breast_screening_grade_id);
 
 CREATE TRIGGER trigger_breast_screening_grade_rule_updated_at
-    BEFORE UPDATE ON breast_screening_grade_rule
+    BEFORE UPDATE ON breast_screening.breast_screening_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE breast_screening_grade_rule IS
+COMMENT ON TABLE breast_screening.breast_screening_grade_rule IS
     'Audit trail of every classification rule that fired during grading: pathway stage, category, and description.';
-COMMENT ON COLUMN breast_screening_grade_rule.id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN breast_screening_grade_rule.created_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN breast_screening_grade_rule.updated_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN breast_screening_grade_rule.deleted_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN breast_screening_grade_rule.breast_screening_grade_id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.breast_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN breast_screening_grade_rule.rule_id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ELIGIBILITY-SYMPTOMATIC-01).';
-COMMENT ON COLUMN breast_screening_grade_rule.stage IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.stage IS
     'Pathway stage the rule concerns: eligibility, reading, assessment, outcome, or completeness.';
-COMMENT ON COLUMN breast_screening_grade_rule.category IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.category IS
     'Subject category (e.g. gate, classification, conditional-requirement).';
-COMMENT ON COLUMN breast_screening_grade_rule.description IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -474,14 +491,14 @@ COMMENT ON COLUMN breast_screening_grade_rule.description IS
 -- priority and a suggested action for the reporting clinician or screening
 -- service.
 
-CREATE TABLE breast_screening_grade_flag (
+CREATE TABLE breast_screening.breast_screening_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     breast_screening_grade_id UUID NOT NULL
-        REFERENCES breast_screening_grade(id) ON DELETE CASCADE,
+        REFERENCES breast_screening.breast_screening_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(30) NOT NULL DEFAULT ''
@@ -505,34 +522,34 @@ CREATE TABLE breast_screening_grade_flag (
 );
 
 CREATE INDEX breast_screening_grade_flag_grade_id_idx
-    ON breast_screening_grade_flag (breast_screening_grade_id);
+    ON breast_screening.breast_screening_grade_flag (breast_screening_grade_id);
 
 CREATE TRIGGER trigger_breast_screening_grade_flag_updated_at
-    BEFORE UPDATE ON breast_screening_grade_flag
+    BEFORE UPDATE ON breast_screening.breast_screening_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE breast_screening_grade_flag IS
+COMMENT ON TABLE breast_screening.breast_screening_grade_flag IS
     'Safety flags that fire independently of the screening outcome, with priority and a suggested action for the reporting clinician or screening service.';
-COMMENT ON COLUMN breast_screening_grade_flag.id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN breast_screening_grade_flag.created_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN breast_screening_grade_flag.updated_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN breast_screening_grade_flag.deleted_at IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN breast_screening_grade_flag.breast_screening_grade_id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.breast_screening_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN breast_screening_grade_flag.flag_id IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SUSPICIOUS-MALIGNANT-001).';
-COMMENT ON COLUMN breast_screening_grade_flag.category IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.category IS
     'Flag category: symptomatic-wrong-pathway, suspicious-malignant, recall-for-assessment, indeterminate-result, technical-repeat, consent-not-given, outside-age-range, overdue, incomplete-record, or other.';
-COMMENT ON COLUMN breast_screening_grade_flag.priority IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN breast_screening_grade_flag.description IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN breast_screening_grade_flag.suggested_action IS
+COMMENT ON COLUMN breast_screening.breast_screening_grade_flag.suggested_action IS
     'Suggested clinical or service action (e.g. "refer urgently to the breast clinic", "repeat the mammogram").';
 
 -- ========================================================================

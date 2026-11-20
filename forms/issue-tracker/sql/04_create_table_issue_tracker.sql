@@ -2,13 +2,13 @@
 -- the nine SOAP-style sections (CC / Pt / Sx / Fx / Hx / Ix / Dx / Tx / Px),
 -- and the seven raw input scores.
 
-CREATE TABLE issue_tracker (
+CREATE TABLE issue_tracker.issue_tracker (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    reporter_id UUID NOT NULL REFERENCES reporter(id) ON DELETE CASCADE,
+    reporter_id UUID NOT NULL REFERENCES issue_tracker.reporter(id) ON DELETE CASCADE,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'open', 'in-progress', 'blocked', 'resolved', 'closed', 'duplicate', 'cancelled')),
@@ -120,155 +120,155 @@ CREATE TABLE issue_tracker (
 );
 
 CREATE TRIGGER trigger_issue_tracker_updated_at
-    BEFORE UPDATE ON issue_tracker
+    BEFORE UPDATE ON issue_tracker.issue_tracker
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION issue_tracker.set_updated_at();
 
-COMMENT ON TABLE issue_tracker IS
+COMMENT ON TABLE issue_tracker.issue_tracker IS
     'A reportable issue captured via a 10-step single-page wizard. Holds reporter metadata, the nine SOAP-style sections, and the seven raw input scores. Computed scores live in the issue_tracker_grade child table.';
-COMMENT ON COLUMN issue_tracker.id IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN issue_tracker.created_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN issue_tracker.updated_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN issue_tracker.deleted_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN issue_tracker.reporter_id IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.reporter_id IS
     'Foreign key to the reporter who originally raised the issue.';
-COMMENT ON COLUMN issue_tracker.status IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.status IS
     'Lifecycle status: draft, open, in-progress, blocked, resolved, closed, duplicate, cancelled.';
-COMMENT ON COLUMN issue_tracker.reported_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.reported_at IS
     'Timestamp the issue was first recorded in this tracker.';
-COMMENT ON COLUMN issue_tracker.discovered_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.discovered_at IS
     'Timestamp the issue was first discovered in the wild.';
-COMMENT ON COLUMN issue_tracker.started_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.started_at IS
     'Timestamp work to remediate the issue began.';
-COMMENT ON COLUMN issue_tracker.resolved_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.resolved_at IS
     'Timestamp the issue was resolved.';
-COMMENT ON COLUMN issue_tracker.issue_category IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.issue_category IS
     'Issue category: software-defect, service-outage, security, clinical-safety, etc.';
-COMMENT ON COLUMN issue_tracker.environment IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.environment IS
     'Environment where the issue occurred: dev, test, staging, production, on-prem, field.';
-COMMENT ON COLUMN issue_tracker.system_name IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.system_name IS
     'Name of the affected system or service.';
-COMMENT ON COLUMN issue_tracker.component IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.component IS
     'Specific component within the system that is affected.';
-COMMENT ON COLUMN issue_tracker.customer_or_project_tag IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.customer_or_project_tag IS
     'Customer name, project tag, or tenant identifier the issue is associated with.';
-COMMENT ON COLUMN issue_tracker.external_reference IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.external_reference IS
     'External reference: ticket id, incident id, change request, RIDDOR or LFPSE id, etc.';
-COMMENT ON COLUMN issue_tracker.cc_summary IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.cc_summary IS
     'Section CC: one-sentence summary of the problem as reported.';
-COMMENT ON COLUMN issue_tracker.cc_long_description IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.cc_long_description IS
     'Section CC: free-text long description of the chief complaint.';
-COMMENT ON COLUMN issue_tracker.cc_reported_by_name IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.cc_reported_by_name IS
     'Section CC: name of the person who reported the chief complaint (may differ from the reporter row).';
-COMMENT ON COLUMN issue_tracker.cc_reported_via IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.cc_reported_via IS
     'Section CC: channel through which the chief complaint was reported.';
-COMMENT ON COLUMN issue_tracker.pt_discoverer_name IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_discoverer_name IS
     'Section Pt: name of the person who discovered the issue.';
-COMMENT ON COLUMN issue_tracker.pt_affected_users_count IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_affected_users_count IS
     'Section Pt: estimated count of users affected.';
-COMMENT ON COLUMN issue_tracker.pt_affected_user_groups IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_affected_user_groups IS
     'Section Pt: free-text list of affected user groups, customer segments, or cohorts.';
-COMMENT ON COLUMN issue_tracker.pt_assignees IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_assignees IS
     'Section Pt: free-text list of assignees responsible for working the issue.';
-COMMENT ON COLUMN issue_tracker.pt_stakeholders_to_inform IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_stakeholders_to_inform IS
     'Section Pt: free-text list of stakeholders to inform about progress.';
-COMMENT ON COLUMN issue_tracker.pt_observers IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.pt_observers IS
     'Section Pt: free-text list of observers and CC recipients.';
-COMMENT ON COLUMN issue_tracker.sx_external_signals IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_external_signals IS
     'Section Sx: external signals observed by users — what is going wrong on the surface.';
-COMMENT ON COLUMN issue_tracker.sx_alert_ids IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_alert_ids IS
     'Section Sx: identifiers of monitoring alerts that fired (Sentry, PagerDuty, Datadog, CloudWatch).';
-COMMENT ON COLUMN issue_tracker.sx_error_messages IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_error_messages IS
     'Section Sx: verbatim error messages, status codes, or stack traces.';
-COMMENT ON COLUMN issue_tracker.sx_screenshots_url IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_screenshots_url IS
     'Section Sx: URL of an attached screenshot or screen capture.';
-COMMENT ON COLUMN issue_tracker.sx_logs_url IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_logs_url IS
     'Section Sx: URL of attached log file or log query.';
-COMMENT ON COLUMN issue_tracker.sx_first_observed_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.sx_first_observed_at IS
     'Section Sx: timestamp of the first observed symptom.';
-COMMENT ON COLUMN issue_tracker.fx_broken_components IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.fx_broken_components IS
     'Section Fx: free-text list of broken components, services, or pipelines.';
-COMMENT ON COLUMN issue_tracker.fx_failed_services IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.fx_failed_services IS
     'Section Fx: list of failed services with their statuses.';
-COMMENT ON COLUMN issue_tracker.fx_stuck_processes IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.fx_stuck_processes IS
     'Section Fx: list of stuck processes, queues, or batch jobs.';
-COMMENT ON COLUMN issue_tracker.fx_hardware_faults IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.fx_hardware_faults IS
     'Section Fx: hardware-level faults — disk, network, sensor, instrument.';
-COMMENT ON COLUMN issue_tracker.fx_data_corruption IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.fx_data_corruption IS
     'Section Fx: data-corruption status — none, suspected, confirmed, or unknown.';
-COMMENT ON COLUMN issue_tracker.hx_related_issues IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.hx_related_issues IS
     'Section Hx: identifiers of related or prior issues.';
-COMMENT ON COLUMN issue_tracker.hx_prior_occurrences IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.hx_prior_occurrences IS
     'Section Hx: count of prior occurrences of the same issue.';
-COMMENT ON COLUMN issue_tracker.hx_recent_change_url IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.hx_recent_change_url IS
     'Section Hx: URL of a recent change suspected to have caused the issue.';
-COMMENT ON COLUMN issue_tracker.hx_references IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.hx_references IS
     'Section Hx: free-text references — runbooks, RFCs, post-mortems.';
-COMMENT ON COLUMN issue_tracker.hx_timeline IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.hx_timeline IS
     'Section Hx: free-text timeline of relevant events.';
-COMMENT ON COLUMN issue_tracker.ix_hypotheses IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.ix_hypotheses IS
     'Section Ix: hypotheses being investigated.';
-COMMENT ON COLUMN issue_tracker.ix_repro_steps IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.ix_repro_steps IS
     'Section Ix: reproduction steps tried so far.';
-COMMENT ON COLUMN issue_tracker.ix_diagnostic_queries IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.ix_diagnostic_queries IS
     'Section Ix: diagnostic queries, profiles, traces, or scripts used.';
-COMMENT ON COLUMN issue_tracker.ix_tests_run IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.ix_tests_run IS
     'Section Ix: list of tests executed during investigation.';
-COMMENT ON COLUMN issue_tracker.ix_blocking_unknowns IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.ix_blocking_unknowns IS
     'Section Ix: known unknowns that are blocking diagnosis.';
-COMMENT ON COLUMN issue_tracker.dx_root_cause IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.dx_root_cause IS
     'Section Dx: root-cause statement.';
-COMMENT ON COLUMN issue_tracker.dx_contributing_causes IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.dx_contributing_causes IS
     'Section Dx: contributing or cascading causes.';
-COMMENT ON COLUMN issue_tracker.dx_scope IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.dx_scope IS
     'Section Dx: blast radius — single-instance, single-service, multiple-services, whole-system, or organisation-wide.';
-COMMENT ON COLUMN issue_tracker.dx_confirmed IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.dx_confirmed IS
     'Section Dx: whether the diagnosis is confirmed: yes, no, or partial.';
-COMMENT ON COLUMN issue_tracker.tx_mitigation_steps IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.tx_mitigation_steps IS
     'Section Tx: mitigation steps taken to limit impact.';
-COMMENT ON COLUMN issue_tracker.tx_fix_plan IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.tx_fix_plan IS
     'Section Tx: planned permanent fix.';
-COMMENT ON COLUMN issue_tracker.tx_workaround IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.tx_workaround IS
     'Section Tx: workaround applied while the permanent fix is in flight.';
-COMMENT ON COLUMN issue_tracker.tx_rollback_plan IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.tx_rollback_plan IS
     'Section Tx: rollback plan if the permanent fix fails.';
-COMMENT ON COLUMN issue_tracker.tx_communication_plan IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.tx_communication_plan IS
     'Section Tx: communication plan — who tells whom, when, and through what channel.';
-COMMENT ON COLUMN issue_tracker.px_expected_resolution_at IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.px_expected_resolution_at IS
     'Section Px: expected resolution timestamp.';
-COMMENT ON COLUMN issue_tracker.px_residual_risk IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.px_residual_risk IS
     'Section Px: residual risk that remains after the fix.';
-COMMENT ON COLUMN issue_tracker.px_monitoring_plan IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.px_monitoring_plan IS
     'Section Px: monitoring plan to detect recurrence.';
-COMMENT ON COLUMN issue_tracker.px_recurrence_likelihood IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.px_recurrence_likelihood IS
     'Section Px: likelihood the issue will recur — very-low, low, moderate, high, very-high.';
-COMMENT ON COLUMN issue_tracker.px_lessons_learned IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.px_lessons_learned IS
     'Section Px: lessons learned to feed into a post-mortem.';
-COMMENT ON COLUMN issue_tracker.score_by_priority_rank IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_priority_rank IS
     'Score 1 of 7: priority rank — 1 = do first, 2 = do second, ... (capped at 999).';
-COMMENT ON COLUMN issue_tracker.score_by_severity_of_impact IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_severity_of_impact IS
     'Score 2 of 7: severity of impact 1 (minimal) to 5 (catastrophic), per Saffir-Simpson scale.';
-COMMENT ON COLUMN issue_tracker.score_by_magnitude_of_damage IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_magnitude_of_damage IS
     'Score 3 of 7: magnitude of damage 1 (minor) to 10 (total destruction), per Richter earthquake scale.';
-COMMENT ON COLUMN issue_tracker.score_by_harm_grade IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_harm_grade IS
     'Score 4 of 7: NHS LFPSE harm grade 0 (no harm) to 4 (fatal).';
-COMMENT ON COLUMN issue_tracker.score_by_failure_condition IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_failure_condition IS
     'Score 5 of 7: aviation FAA / EASA failure condition A (catastrophic) to E (no effect).';
-COMMENT ON COLUMN issue_tracker.score_by_moscow_requirement IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_moscow_requirement IS
     'Score 6 of 7: MoSCoW prioritisation 1 (must) to 4 (won''t).';
-COMMENT ON COLUMN issue_tracker.score_by_frequency_percent IS
+COMMENT ON COLUMN issue_tracker.issue_tracker.score_by_frequency_percent IS
     'Score 7 of 7: frequency of occurrence as a percentage of usage affected, 0 to 100.';
 
 CREATE INDEX issue_tracker_index_reporter_id
-    ON issue_tracker(reporter_id);
+    ON issue_tracker.issue_tracker(reporter_id);
 CREATE INDEX issue_tracker_index_status
-    ON issue_tracker(status);
+    ON issue_tracker.issue_tracker(status);
 CREATE INDEX issue_tracker_index_environment
-    ON issue_tracker(environment);
+    ON issue_tracker.issue_tracker(environment);
 CREATE INDEX issue_tracker_index_cc_summary_trgm
-    ON issue_tracker
+    ON issue_tracker.issue_tracker
     USING GIN (cc_summary gin_trgm_ops);

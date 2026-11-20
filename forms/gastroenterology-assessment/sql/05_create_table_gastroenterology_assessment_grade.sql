@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE gastroenterology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES gastroenterology_assessment.assessment(id) ON DELETE CASCADE,
     severity_score INTEGER NOT NULL DEFAULT 0
         CHECK (severity_score >= 0),
     severity_level VARCHAR(10) NOT NULL DEFAULT 'mild'
@@ -16,30 +16,30 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON gastroenterology_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION gastroenterology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE gastroenterology_assessment.grade IS
     'Computed GI Symptom Severity Score grading result for gastroenterology assessment. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.assessment_id IS
     'Foreign key to the parent assessment (unique, enforcing 1:1).';
-COMMENT ON COLUMN grade.severity_score IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.severity_score IS
     'Composite GI symptom severity score.';
-COMMENT ON COLUMN grade.severity_level IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.severity_level IS
     'Overall severity classification: mild, moderate, or severe.';
-COMMENT ON COLUMN grade.red_flag_count IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.red_flag_count IS
     'Number of red flag symptoms detected.';
-COMMENT ON COLUMN grade.urgent_referral_recommended IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.urgent_referral_recommended IS
     'Whether urgent specialist referral is recommended based on red flags.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN gastroenterology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

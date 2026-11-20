@@ -7,14 +7,14 @@
 -- flags live in dedicated child tables. This is a documentation and
 -- result-classification record, not a numeric score.
 
-CREATE TABLE breast_screening (
+CREATE TABLE breast_screening.breast_screening (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES breast_screening.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES breast_screening.clinician(id) ON DELETE RESTRICT,
 
     -- Context and identification
     reporting_clinician_role VARCHAR(25) NOT NULL DEFAULT '' CHECK (reporting_clinician_role IN ('mammographer', 'advanced-practitioner', 'breast-radiologist', 'screening-office', 'other', '')),
@@ -52,66 +52,66 @@ CREATE TABLE breast_screening (
 );
 
 CREATE INDEX breast_screening_patient_id_idx
-    ON breast_screening (patient_id);
+    ON breast_screening.breast_screening (patient_id);
 CREATE INDEX breast_screening_clinician_id_idx
-    ON breast_screening (clinician_id);
+    ON breast_screening.breast_screening (clinician_id);
 
 CREATE TRIGGER trigger_breast_screening_updated_at
-    BEFORE UPDATE ON breast_screening
+    BEFORE UPDATE ON breast_screening.breast_screening
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION breast_screening.set_updated_at();
 
-COMMENT ON TABLE breast_screening IS
+COMMENT ON TABLE breast_screening.breast_screening IS
     'Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN breast_screening.id IS
+COMMENT ON COLUMN breast_screening.breast_screening.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN breast_screening.created_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN breast_screening.updated_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN breast_screening.deleted_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN breast_screening.patient_id IS
+COMMENT ON COLUMN breast_screening.breast_screening.patient_id IS
     'Foreign key to the patient this screening documents (restrict delete).';
-COMMENT ON COLUMN breast_screening.clinician_id IS
+COMMENT ON COLUMN breast_screening.breast_screening.clinician_id IS
     'Foreign key to the reporting clinician (restrict delete); optional.';
-COMMENT ON COLUMN breast_screening.reporting_clinician_role IS
+COMMENT ON COLUMN breast_screening.breast_screening.reporting_clinician_role IS
     'Role of the reporting clinician: mammographer, advanced-practitioner, breast-radiologist, screening-office, or other.';
-COMMENT ON COLUMN breast_screening.reported_at IS
+COMMENT ON COLUMN breast_screening.breast_screening.reported_at IS
     'Date and time the screening outcome was reported.';
-COMMENT ON COLUMN breast_screening.screening_unit IS
+COMMENT ON COLUMN breast_screening.breast_screening.screening_unit IS
     'Screening unit where the mammogram was taken: static or mobile unit.';
-COMMENT ON COLUMN breast_screening.episode_type IS
+COMMENT ON COLUMN breast_screening.breast_screening.episode_type IS
     'Screening episode type: routine-recall, very-first-call, self-referral, or higher-risk-surveillance.';
-COMMENT ON COLUMN breast_screening.patient_identifier IS
+COMMENT ON COLUMN breast_screening.breast_screening.patient_identifier IS
     'NHS number or local patient identifier as recorded on the record.';
-COMMENT ON COLUMN breast_screening.age_years IS
+COMMENT ON COLUMN breast_screening.breast_screening.age_years IS
     'Patient age in years; drives eligibility and the age-range flag (routine eligible range 50-70).';
-COMMENT ON COLUMN breast_screening.last_screened_date IS
+COMMENT ON COLUMN breast_screening.breast_screening.last_screened_date IS
     'Date of the most recent previous screen, when known; drives the overdue flag (~36 months).';
-COMMENT ON COLUMN breast_screening.higher_risk_surveillance IS
+COMMENT ON COLUMN breast_screening.breast_screening.higher_risk_surveillance IS
     'Whether the woman is on the separate higher-risk surveillance pathway (yes/no); yes classifies eligibility as higher-risk-surveillance.';
-COMMENT ON COLUMN breast_screening.symptomatic IS
+COMMENT ON COLUMN breast_screening.breast_screening.symptomatic IS
     'Whether the woman reports a breast symptom (yes/no); yes routes to the symptomatic breast pathway rather than screening.';
-COMMENT ON COLUMN breast_screening.consent_given IS
+COMMENT ON COLUMN breast_screening.breast_screening.consent_given IS
     'Whether informed consent to image was given: yes, no, or declined; anything other than yes raises the consent flag.';
-COMMENT ON COLUMN breast_screening.views_taken IS
+COMMENT ON COLUMN breast_screening.breast_screening.views_taken IS
     'Mammogram views taken: standard-four-view, additional-views, or unable-to-image.';
-COMMENT ON COLUMN breast_screening.image_adequacy IS
+COMMENT ON COLUMN breast_screening.breast_screening.image_adequacy IS
     'Image adequacy: adequate or inadequate; an inadequate image drives the technical-repeat flag.';
-COMMENT ON COLUMN breast_screening.first_read_opinion IS
+COMMENT ON COLUMN breast_screening.breast_screening.first_read_opinion IS
     'First reader opinion: normal, recall, or technical.';
-COMMENT ON COLUMN breast_screening.second_read_opinion IS
+COMMENT ON COLUMN breast_screening.breast_screening.second_read_opinion IS
     'Second reader opinion: normal, recall, or technical.';
-COMMENT ON COLUMN breast_screening.arbitration_outcome IS
+COMMENT ON COLUMN breast_screening.breast_screening.arbitration_outcome IS
     'Arbitration outcome when the two reads disagree: normal, recall, technical, or not-required.';
-COMMENT ON COLUMN breast_screening.reading_outcome IS
+COMMENT ON COLUMN breast_screening.breast_screening.reading_outcome IS
     'Overall film-reading outcome: normal-routine-recall, technical-repeat, or recall-for-assessment.';
-COMMENT ON COLUMN breast_screening.assessment_performed IS
+COMMENT ON COLUMN breast_screening.breast_screening.assessment_performed IS
     'Whether the recall assessment clinic was attended (yes/no); required before an imaging classification can be recorded.';
-COMMENT ON COLUMN breast_screening.assessment_modalities IS
+COMMENT ON COLUMN breast_screening.breast_screening.assessment_modalities IS
     'Assessment modalities used, serialised multi-select from mammography, ultrasound, and biopsy.';
-COMMENT ON COLUMN breast_screening.imaging_classification IS
+COMMENT ON COLUMN breast_screening.breast_screening.imaging_classification IS
     'Five-point breast imaging classification recorded at assessment (1 normal, 2 benign, 3 indeterminate, 4 suspicious, 5 malignant); null until assessed.';
-COMMENT ON COLUMN breast_screening.clinical_context IS
+COMMENT ON COLUMN breast_screening.breast_screening.clinical_context IS
     'Optional free-text clinical context shown in the summary.';

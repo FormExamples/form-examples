@@ -1,10 +1,10 @@
-CREATE TABLE casualty_card_primary_survey (
+CREATE TABLE casualty_card_form.casualty_card_primary_survey (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     -- 1:1 relationship with casualty_card (UNIQUE constraint)
-    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card(id) ON DELETE CASCADE,
+    casualty_card_id          UUID NOT NULL UNIQUE REFERENCES casualty_card_form.casualty_card(id) ON DELETE CASCADE,
     -- A: Airway
     airway_status             TEXT NOT NULL DEFAULT ''
                               CHECK (airway_status IN ('patent', 'compromised', 'obstructed', '')),
@@ -44,64 +44,64 @@ CREATE TABLE casualty_card_primary_survey (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_casualty_card_primary_survey_updated_at
-    BEFORE UPDATE ON casualty_card_primary_survey
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON casualty_card_form.casualty_card_primary_survey
+    FOR EACH ROW EXECUTE FUNCTION casualty_card_form.set_updated_at();
 
-COMMENT ON TABLE casualty_card_primary_survey IS
+COMMENT ON TABLE casualty_card_form.casualty_card_primary_survey IS
     '1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.';
-COMMENT ON COLUMN casualty_card_primary_survey.casualty_card_id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.casualty_card_id IS
     'FK to casualty_card (UNIQUE = 1:1 relationship).';
-COMMENT ON COLUMN casualty_card_primary_survey.airway_status IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.airway_status IS
     'Airway status: patent, compromised, obstructed, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.airway_adjuncts IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.airway_adjuncts IS
     'Airway adjuncts in use (e.g. oropharyngeal, nasopharyngeal, LMA, ETT).';
-COMMENT ON COLUMN casualty_card_primary_survey.c_spine_immobilised IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.c_spine_immobilised IS
     'Whether cervical spine immobilisation is in place: yes, no, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.breathing_effort IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.breathing_effort IS
     'Breathing effort: normal, laboured, shallow, absent, or empty string if unanswered.';
-COMMENT ON COLUMN casualty_card_primary_survey.chest_movement IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.chest_movement IS
     'Description of chest wall movement (e.g. equal bilateral, asymmetric).';
-COMMENT ON COLUMN casualty_card_primary_survey.breath_sounds IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.breath_sounds IS
     'Auscultation findings (e.g. clear bilateral, wheeze, crackles, absent).';
-COMMENT ON COLUMN casualty_card_primary_survey.trachea_position IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.trachea_position IS
     'Trachea position (e.g. central, deviated left, deviated right).';
-COMMENT ON COLUMN casualty_card_primary_survey.pulse_character IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.pulse_character IS
     'Pulse character (e.g. regular, irregular, bounding, thready, absent).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_colour IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_colour IS
     'Skin colour (e.g. normal, pale, cyanosed, flushed, mottled).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_temperature IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_temperature IS
     'Skin temperature on palpation (e.g. warm, cool, cold, clammy).';
-COMMENT ON COLUMN casualty_card_primary_survey.capillary_refill IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.capillary_refill IS
     'Capillary refill time assessment.';
-COMMENT ON COLUMN casualty_card_primary_survey.haemorrhage IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.haemorrhage IS
     'Description of any active haemorrhage and control measures.';
-COMMENT ON COLUMN casualty_card_primary_survey.iv_access IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.iv_access IS
     'IV access details (e.g. 18G left ACF, none).';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_eye IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_eye IS
     'Glasgow Coma Scale eye opening component (1-4). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_verbal IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_verbal IS
     'Glasgow Coma Scale verbal response component (1-5). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_motor IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_motor IS
     'Glasgow Coma Scale motor response component (1-6). NULL if not assessed.';
-COMMENT ON COLUMN casualty_card_primary_survey.gcs_total IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.gcs_total IS
     'Glasgow Coma Scale total (3-15), auto-calculated from eye + verbal + motor. NULL if components not complete.';
-COMMENT ON COLUMN casualty_card_primary_survey.pupils IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.pupils IS
     'Pupil assessment findings.';
-COMMENT ON COLUMN casualty_card_primary_survey.blood_glucose_disability IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.blood_glucose_disability IS
     'Blood glucose level recorded during disability assessment.';
-COMMENT ON COLUMN casualty_card_primary_survey.limb_movements IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.limb_movements IS
     'Limb movement assessment (e.g. all limbs moving spontaneously).';
-COMMENT ON COLUMN casualty_card_primary_survey.skin_examination IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.skin_examination IS
     'Skin examination findings on exposure (e.g. rashes, wounds, bruising).';
-COMMENT ON COLUMN casualty_card_primary_survey.injuries_identified IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.injuries_identified IS
     'Injuries identified on full exposure examination.';
-COMMENT ON COLUMN casualty_card_primary_survey.log_roll_findings IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.log_roll_findings IS
     'Findings from log roll examination (e.g. spinal tenderness, sacral oedema).';
-COMMENT ON COLUMN casualty_card_primary_survey.id IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN casualty_card_primary_survey.created_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN casualty_card_primary_survey.updated_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN casualty_card_primary_survey.deleted_at IS
+COMMENT ON COLUMN casualty_card_form.casualty_card_primary_survey.deleted_at IS
     'Timestamp when this row was deleted.';

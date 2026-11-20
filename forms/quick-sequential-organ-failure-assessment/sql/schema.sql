@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS quick_sequential_organ_failure_assessment;
+
+COMMENT ON SCHEMA quick_sequential_organ_failure_assessment IS
+    'Namespace for the Quick Sequential Organ Failure Assessment (qSOFA) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION quick_sequential_organ_failure_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE quick_sequential_organ_failure_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.patient IS
     'Patient demographic information used by the qSOFA assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON quick_sequential_organ_failure_assessment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the assessing
 -- clinician (doctor, nurse, paramedic, other).
 
-CREATE TABLE clinician (
+CREATE TABLE quick_sequential_organ_failure_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.clinician IS
     'Clinician identifying information for the assessing clinician.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.role IS
     'Primary clinical role: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON quick_sequential_organ_failure_assessment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -206,14 +223,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- rate, mentation, systolic blood pressure). The computed grade, fired
 -- rules, and flags live in dedicated child tables.
 
-CREATE TABLE quick_sequential_organ_failure_assessment (
+CREATE TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES quick_sequential_organ_failure_assessment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES quick_sequential_organ_failure_assessment.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     clinician_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -242,54 +259,54 @@ CREATE TABLE quick_sequential_organ_failure_assessment (
 );
 
 CREATE INDEX quick_sequential_organ_failure_assessment_patient_id_idx
-    ON quick_sequential_organ_failure_assessment (patient_id);
+    ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment (patient_id);
 CREATE INDEX quick_sequential_organ_failure_assessment_clinician_id_idx
-    ON quick_sequential_organ_failure_assessment (clinician_id);
+    ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment (clinician_id);
 
 CREATE TRIGGER trigger_quick_sequential_organ_failure_assessment_updated_at
-    BEFORE UPDATE ON quick_sequential_organ_failure_assessment
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE quick_sequential_organ_failure_assessment IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment IS
     'Main qSOFA assessment record: assessment context, patient identification, and the three scored criterion inputs (respiratory rate, mentation, systolic blood pressure).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician_name IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.clinician_name IS
     'Name of the assessing clinician as recorded on the assessment.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinician_role IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.clinician_role IS
     'Role of the assessing clinician: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.assessed_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.care_setting IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.care_setting IS
     'Care setting: emergency-department, ward, pre-hospital, or other.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.suspected_source IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.suspected_source IS
     'Suspected or confirmed infection source recorded with the assessment.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.patient_identifier IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.patient_identifier IS
     'Local patient identifier as recorded on the assessment.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.age_band IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.age_band IS
     'Adult age band: 16-39, 40-59, 60-74, or 75-plus.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.sex IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.sex IS
     'Patient sex recorded for the assessment: female, male, intersex, or unknown.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.respiratory_rate IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.respiratory_rate IS
     'Criterion 1 — measured respiratory rate in breaths per minute; scores 1 point when >= 22.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.glasgow_coma_scale IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.glasgow_coma_scale IS
     'Criterion 2 — Glasgow Coma Scale total (3-15); scores 1 point when < 15.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.mentation_altered IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.mentation_altered IS
     'Criterion 2 — altered-mentation flag (yes/no); scores the mentation point at the bedside when a formal GCS is unavailable.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.systolic_blood_pressure IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.systolic_blood_pressure IS
     'Criterion 3 — measured systolic blood pressure in mmHg; scores 1 point when <= 100.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinical_note IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -304,14 +321,14 @@ COMMENT ON COLUMN quick_sequential_organ_failure_assessment.clinical_note IS
 -- summed total (0-3), and the derived risk band (lower/higher) with the
 -- >= 2 escalation threshold.
 
-CREATE TABLE quick_sequential_organ_failure_assessment_grade (
+CREATE TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     quick_sequential_organ_failure_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES quick_sequential_organ_failure_assessment(id) ON DELETE CASCADE,
+        REFERENCES quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment(id) ON DELETE CASCADE,
 
     respiratory_rate_point INT,
     mentation_point INT,
@@ -326,35 +343,35 @@ CREATE TABLE quick_sequential_organ_failure_assessment_grade (
 );
 
 CREATE TRIGGER trigger_quick_sequential_organ_failure_assessment_grade_updated_at
-    BEFORE UPDATE ON quick_sequential_organ_failure_assessment_grade
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE quick_sequential_organ_failure_assessment_grade IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade IS
     'Computed qSOFA grading result: per-criterion 0-1 points, summed total (0-3), derived risk band (lower/higher), and whether the >= 2 escalation threshold was met.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.quick_sequential_organ_failure_assessment_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.quick_sequential_organ_failure_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.respiratory_rate_point IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.respiratory_rate_point IS
     'Point (0 or 1) awarded for criterion 1, respiratory rate (>= 22 breaths/min).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.mentation_point IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.mentation_point IS
     'Point (0 or 1) awarded for criterion 2, mentation (GCS < 15 or altered mentation).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.systolic_blood_pressure_point IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.systolic_blood_pressure_point IS
     'Point (0 or 1) awarded for criterion 3, systolic blood pressure (<= 100 mmHg).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.total_score IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.total_score IS
     'Summed qSOFA score across the three criteria (0-3).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.risk_band IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.risk_band IS
     'Derived risk band: lower (< 2) or higher (>= 2).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.threshold_met IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.threshold_met IS
     'Whether the qSOFA >= 2 positive-screen escalation threshold was met: yes or no.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.graded_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -370,14 +387,14 @@ COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade.graded_at IS
 -- belongs to, the point it contributed, and a human-readable
 -- description.
 
-CREATE TABLE quick_sequential_organ_failure_assessment_grade_rule (
+CREATE TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     quick_sequential_organ_failure_assessment_grade_id UUID NOT NULL
-        REFERENCES quick_sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     criterion VARCHAR(30) NOT NULL
@@ -388,34 +405,34 @@ CREATE TABLE quick_sequential_organ_failure_assessment_grade_rule (
 );
 
 CREATE INDEX quick_sequential_organ_failure_assessment_grade_rule_grade_id_idx
-    ON quick_sequential_organ_failure_assessment_grade_rule (quick_sequential_organ_failure_assessment_grade_id);
+    ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule (quick_sequential_organ_failure_assessment_grade_id);
 
 CREATE TRIGGER trigger_quick_sequential_organ_failure_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON quick_sequential_organ_failure_assessment_grade_rule
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE quick_sequential_organ_failure_assessment_grade_rule IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule IS
     'Audit trail of every grading rule that fired during qSOFA computation: criterion, point contributed, category, and description.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.quick_sequential_organ_failure_assessment_grade_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.quick_sequential_organ_failure_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-RESPIRATORY-RATE-01).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.criterion IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.criterion IS
     'Scored criterion the rule belongs to: respiratory-rate, mentation, systolic-blood-pressure, or band.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.points IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.points IS
     'Point (0 or 1) contributed by this rule for its criterion.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.category IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.category IS
     'Subject category (e.g. threshold-band, risk-band).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.description IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -429,14 +446,14 @@ COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_rule.descripti
 -- Red-flag issues that fire independently of the total score, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE quick_sequential_organ_failure_assessment_grade_flag (
+CREATE TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     quick_sequential_organ_failure_assessment_grade_id UUID NOT NULL
-        REFERENCES quick_sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -456,34 +473,34 @@ CREATE TABLE quick_sequential_organ_failure_assessment_grade_flag (
 );
 
 CREATE INDEX quick_sequential_organ_failure_assessment_grade_flag_grade_id_idx
-    ON quick_sequential_organ_failure_assessment_grade_flag (quick_sequential_organ_failure_assessment_grade_id);
+    ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag (quick_sequential_organ_failure_assessment_grade_id);
 
 CREATE TRIGGER trigger_quick_sequential_organ_failure_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON quick_sequential_organ_failure_assessment_grade_flag
+    BEFORE UPDATE ON quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION quick_sequential_organ_failure_assessment.set_updated_at();
 
-COMMENT ON TABLE quick_sequential_organ_failure_assessment_grade_flag IS
+COMMENT ON TABLE quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag IS
     'Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.quick_sequential_organ_failure_assessment_grade_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.quick_sequential_organ_failure_assessment_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-SEPSIS-ESCALATION-001).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.category IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.priority IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.description IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN quick_sequential_organ_failure_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN quick_sequential_organ_failure_assessment.quick_sequential_organ_failure_assessment_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "escalate to full SOFA and sepsis workup").';
 
 -- ========================================================================

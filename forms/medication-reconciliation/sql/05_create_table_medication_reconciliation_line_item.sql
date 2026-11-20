@@ -5,13 +5,13 @@
 -- frequency, indication, high-risk class, adherence, originating information
 -- source, and (for inpatient rows) the prescribing status.
 
-CREATE TABLE medication_reconciliation_line_item (
+CREATE TABLE medication_reconciliation.medication_reconciliation_line_item (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation(id) ON DELETE CASCADE,
+    medication_reconciliation_id UUID NOT NULL REFERENCES medication_reconciliation.medication_reconciliation(id) ON DELETE CASCADE,
 
     list_source VARCHAR(10) NOT NULL DEFAULT '' CHECK (list_source IN ('bpmh', 'inpatient', '')),
     drug_name TEXT NOT NULL DEFAULT '',
@@ -27,44 +27,44 @@ CREATE TABLE medication_reconciliation_line_item (
 );
 
 CREATE INDEX medication_reconciliation_line_item_reconciliation_id_idx
-    ON medication_reconciliation_line_item (medication_reconciliation_id);
+    ON medication_reconciliation.medication_reconciliation_line_item (medication_reconciliation_id);
 
 CREATE TRIGGER trigger_medication_reconciliation_line_item_updated_at
-    BEFORE UPDATE ON medication_reconciliation_line_item
+    BEFORE UPDATE ON medication_reconciliation.medication_reconciliation_line_item
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medication_reconciliation.set_updated_at();
 
-COMMENT ON TABLE medication_reconciliation_line_item IS
+COMMENT ON TABLE medication_reconciliation.medication_reconciliation_line_item IS
     'Medication line items on either list (BPMH or inpatient), discriminated by list_source, cascading from the parent reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_line_item.id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medication_reconciliation_line_item.created_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medication_reconciliation_line_item.updated_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medication_reconciliation_line_item.deleted_at IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medication_reconciliation_line_item.medication_reconciliation_id IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.medication_reconciliation_id IS
     'Foreign key to the parent medication reconciliation.';
-COMMENT ON COLUMN medication_reconciliation_line_item.list_source IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.list_source IS
     'Which list this line belongs to: bpmh (best-possible medication history) or inpatient.';
-COMMENT ON COLUMN medication_reconciliation_line_item.drug_name IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.drug_name IS
     'Generic (preferred) or brand name of the medicine.';
-COMMENT ON COLUMN medication_reconciliation_line_item.form IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.form IS
     'Pharmaceutical form, e.g. tablet, capsule, injection, patch.';
-COMMENT ON COLUMN medication_reconciliation_line_item.dose IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.dose IS
     'Dose as free text to preserve units, e.g. "5 mg".';
-COMMENT ON COLUMN medication_reconciliation_line_item.route IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.route IS
     'Route of administration: oral, iv, im, subcutaneous, topical, inhaled, or other.';
-COMMENT ON COLUMN medication_reconciliation_line_item.frequency IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.frequency IS
     'Dosing frequency as free text, e.g. "once daily", "BD", "PRN".';
-COMMENT ON COLUMN medication_reconciliation_line_item.indication IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.indication IS
     'Reason the medicine is prescribed.';
-COMMENT ON COLUMN medication_reconciliation_line_item.high_risk_class IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.high_risk_class IS
     'High-risk medicine class: none, anticoagulant, insulin, opioid, or other.';
-COMMENT ON COLUMN medication_reconciliation_line_item.adherence IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.adherence IS
     'Patient adherence: taking, not-taking, intermittent, or unknown.';
-COMMENT ON COLUMN medication_reconciliation_line_item.source_type IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.source_type IS
     'Information source this line came from: patient-interview, carer-interview, gp-record, repeat-prescription, community-pharmacy, dispensing-history, previous-discharge-summary, own-drugs-bag, or care-home-mar.';
-COMMENT ON COLUMN medication_reconciliation_line_item.status IS
+COMMENT ON COLUMN medication_reconciliation.medication_reconciliation_line_item.status IS
     'Prescribing status for inpatient rows: active, held, stopped, or suspended.';

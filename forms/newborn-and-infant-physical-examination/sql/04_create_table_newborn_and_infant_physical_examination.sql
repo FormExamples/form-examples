@@ -6,14 +6,14 @@
 -- classification, the audit trail of fired grading rules, and the referral
 -- flags live in dedicated child tables.
 
-CREATE TABLE newborn_and_infant_physical_examination (
+CREATE TABLE newborn_and_infant_physical_examination.newborn_and_infant_physical_examination (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES newborn_and_infant_physical_examination.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES newborn_and_infant_physical_examination.clinician(id) ON DELETE RESTRICT,
 
     -- Context and baby identification
     practitioner_name TEXT NOT NULL DEFAULT '',
@@ -86,122 +86,122 @@ CREATE TABLE newborn_and_infant_physical_examination (
 );
 
 CREATE INDEX newborn_and_infant_physical_examination_patient_id_idx
-    ON newborn_and_infant_physical_examination (patient_id);
+    ON newborn_and_infant_physical_examination.newborn_and_infant_physical_examination (patient_id);
 CREATE INDEX newborn_and_infant_physical_examination_clinician_id_idx
-    ON newborn_and_infant_physical_examination (clinician_id);
+    ON newborn_and_infant_physical_examination.newborn_and_infant_physical_examination (clinician_id);
 
 CREATE TRIGGER trigger_newborn_and_infant_physical_examination_updated_at
-    BEFORE UPDATE ON newborn_and_infant_physical_examination
+    BEFORE UPDATE ON newborn_and_infant_physical_examination.newborn_and_infant_physical_examination
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION newborn_and_infant_physical_examination.set_updated_at();
 
-COMMENT ON TABLE newborn_and_infant_physical_examination IS
+COMMENT ON TABLE newborn_and_infant_physical_examination.newborn_and_infant_physical_examination IS
     'Main NIPE screening record: one head-to-toe physical examination of a baby, with context and baby identification, hip risk factors, the observation fields for the four key screening components (eyes, heart, hips, testes), the head-to-toe systematic-examination fields, and optional practitioner-recorded per-component results. Classification, fired rules, and referral flags live in child tables.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.id IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.created_at IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.updated_at IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.deleted_at IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.patient_id IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.patient_id IS
     'Foreign key to the infant this examination documents (restrict delete).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.clinician_id IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.clinician_id IS
     'Foreign key to the examining practitioner (restrict delete); optional.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.practitioner_name IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.practitioner_name IS
     'Name of the examining practitioner.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.practitioner_role IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.practitioner_role IS
     'Examining practitioner role: midwife, neonatal-nurse, paediatrician, gp, nurse-practitioner, or other.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.examined_at IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.examined_at IS
     'Date and time of the examination.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.examination_context IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.examination_context IS
     'Screening context: newborn-72h (within 72 hours of birth) or infant-6-8-week (6-8 week infant review).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.care_setting IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.care_setting IS
     'Care setting: maternity-ward, neonatal-unit, community, gp-surgery, home, or other.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.baby_identifier IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.baby_identifier IS
     'NHS number or local identifier for the baby.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.baby_name IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.baby_name IS
     'Name of the baby as recorded on the note.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.date_of_birth IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.date_of_birth IS
     'Date of birth of the baby.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.sex IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.sex IS
     'Sex of the baby: male, female, or indeterminate; drives whether the testes component is applicable.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.gestational_age_weeks IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.gestational_age_weeks IS
     'Completed gestational age in weeks at birth.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.birth_weight_grams IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.birth_weight_grams IS
     'Birth weight in grams.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.breech_presentation IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.breech_presentation IS
     'Whether the baby was breech at or after 36 weeks or at birth (yes/no); a hip risk factor.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.family_history_hip_problems IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.family_history_hip_problems IS
     'Whether there is a first-degree family history of hip problems (yes/no); a hip risk factor.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.antenatal_concerns IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.antenatal_concerns IS
     'Free-text relevant antenatal findings or concerns.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.eyes_red_reflex_right IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.eyes_red_reflex_right IS
     'Eyes: right red reflex (present, absent, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.eyes_red_reflex_left IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.eyes_red_reflex_left IS
     'Eyes: left red reflex (present, absent, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.eyes_appearance IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.eyes_appearance IS
     'Eyes: overall appearance (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.heart_murmur IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.heart_murmur IS
     'Heart: murmur (none, present, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.femoral_pulses_right IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.femoral_pulses_right IS
     'Heart: right femoral pulse (present, weak, absent, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.femoral_pulses_left IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.femoral_pulses_left IS
     'Heart: left femoral pulse (present, weak, absent, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.central_cyanosis IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.central_cyanosis IS
     'Heart: central cyanosis (absent, present, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.oxygen_saturation_preductal IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.oxygen_saturation_preductal IS
     'Heart: pre-ductal oxygen saturation as a percentage.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.oxygen_saturation_postductal IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.oxygen_saturation_postductal IS
     'Heart: post-ductal oxygen saturation as a percentage.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.barlow_test IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.barlow_test IS
     'Hips: Barlow test result (negative, positive, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.ortolani_test IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.ortolani_test IS
     'Hips: Ortolani test result (negative, positive, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.hip_abduction IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.hip_abduction IS
     'Hips: hip abduction (normal, limited, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.testis_right IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.testis_right IS
     'Testes: right testis (descended, undescended, not-palpable, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.testis_left IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.testis_left IS
     'Testes: left testis (descended, undescended, not-palpable, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.general_appearance IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.general_appearance IS
     'Head-to-toe: general appearance (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.skin IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.skin IS
     'Head-to-toe: skin (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.head_and_fontanelles IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.head_and_fontanelles IS
     'Head-to-toe: head and fontanelles (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.face_and_palate IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.face_and_palate IS
     'Head-to-toe: face and palate (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.neck_and_clavicles IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.neck_and_clavicles IS
     'Head-to-toe: neck and clavicles (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.chest_and_lungs IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.chest_and_lungs IS
     'Head-to-toe: chest and lungs (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.abdomen IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.abdomen IS
     'Head-to-toe: abdomen (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.genitalia IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.genitalia IS
     'Head-to-toe: genitalia (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.anus_and_spine IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.anus_and_spine IS
     'Head-to-toe: anus and spine (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.limbs_and_digits IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.limbs_and_digits IS
     'Head-to-toe: limbs and digits (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.feet IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.feet IS
     'Head-to-toe: feet (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.tone_and_movement IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.tone_and_movement IS
     'Head-to-toe: tone and movement (normal, abnormal, or not-examined).';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.weight_grams IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.weight_grams IS
     'Measured weight in grams at the examination.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.head_circumference_cm IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.head_circumference_cm IS
     'Measured head circumference in centimetres.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.length_cm IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.length_cm IS
     'Measured length in centimetres.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.eyes_result_recorded IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.eyes_result_recorded IS
     'Optional practitioner-recorded eyes component result (satisfactory, refer, or not-examined); cross-checked against the engine.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.heart_result_recorded IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.heart_result_recorded IS
     'Optional practitioner-recorded heart component result (satisfactory, refer, or not-examined); cross-checked against the engine.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.hips_result_recorded IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.hips_result_recorded IS
     'Optional practitioner-recorded hips component result (satisfactory, refer, or not-examined); cross-checked against the engine.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.testes_result_recorded IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.testes_result_recorded IS
     'Optional practitioner-recorded testes component result (satisfactory, refer, not-examined, or not-applicable); cross-checked against the engine.';
-COMMENT ON COLUMN newborn_and_infant_physical_examination.clinical_note IS
+COMMENT ON COLUMN newborn_and_infant_physical_examination.newborn_and_infant_physical_examination.clinical_note IS
     'Optional free-text clinical narrative shown in the summary.';

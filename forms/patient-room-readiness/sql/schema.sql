@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (3):
+-- Source files (4):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient_room_readiness_checklist.sql
 
@@ -23,12 +24,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS patient_room_readiness;
+
+COMMENT ON SCHEMA patient_room_readiness IS
+    'Namespace for the Patient Room Readiness form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION patient_room_readiness.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -36,7 +53,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION patient_room_readiness.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -50,7 +67,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- One row per room-readiness inspection: location, 25 fixed
 -- fixture/fabric checkpoints, inspector, and inspection date/time.
 
-CREATE TABLE patient_room_readiness_checklist (
+CREATE TABLE patient_room_readiness.patient_room_readiness_checklist (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -92,81 +109,81 @@ CREATE TABLE patient_room_readiness_checklist (
 );
 
 CREATE TRIGGER trigger_patient_room_readiness_checklist_updated_at
-    BEFORE UPDATE ON patient_room_readiness_checklist
+    BEFORE UPDATE ON patient_room_readiness.patient_room_readiness_checklist
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION patient_room_readiness.set_updated_at();
 
-COMMENT ON TABLE patient_room_readiness_checklist IS
+COMMENT ON TABLE patient_room_readiness.patient_room_readiness_checklist IS
     'One room-readiness inspection: location, 25 fixed fixture/fabric checkpoints, inspector, and inspection date/time.';
-COMMENT ON COLUMN patient_room_readiness_checklist.id IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient_room_readiness_checklist.created_at IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN patient_room_readiness_checklist.updated_at IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN patient_room_readiness_checklist.deleted_at IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN patient_room_readiness_checklist.building_name_or_number IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.building_name_or_number IS
     'Building name or number where the room is located.';
-COMMENT ON COLUMN patient_room_readiness_checklist.room_name_or_number IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.room_name_or_number IS
     'Room name or number being inspected.';
-COMMENT ON COLUMN patient_room_readiness_checklist.patient_cot_mattress_side_railings IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.patient_cot_mattress_side_railings IS
     'Checkpoint: patient cot / mattress / side railings present and in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.attendant_cot_mattress IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.attendant_cot_mattress IS
     'Checkpoint: attendant cot / mattress present and in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.call_bell IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.call_bell IS
     'Checkpoint: call bell present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.cardiac_table_iv_stand IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.cardiac_table_iv_stand IS
     'Checkpoint: cardiac table / IV stand present and in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.hot_kettle_glasses IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.hot_kettle_glasses IS
     'Checkpoint: hot kettle / glasses present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.linen_patient_dress IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.linen_patient_dress IS
     'Checkpoint: linen / patient dress present and clean.';
-COMMENT ON COLUMN patient_room_readiness_checklist.landline_numbers IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.landline_numbers IS
     'Checkpoint: landline phone and reference numbers present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.refrigerator_fan IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.refrigerator_fan IS
     'Checkpoint: refrigerator / fan present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.television_remote IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.television_remote IS
     'Checkpoint: television / remote present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.dustbin IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.dustbin IS
     'Checkpoint: dustbin present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.bath_towel_handtowels IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.bath_towel_handtowels IS
     'Checkpoint: bath towel / hand towels present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.wc_dustbins IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.wc_dustbins IS
     'Checkpoint: WC dustbins present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.washbasin_and_fittings IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.washbasin_and_fittings IS
     'Checkpoint: washbasin & fittings present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.bucket_and_mug IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.bucket_and_mug IS
     'Checkpoint: bucket & mug present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.geyser IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.geyser IS
     'Checkpoint: geyser present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.soap_dispenser IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.soap_dispenser IS
     'Checkpoint: soap dispenser present and stocked.';
-COMMENT ON COLUMN patient_room_readiness_checklist.toilet_kit IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.toilet_kit IS
     'Checkpoint: toilet kit present.';
-COMMENT ON COLUMN patient_room_readiness_checklist.window_glass_grooves IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.window_glass_grooves IS
     'Checkpoint: window glass / grooves clean and intact.';
-COMMENT ON COLUMN patient_room_readiness_checklist.sidewalls IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.sidewalls IS
     'Checkpoint: sidewalls clean and in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.curtain_blind IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.curtain_blind IS
     'Checkpoint: curtain / blind present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.chair_sofa IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.chair_sofa IS
     'Checkpoint: chair / sofa present and in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.wall_seepage_water_leakage IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.wall_seepage_water_leakage IS
     'Checkpoint: no wall seepage / water leakage observed.';
-COMMENT ON COLUMN patient_room_readiness_checklist.electricity_points_lights IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.electricity_points_lights IS
     'Checkpoint: electricity points / lights functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.ceiling_tiles IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.ceiling_tiles IS
     'Checkpoint: ceiling / tiles in acceptable condition.';
-COMMENT ON COLUMN patient_room_readiness_checklist.door_knobs_stopper IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.door_knobs_stopper IS
     'Checkpoint: door / knobs / stopper present and functioning.';
-COMMENT ON COLUMN patient_room_readiness_checklist.inspector_name IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.inspector_name IS
     'Name of the inspector completing this checklist.';
-COMMENT ON COLUMN patient_room_readiness_checklist.inspector_email IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.inspector_email IS
     'Email address of the inspector.';
-COMMENT ON COLUMN patient_room_readiness_checklist.inspection_date IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.inspection_date IS
     'Date the inspection was carried out.';
-COMMENT ON COLUMN patient_room_readiness_checklist.inspection_time IS
+COMMENT ON COLUMN patient_room_readiness.patient_room_readiness_checklist.inspection_time IS
     'Time the inspection was carried out.';
 
 -- ========================================================================

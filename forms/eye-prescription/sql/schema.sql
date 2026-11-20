@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (13):
+-- Source files (14):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_prescriber.sql
@@ -33,12 +34,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS eye_prescription;
+
+COMMENT ON SCHEMA eye_prescription IS
+    'Namespace for the Eye Prescription form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION eye_prescription.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -46,7 +63,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION eye_prescription.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE eye_prescription.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -78,37 +95,37 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON eye_prescription.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE eye_prescription.patient IS
     'Patient demographic record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN eye_prescription.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN eye_prescription.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN eye_prescription.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN eye_prescription.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN eye_prescription.patient.name IS
     'Patient full name as presented for the sight test.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN eye_prescription.patient.birth_date IS
     'Patient date of birth (used to compute paediatric flag and default expiry).';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN eye_prescription.patient.sex IS
     'Patient sex: male, female, other, unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN eye_prescription.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN eye_prescription.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN eye_prescription.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN eye_prescription.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format (e.g. GB).';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN eye_prescription.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN eye_prescription.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number (10 digits with check digit).';
 
 -- ========================================================================
@@ -121,7 +138,7 @@ COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
 
 -- Prescriber (GOC-registered optometrist or dispensing optician)
 
-CREATE TABLE prescriber (
+CREATE TABLE eye_prescription.prescriber (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -146,37 +163,37 @@ CREATE TABLE prescriber (
 );
 
 CREATE TRIGGER trigger_prescriber_updated_at
-    BEFORE UPDATE ON prescriber
+    BEFORE UPDATE ON eye_prescription.prescriber
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE prescriber IS
+COMMENT ON TABLE eye_prescription.prescriber IS
     'GOC-registered prescriber who issued the spectacle prescription.';
-COMMENT ON COLUMN prescriber.id IS
+COMMENT ON COLUMN eye_prescription.prescriber.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN prescriber.created_at IS
+COMMENT ON COLUMN eye_prescription.prescriber.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN prescriber.updated_at IS
+COMMENT ON COLUMN eye_prescription.prescriber.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN prescriber.deleted_at IS
+COMMENT ON COLUMN eye_prescription.prescriber.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN prescriber.name IS
+COMMENT ON COLUMN eye_prescription.prescriber.name IS
     'Prescriber full name (including title, e.g. "Ms Jane Smith").';
-COMMENT ON COLUMN prescriber.goc_registration_number IS
+COMMENT ON COLUMN eye_prescription.prescriber.goc_registration_number IS
     'General Optical Council registration number (mandatory).';
-COMMENT ON COLUMN prescriber.role IS
+COMMENT ON COLUMN eye_prescription.prescriber.role IS
     'Prescriber role: optometrist, dispensing-optician, ophthalmologist, student.';
-COMMENT ON COLUMN prescriber.practice_name IS
+COMMENT ON COLUMN eye_prescription.prescriber.practice_name IS
     'Name of the practice where the prescription was issued.';
-COMMENT ON COLUMN prescriber.practice_address IS
+COMMENT ON COLUMN eye_prescription.prescriber.practice_address IS
     'Practice address as full text.';
-COMMENT ON COLUMN prescriber.postcode IS
+COMMENT ON COLUMN eye_prescription.prescriber.postcode IS
     'Practice postcode.';
-COMMENT ON COLUMN prescriber.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN eye_prescription.prescriber.country_as_iso_3166_1_alpha_2 IS
     'Practice country as ISO 3166-1 alpha-2 (e.g. GB).';
-COMMENT ON COLUMN prescriber.email IS
+COMMENT ON COLUMN eye_prescription.prescriber.email IS
     'Practice contact email.';
-COMMENT ON COLUMN prescriber.phone IS
+COMMENT ON COLUMN eye_prescription.prescriber.phone IS
     'Practice contact phone.';
 
 -- ========================================================================
@@ -189,16 +206,16 @@ COMMENT ON COLUMN prescriber.phone IS
 
 -- Eye prescription header (one row per issued prescription).
 
-CREATE TABLE eye_prescription (
+CREATE TABLE eye_prescription.eye_prescription (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE RESTRICT,
+        REFERENCES eye_prescription.patient(id) ON DELETE RESTRICT,
     prescriber_id UUID NOT NULL
-        REFERENCES prescriber(id) ON DELETE RESTRICT,
+        REFERENCES eye_prescription.prescriber(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN (
@@ -231,50 +248,50 @@ CREATE TABLE eye_prescription (
 );
 
 CREATE TRIGGER trigger_eye_prescription_updated_at
-    BEFORE UPDATE ON eye_prescription
+    BEFORE UPDATE ON eye_prescription.eye_prescription
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
 CREATE INDEX index_eye_prescription_patient_id
-    ON eye_prescription(patient_id);
+    ON eye_prescription.eye_prescription(patient_id);
 CREATE INDEX index_eye_prescription_prescriber_id
-    ON eye_prescription(prescriber_id);
+    ON eye_prescription.eye_prescription(prescriber_id);
 CREATE INDEX index_eye_prescription_issue_date
-    ON eye_prescription(issue_date);
+    ON eye_prescription.eye_prescription(issue_date);
 CREATE INDEX index_eye_prescription_expiry_date
-    ON eye_prescription(expiry_date);
+    ON eye_prescription.eye_prescription(expiry_date);
 
-COMMENT ON TABLE eye_prescription IS
+COMMENT ON TABLE eye_prescription.eye_prescription IS
     'Spectacle prescription header; one row per issued prescription.';
-COMMENT ON COLUMN eye_prescription.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription.patient_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.patient_id IS
     'Foreign key to the patient table.';
-COMMENT ON COLUMN eye_prescription.prescriber_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.prescriber_id IS
     'Foreign key to the prescriber table.';
-COMMENT ON COLUMN eye_prescription.status IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.status IS
     'Prescription lifecycle status: draft, active, cancelled, superseded, expired, entered-in-error.';
-COMMENT ON COLUMN eye_prescription.examination_date IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.examination_date IS
     'Date the sight test was performed.';
-COMMENT ON COLUMN eye_prescription.examination_time IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.examination_time IS
     'Time of day the sight test was performed.';
-COMMENT ON COLUMN eye_prescription.issue_date IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.issue_date IS
     'Date the prescription was issued (usually same day as examination).';
-COMMENT ON COLUMN eye_prescription.expiry_date IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.expiry_date IS
     'Date the prescription expires (default issue + 2 years; 1 year if age < 16 or >= 70).';
-COMMENT ON COLUMN eye_prescription.reason_for_sight_test IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.reason_for_sight_test IS
     'Reason for the sight test: routine, symptoms, follow-up, pre-employment, driving-licence, after-pathology, second-opinion, other.';
-COMMENT ON COLUMN eye_prescription.prior_prescription_on_file IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.prior_prescription_on_file IS
     'Whether a prior prescription is on file for this patient (used to detect significant change).';
-COMMENT ON COLUMN eye_prescription.prior_prescription_date IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.prior_prescription_date IS
     'Date of the prior prescription, if any.';
-COMMENT ON COLUMN eye_prescription.notes IS
+COMMENT ON COLUMN eye_prescription.eye_prescription.notes IS
     'Free-text prescriber notes.';
 
 -- ========================================================================
@@ -287,14 +304,14 @@ COMMENT ON COLUMN eye_prescription.notes IS
 
 -- Per-eye refractive data (one row for right eye, one row for left eye).
 
-CREATE TABLE eye_prescription_eye (
+CREATE TABLE eye_prescription.eye_prescription_eye (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
     eye VARCHAR(10) NOT NULL
         CHECK (eye IN ('right', 'left')),
 
@@ -322,44 +339,44 @@ CREATE TABLE eye_prescription_eye (
 );
 
 CREATE TRIGGER trigger_eye_prescription_eye_updated_at
-    BEFORE UPDATE ON eye_prescription_eye
+    BEFORE UPDATE ON eye_prescription.eye_prescription_eye
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
 CREATE INDEX index_eye_prescription_eye_eye_prescription_id
-    ON eye_prescription_eye(eye_prescription_id);
+    ON eye_prescription.eye_prescription_eye(eye_prescription_id);
 
-COMMENT ON TABLE eye_prescription_eye IS
+COMMENT ON TABLE eye_prescription.eye_prescription_eye IS
     'Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.';
-COMMENT ON COLUMN eye_prescription_eye.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_eye.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription_eye.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_eye.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_eye.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.eye_prescription_id IS
     'Foreign key to the eye_prescription table.';
-COMMENT ON COLUMN eye_prescription_eye.eye IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.eye IS
     'Which eye: right (OD) or left (OS).';
-COMMENT ON COLUMN eye_prescription_eye.sphere_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.sphere_diopters IS
     'Sphere power in dioptres. Negative for myopia, positive for hyperopia, range -30.00 to +30.00 in 0.25 steps.';
-COMMENT ON COLUMN eye_prescription_eye.cylinder_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.cylinder_diopters IS
     'Cylinder power in dioptres (minus-cylinder convention). Range -10.00 to 0.00 in 0.25 steps.';
-COMMENT ON COLUMN eye_prescription_eye.axis_degrees IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.axis_degrees IS
     'Cylinder axis in integer degrees, 1 to 180 (only meaningful when cylinder is non-zero).';
-COMMENT ON COLUMN eye_prescription_eye.addition_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.addition_diopters IS
     'Reading addition in dioptres (always positive). Range 0.00 to +4.00 in 0.25 steps.';
-COMMENT ON COLUMN eye_prescription_eye.intermediate_addition_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.intermediate_addition_diopters IS
     'Intermediate addition for trifocal / occupational varifocal use, in dioptres.';
-COMMENT ON COLUMN eye_prescription_eye.prism_horizontal_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.prism_horizontal_diopters IS
     'Horizontal prism magnitude in prism dioptres (PD). 0.00 if no horizontal prism.';
-COMMENT ON COLUMN eye_prescription_eye.base_horizontal IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.base_horizontal IS
     'Horizontal prism base direction: in (toward nose) or out (toward temple). Empty if no horizontal prism.';
-COMMENT ON COLUMN eye_prescription_eye.prism_vertical_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.prism_vertical_diopters IS
     'Vertical prism magnitude in prism dioptres (PD). 0.00 if no vertical prism.';
-COMMENT ON COLUMN eye_prescription_eye.base_vertical IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_eye.base_vertical IS
     'Vertical prism base direction: up or down. Empty if no vertical prism.';
 
 -- ========================================================================
@@ -372,14 +389,14 @@ COMMENT ON COLUMN eye_prescription_eye.base_vertical IS
 
 -- Visual acuity measurements per eye plus binocular.
 
-CREATE TABLE eye_prescription_visual_acuity (
+CREATE TABLE eye_prescription.eye_prescription_visual_acuity (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL UNIQUE
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
 
     distance_right_unaided VARCHAR(20) NOT NULL DEFAULT '',
     distance_left_unaided VARCHAR(20) NOT NULL DEFAULT '',
@@ -403,51 +420,51 @@ CREATE TABLE eye_prescription_visual_acuity (
 );
 
 CREATE TRIGGER trigger_eye_prescription_visual_acuity_updated_at
-    BEFORE UPDATE ON eye_prescription_visual_acuity
+    BEFORE UPDATE ON eye_prescription.eye_prescription_visual_acuity
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE eye_prescription_visual_acuity IS
+COMMENT ON TABLE eye_prescription.eye_prescription_visual_acuity IS
     'Visual acuity measurements: Snellen distance and near, unaided and corrected, per eye and binocular, plus pinhole VA and dominant eye.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.eye_prescription_id IS
     'Foreign key to the parent eye_prescription (unique, 1:1).';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_right_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_right_unaided IS
     'Snellen distance acuity, right eye, unaided (e.g. "6/12").';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_left_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_left_unaided IS
     'Snellen distance acuity, left eye, unaided.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_binocular_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_binocular_unaided IS
     'Snellen distance acuity, binocular, unaided.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_right_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_right_corrected IS
     'Snellen distance acuity, right eye, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_left_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_left_corrected IS
     'Snellen distance acuity, left eye, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.distance_binocular_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.distance_binocular_corrected IS
     'Snellen distance acuity, binocular, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_right_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_right_unaided IS
     'Near acuity, right eye, unaided (e.g. "N6").';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_left_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_left_unaided IS
     'Near acuity, left eye, unaided.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_binocular_unaided IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_binocular_unaided IS
     'Near acuity, binocular, unaided.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_right_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_right_corrected IS
     'Near acuity, right eye, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_left_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_left_corrected IS
     'Near acuity, left eye, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.near_binocular_corrected IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.near_binocular_corrected IS
     'Near acuity, binocular, with this prescription.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.pinhole_right IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.pinhole_right IS
     'Pinhole visual acuity, right eye.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.pinhole_left IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.pinhole_left IS
     'Pinhole visual acuity, left eye.';
-COMMENT ON COLUMN eye_prescription_visual_acuity.dominant_eye IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_visual_acuity.dominant_eye IS
     'Dominant eye: right, left, none.';
 
 -- ========================================================================
@@ -460,14 +477,14 @@ COMMENT ON COLUMN eye_prescription_visual_acuity.dominant_eye IS
 
 -- Pupillary distance measurements.
 
-CREATE TABLE eye_prescription_pupillary_distance (
+CREATE TABLE eye_prescription.eye_prescription_pupillary_distance (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL UNIQUE
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
 
     distance_total_mm NUMERIC(4,1)
         CHECK (distance_total_mm IS NULL OR distance_total_mm BETWEEN 40.0 AND 80.0),
@@ -488,37 +505,37 @@ CREATE TABLE eye_prescription_pupillary_distance (
 );
 
 CREATE TRIGGER trigger_eye_prescription_pupillary_distance_updated_at
-    BEFORE UPDATE ON eye_prescription_pupillary_distance
+    BEFORE UPDATE ON eye_prescription.eye_prescription_pupillary_distance
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE eye_prescription_pupillary_distance IS
+COMMENT ON TABLE eye_prescription.eye_prescription_pupillary_distance IS
     'Pupillary distance measurements: distance total and monocular, near total and monocular, segment height for bifocal / varifocal.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.eye_prescription_id IS
     'Foreign key to the parent eye_prescription (unique, 1:1).';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.distance_total_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.distance_total_mm IS
     'Total interpupillary distance for distance vision, in mm.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.distance_right_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.distance_right_mm IS
     'Monocular pupillary distance, right eye to nose bridge, for distance vision, in mm.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.distance_left_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.distance_left_mm IS
     'Monocular pupillary distance, left eye to nose bridge, for distance vision, in mm.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.near_total_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.near_total_mm IS
     'Total interpupillary distance for near vision, in mm (typically distance PD - 3 mm).';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.near_right_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.near_right_mm IS
     'Monocular pupillary distance, right eye to nose bridge, for near vision, in mm.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.near_left_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.near_left_mm IS
     'Monocular pupillary distance, left eye to nose bridge, for near vision, in mm.';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.segment_height_right_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.segment_height_right_mm IS
     'Segment height for bifocal / varifocal lens, right eye, in mm (typically 16-22 mm).';
-COMMENT ON COLUMN eye_prescription_pupillary_distance.segment_height_left_mm IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_pupillary_distance.segment_height_left_mm IS
     'Segment height for bifocal / varifocal lens, left eye, in mm.';
 
 -- ========================================================================
@@ -531,14 +548,14 @@ COMMENT ON COLUMN eye_prescription_pupillary_distance.segment_height_left_mm IS
 
 -- Lens recommendation (material, design, coatings, tint).
 
-CREATE TABLE eye_prescription_lens_recommendation (
+CREATE TABLE eye_prescription.eye_prescription_lens_recommendation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL UNIQUE
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
 
     lens_type VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (lens_type IN (
@@ -582,49 +599,49 @@ CREATE TABLE eye_prescription_lens_recommendation (
 );
 
 CREATE TRIGGER trigger_eye_prescription_lens_recommendation_updated_at
-    BEFORE UPDATE ON eye_prescription_lens_recommendation
+    BEFORE UPDATE ON eye_prescription.eye_prescription_lens_recommendation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE eye_prescription_lens_recommendation IS
+COMMENT ON TABLE eye_prescription.eye_prescription_lens_recommendation IS
     'Lens recommendation: design, material, coatings, tint. One row per prescription.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.eye_prescription_id IS
     'Foreign key to the parent eye_prescription (unique, 1:1).';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.lens_type IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.lens_type IS
     'Lens design: single-vision-distance, single-vision-near, single-vision-intermediate, bifocal, trifocal, varifocal, occupational-varifocal.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.material IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.material IS
     'Lens material: cr-39, trivex, polycarbonate, mid-index-1.60, high-index-1.67, high-index-1.74, glass.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.refractive_index IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.refractive_index IS
     'Refractive index of the lens material (1.498 for CR-39, 1.586 for polycarbonate, etc.).';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.aspheric IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.aspheric IS
     'Whether an aspheric lens design is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_anti_reflective IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_anti_reflective IS
     'Whether anti-reflective coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_scratch_resistant IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_scratch_resistant IS
     'Whether scratch-resistant coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_hydrophobic IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_hydrophobic IS
     'Whether hydrophobic coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_blue_light IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_blue_light IS
     'Whether blue-light filter coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_photochromic IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_photochromic IS
     'Whether photochromic (light-reactive) coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_polarised IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_polarised IS
     'Whether polarised coating is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.coating_uv_400 IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.coating_uv_400 IS
     'Whether UV-400 protection is recommended.';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.tint_description IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.tint_description IS
     'Tint description (e.g. "brown", "grey", "G15").';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.tint_percent IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.tint_percent IS
     'Tint density as a percentage (0 = clear, 85 = sunglass).';
-COMMENT ON COLUMN eye_prescription_lens_recommendation.dispenser_notes IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_lens_recommendation.dispenser_notes IS
     'Free-text notes for the dispensing optician.';
 
 -- ========================================================================
@@ -637,14 +654,14 @@ COMMENT ON COLUMN eye_prescription_lens_recommendation.dispenser_notes IS
 
 -- Ocular health findings (optional; one row per prescription).
 
-CREATE TABLE eye_prescription_ocular_health_finding (
+CREATE TABLE eye_prescription.eye_prescription_ocular_health_finding (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL UNIQUE
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
 
     slit_lamp_right TEXT NOT NULL DEFAULT '',
     slit_lamp_left TEXT NOT NULL DEFAULT '',
@@ -669,51 +686,51 @@ CREATE TABLE eye_prescription_ocular_health_finding (
 );
 
 CREATE TRIGGER trigger_eye_prescription_ocular_health_finding_updated_at
-    BEFORE UPDATE ON eye_prescription_ocular_health_finding
+    BEFORE UPDATE ON eye_prescription.eye_prescription_ocular_health_finding
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE eye_prescription_ocular_health_finding IS
+COMMENT ON TABLE eye_prescription.eye_prescription_ocular_health_finding IS
     'Optional ocular health findings recorded during the sight test: slit-lamp, fundus, intraocular pressure, OCT, visual fields, pathology flag.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.eye_prescription_id IS
     'Foreign key to the parent eye_prescription (unique, 1:1).';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.slit_lamp_right IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.slit_lamp_right IS
     'Slit-lamp biomicroscopy findings, right eye.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.slit_lamp_left IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.slit_lamp_left IS
     'Slit-lamp biomicroscopy findings, left eye.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.fundus_right IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.fundus_right IS
     'Fundus examination findings, right eye.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.fundus_left IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.fundus_left IS
     'Fundus examination findings, left eye.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.intraocular_pressure_right_mmhg IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.intraocular_pressure_right_mmhg IS
     'Intraocular pressure, right eye, in mmHg.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.intraocular_pressure_left_mmhg IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.intraocular_pressure_left_mmhg IS
     'Intraocular pressure, left eye, in mmHg.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.cup_to_disc_ratio_right IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.cup_to_disc_ratio_right IS
     'Optic nerve head cup-to-disc ratio, right eye (0.00 to 1.00).';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.cup_to_disc_ratio_left IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.cup_to_disc_ratio_left IS
     'Optic nerve head cup-to-disc ratio, left eye (0.00 to 1.00).';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.oct_performed IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.oct_performed IS
     'Whether an OCT scan was performed at this sight test.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.oct_findings IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.oct_findings IS
     'OCT (optical coherence tomography) findings.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.fields_performed IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.fields_performed IS
     'Whether a visual fields test was performed at this sight test.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.fields_findings IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.fields_findings IS
     'Visual fields findings.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.pathology_flag IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.pathology_flag IS
     'Whether any ocular pathology was identified (drives the ocular-pathology safety flag).';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.refer_ophthalmology IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.refer_ophthalmology IS
     'Whether the prescriber recommends referral to ophthalmology.';
-COMMENT ON COLUMN eye_prescription_ocular_health_finding.referral_reason IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_ocular_health_finding.referral_reason IS
     'Reason for ophthalmology referral, if any.';
 
 -- ========================================================================
@@ -726,14 +743,14 @@ COMMENT ON COLUMN eye_prescription_ocular_health_finding.referral_reason IS
 
 -- Computed grading result (per-eye refractive class + overall complexity).
 
-CREATE TABLE eye_prescription_grade (
+CREATE TABLE eye_prescription.eye_prescription_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_id UUID NOT NULL UNIQUE
-        REFERENCES eye_prescription(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription(id) ON DELETE CASCADE,
 
     right_eye_sphere_class VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (right_eye_sphere_class IN (
@@ -788,51 +805,51 @@ CREATE TABLE eye_prescription_grade (
 );
 
 CREATE TRIGGER trigger_eye_prescription_grade_updated_at
-    BEFORE UPDATE ON eye_prescription_grade
+    BEFORE UPDATE ON eye_prescription.eye_prescription_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
-COMMENT ON TABLE eye_prescription_grade IS
+COMMENT ON TABLE eye_prescription.eye_prescription_grade IS
     'Computed and signed-off grading result for the prescription. Captures per-eye refractive class, presbyopia, anisometropia, and overall complexity. Stores both computed and final complexity with an override reason.';
-COMMENT ON COLUMN eye_prescription_grade.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_grade.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN eye_prescription_grade.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_grade.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_grade.eye_prescription_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.eye_prescription_id IS
     'Foreign key to the parent eye_prescription (unique, 1:1).';
-COMMENT ON COLUMN eye_prescription_grade.right_eye_sphere_class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.right_eye_sphere_class IS
     'Refractive class for the right eye sphere component.';
-COMMENT ON COLUMN eye_prescription_grade.right_eye_cylinder_class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.right_eye_cylinder_class IS
     'Refractive class for the right eye cylinder component.';
-COMMENT ON COLUMN eye_prescription_grade.left_eye_sphere_class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.left_eye_sphere_class IS
     'Refractive class for the left eye sphere component.';
-COMMENT ON COLUMN eye_prescription_grade.left_eye_cylinder_class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.left_eye_cylinder_class IS
     'Refractive class for the left eye cylinder component.';
-COMMENT ON COLUMN eye_prescription_grade.presbyopia_class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.presbyopia_class IS
     'Presbyopia class based on addition power.';
-COMMENT ON COLUMN eye_prescription_grade.anisometropia_diopters IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.anisometropia_diopters IS
     'Absolute difference in sphere between right and left eye in dioptres.';
-COMMENT ON COLUMN eye_prescription_grade.anisometropia_significant IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.anisometropia_significant IS
     'Whether anisometropia exceeds the 2.00 D safety-flag threshold.';
-COMMENT ON COLUMN eye_prescription_grade.prism_present IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.prism_present IS
     'Whether any prism is prescribed (in either eye, either direction).';
-COMMENT ON COLUMN eye_prescription_grade.computed_complexity IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.computed_complexity IS
     'Complexity grade computed by the engine: simple, moderate, complex.';
-COMMENT ON COLUMN eye_prescription_grade.final_complexity IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.final_complexity IS
     'Complexity grade signed off by the prescriber (may equal or differ from computed).';
-COMMENT ON COLUMN eye_prescription_grade.override_reason IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.override_reason IS
     'Reason the prescriber set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN eye_prescription_grade.follow_up_interval_months IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.follow_up_interval_months IS
     'Recommended follow-up interval in months (typically 12 or 24).';
-COMMENT ON COLUMN eye_prescription_grade.prescriber_notes IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.prescriber_notes IS
     'Free-text prescriber summary notes.';
-COMMENT ON COLUMN eye_prescription_grade.signed_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.signed_at IS
     'Timestamp of prescriber electronic signature.';
-COMMENT ON COLUMN eye_prescription_grade.graded_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -845,14 +862,14 @@ COMMENT ON COLUMN eye_prescription_grade.graded_at IS
 
 -- Audit trail of every classification rule that fired for this prescription.
 
-CREATE TABLE eye_prescription_grade_rule (
+CREATE TABLE eye_prescription.eye_prescription_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_grade_id UUID NOT NULL
-        REFERENCES eye_prescription_grade(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(20) NOT NULL DEFAULT ''
@@ -873,36 +890,36 @@ CREATE TABLE eye_prescription_grade_rule (
 );
 
 CREATE TRIGGER trigger_eye_prescription_grade_rule_updated_at
-    BEFORE UPDATE ON eye_prescription_grade_rule
+    BEFORE UPDATE ON eye_prescription.eye_prescription_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
 CREATE INDEX index_eye_prescription_grade_rule_grade_id
-    ON eye_prescription_grade_rule(eye_prescription_grade_id);
+    ON eye_prescription.eye_prescription_grade_rule(eye_prescription_grade_id);
 
-COMMENT ON TABLE eye_prescription_grade_rule IS
+COMMENT ON TABLE eye_prescription.eye_prescription_grade_rule IS
     'Audit trail of every sphere / cylinder / addition / anisometropia / prism / change rule that fired during classification.';
-COMMENT ON COLUMN eye_prescription_grade_rule.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_grade_rule.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN eye_prescription_grade_rule.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_grade_rule.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_grade_rule.eye_prescription_grade_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.eye_prescription_grade_id IS
     'Foreign key to the parent eye_prescription_grade.';
-COMMENT ON COLUMN eye_prescription_grade_rule.rule_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-SPH-MYO-HIGH-01).';
-COMMENT ON COLUMN eye_prescription_grade_rule.instrument IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.instrument IS
     'Classification instrument: sphere, cylinder, addition, anisometropia, prism, change.';
-COMMENT ON COLUMN eye_prescription_grade_rule.eye IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.eye IS
     'Which eye the rule applied to: right, left, both.';
-COMMENT ON COLUMN eye_prescription_grade_rule.class IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.class IS
     'Class contributed by this rule (e.g. high-myopia, mild-astigmatism).';
-COMMENT ON COLUMN eye_prescription_grade_rule.category IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.category IS
     'Risk / classification category (e.g. refraction, alignment).';
-COMMENT ON COLUMN eye_prescription_grade_rule.description IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -915,14 +932,14 @@ COMMENT ON COLUMN eye_prescription_grade_rule.description IS
 
 -- Safety-critical flags fired independently of the complexity grade.
 
-CREATE TABLE eye_prescription_grade_flag (
+CREATE TABLE eye_prescription.eye_prescription_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     eye_prescription_grade_id UUID NOT NULL
-        REFERENCES eye_prescription_grade(id) ON DELETE CASCADE,
+        REFERENCES eye_prescription.eye_prescription_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -950,36 +967,36 @@ CREATE TABLE eye_prescription_grade_flag (
 );
 
 CREATE TRIGGER trigger_eye_prescription_grade_flag_updated_at
-    BEFORE UPDATE ON eye_prescription_grade_flag
+    BEFORE UPDATE ON eye_prescription.eye_prescription_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION eye_prescription.set_updated_at();
 
 CREATE INDEX index_eye_prescription_grade_flag_grade_id
-    ON eye_prescription_grade_flag(eye_prescription_grade_id);
+    ON eye_prescription.eye_prescription_grade_flag(eye_prescription_grade_id);
 
-COMMENT ON TABLE eye_prescription_grade_flag IS
+COMMENT ON TABLE eye_prescription.eye_prescription_grade_flag IS
     'Safety-critical flags that fire independently of the complexity grade, with priority and a suggested action.';
-COMMENT ON COLUMN eye_prescription_grade_flag.id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN eye_prescription_grade_flag.created_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN eye_prescription_grade_flag.updated_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN eye_prescription_grade_flag.deleted_at IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN eye_prescription_grade_flag.eye_prescription_grade_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.eye_prescription_grade_id IS
     'Foreign key to the parent eye_prescription_grade.';
-COMMENT ON COLUMN eye_prescription_grade_flag.flag_id IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-HIGH-MYOPIA-RIGHT-001).';
-COMMENT ON COLUMN eye_prescription_grade_flag.category IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN eye_prescription_grade_flag.eye IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.eye IS
     'Which eye the flag applies to: right, left, both.';
-COMMENT ON COLUMN eye_prescription_grade_flag.priority IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN eye_prescription_grade_flag.description IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN eye_prescription_grade_flag.suggested_action IS
+COMMENT ON COLUMN eye_prescription.eye_prescription_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "consider refer for retinal screening").';
 
 -- ========================================================================

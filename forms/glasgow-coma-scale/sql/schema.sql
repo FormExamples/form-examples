@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS glasgow_coma_scale;
+
+COMMENT ON SCHEMA glasgow_coma_scale IS
+    'Namespace for the Glasgow Coma Scale form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION glasgow_coma_scale.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION glasgow_coma_scale.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE glasgow_coma_scale.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON glasgow_coma_scale.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE glasgow_coma_scale.patient IS
     'Patient demographic information used by the Glasgow Coma Scale assessment record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN glasgow_coma_scale.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON glasgow_coma_scale.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- observer (doctor, nurse, paramedic, emergency medical technician,
 -- advanced clinical practitioner).
 
-CREATE TABLE clinician (
+CREATE TABLE glasgow_coma_scale.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON glasgow_coma_scale.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE glasgow_coma_scale.clinician IS
     'Clinician identifying information for the assessing observer.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.name IS
     'Clinician full name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.role IS
     'Primary clinical role: doctor, nurse, paramedic, emergency-medical-technician, advanced-clinical-practitioner, neuro-observation-staff, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN glasgow_coma_scale.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON glasgow_coma_scale.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- findings for GCS-Pupils, and the trend fields. The computed grade,
 -- fired rules, and flags live in dedicated child tables.
 
-CREATE TABLE glasgow_coma_scale (
+CREATE TABLE glasgow_coma_scale.glasgow_coma_scale (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES glasgow_coma_scale.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES glasgow_coma_scale.clinician(id) ON DELETE RESTRICT,
 
     -- Step 1: assessment context
     assessor_name VARCHAR(255) NOT NULL DEFAULT '',
@@ -257,72 +274,72 @@ CREATE TABLE glasgow_coma_scale (
 );
 
 CREATE INDEX glasgow_coma_scale_patient_id_idx
-    ON glasgow_coma_scale (patient_id);
+    ON glasgow_coma_scale.glasgow_coma_scale (patient_id);
 CREATE INDEX glasgow_coma_scale_clinician_id_idx
-    ON glasgow_coma_scale (clinician_id);
+    ON glasgow_coma_scale.glasgow_coma_scale (clinician_id);
 
 CREATE TRIGGER trigger_glasgow_coma_scale_updated_at
-    BEFORE UPDATE ON glasgow_coma_scale
+    BEFORE UPDATE ON glasgow_coma_scale.glasgow_coma_scale
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE glasgow_coma_scale IS
+COMMENT ON TABLE glasgow_coma_scale.glasgow_coma_scale IS
     'Main Glasgow Coma Scale assessment record: assessment context, patient identification, confounders, the three component responses (eye, verbal, motor) with not-testable handling, pupillary findings for GCS-Pupils, and trend fields.';
-COMMENT ON COLUMN glasgow_coma_scale.id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_coma_scale.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN glasgow_coma_scale.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN glasgow_coma_scale.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN glasgow_coma_scale.patient_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.patient_id IS
     'Foreign key to the patient being assessed (delete restricted).';
-COMMENT ON COLUMN glasgow_coma_scale.clinician_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.clinician_id IS
     'Foreign key to the assessing clinician (optional; delete restricted).';
-COMMENT ON COLUMN glasgow_coma_scale.assessor_name IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.assessor_name IS
     'Name of the assessing observer as recorded on the assessment.';
-COMMENT ON COLUMN glasgow_coma_scale.assessor_role IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.assessor_role IS
     'Role of the assessing observer: doctor, nurse, paramedic, emergency-medical-technician, advanced-clinical-practitioner, neuro-observation-staff, or other.';
-COMMENT ON COLUMN glasgow_coma_scale.assessed_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.assessed_at IS
     'Date and time the assessment was performed.';
-COMMENT ON COLUMN glasgow_coma_scale.setting IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.setting IS
     'Care setting: ed (emergency department), neuro, critical-care, pre-hospital, or other.';
-COMMENT ON COLUMN glasgow_coma_scale.reason IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.reason IS
     'Free-text reason for the assessment (e.g. head injury, stroke, reduced consciousness).';
-COMMENT ON COLUMN glasgow_coma_scale.intubated IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.intubated IS
     'Whether the patient is intubated or has a tracheostomy (confounder; may force the verbal component to NT).';
-COMMENT ON COLUMN glasgow_coma_scale.sedated IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.sedated IS
     'Whether the patient is sedated (confounder; may force a component to NT).';
-COMMENT ON COLUMN glasgow_coma_scale.paralysed IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.paralysed IS
     'Whether the patient has neuromuscular blockade (confounder; may force the motor component to NT).';
-COMMENT ON COLUMN glasgow_coma_scale.eye_response IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.eye_response IS
     'Best eye-opening response (E, 1-4): spontaneous (4), to-sound (3), to-pressure (2), none (1), or NT when a local factor prevents testing.';
-COMMENT ON COLUMN glasgow_coma_scale.eye_not_testable_reason IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.eye_not_testable_reason IS
     'Free-text reason the eye component is not testable (e.g. periorbital swelling, dressings).';
-COMMENT ON COLUMN glasgow_coma_scale.verbal_response IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.verbal_response IS
     'Best verbal response (V, 1-5): orientated (5), confused (4), words (3), sounds (2), none (1), or NT when a local factor prevents testing.';
-COMMENT ON COLUMN glasgow_coma_scale.verbal_not_testable_reason IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.verbal_not_testable_reason IS
     'Free-text reason the verbal component is not testable (e.g. intubation, tracheostomy, language barrier).';
-COMMENT ON COLUMN glasgow_coma_scale.motor_response IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.motor_response IS
     'Best motor response (M, 1-6): obeys-commands (6), localising (5), normal-flexion (4), abnormal-flexion (3), extension (2), none (1), or NT when a local factor prevents testing.';
-COMMENT ON COLUMN glasgow_coma_scale.motor_not_testable_reason IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.motor_not_testable_reason IS
     'Free-text reason the motor component is not testable (e.g. neuromuscular blockade, spinal injury, limb immobilisation).';
-COMMENT ON COLUMN glasgow_coma_scale.left_pupil_reactivity IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.left_pupil_reactivity IS
     'Left pupil reactivity to light: reactive, sluggish, or unreactive (used for the Pupil Reactivity Score).';
-COMMENT ON COLUMN glasgow_coma_scale.right_pupil_reactivity IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.right_pupil_reactivity IS
     'Right pupil reactivity to light: reactive, sluggish, or unreactive (used for the Pupil Reactivity Score).';
-COMMENT ON COLUMN glasgow_coma_scale.left_pupil_size_mm IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.left_pupil_size_mm IS
     'Left pupil size in millimetres (for the record).';
-COMMENT ON COLUMN glasgow_coma_scale.right_pupil_size_mm IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.right_pupil_size_mm IS
     'Right pupil size in millimetres (for the record).';
-COMMENT ON COLUMN glasgow_coma_scale.previous_total IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.previous_total IS
     'Previous total GCS (3-15) for the trend comparison, when available.';
-COMMENT ON COLUMN glasgow_coma_scale.previous_motor_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.previous_motor_score IS
     'Previous motor component score (1-6) for the trend comparison, when available.';
-COMMENT ON COLUMN glasgow_coma_scale.previous_assessed_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.previous_assessed_at IS
     'Date and time of the previous assessment used for the trend comparison.';
-COMMENT ON COLUMN glasgow_coma_scale.clinical_note IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale.clinical_note IS
     'Free-text clinical note recorded with the assessment.';
 
 -- ========================================================================
@@ -339,14 +356,14 @@ COMMENT ON COLUMN glasgow_coma_scale.clinical_note IS
 -- strings, the derived severity band, the Pupil Reactivity Score, and
 -- the secondary GCS-Pupils score.
 
-CREATE TABLE glasgow_coma_scale_grade (
+CREATE TABLE glasgow_coma_scale.glasgow_coma_scale_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_coma_scale_id UUID NOT NULL UNIQUE
-        REFERENCES glasgow_coma_scale(id) ON DELETE CASCADE,
+        REFERENCES glasgow_coma_scale.glasgow_coma_scale(id) ON DELETE CASCADE,
 
     eye_score INT,
     verbal_score INT,
@@ -364,41 +381,41 @@ CREATE TABLE glasgow_coma_scale_grade (
 );
 
 CREATE TRIGGER trigger_glasgow_coma_scale_grade_updated_at
-    BEFORE UPDATE ON glasgow_coma_scale_grade
+    BEFORE UPDATE ON glasgow_coma_scale.glasgow_coma_scale_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE glasgow_coma_scale_grade IS
+COMMENT ON TABLE glasgow_coma_scale.glasgow_coma_scale_grade IS
     'Computed Glasgow Coma Scale grading result: resolved component scores (null when NT), summed total (3-15, null when any component is NT), breakdown and total-display strings, severity band, Pupil Reactivity Score, and the secondary GCS-Pupils score.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.glasgow_coma_scale_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.glasgow_coma_scale_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN glasgow_coma_scale_grade.eye_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.eye_score IS
     'Resolved eye-opening score (1-4), or null when the eye component is not testable.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.verbal_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.verbal_score IS
     'Resolved verbal-response score (1-5), or null when the verbal component is not testable.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.motor_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.motor_score IS
     'Resolved motor-response score (1-6), or null when the motor component is not testable.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.total_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.total_score IS
     'Summed total GCS (E + V + M, 3-15); null when any component is not testable.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.breakdown IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.breakdown IS
     'E/V/M breakdown string with any NT component marked (e.g. "E3 V4 M5" or "E3 V-NT M5").';
-COMMENT ON COLUMN glasgow_coma_scale_grade.total_display IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.total_display IS
     'Reported total display, using the trailing "T" convention for an intubated verbal NT (e.g. "12" or "9T").';
-COMMENT ON COLUMN glasgow_coma_scale_grade.severity_band IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.severity_band IS
     'Derived severity band: mild (13-15), moderate (9-12), or severe (3-8); empty when the total is undefined.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.pupil_reactivity_score IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.pupil_reactivity_score IS
     'Pupil Reactivity Score (PRS): count of pupils unreactive to light (0-2); null when both pupils were not examined.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.gcs_p IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.gcs_p IS
     'Secondary GCS-Pupils score = total - PRS (1-15); null when total or PRS is undefined.';
-COMMENT ON COLUMN glasgow_coma_scale_grade.graded_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -414,14 +431,14 @@ COMMENT ON COLUMN glasgow_coma_scale_grade.graded_at IS
 -- component it belongs to, the score it contributed, and a
 -- human-readable description.
 
-CREATE TABLE glasgow_coma_scale_grade_rule (
+CREATE TABLE glasgow_coma_scale.glasgow_coma_scale_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_coma_scale_grade_id UUID NOT NULL
-        REFERENCES glasgow_coma_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES glasgow_coma_scale.glasgow_coma_scale_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     component VARCHAR(20) NOT NULL
@@ -432,34 +449,34 @@ CREATE TABLE glasgow_coma_scale_grade_rule (
 );
 
 CREATE INDEX glasgow_coma_scale_grade_rule_grade_id_idx
-    ON glasgow_coma_scale_grade_rule (glasgow_coma_scale_grade_id);
+    ON glasgow_coma_scale.glasgow_coma_scale_grade_rule (glasgow_coma_scale_grade_id);
 
 CREATE TRIGGER trigger_glasgow_coma_scale_grade_rule_updated_at
-    BEFORE UPDATE ON glasgow_coma_scale_grade_rule
+    BEFORE UPDATE ON glasgow_coma_scale.glasgow_coma_scale_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE glasgow_coma_scale_grade_rule IS
+COMMENT ON TABLE glasgow_coma_scale.glasgow_coma_scale_grade_rule IS
     'Audit trail of every grading rule that fired during Glasgow Coma Scale computation: component, score contributed, category, and description.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.glasgow_coma_scale_grade_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.glasgow_coma_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.rule_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-EYE-SPONTANEOUS-01, R-TOTAL-BAND-SEVERE-01).';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.component IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.component IS
     'Assessment component the rule belongs to: eye, verbal, motor, total, pupils, gcs-p, trend, or other.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.points IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.points IS
     'Score contributed by this rule for its component (e.g. the resolved component score), when applicable.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.category IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.category IS
     'Subject category (e.g. component-score, severity-band, pupil-reactivity).';
-COMMENT ON COLUMN glasgow_coma_scale_grade_rule.description IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -473,14 +490,14 @@ COMMENT ON COLUMN glasgow_coma_scale_grade_rule.description IS
 -- Red-flag issues that fire independently of the severity band, with
 -- priority and a suggested action for the clinical team.
 
-CREATE TABLE glasgow_coma_scale_grade_flag (
+CREATE TABLE glasgow_coma_scale.glasgow_coma_scale_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     glasgow_coma_scale_grade_id UUID NOT NULL
-        REFERENCES glasgow_coma_scale_grade(id) ON DELETE CASCADE,
+        REFERENCES glasgow_coma_scale.glasgow_coma_scale_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -500,34 +517,34 @@ CREATE TABLE glasgow_coma_scale_grade_flag (
 );
 
 CREATE INDEX glasgow_coma_scale_grade_flag_grade_id_idx
-    ON glasgow_coma_scale_grade_flag (glasgow_coma_scale_grade_id);
+    ON glasgow_coma_scale.glasgow_coma_scale_grade_flag (glasgow_coma_scale_grade_id);
 
 CREATE TRIGGER trigger_glasgow_coma_scale_grade_flag_updated_at
-    BEFORE UPDATE ON glasgow_coma_scale_grade_flag
+    BEFORE UPDATE ON glasgow_coma_scale.glasgow_coma_scale_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION glasgow_coma_scale.set_updated_at();
 
-COMMENT ON TABLE glasgow_coma_scale_grade_flag IS
+COMMENT ON TABLE glasgow_coma_scale.glasgow_coma_scale_grade_flag IS
     'Red-flag issues that fire independently of the severity band, with priority and a suggested action for the clinical team.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.created_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.updated_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.deleted_at IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.glasgow_coma_scale_grade_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.glasgow_coma_scale_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.flag_id IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-AIRWAY-RISK-001, F-UNEQUAL-PUPILS-001).';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.category IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.category IS
     'Flag category: airway-risk (GCS <= 8 / coma), deteriorating, unequal-pupils, untestable-component, falling-motor, or other.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.priority IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.description IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN glasgow_coma_scale_grade_flag.suggested_action IS
+COMMENT ON COLUMN glasgow_coma_scale.glasgow_coma_scale_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "consider definitive airway management and senior escalation", "urgent CT head and neurosurgical referral").';
 
 -- ========================================================================

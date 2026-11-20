@@ -8,14 +8,14 @@
 -- supports preparation of the application; it does not give legal advice and
 -- the register office decides each notice.
 
-CREATE TABLE united_kingdom_marriage_certificate_application (
+CREATE TABLE united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    applicant_id UUID NOT NULL REFERENCES applicant(id) ON DELETE RESTRICT,
-    registrar_id UUID REFERENCES registrar(id) ON DELETE RESTRICT,
+    applicant_id UUID NOT NULL REFERENCES united_kingdom_marriage_certificate_application.applicant(id) ON DELETE RESTRICT,
+    registrar_id UUID REFERENCES united_kingdom_marriage_certificate_application.registrar(id) ON DELETE RESTRICT,
 
     notice_type VARCHAR(17) NOT NULL DEFAULT '' CHECK (notice_type IN ('marriage', 'civil-partnership', '')),
     notice_date DATE,
@@ -52,90 +52,90 @@ CREATE TABLE united_kingdom_marriage_certificate_application (
 );
 
 CREATE INDEX united_kingdom_marriage_certificate_application_applicant_id_idx
-    ON united_kingdom_marriage_certificate_application (applicant_id);
+    ON united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application (applicant_id);
 CREATE INDEX united_kingdom_marriage_certificate_application_registrar_id_idx
-    ON united_kingdom_marriage_certificate_application (registrar_id);
+    ON united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application (registrar_id);
 
 CREATE TRIGGER trigger_united_kingdom_marriage_certificate_application_updated_at
-    BEFORE UPDATE ON united_kingdom_marriage_certificate_application
+    BEFORE UPDATE ON united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_kingdom_marriage_certificate_application.set_updated_at();
 
-COMMENT ON TABLE united_kingdom_marriage_certificate_application IS
+COMMENT ON TABLE united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application IS
     'Main United Kingdom marriage certificate application record: notice of marriage or civil partnership in England and Wales, planned ceremony, both parties'' residence, identity, prior-relationship and immigration evidence, witnesses, and the GRO certificate order. Classification, fired rules, and flags live in child tables.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.id IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.created_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.updated_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.deleted_at IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant_id IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.applicant_id IS
     'Foreign key to the applicant who submits this application (restrict delete).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.registrar_id IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.registrar_id IS
     'Foreign key to the registrar handling the notice (restrict delete); optional.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.notice_type IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.notice_type IS
     'Whether notice is for a marriage or a civil partnership.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.notice_date IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.notice_date IS
     'Date notice is (or will be) given at the register office.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.registration_district IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.registration_district IS
     'Registration district where notice is given.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.notice_given_together IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.notice_given_together IS
     'Whether both parties give notice together at one designated register office (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.ceremony_type IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.ceremony_type IS
     'Kind of ceremony planned.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.ceremony_date IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.ceremony_date IS
     'Planned ceremony date; at least 29 days after notice and within 12 months of it.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.venue_name IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.venue_name IS
     'Name and address of the final ceremony venue.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.venue_confirmed IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.venue_confirmed IS
     'Whether the final venue is confirmed and can be shown at the notice appointment (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.closely_related IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.closely_related IS
     'Whether the parties are within the prohibited degrees of relationship (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.witness_count IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.witness_count IS
     'Number of witnesses arranged; at least two are required.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_name IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_name IS
     'Full name of the first party as it will appear on the notice and certificate.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_date_of_birth IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_date_of_birth IS
     'Date of birth of the first party; both parties must be 18 or over on the ceremony date.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_days_resident_in_district IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_days_resident_in_district IS
     'Whole days the first party has lived in the registration district where notice is given; at least 7 are required.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_nationality_status IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_nationality_status IS
     'Immigration route of the first party: british-or-irish, eu-settlement-scheme (settled or pre-settled), or other (needs immigration evidence and joint notice).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_marital_status IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_marital_status IS
     'Marital or civil partnership status of the first party; currently-married-or-civil-partnered bars a new marriage.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_identity_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_identity_provided IS
     'Whether original photographic identity documents are available for the first party (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_address_proof_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_address_proof_provided IS
     'Whether original proof of home address is available for the first party (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_prior_end_evidence_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_prior_end_evidence_provided IS
     'Whether the decree absolute, final order, annulment or death certificate ending the first party''s previous marriage or civil partnership is available (yes/no/not-applicable).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_one_immigration_evidence_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_one_immigration_evidence_provided IS
     'Whether acceptable immigration evidence (passport, visa, eVisa share code, EU Settlement Scheme share code) is available for the first party (yes/no/not-applicable).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_name IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_name IS
     'Full name of the second party as it will appear on the notice and certificate.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_date_of_birth IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_date_of_birth IS
     'Date of birth of the second party; both parties must be 18 or over on the ceremony date.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_days_resident_in_district IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_days_resident_in_district IS
     'Whole days the second party has lived in the registration district where notice is given; at least 7 are required.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_nationality_status IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_nationality_status IS
     'Immigration route of the second party: british-or-irish, eu-settlement-scheme (settled or pre-settled), or other (needs immigration evidence and joint notice).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_marital_status IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_marital_status IS
     'Marital or civil partnership status of the second party; currently-married-or-civil-partnered bars a new marriage.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_identity_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_identity_provided IS
     'Whether original photographic identity documents are available for the second party (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_address_proof_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_address_proof_provided IS
     'Whether original proof of home address is available for the second party (yes/no).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_prior_end_evidence_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_prior_end_evidence_provided IS
     'Whether the decree absolute, final order, annulment or death certificate ending the second party''s previous marriage or civil partnership is available (yes/no/not-applicable).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.party_two_immigration_evidence_provided IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.party_two_immigration_evidence_provided IS
     'Whether acceptable immigration evidence (passport, visa, eVisa share code, EU Settlement Scheme share code) is available for the second party (yes/no/not-applicable).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.certificate_copies IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.certificate_copies IS
     'Number of marriage certificate copies to order from the General Register Office (GRO) after the ceremony.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.certificate_service IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.certificate_service IS
     'GRO certificate service: standard or priority (next working day if ordered by 4pm).';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.gro_index_reference IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.gro_index_reference IS
     'GRO index reference number, if known, which makes a standard order faster and cheaper.';
-COMMENT ON COLUMN united_kingdom_marriage_certificate_application.applicant_note IS
+COMMENT ON COLUMN united_kingdom_marriage_certificate_application.united_kingdom_marriage_certificate_application.applicant_note IS
     'Free-text note from the applicant.';

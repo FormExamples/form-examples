@@ -1,10 +1,10 @@
-CREATE TABLE grade (
+CREATE TABLE gerontology_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES gerontology_assessment.assessment(id) ON DELETE CASCADE,
     cfs_score INTEGER NOT NULL DEFAULT 1
         CHECK (cfs_score >= 1 AND cfs_score <= 9),
     cfs_category VARCHAR(30) NOT NULL DEFAULT ''
@@ -23,36 +23,36 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON gerontology_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION gerontology_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE gerontology_assessment.grade IS
     'Computed Clinical Frailty Scale result. CFS 1 = Very fit, 4 = Vulnerable, 7 = Severely frail, 9 = Terminally ill. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.cfs_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.cfs_score IS
     'Clinical Frailty Scale score (1-9).';
-COMMENT ON COLUMN grade.cfs_category IS
+COMMENT ON COLUMN gerontology_assessment.grade.cfs_category IS
     'CFS category: very-fit, well, managing-well, vulnerable, mildly-frail, moderately-frail, severely-frail, very-severely-frail, terminally-ill, or empty string.';
-COMMENT ON COLUMN grade.functional_domain_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.functional_domain_score IS
     'Sub-score for the functional assessment domain, NULL if not yet scored.';
-COMMENT ON COLUMN grade.cognitive_domain_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.cognitive_domain_score IS
     'Sub-score for the cognitive screening domain, NULL if not yet scored.';
-COMMENT ON COLUMN grade.mobility_domain_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.mobility_domain_score IS
     'Sub-score for the mobility and falls domain, NULL if not yet scored.';
-COMMENT ON COLUMN grade.nutrition_domain_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.nutrition_domain_score IS
     'Sub-score for the nutrition domain, NULL if not yet scored.';
-COMMENT ON COLUMN grade.polypharmacy_domain_score IS
+COMMENT ON COLUMN gerontology_assessment.grade.polypharmacy_domain_score IS
     'Sub-score for the polypharmacy review domain, NULL if not yet scored.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN gerontology_assessment.grade.graded_at IS
     'Timestamp when the grading was computed.';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN gerontology_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN gerontology_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN gerontology_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN gerontology_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN gerontology_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (7):
+-- Source files (8):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_respondent.sql
 --   - 03_create_table_agile_principles_assessment.sql
@@ -27,12 +28,28 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS agile_principles_assessment;
+
+COMMENT ON SCHEMA agile_principles_assessment IS
+    'Namespace for the Agile Principles Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION agile_principles_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -40,7 +57,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION agile_principles_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -51,7 +68,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- BEGIN 02_create_table_respondent.sql
 -- ========================================================================
 
-CREATE TABLE respondent (
+CREATE TABLE agile_principles_assessment.respondent (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -75,31 +92,31 @@ CREATE TABLE respondent (
 );
 
 CREATE TRIGGER trigger_respondent_updated_at
-    BEFORE UPDATE ON respondent
+    BEFORE UPDATE ON agile_principles_assessment.respondent
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE respondent IS
+COMMENT ON TABLE agile_principles_assessment.respondent IS
     'A single person completing an agile-principles assessment. One respondent may submit multiple assessments over time.';
-COMMENT ON COLUMN respondent.id IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respondent.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN respondent.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN respondent.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN respondent.full_name IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.full_name IS
     'Full name of the respondent.';
-COMMENT ON COLUMN respondent.email IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.email IS
     'Contact email address.';
-COMMENT ON COLUMN respondent.role IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.role IS
     'Job role: individual-contributor, team-lead, scrum-master, product-owner, engineering-manager, agile-coach, executive-sponsor, or other.';
-COMMENT ON COLUMN respondent.team_name IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.team_name IS
     'Name of the team being assessed.';
-COMMENT ON COLUMN respondent.organisation_name IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.organisation_name IS
     'Name of the broader organisation, division, or programme.';
-COMMENT ON COLUMN respondent.years_in_agile IS
+COMMENT ON COLUMN agile_principles_assessment.respondent.years_in_agile IS
     'Number of years the respondent has worked in agile environments.';
 
 -- ========================================================================
@@ -110,12 +127,12 @@ COMMENT ON COLUMN respondent.years_in_agile IS
 -- BEGIN 03_create_table_agile_principles_assessment.sql
 -- ========================================================================
 
-CREATE TABLE agile_principles_assessment (
+CREATE TABLE agile_principles_assessment.agile_principles_assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
-    respondent_id UUID NOT NULL REFERENCES respondent(id) ON DELETE CASCADE,
+    respondent_id UUID NOT NULL REFERENCES agile_principles_assessment.respondent(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed')),
     is_anonymous BOOLEAN NOT NULL DEFAULT FALSE,
@@ -192,103 +209,103 @@ CREATE TABLE agile_principles_assessment (
 );
 
 CREATE TRIGGER trigger_agile_principles_assessment_updated_at
-    BEFORE UPDATE ON agile_principles_assessment
+    BEFORE UPDATE ON agile_principles_assessment.agile_principles_assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE agile_principles_assessment IS
+COMMENT ON TABLE agile_principles_assessment.agile_principles_assessment IS
     'One row per submission. Stores the 12 Agile Manifesto principle Likert scores (1-5, nullable when unanswered) and free-text comments per principle. Composite maturity is computed in agile_principles_assessment_grade.';
-COMMENT ON COLUMN agile_principles_assessment.id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_principles_assessment.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_principles_assessment.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_principles_assessment.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_principles_assessment.respondent_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.respondent_id IS
     'Foreign key to the respondent who completed this assessment.';
-COMMENT ON COLUMN agile_principles_assessment.status IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.status IS
     'Lifecycle status: draft, submitted, or reviewed.';
-COMMENT ON COLUMN agile_principles_assessment.is_anonymous IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.is_anonymous IS
     'TRUE when the respondent chose to submit anonymously; renderers must mask name, email, and role for these rows.';
-COMMENT ON COLUMN agile_principles_assessment.assessment_date IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.assessment_date IS
     'Date on which the assessment was completed.';
-COMMENT ON COLUMN agile_principles_assessment.assessment_period IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.assessment_period IS
     'Cadence of the assessment: sprint, quarter, half-year, annual, or ad-hoc.';
-COMMENT ON COLUMN agile_principles_assessment.p01_customer_satisfaction IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_customer_satisfaction IS
     'Likert 1-5 for principle 1: highest priority is to satisfy the customer through early and continuous delivery of valuable software.';
-COMMENT ON COLUMN agile_principles_assessment.p01_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_comment IS
     'Free-text comment for principle 1.';
-COMMENT ON COLUMN agile_principles_assessment.p02_welcome_change IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_welcome_change IS
     'Likert 1-5 for principle 2: changing requirements are welcomed, even late in development, to harness competitive advantage.';
-COMMENT ON COLUMN agile_principles_assessment.p02_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_comment IS
     'Free-text comment for principle 2.';
-COMMENT ON COLUMN agile_principles_assessment.p03_deliver_frequently IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_deliver_frequently IS
     'Likert 1-5 for principle 3: deliver working software frequently, within a few weeks or months.';
-COMMENT ON COLUMN agile_principles_assessment.p03_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_comment IS
     'Free-text comment for principle 3.';
-COMMENT ON COLUMN agile_principles_assessment.p04_collaboration IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_collaboration IS
     'Likert 1-5 for principle 4: business stakeholders and developers must work together daily.';
-COMMENT ON COLUMN agile_principles_assessment.p04_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_comment IS
     'Free-text comment for principle 4.';
-COMMENT ON COLUMN agile_principles_assessment.p05_motivated_individuals IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_motivated_individuals IS
     'Likert 1-5 for principle 5: build projects around motivated individuals, providing them with the environment and support needed.';
-COMMENT ON COLUMN agile_principles_assessment.p05_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_comment IS
     'Free-text comment for principle 5.';
-COMMENT ON COLUMN agile_principles_assessment.p06_face_to_face IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_face_to_face IS
     'Likert 1-5 for principle 6: the most efficient method for conveying information within a development team is face-to-face communication.';
-COMMENT ON COLUMN agile_principles_assessment.p06_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_comment IS
     'Free-text comment for principle 6.';
-COMMENT ON COLUMN agile_principles_assessment.p07_working_software IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_working_software IS
     'Likert 1-5 for principle 7: working software is the primary measure of progress.';
-COMMENT ON COLUMN agile_principles_assessment.p07_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_comment IS
     'Free-text comment for principle 7.';
-COMMENT ON COLUMN agile_principles_assessment.p08_sustainable_development IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_sustainable_development IS
     'Likert 1-5 for principle 8: agile processes promote a sustainable, consistent pace for developers and users.';
-COMMENT ON COLUMN agile_principles_assessment.p08_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_comment IS
     'Free-text comment for principle 8.';
-COMMENT ON COLUMN agile_principles_assessment.p09_technical_excellence IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_technical_excellence IS
     'Likert 1-5 for principle 9: continuous attention to technical excellence and good design enhances agility.';
-COMMENT ON COLUMN agile_principles_assessment.p09_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_comment IS
     'Free-text comment for principle 9.';
-COMMENT ON COLUMN agile_principles_assessment.p10_simplicity IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_simplicity IS
     'Likert 1-5 for principle 10: the art of maximising the amount of work not done is essential.';
-COMMENT ON COLUMN agile_principles_assessment.p10_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_comment IS
     'Free-text comment for principle 10.';
-COMMENT ON COLUMN agile_principles_assessment.p11_self_organising_teams IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_self_organising_teams IS
     'Likert 1-5 for principle 11: the best architectures, requirements, and designs emerge from self-organising teams.';
-COMMENT ON COLUMN agile_principles_assessment.p11_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_comment IS
     'Free-text comment for principle 11.';
-COMMENT ON COLUMN agile_principles_assessment.p12_regular_reflection IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_regular_reflection IS
     'Likert 1-5 for principle 12: at regular intervals, the team reflects on how to become more effective, then adjusts behaviour accordingly.';
-COMMENT ON COLUMN agile_principles_assessment.p12_comment IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_comment IS
     'Free-text comment for principle 12.';
-COMMENT ON COLUMN agile_principles_assessment.p01_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p01_weight IS
     'Configurable weight for principle 1, range 0.50-2.00, default 1.00. Affects the weighted-mean composite maturity.';
-COMMENT ON COLUMN agile_principles_assessment.p02_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p02_weight IS
     'Configurable weight for principle 2, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p03_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p03_weight IS
     'Configurable weight for principle 3, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p04_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p04_weight IS
     'Configurable weight for principle 4, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p05_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p05_weight IS
     'Configurable weight for principle 5, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p06_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p06_weight IS
     'Configurable weight for principle 6, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p07_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p07_weight IS
     'Configurable weight for principle 7, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p08_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p08_weight IS
     'Configurable weight for principle 8, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p09_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p09_weight IS
     'Configurable weight for principle 9, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p10_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p10_weight IS
     'Configurable weight for principle 10, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p11_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p11_weight IS
     'Configurable weight for principle 11, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.p12_weight IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.p12_weight IS
     'Configurable weight for principle 12, range 0.50-2.00, default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment.overall_notes IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment.overall_notes IS
     'Free-text overall notes captured on the summary step.';
 
 -- ========================================================================
@@ -299,13 +316,13 @@ COMMENT ON COLUMN agile_principles_assessment.overall_notes IS
 -- BEGIN 04_create_table_agile_principles_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE agile_principles_assessment_grade (
+CREATE TABLE agile_principles_assessment.agile_principles_assessment_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     agile_principles_assessment_id UUID NOT NULL UNIQUE
-        REFERENCES agile_principles_assessment(id) ON DELETE CASCADE,
+        REFERENCES agile_principles_assessment.agile_principles_assessment(id) ON DELETE CASCADE,
     answered_count SMALLINT NOT NULL DEFAULT 0
         CHECK (answered_count BETWEEN 0 AND 12),
     mean_score NUMERIC(3,2)
@@ -332,43 +349,43 @@ CREATE TABLE agile_principles_assessment_grade (
 );
 
 CREATE TRIGGER trigger_agile_principles_assessment_grade_updated_at
-    BEFORE UPDATE ON agile_principles_assessment_grade
+    BEFORE UPDATE ON agile_principles_assessment.agile_principles_assessment_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE agile_principles_assessment_grade IS
+COMMENT ON TABLE agile_principles_assessment.agile_principles_assessment_grade IS
     'Computed grading and signed-off action plan. One-to-one with agile_principles_assessment.';
-COMMENT ON COLUMN agile_principles_assessment_grade.id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_principles_assessment_grade.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_principles_assessment_grade.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_principles_assessment_grade.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_principles_assessment_grade.agile_principles_assessment_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.agile_principles_assessment_id IS
     'Foreign key to the parent assessment (unique, 1:1).';
-COMMENT ON COLUMN agile_principles_assessment_grade.answered_count IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.answered_count IS
     'Number of principles (0-12) that received a Likert score.';
-COMMENT ON COLUMN agile_principles_assessment_grade.mean_score IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.mean_score IS
     'Unweighted mean of answered principle scores; NULL when fewer than 6 principles were answered.';
-COMMENT ON COLUMN agile_principles_assessment_grade.weighted_mean_score IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.weighted_mean_score IS
     'Weighted mean of answered principle scores using the per-principle weights from the assessment row; equals mean_score when no weight is customised. NULL when fewer than 6 principles were answered.';
-COMMENT ON COLUMN agile_principles_assessment_grade.weights_customised IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.weights_customised IS
     'TRUE when at least one principle weight on the assessment differs from the default 1.00.';
-COMMENT ON COLUMN agile_principles_assessment_grade.maturity IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.maturity IS
     'Composite maturity level: optimising, mature, developing, initial, ad-hoc, or insufficient-data.';
-COMMENT ON COLUMN agile_principles_assessment_grade.top_action_1 IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.top_action_1 IS
     'First prioritised action drawn from the weakest principles.';
-COMMENT ON COLUMN agile_principles_assessment_grade.top_action_2 IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.top_action_2 IS
     'Second prioritised action drawn from the weakest principles.';
-COMMENT ON COLUMN agile_principles_assessment_grade.top_action_3 IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.top_action_3 IS
     'Third prioritised action drawn from the weakest principles.';
-COMMENT ON COLUMN agile_principles_assessment_grade.coach_notes IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.coach_notes IS
     'Free-text agile-coach notes accompanying the action plan.';
-COMMENT ON COLUMN agile_principles_assessment_grade.signed_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.signed_at IS
     'Timestamp of electronic sign-off.';
-COMMENT ON COLUMN agile_principles_assessment_grade.graded_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade.graded_at IS
     'Timestamp the engine last computed this result.';
 
 -- ========================================================================
@@ -379,13 +396,13 @@ COMMENT ON COLUMN agile_principles_assessment_grade.graded_at IS
 -- BEGIN 05_create_table_agile_principles_assessment_grade_rule.sql
 -- ========================================================================
 
-CREATE TABLE agile_principles_assessment_grade_rule (
+CREATE TABLE agile_principles_assessment.agile_principles_assessment_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     agile_principles_assessment_grade_id UUID NOT NULL
-        REFERENCES agile_principles_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES agile_principles_assessment.agile_principles_assessment_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     principle_number SMALLINT NOT NULL CHECK (principle_number BETWEEN 1 AND 12),
     band VARCHAR(15) NOT NULL DEFAULT ''
@@ -395,34 +412,34 @@ CREATE TABLE agile_principles_assessment_grade_rule (
 );
 
 CREATE INDEX index_agile_principles_assessment_grade_rule_grade_id
-    ON agile_principles_assessment_grade_rule(agile_principles_assessment_grade_id);
+    ON agile_principles_assessment.agile_principles_assessment_grade_rule(agile_principles_assessment_grade_id);
 
 CREATE TRIGGER trigger_agile_principles_assessment_grade_rule_updated_at
-    BEFORE UPDATE ON agile_principles_assessment_grade_rule
+    BEFORE UPDATE ON agile_principles_assessment.agile_principles_assessment_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE agile_principles_assessment_grade_rule IS
+COMMENT ON TABLE agile_principles_assessment.agile_principles_assessment_grade_rule IS
     'Audit trail of every coaching rule fired by the maturity engine, one row per principle that was placed into a band (high / mid / low / unanswered).';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.agile_principles_assessment_grade_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.agile_principles_assessment_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.rule_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-P09-LOW).';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.principle_number IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.principle_number IS
     'Principle ordinal 1-12 as defined in the Agile Manifesto.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.band IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.band IS
     'Band the principle was placed into: high, mid, low, or unanswered.';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.principle_slug IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.principle_slug IS
     'Stable kebab-case slug for the principle (e.g. technical-excellence).';
-COMMENT ON COLUMN agile_principles_assessment_grade_rule.description IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_rule.description IS
     'Human-readable description of why the rule fired and its coaching implication.';
 
 -- ========================================================================
@@ -433,13 +450,13 @@ COMMENT ON COLUMN agile_principles_assessment_grade_rule.description IS
 -- BEGIN 06_create_table_agile_principles_assessment_grade_flag.sql
 -- ========================================================================
 
-CREATE TABLE agile_principles_assessment_grade_flag (
+CREATE TABLE agile_principles_assessment.agile_principles_assessment_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     agile_principles_assessment_grade_id UUID NOT NULL
-        REFERENCES agile_principles_assessment_grade(id) ON DELETE CASCADE,
+        REFERENCES agile_principles_assessment.agile_principles_assessment_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(40) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -469,36 +486,36 @@ CREATE TABLE agile_principles_assessment_grade_flag (
 );
 
 CREATE INDEX index_agile_principles_assessment_grade_flag_grade_id
-    ON agile_principles_assessment_grade_flag(agile_principles_assessment_grade_id);
+    ON agile_principles_assessment.agile_principles_assessment_grade_flag(agile_principles_assessment_grade_id);
 
 CREATE TRIGGER trigger_agile_principles_assessment_grade_flag_updated_at
-    BEFORE UPDATE ON agile_principles_assessment_grade_flag
+    BEFORE UPDATE ON agile_principles_assessment.agile_principles_assessment_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION agile_principles_assessment.set_updated_at();
 
-COMMENT ON TABLE agile_principles_assessment_grade_flag IS
+COMMENT ON TABLE agile_principles_assessment.agile_principles_assessment_grade_flag IS
     'Operational flags raised by the maturity engine independently of the composite maturity level.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.created_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.updated_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.deleted_at IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.agile_principles_assessment_grade_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.agile_principles_assessment_grade_id IS
     'Foreign key to the parent grade row.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.flag_id IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-BURNOUT-RISK).';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.category IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.category IS
     'Flag category: customer-disconnect, change-resistance, burnout-risk, technical-debt, etc.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.priority IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.priority IS
     'Operational priority: low, medium, or high.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.principle_number IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.principle_number IS
     'Ordinal 1-12 of the principle that triggered this flag, NULL when the flag is cross-cutting.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.description IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.description IS
     'Human-readable description of the operational concern.';
-COMMENT ON COLUMN agile_principles_assessment_grade_flag.suggested_action IS
+COMMENT ON COLUMN agile_principles_assessment.agile_principles_assessment_grade_flag.suggested_action IS
     'Suggested coaching action to address the flag.';
 
 -- ========================================================================

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (15):
+-- Source files (16):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -38,12 +39,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS medical_operation_note;
+
+COMMENT ON SCHEMA medical_operation_note IS
+    'Namespace for the Medical Operation Note form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION medical_operation_note.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -51,7 +68,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION medical_operation_note.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -64,7 +81,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE medical_operation_note.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -87,51 +104,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON medical_operation_note.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE medical_operation_note.patient IS
     'Patient demographic information used by the operation-note record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN medical_operation_note.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN medical_operation_note.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN medical_operation_note.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN medical_operation_note.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN medical_operation_note.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN medical_operation_note.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN medical_operation_note.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN medical_operation_note.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_operation_note.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_operation_note.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN medical_operation_note.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN medical_operation_note.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN medical_operation_note.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN medical_operation_note.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN medical_operation_note.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN medical_operation_note.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN medical_operation_note.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded at WHO Sign-In.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON medical_operation_note.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -146,7 +163,7 @@ CREATE INDEX patient_name_trgm_idx
 -- operating team (surgeon, assistant, anaesthetist, ODP, scrub nurse,
 -- circulating nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE medical_operation_note.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -164,41 +181,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON medical_operation_note.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE medical_operation_note.clinician IS
     'Clinician identifying information for members of the operating team.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN medical_operation_note.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN medical_operation_note.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN medical_operation_note.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN medical_operation_note.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN medical_operation_note.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN medical_operation_note.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN medical_operation_note.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN medical_operation_note.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN medical_operation_note.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN medical_operation_note.clinician.role IS
     'Primary clinical role: consultant-surgeon, surgical-registrar, foundation-trainee, consultant-anaesthetist, anaesthetic-registrar, odp, scrub-nurse, circulating-nurse, theatre-coordinator, medical-student, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN medical_operation_note.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN medical_operation_note.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON medical_operation_note.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -215,14 +232,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- implants, drains, specimens, and complications live in dedicated
 -- child tables.
 
-CREATE TABLE medical_operation_note (
+CREATE TABLE medical_operation_note.medical_operation_note (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    lead_surgeon_id UUID NOT NULL REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES medical_operation_note.patient(id) ON DELETE CASCADE,
+    lead_surgeon_id UUID NOT NULL REFERENCES medical_operation_note.clinician(id) ON DELETE RESTRICT,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'submitted', 'amended', 'signed', 'urgent')),
 
@@ -334,209 +351,209 @@ CREATE TABLE medical_operation_note (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_updated_at
-    BEFORE UPDATE ON medical_operation_note
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note IS
     'Operating-team contemporaneous record of a surgical procedure: identification, timing, diagnoses, anaesthesia summary, approach, counts, EBL, complications summary, and post-operative plan.';
-COMMENT ON COLUMN medical_operation_note.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note.patient_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.patient_id IS
     'Foreign key to the patient who underwent the procedure.';
-COMMENT ON COLUMN medical_operation_note.lead_surgeon_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.lead_surgeon_id IS
     'Foreign key to the lead operating surgeon (primary author of the note).';
-COMMENT ON COLUMN medical_operation_note.status IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.status IS
     'Lifecycle status: draft, submitted, amended, signed, or urgent.';
-COMMENT ON COLUMN medical_operation_note.hospital_name IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.hospital_name IS
     'Hospital or site where the procedure was performed.';
-COMMENT ON COLUMN medical_operation_note.theatre_number IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.theatre_number IS
     'Operating theatre or OR identifier.';
-COMMENT ON COLUMN medical_operation_note.list_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.list_type IS
     'Theatre list type: elective, cepod, trauma, obstetric, day-case, or endoscopy.';
-COMMENT ON COLUMN medical_operation_note.case_start_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.case_start_at IS
     'Timestamp the patient arrived in theatre.';
-COMMENT ON COLUMN medical_operation_note.anaesthesia_start_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.anaesthesia_start_at IS
     'Timestamp anaesthesia induction began.';
-COMMENT ON COLUMN medical_operation_note.knife_to_skin_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.knife_to_skin_at IS
     'Timestamp of first surgical incision.';
-COMMENT ON COLUMN medical_operation_note.end_of_surgery_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.end_of_surgery_at IS
     'Timestamp of last surgical action (closure complete).';
-COMMENT ON COLUMN medical_operation_note.case_end_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.case_end_at IS
     'Timestamp the patient left theatre.';
-COMMENT ON COLUMN medical_operation_note.consent_status IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.consent_status IS
     'Consent status at WHO Sign-In: written, verbal, lasting-power-of-attorney, emergency-no-consent, or declined.';
-COMMENT ON COLUMN medical_operation_note.side_marked IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.side_marked IS
     'Whether the operative side was marked pre-induction: yes, no, or na.';
-COMMENT ON COLUMN medical_operation_note.sign_in_completed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.sign_in_completed IS
     'Whether the WHO Sign-In checklist was completed.';
-COMMENT ON COLUMN medical_operation_note.asa_physical_status IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.asa_physical_status IS
     'ASA Physical Status carried over from pre-op assessment (I-VI).';
-COMMENT ON COLUMN medical_operation_note.pre_operative_diagnosis IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.pre_operative_diagnosis IS
     'Pre-operative diagnosis or working diagnosis.';
-COMMENT ON COLUMN medical_operation_note.post_operative_diagnosis IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.post_operative_diagnosis IS
     'Post-operative diagnosis or revised diagnosis after operative findings.';
-COMMENT ON COLUMN medical_operation_note.indication IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.indication IS
     'Clinical indication for the procedure.';
-COMMENT ON COLUMN medical_operation_note.urgency IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.urgency IS
     'NCEPOD Classification of Intervention: elective, expedited, urgent, emergency, or immediate.';
-COMMENT ON COLUMN medical_operation_note.laterality IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.laterality IS
     'Operative side: left, right, bilateral, midline, or na.';
-COMMENT ON COLUMN medical_operation_note.anaesthesia_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.anaesthesia_type IS
     'Primary anaesthetic technique used.';
-COMMENT ON COLUMN medical_operation_note.airway_management IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.airway_management IS
     'Airway management used: face-mask, supraglottic, ett, awake-fibreoptic, surgical-airway, or none.';
-COMMENT ON COLUMN medical_operation_note.induction_agent IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.induction_agent IS
     'Anaesthetic induction agent(s) used.';
-COMMENT ON COLUMN medical_operation_note.maintenance_agent IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.maintenance_agent IS
     'Anaesthetic maintenance agent(s) used.';
-COMMENT ON COLUMN medical_operation_note.neuromuscular_blockade IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.neuromuscular_blockade IS
     'Neuromuscular blocking agent(s) used.';
-COMMENT ON COLUMN medical_operation_note.regional_block_description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.regional_block_description IS
     'Regional or neuraxial block details, if performed.';
-COMMENT ON COLUMN medical_operation_note.invasive_monitoring IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.invasive_monitoring IS
     'Invasive monitoring lines: arterial, CVC, PA, cardiac output, others.';
-COMMENT ON COLUMN medical_operation_note.intraop_crystalloid_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.intraop_crystalloid_ml IS
     'Intra-operative crystalloid given in mL.';
-COMMENT ON COLUMN medical_operation_note.intraop_colloid_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.intraop_colloid_ml IS
     'Intra-operative colloid given in mL.';
-COMMENT ON COLUMN medical_operation_note.intraop_blood_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.intraop_blood_ml IS
     'Intra-operative blood products given in mL (sum across components).';
-COMMENT ON COLUMN medical_operation_note.intraop_urine_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.intraop_urine_ml IS
     'Intra-operative urine output in mL.';
-COMMENT ON COLUMN medical_operation_note.anaesthetic_event IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.anaesthetic_event IS
     'Most significant intra-operative anaesthetic event, if any.';
-COMMENT ON COLUMN medical_operation_note.anaesthetic_event_description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.anaesthetic_event_description IS
     'Free-text description of the anaesthetic event.';
-COMMENT ON COLUMN medical_operation_note.patient_position IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.patient_position IS
     'Patient position on the operating table.';
-COMMENT ON COLUMN medical_operation_note.pressure_area_protection_notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.pressure_area_protection_notes IS
     'Notes on pressure-area protection and padding used.';
-COMMENT ON COLUMN medical_operation_note.prep_solution IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.prep_solution IS
     'Skin preparation solution used.';
-COMMENT ON COLUMN medical_operation_note.drape_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.drape_type IS
     'Drape type and arrangement used.';
-COMMENT ON COLUMN medical_operation_note.surgical_approach IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.surgical_approach IS
     'Surgical approach: open, laparoscopic, robotic, endoscopic, arthroscopic, thoracoscopic, percutaneous, transluminal, or other.';
-COMMENT ON COLUMN medical_operation_note.incision_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.incision_type IS
     'Incision type and location (e.g. midline laparotomy, Pfannenstiel, lateral).';
-COMMENT ON COLUMN medical_operation_note.incision_length_cm IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.incision_length_cm IS
     'Incision length in centimetres.';
-COMMENT ON COLUMN medical_operation_note.table_tilt IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.table_tilt IS
     'Table tilt used during the procedure.';
-COMMENT ON COLUMN medical_operation_note.tourniquet_used IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.tourniquet_used IS
     'Whether a tourniquet was used.';
-COMMENT ON COLUMN medical_operation_note.tourniquet_site IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.tourniquet_site IS
     'Tourniquet site on the limb.';
-COMMENT ON COLUMN medical_operation_note.tourniquet_pressure_mmhg IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.tourniquet_pressure_mmhg IS
     'Tourniquet inflation pressure in mmHg.';
-COMMENT ON COLUMN medical_operation_note.tourniquet_on_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.tourniquet_on_at IS
     'Timestamp tourniquet was inflated.';
-COMMENT ON COLUMN medical_operation_note.tourniquet_off_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.tourniquet_off_at IS
     'Timestamp tourniquet was deflated.';
-COMMENT ON COLUMN medical_operation_note.converted_to_open IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.converted_to_open IS
     'Whether a minimally-invasive case was converted to open.';
-COMMENT ON COLUMN medical_operation_note.conversion_reason IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.conversion_reason IS
     'Reason a minimally-invasive case was converted to open.';
-COMMENT ON COLUMN medical_operation_note.operative_findings_summary IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.operative_findings_summary IS
     'Free-text summary of operative findings (the narrative; numbered steps are in medical_operation_note_step).';
-COMMENT ON COLUMN medical_operation_note.pathology_found IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.pathology_found IS
     'Significant pathology encountered intra-operatively.';
-COMMENT ON COLUMN medical_operation_note.anatomical_anomalies IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.anatomical_anomalies IS
     'Anatomical anomalies encountered intra-operatively.';
-COMMENT ON COLUMN medical_operation_note.intraop_photographs_taken IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.intraop_photographs_taken IS
     'Whether intra-operative photographs were taken for the record.';
-COMMENT ON COLUMN medical_operation_note.frozen_section_requested IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.frozen_section_requested IS
     'Whether a frozen-section histology request was made.';
-COMMENT ON COLUMN medical_operation_note.swab_count_first_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.swab_count_first_agreed IS
     'Whether the first (initial) swab count was agreed between scrub and circulating staff.';
-COMMENT ON COLUMN medical_operation_note.swab_count_final_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.swab_count_final_agreed IS
     'Whether the final (closing) swab count was agreed.';
-COMMENT ON COLUMN medical_operation_note.needle_count_first_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.needle_count_first_agreed IS
     'Whether the first needle count was agreed.';
-COMMENT ON COLUMN medical_operation_note.needle_count_final_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.needle_count_final_agreed IS
     'Whether the final needle count was agreed.';
-COMMENT ON COLUMN medical_operation_note.instrument_count_first_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.instrument_count_first_agreed IS
     'Whether the first instrument count was agreed.';
-COMMENT ON COLUMN medical_operation_note.instrument_count_final_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.instrument_count_final_agreed IS
     'Whether the final instrument count was agreed.';
-COMMENT ON COLUMN medical_operation_note.count_discrepancy_resolution IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.count_discrepancy_resolution IS
     'Free-text record of how any count discrepancy was investigated and resolved.';
-COMMENT ON COLUMN medical_operation_note.estimated_blood_loss_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.estimated_blood_loss_ml IS
     'Estimated intra-operative blood loss in millilitres.';
-COMMENT ON COLUMN medical_operation_note.transfusion_given IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.transfusion_given IS
     'Whether any blood product transfusion was given intra-operatively.';
-COMMENT ON COLUMN medical_operation_note.prbc_units IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.prbc_units IS
     'Units of packed red blood cells transfused.';
-COMMENT ON COLUMN medical_operation_note.ffp_units IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.ffp_units IS
     'Units of fresh frozen plasma transfused.';
-COMMENT ON COLUMN medical_operation_note.platelet_units IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.platelet_units IS
     'Units of platelets transfused.';
-COMMENT ON COLUMN medical_operation_note.cryoprecipitate_units IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.cryoprecipitate_units IS
     'Units of cryoprecipitate transfused.';
-COMMENT ON COLUMN medical_operation_note.cell_salvage_ml IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.cell_salvage_ml IS
     'Volume of cell-salvaged blood returned to the patient in millilitres.';
-COMMENT ON COLUMN medical_operation_note.massive_haemorrhage_protocol_activated IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.massive_haemorrhage_protocol_activated IS
     'Whether the hospital massive haemorrhage protocol was activated.';
-COMMENT ON COLUMN medical_operation_note.never_event_flagged IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.never_event_flagged IS
     'Whether a never-event candidate (wrong site, wrong procedure, wrong implant, retained foreign object) was flagged.';
-COMMENT ON COLUMN medical_operation_note.never_event_description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.never_event_description IS
     'Free-text description of the never-event candidate.';
-COMMENT ON COLUMN medical_operation_note.equipment_problem IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.equipment_problem IS
     'Whether an equipment failure or sterility breach occurred.';
-COMMENT ON COLUMN medical_operation_note.equipment_problem_description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.equipment_problem_description IS
     'Free-text description of the equipment problem.';
-COMMENT ON COLUMN medical_operation_note.recovery_destination IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.recovery_destination IS
     'Post-operative destination: pacu, ward, enhanced-care, hdu, icu, or day-case-discharge.';
-COMMENT ON COLUMN medical_operation_note.monitoring_frequency IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.monitoring_frequency IS
     'Post-operative monitoring frequency instructions.';
-COMMENT ON COLUMN medical_operation_note.iv_fluids_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.iv_fluids_plan IS
     'Post-operative IV fluid prescription (type and rate).';
-COMMENT ON COLUMN medical_operation_note.analgesia_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.analgesia_plan IS
     'Post-operative analgesia plan.';
-COMMENT ON COLUMN medical_operation_note.antibiotic_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.antibiotic_plan IS
     'Post-operative antibiotic plan.';
-COMMENT ON COLUMN medical_operation_note.vte_prophylaxis_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.vte_prophylaxis_plan IS
     'Post-operative venous thromboembolism prophylaxis plan.';
-COMMENT ON COLUMN medical_operation_note.diet_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.diet_plan IS
     'Post-operative diet plan: nbm, sips, fluids, soft, normal, or as-tolerated.';
-COMMENT ON COLUMN medical_operation_note.mobilisation_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.mobilisation_plan IS
     'Post-operative mobilisation instructions.';
-COMMENT ON COLUMN medical_operation_note.wound_care_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.wound_care_plan IS
     'Wound care, dressing change, and suture removal plan.';
-COMMENT ON COLUMN medical_operation_note.follow_up_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.follow_up_plan IS
     'Outpatient follow-up plan.';
-COMMENT ON COLUMN medical_operation_note.special_instructions IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.special_instructions IS
     'Free-text special instructions for the receiving team.';
-COMMENT ON COLUMN medical_operation_note.sign_out_completed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.sign_out_completed IS
     'Whether the WHO Sign-Out was completed before the team left theatre.';
-COMMENT ON COLUMN medical_operation_note.debrief_completed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.debrief_completed IS
     'Whether a team debrief was held at the end of the case.';
-COMMENT ON COLUMN medical_operation_note.surgeon_override_grade IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.surgeon_override_grade IS
     'Lead surgeon override of the computed composite risk grade, if applied.';
-COMMENT ON COLUMN medical_operation_note.surgeon_override_reason IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.surgeon_override_reason IS
     'Reason for the surgeon override of the computed composite risk grade.';
-COMMENT ON COLUMN medical_operation_note.attestation_text IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.attestation_text IS
     'Final attestation statement entered by the surgeon at sign-off.';
-COMMENT ON COLUMN medical_operation_note.electronic_signature IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.electronic_signature IS
     'Electronic signature string for the signed note.';
-COMMENT ON COLUMN medical_operation_note.dictated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.dictated_at IS
     'Timestamp the note was dictated.';
-COMMENT ON COLUMN medical_operation_note.signed_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note.signed_at IS
     'Timestamp the note was electronically signed.';
 
 CREATE INDEX medical_operation_note_patient_id_idx
-    ON medical_operation_note (patient_id);
+    ON medical_operation_note.medical_operation_note (patient_id);
 CREATE INDEX medical_operation_note_lead_surgeon_id_idx
-    ON medical_operation_note (lead_surgeon_id);
+    ON medical_operation_note.medical_operation_note (lead_surgeon_id);
 CREATE INDEX medical_operation_note_status_idx
-    ON medical_operation_note (status);
+    ON medical_operation_note.medical_operation_note (status);
 
 -- ========================================================================
 -- END 04_create_table_medical_operation_note.sql
@@ -551,14 +568,14 @@ CREATE INDEX medical_operation_note_status_idx
 -- table captures the full team (assistants, anaesthetist, ODP, scrub
 -- nurse, circulating nurse, students).
 
-CREATE TABLE medical_operation_note_team_member (
+CREATE TABLE medical_operation_note.medical_operation_note_team_member (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE RESTRICT,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES medical_operation_note.clinician(id) ON DELETE RESTRICT,
     team_role VARCHAR(40) NOT NULL DEFAULT '' CHECK (team_role IN ('lead-surgeon', 'first-assistant', 'second-assistant', 'lead-anaesthetist', 'anaesthetic-assistant', 'odp', 'scrub-nurse', 'circulating-nurse', 'theatre-coordinator', 'medical-student', 'observer', '')),
     arrived_at TIMESTAMPTZ,
     left_at TIMESTAMPTZ,
@@ -566,37 +583,37 @@ CREATE TABLE medical_operation_note_team_member (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_team_member_updated_at
-    BEFORE UPDATE ON medical_operation_note_team_member
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_team_member
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_team_member IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_team_member IS
     'Members of the operating team for an operation note: clinician plus team role and time present.';
-COMMENT ON COLUMN medical_operation_note_team_member.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_team_member.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_team_member.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_team_member.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_team_member.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_team_member.clinician_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.clinician_id IS
     'Foreign key to the clinician filling this team role.';
-COMMENT ON COLUMN medical_operation_note_team_member.team_role IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.team_role IS
     'Role of this clinician on this case: lead-surgeon, first-assistant, second-assistant, lead-anaesthetist, anaesthetic-assistant, odp, scrub-nurse, circulating-nurse, theatre-coordinator, medical-student, or observer.';
-COMMENT ON COLUMN medical_operation_note_team_member.arrived_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.arrived_at IS
     'Timestamp the team member arrived in theatre for this case.';
-COMMENT ON COLUMN medical_operation_note_team_member.left_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.left_at IS
     'Timestamp the team member left theatre for this case (e.g. shift change).';
-COMMENT ON COLUMN medical_operation_note_team_member.notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_team_member.notes IS
     'Free-text notes (e.g. handover details, supervision arrangement).';
 
 CREATE INDEX medical_operation_note_team_member_note_id_idx
-    ON medical_operation_note_team_member (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_team_member (medical_operation_note_id);
 CREATE INDEX medical_operation_note_team_member_clinician_id_idx
-    ON medical_operation_note_team_member (clinician_id);
+    ON medical_operation_note.medical_operation_note_team_member (clinician_id);
 
 -- ========================================================================
 -- END 05_create_table_medical_operation_note_team_member.sql
@@ -610,13 +627,13 @@ CREATE INDEX medical_operation_note_team_member_clinician_id_idx
 -- can be performed in a single case; each row records one procedure
 -- with its OPCS-4 code, free-text name, and role (primary or secondary).
 
-CREATE TABLE medical_operation_note_procedure (
+CREATE TABLE medical_operation_note.medical_operation_note_procedure (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     role VARCHAR(20) NOT NULL DEFAULT '' CHECK (role IN ('planned-primary', 'planned-secondary', 'performed-primary', 'performed-secondary', 'unplanned', '')),
     opcs4_code VARCHAR(10) NOT NULL DEFAULT '',
@@ -627,37 +644,37 @@ CREATE TABLE medical_operation_note_procedure (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_procedure_updated_at
-    BEFORE UPDATE ON medical_operation_note_procedure
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_procedure
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_procedure IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_procedure IS
     'Planned and performed procedures linked to an operation note, with OPCS-4 coding and role (primary, secondary, unplanned).';
-COMMENT ON COLUMN medical_operation_note_procedure.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_procedure.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_procedure.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_procedure.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_procedure.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_procedure.role IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.role IS
     'Procedure role: planned-primary, planned-secondary, performed-primary, performed-secondary, or unplanned.';
-COMMENT ON COLUMN medical_operation_note_procedure.opcs4_code IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.opcs4_code IS
     'NHS Digital OPCS-4 procedure classification code.';
-COMMENT ON COLUMN medical_operation_note_procedure.name IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.name IS
     'Short procedure name.';
-COMMENT ON COLUMN medical_operation_note_procedure.description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.description IS
     'Free-text procedure description.';
-COMMENT ON COLUMN medical_operation_note_procedure.laterality IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.laterality IS
     'Procedure laterality: left, right, bilateral, midline, or na.';
-COMMENT ON COLUMN medical_operation_note_procedure.sequence_index IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_procedure.sequence_index IS
     'Sequence order within the case (0-based).';
 
 CREATE INDEX medical_operation_note_procedure_note_id_idx
-    ON medical_operation_note_procedure (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_procedure (medical_operation_note_id);
 
 -- ========================================================================
 -- END 06_create_table_medical_operation_note_procedure.sql
@@ -672,13 +689,13 @@ CREATE INDEX medical_operation_note_procedure_note_id_idx
 -- prepped in a sterile fashion", "Pfannenstiel incision made and rectus
 -- sheath opened", "Hemostasis achieved with bipolar diathermy".
 
-CREATE TABLE medical_operation_note_step (
+CREATE TABLE medical_operation_note.medical_operation_note_step (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     step_number INTEGER NOT NULL CHECK (step_number > 0),
     title VARCHAR(255) NOT NULL DEFAULT '',
@@ -686,30 +703,30 @@ CREATE TABLE medical_operation_note_step (
 );
 
 CREATE UNIQUE INDEX medical_operation_note_step_note_id_step_number_idx
-    ON medical_operation_note_step (medical_operation_note_id, step_number);
+    ON medical_operation_note.medical_operation_note_step (medical_operation_note_id, step_number);
 
 CREATE TRIGGER trigger_medical_operation_note_step_updated_at
-    BEFORE UPDATE ON medical_operation_note_step
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_step
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_step IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_step IS
     'Numbered free-text operative technique steps for an operation note.';
-COMMENT ON COLUMN medical_operation_note_step.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_step.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_step.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_step.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_step.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_step.step_number IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.step_number IS
     'Step ordinal within the case (1-based).';
-COMMENT ON COLUMN medical_operation_note_step.title IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.title IS
     'Short step title (e.g. "Incision", "Mobilisation", "Closure").';
-COMMENT ON COLUMN medical_operation_note_step.description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_step.description IS
     'Free-text description of what was done at this step.';
 
 -- ========================================================================
@@ -725,13 +742,13 @@ COMMENT ON COLUMN medical_operation_note_step.description IS
 -- regulatory traceability data (lot, serial, batch, expiry, manufacturer,
 -- registry submission status).
 
-CREATE TABLE medical_operation_note_implant (
+CREATE TABLE medical_operation_note.medical_operation_note_implant (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     category VARCHAR(30) NOT NULL DEFAULT '' CHECK (category IN ('suture', 'staple', 'clip', 'mesh', 'screw', 'plate', 'rod', 'pin', 'wire', 'prosthetic-joint', 'cardiac-device', 'vascular-graft', 'stent', 'lens', 'cochlear-implant', 'breast-implant', 'pacemaker', 'icd', 'other', '')),
     name VARCHAR(255) NOT NULL DEFAULT '',
@@ -750,53 +767,53 @@ CREATE TABLE medical_operation_note_implant (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_implant_updated_at
-    BEFORE UPDATE ON medical_operation_note_implant
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_implant
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_implant IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_implant IS
     'Implants, prostheses, sutures, and other materials applied to or left in the patient during a procedure, with regulatory traceability.';
-COMMENT ON COLUMN medical_operation_note_implant.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_implant.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_implant.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_implant.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_implant.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_implant.category IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.category IS
     'Implant or material category: suture, staple, clip, mesh, screw, plate, rod, pin, wire, prosthetic-joint, cardiac-device, vascular-graft, stent, lens, cochlear-implant, breast-implant, pacemaker, icd, or other.';
-COMMENT ON COLUMN medical_operation_note_implant.name IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.name IS
     'Item product name.';
-COMMENT ON COLUMN medical_operation_note_implant.size_or_gauge IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.size_or_gauge IS
     'Item size, gauge, or dimensions.';
-COMMENT ON COLUMN medical_operation_note_implant.quantity IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.quantity IS
     'Quantity used (positive integer).';
-COMMENT ON COLUMN medical_operation_note_implant.manufacturer IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.manufacturer IS
     'Item manufacturer.';
-COMMENT ON COLUMN medical_operation_note_implant.lot_number IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.lot_number IS
     'Manufacturer lot number for traceability.';
-COMMENT ON COLUMN medical_operation_note_implant.serial_number IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.serial_number IS
     'Manufacturer serial number for unique-instance traceability.';
-COMMENT ON COLUMN medical_operation_note_implant.batch_number IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.batch_number IS
     'Manufacturer batch number.';
-COMMENT ON COLUMN medical_operation_note_implant.expiry_date IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.expiry_date IS
     'Item expiry date.';
-COMMENT ON COLUMN medical_operation_note_implant.udi_di IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.udi_di IS
     'Unique Device Identifier (UDI-DI) for regulated medical devices.';
-COMMENT ON COLUMN medical_operation_note_implant.implant_site IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.implant_site IS
     'Anatomical site where the implant was placed.';
-COMMENT ON COLUMN medical_operation_note_implant.registry_required IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.registry_required IS
     'Whether submission to a national implant registry (e.g. NJR, BCIS) is required.';
-COMMENT ON COLUMN medical_operation_note_implant.registry_submitted IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.registry_submitted IS
     'Whether registry submission has been completed.';
-COMMENT ON COLUMN medical_operation_note_implant.notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_implant.notes IS
     'Free-text notes about the implant or its placement.';
 
 CREATE INDEX medical_operation_note_implant_note_id_idx
-    ON medical_operation_note_implant (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_implant (medical_operation_note_id);
 
 -- ========================================================================
 -- END 08_create_table_medical_operation_note_implant.sql
@@ -810,13 +827,13 @@ CREATE INDEX medical_operation_note_implant_note_id_idx
 -- in situ at the end of the procedure, with site, output target, and
 -- planned removal.
 
-CREATE TABLE medical_operation_note_drain (
+CREATE TABLE medical_operation_note.medical_operation_note_drain (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     device_type VARCHAR(40) NOT NULL DEFAULT '' CHECK (device_type IN ('closed-suction', 'open-corrugated', 'jackson-pratt', 'penrose', 'redivac', 'chest-drain', 'pack', 'urinary-catheter', 'suprapubic-catheter', 'ng-tube', 'rectal-tube', 'biliary-drain', 'pigtail', 'other', '')),
     name VARCHAR(255) NOT NULL DEFAULT '',
@@ -830,43 +847,43 @@ CREATE TABLE medical_operation_note_drain (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_drain_updated_at
-    BEFORE UPDATE ON medical_operation_note_drain
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_drain
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_drain IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_drain IS
     'Drains, packs, urinary catheters, NG tubes, and other devices left in situ at the end of the procedure.';
-COMMENT ON COLUMN medical_operation_note_drain.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_drain.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_drain.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_drain.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_drain.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_drain.device_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.device_type IS
     'Device type: closed-suction, open-corrugated, jackson-pratt, penrose, redivac, chest-drain, pack, urinary-catheter, suprapubic-catheter, ng-tube, rectal-tube, biliary-drain, pigtail, or other.';
-COMMENT ON COLUMN medical_operation_note_drain.name IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.name IS
     'Device product name or short description.';
-COMMENT ON COLUMN medical_operation_note_drain.site IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.site IS
     'Anatomical site or insertion location.';
-COMMENT ON COLUMN medical_operation_note_drain.size_or_gauge IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.size_or_gauge IS
     'Device size, French gauge, or dimensions.';
-COMMENT ON COLUMN medical_operation_note_drain.output_target IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.output_target IS
     'Expected output character (serous, sanguineous, biliary, faecal, urine) and volume range.';
-COMMENT ON COLUMN medical_operation_note_drain.removal_plan IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.removal_plan IS
     'Planned criteria for removal (e.g. "remove when < 30 mL/24h").';
-COMMENT ON COLUMN medical_operation_note_drain.removal_by_date IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.removal_by_date IS
     'Date by which the device should be removed (e.g. pack removal-by deadline).';
-COMMENT ON COLUMN medical_operation_note_drain.quantity IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.quantity IS
     'Quantity of devices placed (positive integer).';
-COMMENT ON COLUMN medical_operation_note_drain.notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_drain.notes IS
     'Free-text notes about the device.';
 
 CREATE INDEX medical_operation_note_drain_note_id_idx
-    ON medical_operation_note_drain (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_drain (medical_operation_note_id);
 
 -- ========================================================================
 -- END 09_create_table_medical_operation_note_drain.sql
@@ -881,13 +898,13 @@ CREATE INDEX medical_operation_note_drain_note_id_idx
 -- storage. Each row identifies one specimen with its container,
 -- fixative, destination, and urgency.
 
-CREATE TABLE medical_operation_note_specimen (
+CREATE TABLE medical_operation_note.medical_operation_note_specimen (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     label VARCHAR(255) NOT NULL DEFAULT '',
     specimen_type VARCHAR(30) NOT NULL DEFAULT '' CHECK (specimen_type IN ('tissue', 'fluid', 'pus', 'swab', 'bone', 'stone', 'foreign-body', 'biopsy', 'resection', 'other', '')),
@@ -902,45 +919,45 @@ CREATE TABLE medical_operation_note_specimen (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_specimen_updated_at
-    BEFORE UPDATE ON medical_operation_note_specimen
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_specimen
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_specimen IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_specimen IS
     'Specimens sent from theatre with container, fixative, destination, urgency, and labelling/chain-of-custody status.';
-COMMENT ON COLUMN medical_operation_note_specimen.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_specimen.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_specimen.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_specimen.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_specimen.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_specimen.label IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.label IS
     'Specimen label as written on the container.';
-COMMENT ON COLUMN medical_operation_note_specimen.specimen_type IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.specimen_type IS
     'Specimen type: tissue, fluid, pus, swab, bone, stone, foreign-body, biopsy, resection, or other.';
-COMMENT ON COLUMN medical_operation_note_specimen.anatomical_site IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.anatomical_site IS
     'Anatomical site of origin.';
-COMMENT ON COLUMN medical_operation_note_specimen.container IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.container IS
     'Container: histology-pot, csf-bottle, sterile-pot, culture-bottle, cytology-fluid, frozen-section-bag, biobank-tube, or other.';
-COMMENT ON COLUMN medical_operation_note_specimen.fixative IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.fixative IS
     'Fixative: formalin, saline, rpmi, cytology-fixative, none-fresh, liquid-nitrogen, or other.';
-COMMENT ON COLUMN medical_operation_note_specimen.destination IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.destination IS
     'Destination laboratory: histopathology, microbiology, cytology, frozen-section, biobank, research, or other.';
-COMMENT ON COLUMN medical_operation_note_specimen.urgency IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.urgency IS
     'Specimen urgency: routine, urgent, frozen-section, or mdt.';
-COMMENT ON COLUMN medical_operation_note_specimen.label_verified IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.label_verified IS
     'Whether the label was read back and verified at the trolley before leaving theatre.';
-COMMENT ON COLUMN medical_operation_note_specimen.chain_of_custody_documented IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.chain_of_custody_documented IS
     'Whether the chain-of-custody paperwork was completed.';
-COMMENT ON COLUMN medical_operation_note_specimen.notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_specimen.notes IS
     'Free-text notes about the specimen or its handling.';
 
 CREATE INDEX medical_operation_note_specimen_note_id_idx
-    ON medical_operation_note_specimen (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_specimen (medical_operation_note_id);
 
 -- ========================================================================
 -- END 10_create_table_medical_operation_note_specimen.sql
@@ -953,13 +970,13 @@ CREATE INDEX medical_operation_note_specimen_note_id_idx
 -- Intra-operative complications encountered during the procedure,
 -- classified by Clavien-Dindo and described in free text.
 
-CREATE TABLE medical_operation_note_complication (
+CREATE TABLE medical_operation_note.medical_operation_note_complication (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+    medical_operation_note_id UUID NOT NULL REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     category VARCHAR(40) NOT NULL DEFAULT '' CHECK (category IN ('haemorrhage', 'visceral-injury', 'vascular-injury', 'nerve-injury', 'cardiac-arrhythmia', 'cardiac-arrest', 'respiratory-arrest', 'anaesthetic', 'positioning-pressure', 'infection-suspected', 'equipment-failure', 'medication-error', 'other', '')),
     description TEXT NOT NULL DEFAULT '',
@@ -971,39 +988,39 @@ CREATE TABLE medical_operation_note_complication (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_complication_updated_at
-    BEFORE UPDATE ON medical_operation_note_complication
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_complication
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_complication IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_complication IS
     'Intra-operative complications classified by Clavien-Dindo with description, action taken, and governance reporting status.';
-COMMENT ON COLUMN medical_operation_note_complication.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_complication.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_complication.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_complication.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_complication.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.medical_operation_note_id IS
     'Foreign key to the parent operation note.';
-COMMENT ON COLUMN medical_operation_note_complication.category IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.category IS
     'Complication category: haemorrhage, visceral-injury, vascular-injury, nerve-injury, cardiac-arrhythmia, cardiac-arrest, respiratory-arrest, anaesthetic, positioning-pressure, infection-suspected, equipment-failure, medication-error, or other.';
-COMMENT ON COLUMN medical_operation_note_complication.description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.description IS
     'Free-text description of the complication.';
-COMMENT ON COLUMN medical_operation_note_complication.clavien_dindo_grade IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.clavien_dindo_grade IS
     'Clavien-Dindo classification grade: 0, I, II, IIIa, IIIb, IVa, IVb, or V.';
-COMMENT ON COLUMN medical_operation_note_complication.onset_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.onset_at IS
     'Timestamp the complication was identified.';
-COMMENT ON COLUMN medical_operation_note_complication.action_taken IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.action_taken IS
     'Action taken to manage the complication.';
-COMMENT ON COLUMN medical_operation_note_complication.resolved_in_theatre IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.resolved_in_theatre IS
     'Whether the complication was resolved before the patient left theatre.';
-COMMENT ON COLUMN medical_operation_note_complication.reported_to_governance IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_complication.reported_to_governance IS
     'Whether the complication has been entered into the clinical governance / Datix system.';
 
 CREATE INDEX medical_operation_note_complication_note_id_idx
-    ON medical_operation_note_complication (medical_operation_note_id);
+    ON medical_operation_note.medical_operation_note_complication (medical_operation_note_id);
 
 -- ========================================================================
 -- END 11_create_table_medical_operation_note_complication.sql
@@ -1017,14 +1034,14 @@ CREATE INDEX medical_operation_note_complication_note_id_idx
 -- the engine-computed composite risk grade and the surgeon-final grade
 -- with an override reason.
 
-CREATE TABLE medical_operation_note_grade (
+CREATE TABLE medical_operation_note.medical_operation_note_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_operation_note_id UUID NOT NULL UNIQUE
-        REFERENCES medical_operation_note(id) ON DELETE CASCADE,
+        REFERENCES medical_operation_note.medical_operation_note(id) ON DELETE CASCADE,
 
     computed_composite_risk VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (computed_composite_risk IN ('routine', 'complicated', 'high-risk', 'critical', '')),
@@ -1051,45 +1068,45 @@ CREATE TABLE medical_operation_note_grade (
 );
 
 CREATE TRIGGER trigger_medical_operation_note_grade_updated_at
-    BEFORE UPDATE ON medical_operation_note_grade
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_grade IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_grade IS
     'Computed and signed-off operative-risk grading result. Stores both the engine-computed composite risk grade and the surgeon-final grade with an override reason.';
-COMMENT ON COLUMN medical_operation_note_grade.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_grade.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_grade.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_grade.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_grade.medical_operation_note_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.medical_operation_note_id IS
     'Foreign key to the parent operation note (unique, 1:1).';
-COMMENT ON COLUMN medical_operation_note_grade.computed_composite_risk IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.computed_composite_risk IS
     'Composite operative risk computed by the engine from operative-team data.';
-COMMENT ON COLUMN medical_operation_note_grade.final_composite_risk IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.final_composite_risk IS
     'Composite operative risk signed off by the surgeon (may equal or differ from computed).';
-COMMENT ON COLUMN medical_operation_note_grade.override_reason IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.override_reason IS
     'Reason the surgeon set final differently from computed (mandatory when they differ).';
-COMMENT ON COLUMN medical_operation_note_grade.worst_clavien_dindo_grade IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.worst_clavien_dindo_grade IS
     'Worst Clavien-Dindo grade across all complications recorded for this case.';
-COMMENT ON COLUMN medical_operation_note_grade.asa_physical_status IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.asa_physical_status IS
     'ASA Physical Status carried over from pre-op assessment.';
-COMMENT ON COLUMN medical_operation_note_grade.blood_loss_band IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.blood_loss_band IS
     'Blood loss band: minimal (<= 100 mL), mild (101-500 mL), moderate (501-1500 mL), severe (1501-3000 mL), massive (> 3000 mL).';
-COMMENT ON COLUMN medical_operation_note_grade.counts_agreed IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.counts_agreed IS
     'Whether swab, needle, and instrument final counts were all agreed.';
-COMMENT ON COLUMN medical_operation_note_grade.never_event_suspected IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.never_event_suspected IS
     'Whether any never-event candidate is suspected.';
-COMMENT ON COLUMN medical_operation_note_grade.recommendation IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.recommendation IS
     'Overall recommendation: routine-recovery, enhanced-monitoring, critical-care, urgent-review, or datix-required.';
-COMMENT ON COLUMN medical_operation_note_grade.surgeon_notes IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.surgeon_notes IS
     'Free-text surgeon summary notes for the report.';
-COMMENT ON COLUMN medical_operation_note_grade.signed_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.signed_at IS
     'Timestamp of surgeon electronic signature on the grade.';
-COMMENT ON COLUMN medical_operation_note_grade.graded_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -1105,14 +1122,14 @@ COMMENT ON COLUMN medical_operation_note_grade.graded_at IS
 -- that produced it, the band it contributed, and a human-readable
 -- description.
 
-CREATE TABLE medical_operation_note_grade_rule (
+CREATE TABLE medical_operation_note.medical_operation_note_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_operation_note_grade_id UUID NOT NULL
-        REFERENCES medical_operation_note_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_operation_note.medical_operation_note_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     instrument VARCHAR(30) NOT NULL
@@ -1124,34 +1141,34 @@ CREATE TABLE medical_operation_note_grade_rule (
 );
 
 CREATE INDEX medical_operation_note_grade_rule_grade_id_idx
-    ON medical_operation_note_grade_rule (medical_operation_note_grade_id);
+    ON medical_operation_note.medical_operation_note_grade_rule (medical_operation_note_grade_id);
 
 CREATE TRIGGER trigger_medical_operation_note_grade_rule_updated_at
-    BEFORE UPDATE ON medical_operation_note_grade_rule
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_grade_rule IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_grade_rule IS
     'Audit trail of every grading rule that fired during composite-risk computation: instrument, band, category, and description.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.medical_operation_note_grade_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.medical_operation_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.rule_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-BLOOD-LOSS-MASSIVE-01).';
-COMMENT ON COLUMN medical_operation_note_grade_rule.instrument IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.instrument IS
     'Scoring instrument the rule belongs to: blood-loss, transfusion, clavien-dindo, counts, never-event, anaesthetic-event, conversion, asa, or composite.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.band IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.band IS
     'Composite-risk band contributed by this rule: routine, complicated, high-risk, or critical.';
-COMMENT ON COLUMN medical_operation_note_grade_rule.category IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.category IS
     'Subject category (e.g. haemorrhage, count-discrepancy, anaesthetic-incident).';
-COMMENT ON COLUMN medical_operation_note_grade_rule.description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -1166,14 +1183,14 @@ COMMENT ON COLUMN medical_operation_note_grade_rule.description IS
 -- grade, with priority and a suggested action for the recovery /
 -- governance team.
 
-CREATE TABLE medical_operation_note_grade_flag (
+CREATE TABLE medical_operation_note.medical_operation_note_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     medical_operation_note_grade_id UUID NOT NULL
-        REFERENCES medical_operation_note_grade(id) ON DELETE CASCADE,
+        REFERENCES medical_operation_note.medical_operation_note_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -1207,34 +1224,34 @@ CREATE TABLE medical_operation_note_grade_flag (
 );
 
 CREATE INDEX medical_operation_note_grade_flag_grade_id_idx
-    ON medical_operation_note_grade_flag (medical_operation_note_grade_id);
+    ON medical_operation_note.medical_operation_note_grade_flag (medical_operation_note_grade_id);
 
 CREATE TRIGGER trigger_medical_operation_note_grade_flag_updated_at
-    BEFORE UPDATE ON medical_operation_note_grade_flag
+    BEFORE UPDATE ON medical_operation_note.medical_operation_note_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION medical_operation_note.set_updated_at();
 
-COMMENT ON TABLE medical_operation_note_grade_flag IS
+COMMENT ON TABLE medical_operation_note.medical_operation_note_grade_flag IS
     'Safety-critical flags that fire independently of the composite-risk grade, with priority and a suggested action for the recovery and governance team.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.created_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.updated_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.deleted_at IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.medical_operation_note_grade_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.medical_operation_note_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.flag_id IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-RETAINED-FOREIGN-BODY-001).';
-COMMENT ON COLUMN medical_operation_note_grade_flag.category IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.category IS
     'Flag category (see CHECK constraint for enumeration).';
-COMMENT ON COLUMN medical_operation_note_grade_flag.priority IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.description IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN medical_operation_note_grade_flag.suggested_action IS
+COMMENT ON COLUMN medical_operation_note.medical_operation_note_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "submit Datix report", "x-ray to exclude retained item").';
 
 -- ========================================================================

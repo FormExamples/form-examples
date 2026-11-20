@@ -1,7 +1,7 @@
 -- The attorney, social worker, or facility staff member who reviews the
 -- directive for execution readiness.
 
-CREATE TABLE reviewer (
+CREATE TABLE united_states_health_care_power_of_attorney.reviewer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -14,27 +14,27 @@ CREATE TABLE reviewer (
 );
 
 CREATE TRIGGER trigger_reviewer_updated_at
-    BEFORE UPDATE ON reviewer
+    BEFORE UPDATE ON united_states_health_care_power_of_attorney.reviewer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_health_care_power_of_attorney.set_updated_at();
 
-COMMENT ON TABLE reviewer IS
+COMMENT ON TABLE united_states_health_care_power_of_attorney.reviewer IS
     'Reviewer: the attorney, social worker, or facility staff member who reviews the directive for execution readiness.';
-COMMENT ON COLUMN reviewer.id IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN reviewer.created_at IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN reviewer.updated_at IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN reviewer.deleted_at IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN reviewer.name IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.name IS
     'Full name of the reviewer.';
-COMMENT ON COLUMN reviewer.email IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.email IS
     'Email address.';
-COMMENT ON COLUMN reviewer.phone IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.phone IS
     'Phone number.';
-COMMENT ON COLUMN reviewer.role IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.role IS
     'Reviewer role: attorney, paralegal, social-worker, nurse, chaplain, or other.';
-COMMENT ON COLUMN reviewer.bar_or_license_number IS
+COMMENT ON COLUMN united_states_health_care_power_of_attorney.reviewer.bar_or_license_number IS
     'State bar or professional license number, where applicable.';

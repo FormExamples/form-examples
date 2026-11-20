@@ -1,13 +1,13 @@
 -- Computed interpretation grade for a biopsy result (four-axis engine).
 
-CREATE TABLE biopsy_test_result_grade (
+CREATE TABLE biopsy_test_result.biopsy_test_result_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     biopsy_test_result_id UUID NOT NULL UNIQUE
-        REFERENCES biopsy_test_result(id) ON DELETE CASCADE,
+        REFERENCES biopsy_test_result.biopsy_test_result(id) ON DELETE CASCADE,
 
     -- Axis A: result classification
     result_classification VARCHAR(15) NOT NULL DEFAULT ''
@@ -36,41 +36,41 @@ CREATE TABLE biopsy_test_result_grade (
 );
 
 CREATE TRIGGER trigger_biopsy_test_result_grade_updated_at
-    BEFORE UPDATE ON biopsy_test_result_grade
+    BEFORE UPDATE ON biopsy_test_result.biopsy_test_result_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION biopsy_test_result.set_updated_at();
 
-COMMENT ON TABLE biopsy_test_result_grade IS
+COMMENT ON TABLE biopsy_test_result.biopsy_test_result_grade IS
     'Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. unexpected malignancy or an involved resection margin) auto-escalates the follow-up urgency to critical-alert regardless of the other axes.';
-COMMENT ON COLUMN biopsy_test_result_grade.id IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN biopsy_test_result_grade.created_at IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN biopsy_test_result_grade.updated_at IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN biopsy_test_result_grade.deleted_at IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN biopsy_test_result_grade.biopsy_test_result_id IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.biopsy_test_result_id IS
     'Foreign key to the parent result (unique, 1:1).';
-COMMENT ON COLUMN biopsy_test_result_grade.result_classification IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.result_classification IS
     'Axis A overall classification: normal, abnormal, critical, inconclusive.';
-COMMENT ON COLUMN biopsy_test_result_grade.abnormality_severity IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.abnormality_severity IS
     'Axis B abnormality severity: none, minor, moderate, major.';
-COMMENT ON COLUMN biopsy_test_result_grade.reporting_category IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.reporting_category IS
     'Axis B structured-reporting score / category label (e.g. an RCPath cancer-dataset or TNM8 category).';
-COMMENT ON COLUMN biopsy_test_result_grade.report_completeness_percent IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.report_completeness_percent IS
     'Axis C report completeness as a percentage of mandatory report sections (0-100).';
-COMMENT ON COLUMN biopsy_test_result_grade.follow_up_urgency IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.follow_up_urgency IS
     'Axis D follow-up urgency: routine, recommended, urgent, critical-alert.';
-COMMENT ON COLUMN biopsy_test_result_grade.target_timeframe IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.target_timeframe IS
     'Target timeframe for the recommended follow-up implied by the urgency.';
-COMMENT ON COLUMN biopsy_test_result_grade.recommended_action IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.recommended_action IS
     'Axis D concise recommended action derived from the urgency.';
-COMMENT ON COLUMN biopsy_test_result_grade.recommendation IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.recommendation IS
     'Overall recommendation: no-action, routine-follow-up, further-testing, specialist-referral, urgent-mdt.';
-COMMENT ON COLUMN biopsy_test_result_grade.clinician_notes IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.clinician_notes IS
     'Free-text interpretation / sign-off notes.';
-COMMENT ON COLUMN biopsy_test_result_grade.signed_at IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.signed_at IS
     'Timestamp of the reporting clinician electronic signature.';
-COMMENT ON COLUMN biopsy_test_result_grade.graded_at IS
+COMMENT ON COLUMN biopsy_test_result.biopsy_test_result_grade.graded_at IS
     'Timestamp when the engine last computed the result.';

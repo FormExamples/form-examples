@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -30,12 +31,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS dexa_bone_density_test_result;
+
+COMMENT ON SCHEMA dexa_bone_density_test_result IS
+    'Namespace for the DEXA Bone Density Test Result form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION dexa_bone_density_test_result.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -43,7 +60,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION dexa_bone_density_test_result.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -56,7 +73,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE dexa_bone_density_test_result.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -79,54 +96,54 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON dexa_bone_density_test_result.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE dexa_bone_density_test_result.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON dexa_bone_density_test_result.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN dexa_bone_density_test_result.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -139,7 +156,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Reporting clinician (radiologist / consultant / reporting radiographer) information.
 
-CREATE TABLE clinician (
+CREATE TABLE dexa_bone_density_test_result.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -158,43 +175,43 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON dexa_bone_density_test_result.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE dexa_bone_density_test_result.clinician IS
     'Reporting clinician (radiologist, consultant, reporting radiographer, rheumatologist, or endocrinologist) who authors and signs the DEXA bone-density result report.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.role IS
     'Reporting clinician role: radiologist, consultant, reporting-radiographer, rheumatologist, endocrinologist, other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.registration_body IS
     'Clinician registration body: GMC, HCPC, other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN dexa_bone_density_test_result.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON dexa_bone_density_test_result.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -209,14 +226,14 @@ CREATE INDEX clinician_index_gto
 
 -- DEXA (dual-energy X-ray absorptiometry) bone-density result (report) — the source-of-truth record.
 
-CREATE TABLE dexa_bone_density_test_result (
+CREATE TABLE dexa_bone_density_test_result.dexa_bone_density_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES dexa_bone_density_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES dexa_bone_density_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -278,76 +295,76 @@ CREATE TABLE dexa_bone_density_test_result (
 );
 
 CREATE INDEX index_dexa_bone_density_test_result_patient_id
-    ON dexa_bone_density_test_result(patient_id);
+    ON dexa_bone_density_test_result.dexa_bone_density_test_result(patient_id);
 CREATE INDEX index_dexa_bone_density_test_result_clinician_id
-    ON dexa_bone_density_test_result(clinician_id);
+    ON dexa_bone_density_test_result.dexa_bone_density_test_result(clinician_id);
 
 CREATE TRIGGER trigger_dexa_bone_density_test_result_updated_at
-    BEFORE UPDATE ON dexa_bone_density_test_result
+    BEFORE UPDATE ON dexa_bone_density_test_result.dexa_bone_density_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE dexa_bone_density_test_result IS
+COMMENT ON TABLE dexa_bone_density_test_result.dexa_bone_density_test_result IS
     'DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report). Captures the performed examination, the clinical history, the quantitative findings (BMD in g/cm2, T-scores and Z-scores at the lumbar spine, femoral neck, and total hip, plus the lowest T-score), the WHO densitometric classification, FRAX 10-year fracture probabilities, vertebral-fracture identification, comparison with previous DEXA, the impression, and recommended follow-up. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN dexa_bone_density_test_result.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dexa_bone_density_test_result.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN dexa_bone_density_test_result.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN dexa_bone_density_test_result.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN dexa_bone_density_test_result.patient_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN dexa_bone_density_test_result.clinician_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.clinician_id IS
     'Foreign key to the reporting clinician (radiologist / consultant / reporting radiographer / rheumatologist / endocrinologist).';
-COMMENT ON COLUMN dexa_bone_density_test_result.originating_request_reference IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating DEXA scan request (referral).';
-COMMENT ON COLUMN dexa_bone_density_test_result.report_status IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN dexa_bone_density_test_result.performed_date IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.performed_date IS
     'Date the DEXA examination was performed.';
-COMMENT ON COLUMN dexa_bone_density_test_result.reported_date IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN dexa_bone_density_test_result.scan_region IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.scan_region IS
     'Examined DEXA scan region: hip, spine, hip-and-spine, forearm, whole-body, other.';
-COMMENT ON COLUMN dexa_bone_density_test_result.examination_adequacy IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.examination_adequacy IS
     'Diagnostic adequacy of the examination: adequate, limited, non-diagnostic.';
-COMMENT ON COLUMN dexa_bone_density_test_result.clinical_history IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.clinical_history IS
     'Clinical history and the question the examination was performed to answer.';
-COMMENT ON COLUMN dexa_bone_density_test_result.lumbar_spine_t_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.lumbar_spine_t_score IS
     'Lumbar-spine T-score: standard deviations from young-adult reference mean (WHO classification input).';
-COMMENT ON COLUMN dexa_bone_density_test_result.lumbar_spine_z_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.lumbar_spine_z_score IS
     'Lumbar-spine Z-score: standard deviations from age-matched reference mean (used in younger adults / children).';
-COMMENT ON COLUMN dexa_bone_density_test_result.femoral_neck_t_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.femoral_neck_t_score IS
     'Femoral-neck T-score: standard deviations from young-adult reference mean (reference site for WHO classification and FRAX).';
-COMMENT ON COLUMN dexa_bone_density_test_result.femoral_neck_z_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.femoral_neck_z_score IS
     'Femoral-neck Z-score: standard deviations from age-matched reference mean.';
-COMMENT ON COLUMN dexa_bone_density_test_result.total_hip_t_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.total_hip_t_score IS
     'Total-hip T-score: standard deviations from young-adult reference mean.';
-COMMENT ON COLUMN dexa_bone_density_test_result.lowest_t_score IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.lowest_t_score IS
     'Lowest (most negative) T-score across the measured skeletal sites, which drives the WHO classification.';
-COMMENT ON COLUMN dexa_bone_density_test_result.bone_mineral_density_g_cm2 IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.bone_mineral_density_g_cm2 IS
     'Areal bone mineral density (BMD) in g/cm2 at the reference site.';
-COMMENT ON COLUMN dexa_bone_density_test_result.who_classification IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.who_classification IS
     'WHO densitometric classification derived from the lowest T-score: normal, osteopenia, osteoporosis, severe-osteoporosis.';
-COMMENT ON COLUMN dexa_bone_density_test_result.frax_major_fracture_percent IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.frax_major_fracture_percent IS
     'FRAX 10-year major osteoporotic fracture probability as a percentage (0-100).';
-COMMENT ON COLUMN dexa_bone_density_test_result.frax_hip_fracture_percent IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.frax_hip_fracture_percent IS
     'FRAX 10-year hip fracture probability as a percentage (0-100).';
-COMMENT ON COLUMN dexa_bone_density_test_result.vertebral_fracture_identified IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.vertebral_fracture_identified IS
     'Whether one or more vertebral fractures were identified (e.g. on vertebral fracture assessment / lateral spine imaging).';
-COMMENT ON COLUMN dexa_bone_density_test_result.comparison_with_previous IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.comparison_with_previous IS
     'Comparison with the relevant previous DEXA examination.';
-COMMENT ON COLUMN dexa_bone_density_test_result.percent_change_since_previous IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.percent_change_since_previous IS
     'Percentage change in BMD since the previous DEXA (positive = gain, negative = loss), for monitoring.';
-COMMENT ON COLUMN dexa_bone_density_test_result.impression IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN dexa_bone_density_test_result.recommended_follow_up IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.recommended_follow_up IS
     'Recommended follow-up scan interval, referral, or management.';
-COMMENT ON COLUMN dexa_bone_density_test_result.critical_result_communicated IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the referrer.';
-COMMENT ON COLUMN dexa_bone_density_test_result.reported_to IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';
 
 -- ========================================================================
@@ -360,14 +377,14 @@ COMMENT ON COLUMN dexa_bone_density_test_result.reported_to IS
 
 -- Computed interpretation grade for a DEXA bone-density result (four-axis engine).
 
-CREATE TABLE dexa_bone_density_test_result_grade (
+CREATE TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     dexa_bone_density_test_result_id UUID NOT NULL UNIQUE
-        REFERENCES dexa_bone_density_test_result(id) ON DELETE CASCADE,
+        REFERENCES dexa_bone_density_test_result.dexa_bone_density_test_result(id) ON DELETE CASCADE,
 
     -- Axis A: result classification
     result_classification VARCHAR(15) NOT NULL DEFAULT ''
@@ -396,43 +413,43 @@ CREATE TABLE dexa_bone_density_test_result_grade (
 );
 
 CREATE TRIGGER trigger_dexa_bone_density_test_result_grade_updated_at
-    BEFORE UPDATE ON dexa_bone_density_test_result_grade
+    BEFORE UPDATE ON dexa_bone_density_test_result.dexa_bone_density_test_result_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE dexa_bone_density_test_result_grade IS
+COMMENT ON TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade IS
     'Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category (WHO densitometric classification), report completeness, and follow-up urgency. Severe osteoporosis or an identified vertebral fracture auto-escalates the follow-up urgency to urgent / critical-alert regardless of the other axes.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.dexa_bone_density_test_result_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.dexa_bone_density_test_result_id IS
     'Foreign key to the parent result (unique, 1:1).';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.result_classification IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.result_classification IS
     'Axis A overall classification: normal, abnormal, critical, inconclusive.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.abnormality_severity IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.abnormality_severity IS
     'Axis B abnormality severity: none, minor, moderate, major.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.reporting_category IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.reporting_category IS
     'Axis B structured-reporting category label, carrying the WHO densitometric classification (normal / osteopenia / osteoporosis / severe-osteoporosis).';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.report_completeness_percent IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.report_completeness_percent IS
     'Axis C report completeness as a percentage of mandatory report sections (0-100).';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.follow_up_urgency IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.follow_up_urgency IS
     'Axis D follow-up urgency: routine, recommended, urgent, critical-alert.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.target_timeframe IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.target_timeframe IS
     'Target timeframe for the recommended follow-up implied by the urgency.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.recommended_action IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.recommended_action IS
     'Axis D concise recommended action derived from the urgency.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.recommendation IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.recommendation IS
     'Overall recommendation: no-action, routine-follow-up, further-imaging, specialist-referral, urgent-review.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.clinician_notes IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.clinician_notes IS
     'Free-text interpretation / sign-off notes.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.signed_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.signed_at IS
     'Timestamp of the reporting clinician electronic signature.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade.graded_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade.graded_at IS
     'Timestamp when the engine last computed the result.';
 
 -- ========================================================================
@@ -445,14 +462,14 @@ COMMENT ON COLUMN dexa_bone_density_test_result_grade.graded_at IS
 
 -- Audit trail of every scoring rule that fired for a DEXA bone-density result.
 
-CREATE TABLE dexa_bone_density_test_result_grade_rule (
+CREATE TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     dexa_bone_density_test_result_grade_id UUID NOT NULL
-        REFERENCES dexa_bone_density_test_result_grade(id) ON DELETE CASCADE,
+        REFERENCES dexa_bone_density_test_result.dexa_bone_density_test_result_grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(40) NOT NULL,
     axis VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (axis IN ('classification', 'severity', 'completeness', 'follow-up', '')),
@@ -461,32 +478,32 @@ CREATE TABLE dexa_bone_density_test_result_grade_rule (
 );
 
 CREATE INDEX index_dexa_bone_density_test_result_grade_rule_grade_id
-    ON dexa_bone_density_test_result_grade_rule(dexa_bone_density_test_result_grade_id);
+    ON dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule(dexa_bone_density_test_result_grade_id);
 
 CREATE TRIGGER trigger_dexa_bone_density_test_result_grade_rule_updated_at
-    BEFORE UPDATE ON dexa_bone_density_test_result_grade_rule
+    BEFORE UPDATE ON dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE dexa_bone_density_test_result_grade_rule IS
+COMMENT ON TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule IS
     'Audit trail of every classification / severity / completeness / follow-up rule that fired for this result.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.dexa_bone_density_test_result_grade_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.dexa_bone_density_test_result_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.rule_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-CLASS-OSTEOPOROSIS-01).';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.axis IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.axis IS
     'Scoring axis the rule belongs to: classification, severity, completeness, follow-up.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.category IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.category IS
     'Category or finding the rule relates to.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.description IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -499,14 +516,14 @@ COMMENT ON COLUMN dexa_bone_density_test_result_grade_rule.description IS
 
 -- Safety-critical flags for a DEXA bone-density result, independent of the axes.
 
-CREATE TABLE dexa_bone_density_test_result_grade_flag (
+CREATE TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     dexa_bone_density_test_result_grade_id UUID NOT NULL
-        REFERENCES dexa_bone_density_test_result_grade(id) ON DELETE CASCADE,
+        REFERENCES dexa_bone_density_test_result.dexa_bone_density_test_result_grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (category IN (
@@ -529,34 +546,34 @@ CREATE TABLE dexa_bone_density_test_result_grade_flag (
 );
 
 CREATE INDEX index_dexa_bone_density_test_result_grade_flag_grade_id
-    ON dexa_bone_density_test_result_grade_flag(dexa_bone_density_test_result_grade_id);
+    ON dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag(dexa_bone_density_test_result_grade_id);
 
 CREATE TRIGGER trigger_dexa_bone_density_test_result_grade_flag_updated_at
-    BEFORE UPDATE ON dexa_bone_density_test_result_grade_flag
+    BEFORE UPDATE ON dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION dexa_bone_density_test_result.set_updated_at();
 
-COMMENT ON TABLE dexa_bone_density_test_result_grade_flag IS
+COMMENT ON TABLE dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag IS
     'Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the reporting / referring team.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.created_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.updated_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.deleted_at IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.dexa_bone_density_test_result_grade_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.dexa_bone_density_test_result_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.flag_id IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CRITICAL-RESULT-001).';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.category IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.category IS
     'Flag category.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.priority IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.description IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN dexa_bone_density_test_result_grade_flag.suggested_action IS
+COMMENT ON COLUMN dexa_bone_density_test_result.dexa_bone_density_test_result_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "communicate result and refer for fracture-risk treatment review").';
 
 -- ========================================================================

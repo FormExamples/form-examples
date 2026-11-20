@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS recommended_summary_plan_for_emergency_care_and_treatment;
+
+COMMENT ON SCHEMA recommended_summary_plan_for_emergency_care_and_treatment IS
+    'Namespace for the Recommended Summary Plan for Emergency Care and Treatment (ReSPECT) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -57,7 +74,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the person the ReSPECT plan is about.
 
-CREATE TABLE patient (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -80,51 +97,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.patient IS
     'Patient demographic information for the person the ReSPECT emergency care and treatment plan is about.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.name IS
     'Full patient name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.patient.allergies_summary IS
     'Free-text summary of known allergies.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON recommended_summary_plan_for_emergency_care_and_treatment.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -138,7 +155,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information used to identify the clinician who completed and
 -- signed the ReSPECT plan and any senior clinician who endorsed it.
 
-CREATE TABLE clinician (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -156,41 +173,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.clinician IS
     'Clinician identifying information for the clinician who completed and signed the ReSPECT plan and any senior clinician who endorsed it.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.name IS
     'Clinician full name as recorded on the plan.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.role IS
     'Primary clinical role: doctor, nurse, paramedic, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON recommended_summary_plan_for_emergency_care_and_treatment.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -215,14 +232,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- (recommended_summary_plan_for_emergency_care_and_treatment) would exceed
 -- PostgreSQL's 63-byte identifier limit for derived index and trigger names.
 
-CREATE TABLE respect (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES recommended_summary_plan_for_emergency_care_and_treatment.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES recommended_summary_plan_for_emergency_care_and_treatment.clinician(id) ON DELETE RESTRICT,
 
     -- Personal details
     person_name TEXT NOT NULL DEFAULT '',
@@ -281,93 +298,93 @@ CREATE TABLE respect (
 );
 
 CREATE INDEX respect_patient_id_idx
-    ON respect (patient_id);
+    ON recommended_summary_plan_for_emergency_care_and_treatment.respect (patient_id);
 CREATE INDEX respect_clinician_id_idx
-    ON respect (clinician_id);
+    ON recommended_summary_plan_for_emergency_care_and_treatment.respect (clinician_id);
 CREATE INDEX respect_person_name_trgm_idx
-    ON respect
+    ON recommended_summary_plan_for_emergency_care_and_treatment.respect
     USING GIN (person_name gin_trgm_ops);
 
 CREATE TRIGGER trigger_respect_updated_at
-    BEFORE UPDATE ON respect
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.respect
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE respect IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect IS
     'Main ReSPECT record: one personalised emergency care and treatment plan created through shared decision-making, covering the person''s summary of health, preferences, agreed clinical recommendations, CPR recommendation, ceilings of treatment, capacity and involvement, and clinician sign-off. Completeness grade, fired rules, and flags live in child tables. The short base name `respect` is used because the full slug would exceed PostgreSQL''s 63-byte identifier limit.';
-COMMENT ON COLUMN respect.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respect.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN respect.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN respect.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN respect.patient_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.patient_id IS
     'Foreign key to the patient this plan is about (restrict delete).';
-COMMENT ON COLUMN respect.clinician_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.clinician_id IS
     'Foreign key to the clinician who completed and signed the plan (restrict delete); optional.';
-COMMENT ON COLUMN respect.person_name IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.person_name IS
     'Personal details: name of the person the plan is about.';
-COMMENT ON COLUMN respect.date_of_birth IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.date_of_birth IS
     'Personal details: the person''s date of birth.';
-COMMENT ON COLUMN respect.identifier IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.identifier IS
     'Personal details: NHS / CHI number or local identifier.';
-COMMENT ON COLUMN respect.address IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.address IS
     'Personal details: usual residence.';
-COMMENT ON COLUMN respect.key_contact IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.key_contact IS
     'Personal details: key contact / next-of-kin details.';
-COMMENT ON COLUMN respect.health_summary IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.health_summary IS
     'Summary of relevant health: brief clinical summary (mandatory content).';
-COMMENT ON COLUMN respect.diagnoses IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.diagnoses IS
     'Summary of relevant health: relevant diagnoses.';
-COMMENT ON COLUMN respect.existing_documents IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.existing_documents IS
     'Summary of relevant health: existing documents such as ADRT, LPA, or organ-donation wishes.';
-COMMENT ON COLUMN respect.what_matters IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.what_matters IS
     'Preferences: the person''s values, priorities, and fears.';
-COMMENT ON COLUMN respect.care_preferences IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.care_preferences IS
     'Preferences: the person''s preferences for care.';
-COMMENT ON COLUMN respect.priority_balance IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.priority_balance IS
     'Clinical recommendations: balance of priorities from life-sustaining to comfort (sustain-life, balanced, or comfort).';
-COMMENT ON COLUMN respect.recommended_interventions IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.recommended_interventions IS
     'Clinical recommendations: interventions recommended.';
-COMMENT ON COLUMN respect.not_recommended_interventions IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.not_recommended_interventions IS
     'Clinical recommendations: interventions not recommended.';
-COMMENT ON COLUMN respect.cpr_recommendation IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.cpr_recommendation IS
     'CPR recommendation: attempt CPR, do-not-attempt CPR, or empty when undocumented (the most safety-critical field).';
-COMMENT ON COLUMN respect.cpr_rationale IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.cpr_rationale IS
     'CPR recommendation: clinical rationale for the recommendation.';
-COMMENT ON COLUMN respect.cpr_discussed IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.cpr_discussed IS
     'CPR recommendation: whether the recommendation was discussed with the person or their proxy (yes/no).';
-COMMENT ON COLUMN respect.hospital_transfer IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.hospital_transfer IS
     'Ceilings of treatment: whether hospital transfer is appropriate or not-appropriate.';
-COMMENT ON COLUMN respect.critical_care_admission IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.critical_care_admission IS
     'Ceilings of treatment: whether critical-care admission is appropriate or not-appropriate.';
-COMMENT ON COLUMN respect.treatment_ceilings IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.treatment_ceilings IS
     'Ceilings of treatment: other agreed limits on treatment.';
-COMMENT ON COLUMN respect.has_capacity IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.has_capacity IS
     'Capacity and involvement: whether the person has capacity for this decision (yes/no); drives the conditional capacity rule.';
-COMMENT ON COLUMN respect.capacity_assessment IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.capacity_assessment IS
     'Capacity and involvement: assessment recorded where the person lacks capacity (Mental Capacity Act 2005).';
-COMMENT ON COLUMN respect.involvement IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.involvement IS
     'Capacity and involvement: who was involved in the decision (person, legal-proxy, or consultees).';
-COMMENT ON COLUMN respect.proxy_details IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.proxy_details IS
     'Capacity and involvement: welfare attorney, deputy, or consultee details.';
-COMMENT ON COLUMN respect.clinician_name IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.clinician_name IS
     'Clinician sign-off: name of the completing clinician.';
-COMMENT ON COLUMN respect.clinician_role IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.clinician_role IS
     'Clinician sign-off: role of the completing clinician (doctor, nurse, paramedic, or other).';
-COMMENT ON COLUMN respect.clinician_registration IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.clinician_registration IS
     'Clinician sign-off: GMC / NMC / HCPC registration number.';
-COMMENT ON COLUMN respect.signature IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.signature IS
     'Clinician sign-off: electronic signature; required for the plan to be valid.';
-COMMENT ON COLUMN respect.signed_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.signed_at IS
     'Clinician sign-off: date and time the plan was signed.';
-COMMENT ON COLUMN respect.senior_endorsement IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.senior_endorsement IS
     'Clinician sign-off: senior clinician endorsement.';
-COMMENT ON COLUMN respect.emergency_contacts IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.emergency_contacts IS
     'Clinician sign-off: emergency contacts.';
-COMMENT ON COLUMN respect.review_date IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect.review_date IS
     'Clinician sign-off: planned review date; drives the review-date-passed flag.';
 
 -- ========================================================================
@@ -384,14 +401,14 @@ COMMENT ON COLUMN respect.review_date IS
 -- mandatory fields. A completeness grade reflects the quality of the record,
 -- not any clinical score or the correctness of the care.
 
-CREATE TABLE respect_grade (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     respect_id UUID NOT NULL UNIQUE
-        REFERENCES respect(id) ON DELETE CASCADE,
+        REFERENCES recommended_summary_plan_for_emergency_care_and_treatment.respect(id) ON DELETE CASCADE,
 
     status VARCHAR(15) NOT NULL DEFAULT ''
         CHECK (status IN ('complete', 'incomplete', '')),
@@ -401,27 +418,27 @@ CREATE TABLE respect_grade (
 );
 
 CREATE TRIGGER trigger_respect_grade_updated_at
-    BEFORE UPDATE ON respect_grade
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.respect_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE respect_grade IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade IS
     'Computed documentation-completeness result for a ReSPECT plan: status (complete when all eight mandatory rules are satisfied, otherwise incomplete) and completeness percentage.';
-COMMENT ON COLUMN respect_grade.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respect_grade.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN respect_grade.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN respect_grade.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN respect_grade.respect_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.respect_id IS
     'Foreign key to the parent ReSPECT plan (unique, 1:1).';
-COMMENT ON COLUMN respect_grade.status IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.status IS
     'Completeness status: complete (all mandatory rules satisfied) or incomplete.';
-COMMENT ON COLUMN respect_grade.completeness_percent IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.completeness_percent IS
     'Completeness percentage (0..100): populated mandatory fields / total mandatory fields x 100, reported for both statuses.';
-COMMENT ON COLUMN respect_grade.graded_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -436,14 +453,14 @@ COMMENT ON COLUMN respect_grade.graded_at IS
 -- records one mandatory rule (spec section 4, R1..R8), the plan section it
 -- concerns, whether it was satisfied, and a human-readable description.
 
-CREATE TABLE respect_grade_rule (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     respect_grade_id UUID NOT NULL
-        REFERENCES respect_grade(id) ON DELETE CASCADE,
+        REFERENCES recommended_summary_plan_for_emergency_care_and_treatment.respect_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     section VARCHAR(20) NOT NULL DEFAULT ''
@@ -466,34 +483,34 @@ CREATE TABLE respect_grade_rule (
 );
 
 CREATE INDEX respect_grade_rule_grade_id_idx
-    ON respect_grade_rule (respect_grade_id);
+    ON recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule (respect_grade_id);
 
 CREATE TRIGGER trigger_respect_grade_rule_updated_at
-    BEFORE UPDATE ON respect_grade_rule
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE respect_grade_rule IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule IS
     'Audit trail of every mandatory rule evaluated during grading: rule identifier, plan section, whether it was satisfied, category, and description.';
-COMMENT ON COLUMN respect_grade_rule.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respect_grade_rule.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN respect_grade_rule.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN respect_grade_rule.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN respect_grade_rule.respect_grade_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.respect_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN respect_grade_rule.rule_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R1-IDENTITY, R5-CPR).';
-COMMENT ON COLUMN respect_grade_rule.section IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.section IS
     'Plan section the rule concerns: identity, health, preferences, recommendations, cpr, ceilings, capacity, sign-off, or completeness.';
-COMMENT ON COLUMN respect_grade_rule.satisfied IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.satisfied IS
     'Whether the mandatory rule was satisfied (yes/no).';
-COMMENT ON COLUMN respect_grade_rule.category IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.category IS
     'Subject category (e.g. mandatory-rule, conditional-requirement).';
-COMMENT ON COLUMN respect_grade_rule.description IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_rule.description IS
     'Human-readable description of the rule and why it passed or failed.';
 
 -- ========================================================================
@@ -508,14 +525,14 @@ COMMENT ON COLUMN respect_grade_rule.description IS
 -- status (spec section 5), each with a priority and a suggested action for
 -- the clinician or governance team.
 
-CREATE TABLE respect_grade_flag (
+CREATE TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     respect_grade_id UUID NOT NULL
-        REFERENCES respect_grade(id) ON DELETE CASCADE,
+        REFERENCES recommended_summary_plan_for_emergency_care_and_treatment.respect_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -536,34 +553,34 @@ CREATE TABLE respect_grade_flag (
 );
 
 CREATE INDEX respect_grade_flag_grade_id_idx
-    ON respect_grade_flag (respect_grade_id);
+    ON recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag (respect_grade_id);
 
 CREATE TRIGGER trigger_respect_grade_flag_updated_at
-    BEFORE UPDATE ON respect_grade_flag
+    BEFORE UPDATE ON recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION recommended_summary_plan_for_emergency_care_and_treatment.set_updated_at();
 
-COMMENT ON TABLE respect_grade_flag IS
+COMMENT ON TABLE recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag IS
     'Safety and governance flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.';
-COMMENT ON COLUMN respect_grade_flag.id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN respect_grade_flag.created_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN respect_grade_flag.updated_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN respect_grade_flag.deleted_at IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN respect_grade_flag.respect_grade_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.respect_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN respect_grade_flag.flag_id IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-CPR-NOT-DOCUMENTED-001).';
-COMMENT ON COLUMN respect_grade_flag.category IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.category IS
     'Flag category: cpr-not-documented, capacity-missing, no-clinician-signature, dnacpr-without-discussion, review-date-passed, health-summary-missing, or other.';
-COMMENT ON COLUMN respect_grade_flag.priority IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN respect_grade_flag.description IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN respect_grade_flag.suggested_action IS
+COMMENT ON COLUMN recommended_summary_plan_for_emergency_care_and_treatment.respect_grade_flag.suggested_action IS
     'Suggested clinical or governance action (e.g. "document a CPR recommendation", "obtain a clinician signature").';
 
 -- ========================================================================

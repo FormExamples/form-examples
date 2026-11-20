@@ -1,4 +1,4 @@
-CREATE TABLE pvt_rule (
+CREATE TABLE predicting_risk_of_cardiovascular_disease_events.pvt_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -13,15 +13,15 @@ CREATE TABLE pvt_rule (
 
 -- Auto-update updated_at on every row change
 CREATE TRIGGER trigger_pvt_rule_updated_at
-    BEFORE UPDATE ON pvt_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON predicting_risk_of_cardiovascular_disease_events.pvt_rule
+    FOR EACH ROW EXECUTE FUNCTION predicting_risk_of_cardiovascular_disease_events.set_updated_at();
 
 -- ──────────────────────────────────────────────────────────────
 -- Seed all 20 PVT risk rules
 -- ──────────────────────────────────────────────────────────────
 
 -- HIGH RISK (PVT-001 to PVT-005)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-001', 'Overall Risk',       'Estimated 10-year CVD risk >= 20%',                                                                  'high'),
     ('PVT-002', 'Renal / Diabetes',   'Diabetes with eGFR < 30 (severe CKD with diabetes)',                                                 'high'),
     ('PVT-003', 'Blood Pressure',     'Systolic BP >= 180 mmHg (hypertensive crisis)',                                                      'high'),
@@ -29,7 +29,7 @@ INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-005', 'Diabetes / Smoking', 'HbA1c >= 10% with current smoking',                                                                 'high');
 
 -- MEDIUM RISK (PVT-006 to PVT-015)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-006', 'Overall Risk',    '10-year risk 7.5-19.9% (intermediate risk)',         'medium'),
     ('PVT-007', 'Smoking',         'Current smoker',                                     'medium'),
     ('PVT-008', 'Diabetes',        'Diabetes present',                                   'medium'),
@@ -42,28 +42,28 @@ INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-015', 'Renal Function',  'Albuminuria (uACR > 30 mg/g)',                      'medium');
 
 -- LOW RISK / PROTECTIVE (PVT-016 to PVT-020)
-INSERT INTO pvt_rule (code, category, description, risk_level) VALUES
+INSERT INTO predicting_risk_of_cardiovascular_disease_events.pvt_rule (code, category, description, risk_level) VALUES
     ('PVT-016', 'Cholesterol',     'HDL cholesterol >= 60 mg/dL (protective)',           'low'),
     ('PVT-017', 'Smoking',         'Non-smoker',                                         'low'),
     ('PVT-018', 'Blood Pressure',  'Normal BP (< 120/80 mmHg), no treatment',           'low'),
     ('PVT-019', 'Renal Function',  'eGFR >= 90 mL/min (normal renal function)',          'low'),
     ('PVT-020', 'BMI',             'BMI 18.5-24.9 (normal weight)',                      'low');
 
-COMMENT ON TABLE pvt_rule IS
+COMMENT ON TABLE predicting_risk_of_cardiovascular_disease_events.pvt_rule IS
     'Catalogue of 20 PVT risk rules evaluated during PREVENT risk grading.';
-COMMENT ON COLUMN pvt_rule.code IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN pvt_rule.category IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.category IS
     'Clinical category (e.g. Blood Pressure, Cholesterol, Renal Function).';
-COMMENT ON COLUMN pvt_rule.description IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.description IS
     'Human-readable description of the rule condition.';
-COMMENT ON COLUMN pvt_rule.risk_level IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.risk_level IS
     'Risk level: high, medium, or low.';
-COMMENT ON COLUMN pvt_rule.id IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN pvt_rule.created_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN pvt_rule.updated_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN pvt_rule.deleted_at IS
+COMMENT ON COLUMN predicting_risk_of_cardiovascular_disease_events.pvt_rule.deleted_at IS
     'Timestamp when this row was deleted.';

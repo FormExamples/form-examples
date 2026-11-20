@@ -1,4 +1,4 @@
-CREATE TABLE diabetes_rule (
+CREATE TABLE diabetes_assessment.diabetes_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -14,11 +14,11 @@ CREATE TABLE diabetes_rule (
 );
 
 CREATE TRIGGER trigger_diabetes_rule_updated_at
-    BEFORE UPDATE ON diabetes_rule
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();
+    BEFORE UPDATE ON diabetes_assessment.diabetes_rule
+    FOR EACH ROW EXECUTE FUNCTION diabetes_assessment.set_updated_at();
 
 -- Seed all 20 diabetes rules
-INSERT INTO diabetes_rule (code, category, description, concern_level) VALUES
+INSERT INTO diabetes_assessment.diabetes_rule (code, category, description, concern_level) VALUES
     ('DM-001', 'Glycaemic Control', 'HbA1c >= 86 mmol/mol (>= 10%) - very poor glycaemic control', 'high'),
     ('DM-002', 'Hypoglycaemia', 'Severe hypoglycaemia reported', 'high'),
     ('DM-003', 'Foot', 'Active foot ulcer present', 'high'),
@@ -40,22 +40,22 @@ INSERT INTO diabetes_rule (code, category, description, concern_level) VALUES
     ('DM-019', 'Self-Care', 'Physically active (regular or very active)', 'low'),
     ('DM-020', 'Psychological', 'Good psychological wellbeing (low distress, good coping)', 'low');
 
-COMMENT ON TABLE diabetes_rule IS
+COMMENT ON TABLE diabetes_assessment.diabetes_rule IS
     'Reference catalogue of all 20 diabetes assessment rules (DM-001 to DM-020). Seeded at deployment.';
-COMMENT ON COLUMN diabetes_rule.code IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.code IS
     'Human-readable rule code (e.g. DM-001). UNIQUE stable identifier used by application code and audit records.';
-COMMENT ON COLUMN diabetes_rule.category IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.category IS
     'Clinical category the rule evaluates (e.g. Glycaemic Control, Foot, Renal).';
-COMMENT ON COLUMN diabetes_rule.description IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.description IS
     'Human-readable description of what the rule detects.';
-COMMENT ON COLUMN diabetes_rule.concern_level IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.concern_level IS
     'Clinical concern level when rule fires: high, medium, or low.';
 
-COMMENT ON COLUMN diabetes_rule.id IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN diabetes_rule.created_at IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN diabetes_rule.updated_at IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN diabetes_rule.deleted_at IS
+COMMENT ON COLUMN diabetes_assessment.diabetes_rule.deleted_at IS
     'Timestamp when this row was deleted.';

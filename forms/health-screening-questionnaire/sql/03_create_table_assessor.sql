@@ -4,7 +4,7 @@
 -- practice nurses, and occupational-health nurses. See ../AGENTS.md
 -- "assessor, not clinician" for the naming rationale.
 
-CREATE TABLE assessor (
+CREATE TABLE health_screening_questionnaire.assessor (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -20,37 +20,37 @@ CREATE TABLE assessor (
 );
 
 CREATE TRIGGER trigger_assessor_updated_at
-    BEFORE UPDATE ON assessor
+    BEFORE UPDATE ON health_screening_questionnaire.assessor
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION health_screening_questionnaire.set_updated_at();
 
-COMMENT ON TABLE assessor IS
+COMMENT ON TABLE health_screening_questionnaire.assessor IS
     'Assessor, i.e. the person who conducts the health screening questionnaire. Often not a clinician.';
-COMMENT ON COLUMN assessor.id IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessor.created_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN assessor.updated_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN assessor.deleted_at IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN assessor.name IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.name IS
     'Name.';
-COMMENT ON COLUMN assessor.email IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.email IS
     'Email address.';
-COMMENT ON COLUMN assessor.phone IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.phone IS
     'Phone number.';
-COMMENT ON COLUMN assessor.role IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.role IS
     'Assessor role, spanning both clinical roles (occupational-health-nurse, general-practitioner, practice-nurse, physiotherapist) and non-clinical roles (personal-trainer, gym-instructor, sports-therapist, hr-officer).';
-COMMENT ON COLUMN assessor.registration_body IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.registration_body IS
     'Professional registration body, such as HCPC or NMC, where applicable. Blank for non-clinical assessors.';
-COMMENT ON COLUMN assessor.registration_number IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.registration_number IS
     'Professional registration number issued by the registration body, where applicable.';
-COMMENT ON COLUMN assessor.employer IS
+COMMENT ON COLUMN health_screening_questionnaire.assessor.employer IS
     'Employer, such as the employer commissioning an occupational-health screen, the gym or fitness studio, or the GP practice.';
 
 CREATE INDEX assessor_index_gto
-    ON assessor
+    ON health_screening_questionnaire.assessor
     USING GIN ((
         name
     ) gin_trgm_ops);

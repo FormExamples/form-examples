@@ -10,14 +10,14 @@
 -- a very high AFP / beta-hCG (suggesting a germ-cell tumour) drives a critical
 -- result.
 
-CREATE TABLE tumor_marker_test_result (
+CREATE TABLE tumor_marker_test_result.tumor_marker_test_result (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE CASCADE,
-    clinician_id UUID NOT NULL REFERENCES clinician(id) ON DELETE CASCADE,
+    patient_id UUID NOT NULL REFERENCES tumor_marker_test_result.patient(id) ON DELETE CASCADE,
+    clinician_id UUID NOT NULL REFERENCES tumor_marker_test_result.clinician(id) ON DELETE CASCADE,
 
     -- Report identification
     originating_request_reference VARCHAR(255) NOT NULL DEFAULT '',
@@ -76,82 +76,82 @@ CREATE TABLE tumor_marker_test_result (
 );
 
 CREATE INDEX index_tumor_marker_test_result_patient_id
-    ON tumor_marker_test_result(patient_id);
+    ON tumor_marker_test_result.tumor_marker_test_result(patient_id);
 CREATE INDEX index_tumor_marker_test_result_clinician_id
-    ON tumor_marker_test_result(clinician_id);
+    ON tumor_marker_test_result.tumor_marker_test_result(clinician_id);
 
 CREATE TRIGGER trigger_tumor_marker_test_result_updated_at
-    BEFORE UPDATE ON tumor_marker_test_result
+    BEFORE UPDATE ON tumor_marker_test_result.tumor_marker_test_result
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION tumor_marker_test_result.set_updated_at();
 
-COMMENT ON TABLE tumor_marker_test_result IS
+COMMENT ON TABLE tumor_marker_test_result.tumor_marker_test_result IS
     'Serum tumour-marker test result (report). Captures the measured result value for each serum tumour marker (NUMERIC), the prior value and trend, an overall result status, the interpretive narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.';
-COMMENT ON COLUMN tumor_marker_test_result.id IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN tumor_marker_test_result.created_at IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN tumor_marker_test_result.updated_at IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN tumor_marker_test_result.deleted_at IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN tumor_marker_test_result.patient_id IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.patient_id IS
     'Foreign key to the patient.';
-COMMENT ON COLUMN tumor_marker_test_result.clinician_id IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.clinician_id IS
     'Foreign key to the reporting clinician (clinical biochemist / oncologist / reporting clinician).';
-COMMENT ON COLUMN tumor_marker_test_result.originating_request_reference IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.originating_request_reference IS
     'Free-text reference linking this report back to the originating tumour-marker test request (referral).';
-COMMENT ON COLUMN tumor_marker_test_result.report_status IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.report_status IS
     'Report lifecycle status: preliminary, final, amended, cancelled.';
-COMMENT ON COLUMN tumor_marker_test_result.performed_date IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.performed_date IS
     'Date the specimen was collected / the assay was performed.';
-COMMENT ON COLUMN tumor_marker_test_result.reported_date IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.reported_date IS
     'Date the report was authored / signed.';
-COMMENT ON COLUMN tumor_marker_test_result.specimen_condition IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.specimen_condition IS
     'Specimen condition affecting assay validity: satisfactory, haemolysed, lipaemic, insufficient.';
-COMMENT ON COLUMN tumor_marker_test_result.clinical_history IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.clinical_history IS
     'Clinical history and the question the test was performed to answer.';
-COMMENT ON COLUMN tumor_marker_test_result.known_cancer_site IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.known_cancer_site IS
     'Known or suspected primary cancer site, if any (context for interpretation).';
-COMMENT ON COLUMN tumor_marker_test_result.psa IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.psa IS
     'Measured prostate-specific antigen (PSA) value in ng/mL; NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.ca125 IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.ca125 IS
     'Measured CA125 value in IU/mL (suspected ovarian cancer; NICE CG122 ultrasound threshold 35 IU/mL); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.ca19_9 IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.ca19_9 IS
     'Measured CA19-9 value in U/mL (pancreatic / hepatobiliary cancer; reference < 37 U/mL); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.carcinoembryonic_antigen_cea IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.carcinoembryonic_antigen_cea IS
     'Measured carcinoembryonic antigen (CEA) value in ng/mL (colorectal cancer monitoring); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.alpha_fetoprotein_afp IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.alpha_fetoprotein_afp IS
     'Measured alpha-fetoprotein (AFP) value in ng/mL (hepatocellular carcinoma, germ-cell tumours); a very high value suggests a germ-cell tumour; NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.beta_hcg IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.beta_hcg IS
     'Measured beta human chorionic gonadotrophin (beta-hCG) value in IU/L (germ-cell / trophoblastic tumours); a very high value suggests a germ-cell tumour; NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.ca15_3 IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.ca15_3 IS
     'Measured CA15-3 value in U/mL (breast cancer monitoring); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.lactate_dehydrogenase_ldh IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.lactate_dehydrogenase_ldh IS
     'Measured lactate dehydrogenase (LDH) value in U/L (germ-cell tumour staging, lymphoma prognosis); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.calcitonin IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.calcitonin IS
     'Measured calcitonin value in ng/L (medullary thyroid carcinoma); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.chromogranin_a IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.chromogranin_a IS
     'Measured chromogranin A value in nmol/L (neuroendocrine tumours); NULL if not measured.';
-COMMENT ON COLUMN tumor_marker_test_result.previous_value IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.previous_value IS
     'Most recent previous value of the principal marker, for trend / response interpretation; NULL if none.';
-COMMENT ON COLUMN tumor_marker_test_result.trend IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.trend IS
     'Trend of the principal marker versus the previous value: rising, stable, falling, not-applicable.';
-COMMENT ON COLUMN tumor_marker_test_result.comparison_with_previous IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.comparison_with_previous IS
     'Narrative comparison with previous tumour-marker results.';
-COMMENT ON COLUMN tumor_marker_test_result.overall_result_status IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.overall_result_status IS
     'Overall result status: normal, abnormal, critical.';
-COMMENT ON COLUMN tumor_marker_test_result.markedly_elevated IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.markedly_elevated IS
     'Whether one or more markers are markedly elevated above the reference range.';
-COMMENT ON COLUMN tumor_marker_test_result.findings_narrative IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.findings_narrative IS
     'Narrative description of the measured values and their interpretation (the body of the report).';
-COMMENT ON COLUMN tumor_marker_test_result.impression IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.impression IS
     'Summary impression / conclusion answering the clinical question.';
-COMMENT ON COLUMN tumor_marker_test_result.reporting_category IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.reporting_category IS
     'Structured-reporting category label (e.g. a germ-cell-marker pattern or monitoring-trend category).';
-COMMENT ON COLUMN tumor_marker_test_result.recommended_follow_up IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.recommended_follow_up IS
     'Recommended follow-up: repeat interval, referral, or further investigation.';
-COMMENT ON COLUMN tumor_marker_test_result.critical_result_communicated IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.critical_result_communicated IS
     'Whether a critical or unexpected significant result was communicated directly to the requester.';
-COMMENT ON COLUMN tumor_marker_test_result.reported_to IS
+COMMENT ON COLUMN tumor_marker_test_result.tumor_marker_test_result.reported_to IS
     'Who the critical / urgent result was communicated to, with date and time if applicable.';

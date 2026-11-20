@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (9):
+-- Source files (10):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -32,12 +33,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS partogram;
+
+COMMENT ON SCHEMA partogram IS
+    'Namespace for the Partogram (Partograph) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION partogram.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -45,7 +62,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION partogram.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information.
 
-CREATE TABLE patient (
+CREATE TABLE partogram.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -81,51 +98,51 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON partogram.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE partogram.patient IS
     'Patient demographic information used by the partogram labour record.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN partogram.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN partogram.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN partogram.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN partogram.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN partogram.patient.name IS
     'Full patient name as recorded on the wristband.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN partogram.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN partogram.patient.sex IS
     'Sex recorded for clinical purposes: female, male, intersex, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN partogram.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN partogram.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN partogram.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN partogram.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN partogram.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN partogram.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.hospital_mrn IS
+COMMENT ON COLUMN partogram.patient.hospital_mrn IS
     'Local hospital medical record number (MRN).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN partogram.patient.height_as_cm IS
     'Height in centimetres.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN partogram.patient.weight_as_kg IS
     'Weight in kilograms.';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN partogram.patient.body_mass_index IS
     'Body mass index (BMI), kg/m^2.';
-COMMENT ON COLUMN patient.allergies_summary IS
+COMMENT ON COLUMN partogram.patient.allergies_summary IS
     'Free-text summary of known allergies as recorded on admission.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON partogram.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -139,7 +156,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician employee information used to identify the professional recording
 -- the partogram (midwife, obstetrician, or labour-ward nurse).
 
-CREATE TABLE clinician (
+CREATE TABLE partogram.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -157,41 +174,41 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON partogram.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE partogram.clinician IS
     'Clinician identifying information for the professional recording the partogram.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN partogram.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN partogram.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN partogram.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN partogram.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN partogram.clinician.name IS
     'Clinician full name as recorded in the rota.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN partogram.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN partogram.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN partogram.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN partogram.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN partogram.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN partogram.clinician.role IS
     'Primary clinical role: midwife, obstetrician, nurse, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN partogram.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN partogram.clinician.registration_number IS
     'Professional registration number issued by the registration body.';
 
 CREATE INDEX clinician_name_trgm_idx
-    ON clinician
+    ON partogram.clinician
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -208,14 +225,14 @@ CREATE INDEX clinician_name_trgm_idx
 -- of timed intrapartum observations is held in a child table that cascades
 -- from this parent.
 
-CREATE TABLE partogram (
+CREATE TABLE partogram.partogram (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES partogram.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES partogram.clinician(id) ON DELETE RESTRICT,
 
     clinician_name TEXT NOT NULL DEFAULT '',
     clinician_role VARCHAR(20) NOT NULL DEFAULT '' CHECK (clinician_role IN ('midwife', 'obstetrician', 'nurse', 'other', '')),
@@ -233,50 +250,50 @@ CREATE TABLE partogram (
 );
 
 CREATE INDEX partogram_patient_id_idx
-    ON partogram (patient_id);
+    ON partogram.partogram (patient_id);
 CREATE INDEX partogram_clinician_id_idx
-    ON partogram (clinician_id);
+    ON partogram.partogram (clinician_id);
 
 CREATE TRIGGER trigger_partogram_updated_at
-    BEFORE UPDATE ON partogram
+    BEFORE UPDATE ON partogram.partogram
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE partogram IS
+COMMENT ON TABLE partogram.partogram IS
     'Parent partogram labour record header: recording context, patient identification, admission findings, and the active-phase start time that anchors the alert and action lines.';
-COMMENT ON COLUMN partogram.id IS
+COMMENT ON COLUMN partogram.partogram.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN partogram.created_at IS
+COMMENT ON COLUMN partogram.partogram.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN partogram.updated_at IS
+COMMENT ON COLUMN partogram.partogram.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN partogram.deleted_at IS
+COMMENT ON COLUMN partogram.partogram.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN partogram.patient_id IS
+COMMENT ON COLUMN partogram.partogram.patient_id IS
     'Foreign key to the patient this labour record is for (restricted delete).';
-COMMENT ON COLUMN partogram.clinician_id IS
+COMMENT ON COLUMN partogram.partogram.clinician_id IS
     'Foreign key to the recording clinician (restricted delete); optional.';
-COMMENT ON COLUMN partogram.clinician_name IS
+COMMENT ON COLUMN partogram.partogram.clinician_name IS
     'Name of the clinician recording the partogram, as entered on the record.';
-COMMENT ON COLUMN partogram.clinician_role IS
+COMMENT ON COLUMN partogram.partogram.clinician_role IS
     'Role of the recording clinician: midwife, obstetrician, nurse, or other.';
-COMMENT ON COLUMN partogram.care_setting IS
+COMMENT ON COLUMN partogram.partogram.care_setting IS
     'Care setting: labour-ward, birth-centre, triage, or other.';
-COMMENT ON COLUMN partogram.active_phase_start_at IS
+COMMENT ON COLUMN partogram.partogram.active_phase_start_at IS
     'Date and time the active phase began (cervical dilatation 4 cm); the reference time from which elapsed hours and the alert / action lines are computed.';
-COMMENT ON COLUMN partogram.patient_identifier IS
+COMMENT ON COLUMN partogram.partogram.patient_identifier IS
     'Local patient identifier as entered on the record.';
-COMMENT ON COLUMN partogram.age_band IS
+COMMENT ON COLUMN partogram.partogram.age_band IS
     'Adult age band: under-18, 18-24, 25-34, 35-39, or 40-plus.';
-COMMENT ON COLUMN partogram.parity IS
+COMMENT ON COLUMN partogram.partogram.parity IS
     'Parity: nulliparous (no previous birth) or multiparous.';
-COMMENT ON COLUMN partogram.gestation_weeks IS
+COMMENT ON COLUMN partogram.partogram.gestation_weeks IS
     'Completed weeks of gestation.';
-COMMENT ON COLUMN partogram.membranes_on_admission IS
+COMMENT ON COLUMN partogram.partogram.membranes_on_admission IS
     'Membrane status on admission: intact or ruptured.';
-COMMENT ON COLUMN partogram.risk_factors IS
+COMMENT ON COLUMN partogram.partogram.risk_factors IS
     'Free-text noted risk factors for the labour.';
-COMMENT ON COLUMN partogram.planned_care IS
+COMMENT ON COLUMN partogram.partogram.planned_care IS
     'Free-text planned care or management for the labour.';
 
 -- ========================================================================
@@ -294,13 +311,13 @@ COMMENT ON COLUMN partogram.planned_care IS
 -- and drugs / oxytocin. The progress engine reads this ordered series to plot
 -- points against the alert and action lines and to raise threshold flags.
 
-CREATE TABLE partogram_observation (
+CREATE TABLE partogram.partogram_observation (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    partogram_id UUID NOT NULL REFERENCES partogram(id) ON DELETE CASCADE,
+    partogram_id UUID NOT NULL REFERENCES partogram.partogram(id) ON DELETE CASCADE,
 
     observed_at TIMESTAMPTZ,
     cervical_dilatation_cm NUMERIC(3,1) CHECK (cervical_dilatation_cm IS NULL OR cervical_dilatation_cm BETWEEN 0 AND 10),
@@ -329,62 +346,62 @@ CREATE TABLE partogram_observation (
 );
 
 CREATE INDEX partogram_observation_partogram_id_idx
-    ON partogram_observation (partogram_id);
+    ON partogram.partogram_observation (partogram_id);
 
 CREATE TRIGGER trigger_partogram_observation_updated_at
-    BEFORE UPDATE ON partogram_observation
+    BEFORE UPDATE ON partogram.partogram_observation
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE partogram_observation IS
+COMMENT ON TABLE partogram.partogram_observation IS
     'Timed intrapartum observation rows for a partogram: labour progress, contractions, fetal heart rate, liquor and moulding, maternal vitals, urine, and drugs / oxytocin.';
-COMMENT ON COLUMN partogram_observation.id IS
+COMMENT ON COLUMN partogram.partogram_observation.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN partogram_observation.created_at IS
+COMMENT ON COLUMN partogram.partogram_observation.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN partogram_observation.updated_at IS
+COMMENT ON COLUMN partogram.partogram_observation.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN partogram_observation.deleted_at IS
+COMMENT ON COLUMN partogram.partogram_observation.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN partogram_observation.partogram_id IS
+COMMENT ON COLUMN partogram.partogram_observation.partogram_id IS
     'Foreign key to the parent partogram labour record.';
-COMMENT ON COLUMN partogram_observation.observed_at IS
+COMMENT ON COLUMN partogram.partogram_observation.observed_at IS
     'Wall-clock date and time the observation was taken.';
-COMMENT ON COLUMN partogram_observation.cervical_dilatation_cm IS
+COMMENT ON COLUMN partogram.partogram_observation.cervical_dilatation_cm IS
     'Cervical dilatation in centimetres (0-10), plotted against the alert and action lines.';
-COMMENT ON COLUMN partogram_observation.descent_fifths IS
+COMMENT ON COLUMN partogram.partogram_observation.descent_fifths IS
     'Descent of the fetal head in fifths palpable above the pelvic brim (5 down to 0).';
-COMMENT ON COLUMN partogram_observation.contractions_per_10_min IS
+COMMENT ON COLUMN partogram.partogram_observation.contractions_per_10_min IS
     'Uterine contraction frequency: number of contractions in 10 minutes.';
-COMMENT ON COLUMN partogram_observation.contraction_duration_band IS
+COMMENT ON COLUMN partogram.partogram_observation.contraction_duration_band IS
     'Contraction duration band: <20s, 20-40s, or >40s.';
-COMMENT ON COLUMN partogram_observation.contraction_strength IS
+COMMENT ON COLUMN partogram.partogram_observation.contraction_strength IS
     'Contraction strength on palpation: mild, moderate, or strong.';
-COMMENT ON COLUMN partogram_observation.fetal_heart_rate IS
+COMMENT ON COLUMN partogram.partogram_observation.fetal_heart_rate IS
     'Fetal heart rate in beats per minute.';
-COMMENT ON COLUMN partogram_observation.liquor_state IS
+COMMENT ON COLUMN partogram.partogram_observation.liquor_state IS
     'Amniotic fluid (liquor) state: intact, clear, meconium, blood-stained, or absent.';
-COMMENT ON COLUMN partogram_observation.moulding IS
+COMMENT ON COLUMN partogram.partogram_observation.moulding IS
     'Degree of fetal skull moulding: 0, +, ++, or +++.';
-COMMENT ON COLUMN partogram_observation.systolic_blood_pressure IS
+COMMENT ON COLUMN partogram.partogram_observation.systolic_blood_pressure IS
     'Maternal systolic blood pressure in mmHg.';
-COMMENT ON COLUMN partogram_observation.diastolic_blood_pressure IS
+COMMENT ON COLUMN partogram.partogram_observation.diastolic_blood_pressure IS
     'Maternal diastolic blood pressure in mmHg.';
-COMMENT ON COLUMN partogram_observation.pulse IS
+COMMENT ON COLUMN partogram.partogram_observation.pulse IS
     'Maternal pulse in beats per minute.';
-COMMENT ON COLUMN partogram_observation.temperature IS
+COMMENT ON COLUMN partogram.partogram_observation.temperature IS
     'Maternal temperature in degrees Celsius.';
-COMMENT ON COLUMN partogram_observation.urine_volume_ml IS
+COMMENT ON COLUMN partogram.partogram_observation.urine_volume_ml IS
     'Volume of urine passed in millilitres.';
-COMMENT ON COLUMN partogram_observation.urine_protein IS
+COMMENT ON COLUMN partogram.partogram_observation.urine_protein IS
     'Urine protein dipstick: negative, trace, +, ++, or +++.';
-COMMENT ON COLUMN partogram_observation.urine_ketones IS
+COMMENT ON COLUMN partogram.partogram_observation.urine_ketones IS
     'Urine ketones (acetone) dipstick: negative, trace, +, ++, or +++.';
-COMMENT ON COLUMN partogram_observation.urine_glucose IS
+COMMENT ON COLUMN partogram.partogram_observation.urine_glucose IS
     'Urine glucose dipstick: negative, trace, +, ++, or +++.';
-COMMENT ON COLUMN partogram_observation.oxytocin_rate IS
+COMMENT ON COLUMN partogram.partogram_observation.oxytocin_rate IS
     'Oxytocin infusion rate (drops per minute or mU/min).';
-COMMENT ON COLUMN partogram_observation.drugs_and_fluids IS
+COMMENT ON COLUMN partogram.partogram_observation.drugs_and_fluids IS
     'Free-text record of other drugs and intravenous fluids given.';
 
 -- ========================================================================
@@ -400,14 +417,14 @@ COMMENT ON COLUMN partogram_observation.drugs_and_fluids IS
 -- and the latest cervical dilatation the engine plotted against the alert and
 -- action reference lines. One row per partogram (1:1).
 
-CREATE TABLE partogram_grade (
+CREATE TABLE partogram.partogram_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     partogram_id UUID NOT NULL UNIQUE
-        REFERENCES partogram(id) ON DELETE CASCADE,
+        REFERENCES partogram.partogram(id) ON DELETE CASCADE,
 
     progress_status VARCHAR(25) NOT NULL DEFAULT ''
         CHECK (progress_status IN ('normal', 'alert-line-crossed', 'action-line-crossed', '')),
@@ -417,27 +434,27 @@ CREATE TABLE partogram_grade (
 );
 
 CREATE TRIGGER trigger_partogram_grade_updated_at
-    BEFORE UPDATE ON partogram_grade
+    BEFORE UPDATE ON partogram.partogram_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE partogram_grade IS
+COMMENT ON TABLE partogram.partogram_grade IS
     'Computed labour-progress grading result for a partogram: overall progress classification and the latest cervical dilatation plotted against the alert and action lines.';
-COMMENT ON COLUMN partogram_grade.id IS
+COMMENT ON COLUMN partogram.partogram_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN partogram_grade.created_at IS
+COMMENT ON COLUMN partogram.partogram_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN partogram_grade.updated_at IS
+COMMENT ON COLUMN partogram.partogram_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN partogram_grade.deleted_at IS
+COMMENT ON COLUMN partogram.partogram_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN partogram_grade.partogram_id IS
+COMMENT ON COLUMN partogram.partogram_grade.partogram_id IS
     'Foreign key to the parent partogram labour record (unique, 1:1).';
-COMMENT ON COLUMN partogram_grade.progress_status IS
+COMMENT ON COLUMN partogram.partogram_grade.progress_status IS
     'Overall labour-progress classification: normal, alert-line-crossed, or action-line-crossed.';
-COMMENT ON COLUMN partogram_grade.latest_dilatation_cm IS
+COMMENT ON COLUMN partogram.partogram_grade.latest_dilatation_cm IS
     'Latest observed cervical dilatation in centimetres (0-10) that the engine plotted against the reference lines.';
-COMMENT ON COLUMN partogram_grade.graded_at IS
+COMMENT ON COLUMN partogram.partogram_grade.graded_at IS
     'Timestamp when the engine last computed the grade.';
 
 -- ========================================================================
@@ -451,14 +468,14 @@ COMMENT ON COLUMN partogram_grade.graded_at IS
 -- Audit trail of every progress rule that fired during grading. Each row
 -- records one rule firing with a category and a human-readable description.
 
-CREATE TABLE partogram_grade_rule (
+CREATE TABLE partogram.partogram_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     partogram_grade_id UUID NOT NULL
-        REFERENCES partogram_grade(id) ON DELETE CASCADE,
+        REFERENCES partogram.partogram_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
@@ -466,30 +483,30 @@ CREATE TABLE partogram_grade_rule (
 );
 
 CREATE INDEX partogram_grade_rule_grade_id_idx
-    ON partogram_grade_rule (partogram_grade_id);
+    ON partogram.partogram_grade_rule (partogram_grade_id);
 
 CREATE TRIGGER trigger_partogram_grade_rule_updated_at
-    BEFORE UPDATE ON partogram_grade_rule
+    BEFORE UPDATE ON partogram.partogram_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE partogram_grade_rule IS
+COMMENT ON TABLE partogram.partogram_grade_rule IS
     'Audit trail of every progress rule that fired during grading: category and description.';
-COMMENT ON COLUMN partogram_grade_rule.id IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN partogram_grade_rule.created_at IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN partogram_grade_rule.updated_at IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN partogram_grade_rule.deleted_at IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN partogram_grade_rule.partogram_grade_id IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.partogram_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN partogram_grade_rule.rule_id IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-ACTION-LINE-CROSSED-01).';
-COMMENT ON COLUMN partogram_grade_rule.category IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.category IS
     'Subject category (e.g. progress-classification, reference-line).';
-COMMENT ON COLUMN partogram_grade_rule.description IS
+COMMENT ON COLUMN partogram.partogram_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -504,14 +521,14 @@ COMMENT ON COLUMN partogram_grade_rule.description IS
 -- across the whole observation series, each with a priority and a suggested
 -- action for the labour-ward team.
 
-CREATE TABLE partogram_grade_flag (
+CREATE TABLE partogram.partogram_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     partogram_grade_id UUID NOT NULL
-        REFERENCES partogram_grade(id) ON DELETE CASCADE,
+        REFERENCES partogram.partogram_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(40) NOT NULL DEFAULT ''
@@ -533,34 +550,34 @@ CREATE TABLE partogram_grade_flag (
 );
 
 CREATE INDEX partogram_grade_flag_grade_id_idx
-    ON partogram_grade_flag (partogram_grade_id);
+    ON partogram.partogram_grade_flag (partogram_grade_id);
 
 CREATE TRIGGER trigger_partogram_grade_flag_updated_at
-    BEFORE UPDATE ON partogram_grade_flag
+    BEFORE UPDATE ON partogram.partogram_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION partogram.set_updated_at();
 
-COMMENT ON TABLE partogram_grade_flag IS
+COMMENT ON TABLE partogram.partogram_grade_flag IS
     'Flagged issues raised independently of the progress classification, scanned across the whole observation series, with priority and a suggested action for the labour-ward team.';
-COMMENT ON COLUMN partogram_grade_flag.id IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN partogram_grade_flag.created_at IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN partogram_grade_flag.updated_at IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN partogram_grade_flag.deleted_at IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN partogram_grade_flag.partogram_grade_id IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.partogram_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN partogram_grade_flag.flag_id IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-FETAL-HEART-ABNORMAL-001).';
-COMMENT ON COLUMN partogram_grade_flag.category IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.category IS
     'Flag category: action-line-crossed, alert-line-crossed, fetal-heart-abnormal, meconium, maternal-obs-abnormal, poor-progress, incomplete, or other.';
-COMMENT ON COLUMN partogram_grade_flag.priority IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN partogram_grade_flag.description IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN partogram_grade_flag.suggested_action IS
+COMMENT ON COLUMN partogram.partogram_grade_flag.suggested_action IS
     'Suggested clinical action (e.g. "escalate to the obstetric registrar for review").';
 
 -- ========================================================================

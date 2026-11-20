@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (17):
+-- Source files (18):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -40,12 +41,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS vaccinations_assessment;
+
+COMMENT ON SCHEMA vaccinations_assessment IS
+    'Namespace for the Vaccinations Assessment form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION vaccinations_assessment.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -53,7 +70,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION vaccinations_assessment.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -66,7 +83,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information
 
-CREATE TABLE patient (
+CREATE TABLE vaccinations_assessment.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -89,56 +106,56 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON vaccinations_assessment.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE vaccinations_assessment.patient IS
     'Patient';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN vaccinations_assessment.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.patient.updated_at IS
     'Timestamp when the record was deleted a.k.a. soft-deleted.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN vaccinations_assessment.patient.name IS
     'Name.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN vaccinations_assessment.patient.birth_date IS
     'Birth date.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN vaccinations_assessment.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN vaccinations_assessment.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN vaccinations_assessment.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN vaccinations_assessment.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN vaccinations_assessment.patient.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN vaccinations_assessment.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.waist_as_cm IS
+COMMENT ON COLUMN vaccinations_assessment.patient.waist_as_cm IS
     'Waist circumference measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.height_as_cm IS
+COMMENT ON COLUMN vaccinations_assessment.patient.height_as_cm IS
     'Height measurement in cm, such as for calculating waist-height ratio (WHR).';
-COMMENT ON COLUMN patient.body_mass_index IS
+COMMENT ON COLUMN vaccinations_assessment.patient.body_mass_index IS
     'Body mass index (BMI) measurement.';
-COMMENT ON COLUMN patient.waist_height_ratio IS
+COMMENT ON COLUMN vaccinations_assessment.patient.waist_height_ratio IS
     'Waist-height ratio (WHR) measurement.';
-COMMENT ON COLUMN patient.vo2_max IS
+COMMENT ON COLUMN vaccinations_assessment.patient.vo2_max IS
     'VO2 max measurement.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON vaccinations_assessment.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.patient.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
-COMMENT ON COLUMN patient.weight_as_kg IS
+COMMENT ON COLUMN vaccinations_assessment.patient.weight_as_kg IS
     'Weight as kg.';
 
 -- ========================================================================
@@ -151,7 +168,7 @@ COMMENT ON COLUMN patient.weight_as_kg IS
 
 -- Clinician employee information provided by the employer.
 
-CREATE TABLE clinician (
+CREATE TABLE vaccinations_assessment.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -170,46 +187,46 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON vaccinations_assessment.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE vaccinations_assessment.clinician IS
     'Clinician';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.name IS
     'Name.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.postcode IS
     'Postal code, such as for validating the postal address.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.role IS
     'Clinician role.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.registration_body IS
     'Clinician registration body.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.registration_number IS
     'Clinician registration number.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON vaccinations_assessment.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
 
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinician.deleted_at IS
     'Soft-delete timestamp; NULL when the row is live.';
 
 -- ========================================================================
@@ -220,36 +237,36 @@ COMMENT ON COLUMN clinician.deleted_at IS
 -- BEGIN 04_create_table_vaccinations_assessment.sql
 -- ========================================================================
 
-CREATE TABLE assessment (
+CREATE TABLE vaccinations_assessment.assessment (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.patient(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed'))
 );
 
 CREATE TRIGGER trigger_assessment_updated_at
-    BEFORE UPDATE ON assessment
+    BEFORE UPDATE ON vaccinations_assessment.assessment
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE assessment IS
+COMMENT ON TABLE vaccinations_assessment.assessment IS
     'Vaccination assessment form. Parent entity for all form sections.';
-COMMENT ON COLUMN assessment.patient_id IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.patient_id IS
     'Foreign key to the patient who owns this assessment.';
-COMMENT ON COLUMN assessment.status IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.status IS
     'Lifecycle status: draft, submitted, or reviewed.';
 
-COMMENT ON COLUMN assessment.id IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN assessment.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN assessment.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN assessment.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.assessment.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -260,13 +277,13 @@ COMMENT ON COLUMN assessment.deleted_at IS
 -- BEGIN 05_create_table_immunization_history.sql
 -- ========================================================================
 
-CREATE TABLE immunization_history (
+CREATE TABLE vaccinations_assessment.immunization_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     has_vaccination_record VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (has_vaccination_record IN ('yes', 'no', 'unknown', '')),
     record_source VARCHAR(30) NOT NULL DEFAULT ''
@@ -281,36 +298,36 @@ CREATE TABLE immunization_history (
 );
 
 CREATE TRIGGER trigger_immunization_history_updated_at
-    BEFORE UPDATE ON immunization_history
+    BEFORE UPDATE ON vaccinations_assessment.immunization_history
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE immunization_history IS
+COMMENT ON TABLE vaccinations_assessment.immunization_history IS
     'Immunization history including record source and adverse reaction screening. One-to-one child of assessment.';
 
-COMMENT ON COLUMN immunization_history.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN immunization_history.has_vaccination_record IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.has_vaccination_record IS
     'Has vaccination record. One of: yes, no, unknown.';
-COMMENT ON COLUMN immunization_history.record_source IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.record_source IS
     'Record source. One of: redBook, gpRecords, nhsApp, patientRecall, other.';
-COMMENT ON COLUMN immunization_history.last_review_date IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.last_review_date IS
     'Last review date.';
-COMMENT ON COLUMN immunization_history.previous_adverse_reactions IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.previous_adverse_reactions IS
     'Previous adverse reactions. One of: yes, no.';
-COMMENT ON COLUMN immunization_history.adverse_reaction_details IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.adverse_reaction_details IS
     'Adverse reaction details.';
-COMMENT ON COLUMN immunization_history.immunocompromised IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.immunocompromised IS
     'Immunocompromised. One of: yes, no.';
-COMMENT ON COLUMN immunization_history.immunocompromised_details IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.immunocompromised_details IS
     'Immunocompromised details.';
-COMMENT ON COLUMN immunization_history.id IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN immunization_history.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN immunization_history.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN immunization_history.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.immunization_history.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -321,13 +338,13 @@ COMMENT ON COLUMN immunization_history.deleted_at IS
 -- BEGIN 06_create_table_childhood_vaccinations.sql
 -- ========================================================================
 
-CREATE TABLE childhood_vaccinations (
+CREATE TABLE vaccinations_assessment.childhood_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     dtap_ipv_hib_hepb SMALLINT CHECK (dtap_ipv_hib_hepb IS NULL OR dtap_ipv_hib_hepb BETWEEN 0 AND 2),
     pneumococcal SMALLINT CHECK (pneumococcal IS NULL OR pneumococcal BETWEEN 0 AND 2),
     rotavirus SMALLINT CHECK (rotavirus IS NULL OR rotavirus BETWEEN 0 AND 2),
@@ -338,36 +355,36 @@ CREATE TABLE childhood_vaccinations (
 );
 
 CREATE TRIGGER trigger_childhood_vaccinations_updated_at
-    BEFORE UPDATE ON childhood_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.childhood_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE childhood_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.childhood_vaccinations IS
     'Childhood vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.';
 
-COMMENT ON COLUMN childhood_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN childhood_vaccinations.dtap_ipv_hib_hepb IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.dtap_ipv_hib_hepb IS
     'Dtap ipv hib hepb.';
-COMMENT ON COLUMN childhood_vaccinations.pneumococcal IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.pneumococcal IS
     'Pneumococcal.';
-COMMENT ON COLUMN childhood_vaccinations.rotavirus IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.rotavirus IS
     'Rotavirus.';
-COMMENT ON COLUMN childhood_vaccinations.meningitis_b IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.meningitis_b IS
     'Meningitis b.';
-COMMENT ON COLUMN childhood_vaccinations.mmr IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.mmr IS
     'Mmr.';
-COMMENT ON COLUMN childhood_vaccinations.hib_menc IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.hib_menc IS
     'Hib menc.';
-COMMENT ON COLUMN childhood_vaccinations.preschool_booster IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.preschool_booster IS
     'Preschool booster.';
-COMMENT ON COLUMN childhood_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN childhood_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN childhood_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN childhood_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.childhood_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -378,13 +395,13 @@ COMMENT ON COLUMN childhood_vaccinations.deleted_at IS
 -- BEGIN 07_create_table_adult_vaccinations.sql
 -- ========================================================================
 
-CREATE TABLE adult_vaccinations (
+CREATE TABLE vaccinations_assessment.adult_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     td_ipv_booster SMALLINT CHECK (td_ipv_booster IS NULL OR td_ipv_booster BETWEEN 0 AND 2),
     hpv SMALLINT CHECK (hpv IS NULL OR hpv BETWEEN 0 AND 2),
     meningitis_acwy SMALLINT CHECK (meningitis_acwy IS NULL OR meningitis_acwy BETWEEN 0 AND 2),
@@ -395,36 +412,36 @@ CREATE TABLE adult_vaccinations (
 );
 
 CREATE TRIGGER trigger_adult_vaccinations_updated_at
-    BEFORE UPDATE ON adult_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.adult_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE adult_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.adult_vaccinations IS
     'Adult vaccination status (0=Not Given, 1=Partial, 2=Complete). One-to-one child of assessment.';
 
-COMMENT ON COLUMN adult_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN adult_vaccinations.td_ipv_booster IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.td_ipv_booster IS
     'Td ipv booster.';
-COMMENT ON COLUMN adult_vaccinations.hpv IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.hpv IS
     'Hpv.';
-COMMENT ON COLUMN adult_vaccinations.meningitis_acwy IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.meningitis_acwy IS
     'Meningitis acwy.';
-COMMENT ON COLUMN adult_vaccinations.influenza_annual IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.influenza_annual IS
     'Influenza annual.';
-COMMENT ON COLUMN adult_vaccinations.covid19 IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.covid19 IS
     'Covid19.';
-COMMENT ON COLUMN adult_vaccinations.shingles IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.shingles IS
     'Shingles.';
-COMMENT ON COLUMN adult_vaccinations.pneumococcal_ppv IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.pneumococcal_ppv IS
     'Pneumococcal ppv.';
-COMMENT ON COLUMN adult_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN adult_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN adult_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN adult_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.adult_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -435,13 +452,13 @@ COMMENT ON COLUMN adult_vaccinations.deleted_at IS
 -- BEGIN 08_create_table_travel_vaccinations.sql
 -- ========================================================================
 
-CREATE TABLE travel_vaccinations (
+CREATE TABLE vaccinations_assessment.travel_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     travel_planned VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (travel_planned IN ('yes', 'no', '')),
     travel_destination VARCHAR(255) NOT NULL DEFAULT '',
@@ -454,38 +471,38 @@ CREATE TABLE travel_vaccinations (
 );
 
 CREATE TRIGGER trigger_travel_vaccinations_updated_at
-    BEFORE UPDATE ON travel_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.travel_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE travel_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.travel_vaccinations IS
     'Travel vaccination status and destination information. One-to-one child of assessment.';
 
-COMMENT ON COLUMN travel_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN travel_vaccinations.travel_planned IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.travel_planned IS
     'Travel planned. One of: yes, no.';
-COMMENT ON COLUMN travel_vaccinations.travel_destination IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.travel_destination IS
     'Travel destination.';
-COMMENT ON COLUMN travel_vaccinations.hepatitis_a IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.hepatitis_a IS
     'Hepatitis a.';
-COMMENT ON COLUMN travel_vaccinations.hepatitis_b IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.hepatitis_b IS
     'Hepatitis b.';
-COMMENT ON COLUMN travel_vaccinations.typhoid IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.typhoid IS
     'Typhoid.';
-COMMENT ON COLUMN travel_vaccinations.yellow_fever IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.yellow_fever IS
     'Yellow fever.';
-COMMENT ON COLUMN travel_vaccinations.rabies IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.rabies IS
     'Rabies.';
-COMMENT ON COLUMN travel_vaccinations.japanese_encephalitis IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.japanese_encephalitis IS
     'Japanese encephalitis.';
-COMMENT ON COLUMN travel_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN travel_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN travel_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN travel_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.travel_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -496,13 +513,13 @@ COMMENT ON COLUMN travel_vaccinations.deleted_at IS
 -- BEGIN 09_create_table_occupational_vaccinations.sql
 -- ========================================================================
 
-CREATE TABLE occupational_vaccinations (
+CREATE TABLE vaccinations_assessment.occupational_vaccinations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     occupation VARCHAR(255) NOT NULL DEFAULT '',
     healthcare_worker VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (healthcare_worker IN ('yes', 'no', '')),
@@ -513,34 +530,34 @@ CREATE TABLE occupational_vaccinations (
 );
 
 CREATE TRIGGER trigger_occupational_vaccinations_updated_at
-    BEFORE UPDATE ON occupational_vaccinations
+    BEFORE UPDATE ON vaccinations_assessment.occupational_vaccinations
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE occupational_vaccinations IS
+COMMENT ON TABLE vaccinations_assessment.occupational_vaccinations IS
     'Occupational vaccination status including healthcare worker screening. One-to-one child of assessment.';
 
-COMMENT ON COLUMN occupational_vaccinations.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN occupational_vaccinations.occupation IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.occupation IS
     'Occupation.';
-COMMENT ON COLUMN occupational_vaccinations.healthcare_worker IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.healthcare_worker IS
     'Healthcare worker. One of: yes, no.';
-COMMENT ON COLUMN occupational_vaccinations.hepatitis_b_occupational IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.hepatitis_b_occupational IS
     'Hepatitis b occupational.';
-COMMENT ON COLUMN occupational_vaccinations.influenza_occupational IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.influenza_occupational IS
     'Influenza occupational.';
-COMMENT ON COLUMN occupational_vaccinations.varicella IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.varicella IS
     'Varicella.';
-COMMENT ON COLUMN occupational_vaccinations.bcg_tuberculosis IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.bcg_tuberculosis IS
     'Bcg tuberculosis.';
-COMMENT ON COLUMN occupational_vaccinations.id IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN occupational_vaccinations.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN occupational_vaccinations.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN occupational_vaccinations.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.occupational_vaccinations.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -551,13 +568,13 @@ COMMENT ON COLUMN occupational_vaccinations.deleted_at IS
 -- BEGIN 10_create_table_contraindications_allergies.sql
 -- ========================================================================
 
-CREATE TABLE contraindications_allergies (
+CREATE TABLE vaccinations_assessment.contraindications_allergies (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     egg_allergy VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (egg_allergy IN ('yes', 'no', '')),
     gelatin_allergy VARCHAR(10) NOT NULL DEFAULT ''
@@ -577,40 +594,40 @@ CREATE TABLE contraindications_allergies (
 );
 
 CREATE TRIGGER trigger_contraindications_allergies_updated_at
-    BEFORE UPDATE ON contraindications_allergies
+    BEFORE UPDATE ON vaccinations_assessment.contraindications_allergies
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE contraindications_allergies IS
+COMMENT ON TABLE vaccinations_assessment.contraindications_allergies IS
     'Contraindication and allergy screening for vaccination. One-to-one child of assessment.';
 
-COMMENT ON COLUMN contraindications_allergies.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN contraindications_allergies.egg_allergy IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.egg_allergy IS
     'Egg allergy. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.gelatin_allergy IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.gelatin_allergy IS
     'Gelatin allergy. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.latex_allergy IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.latex_allergy IS
     'Latex allergy. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.neomycin_allergy IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.neomycin_allergy IS
     'Neomycin allergy. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.pregnant IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.pregnant IS
     'Pregnant. One of: yes, no, notApplicable.';
-COMMENT ON COLUMN contraindications_allergies.pregnancy_weeks IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.pregnancy_weeks IS
     'Pregnancy weeks.';
-COMMENT ON COLUMN contraindications_allergies.severe_illness IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.severe_illness IS
     'Severe illness. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.previous_anaphylaxis IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.previous_anaphylaxis IS
     'Previous anaphylaxis. One of: yes, no.';
-COMMENT ON COLUMN contraindications_allergies.anaphylaxis_details IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.anaphylaxis_details IS
     'Anaphylaxis details.';
-COMMENT ON COLUMN contraindications_allergies.id IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN contraindications_allergies.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN contraindications_allergies.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN contraindications_allergies.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.contraindications_allergies.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -621,13 +638,13 @@ COMMENT ON COLUMN contraindications_allergies.deleted_at IS
 -- BEGIN 11_create_table_consent_information.sql
 -- ========================================================================
 
-CREATE TABLE consent_information (
+CREATE TABLE vaccinations_assessment.consent_information (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     information_provided SMALLINT CHECK (information_provided IS NULL OR information_provided BETWEEN 1 AND 5),
     risks_explained SMALLINT CHECK (risks_explained IS NULL OR risks_explained BETWEEN 1 AND 5),
     benefits_explained SMALLINT CHECK (benefits_explained IS NULL OR benefits_explained BETWEEN 1 AND 5),
@@ -640,36 +657,36 @@ CREATE TABLE consent_information (
 );
 
 CREATE TRIGGER trigger_consent_information_updated_at
-    BEFORE UPDATE ON consent_information
+    BEFORE UPDATE ON vaccinations_assessment.consent_information
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE consent_information IS
+COMMENT ON TABLE vaccinations_assessment.consent_information IS
     'Consent quality scoring (1-5 Likert) and consent status. One-to-one child of assessment.';
 
-COMMENT ON COLUMN consent_information.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN consent_information.information_provided IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.information_provided IS
     'Information provided.';
-COMMENT ON COLUMN consent_information.risks_explained IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.risks_explained IS
     'Risks explained.';
-COMMENT ON COLUMN consent_information.benefits_explained IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.benefits_explained IS
     'Benefits explained.';
-COMMENT ON COLUMN consent_information.questions_answered IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.questions_answered IS
     'Questions answered.';
-COMMENT ON COLUMN consent_information.consent_given IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.consent_given IS
     'Consent given. One of: yes, no.';
-COMMENT ON COLUMN consent_information.consent_date IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.consent_date IS
     'Consent date.';
-COMMENT ON COLUMN consent_information.guardian_consent IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.guardian_consent IS
     'Guardian consent. One of: yes, no, notApplicable.';
-COMMENT ON COLUMN consent_information.id IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN consent_information.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN consent_information.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN consent_information.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.consent_information.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -680,13 +697,13 @@ COMMENT ON COLUMN consent_information.deleted_at IS
 -- BEGIN 12_create_table_administration_record.sql
 -- ========================================================================
 
-CREATE TABLE administration_record (
+CREATE TABLE vaccinations_assessment.administration_record (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     vaccine_name VARCHAR(255) NOT NULL DEFAULT '',
     batch_number VARCHAR(50) NOT NULL DEFAULT '',
     expiry_date DATE,
@@ -701,38 +718,38 @@ CREATE TABLE administration_record (
 );
 
 CREATE TRIGGER trigger_administration_record_updated_at
-    BEFORE UPDATE ON administration_record
+    BEFORE UPDATE ON vaccinations_assessment.administration_record
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE administration_record IS
+COMMENT ON TABLE vaccinations_assessment.administration_record IS
     'Vaccine administration details including batch, site, and route. One-to-one child of assessment.';
 
-COMMENT ON COLUMN administration_record.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN administration_record.vaccine_name IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.vaccine_name IS
     'Vaccine name.';
-COMMENT ON COLUMN administration_record.batch_number IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.batch_number IS
     'Batch number.';
-COMMENT ON COLUMN administration_record.expiry_date IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.expiry_date IS
     'Expiry date.';
-COMMENT ON COLUMN administration_record.administration_site IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_site IS
     'Administration site. One of: leftDeltoid, rightDeltoid, leftThigh, rightThigh, oral, nasal.';
-COMMENT ON COLUMN administration_record.administration_route IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_route IS
     'Administration route. One of: intramuscular, subcutaneous, intradermal, oral, nasal.';
-COMMENT ON COLUMN administration_record.dose_number IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.dose_number IS
     'Dose number. One of: 1, 2, 3, booster.';
-COMMENT ON COLUMN administration_record.administered_by IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administered_by IS
     'Administered by.';
-COMMENT ON COLUMN administration_record.administration_date IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.administration_date IS
     'Administration date.';
-COMMENT ON COLUMN administration_record.id IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN administration_record.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN administration_record.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN administration_record.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.administration_record.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -743,13 +760,13 @@ COMMENT ON COLUMN administration_record.deleted_at IS
 -- BEGIN 13_create_table_clinical_review.sql
 -- ========================================================================
 
-CREATE TABLE clinical_review (
+CREATE TABLE vaccinations_assessment.clinical_review (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     post_vaccination_observation SMALLINT CHECK (post_vaccination_observation IS NULL OR post_vaccination_observation BETWEEN 1 AND 5),
     immediate_reaction VARCHAR(10) NOT NULL DEFAULT ''
         CHECK (immediate_reaction IN ('yes', 'no', '')),
@@ -764,38 +781,38 @@ CREATE TABLE clinical_review (
 );
 
 CREATE TRIGGER trigger_clinical_review_updated_at
-    BEFORE UPDATE ON clinical_review
+    BEFORE UPDATE ON vaccinations_assessment.clinical_review
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE clinical_review IS
+COMMENT ON TABLE vaccinations_assessment.clinical_review IS
     'Clinical review including post-vaccination observation and referral needs. One-to-one child of assessment.';
 
-COMMENT ON COLUMN clinical_review.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN clinical_review.post_vaccination_observation IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.post_vaccination_observation IS
     'Post vaccination observation.';
-COMMENT ON COLUMN clinical_review.immediate_reaction IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.immediate_reaction IS
     'Immediate reaction. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.reaction_details IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.reaction_details IS
     'Reaction details.';
-COMMENT ON COLUMN clinical_review.next_dose_due IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.next_dose_due IS
     'Next dose due.';
-COMMENT ON COLUMN clinical_review.catch_up_schedule_needed IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.catch_up_schedule_needed IS
     'Catch up schedule needed. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.referral_needed IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.referral_needed IS
     'Referral needed. One of: yes, no.';
-COMMENT ON COLUMN clinical_review.clinician_notes IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.clinician_notes IS
     'Clinician notes.';
-COMMENT ON COLUMN clinical_review.reviewing_clinician IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.reviewing_clinician IS
     'Reviewing clinician.';
-COMMENT ON COLUMN clinical_review.id IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinical_review.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN clinical_review.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN clinical_review.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.clinical_review.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -806,13 +823,13 @@ COMMENT ON COLUMN clinical_review.deleted_at IS
 -- BEGIN 14_create_table_vaccinations_assessment_grade.sql
 -- ========================================================================
 
-CREATE TABLE grade (
+CREATE TABLE vaccinations_assessment.grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     assessment_id UUID NOT NULL UNIQUE
-        REFERENCES assessment(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.assessment(id) ON DELETE CASCADE,
     vaccination_level VARCHAR(30) NOT NULL DEFAULT ''
         CHECK (vaccination_level IN ('upToDate', 'partiallyComplete', 'overdue', 'contraindicated', 'draft', '')),
     vaccination_score SMALLINT NOT NULL DEFAULT 0
@@ -821,28 +838,28 @@ CREATE TABLE grade (
 );
 
 CREATE TRIGGER trigger_grade_updated_at
-    BEFORE UPDATE ON grade
+    BEFORE UPDATE ON vaccinations_assessment.grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE grade IS
+COMMENT ON TABLE vaccinations_assessment.grade IS
     'Grading result summarizing vaccination level and composite score. One-to-one child of assessment.';
-COMMENT ON COLUMN grade.vaccination_level IS
+COMMENT ON COLUMN vaccinations_assessment.grade.vaccination_level IS
     'Vaccination compliance level: upToDate, partiallyComplete, overdue, contraindicated, or draft.';
-COMMENT ON COLUMN grade.vaccination_score IS
+COMMENT ON COLUMN vaccinations_assessment.grade.vaccination_score IS
     'Composite vaccination score (0-100).';
 
-COMMENT ON COLUMN grade.assessment_id IS
+COMMENT ON COLUMN vaccinations_assessment.grade.assessment_id IS
     'Foreign key to the assessment table.';
-COMMENT ON COLUMN grade.graded_at IS
+COMMENT ON COLUMN vaccinations_assessment.grade.graded_at IS
     'Graded at.';
-COMMENT ON COLUMN grade.id IS
+COMMENT ON COLUMN vaccinations_assessment.grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grade.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grade.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grade.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.grade.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -853,13 +870,13 @@ COMMENT ON COLUMN grade.deleted_at IS
 -- BEGIN 15_create_table_fired_rule.sql
 -- ========================================================================
 
-CREATE TABLE fired_rule (
+CREATE TABLE vaccinations_assessment.fired_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.grade(id) ON DELETE CASCADE,
     rule_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     description TEXT NOT NULL DEFAULT '',
@@ -868,30 +885,30 @@ CREATE TABLE fired_rule (
 );
 
 CREATE TRIGGER trigger_fired_rule_updated_at
-    BEFORE UPDATE ON fired_rule
+    BEFORE UPDATE ON vaccinations_assessment.fired_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE fired_rule IS
+COMMENT ON TABLE vaccinations_assessment.fired_rule IS
     'Vaccination rules that fired during assessment grading. Many-to-one child of grade.';
-COMMENT ON COLUMN fired_rule.rule_id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.rule_id IS
     'Identifier of the vaccination rule that fired (e.g. VAX-001).';
-COMMENT ON COLUMN fired_rule.category IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.category IS
     'Category the rule belongs to (e.g. Childhood, Adult, Contraindication).';
-COMMENT ON COLUMN fired_rule.concern_level IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.concern_level IS
     'Concern level: high, medium, or low.';
 
-COMMENT ON COLUMN fired_rule.grade_id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN fired_rule.description IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.description IS
     'Description.';
-COMMENT ON COLUMN fired_rule.id IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN fired_rule.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN fired_rule.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN fired_rule.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.fired_rule.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================
@@ -902,13 +919,13 @@ COMMENT ON COLUMN fired_rule.deleted_at IS
 -- BEGIN 16_create_table_additional_flag.sql
 -- ========================================================================
 
-CREATE TABLE additional_flag (
+CREATE TABLE vaccinations_assessment.additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES vaccinations_assessment.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -917,30 +934,30 @@ CREATE TABLE additional_flag (
 );
 
 CREATE TRIGGER trigger_additional_flag_updated_at
-    BEFORE UPDATE ON additional_flag
+    BEFORE UPDATE ON vaccinations_assessment.additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION vaccinations_assessment.set_updated_at();
 
-COMMENT ON TABLE additional_flag IS
+COMMENT ON TABLE vaccinations_assessment.additional_flag IS
     'Additional flags raised during vaccination assessment. Many-to-one child of grade.';
-COMMENT ON COLUMN additional_flag.flag_id IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.flag_id IS
     'Identifier of the additional flag (e.g. FLAG-VAX-001).';
-COMMENT ON COLUMN additional_flag.category IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.category IS
     'Category grouping for the flag.';
-COMMENT ON COLUMN additional_flag.message IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.message IS
     'Human-readable message describing the flag.';
-COMMENT ON COLUMN additional_flag.priority IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.priority IS
     'Flag priority: high, medium, or low.';
 
-COMMENT ON COLUMN additional_flag.grade_id IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN additional_flag.id IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN additional_flag.created_at IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN additional_flag.updated_at IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN additional_flag.deleted_at IS
+COMMENT ON COLUMN vaccinations_assessment.additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
 
 -- ========================================================================

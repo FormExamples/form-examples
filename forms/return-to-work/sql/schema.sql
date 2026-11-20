@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (10):
+-- Source files (11):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -33,12 +34,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS return_to_work;
+
+COMMENT ON SCHEMA return_to_work IS
+    'Namespace for the Return to Work form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION return_to_work.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -46,7 +63,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION return_to_work.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -59,7 +76,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 
 -- Patient demographic information for the Return to Work form.
 
-CREATE TABLE patient (
+CREATE TABLE return_to_work.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -84,55 +101,55 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON return_to_work.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE return_to_work.patient IS
     'Patient (the employee) whose return to work is being assessed.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN return_to_work.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN return_to_work.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN return_to_work.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN return_to_work.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN return_to_work.patient.name IS
     'Full legal name as it appears on identification.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN return_to_work.patient.birth_date IS
     'Date of birth.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN return_to_work.patient.sex IS
     'Sex recorded at birth for clinical purposes.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN return_to_work.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN return_to_work.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN return_to_work.patient.postal_address_as_full_text IS
     'Postal address as full text.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN return_to_work.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN return_to_work.patient.postcode IS
     'Postal code.';
-COMMENT ON COLUMN patient.united_kingdom_nhs_number IS
+COMMENT ON COLUMN return_to_work.patient.united_kingdom_nhs_number IS
     'United Kingdom NHS number, unique per person.';
-COMMENT ON COLUMN patient.job_title IS
+COMMENT ON COLUMN return_to_work.patient.job_title IS
     'Patient job title (e.g. Software Engineer, Healthcare Assistant).';
-COMMENT ON COLUMN patient.role_description IS
+COMMENT ON COLUMN return_to_work.patient.role_description IS
     'Free-text description of the patient day-to-day duties.';
-COMMENT ON COLUMN patient.contracted_hours_per_week IS
+COMMENT ON COLUMN return_to_work.patient.contracted_hours_per_week IS
     'Contracted hours per week (full-time UK baseline 37.5).';
-COMMENT ON COLUMN patient.shift_pattern IS
+COMMENT ON COLUMN return_to_work.patient.shift_pattern IS
     'Shift pattern: day, night, rotating, on-call, irregular, or fixed.';
-COMMENT ON COLUMN patient.safety_critical_role IS
+COMMENT ON COLUMN return_to_work.patient.safety_critical_role IS
     'Whether the role is safety-critical (aviation, rail, healthcare, emergency response, etc.).';
-COMMENT ON COLUMN patient.dvla_group_1_licence_held IS
+COMMENT ON COLUMN return_to_work.patient.dvla_group_1_licence_held IS
     'Whether the patient holds a DVLA Group 1 (car / motorcycle) licence.';
-COMMENT ON COLUMN patient.dvla_group_2_licence_held IS
+COMMENT ON COLUMN return_to_work.patient.dvla_group_2_licence_held IS
     'Whether the patient holds a DVLA Group 2 (HGV / PCV) licence.';
 
 CREATE INDEX patient_index_gto
-    ON patient
+    ON return_to_work.patient
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -147,7 +164,7 @@ CREATE INDEX patient_index_gto
 
 -- Clinician issuing the Return to Work statement.
 
-CREATE TABLE clinician (
+CREATE TABLE return_to_work.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -168,47 +185,47 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON return_to_work.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE return_to_work.clinician IS
     'Clinician issuing the Return to Work statement (GP, OH physician, hospital doctor, registered nurse, pharmacist, physiotherapist, or occupational therapist authorised under the UK fit-note scheme).';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN return_to_work.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN return_to_work.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN return_to_work.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN return_to_work.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN return_to_work.clinician.name IS
     'Full name of the clinician.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN return_to_work.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN return_to_work.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN return_to_work.clinician.postal_address_as_full_text IS
     'Practice or clinic postal address.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN return_to_work.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN return_to_work.clinician.postcode IS
     'Postal code.';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN return_to_work.clinician.role IS
     'Clinician role: gp, occupational-health-physician, hospital-consultant, specialty-registrar, nurse, pharmacist, physiotherapist, occupational-therapist, or other.';
-COMMENT ON COLUMN clinician.registration_body IS
+COMMENT ON COLUMN return_to_work.clinician.registration_body IS
     'Professional registration body: GMC, NMC, HCPC, GPhC, GOC, or other.';
-COMMENT ON COLUMN clinician.registration_number IS
+COMMENT ON COLUMN return_to_work.clinician.registration_number IS
     'Professional registration number from the registration body.';
-COMMENT ON COLUMN clinician.site_name IS
+COMMENT ON COLUMN return_to_work.clinician.site_name IS
     'Name of the clinic, practice, or hospital where the assessment was performed.';
-COMMENT ON COLUMN clinician.practice_ods_code IS
+COMMENT ON COLUMN return_to_work.clinician.practice_ods_code IS
     'NHS ODS code for the issuing practice or organisation.';
-COMMENT ON COLUMN clinician.united_kingdom_nhs_number IS
+COMMENT ON COLUMN return_to_work.clinician.united_kingdom_nhs_number IS
     'United Kingdom NHS number of the clinician (where they are also a patient on the same system).';
 
 CREATE INDEX clinician_index_gto
-    ON clinician
+    ON return_to_work.clinician
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -223,7 +240,7 @@ CREATE INDEX clinician_index_gto
 
 -- Employer information for the Return to Work form.
 
-CREATE TABLE employer (
+CREATE TABLE return_to_work.employer (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -247,43 +264,43 @@ CREATE TABLE employer (
 );
 
 CREATE TRIGGER trigger_employer_updated_at
-    BEFORE UPDATE ON employer
+    BEFORE UPDATE ON return_to_work.employer
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE employer IS
+COMMENT ON TABLE return_to_work.employer IS
     'Employer of the patient. Recipient of the Statement of Fitness for Work.';
-COMMENT ON COLUMN employer.id IS
+COMMENT ON COLUMN return_to_work.employer.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN employer.created_at IS
+COMMENT ON COLUMN return_to_work.employer.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN employer.updated_at IS
+COMMENT ON COLUMN return_to_work.employer.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN employer.deleted_at IS
+COMMENT ON COLUMN return_to_work.employer.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN employer.name IS
+COMMENT ON COLUMN return_to_work.employer.name IS
     'Registered employer name.';
-COMMENT ON COLUMN employer.industry_sector IS
+COMMENT ON COLUMN return_to_work.employer.industry_sector IS
     'Industry sector for risk-assessment and RIDDOR context.';
-COMMENT ON COLUMN employer.postal_address_as_full_text IS
+COMMENT ON COLUMN return_to_work.employer.postal_address_as_full_text IS
     'Employer postal address as full text.';
-COMMENT ON COLUMN employer.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN return_to_work.employer.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2 format.';
-COMMENT ON COLUMN employer.postcode IS
+COMMENT ON COLUMN return_to_work.employer.postcode IS
     'Postal code.';
-COMMENT ON COLUMN employer.occupational_health_contact_name IS
+COMMENT ON COLUMN return_to_work.employer.occupational_health_contact_name IS
     'Name of the employer occupational-health contact.';
-COMMENT ON COLUMN employer.occupational_health_contact_email IS
+COMMENT ON COLUMN return_to_work.employer.occupational_health_contact_email IS
     'Email of the employer occupational-health contact.';
-COMMENT ON COLUMN employer.occupational_health_contact_phone IS
+COMMENT ON COLUMN return_to_work.employer.occupational_health_contact_phone IS
     'Phone of the employer occupational-health contact.';
-COMMENT ON COLUMN employer.hr_contact_name IS
+COMMENT ON COLUMN return_to_work.employer.hr_contact_name IS
     'Name of the employer HR contact.';
-COMMENT ON COLUMN employer.hr_contact_email IS
+COMMENT ON COLUMN return_to_work.employer.hr_contact_email IS
     'Email of the employer HR contact.';
 
 CREATE INDEX employer_index_gto
-    ON employer
+    ON return_to_work.employer
     USING GIN ((
         name
     ) gin_trgm_ops);
@@ -300,18 +317,18 @@ CREATE INDEX employer_index_gto
 -- fields: absence history, clinical assessment, fitness statement,
 -- phased-return plan, follow-up plan, and sign-off.
 
-CREATE TABLE return_to_work (
+CREATE TABLE return_to_work.return_to_work (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     patient_id UUID NOT NULL
-        REFERENCES patient(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.patient(id) ON DELETE CASCADE,
     clinician_id UUID NOT NULL
-        REFERENCES clinician(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.clinician(id) ON DELETE CASCADE,
     employer_id UUID
-        REFERENCES employer(id) ON DELETE SET NULL,
+        REFERENCES return_to_work.employer(id) ON DELETE SET NULL,
 
     status VARCHAR(20) NOT NULL DEFAULT 'draft'
         CHECK (status IN ('draft', 'submitted', 'reviewed', 'cancelled', 'superseded')),
@@ -421,146 +438,146 @@ CREATE TABLE return_to_work (
 );
 
 CREATE TRIGGER trigger_return_to_work_updated_at
-    BEFORE UPDATE ON return_to_work
+    BEFORE UPDATE ON return_to_work.return_to_work
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE return_to_work IS
+COMMENT ON TABLE return_to_work.return_to_work IS
     'Clinician-issued Statement of Fitness for Work (Med 3 / fit note) authorising an employee return to work after illness, injury, or extended absence.';
-COMMENT ON COLUMN return_to_work.id IS
+COMMENT ON COLUMN return_to_work.return_to_work.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN return_to_work.created_at IS
+COMMENT ON COLUMN return_to_work.return_to_work.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN return_to_work.updated_at IS
+COMMENT ON COLUMN return_to_work.return_to_work.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN return_to_work.deleted_at IS
+COMMENT ON COLUMN return_to_work.return_to_work.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN return_to_work.patient_id IS
+COMMENT ON COLUMN return_to_work.return_to_work.patient_id IS
     'Foreign key to the patient (employee) being assessed.';
-COMMENT ON COLUMN return_to_work.clinician_id IS
+COMMENT ON COLUMN return_to_work.return_to_work.clinician_id IS
     'Foreign key to the clinician issuing the statement.';
-COMMENT ON COLUMN return_to_work.employer_id IS
+COMMENT ON COLUMN return_to_work.return_to_work.employer_id IS
     'Foreign key to the employer receiving the statement.';
-COMMENT ON COLUMN return_to_work.status IS
+COMMENT ON COLUMN return_to_work.return_to_work.status IS
     'Lifecycle status: draft, submitted, reviewed, cancelled, or superseded.';
-COMMENT ON COLUMN return_to_work.statement_kind IS
+COMMENT ON COLUMN return_to_work.return_to_work.statement_kind IS
     'Statement output style: fit-note (UK Med 3), medical-clearance-letter, or specialist-report.';
-COMMENT ON COLUMN return_to_work.assessment_date IS
+COMMENT ON COLUMN return_to_work.return_to_work.assessment_date IS
     'Date the assessment was performed.';
-COMMENT ON COLUMN return_to_work.assessment_time IS
+COMMENT ON COLUMN return_to_work.return_to_work.assessment_time IS
     'Time the assessment was performed.';
-COMMENT ON COLUMN return_to_work.absence_first_day IS
+COMMENT ON COLUMN return_to_work.return_to_work.absence_first_day IS
     'First calendar day of the current absence.';
-COMMENT ON COLUMN return_to_work.absence_total_calendar_days IS
+COMMENT ON COLUMN return_to_work.return_to_work.absence_total_calendar_days IS
     'Total calendar days absent as of the assessment.';
-COMMENT ON COLUMN return_to_work.prior_med3_reference IS
+COMMENT ON COLUMN return_to_work.return_to_work.prior_med3_reference IS
     'Reference identifier of an earlier Med 3 if this is a continuation.';
-COMMENT ON COLUMN return_to_work.prior_self_certification_reference IS
+COMMENT ON COLUMN return_to_work.return_to_work.prior_self_certification_reference IS
     'Reference identifier of an earlier SC2 self-certification if one was filed.';
-COMMENT ON COLUMN return_to_work.primary_diagnosis_text IS
+COMMENT ON COLUMN return_to_work.return_to_work.primary_diagnosis_text IS
     'Free-text primary diagnosis as it will appear on the fit note.';
-COMMENT ON COLUMN return_to_work.primary_diagnosis_snomed IS
+COMMENT ON COLUMN return_to_work.return_to_work.primary_diagnosis_snomed IS
     'SNOMED CT concept ID for the primary diagnosis.';
-COMMENT ON COLUMN return_to_work.primary_diagnosis_icd10 IS
+COMMENT ON COLUMN return_to_work.return_to_work.primary_diagnosis_icd10 IS
     'ICD-10 code for the primary diagnosis.';
-COMMENT ON COLUMN return_to_work.comorbid_conditions IS
+COMMENT ON COLUMN return_to_work.return_to_work.comorbid_conditions IS
     'Free-text list of comorbid conditions relevant to the return-to-work decision.';
-COMMENT ON COLUMN return_to_work.mechanism IS
+COMMENT ON COLUMN return_to_work.return_to_work.mechanism IS
     'Mechanism of absence: illness, injury, surgery, mental-health, pregnancy-related, cancer-treatment, or other.';
-COMMENT ON COLUMN return_to_work.workplace_cause IS
+COMMENT ON COLUMN return_to_work.return_to_work.workplace_cause IS
     'Whether the absence has a workplace cause (triggers RIDDOR check).';
-COMMENT ON COLUMN return_to_work.riddor_reference IS
+COMMENT ON COLUMN return_to_work.return_to_work.riddor_reference IS
     'RIDDOR report reference if one has been filed by the employer.';
-COMMENT ON COLUMN return_to_work.current_medications IS
+COMMENT ON COLUMN return_to_work.return_to_work.current_medications IS
     'Current medications relevant to the return-to-work assessment.';
-COMMENT ON COLUMN return_to_work.ongoing_therapy IS
+COMMENT ON COLUMN return_to_work.return_to_work.ongoing_therapy IS
     'Ongoing non-pharmacological therapy (physiotherapy, counselling, specialist follow-up).';
-COMMENT ON COLUMN return_to_work.last_consultation_date IS
+COMMENT ON COLUMN return_to_work.return_to_work.last_consultation_date IS
     'Date of the most recent consultation before this assessment.';
-COMMENT ON COLUMN return_to_work.anticipated_recovery_trajectory IS
+COMMENT ON COLUMN return_to_work.return_to_work.anticipated_recovery_trajectory IS
     'Anticipated trajectory: full-recovery-imminent, full-recovery-expected, partial-recovery-expected, chronic-managed, progressive, or palliative.';
-COMMENT ON COLUMN return_to_work.specialist_followup_required IS
+COMMENT ON COLUMN return_to_work.return_to_work.specialist_followup_required IS
     'Whether specialist follow-up is required before the next review.';
-COMMENT ON COLUMN return_to_work.mobility IS
+COMMENT ON COLUMN return_to_work.return_to_work.mobility IS
     'Mobility: normal, reduced, severely-limited, or wheelchair.';
-COMMENT ON COLUMN return_to_work.manual_handling_capacity_kg IS
+COMMENT ON COLUMN return_to_work.return_to_work.manual_handling_capacity_kg IS
     'Maximum safe manual-handling load in kilograms.';
-COMMENT ON COLUMN return_to_work.cognition IS
+COMMENT ON COLUMN return_to_work.return_to_work.cognition IS
     'Cognition: normal, mildly-impaired, moderately-impaired, or severely-impaired.';
-COMMENT ON COLUMN return_to_work.mood IS
+COMMENT ON COLUMN return_to_work.return_to_work.mood IS
     'Mood: stable, low, anxious, agitated, or crisis.';
-COMMENT ON COLUMN return_to_work.sleep IS
+COMMENT ON COLUMN return_to_work.return_to_work.sleep IS
     'Sleep: normal, disturbed, or severely-disturbed.';
-COMMENT ON COLUMN return_to_work.pain_score_0_10 IS
+COMMENT ON COLUMN return_to_work.return_to_work.pain_score_0_10 IS
     'Patient-reported pain on a 0-10 numeric rating scale.';
-COMMENT ON COLUMN return_to_work.driving_capacity IS
+COMMENT ON COLUMN return_to_work.return_to_work.driving_capacity IS
     'Driving capacity: fit-to-drive, restricted, or not-fit-to-drive.';
-COMMENT ON COLUMN return_to_work.standing_tolerance_minutes IS
+COMMENT ON COLUMN return_to_work.return_to_work.standing_tolerance_minutes IS
     'Continuous standing tolerance in minutes.';
-COMMENT ON COLUMN return_to_work.sitting_tolerance_minutes IS
+COMMENT ON COLUMN return_to_work.return_to_work.sitting_tolerance_minutes IS
     'Continuous sitting tolerance in minutes.';
-COMMENT ON COLUMN return_to_work.screen_tolerance_minutes IS
+COMMENT ON COLUMN return_to_work.return_to_work.screen_tolerance_minutes IS
     'Continuous screen-use tolerance in minutes.';
-COMMENT ON COLUMN return_to_work.adl_independence IS
+COMMENT ON COLUMN return_to_work.return_to_work.adl_independence IS
     'Independence in activities of daily living: independent, minor-help, major-help, or dependent.';
-COMMENT ON COLUMN return_to_work.fitness_statement_computed IS
+COMMENT ON COLUMN return_to_work.return_to_work.fitness_statement_computed IS
     'Engine-computed fitness statement before clinician override.';
-COMMENT ON COLUMN return_to_work.fitness_statement_final IS
+COMMENT ON COLUMN return_to_work.return_to_work.fitness_statement_final IS
     'Final fitness statement after any clinician override.';
-COMMENT ON COLUMN return_to_work.clinician_override IS
+COMMENT ON COLUMN return_to_work.return_to_work.clinician_override IS
     'Whether the clinician overrode the computed fitness statement.';
-COMMENT ON COLUMN return_to_work.clinician_override_reason IS
+COMMENT ON COLUMN return_to_work.return_to_work.clinician_override_reason IS
     'Documented reason for any clinician override.';
-COMMENT ON COLUMN return_to_work.clinician_confidence IS
+COMMENT ON COLUMN return_to_work.return_to_work.clinician_confidence IS
     'Clinician confidence in the statement: high, medium, or low.';
-COMMENT ON COLUMN return_to_work.valid_from IS
+COMMENT ON COLUMN return_to_work.return_to_work.valid_from IS
     'First date the statement is valid.';
-COMMENT ON COLUMN return_to_work.valid_until IS
+COMMENT ON COLUMN return_to_work.return_to_work.valid_until IS
     'Last date the statement is valid.';
-COMMENT ON COLUMN return_to_work.validity_weeks IS
+COMMENT ON COLUMN return_to_work.return_to_work.validity_weeks IS
     'Number of weeks the statement is valid (alternative expression of valid_until).';
-COMMENT ON COLUMN return_to_work.reassessment_required IS
+COMMENT ON COLUMN return_to_work.return_to_work.reassessment_required IS
     'Whether the patient must be reassessed at expiry.';
-COMMENT ON COLUMN return_to_work.phased_return_applicable IS
+COMMENT ON COLUMN return_to_work.return_to_work.phased_return_applicable IS
     'Whether a phased return is recommended.';
-COMMENT ON COLUMN return_to_work.phased_return_template IS
+COMMENT ON COLUMN return_to_work.return_to_work.phased_return_template IS
     'Selected phased-return template: 2-week, 4-week, 8-week, 12-week, or custom.';
-COMMENT ON COLUMN return_to_work.phased_return_target_date IS
+COMMENT ON COLUMN return_to_work.return_to_work.phased_return_target_date IS
     'Target date for full-hours resumption.';
-COMMENT ON COLUMN return_to_work.phased_return_schedule_json IS
+COMMENT ON COLUMN return_to_work.return_to_work.phased_return_schedule_json IS
     'Ordered list of {week, hoursPerWeek, daysPerWeek, notes} entries.';
-COMMENT ON COLUMN return_to_work.phased_return_support_contact IS
+COMMENT ON COLUMN return_to_work.return_to_work.phased_return_support_contact IS
     'Workplace support contact during the phased return.';
-COMMENT ON COLUMN return_to_work.workstation_review_required IS
+COMMENT ON COLUMN return_to_work.return_to_work.workstation_review_required IS
     'Whether a workstation / ergonomic review is required before return.';
-COMMENT ON COLUMN return_to_work.additional_adjustments_text IS
+COMMENT ON COLUMN return_to_work.return_to_work.additional_adjustments_text IS
     'Free-text additional workplace adjustments not captured in the enumerated restriction list.';
-COMMENT ON COLUMN return_to_work.review_location IS
+COMMENT ON COLUMN return_to_work.return_to_work.review_location IS
     'Location of the next review: gp, occupational-health, specialist, employer-oh, or none.';
-COMMENT ON COLUMN return_to_work.review_date IS
+COMMENT ON COLUMN return_to_work.return_to_work.review_date IS
     'Scheduled date of the next review.';
-COMMENT ON COLUMN return_to_work.occupational_health_referral_made IS
+COMMENT ON COLUMN return_to_work.return_to_work.occupational_health_referral_made IS
     'Whether an occupational-health referral has been made.';
-COMMENT ON COLUMN return_to_work.dvla_notification_required IS
+COMMENT ON COLUMN return_to_work.return_to_work.dvla_notification_required IS
     'Whether the patient must notify the DVLA of the condition.';
-COMMENT ON COLUMN return_to_work.employer_oh_notified IS
+COMMENT ON COLUMN return_to_work.return_to_work.employer_oh_notified IS
     'Whether the employer occupational-health team has been notified.';
-COMMENT ON COLUMN return_to_work.return_to_work_meeting_scheduled IS
+COMMENT ON COLUMN return_to_work.return_to_work.return_to_work_meeting_scheduled IS
     'Whether a return-to-work meeting has been scheduled with the employer.';
-COMMENT ON COLUMN return_to_work.maternity_certificate_reference IS
+COMMENT ON COLUMN return_to_work.return_to_work.maternity_certificate_reference IS
     'MAT B1 reference if the absence is pregnancy-related.';
-COMMENT ON COLUMN return_to_work.final_notes IS
+COMMENT ON COLUMN return_to_work.return_to_work.final_notes IS
     'Free-text final notes from the clinician.';
-COMMENT ON COLUMN return_to_work.signature_svg IS
+COMMENT ON COLUMN return_to_work.return_to_work.signature_svg IS
     'Clinician electronic signature captured as an SVG path.';
-COMMENT ON COLUMN return_to_work.signed_at IS
+COMMENT ON COLUMN return_to_work.return_to_work.signed_at IS
     'Timestamp when the clinician signed off the statement.';
 
-CREATE INDEX return_to_work_patient_id_index ON return_to_work (patient_id);
-CREATE INDEX return_to_work_clinician_id_index ON return_to_work (clinician_id);
-CREATE INDEX return_to_work_employer_id_index ON return_to_work (employer_id);
-CREATE INDEX return_to_work_status_index ON return_to_work (status);
-CREATE INDEX return_to_work_valid_until_index ON return_to_work (valid_until);
+CREATE INDEX return_to_work_patient_id_index ON return_to_work.return_to_work (patient_id);
+CREATE INDEX return_to_work_clinician_id_index ON return_to_work.return_to_work (clinician_id);
+CREATE INDEX return_to_work_employer_id_index ON return_to_work.return_to_work (employer_id);
+CREATE INDEX return_to_work_status_index ON return_to_work.return_to_work (status);
+CREATE INDEX return_to_work_valid_until_index ON return_to_work.return_to_work (valid_until);
 
 -- ========================================================================
 -- END 05_create_table_return_to_work.sql
@@ -575,14 +592,14 @@ CREATE INDEX return_to_work_valid_until_index ON return_to_work (valid_until);
 -- enumerated check-box on the Med 3 plus a quantitative limit
 -- (e.g. lifting kg, screen-break minutes) and a free-text note.
 
-CREATE TABLE return_to_work_restriction (
+CREATE TABLE return_to_work.return_to_work_restriction (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     return_to_work_id UUID NOT NULL
-        REFERENCES return_to_work(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.return_to_work(id) ON DELETE CASCADE,
 
     kind VARCHAR(40) NOT NULL DEFAULT ''
         CHECK (kind IN (
@@ -623,41 +640,41 @@ CREATE TABLE return_to_work_restriction (
 );
 
 CREATE TRIGGER trigger_return_to_work_restriction_updated_at
-    BEFORE UPDATE ON return_to_work_restriction
+    BEFORE UPDATE ON return_to_work.return_to_work_restriction
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE return_to_work_restriction IS
+COMMENT ON TABLE return_to_work.return_to_work_restriction IS
     'Individual workplace restriction or reasonable adjustment associated with a Return to Work record. Many-to-one relation to return_to_work.';
-COMMENT ON COLUMN return_to_work_restriction.id IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN return_to_work_restriction.created_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN return_to_work_restriction.updated_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN return_to_work_restriction.deleted_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.deleted_at IS
     'Timestamp when this row was deleted.';
-COMMENT ON COLUMN return_to_work_restriction.return_to_work_id IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.return_to_work_id IS
     'Foreign key to the parent return_to_work record.';
-COMMENT ON COLUMN return_to_work_restriction.kind IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.kind IS
     'Restriction kind drawn from the enumerated Med 3 adjustments list plus this monorepo extensions.';
-COMMENT ON COLUMN return_to_work_restriction.severity IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.severity IS
     'Severity of the restriction: low, moderate, or high. Drives the composite restriction-priority grade.';
-COMMENT ON COLUMN return_to_work_restriction.quantitative_limit IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.quantitative_limit IS
     'Quantitative limit for the restriction (e.g. 5 kg lifting limit, 30 minute screen break).';
-COMMENT ON COLUMN return_to_work_restriction.notes IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.notes IS
     'Free-text clinician notes for this specific restriction.';
-COMMENT ON COLUMN return_to_work_restriction.start_date IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.start_date IS
     'First date this restriction applies (defaults to return_to_work.valid_from).';
-COMMENT ON COLUMN return_to_work_restriction.end_date IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.end_date IS
     'Last date this restriction applies (defaults to return_to_work.valid_until).';
-COMMENT ON COLUMN return_to_work_restriction.priority_rank IS
+COMMENT ON COLUMN return_to_work.return_to_work_restriction.priority_rank IS
     'Display ordering for the restriction within the fit note (lower = higher on the printed list).';
 
 CREATE INDEX return_to_work_restriction_return_to_work_id_index
-    ON return_to_work_restriction (return_to_work_id);
+    ON return_to_work.return_to_work_restriction (return_to_work_id);
 CREATE INDEX return_to_work_restriction_kind_index
-    ON return_to_work_restriction (kind);
+    ON return_to_work.return_to_work_restriction (kind);
 
 -- ========================================================================
 -- END 06_create_table_return_to_work_restriction.sql
@@ -670,14 +687,14 @@ CREATE INDEX return_to_work_restriction_kind_index
 -- Computed grading result for a Return to Work record.
 -- One-to-one with the parent return_to_work record.
 
-CREATE TABLE return_to_work_grade (
+CREATE TABLE return_to_work.return_to_work_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     return_to_work_id UUID NOT NULL UNIQUE
-        REFERENCES return_to_work(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.return_to_work(id) ON DELETE CASCADE,
 
     fitness_statement VARCHAR(20) NOT NULL DEFAULT 'not-fit'
         CHECK (fitness_statement IN ('fit', 'may-be-fit', 'not-fit')),
@@ -689,31 +706,31 @@ CREATE TABLE return_to_work_grade (
 );
 
 CREATE TRIGGER trigger_return_to_work_grade_updated_at
-    BEFORE UPDATE ON return_to_work_grade
+    BEFORE UPDATE ON return_to_work.return_to_work_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE return_to_work_grade IS
+COMMENT ON TABLE return_to_work.return_to_work_grade IS
     'Computed Return to Work grading result: the engine-derived fitness statement plus the composite restriction-priority grade. One-to-one child of return_to_work.';
-COMMENT ON COLUMN return_to_work_grade.id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN return_to_work_grade.created_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN return_to_work_grade.updated_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN return_to_work_grade.deleted_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.deleted_at IS
     'Timestamp when this row was deleted.';
-COMMENT ON COLUMN return_to_work_grade.return_to_work_id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.return_to_work_id IS
     'Foreign key to the return_to_work record.';
-COMMENT ON COLUMN return_to_work_grade.fitness_statement IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.fitness_statement IS
     'Engine-computed fitness statement: fit, may-be-fit, or not-fit.';
-COMMENT ON COLUMN return_to_work_grade.restriction_priority IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.restriction_priority IS
     'Composite restriction-priority grade: routine, standard, restricted, or high-risk.';
-COMMENT ON COLUMN return_to_work_grade.rule_count IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.rule_count IS
     'Total number of grading rules that fired.';
-COMMENT ON COLUMN return_to_work_grade.flag_count IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.flag_count IS
     'Total number of additional safety flags raised.';
-COMMENT ON COLUMN return_to_work_grade.graded_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade.graded_at IS
     'Timestamp when the grading was computed.';
 
 -- ========================================================================
@@ -728,14 +745,14 @@ COMMENT ON COLUMN return_to_work_grade.graded_at IS
 -- composite grading. Each row corresponds to one rule that the engine
 -- found to apply to the data on the parent return_to_work record.
 
-CREATE TABLE return_to_work_grade_rule (
+CREATE TABLE return_to_work.return_to_work_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     return_to_work_grade_id UUID NOT NULL
-        REFERENCES return_to_work_grade(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.return_to_work_grade(id) ON DELETE CASCADE,
 
     rule_code VARCHAR(60) NOT NULL DEFAULT '',
     rule_title VARCHAR(255) NOT NULL DEFAULT '',
@@ -750,39 +767,39 @@ CREATE TABLE return_to_work_grade_rule (
 );
 
 CREATE TRIGGER trigger_return_to_work_grade_rule_updated_at
-    BEFORE UPDATE ON return_to_work_grade_rule
+    BEFORE UPDATE ON return_to_work.return_to_work_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE return_to_work_grade_rule IS
+COMMENT ON TABLE return_to_work.return_to_work_grade_rule IS
     'Individual rules that fired during Return to Work composite grading. Many-to-one child of return_to_work_grade.';
-COMMENT ON COLUMN return_to_work_grade_rule.id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN return_to_work_grade_rule.created_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN return_to_work_grade_rule.updated_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN return_to_work_grade_rule.deleted_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.deleted_at IS
     'Timestamp when this row was deleted.';
-COMMENT ON COLUMN return_to_work_grade_rule.return_to_work_grade_id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.return_to_work_grade_id IS
     'Foreign key to the parent return_to_work_grade record.';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_code IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_code IS
     'Stable rule identifier (e.g. RTW-FIT-001, RTW-RES-005).';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_title IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_title IS
     'Human-readable rule title for display in the fired-rules report.';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_band IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_band IS
     'Band this rule drove (fitness statement value or restriction-priority value).';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_priority IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_priority IS
     'Priority of this rule: low, medium, or high.';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_kind IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_kind IS
     'Whether the rule contributes to fitness statement, restriction grading, or both (composite).';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_evidence IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_evidence IS
     'Free-text evidence describing which input field(s) triggered the rule.';
-COMMENT ON COLUMN return_to_work_grade_rule.rule_notes IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_rule.rule_notes IS
     'Free-text notes for the clinician reviewing the fired rules.';
 
 CREATE INDEX return_to_work_grade_rule_grade_id_index
-    ON return_to_work_grade_rule (return_to_work_grade_id);
+    ON return_to_work.return_to_work_grade_rule (return_to_work_grade_id);
 
 -- ========================================================================
 -- END 08_create_table_return_to_work_grade_rule.sql
@@ -797,14 +814,14 @@ CREATE INDEX return_to_work_grade_rule_grade_id_index
 -- restriction-priority grade and are surfaced to the
 -- occupational-health reviewer.
 
-CREATE TABLE return_to_work_grade_flag (
+CREATE TABLE return_to_work.return_to_work_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     return_to_work_grade_id UUID NOT NULL
-        REFERENCES return_to_work_grade(id) ON DELETE CASCADE,
+        REFERENCES return_to_work.return_to_work_grade(id) ON DELETE CASCADE,
 
     flag_code VARCHAR(60) NOT NULL DEFAULT '',
     flag_title VARCHAR(255) NOT NULL DEFAULT '',
@@ -829,37 +846,37 @@ CREATE TABLE return_to_work_grade_flag (
 );
 
 CREATE TRIGGER trigger_return_to_work_grade_flag_updated_at
-    BEFORE UPDATE ON return_to_work_grade_flag
+    BEFORE UPDATE ON return_to_work.return_to_work_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION return_to_work.set_updated_at();
 
-COMMENT ON TABLE return_to_work_grade_flag IS
+COMMENT ON TABLE return_to_work.return_to_work_grade_flag IS
     'Additional safety flags raised during Return to Work composite grading. Many-to-one child of return_to_work_grade.';
-COMMENT ON COLUMN return_to_work_grade_flag.id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN return_to_work_grade_flag.created_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN return_to_work_grade_flag.updated_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN return_to_work_grade_flag.deleted_at IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.deleted_at IS
     'Timestamp when this row was deleted.';
-COMMENT ON COLUMN return_to_work_grade_flag.return_to_work_grade_id IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.return_to_work_grade_id IS
     'Foreign key to the parent return_to_work_grade record.';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_code IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_code IS
     'Stable flag identifier (e.g. RTW-FLAG-SAFETY-001).';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_title IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_title IS
     'Human-readable flag title for display.';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_category IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_category IS
     'Flag category: safety-critical-role, dvla-notifiable, riddor-reportable, phased-return-incomplete, risk-assessment-required, long-term-absence, mental-health-no-followup, pregnancy-no-mat-b1, clinician-low-confidence, equality-act-adjustment, or other.';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_priority IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_priority IS
     'Flag priority: low, medium, or high.';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_evidence IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_evidence IS
     'Free-text evidence describing which input field(s) triggered the flag.';
-COMMENT ON COLUMN return_to_work_grade_flag.flag_recommendation IS
+COMMENT ON COLUMN return_to_work.return_to_work_grade_flag.flag_recommendation IS
     'Free-text recommended action for the occupational-health reviewer.';
 
 CREATE INDEX return_to_work_grade_flag_grade_id_index
-    ON return_to_work_grade_flag (return_to_work_grade_id);
+    ON return_to_work.return_to_work_grade_flag (return_to_work_grade_id);
 
 -- ========================================================================
 -- END 09_create_table_return_to_work_grade_flag.sql

@@ -5,8 +5,9 @@
 -- migration files in this directory. Do not edit by hand — re-run
 -- the generator after changing any NN-*.sql file.
 --
--- Source files (8):
+-- Source files (9):
 --   - 00_create_extensions.sql
+--   - 00_create_schema.sql
 --   - 01_create_function_set_updated_at.sql
 --   - 02_create_table_patient.sql
 --   - 03_create_table_clinician.sql
@@ -31,12 +32,28 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- ========================================================================
 
 -- ========================================================================
+-- BEGIN 00_create_schema.sql
+-- ========================================================================
+
+-- Every table, function and domain of this form lives in its own schema,
+-- named for the form, so no two forms' names can collide; see
+-- spec/form-namespacing/.
+CREATE SCHEMA IF NOT EXISTS united_states_social_security_card_application;
+
+COMMENT ON SCHEMA united_states_social_security_card_application IS
+    'Namespace for the United States Social Security Card Application (Form SS-5) form''s tables, functions and domains.';
+
+-- ========================================================================
+-- END 00_create_schema.sql
+-- ========================================================================
+
+-- ========================================================================
 -- BEGIN 01_create_function_set_updated_at.sql
 -- ========================================================================
 
 -- set_updated_at() is a reusable trigger function that sets the updated_at
 -- column to the current timestamp whenever a row is modified.
-CREATE OR REPLACE FUNCTION set_updated_at()
+CREATE OR REPLACE FUNCTION united_states_social_security_card_application.set_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at = now();
@@ -44,7 +61,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-COMMENT ON FUNCTION set_updated_at() IS
+COMMENT ON FUNCTION united_states_social_security_card_application.set_updated_at() IS
     'Trigger function that sets updated_at to now() on every UPDATE.';
 
 -- ========================================================================
@@ -58,7 +75,7 @@ COMMENT ON FUNCTION set_updated_at() IS
 -- Applicant demographic information for the person who needs a Social
 -- Security card.
 
-CREATE TABLE patient (
+CREATE TABLE united_states_social_security_card_application.patient (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -76,41 +93,41 @@ CREATE TABLE patient (
 );
 
 CREATE TRIGGER trigger_patient_updated_at
-    BEFORE UPDATE ON patient
+    BEFORE UPDATE ON united_states_social_security_card_application.patient
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE patient IS
+COMMENT ON TABLE united_states_social_security_card_application.patient IS
     'Applicant demographic information for the person who needs a Social Security card. The Social Security number is never stored.';
-COMMENT ON COLUMN patient.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN patient.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN patient.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN patient.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN patient.name IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.name IS
     'Full name of the applicant.';
-COMMENT ON COLUMN patient.birth_date IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.birth_date IS
     'Date of birth of the applicant.';
-COMMENT ON COLUMN patient.sex IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.sex IS
     'Sex recorded for the applicant: female, male, other, or unknown.';
-COMMENT ON COLUMN patient.email IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.email IS
     'Email address.';
-COMMENT ON COLUMN patient.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.phone IS
     'Phone number.';
-COMMENT ON COLUMN patient.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN patient.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN patient.postcode IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.postcode IS
     'Postal code (ZIP code).';
-COMMENT ON COLUMN patient.us_state_code IS
+COMMENT ON COLUMN united_states_social_security_card_application.patient.us_state_code IS
     'Two-letter USPS code of the state or territory of residence.';
 
 CREATE INDEX patient_name_trgm_idx
-    ON patient
+    ON united_states_social_security_card_application.patient
     USING GIN (name gin_trgm_ops);
 
 -- ========================================================================
@@ -124,7 +141,7 @@ CREATE INDEX patient_name_trgm_idx
 -- Clinician information for the preparer or assisting staff member who helps
 -- complete this Social Security card application.
 
-CREATE TABLE clinician (
+CREATE TABLE united_states_social_security_card_application.clinician (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -142,37 +159,37 @@ CREATE TABLE clinician (
 );
 
 CREATE TRIGGER trigger_clinician_updated_at
-    BEFORE UPDATE ON clinician
+    BEFORE UPDATE ON united_states_social_security_card_application.clinician
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE clinician IS
+COMMENT ON TABLE united_states_social_security_card_application.clinician IS
     'Clinician information for the preparer or assisting staff member who helps complete the Social Security card application.';
-COMMENT ON COLUMN clinician.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN clinician.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN clinician.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN clinician.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN clinician.name IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.name IS
     'Full name of the preparer or staff member.';
-COMMENT ON COLUMN clinician.email IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.email IS
     'Email address.';
-COMMENT ON COLUMN clinician.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.phone IS
     'Phone number.';
-COMMENT ON COLUMN clinician.postal_address_as_full_text IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.postal_address_as_full_text IS
     'Postal address as a single text block.';
-COMMENT ON COLUMN clinician.country_as_iso_3166_1_alpha_2 IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.country_as_iso_3166_1_alpha_2 IS
     'Country as ISO 3166-1 alpha-2.';
-COMMENT ON COLUMN clinician.postcode IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.postcode IS
     'Postal code (ZIP code).';
-COMMENT ON COLUMN clinician.role IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.role IS
     'Role: preparer, field-office-staff, legal-guardian, or other.';
-COMMENT ON COLUMN clinician.organization IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.organization IS
     'Organization the preparer works for, such as a school, agency, or field office.';
-COMMENT ON COLUMN clinician.staff_identifier IS
+COMMENT ON COLUMN united_states_social_security_card_application.clinician.staff_identifier IS
     'Organization-assigned identifier of the preparer.';
 
 -- ========================================================================
@@ -193,14 +210,14 @@ COMMENT ON COLUMN clinician.staff_identifier IS
 -- Social Security number itself is deliberately never stored. This record
 -- documents an application; the Social Security Administration decides it.
 
-CREATE TABLE ss5_application (
+CREATE TABLE united_states_social_security_card_application.ss5_application (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
-    patient_id UUID NOT NULL REFERENCES patient(id) ON DELETE RESTRICT,
-    clinician_id UUID REFERENCES clinician(id) ON DELETE RESTRICT,
+    patient_id UUID NOT NULL REFERENCES united_states_social_security_card_application.patient(id) ON DELETE RESTRICT,
+    clinician_id UUID REFERENCES united_states_social_security_card_application.clinician(id) ON DELETE RESTRICT,
 
     -- Request (SS-5 items 12-15 and replacement history)
     application_date DATE,
@@ -252,108 +269,108 @@ CREATE TABLE ss5_application (
 );
 
 CREATE INDEX ss5_application_patient_id_idx
-    ON ss5_application (patient_id);
+    ON united_states_social_security_card_application.ss5_application (patient_id);
 CREATE INDEX ss5_application_clinician_id_idx
-    ON ss5_application (clinician_id);
+    ON united_states_social_security_card_application.ss5_application (clinician_id);
 
 CREATE TRIGGER trigger_ss5_application_updated_at
-    BEFORE UPDATE ON ss5_application
+    BEFORE UPDATE ON united_states_social_security_card_application.ss5_application
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE ss5_application IS
+COMMENT ON TABLE united_states_social_security_card_application.ss5_application IS
     'Main Form SS-5 application record: request type, applicant items, evidence documents presented, filer and signature, and death-related Tell-SSA items. Classification, fired rules, and flags live in child tables. The Social Security number is never stored.';
-COMMENT ON COLUMN ss5_application.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ss5_application.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.created_at IS
     'Timestamp when the record was created.';
-COMMENT ON COLUMN ss5_application.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.updated_at IS
     'Timestamp when the record was updated most-recently.';
-COMMENT ON COLUMN ss5_application.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.deleted_at IS
     'Timestamp when the record was deleted a.k.a. soft-removed.';
-COMMENT ON COLUMN ss5_application.patient_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.patient_id IS
     'Foreign key to the applicant (the person named in item 1; restrict delete).';
-COMMENT ON COLUMN ss5_application.clinician_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.clinician_id IS
     'Foreign key to the preparer or assisting staff member (restrict delete); optional.';
-COMMENT ON COLUMN ss5_application.application_date IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.application_date IS
     'Date the application is signed and submitted (SS-5 item 15); the reference date for age rules.';
-COMMENT ON COLUMN ss5_application.request_type IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.request_type IS
     'What the applicant asks SSA for: an original card, a replacement card, or a corrected card.';
-COMMENT ON COLUMN ss5_application.channel IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.channel IS
     'How the application is submitted; applicants aged 12 or older for an original card must apply in person.';
-COMMENT ON COLUMN ss5_application.previously_applied IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.previously_applied IS
     'Whether the person has ever applied for or received an SSN or card (SS-5 item 12).';
-COMMENT ON COLUMN ss5_application.name_change IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change IS
     'Whether the name on the card differs because of a legal name change.';
-COMMENT ON COLUMN ss5_application.name_change_reason IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change_reason IS
     'Reason for the legal name change.';
-COMMENT ON COLUMN ss5_application.date_of_birth_correction IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.date_of_birth_correction IS
     'Whether the request corrects the date of birth recorded by SSA.';
-COMMENT ON COLUMN ss5_application.replacements_this_year IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.replacements_this_year IS
     'Replacement cards already issued in the current calendar year (limit 3).';
-COMMENT ON COLUMN ss5_application.replacements_lifetime IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.replacements_lifetime IS
     'Replacement cards already issued in the lifetime of the number holder (limit 10).';
-COMMENT ON COLUMN ss5_application.limit_exception_reason IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.limit_exception_reason IS
     'Exception reason claimed when a replacement limit is reached.';
-COMMENT ON COLUMN ss5_application.limit_exception_evidence IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.limit_exception_evidence IS
     'Whether documentation supporting the claimed exception reason is available.';
-COMMENT ON COLUMN ss5_application.name_on_card IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_on_card IS
     'Full name to be shown on the card (item 1).';
-COMMENT ON COLUMN ss5_application.name_at_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_at_birth IS
     'Full name at birth (item 2).';
-COMMENT ON COLUMN ss5_application.other_names_used IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.other_names_used IS
     'Other names used (item 3).';
-COMMENT ON COLUMN ss5_application.name_on_most_recent_card IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_on_most_recent_card IS
     'Name on the most recent Social Security card (item 13).';
-COMMENT ON COLUMN ss5_application.date_of_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.date_of_birth IS
     'Date of birth (item 7).';
-COMMENT ON COLUMN ss5_application.place_of_birth_city IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.place_of_birth_city IS
     'City or town of birth (item 6).';
-COMMENT ON COLUMN ss5_application.place_of_birth_region IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.place_of_birth_region IS
     'State, province, or country of birth (item 6).';
-COMMENT ON COLUMN ss5_application.sex IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.sex IS
     'Sex as recorded on the SS-5 (item 11): female or male.';
-COMMENT ON COLUMN ss5_application.citizenship IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship IS
     'Citizenship or alien status (item 8).';
-COMMENT ON COLUMN ss5_application.non_work_reason_valid IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.non_work_reason_valid IS
     'For a lawfully admitted noncitizen not allowed to work: whether a valid non-work reason (federal or state benefit or law) is documented.';
-COMMENT ON COLUMN ss5_application.mother_name_at_birth IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.mother_name_at_birth IS
     'Mother name at her birth (item 4); write unknown if not known.';
-COMMENT ON COLUMN ss5_application.father_name IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.father_name IS
     'Father name (item 5); write unknown if not known.';
-COMMENT ON COLUMN ss5_application.state_of_residence IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.state_of_residence IS
     'Two-letter USPS code of the state or territory of residence.';
-COMMENT ON COLUMN ss5_application.mailing_address IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.mailing_address IS
     'Mailing address where the card is sent (item 17).';
-COMMENT ON COLUMN ss5_application.phone IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.phone IS
     'Daytime telephone number (item 16).';
-COMMENT ON COLUMN ss5_application.identity_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.identity_document IS
     'Primary proof of identity presented; must be current, unexpired, and show name, identifying information, and preferably a photograph.';
-COMMENT ON COLUMN ss5_application.identity_document_expired IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.identity_document_expired IS
     'Whether the identity document is expired.';
-COMMENT ON COLUMN ss5_application.age_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.age_document IS
     'Proof of age presented; a birth certificate is preferred.';
-COMMENT ON COLUMN ss5_application.citizenship_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship_document IS
     'Proof of US citizenship or lawful alien status presented.';
-COMMENT ON COLUMN ss5_application.citizenship_on_file IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.citizenship_on_file IS
     'Whether SSA already holds citizenship or status evidence for this number (relevant to replacement cards).';
-COMMENT ON COLUMN ss5_application.name_change_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.name_change_document IS
     'Document proving the legal name change.';
-COMMENT ON COLUMN ss5_application.documents_original_or_certified IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.documents_original_or_certified IS
     'Whether every document is an original or a copy certified by the issuing agency; photocopies and notarized copies are not accepted.';
-COMMENT ON COLUMN ss5_application.signer_relationship IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_relationship IS
     'Relationship of the person signing to the person in item 1 (item 18).';
-COMMENT ON COLUMN ss5_application.signer_name IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_name IS
     'Name of the person signing when not the applicant.';
-COMMENT ON COLUMN ss5_application.signer_identity_document IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signer_identity_document IS
     'Whether the signer, when not the applicant, presented their own proof of identity.';
-COMMENT ON COLUMN ss5_application.signature_present IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.signature_present IS
     'Whether the application is signed (item 19).';
-COMMENT ON COLUMN ss5_application.applicant_deceased IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.applicant_deceased IS
     'Tell SSA: whether the person in item 1 has died; a card cannot be issued and the death must be reported instead.';
-COMMENT ON COLUMN ss5_application.death_reported_to_ssa IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.death_reported_to_ssa IS
     'Whether the death has already been reported to SSA (funeral home, family, or 1-800-772-1213).';
-COMMENT ON COLUMN ss5_application.preparer_note IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application.preparer_note IS
     'Free-text note from the person preparing the application.';
 
 -- ========================================================================
@@ -372,14 +389,14 @@ COMMENT ON COLUMN ss5_application.preparer_note IS
 -- completeness classification, not a decision: the Social Security
 -- Administration decides every application.
 
-CREATE TABLE ss5_application_grade (
+CREATE TABLE united_states_social_security_card_application.ss5_application_grade (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ss5_application_id UUID NOT NULL UNIQUE
-        REFERENCES ss5_application(id) ON DELETE CASCADE,
+        REFERENCES united_states_social_security_card_application.ss5_application(id) ON DELETE CASCADE,
 
     application_class VARCHAR(20) NOT NULL DEFAULT ''
         CHECK (application_class IN ('ready-to-submit', 'incomplete', 'evidence-missing', 'not-eligible', '')),
@@ -391,29 +408,29 @@ CREATE TABLE ss5_application_grade (
 );
 
 CREATE TRIGGER trigger_ss5_application_grade_updated_at
-    BEFORE UPDATE ON ss5_application_grade
+    BEFORE UPDATE ON united_states_social_security_card_application.ss5_application_grade
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE ss5_application_grade IS
+COMMENT ON TABLE united_states_social_security_card_application.ss5_application_grade IS
     'Computed completeness and evidence classification for a Social Security card application: class (ready-to-submit/incomplete/evidence-missing/not-eligible), count of missing evidence items, and whether a replacement limit is reached.';
-COMMENT ON COLUMN ss5_application_grade.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ss5_application_grade.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ss5_application_grade.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ss5_application_grade.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ss5_application_grade.ss5_application_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.ss5_application_id IS
     'Foreign key to the parent application (unique, 1:1).';
-COMMENT ON COLUMN ss5_application_grade.application_class IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.application_class IS
     'Application class: ready-to-submit, incomplete, evidence-missing, or not-eligible (not-eligible takes precedence, then incomplete, then evidence-missing).';
-COMMENT ON COLUMN ss5_application_grade.missing_evidence_count IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.missing_evidence_count IS
     'Number of required evidence items that are missing, expired, or not acceptable.';
-COMMENT ON COLUMN ss5_application_grade.replacement_limit_reached IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.replacement_limit_reached IS
     'Whether a replacement card limit (3 per year or 10 per lifetime) is already reached (yes/no).';
-COMMENT ON COLUMN ss5_application_grade.graded_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade.graded_at IS
     'Timestamp when the engine last computed the classification.';
 
 -- ========================================================================
@@ -428,14 +445,14 @@ COMMENT ON COLUMN ss5_application_grade.graded_at IS
 -- row records one rule firing with the application dimension it concerns, the
 -- category, and a human-readable description.
 
-CREATE TABLE ss5_application_grade_rule (
+CREATE TABLE united_states_social_security_card_application.ss5_application_grade_rule (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ss5_application_grade_id UUID NOT NULL
-        REFERENCES ss5_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_social_security_card_application.ss5_application_grade(id) ON DELETE CASCADE,
 
     rule_id VARCHAR(40) NOT NULL,
     dimension VARCHAR(20) NOT NULL DEFAULT ''
@@ -445,32 +462,32 @@ CREATE TABLE ss5_application_grade_rule (
 );
 
 CREATE INDEX ss5_application_grade_rule_grade_id_idx
-    ON ss5_application_grade_rule (ss5_application_grade_id);
+    ON united_states_social_security_card_application.ss5_application_grade_rule (ss5_application_grade_id);
 
 CREATE TRIGGER trigger_ss5_application_grade_rule_updated_at
-    BEFORE UPDATE ON ss5_application_grade_rule
+    BEFORE UPDATE ON united_states_social_security_card_application.ss5_application_grade_rule
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE ss5_application_grade_rule IS
+COMMENT ON TABLE united_states_social_security_card_application.ss5_application_grade_rule IS
     'Audit trail of every rule that fired during classification: application dimension, category, and description.';
-COMMENT ON COLUMN ss5_application_grade_rule.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ss5_application_grade_rule.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ss5_application_grade_rule.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ss5_application_grade_rule.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ss5_application_grade_rule.ss5_application_grade_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.ss5_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ss5_application_grade_rule.rule_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.rule_id IS
     'Stable rule identifier (e.g. R-IDENTITY-EVIDENCE-01).';
-COMMENT ON COLUMN ss5_application_grade_rule.dimension IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.dimension IS
     'Application dimension the rule concerns: eligibility, limits, form-fields, evidence, signature, or classification.';
-COMMENT ON COLUMN ss5_application_grade_rule.category IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.category IS
     'Subject category (e.g. identity-evidence, replacement-limit, required-field).';
-COMMENT ON COLUMN ss5_application_grade_rule.description IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_rule.description IS
     'Human-readable description of why the rule fired.';
 
 -- ========================================================================
@@ -485,14 +502,14 @@ COMMENT ON COLUMN ss5_application_grade_rule.description IS
 -- priority and a suggested action for the applicant or
 -- person preparing the application.
 
-CREATE TABLE ss5_application_grade_flag (
+CREATE TABLE united_states_social_security_card_application.ss5_application_grade_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
 
     ss5_application_grade_id UUID NOT NULL
-        REFERENCES ss5_application_grade(id) ON DELETE CASCADE,
+        REFERENCES united_states_social_security_card_application.ss5_application_grade(id) ON DELETE CASCADE,
 
     flag_id VARCHAR(50) NOT NULL,
     category VARCHAR(50) NOT NULL DEFAULT ''
@@ -519,34 +536,34 @@ CREATE TABLE ss5_application_grade_flag (
 );
 
 CREATE INDEX ss5_application_grade_flag_grade_id_idx
-    ON ss5_application_grade_flag (ss5_application_grade_id);
+    ON united_states_social_security_card_application.ss5_application_grade_flag (ss5_application_grade_id);
 
 CREATE TRIGGER trigger_ss5_application_grade_flag_updated_at
-    BEFORE UPDATE ON ss5_application_grade_flag
+    BEFORE UPDATE ON united_states_social_security_card_application.ss5_application_grade_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION united_states_social_security_card_application.set_updated_at();
 
-COMMENT ON TABLE ss5_application_grade_flag IS
+COMMENT ON TABLE united_states_social_security_card_application.ss5_application_grade_flag IS
     'Flagged issues that fire independently of the application class, with priority and a suggested action for the applicant or the person preparing the application.';
-COMMENT ON COLUMN ss5_application_grade_flag.id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN ss5_application_grade_flag.created_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.created_at IS
     'Timestamp when the row was created.';
-COMMENT ON COLUMN ss5_application_grade_flag.updated_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.updated_at IS
     'Timestamp when the row was most recently updated.';
-COMMENT ON COLUMN ss5_application_grade_flag.deleted_at IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.deleted_at IS
     'Timestamp when the row was soft-deleted.';
-COMMENT ON COLUMN ss5_application_grade_flag.ss5_application_grade_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.ss5_application_grade_id IS
     'Foreign key to the parent grade.';
-COMMENT ON COLUMN ss5_application_grade_flag.flag_id IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.flag_id IS
     'Stable flag identifier (e.g. F-REPLACEMENT-LIMIT-001).';
-COMMENT ON COLUMN ss5_application_grade_flag.category IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.category IS
     'Flag category: applicant-deceased, replacement-limit, identity-evidence, age-evidence, citizenship-evidence, work-authorization, name-change-evidence, document-quality, in-person-required, signer-authority, missing-field, state-verify, or other.';
-COMMENT ON COLUMN ss5_application_grade_flag.priority IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.priority IS
     'Priority: low, medium, high.';
-COMMENT ON COLUMN ss5_application_grade_flag.description IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.description IS
     'Human-readable description of what fired the flag.';
-COMMENT ON COLUMN ss5_application_grade_flag.suggested_action IS
+COMMENT ON COLUMN united_states_social_security_card_application.ss5_application_grade_flag.suggested_action IS
     'Suggested action (e.g. "bring an unexpired photo identity document", "report the death to SSA instead").';
 
 -- ========================================================================

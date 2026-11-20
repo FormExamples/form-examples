@@ -1,10 +1,10 @@
-CREATE TABLE grading_additional_flag (
+CREATE TABLE prescription_request.grading_additional_flag (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted_at TIMESTAMPTZ DEFAULT NULL,
     grade_id UUID NOT NULL
-        REFERENCES grade(id) ON DELETE CASCADE,
+        REFERENCES prescription_request.grade(id) ON DELETE CASCADE,
     flag_id VARCHAR(30) NOT NULL,
     category VARCHAR(100) NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
@@ -13,25 +13,25 @@ CREATE TABLE grading_additional_flag (
 );
 
 CREATE TRIGGER trigger_grading_additional_flag_updated_at
-    BEFORE UPDATE ON grading_additional_flag
+    BEFORE UPDATE ON prescription_request.grading_additional_flag
     FOR EACH ROW
-    EXECUTE FUNCTION set_updated_at();
+    EXECUTE FUNCTION prescription_request.set_updated_at();
 
-COMMENT ON TABLE grading_additional_flag IS
+COMMENT ON TABLE prescription_request.grading_additional_flag IS
     'Additional flags detected during prescription request grading.';
-COMMENT ON COLUMN grading_additional_flag.flag_id IS 'Identifier of the flag (e.g. FLAG-NOSUB-001).';
-COMMENT ON COLUMN grading_additional_flag.category IS 'Category of the flag (e.g. Substitution, Completeness, Emergency).';
-COMMENT ON COLUMN grading_additional_flag.message IS 'Human-readable description of the flagged issue.';
-COMMENT ON COLUMN grading_additional_flag.priority IS 'Priority level: high, medium, or low.';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.flag_id IS 'Identifier of the flag (e.g. FLAG-NOSUB-001).';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.category IS 'Category of the flag (e.g. Substitution, Completeness, Emergency).';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.message IS 'Human-readable description of the flagged issue.';
+COMMENT ON COLUMN prescription_request.grading_additional_flag.priority IS 'Priority level: high, medium, or low.';
 --rollback DROP TABLE grading_additional_flag;
 
-COMMENT ON COLUMN grading_additional_flag.grade_id IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.grade_id IS
     'Foreign key to the grade table.';
-COMMENT ON COLUMN grading_additional_flag.id IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.id IS
     'Primary key UUID, auto-generated.';
-COMMENT ON COLUMN grading_additional_flag.created_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.created_at IS
     'Timestamp when this row was created.';
-COMMENT ON COLUMN grading_additional_flag.updated_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.updated_at IS
     'Timestamp when this row was updated.';
-COMMENT ON COLUMN grading_additional_flag.deleted_at IS
+COMMENT ON COLUMN prescription_request.grading_additional_flag.deleted_at IS
     'Timestamp when this row was deleted.';
