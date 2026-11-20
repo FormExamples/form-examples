@@ -25,4 +25,4 @@ export const TEXT_SIZE_OPTIONS: TextSizeOption[] = DEFAULT_SIZES.map((value) => 
 export const DEFAULT_TEXT_SIZE = 'normal';
 
 /** localStorage key for the persisted text-size selection. */
-export const TEXT_SIZE_STORAGE_KEY = 'pre-operative-assessment-by-clinician.text-size.v1';
+export const TEXT_SIZE_STORAGE_KEY = 'medical-fit-note.text-size.v1';

@@ -14,7 +14,7 @@ import { validateAuthorization } from './validate-authorization.js';
 // Persistence
 // ----------------------------------------------------------------------
 
-const STORAGE_KEY = 'us-hipaa-authorization.front-end-form-with-html.v1';
+const STORAGE_KEY = 'united-states-hipaa-authorization-form.front-end-form-with-html.v1';
 const TOTAL_STEPS = 9;
 
 // Merge a possibly-partial or foreign-shaped object onto a fresh default

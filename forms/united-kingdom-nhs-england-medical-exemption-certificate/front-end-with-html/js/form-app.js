@@ -10,7 +10,7 @@ import { ELIGIBLE_CONDITION_LABELS, STEP_TITLES, TOTAL_STEPS as TOTAL } from './
  */
 
   
-  const STORAGE_KEY = "fp92a.application.v1";
+  const STORAGE_KEY = "united-kingdom-nhs-england-medical-exemption-certificate.application.v1";
   
 
   const form = document.getElementById("application-form");

@@ -55,6 +55,7 @@ schema changes. See `spec.md` §10 for the spec-driven workflow.
 - `bin/migrate-sql-filenames.py` — one-shot migration of each form's `sql/` to the canonical `NN_create_table_<name>.sql` layout
 - `bin/sql/generate-sql-comments.py` — append missing `COMMENT ON TABLE` / `COMMENT ON COLUMN` to numbered SQL migrations
 - `bin/sql/generate-sql-combined.py` — combine each form's numbered SQL migrations into `schema.sql`
+- `bin/browser-storage-namespace [--check] [--all|<slug>…]` — rewrite every front-end `'<prefix>.<name>.vN'` storage key to start with the form's own slug, per [`spec/form-namespacing/`](spec/form-namespacing/); the forms share one origin on the public site, so a copied key (e.g. another form's `.theme.v1`) changes that other form's settings. Family hand-off keys shared on purpose (`pre-operative-assessment.*`, `neurodiversity-adjustment.*`) are left alone
 - `bin/sql-schema-namespace [--check] [--all|<slug>…]` — put each form's `sql/` objects in its own Postgres schema, named for the form, per [`spec/form-namespacing/`](spec/form-namespacing/): writes `sql/00_create_schema.sql` and qualifies every reference to the form's tables, functions and domains; generators accept the qualifier, so derived artefacts don't change
 
 ### Axum back-end refactor
@@ -205,6 +206,7 @@ See the per-stack agent docs:
 ```sh
 bin/test                              # validates every form's structure
 bin/test-sql-apply                    # SQL apply gate: every form's migrations on a fresh scratch DB
+bin/browser-storage-namespace --check --all # every localStorage/sessionStorage key starts with its form's slug (family hand-off keys excepted)
 bin/sql-schema-namespace --check --all # every form's sql/ objects in its own schema, per spec/form-namespacing/
 bin/es-modules-refactor --check --all # ES-modules front-end drift detector
 bin/lily-html-refactor --check --all  # Lily HTML contract drift detector

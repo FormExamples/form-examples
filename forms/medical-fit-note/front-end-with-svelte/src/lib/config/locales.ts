@@ -21,4 +21,4 @@ export const LOCALE_OPTIONS: LocaleOption[] = [
 export const DEFAULT_LOCALE = 'en-GB';
 
 /** localStorage key for the persisted locale selection. */
-export const LOCALE_STORAGE_KEY = 'pre-operative-assessment-by-clinician.locale.v1';
+export const LOCALE_STORAGE_KEY = 'medical-fit-note.locale.v1';

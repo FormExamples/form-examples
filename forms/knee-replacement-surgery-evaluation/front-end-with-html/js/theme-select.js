@@ -5,7 +5,7 @@
 // A blocking inline script in <head> already applies any saved choice before
 // first paint; this module only wires up the <select> once the DOM is ready.
 
-const STORAGE_KEY = 'dietic-assessment.theme.v1';
+const STORAGE_KEY = 'knee-replacement-surgery-evaluation.theme.v1';
 const DEFAULT_THEME = 'light';
 
 function themeHref(theme) {

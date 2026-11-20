@@ -73,7 +73,7 @@
 
   // -- localStorage autosave -----------------------------------------------
 
-  var STORAGE_KEY = 'adr.form.v1';
+  var STORAGE_KEY = 'architecture-decision-record.form.v1';
 
   function loadFromStorage() {
     try {

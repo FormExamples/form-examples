@@ -4,7 +4,7 @@
 // Presentation-only: no message catalogue is wired up for this form yet —
 // see docs/i18n.md for the deferred rollout.
 
-const STORAGE_KEY = 'dietic-assessment.locale.v1';
+const STORAGE_KEY = 'health-screening-questionnaire.locale.v1';
 const DEFAULT_LOCALE = 'en-GB';
 
 function readSavedLocale() {

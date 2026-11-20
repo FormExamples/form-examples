@@ -98,6 +98,21 @@ Only SvelteKit's own root files (`src/routes/+layout.svelte`,
 `+page.svelte`, `+server.ts` and similar) may sit at the root, and they only
 redirect to or wrap `/<slug>/`.
 
+### Browser storage keys
+
+Every key a form's front-ends save in `localStorage` or `sessionStorage` has the
+shape `<slug>.<name>.v<N>`, for example
+`pre-operative-assessment-by-clinician.theme.v1`. Every form on the public site
+shares one origin, and therefore one storage area, so a key under another
+form's slug would change that form's settings.
+
+The only exceptions are family hand-off keys, which related forms share on
+purpose to pass data from one form to the next. They're namespaced by the
+family name: `pre-operative-assessment.{a11y,handoff}.v1` (the pre-anaesthesia
+and two pre-operative assessment forms) and
+`neurodiversity-adjustment.{a11y,handoff}.v1` (the request, response and review
+forms). `bin/browser-storage-namespace` lists them in `FAMILY_KEYS`.
+
 ## Conformance
 
 The fleet had 379 forms when this spec was written (2026-11-20). Their status:
@@ -106,6 +121,7 @@ The fleet had 379 forms when this spec was written (2026-11-20). Their status:
 | --- | --- | --- |
 | Svelte routes | 379 / 379 | Already nested under `src/routes/<slug>/` (`bin/route-svelte-layout`) |
 | Axum API routes | 379 / 379 | Moved from `/api/<plural>` by `bin/axum-api-namespace` (2026-11-20) |
+| Browser storage keys | 379 / 379 | 63 copied keys in 32 forms fixed by `bin/browser-storage-namespace` (2026-11-20) |
 | SQL schema | 379 / 379 | Moved from `public` into a per-form schema by `bin/sql-schema-namespace` (2026-11-20) |
 
 New forms must conform from the start. `cargo run -- generate scaffold --api`

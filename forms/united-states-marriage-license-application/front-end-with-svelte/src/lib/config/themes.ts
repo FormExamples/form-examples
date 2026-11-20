@@ -52,4 +52,4 @@ export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
 export const DEFAULT_THEME = 'light';
 
 /** localStorage key for the persisted theme selection. */
-export const THEME_STORAGE_KEY = 'medical-certificate-of-cause-of-death.theme.v1';
+export const THEME_STORAGE_KEY = 'united-states-marriage-license-application.theme.v1';

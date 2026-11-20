@@ -17,7 +17,7 @@
       author fallback, sign-off footer, and unnamed-position fallback.
       Run with `pnpm test`.
 - [ ] Playwright e2e for the happy path
-- [x] localStorage autosave under key `adr.form.v1`. The store's
+- [x] localStorage autosave under key `architecture-decision-record.form.v1`. The store's
       `enableAutosave()` registers a `$effect` that serializes
       `store.data` to `localStorage` on every change; on construct it
       reads any saved blob via `loadFromStorage()`, merging into

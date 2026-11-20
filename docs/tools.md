@@ -2,7 +2,7 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-122 tools.
+123 tools.
 
 - [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
@@ -32,6 +32,7 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/benchmark-engines`](#benchmark-engines)
 - [`bin/benchmark-gates`](#benchmark-gates)
 - [`bin/browser-color-scheme-refactor`](#browser-color-scheme-refactor)
+- [`bin/browser-storage-namespace`](#browser-storage-namespace)
 - [`bin/clean`](#clean)
 - [`bin/consolidate-front-end-html`](#consolidate-front-end-html)
 - [`bin/create-form`](#create-form)
@@ -989,6 +990,36 @@ alone.
 Usage:
   bin/browser-color-scheme-refactor [--all|<slug>...]   # apply
   bin/browser-color-scheme-refactor --check [--all|<slug>...]  # CI drift check
+```
+
+<h2 id="browser-storage-namespace"><code>bin/browser-storage-namespace</code></h2>
+
+```text
+bin/browser-storage-namespace — every front-end storage key starts with its form's slug.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form is fully
+namespaced by its slug. Every form on the public site shares one origin, so
+`localStorage` and `sessionStorage` are shared too: a form that saves its theme
+under another form's key, such as `quick-sequential-organ-failure-assessment.theme.v1`,
+silently changes that other form's theme. Most such keys were copied with a
+reference form's code and never renamed.
+
+A storage key has the shape `'<prefix>.<name>.v<N>'`. In each form's
+`front-end-with-html/` and `front-end-with-svelte/` (sources, tests and docs;
+not `node_modules/`, `.svelte-kit/` or `build/`) the tool rewrites every key whose
+prefix is not the form's own slug to `'<slug>.<name>.v<N>'`.
+
+Shared family keys are the exception. Related forms deliberately share them to
+hand data from one form to the next, and they are namespaced by the family
+name. They are listed in `FAMILY_KEYS` and left alone.
+
+The tool is idempotent. `--check` is the CI drift detector.
+
+Usage:
+  bin/browser-storage-namespace <slug>...        # named forms
+  bin/browser-storage-namespace --all            # every form
+  bin/browser-storage-namespace --dry-run --all  # show what would change
+  bin/browser-storage-namespace --check --all    # CI drift check (non-zero on drift)
 ```
 
 <h2 id="clean"><code>bin/clean</code></h2>

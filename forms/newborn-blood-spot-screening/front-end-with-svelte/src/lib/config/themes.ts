@@ -52,4 +52,4 @@ export const THEME_OPTIONS: ThemeOption[] = DEFAULT_THEMES.map((value) => ({
 export const DEFAULT_THEME = 'light';
 
 /** localStorage key for the persisted theme selection. */
-export const THEME_STORAGE_KEY = 'newborn-and-infant-physical-examination.theme.v1';
+export const THEME_STORAGE_KEY = 'newborn-blood-spot-screening.theme.v1';

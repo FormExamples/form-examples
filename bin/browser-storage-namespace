@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""bin/browser-storage-namespace — every front-end storage key starts with its form's slug.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form is fully
+namespaced by its slug. Every form on the public site shares one origin, so
+`localStorage` and `sessionStorage` are shared too: a form that saves its theme
+under another form's key, such as `quick-sequential-organ-failure-assessment.theme.v1`,
+silently changes that other form's theme. Most such keys were copied with a
+reference form's code and never renamed.
+
+A storage key has the shape `'<prefix>.<name>.v<N>'`. In each form's
+`front-end-with-html/` and `front-end-with-svelte/` (sources, tests and docs;
+not `node_modules/`, `.svelte-kit/` or `build/`) the tool rewrites every key whose
+prefix is not the form's own slug to `'<slug>.<name>.v<N>'`.
+
+Shared family keys are the exception. Related forms deliberately share them to
+hand data from one form to the next, and they are namespaced by the family
+name. They are listed in `FAMILY_KEYS` and left alone.
+
+The tool is idempotent. `--check` is the CI drift detector.
+
+Usage:
+  bin/browser-storage-namespace <slug>...        # named forms
+  bin/browser-storage-namespace --all            # every form
+  bin/browser-storage-namespace --dry-run --all  # show what would change
+  bin/browser-storage-namespace --check --all    # CI drift check (non-zero on drift)
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+# Family keys that related forms share by design, mapped to the forms that use them.
+FAMILY_KEYS = {
+    "pre-operative-assessment": {
+        "pre-anaesthesia-assessment",
+        "pre-operative-assessment-by-clinician",
+        "pre-operative-assessment-by-patient",
+    },
+    "neurodiversity-adjustment": {
+        "neurodiversity-adjustment-request",
+        "neurodiversity-adjustment-response",
+        "neurodiversity-adjustment-review",
+    },
+}
+
+KEY = re.compile(r"""(?P<q>['"`])(?P<prefix>[a-z0-9][a-z0-9-]*)\.(?P<name>[a-z0-9][a-z0-9-]*)\.(?P<v>v\d+)(?P=q)""")
+SUFFIXES = {".js", ".ts", ".svelte", ".html", ".md", ".json"}
+SKIP = {"node_modules", ".svelte-kit", "build", "dist", "target", "test-results", "playwright-report"}
+
+
+def files(form: pathlib.Path):
+    for stack in ("front-end-with-html", "front-end-with-svelte"):
+        base = form / stack
+        for root, dirs, names in os.walk(base):
+            dirs[:] = sorted(d for d in dirs if d not in SKIP and d != "themes")
+            for name in sorted(names):
+                path = pathlib.Path(root) / name
+                if path.suffix in SUFFIXES and name != "package.json" and not name.endswith("lock.yaml"):
+                    yield path
+
+
+def rewrite(text: str, slug: str) -> str:
+    def sub(m: re.Match) -> str:
+        prefix = m["prefix"]
+        if prefix == slug or slug in FAMILY_KEYS.get(prefix, ()):
+            return m.group(0)
+        return f"{m['q']}{slug}.{m['name']}.{m['v']}{m['q']}"
+    return KEY.sub(sub, text)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args()
+    if not args.all and not args.slugs:
+        parser.error("name one or more slugs, or --all")
+    forms = sorted(p for p in FORMS.iterdir() if p.is_dir()) if args.all else [FORMS / s for s in args.slugs]
+
+    changed_forms = changed_files = 0
+    for form in forms:
+        touched = 0
+        for path in files(form):
+            old = path.read_text(errors="surrogateescape")
+            new = rewrite(old, form.name)
+            if new == old:
+                continue
+            touched += 1
+            if args.check or args.dry_run:
+                print(path.relative_to(ROOT))
+            else:
+                path.write_text(new, errors="surrogateescape")
+        if touched:
+            changed_forms += 1
+            changed_files += touched
+    verb = "out of step" if args.check else ("would change" if args.dry_run else "changed")
+    print(f"browser-storage-namespace: {changed_forms} form(s), {changed_files} file(s) {verb}")
+    return 1 if args.check and changed_files else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

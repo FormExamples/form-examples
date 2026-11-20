@@ -3,7 +3,7 @@
 // front-end-with-svelte convention (front-end-with-svelte/src/lib/config/text-sizes.ts).
 // Supports WCAG 2.2 1.4.4 (Resize Text) / 1.4.12 (Text Spacing).
 
-const STORAGE_KEY = 'dietic-assessment.text-size.v1';
+const STORAGE_KEY = 'health-screening-questionnaire.text-size.v1';
 const DEFAULT_TEXT_SIZE = 'medium';
 
 function readSavedTextSize() {
