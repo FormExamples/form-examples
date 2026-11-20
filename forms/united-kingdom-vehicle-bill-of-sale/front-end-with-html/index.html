@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>United Kingdom Vehicle Bill of Sale</title>
+  <meta name="description" content="UK private vehicle bill of sale / sales receipt: records the seller and buyer, the vehicle (registration, VIN, mileage), V5C, MOT and finance checks, price and payment, condition terms, DVLA steps, and signatures. It classifies the record as complete, incomplete, or risk-flagged and raises flags. Documentation support, not legal advice.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('united-kingdom-vehicle-bill-of-sale.theme.v1');
+        if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+        var link = document.getElementById('theme-stylesheet');
+        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to the bill of sale</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-bar">
+        <div class="page-header-title">
+          <h1>United Kingdom Vehicle Bill of Sale</h1>
+          <p class="subtitle">A bill of sale for a private vehicle sale in the UK: the seller, buyer, vehicle, V5C, MOT and finance checks, price, condition, DVLA steps, and signatures — checked for completeness and risk.</p>
+        </div>
+        <div class="page-header-controls no-print">
+          <p class="subtitle page-header-link"><a href="dashboard.html">View the dashboard →</a></p>
+                <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="theme-select" id="theme-select" aria-label="Theme">
+      <option class="theme-select-option" value="abyss">Abyss</option>
+      <option class="theme-select-option" value="acid">Acid</option>
+      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
+      <option class="theme-select-option" value="aqua">Aqua</option>
+      <option class="theme-select-option" value="autumn">Autumn</option>
+      <option class="theme-select-option" value="black">Black</option>
+      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
+      <option class="theme-select-option" value="business">Business</option>
+      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
+      <option class="theme-select-option" value="cmyk">Cmyk</option>
+      <option class="theme-select-option" value="coffee">Coffee</option>
+      <option class="theme-select-option" value="corporate">Corporate</option>
+      <option class="theme-select-option" value="cupcake">Cupcake</option>
+      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
+      <option class="theme-select-option" value="dark">Dark</option>
+      <option class="theme-select-option" value="dim">Dim</option>
+      <option class="theme-select-option" value="dracula">Dracula</option>
+      <option class="theme-select-option" value="emerald">Emerald</option>
+      <option class="theme-select-option" value="fantasy">Fantasy</option>
+      <option class="theme-select-option" value="forest">Forest</option>
+      <option class="theme-select-option" value="garden">Garden</option>
+      <option class="theme-select-option" value="halloween">Halloween</option>
+      <option class="theme-select-option" value="lemonade">Lemonade</option>
+      <option class="theme-select-option" value="light" selected>Light</option>
+      <option class="theme-select-option" value="lofi">Lofi</option>
+      <option class="theme-select-option" value="luxury">Luxury</option>
+      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
+      <option class="theme-select-option" value="night">Night</option>
+      <option class="theme-select-option" value="nord">Nord</option>
+      <option class="theme-select-option" value="pastel">Pastel</option>
+      <option class="theme-select-option" value="retro">Retro</option>
+      <option class="theme-select-option" value="silk">Silk</option>
+      <option class="theme-select-option" value="sunset">Sunset</option>
+      <option class="theme-select-option" value="synthwave">Synthwave</option>
+      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
+      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
+      <option class="theme-select-option" value="valentine">Valentine</option>
+      <option class="theme-select-option" value="winter">Winter</option>
+      <option class="theme-select-option" value="wireframe">Wireframe</option>
+      </select>
+      <label class="visually-hidden" for="text-size-picker">Text size</label>
+      <select class="theme-select" id="text-size-picker" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-picker">
+      <button type="button" class="share-picker-button" id="share-picker" aria-label="Share this page" aria-expanded="false" aria-controls="share-picker-list">
+      <span class="share-picker-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-picker-list" id="share-picker-list" hidden>
+      <li class="share-picker-list-item">
+      <button type="button" class="share-picker-copy" id="share-picker-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-picker-status" id="share-picker-status" aria-live="polite"></p>
+      </div>
+        </div>
+      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Bill of sale completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="United Kingdom Vehicle Bill of Sale steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the ten sections below to record a private vehicle sale. The
+        engine does <strong>not</strong> give legal advice. It checks that the
+        bill of sale is <strong>complete</strong> &mdash; who sold what to whom,
+        for how much, and on what terms &mdash; and looks for <strong>risk</strong>:
+        outstanding finance, a missing or mismatched V5C, a seller who is not the
+        registered keeper, or a vehicle that does not match its description. It
+        classifies the record as <strong>complete</strong>,
+        <strong>incomplete</strong>, or <strong>risk flagged</strong> and raises
+        flags such as no VIN, no mileage, payment risk, and missing signatures.
+        Answers are saved automatically in your browser as you go.
+      </p>
+      <p>
+        This form is <strong>documentation support, not legal advice</strong>. A
+        classification of <strong>complete</strong> does not prove the seller owns
+        the vehicle, that finance is settled, or that the vehicle matches its
+        description. Related forms: the DVLA forms in this collection and
+        United Kingdom Vehicle Registration Application.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="United Kingdom Vehicle Bill of Sale"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Sale, 2 Seller, 3 Buyer, 4 Vehicle, 5 Checks, 6 Payment, -->
+        <!-- 7 Condition, 8 DVLA, 9 Signatures, 10 Summary -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Bill of sale report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+  </main>
+
+    <footer class="page-footer">
+      <p>
+        Grounded in the GOV.UK guidance Buy a vehicle and Sell, scrap or transfer
+        a vehicle, the Sale of Goods Act 1979, and the Consumer Rights Act 2015
+        (which applies only to sales by traders). This form is documentation
+        support, not legal advice; it does not create or replace any statutory
+        document, and it decides nothing about ownership or legal rights.
+      </p>
+    </footer>
+
+
+  <script type="module" src="js/form-app.js"></script>
+  <script type="module" src="js/form-export.js"></script>
+  <script type="module" src="js/form-import.js"></script>
+  <script type="module" src="js/restore-banner.js"></script>
+  <script type="module" src="js/theme-select.js"></script>
+  <script type="module" src="js/text-size-picker.js"></script>
+  <script type="module" src="js/share-picker.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
+</body>
+</html>

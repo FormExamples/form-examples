@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000000a01"
+  deletedAt: null
+  name: "Maria Elena Gonzalez"
+  email: "maria.gonzalez@example.com"
+  phone: "+15125550142"
+  postalAddressAsFullText: "4821 Live Oak Lane, Austin, TX"
+  state: "TX"
+  zipCode: "78745"

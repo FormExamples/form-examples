@@ -1,0 +1,573 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_kingdom_birth_registration
+openapi: 3.1.0
+info:
+  title: United Kingdom Birth Registration — UnitedKingdomBirthRegistration
+  version: 1.0.0
+  description: "Main United Kingdom Birth Registration record: the child, mother, parentage basis for a second parent, informant and identity evidence, and the birth-certificate order for registering a birth in England and Wales. Readiness classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_kingdom_birth_registrations:
+    get:
+      summary: List UnitedKingdomBirthRegistration records
+      operationId: listUnitedKingdomBirthRegistration
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedKingdomBirthRegistration records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedKingdomBirthRegistration
+      operationId: createUnitedKingdomBirthRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+      responses:
+        "200":
+          description: The newly created UnitedKingdomBirthRegistration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_kingdom_birth_registrations/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomBirthRegistration by id
+      operationId: getUnitedKingdomBirthRegistration
+      responses:
+        "200":
+          description: The requested UnitedKingdomBirthRegistration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+        "404":
+          description: UnitedKingdomBirthRegistration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedKingdomBirthRegistration
+      operationId: updateUnitedKingdomBirthRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+      responses:
+        "200":
+          description: The updated UnitedKingdomBirthRegistration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+        "404":
+          description: UnitedKingdomBirthRegistration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedKingdomBirthRegistration
+      operationId: replaceUnitedKingdomBirthRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+      responses:
+        "200":
+          description: The updated UnitedKingdomBirthRegistration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomBirthRegistration"
+        "404":
+          description: UnitedKingdomBirthRegistration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedKingdomBirthRegistration
+      operationId: deleteUnitedKingdomBirthRegistration
+      responses:
+        "200":
+          description: UnitedKingdomBirthRegistration deleted
+        "404":
+          description: UnitedKingdomBirthRegistration not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedKingdomBirthRegistration:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the child whose birth is being registered (restrict delete).
+        clinician_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the registrar or staff member handling the application (restrict delete); optional.
+        child_forenames:
+          type: string
+          description: Forename(s) the parents wish to register for the child.
+        child_surname:
+          type: string
+          description: Surname to be registered for the child.
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - indeterminate
+            - ""
+          description: "Sex of the child as it will be registered: female, male or indeterminate (rare; registrar guidance applies)."
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the child.
+        time_of_birth:
+          type: [string, 'null']
+          format: time
+          description: Time of birth; recorded for multiple births.
+        place_of_birth_type:
+          type: string
+          enum:
+            - hospital
+            - home
+            - birth-centre
+            - other
+            - ""
+          description: "Type of place of birth: hospital, home, birth-centre or other."
+        place_of_birth:
+          type: string
+          description: Name and address of the place of birth (determines the registration district).
+        birth_country:
+          type: string
+          enum:
+            - england
+            - wales
+            - scotland
+            - northern-ireland
+            - abroad
+            - ""
+          description: Country where the child was born; only england and wales are registered under this service.
+        multiple_birth:
+          type: string
+          enum:
+            - single
+            - twins
+            - triplets-or-more
+            - ""
+          description: Whether the child was a single or multiple birth; each child of a multiple birth is registered separately.
+        stillbirth:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the child was born dead after the 24th week of pregnancy (a stillbirth, registered separately).
+        mother_name:
+          type: string
+          description: Full name of the mother (the person who gave birth) at the time of registration.
+        mother_maiden_surname:
+          type: string
+          description: Mothers surname at birth (maiden surname), if different from her current surname.
+        mother_date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the mother.
+        mother_place_of_birth:
+          type: string
+          description: Town and country of birth of the mother.
+        mother_occupation:
+          type: string
+          description: Occupation of the mother.
+        mother_address:
+          type: string
+          description: Usual address of the mother.
+        parents_relationship:
+          type: string
+          enum:
+            - married-or-civil-partners
+            - unmarried
+            - female-couple-married
+            - female-couple-unmarried
+            - male-couple
+            - mother-only
+            - ""
+          description: "Legal relationship of the parents: married or civil partners, unmarried, female couple (married or unmarried), male couple, or mother only."
+        marriage_date:
+          type: [string, 'null']
+          format: date
+          description: Date of the parents marriage or civil partnership, if any.
+        second_parent_included:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a second parent (father or female parent) is to be recorded on the entry.
+        second_parent_name:
+          type: string
+          description: Full name of the second parent.
+        second_parent_date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the second parent.
+        second_parent_place_of_birth:
+          type: string
+          description: Town and country of birth of the second parent.
+        second_parent_occupation:
+          type: string
+          description: Occupation of the second parent.
+        paternity_basis:
+          type: string
+          enum:
+            - married-or-civil-partners
+            - joint-registration
+            - statutory-declaration
+            - court-order-parental-responsibility
+            - parental-order
+            - none
+            - ""
+          description: "Basis on which the second parent may be recorded: marriage/civil partnership, joint registration, statutory declaration, court order, parental order, or none."
+        paternity_evidence_held:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the signed declaration or court document required by the basis is in hand.
+        licensed_clinic_treatment:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "For a female couple not married or civil partners: whether both were treated together by a UK licensed clinic under a parenthood agreement."
+        informant_relationship:
+          type: string
+          enum:
+            - mother
+            - father
+            - second-parent
+            - both-parents
+            - person-present-at-birth
+            - person-responsible-for-child
+            - hospital-administrator
+            - other
+            - ""
+          description: Relationship of the informant to the child; only the qualified informants may register.
+        informant_name:
+          type: string
+          description: Full name of the informant who will attend or sign.
+        parents_unable_to_register:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the parents are unable to register (for example for medical reasons); required for a non-parent informant.
+        registration_route:
+          type: string
+          enum:
+            - local-register-office
+            - hospital
+            - other-register-office
+            - ""
+          description: "Where the birth is to be registered: the local register office for the birth area, the hospital, or any other register office."
+        registration_date:
+          type: [string, 'null']
+          format: date
+          description: Date the birth is, or is intended to be, registered; the 42-day period runs from the date of birth.
+        identity_primary_document:
+          type: string
+          enum:
+            - passport
+            - uk-photocard-driving-licence
+            - eu-photocard-driving-licence
+            - uk-birth-or-adoption-certificate
+            - biometric-immigration-document
+            - uk-travel-document
+            - refugee-or-stateless-travel-document
+            - eu-identity-card
+            - proof-of-age-card
+            - none
+            - ""
+          description: Accepted single identity document the informant will bring, or none.
+        identity_secondary_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of acceptable secondary documents (utility bill, bank statement, council tax and so on) the informant will bring if no single document is held.
+        identity_originals:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the identity documents are originals (photocopies are not accepted).
+        red_book_presented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the personal child health record (red book) will be brought; a registrar may ask to see it.
+        certificates_requested:
+          type: [integer, 'null']
+          format: int32
+          description: Number of birth certificates ordered with the registration.
+        service_level:
+          type: string
+          enum:
+            - standard
+            - priority
+            - ""
+          description: "Certificate service level: standard or priority (next working day if ordered by 4pm)."
+        delivery_address:
+          type: string
+          description: Postal address to which the ordered certificates are sent.
+        payment_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether payment of the certificate fee by debit or credit card is confirmed.
+        applicant_note:
+          type: string
+          description: Free-text note from the applicant to the registrar.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - child_forenames
+        - child_surname
+        - sex
+        - place_of_birth_type
+        - place_of_birth
+        - birth_country
+        - multiple_birth
+        - stillbirth
+        - mother_name
+        - mother_maiden_surname
+        - mother_place_of_birth
+        - mother_occupation
+        - mother_address
+        - parents_relationship
+        - second_parent_included
+        - second_parent_name
+        - second_parent_place_of_birth
+        - second_parent_occupation
+        - paternity_basis
+        - paternity_evidence_held
+        - licensed_clinic_treatment
+        - informant_relationship
+        - informant_name
+        - parents_unable_to_register
+        - registration_route
+        - identity_primary_document
+        - identity_originals
+        - red_book_presented
+        - service_level
+        - delivery_address
+        - payment_confirmed
+        - applicant_note
+      description: "Main United Kingdom Birth Registration record: the child, mother, parentage basis for a second parent, informant and identity evidence, and the birth-certificate order for registering a birth in England and Wales. Readiness classification, fired rules, and flags live in child tables."

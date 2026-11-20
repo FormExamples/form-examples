@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000dda39"
+  deletedAt: null
+  name: "Test Principal"
+  birthDate: "1990-01-01"
+  email: "test.principal@example.com"
+  phone: "+12025550142"
+  postalAddressAsFullText: "1600 Pennsylvania Avenue NW, Washington, DC"
+  postcode: "20500"

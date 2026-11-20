@@ -1,0 +1,3 @@
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_priority_check";
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_category_check";
+ALTER TABLE "united_kingdom_death_registration_grade_rules" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_rules_dimension_check";

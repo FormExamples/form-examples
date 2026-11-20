@@ -1,0 +1,42 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000000c01"
+  deletedAt: null
+  applicantId: "00000000-0000-4000-8000-000000000a01"
+  assessorId: "00000000-0000-4000-8000-000000000b01"
+  applicantName: "Maria Elena Gonzalez"
+  dateOfBirth: "1954-03-12"
+  ageOnAssessmentDate: 71
+  mailingAddress: "4821 Live Oak Lane, Austin, TX 78745"
+  state: "TX"
+  county: "Travis"
+  parcelNumber: "0412-3300-0017"
+  propertyAddress: "4821 Live Oak Lane, Austin, TX 78745"
+  propertyType: "single-family"
+  ownershipType: "sole"
+  ownerOnAssessmentDate: "yes"
+  occupiedAsPrimaryResidence: "yes"
+  occupancyStartDate: "2011-06-01"
+  otherHomesteadClaimed: "no"
+  claimHomestead: "yes"
+  claimSenior: "yes"
+  claimDisability: "no"
+  claimVeteran: "no"
+  claimCircuitBreaker: "no"
+  veteranDisabilityPercent: null
+  householdIncomeDollars: 38200
+  incomeTaxYear: 2025
+  assessmentYear: 2026
+  filingDate: "2026-03-18"
+  applicationType: "initial"
+  proofOfOwnership: "yes"
+  proofOfResidency: "yes"
+  proofOfAge: "yes"
+  proofOfIncome: "yes"
+  proofOfDisability: "no"
+  appealRequested: "no"
+  noticeOfValueDate: null
+  appealFiled: "no"
+  penaltyAcknowledged: "yes"
+  signedByApplicant: "yes"
+  signatureDate: "2026-03-18"

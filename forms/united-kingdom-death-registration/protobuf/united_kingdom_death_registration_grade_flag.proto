@@ -1,0 +1,42 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_death_registration_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_death_registration;
+
+enum UnitedKingdomDeathRegistrationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_DEADLINE = 1;  // deadline
+  CATEGORY_JURISDICTION = 2;  // jurisdiction
+  CATEGORY_MEDICAL_CERTIFICATE = 3;  // medical-certificate
+  CATEGORY_MEDICAL_EXAMINER = 4;  // medical-examiner
+  CATEGORY_CORONER = 5;  // coroner
+  CATEGORY_INFORMANT = 6;  // informant
+  CATEGORY_DISPOSAL_CERTIFICATE = 7;  // disposal-certificate
+  CATEGORY_TELL_US_ONCE = 8;  // tell-us-once
+  CATEGORY_APPOINTMENT = 9;  // appointment
+  CATEGORY_DOCUMENTS = 10;  // documents
+  CATEGORY_COPIES = 11;  // copies
+  CATEGORY_OTHER = 12;  // other
+}
+
+enum UnitedKingdomDeathRegistrationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomDeathRegistrationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_death_registration_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedKingdomDeathRegistrationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedKingdomDeathRegistrationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

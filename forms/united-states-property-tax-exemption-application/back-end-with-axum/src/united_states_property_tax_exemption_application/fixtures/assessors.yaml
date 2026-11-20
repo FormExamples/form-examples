@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000000b01"
+  deletedAt: null
+  name: "Travis Central Appraisal District"
+  email: "exemptions@example.org"
+  phone: "+15125550100"
+  officeName: "Travis Central Appraisal District"
+  county: "Travis"
+  state: "TX"
+  role: "appraiser"

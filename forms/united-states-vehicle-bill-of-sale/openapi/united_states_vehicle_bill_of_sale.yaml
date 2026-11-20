@@ -1,0 +1,603 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_vehicle_bill_of_sale
+openapi: 3.1.0
+info:
+  title: United States Vehicle Bill Of Sale — UnitedStatesVehicleBillOfSale
+  version: 1.0.0
+  description: "Main United States vehicle bill of sale record: sale transaction, seller, buyer, vehicle, the federal odometer disclosure (49 CFR 580), as-is clause, title and lien status, notarization, and post-sale release of liability. Completeness classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_states_vehicle_bill_of_sales:
+    get:
+      summary: List UnitedStatesVehicleBillOfSale records
+      operationId: listUnitedStatesVehicleBillOfSale
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesVehicleBillOfSale records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesVehicleBillOfSale
+      operationId: createUnitedStatesVehicleBillOfSale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+      responses:
+        "200":
+          description: The newly created UnitedStatesVehicleBillOfSale
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_vehicle_bill_of_sales/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesVehicleBillOfSale by id
+      operationId: getUnitedStatesVehicleBillOfSale
+      responses:
+        "200":
+          description: The requested UnitedStatesVehicleBillOfSale
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+        "404":
+          description: UnitedStatesVehicleBillOfSale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesVehicleBillOfSale
+      operationId: updateUnitedStatesVehicleBillOfSale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+      responses:
+        "200":
+          description: The updated UnitedStatesVehicleBillOfSale
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+        "404":
+          description: UnitedStatesVehicleBillOfSale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesVehicleBillOfSale
+      operationId: replaceUnitedStatesVehicleBillOfSale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+      responses:
+        "200":
+          description: The updated UnitedStatesVehicleBillOfSale
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesVehicleBillOfSale"
+        "404":
+          description: UnitedStatesVehicleBillOfSale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesVehicleBillOfSale
+      operationId: deleteUnitedStatesVehicleBillOfSale
+      responses:
+        "200":
+          description: UnitedStatesVehicleBillOfSale deleted
+        "404":
+          description: UnitedStatesVehicleBillOfSale not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesVehicleBillOfSale:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        seller_id:
+          type: string
+          format: uuid
+          description: Foreign key to the seller (restrict delete).
+        buyer_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the buyer (restrict delete); optional until the buyer is known.
+        state:
+          type: string
+          maxLength: 2
+          description: Two-letter USPS code of the state whose rules govern the sale (the state that will title and register the vehicle); empty when unanswered.
+        sale_date:
+          type: [string, 'null']
+          format: date
+          description: Date the vehicle changed hands (date of sale and of odometer transfer).
+        sale_price_as_usd:
+          type: [number, 'null']
+          format: double
+          description: Purchase price in US dollars; 0 for a gift; null when unanswered.
+        payment_method:
+          type: string
+          enum:
+            - cash
+            - check
+            - wire
+            - financing
+            - trade
+            - gift
+            - ""
+          description: "How the price was paid: cash, check, wire, financing, trade, or gift."
+        tax_basis:
+          type: string
+          enum:
+            - purchase-price
+            - standard-presumptive-value
+            - fair-market-value
+            - exempt-gift
+            - exempt-family
+            - ""
+          description: "Basis on which the buyer will pay sales or use tax: purchase price, state standard presumptive value, fair market value, or a claimed gift or family exemption."
+        seller_name:
+          type: string
+          description: Seller printed name as it appears on the title.
+        seller_type:
+          type: string
+          enum:
+            - individual
+            - business
+            - ""
+          description: Whether the seller is an individual or a business.
+        seller_street_address:
+          type: string
+          description: Seller current street address (required by 49 CFR 580.5 for the odometer disclosure).
+        seller_city:
+          type: string
+          description: Seller city.
+        seller_state:
+          type: string
+          maxLength: 2
+          description: Seller two-letter state code.
+        seller_postal_code:
+          type: string
+          maxLength: 10
+          description: Seller ZIP or ZIP+4 code.
+        seller_phone:
+          type: string
+          maxLength: 30
+          description: Seller telephone number.
+        seller_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller signed the bill of sale.
+        buyer_name:
+          type: string
+          description: Buyer printed name.
+        buyer_type:
+          type: string
+          enum:
+            - individual
+            - business
+            - ""
+          description: Whether the buyer is an individual or a business.
+        buyer_street_address:
+          type: string
+          description: Buyer current street address (required by 49 CFR 580.5 for the odometer disclosure).
+        buyer_city:
+          type: string
+          description: Buyer city.
+        buyer_state:
+          type: string
+          maxLength: 2
+          description: Buyer two-letter state code.
+        buyer_postal_code:
+          type: string
+          maxLength: 10
+          description: Buyer ZIP or ZIP+4 code.
+        buyer_phone:
+          type: string
+          maxLength: 30
+          description: Buyer telephone number.
+        buyer_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the buyer signed the bill of sale.
+        vehicle_year:
+          type: [integer, 'null']
+          format: int32
+          description: Model year of the vehicle.
+        vehicle_make:
+          type: string
+          maxLength: 60
+          description: Vehicle make.
+        vehicle_model:
+          type: string
+          maxLength: 60
+          description: Vehicle model.
+        body_type:
+          type: string
+          maxLength: 40
+          description: Vehicle body type (required by 49 CFR 580.5).
+        vin:
+          type: string
+          maxLength: 25
+          description: Vehicle Identification Number; 17 characters for a 1981 or newer vehicle.
+        vehicle_color:
+          type: string
+          maxLength: 40
+          description: Vehicle color.
+        title_number:
+          type: string
+          maxLength: 40
+          description: Certificate of title number.
+        title_brand:
+          type: string
+          enum:
+            - clean
+            - salvage
+            - rebuilt
+            - flood
+            - lemon
+            - junk
+            - unknown
+            - ""
+          description: "Brand on the title: clean, salvage, rebuilt, flood, lemon-law buyback, junk, or unknown."
+        gvwr_over_16000:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the gross vehicle weight rating exceeds 16,000 pounds (exempt from the federal odometer rule).
+        self_propelled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vehicle is self-propelled (a trailer is not, and is exempt from the federal odometer rule).
+        odometer_reading_miles:
+          type: [integer, 'null']
+          format: int32
+          description: Odometer reading in whole miles at transfer, without tenths; null when unanswered.
+        odometer_status:
+          type: string
+          enum:
+            - actual
+            - exceeds-mechanical-limits
+            - not-actual
+            - ""
+          description: "Seller certification under 49 CFR 580.5: actual mileage, mileage exceeds the odometer mechanical limits, or the reading is not the actual mileage (warning odometer discrepancy)."
+        odometer_seller_certified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller signed the odometer disclosure statement.
+        odometer_buyer_acknowledged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the buyer signed the odometer disclosure acknowledgement.
+        seller_holds_title:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller holds the certificate of title in hand at the sale.
+        title_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller has signed the title over to the buyer.
+        lien_status:
+          type: string
+          enum:
+            - none
+            - released
+            - outstanding
+            - ""
+          description: "Lien status: none, released (lien release in hand), or outstanding."
+        lienholder_name:
+          type: string
+          description: Name of the lienholder, if any.
+        lien_release_date:
+          type: [string, 'null']
+          format: date
+          description: Date the lienholder released the lien.
+        as_is_clause:
+          type: string
+          enum:
+            - as-is
+            - warranty
+            - ""
+          description: "Warranty terms: sold as is with no warranty, or with a written warranty."
+        warranty_note:
+          type: string
+          description: Description of any written warranty; empty for an as-is sale.
+        notarized:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - not-required
+            - ""
+          description: Whether the bill of sale or title assignment was notarized, or notarization is not required.
+        release_of_liability_filed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller filed the release of liability or notice of transfer with the state agency.
+        release_filed_date:
+          type: [string, 'null']
+          format: date
+          description: Date the seller filed the release of liability.
+        plates_removed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the seller removed the license plates (relevant where plates stay with the seller).
+        buyer_title_application_date:
+          type: [string, 'null']
+          format: date
+          description: Date the buyer applied to title and register the vehicle.
+      required:
+        - created_at
+        - updated_at
+        - seller_id
+        - state
+        - payment_method
+        - tax_basis
+        - seller_name
+        - seller_type
+        - seller_street_address
+        - seller_city
+        - seller_state
+        - seller_postal_code
+        - seller_phone
+        - seller_signed
+        - buyer_name
+        - buyer_type
+        - buyer_street_address
+        - buyer_city
+        - buyer_state
+        - buyer_postal_code
+        - buyer_phone
+        - buyer_signed
+        - vehicle_make
+        - vehicle_model
+        - body_type
+        - vin
+        - vehicle_color
+        - title_number
+        - title_brand
+        - gvwr_over_16000
+        - self_propelled
+        - odometer_status
+        - odometer_seller_certified
+        - odometer_buyer_acknowledged
+        - seller_holds_title
+        - title_signed
+        - lien_status
+        - lienholder_name
+        - as_is_clause
+        - warranty_note
+        - notarized
+        - release_of_liability_filed
+        - plates_removed
+      description: "Main United States vehicle bill of sale record: sale transaction, seller, buyer, vehicle, the federal odometer disclosure (49 CFR 580), as-is clause, title and lien status, notarization, and post-sale release of liability. Completeness classification, fired rules, and flags live in child tables."

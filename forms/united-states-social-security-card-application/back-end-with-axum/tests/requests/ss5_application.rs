@@ -1,0 +1,27 @@
+#[allow(unused_imports)]
+use crate::{db, seed};
+use axa_test::prelude::*;
+use united_states_social_security_card_application::app::App;
+use serial_test::serial;
+
+#[tokio::test]
+#[serial]
+async fn can_get_ss5_applications() {
+    request::<App, _, _>(|request, _ctx| async move {
+        let res = request
+            .get("/api/ss5_applications")
+            .await;
+        assert_eq!(res.status_code(), 200);
+        // Assert the JSON list handler answered.
+        let content_type = res
+            .headers()
+            .get("content-type")
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("");
+        assert!(
+            content_type.contains("json"),
+            "expected JSON from the list handler, got content-type {content_type:?}"
+        );
+    })
+    .await;
+}

@@ -1,0 +1,1374 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateWill",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateWill(w) returns { validityClass, residuaryPercentTotal, electiveShareAmount, witnessCount, selfProved, federalEstateTaxExposure, stateRuleSource } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification: any high-priority flag -> 'formality-risk'; else any missing required answer -> 'incomplete'; else 'valid-ready-to-execute'. The class depends only on the plan's own dates (execution date versus date of birth), never the wall clock. The 'timestamp' is added by form-app.js, not the grader. State rules come from the STATE_RULES table in rules.js (CA, NY, TX, FL, IL, PA, OH, WA); any other state uses the Uniform Probate Code default and raises F-WILL-022. Regenerate expected with: bin/test-personas united-states-last-will-and-testament --update",
+  "personas": [
+    {
+      "name": "Valid and ready to execute, Florida widow",
+      "description": "A 72-year-old Florida widow with two grandchildren receiving specific gifts and two residuary children (60/40). Two disinterested witnesses sign in her presence on 2026-09-01, the will is self-proved before a notary, and the digital-assets, revocation and safekeeping clauses are present. Expect 'valid-ready-to-execute' with no flags (Florida has no state estate tax and the $800,000 estate is far below the $15,000,000 federal exclusion).",
+      "state": {
+        "testator": {
+          "state": "FL",
+          "testatorName": "Margaret Anne Sullivan",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "widowed"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "Lena Park",
+          "notaryAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Blank form",
+      "description": "Nothing answered. No state, so the Uniform Probate Code default applies without a 'verify state rule' flag (the state is simply missing). Expect 'incomplete' with the three missing-answer flags (testator, family and estate, execution) plus low notes for no digital-assets clause, no safekeeping location and no self-proving affidavit.",
+      "state": {
+        "testator": {
+          "state": "",
+          "testatorName": "",
+          "dateOfBirth": null,
+          "soundMind": "",
+          "undueInfluenceConcern": "",
+          "maritalStatus": ""
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": null,
+          "specificBequestsTotal": null,
+          "specificBequestsSummary": "",
+          "residuaryClausePresent": "",
+          "residuary1Name": "",
+          "residuary1Percent": null,
+          "residuary2Name": "",
+          "residuary2Percent": null,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": ""
+        },
+        "provisions": {
+          "personalRepresentativeName": "",
+          "successorPersonalRepresentativeName": "",
+          "bondWaived": "",
+          "revokesPriorWillsClause": "",
+          "noContestClause": "",
+          "digitalAssetsClause": "",
+          "estateTaxReviewed": "",
+          "originalWillLocation": "",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "",
+          "executionDate": null,
+          "signedAtEnd": "",
+          "signedInWitnessPresence": "",
+          "witnessesSignedInTestatorPresence": "",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "",
+          "witness1Beneficiary": "",
+          "witness2Name": "",
+          "witness2Beneficiary": "",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "residuaryPercentTotal": 0,
+        "electiveShareAmount": null,
+        "witnessCount": 0,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "uniform-default",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-026",
+            "category": "incomplete",
+            "priority": "medium",
+            "description": "Required testator details and capacity answers are missing: state of the testator, testator name, testator date of birth, sound-mind (capacity) confirmation, marital status.",
+            "suggestedAction": "Answer the missing items before the will is signed."
+          },
+          {
+            "id": "F-WILL-027",
+            "category": "incomplete",
+            "priority": "medium",
+            "description": "Required family, bequests and representative answers are missing: whether a residuary clause is present, personal representative (executor).",
+            "suggestedAction": "Answer the missing items before the will is signed."
+          },
+          {
+            "id": "F-WILL-028",
+            "category": "incomplete",
+            "priority": "medium",
+            "description": "Required execution plan answers are missing: form of execution, execution date.",
+            "suggestedAction": "Answer the missing items before the will is signed."
+          },
+          {
+            "id": "F-WILL-029",
+            "category": "digital-assets",
+            "priority": "low",
+            "description": "No digital-assets clause. Under the Revised Uniform Fiduciary Access to Digital Assets Act a representative may get only a catalogue of electronic communications unless the will allows more.",
+            "suggestedAction": "Add a clause authorizing the representative to access digital assets and the content of electronic communications."
+          },
+          {
+            "id": "F-WILL-032",
+            "category": "other",
+            "priority": "low",
+            "description": "No safekeeping location is recorded for the signed original. A lost original may be presumed revoked.",
+            "suggestedAction": "Record where the original is kept and tell the personal representative."
+          },
+          {
+            "id": "F-WILL-021",
+            "category": "self-proving",
+            "priority": "low",
+            "description": "The will is not self-proved. The court may need the witnesses to testify, which is hard when they cannot be found.",
+            "suggestedAction": "Add a self-proving affidavit signed by the testator and witnesses before a notary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete draft, New York married testator",
+      "description": "A New York testator names herself and says she is married but has not named a spouse, a value for the spouse, a representative or a form of execution. Expect 'incomplete': missing-testator, missing-estate and missing-execution answers raise medium flags, and no high flag fires, so formality-risk does not apply. Elective share cannot be estimated because no estate value is given.",
+      "state": {
+        "testator": {
+          "state": "NY",
+          "testatorName": "Priya Raman",
+          "dateOfBirth": "1975-06-30",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "",
+          "maritalStatus": "married"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": null,
+          "specificBequestsTotal": null,
+          "specificBequestsSummary": "",
+          "residuaryClausePresent": "",
+          "residuary1Name": "",
+          "residuary1Percent": null,
+          "residuary2Name": "",
+          "residuary2Percent": null,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": ""
+        },
+        "provisions": {
+          "personalRepresentativeName": "",
+          "successorPersonalRepresentativeName": "",
+          "bondWaived": "",
+          "revokesPriorWillsClause": "",
+          "noContestClause": "",
+          "digitalAssetsClause": "",
+          "estateTaxReviewed": "",
+          "originalWillLocation": "",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "",
+          "executionDate": null,
+          "signedAtEnd": "",
+          "signedInWitnessPresence": "",
+          "witnessesSignedInTestatorPresence": "",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "",
+          "witness1Beneficiary": "",
+          "witness2Name": "",
+          "witness2Beneficiary": "",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "residuaryPercentTotal": 0,
+        "electiveShareAmount": null,
+        "witnessCount": 0,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-027",
+            "category": "incomplete",
+            "priority": "medium",
+            "description": "Required family, bequests and representative answers are missing: spouse name, value left to the spouse, whether a residuary clause is present, personal representative (executor).",
+            "suggestedAction": "Answer the missing items before the will is signed."
+          },
+          {
+            "id": "F-WILL-028",
+            "category": "incomplete",
+            "priority": "medium",
+            "description": "Required execution plan answers are missing: form of execution, execution date.",
+            "suggestedAction": "Answer the missing items before the will is signed."
+          },
+          {
+            "id": "F-WILL-029",
+            "category": "digital-assets",
+            "priority": "low",
+            "description": "No digital-assets clause. Under the Revised Uniform Fiduciary Access to Digital Assets Act a representative may get only a catalogue of electronic communications unless the will allows more.",
+            "suggestedAction": "Add a clause authorizing the representative to access digital assets and the content of electronic communications."
+          },
+          {
+            "id": "F-WILL-032",
+            "category": "other",
+            "priority": "low",
+            "description": "No safekeeping location is recorded for the signed original. A lost original may be presumed revoked.",
+            "suggestedAction": "Record where the original is kept and tell the personal representative."
+          },
+          {
+            "id": "F-WILL-021",
+            "category": "self-proving",
+            "priority": "low",
+            "description": "The will is not self-proved. The court may need the witnesses to testify, which is hard when they cannot be found.",
+            "suggestedAction": "Add a self-proving affidavit signed by the testator and witnesses before a notary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Formality risk, Texas: one interested witness, not signed at the end, arithmetic wrong",
+      "description": "A Texas will with a single witness who is also a beneficiary: the testator did not sign at the end, did not sign in front of the witness, and the witness did not sign in the testator's presence (Texas requires it). Residuary shares add to 90%, and the specific bequests ($2,000,000) exceed the $1,500,000 estate. Expect 'formality-risk' with high flags for signature, witness-count, presence, void interested-witness gift (Texas needs a disinterested corroborating witness), residuary total and over-allocated bequests.",
+      "state": {
+        "testator": {
+          "state": "TX",
+          "testatorName": "Margaret Anne Sullivan",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "widowed"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 1500000,
+          "specificBequestsTotal": 2000000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 30,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "no",
+          "signedInWitnessPresence": "no",
+          "witnessesSignedInTestatorPresence": "no",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Ray Delgado",
+          "witness1Beneficiary": "yes",
+          "witness2Name": "",
+          "witness2Beneficiary": "",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "no",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "residuaryPercentTotal": 90,
+        "electiveShareAmount": null,
+        "witnessCount": 1,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-004",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "The will is not signed by the testator at the end. A signature is the core formality of every will.",
+            "suggestedAction": "Have the testator sign and date at the end of the will, after the last provision, with no text after the signature."
+          },
+          {
+            "id": "F-WILL-006",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "The testator did not sign, or acknowledge the signature, in front of the witnesses. Witnesses must see the signing or hear the testator acknowledge it.",
+            "suggestedAction": "Repeat the signing ceremony with both witnesses present and watching, or have the testator acknowledge the signature to both."
+          },
+          {
+            "id": "F-WILL-007",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "Texas requires the witnesses to sign in the testator's presence, and they did not.",
+            "suggestedAction": "Have each witness sign in the testator's presence, ideally in each other's presence too."
+          },
+          {
+            "id": "F-WILL-005",
+            "category": "witness",
+            "priority": "high",
+            "description": "Only 1 witness is named; Texas needs 2 (UPC 2-502).",
+            "suggestedAction": "Add the missing disinterested adult witness before signing."
+          },
+          {
+            "id": "F-WILL-011",
+            "category": "witness",
+            "priority": "high",
+            "description": "A witness who also takes under the will (Ray Delgado) puts that gift at risk in Texas: the gift is void unless enough disinterested witnesses also signed, and the witness may keep only the intestate share.",
+            "suggestedAction": "Use witnesses who take nothing under the will, or add supernumerary disinterested witnesses."
+          },
+          {
+            "id": "F-WILL-012",
+            "category": "bequest-arithmetic",
+            "priority": "high",
+            "description": "The residuary shares add up to 90%, not 100%. The remainder or the excess would be uncertain and may pass by intestacy.",
+            "suggestedAction": "Adjust the residuary percentages so they total exactly 100%."
+          },
+          {
+            "id": "F-WILL-013",
+            "category": "bequest-arithmetic",
+            "priority": "high",
+            "description": "The specific bequests ($2,000,000) exceed the estimated estate ($1,500,000), so the gifts will abate and nothing is left for the residuary.",
+            "suggestedAction": "Reduce the specific bequests or restate them as percentages so the plan matches the estate."
+          },
+          {
+            "id": "F-WILL-021",
+            "category": "self-proving",
+            "priority": "low",
+            "description": "The will is not self-proved. The court may need the witnesses to testify, which is hard when they cannot be found.",
+            "suggestedAction": "Add a self-proving affidavit signed by the testator and witnesses before a notary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Formality risk, New York: unwitnessed holographic will by a minor who lacks capacity",
+      "description": "A New York holographic will, which New York does not recognize, that is not entirely handwritten, signed by a 16-year-old who is not of sound mind with a possible undue-influence concern. Expect 'formality-risk' with high flags for under-age, no sound mind, undue influence, the holographic form not allowed, and the draft not in the testator's handwriting.",
+      "state": {
+        "testator": {
+          "state": "NY",
+          "testatorName": "Jordan Lee",
+          "dateOfBirth": "2010-05-01",
+          "soundMind": "no",
+          "undueInfluenceConcern": "possible",
+          "maritalStatus": "single"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "holographic",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "",
+          "witnessesSignedInTestatorPresence": "",
+          "holographicEntirelyHandwritten": "no",
+          "witness1Name": "",
+          "witness1Beneficiary": "",
+          "witness2Name": "",
+          "witness2Beneficiary": "",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 0,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-001",
+            "category": "capacity",
+            "priority": "high",
+            "description": "The testator is 16 on the execution date; a will requires a testator aged 18 or older (UPC 2-501).",
+            "suggestedAction": "Do not sign. A person under 18 generally cannot make a valid will; seek advice on intestacy or wait until the testator is 18."
+          },
+          {
+            "id": "F-WILL-002",
+            "category": "capacity",
+            "priority": "high",
+            "description": "The testator is not confirmed to be of sound mind. Testamentary capacity is required when the will is signed.",
+            "suggestedAction": "Do not proceed to signing. Obtain a contemporaneous capacity assessment and legal advice first."
+          },
+          {
+            "id": "F-WILL-003",
+            "category": "capacity",
+            "priority": "high",
+            "description": "There is a possible undue-influence concern, for example a beneficiary who arranged the will. Undue influence can void a will or the affected gifts.",
+            "suggestedAction": "Meet the testator alone, document independent advice, and keep beneficiaries out of the signing room."
+          },
+          {
+            "id": "F-WILL-008",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "New York does not recognize a holographic (handwritten, unwitnessed) will, so an unwitnessed handwritten will would likely fail.",
+            "suggestedAction": "Execute the will as a witnessed will, with two witnesses, instead of relying on a holographic will."
+          },
+          {
+            "id": "F-WILL-009",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "The signature and material provisions of a holographic will must be in the testator's own handwriting. The draft is not entirely handwritten.",
+            "suggestedAction": "Rewrite the dispositive provisions in the testator's handwriting, or execute a witnessed will."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Formality risk, Ohio: electronic will with interested witness, affidavit Ohio does not use",
+      "description": "An Ohio will signed electronically (Ohio is not recorded as allowing a fully electronic will) with two witnesses of whom one takes under the will; with only two witnesses the gift to one of them is void under R.C. 2107.15. A self-proving affidavit is planned, but Ohio does not use one. Expect 'formality-risk' with high flags for the electronic form and the void gift, and a low note that the affidavit adds nothing in Ohio.",
+      "state": {
+        "testator": {
+          "state": "OH",
+          "testatorName": "Walter Kowalski",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "widowed"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "electronic",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "yes",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "Lena Park",
+          "notaryAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-010",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "Ohio is not recorded here as accepting a fully electronic will. An electronic will may fail where no statute allows it.",
+            "suggestedAction": "Print and sign the will with ink and live witnesses, or confirm the state's current electronic-will statute."
+          },
+          {
+            "id": "F-WILL-011",
+            "category": "witness",
+            "priority": "high",
+            "description": "A witness who also takes under the will (Carla Mendez) puts that gift at risk in Ohio: the gift is void unless enough disinterested witnesses also signed, and the witness may keep only the intestate share.",
+            "suggestedAction": "Use witnesses who take nothing under the will, or add supernumerary disinterested witnesses."
+          },
+          {
+            "id": "F-WILL-021",
+            "category": "self-proving",
+            "priority": "low",
+            "description": "Ohio does not use a self-proving affidavit, so it does not add proof there.",
+            "suggestedAction": "Keep the attestation clause and the witness details current instead."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with notes, California married, interested witness, uncertain capacity",
+      "description": "A California testator who is married (community property) leaves her husband nothing in the will because community property already gives him half. One of her two witnesses also takes a gift, which in California raises a rebuttable presumption of undue influence unless two other disinterested witnesses signed. Capacity is recorded as uncertain, there is no residuary clause, earlier wills are not revoked, a no-contest clause is limited in California, and there is no digital-assets clause. California accepts a declaration under penalty of perjury, so no notary is needed. Expect 'valid-ready-to-execute' (no high flags) with medium and low flags.",
+      "state": {
+        "testator": {
+          "state": "CA",
+          "testatorName": "Alma Reyes",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "uncertain",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "married"
+        },
+        "family": {
+          "spouseName": "Luis Reyes",
+          "spouseInheritanceValue": 0,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 300000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "no",
+          "residuary1Name": "",
+          "residuary1Percent": null,
+          "residuary2Name": "",
+          "residuary2Percent": null,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "no",
+          "noContestClause": "yes",
+          "digitalAssetsClause": "no",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-08-15",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "yes",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 0,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-015",
+            "category": "capacity",
+            "priority": "medium",
+            "description": "Testamentary capacity is uncertain. A later contest may challenge capacity.",
+            "suggestedAction": "Record a physician or attorney capacity note near the signing date and consider videotaping the ceremony only on advice of counsel."
+          },
+          {
+            "id": "F-WILL-011",
+            "category": "witness",
+            "priority": "medium",
+            "description": "A witness who also takes under the will (Tom Alvarez) raises a rebuttable presumption of duress or undue influence in California unless two other disinterested witnesses signed.",
+            "suggestedAction": "Use two disinterested witnesses, or add two further disinterested witnesses."
+          },
+          {
+            "id": "F-WILL-014",
+            "category": "bequest-arithmetic",
+            "priority": "medium",
+            "description": "There is no residuary clause, so anything not specifically given passes by intestacy (partial intestacy).",
+            "suggestedAction": "Add a residuary clause naming who takes everything not otherwise given, plus a contingent taker."
+          },
+          {
+            "id": "F-WILL-023",
+            "category": "other",
+            "priority": "medium",
+            "description": "The will does not revoke earlier wills and codicils, so conflicting older documents may still apply.",
+            "suggestedAction": "Add an express clause revoking all prior wills and codicils."
+          },
+          {
+            "id": "F-WILL-017",
+            "category": "spousal-protection",
+            "priority": "low",
+            "description": "California is a community property state: the surviving spouse already owns half of community property, and the will can dispose of only the testator's half plus separate property.",
+            "suggestedAction": "Classify assets as community or separate before allocating them in the will."
+          },
+          {
+            "id": "F-WILL-030",
+            "category": "state-rule",
+            "priority": "low",
+            "description": "California enforces a no-contest clause only in limited cases (for example a direct contest without probable cause).",
+            "suggestedAction": "Confirm the clause fits the statute's narrow categories before relying on it."
+          },
+          {
+            "id": "F-WILL-029",
+            "category": "digital-assets",
+            "priority": "low",
+            "description": "No digital-assets clause. Under the Revised Uniform Fiduciary Access to Digital Assets Act a representative may get only a catalogue of electronic communications unless the will allows more.",
+            "suggestedAction": "Add a clause authorizing the representative to access digital assets and the content of electronic communications."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with notes, Florida married, spouse below elective share, minor children, omitted child",
+      "description": "A Florida testator leaves his wife $100,000 of a $2,000,000 estate, below the roughly $600,000 elective share (30% of the elective estate). He has minor children and no guardian, omits one child without naming him, includes a no-contest clause (unenforceable in Florida), and one witness takes a gift (valid in Florida). Expect 'valid-ready-to-execute' (no high flags) with spousal, guardian, pretermitted-child, no-contest and witness notes.",
+      "state": {
+        "testator": {
+          "state": "FL",
+          "testatorName": "Harold Brandt",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "married"
+        },
+        "family": {
+          "spouseName": "Joan Brandt",
+          "spouseInheritanceValue": 100000,
+          "spouseWaivedElectiveShare": "no",
+          "hasMinorChildren": "yes",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "yes",
+          "disinheritedChildNamed": "no"
+        },
+        "estate": {
+          "estimatedEstateValue": 2000000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "yes",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "yes",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "Lena Park",
+          "notaryAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": 600000,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-016",
+            "category": "spousal-protection",
+            "priority": "medium",
+            "description": "The spouse is left $100,000, below an estimated elective share of about $600,000 in Florida. The spouse may elect against the will.",
+            "suggestedAction": "Increase the spouse's gift, document a written waiver, or plan for the elective share."
+          },
+          {
+            "id": "F-WILL-018",
+            "category": "spousal-protection",
+            "priority": "medium",
+            "description": "A child is left out without being named. An unnamed omitted child may claim a pretermitted-heir share.",
+            "suggestedAction": "Name the omitted child and state the intent to leave them nothing."
+          },
+          {
+            "id": "F-WILL-019",
+            "category": "fiduciary",
+            "priority": "medium",
+            "description": "The testator has minor children but names no guardian for them. The court will choose one.",
+            "suggestedAction": "Nominate a guardian and an alternate for the minor children."
+          },
+          {
+            "id": "F-WILL-011",
+            "category": "witness",
+            "priority": "low",
+            "description": "A witness (Tom Alvarez) also takes under the will. Florida still treats the will and the gift as valid, but a challenger may press undue influence.",
+            "suggestedAction": "Prefer disinterested witnesses anyway to remove the argument."
+          },
+          {
+            "id": "F-WILL-030",
+            "category": "state-rule",
+            "priority": "low",
+            "description": "A no-contest clause is not enforceable in Florida, so it adds no deterrent.",
+            "suggestedAction": "Rely on other measures, such as a trust or clear explanation of the plan."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with tax notes, Illinois married, $20 million estate",
+      "description": "An Illinois testator with a $20,000,000 estate leaves his wife $5,000,000, below the roughly $6.7 million Illinois elective share (one third where the testator has descendants), and the estate is above both the $15,000,000 federal exclusion and the $4,000,000 Illinois estate-tax exclusion. A tax adviser has not reviewed it. Illinois accepts an attestation clause without a notary. Expect 'valid-ready-to-execute' (no high flags) with elective-share, federal and Illinois estate-tax flags.",
+      "state": {
+        "testator": {
+          "state": "IL",
+          "testatorName": "Victor Okafor",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "married"
+        },
+        "family": {
+          "spouseName": "Chidi Okafor",
+          "spouseInheritanceValue": 5000000,
+          "spouseWaivedElectiveShare": "no",
+          "hasMinorChildren": "yes",
+          "guardianForMinorsName": "Amara Okafor",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 20000000,
+          "specificBequestsTotal": 1000000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "no",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": 6666666.67,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": true,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-016",
+            "category": "spousal-protection",
+            "priority": "medium",
+            "description": "The spouse is left $5,000,000, below an estimated elective share of about $6,666,667 in Illinois. The spouse may elect against the will.",
+            "suggestedAction": "Increase the spouse's gift, document a written waiver, or plan for the elective share."
+          },
+          {
+            "id": "F-WILL-024",
+            "category": "estate-tax",
+            "priority": "medium",
+            "description": "The estimated estate ($20,000,000) is above the 2026 federal basic exclusion of $15,000,000, so federal estate tax may apply.",
+            "suggestedAction": "Have a tax adviser review marital and charitable deductions, portability, and trusts."
+          },
+          {
+            "id": "F-WILL-025",
+            "category": "estate-tax",
+            "priority": "medium",
+            "description": "The estimated estate ($20,000,000) is above the Illinois estate-tax exclusion of $4,000,000.",
+            "suggestedAction": "Have a tax adviser estimate the state tax and consider planning to reduce it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with notes, Pennsylvania: inheritance tax, self-proving gap, no backup beneficiary",
+      "description": "A Pennsylvania testator whose witnesses did not sign in his presence (not required in Pennsylvania, so a medium note), whose self-proving affidavit is planned but not notarized, who names no contingent beneficiary or successor representative and no safekeeping location, and whose estate faces Pennsylvania inheritance tax. Expect 'valid-ready-to-execute' (no high flags) with self-proving, witness-presence, backup-beneficiary, successor, safekeeping and inheritance-tax flags.",
+      "state": {
+        "testator": {
+          "state": "PA",
+          "testatorName": "Samuel Whitfield",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "divorced"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "no"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "no",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "",
+          "notaryAcknowledged": "no"
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-007",
+            "category": "execution-formality",
+            "priority": "medium",
+            "description": "The witnesses did not sign in the testator's presence. Pennsylvania may not require it, but it is the safest practice.",
+            "suggestedAction": "Have each witness sign in the testator's presence, ideally in each other's presence too."
+          },
+          {
+            "id": "F-WILL-020",
+            "category": "self-proving",
+            "priority": "medium",
+            "description": "A self-proving affidavit is planned but the notary details are incomplete, so the will is not yet self-proved and the witnesses may have to testify.",
+            "suggestedAction": "Complete the affidavit before a notary and record the notary name and acknowledgment."
+          },
+          {
+            "id": "F-WILL-033",
+            "category": "bequest-arithmetic",
+            "priority": "low",
+            "description": "No contingent (backup) beneficiary is named, so a gift to someone who dies first may lapse or fall to an anti-lapse statute.",
+            "suggestedAction": "Name a contingent beneficiary for the residuary and for each main gift."
+          },
+          {
+            "id": "F-WILL-031",
+            "category": "fiduciary",
+            "priority": "low",
+            "description": "No successor personal representative is named. If the first choice cannot serve, the court appoints someone.",
+            "suggestedAction": "Name at least one successor personal representative."
+          },
+          {
+            "id": "F-WILL-032",
+            "category": "other",
+            "priority": "low",
+            "description": "No safekeeping location is recorded for the signed original. A lost original may be presumed revoked.",
+            "suggestedAction": "Record where the original is kept and tell the personal representative."
+          },
+          {
+            "id": "F-WILL-025",
+            "category": "estate-tax",
+            "priority": "low",
+            "description": "Pennsylvania charges an inheritance tax on transfers to many heirs, depending on the heir's relationship.",
+            "suggestedAction": "Have a tax adviser estimate the state tax and consider planning to reduce it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with notes, unlisted state (Nevada) falls back to the UPC default",
+      "description": "A testator domiciled in Nevada, which is not in this tool's state table. The Uniform Probate Code default is used and the 'verify state rule' flag is raised. Everything else is complete and clean. Expect 'valid-ready-to-execute' with a single medium flag.",
+      "state": {
+        "testator": {
+          "state": "NV",
+          "testatorName": "Dana Whitaker",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "single"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "no",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "Lena Park",
+          "notaryAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "uniform-default",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-022",
+            "category": "state-rule",
+            "priority": "medium",
+            "description": "The state NV is not in this tool's rule table, so the Uniform Probate Code default was used. State law may differ.",
+            "suggestedAction": "Verify the state's will formalities, witness rules and elective share with a local attorney."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with notes, Washington married: community property and state estate tax",
+      "description": "A Washington testator with a $5,000,000 estate, married, leaving his wife $2,000,000. Washington is a community property state with no elective share, and the estate is above the $3,000,000 Washington estate-tax exclusion. One witness also takes a gift, which in Washington raises a rebuttable presumption unless two other witnesses signed. Expect 'valid-ready-to-execute' (no high flags) with community-property, witness and state estate-tax flags.",
+      "state": {
+        "testator": {
+          "state": "WA",
+          "testatorName": "Ingrid Larsen",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "married"
+        },
+        "family": {
+          "spouseName": "Nils Larsen",
+          "spouseInheritanceValue": 2000000,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 5000000,
+          "specificBequestsTotal": 500000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "witnessed",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "yes",
+          "witnessesSignedInTestatorPresence": "yes",
+          "holographicEntirelyHandwritten": "",
+          "witness1Name": "Carla Mendez",
+          "witness1Beneficiary": "yes",
+          "witness2Name": "Tom Alvarez",
+          "witness2Beneficiary": "no",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "yes",
+          "notaryName": "Lena Park",
+          "notaryAcknowledged": "yes"
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 2,
+        "selfProved": true,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": [
+          {
+            "id": "F-WILL-011",
+            "category": "witness",
+            "priority": "medium",
+            "description": "A witness who also takes under the will (Carla Mendez) raises a rebuttable presumption of duress or undue influence in Washington unless two other disinterested witnesses signed.",
+            "suggestedAction": "Use two disinterested witnesses, or add two further disinterested witnesses."
+          },
+          {
+            "id": "F-WILL-025",
+            "category": "estate-tax",
+            "priority": "medium",
+            "description": "The estimated estate ($5,000,000) is above the Washington estate-tax exclusion of $3,000,000.",
+            "suggestedAction": "Have a tax adviser estimate the state tax and consider planning to reduce it."
+          },
+          {
+            "id": "F-WILL-017",
+            "category": "spousal-protection",
+            "priority": "low",
+            "description": "Washington is a community property state: the surviving spouse already owns half of community property, and the will can dispose of only the testator's half plus separate property.",
+            "suggestedAction": "Classify assets as community or separate before allocating them in the will."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid and ready to execute, Texas holographic will",
+      "description": "A Texas will written entirely in the testator's own handwriting and signed at the end, with no witnesses. Texas recognizes holographic wills, so no witness or self-proving flag applies. The testator is single and everything else is complete. Expect 'valid-ready-to-execute'.",
+      "state": {
+        "testator": {
+          "state": "TX",
+          "testatorName": "Rosa Delgado",
+          "dateOfBirth": "1954-03-12",
+          "soundMind": "yes",
+          "undueInfluenceConcern": "none",
+          "maritalStatus": "single"
+        },
+        "family": {
+          "spouseName": "",
+          "spouseInheritanceValue": null,
+          "spouseWaivedElectiveShare": "",
+          "hasMinorChildren": "no",
+          "guardianForMinorsName": "",
+          "disinheritsChild": "no",
+          "disinheritedChildNamed": ""
+        },
+        "estate": {
+          "estimatedEstateValue": 800000,
+          "specificBequestsTotal": 100000,
+          "specificBequestsSummary": "$50,000 each to two grandchildren",
+          "residuaryClausePresent": "yes",
+          "residuary1Name": "Daniel Sullivan",
+          "residuary1Percent": 60,
+          "residuary2Name": "Erin Sullivan",
+          "residuary2Percent": 40,
+          "residuary3Name": "",
+          "residuary3Percent": null,
+          "contingentBeneficiaryNamed": "yes"
+        },
+        "provisions": {
+          "personalRepresentativeName": "Daniel Sullivan",
+          "successorPersonalRepresentativeName": "Erin Sullivan",
+          "bondWaived": "yes",
+          "revokesPriorWillsClause": "yes",
+          "noContestClause": "no",
+          "digitalAssetsClause": "yes",
+          "estateTaxReviewed": "yes",
+          "originalWillLocation": "Attorney vault, Tampa",
+          "drafterNote": ""
+        },
+        "execution": {
+          "executionForm": "holographic",
+          "executionDate": "2026-09-01",
+          "signedAtEnd": "yes",
+          "signedInWitnessPresence": "",
+          "witnessesSignedInTestatorPresence": "",
+          "holographicEntirelyHandwritten": "yes",
+          "witness1Name": "",
+          "witness1Beneficiary": "",
+          "witness2Name": "",
+          "witness2Beneficiary": "",
+          "witness3Name": "",
+          "witness3Beneficiary": ""
+        },
+        "selfProving": {
+          "selfProvingAffidavit": "",
+          "notaryName": "",
+          "notaryAcknowledged": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid-ready-to-execute",
+        "residuaryPercentTotal": 100,
+        "electiveShareAmount": null,
+        "witnessCount": 0,
+        "selfProved": false,
+        "federalEstateTaxExposure": false,
+        "stateRuleSource": "state-table",
+        "flaggedIssues": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,1221 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateBillOfSale",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateBillOfSale(d) returns only { completenessClass, odometerExempt, stateRuleKnown } (no rules array, no flags), so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's `detectFlaggedIssues(state)`. Classification is first-match: riskIndicated (odometer status not-actual or exceeds-mechanical-limits, an invalid VIN, an outstanding lien, sellerHoldsTitle 'no', or a branded title: salvage/rebuilt/flood/lemon/junk) -> 'risk-flagged'; incompleteIndicated (missing party details, signatures, sale or vehicle details, required odometer items, an unsigned title, or a state-required notarization) -> 'incomplete'; else 'complete'. The odometer disclosure is exempt per 49 CFR 580.17: GVWR over 16,000 lb, not self-propelled, model year 2010 or earlier and sale year at least 10 later, or model year 2011 or later and sale year at least 20 later. Deadline flags (release of liability, buyer title) read the wall clock, which test-personas freezes at 2026-09-03T12:00:00Z. Flags are stable-sorted high > medium > low in insertion order within a tier. Regenerate expected with: bin/test-personas united-states-vehicle-bill-of-sale --update",
+  "personas": [
+    {
+      "name": "Complete Texas sale with odometer disclosure",
+      "description": "Private sale of a 2018 Toyota Corolla in Texas on 2026-08-25 for $12,500. Both parties are fully identified and signed; the VIN passes the check digit; the odometer disclosure (64,210 miles, actual) is signed by both; as-is, no lien, title in hand and signed over; the seller filed the Vehicle Transfer Notification within 30 days and the buyer applied to title within 30 days. Expect class complete and only the always-on disclaimer flag.",
+      "state": {
+        "transaction": {
+          "state": "TX",
+          "saleDate": "2026-08-25",
+          "salePriceAsUsd": 12500,
+          "paymentMethod": "check",
+          "taxBasis": "standard-presumptive-value"
+        },
+        "seller": {
+          "name": "Dana R. Whitfield",
+          "type": "individual",
+          "streetAddress": "412 Mesquite Lane",
+          "city": "Austin",
+          "state": "TX",
+          "postalCode": "78704",
+          "phone": "512-555-0142",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Marcus T. Alvarez",
+          "type": "individual",
+          "streetAddress": "88 Oak Hollow Dr",
+          "city": "Round Rock",
+          "state": "TX",
+          "postalCode": "78664",
+          "phone": "512-555-0187",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2018,
+          "make": "Toyota",
+          "model": "Corolla",
+          "bodyType": "Sedan",
+          "vin": "2T1BURHE5JC034461",
+          "color": "Silver",
+          "titleNumber": "TX55820193",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 64210,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": "2026-08-26",
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": "2026-08-30"
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete California sale of a 10-year-exempt vehicle",
+      "description": "Private sale of a 2005 Honda Accord in California on 2026-08-01 for $3,200. Model year 2005 is more than 10 years old, so the federal odometer disclosure is exempt under 49 CFR 580.17(a)(3) and no odometer fields are filled. The seller filed the REG 138 notice two days after the sale (limit 5 days) and the buyer applied within 10 days. Expect class complete with the low-priority exempt note and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "CA",
+          "saleDate": "2026-08-01",
+          "salePriceAsUsd": 3200,
+          "paymentMethod": "cash",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Priya Nair",
+          "type": "individual",
+          "streetAddress": "2210 Alder St",
+          "city": "Sacramento",
+          "state": "CA",
+          "postalCode": "95816",
+          "phone": "916-555-0119",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Tom Becker",
+          "type": "individual",
+          "streetAddress": "75 Delta Way",
+          "city": "Davis",
+          "state": "CA",
+          "postalCode": "95616",
+          "phone": "530-555-0166",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2005,
+          "make": "Honda",
+          "model": "Accord",
+          "bodyType": "Sedan",
+          "vin": "1HGCM82633A004352",
+          "color": "Blue",
+          "titleNumber": "CA1190442",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": null,
+          "status": "",
+          "sellerCertified": "",
+          "buyerAcknowledged": ""
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": "2026-08-03",
+          "platesRemoved": "no",
+          "buyerTitleApplicationDate": "2026-08-08"
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": true,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-015",
+            "category": "odometer-exempt-note",
+            "priority": "low",
+            "description": "The federal odometer disclosure is not required (49 CFR 580.17) because it is model year 2010 or earlier and at least 10 years old.",
+            "suggestedAction": "State law may still require a mileage statement on the title or bill of sale; record the reading anyway if the vehicle has an odometer."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete Washington sale: buyer unsigned, odometer unacknowledged",
+      "description": "A 2019 Subaru Outback sold in Washington on 2026-09-01 for $19,000. The buyer details (address, ZIP) are missing and the buyer has not signed; the odometer reading is recorded but the buyer has not acknowledged it; no as-is statement. Expect class incomplete, a missing-odometer flag, missing party details, missing signature, missing terms, a pending release-of-liability flag (5 days), and the WA official-form note.",
+      "state": {
+        "transaction": {
+          "state": "WA",
+          "saleDate": "2026-09-01",
+          "salePriceAsUsd": 19000,
+          "paymentMethod": "wire",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Elena Kowalski",
+          "type": "individual",
+          "streetAddress": "930 Pine Ridge Rd",
+          "city": "Spokane",
+          "state": "WA",
+          "postalCode": "99201",
+          "phone": "509-555-0130",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Jordan Pike",
+          "type": "individual",
+          "streetAddress": "",
+          "city": "Spokane",
+          "state": "WA",
+          "postalCode": "",
+          "phone": "509-555-0171",
+          "signed": "no"
+        },
+        "vehicle": {
+          "year": 2019,
+          "make": "Subaru",
+          "model": "Outback",
+          "bodyType": "Wagon",
+          "vin": "4S4BSANC7K3205517",
+          "color": "Green",
+          "titleNumber": "",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 41870,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "no"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "",
+          "warrantyNote": "",
+          "notarized": ""
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "",
+          "releaseFiledDate": null,
+          "platesRemoved": "",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "incomplete",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-001",
+            "category": "odometer-disclosure-missing",
+            "priority": "high",
+            "description": "The federal odometer disclosure (49 CFR 580.5) is incomplete: buyer acknowledgement signature not recorded. A federal disclosure is required for this vehicle.",
+            "suggestedAction": "Record the odometer reading, choose the mileage certification statement, and have the seller sign the disclosure and the buyer acknowledge it, on the title or a separate disclosure statement."
+          },
+          {
+            "id": "F-BOS-009",
+            "category": "missing-signature",
+            "priority": "high",
+            "description": "The bill of sale is not fully signed: buyer signature missing.",
+            "suggestedAction": "Have both the seller and the buyer sign and date the bill of sale."
+          },
+          {
+            "id": "F-BOS-008",
+            "category": "missing-party-details",
+            "priority": "medium",
+            "description": "Party details are incomplete: buyer street address, buyer ZIP code not recorded. The odometer rule requires the current printed names and addresses of both parties.",
+            "suggestedAction": "Record the printed name and full current address of the seller and the buyer."
+          },
+          {
+            "id": "F-BOS-010",
+            "category": "missing-terms",
+            "priority": "medium",
+            "description": "Required sale or vehicle details are missing: as-is or warranty statement.",
+            "suggestedAction": "Record the state, date, price, vehicle year, make, model, VIN, the as-is or warranty statement, the lien status, and whether the seller holds the title."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "medium",
+            "description": "Washington expects Report of Sale within 5 days of the sale (3 days left); it is not yet recorded as filed.",
+            "suggestedAction": "File the release of liability or notice of transfer before the deadline."
+          },
+          {
+            "id": "F-BOS-016",
+            "category": "state-form",
+            "priority": "low",
+            "description": "Washington publishes an official bill of sale (Vehicle/Vessel Bill of Sale (420-065)) that its agency expects at titling.",
+            "suggestedAction": "Complete the official state form (or make sure this bill of sale carries every field it asks for)."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk-flagged Florida sale: odometer discrepancy and late filings",
+      "description": "A 2019 Chevrolet Silverado sold in Florida on 2026-06-15 for $27,000. The seller certified that the odometer reading (131,500 miles) is NOT the actual mileage, which must be flagged to the buyer. The seller filed the Notice of Sale 45 days after the sale (limit 30) and the buyer applied to title 35 days after the sale. Everything else is complete. Expect class risk-flagged, an odometer-discrepancy flag, a late release-of-liability flag, a late buyer-title flag, the FL rule and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "FL",
+          "saleDate": "2026-06-15",
+          "salePriceAsUsd": 27000,
+          "paymentMethod": "check",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Gary L. Thompson",
+          "type": "individual",
+          "streetAddress": "1501 Palmetto Ave",
+          "city": "Tampa",
+          "state": "FL",
+          "postalCode": "33602",
+          "phone": "813-555-0108",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Rosa Delgado",
+          "type": "individual",
+          "streetAddress": "340 Bayshore Blvd",
+          "city": "Clearwater",
+          "state": "FL",
+          "postalCode": "33755",
+          "phone": "727-555-0194",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2019,
+          "make": "Chevrolet",
+          "model": "Silverado 1500",
+          "bodyType": "Pickup",
+          "vin": "1GCUYDED4KZ123456",
+          "color": "Black",
+          "titleNumber": "FL88231045",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 131500,
+          "status": "not-actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": "2026-07-30",
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": "2026-07-20"
+        }
+      },
+      "expected": {
+        "completenessClass": "risk-flagged",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-002",
+            "category": "odometer-discrepancy",
+            "priority": "high",
+            "description": "The seller certified: NOT the actual mileage (warning: odometer discrepancy). The buyer must be warned that the mileage may not be accurate.",
+            "suggestedAction": "Make sure the buyer reads and acknowledges the warning, and note the discrepancy on the title or disclosure statement. Do not certify the reading as actual if it is not."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "medium",
+            "description": "Florida expects Notice of Sale (HSMV 82050 or the title back) within 30 days of the sale; it was filed 15 days late.",
+            "suggestedAction": "Keep the filing receipt; the seller stays exposed to tickets and tolls from the sale date until the notice is on file."
+          },
+          {
+            "id": "F-BOS-012",
+            "category": "buyer-title-deadline",
+            "priority": "medium",
+            "description": "Florida expects the buyer to apply to title within 30 days of the sale; the application was 5 days late, and late fees may apply.",
+            "suggestedAction": "Pay any late-transfer fee the agency assesses and keep the receipt."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk-flagged Ohio sale: lien, bad VIN, rebuilt brand, no notarization",
+      "description": "A 2013 Ford F-150 sold in Ohio on 2026-08-28 for $14,500. A lien held by First Federal Credit Union is outstanding, the VIN fails the check digit, the title is branded rebuilt, and Ohio requires the title assignment to be notarized but it was not. The odometer disclosure is complete. Expect class risk-flagged with high flags for the lien, VIN, brand, notarization, plus the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "OH",
+          "saleDate": "2026-08-28",
+          "salePriceAsUsd": 14500,
+          "paymentMethod": "cash",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Walter Hayes",
+          "type": "individual",
+          "streetAddress": "77 Buckeye Ct",
+          "city": "Columbus",
+          "state": "OH",
+          "postalCode": "43215",
+          "phone": "614-555-0122",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Naomi Fischer",
+          "type": "individual",
+          "streetAddress": "19 Lakeview Dr",
+          "city": "Dublin",
+          "state": "OH",
+          "postalCode": "43017",
+          "phone": "614-555-0149",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2013,
+          "make": "Ford",
+          "model": "F-150",
+          "bodyType": "Pickup",
+          "vin": "1FTFW1ET5DFC10312",
+          "color": "White",
+          "titleNumber": "OH7720188",
+          "titleBrand": "rebuilt",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 118004,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "outstanding",
+          "lienholderName": "First Federal Credit Union",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "no"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "",
+          "releaseFiledDate": null,
+          "platesRemoved": "",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "risk-flagged",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-003",
+            "category": "invalid-vin",
+            "priority": "high",
+            "description": "The VIN \"1FTFW1ET5DFC10312\" looks invalid: the ninth character of a 17-character VIN is a check digit, and it does not match.",
+            "suggestedAction": "Compare the VIN on the vehicle (dashboard and door jamb) with the title and correct any typing mistake before signing."
+          },
+          {
+            "id": "F-BOS-004",
+            "category": "lien-outstanding",
+            "priority": "high",
+            "description": "A lien held by First Federal Credit Union is outstanding, so the seller cannot deliver a clear title and the buyer takes the vehicle subject to the lien.",
+            "suggestedAction": "Pay off the loan and obtain a signed lien release (or an electronic lien release) from the lienholder before the transfer."
+          },
+          {
+            "id": "F-BOS-006",
+            "category": "title-brand",
+            "priority": "high",
+            "description": "The title carries a brand: Rebuilt or reconstructed. The brand must be disclosed to the buyer and affects value, insurance, and registration.",
+            "suggestedAction": "Disclose the brand in writing on the bill of sale, and have the buyer confirm the brand before paying."
+          },
+          {
+            "id": "F-BOS-007",
+            "category": "notarization-required",
+            "priority": "high",
+            "description": "Ohio requires the title assignment to be notarized, and notarization is not recorded.",
+            "suggestedAction": "Sign the title assignment in front of a notary public (or the agency's authorized agent) with photo identification."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "low",
+            "description": "No seller notice deadline is encoded for Ohio, and no release of liability is recorded.",
+            "suggestedAction": "Check whether the state agency offers a notice of sale or release of liability, and keep a signed, dated copy of the bill of sale."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete sale in a state outside the rule table",
+      "description": "A 2021 Toyota Tacoma sold in Minnesota on 2026-08-10 for $31,000. Every required item is present, but Minnesota is not in the engine STATE_RULES table, so the uniform default applies and a verify-state-rule flag is raised. The title brand is recorded as unknown (low flag). Expect class complete, stateRuleKnown false, and the medium verify-state-rule flag.",
+      "state": {
+        "transaction": {
+          "state": "MN",
+          "saleDate": "2026-08-10",
+          "salePriceAsUsd": 31000,
+          "paymentMethod": "wire",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Ingrid Larsen",
+          "type": "individual",
+          "streetAddress": "5 Birch Hollow",
+          "city": "Minneapolis",
+          "state": "MN",
+          "postalCode": "55401",
+          "phone": "612-555-0111",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Sam Okafor",
+          "type": "individual",
+          "streetAddress": "812 Summit Ave",
+          "city": "St. Paul",
+          "state": "MN",
+          "postalCode": "55102",
+          "phone": "651-555-0138",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2021,
+          "make": "Toyota",
+          "model": "Tacoma",
+          "bodyType": "Pickup",
+          "vin": "3TMCZ5AN2MM123456",
+          "color": "Gray",
+          "titleNumber": "MN4410032",
+          "titleBrand": "unknown",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 22400,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": "2026-08-11",
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": "2026-08-15"
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": false,
+        "stateRuleKnown": false,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-014",
+            "category": "verify-state-rule",
+            "priority": "medium",
+            "description": "The state \"MN\" is not in the engine rule table, so the uniform default was applied (bill of sale recommended, no notarization, no deadlines).",
+            "suggestedAction": "Verify the state notarization, release-of-liability, and title-transfer rules with the state motor vehicle agency."
+          },
+          {
+            "id": "F-BOS-006",
+            "category": "title-brand",
+            "priority": "low",
+            "description": "The title brand status is unknown.",
+            "suggestedAction": "Check the title itself and a vehicle history report (for example NMVTIS) for salvage, flood, or rebuilt brands."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete Pennsylvania sale, notarized, buyer title overdue",
+      "description": "A 2016 Honda Civic sold in Pennsylvania on 2026-07-10 for $11,200. Pennsylvania requires both parties to sign the title before a notary; that is recorded. All other items are complete, but no buyer title application is recorded and the 20-day window has passed. Expect class complete with a medium buyer-title-deadline flag, a low release-of-liability note (no seller deadline encoded), and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "PA",
+          "saleDate": "2026-07-10",
+          "salePriceAsUsd": 11200,
+          "paymentMethod": "check",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Frank Delaney",
+          "type": "individual",
+          "streetAddress": "61 Quaker Rd",
+          "city": "Pittsburgh",
+          "state": "PA",
+          "postalCode": "15213",
+          "phone": "412-555-0105",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Alicia Brandt",
+          "type": "individual",
+          "streetAddress": "204 Mill St",
+          "city": "Erie",
+          "state": "PA",
+          "postalCode": "16501",
+          "phone": "814-555-0152",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2016,
+          "make": "Honda",
+          "model": "Civic",
+          "bodyType": "Sedan",
+          "vin": "19XFC2F57GE123456",
+          "color": "Red",
+          "titleNumber": "PA33901877",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 87650,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "released",
+          "lienholderName": "Keystone Auto Finance",
+          "lienReleaseDate": "2026-07-02",
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "yes"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "no",
+          "releaseFiledDate": null,
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-012",
+            "category": "buyer-title-deadline",
+            "priority": "medium",
+            "description": "Pennsylvania expects the buyer to apply to title within 20 days of the sale, and no application is recorded after that window.",
+            "suggestedAction": "Apply to title and register the vehicle now; late-transfer fees may apply."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "low",
+            "description": "No seller notice deadline is encoded for Pennsylvania, and no release of liability is recorded.",
+            "suggestedAction": "Check whether the state agency offers a notice of sale or release of liability, and keep a signed, dated copy of the bill of sale."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk-flagged Illinois gift: no title in hand, short VIN, future date",
+      "description": "A 2016 Jeep Cherokee given as a gift in Illinois with a sale date of 2026-12-01 (in the future). The seller does not hold the title, the VIN is only nine characters, the price is $0 with no tax exemption stated, and the buyer has not signed. Expect class risk-flagged with high flags for the missing title, invalid VIN and missing signature, and medium flags for the sales-tax basis, implausible date, and missing details.",
+      "state": {
+        "transaction": {
+          "state": "IL",
+          "saleDate": "2026-12-01",
+          "salePriceAsUsd": 0,
+          "paymentMethod": "gift",
+          "taxBasis": ""
+        },
+        "seller": {
+          "name": "Beth Carmichael",
+          "type": "individual",
+          "streetAddress": "9 Prairie View",
+          "city": "Springfield",
+          "state": "IL",
+          "postalCode": "62701",
+          "phone": "217-555-0173",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Noah Carmichael",
+          "type": "individual",
+          "streetAddress": "9 Prairie View",
+          "city": "Springfield",
+          "state": "IL",
+          "postalCode": "62701",
+          "phone": "",
+          "signed": "no"
+        },
+        "vehicle": {
+          "year": 2016,
+          "make": "Jeep",
+          "model": "Cherokee",
+          "bodyType": "SUV",
+          "vin": "1C4PJLCB8",
+          "color": "Gray",
+          "titleNumber": "",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 92000,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "no"
+        },
+        "terms": {
+          "sellerHoldsTitle": "no",
+          "titleSigned": "no",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": ""
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "",
+          "releaseFiledDate": null,
+          "platesRemoved": "",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "risk-flagged",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-001",
+            "category": "odometer-disclosure-missing",
+            "priority": "high",
+            "description": "The federal odometer disclosure (49 CFR 580.5) is incomplete: buyer acknowledgement signature not recorded. A federal disclosure is required for this vehicle.",
+            "suggestedAction": "Record the odometer reading, choose the mileage certification statement, and have the seller sign the disclosure and the buyer acknowledge it, on the title or a separate disclosure statement."
+          },
+          {
+            "id": "F-BOS-003",
+            "category": "invalid-vin",
+            "priority": "high",
+            "description": "The VIN \"1C4PJLCB8\" looks invalid: a vehicle of model year 1981 or later has a 17-character VIN.",
+            "suggestedAction": "Compare the VIN on the vehicle (dashboard and door jamb) with the title and correct any typing mistake before signing."
+          },
+          {
+            "id": "F-BOS-005",
+            "category": "title-problem",
+            "priority": "high",
+            "description": "The seller does not hold the certificate of title, so ownership cannot be transferred to the buyer on this sale.",
+            "suggestedAction": "Have the seller obtain the title (or a duplicate title from the state agency, or from the lienholder) before the sale is completed."
+          },
+          {
+            "id": "F-BOS-009",
+            "category": "missing-signature",
+            "priority": "high",
+            "description": "The bill of sale is not fully signed: buyer signature missing.",
+            "suggestedAction": "Have both the seller and the buyer sign and date the bill of sale."
+          },
+          {
+            "id": "F-BOS-013",
+            "category": "sales-tax-basis",
+            "priority": "medium",
+            "description": "The price is $0 but no gift or family exemption basis is recorded; agencies often tax a gift at fair market value or a presumptive value.",
+            "suggestedAction": "State the exemption being claimed (and the relationship), or the fair market value, so the buyer can complete the tax form."
+          },
+          {
+            "id": "F-BOS-017",
+            "category": "implausible-data",
+            "priority": "medium",
+            "description": "Some entries look implausible: a sale date in the future.",
+            "suggestedAction": "Check these entries against the title, the vehicle, and the sale date."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "low",
+            "description": "No seller notice deadline is encoded for Illinois, and no release of liability is recorded.",
+            "suggestedAction": "Check whether the state agency offers a notice of sale or release of liability, and keep a signed, dated copy of the bill of sale."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete New York sale with the official bill of sale form",
+      "description": "A 2012 Nissan Altima sold in New York on 2026-08-18 for $5,900. Model year 2012 is less than 20 years old at the sale, so the odometer disclosure is required and complete. NY expects the official MV-912 form and has no encoded seller or buyer deadline. Expect class complete with the low state-form flag, a low release-of-liability note, and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "NY",
+          "saleDate": "2026-08-18",
+          "salePriceAsUsd": 5900,
+          "paymentMethod": "cash",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Helen Cho",
+          "type": "individual",
+          "streetAddress": "48 Willow Pl",
+          "city": "Albany",
+          "state": "NY",
+          "postalCode": "12207",
+          "phone": "518-555-0126",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Victor Ramos",
+          "type": "individual",
+          "streetAddress": "300 Hudson Ave",
+          "city": "Troy",
+          "state": "NY",
+          "postalCode": "12180",
+          "phone": "518-555-0183",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2012,
+          "make": "Nissan",
+          "model": "Altima",
+          "bodyType": "Sedan",
+          "vin": "1N4AL2AP9CN123456",
+          "color": "Silver",
+          "titleNumber": "NY91820334",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 134120,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": null,
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": "2026-08-25"
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-016",
+            "category": "state-form",
+            "priority": "low",
+            "description": "New York publishes an official bill of sale (MV-912 Bill of Sale) that its agency expects at titling.",
+            "suggestedAction": "Complete the official state form (or make sure this bill of sale carries every field it asks for)."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete California sale: title not signed over, release overdue",
+      "description": "A 2020 Ford Transit sold in California on 2026-08-20 for $22,000. The seller holds the title but has not signed it over, and the REG 138 release of liability was not filed within 5 days (14 days have passed by 2026-09-03). Expect class incomplete with a medium title-problem flag, a high overdue release-of-liability flag, a medium overdue buyer-title-deadline flag, and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "CA",
+          "saleDate": "2026-08-20",
+          "salePriceAsUsd": 22000,
+          "paymentMethod": "wire",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Carla Mendes",
+          "type": "individual",
+          "streetAddress": "14 Harbor Rd",
+          "city": "Oakland",
+          "state": "CA",
+          "postalCode": "94607",
+          "phone": "510-555-0101",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Dev Patel",
+          "type": "individual",
+          "streetAddress": "600 Market St",
+          "city": "San Francisco",
+          "state": "CA",
+          "postalCode": "94105",
+          "phone": "415-555-0102",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2020,
+          "make": "Ford",
+          "model": "Transit 150",
+          "bodyType": "Van",
+          "vin": "1FTYE1CM2LKA12345",
+          "color": "Silver",
+          "titleNumber": "CA2203318",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 58300,
+          "status": "actual",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "no",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "no",
+          "releaseFiledDate": null,
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "incomplete",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "high",
+            "description": "California expects Notice of Transfer and Release of Liability (REG 138) within 5 days of the sale, and the 5-day window has passed without a recorded filing.",
+            "suggestedAction": "File the release of liability or notice of transfer now, and keep the confirmation."
+          },
+          {
+            "id": "F-BOS-005",
+            "category": "title-problem",
+            "priority": "medium",
+            "description": "The seller holds the title but has not signed it over to the buyer.",
+            "suggestedAction": "Have the seller sign and date the title assignment, and record the odometer reading on it where the title has the field."
+          },
+          {
+            "id": "F-BOS-012",
+            "category": "buyer-title-deadline",
+            "priority": "medium",
+            "description": "California expects the buyer to apply to title within 10 days of the sale, and no application is recorded after that window.",
+            "suggestedAction": "Apply to title and register the vehicle now; late-transfer fees may apply."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete Texas sale of a heavy truck exempt by weight",
+      "description": "A 2017 Freightliner box truck with a GVWR over 16,000 pounds sold between two businesses in Texas on 2026-07-01 for $46,000. The federal odometer disclosure is exempt under 49 CFR 580.17(a)(1), so no odometer fields are required. Filings are on time. Expect class complete with the exempt note and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "TX",
+          "saleDate": "2026-07-01",
+          "salePriceAsUsd": 46000,
+          "paymentMethod": "check",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Lone Star Haulage LLC",
+          "type": "business",
+          "streetAddress": "2200 Industrial Pkwy",
+          "city": "Houston",
+          "state": "TX",
+          "postalCode": "77032",
+          "phone": "713-555-0150",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Pecos Freight Co",
+          "type": "business",
+          "streetAddress": "55 Depot Rd",
+          "city": "Midland",
+          "state": "TX",
+          "postalCode": "79701",
+          "phone": "432-555-0161",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2017,
+          "make": "Freightliner",
+          "model": "M2 106",
+          "bodyType": "Box truck",
+          "vin": "1FVACWDT2HHJA1234",
+          "color": "Silver",
+          "titleNumber": "TX77120045",
+          "titleBrand": "clean",
+          "gvwrOver16000": "yes",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": null,
+          "status": "",
+          "sellerCertified": "",
+          "buyerAcknowledged": ""
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "as-is",
+          "warrantyNote": "",
+          "notarized": "not-required"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "yes",
+          "releaseFiledDate": "2026-07-05",
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": "2026-07-15"
+        }
+      },
+      "expected": {
+        "completenessClass": "complete",
+        "odometerExempt": true,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-015",
+            "category": "odometer-exempt-note",
+            "priority": "low",
+            "description": "The federal odometer disclosure is not required (49 CFR 580.17) because its gross vehicle weight rating exceeds 16,000 pounds.",
+            "suggestedAction": "State law may still require a mileage statement on the title or bill of sale; record the reading anyway if the vehicle has an odometer."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk-flagged Louisiana sale: mileage exceeds mechanical limits, notarized, with warranty",
+      "description": "A 2014 Dodge Ram 1500 sold in Louisiana on 2026-08-05 for $9,800 with a written 30-day warranty. The seller certified the odometer reading exceeds the mechanical limit of the odometer (999,999). Louisiana is in the rule table with notarization of the bill of sale, which is recorded as done. Expect class risk-flagged with an odometer-discrepancy flag, the LA state-form note, a low release-of-liability note, and the disclaimer.",
+      "state": {
+        "transaction": {
+          "state": "LA",
+          "saleDate": "2026-08-05",
+          "salePriceAsUsd": 9800,
+          "paymentMethod": "cash",
+          "taxBasis": "purchase-price"
+        },
+        "seller": {
+          "name": "Rene Boudreaux",
+          "type": "individual",
+          "streetAddress": "8 Bayou Ln",
+          "city": "Lafayette",
+          "state": "LA",
+          "postalCode": "70501",
+          "phone": "337-555-0120",
+          "signed": "yes"
+        },
+        "buyer": {
+          "name": "Tasha Landry",
+          "type": "individual",
+          "streetAddress": "91 Cane St",
+          "city": "Baton Rouge",
+          "state": "LA",
+          "postalCode": "70802",
+          "phone": "225-555-0121",
+          "signed": "yes"
+        },
+        "vehicle": {
+          "year": 2014,
+          "make": "Dodge",
+          "model": "Ram 1500",
+          "bodyType": "Pickup",
+          "vin": "1C6RR6FT3ES123456",
+          "color": "Silver",
+          "titleNumber": "LA5530911",
+          "titleBrand": "clean",
+          "gvwrOver16000": "no",
+          "selfPropelled": "yes"
+        },
+        "odometer": {
+          "readingMiles": 999999,
+          "status": "exceeds-mechanical-limits",
+          "sellerCertified": "yes",
+          "buyerAcknowledged": "yes"
+        },
+        "terms": {
+          "sellerHoldsTitle": "yes",
+          "titleSigned": "yes",
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienReleaseDate": null,
+          "asIsClause": "warranty",
+          "warrantyNote": "30-day powertrain warranty from the seller.",
+          "notarized": "yes"
+        },
+        "afterSale": {
+          "releaseOfLiabilityFiled": "",
+          "releaseFiledDate": null,
+          "platesRemoved": "yes",
+          "buyerTitleApplicationDate": null
+        }
+      },
+      "expected": {
+        "completenessClass": "risk-flagged",
+        "odometerExempt": false,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-BOS-002",
+            "category": "odometer-discrepancy",
+            "priority": "high",
+            "description": "The seller certified: Exceeds the odometer mechanical limits. The buyer must be warned that the mileage may not be accurate.",
+            "suggestedAction": "Make sure the buyer reads and acknowledges the warning, and note the discrepancy on the title or disclosure statement. Do not certify the reading as actual if it is not."
+          },
+          {
+            "id": "F-BOS-011",
+            "category": "release-of-liability",
+            "priority": "low",
+            "description": "No seller notice deadline is encoded for Louisiana, and no release of liability is recorded.",
+            "suggestedAction": "Check whether the state agency offers a notice of sale or release of liability, and keep a signed, dated copy of the bill of sale."
+          },
+          {
+            "id": "F-BOS-016",
+            "category": "state-form",
+            "priority": "low",
+            "description": "Louisiana requires a written bill of sale to title the vehicle.",
+            "suggestedAction": "Complete the official state form (or make sure this bill of sale carries every field it asks for)."
+          },
+          {
+            "id": "F-BOS-018",
+            "category": "disclaimer",
+            "priority": "low",
+            "description": "This report is documentation support, not legal advice. State rules vary, and the issuing state agency decides what it accepts.",
+            "suggestedAction": "Confirm the current requirements with the state motor vehicle agency, and keep a signed copy of the bill of sale and odometer statement for at least five years."
+          }
+        ]
+      }
+    }
+  ]
+}

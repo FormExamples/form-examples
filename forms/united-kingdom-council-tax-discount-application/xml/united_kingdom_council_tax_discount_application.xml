@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE united_kingdom_council_tax_discount_application SYSTEM "united_kingdom_council_tax_discount_application.dtd">
+<united_kingdom_council_tax_discount_application>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<applicant_id>550e8400-e29b-41d4-a716-446655440000</applicant_id>
+<billing_authority_id>660e8400-e29b-41d4-a716-446655440001</billing_authority_id>
+<claim_type>single-person-discount</claim_type>
+<account_reference></account_reference>
+<application_date>2026-01-15</application_date>
+<effective_date>2026-01-15</effective_date>
+<applicant_status>counted-adult</applicant_status>
+<property_address_as_full_text>Example text.</property_address_as_full_text>
+<property_postcode>ABC123</property_postcode>
+<council_tax_band>A</council_tax_band>
+<main_residence>yes</main_residence>
+<liable_role>owner-occupier</liable_role>
+<other_occupants>yes</other_occupants>
+<smi_certificate>yes</smi_certificate>
+<qualifying_benefit>yes</qualifying_benefit>
+<student_certificate>yes</student_certificate>
+<student_course_months>1</student_course_months>
+<student_hours_per_week>1</student_hours_per_week>
+<disability_adaptation>extra-bathroom</disability_adaptation>
+<disabled_person_main_home>yes</disabled_person_main_home>
+<apprentice_declaration>yes</apprentice_declaration>
+<care_leaver_proof>yes</care_leaver_proof>
+<care_leaver_age_years>45</care_leaver_age_years>
+<evidence_notes>Example text.</evidence_notes>
+<declared_true>yes</declared_true>
+<agrees_to_report_changes>yes</agrees_to_report_changes>
+<fraud_warning_acknowledged>yes</fraud_warning_acknowledged>
+<declarant_name>Example</declarant_name>
+<declaration_date>2026-01-15</declaration_date>
+</united_kingdom_council_tax_discount_application>

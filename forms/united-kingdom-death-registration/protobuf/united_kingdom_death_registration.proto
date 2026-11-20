@@ -1,0 +1,158 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_death_registration
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_death_registration;
+
+enum UnitedKingdomDeathRegistrationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_OTHER = 3;  // other
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum UnitedKingdomDeathRegistrationDeathJurisdictionEnum {
+  DEATHJURISDICTION_UNSPECIFIED = 0;
+  DEATHJURISDICTION_ENGLAND_WALES = 1;  // england-wales
+  DEATHJURISDICTION_SCOTLAND = 2;  // scotland
+  DEATHJURISDICTION_NORTHERN_IRELAND = 3;  // northern-ireland
+  DEATHJURISDICTION_ABROAD = 4;  // abroad
+}
+
+enum UnitedKingdomDeathRegistrationDeceasedParticularsKnownEnum {
+  DECEASEDPARTICULARSKNOWN_UNSPECIFIED = 0;
+  DECEASEDPARTICULARSKNOWN_YES = 1;  // yes
+  DECEASEDPARTICULARSKNOWN_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationMccdReceivedEnum {
+  MCCDRECEIVED_UNSPECIFIED = 0;
+  MCCDRECEIVED_YES = 1;  // yes
+  MCCDRECEIVED_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationMedicalExaminerStatusEnum {
+  MEDICALEXAMINERSTATUS_UNSPECIFIED = 0;
+  MEDICALEXAMINERSTATUS_CONFIRMED = 1;  // confirmed
+  MEDICALEXAMINERSTATUS_PENDING = 2;  // pending
+}
+
+enum UnitedKingdomDeathRegistrationReferredToCoronerEnum {
+  REFERREDTOCORONER_UNSPECIFIED = 0;
+  REFERREDTOCORONER_YES = 1;  // yes
+  REFERREDTOCORONER_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationCoronerStageEnum {
+  CORONERSTAGE_UNSPECIFIED = 0;
+  CORONERSTAGE_INVESTIGATING = 1;  // investigating
+  CORONERSTAGE_POST_MORTEM = 2;  // post-mortem
+  CORONERSTAGE_INQUEST_OPENED = 3;  // inquest-opened
+  CORONERSTAGE_RELEASED_NO_INQUEST = 4;  // released-no-inquest
+  CORONERSTAGE_INQUEST_CONCLUDED = 5;  // inquest-concluded
+}
+
+enum UnitedKingdomDeathRegistrationCoronerCertificateReceivedEnum {
+  CORONERCERTIFICATERECEIVED_UNSPECIFIED = 0;
+  CORONERCERTIFICATERECEIVED_YES = 1;  // yes
+  CORONERCERTIFICATERECEIVED_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationInformantRelationshipEnum {
+  INFORMANTRELATIONSHIP_UNSPECIFIED = 0;
+  INFORMANTRELATIONSHIP_RELATIVE_PRESENT_AT_DEATH = 1;  // relative-present-at-death
+  INFORMANTRELATIONSHIP_RELATIVE_IN_ATTENDANCE = 2;  // relative-in-attendance
+  INFORMANTRELATIONSHIP_RELATIVE_IN_DISTRICT = 3;  // relative-in-district
+  INFORMANTRELATIONSHIP_PERSON_PRESENT_AT_DEATH = 4;  // person-present-at-death
+  INFORMANTRELATIONSHIP_OCCUPIER_OF_PREMISES = 5;  // occupier-of-premises
+  INFORMANTRELATIONSHIP_PERSON_ARRANGING_FUNERAL = 6;  // person-arranging-funeral
+  INFORMANTRELATIONSHIP_NOT_QUALIFIED = 7;  // not-qualified
+}
+
+enum UnitedKingdomDeathRegistrationAppointmentBookedEnum {
+  APPOINTMENTBOOKED_UNSPECIFIED = 0;
+  APPOINTMENTBOOKED_YES = 1;  // yes
+  APPOINTMENTBOOKED_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationSupportingDocumentsAvailableEnum {
+  SUPPORTINGDOCUMENTSAVAILABLE_UNSPECIFIED = 0;
+  SUPPORTINGDOCUMENTSAVAILABLE_YES = 1;  // yes
+  SUPPORTINGDOCUMENTSAVAILABLE_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationDisposalMethodEnum {
+  DISPOSALMETHOD_UNSPECIFIED = 0;
+  DISPOSALMETHOD_BURIAL = 1;  // burial
+  DISPOSALMETHOD_CREMATION = 2;  // cremation
+  DISPOSALMETHOD_OTHER = 3;  // other
+  DISPOSALMETHOD_UNDECIDED = 4;  // undecided
+}
+
+enum UnitedKingdomDeathRegistrationDisposalCertificateIssuedEnum {
+  DISPOSALCERTIFICATEISSUED_UNSPECIFIED = 0;
+  DISPOSALCERTIFICATEISSUED_YES = 1;  // yes
+  DISPOSALCERTIFICATEISSUED_NO = 2;  // no
+}
+
+enum UnitedKingdomDeathRegistrationTellUsOnceStatusEnum {
+  TELLUSONCESTATUS_UNSPECIFIED = 0;
+  TELLUSONCESTATUS_REFERENCE_RECEIVED = 1;  // reference-received
+  TELLUSONCESTATUS_NOT_OFFERED = 2;  // not-offered
+  TELLUSONCESTATUS_DECLINED = 3;  // declined
+}
+
+enum UnitedKingdomDeathRegistrationCopyOrderChannelEnum {
+  COPYORDERCHANNEL_UNSPECIFIED = 0;
+  COPYORDERCHANNEL_AT_REGISTRATION = 1;  // at-registration
+  COPYORDERCHANNEL_GRO_ONLINE = 2;  // gro-online
+  COPYORDERCHANNEL_PHONE = 3;  // phone
+  COPYORDERCHANNEL_POST = 4;  // post
+  COPYORDERCHANNEL_LOCAL_REGISTER_OFFICE = 5;  // local-register-office
+}
+
+enum UnitedKingdomDeathRegistrationPriorityServiceEnum {
+  PRIORITYSERVICE_UNSPECIFIED = 0;
+  PRIORITYSERVICE_YES = 1;  // yes
+  PRIORITYSERVICE_NO = 2;  // no
+}
+
+message UnitedKingdomDeathRegistration {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string informant_id = 6;  // UUID — uuid
+  string deceased_name = 7;  // TEXT
+  UnitedKingdomDeathRegistrationSexEnum sex = 8;  // VARCHAR(20)
+  string date_of_birth = 9;  // DATE — iso 8601 date
+  string date_of_death = 10;  // DATE — iso 8601 date
+  string place_of_death = 11;  // TEXT
+  UnitedKingdomDeathRegistrationDeathJurisdictionEnum death_jurisdiction = 12;  // VARCHAR(20)
+  UnitedKingdomDeathRegistrationDeceasedParticularsKnownEnum deceased_particulars_known = 13;  // VARCHAR(5)
+  UnitedKingdomDeathRegistrationMccdReceivedEnum mccd_received = 14;  // VARCHAR(5)
+  UnitedKingdomDeathRegistrationMedicalExaminerStatusEnum medical_examiner_status = 15;  // VARCHAR(20)
+  string medical_examiner_confirmation_date = 16;  // DATE — iso 8601 date
+  UnitedKingdomDeathRegistrationReferredToCoronerEnum referred_to_coroner = 17;  // VARCHAR(5)
+  UnitedKingdomDeathRegistrationCoronerStageEnum coroner_stage = 18;  // VARCHAR(30)
+  UnitedKingdomDeathRegistrationCoronerCertificateReceivedEnum coroner_certificate_received = 19;  // VARCHAR(5)
+  string informant_name = 20;  // TEXT
+  UnitedKingdomDeathRegistrationInformantRelationshipEnum informant_relationship = 21;  // VARCHAR(40)
+  string informant_address = 22;  // TEXT
+  string register_office = 23;  // TEXT
+  UnitedKingdomDeathRegistrationAppointmentBookedEnum appointment_booked = 24;  // VARCHAR(5)
+  UnitedKingdomDeathRegistrationSupportingDocumentsAvailableEnum supporting_documents_available = 25;  // VARCHAR(5)
+  string registration_date = 26;  // DATE — iso 8601 date
+  string as_of_date = 27;  // DATE — iso 8601 date
+  UnitedKingdomDeathRegistrationDisposalMethodEnum disposal_method = 28;  // VARCHAR(20)
+  UnitedKingdomDeathRegistrationDisposalCertificateIssuedEnum disposal_certificate_issued = 29;  // VARCHAR(5)
+  UnitedKingdomDeathRegistrationTellUsOnceStatusEnum tell_us_once_status = 30;  // VARCHAR(25)
+  string tell_us_once_reference = 31;  // TEXT
+  int32 copies_requested = 32;  // INTEGER
+  UnitedKingdomDeathRegistrationCopyOrderChannelEnum copy_order_channel = 33;  // VARCHAR(25)
+  string gro_index_reference = 34;  // TEXT
+  UnitedKingdomDeathRegistrationPriorityServiceEnum priority_service = 35;  // VARCHAR(5)
+}

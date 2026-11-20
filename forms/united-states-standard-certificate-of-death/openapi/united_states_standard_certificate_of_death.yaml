@@ -1,0 +1,646 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_standard_certificate_of_death
+openapi: 3.1.0
+info:
+  title: United States Standard Certificate Of Death — UnitedStatesStandardCertificateOfDeath
+  version: 1.0.0
+  description: "Main US Standard Certificate of Death record (NCHS 2003 revision): decedent facts, the certifier's Part I and Part II cause-of-death chain, manner of death, tobacco, pregnancy and injury items, medical examiner or coroner referral, the funeral director's disposition, and the certified-copy order. Validity classification, fired rules and flags live in child tables."
+paths:
+  /api/united_states_standard_certificate_of_deaths:
+    get:
+      summary: List UnitedStatesStandardCertificateOfDeath records
+      operationId: listUnitedStatesStandardCertificateOfDeath
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesStandardCertificateOfDeath records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesStandardCertificateOfDeath
+      operationId: createUnitedStatesStandardCertificateOfDeath
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+      responses:
+        "200":
+          description: The newly created UnitedStatesStandardCertificateOfDeath
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_standard_certificate_of_deaths/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesStandardCertificateOfDeath by id
+      operationId: getUnitedStatesStandardCertificateOfDeath
+      responses:
+        "200":
+          description: The requested UnitedStatesStandardCertificateOfDeath
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+        "404":
+          description: UnitedStatesStandardCertificateOfDeath not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesStandardCertificateOfDeath
+      operationId: updateUnitedStatesStandardCertificateOfDeath
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+      responses:
+        "200":
+          description: The updated UnitedStatesStandardCertificateOfDeath
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+        "404":
+          description: UnitedStatesStandardCertificateOfDeath not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesStandardCertificateOfDeath
+      operationId: replaceUnitedStatesStandardCertificateOfDeath
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+      responses:
+        "200":
+          description: The updated UnitedStatesStandardCertificateOfDeath
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesStandardCertificateOfDeath"
+        "404":
+          description: UnitedStatesStandardCertificateOfDeath not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesStandardCertificateOfDeath
+      operationId: deleteUnitedStatesStandardCertificateOfDeath
+      responses:
+        "200":
+          description: UnitedStatesStandardCertificateOfDeath deleted
+        "404":
+          description: UnitedStatesStandardCertificateOfDeath not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesStandardCertificateOfDeath:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the decedent this certificate documents (restrict delete).
+        clinician_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the certifier (restrict delete); optional.
+        state:
+          type: string
+          maxLength: 2
+          description: Two-letter USPS code of the state (or territory) whose vital-records office registers the death; selects the STATE_RULES row.
+        decedent_name:
+          type: string
+          description: Legal name of the decedent as recorded on the certificate (item 1).
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - unknown
+            - ""
+          description: "Sex of the decedent (item 2): female, male, or unknown."
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the decedent (item 5).
+        age_years:
+          type: [integer, 'null']
+          format: int32
+          description: Age of the decedent at death in whole years (item 4); 0 for an infant under one year.
+        marital_status:
+          type: string
+          enum:
+            - married
+            - married-separated
+            - widowed
+            - divorced
+            - never-married
+            - unknown
+            - ""
+          description: Marital status at time of death (item 8).
+        veteran_status:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the decedent ever served in the US Armed Forces (item 10).
+        state_of_residence:
+          type: string
+          maxLength: 2
+          description: Two-letter USPS code of the decedent's state of residence (item 14).
+        place_of_death_type:
+          type: string
+          enum:
+            - hospital-inpatient
+            - hospital-emergency-outpatient
+            - hospital-dead-on-arrival
+            - decedent-home
+            - hospice
+            - nursing-home
+            - other
+            - ""
+          description: "Place of death type (item 20): inpatient, ER/outpatient, DOA, home, hospice, nursing home, or other."
+        place_of_death_facility:
+          type: string
+          description: Name and address of the facility or location where death occurred or the body was found (items 20 to 26).
+        date_of_death:
+          type: [string, 'null']
+          format: date
+          description: Date of death, actual or presumed (item 29).
+        time_of_death:
+          type: [string, 'null']
+          format: time
+          description: Time of death, actual or presumed (item 30).
+        certifier_name:
+          type: string
+          description: Name of the person completing the cause-of-death section (item 32 / certifier block).
+        certifier_type:
+          type: string
+          enum:
+            - certifying-physician
+            - pronouncing-and-certifying-physician
+            - medical-examiner
+            - coroner
+            - other
+            - ""
+          description: "Certifier type (item 32): certifying physician, pronouncing and certifying physician, medical examiner, coroner, or other."
+        certifier_license_number:
+          type: string
+          maxLength: 50
+          description: State license number of the certifier (item 33 / 34).
+        certification_date:
+          type: [string, 'null']
+          format: date
+          description: Date the certifier signed the cause-of-death section (item 35).
+        attended_deceased:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the certifier attended the decedent during the last illness (yes/no).
+        last_seen_alive_date:
+          type: [string, 'null']
+          format: date
+          description: Date the certifier last saw the decedent alive.
+        cause_ia_condition:
+          type: string
+          description: "Part I line (a): the immediate cause, the final disease or condition resulting in death (required)."
+        cause_ia_interval:
+          type: string
+          maxLength: 100
+          description: "Part I line (a): approximate interval between onset and death (item 32)."
+        cause_ib_condition:
+          type: string
+          description: "Part I line (b): the condition, if any, giving rise to line (a) (due to, or as a consequence of)."
+        cause_ib_interval:
+          type: string
+          maxLength: 100
+          description: "Part I line (b): approximate interval between onset and death (item 32)."
+        cause_ic_condition:
+          type: string
+          description: "Part I line (c): the condition, if any, giving rise to line (b)."
+        cause_ic_interval:
+          type: string
+          maxLength: 100
+          description: "Part I line (c): approximate interval between onset and death (item 32)."
+        cause_id_condition:
+          type: string
+          description: "Part I line (d): the underlying cause, the condition that initiated the chain, when four steps are needed."
+        cause_id_interval:
+          type: string
+          maxLength: 100
+          description: "Part I line (d): approximate interval between onset and death (item 32)."
+        part_ii_conditions:
+          type: string
+          description: "Part II: other significant conditions contributing to death but not resulting in the underlying cause given in Part I."
+        autopsy_performed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an autopsy was performed (item 34 / 35).
+        autopsy_findings_available:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether autopsy findings were available to complete the cause of death.
+        manner_of_death:
+          type: string
+          enum:
+            - natural
+            - accident
+            - suicide
+            - homicide
+            - pending-investigation
+            - could-not-be-determined
+            - ""
+          description: "Manner of death (item 41): natural, accident, suicide, homicide, pending investigation, or could not be determined."
+        tobacco_use_contributed:
+          type: string
+          enum:
+            - "yes"
+            - probably
+            - "no"
+            - unknown
+            - ""
+          description: "Did tobacco use contribute to death (item 37): yes, probably, no, or unknown."
+        pregnancy_status:
+          type: string
+          enum:
+            - not-applicable
+            - not-pregnant-within-past-year
+            - pregnant-at-time-of-death
+            - not-pregnant-but-pregnant-within-42-days
+            - not-pregnant-but-pregnant-43-days-to-1-year
+            - unknown
+            - ""
+          description: Pregnancy status (item 36), asked for females; not applicable for males and for females outside the age band.
+        injury_date:
+          type: [string, 'null']
+          format: date
+          description: Date of injury (item 43).
+        injury_time:
+          type: [string, 'null']
+          format: time
+          description: Time of injury (item 44).
+        injury_place:
+          type: string
+          description: Place of injury, for example decedent's home, construction site, or restaurant (item 45).
+        injury_at_work:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the injury occurred at work (item 46).
+        injury_location:
+          type: string
+          description: "Location of injury: state, city, street and number, apartment, zip code (item 47)."
+        injury_description:
+          type: string
+          description: "Description of how the injury occurred (item 48): specific enough to code the external cause."
+        transportation_injury_role:
+          type: string
+          enum:
+            - driver-operator
+            - passenger
+            - pedestrian
+            - other
+            - ""
+          description: Role of the decedent if a transportation injury (item 49).
+        referred_to_medical_examiner:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the death was referred to the medical examiner or coroner.
+        referral_reason:
+          type: string
+          enum:
+            - none
+            - violent-or-unnatural
+            - accident
+            - suicide
+            - homicide
+            - suspicious
+            - poisoning-or-overdose
+            - unattended-by-physician
+            - sudden-unexpected-infant-death
+            - work-related
+            - medical-procedure-related
+            - in-custody
+            - public-health-hazard
+            - unidentified
+            - other
+            - ""
+          description: Medical-examiner or coroner referral criterion, if any; any listed circumstance other than none requires referral.
+        funeral_director_name:
+          type: string
+          description: Name of the funeral director or person acting as such (items 27 and 28).
+        funeral_director_license_number:
+          type: string
+          maxLength: 50
+          description: State license number of the funeral director.
+        disposition_method:
+          type: string
+          enum:
+            - burial
+            - cremation
+            - entombment
+            - donation
+            - removal-from-state
+            - other
+            - ""
+          description: "Method of disposition (item 19): burial, cremation, entombment, donation, removal from state, or other."
+        disposition_date:
+          type: [string, 'null']
+          format: date
+          description: Date of disposition (item 19).
+        disposition_place:
+          type: string
+          description: "Place of disposition: name of cemetery, crematory, or other place (item 20)."
+        filed_date:
+          type: [string, 'null']
+          format: date
+          description: Date the certificate was filed with the local or state registrar.
+        certified_copies_requested:
+          type: [integer, 'null']
+          format: int32
+          description: Number of certified copies ordered.
+        requester_relationship:
+          type: string
+          enum:
+            - spouse
+            - child
+            - parent
+            - sibling
+            - legal-representative
+            - funeral-director
+            - other
+            - ""
+          description: Relationship of the person ordering certified copies to the decedent; most states restrict who may obtain them.
+        requester_identity_verified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the requester's identity and eligibility were verified before certified copies were issued.
+        fee_paid_in_usd:
+          type: [number, 'null']
+          format: double
+          description: Total fee paid in US dollars for the certified copies.
+        certifier_note:
+          type: string
+          description: Free-text note from the certifier or funeral director.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - state
+        - decedent_name
+        - sex
+        - marital_status
+        - veteran_status
+        - state_of_residence
+        - place_of_death_type
+        - place_of_death_facility
+        - certifier_name
+        - certifier_type
+        - certifier_license_number
+        - attended_deceased
+        - cause_ia_condition
+        - cause_ia_interval
+        - cause_ib_condition
+        - cause_ib_interval
+        - cause_ic_condition
+        - cause_ic_interval
+        - cause_id_condition
+        - cause_id_interval
+        - part_ii_conditions
+        - autopsy_performed
+        - autopsy_findings_available
+        - manner_of_death
+        - tobacco_use_contributed
+        - pregnancy_status
+        - injury_place
+        - injury_at_work
+        - injury_location
+        - injury_description
+        - transportation_injury_role
+        - referred_to_medical_examiner
+        - referral_reason
+        - funeral_director_name
+        - funeral_director_license_number
+        - disposition_method
+        - disposition_place
+        - requester_relationship
+        - requester_identity_verified
+        - certifier_note
+      description: "Main US Standard Certificate of Death record (NCHS 2003 revision): decedent facts, the certifier's Part I and Part II cause-of-death chain, manner of death, tobacco, pregnancy and injury items, medical examiner or coroner referral, the funeral director's disposition, and the certified-copy order. Validity classification, fired rules and flags live in child tables."

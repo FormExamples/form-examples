@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00004e02771b"
+  deletedAt: null
+  name: "Test name"
+  birthDate: "1990-01-01"
+  email: "test@example.com"
+  phone: "Test phone"
+  postalAddressAsFullText: "Test postalAddressAsFullText"
+  postcode: "SW1A 2AA"
+  countryAsIso31661Alpha2: "GB"

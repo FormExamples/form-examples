@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_health_care_power_of_attorney_grade
+
+syntax = "proto3";
+
+package form_examples.united_states_health_care_power_of_attorney;
+
+enum UnitedStatesHealthCarePowerOfAttorneyGradeReadinessClassEnum {
+  READINESSCLASS_UNSPECIFIED = 0;
+  READINESSCLASS_READY_TO_EXECUTE = 1;  // ready-to-execute
+  READINESSCLASS_INCOMPLETE = 2;  // incomplete
+  READINESSCLASS_EXECUTION_RISK = 3;  // execution-risk
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyGradeExecutionRiskEnum {
+  EXECUTIONRISK_UNSPECIFIED = 0;
+  EXECUTIONRISK_YES = 1;  // yes
+  EXECUTIONRISK_NO = 2;  // no
+}
+
+message UnitedStatesHealthCarePowerOfAttorneyGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_health_care_power_of_attorney_id = 5;  // UUID — uuid
+  UnitedStatesHealthCarePowerOfAttorneyGradeReadinessClassEnum readiness_class = 6;  // VARCHAR(20)
+  string rule_set_name = 7;  // VARCHAR(50) — max 50 chars
+  int32 missing_count = 8;  // INTEGER
+  UnitedStatesHealthCarePowerOfAttorneyGradeExecutionRiskEnum execution_risk = 9;  // VARCHAR(5)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

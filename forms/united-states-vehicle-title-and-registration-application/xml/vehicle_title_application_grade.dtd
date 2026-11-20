@@ -1,0 +1,13 @@
+<!ELEMENT vehicle_title_application_grade (id,created_at,updated_at,deleted_at,vehicle_title_application_id,application_class,vin_status,odometer_disclosure_required,brand_or_lien_issue,outstanding_item_count,state_rule_known,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT vehicle_title_application_id (#PCDATA)>
+<!ELEMENT application_class (#PCDATA)>
+<!ELEMENT vin_status (#PCDATA)>
+<!ELEMENT odometer_disclosure_required (#PCDATA)>
+<!ELEMENT brand_or_lien_issue (#PCDATA)>
+<!ELEMENT outstanding_item_count (#PCDATA)>
+<!ELEMENT state_rule_known (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

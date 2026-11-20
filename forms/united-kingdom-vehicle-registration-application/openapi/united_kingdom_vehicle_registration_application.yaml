@@ -1,0 +1,546 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_kingdom_vehicle_registration_application
+openapi: 3.1.0
+info:
+  title: United Kingdom Vehicle Registration Application — UnitedKingdomVehicleRegistrationApplication
+  version: 1.0.0
+  description: "Main vehicle registration application record: V62 replacement V5C, V55/4 or V55/5 first registration, imported vehicle, or V627/1 rebuilt or kit vehicle, with keeper, vehicle identity, supporting evidence, fee, and declaration."
+paths:
+  /api/united_kingdom_vehicle_registration_applications:
+    get:
+      summary: List UnitedKingdomVehicleRegistrationApplication records
+      operationId: listUnitedKingdomVehicleRegistrationApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedKingdomVehicleRegistrationApplication records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedKingdomVehicleRegistrationApplication
+      operationId: createUnitedKingdomVehicleRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+      responses:
+        "200":
+          description: The newly created UnitedKingdomVehicleRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_kingdom_vehicle_registration_applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomVehicleRegistrationApplication by id
+      operationId: getUnitedKingdomVehicleRegistrationApplication
+      responses:
+        "200":
+          description: The requested UnitedKingdomVehicleRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+        "404":
+          description: UnitedKingdomVehicleRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedKingdomVehicleRegistrationApplication
+      operationId: updateUnitedKingdomVehicleRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+      responses:
+        "200":
+          description: The updated UnitedKingdomVehicleRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+        "404":
+          description: UnitedKingdomVehicleRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedKingdomVehicleRegistrationApplication
+      operationId: replaceUnitedKingdomVehicleRegistrationApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+      responses:
+        "200":
+          description: The updated UnitedKingdomVehicleRegistrationApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomVehicleRegistrationApplication"
+        "404":
+          description: UnitedKingdomVehicleRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedKingdomVehicleRegistrationApplication
+      operationId: deleteUnitedKingdomVehicleRegistrationApplication
+      responses:
+        "200":
+          description: UnitedKingdomVehicleRegistrationApplication deleted
+        "404":
+          description: UnitedKingdomVehicleRegistrationApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedKingdomVehicleRegistrationApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        applicant_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant.
+        keeper_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the registered keeper when different from the applicant.
+        application_type:
+          type: string
+          enum:
+            - v62-replacement-v5c
+            - v62-acquired-without-v5c
+            - v55-4-new-vehicle
+            - v55-5-used-vehicle
+            - imported-vehicle
+            - v627-1-rebuilt-or-kit
+            - ""
+          description: "Application variant: v62-replacement-v5c, v62-acquired-without-v5c, v55-4-new-vehicle, v55-5-used-vehicle, imported-vehicle, or v627-1-rebuilt-or-kit."
+        application_date:
+          type: [string, 'null']
+          format: date
+          description: Date the application was completed.
+        v5c_status:
+          type: string
+          enum:
+            - lost
+            - stolen
+            - destroyed
+            - not-received
+            - damaged
+            - never-had
+            - has-v5c
+            - ""
+          description: "Why a V5C is needed: lost, stolen, destroyed, not-received, damaged, never-had (acquired without one), or has-v5c."
+        weeks_since_change_of_keeper:
+          type: [integer, 'null']
+          format: int32
+          description: Whole weeks since the keeper change, used for the 6-week not-received replacement window.
+        new_keeper_slip_provided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the green new-keeper slip from the most recent V5C is enclosed (yes/no); it waives the V62 fee.
+        owner_differs_from_keeper:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the legal owner differs from the registered keeper (yes/no).
+        owner_name:
+          type: string
+          description: Name of the owner when the owner differs from the keeper.
+        keeper_address_in_northern_ireland:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the keeper address is in Northern Ireland (yes/no); insurance and a 4-year MOT threshold apply.
+        registration_number:
+          type: string
+          maxLength: 12
+          description: Vehicle registration mark (number plate), blank for a first registration where the DVLA assigns one.
+        vehicle_identification_number:
+          type: string
+          maxLength: 30
+          description: Vehicle identification number (VIN, chassis number).
+        engine_number:
+          type: string
+          maxLength: 30
+          description: Engine number as stamped on the engine.
+        make:
+          type: string
+          description: Vehicle make (manufacturer).
+        model:
+          type: string
+          description: Vehicle model.
+        colour:
+          type: string
+          description: Vehicle colour.
+        vehicle_category:
+          type: string
+          enum:
+            - car
+            - motorcycle
+            - light-goods
+            - heavy-goods
+            - bus
+            - other
+            - ""
+          description: "Vehicle category: car, motorcycle, light-goods, heavy-goods, bus, or other."
+        fuel_type:
+          type: string
+          enum:
+            - petrol
+            - diesel
+            - electric
+            - hybrid
+            - lpg
+            - other
+            - ""
+          description: "Fuel type: petrol, diesel, electric, hybrid, lpg, or other."
+        engine_capacity_as_cc:
+          type: [integer, 'null']
+          format: int32
+          description: Engine capacity in cubic centimetres, null for electric vehicles.
+        date_of_manufacture:
+          type: [string, 'null']
+          format: date
+          description: Date the vehicle was manufactured.
+        date_first_used:
+          type: [string, 'null']
+          format: date
+          description: Date the vehicle was first used, anywhere.
+        seriously_damaged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the vehicle is seriously damaged and cannot be repaired (yes/no); such a vehicle cannot be registered.
+        certificate_of_newness_provided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a certificate of newness (or declaration for imports) is enclosed (yes/no).
+        type_approval:
+          type: string
+          enum:
+            - ecwvta
+            - gb-type-approval
+            - ni-type-approval
+            - iva
+            - msva
+            - exempt-over-10-years
+            - none
+            - ""
+          description: "Type approval evidence: ecwvta, gb-type-approval, ni-type-approval, iva, msva, exempt-over-10-years, or none."
+        mot_status:
+          type: string
+          enum:
+            - valid
+            - not-required
+            - missing
+            - ""
+          description: "MOT evidence: valid, not-required, or missing."
+        insurance_status:
+          type: string
+          enum:
+            - in-force
+            - none
+            - ""
+          description: "Insurance evidence: in-force or none."
+        country_of_export:
+          type: string
+          description: Country the vehicle was imported from.
+        import_date:
+          type: [string, 'null']
+          format: date
+          description: Date the vehicle arrived in Great Britain.
+        nova_status:
+          type: string
+          enum:
+            - notified
+            - not-notified
+            - not-applicable
+            - ""
+          description: "HMRC Notification of Vehicle Arrivals (NOVA) status: notified, not-notified, or not-applicable."
+        nova_reference:
+          type: string
+          maxLength: 40
+          description: NOVA reference given by HMRC.
+        build_evidence_provided:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether receipts and build evidence for a rebuilt or kit vehicle are enclosed (yes/no).
+        donor_vehicle_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of donor vehicles whose parts were used, for a rebuilt vehicle.
+        fee_payment_method:
+          type: string
+          enum:
+            - cheque
+            - postal-order
+            - post-office-card
+            - online-card
+            - none
+            - ""
+          description: "Payment method for the fee: cheque, postal-order, post-office-card, online-card, or none."
+        fee_paid_as_pence:
+          type: [integer, 'null']
+          format: int32
+          description: Fee enclosed or paid, in pence.
+        declaration_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant signed the declaration (yes/no).
+        declaration_date:
+          type: [string, 'null']
+          format: date
+          description: Date the declaration was signed.
+        applicant_note:
+          type: string
+          description: Free-text note from the applicant.
+      required:
+        - created_at
+        - updated_at
+        - applicant_id
+        - application_type
+        - v5c_status
+        - new_keeper_slip_provided
+        - owner_differs_from_keeper
+        - owner_name
+        - keeper_address_in_northern_ireland
+        - registration_number
+        - vehicle_identification_number
+        - engine_number
+        - make
+        - model
+        - colour
+        - vehicle_category
+        - fuel_type
+        - seriously_damaged
+        - certificate_of_newness_provided
+        - type_approval
+        - mot_status
+        - insurance_status
+        - country_of_export
+        - nova_status
+        - nova_reference
+        - build_evidence_provided
+        - fee_payment_method
+        - declaration_signed
+        - applicant_note
+      description: "Main vehicle registration application record: V62 replacement V5C, V55/4 or V55/5 first registration, imported vehicle, or V627/1 rebuilt or kit vehicle, with keeper, vehicle identity, supporting evidence, fee, and declaration."

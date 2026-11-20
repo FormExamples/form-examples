@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001006"
+  deletedAt: null
+  flagId: "F-INSPECTION-003"
+  category: "inspection"
+  priority: "low"
+  description: "In Texas, emissions testing applies only in designated counties or metropolitan areas."
+  suggestedAction: "Check the inspection requirement for the county where the vehicle will be registered."
+  vehicleTitleApplicationGradeId: "00000000-0000-4000-8000-000000001004"

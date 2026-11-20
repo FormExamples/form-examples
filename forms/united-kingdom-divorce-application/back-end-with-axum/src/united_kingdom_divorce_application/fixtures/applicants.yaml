@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000dda39"
+  deletedAt: null
+  name: "Margaret Ellis"
+  birthDate: "1986-03-12"
+  email: "margaret.ellis@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "12 Park Road, Leeds"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "LS6 1AB"

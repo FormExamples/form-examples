@@ -1,0 +1,1273 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateRegistration",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateRegistration(d) returns only { readinessClass, daysSinceBirth, lateRegistration, missingItemCount } - no rules array and no flags - so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's `detectFlaggedIssues(state)`. Classification is first-match: outOfScopeReason (stillbirth yes, or a birth country other than england/wales) -> 'out-of-scope'; any missing required item or date inconsistency -> 'incomplete'; any evidence gap (informant problem, paternity route or evidence, insufficient identity evidence, non-original documents, more than 365 days) -> 'needs-additional-evidence'; else 'ready-to-submit'. Days are whole days from dateOfBirth to registrationDate (UTC); the 42-day period, the 35-day warning and the 365-day limit are in rules.js. A late registration of 43 to 365 days raises a flag but does not by itself block ready-to-submit. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas united-kingdom-birth-registration --update",
+  "personas": [
+    {
+      "name": "Ready: married parents, mother registers within 42 days",
+      "description": "Married parents; the mother registers 12 days after the birth at the local register office with a passport and orders two standard certificates. Expect ready-to-submit, 12 days, not late, no missing items, and no flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-submit",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready: unmarried parents register together; twins; no red book",
+      "description": "Unmarried parents register jointly (the father's name goes on the entry), twins, red book not brought. Expect ready-to-submit with only the low-priority multiple-birth and red-book flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "twins",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Marcus Bell",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "joint-registration",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "both-parents",
+          "informantName": "Beatrice Ellis and Marcus Bell",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "uk-photocard-driving-licence",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "no"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-submit",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-MULTIPLE-BIRTH-001",
+            "category": "multiple-birth",
+            "priority": "low",
+            "description": "Each child of a multiple birth is registered separately, each with its own entry and certificate.",
+            "suggestedAction": "Complete one application for each child, and tell the registrar the birth order and times."
+          },
+          {
+            "id": "F-RED-BOOK-001",
+            "category": "other",
+            "priority": "low",
+            "description": "The child's personal child health record (red book) will not be brought; some registrars ask to see it.",
+            "suggestedAction": "Bring the red book if you have it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: missing child forenames, mother details, informant and delivery",
+      "description": "Several required items are blank (forenames, mother's name, maiden surname and address, informant name, registration date, delivery address, payment). Expect incomplete with a missing-required flag.",
+      "state": {
+        "child": {
+          "childForenames": "",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "",
+          "motherMaidenSurname": "",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": ""
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": null,
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "",
+          "paymentConfirmed": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "daysSinceBirth": null,
+        "lateRegistration": "",
+        "missingItemCount": 8,
+        "flaggedIssues": [
+          {
+            "id": "F-MISSING-REQUIRED-001",
+            "category": "missing-required",
+            "priority": "high",
+            "description": "8 required items are missing: Child's forename(s); Mother's full name; Mother's maiden surname; Mother's address; Informant's full name; Registration date; Certificate delivery address; Whether payment is confirmed.",
+            "suggestedAction": "Complete the missing items before attending the register office; the registrar needs them to make the entry."
+          },
+          {
+            "id": "F-CERTIFICATE-DELIVERY-001",
+            "category": "certificate-order",
+            "priority": "medium",
+            "description": "Certificates are ordered but no delivery address is given.",
+            "suggestedAction": "Enter the postal address the certificates should be sent to."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: unmarried father named with no valid basis",
+      "description": "Unmarried parents, father included, but the basis is none and the mother registers alone. Expect needs-additional-evidence with the paternity-route flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Marcus Bell",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "none",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-PATERNITY-ROUTE-001",
+            "category": "paternity-route",
+            "priority": "high",
+            "description": "The stated basis cannot be used to record the second parent for these parents.",
+            "suggestedAction": "Unmarried parents: register together, bring a signed statutory declaration of parentage, or bring a court document giving parental responsibility. A male couple needs a parental order."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: 63 days after birth, one secondary document, photocopies",
+      "description": "Registration 63 days after the birth; only one secondary identity document and not originals. Expect needs-additional-evidence, late registration yes, with the late, identity-evidence and originals flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-10-03",
+          "identityPrimaryDocument": "none",
+          "identitySecondaryCount": 1,
+          "identityOriginals": "no",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 63,
+        "lateRegistration": "yes",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-LATE-REGISTRATION-001",
+            "category": "late-registration",
+            "priority": "high",
+            "description": "Registration is 63 days after the birth; a birth in England and Wales must be registered within 42 days.",
+            "suggestedAction": "Register without further delay and tell the registrar why the birth was not registered in time."
+          },
+          {
+            "id": "F-IDENTITY-EVIDENCE-001",
+            "category": "identity-evidence",
+            "priority": "high",
+            "description": "No acceptable identity evidence is held: one accepted document (for example a passport or photocard driving licence), or two from the secondary list, is needed.",
+            "suggestedAction": "Gather one accepted identity document, or two secondary documents such as a utility bill and a bank statement, showing your name."
+          },
+          {
+            "id": "F-IDENTITY-ORIGINALS-001",
+            "category": "identity-evidence",
+            "priority": "medium",
+            "description": "The identity documents must be originals; photocopies are not accepted.",
+            "suggestedAction": "Bring the original documents to the register office."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Out of scope: birth in Scotland",
+      "description": "The birth took place in Scotland, which has its own register. Expect out-of-scope with the out-of-scope flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "scotland",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "out-of-scope",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-OUT-OF-SCOPE-COUNTRY-001",
+            "category": "out-of-scope",
+            "priority": "high",
+            "description": "A birth in Scotland is registered under that country's own rules, not the England and Wales register.",
+            "suggestedAction": "Register with the National Records of Scotland, nidirect (Northern Ireland), or the local authority abroad and, if wanted, the UK Overseas Registration Unit."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Out of scope: stillbirth",
+      "description": "The child was born dead after the 24th week. Expect out-of-scope (a stillbirth is registered separately).",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "yes"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "out-of-scope",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-OUT-OF-SCOPE-STILLBIRTH-001",
+            "category": "out-of-scope",
+            "priority": "high",
+            "description": "A child born dead after the 24th week of pregnancy is a stillbirth, which is registered separately from a live birth and needs a medical certificate of stillbirth.",
+            "suggestedAction": "Contact the local register office about registering a stillbirth; do not use this application."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: female couple, statutory declaration, 40 days",
+      "description": "Unmarried female couple treated at a UK licensed clinic; the second mother is recorded through a signed statutory declaration held by the informant. Registration is 40 days after the birth, inside a week of the deadline. Expect ready-to-submit with the deadline-approaching flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "female-couple-unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Helen Marsh",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "statutory-declaration",
+          "paternityEvidenceHeld": "yes",
+          "licensedClinicTreatment": "yes"
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-09-10",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 1,
+          "serviceLevel": "priority",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-submit",
+        "daysSinceBirth": 40,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-APPROACHING-001",
+            "category": "deadline-approaching",
+            "priority": "medium",
+            "description": "Registration falls 40 days after the birth, within a week of the 42-day statutory period.",
+            "suggestedAction": "Book the register office appointment now so the birth is registered in time."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: male couple without a parental order",
+      "description": "A male couple with a statutory declaration instead of a parental order, document not in hand, the father informant. Expect needs-additional-evidence with paternity-route and paternity-evidence flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "male-couple",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "statutory-declaration",
+          "paternityEvidenceHeld": "no",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "father",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-PATERNITY-ROUTE-001",
+            "category": "paternity-route",
+            "priority": "high",
+            "description": "The stated basis cannot be used to record the second parent for these parents.",
+            "suggestedAction": "Unmarried parents: register together, bring a signed statutory declaration of parentage, or bring a court document giving parental responsibility. A male couple needs a parental order."
+          },
+          {
+            "id": "F-PATERNITY-EVIDENCE-001",
+            "category": "paternity-evidence",
+            "priority": "high",
+            "description": "The basis needs a signed statutory declaration, a court document, or a parental order, and it is not yet in hand.",
+            "suggestedAction": "Obtain the signed form or court document and bring the original to the register office."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: grandmother not present at the birth",
+      "description": "The informant is the child's grandmother, who was not present, and the parents are able to register. Expect needs-additional-evidence with the informant-not-qualified flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "other",
+          "informantName": "Margaret Ellis (grandmother)",
+          "parentsUnableToRegister": "no",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-INFORMANT-NOT-QUALIFIED-001",
+            "category": "informant-not-qualified",
+            "priority": "high",
+            "description": "The informant is not a qualified informant. Only a parent, someone present at the birth, someone responsible for the child, or hospital administrative staff may register a birth.",
+            "suggestedAction": "Ask a parent, or another qualified informant, to register the birth."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: more than 12 months after the birth",
+      "description": "Registration 396 days after the birth. Expect needs-additional-evidence and late registration yes with the Registrar General's authority wording.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2027-09-01",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 396,
+        "lateRegistration": "yes",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-LATE-REGISTRATION-001",
+            "category": "late-registration",
+            "priority": "high",
+            "description": "Registration is 396 days after the birth; a birth in England and Wales must be registered within 42 days. More than 12 months after the birth the Registrar General’s authority is needed.",
+            "suggestedAction": "Contact the register office or the General Register Office about late registration before attending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: dates inconsistent",
+      "description": "Registration date before the birth and the mother's date of birth after the child's. Expect incomplete with two date-inconsistent flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "2026-08-02",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-07-20",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "daysSinceBirth": -12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-DATE-REGISTRATION-BEFORE-BIRTH-001",
+            "category": "date-inconsistent",
+            "priority": "high",
+            "description": "The registration date is before the date of birth.",
+            "suggestedAction": "Correct the registration date or the date of birth."
+          },
+          {
+            "id": "F-DATE-MOTHER-BORN-AFTER-CHILD-001",
+            "category": "date-inconsistent",
+            "priority": "high",
+            "description": "The mother's date of birth is on or after the child's date of birth.",
+            "suggestedAction": "Check the mother's and the child's dates of birth."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: unmarried mother registers alone, no certificate, within 42 days",
+      "description": "The mother registers alone with the father's details left off, orders no certificate, 37 days after the birth. Expect ready-to-submit with the unmarried-father and deadline-approaching flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "no",
+          "secondParentName": "",
+          "secondParentDateOfBirth": null,
+          "secondParentPlaceOfBirth": "",
+          "secondParentOccupation": "",
+          "paternityBasis": "",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-09-07",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 0,
+          "serviceLevel": "",
+          "deliveryAddress": "",
+          "paymentConfirmed": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-submit",
+        "daysSinceBirth": 37,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-APPROACHING-001",
+            "category": "deadline-approaching",
+            "priority": "medium",
+            "description": "Registration falls 37 days after the birth, within a week of the 42-day statutory period.",
+            "suggestedAction": "Book the register office appointment now so the birth is registered in time."
+          },
+          {
+            "id": "F-UNMARRIED-FATHER-001",
+            "category": "unmarried-father",
+            "priority": "low",
+            "description": "The mother is registering without the father: his details are left off the entry and may be added later by an application to re-register the birth.",
+            "suggestedAction": "If the father should be named, register together or arrange a statutory declaration first."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: joint registration but the mother attends alone, payment declined",
+      "description": "Unmarried parents choose joint registration but only the mother is the informant; card payment not confirmed. Expect needs-additional-evidence with the paternity-joint and certificate-payment flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "joint-registration",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "mother",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "no",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-PATERNITY-JOINT-001",
+            "category": "paternity-route",
+            "priority": "high",
+            "description": "Joint registration needs both parents to attend and sign the register together.",
+            "suggestedAction": "Choose both parents as informants, or use a statutory declaration or court document."
+          },
+          {
+            "id": "F-CERTIFICATE-PAYMENT-001",
+            "category": "certificate-order",
+            "priority": "medium",
+            "description": "Payment for the certificates is not confirmed; a debit or credit card is needed.",
+            "suggestedAction": "Have a debit or credit card ready when ordering."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: female couple without licensed clinic treatment",
+      "description": "Unmarried female couple, joint registration, but no licensed-clinic parenthood agreement. Expect needs-additional-evidence with the paternity-clinic flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "female-couple-unmarried",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "joint-registration",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": "no"
+        },
+        "informant": {
+          "informantRelationship": "both-parents",
+          "informantName": "Beatrice Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-PATERNITY-CLINIC-001",
+            "category": "paternity-route",
+            "priority": "high",
+            "description": "A female couple who are not married or civil partners must have been treated together by a UK licensed clinic under a parenthood agreement for both to be recorded.",
+            "suggestedAction": "Confirm the licensed-clinic treatment and parenthood agreement."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: mother-only with a second parent; bystander informant",
+      "description": "Parents recorded as mother only yet a second parent is included, and the informant is someone present at the birth while the parents are able to register. Expect needs-additional-evidence with the mother-only and parents-able flags.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "mother-only",
+          "marriageDate": null,
+          "secondParentIncluded": "yes",
+          "secondParentName": "Daniel Ellis",
+          "secondParentDateOfBirth": "1989-11-02",
+          "secondParentPlaceOfBirth": "Bristol, England",
+          "secondParentOccupation": "Engineer",
+          "paternityBasis": "married-or-civil-partners",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "person-present-at-birth",
+          "informantName": "Nurse Ruth Adams",
+          "parentsUnableToRegister": "no",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-INFORMANT-PARENTS-ABLE-001",
+            "category": "informant-not-qualified",
+            "priority": "high",
+            "description": "A person who is not a parent may register only if the parents cannot (for example for medical reasons), and that has not been confirmed.",
+            "suggestedAction": "Confirm why the parents cannot register, or ask a parent to register."
+          },
+          {
+            "id": "F-PATERNITY-MOTHER-ONLY-001",
+            "category": "paternity-route",
+            "priority": "high",
+            "description": "A second parent is included although the parents are recorded as mother only.",
+            "suggestedAction": "Change the parents' relationship, or do not include a second parent."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: father informant with no second parent recorded",
+      "description": "Married parents but the informant is the father while no second parent is recorded. Expect needs-additional-evidence with the informant-second-parent flag.",
+      "state": {
+        "child": {
+          "childForenames": "Amara Grace",
+          "childSurname": "Ellis",
+          "sex": "female",
+          "dateOfBirth": "2026-08-01",
+          "timeOfBirth": "09:15",
+          "placeOfBirthType": "hospital",
+          "placeOfBirth": "Royal Berkshire Hospital, London Road, Reading",
+          "birthCountry": "england",
+          "multipleBirth": "single",
+          "stillbirth": "no"
+        },
+        "mother": {
+          "motherName": "Beatrice Ellis",
+          "motherMaidenSurname": "Hartley",
+          "motherDateOfBirth": "1991-03-14",
+          "motherPlaceOfBirth": "Leeds, England",
+          "motherOccupation": "Teacher",
+          "motherAddress": "14 Orchard Road, Reading RG1 2AB"
+        },
+        "parentage": {
+          "parentsRelationship": "married-or-civil-partners",
+          "marriageDate": "2019-06-15",
+          "secondParentIncluded": "no",
+          "secondParentName": "",
+          "secondParentDateOfBirth": null,
+          "secondParentPlaceOfBirth": "",
+          "secondParentOccupation": "",
+          "paternityBasis": "",
+          "paternityEvidenceHeld": "",
+          "licensedClinicTreatment": ""
+        },
+        "informant": {
+          "informantRelationship": "father",
+          "informantName": "Daniel Ellis",
+          "parentsUnableToRegister": "",
+          "registrationRoute": "local-register-office",
+          "registrationDate": "2026-08-13",
+          "identityPrimaryDocument": "passport",
+          "identitySecondaryCount": 0,
+          "identityOriginals": "yes",
+          "redBookPresented": "yes"
+        },
+        "certificate": {
+          "certificatesRequested": 2,
+          "serviceLevel": "standard",
+          "deliveryAddress": "14 Orchard Road, Reading RG1 2AB",
+          "paymentConfirmed": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "needs-additional-evidence",
+        "daysSinceBirth": 12,
+        "lateRegistration": "no",
+        "missingItemCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-INFORMANT-SECOND-PARENT-001",
+            "category": "informant-not-qualified",
+            "priority": "high",
+            "description": "The informant is the father or second parent, but no second parent is recorded on the entry.",
+            "suggestedAction": "Record the second parent and the basis, or choose the mother as informant."
+          }
+        ]
+      }
+    }
+  ]
+}

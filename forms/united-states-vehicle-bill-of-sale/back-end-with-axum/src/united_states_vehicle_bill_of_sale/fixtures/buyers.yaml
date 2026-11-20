@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test Buyer"
+  email: "test.buyer@example.com"
+  phone: "+15125550142"
+  postalAddressAsFullText: "412 Mesquite Lane, Austin, TX"
+  countryAsIso31661Alpha2: "US"
+  postcode: "78704"

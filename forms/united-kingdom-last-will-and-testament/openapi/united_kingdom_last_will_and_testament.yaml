@@ -1,0 +1,742 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_kingdom_last_will_and_testament
+openapi: 3.1.0
+info:
+  title: United Kingdom Last Will And Testament — UnitedKingdomLastWillAndTestament
+  version: 1.0.0
+  description: "Main United Kingdom Last Will and Testament record (England and Wales): testator, estate, executors, beneficiaries and shares, guardians, funeral wishes, and execution formalities. Validity classification, fired rules, and flags live in child tables. Documentation support, not legal advice."
+paths:
+  /api/united_kingdom_last_will_and_testaments:
+    get:
+      summary: List UnitedKingdomLastWillAndTestament records
+      operationId: listUnitedKingdomLastWillAndTestament
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedKingdomLastWillAndTestament records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedKingdomLastWillAndTestament
+      operationId: createUnitedKingdomLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+      responses:
+        "200":
+          description: The newly created UnitedKingdomLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_kingdom_last_will_and_testaments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomLastWillAndTestament by id
+      operationId: getUnitedKingdomLastWillAndTestament
+      responses:
+        "200":
+          description: The requested UnitedKingdomLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+        "404":
+          description: UnitedKingdomLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedKingdomLastWillAndTestament
+      operationId: updateUnitedKingdomLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+      responses:
+        "200":
+          description: The updated UnitedKingdomLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+        "404":
+          description: UnitedKingdomLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedKingdomLastWillAndTestament
+      operationId: replaceUnitedKingdomLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+      responses:
+        "200":
+          description: The updated UnitedKingdomLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomLastWillAndTestament"
+        "404":
+          description: UnitedKingdomLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedKingdomLastWillAndTestament
+      operationId: deleteUnitedKingdomLastWillAndTestament
+      responses:
+        "200":
+          description: UnitedKingdomLastWillAndTestament deleted
+        "404":
+          description: UnitedKingdomLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedKingdomLastWillAndTestament:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        testator_id:
+          type: string
+          format: uuid
+          description: Foreign key to the testator this will documents (restrict delete).
+        testator_name:
+          type: string
+          description: Full legal name of the testator as it will appear in the will.
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Testator date of birth; a testator must be 18 or over (Wills Act 1837 s.7).
+        testator_address:
+          type: string
+          description: Testator postal address as a single text block.
+        domicile:
+          type: string
+          enum:
+            - england-wales
+            - scotland
+            - northern-ireland
+            - other
+            - ""
+          description: "Testator domicile for choice of law: england-wales, scotland, northern-ireland, or other."
+        marital_status:
+          type: string
+          enum:
+            - single
+            - married
+            - civil-partnership
+            - cohabiting
+            - divorced-or-dissolved
+            - widowed
+            - ""
+          description: "Marital status: single, married, civil-partnership, cohabiting, divorced-or-dissolved, or widowed."
+        marriage_expected:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator expects to marry or form a civil partnership soon (marriage revokes a will, Wills Act 1837 s.18).
+        contemplation_of_marriage_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will states it is made in contemplation of that marriage or civil partnership, which stops the marriage revoking it (s.18).
+        has_mental_capacity:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator has testamentary capacity (understands making a will, the extent of the estate, and who might claim on it).
+        made_voluntarily:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator makes the will freely, without undue influence or pressure.
+        previous_will:
+          type: string
+          enum:
+            - none
+            - exists
+            - unsure
+            - ""
+          description: "Earlier will status: none, exists (an earlier will exists), or unsure."
+        revocation_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will expressly revokes all earlier wills and codicils.
+        estate_value_band:
+          type: string
+          enum:
+            - under-325k
+            - 325k-500k
+            - 500k-2m
+            - over-2m
+            - ""
+          description: "Approximate estate value band: under-325k, 325k-500k, 500k-2m, or over-2m (inheritance tax thresholds)."
+        owns_home:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator owns a home that forms part of the estate.
+        home_to_direct_descendants:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the home is left to children or grandchildren (residence nil-rate band).
+        charity_gift_percent:
+          type: [number, 'null']
+          format: double
+          description: Percentage of the net estate left to charity (10% or more earns the reduced 36% inheritance tax rate).
+        estate_other_jurisdictions:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator owns property outside England and Wales.
+        other_jurisdictions_detail:
+          type: string
+          description: Where and what property is held outside England and Wales.
+        specific_gifts_notes:
+          type: string
+          description: Free-text list of specific gifts (items, sums of money) left to named people.
+        executor_first_name:
+          type: string
+          description: Name of the first executor.
+        executor_first_relationship:
+          type: string
+          description: Relationship of the first executor to the testator.
+        executor_second_name:
+          type: string
+          description: Name of the second executor.
+        executor_second_relationship:
+          type: string
+          description: Relationship of the second executor to the testator.
+        executors_adult_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether every named executor is confirmed as 18 or over and willing to act.
+        beneficiary_first_name:
+          type: string
+          description: Name of the first beneficiary.
+        beneficiary_first_relationship:
+          type: string
+          enum:
+            - spouse-or-civil-partner
+            - unmarried-partner
+            - child
+            - grandchild
+            - other-relative
+            - friend
+            - charity
+            - other
+            - ""
+          description: "Relationship of the first beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other."
+        beneficiary_first_share_percent:
+          type: [number, 'null']
+          format: double
+          description: Percentage share of the residuary estate left to the first beneficiary.
+        beneficiary_first_is_minor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first beneficiary is under 18.
+        beneficiary_first_has_trustee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a trustee is appointed to hold the first beneficiary share until they are 18.
+        beneficiary_second_name:
+          type: string
+          description: Name of the second beneficiary.
+        beneficiary_second_relationship:
+          type: string
+          enum:
+            - spouse-or-civil-partner
+            - unmarried-partner
+            - child
+            - grandchild
+            - other-relative
+            - friend
+            - charity
+            - other
+            - ""
+          description: "Relationship of the second beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other."
+        beneficiary_second_share_percent:
+          type: [number, 'null']
+          format: double
+          description: Percentage share of the residuary estate left to the second beneficiary.
+        beneficiary_second_is_minor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the second beneficiary is under 18.
+        beneficiary_second_has_trustee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a trustee is appointed to hold the second beneficiary share until they are 18.
+        beneficiary_third_name:
+          type: string
+          description: Name of the third beneficiary.
+        beneficiary_third_relationship:
+          type: string
+          enum:
+            - spouse-or-civil-partner
+            - unmarried-partner
+            - child
+            - grandchild
+            - other-relative
+            - friend
+            - charity
+            - other
+            - ""
+          description: "Relationship of the third beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other."
+        beneficiary_third_share_percent:
+          type: [number, 'null']
+          format: double
+          description: Percentage share of the residuary estate left to the third beneficiary.
+        beneficiary_third_is_minor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the third beneficiary is under 18.
+        beneficiary_third_has_trustee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a trustee is appointed to hold the third beneficiary share until they are 18.
+        beneficiary_fourth_name:
+          type: string
+          description: Name of the fourth beneficiary.
+        beneficiary_fourth_relationship:
+          type: string
+          enum:
+            - spouse-or-civil-partner
+            - unmarried-partner
+            - child
+            - grandchild
+            - other-relative
+            - friend
+            - charity
+            - other
+            - ""
+          description: "Relationship of the fourth beneficiary: spouse-or-civil-partner, unmarried-partner, child, grandchild, other-relative, friend, charity, or other."
+        beneficiary_fourth_share_percent:
+          type: [number, 'null']
+          format: double
+          description: Percentage share of the residuary estate left to the fourth beneficiary.
+        beneficiary_fourth_is_minor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the fourth beneficiary is under 18.
+        beneficiary_fourth_has_trustee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a trustee is appointed to hold the fourth beneficiary share until they are 18.
+        residuary_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will disposes of the residuary estate (everything not otherwise given away).
+        dependants_considered:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator has considered who could claim reasonable provision under the Inheritance (Provision for Family and Dependants) Act 1975.
+        has_children_under_18:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator has children under 18.
+        guardian_name:
+          type: string
+          description: Guardian appointed for children under 18.
+        funeral_wishes:
+          type: string
+          enum:
+            - burial
+            - cremation
+            - no-preference
+            - other
+            - ""
+          description: "Funeral wishes: burial, cremation, no-preference, or other."
+        funeral_wishes_note:
+          type: string
+          description: Free-text funeral wishes (not legally binding on the executors).
+        execution_status:
+          type: string
+          enum:
+            - draft
+            - signed
+            - ""
+          description: Whether the will is still a draft or has been signed and witnessed.
+        date_of_will:
+          type: [string, 'null']
+          format: date
+          description: Date the will was signed and witnessed.
+        will_in_writing:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will is in writing (Wills Act 1837 s.9).
+        testator_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator signed (or acknowledged their signature) with the intention of giving effect to the will.
+        witnesses_present_together:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether two witnesses were present together when the testator signed or acknowledged.
+        witnesses_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether each witness then signed or acknowledged their signature in the testator presence.
+        witness_first_name:
+          type: string
+          description: Name of the first witness.
+        witness_first_over_18:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first witness is 18 or over.
+        witness_first_is_beneficiary_or_spouse:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first witness, or their spouse or civil partner, is a beneficiary (the gift fails, Wills Act 1837 s.15).
+        witness_second_name:
+          type: string
+          description: Name of the second witness.
+        witness_second_over_18:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the second witness is 18 or over.
+        witness_second_is_beneficiary_or_spouse:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the second witness, or their spouse or civil partner, is a beneficiary (the gift fails, Wills Act 1837 s.15).
+        drafter_note:
+          type: string
+          description: Free-text note from the person preparing the will.
+      required:
+        - created_at
+        - updated_at
+        - testator_id
+        - testator_name
+        - testator_address
+        - domicile
+        - marital_status
+        - marriage_expected
+        - contemplation_of_marriage_clause
+        - has_mental_capacity
+        - made_voluntarily
+        - previous_will
+        - revocation_clause
+        - estate_value_band
+        - owns_home
+        - home_to_direct_descendants
+        - estate_other_jurisdictions
+        - other_jurisdictions_detail
+        - specific_gifts_notes
+        - executor_first_name
+        - executor_first_relationship
+        - executor_second_name
+        - executor_second_relationship
+        - executors_adult_confirmed
+        - beneficiary_first_name
+        - beneficiary_first_relationship
+        - beneficiary_first_is_minor
+        - beneficiary_first_has_trustee
+        - beneficiary_second_name
+        - beneficiary_second_relationship
+        - beneficiary_second_is_minor
+        - beneficiary_second_has_trustee
+        - beneficiary_third_name
+        - beneficiary_third_relationship
+        - beneficiary_third_is_minor
+        - beneficiary_third_has_trustee
+        - beneficiary_fourth_name
+        - beneficiary_fourth_relationship
+        - beneficiary_fourth_is_minor
+        - beneficiary_fourth_has_trustee
+        - residuary_clause
+        - dependants_considered
+        - has_children_under_18
+        - guardian_name
+        - funeral_wishes
+        - funeral_wishes_note
+        - execution_status
+        - will_in_writing
+        - testator_signed
+        - witnesses_present_together
+        - witnesses_signed
+        - witness_first_name
+        - witness_first_over_18
+        - witness_first_is_beneficiary_or_spouse
+        - witness_second_name
+        - witness_second_over_18
+        - witness_second_is_beneficiary_or_spouse
+        - drafter_note
+      description: "Main United Kingdom Last Will and Testament record (England and Wales): testator, estate, executors, beneficiaries and shares, guardians, funeral wishes, and execution formalities. Validity classification, fired rules, and flags live in child tables. Documentation support, not legal advice."

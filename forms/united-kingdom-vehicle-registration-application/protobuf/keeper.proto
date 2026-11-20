@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: keeper
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_registration_application;
+
+enum KeeperKeeperTypeEnum {
+  KEEPERTYPE_UNSPECIFIED = 0;
+  KEEPERTYPE_INDIVIDUAL = 1;  // individual
+  KEEPERTYPE_COMPANY = 2;  // company
+  KEEPERTYPE_ORGANIZATION = 3;  // organization
+  KEEPERTYPE_TRADE = 4;  // trade
+  KEEPERTYPE_OTHER = 5;  // other
+}
+
+message Keeper {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  KeeperKeeperTypeEnum keeper_type = 6;  // VARCHAR(20)
+  string company_registration_number = 7;  // VARCHAR(20) — max 20 chars
+  string email = 8;  // TEXT
+  string phone = 9;  // TEXT
+  string postal_address_as_full_text = 10;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 11;  // CHAR(2) — max 2 chars
+  string postcode = 12;  // TEXT
+}

@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: property_tax_exemption_application_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_states_property_tax_exemption_application;
+
+enum PropertyTaxExemptionApplicationGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_OWNERSHIP = 1;  // ownership
+  DIMENSION_OCCUPANCY = 2;  // occupancy
+  DIMENSION_EXEMPTION = 3;  // exemption
+  DIMENSION_INCOME = 4;  // income
+  DIMENSION_DOCUMENTS = 5;  // documents
+  DIMENSION_FILING = 6;  // filing
+  DIMENSION_DECLARATION = 7;  // declaration
+  DIMENSION_CLASSIFICATION = 8;  // classification
+}
+
+message PropertyTaxExemptionApplicationGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string property_tax_exemption_application_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  PropertyTaxExemptionApplicationGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

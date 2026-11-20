@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>United States Marriage License Application</title>
+  <meta name="description" content="United States marriage license application: records the issuing state and county, both applicants, eligibility (age and consent, prior marriages, relationship, proxy), the ceremony, and the certified marriage certificate. It classifies the application as ready-to-apply, incomplete, or not-eligible and raises flags. It is documentation support, not legal advice.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" id="theme-stylesheet" href="css/themes/light.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('united-states-marriage-license-application.theme.v1');
+        if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+        var link = document.getElementById('theme-stylesheet');
+        if (saved && link) link.setAttribute('href', 'css/themes/' + saved + '.css');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#form-sections">Skip to the application</a>
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-bar">
+        <div class="page-header-title">
+          <h1>United States Marriage License Application</h1>
+          <p class="subtitle">Apply for a marriage license and, after the ceremony, the certified marriage certificate: state and county rules on age and consent, waiting periods, license validity, witnesses, prior marriages, and proxy marriage, checked for completeness and eligibility.</p>
+        </div>
+        <div class="page-header-controls no-print">
+          <p class="subtitle page-header-link"><a href="dashboard.html">View the review dashboard →</a></p>
+                <label class="visually-hidden" for="locale-select">Language</label>
+      <select class="theme-select" id="locale-select" aria-label="Language">
+      <option class="theme-select-option" value="en-GB" selected lang="en-GB">English (UK)</option>
+      <option class="theme-select-option" value="en-US" lang="en-US">English (US)</option>
+      <option class="theme-select-option" value="cy-GB" lang="cy-GB">Cymraeg</option>
+      <option class="theme-select-option" value="de-DE" lang="de-DE">Deutsch</option>
+      </select>
+      <label class="visually-hidden" for="theme-select">Theme</label>
+      <select class="theme-select" id="theme-select" aria-label="Theme">
+      <option class="theme-select-option" value="abyss">Abyss</option>
+      <option class="theme-select-option" value="acid">Acid</option>
+      <option class="theme-select-option" value="adobe-spectrum">Adobe Spectrum</option>
+      <option class="theme-select-option" value="aqua">Aqua</option>
+      <option class="theme-select-option" value="autumn">Autumn</option>
+      <option class="theme-select-option" value="black">Black</option>
+      <option class="theme-select-option" value="bumblebee">Bumblebee</option>
+      <option class="theme-select-option" value="business">Business</option>
+      <option class="theme-select-option" value="caramellatte">Caramellatte</option>
+      <option class="theme-select-option" value="cmyk">Cmyk</option>
+      <option class="theme-select-option" value="coffee">Coffee</option>
+      <option class="theme-select-option" value="corporate">Corporate</option>
+      <option class="theme-select-option" value="cupcake">Cupcake</option>
+      <option class="theme-select-option" value="cyberpunk">Cyberpunk</option>
+      <option class="theme-select-option" value="dark">Dark</option>
+      <option class="theme-select-option" value="dim">Dim</option>
+      <option class="theme-select-option" value="dracula">Dracula</option>
+      <option class="theme-select-option" value="emerald">Emerald</option>
+      <option class="theme-select-option" value="fantasy">Fantasy</option>
+      <option class="theme-select-option" value="forest">Forest</option>
+      <option class="theme-select-option" value="garden">Garden</option>
+      <option class="theme-select-option" value="halloween">Halloween</option>
+      <option class="theme-select-option" value="lemonade">Lemonade</option>
+      <option class="theme-select-option" value="light" selected>Light</option>
+      <option class="theme-select-option" value="lofi">Lofi</option>
+      <option class="theme-select-option" value="luxury">Luxury</option>
+      <option class="theme-select-option" value="mozilla-protocol">Mozilla Protocol</option>
+      <option class="theme-select-option" value="night">Night</option>
+      <option class="theme-select-option" value="nord">Nord</option>
+      <option class="theme-select-option" value="pastel">Pastel</option>
+      <option class="theme-select-option" value="retro">Retro</option>
+      <option class="theme-select-option" value="silk">Silk</option>
+      <option class="theme-select-option" value="sunset">Sunset</option>
+      <option class="theme-select-option" value="synthwave">Synthwave</option>
+      <option class="theme-select-option" value="united-kingdom-government-digital-service">UK · Government Digital Service</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-patients">UK · NHS England — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-england-for-practitioners">UK · NHS England — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-patients">UK · NHS Scotland — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-scotland-for-practitioners">UK · NHS Scotland — Practitioners</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-patients">UK · NHS Wales — Patients</option>
+      <option class="theme-select-option" value="united-kingdom-national-health-service-wales-for-practitioners">UK · NHS Wales — Practitioners</option>
+      <option class="theme-select-option" value="united-states-web-design-system">US · Web Design System</option>
+      <option class="theme-select-option" value="valentine">Valentine</option>
+      <option class="theme-select-option" value="winter">Winter</option>
+      <option class="theme-select-option" value="wireframe">Wireframe</option>
+      </select>
+      <label class="visually-hidden" for="text-size-picker">Text size</label>
+      <select class="theme-select" id="text-size-picker" aria-label="Text size">
+      <option class="theme-select-option" value="small">Small</option>
+      <option class="theme-select-option" value="medium" selected>Medium</option>
+      <option class="theme-select-option" value="large">Large</option>
+      <option class="theme-select-option" value="x-large">X Large</option>
+      </select>
+      <div class="share-picker">
+      <button type="button" class="share-picker-button" id="share-picker" aria-label="Share this page" aria-expanded="false" aria-controls="share-picker-list">
+      <span class="share-picker-icon" aria-hidden="true">↪</span>
+      </button>
+      <ul class="share-picker-list" id="share-picker-list" hidden>
+      <li class="share-picker-list-item">
+      <button type="button" class="share-picker-copy" id="share-picker-copy">Copy link</button>
+      </li>
+      </ul>
+      <p class="share-picker-status" id="share-picker-status" aria-live="polite"></p>
+      </div>
+        </div>
+      </div>
+      <progress
+        id="progress"
+        class="progress"
+        max="100"
+        value="0"
+        aria-label="Application completion"
+      ></progress>
+      <p id="progress-text" class="subtitle" aria-live="polite">0 fields answered (0%)</p>
+
+      <ol
+        id="step-list"
+        class="step-list"
+        aria-label="United States Marriage License Application steps"
+        data-current="0"
+      ><!-- step-list-items injected by js/form-app.js --></ol>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>
+        Complete the seven sections below to prepare a marriage license
+        application. The engine does <strong>not</strong> give legal advice and
+        does <strong>not</strong> decide whether a license issues. It checks that
+        the application is <strong>complete</strong> and that nothing in it bars the
+        license under the rule for your state (minimum age and consent, an
+        existing marriage, the relationship between the applicants, proxy
+        marriage), works out the earliest permitted ceremony date and the license
+        expiry, and classifies the application as <strong>ready to apply</strong>,
+        <strong>incomplete</strong>, or <strong>not eligible</strong>. Answers are
+        saved automatically in your browser as you go.
+      </p>
+      <p>
+        Marriage law is made state by state and a county clerk issues the license.
+        Eleven states are encoded in detail here; any other state uses a uniform
+        default and raises a flag to verify the rule. Same-sex couples may marry in
+        every state (<em>Obergefell v. Hodges</em>). This tool is documentation
+        support, not legal advice; the issuing clerk or a court decides.
+      </p>
+    </div>
+
+    <form
+      id="assessment-form"
+      class="form"
+      autocomplete="off"
+      novalidate
+      onsubmit="return false;"
+      aria-label="United States Marriage License Application"
+    >
+      <div
+        id="error-summary"
+        class="error-summary"
+        role="alert"
+        aria-label="Validation errors"
+        hidden
+      ></div>
+
+      <div id="form-sections">
+        <!-- Steps rendered by js/form-app.js: -->
+        <!-- 1 Jurisdiction, 2 First applicant, 3 Second applicant, -->
+        <!-- 4 Eligibility, 5 License issuance and fee, -->
+        <!-- 6 Ceremony and marriage certificate, -->
+        <!-- 7 Summary and class -->
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="submit-btn" class="button" data-variant="primary">
+          Submit and view report
+        </button>
+        <button type="button" id="reset-btn" class="button" data-variant="secondary">
+          Start over
+        </button>
+      </div>
+    </form>
+
+    <section
+      id="report"
+      class="panel"
+      role="region"
+      aria-live="polite"
+      aria-label="Eligibility report"
+    >
+      <p class="empty-message">Submit the form to see the report.</p>
+    </section>
+
+  </main>
+
+    <footer class="page-footer">
+      <p>
+        There is no federal marriage license: each state sets the rules and a county
+        clerk issues the license. Same-sex couples may marry in every state
+        (Obergefell v. Hodges, 2015) and every state recognizes a valid marriage
+        from another (Respect for Marriage Act, 2022). This tool documents and
+        checks the application and is not legal advice; the issuing county clerk or
+        a court decides, and rules change, so confirm the waiting period, fee, and
+        witness rules with the clerk.
+      </p>
+    </footer>
+
+
+  <script type="module" src="js/form-app.js"></script>
+  <script type="module" src="js/form-export.js"></script>
+  <script type="module" src="js/form-import.js"></script>
+  <script type="module" src="js/restore-banner.js"></script>
+  <script type="module" src="js/theme-select.js"></script>
+  <script type="module" src="js/text-size-picker.js"></script>
+  <script type="module" src="js/share-picker.js"></script>
+  <script type="module" src="js/locale-select.js"></script>
+</body>
+</html>

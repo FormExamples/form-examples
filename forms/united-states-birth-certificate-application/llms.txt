@@ -1,0 +1,27 @@
+# United States Birth Certificate Application
+
+> Request a **certified copy of a US birth certificate** from the state or territory vital records office that registered the birth. There is no national registry: each state, the District of Columbia, and each territory issues its own, and the CDC National Center for Health Statistics (NCHS) *Where to Write for Vital Records* directs requesters to the right office. The form collects the data of the US Standard Certificate of Live Birth needed to find the record (name, sex, date, city, county, state, facility, mother's name before first marriage, father's name), who is asking and why, the kind and number of copies, delivery and fee, identity and supporting documents, whether an apostille is needed for use abroad, and the signed declaration.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

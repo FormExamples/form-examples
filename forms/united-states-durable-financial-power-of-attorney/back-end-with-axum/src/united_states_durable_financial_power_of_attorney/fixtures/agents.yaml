@@ -1,0 +1,8 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test Agent"
+  email: "test.agent@example.com"
+  phone: "+12025550124"
+  postalAddressAsFullText: "1600 Pennsylvania Avenue NW, Washington, DC"

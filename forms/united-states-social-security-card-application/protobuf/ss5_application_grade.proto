@@ -1,0 +1,32 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ss5_application_grade
+
+syntax = "proto3";
+
+package form_examples.united_states_social_security_card_application;
+
+enum Ss5ApplicationGradeApplicationClassEnum {
+  APPLICATIONCLASS_UNSPECIFIED = 0;
+  APPLICATIONCLASS_READY_TO_SUBMIT = 1;  // ready-to-submit
+  APPLICATIONCLASS_INCOMPLETE = 2;  // incomplete
+  APPLICATIONCLASS_EVIDENCE_MISSING = 3;  // evidence-missing
+  APPLICATIONCLASS_NOT_ELIGIBLE = 4;  // not-eligible
+}
+
+enum Ss5ApplicationGradeReplacementLimitReachedEnum {
+  REPLACEMENTLIMITREACHED_UNSPECIFIED = 0;
+  REPLACEMENTLIMITREACHED_YES = 1;  // yes
+  REPLACEMENTLIMITREACHED_NO = 2;  // no
+}
+
+message Ss5ApplicationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ss5_application_id = 5;  // UUID — uuid
+  Ss5ApplicationGradeApplicationClassEnum application_class = 6;  // VARCHAR(20)
+  int32 missing_evidence_count = 7;  // INTEGER
+  Ss5ApplicationGradeReplacementLimitReachedEnum replacement_limit_reached = 8;  // VARCHAR(5)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

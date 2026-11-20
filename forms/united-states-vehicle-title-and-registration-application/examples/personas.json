@@ -1,0 +1,1436 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(a) returns { applicationClass, vinStatus, odometerDisclosureRequired, brandOrLienIssue, outstandingItemCount, stateRuleKnown, estimatedStateTaxUsd } with no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's `detectFlaggedIssues(state)`. Classification is first-match: titleBrandOrLienIssue (a title brand, an NMVTIS brand or theft record, an unreleased existing lien, or a not-actual odometer disclosure) -> 'title-brand-or-lien-issue'; any outstanding item -> 'incomplete'; else 'ready-to-submit'. The engine reads no clock; the persona dates are fixed. Fees are never encoded. Regenerate expected with: bin/test-personas united-states-vehicle-title-and-registration-application --update",
+  "personas": [
+    {
+      "name": "Ready: California used private-party sale, all documents present",
+      "description": "A 2019 Honda Civic bought privately in Fresno and applied for 7 days after the sale. The VIN passes the 49 CFR 565.15 check digit, a signed odometer statement is acknowledged by the buyer, the state title is surrendered, NMVTIS is clear, there is no lien, insurance is current, and the smog certificate (required in California for a used gasoline vehicle more than four model years old) has passed. Use tax is due at 8.75 percent. Expect applicationClass 'ready-to-submit' and no flags.",
+      "state": {
+        "application": {
+          "state": "CA",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Marisol Alvarez",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "19XFC2F50KE000123",
+          "modelYear": 2019,
+          "make": "Honda",
+          "model": "Civic",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 61250,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "passed",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 14500,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 8.75,
+          "salesTaxAmountUsd": 1268.75,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 1051.25,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready: Texas new truck from a dealer, financed, electronic lien",
+      "description": "A new 2026 Ford F-150 bought from a dealer on a manufacturer's statement of origin, with a new electronic lien to a credit union and tax paid to the dealer. The 16-mile odometer reading is disclosed (a new vehicle's dealer-to-buyer sale is not exempt). Expect 'ready-to-submit' with only the low-priority county-emissions reminder, F-INSPECTION-003.",
+      "state": {
+        "application": {
+          "state": "TX",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "new",
+          "acquisitionMethod": "dealer-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-12",
+          "applicationDate": "2026-10-14"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Daniel Brooks",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "TX 40112233",
+          "mailingAddress": "88 Ranch Road, Austin, TX",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "1FTFW1E59TFA12345",
+          "modelYear": 2026,
+          "make": "Ford",
+          "model": "F-150",
+          "bodyType": "Crew cab pickup",
+          "vehicleClass": "light-truck",
+          "fuelType": "gasoline",
+          "gvwrLbs": 7050,
+          "color": "Blue"
+        },
+        "odometer": {
+          "odometerReading": 16,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "manufacturer-statement-of-origin",
+          "priorTitleSurrendered": "",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "new-lien",
+          "lienholderName": "Lone Star Credit Union",
+          "lienElectronic": "yes"
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-04-30",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 52000,
+          "salesTaxStatus": "paid-to-dealer",
+          "salesTaxRatePercent": 6.25,
+          "salesTaxAmountUsd": 3250,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 3250,
+        "flaggedIssues": [
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In Texas, emissions testing applies only in designated counties or metropolitan areas.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Florida purchase with a mistyped VIN, no insurance, no odometer statement",
+      "description": "A 2016 Volkswagen Jetta bought privately, where the VIN was mistyped (the check digit no longer matches), no proof of insurance is provided, the seller's odometer statement is missing, the title is not surrendered, and tax and fees are not settled. Expect 'incomplete' with VIN, odometer, title, insurance, and fee flags, and a medium NMVTIS-not-checked flag.",
+      "state": {
+        "application": {
+          "state": "FL",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-05",
+          "applicationDate": "2026-10-20"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Tomasz Evans",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "E123-456-78-901-0",
+          "mailingAddress": "14 Palm Way, Tampa, FL",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "3VWDB7AJ5GHM00099",
+          "modelYear": 2016,
+          "make": "Volkswagen",
+          "model": "Jetta",
+          "bodyType": "Sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 3900,
+          "color": "Black"
+        },
+        "odometer": {
+          "odometerReading": 142000,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "no",
+          "buyerOdometerAcknowledged": "no"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "no",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "not-checked",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "not-provided",
+          "insuranceExpiryDate": null,
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 2400,
+          "salesTaxStatus": "not-calculated",
+          "salesTaxRatePercent": null,
+          "salesTaxAmountUsd": null,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "no",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "vinStatus": "check-digit-mismatch",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 7,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 144,
+        "flaggedIssues": [
+          {
+            "id": "F-VIN-002",
+            "category": "vin",
+            "priority": "high",
+            "description": "The VIN fails the position-9 check-digit test of 49 CFR 565.15, so it is mistyped or not a valid North American VIN.",
+            "suggestedAction": "Verify each character against the vehicle and the title before submitting; a transposed character is the commonest cause."
+          },
+          {
+            "id": "F-ODOMETER-001",
+            "category": "odometer",
+            "priority": "high",
+            "description": "The federal odometer disclosure (49 CFR 580.5) is missing: a reading and the seller's signed statement are required on the title or a separate form.",
+            "suggestedAction": "Have the seller state the mileage without tenths and sign, then retain the statement (the transferor and transferee each keep records for five years)."
+          },
+          {
+            "id": "F-TITLE-002",
+            "category": "title",
+            "priority": "high",
+            "description": "The prior title has not been surrendered with the application.",
+            "suggestedAction": "Sign and attach the prior title (assigned by the seller) or the MSO."
+          },
+          {
+            "id": "F-INSURANCE-001",
+            "category": "insurance",
+            "priority": "high",
+            "description": "Florida requires proof of liability insurance to register a vehicle, and none is provided.",
+            "suggestedAction": "Provide the insurance card, declarations page, or the carrier's electronic verification."
+          },
+          {
+            "id": "F-BRAND-004",
+            "category": "brand",
+            "priority": "medium",
+            "description": "No NMVTIS vehicle-history check has been run. The agency will query NMVTIS before issuing a title.",
+            "suggestedAction": "Run a NMVTIS check through an approved provider before buying or submitting, to avoid a rejection."
+          },
+          {
+            "id": "F-TAX-001",
+            "category": "tax",
+            "priority": "medium",
+            "description": "Sales or use tax has not been calculated or its status stated.",
+            "suggestedAction": "State whether tax was paid to the dealer, is due at titling, or is exempt (with the reason)."
+          },
+          {
+            "id": "F-FEES-001",
+            "category": "fees",
+            "priority": "medium",
+            "description": "The title and registration fees have not been confirmed as tendered.",
+            "suggestedAction": "Check the agency's current fee schedule (fees change every legislative session) and include payment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Issue: Washington salvage title, NMVTIS record found, title-only",
+      "description": "A 2014 Subaru Outback with a salvage brand disclosed on the application, and an NMVTIS check that found the brand and a total-loss record. The applicant requests a title only, so the registration-time salvage flag does not fire and insurance is not required. Expect 'title-brand-or-lien-issue' with F-BRAND-001 and F-BRAND-005.",
+      "state": {
+        "application": {
+          "state": "WA",
+          "transactionType": "title-only",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-10",
+          "applicationDate": "2026-10-16"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Chen Wei",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "4S4BSAHC8E3123456",
+          "modelYear": 2014,
+          "make": "Subaru",
+          "model": "Outback",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 61250,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "salvage",
+          "brandDisclosed": "yes",
+          "nmvtisCheck": "brand-or-theft-found",
+          "brandInspection": "not-done"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "not-provided",
+          "insuranceExpiryDate": null,
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 3100,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 10.1,
+          "salesTaxAmountUsd": 313.1,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "title-brand-or-lien-issue",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": true,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 201.5,
+        "flaggedIssues": [
+          {
+            "id": "F-BRAND-001",
+            "category": "brand",
+            "priority": "high",
+            "description": "The title carries a salvage brand. A brand follows the vehicle to every state under the National Motor Vehicle Title Information System rules and must appear on the new title.",
+            "suggestedAction": "Submit the branded title, expect a brand on the new title, and disclose the brand to the buyer in writing."
+          },
+          {
+            "id": "F-BRAND-005",
+            "category": "brand",
+            "priority": "high",
+            "description": "The National Motor Vehicle Title Information System (NMVTIS) check found a brand, total-loss, or theft record for this VIN.",
+            "suggestedAction": "Reconcile the NMVTIS record with the title in hand; do not proceed until a theft or total-loss record is explained."
+          },
+          {
+            "id": "F-INSURANCE-003",
+            "category": "insurance",
+            "priority": "low",
+            "description": "Washington does not ask for proof of insurance at registration, but liability coverage is still required to drive.",
+            "suggestedAction": "Keep proof of coverage with the vehicle."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Issue: Pennsylvania existing lien not released",
+      "description": "A 2021 Toyota Camry whose prior lien has not been released by the lender: the seller's title still shows the bank. Everything else is complete. Expect 'title-brand-or-lien-issue' with F-LIEN-001 and the low PA safety-and-county-emissions reminder.",
+      "state": {
+        "application": {
+          "state": "PA",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Ruth Delaney",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "4T1B11HK6MU654321",
+          "modelYear": 2021,
+          "make": "Toyota",
+          "model": "Camry",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 61250,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "existing-lien-unreleased",
+          "lienholderName": "Keystone Auto Finance",
+          "lienElectronic": "no"
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 21500,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 6,
+          "salesTaxAmountUsd": 1290,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "title-brand-or-lien-issue",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": true,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 1290,
+        "flaggedIssues": [
+          {
+            "id": "F-LIEN-001",
+            "category": "lien",
+            "priority": "high",
+            "description": "An existing lien has not been released. A title with an open lien cannot be transferred cleanly.",
+            "suggestedAction": "Obtain a signed lien release (or an electronic release) from the lienholder before submitting."
+          },
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In Pennsylvania, a safety inspection is due after registration, and emissions testing applies in designated counties.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: Montana (state not encoded) uses the uniform default rule",
+      "description": "A 2010 Toyota Prius titled in Montana, which is not in STATE_RULES, so the uniform default rule applies and F-STATE-002 asks the applicant to verify the state rule. A model-year-2010 vehicle transferred in 2026 is 16 years old, so the odometer disclosure is exempt (49 CFR 580.17). Tax is marked exempt with a stated reason. Expect 'ready-to-submit' with F-STATE-002 and F-ODOMETER-005.",
+      "state": {
+        "application": {
+          "state": "MT",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Anneliese Fischer",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "JTDKN3DU6A0123456",
+          "modelYear": 2010,
+          "make": "Toyota",
+          "model": "Prius",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "hybrid",
+          "gvwrLbs": 4300,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": null,
+          "odometerStatus": "",
+          "sellerOdometerStatement": "",
+          "buyerOdometerAcknowledged": ""
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 5200,
+          "salesTaxStatus": "exempt",
+          "salesTaxRatePercent": null,
+          "salesTaxAmountUsd": null,
+          "taxExemptionReason": "Montana levies no general sales tax",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": false,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": false,
+        "estimatedStateTaxUsd": null,
+        "flaggedIssues": [
+          {
+            "id": "F-STATE-002",
+            "category": "state",
+            "priority": "low",
+            "description": "State MT is not in the encoded rule table; the uniform default rule was applied.",
+            "suggestedAction": "Verify the deadline, sales tax rate, inspection, insurance, and fee rules with the issuing state agency."
+          },
+          {
+            "id": "F-ODOMETER-005",
+            "category": "odometer",
+            "priority": "low",
+            "description": "An odometer disclosure is not required under 49 CFR 580.17 because it is model year 2010 or earlier and at least 10 years old at transfer.",
+            "suggestedAction": "Some states still collect a reading; enter one if the title form asks for it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: Illinois out-of-state transfer from Wisconsin, 1998 vehicle, late application",
+      "description": "A 1998 Chevrolet Cavalier brought from Wisconsin on an out-of-state title, with a completed VIN verification. The odometer is exempt (model year 2010 or earlier and over 10 years old). The application is 32 days after purchase, past Illinois's 20-day period. Expect 'ready-to-submit' with F-DEADLINE-001, F-ODOMETER-005, and F-INSPECTION-003.",
+      "state": {
+        "application": {
+          "state": "IL",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "yes",
+          "previousState": "WI",
+          "acquisitionDate": "2026-08-01",
+          "applicationDate": "2026-09-02"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Rohan Gupta",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "1G1JC1246W7123456",
+          "modelYear": 1998,
+          "make": "Chevrolet",
+          "model": "Cavalier",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": null,
+          "odometerStatus": "",
+          "sellerOdometerStatement": "",
+          "buyerOdometerAcknowledged": ""
+        },
+        "titleHistory": {
+          "titleDocument": "out-of-state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "done"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 1800,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 6.25,
+          "salesTaxAmountUsd": 112.5,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": false,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 112.5,
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-001",
+            "category": "deadline",
+            "priority": "medium",
+            "description": "The application is 32 days after acquisition; Illinois sets 20 days before late penalties apply.",
+            "suggestedAction": "Apply at once; ask the agency whether it will waive or reduce the late penalty."
+          },
+          {
+            "id": "F-ODOMETER-005",
+            "category": "odometer",
+            "priority": "low",
+            "description": "An odometer disclosure is not required under 49 CFR 580.17 because it is model year 2010 or earlier and at least 10 years old at transfer.",
+            "suggestedAction": "Some states still collect a reading; enter one if the title form asks for it."
+          },
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In Illinois, emissions testing applies only in designated counties or metropolitan areas.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Issue: Ohio gifted vehicle with a not-actual-mileage odometer disclosure",
+      "description": "A 2017 Ford Focus received as a gift, where the donor signed an odometer statement that the reading is NOT the actual mileage after an instrument-cluster replacement. A not-actual disclosure puts the application in 'title-brand-or-lien-issue' (F-ODOMETER-002) and the title will be branded. Tax is exempt as a family gift.",
+      "state": {
+        "application": {
+          "state": "OH",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "gift",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Priya Nair",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "1FADP3F2XHL123456",
+          "modelYear": 2017,
+          "make": "Ford",
+          "model": "Focus",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 88400,
+          "odometerStatus": "not-actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": null,
+          "salesTaxStatus": "exempt",
+          "salesTaxRatePercent": null,
+          "salesTaxAmountUsd": null,
+          "taxExemptionReason": "Gift between family members",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "title-brand-or-lien-issue",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": true,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": null,
+        "flaggedIssues": [
+          {
+            "id": "F-ODOMETER-002",
+            "category": "odometer",
+            "priority": "high",
+            "description": "The seller disclosed that the odometer reading is NOT the actual mileage; the title will be branded \"not actual mileage\".",
+            "suggestedAction": "Do not proceed as a normal transfer; the agency brands the title and the buyer should be told in writing."
+          },
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In Ohio, emissions testing applies only in designated counties or metropolitan areas.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: New York business-owned heavy truck over 16,000 pounds (odometer exempt)",
+      "description": "A 2017 Freightliner truck with a 24,000-pound GVWR bought by a business identified by its FEIN. The odometer disclosure is exempt (GVWR over 16,000 pounds), the weight class is recorded, and New York tax is entered at the 8.875 percent New York City rate. Expect 'ready-to-submit' with F-ODOMETER-005, F-WEIGHT-002, and the low NY inspection reminder.",
+      "state": {
+        "application": {
+          "state": "NY",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "business",
+          "ownerName": "Hudson Valley Hauling LLC",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "fein",
+          "identificationNumber": "12-3456789",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "1FUJGLDR7HLHL1234",
+          "modelYear": 2017,
+          "make": "Freightliner",
+          "model": "M2 106",
+          "bodyType": "Box truck",
+          "vehicleClass": "heavy-truck",
+          "fuelType": "diesel",
+          "gvwrLbs": 24000,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": null,
+          "odometerStatus": "",
+          "sellerOdometerStatement": "",
+          "buyerOdometerAcknowledged": ""
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 46000,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 8.875,
+          "salesTaxAmountUsd": 4082.5,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": false,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 1840,
+        "flaggedIssues": [
+          {
+            "id": "F-ODOMETER-005",
+            "category": "odometer",
+            "priority": "low",
+            "description": "An odometer disclosure is not required under 49 CFR 580.17 because its gross vehicle weight rating is over 16,000 pounds.",
+            "suggestedAction": "Some states still collect a reading; enter one if the title form asks for it."
+          },
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In New York, an annual safety and emissions inspection is due after registration.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          },
+          {
+            "id": "F-WEIGHT-002",
+            "category": "weight",
+            "priority": "low",
+            "description": "A GVWR over 10,000 pounds is usually registered in a weight-based or commercial class, with different fees and possibly federal heavy-vehicle requirements.",
+            "suggestedAction": "Ask the agency about the commercial class, and see the federal heavy-vehicle use tax rules for vehicles over 55,000 pounds."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Arizona co-owner AND has not signed, expired insurance, tax rate below the state base",
+      "description": "A 2025 Toyota RAV4 titled to two owners joined by AND, where the co-owner has not signed, the insurance policy expired before the application date, and the tax rate entered (5 percent) is below Arizona's 5.6 percent base. Expect 'incomplete' with F-OWNER-003, F-INSURANCE-002, F-TAX-002 and the low Arizona emissions reminder.",
+      "state": {
+        "application": {
+          "state": "AZ",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Carla Mendes",
+          "coOwnerName": "Paulo Mendes",
+          "coOwnerConjunction": "and",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": "no"
+        },
+        "vehicle": {
+          "vin": "JTMBFREV2SJ123456",
+          "modelYear": 2025,
+          "make": "Toyota",
+          "model": "RAV4",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "light-truck",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4800,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 61250,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2026-09-30",
+          "emissionsInspection": "not-required",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 31000,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 5,
+          "salesTaxAmountUsd": 1550,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 2,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 1736,
+        "flaggedIssues": [
+          {
+            "id": "F-OWNER-003",
+            "category": "owner",
+            "priority": "high",
+            "description": "A required owner signature is missing.",
+            "suggestedAction": "Every owner joined by AND must sign the application; an unsigned application is rejected."
+          },
+          {
+            "id": "F-INSURANCE-002",
+            "category": "insurance",
+            "priority": "high",
+            "description": "The insurance policy expires before the application date.",
+            "suggestedAction": "Renew the policy and provide current proof."
+          },
+          {
+            "id": "F-TAX-002",
+            "category": "tax",
+            "priority": "medium",
+            "description": "The tax rate entered is below Arizona's state base rate of 5.6%.",
+            "suggestedAction": "Use the state rate plus the local rate for the buyer's address; the agency collects the correct amount."
+          },
+          {
+            "id": "F-INSPECTION-003",
+            "category": "inspection",
+            "priority": "low",
+            "description": "In Arizona, emissions testing applies only in designated counties or metropolitan areas.",
+            "suggestedAction": "Check the inspection requirement for the county where the vehicle will be registered."
+          },
+          {
+            "id": "F-TAX-005",
+            "category": "tax",
+            "priority": "low",
+            "description": "The tax amount is below the state-level estimate of 1736.00 dollars on the purchase price.",
+            "suggestedAction": "The agency may tax the greater of the price and a presumptive value; confirm the amount at the counter."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Issue: California rebuilt vehicle, brand undisclosed, no inspection, no smog certificate",
+      "description": "A 2018 Honda Civic carrying a rebuilt brand that the applicant has not disclosed, with no rebuilt-vehicle inspection and no smog certificate. Expect 'title-brand-or-lien-issue' with F-BRAND-001, F-BRAND-002, F-BRAND-003 and F-INSPECTION-001.",
+      "state": {
+        "application": {
+          "state": "CA",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "Marcus Webb",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "2HGFC2F50JH500321",
+          "modelYear": 2018,
+          "make": "Honda",
+          "model": "Civic",
+          "bodyType": "4-door sedan",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": 61250,
+          "odometerStatus": "actual",
+          "sellerOdometerStatement": "yes",
+          "buyerOdometerAcknowledged": "yes"
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "rebuilt",
+          "brandDisclosed": "no",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-done"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "not-done",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 9000,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 8.75,
+          "salesTaxAmountUsd": 787.5,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "title-brand-or-lien-issue",
+        "vinStatus": "valid",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": true,
+        "outstandingItemCount": 1,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 652.5,
+        "flaggedIssues": [
+          {
+            "id": "F-BRAND-001",
+            "category": "brand",
+            "priority": "high",
+            "description": "The title carries a rebuilt or reconstructed brand. A brand follows the vehicle to every state under the National Motor Vehicle Title Information System rules and must appear on the new title.",
+            "suggestedAction": "Submit the branded title, expect a brand on the new title, and disclose the brand to the buyer in writing."
+          },
+          {
+            "id": "F-BRAND-002",
+            "category": "brand",
+            "priority": "high",
+            "description": "The brand has not been disclosed on the application. Omitting a brand (\"title washing\") is unlawful.",
+            "suggestedAction": "Disclose the brand on the application and the bill of sale."
+          },
+          {
+            "id": "F-BRAND-003",
+            "category": "brand",
+            "priority": "high",
+            "description": "A rebuilt or reconstructed vehicle has no passed rebuilt-vehicle inspection recorded.",
+            "suggestedAction": "Obtain the state's rebuilt-vehicle (anti-theft or safety) inspection before submitting."
+          },
+          {
+            "id": "F-INSPECTION-001",
+            "category": "inspection",
+            "priority": "high",
+            "description": "A smog (emissions) certificate is required to transfer this vehicle in California and none is recorded.",
+            "suggestedAction": "Obtain a smog certificate from a licensed station (the seller is normally responsible) before submitting."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: California 1972 classic, VIN not standardized, odometer exempt",
+      "description": "A 1972 Ford Mustang titled in California. A pre-1981 vehicle has no 17-character VIN (F-VIN-004), the odometer disclosure is exempt by age, and the smog requirement is marked exempt for a pre-1975 vehicle. Expect 'ready-to-submit' with F-VIN-004 and F-ODOMETER-005.",
+      "state": {
+        "application": {
+          "state": "CA",
+          "transactionType": "title-and-registration",
+          "vehicleCondition": "used",
+          "acquisitionMethod": "private-purchase",
+          "outOfStateTransfer": "no",
+          "previousState": "",
+          "acquisitionDate": "2026-10-01",
+          "applicationDate": "2026-10-08"
+        },
+        "owner": {
+          "ownerType": "individual",
+          "ownerName": "George Ibarra",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "drivers-license",
+          "identificationNumber": "D1234567",
+          "mailingAddress": "123 Main Street, Anytown",
+          "ownerSigned": "yes",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "F02FH123456",
+          "modelYear": 1972,
+          "make": "Ford",
+          "model": "Mustang",
+          "bodyType": "2-door coupe",
+          "vehicleClass": "passenger",
+          "fuelType": "gasoline",
+          "gvwrLbs": 4400,
+          "color": "Silver"
+        },
+        "odometer": {
+          "odometerReading": null,
+          "odometerStatus": "",
+          "sellerOdometerStatement": "",
+          "buyerOdometerAcknowledged": ""
+        },
+        "titleHistory": {
+          "titleDocument": "state-title",
+          "priorTitleSurrendered": "yes",
+          "titleBrand": "none",
+          "brandDisclosed": "",
+          "nmvtisCheck": "clear",
+          "brandInspection": "not-applicable"
+        },
+        "lien": {
+          "lienStatus": "none",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "provided",
+          "insuranceExpiryDate": "2027-03-01",
+          "emissionsInspection": "exempt",
+          "safetyInspection": "not-required",
+          "vinVerification": "not-required"
+        },
+        "feesTax": {
+          "purchasePriceUsd": 28000,
+          "salesTaxStatus": "due-at-title",
+          "salesTaxRatePercent": 8.75,
+          "salesTaxAmountUsd": 2450,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "yes",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "vinStatus": "not-standardized",
+        "odometerDisclosureRequired": false,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 0,
+        "stateRuleKnown": true,
+        "estimatedStateTaxUsd": 2030,
+        "flaggedIssues": [
+          {
+            "id": "F-VIN-004",
+            "category": "vin",
+            "priority": "low",
+            "description": "This vehicle is model year 1980 or earlier, so the 17-character VIN format and check digit do not apply.",
+            "suggestedAction": "Expect the agency to require a physical VIN inspection of a pre-standardization vehicle."
+          },
+          {
+            "id": "F-ODOMETER-005",
+            "category": "odometer",
+            "priority": "low",
+            "description": "An odometer disclosure is not required under 49 CFR 580.17 because it is model year 2010 or earlier and at least 10 years old at transfer.",
+            "suggestedAction": "Some states still collect a reading; enter one if the title form asks for it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Blank application",
+      "description": "Nothing entered. Expect 'incomplete' with every required item outstanding and the missing-state, VIN, title, tax, and fee flags.",
+      "state": {
+        "application": {
+          "state": "",
+          "transactionType": "",
+          "vehicleCondition": "",
+          "acquisitionMethod": "",
+          "outOfStateTransfer": "",
+          "previousState": "",
+          "acquisitionDate": null,
+          "applicationDate": null
+        },
+        "owner": {
+          "ownerType": "",
+          "ownerName": "",
+          "coOwnerName": "",
+          "coOwnerConjunction": "",
+          "identificationType": "",
+          "identificationNumber": "",
+          "mailingAddress": "",
+          "ownerSigned": "",
+          "coOwnerSigned": ""
+        },
+        "vehicle": {
+          "vin": "",
+          "modelYear": null,
+          "make": "",
+          "model": "",
+          "bodyType": "",
+          "vehicleClass": "",
+          "fuelType": "",
+          "gvwrLbs": null,
+          "color": ""
+        },
+        "odometer": {
+          "odometerReading": null,
+          "odometerStatus": "",
+          "sellerOdometerStatement": "",
+          "buyerOdometerAcknowledged": ""
+        },
+        "titleHistory": {
+          "titleDocument": "",
+          "priorTitleSurrendered": "",
+          "titleBrand": "",
+          "brandDisclosed": "",
+          "nmvtisCheck": "",
+          "brandInspection": ""
+        },
+        "lien": {
+          "lienStatus": "",
+          "lienholderName": "",
+          "lienElectronic": ""
+        },
+        "compliance": {
+          "insuranceProof": "",
+          "insuranceExpiryDate": null,
+          "emissionsInspection": "",
+          "safetyInspection": "",
+          "vinVerification": ""
+        },
+        "feesTax": {
+          "purchasePriceUsd": null,
+          "salesTaxStatus": "",
+          "salesTaxRatePercent": null,
+          "salesTaxAmountUsd": null,
+          "taxExemptionReason": "",
+          "titleFeeUsd": null,
+          "registrationFeeUsd": null,
+          "feesTendered": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "vinStatus": "",
+        "odometerDisclosureRequired": true,
+        "brandOrLienIssue": false,
+        "outstandingItemCount": 28,
+        "stateRuleKnown": false,
+        "estimatedStateTaxUsd": null,
+        "flaggedIssues": [
+          {
+            "id": "F-STATE-001",
+            "category": "state",
+            "priority": "high",
+            "description": "No state is selected, so no state rule (deadline, tax rate, inspection, insurance) can be applied.",
+            "suggestedAction": "Enter the two-letter code of the state that will issue the title."
+          },
+          {
+            "id": "F-VIN-001",
+            "category": "vin",
+            "priority": "high",
+            "description": "No vehicle identification number (VIN) is entered.",
+            "suggestedAction": "Copy the 17-character VIN from the dashboard plate, door-jamb label, and the title; they must agree."
+          },
+          {
+            "id": "F-ODOMETER-001",
+            "category": "odometer",
+            "priority": "high",
+            "description": "The federal odometer disclosure (49 CFR 580.5) is missing: a reading and the seller's signed statement are required on the title or a separate form.",
+            "suggestedAction": "Have the seller state the mileage without tenths and sign, then retain the statement (the transferor and transferee each keep records for five years)."
+          },
+          {
+            "id": "F-TITLE-001",
+            "category": "title",
+            "priority": "high",
+            "description": "No title or manufacturer's statement of origin (MSO) is available.",
+            "suggestedAction": "Obtain the title from the seller, or apply for a duplicate or bonded title; a bill of sale alone is not enough."
+          },
+          {
+            "id": "F-OWNER-001",
+            "category": "owner",
+            "priority": "high",
+            "description": "The owner is not identified: an identification type and number are required (a driver license or state ID number for an individual, a federal employer identification number for a business).",
+            "suggestedAction": "Enter the identification exactly as shown on the document the owner will present."
+          },
+          {
+            "id": "F-OWNER-003",
+            "category": "owner",
+            "priority": "high",
+            "description": "A required owner signature is missing.",
+            "suggestedAction": "Every owner joined by AND must sign the application; an unsigned application is rejected."
+          },
+          {
+            "id": "F-INSURANCE-001",
+            "category": "insurance",
+            "priority": "high",
+            "description": "The state requires proof of liability insurance to register a vehicle, and none is provided.",
+            "suggestedAction": "Provide the insurance card, declarations page, or the carrier's electronic verification."
+          },
+          {
+            "id": "F-TAX-001",
+            "category": "tax",
+            "priority": "medium",
+            "description": "Sales or use tax has not been calculated or its status stated.",
+            "suggestedAction": "State whether tax was paid to the dealer, is due at titling, or is exempt (with the reason)."
+          },
+          {
+            "id": "F-FEES-001",
+            "category": "fees",
+            "priority": "medium",
+            "description": "The title and registration fees have not been confirmed as tendered.",
+            "suggestedAction": "Check the agency's current fee schedule (fees change every legislative session) and include payment."
+          },
+          {
+            "id": "F-VEHICLE-001",
+            "category": "vehicle",
+            "priority": "low",
+            "description": "The fuel type is not recorded; electric and hybrid vehicles are treated differently for emissions and some fees.",
+            "suggestedAction": "Record the fuel type from the title or registration."
+          }
+        ]
+      }
+    }
+  ]
+}

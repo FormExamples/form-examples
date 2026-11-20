@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000005a1"
+  deletedAt: null
+  flagId: "F-USMLA-024"
+  category: "waiting-period"
+  priority: "low"
+  description: "The license is valid through 2026-11-18."
+  suggestedAction: "Schedule the ceremony before the license expires."
+  unitedStatesMarriageLicenseApplicationGradeId: "00000000-0000-4000-8000-0000000004a1"

@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001002"
+  deletedAt: null
+  name: "Lone Star Credit Union"
+  email: "titles@lonestarcu.example.com"
+  phone: "+15125550188"
+  postalAddressAsFullText: "500 Congress Avenue, Austin, TX"
+  stateCode: "TX"
+  postcode: "78701"
+  electronicLienIdentifier: "ELT-0042"

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000019046"
+  deletedAt: null
+  completenessClass: "complete"
+  odometerDisclosureExempt: "no"
+  stateRuleKnown: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  unitedStatesVehicleBillOfSaleId: "00000000-0000-4000-8000-00000001ee3b"

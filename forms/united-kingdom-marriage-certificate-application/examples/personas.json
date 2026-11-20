@@ -1,0 +1,570 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(a) returns only { validityClass, earliestCeremonyDate, latestCeremonyDate, immigrationReferralIndicated } with no rules array and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's `detectFlaggedIssues(state)`. Classification is first-match: ineligible (a party under 18 on the ceremony date, already married or in a civil partnership, or closely related) > incomplete (a required field missing, or certificate copies requested without a service) > needs-evidence (residence under 7 days, previous-relationship evidence missing, immigration evidence missing, identity or proof of address not confirmed, notice under 29 days or ceremony after the 12-month expiry, fewer than two witnesses, venue unconfirmed, or joint notice required but not given) > ready-to-submit. Dates are ISO strings compared without a clock, so no `clock` pin is needed. Flags are stable-sorted high > medium > low. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas united-kingdom-marriage-certificate-application --update",
+  "personas": [
+    {
+      "name": "Ready to submit, civil ceremony at a register office",
+      "description": "Two never-married British adults give notice together in Leeds on 1 June 2026 for a register-office ceremony on 15 August 2026 (75 days later, inside the 29-day to 12-month window). Both have original identity and proof of address, two witnesses are arranged, the venue is confirmed, and two standard certificate copies are ordered with a GRO index reference. Expect ready-to-submit, the window 2026-06-30 to 2027-06-01, no immigration referral, and no flags.",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-06-01",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "yes"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2026-08-15",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "yes",
+          "witnessCount": 2
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 400,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Daniel Hughes",
+          "dateOfBirth": "1991-11-03",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "relationship": {
+          "closelyRelated": "no"
+        },
+        "certificate": {
+          "certificateCopies": 2,
+          "certificateService": "standard",
+          "groIndexReference": "GRO-2026-884213",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "earliestCeremonyDate": "2026-06-30",
+        "latestCeremonyDate": "2027-06-01",
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready to submit with a previous divorce and EU Settlement Scheme status",
+      "description": "The first party is divorced and brings the decree absolute; the second party holds EU Settlement Scheme status and has a share code, so joint notice is not required by status. Everything else is in order. Expect ready-to-submit with two low flags: the evidence-check fee reminder and a missing GRO index reference for the one certificate copy ordered.",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-06-01",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "yes"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2026-08-15",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "yes",
+          "witnessCount": 2
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 400,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "divorced",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "yes",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Daniel Hughes",
+          "dateOfBirth": "1991-11-03",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "eu-settlement-scheme",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "yes"
+        },
+        "relationship": {
+          "closelyRelated": "no"
+        },
+        "certificate": {
+          "certificateCopies": 1,
+          "certificateService": "standard",
+          "groIndexReference": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "earliestCeremonyDate": "2026-06-30",
+        "latestCeremonyDate": "2027-06-01",
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-GRO-INDEX-REFERENCE-MISSING-001",
+            "category": "gro-index-reference-missing",
+            "priority": "low",
+            "description": "No GRO index reference is given, so each certificate search costs extra and takes about 15 working days.",
+            "suggestedAction": "After the ceremony, quote the GRO index reference from the register entry if available."
+          },
+          {
+            "id": "F-PRIOR-EVIDENCE-CHECK-FEE-001",
+            "category": "prior-evidence-check-fee",
+            "priority": "low",
+            "description": "The first party has a previous relationship to evidence. The register office charges a fee to check these documents (more if the General Register Office must check them).",
+            "suggestedAction": "Ask the register office for the current document-checking fee when booking."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ineligible: under 18, already married, and closely related",
+      "description": "The second party is born on 1 March 2009 so is 17 on the 15 August 2026 ceremony date; the first party is recorded as currently married; and the parties are closely related. Three independent high-priority eligibility flags fire, and the class is ineligible even though the rest of the application is complete. (Since 27 February 2023 18 is the minimum age with no parental-consent exception.)",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-06-01",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "yes"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2026-08-15",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "yes",
+          "witnessCount": 2
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 400,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "currently-married-or-civil-partnered",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Daniel Hughes",
+          "dateOfBirth": "2009-03-01",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "relationship": {
+          "closelyRelated": "yes"
+        },
+        "certificate": {
+          "certificateCopies": 2,
+          "certificateService": "standard",
+          "groIndexReference": "GRO-2026-884213",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ineligible",
+        "earliestCeremonyDate": "2026-06-30",
+        "latestCeremonyDate": "2027-06-01",
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-PARTY-UNDER-18-001",
+            "category": "party-under-18",
+            "priority": "high",
+            "description": "The second party will be under 18 on the ceremony date. Since 27 February 2023 no one under 18 may marry or form a civil partnership in England and Wales, even with parental consent.",
+            "suggestedAction": "Do not proceed. Notice can be given only for a ceremony on or after the date both parties are 18."
+          },
+          {
+            "id": "F-ALREADY-MARRIED-001",
+            "category": "already-married-or-civil-partnered",
+            "priority": "high",
+            "description": "The first party is recorded as currently married or in a civil partnership, so cannot marry or form a new civil partnership.",
+            "suggestedAction": "Obtain a decree absolute or final order (or the former partner's death certificate) first, then update the marital status. A civil partnership may instead be converted into a marriage."
+          },
+          {
+            "id": "F-CLOSELY-RELATED-001",
+            "category": "closely-related",
+            "priority": "high",
+            "description": "The parties are within the prohibited degrees of relationship, so cannot marry or form a civil partnership.",
+            "suggestedAction": "Do not proceed. Check the degrees of relationship with the register office if unsure."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: only a name and a certificate request",
+      "description": "Only a notice type and the first party's name are entered, and one certificate copy is requested with no GRO service. Most required fields are missing, identity, proof of address and venue are unconfirmed, and no GRO index reference is given. Expect incomplete with the required-fields flag, the certificate-service flag, the missing-GRO-index-reference flag and the identity, address and venue flags; with no notice date there is no ceremony window.",
+      "state": {
+        "notice": {
+          "noticeType": "civil-partnership",
+          "noticeDate": null,
+          "registrationDistrict": "",
+          "noticeGivenTogether": ""
+        },
+        "ceremony": {
+          "ceremonyType": "",
+          "ceremonyDate": null,
+          "venueName": "",
+          "venueConfirmed": "",
+          "witnessCount": null
+        },
+        "partyOne": {
+          "name": "Jamie Cole",
+          "dateOfBirth": null,
+          "daysResidentInDistrict": null,
+          "nationalityStatus": "",
+          "maritalStatus": "",
+          "identityProvided": "",
+          "addressProofProvided": "",
+          "priorEndEvidenceProvided": "",
+          "immigrationEvidenceProvided": ""
+        },
+        "partyTwo": {
+          "name": "",
+          "dateOfBirth": null,
+          "daysResidentInDistrict": null,
+          "nationalityStatus": "",
+          "maritalStatus": "",
+          "identityProvided": "",
+          "addressProofProvided": "",
+          "priorEndEvidenceProvided": "",
+          "immigrationEvidenceProvided": ""
+        },
+        "relationship": {
+          "closelyRelated": ""
+        },
+        "certificate": {
+          "certificateCopies": 1,
+          "certificateService": "",
+          "groIndexReference": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "earliestCeremonyDate": null,
+        "latestCeremonyDate": null,
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IDENTITY-MISSING-001",
+            "category": "identity-missing",
+            "priority": "medium",
+            "description": "Original photographic identity is not confirmed for the first party and second party.",
+            "suggestedAction": "Bring an original passport or other accepted photographic identity document; photocopies are not accepted."
+          },
+          {
+            "id": "F-ADDRESS-PROOF-MISSING-001",
+            "category": "address-proof-missing",
+            "priority": "medium",
+            "description": "Original proof of home address is not confirmed for the first party and second party.",
+            "suggestedAction": "Bring an original recent bill, bank statement or similar showing the home address; give a UK contact address if living overseas."
+          },
+          {
+            "id": "F-VENUE-NOT-CONFIRMED-001",
+            "category": "venue-not-confirmed",
+            "priority": "medium",
+            "description": "The final ceremony venue is not confirmed. The venue details are needed when giving notice.",
+            "suggestedAction": "Confirm and book the venue, and check it is approved or registered for the ceremony type."
+          },
+          {
+            "id": "F-REQUIRED-FIELDS-MISSING-001",
+            "category": "required-fields-missing",
+            "priority": "medium",
+            "description": "Required details are missing: Date notice is given; Registration district; Type of ceremony; Ceremony date; Ceremony venue; Number of witnesses; First party: date of birth; First party: days resident in the district; First party: nationality or immigration route; First party: marital status; Second party: name; Second party: date of birth; Second party: days resident in the district; Second party: nationality or immigration route; Second party: marital status; Whether the parties are closely related.",
+            "suggestedAction": "Complete the missing details before booking the notice appointment."
+          },
+          {
+            "id": "F-CERTIFICATE-SERVICE-MISSING-001",
+            "category": "certificate-service-missing",
+            "priority": "low",
+            "description": "Marriage certificate copies are requested without a GRO service (standard or priority).",
+            "suggestedAction": "Choose the standard service (about 4 days with an index reference) or the priority service (next working day if ordered by 4pm)."
+          },
+          {
+            "id": "F-GRO-INDEX-REFERENCE-MISSING-001",
+            "category": "gro-index-reference-missing",
+            "priority": "low",
+            "description": "No GRO index reference is given, so each certificate search costs extra and takes about 15 working days.",
+            "suggestedAction": "After the ceremony, quote the GRO index reference from the register entry if available."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: short notice, residence, witnesses and documents",
+      "description": "Notice on 20 July 2026 for a ceremony on 1 August 2026 is only 12 days, short of the 29 required. The first party has lived in the district 3 days and has no original identity or proof of address; the second party is a widow(er) without a death certificate; the venue is unconfirmed; one witness is arranged; and zero certificate copies is invalid. Everything is complete and eligible, so the class is needs-evidence, with eight flags across all three priorities.",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-07-20",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "yes"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2026-08-01",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "no",
+          "witnessCount": 1
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 3,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "no",
+          "addressProofProvided": "no",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Daniel Hughes",
+          "dateOfBirth": "1991-11-03",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "widowed",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "no",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "relationship": {
+          "closelyRelated": "no"
+        },
+        "certificate": {
+          "certificateCopies": 0,
+          "certificateService": "",
+          "groIndexReference": "",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-evidence",
+        "earliestCeremonyDate": "2026-08-18",
+        "latestCeremonyDate": "2027-07-20",
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-NOTICE-PERIOD-TOO-SHORT-001",
+            "category": "notice-period-too-short",
+            "priority": "high",
+            "description": "The ceremony is planned for 2026-08-01, before the earliest permitted date of 2026-08-18 (notice must be given at least 29 days before the ceremony).",
+            "suggestedAction": "Move the ceremony to the earliest permitted date or later, or give notice earlier."
+          },
+          {
+            "id": "F-PRIOR-RELATIONSHIP-EVIDENCE-MISSING-001",
+            "category": "prior-relationship-evidence-missing",
+            "priority": "high",
+            "description": "The second party has a previous marriage or civil partnership with no evidence that it has ended (decree absolute, final order, annulment, or death certificate).",
+            "suggestedAction": "Bring the original decree absolute, final order, annulment certificate or former partner's death certificate to the notice appointment."
+          },
+          {
+            "id": "F-RESIDENCE-UNDER-7-DAYS-001",
+            "category": "residence-under-7-days",
+            "priority": "medium",
+            "description": "The first party has lived in the registration district for fewer than 7 days, so cannot yet give notice there.",
+            "suggestedAction": "Wait until 7 days' residence is reached, then book the appointment."
+          },
+          {
+            "id": "F-IDENTITY-MISSING-001",
+            "category": "identity-missing",
+            "priority": "medium",
+            "description": "Original photographic identity is not confirmed for the first party.",
+            "suggestedAction": "Bring an original passport or other accepted photographic identity document; photocopies are not accepted."
+          },
+          {
+            "id": "F-ADDRESS-PROOF-MISSING-001",
+            "category": "address-proof-missing",
+            "priority": "medium",
+            "description": "Original proof of home address is not confirmed for the first party.",
+            "suggestedAction": "Bring an original recent bill, bank statement or similar showing the home address; give a UK contact address if living overseas."
+          },
+          {
+            "id": "F-VENUE-NOT-CONFIRMED-001",
+            "category": "venue-not-confirmed",
+            "priority": "medium",
+            "description": "The final ceremony venue is not confirmed. The venue details are needed when giving notice.",
+            "suggestedAction": "Confirm and book the venue, and check it is approved or registered for the ceremony type."
+          },
+          {
+            "id": "F-WITNESSES-INSUFFICIENT-001",
+            "category": "witnesses-insufficient",
+            "priority": "medium",
+            "description": "Fewer than 2 witnesses are arranged. Every ceremony needs at least 2 witnesses.",
+            "suggestedAction": "Arrange at least 2 witnesses to attend and sign."
+          },
+          {
+            "id": "F-CERTIFICATE-COPIES-INVALID-001",
+            "category": "certificate-copies-invalid",
+            "priority": "low",
+            "description": "The number of certificate copies must be a whole number of at least 1.",
+            "suggestedAction": "Enter the number of copies required, or leave blank to order none."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs evidence: overseas party without immigration evidence, notice not joint",
+      "description": "The second party is from outside the UK and Ireland with no EU Settlement Scheme status and has no immigration evidence, and the parties are not giving notice together. Expect needs-evidence, an immigration referral indicated, the immigration-referral flag (possible Home Office referral adding up to 70 days) and the joint-notice-required flag.",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-06-01",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "no"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2026-08-15",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "yes",
+          "witnessCount": 2
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 400,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Lena Fischer",
+          "dateOfBirth": "1995-07-22",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "other",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "no"
+        },
+        "relationship": {
+          "closelyRelated": "no"
+        },
+        "certificate": {
+          "certificateCopies": 2,
+          "certificateService": "standard",
+          "groIndexReference": "GRO-2026-884213",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-evidence",
+        "earliestCeremonyDate": "2026-06-30",
+        "latestCeremonyDate": "2027-06-01",
+        "immigrationReferralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-IMMIGRATION-REFERRAL-001",
+            "category": "immigration-status-referral",
+            "priority": "high",
+            "description": "No acceptable immigration evidence is available for the second party. Without it the notice is referred to the Home Office, which can add up to 70 days.",
+            "suggestedAction": "Bring a valid passport with visa or endorsement, an eVisa or biometric residence permit share code, or an EU Settlement Scheme share code."
+          },
+          {
+            "id": "F-JOINT-NOTICE-REQUIRED-001",
+            "category": "joint-notice-required",
+            "priority": "high",
+            "description": "A party from outside the UK and Ireland (without EU Settlement Scheme status) means both parties must give notice together at a designated register office.",
+            "suggestedAction": "Book one joint appointment at a register office in the district where at least one of you lives."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Needs correction: ceremony after the notice lapses",
+      "description": "Notice given on 10 March 2026 is valid until 10 March 2027, but the ceremony is planned for 8 May 2027. Everything else is in order, so the only finding is the notice-expires-before-ceremony flag (high); the class is needs-evidence.",
+      "state": {
+        "notice": {
+          "noticeType": "marriage",
+          "noticeDate": "2026-03-10",
+          "registrationDistrict": "Leeds",
+          "noticeGivenTogether": "yes"
+        },
+        "ceremony": {
+          "ceremonyType": "civil-register-office",
+          "ceremonyDate": "2027-05-08",
+          "venueName": "Leeds Register Office, Park Row, Leeds",
+          "venueConfirmed": "yes",
+          "witnessCount": 2
+        },
+        "partyOne": {
+          "name": "Amara Okafor",
+          "dateOfBirth": "1993-04-12",
+          "daysResidentInDistrict": 400,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "partyTwo": {
+          "name": "Daniel Hughes",
+          "dateOfBirth": "1991-11-03",
+          "daysResidentInDistrict": 900,
+          "nationalityStatus": "british-or-irish",
+          "maritalStatus": "never-married",
+          "identityProvided": "yes",
+          "addressProofProvided": "yes",
+          "priorEndEvidenceProvided": "not-applicable",
+          "immigrationEvidenceProvided": "not-applicable"
+        },
+        "relationship": {
+          "closelyRelated": "no"
+        },
+        "certificate": {
+          "certificateCopies": 2,
+          "certificateService": "standard",
+          "groIndexReference": "GRO-2026-884213",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-evidence",
+        "earliestCeremonyDate": "2026-04-08",
+        "latestCeremonyDate": "2027-03-10",
+        "immigrationReferralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-NOTICE-EXPIRES-BEFORE-CEREMONY-001",
+            "category": "notice-expires-before-ceremony",
+            "priority": "high",
+            "description": "The ceremony is planned for 2027-05-08, after the notice lapses on 2027-03-10. The ceremony must take place within 12 months of giving notice.",
+            "suggestedAction": "Bring the ceremony forward, or give notice again closer to the ceremony date."
+          }
+        ]
+      }
+    }
+  ]
+}

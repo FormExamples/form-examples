@@ -1,0 +1,7 @@
+pub mod openapi;
+pub mod applicant;
+pub mod keeper;
+pub mod united_kingdom_vehicle_registration_application;
+pub mod united_kingdom_vehicle_registration_application_grade;
+pub mod united_kingdom_vehicle_registration_application_grade_rule;
+pub mod united_kingdom_vehicle_registration_application_grade_flag;

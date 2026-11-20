@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_vehicle_registration_application_grade_rules";

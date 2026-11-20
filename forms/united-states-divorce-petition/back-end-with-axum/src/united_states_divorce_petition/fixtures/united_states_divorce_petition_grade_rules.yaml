@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001006"
+  deletedAt: null
+  unitedStatesDivorcePetitionGradeId: "00000000-0000-4000-8000-000000001004"
+  ruleId: "R-CLASS-001"
+  dimension: "classification"
+  category: "ready-to-file"
+  description: "No residency, separation or waiting-period shortfall and every required item is present."

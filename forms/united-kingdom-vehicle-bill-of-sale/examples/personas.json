@@ -1,0 +1,827 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "assessBillOfSale",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "assessBillOfSale(d) returns { classification, missingItemCount, riskFlagCount, missingItems } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js (the grader result is not passed to the detector). Classification is first-match: any risk condition (finance outstanding, seller not registered keeper, V5C missing, V5C mismatch, description mismatch) -> 'risk-flagged'; any missing required item -> 'incomplete'; else 'complete'. Flags are stable-sorted high > medium > low. The MOT flag uses the sale year (not the wall clock) when a sale date is present. Regenerate expected with: bin/test-personas united-kingdom-vehicle-bill-of-sale --update",
+  "personas": [
+    {
+      "name": "Complete private sale, no flags",
+      "description": "A clean private sale of a 2018 Ford Focus: seller is the registered keeper with a matching V5C, valid MOT, finance checked and clear, bank transfer received, sold as seen with faults recorded, V5C/2 slip given, DVLA told online, both parties signed. Expect classification 'complete', 0 missing items, 0 risk conditions and no flags.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "complete",
+        "missingItemCount": 0,
+        "riskFlagCount": 0,
+        "missingItems": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Incomplete: no VIN and no mileage",
+      "description": "Otherwise sound sale, but the VIN is blank and no odometer reading is recorded. Expect 'incomplete' (2 missing items, no risk conditions) with the high no-vin and no-mileage flags.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": null,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "incomplete",
+        "missingItemCount": 2,
+        "riskFlagCount": 0,
+        "missingItems": [
+          "Vehicle identification number (VIN)",
+          "Mileage"
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NO-VIN-001",
+            "category": "no-vin",
+            "priority": "high",
+            "description": "No usable vehicle identification number (VIN) is recorded.",
+            "suggestedAction": "Copy the VIN from the V5C and check it matches the number on the vehicle itself."
+          },
+          {
+            "id": "F-NO-MILEAGE-001",
+            "category": "no-mileage",
+            "priority": "high",
+            "description": "No odometer reading is recorded.",
+            "suggestedAction": "Record the mileage shown at handover, and compare it with the MOT history."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk flagged: finance outstanding",
+      "description": "Hire-purchase finance is still outstanding on the vehicle. Expect 'risk-flagged' (1 risk condition) with a high finance-outstanding flag; every required item is otherwise present.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "outstanding",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "risk-flagged",
+        "missingItemCount": 0,
+        "riskFlagCount": 1,
+        "missingItems": [],
+        "flaggedIssues": [
+          {
+            "id": "F-FINANCE-OUTSTANDING-001",
+            "category": "finance-outstanding",
+            "priority": "high",
+            "description": "Finance is recorded as outstanding. The lender may still own the vehicle and could repossess it from the buyer.",
+            "suggestedAction": "Do not complete the sale until the finance is settled and the lender confirms it in writing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk flagged: seller not keeper and V5C missing",
+      "description": "The seller is not the registered keeper and has no V5C, and the V5C/2 slip was not given. Expect 'risk-flagged' (2 risk conditions) with seller-not-keeper, v5c-missing and keeper-slip flags.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "no"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "no",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "no",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "risk-flagged",
+        "missingItemCount": 0,
+        "riskFlagCount": 2,
+        "missingItems": [],
+        "flaggedIssues": [
+          {
+            "id": "F-V5C-MISSING-001",
+            "category": "v5c-missing",
+            "priority": "high",
+            "description": "The seller does not have the V5C registration certificate (log book).",
+            "suggestedAction": "The seller should apply to DVLA for a replacement before selling; a buyer should be very cautious without one."
+          },
+          {
+            "id": "F-SELLER-NOT-KEEPER-001",
+            "category": "seller-not-keeper",
+            "priority": "high",
+            "description": "The seller is not the registered keeper named on the V5C. The seller may have no right to sell.",
+            "suggestedAction": "Ask the registered keeper to sell, or have the keeper change recorded with DVLA first."
+          },
+          {
+            "id": "F-KEEPER-SLIP-001",
+            "category": "keeper-slip",
+            "priority": "medium",
+            "description": "The V5C/2 new keeper section has not been given to the buyer.",
+            "suggestedAction": "Give the buyer the V5C/2 new keeper section as proof of purchase until the new V5C arrives."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Risk flagged: description mismatch and cash payment",
+      "description": "The vehicle does not match its advert, and the buyer pays 8,000 pounds in cash. Expect 'risk-flagged' (1 risk condition), a high description-mismatch flag and a medium payment-risk flag.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 8000,
+          "depositAsGbp": 500,
+          "paymentMethod": "cash",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "no"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "risk-flagged",
+        "missingItemCount": 0,
+        "riskFlagCount": 1,
+        "missingItems": [],
+        "flaggedIssues": [
+          {
+            "id": "F-DESCRIPTION-MISMATCH-001",
+            "category": "description-mismatch",
+            "priority": "high",
+            "description": "The vehicle does not match the advert or description. Under the Sale of Goods Act 1979 s.13 goods sold by description must correspond with it, even in a private sale.",
+            "suggestedAction": "Correct the description in writing or agree a new price before signing; keep the advert as evidence."
+          },
+          {
+            "id": "F-PAYMENT-RISK-001",
+            "category": "payment-risk",
+            "priority": "medium",
+            "description": "The payment arrangement carries risk (cash): cash at £1,000 or more, an uncleared cheque, or funds not yet received.",
+            "suggestedAction": "Prefer a bank transfer, hand over the vehicle only once funds have cleared, and keep proof of payment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: unsigned and DVLA not told",
+      "description": "Everything is recorded except the signatures, and the seller has not yet told DVLA. Expect 'incomplete' (2 missing signatures) with unsigned (medium) and dvla-notification (low) flags.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "not-yet"
+        },
+        "signatures": {
+          "sellerSigned": "no",
+          "buyerSigned": "",
+          "signatureDate": null,
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "incomplete",
+        "missingItemCount": 2,
+        "riskFlagCount": 0,
+        "missingItems": [
+          "Seller signature",
+          "Buyer signature"
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-UNSIGNED-001",
+            "category": "unsigned",
+            "priority": "medium",
+            "description": "The bill of sale is not signed by both the seller and the buyer.",
+            "suggestedAction": "Both parties should sign and date it, and each keep a copy."
+          },
+          {
+            "id": "F-DVLA-NOTIFICATION-001",
+            "category": "dvla-notification",
+            "priority": "low",
+            "description": "DVLA has not yet been told about the sale.",
+            "suggestedAction": "The seller should tell DVLA at once, online or by post, so vehicle tax is cancelled and any refund can be claimed."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete: trader sale with expired MOT",
+      "description": "The seller is a trader, the vehicle (2012) has an expired MOT, finance is checked and clear, and no faults are recorded though sold as seen. Expect 'complete' with trader-sale, mot-issue (medium) and faults-not-recorded (low) flags.",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "trader"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2012,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "expired",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "none",
+          "financeCheckDate": "2026-08-10"
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "complete",
+        "missingItemCount": 0,
+        "riskFlagCount": 0,
+        "missingItems": [],
+        "flaggedIssues": [
+          {
+            "id": "F-MOT-ISSUE-001",
+            "category": "mot-issue",
+            "priority": "medium",
+            "description": "The vehicle is over three years old and has no current MOT.",
+            "suggestedAction": "The vehicle needs a current MOT to be driven on the road, apart from driving to a pre-booked test."
+          },
+          {
+            "id": "F-TRADER-SALE-001",
+            "category": "trader-sale",
+            "priority": "medium",
+            "description": "The seller sells as a trader. The Consumer Rights Act 2015 applies, and \"sold as seen\" cannot remove the buyer's statutory rights.",
+            "suggestedAction": "Treat this as a trade sale, not a private sale, and give the buyer the statutory protections."
+          },
+          {
+            "id": "F-FAULTS-NOT-RECORDED-001",
+            "category": "faults-not-recorded",
+            "priority": "low",
+            "description": "The vehicle is sold as seen but no known faults are recorded.",
+            "suggestedAction": "Record any known faults so both parties agree what the buyer was told."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Complete: finance unchecked",
+      "description": "Finance was marked unchecked, but the V5C is present and everything else is complete. Expect 'complete' with a medium finance-unchecked flag (unchecked is answered, so not a missing item).",
+      "state": {
+        "sale": {
+          "saleDate": "2026-08-15",
+          "salePlace": "Seller's home, Leeds",
+          "sellerCapacity": "private"
+        },
+        "seller": {
+          "name": "Hannah Whitfield",
+          "address": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "phone": "07700 900123",
+          "email": "hannah.whitfield@example.com",
+          "isRegisteredKeeper": "yes"
+        },
+        "buyer": {
+          "name": "Omar Siddiqui",
+          "address": "3 Park Row, Bradford",
+          "postcode": "BD1 5HT",
+          "phone": "07700 900456",
+          "email": "omar.siddiqui@example.com"
+        },
+        "vehicle": {
+          "registration": "LB68 KXR",
+          "make": "Ford",
+          "model": "Focus",
+          "colour": "Blue",
+          "vin": "WF0XXXGCDXJK12345",
+          "firstRegisteredYear": 2018,
+          "fuelType": "petrol",
+          "mileage": 48210,
+          "mileageAccuracy": "recorded"
+        },
+        "checks": {
+          "v5cPresent": "yes",
+          "v5cDetailsMatch": "yes",
+          "motStatus": "valid",
+          "motExpiryDate": "2027-03-02",
+          "financeStatus": "unchecked",
+          "financeCheckDate": null
+        },
+        "payment": {
+          "priceAsGbp": 6500,
+          "depositAsGbp": 500,
+          "paymentMethod": "bank-transfer",
+          "paymentReceived": "yes"
+        },
+        "condition": {
+          "saleTerms": "sold-as-seen",
+          "knownFaults": "Small scratch on the rear bumper; passenger window is slow.",
+          "descriptionMatchesAdvert": "yes"
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "yes",
+          "dvlaNotification": "online"
+        },
+        "signatures": {
+          "sellerSigned": "yes",
+          "buyerSigned": "yes",
+          "signatureDate": "2026-08-15",
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "complete",
+        "missingItemCount": 0,
+        "riskFlagCount": 0,
+        "missingItems": [],
+        "flaggedIssues": [
+          {
+            "id": "F-FINANCE-UNCHECKED-001",
+            "category": "finance-unchecked",
+            "priority": "medium",
+            "description": "Outstanding finance has not been checked.",
+            "suggestedAction": "Run a vehicle history check to confirm there is no finance, theft marker, or write-off record."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Blank bill of sale",
+      "description": "Nothing answered. Expect 'incomplete' with every required item missing (the V5C, keeper, finance, and signatures included) and the blank-state flags: no-vin, no-mileage, finance-unchecked, unsigned.",
+      "state": {
+        "sale": {
+          "saleDate": null,
+          "salePlace": "",
+          "sellerCapacity": ""
+        },
+        "seller": {
+          "name": "",
+          "address": "",
+          "postcode": "",
+          "phone": "",
+          "email": "",
+          "isRegisteredKeeper": ""
+        },
+        "buyer": {
+          "name": "",
+          "address": "",
+          "postcode": "",
+          "phone": "",
+          "email": ""
+        },
+        "vehicle": {
+          "registration": "",
+          "make": "",
+          "model": "",
+          "colour": "",
+          "vin": "",
+          "firstRegisteredYear": null,
+          "fuelType": "",
+          "mileage": null,
+          "mileageAccuracy": ""
+        },
+        "checks": {
+          "v5cPresent": "",
+          "v5cDetailsMatch": "",
+          "motStatus": "",
+          "motExpiryDate": null,
+          "financeStatus": "",
+          "financeCheckDate": null
+        },
+        "payment": {
+          "priceAsGbp": null,
+          "depositAsGbp": null,
+          "paymentMethod": "",
+          "paymentReceived": ""
+        },
+        "condition": {
+          "saleTerms": "",
+          "knownFaults": "",
+          "descriptionMatchesAdvert": ""
+        },
+        "dvla": {
+          "newKeeperSlipGiven": "",
+          "dvlaNotification": ""
+        },
+        "signatures": {
+          "sellerSigned": "",
+          "buyerSigned": "",
+          "signatureDate": null,
+          "note": ""
+        }
+      },
+      "expected": {
+        "classification": "incomplete",
+        "missingItemCount": 18,
+        "riskFlagCount": 0,
+        "missingItems": [
+          "Date of sale",
+          "Seller name",
+          "Seller address",
+          "Buyer name",
+          "Buyer address",
+          "Whether the seller is the registered keeper",
+          "Registration number",
+          "Make",
+          "Model",
+          "Vehicle identification number (VIN)",
+          "Mileage",
+          "Whether the V5C is present",
+          "Outstanding finance status",
+          "Price",
+          "Payment method",
+          "Sale terms",
+          "Seller signature",
+          "Buyer signature"
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NO-VIN-001",
+            "category": "no-vin",
+            "priority": "high",
+            "description": "No usable vehicle identification number (VIN) is recorded.",
+            "suggestedAction": "Copy the VIN from the V5C and check it matches the number on the vehicle itself."
+          },
+          {
+            "id": "F-NO-MILEAGE-001",
+            "category": "no-mileage",
+            "priority": "high",
+            "description": "No odometer reading is recorded.",
+            "suggestedAction": "Record the mileage shown at handover, and compare it with the MOT history."
+          },
+          {
+            "id": "F-FINANCE-UNCHECKED-001",
+            "category": "finance-unchecked",
+            "priority": "medium",
+            "description": "Outstanding finance has not been checked.",
+            "suggestedAction": "Run a vehicle history check to confirm there is no finance, theft marker, or write-off record."
+          },
+          {
+            "id": "F-UNSIGNED-001",
+            "category": "unsigned",
+            "priority": "medium",
+            "description": "The bill of sale is not signed by both the seller and the buyer.",
+            "suggestedAction": "Both parties should sign and date it, and each keep a copy."
+          }
+        ]
+      }
+    }
+  ]
+}

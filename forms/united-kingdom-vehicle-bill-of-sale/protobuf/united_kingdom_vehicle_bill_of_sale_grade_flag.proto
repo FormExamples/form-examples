@@ -1,0 +1,46 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_vehicle_bill_of_sale_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_bill_of_sale;
+
+enum UnitedKingdomVehicleBillOfSaleGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_NO_VIN = 1;  // no-vin
+  CATEGORY_NO_MILEAGE = 2;  // no-mileage
+  CATEGORY_FINANCE_OUTSTANDING = 3;  // finance-outstanding
+  CATEGORY_FINANCE_UNCHECKED = 4;  // finance-unchecked
+  CATEGORY_V5C_MISSING = 5;  // v5c-missing
+  CATEGORY_V5C_MISMATCH = 6;  // v5c-mismatch
+  CATEGORY_SELLER_NOT_KEEPER = 7;  // seller-not-keeper
+  CATEGORY_PAYMENT_RISK = 8;  // payment-risk
+  CATEGORY_UNSIGNED = 9;  // unsigned
+  CATEGORY_DESCRIPTION_MISMATCH = 10;  // description-mismatch
+  CATEGORY_MOT_ISSUE = 11;  // mot-issue
+  CATEGORY_TRADER_SALE = 12;  // trader-sale
+  CATEGORY_KEEPER_SLIP = 13;  // keeper-slip
+  CATEGORY_DVLA_NOTIFICATION = 14;  // dvla-notification
+  CATEGORY_FAULTS_NOT_RECORDED = 15;  // faults-not-recorded
+  CATEGORY_OTHER = 16;  // other
+}
+
+enum UnitedKingdomVehicleBillOfSaleGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomVehicleBillOfSaleGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_vehicle_bill_of_sale_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedKingdomVehicleBillOfSaleGradeFlagCategoryEnum category = 7;  // VARCHAR(20)
+  UnitedKingdomVehicleBillOfSaleGradeFlagPriorityEnum priority = 8;  // VARCHAR(6)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

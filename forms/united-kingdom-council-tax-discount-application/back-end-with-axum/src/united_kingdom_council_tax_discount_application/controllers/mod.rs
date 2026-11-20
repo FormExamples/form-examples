@@ -1,0 +1,9 @@
+pub mod openapi;
+
+pub mod applicant;
+pub mod billing_authority;
+pub mod occupant;
+pub mod united_kingdom_council_tax_discount_application;
+pub mod united_kingdom_council_tax_discount_application_grade;
+pub mod united_kingdom_council_tax_discount_application_grade_flag;
+pub mod united_kingdom_council_tax_discount_application_grade_rule;

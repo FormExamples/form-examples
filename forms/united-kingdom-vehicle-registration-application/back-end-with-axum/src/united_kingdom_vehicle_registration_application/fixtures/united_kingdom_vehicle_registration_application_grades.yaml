@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000019046"
+  deletedAt: null
+  validityClass: "ready-to-submit"
+  feeDueAsPence: 2500
+  missingItemCount: 0
+  gradedAt: "2026-01-01T00:00:00Z"
+  unitedKingdomVehicleRegistrationApplicationId: "00000000-0000-4000-8000-00000001ee3b"

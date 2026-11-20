@@ -1,0 +1,10 @@
+<!ELEMENT ss5_application_grade (id,created_at,updated_at,deleted_at,ss5_application_id,application_class,missing_evidence_count,replacement_limit_reached,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT ss5_application_id (#PCDATA)>
+<!ELEMENT application_class (#PCDATA)>
+<!ELEMENT missing_evidence_count (#PCDATA)>
+<!ELEMENT replacement_limit_reached (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,44 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_divorce_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_divorce_application;
+
+enum UnitedKingdomDivorceApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_JURISDICTION = 1;  // jurisdiction
+  CATEGORY_MARRIAGE_CERTIFICATE = 2;  // marriage-certificate
+  CATEGORY_TRANSLATION = 3;  // translation
+  CATEGORY_SERVICE_ADDRESS = 4;  // service-address
+  CATEGORY_CHILDREN_ARRANGEMENTS = 5;  // children-arrangements
+  CATEGORY_FINANCIAL_ORDER = 6;  // financial-order
+  CATEGORY_DOMESTIC_ABUSE = 7;  // domestic-abuse
+  CATEGORY_TIMING = 8;  // timing
+  CATEGORY_FINAL_ORDER_DELAY = 9;  // final-order-delay
+  CATEGORY_NAME_CHANGE_PROOF = 10;  // name-change-proof
+  CATEGORY_FEE = 11;  // fee
+  CATEGORY_RELATIONSHIP_STATUS = 12;  // relationship-status
+  CATEGORY_ACKNOWLEDGEMENT = 13;  // acknowledgement
+  CATEGORY_OTHER = 14;  // other
+}
+
+enum UnitedKingdomDivorceApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomDivorceApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_divorce_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedKingdomDivorceApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(30)
+  UnitedKingdomDivorceApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

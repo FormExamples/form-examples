@@ -1,0 +1,182 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_marriage_license_application
+
+syntax = "proto3";
+
+package form_examples.united_states_marriage_license_application;
+
+enum UnitedStatesMarriageLicenseApplicationLicenseTypeEnum {
+  LICENSETYPE_UNSPECIFIED = 0;
+  LICENSETYPE_STANDARD = 1;  // standard
+  LICENSETYPE_CONFIDENTIAL = 2;  // confidential
+}
+
+enum UnitedStatesMarriageLicenseApplicationFirstApplicantSexEnum {
+  FIRSTAPPLICANTSEX_UNSPECIFIED = 0;
+  FIRSTAPPLICANTSEX_FEMALE = 1;  // female
+  FIRSTAPPLICANTSEX_MALE = 2;  // male
+  FIRSTAPPLICANTSEX_NONBINARY = 3;  // nonbinary
+  FIRSTAPPLICANTSEX_UNKNOWN = 4;  // unknown
+}
+
+enum UnitedStatesMarriageLicenseApplicationFirstApplicantIdPresentedEnum {
+  FIRSTAPPLICANTIDPRESENTED_UNSPECIFIED = 0;
+  FIRSTAPPLICANTIDPRESENTED_YES = 1;  // yes
+  FIRSTAPPLICANTIDPRESENTED_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationFirstApplicantSsnStatusEnum {
+  FIRSTAPPLICANTSSNSTATUS_UNSPECIFIED = 0;
+  FIRSTAPPLICANTSSNSTATUS_PROVIDED = 1;  // provided
+  FIRSTAPPLICANTSSNSTATUS_NONE_ISSUED = 2;  // none-issued
+  FIRSTAPPLICANTSSNSTATUS_DECLINED = 3;  // declined
+}
+
+enum UnitedStatesMarriageLicenseApplicationFirstApplicantMaritalStatusEnum {
+  FIRSTAPPLICANTMARITALSTATUS_UNSPECIFIED = 0;
+  FIRSTAPPLICANTMARITALSTATUS_NEVER_MARRIED = 1;  // never-married
+  FIRSTAPPLICANTMARITALSTATUS_DIVORCED = 2;  // divorced
+  FIRSTAPPLICANTMARITALSTATUS_WIDOWED = 3;  // widowed
+  FIRSTAPPLICANTMARITALSTATUS_ANNULLED = 4;  // annulled
+  FIRSTAPPLICANTMARITALSTATUS_CURRENTLY_MARRIED = 5;  // currently-married
+}
+
+enum UnitedStatesMarriageLicenseApplicationSecondApplicantSexEnum {
+  SECONDAPPLICANTSEX_UNSPECIFIED = 0;
+  SECONDAPPLICANTSEX_FEMALE = 1;  // female
+  SECONDAPPLICANTSEX_MALE = 2;  // male
+  SECONDAPPLICANTSEX_NONBINARY = 3;  // nonbinary
+  SECONDAPPLICANTSEX_UNKNOWN = 4;  // unknown
+}
+
+enum UnitedStatesMarriageLicenseApplicationSecondApplicantIdPresentedEnum {
+  SECONDAPPLICANTIDPRESENTED_UNSPECIFIED = 0;
+  SECONDAPPLICANTIDPRESENTED_YES = 1;  // yes
+  SECONDAPPLICANTIDPRESENTED_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationSecondApplicantSsnStatusEnum {
+  SECONDAPPLICANTSSNSTATUS_UNSPECIFIED = 0;
+  SECONDAPPLICANTSSNSTATUS_PROVIDED = 1;  // provided
+  SECONDAPPLICANTSSNSTATUS_NONE_ISSUED = 2;  // none-issued
+  SECONDAPPLICANTSSNSTATUS_DECLINED = 3;  // declined
+}
+
+enum UnitedStatesMarriageLicenseApplicationSecondApplicantMaritalStatusEnum {
+  SECONDAPPLICANTMARITALSTATUS_UNSPECIFIED = 0;
+  SECONDAPPLICANTMARITALSTATUS_NEVER_MARRIED = 1;  // never-married
+  SECONDAPPLICANTMARITALSTATUS_DIVORCED = 2;  // divorced
+  SECONDAPPLICANTMARITALSTATUS_WIDOWED = 3;  // widowed
+  SECONDAPPLICANTMARITALSTATUS_ANNULLED = 4;  // annulled
+  SECONDAPPLICANTMARITALSTATUS_CURRENTLY_MARRIED = 5;  // currently-married
+}
+
+enum UnitedStatesMarriageLicenseApplicationRelationshipBetweenApplicantsEnum {
+  RELATIONSHIPBETWEENAPPLICANTS_UNSPECIFIED = 0;
+  RELATIONSHIPBETWEENAPPLICANTS_NOT_RELATED = 1;  // not-related
+  RELATIONSHIPBETWEENAPPLICANTS_RELATED_PROHIBITED = 2;  // related-prohibited
+}
+
+enum UnitedStatesMarriageLicenseApplicationMinorConsentEnum {
+  MINORCONSENT_UNSPECIFIED = 0;
+  MINORCONSENT_NOT_APPLICABLE = 1;  // not-applicable
+  MINORCONSENT_PARENTAL_CONSENT = 2;  // parental-consent
+  MINORCONSENT_COURT_ORDER = 3;  // court-order
+  MINORCONSENT_NONE = 4;  // none
+}
+
+enum UnitedStatesMarriageLicenseApplicationActiveDutyMilitaryEnum {
+  ACTIVEDUTYMILITARY_UNSPECIFIED = 0;
+  ACTIVEDUTYMILITARY_YES = 1;  // yes
+  ACTIVEDUTYMILITARY_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationAppearInPersonEnum {
+  APPEARINPERSON_UNSPECIFIED = 0;
+  APPEARINPERSON_YES = 1;  // yes
+  APPEARINPERSON_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationProxyRequestedEnum {
+  PROXYREQUESTED_UNSPECIFIED = 0;
+  PROXYREQUESTED_YES = 1;  // yes
+  PROXYREQUESTED_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationPremaritalCourseCompletedEnum {
+  PREMARITALCOURSECOMPLETED_UNSPECIFIED = 0;
+  PREMARITALCOURSECOMPLETED_YES = 1;  // yes
+  PREMARITALCOURSECOMPLETED_NO = 2;  // no
+}
+
+enum UnitedStatesMarriageLicenseApplicationBloodTestEvidenceEnum {
+  BLOODTESTEVIDENCE_UNSPECIFIED = 0;
+  BLOODTESTEVIDENCE_PROVIDED = 1;  // provided
+  BLOODTESTEVIDENCE_NOT_REQUIRED = 2;  // not-required
+  BLOODTESTEVIDENCE_NOT_PROVIDED = 3;  // not-provided
+}
+
+enum UnitedStatesMarriageLicenseApplicationOfficiantTypeEnum {
+  OFFICIANTTYPE_UNSPECIFIED = 0;
+  OFFICIANTTYPE_CLERGY = 1;  // clergy
+  OFFICIANTTYPE_JUDGE = 2;  // judge
+  OFFICIANTTYPE_CLERK = 3;  // clerk
+  OFFICIANTTYPE_NOTARY = 4;  // notary
+  OFFICIANTTYPE_SELF_UNITING = 5;  // self-uniting
+  OFFICIANTTYPE_OTHER = 6;  // other
+}
+
+enum UnitedStatesMarriageLicenseApplicationOfficiantAuthorizedEnum {
+  OFFICIANTAUTHORIZED_UNSPECIFIED = 0;
+  OFFICIANTAUTHORIZED_YES = 1;  // yes
+  OFFICIANTAUTHORIZED_NO = 2;  // no
+}
+
+message UnitedStatesMarriageLicenseApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string first_applicant_id = 5;  // UUID — uuid
+  string second_applicant_id = 6;  // UUID — uuid
+  string county_clerk_id = 7;  // UUID — uuid
+  string state = 8;  // VARCHAR(2) — max 2 chars
+  string county = 9;  // TEXT
+  string application_date = 10;  // DATE — iso 8601 date
+  UnitedStatesMarriageLicenseApplicationLicenseTypeEnum license_type = 11;  // VARCHAR(12)
+  string first_applicant_name = 12;  // TEXT
+  UnitedStatesMarriageLicenseApplicationFirstApplicantSexEnum first_applicant_sex = 13;  // VARCHAR(9)
+  string first_applicant_date_of_birth = 14;  // DATE — iso 8601 date
+  string first_applicant_place_of_birth = 15;  // TEXT
+  string first_applicant_residence_state = 16;  // VARCHAR(2) — max 2 chars
+  UnitedStatesMarriageLicenseApplicationFirstApplicantIdPresentedEnum first_applicant_id_presented = 17;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationFirstApplicantSsnStatusEnum first_applicant_ssn_status = 18;  // VARCHAR(11)
+  UnitedStatesMarriageLicenseApplicationFirstApplicantMaritalStatusEnum first_applicant_marital_status = 19;  // VARCHAR(17)
+  string first_applicant_prior_marriage_ended_date = 20;  // DATE — iso 8601 date
+  string second_applicant_name = 21;  // TEXT
+  UnitedStatesMarriageLicenseApplicationSecondApplicantSexEnum second_applicant_sex = 22;  // VARCHAR(9)
+  string second_applicant_date_of_birth = 23;  // DATE — iso 8601 date
+  string second_applicant_place_of_birth = 24;  // TEXT
+  string second_applicant_residence_state = 25;  // VARCHAR(2) — max 2 chars
+  UnitedStatesMarriageLicenseApplicationSecondApplicantIdPresentedEnum second_applicant_id_presented = 26;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationSecondApplicantSsnStatusEnum second_applicant_ssn_status = 27;  // VARCHAR(11)
+  UnitedStatesMarriageLicenseApplicationSecondApplicantMaritalStatusEnum second_applicant_marital_status = 28;  // VARCHAR(17)
+  string second_applicant_prior_marriage_ended_date = 29;  // DATE — iso 8601 date
+  UnitedStatesMarriageLicenseApplicationRelationshipBetweenApplicantsEnum relationship_between_applicants = 30;  // VARCHAR(18)
+  UnitedStatesMarriageLicenseApplicationMinorConsentEnum minor_consent = 31;  // VARCHAR(16)
+  UnitedStatesMarriageLicenseApplicationActiveDutyMilitaryEnum active_duty_military = 32;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationAppearInPersonEnum appear_in_person = 33;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationProxyRequestedEnum proxy_requested = 34;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationPremaritalCourseCompletedEnum premarital_course_completed = 35;  // VARCHAR(3)
+  UnitedStatesMarriageLicenseApplicationBloodTestEvidenceEnum blood_test_evidence = 36;  // VARCHAR(12)
+  double fee_paid_usd = 37;  // NUMERIC(7,2) — numeric(7,2)
+  string license_issued_date = 38;  // DATE — iso 8601 date
+  string ceremony_date = 39;  // DATE — iso 8601 date
+  UnitedStatesMarriageLicenseApplicationOfficiantTypeEnum officiant_type = 40;  // VARCHAR(12)
+  string officiant_name = 41;  // TEXT
+  UnitedStatesMarriageLicenseApplicationOfficiantAuthorizedEnum officiant_authorized = 42;  // VARCHAR(3)
+  int32 witness_count = 43;  // INTEGER
+  string license_returned_date = 44;  // DATE — iso 8601 date
+  int32 certified_copies_requested = 45;  // INTEGER
+  string clerk_note = 46;  // TEXT
+}

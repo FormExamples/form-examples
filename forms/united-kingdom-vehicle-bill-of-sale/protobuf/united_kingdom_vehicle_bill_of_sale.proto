@@ -1,0 +1,153 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_vehicle_bill_of_sale
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_bill_of_sale;
+
+enum UnitedKingdomVehicleBillOfSaleSellerCapacityEnum {
+  SELLERCAPACITY_UNSPECIFIED = 0;
+  SELLERCAPACITY_PRIVATE = 1;  // private
+  SELLERCAPACITY_TRADER = 2;  // trader
+}
+
+enum UnitedKingdomVehicleBillOfSaleSellerIsRegisteredKeeperEnum {
+  SELLERISREGISTEREDKEEPER_UNSPECIFIED = 0;
+  SELLERISREGISTEREDKEEPER_YES = 1;  // yes
+  SELLERISREGISTEREDKEEPER_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleFuelTypeEnum {
+  FUELTYPE_UNSPECIFIED = 0;
+  FUELTYPE_PETROL = 1;  // petrol
+  FUELTYPE_DIESEL = 2;  // diesel
+  FUELTYPE_HYBRID = 3;  // hybrid
+  FUELTYPE_ELECTRIC = 4;  // electric
+  FUELTYPE_OTHER = 5;  // other
+}
+
+enum UnitedKingdomVehicleBillOfSaleMileageAccuracyEnum {
+  MILEAGEACCURACY_UNSPECIFIED = 0;
+  MILEAGEACCURACY_RECORDED = 1;  // recorded
+  MILEAGEACCURACY_NOT_KNOWN = 2;  // not-known
+}
+
+enum UnitedKingdomVehicleBillOfSaleV5cPresentEnum {
+  V5CPRESENT_UNSPECIFIED = 0;
+  V5CPRESENT_YES = 1;  // yes
+  V5CPRESENT_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleV5cDetailsMatchEnum {
+  V5CDETAILSMATCH_UNSPECIFIED = 0;
+  V5CDETAILSMATCH_YES = 1;  // yes
+  V5CDETAILSMATCH_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleMotStatusEnum {
+  MOTSTATUS_UNSPECIFIED = 0;
+  MOTSTATUS_VALID = 1;  // valid
+  MOTSTATUS_EXPIRED = 2;  // expired
+  MOTSTATUS_EXEMPT = 3;  // exempt
+  MOTSTATUS_NONE = 4;  // none
+}
+
+enum UnitedKingdomVehicleBillOfSaleFinanceStatusEnum {
+  FINANCESTATUS_UNSPECIFIED = 0;
+  FINANCESTATUS_NONE = 1;  // none
+  FINANCESTATUS_OUTSTANDING = 2;  // outstanding
+  FINANCESTATUS_UNCHECKED = 3;  // unchecked
+}
+
+enum UnitedKingdomVehicleBillOfSalePaymentMethodEnum {
+  PAYMENTMETHOD_UNSPECIFIED = 0;
+  PAYMENTMETHOD_BANK_TRANSFER = 1;  // bank-transfer
+  PAYMENTMETHOD_CASH = 2;  // cash
+  PAYMENTMETHOD_CHEQUE = 3;  // cheque
+  PAYMENTMETHOD_CARD = 4;  // card
+  PAYMENTMETHOD_OTHER = 5;  // other
+}
+
+enum UnitedKingdomVehicleBillOfSalePaymentReceivedEnum {
+  PAYMENTRECEIVED_UNSPECIFIED = 0;
+  PAYMENTRECEIVED_YES = 1;  // yes
+  PAYMENTRECEIVED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleSaleTermsEnum {
+  SALETERMS_UNSPECIFIED = 0;
+  SALETERMS_SOLD_AS_SEEN = 1;  // sold-as-seen
+  SALETERMS_WARRANTY_GIVEN = 2;  // warranty-given
+}
+
+enum UnitedKingdomVehicleBillOfSaleDescriptionMatchesAdvertEnum {
+  DESCRIPTIONMATCHESADVERT_UNSPECIFIED = 0;
+  DESCRIPTIONMATCHESADVERT_YES = 1;  // yes
+  DESCRIPTIONMATCHESADVERT_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleNewKeeperSlipGivenEnum {
+  NEWKEEPERSLIPGIVEN_UNSPECIFIED = 0;
+  NEWKEEPERSLIPGIVEN_YES = 1;  // yes
+  NEWKEEPERSLIPGIVEN_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleDvlaNotificationEnum {
+  DVLANOTIFICATION_UNSPECIFIED = 0;
+  DVLANOTIFICATION_ONLINE = 1;  // online
+  DVLANOTIFICATION_POST = 2;  // post
+  DVLANOTIFICATION_NOT_YET = 3;  // not-yet
+}
+
+enum UnitedKingdomVehicleBillOfSaleSellerSignedEnum {
+  SELLERSIGNED_UNSPECIFIED = 0;
+  SELLERSIGNED_YES = 1;  // yes
+  SELLERSIGNED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleBillOfSaleBuyerSignedEnum {
+  BUYERSIGNED_UNSPECIFIED = 0;
+  BUYERSIGNED_YES = 1;  // yes
+  BUYERSIGNED_NO = 2;  // no
+}
+
+message UnitedKingdomVehicleBillOfSale {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string seller_id = 5;  // UUID — uuid
+  string buyer_id = 6;  // UUID — uuid
+  string sale_date = 7;  // DATE — iso 8601 date
+  string sale_place = 8;  // TEXT
+  UnitedKingdomVehicleBillOfSaleSellerCapacityEnum seller_capacity = 9;  // VARCHAR(7)
+  UnitedKingdomVehicleBillOfSaleSellerIsRegisteredKeeperEnum seller_is_registered_keeper = 10;  // VARCHAR(3)
+  string vehicle_registration = 11;  // VARCHAR(20) — max 20 chars
+  string vehicle_make = 12;  // VARCHAR(50) — max 50 chars
+  string vehicle_model = 13;  // VARCHAR(50) — max 50 chars
+  string vehicle_colour = 14;  // VARCHAR(30) — max 30 chars
+  string vehicle_vin = 15;  // VARCHAR(30) — max 30 chars
+  int32 first_registered_year = 16;  // INTEGER
+  UnitedKingdomVehicleBillOfSaleFuelTypeEnum fuel_type = 17;  // VARCHAR(8)
+  int32 mileage = 18;  // INTEGER
+  UnitedKingdomVehicleBillOfSaleMileageAccuracyEnum mileage_accuracy = 19;  // VARCHAR(9)
+  UnitedKingdomVehicleBillOfSaleV5cPresentEnum v5c_present = 20;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleV5cDetailsMatchEnum v5c_details_match = 21;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleMotStatusEnum mot_status = 22;  // VARCHAR(7)
+  string mot_expiry_date = 23;  // DATE — iso 8601 date
+  UnitedKingdomVehicleBillOfSaleFinanceStatusEnum finance_status = 24;  // VARCHAR(11)
+  string finance_check_date = 25;  // DATE — iso 8601 date
+  double price_as_gbp = 26;  // NUMERIC(10,2) — numeric(10,2)
+  double deposit_as_gbp = 27;  // NUMERIC(10,2) — numeric(10,2)
+  UnitedKingdomVehicleBillOfSalePaymentMethodEnum payment_method = 28;  // VARCHAR(13)
+  UnitedKingdomVehicleBillOfSalePaymentReceivedEnum payment_received = 29;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleSaleTermsEnum sale_terms = 30;  // VARCHAR(14)
+  string known_faults = 31;  // TEXT
+  UnitedKingdomVehicleBillOfSaleDescriptionMatchesAdvertEnum description_matches_advert = 32;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleNewKeeperSlipGivenEnum new_keeper_slip_given = 33;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleDvlaNotificationEnum dvla_notification = 34;  // VARCHAR(7)
+  UnitedKingdomVehicleBillOfSaleSellerSignedEnum seller_signed = 35;  // VARCHAR(3)
+  UnitedKingdomVehicleBillOfSaleBuyerSignedEnum buyer_signed = 36;  // VARCHAR(3)
+  string signature_date = 37;  // DATE — iso 8601 date
+  string note = 38;  // TEXT
+}

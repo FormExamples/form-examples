@@ -1,0 +1,47 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_last_will_and_testament_grade
+
+syntax = "proto3";
+
+package form_examples.united_states_last_will_and_testament;
+
+enum UnitedStatesLastWillAndTestamentGradeValidityClassEnum {
+  VALIDITYCLASS_UNSPECIFIED = 0;
+  VALIDITYCLASS_VALID_READY_TO_EXECUTE = 1;  // valid-ready-to-execute
+  VALIDITYCLASS_INCOMPLETE = 2;  // incomplete
+  VALIDITYCLASS_FORMALITY_RISK = 3;  // formality-risk
+}
+
+enum UnitedStatesLastWillAndTestamentGradeSelfProvedEnum {
+  SELFPROVED_UNSPECIFIED = 0;
+  SELFPROVED_YES = 1;  // yes
+  SELFPROVED_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentGradeFederalEstateTaxExposureEnum {
+  FEDERALESTATETAXEXPOSURE_UNSPECIFIED = 0;
+  FEDERALESTATETAXEXPOSURE_YES = 1;  // yes
+  FEDERALESTATETAXEXPOSURE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentGradeStateRuleSourceEnum {
+  STATERULESOURCE_UNSPECIFIED = 0;
+  STATERULESOURCE_STATE_TABLE = 1;  // state-table
+  STATERULESOURCE_UNIFORM_DEFAULT = 2;  // uniform-default
+}
+
+message UnitedStatesLastWillAndTestamentGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_last_will_and_testament_id = 5;  // UUID — uuid
+  UnitedStatesLastWillAndTestamentGradeValidityClassEnum validity_class = 6;  // VARCHAR(25)
+  double residuary_percent_total = 7;  // NUMERIC(6,2) — numeric(6,2)
+  double elective_share_amount = 8;  // NUMERIC(14,2) — numeric(14,2)
+  int32 witness_count = 9;  // INTEGER
+  UnitedStatesLastWillAndTestamentGradeSelfProvedEnum self_proved = 10;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentGradeFederalEstateTaxExposureEnum federal_estate_tax_exposure = 11;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentGradeStateRuleSourceEnum state_rule_source = 12;  // VARCHAR(20)
+  string graded_at = 13;  // TIMESTAMPTZ — iso 8601
+}

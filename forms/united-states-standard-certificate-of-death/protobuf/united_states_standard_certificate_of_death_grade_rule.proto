@@ -1,0 +1,31 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_standard_certificate_of_death_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_states_standard_certificate_of_death;
+
+enum UnitedStatesStandardCertificateOfDeathGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_PART_I = 1;  // part-i
+  DIMENSION_PART_II = 2;  // part-ii
+  DIMENSION_MANNER = 3;  // manner
+  DIMENSION_REFERRAL = 4;  // referral
+  DIMENSION_DECEDENT = 5;  // decedent
+  DIMENSION_CERTIFIER = 6;  // certifier
+  DIMENSION_DISPOSITION = 7;  // disposition
+  DIMENSION_COPIES = 8;  // copies
+  DIMENSION_CLASSIFICATION = 9;  // classification
+}
+
+message UnitedStatesStandardCertificateOfDeathGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_standard_certificate_of_death_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedStatesStandardCertificateOfDeathGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

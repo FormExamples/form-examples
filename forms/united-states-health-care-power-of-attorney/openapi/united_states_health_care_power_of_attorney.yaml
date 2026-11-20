@@ -1,0 +1,730 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_health_care_power_of_attorney
+openapi: 3.1.0
+info:
+  title: United States Health Care Power Of Attorney — UnitedStatesHealthCarePowerOfAttorney
+  version: 1.0.0
+  description: "Main United States health care power of attorney record: principal, agent and successors, authority, treatment wishes, and signing details. Readiness classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_states_health_care_power_of_attorneys:
+    get:
+      summary: List UnitedStatesHealthCarePowerOfAttorney records
+      operationId: listUnitedStatesHealthCarePowerOfAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesHealthCarePowerOfAttorney records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesHealthCarePowerOfAttorney
+      operationId: createUnitedStatesHealthCarePowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+      responses:
+        "200":
+          description: The newly created UnitedStatesHealthCarePowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_health_care_power_of_attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesHealthCarePowerOfAttorney by id
+      operationId: getUnitedStatesHealthCarePowerOfAttorney
+      responses:
+        "200":
+          description: The requested UnitedStatesHealthCarePowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+        "404":
+          description: UnitedStatesHealthCarePowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesHealthCarePowerOfAttorney
+      operationId: updateUnitedStatesHealthCarePowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+      responses:
+        "200":
+          description: The updated UnitedStatesHealthCarePowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+        "404":
+          description: UnitedStatesHealthCarePowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesHealthCarePowerOfAttorney
+      operationId: replaceUnitedStatesHealthCarePowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+      responses:
+        "200":
+          description: The updated UnitedStatesHealthCarePowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesHealthCarePowerOfAttorney"
+        "404":
+          description: UnitedStatesHealthCarePowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesHealthCarePowerOfAttorney
+      operationId: deleteUnitedStatesHealthCarePowerOfAttorney
+      responses:
+        "200":
+          description: UnitedStatesHealthCarePowerOfAttorney deleted
+        "404":
+          description: UnitedStatesHealthCarePowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesHealthCarePowerOfAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        principal_id:
+          type: string
+          format: uuid
+          description: Foreign key to the principal who makes this directive (restrict delete).
+        reviewer_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the reviewer (restrict delete); optional.
+        principal_name:
+          type: string
+          description: Full legal name of the principal as written in the directive.
+        birth_date:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the principal.
+        state_code:
+          type: string
+          enum:
+            - ""
+            - AL
+            - AK
+            - AZ
+            - AR
+            - CA
+            - CO
+            - CT
+            - DE
+            - DC
+            - FL
+            - GA
+            - HI
+            - ID
+            - IL
+            - IN
+            - IA
+            - KS
+            - KY
+            - LA
+            - ME
+            - MD
+            - MA
+            - MI
+            - MN
+            - MS
+            - MO
+            - MT
+            - NE
+            - NV
+            - NH
+            - NJ
+            - NM
+            - NY
+            - NC
+            - ND
+            - OH
+            - OK
+            - OR
+            - PA
+            - RI
+            - SC
+            - SD
+            - TN
+            - TX
+            - UT
+            - VT
+            - VA
+            - WA
+            - WV
+            - WI
+            - WY
+          description: Two-letter USPS state code whose rule table applies; blank when unanswered.
+        phone:
+          type: string
+          description: Principal phone number.
+        capacity_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal understands the document and what it does (yes/no).
+        signed_voluntarily:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal is signing freely, without pressure (yes/no).
+        agent_name:
+          type: string
+          description: Full name of the health care agent (proxy, surrogate, attorney-in-fact).
+        agent_relationship:
+          type: string
+          enum:
+            - spouse
+            - adult-child
+            - parent
+            - sibling
+            - other-relative
+            - friend
+            - other
+            - ""
+          description: "Agent relationship to the principal: spouse, adult-child, parent, sibling, other-relative, friend, or other."
+        agent_age:
+          type: [integer, 'null']
+          format: int32
+          description: Agent age in whole years; an agent must be 18 or older.
+        agent_phone:
+          type: string
+          description: Agent phone number.
+        agent_is_health_care_provider:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent is the principal's treating provider or that provider's employee (yes/no).
+        agent_is_facility_employee:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent operates or works at the facility where the principal is a patient (yes/no).
+        agent_related_to_principal:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent is related to the principal by blood, marriage, or adoption (yes/no).
+        agent_accepted:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent has agreed to serve (yes/no).
+        successor1_name:
+          type: string
+          description: First successor agent name.
+        successor1_phone:
+          type: string
+          description: First successor agent phone.
+        successor2_name:
+          type: string
+          description: Second successor agent name.
+        effective_when:
+          type: string
+          enum:
+            - immediately
+            - upon-incapacity
+            - ""
+          description: "When the agent authority begins: immediately or upon-incapacity."
+        incapacity_determined_by:
+          type: string
+          enum:
+            - one-physician
+            - two-physicians
+            - other
+            - ""
+          description: "Who decides the principal cannot decide: one-physician, two-physicians, or other."
+        hipaa_release:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the document includes a HIPAA authorization for the agent (yes/no).
+        mental_health_authority:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent may decide on mental health treatment (yes/no).
+        organ_donation:
+          type: string
+          enum:
+            - any-needs
+            - transplant-only
+            - research-only
+            - none
+            - not-addressed
+            - ""
+          description: "Organ and tissue donation direction: any-needs, transplant-only, research-only, none, or not-addressed."
+        prior_directive_status:
+          type: string
+          enum:
+            - none-existing
+            - revokes-prior
+            - prior-remains
+            - ""
+          description: "Status of earlier health care powers of attorney: none-existing, revokes-prior, or prior-remains."
+        life_sustaining_treatment:
+          type: string
+          enum:
+            - refuse
+            - time-limited-trial
+            - want-all
+            - agent-decides
+            - ""
+          description: "General wish on life-sustaining treatment: refuse, time-limited-trial, want-all, or agent-decides."
+        cpr:
+          type: string
+          enum:
+            - accept
+            - refuse
+            - agent-decides
+            - ""
+          description: "CPR wish: accept, refuse, or agent-decides."
+        ventilator:
+          type: string
+          enum:
+            - accept
+            - refuse
+            - agent-decides
+            - ""
+          description: "Ventilator wish: accept, refuse, or agent-decides."
+        artificial_nutrition:
+          type: string
+          enum:
+            - accept
+            - refuse
+            - agent-decides
+            - ""
+          description: "Artificial nutrition and hydration wish: accept, refuse, or agent-decides."
+        comfort_care_first:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether comfort and pain relief are the priority (yes/no).
+        serious_illness:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal has a serious illness or frailty (yes/no); a POLST is meant for these people.
+        polst_status:
+          type: string
+          enum:
+            - none
+            - in-place
+            - discussing
+            - ""
+          description: "POLST status: none, in-place, or discussing."
+        wishes_note:
+          type: string
+          description: Free-text values and wishes in the principal own words.
+        signature_date:
+          type: [string, 'null']
+          format: date
+          description: Date the principal signed the directive.
+        execution_method:
+          type: string
+          enum:
+            - two-witnesses
+            - one-witness
+            - notary
+            - witnesses-and-notary
+            - ""
+          description: "Signing method: two-witnesses, one-witness, notary, or witnesses-and-notary."
+        witnesses_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal signed, or acknowledged the signature, in the presence of the witnesses or notary (yes/no).
+        witness1_name:
+          type: string
+          description: Witness 1 name.
+        witness1_is_relative:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 1 is related to the principal (yes/no).
+        witness1_is_heir:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 1 would inherit from the principal (yes/no).
+        witness1_is_agent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 1 is the named agent (yes/no).
+        witness1_is_provider:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 1 is the principal's provider or facility staff (yes/no).
+        witness2_name:
+          type: string
+          description: Witness 2 name.
+        witness2_is_relative:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 2 is related to the principal (yes/no).
+        witness2_is_heir:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 2 would inherit from the principal (yes/no).
+        witness2_is_agent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 2 is the named agent (yes/no).
+        witness2_is_provider:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 2 is the principal's provider or facility staff (yes/no).
+        notary_name:
+          type: string
+          description: Name of the notary public, when the acknowledgment route is used.
+        principal_in_skilled_nursing_facility:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal lives in a skilled nursing facility (yes/no).
+        ombudsman_signed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a patient advocate or ombudsman signed as a witness (yes/no).
+        copy_to_agent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a signed copy was given to the agent (yes/no).
+        copy_to_physician:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a signed copy was given to the principal physician (yes/no).
+        copy_to_successor:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a signed copy was given to the successor agents (yes/no).
+        copy_to_facility:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a copy was brought to the hospital or care facility (yes/no).
+      required:
+        - created_at
+        - updated_at
+        - principal_id
+        - principal_name
+        - state_code
+        - phone
+        - capacity_confirmed
+        - signed_voluntarily
+        - agent_name
+        - agent_relationship
+        - agent_phone
+        - agent_is_health_care_provider
+        - agent_is_facility_employee
+        - agent_related_to_principal
+        - agent_accepted
+        - successor1_name
+        - successor1_phone
+        - successor2_name
+        - effective_when
+        - incapacity_determined_by
+        - hipaa_release
+        - mental_health_authority
+        - organ_donation
+        - prior_directive_status
+        - life_sustaining_treatment
+        - cpr
+        - ventilator
+        - artificial_nutrition
+        - comfort_care_first
+        - serious_illness
+        - polst_status
+        - wishes_note
+        - execution_method
+        - witnesses_present
+        - witness1_name
+        - witness1_is_relative
+        - witness1_is_heir
+        - witness1_is_agent
+        - witness1_is_provider
+        - witness2_name
+        - witness2_is_relative
+        - witness2_is_heir
+        - witness2_is_agent
+        - witness2_is_provider
+        - notary_name
+        - principal_in_skilled_nursing_facility
+        - ombudsman_signed
+        - copy_to_agent
+        - copy_to_physician
+        - copy_to_successor
+        - copy_to_facility
+      description: "Main United States health care power of attorney record: principal, agent and successors, authority, treatment wishes, and signing details. Readiness classification, fired rules, and flags live in child tables."

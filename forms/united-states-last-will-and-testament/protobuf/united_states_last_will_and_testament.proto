@@ -1,0 +1,211 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_last_will_and_testament
+
+syntax = "proto3";
+
+package form_examples.united_states_last_will_and_testament;
+
+enum UnitedStatesLastWillAndTestamentSoundMindEnum {
+  SOUNDMIND_UNSPECIFIED = 0;
+  SOUNDMIND_YES = 1;  // yes
+  SOUNDMIND_NO = 2;  // no
+  SOUNDMIND_UNCERTAIN = 3;  // uncertain
+}
+
+enum UnitedStatesLastWillAndTestamentUndueInfluenceConcernEnum {
+  UNDUEINFLUENCECONCERN_UNSPECIFIED = 0;
+  UNDUEINFLUENCECONCERN_NONE = 1;  // none
+  UNDUEINFLUENCECONCERN_POSSIBLE = 2;  // possible
+}
+
+enum UnitedStatesLastWillAndTestamentMaritalStatusEnum {
+  MARITALSTATUS_UNSPECIFIED = 0;
+  MARITALSTATUS_SINGLE = 1;  // single
+  MARITALSTATUS_MARRIED = 2;  // married
+  MARITALSTATUS_DIVORCED = 3;  // divorced
+  MARITALSTATUS_WIDOWED = 4;  // widowed
+}
+
+enum UnitedStatesLastWillAndTestamentSpouseWaivedElectiveShareEnum {
+  SPOUSEWAIVEDELECTIVESHARE_UNSPECIFIED = 0;
+  SPOUSEWAIVEDELECTIVESHARE_YES = 1;  // yes
+  SPOUSEWAIVEDELECTIVESHARE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentHasMinorChildrenEnum {
+  HASMINORCHILDREN_UNSPECIFIED = 0;
+  HASMINORCHILDREN_YES = 1;  // yes
+  HASMINORCHILDREN_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentDisinheritsChildEnum {
+  DISINHERITSCHILD_UNSPECIFIED = 0;
+  DISINHERITSCHILD_YES = 1;  // yes
+  DISINHERITSCHILD_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentDisinheritedChildNamedEnum {
+  DISINHERITEDCHILDNAMED_UNSPECIFIED = 0;
+  DISINHERITEDCHILDNAMED_YES = 1;  // yes
+  DISINHERITEDCHILDNAMED_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentResiduaryClausePresentEnum {
+  RESIDUARYCLAUSEPRESENT_UNSPECIFIED = 0;
+  RESIDUARYCLAUSEPRESENT_YES = 1;  // yes
+  RESIDUARYCLAUSEPRESENT_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentContingentBeneficiaryNamedEnum {
+  CONTINGENTBENEFICIARYNAMED_UNSPECIFIED = 0;
+  CONTINGENTBENEFICIARYNAMED_YES = 1;  // yes
+  CONTINGENTBENEFICIARYNAMED_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentBondWaivedEnum {
+  BONDWAIVED_UNSPECIFIED = 0;
+  BONDWAIVED_YES = 1;  // yes
+  BONDWAIVED_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentRevokesPriorWillsClauseEnum {
+  REVOKESPRIORWILLSCLAUSE_UNSPECIFIED = 0;
+  REVOKESPRIORWILLSCLAUSE_YES = 1;  // yes
+  REVOKESPRIORWILLSCLAUSE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentNoContestClauseEnum {
+  NOCONTESTCLAUSE_UNSPECIFIED = 0;
+  NOCONTESTCLAUSE_YES = 1;  // yes
+  NOCONTESTCLAUSE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentDigitalAssetsClauseEnum {
+  DIGITALASSETSCLAUSE_UNSPECIFIED = 0;
+  DIGITALASSETSCLAUSE_YES = 1;  // yes
+  DIGITALASSETSCLAUSE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentEstateTaxReviewedEnum {
+  ESTATETAXREVIEWED_UNSPECIFIED = 0;
+  ESTATETAXREVIEWED_YES = 1;  // yes
+  ESTATETAXREVIEWED_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentExecutionFormEnum {
+  EXECUTIONFORM_UNSPECIFIED = 0;
+  EXECUTIONFORM_WITNESSED = 1;  // witnessed
+  EXECUTIONFORM_HOLOGRAPHIC = 2;  // holographic
+  EXECUTIONFORM_ELECTRONIC = 3;  // electronic
+}
+
+enum UnitedStatesLastWillAndTestamentSignedAtEndEnum {
+  SIGNEDATEND_UNSPECIFIED = 0;
+  SIGNEDATEND_YES = 1;  // yes
+  SIGNEDATEND_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentSignedInWitnessPresenceEnum {
+  SIGNEDINWITNESSPRESENCE_UNSPECIFIED = 0;
+  SIGNEDINWITNESSPRESENCE_YES = 1;  // yes
+  SIGNEDINWITNESSPRESENCE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentWitnessesSignedInTestatorPresenceEnum {
+  WITNESSESSIGNEDINTESTATORPRESENCE_UNSPECIFIED = 0;
+  WITNESSESSIGNEDINTESTATORPRESENCE_YES = 1;  // yes
+  WITNESSESSIGNEDINTESTATORPRESENCE_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentHolographicEntirelyHandwrittenEnum {
+  HOLOGRAPHICENTIRELYHANDWRITTEN_UNSPECIFIED = 0;
+  HOLOGRAPHICENTIRELYHANDWRITTEN_YES = 1;  // yes
+  HOLOGRAPHICENTIRELYHANDWRITTEN_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentWitness1BeneficiaryEnum {
+  WITNESS1BENEFICIARY_UNSPECIFIED = 0;
+  WITNESS1BENEFICIARY_YES = 1;  // yes
+  WITNESS1BENEFICIARY_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentWitness2BeneficiaryEnum {
+  WITNESS2BENEFICIARY_UNSPECIFIED = 0;
+  WITNESS2BENEFICIARY_YES = 1;  // yes
+  WITNESS2BENEFICIARY_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentWitness3BeneficiaryEnum {
+  WITNESS3BENEFICIARY_UNSPECIFIED = 0;
+  WITNESS3BENEFICIARY_YES = 1;  // yes
+  WITNESS3BENEFICIARY_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentSelfProvingAffidavitEnum {
+  SELFPROVINGAFFIDAVIT_UNSPECIFIED = 0;
+  SELFPROVINGAFFIDAVIT_YES = 1;  // yes
+  SELFPROVINGAFFIDAVIT_NO = 2;  // no
+}
+
+enum UnitedStatesLastWillAndTestamentNotaryAcknowledgedEnum {
+  NOTARYACKNOWLEDGED_UNSPECIFIED = 0;
+  NOTARYACKNOWLEDGED_YES = 1;  // yes
+  NOTARYACKNOWLEDGED_NO = 2;  // no
+}
+
+message UnitedStatesLastWillAndTestament {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string testator_id = 5;  // UUID — uuid
+  string attorney_id = 6;  // UUID — uuid
+  string state = 7;  // VARCHAR(2) — max 2 chars
+  string testator_name = 8;  // TEXT
+  string testator_date_of_birth = 9;  // DATE — iso 8601 date
+  UnitedStatesLastWillAndTestamentSoundMindEnum sound_mind = 10;  // VARCHAR(9)
+  UnitedStatesLastWillAndTestamentUndueInfluenceConcernEnum undue_influence_concern = 11;  // VARCHAR(8)
+  UnitedStatesLastWillAndTestamentMaritalStatusEnum marital_status = 12;  // VARCHAR(8)
+  string spouse_name = 13;  // TEXT
+  double spouse_inheritance_value = 14;  // NUMERIC(14,2) — numeric(14,2)
+  UnitedStatesLastWillAndTestamentSpouseWaivedElectiveShareEnum spouse_waived_elective_share = 15;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentHasMinorChildrenEnum has_minor_children = 16;  // VARCHAR(3)
+  string guardian_for_minors_name = 17;  // TEXT
+  UnitedStatesLastWillAndTestamentDisinheritsChildEnum disinherits_child = 18;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentDisinheritedChildNamedEnum disinherited_child_named = 19;  // VARCHAR(3)
+  double estimated_estate_value = 20;  // NUMERIC(14,2) — numeric(14,2)
+  double specific_bequests_total = 21;  // NUMERIC(14,2) — numeric(14,2)
+  string specific_bequests_summary = 22;  // TEXT
+  UnitedStatesLastWillAndTestamentResiduaryClausePresentEnum residuary_clause_present = 23;  // VARCHAR(3)
+  string residuary_1_name = 24;  // TEXT
+  double residuary_1_percent = 25;  // NUMERIC(5,2) — numeric(5,2)
+  string residuary_2_name = 26;  // TEXT
+  double residuary_2_percent = 27;  // NUMERIC(5,2) — numeric(5,2)
+  string residuary_3_name = 28;  // TEXT
+  double residuary_3_percent = 29;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedStatesLastWillAndTestamentContingentBeneficiaryNamedEnum contingent_beneficiary_named = 30;  // VARCHAR(3)
+  string personal_representative_name = 31;  // TEXT
+  string successor_personal_representative_name = 32;  // TEXT
+  UnitedStatesLastWillAndTestamentBondWaivedEnum bond_waived = 33;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentRevokesPriorWillsClauseEnum revokes_prior_wills_clause = 34;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentNoContestClauseEnum no_contest_clause = 35;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentDigitalAssetsClauseEnum digital_assets_clause = 36;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentEstateTaxReviewedEnum estate_tax_reviewed = 37;  // VARCHAR(3)
+  string original_will_location = 38;  // TEXT
+  string drafter_note = 39;  // TEXT
+  UnitedStatesLastWillAndTestamentExecutionFormEnum execution_form = 40;  // VARCHAR(11)
+  string execution_date = 41;  // DATE — iso 8601 date
+  UnitedStatesLastWillAndTestamentSignedAtEndEnum signed_at_end = 42;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentSignedInWitnessPresenceEnum signed_in_witness_presence = 43;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentWitnessesSignedInTestatorPresenceEnum witnesses_signed_in_testator_presence = 44;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentHolographicEntirelyHandwrittenEnum holographic_entirely_handwritten = 45;  // VARCHAR(3)
+  string witness_1_name = 46;  // TEXT
+  UnitedStatesLastWillAndTestamentWitness1BeneficiaryEnum witness_1_beneficiary = 47;  // VARCHAR(3)
+  string witness_2_name = 48;  // TEXT
+  UnitedStatesLastWillAndTestamentWitness2BeneficiaryEnum witness_2_beneficiary = 49;  // VARCHAR(3)
+  string witness_3_name = 50;  // TEXT
+  UnitedStatesLastWillAndTestamentWitness3BeneficiaryEnum witness_3_beneficiary = 51;  // VARCHAR(3)
+  UnitedStatesLastWillAndTestamentSelfProvingAffidavitEnum self_proving_affidavit = 52;  // VARCHAR(3)
+  string notary_name = 53;  // TEXT
+  UnitedStatesLastWillAndTestamentNotaryAcknowledgedEnum notary_acknowledged = 54;  // VARCHAR(3)
+}

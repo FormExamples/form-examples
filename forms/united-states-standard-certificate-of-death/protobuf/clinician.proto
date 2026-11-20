@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: clinician
+
+syntax = "proto3";
+
+package form_examples.united_states_standard_certificate_of_death;
+
+enum ClinicianRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ATTENDING_PHYSICIAN = 1;  // attending-physician
+  ROLE_PRONOUNCING_PHYSICIAN = 2;  // pronouncing-physician
+  ROLE_MEDICAL_EXAMINER = 3;  // medical-examiner
+  ROLE_CORONER = 4;  // coroner
+  ROLE_FUNERAL_DIRECTOR = 5;  // funeral-director
+  ROLE_OTHER = 6;  // other
+}
+
+enum ClinicianRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_STATE_MEDICAL_BOARD = 1;  // state-medical-board
+  REGISTRATIONBODY_STATE_FUNERAL_BOARD = 2;  // state-funeral-board
+  REGISTRATIONBODY_OTHER = 3;  // other
+}
+
+message Clinician {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  ClinicianRoleEnum role = 11;  // VARCHAR(40)
+  ClinicianRegistrationBodyEnum registration_body = 12;  // VARCHAR(25)
+  string registration_number = 13;  // TEXT
+}

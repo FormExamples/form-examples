@@ -1,0 +1,6 @@
+ALTER TABLE "united_states_health_care_power_of_attorney_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_health_care_power_of_attorney_grade_flag_2abc5d51";
+ALTER TABLE "united_states_health_care_power_of_attorney_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_health_care_power_of_attorney_grade_flag_7a7158a0";
+ALTER TABLE "united_states_health_care_power_of_attorney_grade_rules" DROP CONSTRAINT IF EXISTS "united_states_health_care_power_of_attorney_grade_rule_9e44b353";
+ALTER TABLE "united_states_health_care_power_of_attorney_grades" DROP CONSTRAINT IF EXISTS "united_states_health_care_power_of_attorney_grades_exe_682e0e3e";
+ALTER TABLE "united_states_health_care_power_of_attorney_grades" DROP CONSTRAINT IF EXISTS "united_states_health_care_power_of_attorney_grades_rea_00890ae8";
+ALTER TABLE "reviewers" DROP CONSTRAINT IF EXISTS "reviewers_role_check";

@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001001"
+  deletedAt: null
+  name: "Maria L. Alvarez"
+  birthDate: "1985-04-12"
+  email: "maria.alvarez@example.com"
+  phone: "+13125550102"
+  postalAddressAsFullText: "200 W Madison St, Chicago, IL 60606"
+  stateAsUspsCode: "IL"
+  postcode: "60606"

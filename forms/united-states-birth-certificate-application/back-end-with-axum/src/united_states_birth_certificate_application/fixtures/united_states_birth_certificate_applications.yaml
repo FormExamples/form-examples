@@ -1,0 +1,21 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000001ee3b"
+  deletedAt: null
+  applicantId: "00000000-0000-4000-8000-000000027f31"
+  registrantId: "00000000-0000-4000-8000-0000000dda39"
+  requesterRelationship: "self"
+  purpose: "passport"
+  needsApostille: "yes"
+  apostilleCountry: "Test apostilleCountry"
+  certificateType: "certified-long-form"
+  copies: 1
+  deliveryMethod: "online"
+  feeEnclosedUsd: 1.5
+  idType: "state-driver-license"
+  idUnexpired: "yes"
+  proofOfRelationship: "yes"
+  authorityDocument: "yes"
+  notarizedSwornStatement: "yes"
+  declarationSigned: "yes"
+  applicationNote: "Test applicationNote"

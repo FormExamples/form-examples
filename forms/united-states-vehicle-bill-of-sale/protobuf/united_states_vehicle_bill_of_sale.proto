@@ -1,0 +1,191 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_vehicle_bill_of_sale
+
+syntax = "proto3";
+
+package form_examples.united_states_vehicle_bill_of_sale;
+
+enum UnitedStatesVehicleBillOfSalePaymentMethodEnum {
+  PAYMENTMETHOD_UNSPECIFIED = 0;
+  PAYMENTMETHOD_CASH = 1;  // cash
+  PAYMENTMETHOD_CHECK = 2;  // check
+  PAYMENTMETHOD_WIRE = 3;  // wire
+  PAYMENTMETHOD_FINANCING = 4;  // financing
+  PAYMENTMETHOD_TRADE = 5;  // trade
+  PAYMENTMETHOD_GIFT = 6;  // gift
+}
+
+enum UnitedStatesVehicleBillOfSaleTaxBasisEnum {
+  TAXBASIS_UNSPECIFIED = 0;
+  TAXBASIS_PURCHASE_PRICE = 1;  // purchase-price
+  TAXBASIS_STANDARD_PRESUMPTIVE_VALUE = 2;  // standard-presumptive-value
+  TAXBASIS_FAIR_MARKET_VALUE = 3;  // fair-market-value
+  TAXBASIS_EXEMPT_GIFT = 4;  // exempt-gift
+  TAXBASIS_EXEMPT_FAMILY = 5;  // exempt-family
+}
+
+enum UnitedStatesVehicleBillOfSaleSellerTypeEnum {
+  SELLERTYPE_UNSPECIFIED = 0;
+  SELLERTYPE_INDIVIDUAL = 1;  // individual
+  SELLERTYPE_BUSINESS = 2;  // business
+}
+
+enum UnitedStatesVehicleBillOfSaleSellerSignedEnum {
+  SELLERSIGNED_UNSPECIFIED = 0;
+  SELLERSIGNED_YES = 1;  // yes
+  SELLERSIGNED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleBuyerTypeEnum {
+  BUYERTYPE_UNSPECIFIED = 0;
+  BUYERTYPE_INDIVIDUAL = 1;  // individual
+  BUYERTYPE_BUSINESS = 2;  // business
+}
+
+enum UnitedStatesVehicleBillOfSaleBuyerSignedEnum {
+  BUYERSIGNED_UNSPECIFIED = 0;
+  BUYERSIGNED_YES = 1;  // yes
+  BUYERSIGNED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleTitleBrandEnum {
+  TITLEBRAND_UNSPECIFIED = 0;
+  TITLEBRAND_CLEAN = 1;  // clean
+  TITLEBRAND_SALVAGE = 2;  // salvage
+  TITLEBRAND_REBUILT = 3;  // rebuilt
+  TITLEBRAND_FLOOD = 4;  // flood
+  TITLEBRAND_LEMON = 5;  // lemon
+  TITLEBRAND_JUNK = 6;  // junk
+  TITLEBRAND_UNKNOWN = 7;  // unknown
+}
+
+enum UnitedStatesVehicleBillOfSaleGvwrOver16000Enum {
+  GVWROVER16000_UNSPECIFIED = 0;
+  GVWROVER16000_YES = 1;  // yes
+  GVWROVER16000_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleSelfPropelledEnum {
+  SELFPROPELLED_UNSPECIFIED = 0;
+  SELFPROPELLED_YES = 1;  // yes
+  SELFPROPELLED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleOdometerStatusEnum {
+  ODOMETERSTATUS_UNSPECIFIED = 0;
+  ODOMETERSTATUS_ACTUAL = 1;  // actual
+  ODOMETERSTATUS_EXCEEDS_MECHANICAL_LIMITS = 2;  // exceeds-mechanical-limits
+  ODOMETERSTATUS_NOT_ACTUAL = 3;  // not-actual
+}
+
+enum UnitedStatesVehicleBillOfSaleOdometerSellerCertifiedEnum {
+  ODOMETERSELLERCERTIFIED_UNSPECIFIED = 0;
+  ODOMETERSELLERCERTIFIED_YES = 1;  // yes
+  ODOMETERSELLERCERTIFIED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleOdometerBuyerAcknowledgedEnum {
+  ODOMETERBUYERACKNOWLEDGED_UNSPECIFIED = 0;
+  ODOMETERBUYERACKNOWLEDGED_YES = 1;  // yes
+  ODOMETERBUYERACKNOWLEDGED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleSellerHoldsTitleEnum {
+  SELLERHOLDSTITLE_UNSPECIFIED = 0;
+  SELLERHOLDSTITLE_YES = 1;  // yes
+  SELLERHOLDSTITLE_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleTitleSignedEnum {
+  TITLESIGNED_UNSPECIFIED = 0;
+  TITLESIGNED_YES = 1;  // yes
+  TITLESIGNED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSaleLienStatusEnum {
+  LIENSTATUS_UNSPECIFIED = 0;
+  LIENSTATUS_NONE = 1;  // none
+  LIENSTATUS_RELEASED = 2;  // released
+  LIENSTATUS_OUTSTANDING = 3;  // outstanding
+}
+
+enum UnitedStatesVehicleBillOfSaleAsIsClauseEnum {
+  ASISCLAUSE_UNSPECIFIED = 0;
+  ASISCLAUSE_AS_IS = 1;  // as-is
+  ASISCLAUSE_WARRANTY = 2;  // warranty
+}
+
+enum UnitedStatesVehicleBillOfSaleNotarizedEnum {
+  NOTARIZED_UNSPECIFIED = 0;
+  NOTARIZED_YES = 1;  // yes
+  NOTARIZED_NO = 2;  // no
+  NOTARIZED_NOT_REQUIRED = 3;  // not-required
+}
+
+enum UnitedStatesVehicleBillOfSaleReleaseOfLiabilityFiledEnum {
+  RELEASEOFLIABILITYFILED_UNSPECIFIED = 0;
+  RELEASEOFLIABILITYFILED_YES = 1;  // yes
+  RELEASEOFLIABILITYFILED_NO = 2;  // no
+}
+
+enum UnitedStatesVehicleBillOfSalePlatesRemovedEnum {
+  PLATESREMOVED_UNSPECIFIED = 0;
+  PLATESREMOVED_YES = 1;  // yes
+  PLATESREMOVED_NO = 2;  // no
+}
+
+message UnitedStatesVehicleBillOfSale {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string seller_id = 5;  // UUID — uuid
+  string buyer_id = 6;  // UUID — uuid
+  string state = 7;  // VARCHAR(2) — max 2 chars
+  string sale_date = 8;  // DATE — iso 8601 date
+  double sale_price_as_usd = 9;  // NUMERIC(12,2) — numeric(12,2)
+  UnitedStatesVehicleBillOfSalePaymentMethodEnum payment_method = 10;  // VARCHAR(10)
+  UnitedStatesVehicleBillOfSaleTaxBasisEnum tax_basis = 11;  // VARCHAR(30)
+  string seller_name = 12;  // TEXT
+  UnitedStatesVehicleBillOfSaleSellerTypeEnum seller_type = 13;  // VARCHAR(10)
+  string seller_street_address = 14;  // TEXT
+  string seller_city = 15;  // TEXT
+  string seller_state = 16;  // VARCHAR(2) — max 2 chars
+  string seller_postal_code = 17;  // VARCHAR(10) — max 10 chars
+  string seller_phone = 18;  // VARCHAR(30) — max 30 chars
+  UnitedStatesVehicleBillOfSaleSellerSignedEnum seller_signed = 19;  // VARCHAR(5)
+  string buyer_name = 20;  // TEXT
+  UnitedStatesVehicleBillOfSaleBuyerTypeEnum buyer_type = 21;  // VARCHAR(10)
+  string buyer_street_address = 22;  // TEXT
+  string buyer_city = 23;  // TEXT
+  string buyer_state = 24;  // VARCHAR(2) — max 2 chars
+  string buyer_postal_code = 25;  // VARCHAR(10) — max 10 chars
+  string buyer_phone = 26;  // VARCHAR(30) — max 30 chars
+  UnitedStatesVehicleBillOfSaleBuyerSignedEnum buyer_signed = 27;  // VARCHAR(5)
+  int32 vehicle_year = 28;  // INTEGER
+  string vehicle_make = 29;  // VARCHAR(60) — max 60 chars
+  string vehicle_model = 30;  // VARCHAR(60) — max 60 chars
+  string body_type = 31;  // VARCHAR(40) — max 40 chars
+  string vin = 32;  // VARCHAR(25) — max 25 chars
+  string vehicle_color = 33;  // VARCHAR(40) — max 40 chars
+  string title_number = 34;  // VARCHAR(40) — max 40 chars
+  UnitedStatesVehicleBillOfSaleTitleBrandEnum title_brand = 35;  // VARCHAR(10)
+  UnitedStatesVehicleBillOfSaleGvwrOver16000Enum gvwr_over_16000 = 36;  // VARCHAR(5)
+  UnitedStatesVehicleBillOfSaleSelfPropelledEnum self_propelled = 37;  // VARCHAR(5)
+  int32 odometer_reading_miles = 38;  // INTEGER
+  UnitedStatesVehicleBillOfSaleOdometerStatusEnum odometer_status = 39;  // VARCHAR(30)
+  UnitedStatesVehicleBillOfSaleOdometerSellerCertifiedEnum odometer_seller_certified = 40;  // VARCHAR(5)
+  UnitedStatesVehicleBillOfSaleOdometerBuyerAcknowledgedEnum odometer_buyer_acknowledged = 41;  // VARCHAR(5)
+  UnitedStatesVehicleBillOfSaleSellerHoldsTitleEnum seller_holds_title = 42;  // VARCHAR(5)
+  UnitedStatesVehicleBillOfSaleTitleSignedEnum title_signed = 43;  // VARCHAR(5)
+  UnitedStatesVehicleBillOfSaleLienStatusEnum lien_status = 44;  // VARCHAR(20)
+  string lienholder_name = 45;  // TEXT
+  string lien_release_date = 46;  // DATE — iso 8601 date
+  UnitedStatesVehicleBillOfSaleAsIsClauseEnum as_is_clause = 47;  // VARCHAR(10)
+  string warranty_note = 48;  // TEXT
+  UnitedStatesVehicleBillOfSaleNotarizedEnum notarized = 49;  // VARCHAR(20)
+  UnitedStatesVehicleBillOfSaleReleaseOfLiabilityFiledEnum release_of_liability_filed = 50;  // VARCHAR(5)
+  string release_filed_date = 51;  // DATE — iso 8601 date
+  UnitedStatesVehicleBillOfSalePlatesRemovedEnum plates_removed = 52;  // VARCHAR(5)
+  string buyer_title_application_date = 53;  // DATE — iso 8601 date
+}

@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000b98d5"
+  deletedAt: null
+  ruleId: "R-FEE-V62-01"
+  dimension: "fee"
+  category: "fee"
+  description: "A V62 replacement V5C costs 25 pounds."
+  unitedKingdomVehicleRegistrationApplicationGradeId: "00000000-0000-4000-8000-000000019046"

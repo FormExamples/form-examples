@@ -1,0 +1,1101 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(s) returns { applicationClass, earliestEligibleDate, jurisdictionMet, rules } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: the stage gate not met (one year of marriage; issue + 140 days; conditional order + 43 days) -> 'not-eligible-yet'; any readiness rule -> 'incomplete'; else 'ready-to-apply'. Every date is tested against application.asOfDate, never the wall clock. A gate whose input date is missing is not 'not met'; the missing date is an 'incomplete' rule instead. Flags are stable-sorted high > medium > low. The 'timestamp' key is added by form-app.js. Regenerate expected with: bin/test-personas united-kingdom-divorce-application --update",
+  "personas": [
+    {
+      "name": "Ready sole application, no flags",
+      "description": "Sole divorce application at the application stage: married 2018, certificate original in English, England and Wales residence and domicile on both sides, service by email, no children, no financial order intended, fee paid. Expect 'ready-to-apply', jurisdiction met, earliest date 2019-06-09, no rules and no flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestEligibleDate": "2019-06-09",
+        "jurisdictionMet": true,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready joint dissolution with children agreed and financial order outstanding",
+      "description": "Joint application to dissolve a civil partnership; two children under 18 with agreed arrangements; a financial order is intended but not yet applied for. Expect 'ready-to-apply' with only the medium financial-order reminder.",
+      "state": {
+        "application": {
+          "applicationType": "dissolution",
+          "applicationMode": "joint",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "yes",
+          "childrenCount": 2,
+          "childrenArrangements": "agreed",
+          "childrenNote": "Children live with Margaret; shared weekends."
+        },
+        "finances": {
+          "financialOrderIntended": "yes",
+          "financialOrderApplied": "no",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestEligibleDate": "2019-06-09",
+        "jurisdictionMet": true,
+        "rules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-FINANCIAL-ORDER-REMINDER-001",
+            "category": "financial-order",
+            "priority": "medium",
+            "description": "A financial order is wanted or undecided; the divorce does not by itself settle money and property.",
+            "suggestedAction": "Apply for a financial order (a consent order if agreed) before the final order is made, and take legal advice on pensions."
+          }
+        ]
+      }
+    },
+    {
+      "name": "One-year rule not met",
+      "description": "Marriage on 2025-11-20 and the check on 2026-09-03: under one year. Expect 'not-eligible-yet' (the gate takes precedence), earliest date 2026-11-20 and the high one-year-rule flag.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2025-11-20",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible-yet",
+        "earliestEligibleDate": "2026-11-20",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-TIME-GATE-NOT-MET-01",
+            "dimension": "timing",
+            "category": "stage-gate",
+            "description": "The application stage cannot be applied for before 2026-11-20."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ONE-YEAR-RULE-001",
+            "category": "timing",
+            "priority": "high",
+            "description": "The marriage or civil partnership is under one year old; an application cannot be made before 2026-11-20.",
+            "suggestedAction": "Wait until the first anniversary. During the first year you can apply for judicial separation or a nullity order instead."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Exactly one year: boundary is eligible",
+      "description": "Marriage on 2025-09-03 and the check on 2026-09-03 is the first anniversary, on which an application may be made. Residence is a 12-month sole-applicant ground only. Expect 'ready-to-apply'.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2025-09-03",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 12,
+          "applicantDomiciled": "no",
+          "respondentHabitualResident": "no",
+          "respondentDomiciled": "no",
+          "lastHabituallyResidentTogether": "no"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestEligibleDate": "2026-09-03",
+        "jurisdictionMet": true,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Foreign certificate, no translation, address unknown, fee unpaid",
+      "description": "Married in Poland; certificate not in English and no certified translation; name changed with no proof; the other spouse's address is unknown; fee unpaid; children under 18 with arrangements not agreed. Expect 'incomplete' with certificate-translation, name-proof, service-address, children and fee flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Krakow",
+          "marriageCountry": "Poland",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "no",
+          "certifiedTranslation": "no",
+          "nameChanged": "yes",
+          "nameChangeProof": "none"
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "",
+          "respondentEmail": "",
+          "respondentAddressKnown": "no",
+          "serviceMethod": "alternative-service"
+        },
+        "children": {
+          "childrenUnder18": "yes",
+          "childrenCount": 1,
+          "childrenArrangements": "not-agreed",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "unpaid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestEligibleDate": "2019-06-09",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-TRANSLATION-MISSING-01",
+            "dimension": "documents",
+            "category": "translation",
+            "description": "A certified translation is required for a marriage certificate that is not in English."
+          },
+          {
+            "id": "R-NAME-PROOF-MISSING-01",
+            "dimension": "documents",
+            "category": "name-change",
+            "description": "Proof of the name change (marriage certificate or deed poll) is required."
+          },
+          {
+            "id": "R-SERVICE-ADDRESS-UNUSABLE-01",
+            "dimension": "service",
+            "category": "service-address",
+            "description": "The court needs a current address (or an email address for online service) for the other spouse."
+          },
+          {
+            "id": "R-FEE-OUTSTANDING-01",
+            "dimension": "finances",
+            "category": "fee",
+            "description": "The court fee must be paid or help with fees approved or applied for."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-TRANSLATION-MISSING-001",
+            "category": "translation",
+            "priority": "high",
+            "description": "The marriage certificate is not in English and no certified translation is held.",
+            "suggestedAction": "Obtain a certified translation (with the translator's statement of accuracy) and send it with the original certificate."
+          },
+          {
+            "id": "F-SERVICE-ADDRESS-001",
+            "category": "service-address",
+            "priority": "high",
+            "description": "The other spouse's current address (or an email address for online service) is missing or unknown.",
+            "suggestedAction": "Provide a current address or email, or ask the court for permission to use alternative service or to dispense with service."
+          },
+          {
+            "id": "F-CHILDREN-ARRANGEMENTS-001",
+            "category": "children-arrangements",
+            "priority": "medium",
+            "description": "There are children under 18 and the arrangements for them are not agreed.",
+            "suggestedAction": "Try mediation or agree arrangements; if that fails apply separately for a child arrangements order."
+          },
+          {
+            "id": "F-FEE-001",
+            "category": "fee",
+            "priority": "medium",
+            "description": "The application fee (GBP 628 per GOV.UK; check the current fee) has not been paid.",
+            "suggestedAction": "Pay the fee online or by card, or apply for Help with Fees (both spouses must apply for a joint application)."
+          },
+          {
+            "id": "F-NAME-CHANGE-PROOF-001",
+            "category": "name-change-proof",
+            "priority": "low",
+            "description": "A name has changed since the marriage but no proof is held.",
+            "suggestedAction": "Provide the marriage certificate or the deed poll as proof of the name change."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Certificate not held and no jurisdiction ground",
+      "description": "The marriage certificate is not held and neither spouse is resident or domiciled in England and Wales. Expect 'incomplete' with the high certificate and jurisdiction flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "not-held",
+          "certificateInEnglish": "",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "no",
+          "applicantResidenceMonths": 0,
+          "applicantDomiciled": "no",
+          "respondentHabitualResident": "no",
+          "respondentDomiciled": "no",
+          "lastHabituallyResidentTogether": "no"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestEligibleDate": "2019-06-09",
+        "jurisdictionMet": false,
+        "rules": [
+          {
+            "id": "R-JURISDICTION-NOT-MET-01",
+            "dimension": "jurisdiction",
+            "category": "jurisdiction-ground",
+            "description": "No England and Wales jurisdiction ground is met by the residence and domicile answers given."
+          },
+          {
+            "id": "R-CERTIFICATE-MISSING-01",
+            "dimension": "documents",
+            "category": "marriage-certificate",
+            "description": "The original marriage certificate or a certified copy is required."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-JURISDICTION-NOT-MET-001",
+            "category": "jurisdiction",
+            "priority": "high",
+            "description": "No England and Wales jurisdiction ground is met by the residence and domicile answers given.",
+            "suggestedAction": "Take legal advice: the courts of England and Wales may not be able to hear the application, and another country may have jurisdiction."
+          },
+          {
+            "id": "F-CERTIFICATE-MISSING-001",
+            "category": "marriage-certificate",
+            "priority": "high",
+            "description": "The original marriage certificate or a certified copy is not held.",
+            "suggestedAction": "Order a certified copy from the General Register Office or the issuing register office, or from the issuing authority abroad."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Joint application despite domestic-abuse risk, relationship not recognized",
+      "description": "A joint application with a declared risk of domestic abuse, a marriage that is not legally recognized and no stated breakdown. Expect 'incomplete' with the abuse and relationship-status flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "joint",
+          "stage": "application",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "yes"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "no",
+          "breakdownConfirmed": "no",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestEligibleDate": "2019-06-09",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-RECOGNITION-NOT-CONFIRMED-01",
+            "dimension": "eligibility",
+            "category": "legal-recognition",
+            "description": "The marriage or civil partnership must be legally recognised in the United Kingdom."
+          },
+          {
+            "id": "R-BREAKDOWN-NOT-CONFIRMED-01",
+            "dimension": "eligibility",
+            "category": "irretrievable-breakdown",
+            "description": "The applicant must state that the relationship has broken down irretrievably."
+          },
+          {
+            "id": "R-JOINT-DESPITE-ABUSE-01",
+            "dimension": "eligibility",
+            "category": "application-mode",
+            "description": "A joint application is not suitable where there is a risk of domestic abuse; apply as a sole applicant."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NOT-RECOGNISED-001",
+            "category": "relationship-status",
+            "priority": "high",
+            "description": "The marriage or civil partnership is not legally recognised in the United Kingdom.",
+            "suggestedAction": "Take legal advice; a nullity or declaration of status application may be more suitable than a divorce."
+          },
+          {
+            "id": "F-BREAKDOWN-NOT-STATED-001",
+            "category": "relationship-status",
+            "priority": "high",
+            "description": "The relationship is not stated to have broken down irretrievably, which is the only ground.",
+            "suggestedAction": "A divorce can only be applied for once the applicant states the relationship has broken down irretrievably."
+          },
+          {
+            "id": "F-JOINT-DOMESTIC-ABUSE-001",
+            "category": "domestic-abuse",
+            "priority": "high",
+            "description": "A joint application is not suitable where there is a risk of domestic abuse.",
+            "suggestedAction": "Apply as a sole applicant and seek specialist domestic-abuse support; do not ask the other spouse to sign."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Conditional order inside the 20-week reflection period",
+      "description": "Application issued 2026-05-01; the check on 2026-09-03 is before 2026-09-18 (issue + 140 days), and the other spouse has not returned the acknowledgement. Expect 'not-eligible-yet', earliest 2026-09-18, the reflection and acknowledgement flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "conditional-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": "2026-05-01",
+          "respondentAcknowledged": "no",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible-yet",
+        "earliestEligibleDate": "2026-09-18",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-TIME-GATE-NOT-MET-01",
+            "dimension": "timing",
+            "category": "stage-gate",
+            "description": "The conditional-order stage cannot be applied for before 2026-09-18."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-REFLECTION-PERIOD-001",
+            "category": "timing",
+            "priority": "high",
+            "description": "The 20-week reflection period has not ended; a conditional order cannot be applied for before 2026-09-18.",
+            "suggestedAction": "Wait until the 20 weeks since the application was issued have passed, then apply for the conditional order (form D84 or online)."
+          },
+          {
+            "id": "F-ACKNOWLEDGEMENT-001",
+            "category": "acknowledgement",
+            "priority": "medium",
+            "description": "The other spouse has not returned the acknowledgement of service (due within 14 days).",
+            "suggestedAction": "Apply for a conditional order with proof of service, or ask the court for deemed or alternative service."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Conditional order ready after 20 weeks",
+      "description": "Application issued 2026-03-01; 20 weeks ended 2026-07-19; the acknowledgement was returned. Expect 'ready-to-apply' and no flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "conditional-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": "2026-03-01",
+          "respondentAcknowledged": "yes",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestEligibleDate": "2026-07-19",
+        "jurisdictionMet": true,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Conditional order stage, issue date missing",
+      "description": "The conditional-order stage with no issue date: the gate cannot be tested, so the missing date makes it 'incomplete'.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "conditional-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": null,
+          "respondentAcknowledged": "",
+          "conditionalOrderGrantedDate": null,
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestEligibleDate": "",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-ISSUE-DATE-MISSING-01",
+            "dimension": "timing",
+            "category": "required-field",
+            "description": "The date the court issued the application is required for a conditional order."
+          }
+        ],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Final order inside the 6 weeks and 1 day wait",
+      "description": "Conditional order made 2026-08-10; the final order cannot be applied for before 2026-09-22; a financial order is intended and not applied for. Expect 'not-eligible-yet', earliest 2026-09-22, the final-order-wait flag and the high financial-order flag.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "final-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "yes",
+          "financialOrderApplied": "no",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": "2026-01-05",
+          "respondentAcknowledged": "yes",
+          "conditionalOrderGrantedDate": "2026-08-10",
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible-yet",
+        "earliestEligibleDate": "2026-09-22",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-TIME-GATE-NOT-MET-01",
+            "dimension": "timing",
+            "category": "stage-gate",
+            "description": "The final-order stage cannot be applied for before 2026-09-22."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-FINAL-ORDER-WAIT-001",
+            "category": "timing",
+            "priority": "high",
+            "description": "The 6 weeks and 1 day since the conditional order have not passed; a final order cannot be applied for before 2026-09-22.",
+            "suggestedAction": "Wait until 43 days after the conditional order, then apply for the final order (form D36 or online)."
+          },
+          {
+            "id": "F-FINANCIAL-ORDER-REMINDER-001",
+            "category": "financial-order",
+            "priority": "high",
+            "description": "A financial order is wanted but not applied for, and the final order would end the marriage and can remove financial claims such as pension rights.",
+            "suggestedAction": "Apply for a financial order (a consent order if agreed) before the final order is made, and take legal advice on pensions."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Final order ready, financial order applied",
+      "description": "Conditional order made 2026-06-01; 43 days ended 2026-07-14; a financial order has been applied for. Expect 'ready-to-apply' and no flags.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "final-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "yes",
+          "financialOrderApplied": "yes",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": "2026-01-05",
+          "respondentAcknowledged": "yes",
+          "conditionalOrderGrantedDate": "2026-06-01",
+          "finalOrderDelayExplained": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestEligibleDate": "2026-07-14",
+        "jurisdictionMet": true,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Final order delayed more than 12 months, unexplained",
+      "description": "Conditional order made 2025-06-01; the 12 months ended 2026-06-01 and the delay is not explained. Expect 'incomplete' with the medium final-order-delay flag.",
+      "state": {
+        "application": {
+          "applicationType": "divorce",
+          "applicationMode": "sole",
+          "stage": "final-order",
+          "asOfDate": "2026-09-03",
+          "domesticAbuseRisk": "no"
+        },
+        "marriage": {
+          "marriageDate": "2018-06-09",
+          "marriagePlace": "Leeds",
+          "marriageCountry": "England",
+          "legallyRecognised": "yes",
+          "breakdownConfirmed": "yes",
+          "marriageCertificateType": "original",
+          "certificateInEnglish": "yes",
+          "certifiedTranslation": "",
+          "nameChanged": "no",
+          "nameChangeProof": ""
+        },
+        "jurisdiction": {
+          "applicantHabitualResident": "yes",
+          "applicantResidenceMonths": 120,
+          "applicantDomiciled": "yes",
+          "respondentHabitualResident": "yes",
+          "respondentDomiciled": "yes",
+          "lastHabituallyResidentTogether": "yes"
+        },
+        "parties": {
+          "applicantName": "Margaret Ellis",
+          "applicantAddress": "12 Park Road, Leeds LS6 1AB",
+          "applicantEmail": "margaret.ellis@example.com",
+          "respondentName": "Peter Ellis",
+          "respondentAddress": "4 Mill Lane, Bradford BD1 2CD",
+          "respondentEmail": "peter.ellis@example.com",
+          "respondentAddressKnown": "yes",
+          "serviceMethod": "email"
+        },
+        "children": {
+          "childrenUnder18": "no",
+          "childrenCount": null,
+          "childrenArrangements": "",
+          "childrenNote": ""
+        },
+        "finances": {
+          "financialOrderIntended": "no",
+          "financialOrderApplied": "",
+          "feeStatus": "paid"
+        },
+        "progress": {
+          "applicationIssuedDate": "2025-01-05",
+          "respondentAcknowledged": "yes",
+          "conditionalOrderGrantedDate": "2025-06-01",
+          "finalOrderDelayExplained": "no"
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestEligibleDate": "2025-07-14",
+        "jurisdictionMet": true,
+        "rules": [
+          {
+            "id": "R-FINAL-ORDER-DELAY-UNEXPLAINED-01",
+            "dimension": "timing",
+            "category": "final-order-delay",
+            "description": "More than 12 months have passed since the conditional order; the reason for the delay must be explained to the court."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-FINAL-ORDER-DELAY-001",
+            "category": "final-order-delay",
+            "priority": "medium",
+            "description": "More than 12 months have passed since the conditional order (the 12 months ended 2026-06-01).",
+            "suggestedAction": "Explain the delay in writing to the court when applying for the final order."
+          }
+        ]
+      }
+    }
+  ]
+}

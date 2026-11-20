@@ -1,0 +1,604 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_last_will_and_testament
+openapi: 3.1.0
+info:
+  title: United States Last Will And Testament — UnitedStatesLastWillAndTestament
+  version: 1.0.0
+  description: "Main United States Last Will and Testament record: testator and state, family and spouse, estate and bequests, personal representative and clauses, execution plan and witnesses, and the self-proving affidavit. Validity classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_states_last_will_and_testaments:
+    get:
+      summary: List UnitedStatesLastWillAndTestament records
+      operationId: listUnitedStatesLastWillAndTestament
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesLastWillAndTestament records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesLastWillAndTestament
+      operationId: createUnitedStatesLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+      responses:
+        "200":
+          description: The newly created UnitedStatesLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_last_will_and_testaments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesLastWillAndTestament by id
+      operationId: getUnitedStatesLastWillAndTestament
+      responses:
+        "200":
+          description: The requested UnitedStatesLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+        "404":
+          description: UnitedStatesLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesLastWillAndTestament
+      operationId: updateUnitedStatesLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+      responses:
+        "200":
+          description: The updated UnitedStatesLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+        "404":
+          description: UnitedStatesLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesLastWillAndTestament
+      operationId: replaceUnitedStatesLastWillAndTestament
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+      responses:
+        "200":
+          description: The updated UnitedStatesLastWillAndTestament
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesLastWillAndTestament"
+        "404":
+          description: UnitedStatesLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesLastWillAndTestament
+      operationId: deleteUnitedStatesLastWillAndTestament
+      responses:
+        "200":
+          description: UnitedStatesLastWillAndTestament deleted
+        "404":
+          description: UnitedStatesLastWillAndTestament not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesLastWillAndTestament:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        testator_id:
+          type: string
+          format: uuid
+          description: Foreign key to the testator (restrict delete).
+        attorney_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the drafting attorney (restrict delete); optional.
+        state:
+          type: string
+          maxLength: 2
+          description: Two-letter state code whose law governs the will; unknown states fall back to the Uniform Probate Code default.
+        testator_name:
+          type: string
+          description: Full legal name of the testator as written in the will.
+        testator_date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the testator; the testator must be 18 or older on the execution date.
+        sound_mind:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - uncertain
+            - ""
+          description: "Testamentary capacity: whether the testator is of sound mind: yes, no, or uncertain."
+        undue_influence_concern:
+          type: string
+          enum:
+            - none
+            - possible
+            - ""
+          description: "Whether there is a concern of undue influence: none or possible."
+        marital_status:
+          type: string
+          enum:
+            - single
+            - married
+            - divorced
+            - widowed
+            - ""
+          description: "Marital status of the testator: single, married, divorced, or widowed."
+        spouse_name:
+          type: string
+          description: Full name of the testator's spouse, when married.
+        spouse_inheritance_value:
+          type: [number, 'null']
+          format: double
+          description: Value in US dollars left to the surviving spouse.
+        spouse_waived_elective_share:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the spouse has waived the elective share in writing (yes/no).
+        has_minor_children:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator has minor children (yes/no).
+        guardian_for_minors_name:
+          type: string
+          description: Nominated guardian for minor children.
+        disinherits_child:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will leaves a child out (yes/no).
+        disinherited_child_named:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the omitted child is named in the will (yes/no).
+        estimated_estate_value:
+          type: [number, 'null']
+          format: double
+          description: Estimated gross estate value in US dollars.
+        specific_bequests_total:
+          type: [number, 'null']
+          format: double
+          description: Total value in US dollars of all specific bequests.
+        specific_bequests_summary:
+          type: string
+          description: Free-text summary of the specific bequests.
+        residuary_clause_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will has a residuary clause giving away everything not otherwise given (yes/no).
+        residuary_1_name:
+          type: string
+          description: Residuary beneficiary 1 name.
+        residuary_1_percent:
+          type: [number, 'null']
+          format: double
+          description: Residuary beneficiary 1 share, percent.
+        residuary_2_name:
+          type: string
+          description: Residuary beneficiary 2 name.
+        residuary_2_percent:
+          type: [number, 'null']
+          format: double
+          description: Residuary beneficiary 2 share, percent.
+        residuary_3_name:
+          type: string
+          description: Residuary beneficiary 3 name.
+        residuary_3_percent:
+          type: [number, 'null']
+          format: double
+          description: Residuary beneficiary 3 share, percent.
+        contingent_beneficiary_named:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a contingent (backup) beneficiary is named (yes/no).
+        personal_representative_name:
+          type: string
+          description: Personal representative (executor) named in the will.
+        successor_personal_representative_name:
+          type: string
+          description: Successor personal representative named in the will.
+        bond_waived:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will waives the personal representative's bond (yes/no).
+        revokes_prior_wills_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will expressly revokes all earlier wills and codicils (yes/no).
+        no_contest_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will has a no-contest (in terrorem) clause (yes/no).
+        digital_assets_clause:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the will authorizes access to digital assets under RUFADAA (yes/no).
+        estate_tax_reviewed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a tax adviser has reviewed estate tax (yes/no).
+        original_will_location:
+          type: string
+          description: Where the signed original will is kept.
+        drafter_note:
+          type: string
+          description: Free-text note from the drafter.
+        execution_form:
+          type: string
+          enum:
+            - witnessed
+            - holographic
+            - electronic
+            - ""
+          description: "Form of execution: witnessed, holographic, or electronic."
+        execution_date:
+          type: [string, 'null']
+          format: date
+          description: Date the will is or was signed.
+        signed_at_end:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator signs at the end of the will (yes/no).
+        signed_in_witness_presence:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the testator signs or acknowledges the signature in front of the witnesses (yes/no).
+        witnesses_signed_in_testator_presence:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the witnesses sign in the testator's presence (yes/no).
+        holographic_entirely_handwritten:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: For a holographic will, whether the signature and material provisions are in the testator's handwriting (yes/no).
+        witness_1_name:
+          type: string
+          description: Witness 1 name.
+        witness_1_beneficiary:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 1 takes a gift under the will (yes/no).
+        witness_2_name:
+          type: string
+          description: Witness 2 name.
+        witness_2_beneficiary:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 2 takes a gift under the will (yes/no).
+        witness_3_name:
+          type: string
+          description: Witness 3 name (optional extra witness).
+        witness_3_beneficiary:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether witness 3 takes a gift under the will (yes/no).
+        self_proving_affidavit:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a self-proving affidavit will be signed (yes/no).
+        notary_name:
+          type: string
+          description: Name of the notary on the self-proving affidavit.
+        notary_acknowledged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the notary acknowledged the signatures (yes/no).
+      required:
+        - created_at
+        - updated_at
+        - testator_id
+        - state
+        - testator_name
+        - sound_mind
+        - undue_influence_concern
+        - marital_status
+        - spouse_name
+        - spouse_waived_elective_share
+        - has_minor_children
+        - guardian_for_minors_name
+        - disinherits_child
+        - disinherited_child_named
+        - specific_bequests_summary
+        - residuary_clause_present
+        - residuary_1_name
+        - residuary_2_name
+        - residuary_3_name
+        - contingent_beneficiary_named
+        - personal_representative_name
+        - successor_personal_representative_name
+        - bond_waived
+        - revokes_prior_wills_clause
+        - no_contest_clause
+        - digital_assets_clause
+        - estate_tax_reviewed
+        - original_will_location
+        - drafter_note
+        - execution_form
+        - signed_at_end
+        - signed_in_witness_presence
+        - witnesses_signed_in_testator_presence
+        - holographic_entirely_handwritten
+        - witness_1_name
+        - witness_1_beneficiary
+        - witness_2_name
+        - witness_2_beneficiary
+        - witness_3_name
+        - witness_3_beneficiary
+        - self_proving_affidavit
+        - notary_name
+        - notary_acknowledged
+      description: "Main United States Last Will and Testament record: testator and state, family and spouse, estate and bequests, personal representative and clauses, execution plan and witnesses, and the self-proving affidavit. Validity classification, fired rules, and flags live in child tables."

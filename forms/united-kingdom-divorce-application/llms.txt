@@ -1,0 +1,27 @@
+# United Kingdom Divorce Application
+
+> A completeness and time-gate checker for applying for a **divorce** (or the **dissolution of a civil partnership**) in England and Wales under the no-fault regime of the Divorce, Dissolution and Separation Act 2020. It follows a case through its three stages: the **application** (form D8 or online), the **conditional order** (form D84, formerly the decree nisi) and the **final order** (form D36, formerly the decree absolute), which is what ends the marriage and produces the divorce paperwork.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

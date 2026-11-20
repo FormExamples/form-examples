@@ -1,0 +1,222 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_standard_certificate_of_death
+
+syntax = "proto3";
+
+package form_examples.united_states_standard_certificate_of_death;
+
+enum UnitedStatesStandardCertificateOfDeathSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_UNKNOWN = 3;  // unknown
+}
+
+enum UnitedStatesStandardCertificateOfDeathMaritalStatusEnum {
+  MARITALSTATUS_UNSPECIFIED = 0;
+  MARITALSTATUS_MARRIED = 1;  // married
+  MARITALSTATUS_MARRIED_SEPARATED = 2;  // married-separated
+  MARITALSTATUS_WIDOWED = 3;  // widowed
+  MARITALSTATUS_DIVORCED = 4;  // divorced
+  MARITALSTATUS_NEVER_MARRIED = 5;  // never-married
+  MARITALSTATUS_UNKNOWN = 6;  // unknown
+}
+
+enum UnitedStatesStandardCertificateOfDeathVeteranStatusEnum {
+  VETERANSTATUS_UNSPECIFIED = 0;
+  VETERANSTATUS_YES = 1;  // yes
+  VETERANSTATUS_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathPlaceOfDeathTypeEnum {
+  PLACEOFDEATHTYPE_UNSPECIFIED = 0;
+  PLACEOFDEATHTYPE_HOSPITAL_INPATIENT = 1;  // hospital-inpatient
+  PLACEOFDEATHTYPE_HOSPITAL_EMERGENCY_OUTPATIENT = 2;  // hospital-emergency-outpatient
+  PLACEOFDEATHTYPE_HOSPITAL_DEAD_ON_ARRIVAL = 3;  // hospital-dead-on-arrival
+  PLACEOFDEATHTYPE_DECEDENT_HOME = 4;  // decedent-home
+  PLACEOFDEATHTYPE_HOSPICE = 5;  // hospice
+  PLACEOFDEATHTYPE_NURSING_HOME = 6;  // nursing-home
+  PLACEOFDEATHTYPE_OTHER = 7;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathCertifierTypeEnum {
+  CERTIFIERTYPE_UNSPECIFIED = 0;
+  CERTIFIERTYPE_CERTIFYING_PHYSICIAN = 1;  // certifying-physician
+  CERTIFIERTYPE_PRONOUNCING_AND_CERTIFYING_PHYSICIAN = 2;  // pronouncing-and-certifying-physician
+  CERTIFIERTYPE_MEDICAL_EXAMINER = 3;  // medical-examiner
+  CERTIFIERTYPE_CORONER = 4;  // coroner
+  CERTIFIERTYPE_OTHER = 5;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathAttendedDeceasedEnum {
+  ATTENDEDDECEASED_UNSPECIFIED = 0;
+  ATTENDEDDECEASED_YES = 1;  // yes
+  ATTENDEDDECEASED_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathAutopsyPerformedEnum {
+  AUTOPSYPERFORMED_UNSPECIFIED = 0;
+  AUTOPSYPERFORMED_YES = 1;  // yes
+  AUTOPSYPERFORMED_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathAutopsyFindingsAvailableEnum {
+  AUTOPSYFINDINGSAVAILABLE_UNSPECIFIED = 0;
+  AUTOPSYFINDINGSAVAILABLE_YES = 1;  // yes
+  AUTOPSYFINDINGSAVAILABLE_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathMannerOfDeathEnum {
+  MANNEROFDEATH_UNSPECIFIED = 0;
+  MANNEROFDEATH_NATURAL = 1;  // natural
+  MANNEROFDEATH_ACCIDENT = 2;  // accident
+  MANNEROFDEATH_SUICIDE = 3;  // suicide
+  MANNEROFDEATH_HOMICIDE = 4;  // homicide
+  MANNEROFDEATH_PENDING_INVESTIGATION = 5;  // pending-investigation
+  MANNEROFDEATH_COULD_NOT_BE_DETERMINED = 6;  // could-not-be-determined
+}
+
+enum UnitedStatesStandardCertificateOfDeathTobaccoUseContributedEnum {
+  TOBACCOUSECONTRIBUTED_UNSPECIFIED = 0;
+  TOBACCOUSECONTRIBUTED_YES = 1;  // yes
+  TOBACCOUSECONTRIBUTED_PROBABLY = 2;  // probably
+  TOBACCOUSECONTRIBUTED_NO = 3;  // no
+  TOBACCOUSECONTRIBUTED_UNKNOWN = 4;  // unknown
+}
+
+enum UnitedStatesStandardCertificateOfDeathPregnancyStatusEnum {
+  PREGNANCYSTATUS_UNSPECIFIED = 0;
+  PREGNANCYSTATUS_NOT_APPLICABLE = 1;  // not-applicable
+  PREGNANCYSTATUS_NOT_PREGNANT_WITHIN_PAST_YEAR = 2;  // not-pregnant-within-past-year
+  PREGNANCYSTATUS_PREGNANT_AT_TIME_OF_DEATH = 3;  // pregnant-at-time-of-death
+  PREGNANCYSTATUS_NOT_PREGNANT_BUT_PREGNANT_WITHIN_42_DAYS = 4;  // not-pregnant-but-pregnant-within-42-days
+  PREGNANCYSTATUS_NOT_PREGNANT_BUT_PREGNANT_43_DAYS_TO_1_YEAR = 5;  // not-pregnant-but-pregnant-43-days-to-1-year
+  PREGNANCYSTATUS_UNKNOWN = 6;  // unknown
+}
+
+enum UnitedStatesStandardCertificateOfDeathInjuryAtWorkEnum {
+  INJURYATWORK_UNSPECIFIED = 0;
+  INJURYATWORK_YES = 1;  // yes
+  INJURYATWORK_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathTransportationInjuryRoleEnum {
+  TRANSPORTATIONINJURYROLE_UNSPECIFIED = 0;
+  TRANSPORTATIONINJURYROLE_DRIVER_OPERATOR = 1;  // driver-operator
+  TRANSPORTATIONINJURYROLE_PASSENGER = 2;  // passenger
+  TRANSPORTATIONINJURYROLE_PEDESTRIAN = 3;  // pedestrian
+  TRANSPORTATIONINJURYROLE_OTHER = 4;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathReferredToMedicalExaminerEnum {
+  REFERREDTOMEDICALEXAMINER_UNSPECIFIED = 0;
+  REFERREDTOMEDICALEXAMINER_YES = 1;  // yes
+  REFERREDTOMEDICALEXAMINER_NO = 2;  // no
+}
+
+enum UnitedStatesStandardCertificateOfDeathReferralReasonEnum {
+  REFERRALREASON_UNSPECIFIED = 0;
+  REFERRALREASON_NONE = 1;  // none
+  REFERRALREASON_VIOLENT_OR_UNNATURAL = 2;  // violent-or-unnatural
+  REFERRALREASON_ACCIDENT = 3;  // accident
+  REFERRALREASON_SUICIDE = 4;  // suicide
+  REFERRALREASON_HOMICIDE = 5;  // homicide
+  REFERRALREASON_SUSPICIOUS = 6;  // suspicious
+  REFERRALREASON_POISONING_OR_OVERDOSE = 7;  // poisoning-or-overdose
+  REFERRALREASON_UNATTENDED_BY_PHYSICIAN = 8;  // unattended-by-physician
+  REFERRALREASON_SUDDEN_UNEXPECTED_INFANT_DEATH = 9;  // sudden-unexpected-infant-death
+  REFERRALREASON_WORK_RELATED = 10;  // work-related
+  REFERRALREASON_MEDICAL_PROCEDURE_RELATED = 11;  // medical-procedure-related
+  REFERRALREASON_IN_CUSTODY = 12;  // in-custody
+  REFERRALREASON_PUBLIC_HEALTH_HAZARD = 13;  // public-health-hazard
+  REFERRALREASON_UNIDENTIFIED = 14;  // unidentified
+  REFERRALREASON_OTHER = 15;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathDispositionMethodEnum {
+  DISPOSITIONMETHOD_UNSPECIFIED = 0;
+  DISPOSITIONMETHOD_BURIAL = 1;  // burial
+  DISPOSITIONMETHOD_CREMATION = 2;  // cremation
+  DISPOSITIONMETHOD_ENTOMBMENT = 3;  // entombment
+  DISPOSITIONMETHOD_DONATION = 4;  // donation
+  DISPOSITIONMETHOD_REMOVAL_FROM_STATE = 5;  // removal-from-state
+  DISPOSITIONMETHOD_OTHER = 6;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathRequesterRelationshipEnum {
+  REQUESTERRELATIONSHIP_UNSPECIFIED = 0;
+  REQUESTERRELATIONSHIP_SPOUSE = 1;  // spouse
+  REQUESTERRELATIONSHIP_CHILD = 2;  // child
+  REQUESTERRELATIONSHIP_PARENT = 3;  // parent
+  REQUESTERRELATIONSHIP_SIBLING = 4;  // sibling
+  REQUESTERRELATIONSHIP_LEGAL_REPRESENTATIVE = 5;  // legal-representative
+  REQUESTERRELATIONSHIP_FUNERAL_DIRECTOR = 6;  // funeral-director
+  REQUESTERRELATIONSHIP_OTHER = 7;  // other
+}
+
+enum UnitedStatesStandardCertificateOfDeathRequesterIdentityVerifiedEnum {
+  REQUESTERIDENTITYVERIFIED_UNSPECIFIED = 0;
+  REQUESTERIDENTITYVERIFIED_YES = 1;  // yes
+  REQUESTERIDENTITYVERIFIED_NO = 2;  // no
+}
+
+message UnitedStatesStandardCertificateOfDeath {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string state = 7;  // CHAR(2) — max 2 chars
+  string decedent_name = 8;  // TEXT
+  UnitedStatesStandardCertificateOfDeathSexEnum sex = 9;  // VARCHAR(9)
+  string date_of_birth = 10;  // DATE — iso 8601 date
+  int32 age_years = 11;  // INTEGER
+  UnitedStatesStandardCertificateOfDeathMaritalStatusEnum marital_status = 12;  // VARCHAR(19)
+  UnitedStatesStandardCertificateOfDeathVeteranStatusEnum veteran_status = 13;  // VARCHAR(5)
+  string state_of_residence = 14;  // CHAR(2) — max 2 chars
+  UnitedStatesStandardCertificateOfDeathPlaceOfDeathTypeEnum place_of_death_type = 15;  // VARCHAR(30)
+  string place_of_death_facility = 16;  // TEXT
+  string date_of_death = 17;  // DATE — iso 8601 date
+  string time_of_death = 18;  // TIME — iso 8601 time
+  string certifier_name = 19;  // TEXT
+  UnitedStatesStandardCertificateOfDeathCertifierTypeEnum certifier_type = 20;  // VARCHAR(40)
+  string certifier_license_number = 21;  // VARCHAR(50) — max 50 chars
+  string certification_date = 22;  // DATE — iso 8601 date
+  UnitedStatesStandardCertificateOfDeathAttendedDeceasedEnum attended_deceased = 23;  // VARCHAR(5)
+  string last_seen_alive_date = 24;  // DATE — iso 8601 date
+  string cause_ia_condition = 25;  // TEXT
+  string cause_ia_interval = 26;  // VARCHAR(100) — max 100 chars
+  string cause_ib_condition = 27;  // TEXT
+  string cause_ib_interval = 28;  // VARCHAR(100) — max 100 chars
+  string cause_ic_condition = 29;  // TEXT
+  string cause_ic_interval = 30;  // VARCHAR(100) — max 100 chars
+  string cause_id_condition = 31;  // TEXT
+  string cause_id_interval = 32;  // VARCHAR(100) — max 100 chars
+  string part_ii_conditions = 33;  // TEXT
+  UnitedStatesStandardCertificateOfDeathAutopsyPerformedEnum autopsy_performed = 34;  // VARCHAR(5)
+  UnitedStatesStandardCertificateOfDeathAutopsyFindingsAvailableEnum autopsy_findings_available = 35;  // VARCHAR(5)
+  UnitedStatesStandardCertificateOfDeathMannerOfDeathEnum manner_of_death = 36;  // VARCHAR(30)
+  UnitedStatesStandardCertificateOfDeathTobaccoUseContributedEnum tobacco_use_contributed = 37;  // VARCHAR(10)
+  UnitedStatesStandardCertificateOfDeathPregnancyStatusEnum pregnancy_status = 38;  // VARCHAR(50)
+  string injury_date = 39;  // DATE — iso 8601 date
+  string injury_time = 40;  // TIME — iso 8601 time
+  string injury_place = 41;  // TEXT
+  UnitedStatesStandardCertificateOfDeathInjuryAtWorkEnum injury_at_work = 42;  // VARCHAR(5)
+  string injury_location = 43;  // TEXT
+  string injury_description = 44;  // TEXT
+  UnitedStatesStandardCertificateOfDeathTransportationInjuryRoleEnum transportation_injury_role = 45;  // VARCHAR(20)
+  UnitedStatesStandardCertificateOfDeathReferredToMedicalExaminerEnum referred_to_medical_examiner = 46;  // VARCHAR(5)
+  UnitedStatesStandardCertificateOfDeathReferralReasonEnum referral_reason = 47;  // VARCHAR(35)
+  string funeral_director_name = 48;  // TEXT
+  string funeral_director_license_number = 49;  // VARCHAR(50) — max 50 chars
+  UnitedStatesStandardCertificateOfDeathDispositionMethodEnum disposition_method = 50;  // VARCHAR(25)
+  string disposition_date = 51;  // DATE — iso 8601 date
+  string disposition_place = 52;  // TEXT
+  string filed_date = 53;  // DATE — iso 8601 date
+  int32 certified_copies_requested = 54;  // INTEGER
+  UnitedStatesStandardCertificateOfDeathRequesterRelationshipEnum requester_relationship = 55;  // VARCHAR(25)
+  UnitedStatesStandardCertificateOfDeathRequesterIdentityVerifiedEnum requester_identity_verified = 56;  // VARCHAR(5)
+  double fee_paid_in_usd = 57;  // NUMERIC(8,2) — numeric(8,2)
+  string certifier_note = 58;  // TEXT
+}

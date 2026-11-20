@@ -1,0 +1,10 @@
+<!ELEMENT united_kingdom_council_tax_discount_application_grade (id,created_at,updated_at,deleted_at,united_kingdom_council_tax_discount_application_id,eligibility_class,counted_adults,indicative_outcome,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_council_tax_discount_application_id (#PCDATA)>
+<!ELEMENT eligibility_class (#PCDATA)>
+<!ELEMENT counted_adults (#PCDATA)>
+<!ELEMENT indicative_outcome (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

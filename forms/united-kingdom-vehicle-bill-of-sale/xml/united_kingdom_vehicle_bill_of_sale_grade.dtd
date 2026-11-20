@@ -1,0 +1,10 @@
+<!ELEMENT united_kingdom_vehicle_bill_of_sale_grade (id,created_at,updated_at,deleted_at,united_kingdom_vehicle_bill_of_sale_id,classification,missing_item_count,risk_flag_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_vehicle_bill_of_sale_id (#PCDATA)>
+<!ELEMENT classification (#PCDATA)>
+<!ELEMENT missing_item_count (#PCDATA)>
+<!ELEMENT risk_flag_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

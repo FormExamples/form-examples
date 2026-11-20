@@ -1,0 +1,11 @@
+<!ELEMENT united_states_divorce_petition_grade (id,created_at,updated_at,deleted_at,united_states_divorce_petition_id,readiness_class,property_regime,earliest_decree_date,state_rule_known,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_states_divorce_petition_id (#PCDATA)>
+<!ELEMENT readiness_class (#PCDATA)>
+<!ELEMENT property_regime (#PCDATA)>
+<!ELEMENT earliest_decree_date (#PCDATA)>
+<!ELEMENT state_rule_known (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

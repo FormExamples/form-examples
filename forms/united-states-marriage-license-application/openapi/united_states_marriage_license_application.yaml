@@ -1,0 +1,566 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_marriage_license_application
+openapi: 3.1.0
+info:
+  title: United States Marriage License Application — UnitedStatesMarriageLicenseApplication
+  version: 1.0.0
+  description: One United States marriage license application, covering the issuing jurisdiction, both applicants, eligibility, the ceremony, and the certified marriage certificate. Documentation support, not legal advice.
+paths:
+  /api/united_states_marriage_license_applications:
+    get:
+      summary: List UnitedStatesMarriageLicenseApplication records
+      operationId: listUnitedStatesMarriageLicenseApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesMarriageLicenseApplication records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesMarriageLicenseApplication
+      operationId: createUnitedStatesMarriageLicenseApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+      responses:
+        "200":
+          description: The newly created UnitedStatesMarriageLicenseApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_marriage_license_applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesMarriageLicenseApplication by id
+      operationId: getUnitedStatesMarriageLicenseApplication
+      responses:
+        "200":
+          description: The requested UnitedStatesMarriageLicenseApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+        "404":
+          description: UnitedStatesMarriageLicenseApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesMarriageLicenseApplication
+      operationId: updateUnitedStatesMarriageLicenseApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+      responses:
+        "200":
+          description: The updated UnitedStatesMarriageLicenseApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+        "404":
+          description: UnitedStatesMarriageLicenseApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesMarriageLicenseApplication
+      operationId: replaceUnitedStatesMarriageLicenseApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+      responses:
+        "200":
+          description: The updated UnitedStatesMarriageLicenseApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesMarriageLicenseApplication"
+        "404":
+          description: UnitedStatesMarriageLicenseApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesMarriageLicenseApplication
+      operationId: deleteUnitedStatesMarriageLicenseApplication
+      responses:
+        "200":
+          description: UnitedStatesMarriageLicenseApplication deleted
+        "404":
+          description: UnitedStatesMarriageLicenseApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesMarriageLicenseApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        first_applicant_id:
+          type: string
+          format: uuid
+          description: Foreign key to the first applicant.
+        second_applicant_id:
+          type: string
+          format: uuid
+          description: Foreign key to the second applicant.
+        county_clerk_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the issuing county clerk office, if known.
+        state:
+          type: string
+          maxLength: 2
+          description: Two-letter USPS code of the issuing state; selects the state rule table in the engine.
+        county:
+          type: string
+          description: County (or issuing clerk jurisdiction) where the application is made.
+        application_date:
+          type: [string, 'null']
+          format: date
+          description: Date the application is made to the clerk.
+        license_type:
+          type: string
+          enum:
+            - standard
+            - confidential
+            - ""
+          description: "License type: standard (public) or confidential (for example California)."
+        first_applicant_name:
+          type: string
+          description: Full legal name of the first applicant as it will appear on the license.
+        first_applicant_sex:
+          type: string
+          enum:
+            - female
+            - male
+            - nonbinary
+            - unknown
+            - ""
+          description: "Sex or gender recorded for the first applicant: female, male, nonbinary, or unknown. Informational only; it never affects eligibility (Obergefell v. Hodges)."
+        first_applicant_date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the first applicant.
+        first_applicant_place_of_birth:
+          type: string
+          description: City, state, and country of birth of the first applicant.
+        first_applicant_residence_state:
+          type: string
+          maxLength: 2
+          description: Two-letter state or territory of residence of the first applicant.
+        first_applicant_id_presented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the first applicant presented acceptable government photo identification (yes/no).
+        first_applicant_ssn_status:
+          type: string
+          enum:
+            - provided
+            - none-issued
+            - declined
+            - ""
+          description: "Social Security number status of the first applicant: provided, none-issued, or declined. Never stores the number itself."
+        first_applicant_marital_status:
+          type: string
+          enum:
+            - never-married
+            - divorced
+            - widowed
+            - annulled
+            - currently-married
+            - ""
+          description: "Marital status of the first applicant before this marriage: never-married, divorced, widowed, annulled, or currently-married."
+        first_applicant_prior_marriage_ended_date:
+          type: [string, 'null']
+          format: date
+          description: Date the first applicant's most recent prior marriage ended by divorce, death, or annulment.
+        second_applicant_name:
+          type: string
+          description: Full legal name of the second applicant as it will appear on the license.
+        second_applicant_sex:
+          type: string
+          enum:
+            - female
+            - male
+            - nonbinary
+            - unknown
+            - ""
+          description: "Sex or gender recorded for the second applicant: female, male, nonbinary, or unknown. Informational only; it never affects eligibility (Obergefell v. Hodges)."
+        second_applicant_date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the second applicant.
+        second_applicant_place_of_birth:
+          type: string
+          description: City, state, and country of birth of the second applicant.
+        second_applicant_residence_state:
+          type: string
+          maxLength: 2
+          description: Two-letter state or territory of residence of the second applicant.
+        second_applicant_id_presented:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the second applicant presented acceptable government photo identification (yes/no).
+        second_applicant_ssn_status:
+          type: string
+          enum:
+            - provided
+            - none-issued
+            - declined
+            - ""
+          description: "Social Security number status of the second applicant: provided, none-issued, or declined. Never stores the number itself."
+        second_applicant_marital_status:
+          type: string
+          enum:
+            - never-married
+            - divorced
+            - widowed
+            - annulled
+            - currently-married
+            - ""
+          description: "Marital status of the second applicant before this marriage: never-married, divorced, widowed, annulled, or currently-married."
+        second_applicant_prior_marriage_ended_date:
+          type: [string, 'null']
+          format: date
+          description: Date the second applicant's most recent prior marriage ended by divorce, death, or annulment.
+        relationship_between_applicants:
+          type: string
+          enum:
+            - not-related
+            - related-prohibited
+            - ""
+          description: "Whether the applicants are related within a degree the state prohibits: not-related or related-prohibited."
+        minor_consent:
+          type: string
+          enum:
+            - not-applicable
+            - parental-consent
+            - court-order
+            - none
+            - ""
+          description: "Consent for an applicant under 18: not-applicable, parental-consent, court-order, or none."
+        active_duty_military:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether either applicant is on active military duty (a waiting-period waiver in some states and the basis for proxy marriage).
+        appear_in_person:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether both applicants will appear in person before the clerk (yes/no).
+        proxy_requested:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a proxy marriage is requested because one applicant cannot attend (yes/no).
+        premarital_course_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the couple completed a state-approved premarital education course (yes/no); waives the waiting period and reduces the fee in some states.
+        blood_test_evidence:
+          type: string
+          enum:
+            - provided
+            - not-required
+            - not-provided
+            - ""
+          description: "Premarital blood-test evidence: provided, not-required, or not-provided. No US state currently requires a test."
+        fee_paid_usd:
+          type: [number, 'null']
+          format: double
+          description: License fee paid, in US dollars; null when not yet paid.
+        license_issued_date:
+          type: [string, 'null']
+          format: date
+          description: Date the clerk issued the license; the waiting period and validity period run from here.
+        ceremony_date:
+          type: [string, 'null']
+          format: date
+          description: Date of the marriage ceremony.
+        officiant_type:
+          type: string
+          enum:
+            - clergy
+            - judge
+            - clerk
+            - notary
+            - self-uniting
+            - other
+            - ""
+          description: "Who solemnizes the marriage: clergy, judge, clerk, notary, self-uniting, or other."
+        officiant_name:
+          type: string
+          description: Name of the person who solemnized the marriage.
+        officiant_authorized:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the officiant is authorized to solemnize marriages in the state (yes/no).
+        witness_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of witnesses present at the ceremony; null when unanswered.
+        license_returned_date:
+          type: [string, 'null']
+          format: date
+          description: Date the signed license was returned to the clerk for recording; starts the certified marriage certificate.
+        certified_copies_requested:
+          type: [integer, 'null']
+          format: int32
+          description: Number of certified copies of the marriage certificate requested; null when unanswered.
+        clerk_note:
+          type: string
+          description: Free-text note from the applicants or the clerk.
+      required:
+        - created_at
+        - updated_at
+        - first_applicant_id
+        - second_applicant_id
+        - state
+        - county
+        - license_type
+        - first_applicant_name
+        - first_applicant_sex
+        - first_applicant_place_of_birth
+        - first_applicant_residence_state
+        - first_applicant_id_presented
+        - first_applicant_ssn_status
+        - first_applicant_marital_status
+        - second_applicant_name
+        - second_applicant_sex
+        - second_applicant_place_of_birth
+        - second_applicant_residence_state
+        - second_applicant_id_presented
+        - second_applicant_ssn_status
+        - second_applicant_marital_status
+        - relationship_between_applicants
+        - minor_consent
+        - active_duty_military
+        - appear_in_person
+        - proxy_requested
+        - premarital_course_completed
+        - blood_test_evidence
+        - officiant_type
+        - officiant_name
+        - officiant_authorized
+        - clerk_note
+      description: One United States marriage license application, covering the issuing jurisdiction, both applicants, eligibility, the ceremony, and the certified marriage certificate. Documentation support, not legal advice.

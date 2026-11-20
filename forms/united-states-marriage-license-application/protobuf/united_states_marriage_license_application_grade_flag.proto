@@ -1,0 +1,51 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_marriage_license_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_marriage_license_application;
+
+enum UnitedStatesMarriageLicenseApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_UNDERAGE = 1;  // underage
+  CATEGORY_MINOR_CONSENT = 2;  // minor-consent
+  CATEGORY_EXISTING_MARRIAGE = 3;  // existing-marriage
+  CATEGORY_PROHIBITED_RELATIONSHIP = 4;  // prohibited-relationship
+  CATEGORY_PROXY_NOT_PERMITTED = 5;  // proxy-not-permitted
+  CATEGORY_MISSING_REQUIRED_DATA = 6;  // missing-required-data
+  CATEGORY_PRIOR_MARRIAGE_UNDOCUMENTED = 7;  // prior-marriage-undocumented
+  CATEGORY_IDENTIFICATION = 8;  // identification
+  CATEGORY_IN_PERSON_APPEARANCE = 9;  // in-person-appearance
+  CATEGORY_WAITING_PERIOD = 10;  // waiting-period
+  CATEGORY_LICENSE_EXPIRED = 11;  // license-expired
+  CATEGORY_CEREMONY_TIMING = 12;  // ceremony-timing
+  CATEGORY_WITNESSES = 13;  // witnesses
+  CATEGORY_OFFICIANT = 14;  // officiant
+  CATEGORY_CERTIFICATE_RETURN = 15;  // certificate-return
+  CATEGORY_STATE_RULE = 16;  // state-rule
+  CATEGORY_FEE = 17;  // fee
+  CATEGORY_SAME_SEX_COUPLE = 18;  // same-sex-couple
+  CATEGORY_SOCIAL_SECURITY_NUMBER = 19;  // social-security-number
+  CATEGORY_BLOOD_TEST = 20;  // blood-test
+  CATEGORY_OTHER = 21;  // other
+}
+
+enum UnitedStatesMarriageLicenseApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedStatesMarriageLicenseApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_marriage_license_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedStatesMarriageLicenseApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedStatesMarriageLicenseApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(6)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000f0cbd0d0"
+  deletedAt: null
+  unitedKingdomCouncilTaxDiscountApplicationGradeId: "00000000-0000-4000-8000-00003de59ecf"
+  flagId: "Test flagId"
+  category: "adult-count-mismatch"
+  priority: "low"
+  description: "Test description"
+  suggestedAction: "Test suggestedAction"

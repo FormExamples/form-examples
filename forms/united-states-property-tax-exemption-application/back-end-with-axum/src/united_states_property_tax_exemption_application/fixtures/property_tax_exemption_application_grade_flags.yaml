@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000000f01"
+  deletedAt: null
+  propertyTaxExemptionApplicationGradeId: "00000000-0000-4000-8000-000000000d01"
+  flagId: "F-APPEAL-001"
+  category: "appeal-guidance"
+  priority: "low"
+  description: "Appeal guidance requested; the protest window is state-specific."
+  suggestedAction: "Protest to the appraisal review board by May 15 or 30 days after the notice of appraised value."

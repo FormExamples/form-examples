@@ -1,0 +1,1044 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(a) returns only { eligibilityClass, countedAdults, indicativeOutcome } with no rules array and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: any disqualifier -> likely-ineligible (indicativeOutcome 'none'); any missing item -> incomplete; else likely-eligible. Counted adults are the applicant plus roster occupants whose status is '' or 'counted-adult'; the roster is ignored when household.othersLive is 'no'. The 'timestamp' and 'reasons' keys are added by form-app.js, not the grader. Eligibility is decided by the billing authority. Regenerate expected with: bin/test-personas united-kingdom-council-tax-discount-application --update",
+  "personas": [
+    {
+      "name": "Single person, likely eligible",
+      "description": "Applicant lives alone in a Band C main home, applies for the 25% single person discount from the application date, accepts every declaration. Expect likely-eligible, 1 counted adult, 25-percent-discount and no flags.",
+      "state": {
+        "claim": {
+          "claimType": "single-person-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "25-percent-discount",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Single person, second adult listed",
+      "description": "Applicant claims the single person discount but a partner who counts as an adult also lives there. Expect likely-ineligible (2 counted adults, outcome none) and the adult-count-mismatch flag.",
+      "state": {
+        "claim": {
+          "claimType": "single-person-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Tunde Okonkwo",
+              "birthDate": "1983-02-20",
+              "status": "counted-adult",
+              "evidenceHeld": ""
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "countedAdults": 2,
+        "indicativeOutcome": "none",
+        "flaggedIssues": [
+          {
+            "id": "F-ADULT-COUNT-MISMATCH-001",
+            "category": "adult-count-mismatch",
+            "priority": "high",
+            "description": "2 counted adult(s) on the roster does not fit the claim \"Single person discount (25%)\".",
+            "suggestedAction": "Check each occupant's status. Disregarded people do not count; if the claim is wrong, choose the discount that fits (25% for one counted adult, 50% when everyone is disregarded)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Student household exemption, likely eligible",
+      "description": "Applicant and a flatmate are both full-time students, the course is 36 months at 25 hours a week with the certificate held, and the flatmate's evidence is held. Expect likely-eligible, 0 counted adults, full-exemption, and no flags.",
+      "state": {
+        "claim": {
+          "claimType": "student-exemption",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Rhys Hughes",
+          "birthDate": "2004-06-01",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "full-time-student"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Sam Lee",
+              "birthDate": "2004-11-09",
+              "status": "full-time-student",
+              "evidenceHeld": "yes"
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "yes",
+          "studentCourseMonths": 36,
+          "studentHoursPerWeek": 25,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 0,
+        "indicativeOutcome": "full-exemption",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Student exemption, short course and a working adult",
+      "description": "The claim is a student exemption but a working adult lives in the home, and the student course is 6 months at 10 hours a week with no certificate. Expect likely-ineligible with adult-count-mismatch and student-evidence flags.",
+      "state": {
+        "claim": {
+          "claimType": "student-exemption",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Jo Marsh",
+          "birthDate": "1999-01-15",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "full-time-student"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Chris Marsh",
+              "birthDate": "1975-03-02",
+              "status": "counted-adult",
+              "evidenceHeld": ""
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "no",
+          "studentCourseMonths": 6,
+          "studentHoursPerWeek": 10,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "none",
+        "flaggedIssues": [
+          {
+            "id": "F-ADULT-COUNT-MISMATCH-001",
+            "category": "adult-count-mismatch",
+            "priority": "high",
+            "description": "1 counted adult(s) on the roster does not fit the claim \"Full-time student exemption\".",
+            "suggestedAction": "Check each occupant's status. Disregarded people do not count; if the claim is wrong, choose the discount that fits (25% for one counted adult, 50% when everyone is disregarded)."
+          },
+          {
+            "id": "F-STUDENT-EVIDENCE-001",
+            "category": "student-evidence",
+            "priority": "high",
+            "description": "No student certificate from the course provider is held.",
+            "suggestedAction": "Ask the course provider for a student certificate that states the course length and weekly hours."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Severe mental impairment, evidence outstanding",
+      "description": "Claim for the severe mental impairment disregard: the doctor's certificate is held but the qualifying benefit is not yet confirmed, the occupant has no evidence recorded, and the duty and fraud declarations are not accepted. Expect incomplete with smi-evidence, disregard-evidence, duty-to-report-changes and fraud-warning flags.",
+      "state": {
+        "claim": {
+          "claimType": "severe-mental-impairment",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Meera Patel",
+          "birthDate": "1979-08-30",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Anil Patel",
+              "birthDate": "1981-12-04",
+              "status": "severely-mentally-impaired",
+              "evidenceHeld": "no"
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "yes",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "",
+          "fraudWarningAcknowledged": "",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "incomplete",
+        "countedAdults": 1,
+        "indicativeOutcome": "smi-disregard",
+        "flaggedIssues": [
+          {
+            "id": "F-SMI-EVIDENCE-001",
+            "category": "smi-evidence",
+            "priority": "high",
+            "description": "Severe mental impairment needs a registered medical practitioner's certificate and a qualifying benefit.",
+            "suggestedAction": "Ask a doctor for the certificate and send proof of the qualifying benefit (for example Attendance Allowance or the PIP daily living component)."
+          },
+          {
+            "id": "F-DISREGARD-EVIDENCE-001",
+            "category": "disregard-evidence",
+            "priority": "medium",
+            "description": "1 disregarded occupant(s) on the roster have no evidence held.",
+            "suggestedAction": "Gather the certificate or declaration for each student, severely mentally impaired person, apprentice or care leaver."
+          },
+          {
+            "id": "F-DUTY-TO-REPORT-CHANGES-001",
+            "category": "duty-to-report-changes",
+            "priority": "medium",
+            "description": "The duty to report a change in circumstances within 21 days is not accepted.",
+            "suggestedAction": "Tell the billing authority within 21 days of any change, such as someone moving in or a student finishing a course; a penalty can follow."
+          },
+          {
+            "id": "F-FRAUD-WARNING-001",
+            "category": "fraud-warning",
+            "priority": "medium",
+            "description": "The penalty and prosecution warning for false information is not acknowledged.",
+            "suggestedAction": "Read the warning: giving false information can lead to a penalty and prosecution, and a wrongly received discount must be repaid."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Severe mental impairment, likely eligible",
+      "description": "Certificate and qualifying benefit both held, the severely mentally impaired occupant has evidence held, declarations all accepted. Expect likely-eligible, smi-disregard, no flags.",
+      "state": {
+        "claim": {
+          "claimType": "severe-mental-impairment",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Ben Okonkwo",
+              "birthDate": "1990-05-05",
+              "status": "severely-mentally-impaired",
+              "evidenceHeld": "yes"
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "yes",
+          "qualifyingBenefit": "yes",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "smi-disregard",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Disabled band reduction, Band A",
+      "description": "A wheelchair user lives in a Band A home with extra indoor space for the wheelchair; it is the disabled person's main home. Expect likely-eligible, band-reduction and the low band-a-percentage flag.",
+      "state": {
+        "claim": {
+          "claimType": "disabled-band-reduction",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "A",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "wheelchair-space",
+          "disabledPersonMainHome": "yes",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "band-reduction",
+        "flaggedIssues": [
+          {
+            "id": "F-BAND-A-PERCENTAGE-001",
+            "category": "band-a-percentage",
+            "priority": "low",
+            "description": "A Band A property cannot drop a band; a 17% reduction applies instead.",
+            "suggestedAction": "No action needed; the authority applies the 17% reduction."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Disabled band reduction, no adaptation and not main home",
+      "description": "Claim for the disabled band reduction with no qualifying adaptation, and the property is not the main home. Expect likely-ineligible with disability-adaptation and not-main-residence flags.",
+      "state": {
+        "claim": {
+          "claimType": "disabled-band-reduction",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "D",
+          "mainResidence": "no",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "none",
+          "disabledPersonMainHome": "no",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "none",
+        "flaggedIssues": [
+          {
+            "id": "F-NOT-MAIN-RESIDENCE-001",
+            "category": "not-main-residence",
+            "priority": "high",
+            "description": "The property is not the applicant's main home.",
+            "suggestedAction": "Discounts apply to a main home. Contact the billing authority about a second home or empty property charge."
+          },
+          {
+            "id": "F-DISABILITY-ADAPTATION-001",
+            "category": "disability-adaptation",
+            "priority": "high",
+            "description": "The band reduction needs an extra bathroom, kitchen, room or wheelchair space, and must be a disabled person's main home.",
+            "suggestedAction": "Describe the adaptation, or withdraw the claim if the property has none."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Care leaver aged 26",
+      "description": "Care leaver relief claimed by a 26-year-old with local-authority proof held. Expect likely-ineligible and the care-leaver-age flag.",
+      "state": {
+        "claim": {
+          "claimType": "care-leaver-relief",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Imani Brown",
+          "birthDate": "2000-07-07",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "yes",
+          "careLeaverAgeYears": 26,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "none",
+        "flaggedIssues": [
+          {
+            "id": "F-CARE-LEAVER-AGE-001",
+            "category": "care-leaver-age",
+            "priority": "medium",
+            "description": "Care leaver relief is for care leavers under 25.",
+            "suggestedAction": "Ask the billing authority whether any local scheme covers an older care leaver."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Care leaver aged 22, likely eligible",
+      "description": "Care leaver relief with proof held and age 22. Expect likely-eligible, care-leaver-relief, no flags.",
+      "state": {
+        "claim": {
+          "claimType": "care-leaver-relief",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Zara Khan",
+          "birthDate": "2004-02-02",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "yes",
+          "careLeaverAgeYears": 22,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "care-leaver-relief",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Council Tax Reduction, backdated and incomplete",
+      "description": "A Council Tax Reduction claim backdated two months with no billing authority or band given. Expect incomplete with the backdating, means-tested and incomplete-application flags.",
+      "state": {
+        "claim": {
+          "claimType": "council-tax-reduction",
+          "billingAuthority": "",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-10",
+          "effectiveDate": "2026-07-10"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "incomplete",
+        "countedAdults": 1,
+        "indicativeOutcome": "means-tested-reduction",
+        "flaggedIssues": [
+          {
+            "id": "F-BACKDATING-001",
+            "category": "backdating",
+            "priority": "medium",
+            "description": "The discount is requested from a date before the application.",
+            "suggestedAction": "Backdating is at the authority's discretion. Send evidence that the circumstances applied throughout the period."
+          },
+          {
+            "id": "F-MEANS-TESTED-001",
+            "category": "means-tested",
+            "priority": "low",
+            "description": "Council Tax Reduction depends on income, savings and household, under the authority's local scheme.",
+            "suggestedAction": "Expect to be asked for income, savings and benefit details; the authority decides the award."
+          },
+          {
+            "id": "F-INCOMPLETE-APPLICATION-001",
+            "category": "incomplete-application",
+            "priority": "low",
+            "description": "Application details are missing: Name the billing authority; Choose the Council Tax band.",
+            "suggestedAction": "Complete the claim, applicant and property sections."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fifty percent discount, all disregarded",
+      "description": "Applicant is a full-time student living with their under-18 sibling whose date of birth fits. Every resident is disregarded, so 0 counted adults. Expect likely-eligible, 50-percent-discount and no flags.",
+      "state": {
+        "claim": {
+          "claimType": "all-disregarded-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Lena Fischer",
+          "birthDate": "2005-03-03",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "full-time-student"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Max Fischer",
+              "birthDate": "2012-09-09",
+              "status": "under-18",
+              "evidenceHeld": ""
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "yes",
+          "studentCourseMonths": 24,
+          "studentHoursPerWeek": 24,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 0,
+        "indicativeOutcome": "50-percent-discount",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Occupant age conflicts with status",
+      "description": "Single person discount claimed. A listed occupant is marked under 18 but was born in 1990, so the roster is inconsistent; the occupant does not count as an adult. Expect likely-eligible with the age-status-mismatch flag.",
+      "state": {
+        "claim": {
+          "claimType": "single-person-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "yes",
+          "occupants": [
+            {
+              "name": "Pat Quinn",
+              "birthDate": "1990-01-01",
+              "status": "under-18",
+              "evidenceHeld": ""
+            }
+          ]
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "25-percent-discount",
+        "flaggedIssues": [
+          {
+            "id": "F-AGE-STATUS-MISMATCH-001",
+            "category": "age-status-mismatch",
+            "priority": "medium",
+            "description": "1 occupant(s) have a date of birth that conflicts with their stated status.",
+            "suggestedAction": "Check the dates of birth and statuses on the roster."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Single person, not the main home",
+      "description": "The property is a second home, so no discount applies. Expect likely-ineligible with the not-main-residence flag.",
+      "state": {
+        "claim": {
+          "claimType": "single-person-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-09-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "no",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "none",
+        "flaggedIssues": [
+          {
+            "id": "F-NOT-MAIN-RESIDENCE-001",
+            "category": "not-main-residence",
+            "priority": "high",
+            "description": "The property is not the applicant's main home.",
+            "suggestedAction": "Discounts apply to a main home. Contact the billing authority about a second home or empty property charge."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Single person, backdated",
+      "description": "Single person discount requested from three months before the application, all details complete. Expect likely-eligible with the backdating flag.",
+      "state": {
+        "claim": {
+          "claimType": "single-person-discount",
+          "billingAuthority": "Leeds City Council",
+          "accountReference": "CT-100234",
+          "applicationDate": "2026-09-02",
+          "effectiveDate": "2026-06-02"
+        },
+        "applicant": {
+          "name": "Adaeze Okonkwo",
+          "birthDate": "1985-04-12",
+          "email": "adaeze.okonkwo@example.com",
+          "phone": "07700 900123",
+          "status": "counted-adult"
+        },
+        "property": {
+          "addressAsFullText": "14 Mill Lane, Leeds",
+          "postcode": "LS6 2AB",
+          "band": "C",
+          "mainResidence": "yes",
+          "liableRole": "owner-occupier"
+        },
+        "household": {
+          "othersLive": "no",
+          "occupants": []
+        },
+        "evidence": {
+          "smiCertificate": "",
+          "qualifyingBenefit": "",
+          "studentCertificate": "",
+          "studentCourseMonths": null,
+          "studentHoursPerWeek": null,
+          "disabilityAdaptation": "",
+          "disabledPersonMainHome": "",
+          "apprenticeDeclaration": "",
+          "careLeaverProof": "",
+          "careLeaverAgeYears": null,
+          "notes": ""
+        },
+        "declaration": {
+          "declaredTrue": "yes",
+          "agreesToReportChanges": "yes",
+          "fraudWarningAcknowledged": "yes",
+          "declarantName": "Adaeze Okonkwo",
+          "declarationDate": "2026-09-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "countedAdults": 1,
+        "indicativeOutcome": "25-percent-discount",
+        "flaggedIssues": [
+          {
+            "id": "F-BACKDATING-001",
+            "category": "backdating",
+            "priority": "medium",
+            "description": "The discount is requested from a date before the application.",
+            "suggestedAction": "Backdating is at the authority's discretion. Send evidence that the circumstances applied throughout the period."
+          }
+        ]
+      }
+    }
+  ]
+}

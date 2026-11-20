@@ -1,0 +1,11 @@
+<!ELEMENT united_kingdom_birth_registration_grade (id,created_at,updated_at,deleted_at,united_kingdom_birth_registration_id,readiness_class,days_since_birth,late_registration,missing_item_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_birth_registration_id (#PCDATA)>
+<!ELEMENT readiness_class (#PCDATA)>
+<!ELEMENT days_since_birth (#PCDATA)>
+<!ELEMENT late_registration (#PCDATA)>
+<!ELEMENT missing_item_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

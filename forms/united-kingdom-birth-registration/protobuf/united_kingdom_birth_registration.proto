@@ -1,0 +1,193 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_birth_registration
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_birth_registration;
+
+enum UnitedKingdomBirthRegistrationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_INDETERMINATE = 3;  // indeterminate
+}
+
+enum UnitedKingdomBirthRegistrationPlaceOfBirthTypeEnum {
+  PLACEOFBIRTHTYPE_UNSPECIFIED = 0;
+  PLACEOFBIRTHTYPE_HOSPITAL = 1;  // hospital
+  PLACEOFBIRTHTYPE_HOME = 2;  // home
+  PLACEOFBIRTHTYPE_BIRTH_CENTRE = 3;  // birth-centre
+  PLACEOFBIRTHTYPE_OTHER = 4;  // other
+}
+
+enum UnitedKingdomBirthRegistrationBirthCountryEnum {
+  BIRTHCOUNTRY_UNSPECIFIED = 0;
+  BIRTHCOUNTRY_ENGLAND = 1;  // england
+  BIRTHCOUNTRY_WALES = 2;  // wales
+  BIRTHCOUNTRY_SCOTLAND = 3;  // scotland
+  BIRTHCOUNTRY_NORTHERN_IRELAND = 4;  // northern-ireland
+  BIRTHCOUNTRY_ABROAD = 5;  // abroad
+}
+
+enum UnitedKingdomBirthRegistrationMultipleBirthEnum {
+  MULTIPLEBIRTH_UNSPECIFIED = 0;
+  MULTIPLEBIRTH_SINGLE = 1;  // single
+  MULTIPLEBIRTH_TWINS = 2;  // twins
+  MULTIPLEBIRTH_TRIPLETS_OR_MORE = 3;  // triplets-or-more
+}
+
+enum UnitedKingdomBirthRegistrationStillbirthEnum {
+  STILLBIRTH_UNSPECIFIED = 0;
+  STILLBIRTH_YES = 1;  // yes
+  STILLBIRTH_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationParentsRelationshipEnum {
+  PARENTSRELATIONSHIP_UNSPECIFIED = 0;
+  PARENTSRELATIONSHIP_MARRIED_OR_CIVIL_PARTNERS = 1;  // married-or-civil-partners
+  PARENTSRELATIONSHIP_UNMARRIED = 2;  // unmarried
+  PARENTSRELATIONSHIP_FEMALE_COUPLE_MARRIED = 3;  // female-couple-married
+  PARENTSRELATIONSHIP_FEMALE_COUPLE_UNMARRIED = 4;  // female-couple-unmarried
+  PARENTSRELATIONSHIP_MALE_COUPLE = 5;  // male-couple
+  PARENTSRELATIONSHIP_MOTHER_ONLY = 6;  // mother-only
+}
+
+enum UnitedKingdomBirthRegistrationSecondParentIncludedEnum {
+  SECONDPARENTINCLUDED_UNSPECIFIED = 0;
+  SECONDPARENTINCLUDED_YES = 1;  // yes
+  SECONDPARENTINCLUDED_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationPaternityBasisEnum {
+  PATERNITYBASIS_UNSPECIFIED = 0;
+  PATERNITYBASIS_MARRIED_OR_CIVIL_PARTNERS = 1;  // married-or-civil-partners
+  PATERNITYBASIS_JOINT_REGISTRATION = 2;  // joint-registration
+  PATERNITYBASIS_STATUTORY_DECLARATION = 3;  // statutory-declaration
+  PATERNITYBASIS_COURT_ORDER_PARENTAL_RESPONSIBILITY = 4;  // court-order-parental-responsibility
+  PATERNITYBASIS_PARENTAL_ORDER = 5;  // parental-order
+  PATERNITYBASIS_NONE = 6;  // none
+}
+
+enum UnitedKingdomBirthRegistrationPaternityEvidenceHeldEnum {
+  PATERNITYEVIDENCEHELD_UNSPECIFIED = 0;
+  PATERNITYEVIDENCEHELD_YES = 1;  // yes
+  PATERNITYEVIDENCEHELD_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationLicensedClinicTreatmentEnum {
+  LICENSEDCLINICTREATMENT_UNSPECIFIED = 0;
+  LICENSEDCLINICTREATMENT_YES = 1;  // yes
+  LICENSEDCLINICTREATMENT_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationInformantRelationshipEnum {
+  INFORMANTRELATIONSHIP_UNSPECIFIED = 0;
+  INFORMANTRELATIONSHIP_MOTHER = 1;  // mother
+  INFORMANTRELATIONSHIP_FATHER = 2;  // father
+  INFORMANTRELATIONSHIP_SECOND_PARENT = 3;  // second-parent
+  INFORMANTRELATIONSHIP_BOTH_PARENTS = 4;  // both-parents
+  INFORMANTRELATIONSHIP_PERSON_PRESENT_AT_BIRTH = 5;  // person-present-at-birth
+  INFORMANTRELATIONSHIP_PERSON_RESPONSIBLE_FOR_CHILD = 6;  // person-responsible-for-child
+  INFORMANTRELATIONSHIP_HOSPITAL_ADMINISTRATOR = 7;  // hospital-administrator
+  INFORMANTRELATIONSHIP_OTHER = 8;  // other
+}
+
+enum UnitedKingdomBirthRegistrationParentsUnableToRegisterEnum {
+  PARENTSUNABLETOREGISTER_UNSPECIFIED = 0;
+  PARENTSUNABLETOREGISTER_YES = 1;  // yes
+  PARENTSUNABLETOREGISTER_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationRegistrationRouteEnum {
+  REGISTRATIONROUTE_UNSPECIFIED = 0;
+  REGISTRATIONROUTE_LOCAL_REGISTER_OFFICE = 1;  // local-register-office
+  REGISTRATIONROUTE_HOSPITAL = 2;  // hospital
+  REGISTRATIONROUTE_OTHER_REGISTER_OFFICE = 3;  // other-register-office
+}
+
+enum UnitedKingdomBirthRegistrationIdentityPrimaryDocumentEnum {
+  IDENTITYPRIMARYDOCUMENT_UNSPECIFIED = 0;
+  IDENTITYPRIMARYDOCUMENT_PASSPORT = 1;  // passport
+  IDENTITYPRIMARYDOCUMENT_UK_PHOTOCARD_DRIVING_LICENCE = 2;  // uk-photocard-driving-licence
+  IDENTITYPRIMARYDOCUMENT_EU_PHOTOCARD_DRIVING_LICENCE = 3;  // eu-photocard-driving-licence
+  IDENTITYPRIMARYDOCUMENT_UK_BIRTH_OR_ADOPTION_CERTIFICATE = 4;  // uk-birth-or-adoption-certificate
+  IDENTITYPRIMARYDOCUMENT_BIOMETRIC_IMMIGRATION_DOCUMENT = 5;  // biometric-immigration-document
+  IDENTITYPRIMARYDOCUMENT_UK_TRAVEL_DOCUMENT = 6;  // uk-travel-document
+  IDENTITYPRIMARYDOCUMENT_REFUGEE_OR_STATELESS_TRAVEL_DOCUMENT = 7;  // refugee-or-stateless-travel-document
+  IDENTITYPRIMARYDOCUMENT_EU_IDENTITY_CARD = 8;  // eu-identity-card
+  IDENTITYPRIMARYDOCUMENT_PROOF_OF_AGE_CARD = 9;  // proof-of-age-card
+  IDENTITYPRIMARYDOCUMENT_NONE = 10;  // none
+}
+
+enum UnitedKingdomBirthRegistrationIdentityOriginalsEnum {
+  IDENTITYORIGINALS_UNSPECIFIED = 0;
+  IDENTITYORIGINALS_YES = 1;  // yes
+  IDENTITYORIGINALS_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationRedBookPresentedEnum {
+  REDBOOKPRESENTED_UNSPECIFIED = 0;
+  REDBOOKPRESENTED_YES = 1;  // yes
+  REDBOOKPRESENTED_NO = 2;  // no
+}
+
+enum UnitedKingdomBirthRegistrationServiceLevelEnum {
+  SERVICELEVEL_UNSPECIFIED = 0;
+  SERVICELEVEL_STANDARD = 1;  // standard
+  SERVICELEVEL_PRIORITY = 2;  // priority
+}
+
+enum UnitedKingdomBirthRegistrationPaymentConfirmedEnum {
+  PAYMENTCONFIRMED_UNSPECIFIED = 0;
+  PAYMENTCONFIRMED_YES = 1;  // yes
+  PAYMENTCONFIRMED_NO = 2;  // no
+}
+
+message UnitedKingdomBirthRegistration {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string child_forenames = 7;  // TEXT
+  string child_surname = 8;  // TEXT
+  UnitedKingdomBirthRegistrationSexEnum sex = 9;  // VARCHAR(20)
+  string date_of_birth = 10;  // DATE — iso 8601 date
+  string time_of_birth = 11;  // TIME — iso 8601 time
+  UnitedKingdomBirthRegistrationPlaceOfBirthTypeEnum place_of_birth_type = 12;  // VARCHAR(20)
+  string place_of_birth = 13;  // TEXT
+  UnitedKingdomBirthRegistrationBirthCountryEnum birth_country = 14;  // VARCHAR(20)
+  UnitedKingdomBirthRegistrationMultipleBirthEnum multiple_birth = 15;  // VARCHAR(20)
+  UnitedKingdomBirthRegistrationStillbirthEnum stillbirth = 16;  // VARCHAR(5)
+  string mother_name = 17;  // TEXT
+  string mother_maiden_surname = 18;  // TEXT
+  string mother_date_of_birth = 19;  // DATE — iso 8601 date
+  string mother_place_of_birth = 20;  // TEXT
+  string mother_occupation = 21;  // TEXT
+  string mother_address = 22;  // TEXT
+  UnitedKingdomBirthRegistrationParentsRelationshipEnum parents_relationship = 23;  // VARCHAR(30)
+  string marriage_date = 24;  // DATE — iso 8601 date
+  UnitedKingdomBirthRegistrationSecondParentIncludedEnum second_parent_included = 25;  // VARCHAR(5)
+  string second_parent_name = 26;  // TEXT
+  string second_parent_date_of_birth = 27;  // DATE — iso 8601 date
+  string second_parent_place_of_birth = 28;  // TEXT
+  string second_parent_occupation = 29;  // TEXT
+  UnitedKingdomBirthRegistrationPaternityBasisEnum paternity_basis = 30;  // VARCHAR(40)
+  UnitedKingdomBirthRegistrationPaternityEvidenceHeldEnum paternity_evidence_held = 31;  // VARCHAR(5)
+  UnitedKingdomBirthRegistrationLicensedClinicTreatmentEnum licensed_clinic_treatment = 32;  // VARCHAR(5)
+  UnitedKingdomBirthRegistrationInformantRelationshipEnum informant_relationship = 33;  // VARCHAR(40)
+  string informant_name = 34;  // TEXT
+  UnitedKingdomBirthRegistrationParentsUnableToRegisterEnum parents_unable_to_register = 35;  // VARCHAR(5)
+  UnitedKingdomBirthRegistrationRegistrationRouteEnum registration_route = 36;  // VARCHAR(30)
+  string registration_date = 37;  // DATE — iso 8601 date
+  UnitedKingdomBirthRegistrationIdentityPrimaryDocumentEnum identity_primary_document = 38;  // VARCHAR(40)
+  int32 identity_secondary_count = 39;  // INTEGER
+  UnitedKingdomBirthRegistrationIdentityOriginalsEnum identity_originals = 40;  // VARCHAR(5)
+  UnitedKingdomBirthRegistrationRedBookPresentedEnum red_book_presented = 41;  // VARCHAR(5)
+  int32 certificates_requested = 42;  // INTEGER
+  UnitedKingdomBirthRegistrationServiceLevelEnum service_level = 43;  // VARCHAR(20)
+  string delivery_address = 44;  // TEXT
+  UnitedKingdomBirthRegistrationPaymentConfirmedEnum payment_confirmed = 45;  // VARCHAR(5)
+  string applicant_note = 46;  // TEXT
+}

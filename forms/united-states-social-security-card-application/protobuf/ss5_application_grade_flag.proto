@@ -1,0 +1,43 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ss5_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_social_security_card_application;
+
+enum Ss5ApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_APPLICANT_DECEASED = 1;  // applicant-deceased
+  CATEGORY_REPLACEMENT_LIMIT = 2;  // replacement-limit
+  CATEGORY_IDENTITY_EVIDENCE = 3;  // identity-evidence
+  CATEGORY_AGE_EVIDENCE = 4;  // age-evidence
+  CATEGORY_CITIZENSHIP_EVIDENCE = 5;  // citizenship-evidence
+  CATEGORY_WORK_AUTHORIZATION = 6;  // work-authorization
+  CATEGORY_NAME_CHANGE_EVIDENCE = 7;  // name-change-evidence
+  CATEGORY_DOCUMENT_QUALITY = 8;  // document-quality
+  CATEGORY_IN_PERSON_REQUIRED = 9;  // in-person-required
+  CATEGORY_SIGNER_AUTHORITY = 10;  // signer-authority
+  CATEGORY_MISSING_FIELD = 11;  // missing-field
+  CATEGORY_STATE_VERIFY = 12;  // state-verify
+  CATEGORY_OTHER = 13;  // other
+}
+
+enum Ss5ApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message Ss5ApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string ss5_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  Ss5ApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  Ss5ApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

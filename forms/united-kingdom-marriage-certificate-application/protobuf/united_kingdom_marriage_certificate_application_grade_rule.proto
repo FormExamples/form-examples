@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_marriage_certificate_application_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_marriage_certificate_application;
+
+enum UnitedKingdomMarriageCertificateApplicationGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_ELIGIBILITY = 1;  // eligibility
+  DIMENSION_EVIDENCE = 2;  // evidence
+  DIMENSION_TIMING = 3;  // timing
+  DIMENSION_COMPLETENESS = 4;  // completeness
+  DIMENSION_LOGISTICS = 5;  // logistics
+  DIMENSION_CERTIFICATE = 6;  // certificate
+  DIMENSION_CLASSIFICATION = 7;  // classification
+}
+
+message UnitedKingdomMarriageCertificateApplicationGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_marriage_certificate_application_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedKingdomMarriageCertificateApplicationGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

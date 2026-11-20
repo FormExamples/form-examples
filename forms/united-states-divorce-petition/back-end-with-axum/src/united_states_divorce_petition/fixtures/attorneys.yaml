@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001002"
+  deletedAt: null
+  name: "Jordan P. Ellison"
+  email: "jordan.ellison@example.com"
+  phone: "+13125550101"
+  postalAddressAsFullText: "100 N LaSalle St, Chicago, IL 60602"
+  barStateAsUspsCode: "IL"
+  barNumber: "6200001"

@@ -1,0 +1,10 @@
+<!ELEMENT united_states_vehicle_bill_of_sale_grade (id,created_at,updated_at,deleted_at,united_states_vehicle_bill_of_sale_id,completeness_class,odometer_disclosure_exempt,state_rule_known,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_states_vehicle_bill_of_sale_id (#PCDATA)>
+<!ELEMENT completeness_class (#PCDATA)>
+<!ELEMENT odometer_disclosure_exempt (#PCDATA)>
+<!ELEMENT state_rule_known (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

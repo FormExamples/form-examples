@@ -1,0 +1,44 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: registrant
+
+syntax = "proto3";
+
+package form_examples.united_states_birth_certificate_application;
+
+enum RegistrantSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+  SEX_OTHER = 3;  // other
+  SEX_UNKNOWN = 4;  // unknown
+}
+
+enum RegistrantIsDeceasedEnum {
+  ISDECEASED_UNSPECIFIED = 0;
+  ISDECEASED_YES = 1;  // yes
+  ISDECEASED_NO = 2;  // no
+}
+
+enum RegistrantIsAdoptedEnum {
+  ISADOPTED_UNSPECIFIED = 0;
+  ISADOPTED_YES = 1;  // yes
+  ISADOPTED_NO = 2;  // no
+}
+
+message Registrant {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string birth_date = 6;  // DATE — iso 8601 date
+  RegistrantSexEnum sex = 7;  // VARCHAR(20)
+  string place_of_birth = 8;  // TEXT
+  string county_of_birth = 9;  // TEXT
+  string birth_state = 10;  // CHAR(2) — max 2 chars
+  string birth_facility = 11;  // TEXT
+  string mother_name_before_first_marriage = 12;  // TEXT
+  string father_name = 13;  // TEXT
+  RegistrantIsDeceasedEnum is_deceased = 14;  // VARCHAR(5)
+  RegistrantIsAdoptedEnum is_adopted = 15;  // VARCHAR(5)
+}

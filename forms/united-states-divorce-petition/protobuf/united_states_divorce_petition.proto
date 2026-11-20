@@ -1,0 +1,164 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_divorce_petition
+
+syntax = "proto3";
+
+package form_examples.united_states_divorce_petition;
+
+enum UnitedStatesDivorcePetitionCaseTypeEnum {
+  CASETYPE_UNSPECIFIED = 0;
+  CASETYPE_UNCONTESTED = 1;  // uncontested
+  CASETYPE_CONTESTED = 2;  // contested
+}
+
+enum UnitedStatesDivorcePetitionGroundTypeEnum {
+  GROUNDTYPE_UNSPECIFIED = 0;
+  GROUNDTYPE_NO_FAULT = 1;  // no-fault
+  GROUNDTYPE_FAULT = 2;  // fault
+}
+
+enum UnitedStatesDivorcePetitionFaultGroundEnum {
+  FAULTGROUND_UNSPECIFIED = 0;
+  FAULTGROUND_ADULTERY = 1;  // adultery
+  FAULTGROUND_CRUELTY = 2;  // cruelty
+  FAULTGROUND_ABANDONMENT = 3;  // abandonment
+  FAULTGROUND_FELONY_CONVICTION = 4;  // felony-conviction
+  FAULTGROUND_IMPOTENCE = 5;  // impotence
+  FAULTGROUND_OTHER = 6;  // other
+}
+
+enum UnitedStatesDivorcePetitionMarriedOrLivedInStateEnum {
+  MARRIEDORLIVEDINSTATE_UNSPECIFIED = 0;
+  MARRIEDORLIVEDINSTATE_YES = 1;  // yes
+  MARRIEDORLIVEDINSTATE_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionRespondentMilitaryEnum {
+  RESPONDENTMILITARY_UNSPECIFIED = 0;
+  RESPONDENTMILITARY_YES = 1;  // yes
+  RESPONDENTMILITARY_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionHasMinorChildrenEnum {
+  HASMINORCHILDREN_UNSPECIFIED = 0;
+  HASMINORCHILDREN_YES = 1;  // yes
+  HASMINORCHILDREN_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionPregnantEnum {
+  PREGNANT_UNSPECIFIED = 0;
+  PREGNANT_YES = 1;  // yes
+  PREGNANT_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionCustodyPlanDocumentedEnum {
+  CUSTODYPLANDOCUMENTED_UNSPECIFIED = 0;
+  CUSTODYPLANDOCUMENTED_YES = 1;  // yes
+  CUSTODYPLANDOCUMENTED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionChildSupportWorksheetCompletedEnum {
+  CHILDSUPPORTWORKSHEETCOMPLETED_UNSPECIFIED = 0;
+  CHILDSUPPORTWORKSHEETCOMPLETED_YES = 1;  // yes
+  CHILDSUPPORTWORKSHEETCOMPLETED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionPropertyDivisionApproachEnum {
+  PROPERTYDIVISIONAPPROACH_UNSPECIFIED = 0;
+  PROPERTYDIVISIONAPPROACH_COMMUNITY = 1;  // community
+  PROPERTYDIVISIONAPPROACH_EQUITABLE = 2;  // equitable
+}
+
+enum UnitedStatesDivorcePetitionSettlementAgreementSignedEnum {
+  SETTLEMENTAGREEMENTSIGNED_UNSPECIFIED = 0;
+  SETTLEMENTAGREEMENTSIGNED_YES = 1;  // yes
+  SETTLEMENTAGREEMENTSIGNED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionFinancialDisclosureFiledEnum {
+  FINANCIALDISCLOSUREFILED_UNSPECIFIED = 0;
+  FINANCIALDISCLOSUREFILED_YES = 1;  // yes
+  FINANCIALDISCLOSUREFILED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionSpousalSupportRequestedEnum {
+  SPOUSALSUPPORTREQUESTED_UNSPECIFIED = 0;
+  SPOUSALSUPPORTREQUESTED_YES = 1;  // yes
+  SPOUSALSUPPORTREQUESTED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionServiceMethodEnum {
+  SERVICEMETHOD_UNSPECIFIED = 0;
+  SERVICEMETHOD_PERSONAL = 1;  // personal
+  SERVICEMETHOD_ACCEPTANCE = 2;  // acceptance
+  SERVICEMETHOD_MAIL = 3;  // mail
+  SERVICEMETHOD_PUBLICATION = 4;  // publication
+  SERVICEMETHOD_NONE = 5;  // none
+}
+
+enum UnitedStatesDivorcePetitionRespondentRespondedEnum {
+  RESPONDENTRESPONDED_UNSPECIFIED = 0;
+  RESPONDENTRESPONDED_YES = 1;  // yes
+  RESPONDENTRESPONDED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionDecreeEnteredEnum {
+  DECREEENTERED_UNSPECIFIED = 0;
+  DECREEENTERED_YES = 1;  // yes
+  DECREEENTERED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionNameRestorationRequestedEnum {
+  NAMERESTORATIONREQUESTED_UNSPECIFIED = 0;
+  NAMERESTORATIONREQUESTED_YES = 1;  // yes
+  NAMERESTORATIONREQUESTED_NO = 2;  // no
+}
+
+enum UnitedStatesDivorcePetitionCertificateRequestedEnum {
+  CERTIFICATEREQUESTED_UNSPECIFIED = 0;
+  CERTIFICATEREQUESTED_YES = 1;  // yes
+  CERTIFICATEREQUESTED_NO = 2;  // no
+}
+
+message UnitedStatesDivorcePetition {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string petitioner_id = 5;  // UUID — uuid
+  string attorney_id = 6;  // UUID — uuid
+  string state = 7;  // VARCHAR(2) — max 2 chars
+  string county = 8;  // TEXT
+  string filing_date = 9;  // DATE — iso 8601 date
+  UnitedStatesDivorcePetitionCaseTypeEnum case_type = 10;  // VARCHAR(12)
+  UnitedStatesDivorcePetitionGroundTypeEnum ground_type = 11;  // VARCHAR(10)
+  UnitedStatesDivorcePetitionFaultGroundEnum fault_ground = 12;  // VARCHAR(20)
+  string petitioner_name = 13;  // TEXT
+  string respondent_name = 14;  // TEXT
+  string marriage_date = 15;  // DATE — iso 8601 date
+  string marriage_place = 16;  // TEXT
+  string separation_date = 17;  // DATE — iso 8601 date
+  int32 petitioner_residency_months = 18;  // INTEGER
+  int32 county_residency_days = 19;  // INTEGER
+  UnitedStatesDivorcePetitionMarriedOrLivedInStateEnum married_or_lived_in_state = 20;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionRespondentMilitaryEnum respondent_military = 21;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionHasMinorChildrenEnum has_minor_children = 22;  // VARCHAR(5)
+  int32 children_count = 23;  // INTEGER
+  int32 children_home_state_months = 24;  // INTEGER
+  UnitedStatesDivorcePetitionPregnantEnum pregnant = 25;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionCustodyPlanDocumentedEnum custody_plan_documented = 26;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionChildSupportWorksheetCompletedEnum child_support_worksheet_completed = 27;  // VARCHAR(5)
+  double child_support_monthly_amount = 28;  // NUMERIC(10,2) — numeric(10,2)
+  UnitedStatesDivorcePetitionPropertyDivisionApproachEnum property_division_approach = 29;  // VARCHAR(10)
+  UnitedStatesDivorcePetitionSettlementAgreementSignedEnum settlement_agreement_signed = 30;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionFinancialDisclosureFiledEnum financial_disclosure_filed = 31;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionSpousalSupportRequestedEnum spousal_support_requested = 32;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionServiceMethodEnum service_method = 33;  // VARCHAR(12)
+  string service_date = 34;  // DATE — iso 8601 date
+  UnitedStatesDivorcePetitionRespondentRespondedEnum respondent_responded = 35;  // VARCHAR(5)
+  UnitedStatesDivorcePetitionDecreeEnteredEnum decree_entered = 36;  // VARCHAR(5)
+  string decree_date = 37;  // DATE — iso 8601 date
+  UnitedStatesDivorcePetitionNameRestorationRequestedEnum name_restoration_requested = 38;  // VARCHAR(5)
+  string name_to_restore = 39;  // TEXT
+  UnitedStatesDivorcePetitionCertificateRequestedEnum certificate_requested = 40;  // VARCHAR(5)
+}

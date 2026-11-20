@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_council_tax_discount_application_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_council_tax_discount_application;
+
+enum UnitedKingdomCouncilTaxDiscountApplicationGradeEligibilityClassEnum {
+  ELIGIBILITYCLASS_UNSPECIFIED = 0;
+  ELIGIBILITYCLASS_LIKELY_ELIGIBLE = 1;  // likely-eligible
+  ELIGIBILITYCLASS_INCOMPLETE = 2;  // incomplete
+  ELIGIBILITYCLASS_LIKELY_INELIGIBLE = 3;  // likely-ineligible
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationGradeIndicativeOutcomeEnum {
+  INDICATIVEOUTCOME_UNSPECIFIED = 0;
+  INDICATIVEOUTCOME_V_25_PERCENT_DISCOUNT = 1;  // 25-percent-discount
+  INDICATIVEOUTCOME_V_50_PERCENT_DISCOUNT = 2;  // 50-percent-discount
+  INDICATIVEOUTCOME_FULL_EXEMPTION = 3;  // full-exemption
+  INDICATIVEOUTCOME_SMI_DISREGARD = 4;  // smi-disregard
+  INDICATIVEOUTCOME_BAND_REDUCTION = 5;  // band-reduction
+  INDICATIVEOUTCOME_CARE_LEAVER_RELIEF = 6;  // care-leaver-relief
+  INDICATIVEOUTCOME_MEANS_TESTED_REDUCTION = 7;  // means-tested-reduction
+  INDICATIVEOUTCOME_NONE = 8;  // none
+}
+
+message UnitedKingdomCouncilTaxDiscountApplicationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_council_tax_discount_application_id = 5;  // UUID — uuid
+  UnitedKingdomCouncilTaxDiscountApplicationGradeEligibilityClassEnum eligibility_class = 6;  // VARCHAR(20)
+  int32 counted_adults = 7;  // INTEGER
+  UnitedKingdomCouncilTaxDiscountApplicationGradeIndicativeOutcomeEnum indicative_outcome = 8;  // VARCHAR(30)
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

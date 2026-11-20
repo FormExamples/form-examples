@@ -1,0 +1,213 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_divorce_application
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_divorce_application;
+
+enum UnitedKingdomDivorceApplicationApplicationTypeEnum {
+  APPLICATIONTYPE_UNSPECIFIED = 0;
+  APPLICATIONTYPE_DIVORCE = 1;  // divorce
+  APPLICATIONTYPE_DISSOLUTION = 2;  // dissolution
+}
+
+enum UnitedKingdomDivorceApplicationApplicationModeEnum {
+  APPLICATIONMODE_UNSPECIFIED = 0;
+  APPLICATIONMODE_SOLE = 1;  // sole
+  APPLICATIONMODE_JOINT = 2;  // joint
+}
+
+enum UnitedKingdomDivorceApplicationStageEnum {
+  STAGE_UNSPECIFIED = 0;
+  STAGE_APPLICATION = 1;  // application
+  STAGE_CONDITIONAL_ORDER = 2;  // conditional-order
+  STAGE_FINAL_ORDER = 3;  // final-order
+}
+
+enum UnitedKingdomDivorceApplicationDomesticAbuseRiskEnum {
+  DOMESTICABUSERISK_UNSPECIFIED = 0;
+  DOMESTICABUSERISK_YES = 1;  // yes
+  DOMESTICABUSERISK_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationLegallyRecognisedEnum {
+  LEGALLYRECOGNISED_UNSPECIFIED = 0;
+  LEGALLYRECOGNISED_YES = 1;  // yes
+  LEGALLYRECOGNISED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationBreakdownConfirmedEnum {
+  BREAKDOWNCONFIRMED_UNSPECIFIED = 0;
+  BREAKDOWNCONFIRMED_YES = 1;  // yes
+  BREAKDOWNCONFIRMED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationMarriageCertificateTypeEnum {
+  MARRIAGECERTIFICATETYPE_UNSPECIFIED = 0;
+  MARRIAGECERTIFICATETYPE_ORIGINAL = 1;  // original
+  MARRIAGECERTIFICATETYPE_CERTIFIED_COPY = 2;  // certified-copy
+  MARRIAGECERTIFICATETYPE_NOT_HELD = 3;  // not-held
+}
+
+enum UnitedKingdomDivorceApplicationCertificateInEnglishEnum {
+  CERTIFICATEINENGLISH_UNSPECIFIED = 0;
+  CERTIFICATEINENGLISH_YES = 1;  // yes
+  CERTIFICATEINENGLISH_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationCertifiedTranslationEnum {
+  CERTIFIEDTRANSLATION_UNSPECIFIED = 0;
+  CERTIFIEDTRANSLATION_YES = 1;  // yes
+  CERTIFIEDTRANSLATION_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationNameChangedEnum {
+  NAMECHANGED_UNSPECIFIED = 0;
+  NAMECHANGED_YES = 1;  // yes
+  NAMECHANGED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationNameChangeProofEnum {
+  NAMECHANGEPROOF_UNSPECIFIED = 0;
+  NAMECHANGEPROOF_MARRIAGE_CERTIFICATE = 1;  // marriage-certificate
+  NAMECHANGEPROOF_DEED_POLL = 2;  // deed-poll
+  NAMECHANGEPROOF_NONE = 3;  // none
+}
+
+enum UnitedKingdomDivorceApplicationApplicantHabitualResidentEnum {
+  APPLICANTHABITUALRESIDENT_UNSPECIFIED = 0;
+  APPLICANTHABITUALRESIDENT_YES = 1;  // yes
+  APPLICANTHABITUALRESIDENT_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationApplicantDomiciledEnum {
+  APPLICANTDOMICILED_UNSPECIFIED = 0;
+  APPLICANTDOMICILED_YES = 1;  // yes
+  APPLICANTDOMICILED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationRespondentHabitualResidentEnum {
+  RESPONDENTHABITUALRESIDENT_UNSPECIFIED = 0;
+  RESPONDENTHABITUALRESIDENT_YES = 1;  // yes
+  RESPONDENTHABITUALRESIDENT_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationRespondentDomiciledEnum {
+  RESPONDENTDOMICILED_UNSPECIFIED = 0;
+  RESPONDENTDOMICILED_YES = 1;  // yes
+  RESPONDENTDOMICILED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationLastHabituallyResidentTogetherEnum {
+  LASTHABITUALLYRESIDENTTOGETHER_UNSPECIFIED = 0;
+  LASTHABITUALLYRESIDENTTOGETHER_YES = 1;  // yes
+  LASTHABITUALLYRESIDENTTOGETHER_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationRespondentAddressKnownEnum {
+  RESPONDENTADDRESSKNOWN_UNSPECIFIED = 0;
+  RESPONDENTADDRESSKNOWN_YES = 1;  // yes
+  RESPONDENTADDRESSKNOWN_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationServiceMethodEnum {
+  SERVICEMETHOD_UNSPECIFIED = 0;
+  SERVICEMETHOD_EMAIL = 1;  // email
+  SERVICEMETHOD_POST = 2;  // post
+  SERVICEMETHOD_ALTERNATIVE_SERVICE = 3;  // alternative-service
+}
+
+enum UnitedKingdomDivorceApplicationChildrenUnder18Enum {
+  CHILDRENUNDER18_UNSPECIFIED = 0;
+  CHILDRENUNDER18_YES = 1;  // yes
+  CHILDRENUNDER18_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationChildrenArrangementsEnum {
+  CHILDRENARRANGEMENTS_UNSPECIFIED = 0;
+  CHILDRENARRANGEMENTS_AGREED = 1;  // agreed
+  CHILDRENARRANGEMENTS_NOT_AGREED = 2;  // not-agreed
+  CHILDRENARRANGEMENTS_UNDECIDED = 3;  // undecided
+}
+
+enum UnitedKingdomDivorceApplicationFinancialOrderIntendedEnum {
+  FINANCIALORDERINTENDED_UNSPECIFIED = 0;
+  FINANCIALORDERINTENDED_YES = 1;  // yes
+  FINANCIALORDERINTENDED_NO = 2;  // no
+  FINANCIALORDERINTENDED_UNDECIDED = 3;  // undecided
+}
+
+enum UnitedKingdomDivorceApplicationFinancialOrderAppliedEnum {
+  FINANCIALORDERAPPLIED_UNSPECIFIED = 0;
+  FINANCIALORDERAPPLIED_YES = 1;  // yes
+  FINANCIALORDERAPPLIED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationFeeStatusEnum {
+  FEESTATUS_UNSPECIFIED = 0;
+  FEESTATUS_PAID = 1;  // paid
+  FEESTATUS_HELP_WITH_FEES_APPROVED = 2;  // help-with-fees-approved
+  FEESTATUS_HELP_WITH_FEES_PENDING = 3;  // help-with-fees-pending
+  FEESTATUS_UNPAID = 4;  // unpaid
+}
+
+enum UnitedKingdomDivorceApplicationRespondentAcknowledgedEnum {
+  RESPONDENTACKNOWLEDGED_UNSPECIFIED = 0;
+  RESPONDENTACKNOWLEDGED_YES = 1;  // yes
+  RESPONDENTACKNOWLEDGED_NO = 2;  // no
+}
+
+enum UnitedKingdomDivorceApplicationFinalOrderDelayExplainedEnum {
+  FINALORDERDELAYEXPLAINED_UNSPECIFIED = 0;
+  FINALORDERDELAYEXPLAINED_YES = 1;  // yes
+  FINALORDERDELAYEXPLAINED_NO = 2;  // no
+}
+
+message UnitedKingdomDivorceApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string applicant_id = 5;  // UUID — uuid
+  string caseworker_id = 6;  // UUID — uuid
+  UnitedKingdomDivorceApplicationApplicationTypeEnum application_type = 7;  // VARCHAR(11)
+  UnitedKingdomDivorceApplicationApplicationModeEnum application_mode = 8;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationStageEnum stage = 9;  // VARCHAR(17)
+  string as_of_date = 10;  // DATE — iso 8601 date
+  UnitedKingdomDivorceApplicationDomesticAbuseRiskEnum domestic_abuse_risk = 11;  // VARCHAR(5)
+  string marriage_date = 12;  // DATE — iso 8601 date
+  string marriage_place = 13;  // TEXT
+  string marriage_country = 14;  // TEXT
+  UnitedKingdomDivorceApplicationLegallyRecognisedEnum legally_recognised = 15;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationBreakdownConfirmedEnum breakdown_confirmed = 16;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationMarriageCertificateTypeEnum marriage_certificate_type = 17;  // VARCHAR(14)
+  UnitedKingdomDivorceApplicationCertificateInEnglishEnum certificate_in_english = 18;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationCertifiedTranslationEnum certified_translation = 19;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationNameChangedEnum name_changed = 20;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationNameChangeProofEnum name_change_proof = 21;  // VARCHAR(20)
+  UnitedKingdomDivorceApplicationApplicantHabitualResidentEnum applicant_habitual_resident = 22;  // VARCHAR(5)
+  int32 applicant_residence_months = 23;  // INTEGER
+  UnitedKingdomDivorceApplicationApplicantDomiciledEnum applicant_domiciled = 24;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationRespondentHabitualResidentEnum respondent_habitual_resident = 25;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationRespondentDomiciledEnum respondent_domiciled = 26;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationLastHabituallyResidentTogetherEnum last_habitually_resident_together = 27;  // VARCHAR(5)
+  string applicant_name = 28;  // TEXT
+  string applicant_address = 29;  // TEXT
+  string applicant_email = 30;  // TEXT
+  string respondent_name = 31;  // TEXT
+  string respondent_address = 32;  // TEXT
+  string respondent_email = 33;  // TEXT
+  UnitedKingdomDivorceApplicationRespondentAddressKnownEnum respondent_address_known = 34;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationServiceMethodEnum service_method = 35;  // VARCHAR(19)
+  UnitedKingdomDivorceApplicationChildrenUnder18Enum children_under_18 = 36;  // VARCHAR(5)
+  int32 children_count = 37;  // INTEGER
+  UnitedKingdomDivorceApplicationChildrenArrangementsEnum children_arrangements = 38;  // VARCHAR(10)
+  string children_note = 39;  // TEXT
+  UnitedKingdomDivorceApplicationFinancialOrderIntendedEnum financial_order_intended = 40;  // VARCHAR(9)
+  UnitedKingdomDivorceApplicationFinancialOrderAppliedEnum financial_order_applied = 41;  // VARCHAR(5)
+  UnitedKingdomDivorceApplicationFeeStatusEnum fee_status = 42;  // VARCHAR(23)
+  string application_issued_date = 43;  // DATE — iso 8601 date
+  UnitedKingdomDivorceApplicationRespondentAcknowledgedEnum respondent_acknowledged = 44;  // VARCHAR(5)
+  string conditional_order_granted_date = 45;  // DATE — iso 8601 date
+  UnitedKingdomDivorceApplicationFinalOrderDelayExplainedEnum final_order_delay_explained = 46;  // VARCHAR(5)
+}

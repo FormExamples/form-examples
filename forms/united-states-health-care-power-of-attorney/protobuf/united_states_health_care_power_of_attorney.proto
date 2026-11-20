@@ -1,0 +1,355 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_health_care_power_of_attorney
+
+syntax = "proto3";
+
+package form_examples.united_states_health_care_power_of_attorney;
+
+enum UnitedStatesHealthCarePowerOfAttorneyStateCodeEnum {
+  STATECODE_UNSPECIFIED = 0;
+  STATECODE_AL = 1;  // AL
+  STATECODE_AK = 2;  // AK
+  STATECODE_AZ = 3;  // AZ
+  STATECODE_AR = 4;  // AR
+  STATECODE_CA = 5;  // CA
+  STATECODE_CO = 6;  // CO
+  STATECODE_CT = 7;  // CT
+  STATECODE_DE = 8;  // DE
+  STATECODE_DC = 9;  // DC
+  STATECODE_FL = 10;  // FL
+  STATECODE_GA = 11;  // GA
+  STATECODE_HI = 12;  // HI
+  STATECODE_ID = 13;  // ID
+  STATECODE_IL = 14;  // IL
+  STATECODE_IN = 15;  // IN
+  STATECODE_IA = 16;  // IA
+  STATECODE_KS = 17;  // KS
+  STATECODE_KY = 18;  // KY
+  STATECODE_LA = 19;  // LA
+  STATECODE_ME = 20;  // ME
+  STATECODE_MD = 21;  // MD
+  STATECODE_MA = 22;  // MA
+  STATECODE_MI = 23;  // MI
+  STATECODE_MN = 24;  // MN
+  STATECODE_MS = 25;  // MS
+  STATECODE_MO = 26;  // MO
+  STATECODE_MT = 27;  // MT
+  STATECODE_NE = 28;  // NE
+  STATECODE_NV = 29;  // NV
+  STATECODE_NH = 30;  // NH
+  STATECODE_NJ = 31;  // NJ
+  STATECODE_NM = 32;  // NM
+  STATECODE_NY = 33;  // NY
+  STATECODE_NC = 34;  // NC
+  STATECODE_ND = 35;  // ND
+  STATECODE_OH = 36;  // OH
+  STATECODE_OK = 37;  // OK
+  STATECODE_OR = 38;  // OR
+  STATECODE_PA = 39;  // PA
+  STATECODE_RI = 40;  // RI
+  STATECODE_SC = 41;  // SC
+  STATECODE_SD = 42;  // SD
+  STATECODE_TN = 43;  // TN
+  STATECODE_TX = 44;  // TX
+  STATECODE_UT = 45;  // UT
+  STATECODE_VT = 46;  // VT
+  STATECODE_VA = 47;  // VA
+  STATECODE_WA = 48;  // WA
+  STATECODE_WV = 49;  // WV
+  STATECODE_WI = 50;  // WI
+  STATECODE_WY = 51;  // WY
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCapacityConfirmedEnum {
+  CAPACITYCONFIRMED_UNSPECIFIED = 0;
+  CAPACITYCONFIRMED_YES = 1;  // yes
+  CAPACITYCONFIRMED_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneySignedVoluntarilyEnum {
+  SIGNEDVOLUNTARILY_UNSPECIFIED = 0;
+  SIGNEDVOLUNTARILY_YES = 1;  // yes
+  SIGNEDVOLUNTARILY_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyAgentRelationshipEnum {
+  AGENTRELATIONSHIP_UNSPECIFIED = 0;
+  AGENTRELATIONSHIP_SPOUSE = 1;  // spouse
+  AGENTRELATIONSHIP_ADULT_CHILD = 2;  // adult-child
+  AGENTRELATIONSHIP_PARENT = 3;  // parent
+  AGENTRELATIONSHIP_SIBLING = 4;  // sibling
+  AGENTRELATIONSHIP_OTHER_RELATIVE = 5;  // other-relative
+  AGENTRELATIONSHIP_FRIEND = 6;  // friend
+  AGENTRELATIONSHIP_OTHER = 7;  // other
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyAgentIsHealthCareProviderEnum {
+  AGENTISHEALTHCAREPROVIDER_UNSPECIFIED = 0;
+  AGENTISHEALTHCAREPROVIDER_YES = 1;  // yes
+  AGENTISHEALTHCAREPROVIDER_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyAgentIsFacilityEmployeeEnum {
+  AGENTISFACILITYEMPLOYEE_UNSPECIFIED = 0;
+  AGENTISFACILITYEMPLOYEE_YES = 1;  // yes
+  AGENTISFACILITYEMPLOYEE_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyAgentRelatedToPrincipalEnum {
+  AGENTRELATEDTOPRINCIPAL_UNSPECIFIED = 0;
+  AGENTRELATEDTOPRINCIPAL_YES = 1;  // yes
+  AGENTRELATEDTOPRINCIPAL_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyAgentAcceptedEnum {
+  AGENTACCEPTED_UNSPECIFIED = 0;
+  AGENTACCEPTED_YES = 1;  // yes
+  AGENTACCEPTED_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyEffectiveWhenEnum {
+  EFFECTIVEWHEN_UNSPECIFIED = 0;
+  EFFECTIVEWHEN_IMMEDIATELY = 1;  // immediately
+  EFFECTIVEWHEN_UPON_INCAPACITY = 2;  // upon-incapacity
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyIncapacityDeterminedByEnum {
+  INCAPACITYDETERMINEDBY_UNSPECIFIED = 0;
+  INCAPACITYDETERMINEDBY_ONE_PHYSICIAN = 1;  // one-physician
+  INCAPACITYDETERMINEDBY_TWO_PHYSICIANS = 2;  // two-physicians
+  INCAPACITYDETERMINEDBY_OTHER = 3;  // other
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyHipaaReleaseEnum {
+  HIPAARELEASE_UNSPECIFIED = 0;
+  HIPAARELEASE_YES = 1;  // yes
+  HIPAARELEASE_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyMentalHealthAuthorityEnum {
+  MENTALHEALTHAUTHORITY_UNSPECIFIED = 0;
+  MENTALHEALTHAUTHORITY_YES = 1;  // yes
+  MENTALHEALTHAUTHORITY_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyOrganDonationEnum {
+  ORGANDONATION_UNSPECIFIED = 0;
+  ORGANDONATION_ANY_NEEDS = 1;  // any-needs
+  ORGANDONATION_TRANSPLANT_ONLY = 2;  // transplant-only
+  ORGANDONATION_RESEARCH_ONLY = 3;  // research-only
+  ORGANDONATION_NONE = 4;  // none
+  ORGANDONATION_NOT_ADDRESSED = 5;  // not-addressed
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyPriorDirectiveStatusEnum {
+  PRIORDIRECTIVESTATUS_UNSPECIFIED = 0;
+  PRIORDIRECTIVESTATUS_NONE_EXISTING = 1;  // none-existing
+  PRIORDIRECTIVESTATUS_REVOKES_PRIOR = 2;  // revokes-prior
+  PRIORDIRECTIVESTATUS_PRIOR_REMAINS = 3;  // prior-remains
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyLifeSustainingTreatmentEnum {
+  LIFESUSTAININGTREATMENT_UNSPECIFIED = 0;
+  LIFESUSTAININGTREATMENT_REFUSE = 1;  // refuse
+  LIFESUSTAININGTREATMENT_TIME_LIMITED_TRIAL = 2;  // time-limited-trial
+  LIFESUSTAININGTREATMENT_WANT_ALL = 3;  // want-all
+  LIFESUSTAININGTREATMENT_AGENT_DECIDES = 4;  // agent-decides
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCprEnum {
+  CPR_UNSPECIFIED = 0;
+  CPR_ACCEPT = 1;  // accept
+  CPR_REFUSE = 2;  // refuse
+  CPR_AGENT_DECIDES = 3;  // agent-decides
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyVentilatorEnum {
+  VENTILATOR_UNSPECIFIED = 0;
+  VENTILATOR_ACCEPT = 1;  // accept
+  VENTILATOR_REFUSE = 2;  // refuse
+  VENTILATOR_AGENT_DECIDES = 3;  // agent-decides
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyArtificialNutritionEnum {
+  ARTIFICIALNUTRITION_UNSPECIFIED = 0;
+  ARTIFICIALNUTRITION_ACCEPT = 1;  // accept
+  ARTIFICIALNUTRITION_REFUSE = 2;  // refuse
+  ARTIFICIALNUTRITION_AGENT_DECIDES = 3;  // agent-decides
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyComfortCareFirstEnum {
+  COMFORTCAREFIRST_UNSPECIFIED = 0;
+  COMFORTCAREFIRST_YES = 1;  // yes
+  COMFORTCAREFIRST_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneySeriousIllnessEnum {
+  SERIOUSILLNESS_UNSPECIFIED = 0;
+  SERIOUSILLNESS_YES = 1;  // yes
+  SERIOUSILLNESS_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyPolstStatusEnum {
+  POLSTSTATUS_UNSPECIFIED = 0;
+  POLSTSTATUS_NONE = 1;  // none
+  POLSTSTATUS_IN_PLACE = 2;  // in-place
+  POLSTSTATUS_DISCUSSING = 3;  // discussing
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyExecutionMethodEnum {
+  EXECUTIONMETHOD_UNSPECIFIED = 0;
+  EXECUTIONMETHOD_TWO_WITNESSES = 1;  // two-witnesses
+  EXECUTIONMETHOD_ONE_WITNESS = 2;  // one-witness
+  EXECUTIONMETHOD_NOTARY = 3;  // notary
+  EXECUTIONMETHOD_WITNESSES_AND_NOTARY = 4;  // witnesses-and-notary
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitnessesPresentEnum {
+  WITNESSESPRESENT_UNSPECIFIED = 0;
+  WITNESSESPRESENT_YES = 1;  // yes
+  WITNESSESPRESENT_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness1IsRelativeEnum {
+  WITNESS1ISRELATIVE_UNSPECIFIED = 0;
+  WITNESS1ISRELATIVE_YES = 1;  // yes
+  WITNESS1ISRELATIVE_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness1IsHeirEnum {
+  WITNESS1ISHEIR_UNSPECIFIED = 0;
+  WITNESS1ISHEIR_YES = 1;  // yes
+  WITNESS1ISHEIR_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness1IsAgentEnum {
+  WITNESS1ISAGENT_UNSPECIFIED = 0;
+  WITNESS1ISAGENT_YES = 1;  // yes
+  WITNESS1ISAGENT_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness1IsProviderEnum {
+  WITNESS1ISPROVIDER_UNSPECIFIED = 0;
+  WITNESS1ISPROVIDER_YES = 1;  // yes
+  WITNESS1ISPROVIDER_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness2IsRelativeEnum {
+  WITNESS2ISRELATIVE_UNSPECIFIED = 0;
+  WITNESS2ISRELATIVE_YES = 1;  // yes
+  WITNESS2ISRELATIVE_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness2IsHeirEnum {
+  WITNESS2ISHEIR_UNSPECIFIED = 0;
+  WITNESS2ISHEIR_YES = 1;  // yes
+  WITNESS2ISHEIR_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness2IsAgentEnum {
+  WITNESS2ISAGENT_UNSPECIFIED = 0;
+  WITNESS2ISAGENT_YES = 1;  // yes
+  WITNESS2ISAGENT_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyWitness2IsProviderEnum {
+  WITNESS2ISPROVIDER_UNSPECIFIED = 0;
+  WITNESS2ISPROVIDER_YES = 1;  // yes
+  WITNESS2ISPROVIDER_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyPrincipalInSkilledNursingFacilityEnum {
+  PRINCIPALINSKILLEDNURSINGFACILITY_UNSPECIFIED = 0;
+  PRINCIPALINSKILLEDNURSINGFACILITY_YES = 1;  // yes
+  PRINCIPALINSKILLEDNURSINGFACILITY_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyOmbudsmanSignedEnum {
+  OMBUDSMANSIGNED_UNSPECIFIED = 0;
+  OMBUDSMANSIGNED_YES = 1;  // yes
+  OMBUDSMANSIGNED_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCopyToAgentEnum {
+  COPYTOAGENT_UNSPECIFIED = 0;
+  COPYTOAGENT_YES = 1;  // yes
+  COPYTOAGENT_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCopyToPhysicianEnum {
+  COPYTOPHYSICIAN_UNSPECIFIED = 0;
+  COPYTOPHYSICIAN_YES = 1;  // yes
+  COPYTOPHYSICIAN_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCopyToSuccessorEnum {
+  COPYTOSUCCESSOR_UNSPECIFIED = 0;
+  COPYTOSUCCESSOR_YES = 1;  // yes
+  COPYTOSUCCESSOR_NO = 2;  // no
+}
+
+enum UnitedStatesHealthCarePowerOfAttorneyCopyToFacilityEnum {
+  COPYTOFACILITY_UNSPECIFIED = 0;
+  COPYTOFACILITY_YES = 1;  // yes
+  COPYTOFACILITY_NO = 2;  // no
+}
+
+message UnitedStatesHealthCarePowerOfAttorney {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string principal_id = 5;  // UUID — uuid
+  string reviewer_id = 6;  // UUID — uuid
+  string principal_name = 7;  // TEXT
+  string birth_date = 8;  // DATE — iso 8601 date
+  UnitedStatesHealthCarePowerOfAttorneyStateCodeEnum state_code = 9;  // VARCHAR(2)
+  string phone = 10;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyCapacityConfirmedEnum capacity_confirmed = 11;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneySignedVoluntarilyEnum signed_voluntarily = 12;  // VARCHAR(5)
+  string agent_name = 13;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyAgentRelationshipEnum agent_relationship = 14;  // VARCHAR(20)
+  int32 agent_age = 15;  // INTEGER
+  string agent_phone = 16;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyAgentIsHealthCareProviderEnum agent_is_health_care_provider = 17;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyAgentIsFacilityEmployeeEnum agent_is_facility_employee = 18;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyAgentRelatedToPrincipalEnum agent_related_to_principal = 19;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyAgentAcceptedEnum agent_accepted = 20;  // VARCHAR(5)
+  string successor1_name = 21;  // TEXT
+  string successor1_phone = 22;  // TEXT
+  string successor2_name = 23;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyEffectiveWhenEnum effective_when = 24;  // VARCHAR(20)
+  UnitedStatesHealthCarePowerOfAttorneyIncapacityDeterminedByEnum incapacity_determined_by = 25;  // VARCHAR(20)
+  UnitedStatesHealthCarePowerOfAttorneyHipaaReleaseEnum hipaa_release = 26;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyMentalHealthAuthorityEnum mental_health_authority = 27;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyOrganDonationEnum organ_donation = 28;  // VARCHAR(20)
+  UnitedStatesHealthCarePowerOfAttorneyPriorDirectiveStatusEnum prior_directive_status = 29;  // VARCHAR(20)
+  UnitedStatesHealthCarePowerOfAttorneyLifeSustainingTreatmentEnum life_sustaining_treatment = 30;  // VARCHAR(25)
+  UnitedStatesHealthCarePowerOfAttorneyCprEnum cpr = 31;  // VARCHAR(15)
+  UnitedStatesHealthCarePowerOfAttorneyVentilatorEnum ventilator = 32;  // VARCHAR(15)
+  UnitedStatesHealthCarePowerOfAttorneyArtificialNutritionEnum artificial_nutrition = 33;  // VARCHAR(15)
+  UnitedStatesHealthCarePowerOfAttorneyComfortCareFirstEnum comfort_care_first = 34;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneySeriousIllnessEnum serious_illness = 35;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyPolstStatusEnum polst_status = 36;  // VARCHAR(15)
+  string wishes_note = 37;  // TEXT
+  string signature_date = 38;  // DATE — iso 8601 date
+  UnitedStatesHealthCarePowerOfAttorneyExecutionMethodEnum execution_method = 39;  // VARCHAR(25)
+  UnitedStatesHealthCarePowerOfAttorneyWitnessesPresentEnum witnesses_present = 40;  // VARCHAR(5)
+  string witness1_name = 41;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyWitness1IsRelativeEnum witness1_is_relative = 42;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness1IsHeirEnum witness1_is_heir = 43;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness1IsAgentEnum witness1_is_agent = 44;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness1IsProviderEnum witness1_is_provider = 45;  // VARCHAR(5)
+  string witness2_name = 46;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyWitness2IsRelativeEnum witness2_is_relative = 47;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness2IsHeirEnum witness2_is_heir = 48;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness2IsAgentEnum witness2_is_agent = 49;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyWitness2IsProviderEnum witness2_is_provider = 50;  // VARCHAR(5)
+  string notary_name = 51;  // TEXT
+  UnitedStatesHealthCarePowerOfAttorneyPrincipalInSkilledNursingFacilityEnum principal_in_skilled_nursing_facility = 52;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyOmbudsmanSignedEnum ombudsman_signed = 53;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyCopyToAgentEnum copy_to_agent = 54;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyCopyToPhysicianEnum copy_to_physician = 55;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyCopyToSuccessorEnum copy_to_successor = 56;  // VARCHAR(5)
+  UnitedStatesHealthCarePowerOfAttorneyCopyToFacilityEnum copy_to_facility = 57;  // VARCHAR(5)
+}

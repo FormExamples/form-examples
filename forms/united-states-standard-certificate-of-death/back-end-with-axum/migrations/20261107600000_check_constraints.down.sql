@@ -1,0 +1,17 @@
+ALTER TABLE "united_states_standard_certificate_of_death_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_death_grade_flag_923347fd";
+ALTER TABLE "united_states_standard_certificate_of_death_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_death_grade_flag_6caf18ca";
+ALTER TABLE "united_states_standard_certificate_of_death_grade_rules" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_death_grade_rule_cbd1d699";
+ALTER TABLE "united_states_standard_certificate_of_death_grades" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_death_grades_ref_cbce6fe6";
+ALTER TABLE "united_states_standard_certificate_of_death_grades" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_death_grades_val_0996ffe6";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_referral__ab0c6b58";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_referred__1d9d77cf";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_manner_of_c5b7f8ef";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_attended__d8d9f5bd";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_certifier_6039e129";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_place_of__a1c5a126";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_marital_s_af103228";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_age_years_check";
+ALTER TABLE "united_states_standard_certificate_of_deaths" DROP CONSTRAINT IF EXISTS "united_states_standard_certificate_of_deaths_sex_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_registration_body_check";
+ALTER TABLE "clinicians" DROP CONSTRAINT IF EXISTS "clinicians_role_check";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_sex_check";

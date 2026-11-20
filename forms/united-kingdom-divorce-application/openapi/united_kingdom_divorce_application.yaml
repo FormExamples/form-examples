@@ -1,0 +1,579 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_kingdom_divorce_application
+openapi: 3.1.0
+info:
+  title: United Kingdom Divorce Application — UnitedKingdomDivorceApplication
+  version: 1.0.0
+  description: "Main United Kingdom divorce or dissolution application record (D8, D84, D36): application type and stage, marriage and certificate, jurisdiction facts, parties and service address, children and financial arrangements, and stage dates. Readiness classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_kingdom_divorce_applications:
+    get:
+      summary: List UnitedKingdomDivorceApplication records
+      operationId: listUnitedKingdomDivorceApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedKingdomDivorceApplication records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedKingdomDivorceApplication
+      operationId: createUnitedKingdomDivorceApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+      responses:
+        "200":
+          description: The newly created UnitedKingdomDivorceApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_kingdom_divorce_applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedKingdomDivorceApplication by id
+      operationId: getUnitedKingdomDivorceApplication
+      responses:
+        "200":
+          description: The requested UnitedKingdomDivorceApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+        "404":
+          description: UnitedKingdomDivorceApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedKingdomDivorceApplication
+      operationId: updateUnitedKingdomDivorceApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+      responses:
+        "200":
+          description: The updated UnitedKingdomDivorceApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+        "404":
+          description: UnitedKingdomDivorceApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedKingdomDivorceApplication
+      operationId: replaceUnitedKingdomDivorceApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+      responses:
+        "200":
+          description: The updated UnitedKingdomDivorceApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedKingdomDivorceApplication"
+        "404":
+          description: UnitedKingdomDivorceApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedKingdomDivorceApplication
+      operationId: deleteUnitedKingdomDivorceApplication
+      responses:
+        "200":
+          description: UnitedKingdomDivorceApplication deleted
+        "404":
+          description: UnitedKingdomDivorceApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedKingdomDivorceApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        applicant_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant (restrict delete).
+        caseworker_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the caseworker (restrict delete); optional.
+        application_type:
+          type: string
+          enum:
+            - divorce
+            - dissolution
+            - ""
+          description: Whether the application is for a divorce (marriage) or the dissolution of a civil partnership.
+        application_mode:
+          type: string
+          enum:
+            - sole
+            - joint
+            - ""
+          description: Sole application by one spouse, or joint application by both.
+        stage:
+          type: string
+          enum:
+            - application
+            - conditional-order
+            - final-order
+            - ""
+          description: "Which stage the user is checking: application (D8 or online), conditional order (D84), or final order (D36)."
+        as_of_date:
+          type: [string, 'null']
+          format: date
+          description: The date the check is made, against which the time gates are tested.
+        domestic_abuse_risk:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there is a risk of domestic abuse. A joint application is not suitable where there is (yes/no).
+        marriage_date:
+          type: [string, 'null']
+          format: date
+          description: Date of the marriage or civil partnership formation.
+        marriage_place:
+          type: string
+          description: Place where the marriage or civil partnership was formed.
+        marriage_country:
+          type: string
+          description: Country where the marriage or civil partnership was formed.
+        legally_recognised:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the marriage or civil partnership is legally recognised in the United Kingdom (yes/no).
+        breakdown_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant states that the relationship has broken down irretrievably (yes/no).
+        marriage_certificate_type:
+          type: string
+          enum:
+            - original
+            - certified-copy
+            - not-held
+            - ""
+          description: "The marriage certificate held: original, certified-copy, or not-held."
+        certificate_in_english:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the marriage certificate is in English (yes/no).
+        certified_translation:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a certified translation of the marriage certificate is held (yes/no).
+        name_changed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a name has been changed since the marriage (yes/no).
+        name_change_proof:
+          type: string
+          enum:
+            - marriage-certificate
+            - deed-poll
+            - none
+            - ""
+          description: "Proof of the name change: marriage-certificate, deed-poll, or none."
+        applicant_habitual_resident:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant is habitually resident in England and Wales (yes/no).
+        applicant_residence_months:
+          type: [integer, 'null']
+          format: int32
+          description: Months the applicant has been habitually resident in England and Wales.
+        applicant_domiciled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant is domiciled in England and Wales (yes/no).
+        respondent_habitual_resident:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the other spouse is habitually resident in England and Wales (yes/no).
+        respondent_domiciled:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the other spouse is domiciled in England and Wales (yes/no).
+        last_habitually_resident_together:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether both were last habitually resident in England and Wales and one still resides there (yes/no).
+        applicant_name:
+          type: string
+          description: Full name of the applicant as it appears on the application.
+        applicant_address:
+          type: string
+          description: Postal address of the applicant.
+        applicant_email:
+          type: string
+          description: Email address of the applicant.
+        respondent_name:
+          type: string
+          description: Full name of the other spouse (the respondent, or the second joint applicant).
+        respondent_address:
+          type: string
+          description: Postal address of the other spouse; the service address for a sole application.
+        respondent_email:
+          type: string
+          description: Email address of the other spouse, used to serve papers online.
+        respondent_address_known:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the current address of the other spouse is known (yes/no).
+        service_method:
+          type: string
+          enum:
+            - email
+            - post
+            - alternative-service
+            - ""
+          description: "How the application is served on the other spouse: email, post, or alternative-service."
+        children_under_18:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether there are children of the family under 18 (yes/no).
+        children_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of children of the family under 18.
+        children_arrangements:
+          type: string
+          enum:
+            - agreed
+            - not-agreed
+            - undecided
+            - ""
+          description: "State of the arrangements for the children: agreed, not-agreed, or undecided."
+        children_note:
+          type: string
+          description: Free-text note on the children arrangements.
+        financial_order_intended:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - undecided
+            - ""
+          description: "Whether a financial order on money and property is intended: yes, no, or undecided."
+        financial_order_applied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a financial order has been applied for (yes/no).
+        fee_status:
+          type: string
+          enum:
+            - paid
+            - help-with-fees-approved
+            - help-with-fees-pending
+            - unpaid
+            - ""
+          description: "Status of the court fee: paid, help-with-fees-approved, help-with-fees-pending, or unpaid."
+        application_issued_date:
+          type: [string, 'null']
+          format: date
+          description: Date the court issued the application; the 20-week reflection period runs from it.
+        respondent_acknowledged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the other spouse has returned the acknowledgement of service (yes/no).
+        conditional_order_granted_date:
+          type: [string, 'null']
+          format: date
+          description: Date the conditional order was made; the 6 weeks and 1 day wait runs from it.
+        final_order_delay_explained:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the reason for waiting more than 12 months to apply for the final order is explained (yes/no).
+      required:
+        - created_at
+        - updated_at
+        - applicant_id
+        - application_type
+        - application_mode
+        - stage
+        - domestic_abuse_risk
+        - marriage_place
+        - marriage_country
+        - legally_recognised
+        - breakdown_confirmed
+        - marriage_certificate_type
+        - certificate_in_english
+        - certified_translation
+        - name_changed
+        - name_change_proof
+        - applicant_habitual_resident
+        - applicant_domiciled
+        - respondent_habitual_resident
+        - respondent_domiciled
+        - last_habitually_resident_together
+        - applicant_name
+        - applicant_address
+        - applicant_email
+        - respondent_name
+        - respondent_address
+        - respondent_email
+        - respondent_address_known
+        - service_method
+        - children_under_18
+        - children_arrangements
+        - children_note
+        - financial_order_intended
+        - financial_order_applied
+        - fee_status
+        - respondent_acknowledged
+        - final_order_delay_explained
+      description: "Main United Kingdom divorce or dissolution application record (D8, D84, D36): application type and stage, marriage and certificate, jurisdiction facts, parties and service address, children and financial arrangements, and stage dates. Readiness classification, fired rules, and flags live in child tables."

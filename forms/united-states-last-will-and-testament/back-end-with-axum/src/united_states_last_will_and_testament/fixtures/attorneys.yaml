@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test name"
+  email: "Test email"
+  phone: "Test phone"
+  postalAddressAsFullText: "Test postalAddressAsFullText"
+  countryAsIso31661Alpha2: "US"
+  postcode: "Test postcode"
+  role: "drafting-attorney"
+  barState: "CA"
+  barNumber: "Test barNumber"

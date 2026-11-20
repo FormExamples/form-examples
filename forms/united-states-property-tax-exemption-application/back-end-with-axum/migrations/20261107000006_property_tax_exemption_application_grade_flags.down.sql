@@ -1,0 +1,1 @@
+DROP TABLE "property_tax_exemption_application_grade_flags";

@@ -1,0 +1,25 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_vehicle_bill_of_sale_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_bill_of_sale;
+
+enum UnitedKingdomVehicleBillOfSaleGradeClassificationEnum {
+  CLASSIFICATION_UNSPECIFIED = 0;
+  CLASSIFICATION_COMPLETE = 1;  // complete
+  CLASSIFICATION_INCOMPLETE = 2;  // incomplete
+  CLASSIFICATION_RISK_FLAGGED = 3;  // risk-flagged
+}
+
+message UnitedKingdomVehicleBillOfSaleGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_vehicle_bill_of_sale_id = 5;  // UUID — uuid
+  UnitedKingdomVehicleBillOfSaleGradeClassificationEnum classification = 6;  // VARCHAR(12)
+  int32 missing_item_count = 7;  // INTEGER
+  int32 risk_flag_count = 8;  // INTEGER
+  string graded_at = 9;  // TIMESTAMPTZ — iso 8601
+}

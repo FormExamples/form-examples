@@ -1,0 +1,37 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: occupant
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_council_tax_discount_application;
+
+enum OccupantStatusEnum {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_COUNTED_ADULT = 1;  // counted-adult
+  STATUS_FULL_TIME_STUDENT = 2;  // full-time-student
+  STATUS_SEVERELY_MENTALLY_IMPAIRED = 3;  // severely-mentally-impaired
+  STATUS_UNDER_18 = 4;  // under-18
+  STATUS_APPRENTICE = 5;  // apprentice
+  STATUS_EDUCATION_18_19 = 6;  // education-18-19
+  STATUS_LIVE_IN_CARER = 7;  // live-in-carer
+  STATUS_CARE_LEAVER = 8;  // care-leaver
+  STATUS_OTHER_DISREGARDED = 9;  // other-disregarded
+}
+
+enum OccupantEvidenceHeldEnum {
+  EVIDENCEHELD_UNSPECIFIED = 0;
+  EVIDENCEHELD_YES = 1;  // yes
+  EVIDENCEHELD_NO = 2;  // no
+}
+
+message Occupant {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_council_tax_discount_application_id = 5;  // UUID — uuid
+  string name = 6;  // VARCHAR(255) — max 255 chars
+  string birth_date = 7;  // DATE — iso 8601 date
+  OccupantStatusEnum status = 8;  // VARCHAR(30)
+  OccupantEvidenceHeldEnum evidence_held = 9;  // VARCHAR(5)
+}

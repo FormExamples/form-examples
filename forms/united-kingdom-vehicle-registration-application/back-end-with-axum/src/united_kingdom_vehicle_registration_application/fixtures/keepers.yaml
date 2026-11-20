@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000a1b2c"
+  deletedAt: null
+  name: "Test Keeper"
+  keeperType: "individual"
+  companyRegistrationNumber: ""
+  email: "test.keeper@example.com"
+  phone: "+441234567891"
+  postalAddressAsFullText: "10 Downing Street, London"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "SW1A 2AA"

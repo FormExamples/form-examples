@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_last_will_and_testament_grade_rules";

@@ -1,0 +1,1 @@
+DROP TABLE "united_states_birth_certificate_application_grade_flags";

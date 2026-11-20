@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test Preparer"
+  email: "test.preparer@example.com"
+  phone: "+12025550143"
+  postalAddressAsFullText: "100 Main Street, Springfield, IL 62701"
+  countryAsIso31661Alpha2: "US"
+  postcode: "62701"
+  role: "preparer"
+  organization: "Test organization"
+  staffIdentifier: "Test staffIdentifier"

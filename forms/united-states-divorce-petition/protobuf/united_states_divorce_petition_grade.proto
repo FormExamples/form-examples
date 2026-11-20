@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_divorce_petition_grade
+
+syntax = "proto3";
+
+package form_examples.united_states_divorce_petition;
+
+enum UnitedStatesDivorcePetitionGradeReadinessClassEnum {
+  READINESSCLASS_UNSPECIFIED = 0;
+  READINESSCLASS_READY_TO_FILE = 1;  // ready-to-file
+  READINESSCLASS_INCOMPLETE = 2;  // incomplete
+  READINESSCLASS_NOT_YET_ELIGIBLE = 3;  // not-yet-eligible
+}
+
+enum UnitedStatesDivorcePetitionGradePropertyRegimeEnum {
+  PROPERTYREGIME_UNSPECIFIED = 0;
+  PROPERTYREGIME_COMMUNITY = 1;  // community
+  PROPERTYREGIME_EQUITABLE = 2;  // equitable
+  PROPERTYREGIME_UNKNOWN = 3;  // unknown
+}
+
+enum UnitedStatesDivorcePetitionGradeStateRuleKnownEnum {
+  STATERULEKNOWN_UNSPECIFIED = 0;
+  STATERULEKNOWN_YES = 1;  // yes
+  STATERULEKNOWN_NO = 2;  // no
+}
+
+message UnitedStatesDivorcePetitionGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_divorce_petition_id = 5;  // UUID — uuid
+  UnitedStatesDivorcePetitionGradeReadinessClassEnum readiness_class = 6;  // VARCHAR(20)
+  UnitedStatesDivorcePetitionGradePropertyRegimeEnum property_regime = 7;  // VARCHAR(10)
+  string earliest_decree_date = 8;  // DATE — iso 8601 date
+  UnitedStatesDivorcePetitionGradeStateRuleKnownEnum state_rule_known = 9;  // VARCHAR(5)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

@@ -1,0 +1,735 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateRegistration",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateRegistration(d) returns { registrationClass, deadlineStatus, daysSinceConfirmation, informantQualified, blockingRules } and detectFlaggedIssues(state) returns the flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. There is no wall-clock dependence: the 5-day clock counts from medical.medicalExaminerConfirmationDate to registration.registrationDate (or to registration.asOfDate while unregistered), so the 'timestamp' key added by form-app.js is the only time-varying output. Classification is first-match: coroner referred and no coroner certificate -> 'referred-to-coroner-pending'; any blocking rule -> 'incomplete'; registrationDate set -> 'registered'; else 'ready-to-register'. Deadline: more than 5 days -> overdue (or registered-late), 4 or 5 days -> due-soon. Regenerate expected with: bin/test-personas united-kingdom-death-registration --update",
+  "personas": [
+    {
+      "name": "Ready to register, on track",
+      "description": "Expected hospital death; medical examiner confirmed 2026-09-01, assessed 2026-09-02 (1 day elapsed); not a coroner case; son present at the death is a qualified informant; appointment booked, documents to hand, cremation planned, five copies to be bought at registration. Expect ready-to-register, on-track, and no flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Margaret Ellis",
+          "sex": "female",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-31",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "yes",
+          "medicalExaminerStatus": "confirmed",
+          "medicalExaminerConfirmationDate": "2026-09-01"
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "relative-present-at-death",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Reading Register Office",
+          "appointmentBooked": "yes",
+          "supportingDocumentsAvailable": "yes",
+          "registrationDate": null,
+          "asOfDate": "2026-09-02"
+        },
+        "aftercare": {
+          "disposalMethod": "cremation",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": 5,
+          "copyOrderChannel": "at-registration",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "ready-to-register",
+        "deadlineStatus": "on-track",
+        "daysSinceConfirmation": 1,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready but due soon, loose ends",
+      "description": "Confirmed 2026-08-30, assessed 2026-09-03: 4 of 5 days used so the deadline is due-soon. No appointment booked, no documents to hand, disposal undecided, no copies planned. Expect ready-to-register, due-soon, with due-soon, appointment, documents, disposal-undecided and copies flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Piotr Nowak",
+          "sex": "male",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-29",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "yes",
+          "medicalExaminerStatus": "confirmed",
+          "medicalExaminerConfirmationDate": "2026-08-30"
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "relative-in-attendance",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Oxford Register Office",
+          "appointmentBooked": "no",
+          "supportingDocumentsAvailable": "no",
+          "registrationDate": null,
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "undecided",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": null,
+          "copyOrderChannel": "",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "ready-to-register",
+        "deadlineStatus": "due-soon",
+        "daysSinceConfirmation": 4,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-DUE-SOON-001",
+            "category": "deadline",
+            "priority": "medium",
+            "description": "4 of the 5 days allowed since the medical examiner’s confirmation have passed.",
+            "suggestedAction": "Register now; if more time is needed tell the register office immediately."
+          },
+          {
+            "id": "F-APPOINTMENT-001",
+            "category": "appointment",
+            "priority": "low",
+            "description": "No registration appointment is booked.",
+            "suggestedAction": "Book an appointment with the register office for the district where the death occurred."
+          },
+          {
+            "id": "F-DOCUMENTS-001",
+            "category": "documents",
+            "priority": "low",
+            "description": "Supporting documents are not to hand. They are helpful but not mandatory.",
+            "suggestedAction": "Take what is available: the deceased’s birth or marriage certificate, passport, NHS medical card, driving licence, and proof of address."
+          },
+          {
+            "id": "F-DISPOSAL-UNDECIDED-001",
+            "category": "disposal-certificate",
+            "priority": "low",
+            "description": "The method of disposal has not been decided.",
+            "suggestedAction": "Decide between burial and cremation with the funeral director; cremation needs further forms."
+          },
+          {
+            "id": "F-COPIES-001",
+            "category": "copies",
+            "priority": "low",
+            "description": "No certified copies of the death certificate are planned. Banks, insurers and probate usually each need one.",
+            "suggestedAction": "Decide how many copies are needed; copies are cheaper bought at registration than ordered later."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready but overdue",
+      "description": "Confirmed 2026-08-25 and still unregistered on 2026-09-03: 9 days, past the 5-day limit. The informant cannot give all of the deceased's particulars. Expect ready-to-register, overdue, with overdue and particulars flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Rosemary Fletcher",
+          "sex": "female",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-24",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "no"
+        },
+        "medical": {
+          "mccdReceived": "yes",
+          "medicalExaminerStatus": "confirmed",
+          "medicalExaminerConfirmationDate": "2026-08-25"
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "person-arranging-funeral",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Bristol Register Office",
+          "appointmentBooked": "yes",
+          "supportingDocumentsAvailable": "yes",
+          "registrationDate": null,
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "burial",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": 3,
+          "copyOrderChannel": "at-registration",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "ready-to-register",
+        "deadlineStatus": "overdue",
+        "daysSinceConfirmation": 9,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-OVERDUE-001",
+            "category": "deadline",
+            "priority": "high",
+            "description": "The death must be registered within 5 days of the medical examiner’s confirmation, and 9 days have passed.",
+            "suggestedAction": "Tell the register office immediately and book the earliest appointment; weekends and bank holidays count towards the deadline."
+          },
+          {
+            "id": "F-PARTICULARS-001",
+            "category": "informant",
+            "priority": "medium",
+            "description": "The informant cannot give the deceased’s full particulars (names, birth date and place, last address, occupation, marital status).",
+            "suggestedAction": "Gather the particulars from a relative or the deceased’s documents before the appointment."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registered in time, complete",
+      "description": "Confirmed 2026-08-29 and registered 2026-09-01 (3 days). Burial certificate issued, Tell Us Once reference received, three copies ordered online with a GRO index reference and priority service. Expect registered, registered-in-time, and no flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Gareth Hughes",
+          "sex": "male",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-28",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "yes",
+          "medicalExaminerStatus": "confirmed",
+          "medicalExaminerConfirmationDate": "2026-08-29"
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "occupier-of-premises",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Cardiff Register Office",
+          "appointmentBooked": "yes",
+          "supportingDocumentsAvailable": "yes",
+          "registrationDate": "2026-09-01",
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "burial",
+          "disposalCertificateIssued": "yes",
+          "tellUsOnceStatus": "reference-received",
+          "tellUsOnceReference": "TUO-7K3M9Q",
+          "copiesRequested": 3,
+          "copyOrderChannel": "gro-online",
+          "groIndexReference": "GRO-2026-118840",
+          "priorityService": "yes"
+        }
+      },
+      "expected": {
+        "registrationClass": "registered",
+        "deadlineStatus": "registered",
+        "daysSinceConfirmation": 3,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Registered late, loose ends",
+      "description": "Confirmed 2026-08-20 and registered 2026-08-30 (10 days, late). The burial certificate has not been issued, no Tell Us Once reference was recorded, and two copies are to be ordered online without a GRO index reference. Expect registered, registered-late, with late-registration, disposal-certificate, Tell Us Once and GRO index flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Dilys Hughes",
+          "sex": "female",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-19",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "yes",
+          "medicalExaminerStatus": "confirmed",
+          "medicalExaminerConfirmationDate": "2026-08-20"
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "relative-in-district",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Swansea Register Office",
+          "appointmentBooked": "yes",
+          "supportingDocumentsAvailable": "yes",
+          "registrationDate": "2026-08-30",
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "burial",
+          "disposalCertificateIssued": "no",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": 2,
+          "copyOrderChannel": "gro-online",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "registered",
+        "deadlineStatus": "registered-late",
+        "daysSinceConfirmation": 10,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-LATE-001",
+            "category": "deadline",
+            "priority": "medium",
+            "description": "The death was registered 10 days after the medical examiner’s confirmation, later than the 5-day limit.",
+            "suggestedAction": "No action on this registration; note the delay for the record."
+          },
+          {
+            "id": "F-DISPOSAL-CERTIFICATE-001",
+            "category": "disposal-certificate",
+            "priority": "medium",
+            "description": "The certificate for burial or cremation (the green form) has not been issued, and the funeral cannot take place without it.",
+            "suggestedAction": "Ask the registrar for the green form and give it to the funeral director, crematorium or burial authority."
+          },
+          {
+            "id": "F-TELL-US-ONCE-001",
+            "category": "tell-us-once",
+            "priority": "low",
+            "description": "No Tell Us Once reference number is recorded.",
+            "suggestedAction": "Ask the registrar for the Tell Us Once reference number so government departments can be informed in one go."
+          },
+          {
+            "id": "F-GRO-INDEX-001",
+            "category": "copies",
+            "priority": "low",
+            "description": "No GRO index reference is recorded: ordering online without it adds a search fee and takes about 15 working days.",
+            "suggestedAction": "Find the GRO index reference (the register office can supply it) to avoid the extra fee."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Referred to coroner, pending",
+      "description": "The death was reported to a coroner, an inquest has been opened and the coroner's certificate has not arrived. Registration waits and the clock is paused. Priority service is requested by post (not available). Expect referred-to-coroner-pending, paused-coroner, with coroner-pending, copies and priority flags.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Chidi Okafor",
+          "sex": "male",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-27",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "",
+          "medicalExaminerStatus": "",
+          "medicalExaminerConfirmationDate": null
+        },
+        "coroner": {
+          "referredToCoroner": "yes",
+          "coronerStage": "inquest-opened",
+          "coronerCertificateReceived": "no"
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "person-present-at-death",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Manchester Register Office",
+          "appointmentBooked": "no",
+          "supportingDocumentsAvailable": "",
+          "registrationDate": null,
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "cremation",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": null,
+          "copyOrderChannel": "post",
+          "groIndexReference": "",
+          "priorityService": "yes"
+        }
+      },
+      "expected": {
+        "registrationClass": "referred-to-coroner-pending",
+        "deadlineStatus": "paused-coroner",
+        "daysSinceConfirmation": null,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-CORONER-PENDING-001",
+            "category": "coroner",
+            "priority": "high",
+            "description": "The death has been reported to a coroner and the coroner’s certificate has not been received. The death cannot be registered yet.",
+            "suggestedAction": "Wait for the coroner to send the certificate (form CN2, or the certificate after inquest) to the registrar; ask the coroner for an interim certificate if proof of death is needed meanwhile."
+          },
+          {
+            "id": "F-COPIES-001",
+            "category": "copies",
+            "priority": "low",
+            "description": "No certified copies of the death certificate are planned. Banks, insurers and probate usually each need one.",
+            "suggestedAction": "Decide how many copies are needed; copies are cheaper bought at registration than ordered later."
+          },
+          {
+            "id": "F-PRIORITY-001",
+            "category": "copies",
+            "priority": "low",
+            "description": "The priority (next working day) service is only available when ordering online from the General Register Office.",
+            "suggestedAction": "Order online from the GRO, or drop the priority request."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Coroner released, ready",
+      "description": "The coroner investigated, released the death with no inquest and the registrar has the coroner's certificate; no medical examiner confirmation is needed. Expect ready-to-register, clock not started, with only the coroner-released flag.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Sinead Doyle",
+          "sex": "female",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-08-26",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "england-wales",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "",
+          "medicalExaminerStatus": "",
+          "medicalExaminerConfirmationDate": null
+        },
+        "coroner": {
+          "referredToCoroner": "yes",
+          "coronerStage": "released-no-inquest",
+          "coronerCertificateReceived": "yes"
+        },
+        "informant": {
+          "informantName": "Peter Ellis",
+          "informantRelationship": "relative-present-at-death",
+          "informantAddress": "4 Mill Lane, Reading RG1 2AB"
+        },
+        "registration": {
+          "registerOffice": "Leeds Register Office",
+          "appointmentBooked": "yes",
+          "supportingDocumentsAvailable": "yes",
+          "registrationDate": null,
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "cremation",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": 3,
+          "copyOrderChannel": "at-registration",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "ready-to-register",
+        "deadlineStatus": "not-started",
+        "daysSinceConfirmation": null,
+        "informantQualified": true,
+        "blockingRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-CORONER-RELEASED-001",
+            "category": "coroner",
+            "priority": "low",
+            "description": "The coroner has released the death. Registration proceeds on the coroner’s certificate; for a cremation the coroner also sends the Cremation 6 certificate.",
+            "suggestedAction": "Book the registration appointment; the registrar will contact the informant."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, wrong jurisdiction and informant",
+      "description": "Death in Scotland, MCCD not received, medical examiner not yet confirmed, and the informant is a neighbour who does not qualify. Expect incomplete with jurisdiction, MCCD, medical-examiner and informant flags and the matching blocking rules.",
+      "state": {
+        "deceased": {
+          "deceasedName": "Aoife Byrne",
+          "sex": "female",
+          "dateOfBirth": "1941-03-14",
+          "dateOfDeath": "2026-09-01",
+          "placeOfDeath": "Royal Berkshire Hospital, Reading",
+          "deathJurisdiction": "scotland",
+          "deceasedParticularsKnown": "yes"
+        },
+        "medical": {
+          "mccdReceived": "no",
+          "medicalExaminerStatus": "pending",
+          "medicalExaminerConfirmationDate": null
+        },
+        "coroner": {
+          "referredToCoroner": "no",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "Sean Byrne",
+          "informantRelationship": "not-qualified",
+          "informantAddress": "12 High Street, Perth"
+        },
+        "registration": {
+          "registerOffice": "",
+          "appointmentBooked": "no",
+          "supportingDocumentsAvailable": "",
+          "registrationDate": null,
+          "asOfDate": "2026-09-03"
+        },
+        "aftercare": {
+          "disposalMethod": "burial",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": 1,
+          "copyOrderChannel": "at-registration",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "incomplete",
+        "deadlineStatus": "not-started",
+        "daysSinceConfirmation": null,
+        "informantQualified": false,
+        "blockingRules": [
+          {
+            "ruleId": "R-JURISDICTION-001",
+            "dimension": "deceased",
+            "category": "jurisdiction",
+            "description": "The death must have occurred in England or Wales; other jurisdictions register elsewhere."
+          },
+          {
+            "ruleId": "R-MEDICAL-001",
+            "dimension": "medical",
+            "category": "mccd",
+            "description": "The medical certificate of cause of death has not been received."
+          },
+          {
+            "ruleId": "R-MEDICAL-002",
+            "dimension": "medical",
+            "category": "medical-examiner",
+            "description": "The medical examiner has not confirmed that the death can be registered."
+          },
+          {
+            "ruleId": "R-INFORMANT-002",
+            "dimension": "informant",
+            "category": "qualified-informant",
+            "description": "The informant is not a qualified informant under section 16 of the Births and Deaths Registration Act 1953."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-JURISDICTION-001",
+            "category": "jurisdiction",
+            "priority": "high",
+            "description": "The death did not occur in England or Wales. This process does not apply; Scotland, Northern Ireland and deaths abroad have their own registration rules and deadlines.",
+            "suggestedAction": "Register with the registrar for the country where the death occurred, or with the FCDO for a death abroad."
+          },
+          {
+            "id": "F-MCCD-MISSING-001",
+            "category": "medical-certificate",
+            "priority": "high",
+            "description": "The medical certificate of cause of death (MCCD) has not been received by the register office.",
+            "suggestedAction": "Ask the doctor or hospital bereavement office to send the MCCD to the register office."
+          },
+          {
+            "id": "F-MEDICAL-EXAMINER-001",
+            "category": "medical-examiner",
+            "priority": "high",
+            "description": "The medical examiner has not confirmed that the death can be registered, so the 5-day clock has not started.",
+            "suggestedAction": "Wait for the medical examiner’s office to contact the informant; do not book to register before then."
+          },
+          {
+            "id": "F-INFORMANT-001",
+            "category": "informant",
+            "priority": "high",
+            "description": "The informant is not a qualified informant. Only a relative, a person present at the death, the occupier of the premises, or the person arranging the funeral can register.",
+            "suggestedAction": "Ask a qualified informant to register the death, or check the registrar’s guidance for exceptions."
+          },
+          {
+            "id": "F-APPOINTMENT-001",
+            "category": "appointment",
+            "priority": "low",
+            "description": "No registration appointment is booked.",
+            "suggestedAction": "Book an appointment with the register office for the district where the death occurred."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Blank state",
+      "description": "Nothing answered. Expect incomplete: name and date of death, jurisdiction, coroner answer, MCCD, medical examiner and informant rules all fire; only the copies and appointment flags are raised.",
+      "state": {
+        "deceased": {
+          "deceasedName": "",
+          "sex": "",
+          "dateOfBirth": null,
+          "dateOfDeath": null,
+          "placeOfDeath": "",
+          "deathJurisdiction": "",
+          "deceasedParticularsKnown": ""
+        },
+        "medical": {
+          "mccdReceived": "",
+          "medicalExaminerStatus": "",
+          "medicalExaminerConfirmationDate": null
+        },
+        "coroner": {
+          "referredToCoroner": "",
+          "coronerStage": "",
+          "coronerCertificateReceived": ""
+        },
+        "informant": {
+          "informantName": "",
+          "informantRelationship": "",
+          "informantAddress": ""
+        },
+        "registration": {
+          "registerOffice": "",
+          "appointmentBooked": "",
+          "supportingDocumentsAvailable": "",
+          "registrationDate": null,
+          "asOfDate": null
+        },
+        "aftercare": {
+          "disposalMethod": "",
+          "disposalCertificateIssued": "",
+          "tellUsOnceStatus": "",
+          "tellUsOnceReference": "",
+          "copiesRequested": null,
+          "copyOrderChannel": "",
+          "groIndexReference": "",
+          "priorityService": ""
+        }
+      },
+      "expected": {
+        "registrationClass": "incomplete",
+        "deadlineStatus": "not-started",
+        "daysSinceConfirmation": null,
+        "informantQualified": false,
+        "blockingRules": [
+          {
+            "ruleId": "R-DECEASED-001",
+            "dimension": "deceased",
+            "category": "identity",
+            "description": "The name of the deceased and the date of death are required."
+          },
+          {
+            "ruleId": "R-JURISDICTION-001",
+            "dimension": "deceased",
+            "category": "jurisdiction",
+            "description": "The death must have occurred in England or Wales; other jurisdictions register elsewhere."
+          },
+          {
+            "ruleId": "R-CORONER-001",
+            "dimension": "coroner",
+            "category": "coroner-answer",
+            "description": "Whether the death was reported to a coroner has not been answered."
+          },
+          {
+            "ruleId": "R-MEDICAL-001",
+            "dimension": "medical",
+            "category": "mccd",
+            "description": "The medical certificate of cause of death has not been received."
+          },
+          {
+            "ruleId": "R-MEDICAL-002",
+            "dimension": "medical",
+            "category": "medical-examiner",
+            "description": "The medical examiner has not confirmed that the death can be registered."
+          },
+          {
+            "ruleId": "R-INFORMANT-001",
+            "dimension": "informant",
+            "category": "informant-details",
+            "description": "The name of the person registering the death is required."
+          },
+          {
+            "ruleId": "R-INFORMANT-002",
+            "dimension": "informant",
+            "category": "qualified-informant",
+            "description": "The informant is not a qualified informant under section 16 of the Births and Deaths Registration Act 1953."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-APPOINTMENT-001",
+            "category": "appointment",
+            "priority": "low",
+            "description": "No registration appointment is booked.",
+            "suggestedAction": "Book an appointment with the register office for the district where the death occurred."
+          },
+          {
+            "id": "F-COPIES-001",
+            "category": "copies",
+            "priority": "low",
+            "description": "No certified copies of the death certificate are planned. Banks, insurers and probate usually each need one.",
+            "suggestedAction": "Decide how many copies are needed; copies are cheaper bought at registration than ordered later."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+mod informants;
+mod united_kingdom_death_registration_grade_flags;
+mod united_kingdom_death_registration_grade_rules;
+mod united_kingdom_death_registration_grades;
+mod united_kingdom_death_registrations;
+mod patients;

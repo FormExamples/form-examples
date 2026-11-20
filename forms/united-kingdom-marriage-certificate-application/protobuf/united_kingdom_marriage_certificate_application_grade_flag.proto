@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_marriage_certificate_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_marriage_certificate_application;
+
+enum UnitedKingdomMarriageCertificateApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_PARTY_UNDER_18 = 1;  // party-under-18
+  CATEGORY_ALREADY_MARRIED_OR_CIVIL_PARTNERED = 2;  // already-married-or-civil-partnered
+  CATEGORY_CLOSELY_RELATED = 3;  // closely-related
+  CATEGORY_NOTICE_PERIOD_TOO_SHORT = 4;  // notice-period-too-short
+  CATEGORY_NOTICE_EXPIRES_BEFORE_CEREMONY = 5;  // notice-expires-before-ceremony
+  CATEGORY_PRIOR_RELATIONSHIP_EVIDENCE_MISSING = 6;  // prior-relationship-evidence-missing
+  CATEGORY_IMMIGRATION_STATUS_REFERRAL = 7;  // immigration-status-referral
+  CATEGORY_JOINT_NOTICE_REQUIRED = 8;  // joint-notice-required
+  CATEGORY_RESIDENCE_UNDER_7_DAYS = 9;  // residence-under-7-days
+  CATEGORY_IDENTITY_MISSING = 10;  // identity-missing
+  CATEGORY_ADDRESS_PROOF_MISSING = 11;  // address-proof-missing
+  CATEGORY_VENUE_NOT_CONFIRMED = 12;  // venue-not-confirmed
+  CATEGORY_WITNESSES_INSUFFICIENT = 13;  // witnesses-insufficient
+  CATEGORY_REQUIRED_FIELDS_MISSING = 14;  // required-fields-missing
+  CATEGORY_CERTIFICATE_SERVICE_MISSING = 15;  // certificate-service-missing
+  CATEGORY_CERTIFICATE_COPIES_INVALID = 16;  // certificate-copies-invalid
+  CATEGORY_GRO_INDEX_REFERENCE_MISSING = 17;  // gro-index-reference-missing
+  CATEGORY_PRIOR_EVIDENCE_CHECK_FEE = 18;  // prior-evidence-check-fee
+  CATEGORY_OTHER = 19;  // other
+}
+
+enum UnitedKingdomMarriageCertificateApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomMarriageCertificateApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_marriage_certificate_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedKingdomMarriageCertificateApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedKingdomMarriageCertificateApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

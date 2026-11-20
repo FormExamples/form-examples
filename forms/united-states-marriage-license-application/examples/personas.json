@@ -1,0 +1,1216 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(d) returns only { applicationClass, earliestCeremonyDate, licenseExpiryDate, stateRuleKnown } -- no rules array and no flags -- so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js (the grader result is not passed to the detector). Classification is first-match: not-eligible (an applicant under the state minimum age with no permitted path, a currently-married applicant, a prohibited relationship, or a proxy marriage the state does not allow) -> incomplete (missing required data, minor consent, ID, prior-marriage end date, in-person appearance, or ceremony timing, witnesses, officiant) -> ready-to-apply. The wall clock is frozen at 2026-09-03 for the signed-license overdue test. The blood-test flag (F-USMLA-020) is not pinned because no encoded state requires a test. Regenerate expected with: bin/test-personas united-states-marriage-license-application --update",
+  "personas": [
+    {
+      "name": "Ready, California, ceremony held and license returned",
+      "description": "Two never-married adults in Los Angeles County apply on 2026-08-20 (California: no waiting period, 90-day validity, one witness on a public license). The license issues the same day with the $91 fee, the ceremony is on 2026-08-30 with an authorized clergy officiant and one witness, and the signed license is returned on 2026-09-01, inside the 10-day window. Expect ready-to-apply with an empty flag list.",
+      "state": {
+        "jurisdiction": {
+          "state": "CA",
+          "county": "Los Angeles County",
+          "applicationDate": "2026-08-20",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Maria Garcia",
+          "sex": "female",
+          "dateOfBirth": "1990-03-14",
+          "placeOfBirth": "United States",
+          "residenceState": "CA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Jordan Lee",
+          "sex": "male",
+          "dateOfBirth": "1988-07-02",
+          "placeOfBirth": "United States",
+          "residenceState": "CA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 91,
+          "licenseIssuedDate": "2026-08-20",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-08-30",
+          "officiantType": "clergy",
+          "officiantName": "Rev. Anita Brooks",
+          "officiantAuthorized": "yes",
+          "witnessCount": 1,
+          "licenseReturnedDate": "2026-09-01",
+          "certifiedCopiesRequested": 2
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestCeremonyDate": "2026-08-20",
+        "licenseExpiryDate": "2026-11-18",
+        "stateRuleKnown": true,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready, Texas, waiting period waived by a premarital course, same-sex couple",
+      "description": "Two women in Travis County apply on 2026-08-25. One was divorced on 2024-05-10. Texas has a 72-hour wait, waived here because the couple completed a premarital course, so the earliest ceremony is the issue date itself; there is no ceremony date yet. Expect ready-to-apply with two low flags: the waiting-period information (waiver applied) and the same-sex Obergefell notice (not a bar).",
+      "state": {
+        "jurisdiction": {
+          "state": "TX",
+          "county": "Travis County",
+          "applicationDate": "2026-08-25",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Priya Natarajan",
+          "sex": "female",
+          "dateOfBirth": "1991-11-09",
+          "placeOfBirth": "United States",
+          "residenceState": "TX",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "divorced",
+          "priorMarriageEndedDate": "2024-05-10"
+        },
+        "applicantTwo": {
+          "name": "Alex Moreno",
+          "sex": "female",
+          "dateOfBirth": "1993-02-21",
+          "placeOfBirth": "United States",
+          "residenceState": "TX",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "yes",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 21,
+          "licenseIssuedDate": "2026-08-25",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestCeremonyDate": "2026-08-25",
+        "licenseExpiryDate": "2026-11-23",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-022",
+            "category": "same-sex-couple",
+            "priority": "low",
+            "description": "The applicants are recorded as the same sex. Under Obergefell v. Hodges (2015) every state must license and recognize their marriage on the same terms as any other; this is not a bar.",
+            "suggestedAction": "If a clerk refuses a license because the applicants are the same sex, ask for the refusal in writing and contact the county clerk supervisor or an attorney."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The waiting period is waived (premarital course), and the license expires after 2026-11-23 (90-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, New York, ceremony the same day the license issues, no witness",
+      "description": "Two adults in Kings County. The license issues on 2026-08-30 and the ceremony is also on 2026-08-30, inside New York's 24-hour waiting period, with no witness although New York requires one. Expect incomplete with the high waiting-period and witness-shortfall flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "NY",
+          "county": "Kings County",
+          "applicationDate": "2026-08-30",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Tomasz Nowak",
+          "sex": "male",
+          "dateOfBirth": "1985-05-30",
+          "placeOfBirth": "United States",
+          "residenceState": "NY",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Elena Silva",
+          "sex": "female",
+          "dateOfBirth": "1987-12-12",
+          "placeOfBirth": "United States",
+          "residenceState": "NY",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 40,
+          "licenseIssuedDate": "2026-08-30",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-08-30",
+          "officiantType": "judge",
+          "officiantName": "Hon. R. Alvarez",
+          "officiantAuthorized": "yes",
+          "witnessCount": 0,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-08-31",
+        "licenseExpiryDate": "2026-10-29",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-010",
+            "category": "waiting-period",
+            "priority": "high",
+            "description": "The ceremony is set inside New York's 24-hour waiting period after the license issues (earliest permitted ceremony: 2026-08-31).",
+            "suggestedAction": "Move the ceremony to 2026-08-31 or later, or ask whether a waiver (course, court order) applies."
+          },
+          {
+            "id": "F-USMLA-013",
+            "category": "witnesses",
+            "priority": "high",
+            "description": "New York requires 1 witness at the ceremony; 0 recorded.",
+            "suggestedAction": "Have the required number of adult witnesses sign the license at the ceremony."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, Florida, expired license and officiant not recorded",
+      "description": "A Florida license issues on 2026-06-01 and the ceremony is held on 2026-08-15, 75 days later, past the 60-day validity. The officiant is not recorded and the signed license has not been returned more than 10 days after the ceremony; no fee is recorded. Expect incomplete with the expired-license, officiant-missing, overdue-return, and fee flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "FL",
+          "county": "Orange County",
+          "applicationDate": "2026-06-01",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Grace Hughes",
+          "sex": "female",
+          "dateOfBirth": "1989-01-17",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Samir Patel",
+          "sex": "male",
+          "dateOfBirth": "1986-09-03",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": "2026-06-01",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-08-15",
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": 0,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-06-04",
+        "licenseExpiryDate": "2026-07-31",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-011",
+            "category": "license-expired",
+            "priority": "high",
+            "description": "The ceremony is set after the license expired (Florida licenses are valid 60 days; last valid day 2026-07-31).",
+            "suggestedAction": "Apply for a new license and pay the fee again; do not hold the ceremony on an expired license."
+          },
+          {
+            "id": "F-USMLA-015",
+            "category": "officiant",
+            "priority": "medium",
+            "description": "The officiant type, name, or authority is not recorded for a ceremony that has a date.",
+            "suggestedAction": "Record who solemnized the marriage and confirm they are authorized in this state."
+          },
+          {
+            "id": "F-USMLA-016",
+            "category": "certificate-return",
+            "priority": "medium",
+            "description": "The signed license has not been returned to the clerk within 10 days of the ceremony (the Florida deadline), so the certified marriage certificate cannot be issued.",
+            "suggestedAction": "Ask the officiant to return the signed license to the clerk now, then order certified copies."
+          },
+          {
+            "id": "F-USMLA-021",
+            "category": "fee",
+            "priority": "low",
+            "description": "A license issue date is recorded but no fee is (clerks set fees by county; Florida licenses commonly cost about $86).",
+            "suggestedAction": "Record the fee paid, and keep the receipt with the license."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible, Pennsylvania, 17-year-old and a spouse not yet divorced",
+      "description": "The first applicant is 17, and Pennsylvania allows no marriage under 18; the second applicant is recorded as currently married. Expect not-eligible with the underage and existing-marriage flags (and the SSN-declined notice for the minor).",
+      "state": {
+        "jurisdiction": {
+          "state": "PA",
+          "county": "Allegheny County",
+          "applicationDate": "2026-09-02",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Chloe Mensah",
+          "sex": "female",
+          "dateOfBirth": "2009-04-18",
+          "placeOfBirth": "United States",
+          "residenceState": "PA",
+          "idPresented": "yes",
+          "ssnStatus": "declined",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Daniel Ahmed",
+          "sex": "male",
+          "dateOfBirth": "1998-08-08",
+          "placeOfBirth": "United States",
+          "residenceState": "PA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "currently-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "parental-consent",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "earliestCeremonyDate": "2026-09-05",
+        "licenseExpiryDate": "2026-11-01",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-001",
+            "category": "underage",
+            "priority": "high",
+            "description": "First applicant is 17: Pennsylvania allows no marriage under 18.",
+            "suggestedAction": "The clerk cannot issue this license. Wait until every applicant reaches the state minimum age, or confirm the state rule with the county clerk."
+          },
+          {
+            "id": "F-USMLA-003",
+            "category": "existing-marriage",
+            "priority": "high",
+            "description": "An applicant is recorded as currently married. A marriage to a second living spouse is void; every prior marriage must have ended by divorce, death, or annulment first.",
+            "suggestedAction": "Finish the divorce or annulment before applying, then record the end date and bring the decree or death certificate if the clerk asks."
+          },
+          {
+            "id": "F-USMLA-023",
+            "category": "social-security-number",
+            "priority": "low",
+            "description": "Social Security number not provided for the first applicant. Federal law (42 U.S.C. 666(a)(13)) has states collect it where one has been issued, but most states do not refuse a license to an applicant who has none.",
+            "suggestedAction": "Tell the clerk if no number was ever issued; the clerk will record that."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The earliest permitted ceremony is 2026-09-05 (Pennsylvania waiting period 72 hours) and the license expires after 2026-11-01 (60-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible, Florida, proxy requested and applicants related",
+      "description": "The applicants are recorded as related within a prohibited degree, and a proxy marriage is requested in Florida, which does not allow it. Expect not-eligible with the prohibited-relationship and proxy-not-permitted flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "FL",
+          "county": "Miami-Dade County",
+          "applicationDate": "2026-09-01",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Lucia Fernandez",
+          "sex": "female",
+          "dateOfBirth": "1980-06-06",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Mateo Fernandez",
+          "sex": "male",
+          "dateOfBirth": "1978-10-10",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "related-prohibited",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "no",
+          "proxyRequested": "yes",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "earliestCeremonyDate": "2026-09-04",
+        "licenseExpiryDate": "2026-10-31",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-004",
+            "category": "prohibited-relationship",
+            "priority": "high",
+            "description": "The applicants are related within a degree of kinship the state prohibits, so the marriage would be void.",
+            "suggestedAction": "Do not proceed. Confirm the state prohibited-degrees rule with the county clerk or an attorney."
+          },
+          {
+            "id": "F-USMLA-005",
+            "category": "proxy-not-permitted",
+            "priority": "high",
+            "description": "A proxy marriage is requested, but Florida does not allow marriage by proxy.",
+            "suggestedAction": "Both applicants should appear in person or by an arrangement the clerk accepts; ask the county clerk before relying on a proxy."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The earliest permitted ceremony is 2026-09-04 (Florida waiting period 72 hours) and the license expires after 2026-10-31 (60-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, Vermont (unlisted state), missing details and remote appearance",
+      "description": "Vermont is not in the rule table, so the uniform default applies and the state-rule flag asks the applicants to verify. The county is blank, the second applicant has no date of birth or marital status, neither has presented ID, and the couple will not appear in person with no proxy. Expect incomplete with the missing-data, ID, in-person-appearance, and verify-state-rule flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "VT",
+          "county": "",
+          "applicationDate": "2026-09-01",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Noah Byrne",
+          "sex": "male",
+          "dateOfBirth": "1992-03-03",
+          "placeOfBirth": "United States",
+          "residenceState": "VT",
+          "idPresented": "no",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Sinead Doyle",
+          "sex": "female",
+          "dateOfBirth": null,
+          "placeOfBirth": "United States",
+          "residenceState": "VT",
+          "idPresented": "no",
+          "ssnStatus": "provided",
+          "maritalStatus": "",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "no",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-09-01",
+        "licenseExpiryDate": "2026-10-31",
+        "stateRuleKnown": false,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-006",
+            "category": "missing-required-data",
+            "priority": "medium",
+            "description": "Required application details are missing: County, Second applicant date of birth, Second applicant marital status.",
+            "suggestedAction": "Complete every required field before applying to the clerk."
+          },
+          {
+            "id": "F-USMLA-008",
+            "category": "identification",
+            "priority": "medium",
+            "description": "First applicant and Second applicant has not presented acceptable government photo identification.",
+            "suggestedAction": "Bring a current government photo ID (driver license, state ID, or passport) and proof of age for each applicant."
+          },
+          {
+            "id": "F-USMLA-009",
+            "category": "in-person-appearance",
+            "priority": "medium",
+            "description": "Both applicants are not appearing in person and no proxy marriage is requested. Most clerks require both applicants at the counter; a few allow a remote or video appearance.",
+            "suggestedAction": "Ask the county clerk whether a remote appearance is available, or arrange for both applicants to attend."
+          },
+          {
+            "id": "F-USMLA-019",
+            "category": "state-rule",
+            "priority": "medium",
+            "description": "The state \"VT\" is not in this tool's rule table, so the uniform default (18 to marry, 60-day validity, no waiting period, no witnesses) was applied. Verify the state rule.",
+            "suggestedAction": "Verify the waiting period, license validity, minimum age, and witness rules with the county clerk before relying on this result."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, Illinois, 17-year-old without consent and an undocumented divorce",
+      "description": "The second applicant is 17 and Illinois allows that with parental consent or judicial approval, but none is recorded; the first applicant is divorced with no end date. Expect incomplete with the minor-consent and prior-marriage-undocumented flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "IL",
+          "county": "Cook County",
+          "applicationDate": "2026-09-02",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Imani Carter",
+          "sex": "female",
+          "dateOfBirth": "1996-02-02",
+          "placeOfBirth": "United States",
+          "residenceState": "IL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "divorced",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Leo Brown",
+          "sex": "male",
+          "dateOfBirth": "2009-07-30",
+          "placeOfBirth": "United States",
+          "residenceState": "IL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "none",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-09-03",
+        "licenseExpiryDate": "2026-11-01",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-002",
+            "category": "minor-consent",
+            "priority": "high",
+            "description": "An applicant is under 18. Illinois allows this only with parental or guardian consent (or a court order), and that is not recorded (recorded: none).",
+            "suggestedAction": "Obtain the required court order or consent, and bring it and proof of age to the clerk."
+          },
+          {
+            "id": "F-USMLA-007",
+            "category": "prior-marriage-undocumented",
+            "priority": "high",
+            "description": "First applicant: no end date recorded for the prior marriage.",
+            "suggestedAction": "Record when the prior marriage ended, and bring the divorce decree, annulment, or death certificate if the clerk asks for it."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The earliest permitted ceremony is 2026-09-03 (Illinois waiting period 24 hours) and the license expires after 2026-11-01 (60-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible, Florida, 17-year-old with a partner more than two years older",
+      "description": "A 17-year-old and a 22-year-old apply in Florida with parental consent recorded. Florida allows 17 with consent only when the partner is no more than two years older. Expect not-eligible with the underage flag naming the age-gap limit.",
+      "state": {
+        "jurisdiction": {
+          "state": "FL",
+          "county": "Hillsborough County",
+          "applicationDate": "2026-09-02",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Ava Johnson",
+          "sex": "female",
+          "dateOfBirth": "2009-03-15",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Ethan Clark",
+          "sex": "male",
+          "dateOfBirth": "2004-01-20",
+          "placeOfBirth": "United States",
+          "residenceState": "FL",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "parental-consent",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "earliestCeremonyDate": "2026-09-05",
+        "licenseExpiryDate": "2026-11-01",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-001",
+            "category": "underage",
+            "priority": "high",
+            "description": "First applicant is 17: the age gap exceeds the 2-year limit Florida sets when a minor marries.",
+            "suggestedAction": "The clerk cannot issue this license. Wait until every applicant reaches the state minimum age, or confirm the state rule with the county clerk."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The earliest permitted ceremony is 2026-09-05 (Florida waiting period 72 hours) and the license expires after 2026-11-01 (60-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready, Ohio, 17-year-old with a court order and a partner within four years",
+      "description": "A 17-year-old and a 20-year-old apply in Ohio with juvenile-court approval recorded; the age gap is within Ohio's four-year limit. Ohio has no waiting period. Expect ready-to-apply, with the low waiting-period information flag only.",
+      "state": {
+        "jurisdiction": {
+          "state": "OH",
+          "county": "Franklin County",
+          "applicationDate": "2026-09-02",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Zoe Adams",
+          "sex": "female",
+          "dateOfBirth": "2009-05-09",
+          "placeOfBirth": "United States",
+          "residenceState": "OH",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Caleb Turner",
+          "sex": "male",
+          "dateOfBirth": "2006-02-14",
+          "placeOfBirth": "United States",
+          "residenceState": "OH",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "court-order",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 60,
+          "licenseIssuedDate": "2026-09-02",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestCeremonyDate": "2026-09-02",
+        "licenseExpiryDate": "2026-11-01",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "There is no waiting period, and the license expires after 2026-11-01 (60-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready, Washington, two witnesses, late return and SSN not issued",
+      "description": "A Washington couple observes the 3-day wait (issued 2026-07-20, ceremony 2026-07-25), has two witnesses and an authorized officiant, and returns the signed license on 2026-08-30, 36 days after the ceremony and past the 30-day window. One applicant has no Social Security number issued. Expect ready-to-apply with the late-return and SSN notice low flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "WA",
+          "county": "King County",
+          "applicationDate": "2026-07-20",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Hana Kim",
+          "sex": "female",
+          "dateOfBirth": "1994-04-04",
+          "placeOfBirth": "South Korea",
+          "residenceState": "WA",
+          "idPresented": "yes",
+          "ssnStatus": "none-issued",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Marcus Reed",
+          "sex": "male",
+          "dateOfBirth": "1991-09-19",
+          "placeOfBirth": "United States",
+          "residenceState": "WA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 162,
+          "licenseIssuedDate": "2026-07-20",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-07-25",
+          "officiantType": "notary",
+          "officiantName": "P. Ortega",
+          "officiantAuthorized": "yes",
+          "witnessCount": 2,
+          "licenseReturnedDate": "2026-08-30",
+          "certifiedCopiesRequested": 3
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestCeremonyDate": "2026-07-23",
+        "licenseExpiryDate": "2026-09-18",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-017",
+            "category": "certificate-return",
+            "priority": "low",
+            "description": "The signed license was returned more than 30 days after the ceremony (the Washington deadline).",
+            "suggestedAction": "Confirm with the clerk that the late return was recorded, and keep the receipt."
+          },
+          {
+            "id": "F-USMLA-023",
+            "category": "social-security-number",
+            "priority": "low",
+            "description": "Social Security number not provided for the first applicant. Federal law (42 U.S.C. 666(a)(13)) has states collect it where one has been issued, but most states do not refuse a license to an applicant who has none.",
+            "suggestedAction": "Tell the clerk if no number was ever issued; the clerk will record that."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, Georgia, unauthorized officiant and license returned before the ceremony",
+      "description": "The officiant is recorded as not authorized to solemnize marriages in Georgia and the license-return date is before the ceremony date (a typing error). Expect incomplete with the unauthorized-officiant and return-before-ceremony flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "GA",
+          "county": "Fulton County",
+          "applicationDate": "2026-08-01",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Olivia Price",
+          "sex": "female",
+          "dateOfBirth": "1990-12-01",
+          "placeOfBirth": "United States",
+          "residenceState": "GA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Henry Cole",
+          "sex": "male",
+          "dateOfBirth": "1989-11-11",
+          "placeOfBirth": "United States",
+          "residenceState": "GA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 76,
+          "licenseIssuedDate": "2026-08-01",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-08-10",
+          "officiantType": "other",
+          "officiantName": "Friend of the couple",
+          "officiantAuthorized": "no",
+          "witnessCount": 0,
+          "licenseReturnedDate": "2026-08-05",
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-08-01",
+        "licenseExpiryDate": "2027-08-01",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-014",
+            "category": "officiant",
+            "priority": "high",
+            "description": "The officiant is recorded as not authorized to solemnize marriages in this state, which can put the validity of the marriage in doubt.",
+            "suggestedAction": "Use an authorized officiant (clergy, judge, clerk, or another person the state authorizes) and confirm authority with the clerk before the ceremony."
+          },
+          {
+            "id": "F-USMLA-018",
+            "category": "certificate-return",
+            "priority": "medium",
+            "description": "The license return date is before the ceremony date.",
+            "suggestedAction": "Correct the ceremony or license-return date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible, California after the minor path closes (2027)",
+      "description": "California allows a court order for a minor until 2027-01-01. On an application dated 2027-01-15 a 17-year-old with a court order is barred. Expect not-eligible with the underage flag.",
+      "state": {
+        "jurisdiction": {
+          "state": "CA",
+          "county": "San Diego County",
+          "applicationDate": "2027-01-15",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Mia Torres",
+          "sex": "female",
+          "dateOfBirth": "2009-10-05",
+          "placeOfBirth": "United States",
+          "residenceState": "CA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Lucas Wright",
+          "sex": "male",
+          "dateOfBirth": "2000-10-05",
+          "placeOfBirth": "United States",
+          "residenceState": "CA",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "court-order",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": null,
+          "licenseIssuedDate": null,
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "earliestCeremonyDate": "2027-01-15",
+        "licenseExpiryDate": "2027-04-15",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-001",
+            "category": "underage",
+            "priority": "high",
+            "description": "First applicant is 17: California allows no marriage under 18.",
+            "suggestedAction": "The clerk cannot issue this license. Wait until every applicant reaches the state minimum age, or confirm the state rule with the county clerk."
+          },
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "There is no waiting period, and the license expires after 2027-04-15 (90-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready, Texas, deployed service member by proxy",
+      "description": "A Texas applicant is on active duty and a proxy marriage is requested; Texas allows proxy marriage for a deployed service member. The 72-hour wait is waived by the military exception. Expect ready-to-apply with the proxy allowed and the low waiting-period information flag, and the in-person flag does not fire because a proxy is requested.",
+      "state": {
+        "jurisdiction": {
+          "state": "TX",
+          "county": "Bexar County",
+          "applicationDate": "2026-08-28",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Sgt. Dana Whitfield",
+          "sex": "female",
+          "dateOfBirth": "1995-03-22",
+          "placeOfBirth": "United States",
+          "residenceState": "TX",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Jamal Whitfield",
+          "sex": "male",
+          "dateOfBirth": "1994-06-28",
+          "placeOfBirth": "United States",
+          "residenceState": "TX",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "yes",
+          "appearInPerson": "no",
+          "proxyRequested": "yes",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 81,
+          "licenseIssuedDate": "2026-08-28",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": null,
+          "officiantType": "",
+          "officiantName": "",
+          "officiantAuthorized": "",
+          "witnessCount": null,
+          "licenseReturnedDate": null,
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-apply",
+        "earliestCeremonyDate": "2026-08-28",
+        "licenseExpiryDate": "2026-11-26",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-024",
+            "category": "waiting-period",
+            "priority": "low",
+            "description": "The waiting period is waived (active-duty military service), and the license expires after 2026-11-26 (90-day validity).",
+            "suggestedAction": "Schedule the ceremony between those dates, in the county or state the license allows."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete, Ohio, ceremony dated before the license issued",
+      "description": "The ceremony date (2026-08-01) is before the license issue date (2026-08-05), a date typo or a ceremony held without a license. Expect incomplete with the ceremony-before-issuance flag.",
+      "state": {
+        "jurisdiction": {
+          "state": "OH",
+          "county": "Summit County",
+          "applicationDate": "2026-08-05",
+          "licenseType": "standard"
+        },
+        "applicantOne": {
+          "name": "Ruby Evans",
+          "sex": "female",
+          "dateOfBirth": "1993-07-07",
+          "placeOfBirth": "United States",
+          "residenceState": "OH",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "applicantTwo": {
+          "name": "Felix Grant",
+          "sex": "male",
+          "dateOfBirth": "1992-08-08",
+          "placeOfBirth": "United States",
+          "residenceState": "OH",
+          "idPresented": "yes",
+          "ssnStatus": "provided",
+          "maritalStatus": "never-married",
+          "priorMarriageEndedDate": null
+        },
+        "eligibility": {
+          "relationshipBetweenApplicants": "not-related",
+          "minorConsent": "not-applicable",
+          "activeDutyMilitary": "no",
+          "appearInPerson": "yes",
+          "proxyRequested": "no",
+          "premaritalCourseCompleted": "no",
+          "bloodTestEvidence": "not-required"
+        },
+        "issuance": {
+          "feePaidUsd": 60,
+          "licenseIssuedDate": "2026-08-05",
+          "clerkNote": ""
+        },
+        "ceremony": {
+          "ceremonyDate": "2026-08-01",
+          "officiantType": "judge",
+          "officiantName": "Hon. L. Park",
+          "officiantAuthorized": "yes",
+          "witnessCount": 0,
+          "licenseReturnedDate": "2026-08-06",
+          "certifiedCopiesRequested": null
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "earliestCeremonyDate": "2026-08-05",
+        "licenseExpiryDate": "2026-10-04",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-USMLA-012",
+            "category": "ceremony-timing",
+            "priority": "high",
+            "description": "The ceremony date is before the license was issued. A ceremony without a valid license does not create a licensed marriage.",
+            "suggestedAction": "Check the dates. Hold the ceremony only after the license has issued and the waiting period has passed."
+          }
+        ]
+      }
+    }
+  ]
+}

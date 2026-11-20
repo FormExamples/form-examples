@@ -1,0 +1,12 @@
+<!ELEMENT principal (id,created_at,updated_at,deleted_at,name,birth_date,email,phone,postal_address_as_full_text,state_as_iso_3166_2_us,postcode)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT state_as_iso_3166_2_us (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>

@@ -1,0 +1,1608 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateApplication(d) returns { validityClass, feeDueAsPence, missingItemCount, rules } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's detectFlaggedIssues(state). Classification: any missing data item (required field, VIN or registration-number format, seriously damaged vehicle, unsigned declaration) -> 'incomplete'; else any missing document or fee -> 'needs-supporting-documents'; else 'ready-to-submit'. Fee: V62 25 pounds (waived with a new-keeper slip, or for a V5C not received within 6 weeks); first registration, import, and V627/1 55 pounds. Vehicle age and MOT/type-approval requirements are computed from the application date in the state, so no wall clock is involved.",
+  "personas": [
+    {
+      "name": "v62-lost-v5c-ready",
+      "description": "V62 replacement for a lost V5C, 25 pound cheque, signed: ready to submit, with the low lost-V5C flag.",
+      "state": {
+        "application": {
+          "applicationType": "v62-replacement-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "lost",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "AB12 CDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 2500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 2500,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-V5C-LOST-STOLEN-DESTROYED-001",
+            "category": "v5c-lost-stolen-destroyed",
+            "priority": "low",
+            "description": "The V5C was lost, so a replacement is requested with the 25 pound fee.",
+            "suggestedAction": "Post the V62 with a cheque or postal order for 25 pounds payable to DVLA, Swansea. Do not send cash."
+          }
+        ]
+      }
+    },
+    {
+      "name": "v62-acquired-with-slip-ready",
+      "description": "V62 for a vehicle acquired without a V5C, with the new-keeper slip: no fee, ready to submit.",
+      "state": {
+        "application": {
+          "applicationType": "v62-acquired-without-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "never-had",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": "yes"
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "AB12 CDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "none",
+          "feePaidAsPence": null,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 0,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "v62-not-received-in-window",
+      "description": "V62 where the V5C has not arrived within 6 weeks: no fee due, ready to submit.",
+      "state": {
+        "application": {
+          "applicationType": "v62-replacement-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "not-received",
+          "weeksSinceChangeOfKeeper": 4,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "AB12 CDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "",
+          "feePaidAsPence": null,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 0,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "v62-acquired-no-slip-no-fee",
+      "description": "V62 acquired without a V5C and no new-keeper slip: 25 pounds due but nothing enclosed, so it needs documents; entitlement and fee flags.",
+      "state": {
+        "application": {
+          "applicationType": "v62-acquired-without-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "never-had",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": "no"
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "passport",
+          "addressDocumentType": "utility-bill"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "AB12 CDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "",
+          "feePaidAsPence": null,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 2500,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-FEE-MISSING-01",
+            "dimension": "fee",
+            "category": "fee",
+            "description": "A fee of £25.00 is due but no payment is enclosed."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ENTITLEMENT-MISSING-002",
+            "category": "entitlement-missing",
+            "priority": "medium",
+            "description": "No new-keeper slip from the most recent V5C is enclosed, so the 25 pound fee applies and the DVLA may ask for proof that you acquired the vehicle.",
+            "suggestedAction": "Ask the seller for the green new-keeper slip; if you cannot, enclose proof of purchase and the fee."
+          },
+          {
+            "id": "F-FEE-INCORRECT-001",
+            "category": "fee-incorrect",
+            "priority": "high",
+            "description": "A fee of £25.00 is due but no payment is enclosed.",
+            "suggestedAction": "Enclose a cheque or postal order payable to DVLA, Swansea, or pay at a Post Office branch that deals with vehicle tax. Do not send cash."
+          }
+        ]
+      }
+    },
+    {
+      "name": "v55-4-new-vehicle-missing-docs",
+      "description": "New vehicle first registration with no certificate of newness, no type approval, and no payment: needs supporting documents.",
+      "state": {
+        "application": {
+          "applicationType": "v55-4-new-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2026-06-01",
+          "dateFirstUsed": "2026-07-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "no",
+          "typeApproval": "none",
+          "motStatus": "not-required",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "",
+          "feePaidAsPence": null,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 3,
+        "rules": [
+          {
+            "ruleId": "R-NEWNESS-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "A new vehicle needs a certificate of newness (or a declaration of newness for an import)."
+          },
+          {
+            "ruleId": "R-TYPE-APPROVAL-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "Vehicle approval evidence is needed for a vehicle under 10 years old, unless exempt."
+          },
+          {
+            "ruleId": "R-FEE-MISSING-01",
+            "dimension": "fee",
+            "category": "fee",
+            "description": "A fee of £55.00 is due but no payment is enclosed."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-TYPE-APPROVAL-MISSING-001",
+            "category": "type-approval-missing",
+            "priority": "high",
+            "description": "Vehicle approval evidence (certificate of conformity, type approval, IVA, or MSVA) is missing for a vehicle under 10 years old.",
+            "suggestedAction": "Enclose the manufacturer certificate of conformity or the approval certificate for the vehicle."
+          },
+          {
+            "id": "F-FEE-INCORRECT-001",
+            "category": "fee-incorrect",
+            "priority": "high",
+            "description": "A fee of £55.00 is due but no payment is enclosed.",
+            "suggestedAction": "Enclose a cheque or postal order payable to DVLA, Swansea, or pay at a Post Office branch that deals with vehicle tax. Do not send cash."
+          }
+        ]
+      }
+    },
+    {
+      "name": "v55-4-new-vehicle-ready",
+      "description": "New vehicle first registration with newness certificate, type approval, and 55 pound cheque: ready to submit.",
+      "state": {
+        "application": {
+          "applicationType": "v55-4-new-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2026-06-01",
+          "dateFirstUsed": "2026-07-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "yes",
+          "typeApproval": "ecwvta",
+          "motStatus": "not-required",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "v55-5-used-no-mot",
+      "description": "Used vehicle 7 years old, no MOT certificate, vehicle approval present, wrong fee amount: needs documents.",
+      "state": {
+        "application": {
+          "applicationType": "v55-5-used-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "passport",
+          "addressDocumentType": "bank-statement"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "gb-type-approval",
+          "motStatus": "missing",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 2500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 2,
+        "rules": [
+          {
+            "ruleId": "R-MOT-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "A valid MOT certificate is needed for a used vehicle over 3 years old (over 4 in Northern Ireland)."
+          },
+          {
+            "ruleId": "R-FEE-AMOUNT-01",
+            "dimension": "fee",
+            "category": "fee",
+            "description": "The fee due is £55.00 but the amount recorded is different."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-MOT-MISSING-001",
+            "category": "mot-missing",
+            "priority": "high",
+            "description": "A used vehicle over 3 years old (over 4 in Northern Ireland) needs a current MOT certificate with the first-registration application.",
+            "suggestedAction": "Have the vehicle tested and enclose the MOT certificate."
+          },
+          {
+            "id": "F-FEE-INCORRECT-002",
+            "category": "fee-incorrect",
+            "priority": "high",
+            "description": "The fee due is £55.00 but the amount recorded is £25.00.",
+            "suggestedAction": "Correct the payment so it matches the fee due."
+          }
+        ]
+      }
+    },
+    {
+      "name": "v55-5-used-old-exempt-ready",
+      "description": "Used vehicle 20 years old: type approval exempt, valid MOT, 55 pound postal order: ready to submit.",
+      "state": {
+        "application": {
+          "applicationType": "v55-5-used-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2006-05-01",
+          "dateFirstUsed": "2006-06-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "exempt-over-10-years",
+          "motStatus": "valid",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "postal-order",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "imported-vehicle-nova-missing",
+      "description": "Imported used vehicle not notified to HMRC through NOVA, with an IVA certificate and MOT: needs documents with a high NOVA flag.",
+      "state": {
+        "application": {
+          "applicationType": "imported-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2020-02-01",
+          "dateFirstUsed": "2020-03-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "iva",
+          "motStatus": "valid",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "Japan",
+          "importDate": "2026-08-20",
+          "novaStatus": "not-notified",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-NOVA-01",
+            "dimension": "import",
+            "category": "evidence",
+            "description": "HMRC must be told of the vehicle arrival (NOVA) within 14 days; the vehicle is not recorded as notified."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NOVA-MISSING-001",
+            "category": "nova-missing",
+            "priority": "high",
+            "description": "An imported vehicle must be notified to HMRC through the Notification of Vehicle Arrivals (NOVA) within 14 days of arrival; it is not recorded as notified.",
+            "suggestedAction": "Notify HMRC through NOVA and enter the reference before applying to register the vehicle."
+          }
+        ]
+      }
+    },
+    {
+      "name": "imported-vehicle-ready",
+      "description": "Imported used vehicle with a NOVA reference, IVA, MOT, and fee: ready to submit.",
+      "state": {
+        "application": {
+          "applicationType": "imported-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2020-02-01",
+          "dateFirstUsed": "2020-03-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "iva",
+          "motStatus": "valid",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "Japan",
+          "importDate": "2026-08-20",
+          "novaStatus": "notified",
+          "novaReference": "NOVA-2026-0001"
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "online-card",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-submit",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 0,
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "kit-vehicle-no-build-evidence",
+      "description": "Kit vehicle with no build evidence: needs documents with an entitlement flag.",
+      "state": {
+        "application": {
+          "applicationType": "v627-1-rebuilt-or-kit",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Caterham",
+          "model": "Seven kit",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2025-11-01",
+          "dateFirstUsed": "2026-02-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "msva",
+          "motStatus": "not-required",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "no",
+          "donorVehicleCount": 0
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-BUILD-EVIDENCE-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "A rebuilt or kit vehicle needs receipts and build evidence (for example build plans)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-ENTITLEMENT-MISSING-001",
+            "category": "entitlement-missing",
+            "priority": "medium",
+            "description": "A rebuilt or kit vehicle needs the build evidence (receipts, build plans) that shows the vehicle is entitled to be registered.",
+            "suggestedAction": "Enclose receipts for the major components and any build plans."
+          }
+        ]
+      }
+    },
+    {
+      "name": "seriously-damaged-vehicle",
+      "description": "Seriously damaged vehicle that cannot be repaired: incomplete (cannot be registered), high flag.",
+      "state": {
+        "application": {
+          "applicationType": "v55-5-used-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "yes"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "gb-type-approval",
+          "motStatus": "valid",
+          "insuranceStatus": "in-force",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-SERIOUSLY-DAMAGED-01",
+            "dimension": "vehicle",
+            "category": "blocking",
+            "description": "A seriously damaged vehicle that cannot be repaired cannot be registered."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SERIOUSLY-DAMAGED-001",
+            "category": "seriously-damaged",
+            "priority": "high",
+            "description": "The vehicle is recorded as seriously damaged, meaning it cannot be repaired. The DVLA cannot register a vehicle in that state, and fees paid beforehand are not refunded.",
+            "suggestedAction": "Do not send the application until the vehicle has been repaired and can be registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "bad-vin-and-registration",
+      "description": "V62 with a VIN containing the letter O and a malformed registration number: incomplete with format flags.",
+      "state": {
+        "application": {
+          "applicationType": "v62-replacement-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "destroyed",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "12 ABCDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXWO00001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 2500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "feeDueAsPence": 2500,
+        "missingItemCount": 2,
+        "rules": [
+          {
+            "ruleId": "R-REGISTRATION-FORMAT-01",
+            "dimension": "vehicle",
+            "category": "format",
+            "description": "The registration number does not match a known Great Britain or Northern Ireland format."
+          },
+          {
+            "ruleId": "R-VIN-FORMAT-01",
+            "dimension": "vehicle",
+            "category": "format",
+            "description": "The VIN is not 17 characters of letters (not I, O, Q) and digits, as ISO 3779 requires for a vehicle made from 1981."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-V5C-LOST-STOLEN-DESTROYED-001",
+            "category": "v5c-lost-stolen-destroyed",
+            "priority": "low",
+            "description": "The V5C was destroyed, so a replacement is requested with the 25 pound fee.",
+            "suggestedAction": "Post the V62 with a cheque or postal order for 25 pounds payable to DVLA, Swansea. Do not send cash."
+          },
+          {
+            "id": "F-VIN-INVALID-001",
+            "category": "vin-invalid",
+            "priority": "medium",
+            "description": "The VIN is not 17 characters of letters (not I, O, Q) and digits, as ISO 3779 requires for a vehicle made from 1981.",
+            "suggestedAction": "Check the VIN against the plate on the vehicle or the V5C; a mistyped VIN delays the application."
+          },
+          {
+            "id": "F-REGISTRATION-NUMBER-INVALID-001",
+            "category": "registration-number-invalid",
+            "priority": "medium",
+            "description": "The registration number does not match a Great Britain or Northern Ireland format.",
+            "suggestedAction": "Check the registration number on the number plate or the V5C."
+          }
+        ]
+      }
+    },
+    {
+      "name": "northern-ireland-company-keeper",
+      "description": "Company keeper at a Northern Ireland address, owner differs, no insurance, no company number: incomplete.",
+      "state": {
+        "application": {
+          "applicationType": "v55-5-used-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Belfast Haulage Ltd",
+          "keeperType": "company",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "yes",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "yes"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2024-01-10",
+          "dateFirstUsed": "2024-02-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "gb-type-approval",
+          "motStatus": "valid",
+          "insuranceStatus": "none",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "no",
+          "declarationDate": null,
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 4,
+        "rules": [
+          {
+            "ruleId": "R-MISSING-COMPANY-NUMBER-01",
+            "dimension": "keeper",
+            "category": "required-field",
+            "description": "A company keeper needs a Companies House registration number."
+          },
+          {
+            "ruleId": "R-MISSING-OWNER-NAME-01",
+            "dimension": "keeper",
+            "category": "required-field",
+            "description": "The owner differs from the keeper but the owner name is missing."
+          },
+          {
+            "ruleId": "R-DECLARATION-UNSIGNED-01",
+            "dimension": "classification",
+            "category": "declaration",
+            "description": "The declaration is not signed."
+          },
+          {
+            "ruleId": "R-INSURANCE-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "An insurance certificate or cover note is needed when registering to a Northern Ireland address."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INSURANCE-MISSING-001",
+            "category": "insurance-missing",
+            "priority": "high",
+            "description": "A Northern Ireland address needs an insurance certificate or cover note with the first-registration application.",
+            "suggestedAction": "Enclose an insurance certificate or cover note naming the vehicle."
+          },
+          {
+            "id": "F-KEEPER-OWNER-MISMATCH-001",
+            "category": "keeper-owner-mismatch",
+            "priority": "medium",
+            "description": "The owner differs from the registered keeper. The keeper named on the V5C is responsible for taxing and insuring the vehicle; the V5C is not proof of ownership.",
+            "suggestedAction": "Enter the owner name and check that the keeper details are right."
+          },
+          {
+            "id": "F-DECLARATION-UNSIGNED-001",
+            "category": "declaration-unsigned",
+            "priority": "high",
+            "description": "The declaration is not signed, and the DVLA will return an unsigned application.",
+            "suggestedAction": "Sign and date the declaration before posting the application."
+          }
+        ]
+      }
+    },
+    {
+      "name": "northern-ireland-no-insurance",
+      "description": "Individual keeper at a Northern Ireland address with the owner recorded but no insurance certificate: needs documents; keeper-owner and high insurance flags.",
+      "state": {
+        "application": {
+          "applicationType": "v55-5-used-vehicle",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "has-v5c",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "photocard-driving-licence",
+          "addressDocumentType": "photocard-driving-licence"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "yes",
+          "ownerName": "Pat Morgan",
+          "keeperAddressInNorthernIreland": "yes"
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2024-01-10",
+          "dateFirstUsed": "2024-02-01",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "gb-type-approval",
+          "motStatus": "not-required",
+          "insuranceStatus": "none",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 5500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 5500,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-INSURANCE-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "An insurance certificate or cover note is needed when registering to a Northern Ireland address."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INSURANCE-MISSING-001",
+            "category": "insurance-missing",
+            "priority": "high",
+            "description": "A Northern Ireland address needs an insurance certificate or cover note with the first-registration application.",
+            "suggestedAction": "Enclose an insurance certificate or cover note naming the vehicle."
+          },
+          {
+            "id": "F-KEEPER-OWNER-MISMATCH-001",
+            "category": "keeper-owner-mismatch",
+            "priority": "medium",
+            "description": "The owner differs from the registered keeper. The keeper named on the V5C is responsible for taxing and insuring the vehicle; the V5C is not proof of ownership.",
+            "suggestedAction": "Check that the keeper details are right and keep proof of the owner."
+          }
+        ]
+      }
+    },
+    {
+      "name": "blank-application",
+      "description": "A blank application: incomplete with every required item missing.",
+      "state": {
+        "application": {
+          "applicationType": "",
+          "applicationDate": null,
+          "v5cStatus": "",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": ""
+        },
+        "applicant": {
+          "name": "",
+          "birthDate": null,
+          "email": "",
+          "phone": "",
+          "postalAddressAsFullText": "",
+          "postcode": "",
+          "drivingLicenceNumber": "",
+          "identityDocumentType": "",
+          "addressDocumentType": ""
+        },
+        "keeper": {
+          "keeperName": "",
+          "keeperType": "",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": ""
+        },
+        "vehicle": {
+          "registrationNumber": "",
+          "vehicleIdentificationNumber": "",
+          "engineNumber": "",
+          "make": "",
+          "model": "",
+          "colour": "",
+          "vehicleCategory": "",
+          "fuelType": "",
+          "engineCapacityAsCc": null,
+          "dateOfManufacture": null,
+          "dateFirstUsed": null,
+          "seriouslyDamaged": ""
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "",
+          "feePaidAsPence": null,
+          "declarationSigned": "",
+          "declarationDate": null,
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "feeDueAsPence": null,
+        "missingItemCount": 10,
+        "rules": [
+          {
+            "ruleId": "R-MISSING-TYPE-01",
+            "dimension": "classification",
+            "category": "required-field",
+            "description": "The application type (V62, V55/4, V55/5, import, V627/1) is not chosen."
+          },
+          {
+            "ruleId": "R-MISSING-DATE-01",
+            "dimension": "classification",
+            "category": "required-field",
+            "description": "The application date is missing."
+          },
+          {
+            "ruleId": "R-MISSING-APPLICANT-NAME-01",
+            "dimension": "applicant",
+            "category": "required-field",
+            "description": "The applicant name is missing."
+          },
+          {
+            "ruleId": "R-MISSING-APPLICANT-DOB-01",
+            "dimension": "applicant",
+            "category": "required-field",
+            "description": "The applicant date of birth is missing."
+          },
+          {
+            "ruleId": "R-MISSING-APPLICANT-ADDRESS-01",
+            "dimension": "applicant",
+            "category": "required-field",
+            "description": "The applicant address or postcode is missing."
+          },
+          {
+            "ruleId": "R-MISSING-KEEPER-NAME-01",
+            "dimension": "keeper",
+            "category": "required-field",
+            "description": "The registered keeper name is missing."
+          },
+          {
+            "ruleId": "R-MISSING-KEEPER-TYPE-01",
+            "dimension": "keeper",
+            "category": "required-field",
+            "description": "The keeper type (individual, company, organization, trade) is missing."
+          },
+          {
+            "ruleId": "R-MISSING-MAKE-01",
+            "dimension": "vehicle",
+            "category": "required-field",
+            "description": "The vehicle make is missing."
+          },
+          {
+            "ruleId": "R-MISSING-MODEL-01",
+            "dimension": "vehicle",
+            "category": "required-field",
+            "description": "The vehicle model is missing."
+          },
+          {
+            "ruleId": "R-DECLARATION-UNSIGNED-01",
+            "dimension": "classification",
+            "category": "declaration",
+            "description": "The declaration is not signed."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DECLARATION-UNSIGNED-001",
+            "category": "declaration-unsigned",
+            "priority": "high",
+            "description": "The declaration is not signed, and the DVLA will return an unsigned application.",
+            "suggestedAction": "Sign and date the declaration before posting the application."
+          }
+        ]
+      }
+    },
+    {
+      "name": "v62-no-identity-overpaid",
+      "description": "V62 acquired without a V5C with a slip enclosed but a fee paid and no identity evidence: needs documents; low overpayment flag. Not insured, so the low insurance flag also fires.",
+      "state": {
+        "application": {
+          "applicationType": "v62-acquired-without-v5c",
+          "applicationDate": "2026-09-03",
+          "v5cStatus": "never-had",
+          "weeksSinceChangeOfKeeper": null,
+          "newKeeperSlipProvided": "yes"
+        },
+        "applicant": {
+          "name": "Alex Morgan",
+          "birthDate": "1985-04-12",
+          "email": "alex@example.com",
+          "phone": "07700900123",
+          "postalAddressAsFullText": "1 High Street, Swansea",
+          "postcode": "SA1 1AA",
+          "drivingLicenceNumber": "MORGA854125A99XY",
+          "identityDocumentType": "none",
+          "addressDocumentType": "none"
+        },
+        "keeper": {
+          "keeperName": "Alex Morgan",
+          "keeperType": "individual",
+          "companyRegistrationNumber": "",
+          "ownerDiffersFromKeeper": "no",
+          "ownerName": "",
+          "keeperAddressInNorthernIreland": "no"
+        },
+        "vehicle": {
+          "registrationNumber": "AB12 CDE",
+          "vehicleIdentificationNumber": "WVWZZZ1JZXW000001",
+          "engineNumber": "CBZB123456",
+          "make": "Volkswagen",
+          "model": "Golf",
+          "colour": "Blue",
+          "vehicleCategory": "car",
+          "fuelType": "petrol",
+          "engineCapacityAsCc": 1197,
+          "dateOfManufacture": "2019-03-01",
+          "dateFirstUsed": "2019-03-15",
+          "seriouslyDamaged": "no"
+        },
+        "evidence": {
+          "certificateOfNewnessProvided": "",
+          "typeApproval": "",
+          "motStatus": "",
+          "insuranceStatus": "none",
+          "buildEvidenceProvided": "",
+          "donorVehicleCount": null
+        },
+        "importDetails": {
+          "countryOfExport": "",
+          "importDate": null,
+          "novaStatus": "",
+          "novaReference": ""
+        },
+        "feeAndDeclaration": {
+          "feePaymentMethod": "cheque",
+          "feePaidAsPence": 2500,
+          "declarationSigned": "yes",
+          "declarationDate": "2026-09-03",
+          "applicantNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "needs-supporting-documents",
+        "feeDueAsPence": 0,
+        "missingItemCount": 1,
+        "rules": [
+          {
+            "ruleId": "R-IDENTITY-EVIDENCE-01",
+            "dimension": "documents",
+            "category": "evidence",
+            "description": "Send a photocopy of a photocard driving licence, or copies of one document proving the name and one proving the address."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-IDENTITY-EVIDENCE-MISSING-001",
+            "category": "identity-evidence-missing",
+            "priority": "high",
+            "description": "Proof of identity is missing. The DVLA asks for a photocopy of a photocard driving licence, or copies of one document proving your name and one proving your address.",
+            "suggestedAction": "Enclose a photocopy of your photocard driving licence, or a passport copy plus a recent utility bill or bank statement."
+          },
+          {
+            "id": "F-INSURANCE-MISSING-002",
+            "category": "insurance-missing",
+            "priority": "low",
+            "description": "The vehicle is not insured. It must be insured before it is used on the road.",
+            "suggestedAction": "Arrange insurance before driving the vehicle."
+          },
+          {
+            "id": "F-FEE-INCORRECT-003",
+            "category": "fee-incorrect",
+            "priority": "low",
+            "description": "No fee is due for this application, but a payment is recorded.",
+            "suggestedAction": "Remove the payment, or check whether the application type is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

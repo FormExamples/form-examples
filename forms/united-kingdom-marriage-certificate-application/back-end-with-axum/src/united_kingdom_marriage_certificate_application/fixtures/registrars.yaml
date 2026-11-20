@@ -1,0 +1,12 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test"
+  email: "Test"
+  phone: "Test"
+  postalAddressAsFullText: "Test"
+  postcode: "Test"
+  role: "registrar"
+  registrationBody: "GRO"
+  registrationNumber: "Test"

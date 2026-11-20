@@ -1,0 +1,161 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_council_tax_discount_application
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_council_tax_discount_application;
+
+enum UnitedKingdomCouncilTaxDiscountApplicationClaimTypeEnum {
+  CLAIMTYPE_UNSPECIFIED = 0;
+  CLAIMTYPE_SINGLE_PERSON_DISCOUNT = 1;  // single-person-discount
+  CLAIMTYPE_ALL_DISREGARDED_DISCOUNT = 2;  // all-disregarded-discount
+  CLAIMTYPE_STUDENT_EXEMPTION = 3;  // student-exemption
+  CLAIMTYPE_SEVERE_MENTAL_IMPAIRMENT = 4;  // severe-mental-impairment
+  CLAIMTYPE_DISABLED_BAND_REDUCTION = 5;  // disabled-band-reduction
+  CLAIMTYPE_CARE_LEAVER_RELIEF = 6;  // care-leaver-relief
+  CLAIMTYPE_COUNCIL_TAX_REDUCTION = 7;  // council-tax-reduction
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationApplicantStatusEnum {
+  APPLICANTSTATUS_UNSPECIFIED = 0;
+  APPLICANTSTATUS_COUNTED_ADULT = 1;  // counted-adult
+  APPLICANTSTATUS_FULL_TIME_STUDENT = 2;  // full-time-student
+  APPLICANTSTATUS_SEVERELY_MENTALLY_IMPAIRED = 3;  // severely-mentally-impaired
+  APPLICANTSTATUS_UNDER_18 = 4;  // under-18
+  APPLICANTSTATUS_APPRENTICE = 5;  // apprentice
+  APPLICANTSTATUS_EDUCATION_18_19 = 6;  // education-18-19
+  APPLICANTSTATUS_LIVE_IN_CARER = 7;  // live-in-carer
+  APPLICANTSTATUS_CARE_LEAVER = 8;  // care-leaver
+  APPLICANTSTATUS_OTHER_DISREGARDED = 9;  // other-disregarded
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationCouncilTaxBandEnum {
+  COUNCILTAXBAND_UNSPECIFIED = 0;
+  COUNCILTAXBAND_A = 1;  // A
+  COUNCILTAXBAND_B = 2;  // B
+  COUNCILTAXBAND_C = 3;  // C
+  COUNCILTAXBAND_D = 4;  // D
+  COUNCILTAXBAND_E = 5;  // E
+  COUNCILTAXBAND_F = 6;  // F
+  COUNCILTAXBAND_G = 7;  // G
+  COUNCILTAXBAND_H = 8;  // H
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationMainResidenceEnum {
+  MAINRESIDENCE_UNSPECIFIED = 0;
+  MAINRESIDENCE_YES = 1;  // yes
+  MAINRESIDENCE_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationLiableRoleEnum {
+  LIABLEROLE_UNSPECIFIED = 0;
+  LIABLEROLE_OWNER_OCCUPIER = 1;  // owner-occupier
+  LIABLEROLE_TENANT = 2;  // tenant
+  LIABLEROLE_LANDLORD = 3;  // landlord
+  LIABLEROLE_OTHER = 4;  // other
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationOtherOccupantsEnum {
+  OTHEROCCUPANTS_UNSPECIFIED = 0;
+  OTHEROCCUPANTS_YES = 1;  // yes
+  OTHEROCCUPANTS_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationSmiCertificateEnum {
+  SMICERTIFICATE_UNSPECIFIED = 0;
+  SMICERTIFICATE_YES = 1;  // yes
+  SMICERTIFICATE_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationQualifyingBenefitEnum {
+  QUALIFYINGBENEFIT_UNSPECIFIED = 0;
+  QUALIFYINGBENEFIT_YES = 1;  // yes
+  QUALIFYINGBENEFIT_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationStudentCertificateEnum {
+  STUDENTCERTIFICATE_UNSPECIFIED = 0;
+  STUDENTCERTIFICATE_YES = 1;  // yes
+  STUDENTCERTIFICATE_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationDisabilityAdaptationEnum {
+  DISABILITYADAPTATION_UNSPECIFIED = 0;
+  DISABILITYADAPTATION_EXTRA_BATHROOM = 1;  // extra-bathroom
+  DISABILITYADAPTATION_EXTRA_KITCHEN = 2;  // extra-kitchen
+  DISABILITYADAPTATION_EXTRA_ROOM = 3;  // extra-room
+  DISABILITYADAPTATION_WHEELCHAIR_SPACE = 4;  // wheelchair-space
+  DISABILITYADAPTATION_NONE = 5;  // none
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationDisabledPersonMainHomeEnum {
+  DISABLEDPERSONMAINHOME_UNSPECIFIED = 0;
+  DISABLEDPERSONMAINHOME_YES = 1;  // yes
+  DISABLEDPERSONMAINHOME_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationApprenticeDeclarationEnum {
+  APPRENTICEDECLARATION_UNSPECIFIED = 0;
+  APPRENTICEDECLARATION_YES = 1;  // yes
+  APPRENTICEDECLARATION_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationCareLeaverProofEnum {
+  CARELEAVERPROOF_UNSPECIFIED = 0;
+  CARELEAVERPROOF_YES = 1;  // yes
+  CARELEAVERPROOF_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationDeclaredTrueEnum {
+  DECLAREDTRUE_UNSPECIFIED = 0;
+  DECLAREDTRUE_YES = 1;  // yes
+  DECLAREDTRUE_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationAgreesToReportChangesEnum {
+  AGREESTOREPORTCHANGES_UNSPECIFIED = 0;
+  AGREESTOREPORTCHANGES_YES = 1;  // yes
+  AGREESTOREPORTCHANGES_NO = 2;  // no
+}
+
+enum UnitedKingdomCouncilTaxDiscountApplicationFraudWarningAcknowledgedEnum {
+  FRAUDWARNINGACKNOWLEDGED_UNSPECIFIED = 0;
+  FRAUDWARNINGACKNOWLEDGED_YES = 1;  // yes
+  FRAUDWARNINGACKNOWLEDGED_NO = 2;  // no
+}
+
+message UnitedKingdomCouncilTaxDiscountApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string applicant_id = 5;  // UUID — uuid
+  string billing_authority_id = 6;  // UUID — uuid
+  UnitedKingdomCouncilTaxDiscountApplicationClaimTypeEnum claim_type = 7;  // VARCHAR(30)
+  string account_reference = 8;  // VARCHAR(50) — max 50 chars
+  string application_date = 9;  // DATE — iso 8601 date
+  string effective_date = 10;  // DATE — iso 8601 date
+  UnitedKingdomCouncilTaxDiscountApplicationApplicantStatusEnum applicant_status = 11;  // VARCHAR(30)
+  string property_address_as_full_text = 12;  // TEXT
+  string property_postcode = 13;  // VARCHAR(10) — max 10 chars
+  UnitedKingdomCouncilTaxDiscountApplicationCouncilTaxBandEnum council_tax_band = 14;  // VARCHAR(1)
+  UnitedKingdomCouncilTaxDiscountApplicationMainResidenceEnum main_residence = 15;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationLiableRoleEnum liable_role = 16;  // VARCHAR(20)
+  UnitedKingdomCouncilTaxDiscountApplicationOtherOccupantsEnum other_occupants = 17;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationSmiCertificateEnum smi_certificate = 18;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationQualifyingBenefitEnum qualifying_benefit = 19;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationStudentCertificateEnum student_certificate = 20;  // VARCHAR(5)
+  int32 student_course_months = 21;  // INTEGER
+  int32 student_hours_per_week = 22;  // INTEGER
+  UnitedKingdomCouncilTaxDiscountApplicationDisabilityAdaptationEnum disability_adaptation = 23;  // VARCHAR(20)
+  UnitedKingdomCouncilTaxDiscountApplicationDisabledPersonMainHomeEnum disabled_person_main_home = 24;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationApprenticeDeclarationEnum apprentice_declaration = 25;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationCareLeaverProofEnum care_leaver_proof = 26;  // VARCHAR(5)
+  int32 care_leaver_age_years = 27;  // INTEGER
+  string evidence_notes = 28;  // TEXT
+  UnitedKingdomCouncilTaxDiscountApplicationDeclaredTrueEnum declared_true = 29;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationAgreesToReportChangesEnum agrees_to_report_changes = 30;  // VARCHAR(5)
+  UnitedKingdomCouncilTaxDiscountApplicationFraudWarningAcknowledgedEnum fraud_warning_acknowledged = 31;  // VARCHAR(5)
+  string declarant_name = 32;  // TEXT
+  string declaration_date = 33;  // DATE — iso 8601 date
+}

@@ -1,0 +1,280 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_durable_financial_power_of_attorney
+
+syntax = "proto3";
+
+package form_examples.united_states_durable_financial_power_of_attorney;
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyCapacityConfirmedEnum {
+  CAPACITYCONFIRMED_UNSPECIFIED = 0;
+  CAPACITYCONFIRMED_YES = 1;  // yes
+  CAPACITYCONFIRMED_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyDurableStatementEnum {
+  DURABLESTATEMENT_UNSPECIFIED = 0;
+  DURABLESTATEMENT_YES = 1;  // yes
+  DURABLESTATEMENT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyEffectivenessEnum {
+  EFFECTIVENESS_UNSPECIFIED = 0;
+  EFFECTIVENESS_IMMEDIATE = 1;  // immediate
+  EFFECTIVENESS_SPRINGING = 2;  // springing
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneySpringingTriggerEnum {
+  SPRINGINGTRIGGER_UNSPECIFIED = 0;
+  SPRINGINGTRIGGER_PHYSICIAN_CERTIFICATION = 1;  // physician-certification
+  SPRINGINGTRIGGER_NAMED_PERSON_DECLARATION = 2;  // named-person-declaration
+  SPRINGINGTRIGGER_COURT_DETERMINATION = 3;  // court-determination
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyStatutoryNoticeIncludedEnum {
+  STATUTORYNOTICEINCLUDED_UNSPECIFIED = 0;
+  STATUTORYNOTICEINCLUDED_YES = 1;  // yes
+  STATUTORYNOTICEINCLUDED_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyAgentRelationshipEnum {
+  AGENTRELATIONSHIP_UNSPECIFIED = 0;
+  AGENTRELATIONSHIP_SPOUSE = 1;  // spouse
+  AGENTRELATIONSHIP_CHILD = 2;  // child
+  AGENTRELATIONSHIP_OTHER_FAMILY = 3;  // other-family
+  AGENTRELATIONSHIP_FRIEND = 4;  // friend
+  AGENTRELATIONSHIP_PROFESSIONAL = 5;  // professional
+  AGENTRELATIONSHIP_FINANCIAL_INSTITUTION = 6;  // financial-institution
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyAgentIsAdultEnum {
+  AGENTISADULT_UNSPECIFIED = 0;
+  AGENTISADULT_YES = 1;  // yes
+  AGENTISADULT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyAgentSignedAcknowledgmentEnum {
+  AGENTSIGNEDACKNOWLEDGMENT_UNSPECIFIED = 0;
+  AGENTSIGNEDACKNOWLEDGMENT_YES = 1;  // yes
+  AGENTSIGNEDACKNOWLEDGMENT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyCoAgentsModeEnum {
+  COAGENTSMODE_UNSPECIFIED = 0;
+  COAGENTSMODE_SOLE = 1;  // sole
+  COAGENTSMODE_JOINTLY = 2;  // jointly
+  COAGENTSMODE_INDEPENDENTLY = 3;  // independently
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyCompensationEnum {
+  COMPENSATION_UNSPECIFIED = 0;
+  COMPENSATION_NONE = 1;  // none
+  COMPENSATION_REASONABLE = 2;  // reasonable
+  COMPENSATION_FIXED = 3;  // fixed
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantBankingEnum {
+  GRANTBANKING_UNSPECIFIED = 0;
+  GRANTBANKING_YES = 1;  // yes
+  GRANTBANKING_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantRealEstateEnum {
+  GRANTREALESTATE_UNSPECIFIED = 0;
+  GRANTREALESTATE_YES = 1;  // yes
+  GRANTREALESTATE_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantInvestmentsEnum {
+  GRANTINVESTMENTS_UNSPECIFIED = 0;
+  GRANTINVESTMENTS_YES = 1;  // yes
+  GRANTINVESTMENTS_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantBusinessEnum {
+  GRANTBUSINESS_UNSPECIFIED = 0;
+  GRANTBUSINESS_YES = 1;  // yes
+  GRANTBUSINESS_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantInsuranceEnum {
+  GRANTINSURANCE_UNSPECIFIED = 0;
+  GRANTINSURANCE_YES = 1;  // yes
+  GRANTINSURANCE_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantTaxMattersEnum {
+  GRANTTAXMATTERS_UNSPECIFIED = 0;
+  GRANTTAXMATTERS_YES = 1;  // yes
+  GRANTTAXMATTERS_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantBenefitsEnum {
+  GRANTBENEFITS_UNSPECIFIED = 0;
+  GRANTBENEFITS_YES = 1;  // yes
+  GRANTBENEFITS_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantRetirementEnum {
+  GRANTRETIREMENT_UNSPECIFIED = 0;
+  GRANTRETIREMENT_YES = 1;  // yes
+  GRANTRETIREMENT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantClaimsEnum {
+  GRANTCLAIMS_UNSPECIFIED = 0;
+  GRANTCLAIMS_YES = 1;  // yes
+  GRANTCLAIMS_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGrantPersonalPropertyEnum {
+  GRANTPERSONALPROPERTY_UNSPECIFIED = 0;
+  GRANTPERSONALPROPERTY_YES = 1;  // yes
+  GRANTPERSONALPROPERTY_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotCreateTrustEnum {
+  HOTCREATETRUST_UNSPECIFIED = 0;
+  HOTCREATETRUST_YES = 1;  // yes
+  HOTCREATETRUST_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotGiftEnum {
+  HOTGIFT_UNSPECIFIED = 0;
+  HOTGIFT_YES = 1;  // yes
+  HOTGIFT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotSurvivorshipEnum {
+  HOTSURVIVORSHIP_UNSPECIFIED = 0;
+  HOTSURVIVORSHIP_YES = 1;  // yes
+  HOTSURVIVORSHIP_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotBeneficiaryEnum {
+  HOTBENEFICIARY_UNSPECIFIED = 0;
+  HOTBENEFICIARY_YES = 1;  // yes
+  HOTBENEFICIARY_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotDelegateEnum {
+  HOTDELEGATE_UNSPECIFIED = 0;
+  HOTDELEGATE_YES = 1;  // yes
+  HOTDELEGATE_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotAnnuityWaiverEnum {
+  HOTANNUITYWAIVER_UNSPECIFIED = 0;
+  HOTANNUITYWAIVER_YES = 1;  // yes
+  HOTANNUITYWAIVER_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotDisclaimEnum {
+  HOTDISCLAIM_UNSPECIFIED = 0;
+  HOTDISCLAIM_YES = 1;  // yes
+  HOTDISCLAIM_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyHotPowersInitialedEnum {
+  HOTPOWERSINITIALED_UNSPECIFIED = 0;
+  HOTPOWERSINITIALED_YES = 1;  // yes
+  HOTPOWERSINITIALED_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyGiftLimitTypeEnum {
+  GIFTLIMITTYPE_UNSPECIFIED = 0;
+  GIFTLIMITTYPE_ANNUAL_EXCLUSION = 1;  // annual-exclusion
+  GIFTLIMITTYPE_FIXED_AMOUNT = 2;  // fixed-amount
+  GIFTLIMITTYPE_UNLIMITED = 3;  // unlimited
+  GIFTLIMITTYPE_NONE = 4;  // none
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneySelfGiftingAllowedEnum {
+  SELFGIFTINGALLOWED_UNSPECIFIED = 0;
+  SELFGIFTINGALLOWED_YES = 1;  // yes
+  SELFGIFTINGALLOWED_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyNotaryArrangedEnum {
+  NOTARYARRANGED_UNSPECIFIED = 0;
+  NOTARYARRANGED_YES = 1;  // yes
+  NOTARYARRANGED_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyWitnessIsAgentEnum {
+  WITNESSISAGENT_UNSPECIFIED = 0;
+  WITNESSISAGENT_YES = 1;  // yes
+  WITNESSISAGENT_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyUsedForRealEstateEnum {
+  USEDFORREALESTATE_UNSPECIFIED = 0;
+  USEDFORREALESTATE_YES = 1;  // yes
+  USEDFORREALESTATE_NO = 2;  // no
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyBankFormCompletedEnum {
+  BANKFORMCOMPLETED_UNSPECIFIED = 0;
+  BANKFORMCOMPLETED_YES = 1;  // yes
+  BANKFORMCOMPLETED_NO = 2;  // no
+  BANKFORMCOMPLETED_NOT_NEEDED = 3;  // not-needed
+}
+
+enum UnitedStatesDurableFinancialPowerOfAttorneyForm2848StatusEnum {
+  FORM2848STATUS_UNSPECIFIED = 0;
+  FORM2848STATUS_FILED = 1;  // filed
+  FORM2848STATUS_NOT_FILED = 2;  // not-filed
+  FORM2848STATUS_NOT_NEEDED = 3;  // not-needed
+}
+
+message UnitedStatesDurableFinancialPowerOfAttorney {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string principal_id = 5;  // UUID — uuid
+  string agent_id = 6;  // UUID — uuid
+  string principal_name = 7;  // TEXT
+  string date_of_birth = 8;  // DATE — iso 8601 date
+  string state = 9;  // VARCHAR(2) — max 2 chars
+  string principal_address = 10;  // TEXT
+  UnitedStatesDurableFinancialPowerOfAttorneyCapacityConfirmedEnum capacity_confirmed = 11;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyDurableStatementEnum durable_statement = 12;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyEffectivenessEnum effectiveness = 13;  // VARCHAR(10)
+  UnitedStatesDurableFinancialPowerOfAttorneySpringingTriggerEnum springing_trigger = 14;  // VARCHAR(30)
+  UnitedStatesDurableFinancialPowerOfAttorneyStatutoryNoticeIncludedEnum statutory_notice_included = 15;  // VARCHAR(5)
+  string agent_name = 16;  // TEXT
+  UnitedStatesDurableFinancialPowerOfAttorneyAgentRelationshipEnum agent_relationship = 17;  // VARCHAR(25)
+  UnitedStatesDurableFinancialPowerOfAttorneyAgentIsAdultEnum agent_is_adult = 18;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyAgentSignedAcknowledgmentEnum agent_signed_acknowledgment = 19;  // VARCHAR(5)
+  string successor_agent_name = 20;  // TEXT
+  UnitedStatesDurableFinancialPowerOfAttorneyCoAgentsModeEnum co_agents_mode = 21;  // VARCHAR(15)
+  UnitedStatesDurableFinancialPowerOfAttorneyCompensationEnum compensation = 22;  // VARCHAR(10)
+  double compensation_amount = 23;  // NUMERIC(12,2) — numeric(12,2)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantBankingEnum grant_banking = 24;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantRealEstateEnum grant_real_estate = 25;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantInvestmentsEnum grant_investments = 26;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantBusinessEnum grant_business = 27;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantInsuranceEnum grant_insurance = 28;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantTaxMattersEnum grant_tax_matters = 29;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantBenefitsEnum grant_benefits = 30;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantRetirementEnum grant_retirement = 31;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantClaimsEnum grant_claims = 32;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGrantPersonalPropertyEnum grant_personal_property = 33;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotCreateTrustEnum hot_create_trust = 34;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotGiftEnum hot_gift = 35;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotSurvivorshipEnum hot_survivorship = 36;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotBeneficiaryEnum hot_beneficiary = 37;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotDelegateEnum hot_delegate = 38;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotAnnuityWaiverEnum hot_annuity_waiver = 39;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotDisclaimEnum hot_disclaim = 40;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyHotPowersInitialedEnum hot_powers_initialed = 41;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyGiftLimitTypeEnum gift_limit_type = 42;  // VARCHAR(20)
+  double gift_limit_amount = 43;  // NUMERIC(12,2) — numeric(12,2)
+  UnitedStatesDurableFinancialPowerOfAttorneySelfGiftingAllowedEnum self_gifting_allowed = 44;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyNotaryArrangedEnum notary_arranged = 45;  // VARCHAR(5)
+  int32 witness_count = 46;  // INTEGER
+  UnitedStatesDurableFinancialPowerOfAttorneyWitnessIsAgentEnum witness_is_agent = 47;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyUsedForRealEstateEnum used_for_real_estate = 48;  // VARCHAR(5)
+  UnitedStatesDurableFinancialPowerOfAttorneyBankFormCompletedEnum bank_form_completed = 49;  // VARCHAR(10)
+  UnitedStatesDurableFinancialPowerOfAttorneyForm2848StatusEnum form2848_status = 50;  // VARCHAR(12)
+}

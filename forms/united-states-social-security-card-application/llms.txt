@@ -1,0 +1,27 @@
+# United States Social Security Card Application (Form SS-5)
+
+> A single-page, step-by-step questionnaire for Form SS-5, the application for an original, replacement, or corrected Social Security card. It checks the form and the evidence the applicant plans to bring against the Social Security Administration (SSA) rules, classifies the application as **Ready to submit**, **Incomplete**, **Evidence missing**, or **Not eligible**, and raises prioritized flagged issues. It is documentation support, not legal advice, and SSA decides every application. The Social Security number is never collected.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

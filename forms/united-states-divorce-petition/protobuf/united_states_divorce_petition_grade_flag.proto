@@ -1,0 +1,50 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_divorce_petition_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_divorce_petition;
+
+enum UnitedStatesDivorcePetitionGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_STATE_RESIDENCY = 1;  // state-residency
+  CATEGORY_COUNTY_RESIDENCY = 2;  // county-residency
+  CATEGORY_UNKNOWN_STATE_RULE = 3;  // unknown-state-rule
+  CATEGORY_MISSING_CORE_DETAILS = 4;  // missing-core-details
+  CATEGORY_GROUND_NOT_AVAILABLE = 5;  // ground-not-available
+  CATEGORY_SEPARATION_PERIOD = 6;  // separation-period
+  CATEGORY_CUSTODY_PLAN_MISSING = 7;  // custody-plan-missing
+  CATEGORY_CHILD_SUPPORT_MISSING = 8;  // child-support-missing
+  CATEGORY_HOME_STATE_JURISDICTION = 9;  // home-state-jurisdiction
+  CATEGORY_PROPERTY_APPROACH_MISMATCH = 10;  // property-approach-mismatch
+  CATEGORY_FINANCIAL_DISCLOSURE_MISSING = 11;  // financial-disclosure-missing
+  CATEGORY_SERVICE_INCOMPLETE = 12;  // service-incomplete
+  CATEGORY_SERVICE_BY_PUBLICATION = 13;  // service-by-publication
+  CATEGORY_UNCONTESTED_WITHOUT_AGREEMENT = 14;  // uncontested-without-agreement
+  CATEGORY_MILITARY_RESPONDENT = 15;  // military-respondent
+  CATEGORY_DECREE_BEFORE_WAITING_PERIOD = 16;  // decree-before-waiting-period
+  CATEGORY_WAITING_PERIOD_PENDING = 17;  // waiting-period-pending
+  CATEGORY_NAME_RESTORATION_INCOMPLETE = 18;  // name-restoration-incomplete
+  CATEGORY_CERTIFICATE_NOT_REQUESTED = 19;  // certificate-not-requested
+  CATEGORY_OTHER = 20;  // other
+}
+
+enum UnitedStatesDivorcePetitionGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedStatesDivorcePetitionGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_divorce_petition_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedStatesDivorcePetitionGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedStatesDivorcePetitionGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

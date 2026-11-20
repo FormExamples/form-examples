@@ -1,0 +1,27 @@
+# United States Durable Financial Power of Attorney
+
+> A United States **execution-readiness** checker for a durable power of attorney for property and finances. A principal appoints an agent (and successors) to manage money, real estate, investments, benefits, and taxes, and the authority survives the principal's later incapacity. Law here is **state-variable**: the [Uniform Power of Attorney Act (2006)](doc/upoaa-framework.md) (UPOAA) is the baseline, and a `STATE_RULES` table encodes the execution formalities of California, New York, Texas, Florida, Illinois, Pennsylvania, Ohio, and Washington. Any other state falls back to the uniform default and raises a "verify the state rule" flag.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

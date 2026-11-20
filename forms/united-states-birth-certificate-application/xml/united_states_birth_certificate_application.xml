@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE united_states_birth_certificate_application SYSTEM "united_states_birth_certificate_application.dtd">
+<united_states_birth_certificate_application>
+<id>770e8400-e29b-41d4-a716-446655440002</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<applicant_id>550e8400-e29b-41d4-a716-446655440000</applicant_id>
+<registrant_id>660e8400-e29b-41d4-a716-446655440001</registrant_id>
+<requester_relationship>self</requester_relationship>
+<purpose>passport</purpose>
+<needs_apostille>yes</needs_apostille>
+<apostille_country></apostille_country>
+<certificate_type>certified-long-form</certificate_type>
+<copies>1</copies>
+<delivery_method>online</delivery_method>
+<fee_enclosed_usd>0.0</fee_enclosed_usd>
+<id_type>state-driver-license</id_type>
+<id_unexpired>yes</id_unexpired>
+<proof_of_relationship>yes</proof_of_relationship>
+<authority_document>yes</authority_document>
+<notarized_sworn_statement>yes</notarized_sworn_statement>
+<declaration_signed>yes</declaration_signed>
+<application_note></application_note>
+</united_states_birth_certificate_application>

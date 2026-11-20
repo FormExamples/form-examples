@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_vehicle_bill_of_sale_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_bill_of_sale;
+
+enum UnitedKingdomVehicleBillOfSaleGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_PARTIES = 1;  // parties
+  DIMENSION_VEHICLE = 2;  // vehicle
+  DIMENSION_PRICE = 3;  // price
+  DIMENSION_CONDITION = 4;  // condition
+  DIMENSION_DVLA = 5;  // dvla
+  DIMENSION_SIGNATURES = 6;  // signatures
+  DIMENSION_CLASSIFICATION = 7;  // classification
+}
+
+message UnitedKingdomVehicleBillOfSaleGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_vehicle_bill_of_sale_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedKingdomVehicleBillOfSaleGradeRuleDimensionEnum dimension = 7;  // VARCHAR(14)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

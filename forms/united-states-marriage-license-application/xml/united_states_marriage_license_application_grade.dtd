@@ -1,0 +1,10 @@
+<!ELEMENT united_states_marriage_license_application_grade (id,created_at,updated_at,deleted_at,united_states_marriage_license_application_id,application_class,earliest_ceremony_date,license_expiry_date,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_states_marriage_license_application_id (#PCDATA)>
+<!ELEMENT application_class (#PCDATA)>
+<!ELEMENT earliest_ceremony_date (#PCDATA)>
+<!ELEMENT license_expiry_date (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

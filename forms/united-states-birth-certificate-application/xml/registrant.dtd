@@ -1,0 +1,16 @@
+<!ELEMENT registrant (id,created_at,updated_at,deleted_at,name,birth_date,sex,place_of_birth,county_of_birth,birth_state,birth_facility,mother_name_before_first_marriage,father_name,is_deceased,is_adopted)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT place_of_birth (#PCDATA)>
+<!ELEMENT county_of_birth (#PCDATA)>
+<!ELEMENT birth_state (#PCDATA)>
+<!ELEMENT birth_facility (#PCDATA)>
+<!ELEMENT mother_name_before_first_marriage (#PCDATA)>
+<!ELEMENT father_name (#PCDATA)>
+<!ELEMENT is_deceased (#PCDATA)>
+<!ELEMENT is_adopted (#PCDATA)>

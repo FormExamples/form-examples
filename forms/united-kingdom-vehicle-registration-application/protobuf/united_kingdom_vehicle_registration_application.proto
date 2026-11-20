@@ -1,0 +1,173 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_vehicle_registration_application
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_vehicle_registration_application;
+
+enum UnitedKingdomVehicleRegistrationApplicationApplicationTypeEnum {
+  APPLICATIONTYPE_UNSPECIFIED = 0;
+  APPLICATIONTYPE_V62_REPLACEMENT_V5C = 1;  // v62-replacement-v5c
+  APPLICATIONTYPE_V62_ACQUIRED_WITHOUT_V5C = 2;  // v62-acquired-without-v5c
+  APPLICATIONTYPE_V55_4_NEW_VEHICLE = 3;  // v55-4-new-vehicle
+  APPLICATIONTYPE_V55_5_USED_VEHICLE = 4;  // v55-5-used-vehicle
+  APPLICATIONTYPE_IMPORTED_VEHICLE = 5;  // imported-vehicle
+  APPLICATIONTYPE_V627_1_REBUILT_OR_KIT = 6;  // v627-1-rebuilt-or-kit
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationV5cStatusEnum {
+  V5CSTATUS_UNSPECIFIED = 0;
+  V5CSTATUS_LOST = 1;  // lost
+  V5CSTATUS_STOLEN = 2;  // stolen
+  V5CSTATUS_DESTROYED = 3;  // destroyed
+  V5CSTATUS_NOT_RECEIVED = 4;  // not-received
+  V5CSTATUS_DAMAGED = 5;  // damaged
+  V5CSTATUS_NEVER_HAD = 6;  // never-had
+  V5CSTATUS_HAS_V5C = 7;  // has-v5c
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationNewKeeperSlipProvidedEnum {
+  NEWKEEPERSLIPPROVIDED_UNSPECIFIED = 0;
+  NEWKEEPERSLIPPROVIDED_YES = 1;  // yes
+  NEWKEEPERSLIPPROVIDED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationOwnerDiffersFromKeeperEnum {
+  OWNERDIFFERSFROMKEEPER_UNSPECIFIED = 0;
+  OWNERDIFFERSFROMKEEPER_YES = 1;  // yes
+  OWNERDIFFERSFROMKEEPER_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationKeeperAddressInNorthernIrelandEnum {
+  KEEPERADDRESSINNORTHERNIRELAND_UNSPECIFIED = 0;
+  KEEPERADDRESSINNORTHERNIRELAND_YES = 1;  // yes
+  KEEPERADDRESSINNORTHERNIRELAND_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationVehicleCategoryEnum {
+  VEHICLECATEGORY_UNSPECIFIED = 0;
+  VEHICLECATEGORY_CAR = 1;  // car
+  VEHICLECATEGORY_MOTORCYCLE = 2;  // motorcycle
+  VEHICLECATEGORY_LIGHT_GOODS = 3;  // light-goods
+  VEHICLECATEGORY_HEAVY_GOODS = 4;  // heavy-goods
+  VEHICLECATEGORY_BUS = 5;  // bus
+  VEHICLECATEGORY_OTHER = 6;  // other
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationFuelTypeEnum {
+  FUELTYPE_UNSPECIFIED = 0;
+  FUELTYPE_PETROL = 1;  // petrol
+  FUELTYPE_DIESEL = 2;  // diesel
+  FUELTYPE_ELECTRIC = 3;  // electric
+  FUELTYPE_HYBRID = 4;  // hybrid
+  FUELTYPE_LPG = 5;  // lpg
+  FUELTYPE_OTHER = 6;  // other
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationSeriouslyDamagedEnum {
+  SERIOUSLYDAMAGED_UNSPECIFIED = 0;
+  SERIOUSLYDAMAGED_YES = 1;  // yes
+  SERIOUSLYDAMAGED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationCertificateOfNewnessProvidedEnum {
+  CERTIFICATEOFNEWNESSPROVIDED_UNSPECIFIED = 0;
+  CERTIFICATEOFNEWNESSPROVIDED_YES = 1;  // yes
+  CERTIFICATEOFNEWNESSPROVIDED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationTypeApprovalEnum {
+  TYPEAPPROVAL_UNSPECIFIED = 0;
+  TYPEAPPROVAL_ECWVTA = 1;  // ecwvta
+  TYPEAPPROVAL_GB_TYPE_APPROVAL = 2;  // gb-type-approval
+  TYPEAPPROVAL_NI_TYPE_APPROVAL = 3;  // ni-type-approval
+  TYPEAPPROVAL_IVA = 4;  // iva
+  TYPEAPPROVAL_MSVA = 5;  // msva
+  TYPEAPPROVAL_EXEMPT_OVER_10_YEARS = 6;  // exempt-over-10-years
+  TYPEAPPROVAL_NONE = 7;  // none
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationMotStatusEnum {
+  MOTSTATUS_UNSPECIFIED = 0;
+  MOTSTATUS_VALID = 1;  // valid
+  MOTSTATUS_NOT_REQUIRED = 2;  // not-required
+  MOTSTATUS_MISSING = 3;  // missing
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationInsuranceStatusEnum {
+  INSURANCESTATUS_UNSPECIFIED = 0;
+  INSURANCESTATUS_IN_FORCE = 1;  // in-force
+  INSURANCESTATUS_NONE = 2;  // none
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationNovaStatusEnum {
+  NOVASTATUS_UNSPECIFIED = 0;
+  NOVASTATUS_NOTIFIED = 1;  // notified
+  NOVASTATUS_NOT_NOTIFIED = 2;  // not-notified
+  NOVASTATUS_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationBuildEvidenceProvidedEnum {
+  BUILDEVIDENCEPROVIDED_UNSPECIFIED = 0;
+  BUILDEVIDENCEPROVIDED_YES = 1;  // yes
+  BUILDEVIDENCEPROVIDED_NO = 2;  // no
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationFeePaymentMethodEnum {
+  FEEPAYMENTMETHOD_UNSPECIFIED = 0;
+  FEEPAYMENTMETHOD_CHEQUE = 1;  // cheque
+  FEEPAYMENTMETHOD_POSTAL_ORDER = 2;  // postal-order
+  FEEPAYMENTMETHOD_POST_OFFICE_CARD = 3;  // post-office-card
+  FEEPAYMENTMETHOD_ONLINE_CARD = 4;  // online-card
+  FEEPAYMENTMETHOD_NONE = 5;  // none
+}
+
+enum UnitedKingdomVehicleRegistrationApplicationDeclarationSignedEnum {
+  DECLARATIONSIGNED_UNSPECIFIED = 0;
+  DECLARATIONSIGNED_YES = 1;  // yes
+  DECLARATIONSIGNED_NO = 2;  // no
+}
+
+message UnitedKingdomVehicleRegistrationApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string applicant_id = 5;  // UUID — uuid
+  string keeper_id = 6;  // UUID — uuid
+  UnitedKingdomVehicleRegistrationApplicationApplicationTypeEnum application_type = 7;  // VARCHAR(30)
+  string application_date = 8;  // DATE — iso 8601 date
+  UnitedKingdomVehicleRegistrationApplicationV5cStatusEnum v5c_status = 9;  // VARCHAR(20)
+  int32 weeks_since_change_of_keeper = 10;  // INTEGER
+  UnitedKingdomVehicleRegistrationApplicationNewKeeperSlipProvidedEnum new_keeper_slip_provided = 11;  // VARCHAR(5)
+  UnitedKingdomVehicleRegistrationApplicationOwnerDiffersFromKeeperEnum owner_differs_from_keeper = 12;  // VARCHAR(5)
+  string owner_name = 13;  // TEXT
+  UnitedKingdomVehicleRegistrationApplicationKeeperAddressInNorthernIrelandEnum keeper_address_in_northern_ireland = 14;  // VARCHAR(5)
+  string registration_number = 15;  // VARCHAR(12) — max 12 chars
+  string vehicle_identification_number = 16;  // VARCHAR(30) — max 30 chars
+  string engine_number = 17;  // VARCHAR(30) — max 30 chars
+  string make = 18;  // TEXT
+  string model = 19;  // TEXT
+  string colour = 20;  // TEXT
+  UnitedKingdomVehicleRegistrationApplicationVehicleCategoryEnum vehicle_category = 21;  // VARCHAR(20)
+  UnitedKingdomVehicleRegistrationApplicationFuelTypeEnum fuel_type = 22;  // VARCHAR(20)
+  int32 engine_capacity_as_cc = 23;  // INTEGER
+  string date_of_manufacture = 24;  // DATE — iso 8601 date
+  string date_first_used = 25;  // DATE — iso 8601 date
+  UnitedKingdomVehicleRegistrationApplicationSeriouslyDamagedEnum seriously_damaged = 26;  // VARCHAR(5)
+  UnitedKingdomVehicleRegistrationApplicationCertificateOfNewnessProvidedEnum certificate_of_newness_provided = 27;  // VARCHAR(5)
+  UnitedKingdomVehicleRegistrationApplicationTypeApprovalEnum type_approval = 28;  // VARCHAR(25)
+  UnitedKingdomVehicleRegistrationApplicationMotStatusEnum mot_status = 29;  // VARCHAR(15)
+  UnitedKingdomVehicleRegistrationApplicationInsuranceStatusEnum insurance_status = 30;  // VARCHAR(15)
+  string country_of_export = 31;  // TEXT
+  string import_date = 32;  // DATE — iso 8601 date
+  UnitedKingdomVehicleRegistrationApplicationNovaStatusEnum nova_status = 33;  // VARCHAR(20)
+  string nova_reference = 34;  // VARCHAR(40) — max 40 chars
+  UnitedKingdomVehicleRegistrationApplicationBuildEvidenceProvidedEnum build_evidence_provided = 35;  // VARCHAR(5)
+  int32 donor_vehicle_count = 36;  // INTEGER
+  UnitedKingdomVehicleRegistrationApplicationFeePaymentMethodEnum fee_payment_method = 37;  // VARCHAR(20)
+  int32 fee_paid_as_pence = 38;  // INTEGER
+  UnitedKingdomVehicleRegistrationApplicationDeclarationSignedEnum declaration_signed = 39;  // VARCHAR(5)
+  string declaration_date = 40;  // DATE — iso 8601 date
+  string applicant_note = 41;  // TEXT
+}

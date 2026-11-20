@@ -1,0 +1,271 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: vehicle_title_application
+
+syntax = "proto3";
+
+package form_examples.united_states_vehicle_title_and_registration_application;
+
+enum VehicleTitleApplicationTransactionTypeEnum {
+  TRANSACTIONTYPE_UNSPECIFIED = 0;
+  TRANSACTIONTYPE_TITLE_AND_REGISTRATION = 1;  // title-and-registration
+  TRANSACTIONTYPE_TITLE_ONLY = 2;  // title-only
+  TRANSACTIONTYPE_REGISTRATION_ONLY = 3;  // registration-only
+}
+
+enum VehicleTitleApplicationVehicleConditionEnum {
+  VEHICLECONDITION_UNSPECIFIED = 0;
+  VEHICLECONDITION_NEW = 1;  // new
+  VEHICLECONDITION_USED = 2;  // used
+}
+
+enum VehicleTitleApplicationAcquisitionMethodEnum {
+  ACQUISITIONMETHOD_UNSPECIFIED = 0;
+  ACQUISITIONMETHOD_DEALER_PURCHASE = 1;  // dealer-purchase
+  ACQUISITIONMETHOD_PRIVATE_PURCHASE = 2;  // private-purchase
+  ACQUISITIONMETHOD_GIFT = 3;  // gift
+  ACQUISITIONMETHOD_INHERITANCE = 4;  // inheritance
+  ACQUISITIONMETHOD_OTHER = 5;  // other
+}
+
+enum VehicleTitleApplicationOutOfStateTransferEnum {
+  OUTOFSTATETRANSFER_UNSPECIFIED = 0;
+  OUTOFSTATETRANSFER_YES = 1;  // yes
+  OUTOFSTATETRANSFER_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationCoOwnerConjunctionEnum {
+  COOWNERCONJUNCTION_UNSPECIFIED = 0;
+  COOWNERCONJUNCTION_AND = 1;  // and
+  COOWNERCONJUNCTION_OR = 2;  // or
+}
+
+enum VehicleTitleApplicationOwnerTypeEnum {
+  OWNERTYPE_UNSPECIFIED = 0;
+  OWNERTYPE_INDIVIDUAL = 1;  // individual
+  OWNERTYPE_BUSINESS = 2;  // business
+}
+
+enum VehicleTitleApplicationIdentificationTypeEnum {
+  IDENTIFICATIONTYPE_UNSPECIFIED = 0;
+  IDENTIFICATIONTYPE_DRIVERS_LICENSE = 1;  // drivers-license
+  IDENTIFICATIONTYPE_STATE_ID = 2;  // state-id
+  IDENTIFICATIONTYPE_PASSPORT = 3;  // passport
+  IDENTIFICATIONTYPE_FEIN = 4;  // fein
+  IDENTIFICATIONTYPE_OTHER = 5;  // other
+}
+
+enum VehicleTitleApplicationOwnerSignedEnum {
+  OWNERSIGNED_UNSPECIFIED = 0;
+  OWNERSIGNED_YES = 1;  // yes
+  OWNERSIGNED_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationCoOwnerSignedEnum {
+  COOWNERSIGNED_UNSPECIFIED = 0;
+  COOWNERSIGNED_YES = 1;  // yes
+  COOWNERSIGNED_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationVehicleClassEnum {
+  VEHICLECLASS_UNSPECIFIED = 0;
+  VEHICLECLASS_PASSENGER = 1;  // passenger
+  VEHICLECLASS_LIGHT_TRUCK = 2;  // light-truck
+  VEHICLECLASS_HEAVY_TRUCK = 3;  // heavy-truck
+  VEHICLECLASS_MOTORCYCLE = 4;  // motorcycle
+  VEHICLECLASS_TRAILER = 5;  // trailer
+  VEHICLECLASS_MOTORHOME = 6;  // motorhome
+}
+
+enum VehicleTitleApplicationFuelTypeEnum {
+  FUELTYPE_UNSPECIFIED = 0;
+  FUELTYPE_GASOLINE = 1;  // gasoline
+  FUELTYPE_DIESEL = 2;  // diesel
+  FUELTYPE_ELECTRIC = 3;  // electric
+  FUELTYPE_HYBRID = 4;  // hybrid
+  FUELTYPE_OTHER = 5;  // other
+}
+
+enum VehicleTitleApplicationOdometerStatusEnum {
+  ODOMETERSTATUS_UNSPECIFIED = 0;
+  ODOMETERSTATUS_ACTUAL = 1;  // actual
+  ODOMETERSTATUS_EXCEEDS_MECHANICAL_LIMITS = 2;  // exceeds-mechanical-limits
+  ODOMETERSTATUS_NOT_ACTUAL = 3;  // not-actual
+}
+
+enum VehicleTitleApplicationSellerOdometerStatementEnum {
+  SELLERODOMETERSTATEMENT_UNSPECIFIED = 0;
+  SELLERODOMETERSTATEMENT_YES = 1;  // yes
+  SELLERODOMETERSTATEMENT_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationBuyerOdometerAcknowledgedEnum {
+  BUYERODOMETERACKNOWLEDGED_UNSPECIFIED = 0;
+  BUYERODOMETERACKNOWLEDGED_YES = 1;  // yes
+  BUYERODOMETERACKNOWLEDGED_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationTitleDocumentEnum {
+  TITLEDOCUMENT_UNSPECIFIED = 0;
+  TITLEDOCUMENT_STATE_TITLE = 1;  // state-title
+  TITLEDOCUMENT_MANUFACTURER_STATEMENT_OF_ORIGIN = 2;  // manufacturer-statement-of-origin
+  TITLEDOCUMENT_OUT_OF_STATE_TITLE = 3;  // out-of-state-title
+  TITLEDOCUMENT_NONE = 4;  // none
+}
+
+enum VehicleTitleApplicationPriorTitleSurrenderedEnum {
+  PRIORTITLESURRENDERED_UNSPECIFIED = 0;
+  PRIORTITLESURRENDERED_YES = 1;  // yes
+  PRIORTITLESURRENDERED_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationTitleBrandEnum {
+  TITLEBRAND_UNSPECIFIED = 0;
+  TITLEBRAND_NONE = 1;  // none
+  TITLEBRAND_SALVAGE = 2;  // salvage
+  TITLEBRAND_JUNK = 3;  // junk
+  TITLEBRAND_REBUILT = 4;  // rebuilt
+  TITLEBRAND_FLOOD = 5;  // flood
+  TITLEBRAND_ODOMETER_NOT_ACTUAL = 6;  // odometer-not-actual
+  TITLEBRAND_LEMON_LAW_BUYBACK = 7;  // lemon-law-buyback
+  TITLEBRAND_HAIL = 8;  // hail
+  TITLEBRAND_OTHER = 9;  // other
+}
+
+enum VehicleTitleApplicationBrandDisclosedEnum {
+  BRANDDISCLOSED_UNSPECIFIED = 0;
+  BRANDDISCLOSED_YES = 1;  // yes
+  BRANDDISCLOSED_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationNmvtisCheckEnum {
+  NMVTISCHECK_UNSPECIFIED = 0;
+  NMVTISCHECK_CLEAR = 1;  // clear
+  NMVTISCHECK_BRAND_OR_THEFT_FOUND = 2;  // brand-or-theft-found
+  NMVTISCHECK_NOT_CHECKED = 3;  // not-checked
+}
+
+enum VehicleTitleApplicationBrandInspectionEnum {
+  BRANDINSPECTION_UNSPECIFIED = 0;
+  BRANDINSPECTION_PASSED = 1;  // passed
+  BRANDINSPECTION_NOT_DONE = 2;  // not-done
+  BRANDINSPECTION_NOT_APPLICABLE = 3;  // not-applicable
+}
+
+enum VehicleTitleApplicationLienStatusEnum {
+  LIENSTATUS_UNSPECIFIED = 0;
+  LIENSTATUS_NONE = 1;  // none
+  LIENSTATUS_NEW_LIEN = 2;  // new-lien
+  LIENSTATUS_EXISTING_LIEN_RELEASED = 3;  // existing-lien-released
+  LIENSTATUS_EXISTING_LIEN_UNRELEASED = 4;  // existing-lien-unreleased
+}
+
+enum VehicleTitleApplicationLienElectronicEnum {
+  LIENELECTRONIC_UNSPECIFIED = 0;
+  LIENELECTRONIC_YES = 1;  // yes
+  LIENELECTRONIC_NO = 2;  // no
+}
+
+enum VehicleTitleApplicationInsuranceProofEnum {
+  INSURANCEPROOF_UNSPECIFIED = 0;
+  INSURANCEPROOF_PROVIDED = 1;  // provided
+  INSURANCEPROOF_NOT_PROVIDED = 2;  // not-provided
+}
+
+enum VehicleTitleApplicationEmissionsInspectionEnum {
+  EMISSIONSINSPECTION_UNSPECIFIED = 0;
+  EMISSIONSINSPECTION_PASSED = 1;  // passed
+  EMISSIONSINSPECTION_NOT_DONE = 2;  // not-done
+  EMISSIONSINSPECTION_EXEMPT = 3;  // exempt
+  EMISSIONSINSPECTION_NOT_REQUIRED = 4;  // not-required
+}
+
+enum VehicleTitleApplicationSafetyInspectionEnum {
+  SAFETYINSPECTION_UNSPECIFIED = 0;
+  SAFETYINSPECTION_PASSED = 1;  // passed
+  SAFETYINSPECTION_NOT_DONE = 2;  // not-done
+  SAFETYINSPECTION_EXEMPT = 3;  // exempt
+  SAFETYINSPECTION_NOT_REQUIRED = 4;  // not-required
+}
+
+enum VehicleTitleApplicationVinVerificationEnum {
+  VINVERIFICATION_UNSPECIFIED = 0;
+  VINVERIFICATION_DONE = 1;  // done
+  VINVERIFICATION_NOT_DONE = 2;  // not-done
+  VINVERIFICATION_NOT_REQUIRED = 3;  // not-required
+}
+
+enum VehicleTitleApplicationSalesTaxStatusEnum {
+  SALESTAXSTATUS_UNSPECIFIED = 0;
+  SALESTAXSTATUS_PAID_TO_DEALER = 1;  // paid-to-dealer
+  SALESTAXSTATUS_DUE_AT_TITLE = 2;  // due-at-title
+  SALESTAXSTATUS_EXEMPT = 3;  // exempt
+  SALESTAXSTATUS_NOT_CALCULATED = 4;  // not-calculated
+}
+
+enum VehicleTitleApplicationFeesTenderedEnum {
+  FEESTENDERED_UNSPECIFIED = 0;
+  FEESTENDERED_YES = 1;  // yes
+  FEESTENDERED_NO = 2;  // no
+}
+
+message VehicleTitleApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string applicant_id = 5;  // UUID — uuid
+  string lienholder_id = 6;  // UUID — uuid
+  string state = 7;  // VARCHAR(2) — max 2 chars
+  VehicleTitleApplicationTransactionTypeEnum transaction_type = 8;  // VARCHAR(22)
+  VehicleTitleApplicationVehicleConditionEnum vehicle_condition = 9;  // VARCHAR(4)
+  VehicleTitleApplicationAcquisitionMethodEnum acquisition_method = 10;  // VARCHAR(16)
+  VehicleTitleApplicationOutOfStateTransferEnum out_of_state_transfer = 11;  // VARCHAR(5)
+  string previous_state = 12;  // VARCHAR(2) — max 2 chars
+  string acquisition_date = 13;  // DATE — iso 8601 date
+  string application_date = 14;  // DATE — iso 8601 date
+  string owner_name = 15;  // TEXT
+  string co_owner_name = 16;  // TEXT
+  VehicleTitleApplicationCoOwnerConjunctionEnum co_owner_conjunction = 17;  // VARCHAR(3)
+  VehicleTitleApplicationOwnerTypeEnum owner_type = 18;  // VARCHAR(10)
+  VehicleTitleApplicationIdentificationTypeEnum identification_type = 19;  // VARCHAR(15)
+  string identification_number = 20;  // TEXT
+  string mailing_address = 21;  // TEXT
+  VehicleTitleApplicationOwnerSignedEnum owner_signed = 22;  // VARCHAR(5)
+  VehicleTitleApplicationCoOwnerSignedEnum co_owner_signed = 23;  // VARCHAR(5)
+  string vin = 24;  // VARCHAR(40) — max 40 chars
+  int32 model_year = 25;  // INTEGER
+  string make = 26;  // TEXT
+  string model = 27;  // TEXT
+  string body_type = 28;  // TEXT
+  VehicleTitleApplicationVehicleClassEnum vehicle_class = 29;  // VARCHAR(11)
+  VehicleTitleApplicationFuelTypeEnum fuel_type = 30;  // VARCHAR(8)
+  int32 gvwr_lbs = 31;  // INTEGER
+  string color = 32;  // TEXT
+  int32 odometer_reading = 33;  // INTEGER
+  VehicleTitleApplicationOdometerStatusEnum odometer_status = 34;  // VARCHAR(25)
+  VehicleTitleApplicationSellerOdometerStatementEnum seller_odometer_statement = 35;  // VARCHAR(5)
+  VehicleTitleApplicationBuyerOdometerAcknowledgedEnum buyer_odometer_acknowledged = 36;  // VARCHAR(5)
+  VehicleTitleApplicationTitleDocumentEnum title_document = 37;  // VARCHAR(32)
+  VehicleTitleApplicationPriorTitleSurrenderedEnum prior_title_surrendered = 38;  // VARCHAR(5)
+  VehicleTitleApplicationTitleBrandEnum title_brand = 39;  // VARCHAR(19)
+  VehicleTitleApplicationBrandDisclosedEnum brand_disclosed = 40;  // VARCHAR(5)
+  VehicleTitleApplicationNmvtisCheckEnum nmvtis_check = 41;  // VARCHAR(20)
+  VehicleTitleApplicationBrandInspectionEnum brand_inspection = 42;  // VARCHAR(14)
+  VehicleTitleApplicationLienStatusEnum lien_status = 43;  // VARCHAR(24)
+  string lienholder_name = 44;  // TEXT
+  VehicleTitleApplicationLienElectronicEnum lien_electronic = 45;  // VARCHAR(5)
+  VehicleTitleApplicationInsuranceProofEnum insurance_proof = 46;  // VARCHAR(12)
+  string insurance_expiry_date = 47;  // DATE — iso 8601 date
+  VehicleTitleApplicationEmissionsInspectionEnum emissions_inspection = 48;  // VARCHAR(12)
+  VehicleTitleApplicationSafetyInspectionEnum safety_inspection = 49;  // VARCHAR(12)
+  VehicleTitleApplicationVinVerificationEnum vin_verification = 50;  // VARCHAR(12)
+  double purchase_price_usd = 51;  // NUMERIC(12,2) — numeric(12,2)
+  VehicleTitleApplicationSalesTaxStatusEnum sales_tax_status = 52;  // VARCHAR(14)
+  double sales_tax_rate_percent = 53;  // NUMERIC(6,3) — numeric(6,3)
+  double sales_tax_amount_usd = 54;  // NUMERIC(12,2) — numeric(12,2)
+  string tax_exemption_reason = 55;  // TEXT
+  double title_fee_usd = 56;  // NUMERIC(8,2) — numeric(8,2)
+  double registration_fee_usd = 57;  // NUMERIC(8,2) — numeric(8,2)
+  VehicleTitleApplicationFeesTenderedEnum fees_tendered = 58;  // VARCHAR(5)
+  string applicant_note = 59;  // TEXT
+}

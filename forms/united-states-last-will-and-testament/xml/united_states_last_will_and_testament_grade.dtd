@@ -1,0 +1,14 @@
+<!ELEMENT united_states_last_will_and_testament_grade (id,created_at,updated_at,deleted_at,united_states_last_will_and_testament_id,validity_class,residuary_percent_total,elective_share_amount,witness_count,self_proved,federal_estate_tax_exposure,state_rule_source,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_states_last_will_and_testament_id (#PCDATA)>
+<!ELEMENT validity_class (#PCDATA)>
+<!ELEMENT residuary_percent_total (#PCDATA)>
+<!ELEMENT elective_share_amount (#PCDATA)>
+<!ELEMENT witness_count (#PCDATA)>
+<!ELEMENT self_proved (#PCDATA)>
+<!ELEMENT federal_estate_tax_exposure (#PCDATA)>
+<!ELEMENT state_rule_source (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

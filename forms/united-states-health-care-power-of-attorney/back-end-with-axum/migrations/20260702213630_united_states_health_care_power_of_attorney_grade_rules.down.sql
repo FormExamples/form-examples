@@ -1,0 +1,1 @@
+DROP TABLE "united_states_health_care_power_of_attorney_grade_rules";

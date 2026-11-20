@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000021e2e"
+  deletedAt: null
+  flagId: "F-FINANCIAL-ORDER-REMINDER-001"
+  category: "financial-order"
+  priority: "medium"
+  description: "A financial order is wanted or undecided; the divorce does not by itself settle money and property."
+  suggestedAction: "Apply for a financial order before the final order is made."
+  unitedKingdomDivorceApplicationGradeId: "00000000-0000-4000-8000-000000019046"

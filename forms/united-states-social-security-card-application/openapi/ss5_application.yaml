@@ -1,0 +1,601 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: ss5_application
+openapi: 3.1.0
+info:
+  title: United States Social Security Card Application — Ss5Application
+  version: 1.0.0
+  description: "Main Form SS-5 application record: request type, applicant items, evidence documents presented, filer and signature, and death-related Tell-SSA items. Classification, fired rules, and flags live in child tables. The Social Security number is never stored."
+paths:
+  /api/ss5_applications:
+    get:
+      summary: List Ss5Application records
+      operationId: listSs5Application
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of Ss5Application records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ss5Application"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new Ss5Application
+      operationId: createSs5Application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ss5Application"
+      responses:
+        "200":
+          description: The newly created Ss5Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ss5Application"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/ss5_applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one Ss5Application by id
+      operationId: getSs5Application
+      responses:
+        "200":
+          description: The requested Ss5Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ss5Application"
+        "404":
+          description: Ss5Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing Ss5Application
+      operationId: updateSs5Application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ss5Application"
+      responses:
+        "200":
+          description: The updated Ss5Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ss5Application"
+        "404":
+          description: Ss5Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing Ss5Application
+      operationId: replaceSs5Application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ss5Application"
+      responses:
+        "200":
+          description: The updated Ss5Application
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ss5Application"
+        "404":
+          description: Ss5Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a Ss5Application
+      operationId: deleteSs5Application
+      responses:
+        "200":
+          description: Ss5Application deleted
+        "404":
+          description: Ss5Application not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    Ss5Application:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        patient_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant (the person named in item 1; restrict delete).
+        clinician_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the preparer or assisting staff member (restrict delete); optional.
+        application_date:
+          type: [string, 'null']
+          format: date
+          description: Date the application is signed and submitted (SS-5 item 15); the reference date for age rules.
+        request_type:
+          type: string
+          enum:
+            - original
+            - replacement
+            - correction
+            - ""
+          description: "What the applicant asks SSA for: an original card, a replacement card, or a corrected card."
+        channel:
+          type: string
+          enum:
+            - in-person
+            - mail
+            - ""
+          description: How the application is submitted; applicants aged 12 or older for an original card must apply in person.
+        previously_applied:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - dont-know
+            - ""
+          description: Whether the person has ever applied for or received an SSN or card (SS-5 item 12).
+        name_change:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the name on the card differs because of a legal name change.
+        name_change_reason:
+          type: string
+          enum:
+            - marriage
+            - divorce
+            - court-order
+            - other
+            - ""
+          description: Reason for the legal name change.
+        date_of_birth_correction:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the request corrects the date of birth recorded by SSA.
+        replacements_this_year:
+          type: [integer, 'null']
+          format: int32
+          description: Replacement cards already issued in the current calendar year (limit 3).
+        replacements_lifetime:
+          type: [integer, 'null']
+          format: int32
+          description: Replacement cards already issued in the lifetime of the number holder (limit 10).
+        limit_exception_reason:
+          type: string
+          enum:
+            - name-change
+            - legend-change
+            - non-receipt
+            - ssa-error
+            - hardship
+            - ""
+          description: Exception reason claimed when a replacement limit is reached.
+        limit_exception_evidence:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether documentation supporting the claimed exception reason is available.
+        name_on_card:
+          type: string
+          description: Full name to be shown on the card (item 1).
+        name_at_birth:
+          type: string
+          description: Full name at birth (item 2).
+        other_names_used:
+          type: string
+          description: Other names used (item 3).
+        name_on_most_recent_card:
+          type: string
+          description: Name on the most recent Social Security card (item 13).
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth (item 7).
+        place_of_birth_city:
+          type: string
+          description: City or town of birth (item 6).
+        place_of_birth_region:
+          type: string
+          description: State, province, or country of birth (item 6).
+        sex:
+          type: string
+          enum:
+            - female
+            - male
+            - ""
+          description: "Sex as recorded on the SS-5 (item 11): female or male."
+        citizenship:
+          type: string
+          enum:
+            - us-citizen
+            - legal-alien-allowed-to-work
+            - legal-alien-not-allowed-to-work
+            - other
+            - ""
+          description: Citizenship or alien status (item 8).
+        non_work_reason_valid:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "For a lawfully admitted noncitizen not allowed to work: whether a valid non-work reason (federal or state benefit or law) is documented."
+        mother_name_at_birth:
+          type: string
+          description: Mother name at her birth (item 4); write unknown if not known.
+        father_name:
+          type: string
+          description: Father name (item 5); write unknown if not known.
+        state_of_residence:
+          type: string
+          maxLength: 2
+          description: Two-letter USPS code of the state or territory of residence.
+        mailing_address:
+          type: string
+          description: Mailing address where the card is sent (item 17).
+        phone:
+          type: string
+          description: Daytime telephone number (item 16).
+        identity_document:
+          type: string
+          enum:
+            - us-driver-license
+            - state-id-card
+            - us-passport
+            - military-id
+            - employee-id
+            - school-id
+            - health-insurance-card
+            - other
+            - none
+            - ""
+          description: Primary proof of identity presented; must be current, unexpired, and show name, identifying information, and preferably a photograph.
+        identity_document_expired:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the identity document is expired.
+        age_document:
+          type: string
+          enum:
+            - us-birth-certificate
+            - us-passport
+            - hospital-record
+            - religious-record
+            - immigration-record
+            - other
+            - none
+            - ""
+          description: Proof of age presented; a birth certificate is preferred.
+        citizenship_document:
+          type: string
+          enum:
+            - us-birth-certificate
+            - us-passport
+            - certificate-of-naturalization
+            - certificate-of-citizenship
+            - consular-report-of-birth-abroad
+            - permanent-resident-card
+            - i-94-with-work-authorization
+            - employment-authorization-document
+            - other
+            - none
+            - ""
+          description: Proof of US citizenship or lawful alien status presented.
+        citizenship_on_file:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - dont-know
+            - ""
+          description: Whether SSA already holds citizenship or status evidence for this number (relevant to replacement cards).
+        name_change_document:
+          type: string
+          enum:
+            - marriage-certificate
+            - divorce-decree
+            - court-order
+            - certificate-of-naturalization
+            - other
+            - none
+            - ""
+          description: Document proving the legal name change.
+        documents_original_or_certified:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether every document is an original or a copy certified by the issuing agency; photocopies and notarized copies are not accepted.
+        signer_relationship:
+          type: string
+          enum:
+            - self
+            - parent
+            - legal-guardian
+            - custodian
+            - other
+            - ""
+          description: Relationship of the person signing to the person in item 1 (item 18).
+        signer_name:
+          type: string
+          description: Name of the person signing when not the applicant.
+        signer_identity_document:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the signer, when not the applicant, presented their own proof of identity.
+        signature_present:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the application is signed (item 19).
+        applicant_deceased:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Tell SSA: whether the person in item 1 has died; a card cannot be issued and the death must be reported instead."
+        death_reported_to_ssa:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the death has already been reported to SSA (funeral home, family, or 1-800-772-1213).
+        preparer_note:
+          type: string
+          description: Free-text note from the person preparing the application.
+      required:
+        - created_at
+        - updated_at
+        - patient_id
+        - request_type
+        - channel
+        - previously_applied
+        - name_change
+        - name_change_reason
+        - date_of_birth_correction
+        - limit_exception_reason
+        - limit_exception_evidence
+        - name_on_card
+        - name_at_birth
+        - other_names_used
+        - name_on_most_recent_card
+        - place_of_birth_city
+        - place_of_birth_region
+        - sex
+        - citizenship
+        - non_work_reason_valid
+        - mother_name_at_birth
+        - father_name
+        - state_of_residence
+        - mailing_address
+        - phone
+        - identity_document
+        - identity_document_expired
+        - age_document
+        - citizenship_document
+        - citizenship_on_file
+        - name_change_document
+        - documents_original_or_certified
+        - signer_relationship
+        - signer_name
+        - signer_identity_document
+        - signature_present
+        - applicant_deceased
+        - death_reported_to_ssa
+        - preparer_note
+      description: "Main Form SS-5 application record: request type, applicant items, evidence documents presented, filer and signature, and death-related Tell-SSA items. Classification, fired rules, and flags live in child tables. The Social Security number is never stored."

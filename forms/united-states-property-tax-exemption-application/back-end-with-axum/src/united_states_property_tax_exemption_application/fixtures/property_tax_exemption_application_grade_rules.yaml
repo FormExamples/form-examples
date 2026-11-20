@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000000e01"
+  deletedAt: null
+  propertyTaxExemptionApplicationGradeId: "00000000-0000-4000-8000-000000000d01"
+  ruleId: "R-CLASSIFICATION-01"
+  dimension: "classification"
+  category: "base-eligibility"
+  description: "Owner-occupier on the assessment date with a complete, signed application filed before the state deadline."

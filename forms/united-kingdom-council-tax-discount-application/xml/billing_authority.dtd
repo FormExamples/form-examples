@@ -1,0 +1,10 @@
+<!ELEMENT billing_authority (id,created_at,updated_at,deleted_at,name,gss_code,email,phone,website_url)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT gss_code (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT website_url (#PCDATA)>

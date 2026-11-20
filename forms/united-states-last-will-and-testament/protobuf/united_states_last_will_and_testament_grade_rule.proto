@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_last_will_and_testament_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_states_last_will_and_testament;
+
+enum UnitedStatesLastWillAndTestamentGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_CAPACITY = 1;  // capacity
+  DIMENSION_EXECUTION = 2;  // execution
+  DIMENSION_WITNESSES = 3;  // witnesses
+  DIMENSION_BEQUESTS = 4;  // bequests
+  DIMENSION_FAMILY = 5;  // family
+  DIMENSION_FIDUCIARY = 6;  // fiduciary
+  DIMENSION_JURISDICTION = 7;  // jurisdiction
+  DIMENSION_CLASSIFICATION = 8;  // classification
+}
+
+message UnitedStatesLastWillAndTestamentGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_last_will_and_testament_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedStatesLastWillAndTestamentGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

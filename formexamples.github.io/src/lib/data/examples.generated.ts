@@ -3905,7 +3905,7 @@ export const examples: ExampleEntry[] = [
     "personas": [
       {
         "name": "Valid certificate, scrutinised by medical examiner",
-        "description": "Expected hospital death of an 84-year-old woman from bronchopneumonia due to a left MCA infarct due to atrial fibrillation, Part II type 2 diabetes; all three Part I intervals recorded; consultant certifier fully identified who attended the deceased; not referred to the coroner (reason 'none'); medical examiner status 'scrutinised'. Expect validityClass 'valid', underlyingCause 'Atrial fibrillation' (the I(c) line), coronerReferralIndicated false, and an empty flaggedIssues array (the ME-scrutiny flag is suppressed by 'scrutinised')."
+        "description": "Expected hospital death of an 84-year-old woman from bronchopneumonia due to a left MCA infarct due to atrial fibrillation, Part II type 2 diabetes; all three Part I intervals recorded; consultant certifier fully identified who attended the deceased; not referred to the coroner (reason 'none'); medical examiner status 'scrutinised'. Expect validityClass 'valid', underlyingCause 'Atrial fibrillation' (the I(c) line), coronerReferralIndicated false, and an empty flaggedIssues array (the ME-scrutiny flag is suppressed by 'scrutinised'). The new statutory additions (qualifications, in-person attendance, ethnicity, pregnancy, implanted-device status) are all recorded, so none of the new flags fire."
       },
       {
         "name": "Industrial disease referral asserted by reason alone",
@@ -3914,6 +3914,26 @@ export const examples: ExampleEntry[] = [
       {
         "name": "Night-shift draft: mode of death only, Part I(a) missing",
         "description": "Foundation doctor's overnight draft for a 67-year-old man: Part I(a) left blank, Part I(b) reads 'Cardiac arrest' (a listed mode of death) with no interval, I(c) and Part II empty; coroner and medical-examiner questions unanswered; certifier name given but grade, GMC reference and attendance blank. Not referred (referredToCoroner '' and coronerReason '' both fail the referral predicate). Expect validityClass 'incomplete' (missingPartIa true AND unacceptableSoleCause true — one line, Part II empty, normalises to 'cardiac arrest'), underlyingCause 'Cardiac arrest', coronerReferralIndicated false, and six flags in order: F-UNACCEPTABLE-SOLE-CAUSE-001 (high), F-MISSING-PART-I-001 (high), F-ILLOGICAL-SEQUENCE-001 (medium: I(b) completed while I(a) empty), F-MEDICAL-EXAMINER-SCRUTINY-001 (medium), F-MISSING-INTERVAL-001 (low, 'I(b)'), F-INCOMPLETE-CERTIFIER-001 (low: 'grade, GMC reference, attendance on the deceased not recorded')."
+      },
+      {
+        "name": "Prohibited abbreviations and unspecified diabetes",
+        "description": "Part I(a) 'MI', I(b) 'IHD' and Part II 'COPD; diabetes': abbreviations MI, IHD, COPD are prohibited and diabetes has no type. Expect a valid class (no referral, I(a) present) but the abbreviation and specificity flags."
+      },
+      {
+        "name": "Telephone-only attendance cannot certify",
+        "description": "Certifier only spoke to the patient by telephone: attendanceMode 'telephone' means no attending practitioner, so the certificate is classified refer-to-coroner with the not-attending flag."
+      },
+      {
+        "name": "Fracture of the neck of femur not referred",
+        "description": "Pulmonary embolism due to deep vein thrombosis following a fractured neck of femur after a fall, certified without a coroner referral. Expect class refer-to-coroner, the coroner-referral flag and the trauma-in-cause flag (high); the injury must stay on the certificate and the death be referred."
+      },
+      {
+        "name": "Four-line chain with device and pregnancy",
+        "description": "Four-step chain I(a)-I(d) down to adenocarcinoma of the sigmoid colon, a pacemaker recorded, and pregnancy within 12 months. Underlying cause is I(d). Expect the implanted-device-present flag only: the malignancy is specific (adenocarcinoma of the sigmoid colon) and diabetes is Type 2."
+      },
+      {
+        "name": "Statutory additions all missing",
+        "description": "Well-formed Part I but no qualifications, ethnicity, pregnancy status or implanted-device status, and diabetes without a type in Part II. Expect the statutory-addition flags."
       }
     ]
   },
@@ -6730,6 +6750,250 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "united-kingdom-birth-registration",
+    "title": "United Kingdom Birth Registration",
+    "description": "Prepare to register a birth in England and Wales (GOV.UK \"Register a birth\") and order the birth certificate from the General Register Office (GRO). The form is a single continuous single-page wizard that collects the child, the mother, the second parent and the basis for recording them, the informant and identity evidence, and the certificate order. Its engine is a completeness and validity engine, not a clinical score: it classifies the application as ready to submit, incomplete, needs additional evidence, or out of scope, and raises flagged issues for the statutory deadline, the informant, the unmarried-father rules, and the required evidence.",
+    "personas": [
+      {
+        "name": "Ready: married parents, mother registers within 42 days",
+        "description": "Married parents; the mother registers 12 days after the birth at the local register office with a passport and orders two standard certificates. Expect ready-to-submit, 12 days, not late, no missing items, and no flags."
+      },
+      {
+        "name": "Ready: unmarried parents register together; twins; no red book",
+        "description": "Unmarried parents register jointly (the father's name goes on the entry), twins, red book not brought. Expect ready-to-submit with only the low-priority multiple-birth and red-book flags."
+      },
+      {
+        "name": "Incomplete: missing child forenames, mother details, informant and delivery",
+        "description": "Several required items are blank (forenames, mother's name, maiden surname and address, informant name, registration date, delivery address, payment). Expect incomplete with a missing-required flag."
+      },
+      {
+        "name": "Needs evidence: unmarried father named with no valid basis",
+        "description": "Unmarried parents, father included, but the basis is none and the mother registers alone. Expect needs-additional-evidence with the paternity-route flag."
+      },
+      {
+        "name": "Needs evidence: 63 days after birth, one secondary document, photocopies",
+        "description": "Registration 63 days after the birth; only one secondary identity document and not originals. Expect needs-additional-evidence, late registration yes, with the late, identity-evidence and originals flags."
+      },
+      {
+        "name": "Out of scope: birth in Scotland",
+        "description": "The birth took place in Scotland, which has its own register. Expect out-of-scope with the out-of-scope flag."
+      },
+      {
+        "name": "Out of scope: stillbirth",
+        "description": "The child was born dead after the 24th week. Expect out-of-scope (a stillbirth is registered separately)."
+      },
+      {
+        "name": "Ready: female couple, statutory declaration, 40 days",
+        "description": "Unmarried female couple treated at a UK licensed clinic; the second mother is recorded through a signed statutory declaration held by the informant. Registration is 40 days after the birth, inside a week of the deadline. Expect ready-to-submit with the deadline-approaching flag."
+      },
+      {
+        "name": "Needs evidence: male couple without a parental order",
+        "description": "A male couple with a statutory declaration instead of a parental order, document not in hand, the father informant. Expect needs-additional-evidence with paternity-route and paternity-evidence flags."
+      },
+      {
+        "name": "Needs evidence: grandmother not present at the birth",
+        "description": "The informant is the child's grandmother, who was not present, and the parents are able to register. Expect needs-additional-evidence with the informant-not-qualified flag."
+      },
+      {
+        "name": "Needs evidence: more than 12 months after the birth",
+        "description": "Registration 396 days after the birth. Expect needs-additional-evidence and late registration yes with the Registrar General's authority wording."
+      },
+      {
+        "name": "Incomplete: dates inconsistent",
+        "description": "Registration date before the birth and the mother's date of birth after the child's. Expect incomplete with two date-inconsistent flags."
+      },
+      {
+        "name": "Ready: unmarried mother registers alone, no certificate, within 42 days",
+        "description": "The mother registers alone with the father's details left off, orders no certificate, 37 days after the birth. Expect ready-to-submit with the unmarried-father and deadline-approaching flags."
+      },
+      {
+        "name": "Needs evidence: joint registration but the mother attends alone, payment declined",
+        "description": "Unmarried parents choose joint registration but only the mother is the informant; card payment not confirmed. Expect needs-additional-evidence with the paternity-joint and certificate-payment flags."
+      },
+      {
+        "name": "Needs evidence: female couple without licensed clinic treatment",
+        "description": "Unmarried female couple, joint registration, but no licensed-clinic parenthood agreement. Expect needs-additional-evidence with the paternity-clinic flag."
+      },
+      {
+        "name": "Needs evidence: mother-only with a second parent; bystander informant",
+        "description": "Parents recorded as mother only yet a second parent is included, and the informant is someone present at the birth while the parents are able to register. Expect needs-additional-evidence with the mother-only and parents-able flags."
+      },
+      {
+        "name": "Needs evidence: father informant with no second parent recorded",
+        "description": "Married parents but the informant is the father while no second parent is recorded. Expect needs-additional-evidence with the informant-second-parent flag."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-council-tax-discount-application",
+    "title": "United Kingdom Council Tax Discount Application",
+    "description": "A single-page, step-by-step application to a local council in England for a Council Tax discount, exemption, disregard or reduction. It captures the claim type (single person discount, 50% all-disregarded discount, student exemption, severe mental impairment, disabled band reduction, care-leaver relief or Council Tax Reduction), the applicant and property (band A to H), the occupant roster, the supporting evidence, the effective date and the declaration.",
+    "personas": [
+      {
+        "name": "Single person, likely eligible",
+        "description": "Applicant lives alone in a Band C main home, applies for the 25% single person discount from the application date, accepts every declaration. Expect likely-eligible, 1 counted adult, 25-percent-discount and no flags."
+      },
+      {
+        "name": "Single person, second adult listed",
+        "description": "Applicant claims the single person discount but a partner who counts as an adult also lives there. Expect likely-ineligible (2 counted adults, outcome none) and the adult-count-mismatch flag."
+      },
+      {
+        "name": "Student household exemption, likely eligible",
+        "description": "Applicant and a flatmate are both full-time students, the course is 36 months at 25 hours a week with the certificate held, and the flatmate's evidence is held. Expect likely-eligible, 0 counted adults, full-exemption, and no flags."
+      },
+      {
+        "name": "Student exemption, short course and a working adult",
+        "description": "The claim is a student exemption but a working adult lives in the home, and the student course is 6 months at 10 hours a week with no certificate. Expect likely-ineligible with adult-count-mismatch and student-evidence flags."
+      },
+      {
+        "name": "Severe mental impairment, evidence outstanding",
+        "description": "Claim for the severe mental impairment disregard: the doctor's certificate is held but the qualifying benefit is not yet confirmed, the occupant has no evidence recorded, and the duty and fraud declarations are not accepted. Expect incomplete with smi-evidence, disregard-evidence, duty-to-report-changes and fraud-warning flags."
+      },
+      {
+        "name": "Severe mental impairment, likely eligible",
+        "description": "Certificate and qualifying benefit both held, the severely mentally impaired occupant has evidence held, declarations all accepted. Expect likely-eligible, smi-disregard, no flags."
+      },
+      {
+        "name": "Disabled band reduction, Band A",
+        "description": "A wheelchair user lives in a Band A home with extra indoor space for the wheelchair; it is the disabled person's main home. Expect likely-eligible, band-reduction and the low band-a-percentage flag."
+      },
+      {
+        "name": "Disabled band reduction, no adaptation and not main home",
+        "description": "Claim for the disabled band reduction with no qualifying adaptation, and the property is not the main home. Expect likely-ineligible with disability-adaptation and not-main-residence flags."
+      },
+      {
+        "name": "Care leaver aged 26",
+        "description": "Care leaver relief claimed by a 26-year-old with local-authority proof held. Expect likely-ineligible and the care-leaver-age flag."
+      },
+      {
+        "name": "Care leaver aged 22, likely eligible",
+        "description": "Care leaver relief with proof held and age 22. Expect likely-eligible, care-leaver-relief, no flags."
+      },
+      {
+        "name": "Council Tax Reduction, backdated and incomplete",
+        "description": "A Council Tax Reduction claim backdated two months with no billing authority or band given. Expect incomplete with the backdating, means-tested and incomplete-application flags."
+      },
+      {
+        "name": "Fifty percent discount, all disregarded",
+        "description": "Applicant is a full-time student living with their under-18 sibling whose date of birth fits. Every resident is disregarded, so 0 counted adults. Expect likely-eligible, 50-percent-discount and no flags."
+      },
+      {
+        "name": "Occupant age conflicts with status",
+        "description": "Single person discount claimed. A listed occupant is marked under 18 but was born in 1990, so the roster is inconsistent; the occupant does not count as an adult. Expect likely-eligible with the age-status-mismatch flag."
+      },
+      {
+        "name": "Single person, not the main home",
+        "description": "The property is a second home, so no discount applies. Expect likely-ineligible with the not-main-residence flag."
+      },
+      {
+        "name": "Single person, backdated",
+        "description": "Single person discount requested from three months before the application, all details complete. Expect likely-eligible with the backdating flag."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-death-registration",
+    "title": "United Kingdom death registration (England and Wales)",
+    "description": "Registering a death in England and Wales after a doctor has completed the medical certificate of cause of death (MCCD): the 5-day deadline, the qualified informant, medical examiner confirmation, coroner involvement, the certificate for burial or cremation, Tell Us Once, and ordering certified copies of the death certificate. A single continuous single-page wizard checks whether the death is ready to register and raises flagged issues.",
+    "personas": [
+      {
+        "name": "Ready to register, on track",
+        "description": "Expected hospital death; medical examiner confirmed 2026-09-01, assessed 2026-09-02 (1 day elapsed); not a coroner case; son present at the death is a qualified informant; appointment booked, documents to hand, cremation planned, five copies to be bought at registration. Expect ready-to-register, on-track, and no flags."
+      },
+      {
+        "name": "Ready but due soon, loose ends",
+        "description": "Confirmed 2026-08-30, assessed 2026-09-03: 4 of 5 days used so the deadline is due-soon. No appointment booked, no documents to hand, disposal undecided, no copies planned. Expect ready-to-register, due-soon, with due-soon, appointment, documents, disposal-undecided and copies flags."
+      },
+      {
+        "name": "Ready but overdue",
+        "description": "Confirmed 2026-08-25 and still unregistered on 2026-09-03: 9 days, past the 5-day limit. The informant cannot give all of the deceased's particulars. Expect ready-to-register, overdue, with overdue and particulars flags."
+      },
+      {
+        "name": "Registered in time, complete",
+        "description": "Confirmed 2026-08-29 and registered 2026-09-01 (3 days). Burial certificate issued, Tell Us Once reference received, three copies ordered online with a GRO index reference and priority service. Expect registered, registered-in-time, and no flags."
+      },
+      {
+        "name": "Registered late, loose ends",
+        "description": "Confirmed 2026-08-20 and registered 2026-08-30 (10 days, late). The burial certificate has not been issued, no Tell Us Once reference was recorded, and two copies are to be ordered online without a GRO index reference. Expect registered, registered-late, with late-registration, disposal-certificate, Tell Us Once and GRO index flags."
+      },
+      {
+        "name": "Referred to coroner, pending",
+        "description": "The death was reported to a coroner, an inquest has been opened and the coroner's certificate has not arrived. Registration waits and the clock is paused. Priority service is requested by post (not available). Expect referred-to-coroner-pending, paused-coroner, with coroner-pending, copies and priority flags."
+      },
+      {
+        "name": "Coroner released, ready",
+        "description": "The coroner investigated, released the death with no inquest and the registrar has the coroner's certificate; no medical examiner confirmation is needed. Expect ready-to-register, clock not started, with only the coroner-released flag."
+      },
+      {
+        "name": "Incomplete, wrong jurisdiction and informant",
+        "description": "Death in Scotland, MCCD not received, medical examiner not yet confirmed, and the informant is a neighbour who does not qualify. Expect incomplete with jurisdiction, MCCD, medical-examiner and informant flags and the matching blocking rules."
+      },
+      {
+        "name": "Blank state",
+        "description": "Nothing answered. Expect incomplete: name and date of death, jurisdiction, coroner answer, MCCD, medical examiner and informant rules all fire; only the copies and appointment flags are raised."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-divorce-application",
+    "title": "United Kingdom Divorce Application",
+    "description": "A completeness and time-gate checker for applying for a divorce (or the dissolution of a civil partnership) in England and Wales under the no-fault regime of the Divorce, Dissolution and Separation Act 2020. It follows a case through its three stages: the application (form D8 or online), the conditional order (form D84, formerly the decree nisi) and the final order (form D36, formerly the decree absolute), which is what ends the marriage and produces the divorce paperwork.",
+    "personas": [
+      {
+        "name": "Ready sole application, no flags",
+        "description": "Sole divorce application at the application stage: married 2018, certificate original in English, England and Wales residence and domicile on both sides, service by email, no children, no financial order intended, fee paid. Expect 'ready-to-apply', jurisdiction met, earliest date 2019-06-09, no rules and no flags."
+      },
+      {
+        "name": "Ready joint dissolution with children agreed and financial order outstanding",
+        "description": "Joint application to dissolve a civil partnership; two children under 18 with agreed arrangements; a financial order is intended but not yet applied for. Expect 'ready-to-apply' with only the medium financial-order reminder."
+      },
+      {
+        "name": "One-year rule not met",
+        "description": "Marriage on 2025-11-20 and the check on 2026-09-03: under one year. Expect 'not-eligible-yet' (the gate takes precedence), earliest date 2026-11-20 and the high one-year-rule flag."
+      },
+      {
+        "name": "Exactly one year: boundary is eligible",
+        "description": "Marriage on 2025-09-03 and the check on 2026-09-03 is the first anniversary, on which an application may be made. Residence is a 12-month sole-applicant ground only. Expect 'ready-to-apply'."
+      },
+      {
+        "name": "Foreign certificate, no translation, address unknown, fee unpaid",
+        "description": "Married in Poland; certificate not in English and no certified translation; name changed with no proof; the other spouse's address is unknown; fee unpaid; children under 18 with arrangements not agreed. Expect 'incomplete' with certificate-translation, name-proof, service-address, children and fee flags."
+      },
+      {
+        "name": "Certificate not held and no jurisdiction ground",
+        "description": "The marriage certificate is not held and neither spouse is resident or domiciled in England and Wales. Expect 'incomplete' with the high certificate and jurisdiction flags."
+      },
+      {
+        "name": "Joint application despite domestic-abuse risk, relationship not recognized",
+        "description": "A joint application with a declared risk of domestic abuse, a marriage that is not legally recognized and no stated breakdown. Expect 'incomplete' with the abuse and relationship-status flags."
+      },
+      {
+        "name": "Conditional order inside the 20-week reflection period",
+        "description": "Application issued 2026-05-01; the check on 2026-09-03 is before 2026-09-18 (issue + 140 days), and the other spouse has not returned the acknowledgement. Expect 'not-eligible-yet', earliest 2026-09-18, the reflection and acknowledgement flags."
+      },
+      {
+        "name": "Conditional order ready after 20 weeks",
+        "description": "Application issued 2026-03-01; 20 weeks ended 2026-07-19; the acknowledgement was returned. Expect 'ready-to-apply' and no flags."
+      },
+      {
+        "name": "Conditional order stage, issue date missing",
+        "description": "The conditional-order stage with no issue date: the gate cannot be tested, so the missing date makes it 'incomplete'."
+      },
+      {
+        "name": "Final order inside the 6 weeks and 1 day wait",
+        "description": "Conditional order made 2026-08-10; the final order cannot be applied for before 2026-09-22; a financial order is intended and not applied for. Expect 'not-eligible-yet', earliest 2026-09-22, the final-order-wait flag and the high financial-order flag."
+      },
+      {
+        "name": "Final order ready, financial order applied",
+        "description": "Conditional order made 2026-06-01; 43 days ended 2026-07-14; a financial order has been applied for. Expect 'ready-to-apply' and no flags."
+      },
+      {
+        "name": "Final order delayed more than 12 months, unexplained",
+        "description": "Conditional order made 2025-06-01; the 12 months ended 2026-06-01 and the delay is not explained. Expect 'incomplete' with the medium final-order-delay flag."
+      }
+    ]
+  },
+  {
     "slug": "united-kingdom-driver-and-vehicle-licensing-agency-b1-form",
     "title": "United Kingdom Driver and Vehicle Licensing Agency B1 Form",
     "description": "Confidential medical information — neurological conditions for driving fitness assessment.",
@@ -6787,6 +7051,57 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "united-kingdom-last-will-and-testament",
+    "title": "United Kingdom Last Will and Testament",
+    "description": "A will-drafting documentation instrument for England and Wales. The person preparing a will records the testator, the estate, the executors, the beneficiaries and their shares, guardians for children under 18, funeral wishes, and how the will is to be signed and witnessed. The engine checks the record against the Wills Act 1837 formalities and basic completeness, and tells the person whether the will looks ready to sign.",
+    "personas": [
+      {
+        "name": "Valid draft, ready to execute",
+        "description": "A widowed 68-year-old in England and Wales leaves her estate (under £325,000) equally to her two adult children, with two executors, a residuary clause, a cremation wish, and Inheritance Act claims considered. Still a draft with no witnesses named yet. Expect validityClass valid, no formality risk, shares 100, and only the low reminder that witnesses are not yet arranged."
+      },
+      {
+        "name": "Valid and signed with two independent witnesses",
+        "description": "The same will after execution on 2026-08-20: written, signed, two adult witnesses present together who each signed, neither a beneficiary. Expect validityClass valid, two witnesses and no flags."
+      },
+      {
+        "name": "Blank will record",
+        "description": "Nothing answered. Expect validityClass incomplete: the testator details, capacity, executor, beneficiaries and residuary clause are all missing, and the engine raises the matching high and medium flags."
+      },
+      {
+        "name": "Shares total 80% and a minor beneficiary with no trustee",
+        "description": "Two adult children each receive 40% and a nine-year-old grandchild is named with a 0% share and no trustee, so the shares total 80% and no trustee holds the child's share. Expect validityClass incomplete with the shares-not-100 and minor-beneficiary-no-trustee flags."
+      },
+      {
+        "name": "Signed with only one witness",
+        "description": "Recorded as signed and witnessed, but only one witness is named. Expect validityClass formality-risk, a high fewer-than-two-witnesses flag, and witnessCount 1."
+      },
+      {
+        "name": "Witness is also a beneficiary",
+        "description": "The first witness, Anna Ellis, is the daughter who receives 50% of the estate. Expect validityClass formality-risk with the witness-is-beneficiary flag, because her gift would fail under Wills Act 1837 s.15."
+      },
+      {
+        "name": "Testator aged 17",
+        "description": "A 17-year-old drafts a will. Expect validityClass formality-risk and the testator-under-18 flag, since the testator must be 18 or over."
+      },
+      {
+        "name": "Marriage expected without a contemplation clause",
+        "description": "The testator is engaged and the will does not say it is made in contemplation of the marriage, so the marriage would revoke it. Expect validityClass formality-risk and the marriage-revocation flag."
+      },
+      {
+        "name": "Domiciled in Scotland",
+        "description": "Scottish domicile; England and Wales rules do not apply. Expect validityClass formality-risk and the other-jurisdictions (domicile) flag."
+      },
+      {
+        "name": "Lacks capacity",
+        "description": "Capacity is recorded as no. Expect validityClass formality-risk and a high capacity flag."
+      },
+      {
+        "name": "Valid but complex: partner, children, foreign property, large estate",
+        "description": "A cohabiting testator with children under 18, no guardian, a property in Spain, an earlier will not revoked, an estate over £2 million, and Inheritance Act claims not yet considered; the content is complete (executor, shares 100%). Expect validityClass valid with a cluster of medium and low awareness flags: partner not provided for, other jurisdictions, previous will, guardian not named, Inheritance Act, inheritance tax."
+      }
+    ]
+  },
+  {
     "slug": "united-kingdom-lasting-power-of-attorney-for-financial-decisions",
     "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
     "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs. The LPA is a statutory deed under the Mental Capacity Act 2005 by which a donor (\"the donor\") appoints one or more attorneys to make decisions about their property and financial affairs. Once registered by the OPG it is the legal instrument that lets attorneys run bank accounts, sell property, manage investments, claim benefits, and pay bills on behalf of the donor.",
@@ -6821,6 +7136,41 @@ export const examples: ExampleEntry[] = [
       {
         "name": "critical-underage-donor-no-attorneys-no-signatures",
         "description": "Underage donor without capacity, no attorneys named, no certificate provider linked, no signatures at all, life-sustaining-treatment choice unset, a prohibited-act instruction (assisted suicide) that also contradicts a known ADRT, an underage replacement attorney, six people to notify, and an incomplete registration with no fee paid. Maximal fatal-rule coverage across every rule family; the application is invalid."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-marriage-certificate-application",
+    "title": "United Kingdom Marriage Certificate Application",
+    "description": "A completeness and validity check for giving notice of marriage or civil partnership in England and Wales and ordering a marriage certificate from the General Register Office (GRO). A single continuous page collects the notice, the ceremony, each party's identity, residence, previous-relationship and immigration evidence, whether the parties are closely related, and the certificate order. The engine classifies the application as ready to submit, incomplete, needs evidence or correction, or ineligible, computes the permitted ceremony window, and raises flagged issues. It gives no legal advice; the register office decides each notice.",
+    "personas": [
+      {
+        "name": "Ready to submit, civil ceremony at a register office",
+        "description": "Two never-married British adults give notice together in Leeds on 1 June 2026 for a register-office ceremony on 15 August 2026 (75 days later, inside the 29-day to 12-month window). Both have original identity and proof of address, two witnesses are arranged, the venue is confirmed, and two standard certificate copies are ordered with a GRO index reference. Expect ready-to-submit, the window 2026-06-30 to 2027-06-01, no immigration referral, and no flags."
+      },
+      {
+        "name": "Ready to submit with a previous divorce and EU Settlement Scheme status",
+        "description": "The first party is divorced and brings the decree absolute; the second party holds EU Settlement Scheme status and has a share code, so joint notice is not required by status. Everything else is in order. Expect ready-to-submit with two low flags: the evidence-check fee reminder and a missing GRO index reference for the one certificate copy ordered."
+      },
+      {
+        "name": "Ineligible: under 18, already married, and closely related",
+        "description": "The second party is born on 1 March 2009 so is 17 on the 15 August 2026 ceremony date; the first party is recorded as currently married; and the parties are closely related. Three independent high-priority eligibility flags fire, and the class is ineligible even though the rest of the application is complete. (Since 27 February 2023 18 is the minimum age with no parental-consent exception.)"
+      },
+      {
+        "name": "Incomplete: only a name and a certificate request",
+        "description": "Only a notice type and the first party's name are entered, and one certificate copy is requested with no GRO service. Most required fields are missing, identity, proof of address and venue are unconfirmed, and no GRO index reference is given. Expect incomplete with the required-fields flag, the certificate-service flag, the missing-GRO-index-reference flag and the identity, address and venue flags; with no notice date there is no ceremony window."
+      },
+      {
+        "name": "Needs evidence: short notice, residence, witnesses and documents",
+        "description": "Notice on 20 July 2026 for a ceremony on 1 August 2026 is only 12 days, short of the 29 required. The first party has lived in the district 3 days and has no original identity or proof of address; the second party is a widow(er) without a death certificate; the venue is unconfirmed; one witness is arranged; and zero certificate copies is invalid. Everything is complete and eligible, so the class is needs-evidence, with eight flags across all three priorities."
+      },
+      {
+        "name": "Needs evidence: overseas party without immigration evidence, notice not joint",
+        "description": "The second party is from outside the UK and Ireland with no EU Settlement Scheme status and has no immigration evidence, and the parties are not giving notice together. Expect needs-evidence, an immigration referral indicated, the immigration-referral flag (possible Home Office referral adding up to 70 days) and the joint-notice-required flag."
+      },
+      {
+        "name": "Needs correction: ceremony after the notice lapses",
+        "description": "Notice given on 10 March 2026 is valid until 10 March 2027, but the ceremony is planned for 8 May 2027. Everything else is in order, so the only finding is the notice-expires-before-ceremony flag (high); the class is needs-evidence."
       }
     ]
   },
@@ -6882,6 +7232,332 @@ export const examples: ExampleEntry[] = [
     ]
   },
   {
+    "slug": "united-kingdom-vehicle-bill-of-sale",
+    "title": "United Kingdom Vehicle Bill of Sale",
+    "description": "A bill of sale / sales receipt for a private vehicle sale in the United Kingdom, following the GOV.UK \"Buy a vehicle\" and \"Sell, scrap or transfer a vehicle\" journeys. One continuous single-page wizard records the sale, the seller and buyer, the vehicle, the checks, the price and payment, the condition terms, the DVLA steps, and both signatures.",
+    "personas": [
+      {
+        "name": "Complete private sale, no flags",
+        "description": "A clean private sale of a 2018 Ford Focus: seller is the registered keeper with a matching V5C, valid MOT, finance checked and clear, bank transfer received, sold as seen with faults recorded, V5C/2 slip given, DVLA told online, both parties signed. Expect classification 'complete', 0 missing items, 0 risk conditions and no flags."
+      },
+      {
+        "name": "Incomplete: no VIN and no mileage",
+        "description": "Otherwise sound sale, but the VIN is blank and no odometer reading is recorded. Expect 'incomplete' (2 missing items, no risk conditions) with the high no-vin and no-mileage flags."
+      },
+      {
+        "name": "Risk flagged: finance outstanding",
+        "description": "Hire-purchase finance is still outstanding on the vehicle. Expect 'risk-flagged' (1 risk condition) with a high finance-outstanding flag; every required item is otherwise present."
+      },
+      {
+        "name": "Risk flagged: seller not keeper and V5C missing",
+        "description": "The seller is not the registered keeper and has no V5C, and the V5C/2 slip was not given. Expect 'risk-flagged' (2 risk conditions) with seller-not-keeper, v5c-missing and keeper-slip flags."
+      },
+      {
+        "name": "Risk flagged: description mismatch and cash payment",
+        "description": "The vehicle does not match its advert, and the buyer pays 8,000 pounds in cash. Expect 'risk-flagged' (1 risk condition), a high description-mismatch flag and a medium payment-risk flag."
+      },
+      {
+        "name": "Incomplete: unsigned and DVLA not told",
+        "description": "Everything is recorded except the signatures, and the seller has not yet told DVLA. Expect 'incomplete' (2 missing signatures) with unsigned (medium) and dvla-notification (low) flags."
+      },
+      {
+        "name": "Complete: trader sale with expired MOT",
+        "description": "The seller is a trader, the vehicle (2012) has an expired MOT, finance is checked and clear, and no faults are recorded though sold as seen. Expect 'complete' with trader-sale, mot-issue (medium) and faults-not-recorded (low) flags."
+      },
+      {
+        "name": "Complete: finance unchecked",
+        "description": "Finance was marked unchecked, but the V5C is present and everything else is complete. Expect 'complete' with a medium finance-unchecked flag (unchecked is answered, so not a missing item)."
+      },
+      {
+        "name": "Blank bill of sale",
+        "description": "Nothing answered. Expect 'incomplete' with every required item missing (the V5C, keeper, finance, and signatures included) and the blank-state flags: no-vin, no-mileage, finance-unchecked, unsigned."
+      }
+    ]
+  },
+  {
+    "slug": "united-kingdom-vehicle-registration-application",
+    "title": "United Kingdom Vehicle Registration Application",
+    "description": "Registering a vehicle with the Driver and Vehicle Licensing Agency (DVLA) in Great Britain: the V62 application for a vehicle registration certificate (V5C, the log book), and the first-registration variants V55/4 (new vehicle), V55/5 (used vehicle), imported vehicles, and V627/1 (rebuilt or kit vehicles). The applicant records who is applying, who the registered keeper and owner are, the vehicle's identity, the evidence enclosed, and the fee, and the form checks the application before it is posted.",
+    "personas": [
+      {
+        "name": "v62-lost-v5c-ready",
+        "description": "V62 replacement for a lost V5C, 25 pound cheque, signed: ready to submit, with the low lost-V5C flag."
+      },
+      {
+        "name": "v62-acquired-with-slip-ready",
+        "description": "V62 for a vehicle acquired without a V5C, with the new-keeper slip: no fee, ready to submit."
+      },
+      {
+        "name": "v62-not-received-in-window",
+        "description": "V62 where the V5C has not arrived within 6 weeks: no fee due, ready to submit."
+      },
+      {
+        "name": "v62-acquired-no-slip-no-fee",
+        "description": "V62 acquired without a V5C and no new-keeper slip: 25 pounds due but nothing enclosed, so it needs documents; entitlement and fee flags."
+      },
+      {
+        "name": "v55-4-new-vehicle-missing-docs",
+        "description": "New vehicle first registration with no certificate of newness, no type approval, and no payment: needs supporting documents."
+      },
+      {
+        "name": "v55-4-new-vehicle-ready",
+        "description": "New vehicle first registration with newness certificate, type approval, and 55 pound cheque: ready to submit."
+      },
+      {
+        "name": "v55-5-used-no-mot",
+        "description": "Used vehicle 7 years old, no MOT certificate, vehicle approval present, wrong fee amount: needs documents."
+      },
+      {
+        "name": "v55-5-used-old-exempt-ready",
+        "description": "Used vehicle 20 years old: type approval exempt, valid MOT, 55 pound postal order: ready to submit."
+      },
+      {
+        "name": "imported-vehicle-nova-missing",
+        "description": "Imported used vehicle not notified to HMRC through NOVA, with an IVA certificate and MOT: needs documents with a high NOVA flag."
+      },
+      {
+        "name": "imported-vehicle-ready",
+        "description": "Imported used vehicle with a NOVA reference, IVA, MOT, and fee: ready to submit."
+      },
+      {
+        "name": "kit-vehicle-no-build-evidence",
+        "description": "Kit vehicle with no build evidence: needs documents with an entitlement flag."
+      },
+      {
+        "name": "seriously-damaged-vehicle",
+        "description": "Seriously damaged vehicle that cannot be repaired: incomplete (cannot be registered), high flag."
+      },
+      {
+        "name": "bad-vin-and-registration",
+        "description": "V62 with a VIN containing the letter O and a malformed registration number: incomplete with format flags."
+      },
+      {
+        "name": "northern-ireland-company-keeper",
+        "description": "Company keeper at a Northern Ireland address, owner differs, no insurance, no company number: incomplete."
+      },
+      {
+        "name": "northern-ireland-no-insurance",
+        "description": "Individual keeper at a Northern Ireland address with the owner recorded but no insurance certificate: needs documents; keeper-owner and high insurance flags."
+      },
+      {
+        "name": "blank-application",
+        "description": "A blank application: incomplete with every required item missing."
+      },
+      {
+        "name": "v62-no-identity-overpaid",
+        "description": "V62 acquired without a V5C with a slip enclosed but a fee paid and no identity evidence: needs documents; low overpayment flag. Not insured, so the low insurance flag also fires."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-birth-certificate-application",
+    "title": "United States Birth Certificate Application",
+    "description": "Request a certified copy of a US birth certificate from the state or territory vital records office that registered the birth. There is no national registry: each state, the District of Columbia, and each territory issues its own, and the CDC National Center for Health Statistics (NCHS) Where to Write for Vital Records directs requesters to the right office. The form collects the data of the US Standard Certificate of Live Birth needed to find the record (name, sex, date, city, county, state, facility, mother's name before first marriage, father's name), who is asking and why, the kind and number of copies, delivery and fee, identity and supporting documents, whether an apostille is needed for use abroad, and the signed declaration.",
+    "personas": [
+      {
+        "name": "California adult requests own long form for a passport",
+        "description": "An adult Californian born in Fresno asks for one certified long-form copy for a passport, by mail with the notarized sworn statement California requires, ID unexpired, fee 31 enclosed. Expect ready-to-submit with no flags."
+      },
+      {
+        "name": "Texas parent orders two copies for school",
+        "description": "A mother named on a Texas record (fee 22 plus 3 for the second copy, 25 total) requests two certified short-form copies for school enrollment by mail with unexpired ID. Expect ready-to-submit; Texas fee verified, no flags."
+      },
+      {
+        "name": "New York spouse missing proof, expired ID, short fee",
+        "description": "A spouse asks New York State for a certified copy but encloses no marriage certificate, the ID is expired, and 15 dollars is enclosed against 30. Expect incomplete with ID, proof and fee flags plus the NYC reminder."
+      },
+      {
+        "name": "Florida sibling of a living registrant is ineligible",
+        "description": "A sibling asks Florida for a certified copy of a living person's record. Florida limits living registrants' records to the person, a parent named on it, a guardian or a legal representative. Expect ineligible-requester."
+      },
+      {
+        "name": "Florida sibling of a deceased registrant is eligible",
+        "description": "The same Florida sibling relationship is allowed once the registrant is deceased; proof of relationship and death are enclosed. Expect ready-to-submit with the deceased-registrant and unverified-fee flags."
+      },
+      {
+        "name": "Pennsylvania 15-year-old orders own record",
+        "description": "A 15-year-old asks Pennsylvania for their own certificate; the state minimum for self-requests is 16. Expect ineligible-requester via the underage flag."
+      },
+      {
+        "name": "Washington grandparent chooses an informational copy",
+        "description": "A non-parent applicant in Washington who is not eligible for a certified copy asks for an informational copy for genealogy; WA offers these to anyone, so no ID, proof or eligibility check applies. Expect ready-to-submit with no flags."
+      },
+      {
+        "name": "Illinois stranger is ineligible",
+        "description": "A friend with no legal interest asks the Illinois Division of Vital Records for a certified copy. Expect ineligible-requester and the unverified-fee note."
+      },
+      {
+        "name": "Unknown state with apostille, short form, no destination",
+        "description": "A self-requester born in Minnesota (no verified rule held) wants an apostille on a short-form copy and names no country. Expect incomplete: type-unacceptable and apostille-country flags plus the verify-state-rule flag; fee unknown."
+      },
+      {
+        "name": "California legal guardian without court order, adopted ward",
+        "description": "A guardian orders a ward's California certificate by mail without letters of guardianship or the notarized statement; the ward was adopted. Expect incomplete with authority, notarization, fee-short and adopted flags."
+      },
+      {
+        "name": "Ohio open record, unrelated applicant without proof, unsigned",
+        "description": "Ohio birth records are open, so an unrelated applicant is eligible, but this request lacks proof, ID details and the signed declaration. Expect incomplete with proof, ID and declaration flags."
+      },
+      {
+        "name": "New York self with apostille ready",
+        "description": "A New Yorker requests a certified long form with an apostille for Italy, ID unexpired and 30 dollars enclosed. Expect ready-to-submit with the apostille process note and the NYC reminder."
+      },
+      {
+        "name": "Texas request missing identifiers and order details",
+        "description": "A Texas request missing the registrant name, mother name, copy count and delivery method. Expect incomplete with the missing-registrant-data flag."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-divorce-petition",
+    "title": "United States Divorce Petition",
+    "description": "Petition for dissolution of marriage, the divorce decree and the vital-records divorce certificate for United States courts. A single continuous wizard collects the filing state and county, spouses and residency, children and child support, property division (community or equitable), service of process, and the decree; the engine checks the filing state's residency, separation and waiting-period rules and classifies the petition as ready to file, incomplete, or not yet eligible, with prioritized flags.",
+    "personas": [
+      {
+        "name": "Ready to file: Illinois uncontested, no children, served by acceptance",
+        "description": "Both spouses agree; 14 months in Illinois (90 days needed), settlement agreement signed, financial disclosure ready, respondent signed an acceptance of service a week after filing, no children, no decree yet. Illinois has no waiting period before the decree. Expect readinessClass 'ready-to-file', property regime equitable, and no flags."
+      },
+      {
+        "name": "Ready to file: California uncontested with children, waiting period pending",
+        "description": "California uncontested no-fault with two minor children, custody plan and guideline worksheet done ($1,240 a month), 9 months in state and 5 months in county, served personally on 2026-07-20. Expect 'ready-to-file', community property, earliest decree 2027-01-21 (six months and a day from service) and only the low waiting-period-pending flag."
+      },
+      {
+        "name": "Not yet eligible: Texas residency and county residency short",
+        "description": "Texas petition filed after only 4 months in the state and 60 days in the county (6 months and 90 days are required). Everything else is complete. Expect 'not-yet-eligible' with high state-residency and county-residency flags and the low waiting-period flag (60 days from filing)."
+      },
+      {
+        "name": "Not yet eligible: Pennsylvania contested no-fault, separation too short",
+        "description": "Contested Pennsylvania no-fault petition under 3301(d); the spouses separated 2026-03-01 and the petition is filed 2026-08-15, about 167 days against the one year required. Expect 'not-yet-eligible' with the high separation flag, and the low waiting-period flag (90 days from service)."
+      },
+      {
+        "name": "Incomplete: Florida with a fault ground, missing names and children paperwork",
+        "description": "Florida has no fault grounds (only irretrievable breakdown), yet adultery is pleaded; the respondent and marriage date are missing; there are children with no custody plan or child-support worksheet; no financial disclosure. Expect 'incomplete' with core-missing, ground-not-available, custody-plan, child-support and financial-disclosure flags."
+      },
+      {
+        "name": "Not yet eligible: Washington decree entered before the 90-day waiting period",
+        "description": "Washington petition filed 2026-07-01, served 2026-07-10, but a decree is recorded as entered 2026-08-20; the 90 days run from the later of filing or service, so the earliest decree date is 2026-10-08. Name restoration is requested without a name and no divorce certificate is requested. Expect 'not-yet-eligible' with decree-before-waiting-period, name-restoration and certificate flags."
+      },
+      {
+        "name": "Ready to file with flags: unknown state, UCCJEA gap, military respondent, publication",
+        "description": "Minnesota is not in the verified rule table, so the default 90-day domicile rule applies and a verify-state-rule flag is raised. The children have lived there only 4 months (UCCJEA six-month home-state test), the respondent is on active duty and has not appeared, service is by publication, and no financial disclosure is ready. Expect 'ready-to-file' with unknown-state, home-state, military, publication and disclosure flags."
+      },
+      {
+        "name": "Ready to file with flag: New York with the shortened residency and a property mismatch",
+        "description": "New York needs two years of residency, or one year when the spouses married or lived as spouses in New York; this petitioner has 14 months and married in New York, so residency is met. The petition pleads community property although New York uses equitable distribution. A decree is entered with a certificate requested. Expect 'ready-to-file' with the property-approach-mismatch flag only."
+      },
+      {
+        "name": "Incomplete: Ohio contested no-fault with no separation date",
+        "description": "Ohio contested no-fault needs a year of separation (ORC 3105.01(J)) but no separation date is recorded; 7 months in Ohio and 120 days in the county satisfy residency. Expect 'incomplete' with core-missing and separation-period (medium) flags."
+      },
+      {
+        "name": "Incomplete: blank petition",
+        "description": "A fresh blank petition. Expect 'incomplete', with core-missing, financial-disclosure and not-yet-served flags."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-durable-financial-power-of-attorney",
+    "title": "United States Durable Financial Power of Attorney",
+    "description": "A United States execution-readiness checker for a durable power of attorney for property and finances. A principal appoints an agent (and successors) to manage money, real estate, investments, benefits, and taxes, and the authority survives the principal's later incapacity. Law here is state-variable: the [Uniform Power of Attorney Act (2006)](doc/upoaa-framework.md) (UPOAA) is the baseline, and a `STATE_RULES` table encodes the execution formalities of California, New York, Texas, Florida, Illinois, Pennsylvania, Ohio, and Washington. Any other state falls back to the uniform default and raises a \"verify the state rule\" flag.",
+    "personas": [
+      {
+        "name": "Ready: Texas, notarized, gift cap, Form 2848 filed",
+        "description": "Texas principal, durable wording, immediate effect, notary arranged (Texas needs no witnesses), spouse agent plus successor, all general grants, gifting limited to the annual exclusion, bank form completed, Form 2848 filed. Expect ready-to-execute with no flags."
+      },
+      {
+        "name": "Ready: New York, notary counts as second witness",
+        "description": "New York needs two witnesses and acknowledgment; the notary may be one, so one separate witness plus the notary satisfies it. Agent signed and acknowledged; statutory notice included. No hot powers are granted, so only the low default-deny advisory fires. Expect ready-to-execute."
+      },
+      {
+        "name": "Execution risk: Florida springing power, uninitialed hot powers, agent witness",
+        "description": "Florida: a springing power is ineffective (709.2108(3)); hot powers granted but not initialed (709.2202); only one witness (two needed) and that witness is an agent. Expect execution-risk with the Florida flags."
+      },
+      {
+        "name": "Execution risk: California without notary and with one witness",
+        "description": "California accepts a notary OR two witnesses. Neither is satisfied: no notary and one witness. Statutory warning text is missing. Expect execution-risk (notarization and witnesses flags) plus the California notice flag."
+      },
+      {
+        "name": "Execution risk: Texas, not durable, no capacity, minor agent, real estate",
+        "description": "Texas plan with several answered defects: not durable, capacity not confirmed, agent is not an adult, no notary although the plan records real estate, unlimited gifting, and agent self-gifting. Expect execution-risk and the matching high and medium flags."
+      },
+      {
+        "name": "Execution risk: New York agent signature not acknowledged",
+        "description": "New York makes the power effective only when each agent signature is acknowledged. Agent has not signed. Everything else is in order. Expect execution-risk with F-AGENT-SIGNATURE-REQUIRED-001 at high priority."
+      },
+      {
+        "name": "Ready with advisories: Pennsylvania agent acknowledgment, tax authority, no gift limit",
+        "description": "Pennsylvania: notary and two witnesses arranged; statutory notice included. The agent acknowledgment is still unsigned (medium, not blocking), tax authority is granted without Form 2848, gift power has no stated limit, no bank form. Expect ready-to-execute with medium and low flags."
+      },
+      {
+        "name": "Execution risk: Illinois with no witness",
+        "description": "Illinois requires one witness who is not the notary, and a notary. A notary is arranged but no witness. Expect execution-risk with F-WITNESSES-SHORT-001."
+      },
+      {
+        "name": "Incomplete: Ohio, agent and effectiveness unanswered",
+        "description": "Ohio principal named, but no agent, no effectiveness, no durability answer, no capacity answer, no notary plan, and no grants. Expect incomplete (unanswered items never create an execution risk) with the no-successor flag and low advisories."
+      },
+      {
+        "name": "Incomplete: unknown state with springing trigger unanswered",
+        "description": "Oregon is not in the state table so the uniform default applies and the verify flag fires. A springing power is chosen without a trigger. Grants and notary are otherwise answered. Expect incomplete with F-STATE-RULE-VERIFY-001 and F-SPRINGING-NO-DETERMINER-001."
+      },
+      {
+        "name": "Ready: Washington springing power with named determiner",
+        "description": "Washington UPOAA state: notary arranged, no witnesses required, springing allowed with a physician determiner, successor agent named, no hot powers. Expect ready-to-execute with only the low default-deny advisory."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-health-care-power-of-attorney",
+    "title": "United States Health Care Power of Attorney",
+    "description": "A durable power of attorney for health care: the document in which an adult (the principal) names an agent, and successor agents, to make health care decisions if the principal cannot. States call it a health care proxy (New York), a medical power of attorney (Texas), a designation of health care surrogate (Florida), or an advance health care directive (California). The same form can carry the principal's wishes about life-sustaining treatment, a HIPAA release, and a direction about organ donation.",
+    "personas": [
+      {
+        "name": "California directive, ready to execute",
+        "description": "Complete California directive signed before two unrelated, disinterested witnesses; adult-child agent, two successors, HIPAA release, organ donation addressed, copies distributed. Expect ready-to-execute and no flags."
+      },
+      {
+        "name": "New York health care proxy, relatives may witness",
+        "description": "New York needs two adult witnesses and allows relatives; the agent is not a witness. Expect ready-to-execute."
+      },
+      {
+        "name": "Texas medical power of attorney via notary",
+        "description": "Texas accepts a notary acknowledgment in place of witnesses. Expect ready-to-execute."
+      },
+      {
+        "name": "Illinois directive with one witness",
+        "description": "Illinois requires a single adult witness who is not related to the principal and not a provider. Expect ready-to-execute."
+      },
+      {
+        "name": "Blank-ish draft is incomplete",
+        "description": "Florida principal who has named an agent but not chosen when authority begins, a signing date, or a method. Expect incomplete with the missing-required flag and no execution defect."
+      },
+      {
+        "name": "Florida: agent signed as a witness",
+        "description": "Florida needs two witnesses, one neither spouse nor blood relative, and the surrogate cannot witness. Witness 1 is the agent; witness 2 is the principal's sister. Expect execution-risk with witness-eligibility and execution-formalities flags."
+      },
+      {
+        "name": "California nursing-home resident without ombudsman",
+        "description": "Skilled nursing facility resident in California; one witness is the facility's provider staff and no ombudsman signed; the agent is the facility's unrelated employee. Expect execution-risk with facility-rule, witness-eligibility and agent-eligibility flags."
+      },
+      {
+        "name": "Washington: principal and agent are minors",
+        "description": "Washington principal who was 17 at signing, with a 16-year-old agent; capacity is confirmed and two valid witnesses signed. Expect execution-risk with the principal-minor and agent-eligibility flags."
+      },
+      {
+        "name": "Ohio: relative witness bars the signing",
+        "description": "Ohio bars relatives as witnesses; witness 2 is the principal's nephew, leaving only one valid witness. Expect execution-risk with a witness-count and witness-eligibility flag."
+      },
+      {
+        "name": "Alaska uses the uniform default",
+        "description": "Alaska is not in the verified rule table, so the uniform default applies (two unrelated witnesses) and the verify-state-rule flag fires. Serious illness with no POLST and no organ-donation answer also flag. Expect ready-to-execute with state-rule, POLST and organ-donation flags."
+      },
+      {
+        "name": "Pennsylvania: capacity doubt, prior directive remains",
+        "description": "The signer states the principal may not understand the document; an earlier directive remains in force; agent has not agreed. Expect execution-risk with capacity, revocation and successor-agent flags."
+      }
+    ]
+  },
+  {
     "slug": "united-states-hipaa-authorization-form",
     "title": "United States HIPAA Authorization Form",
     "description": "A United States Health Insurance Portability and Accountability Act (HIPAA) authorization form. This is a legal document by which a patient (or their authorized representative) gives a covered entity — a health-care provider, health plan, or health-care clearinghouse — explicit, time-bounded permission to use or disclose specifically described Protected Health Information (PHI) to a named third-party recipient for a stated purpose. It is the standard mechanism, defined in 45 CFR § 164.508 of the HIPAA Privacy Rule, for any use or disclosure of PHI that is not otherwise permitted as treatment, payment, or health-care operations (TPO).",
@@ -6897,6 +7573,403 @@ export const examples: ExampleEntry[] = [
       {
         "name": "Defective VA sensitive-records release for an investigation",
         "description": "A power-of-attorney holder (no authority described) tries to release a veteran's substance-use, HIV, mental-health, psychotherapy-note and reproductive-health records from a VA medical center (class mode with the class left blank, 'All my records' as the description) to a private investigator for an 'investigation' purpose, with expiration event 'none', signature not confirmed, no signature date, and the right-to-revoke / no-conditioning / redisclosure statements not acknowledged. Expect validityStatus 'invalid', completenessScore 90 / 'partial' (only signatureDate is empty — the 'no' answers still count as filled), 14 firedRules in order: phi-description-not-vague, disclosing-source-identified, expiration-not-none, signature-and-date, representative-authority, right-to-revoke-statement, no-conditioning-statement, redisclosure-warning, substance-use-part-2-consent, substance-use-initials, hiv-aids-state-consent, hiv-aids-initials, mental-health-separate-initial, psychotherapy-separate-auth; and 2 additionalFlags in order: reproductive-health-investigation (high), va-records-7332-notice (high). Note expiration-stated does NOT fire because the non-empty event 'none' satisfies its presence check."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-last-will-and-testament",
+    "title": "United States Last Will and Testament",
+    "description": "A planning and validity-checking form for a United States will. A single continuous single-page wizard collects the testator and state, the family and spouse, the estate and the specific and residuary bequests, the personal representative and standard clauses, the execution plan with witnesses, and the self-proving affidavit. The engine classifies the plan as valid-ready-to-execute, incomplete, or formality-risk and raises prioritized flagged issues.",
+    "personas": [
+      {
+        "name": "Valid and ready to execute, Florida widow",
+        "description": "A 72-year-old Florida widow with two grandchildren receiving specific gifts and two residuary children (60/40). Two disinterested witnesses sign in her presence on 2026-09-01, the will is self-proved before a notary, and the digital-assets, revocation and safekeeping clauses are present. Expect 'valid-ready-to-execute' with no flags (Florida has no state estate tax and the $800,000 estate is far below the $15,000,000 federal exclusion)."
+      },
+      {
+        "name": "Blank form",
+        "description": "Nothing answered. No state, so the Uniform Probate Code default applies without a 'verify state rule' flag (the state is simply missing). Expect 'incomplete' with the three missing-answer flags (testator, family and estate, execution) plus low notes for no digital-assets clause, no safekeeping location and no self-proving affidavit."
+      },
+      {
+        "name": "Incomplete draft, New York married testator",
+        "description": "A New York testator names herself and says she is married but has not named a spouse, a value for the spouse, a representative or a form of execution. Expect 'incomplete': missing-testator, missing-estate and missing-execution answers raise medium flags, and no high flag fires, so formality-risk does not apply. Elective share cannot be estimated because no estate value is given."
+      },
+      {
+        "name": "Formality risk, Texas: one interested witness, not signed at the end, arithmetic wrong",
+        "description": "A Texas will with a single witness who is also a beneficiary: the testator did not sign at the end, did not sign in front of the witness, and the witness did not sign in the testator's presence (Texas requires it). Residuary shares add to 90%, and the specific bequests ($2,000,000) exceed the $1,500,000 estate. Expect 'formality-risk' with high flags for signature, witness-count, presence, void interested-witness gift (Texas needs a disinterested corroborating witness), residuary total and over-allocated bequests."
+      },
+      {
+        "name": "Formality risk, New York: unwitnessed holographic will by a minor who lacks capacity",
+        "description": "A New York holographic will, which New York does not recognize, that is not entirely handwritten, signed by a 16-year-old who is not of sound mind with a possible undue-influence concern. Expect 'formality-risk' with high flags for under-age, no sound mind, undue influence, the holographic form not allowed, and the draft not in the testator's handwriting."
+      },
+      {
+        "name": "Formality risk, Ohio: electronic will with interested witness, affidavit Ohio does not use",
+        "description": "An Ohio will signed electronically (Ohio is not recorded as allowing a fully electronic will) with two witnesses of whom one takes under the will; with only two witnesses the gift to one of them is void under R.C. 2107.15. A self-proving affidavit is planned, but Ohio does not use one. Expect 'formality-risk' with high flags for the electronic form and the void gift, and a low note that the affidavit adds nothing in Ohio."
+      },
+      {
+        "name": "Valid with notes, California married, interested witness, uncertain capacity",
+        "description": "A California testator who is married (community property) leaves her husband nothing in the will because community property already gives him half. One of her two witnesses also takes a gift, which in California raises a rebuttable presumption of undue influence unless two other disinterested witnesses signed. Capacity is recorded as uncertain, there is no residuary clause, earlier wills are not revoked, a no-contest clause is limited in California, and there is no digital-assets clause. California accepts a declaration under penalty of perjury, so no notary is needed. Expect 'valid-ready-to-execute' (no high flags) with medium and low flags."
+      },
+      {
+        "name": "Valid with notes, Florida married, spouse below elective share, minor children, omitted child",
+        "description": "A Florida testator leaves his wife $100,000 of a $2,000,000 estate, below the roughly $600,000 elective share (30% of the elective estate). He has minor children and no guardian, omits one child without naming him, includes a no-contest clause (unenforceable in Florida), and one witness takes a gift (valid in Florida). Expect 'valid-ready-to-execute' (no high flags) with spousal, guardian, pretermitted-child, no-contest and witness notes."
+      },
+      {
+        "name": "Valid with tax notes, Illinois married, $20 million estate",
+        "description": "An Illinois testator with a $20,000,000 estate leaves his wife $5,000,000, below the roughly $6.7 million Illinois elective share (one third where the testator has descendants), and the estate is above both the $15,000,000 federal exclusion and the $4,000,000 Illinois estate-tax exclusion. A tax adviser has not reviewed it. Illinois accepts an attestation clause without a notary. Expect 'valid-ready-to-execute' (no high flags) with elective-share, federal and Illinois estate-tax flags."
+      },
+      {
+        "name": "Valid with notes, Pennsylvania: inheritance tax, self-proving gap, no backup beneficiary",
+        "description": "A Pennsylvania testator whose witnesses did not sign in his presence (not required in Pennsylvania, so a medium note), whose self-proving affidavit is planned but not notarized, who names no contingent beneficiary or successor representative and no safekeeping location, and whose estate faces Pennsylvania inheritance tax. Expect 'valid-ready-to-execute' (no high flags) with self-proving, witness-presence, backup-beneficiary, successor, safekeeping and inheritance-tax flags."
+      },
+      {
+        "name": "Valid with notes, unlisted state (Nevada) falls back to the UPC default",
+        "description": "A testator domiciled in Nevada, which is not in this tool's state table. The Uniform Probate Code default is used and the 'verify state rule' flag is raised. Everything else is complete and clean. Expect 'valid-ready-to-execute' with a single medium flag."
+      },
+      {
+        "name": "Valid with notes, Washington married: community property and state estate tax",
+        "description": "A Washington testator with a $5,000,000 estate, married, leaving his wife $2,000,000. Washington is a community property state with no elective share, and the estate is above the $3,000,000 Washington estate-tax exclusion. One witness also takes a gift, which in Washington raises a rebuttable presumption unless two other witnesses signed. Expect 'valid-ready-to-execute' (no high flags) with community-property, witness and state estate-tax flags."
+      },
+      {
+        "name": "Valid and ready to execute, Texas holographic will",
+        "description": "A Texas will written entirely in the testator's own handwriting and signed at the end, with no witnesses. Texas recognizes holographic wills, so no witness or self-proving flag applies. The testator is single and everything else is complete. Expect 'valid-ready-to-execute'."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-marriage-license-application",
+    "title": "United States Marriage License Application",
+    "description": "A single-page, step-by-step questionnaire for applying for a United States marriage license and, after the ceremony, the certified marriage certificate. It records the issuing state and county, both applicants, eligibility (age and consent, prior marriages, relationship, proxy), the license issuance and fee, and the ceremony (officiant, witnesses, return of the signed license). It classifies the application as ready-to-apply, incomplete, or not-eligible, works out the earliest permitted ceremony date and the license expiry, and raises prioritized flags (`F-USMLA-001` to `F-USMLA-024`).",
+    "personas": [
+      {
+        "name": "Ready, California, ceremony held and license returned",
+        "description": "Two never-married adults in Los Angeles County apply on 2026-08-20 (California: no waiting period, 90-day validity, one witness on a public license). The license issues the same day with the $91 fee, the ceremony is on 2026-08-30 with an authorized clergy officiant and one witness, and the signed license is returned on 2026-09-01, inside the 10-day window. Expect ready-to-apply with an empty flag list."
+      },
+      {
+        "name": "Ready, Texas, waiting period waived by a premarital course, same-sex couple",
+        "description": "Two women in Travis County apply on 2026-08-25. One was divorced on 2024-05-10. Texas has a 72-hour wait, waived here because the couple completed a premarital course, so the earliest ceremony is the issue date itself; there is no ceremony date yet. Expect ready-to-apply with two low flags: the waiting-period information (waiver applied) and the same-sex Obergefell notice (not a bar)."
+      },
+      {
+        "name": "Incomplete, New York, ceremony the same day the license issues, no witness",
+        "description": "Two adults in Kings County. The license issues on 2026-08-30 and the ceremony is also on 2026-08-30, inside New York's 24-hour waiting period, with no witness although New York requires one. Expect incomplete with the high waiting-period and witness-shortfall flags."
+      },
+      {
+        "name": "Incomplete, Florida, expired license and officiant not recorded",
+        "description": "A Florida license issues on 2026-06-01 and the ceremony is held on 2026-08-15, 75 days later, past the 60-day validity. The officiant is not recorded and the signed license has not been returned more than 10 days after the ceremony; no fee is recorded. Expect incomplete with the expired-license, officiant-missing, overdue-return, and fee flags."
+      },
+      {
+        "name": "Not eligible, Pennsylvania, 17-year-old and a spouse not yet divorced",
+        "description": "The first applicant is 17, and Pennsylvania allows no marriage under 18; the second applicant is recorded as currently married. Expect not-eligible with the underage and existing-marriage flags (and the SSN-declined notice for the minor)."
+      },
+      {
+        "name": "Not eligible, Florida, proxy requested and applicants related",
+        "description": "The applicants are recorded as related within a prohibited degree, and a proxy marriage is requested in Florida, which does not allow it. Expect not-eligible with the prohibited-relationship and proxy-not-permitted flags."
+      },
+      {
+        "name": "Incomplete, Vermont (unlisted state), missing details and remote appearance",
+        "description": "Vermont is not in the rule table, so the uniform default applies and the state-rule flag asks the applicants to verify. The county is blank, the second applicant has no date of birth or marital status, neither has presented ID, and the couple will not appear in person with no proxy. Expect incomplete with the missing-data, ID, in-person-appearance, and verify-state-rule flags."
+      },
+      {
+        "name": "Incomplete, Illinois, 17-year-old without consent and an undocumented divorce",
+        "description": "The second applicant is 17 and Illinois allows that with parental consent or judicial approval, but none is recorded; the first applicant is divorced with no end date. Expect incomplete with the minor-consent and prior-marriage-undocumented flags."
+      },
+      {
+        "name": "Not eligible, Florida, 17-year-old with a partner more than two years older",
+        "description": "A 17-year-old and a 22-year-old apply in Florida with parental consent recorded. Florida allows 17 with consent only when the partner is no more than two years older. Expect not-eligible with the underage flag naming the age-gap limit."
+      },
+      {
+        "name": "Ready, Ohio, 17-year-old with a court order and a partner within four years",
+        "description": "A 17-year-old and a 20-year-old apply in Ohio with juvenile-court approval recorded; the age gap is within Ohio's four-year limit. Ohio has no waiting period. Expect ready-to-apply, with the low waiting-period information flag only."
+      },
+      {
+        "name": "Ready, Washington, two witnesses, late return and SSN not issued",
+        "description": "A Washington couple observes the 3-day wait (issued 2026-07-20, ceremony 2026-07-25), has two witnesses and an authorized officiant, and returns the signed license on 2026-08-30, 36 days after the ceremony and past the 30-day window. One applicant has no Social Security number issued. Expect ready-to-apply with the late-return and SSN notice low flags."
+      },
+      {
+        "name": "Incomplete, Georgia, unauthorized officiant and license returned before the ceremony",
+        "description": "The officiant is recorded as not authorized to solemnize marriages in Georgia and the license-return date is before the ceremony date (a typing error). Expect incomplete with the unauthorized-officiant and return-before-ceremony flags."
+      },
+      {
+        "name": "Not eligible, California after the minor path closes (2027)",
+        "description": "California allows a court order for a minor until 2027-01-01. On an application dated 2027-01-15 a 17-year-old with a court order is barred. Expect not-eligible with the underage flag."
+      },
+      {
+        "name": "Ready, Texas, deployed service member by proxy",
+        "description": "A Texas applicant is on active duty and a proxy marriage is requested; Texas allows proxy marriage for a deployed service member. The 72-hour wait is waived by the military exception. Expect ready-to-apply with the proxy allowed and the low waiting-period information flag, and the in-person flag does not fire because a proxy is requested."
+      },
+      {
+        "name": "Incomplete, Ohio, ceremony dated before the license issued",
+        "description": "The ceremony date (2026-08-01) is before the license issue date (2026-08-05), a date typo or a ceremony held without a license. Expect incomplete with the ceremony-before-issuance flag."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-property-tax-exemption-application",
+    "title": "United States Property Tax Exemption Application",
+    "description": "A county or state application for a residential property tax homestead exemption and related relief: senior, disability, disabled-veteran and circuit-breaker relief, plus assessment-appeal basics. The applicant gives the parcel number, ownership and occupancy as of the assessment date, the exemptions claimed, household income, the proof documents, the filing date and a signed declaration under penalty for a false statement.",
+    "personas": [
+      {
+        "name": "Likely eligible: Texas homestead plus over-65, filed in time",
+        "description": "Austin homeowner aged 71, owner-occupier on January 1, claims the homestead and the over-65 exemption (Texas has no income limit), all proofs attached, signed, filed 18 March 2026 before the 30 April deadline. Expect likely-eligible, deadline 2026-04-30, filed on time, qualifying homestead and senior, and no flags."
+      },
+      {
+        "name": "Likely eligible: California Homeowners' Exemption with appeal guidance",
+        "description": "Los Angeles owner-occupier claims only the $7,000 Homeowners' Exemption, files 3 February 2026 before the 15 February deadline, and asks for appeal guidance with a notice date. Expect likely-eligible with a single low appeal-guidance flag."
+      },
+      {
+        "name": "Incomplete: Florida application with no proofs, unsigned",
+        "description": "Orange County owner-occupier, homestead and senior claimed, filed 20 February 2026 (before 1 March) but no proof documents are marked attached, household income and age are present, and the declaration is neither signed nor acknowledged. Expect incomplete, with signature, documents and state-figures flags."
+      },
+      {
+        "name": "Incomplete: Washington disabled veteran missing rating and income",
+        "description": "King County applicant claims homestead, disability and disabled-veteran relief but gives no VA rating or income, no disability proof, and the unencoded-deadline state raises low flags. Expect incomplete: the blank VA rating raises the income-missing (needs-an-answer) flag, alongside documents, no-deadline and figures flags."
+      },
+      {
+        "name": "Likely ineligible: Illinois homestead not occupied, second homestead",
+        "description": "Cook County owner who did not live in the home on January 1 and also claims a homestead elsewhere. Illinois sets no statewide deadline, so no late flag fires. Expect likely-ineligible with occupancy and duplicate-homestead high flags."
+      },
+      {
+        "name": "Likely ineligible: Ohio senior over the income limit and filed after December 31",
+        "description": "Franklin County owner aged 70 with household income $52,000, above the $41,000 Ohio limit, filing 4 January 2027 for assessment year 2026, after the 31 December 2026 deadline, as an initial (not late) application. Expect likely-ineligible with late-filing, income and no passing exemption."
+      },
+      {
+        "name": "Likely ineligible: New York senior under 65 claiming Enhanced STAR",
+        "description": "Monroe County owner aged 58 claiming only the senior relief, which needs age 65. Expect likely-ineligible because the sole claim fails the age test, plus an age flag and a state-figures low flag."
+      },
+      {
+        "name": "Eligible with late-filing relief: Pennsylvania filed after March 1 as a late application",
+        "description": "Allegheny County owner aged 66, income $31,000 (under the $48,110 limit), homestead and circuit-breaker claimed; filed 10 April 2026 against the 1 March 2025 deadline for the 2026 year but marked as a late application. Expect likely-eligible with a medium late-relief flag and qualifying homestead and circuit-breaker."
+      },
+      {
+        "name": "Likely eligible with verify flag: unknown state uses the default rule",
+        "description": "A Georgia application (not in the encoded table) otherwise complete: the default rule applies, no deadline can be derived, and a verify-state-rule flag is raised. Expect likely-eligible with the medium state-verify flag and no derived deadline."
+      },
+      {
+        "name": "Likely ineligible: disabled-veteran claim below the minimum rating and no claims otherwise",
+        "description": "Texas owner claims only the disabled-veteran exemption with a 0 percent VA rating. Expect likely-ineligible with a veteran-rating high flag."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-social-security-card-application",
+    "title": "United States Social Security Card Application (Form SS-5)",
+    "description": "A single-page, step-by-step questionnaire for Form SS-5, the application for an original, replacement, or corrected Social Security card. It checks the form and the evidence the applicant plans to bring against the Social Security Administration (SSA) rules, classifies the application as Ready to submit, Incomplete, Evidence missing, or Not eligible, and raises prioritized flagged issues. It is documentation support, not legal advice, and SSA decides every application. The Social Security number is never collected.",
+    "personas": [
+      {
+        "name": "Ready: adult original card, all evidence",
+        "description": "Adult US-born applicant requests an original card in person with an unexpired Texas driver license and a US birth certificate that prove identity, age, and citizenship; originals; signs for self. Expect ready-to-submit and no flags."
+      },
+      {
+        "name": "Ready: replacement card, evidence on file",
+        "description": "Replacement of a lost card, second replacement this year and third in a lifetime, with the name on the most recent card given, a US passport as identity, and citizenship already on file. Expect ready-to-submit; the near-limit flag fires because two have been issued this year."
+      },
+      {
+        "name": "Ready: child original card signed by a parent",
+        "description": "Seven-year-old US-born child; the mother signs, gives her name, and brings her own identity document; the child's identity, age, and citizenship are shown by a US birth certificate and a school identity card. Expect ready-to-submit."
+      },
+      {
+        "name": "Incomplete: blank-ish application",
+        "description": "Only the request type is chosen; the applicant items, evidence, signer, and Tell-SSA answers are blank. Expect incomplete with the missing-fields, signature, identity, age, and citizenship flags."
+      },
+      {
+        "name": "Incomplete: original card by mail for a 30-year-old",
+        "description": "Everything is present, but an applicant aged 12 or older chooses to mail an original-card application. Expect incomplete with the in-person flag; a state code 'ZZ' is also unrecognized so the verify-state flag fires."
+      },
+      {
+        "name": "Incomplete: minor signs for self",
+        "description": "A 15-year-old signs for herself; a parent is required. Expect incomplete with the minor-signer flag. The name differs from the birth name with no name change recorded, so the name-differs flag also fires."
+      },
+      {
+        "name": "Incomplete: replacement says never applied",
+        "description": "Replacement requested but item 12 answers no, which contradicts the request, and the name on the most recent card is blank. Expect incomplete with the missing-fields and prior-application flags."
+      },
+      {
+        "name": "Evidence missing: noncitizen without work authorization",
+        "description": "Lawfully admitted noncitizen not allowed to work requests an original card with a Permanent Resident Card but no valid non-work reason, and an expired foreign identity document. Expect evidence-missing with identity-evidence and work-authorization flags."
+      },
+      {
+        "name": "Evidence missing: name change without document, photocopies, no age proof",
+        "description": "Corrected card after marriage: name change claimed, no marriage certificate, an expired license, photocopies, and the date of birth also corrected with no age document. Expect evidence-missing with identity, age, name-change, and originals flags."
+      },
+      {
+        "name": "Evidence missing: adult signed for by another without identity",
+        "description": "An adult applicant is signed for by a custodian who has no identity document with them. Expect evidence-missing with the signer-identity and adult-signer flags."
+      },
+      {
+        "name": "Not eligible: replacement limit reached, no exception",
+        "description": "Third replacement this year already issued; no name change and no exception claimed. Expect not-eligible and the replacement-limit flag."
+      },
+      {
+        "name": "Ready: limit reached but non-receipt exception documented",
+        "description": "Tenth replacement in a lifetime already issued, but the last card was never received and documents support the exception. Expect ready-to-submit with the low exception flag."
+      },
+      {
+        "name": "Not eligible: exception claimed without documents",
+        "description": "Lifetime limit exceeded (11 replacements); hardship is claimed but nothing supports it, so the exception is unsupported. Expect not-eligible, replacementLimitReached true, with the limit flag and the unsupported-exception flag."
+      },
+      {
+        "name": "Not eligible: applicant has died",
+        "description": "A family member begins an application for a person who has died; the death has not been reported to SSA. Expect not-eligible with the deceased and death-report flags."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-standard-certificate-of-death",
+    "title": "US Standard Certificate of Death (NCHS 2003 revision)",
+    "description": "A documentation-support and validity-classification form for the [U.S. Standard Certificate of Death](https://www.cdc.gov/nchs/data/dvs/DEATH11-03final-acc.pdf) as completed by the funeral director and the medical certifier. It is not a clinical score, not a diagnostic tool, and not legal advice: the registering state agency decides whether a certificate is accepted.",
+    "personas": [
+      {
+        "name": "Valid: natural death in a California hospital, complete certificate",
+        "description": "Expected death of an 83-year-old woman: aspiration pneumonia due to an ischemic stroke due to atrial fibrillation, Part II type 2 diabetes mellitus, all intervals given, natural manner, tobacco no, pregnancy not applicable, certified the day of death, filed in 3 days, five copies at the California fee of $24 each. Expect valid, underlying cause Atrial fibrillation, no flags."
+      },
+      {
+        "name": "Incomplete: cardiac arrest as the only cause (Texas)",
+        "description": "A 74-year-old man whose only Part I line is \"Cardiac arrest\" with Part II empty. The NCHS Handbook forbids a mechanism standing alone. Everything else is complete, so the class is incomplete and F-MECHANISM-001 fires."
+      },
+      {
+        "name": "Refer: accidental fall, cremation planned, copies ordered (New York)",
+        "description": "A 58-year-old man who fell from a ladder: subdural hematoma due to blunt force head injury due to a fall from a ladder. Manner accident, referral recorded with reason accident, injury items complete, cremation planned and two copies ordered before the case is released. Expect refer-to-medical-examiner-or-coroner with F-ME-REFERRAL-001, F-CREMATION-HOLD-001 and F-COPIES-001."
+      },
+      {
+        "name": "Incomplete: many gaps and unwritten abbreviations (Florida)",
+        "description": "A 36-year-old woman. Part I line (a) is empty while (b) says COPD and (c) says DM, so the sequence is illogical, the terms are abbreviated and diabetes has no type. Part II says only \"Diabetes\". Date of birth, manner, tobacco and pregnancy are blank, the certifier has no license number or date, and no funeral director is named. Expect incomplete with the full set of completeness flags."
+      },
+      {
+        "name": "Valid with flags: unspecified cancer, late certification and filing (Ohio)",
+        "description": "A 66-year-old woman with sepsis due to metastatic cancer of the pancreas (no histologic type). Certified 3 days after death and filed 5 days after, against Ohio limits of 2 and 3. Complete otherwise, so the class is valid while F-SPECIFICITY-001, F-CERTIFY-DEADLINE-001 and F-FILING-DEADLINE-001 fire."
+      },
+      {
+        "name": "Valid with flags: pregnancy at death, copy order problems (Illinois)",
+        "description": "A 31-year-old woman who died pregnant (amniotic fluid embolism). Valid certificate. The requester is outside the immediate family and unverified, and the fee paid ($57) differs from Illinois’s $19 plus $4 per additional copy ($27). Expect F-COPIES-001 and F-FEE-001 only."
+      },
+      {
+        "name": "Refer: suicide by overdose with injury items missing and late filing (Washington)",
+        "description": "A 41-year-old man: acute diphenhydramine toxicity, manner suicide, referred to the medical examiner. The injury items are blank. Died Friday 2026-06-12 and filed Thursday 2026-06-18, four business days against Washington’s three. Expect refer, F-ME-REFERRAL-001, F-INJURY-001, F-FILING-DEADLINE-001 (unverified note)."
+      },
+      {
+        "name": "Valid with flags: medical examiner certifies, manner pending (Pennsylvania)",
+        "description": "A 52-year-old man found dead; the medical examiner is the certifier, so no referral is needed. Manner is pending investigation and the autopsy items are blank, and cremation is planned. Expect valid with F-PENDING-001, F-AUTOPSY-001 and F-CREMATION-HOLD-001."
+      },
+      {
+        "name": "Refer: natural manner with a hip fracture, unattended, unlisted state (Georgia)",
+        "description": "An 80-year-old woman recorded as a natural death although line (b) is a hip fracture; the certifier did not attend her. Dates are inconsistent (certified before death, stated age 80 but dates give 66). Georgia is not in the state table. Expect refer with F-ME-REFERRAL-001, F-MANNER-MISMATCH-001, F-DATES-001 and F-VERIFY-STATE-001."
+      },
+      {
+        "name": "Valid with flags: pregnancy item inconsistent, accident-free but late (Texas)",
+        "description": "A 50-year-old man whose pregnancy item says pregnant at time of death. Certified 7 days after death (Texas allows 5 for the physician, verified) and filed 12 days after (Texas allows 10, not independently verified). Natural manner, valid otherwise. Expect F-PREGNANCY-001, F-CERTIFY-DEADLINE-001, F-FILING-DEADLINE-001."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-vehicle-bill-of-sale",
+    "title": "United States Vehicle Bill of Sale",
+    "description": "A bill of sale for a private-party sale of a motor vehicle in the United States. One continuous single-page wizard collects the sale (state, date, price, payment, sales-tax basis), the seller and buyer, the vehicle (year, make, model, body type, VIN, title brand), the federal odometer disclosure statement (49 CFR Part 580), the as-is clause, title and lien status, notarization where the state requires it, and the post-sale release of liability and buyer title application. The engine classifies the sale as complete, incomplete, or risk flagged and raises prioritized flags. It is documentation support, not legal advice: the state motor vehicle agency decides what it accepts.",
+    "personas": [
+      {
+        "name": "Complete Texas sale with odometer disclosure",
+        "description": "Private sale of a 2018 Toyota Corolla in Texas on 2026-08-25 for $12,500. Both parties are fully identified and signed; the VIN passes the check digit; the odometer disclosure (64,210 miles, actual) is signed by both; as-is, no lien, title in hand and signed over; the seller filed the Vehicle Transfer Notification within 30 days and the buyer applied to title within 30 days. Expect class complete and only the always-on disclaimer flag."
+      },
+      {
+        "name": "Complete California sale of a 10-year-exempt vehicle",
+        "description": "Private sale of a 2005 Honda Accord in California on 2026-08-01 for $3,200. Model year 2005 is more than 10 years old, so the federal odometer disclosure is exempt under 49 CFR 580.17(a)(3) and no odometer fields are filled. The seller filed the REG 138 notice two days after the sale (limit 5 days) and the buyer applied within 10 days. Expect class complete with the low-priority exempt note and the disclaimer."
+      },
+      {
+        "name": "Incomplete Washington sale: buyer unsigned, odometer unacknowledged",
+        "description": "A 2019 Subaru Outback sold in Washington on 2026-09-01 for $19,000. The buyer details (address, ZIP) are missing and the buyer has not signed; the odometer reading is recorded but the buyer has not acknowledged it; no as-is statement. Expect class incomplete, a missing-odometer flag, missing party details, missing signature, missing terms, a pending release-of-liability flag (5 days), and the WA official-form note."
+      },
+      {
+        "name": "Risk-flagged Florida sale: odometer discrepancy and late filings",
+        "description": "A 2019 Chevrolet Silverado sold in Florida on 2026-06-15 for $27,000. The seller certified that the odometer reading (131,500 miles) is NOT the actual mileage, which must be flagged to the buyer. The seller filed the Notice of Sale 45 days after the sale (limit 30) and the buyer applied to title 35 days after the sale. Everything else is complete. Expect class risk-flagged, an odometer-discrepancy flag, a late release-of-liability flag, a late buyer-title flag, the FL rule and the disclaimer."
+      },
+      {
+        "name": "Risk-flagged Ohio sale: lien, bad VIN, rebuilt brand, no notarization",
+        "description": "A 2013 Ford F-150 sold in Ohio on 2026-08-28 for $14,500. A lien held by First Federal Credit Union is outstanding, the VIN fails the check digit, the title is branded rebuilt, and Ohio requires the title assignment to be notarized but it was not. The odometer disclosure is complete. Expect class risk-flagged with high flags for the lien, VIN, brand, notarization, plus the disclaimer."
+      },
+      {
+        "name": "Complete sale in a state outside the rule table",
+        "description": "A 2021 Toyota Tacoma sold in Minnesota on 2026-08-10 for $31,000. Every required item is present, but Minnesota is not in the engine STATE_RULES table, so the uniform default applies and a verify-state-rule flag is raised. The title brand is recorded as unknown (low flag). Expect class complete, stateRuleKnown false, and the medium verify-state-rule flag."
+      },
+      {
+        "name": "Complete Pennsylvania sale, notarized, buyer title overdue",
+        "description": "A 2016 Honda Civic sold in Pennsylvania on 2026-07-10 for $11,200. Pennsylvania requires both parties to sign the title before a notary; that is recorded. All other items are complete, but no buyer title application is recorded and the 20-day window has passed. Expect class complete with a medium buyer-title-deadline flag, a low release-of-liability note (no seller deadline encoded), and the disclaimer."
+      },
+      {
+        "name": "Risk-flagged Illinois gift: no title in hand, short VIN, future date",
+        "description": "A 2016 Jeep Cherokee given as a gift in Illinois with a sale date of 2026-12-01 (in the future). The seller does not hold the title, the VIN is only nine characters, the price is $0 with no tax exemption stated, and the buyer has not signed. Expect class risk-flagged with high flags for the missing title, invalid VIN and missing signature, and medium flags for the sales-tax basis, implausible date, and missing details."
+      },
+      {
+        "name": "Complete New York sale with the official bill of sale form",
+        "description": "A 2012 Nissan Altima sold in New York on 2026-08-18 for $5,900. Model year 2012 is less than 20 years old at the sale, so the odometer disclosure is required and complete. NY expects the official MV-912 form and has no encoded seller or buyer deadline. Expect class complete with the low state-form flag, a low release-of-liability note, and the disclaimer."
+      },
+      {
+        "name": "Incomplete California sale: title not signed over, release overdue",
+        "description": "A 2020 Ford Transit sold in California on 2026-08-20 for $22,000. The seller holds the title but has not signed it over, and the REG 138 release of liability was not filed within 5 days (14 days have passed by 2026-09-03). Expect class incomplete with a medium title-problem flag, a high overdue release-of-liability flag, a medium overdue buyer-title-deadline flag, and the disclaimer."
+      },
+      {
+        "name": "Complete Texas sale of a heavy truck exempt by weight",
+        "description": "A 2017 Freightliner box truck with a GVWR over 16,000 pounds sold between two businesses in Texas on 2026-07-01 for $46,000. The federal odometer disclosure is exempt under 49 CFR 580.17(a)(1), so no odometer fields are required. Filings are on time. Expect class complete with the exempt note and the disclaimer."
+      },
+      {
+        "name": "Risk-flagged Louisiana sale: mileage exceeds mechanical limits, notarized, with warranty",
+        "description": "A 2014 Dodge Ram 1500 sold in Louisiana on 2026-08-05 for $9,800 with a written 30-day warranty. The seller certified the odometer reading exceeds the mechanical limit of the odometer (999,999). Louisiana is in the rule table with notarization of the bill of sale, which is recorded as done. Expect class risk-flagged with an odometer-discrepancy flag, the LA state-form note, a low release-of-liability note, and the disclaimer."
+      }
+    ]
+  },
+  {
+    "slug": "united-states-vehicle-title-and-registration-application",
+    "title": "United States Vehicle Title and Registration Application",
+    "description": "An application for a certificate of title and registration with a United States state motor vehicle agency. The applicant records the state and transaction, the owner and co-owner identification, the vehicle and its VIN, the federal odometer disclosure, the title history and any title brand (salvage, junk, rebuilt, flood, and so on), any lien, proof of insurance, inspections, and the sales or use tax and fees. The engine checks the application for completeness and consistency against federal rules and the rules of the chosen state, before it reaches a clerk.",
+    "personas": [
+      {
+        "name": "Ready: California used private-party sale, all documents present",
+        "description": "A 2019 Honda Civic bought privately in Fresno and applied for 7 days after the sale. The VIN passes the 49 CFR 565.15 check digit, a signed odometer statement is acknowledged by the buyer, the state title is surrendered, NMVTIS is clear, there is no lien, insurance is current, and the smog certificate (required in California for a used gasoline vehicle more than four model years old) has passed. Use tax is due at 8.75 percent. Expect applicationClass 'ready-to-submit' and no flags."
+      },
+      {
+        "name": "Ready: Texas new truck from a dealer, financed, electronic lien",
+        "description": "A new 2026 Ford F-150 bought from a dealer on a manufacturer's statement of origin, with a new electronic lien to a credit union and tax paid to the dealer. The 16-mile odometer reading is disclosed (a new vehicle's dealer-to-buyer sale is not exempt). Expect 'ready-to-submit' with only the low-priority county-emissions reminder, F-INSPECTION-003."
+      },
+      {
+        "name": "Incomplete: Florida purchase with a mistyped VIN, no insurance, no odometer statement",
+        "description": "A 2016 Volkswagen Jetta bought privately, where the VIN was mistyped (the check digit no longer matches), no proof of insurance is provided, the seller's odometer statement is missing, the title is not surrendered, and tax and fees are not settled. Expect 'incomplete' with VIN, odometer, title, insurance, and fee flags, and a medium NMVTIS-not-checked flag."
+      },
+      {
+        "name": "Issue: Washington salvage title, NMVTIS record found, title-only",
+        "description": "A 2014 Subaru Outback with a salvage brand disclosed on the application, and an NMVTIS check that found the brand and a total-loss record. The applicant requests a title only, so the registration-time salvage flag does not fire and insurance is not required. Expect 'title-brand-or-lien-issue' with F-BRAND-001 and F-BRAND-005."
+      },
+      {
+        "name": "Issue: Pennsylvania existing lien not released",
+        "description": "A 2021 Toyota Camry whose prior lien has not been released by the lender: the seller's title still shows the bank. Everything else is complete. Expect 'title-brand-or-lien-issue' with F-LIEN-001 and the low PA safety-and-county-emissions reminder."
+      },
+      {
+        "name": "Ready: Montana (state not encoded) uses the uniform default rule",
+        "description": "A 2010 Toyota Prius titled in Montana, which is not in STATE_RULES, so the uniform default rule applies and F-STATE-002 asks the applicant to verify the state rule. A model-year-2010 vehicle transferred in 2026 is 16 years old, so the odometer disclosure is exempt (49 CFR 580.17). Tax is marked exempt with a stated reason. Expect 'ready-to-submit' with F-STATE-002 and F-ODOMETER-005."
+      },
+      {
+        "name": "Ready: Illinois out-of-state transfer from Wisconsin, 1998 vehicle, late application",
+        "description": "A 1998 Chevrolet Cavalier brought from Wisconsin on an out-of-state title, with a completed VIN verification. The odometer is exempt (model year 2010 or earlier and over 10 years old). The application is 32 days after purchase, past Illinois's 20-day period. Expect 'ready-to-submit' with F-DEADLINE-001, F-ODOMETER-005, and F-INSPECTION-003."
+      },
+      {
+        "name": "Issue: Ohio gifted vehicle with a not-actual-mileage odometer disclosure",
+        "description": "A 2017 Ford Focus received as a gift, where the donor signed an odometer statement that the reading is NOT the actual mileage after an instrument-cluster replacement. A not-actual disclosure puts the application in 'title-brand-or-lien-issue' (F-ODOMETER-002) and the title will be branded. Tax is exempt as a family gift."
+      },
+      {
+        "name": "Ready: New York business-owned heavy truck over 16,000 pounds (odometer exempt)",
+        "description": "A 2017 Freightliner truck with a 24,000-pound GVWR bought by a business identified by its FEIN. The odometer disclosure is exempt (GVWR over 16,000 pounds), the weight class is recorded, and New York tax is entered at the 8.875 percent New York City rate. Expect 'ready-to-submit' with F-ODOMETER-005, F-WEIGHT-002, and the low NY inspection reminder."
+      },
+      {
+        "name": "Incomplete: Arizona co-owner AND has not signed, expired insurance, tax rate below the state base",
+        "description": "A 2025 Toyota RAV4 titled to two owners joined by AND, where the co-owner has not signed, the insurance policy expired before the application date, and the tax rate entered (5 percent) is below Arizona's 5.6 percent base. Expect 'incomplete' with F-OWNER-003, F-INSURANCE-002, F-TAX-002 and the low Arizona emissions reminder."
+      },
+      {
+        "name": "Issue: California rebuilt vehicle, brand undisclosed, no inspection, no smog certificate",
+        "description": "A 2018 Honda Civic carrying a rebuilt brand that the applicant has not disclosed, with no rebuilt-vehicle inspection and no smog certificate. Expect 'title-brand-or-lien-issue' with F-BRAND-001, F-BRAND-002, F-BRAND-003 and F-INSPECTION-001."
+      },
+      {
+        "name": "Ready: California 1972 classic, VIN not standardized, odometer exempt",
+        "description": "A 1972 Ford Mustang titled in California. A pre-1981 vehicle has no 17-character VIN (F-VIN-004), the odometer disclosure is exempt by age, and the smog requirement is marked exempt for a pre-1975 vehicle. Expect 'ready-to-submit' with F-VIN-004 and F-ODOMETER-005."
+      },
+      {
+        "name": "Blank application",
+        "description": "Nothing entered. Expect 'incomplete' with every required item outstanding and the missing-state, VIN, title, tax, and fee flags."
       }
     ]
   },

@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "A. Okafor"
+  email: "a.okafor@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "1 Court Street, Leeds"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "LS1 1AA"
+  role: "solicitor"
+  registrationBody: "SRA"
+  registrationNumber: "SRA-123456"

@@ -1,0 +1,42 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_last_will_and_testament_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_last_will_and_testament;
+
+enum UnitedStatesLastWillAndTestamentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_CAPACITY = 1;  // capacity
+  CATEGORY_EXECUTION_FORMALITY = 2;  // execution-formality
+  CATEGORY_WITNESS = 3;  // witness
+  CATEGORY_SELF_PROVING = 4;  // self-proving
+  CATEGORY_BEQUEST_ARITHMETIC = 5;  // bequest-arithmetic
+  CATEGORY_SPOUSAL_PROTECTION = 6;  // spousal-protection
+  CATEGORY_FIDUCIARY = 7;  // fiduciary
+  CATEGORY_STATE_RULE = 8;  // state-rule
+  CATEGORY_DIGITAL_ASSETS = 9;  // digital-assets
+  CATEGORY_ESTATE_TAX = 10;  // estate-tax
+  CATEGORY_INCOMPLETE = 11;  // incomplete
+  CATEGORY_OTHER = 12;  // other
+}
+
+enum UnitedStatesLastWillAndTestamentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedStatesLastWillAndTestamentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_last_will_and_testament_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedStatesLastWillAndTestamentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedStatesLastWillAndTestamentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

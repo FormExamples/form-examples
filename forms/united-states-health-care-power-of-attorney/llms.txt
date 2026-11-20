@@ -1,0 +1,27 @@
+# United States Health Care Power of Attorney
+
+> A durable power of attorney for health care: the document in which an adult (the principal) names an agent, and successor agents, to make health care decisions if the principal cannot. States call it a health care proxy (New York), a medical power of attorney (Texas), a designation of health care surrogate (Florida), or an advance health care directive (California). The same form can carry the principal's wishes about life-sustaining treatment, a HIPAA release, and a direction about organ donation.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

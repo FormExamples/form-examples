@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_marriage_certificate_application_grade_flags";

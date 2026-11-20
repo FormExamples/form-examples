@@ -1634,6 +1634,26 @@ export const forms: Form[] = [
     "description": "A UK NHS–aligned general (non-obstetric) ultrasound result (report) that a reporting clinician completes after a diagnostic ultrasound examination has been performed."
   },
   {
+    "slug": "united-kingdom-birth-registration",
+    "title": "United Kingdom Birth Registration",
+    "description": "Prepare to register a birth in England and Wales (GOV.UK \"Register a birth\") and order the birth certificate from the General Register Office (GRO)."
+  },
+  {
+    "slug": "united-kingdom-council-tax-discount-application",
+    "title": "United Kingdom Council Tax Discount Application",
+    "description": "A single-page, step-by-step application to a local council in England for a Council Tax discount, exemption, disregard or reduction."
+  },
+  {
+    "slug": "united-kingdom-death-registration",
+    "title": "United Kingdom death registration (England and Wales)",
+    "description": "Registering a death in England and Wales after a doctor has completed the medical certificate of cause of death (MCCD): the 5-day deadline, the qualified informant, medical examiner confirmation, coroner involvement,…"
+  },
+  {
+    "slug": "united-kingdom-divorce-application",
+    "title": "United Kingdom Divorce Application",
+    "description": "A completeness and time-gate checker for applying for a divorce (or the dissolution of a civil partnership) in England and Wales under the no-fault regime of the Divorce, Dissolution and Separation Act 2020."
+  },
+  {
     "slug": "united-kingdom-driver-and-vehicle-licensing-agency-b1-form",
     "title": "United Kingdom Driver and Vehicle Licensing Agency B1 Form",
     "description": "Confidential medical information — neurological conditions for driving fitness assessment."
@@ -1649,6 +1669,11 @@ export const forms: Form[] = [
     "description": "General confidential medical information — vision self-declaration for driving fitness assessment."
   },
   {
+    "slug": "united-kingdom-last-will-and-testament",
+    "title": "United Kingdom Last Will and Testament",
+    "description": "A will-drafting documentation instrument for England and Wales. The person preparing a will records the testator, the estate, the executors, the beneficiaries and their shares, guardians for children under 18, funeral…"
+  },
+  {
     "slug": "united-kingdom-lasting-power-of-attorney-for-financial-decisions",
     "title": "United Kingdom Lasting Power of Attorney for Financial Decisions",
     "description": "A digital implementation of the Office of the Public Guardian (OPG) form LP1F — Lasting power of attorney for property and financial affairs."
@@ -1657,6 +1682,11 @@ export const forms: Form[] = [
     "slug": "united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions",
     "title": "United Kingdom Lasting Power of Attorney for Health and Care Decisions",
     "description": "A digital implementation of the statutory Lasting Power of Attorney for Health and Welfare (statutory form LP1H) under the Mental Capacity Act 2005 (England and Wales)."
+  },
+  {
+    "slug": "united-kingdom-marriage-certificate-application",
+    "title": "United Kingdom Marriage Certificate Application",
+    "description": "A completeness and validity check for giving notice of marriage or civil partnership in England and Wales and ordering a marriage certificate from the General Register Office (GRO)."
   },
   {
     "slug": "united-kingdom-maternity-certificate-mat-b1",
@@ -1674,9 +1704,74 @@ export const forms: Form[] = [
     "description": "A digital implementation of the UK Statement of Fitness for Work — commonly known as the fit note or Med 3 — issued by a healthcare professional (doctor, nurse, occupational therapist, pharmacist, or physiotherapist) to…"
   },
   {
+    "slug": "united-kingdom-vehicle-bill-of-sale",
+    "title": "United Kingdom Vehicle Bill of Sale",
+    "description": "A bill of sale / sales receipt for a private vehicle sale in the United Kingdom, following the GOV.UK \"Buy a vehicle\" and \"Sell, scrap or transfer a vehicle\" journeys."
+  },
+  {
+    "slug": "united-kingdom-vehicle-registration-application",
+    "title": "United Kingdom Vehicle Registration Application",
+    "description": "Registering a vehicle with the Driver and Vehicle Licensing Agency (DVLA) in Great Britain: the V62 application for a vehicle registration certificate (V5C, the log book), and the first-registration variants V55/4 (new…"
+  },
+  {
+    "slug": "united-states-birth-certificate-application",
+    "title": "United States Birth Certificate Application",
+    "description": "Request a certified copy of a US birth certificate from the state or territory vital records office that registered the birth."
+  },
+  {
+    "slug": "united-states-divorce-petition",
+    "title": "United States Divorce Petition",
+    "description": "Petition for dissolution of marriage, the divorce decree and the vital-records divorce certificate for United States courts."
+  },
+  {
+    "slug": "united-states-durable-financial-power-of-attorney",
+    "title": "United States Durable Financial Power of Attorney",
+    "description": "A United States execution-readiness checker for a durable power of attorney for property and finances."
+  },
+  {
+    "slug": "united-states-health-care-power-of-attorney",
+    "title": "United States Health Care Power of Attorney",
+    "description": "A durable power of attorney for health care: the document in which an adult (the principal) names an agent, and successor agents, to make health care decisions if the principal cannot."
+  },
+  {
     "slug": "united-states-hipaa-authorization-form",
     "title": "United States HIPAA Authorization Form",
     "description": "A United States Health Insurance Portability and Accountability Act (HIPAA) authorization form."
+  },
+  {
+    "slug": "united-states-last-will-and-testament",
+    "title": "United States Last Will and Testament",
+    "description": "A planning and validity-checking form for a United States will. A single continuous single-page wizard collects the testator and state, the family and spouse, the estate and the specific and residuary bequests, the…"
+  },
+  {
+    "slug": "united-states-marriage-license-application",
+    "title": "United States Marriage License Application",
+    "description": "A single-page, step-by-step questionnaire for applying for a United States marriage license and, after the ceremony, the certified marriage certificate."
+  },
+  {
+    "slug": "united-states-property-tax-exemption-application",
+    "title": "United States Property Tax Exemption Application",
+    "description": "A county or state application for a residential property tax homestead exemption and related relief: senior, disability, disabled-veteran and circuit-breaker relief, plus assessment-appeal basics."
+  },
+  {
+    "slug": "united-states-social-security-card-application",
+    "title": "United States Social Security Card Application (Form SS-5)",
+    "description": "A single-page, step-by-step questionnaire for Form SS-5, the application for an original, replacement, or corrected Social Security card."
+  },
+  {
+    "slug": "united-states-standard-certificate-of-death",
+    "title": "US Standard Certificate of Death (NCHS 2003 revision)",
+    "description": "A documentation-support and validity-classification form for the U.S. Standard Certificate of Death as completed by the funeral director and the medical certifier."
+  },
+  {
+    "slug": "united-states-vehicle-bill-of-sale",
+    "title": "United States Vehicle Bill of Sale",
+    "description": "A bill of sale for a private-party sale of a motor vehicle in the United States. One continuous single-page wizard collects the sale (state, date, price, payment, sales-tax basis), the seller and buyer, the vehicle…"
+  },
+  {
+    "slug": "united-states-vehicle-title-and-registration-application",
+    "title": "United States Vehicle Title and Registration Application",
+    "description": "An application for a certificate of title and registration with a United States state motor vehicle agency."
   },
   {
     "slug": "urinalysis-test-request",

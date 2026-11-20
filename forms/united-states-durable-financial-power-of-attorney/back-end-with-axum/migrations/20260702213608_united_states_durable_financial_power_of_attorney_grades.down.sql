@@ -1,0 +1,1 @@
+DROP TABLE "united_states_durable_financial_power_of_attorney_grades";

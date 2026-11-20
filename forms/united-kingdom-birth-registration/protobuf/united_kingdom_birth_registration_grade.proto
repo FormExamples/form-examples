@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_birth_registration_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_birth_registration;
+
+enum UnitedKingdomBirthRegistrationGradeReadinessClassEnum {
+  READINESSCLASS_UNSPECIFIED = 0;
+  READINESSCLASS_READY_TO_SUBMIT = 1;  // ready-to-submit
+  READINESSCLASS_INCOMPLETE = 2;  // incomplete
+  READINESSCLASS_NEEDS_ADDITIONAL_EVIDENCE = 3;  // needs-additional-evidence
+  READINESSCLASS_OUT_OF_SCOPE = 4;  // out-of-scope
+}
+
+enum UnitedKingdomBirthRegistrationGradeLateRegistrationEnum {
+  LATEREGISTRATION_UNSPECIFIED = 0;
+  LATEREGISTRATION_YES = 1;  // yes
+  LATEREGISTRATION_NO = 2;  // no
+}
+
+message UnitedKingdomBirthRegistrationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_birth_registration_id = 5;  // UUID — uuid
+  UnitedKingdomBirthRegistrationGradeReadinessClassEnum readiness_class = 6;  // VARCHAR(30)
+  int32 days_since_birth = 7;  // INTEGER
+  UnitedKingdomBirthRegistrationGradeLateRegistrationEnum late_registration = 8;  // VARCHAR(5)
+  int32 missing_item_count = 9;  // INTEGER
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

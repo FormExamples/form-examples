@@ -1,0 +1,1195 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateWill",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateWill(d) returns only { validityClass, formalityRisk, sharesTotalPercent, witnessCount } (no rules array, no flags), so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: formalityRisk (testator under 18, capacity denied, domicile outside England and Wales, marriage expected without a contemplation clause, witness under 18, witness is a beneficiary by answer or by name, signed with fewer than two witnesses, signed with an execution answer not yes) -> formality-risk; else incomplete (name or date of birth missing, capacity or voluntariness not yes, no executor, no beneficiary, residuary clause not yes, shares not totalling 100, minor beneficiary without trustee) -> incomplete; else valid. The testator age is measured at dateOfWill if set, else at the frozen wall clock. Flags are stable-sorted high > medium > low. The timestamp key is added by form-app.js. Regenerate expected with: bin/test-personas united-kingdom-last-will-and-testament --update",
+  "personas": [
+    {
+      "name": "Valid draft, ready to execute",
+      "description": "A widowed 68-year-old in England and Wales leaves her estate (under £325,000) equally to her two adult children, with two executors, a residuary clause, a cremation wish, and Inheritance Act claims considered. Still a draft with no witnesses named yet. Expect validityClass valid, no formality risk, shares 100, and only the low reminder that witnesses are not yet arranged.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "formalityRisk": false,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid and signed with two independent witnesses",
+      "description": "The same will after execution on 2026-08-20: written, signed, two adult witnesses present together who each signed, neither a beneficiary. Expect validityClass valid, two witnesses and no flags.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "signed",
+          "dateOfWill": "2026-08-20",
+          "willInWriting": "yes",
+          "testatorSigned": "yes",
+          "witnessesPresentTogether": "yes",
+          "witnessesSigned": "yes",
+          "witnessFirstName": "Helen Booth",
+          "witnessFirstOver18": "yes",
+          "witnessFirstIsBeneficiaryOrSpouse": "no",
+          "witnessSecondName": "Raj Patel",
+          "witnessSecondOver18": "yes",
+          "witnessSecondIsBeneficiaryOrSpouse": "no",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "formalityRisk": false,
+        "sharesTotalPercent": 100,
+        "witnessCount": 2,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Blank will record",
+      "description": "Nothing answered. Expect validityClass incomplete: the testator details, capacity, executor, beneficiaries and residuary clause are all missing, and the engine raises the matching high and medium flags.",
+      "state": {
+        "testator": {
+          "testatorName": "",
+          "dateOfBirth": null,
+          "testatorAddress": "",
+          "domicile": "",
+          "maritalStatus": "",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "",
+          "madeVoluntarily": "",
+          "previousWill": "",
+          "revocationClause": ""
+        },
+        "estate": {
+          "estateValueBand": "",
+          "ownsHome": "",
+          "homeToDirectDescendants": "",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": ""
+        },
+        "executors": {
+          "executorFirstName": "",
+          "executorFirstRelationship": "",
+          "executorSecondName": "",
+          "executorSecondRelationship": "",
+          "executorsAdultConfirmed": ""
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "",
+          "beneficiaryFirstRelationship": "",
+          "beneficiaryFirstSharePercent": null,
+          "beneficiaryFirstIsMinor": "",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "",
+          "beneficiarySecondRelationship": "",
+          "beneficiarySecondSharePercent": null,
+          "beneficiarySecondIsMinor": "",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "",
+          "dependantsConsidered": ""
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "",
+          "funeralWishesNote": ""
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "formalityRisk": false,
+        "sharesTotalPercent": 0,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-NO-EXECUTOR-001",
+            "category": "no-executor",
+            "priority": "high",
+            "description": "No executor is named. Executors collect the estate, pay debts and tax, and distribute the gifts.",
+            "suggestedAction": "Appoint at least one executor, ideally two, and a professional or a replacement if they may not outlive you."
+          },
+          {
+            "id": "F-NO-BENEFICIARY-001",
+            "category": "no-beneficiary",
+            "priority": "high",
+            "description": "No beneficiary is named, so the will does not say who inherits.",
+            "suggestedAction": "Name each beneficiary and the share of the residuary estate they receive."
+          },
+          {
+            "id": "F-RESIDUARY-001",
+            "category": "residuary-clause-missing",
+            "priority": "high",
+            "description": "The will does not confirm a residuary clause. Anything not specifically given away (the residuary estate) passes under the intestacy rules instead.",
+            "suggestedAction": "Add a residuary clause that gives everything not otherwise left to named beneficiaries, with a fallback if one dies first."
+          },
+          {
+            "id": "F-CAPACITY-UNCONFIRMED-001",
+            "category": "capacity-or-voluntariness",
+            "priority": "medium",
+            "description": "Capacity and voluntariness are not both confirmed as yes.",
+            "suggestedAction": "Confirm that the testator understands what a will does, the extent of the estate, and who might expect to inherit, and is acting freely."
+          },
+          {
+            "id": "F-DETAILS-001",
+            "category": "incomplete-details",
+            "priority": "medium",
+            "description": "The testator name or date of birth is missing.",
+            "suggestedAction": "Record the testator’s full legal name and date of birth."
+          },
+          {
+            "id": "F-INHERITANCE-ACT-001",
+            "category": "inheritance-act-provision",
+            "priority": "medium",
+            "description": "It is not confirmed that claims under the Inheritance (Provision for Family and Dependants) Act 1975 were considered. A spouse or civil partner, a former partner, a partner of two years or more, a child, a child of the family, or anyone financially maintained may apply to court within six months of the grant of probate if the will leaves them without reasonable provision.",
+            "suggestedAction": "List who might claim, provide for them, or record the reason for leaving them out in a signed letter kept with the will."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          },
+          {
+            "id": "F-FUNERAL-001",
+            "category": "other",
+            "priority": "low",
+            "description": "Funeral wishes are not recorded. They are not legally binding on the executors, but they guide them.",
+            "suggestedAction": "Record burial or cremation and any wishes, and tell the executors."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Shares total 80% and a minor beneficiary with no trustee",
+      "description": "Two adult children each receive 40% and a nine-year-old grandchild is named with a 0% share and no trustee, so the shares total 80% and no trustee holds the child's share. Expect validityClass incomplete with the shares-not-100 and minor-beneficiary-no-trustee flags.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 40,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 40,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "Ollie Ellis",
+          "beneficiaryThirdRelationship": "grandchild",
+          "beneficiaryThirdSharePercent": 0,
+          "beneficiaryThirdIsMinor": "yes",
+          "beneficiaryThirdHasTrustee": "no",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "formalityRisk": false,
+        "sharesTotalPercent": 80,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-SHARES-001",
+            "category": "shares-not-100",
+            "priority": "high",
+            "description": "The beneficiary shares total 80%, not 100%. A residuary estate that is over- or under-allocated causes disputes and partial intestacy.",
+            "suggestedAction": "Adjust the percentage shares so they total exactly 100%."
+          },
+          {
+            "id": "F-MINOR-TRUSTEE-001",
+            "category": "minor-beneficiary-no-trustee",
+            "priority": "high",
+            "description": "A beneficiary is under 18 and no trustee is appointed. A child cannot give a valid receipt for an inheritance, and the share would have no one to manage it.",
+            "suggestedAction": "Appoint trustees to hold the share until the child reaches the age you choose (often 18, or later)."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Signed with only one witness",
+      "description": "Recorded as signed and witnessed, but only one witness is named. Expect validityClass formality-risk, a high fewer-than-two-witnesses flag, and witnessCount 1.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "signed",
+          "dateOfWill": "2026-08-20",
+          "willInWriting": "yes",
+          "testatorSigned": "yes",
+          "witnessesPresentTogether": "yes",
+          "witnessesSigned": "yes",
+          "witnessFirstName": "Helen Booth",
+          "witnessFirstOver18": "yes",
+          "witnessFirstIsBeneficiaryOrSpouse": "no",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 1,
+        "flaggedIssues": [
+          {
+            "id": "F-WITNESSES-001",
+            "category": "witness-formalities",
+            "priority": "high",
+            "description": "The will is recorded as signed but only 1 witness is named. A will must be signed or acknowledged by the testator in the presence of at least two witnesses present at the same time (Wills Act 1837 s.9).",
+            "suggestedAction": "Name both witnesses. If the will was signed with fewer than two, it is unlikely to be valid; sign a fresh will correctly."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Witness is also a beneficiary",
+      "description": "The first witness, Anna Ellis, is the daughter who receives 50% of the estate. Expect validityClass formality-risk with the witness-is-beneficiary flag, because her gift would fail under Wills Act 1837 s.15.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "signed",
+          "dateOfWill": "2026-08-20",
+          "willInWriting": "yes",
+          "testatorSigned": "yes",
+          "witnessesPresentTogether": "yes",
+          "witnessesSigned": "yes",
+          "witnessFirstName": "Anna Ellis",
+          "witnessFirstOver18": "yes",
+          "witnessFirstIsBeneficiaryOrSpouse": "no",
+          "witnessSecondName": "Raj Patel",
+          "witnessSecondOver18": "yes",
+          "witnessSecondIsBeneficiaryOrSpouse": "no",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 2,
+        "flaggedIssues": [
+          {
+            "id": "F-WITNESS-BENEFICIARY-001",
+            "category": "witness-is-beneficiary",
+            "priority": "high",
+            "description": "A witness, or the spouse or civil partner of a witness, is a beneficiary. The will stays valid but that gift fails (Wills Act 1837 s.15). GOV.UK: you cannot leave your witnesses, or their married partners, anything in your will.",
+            "suggestedAction": "Choose two independent adult witnesses who are not beneficiaries or married to one."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Testator aged 17",
+      "description": "A 17-year-old drafts a will. Expect validityClass formality-risk and the testator-under-18 flag, since the testator must be 18 or over.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "2009-06-01",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "single",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "no"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-TESTATOR-UNDER-18-001",
+            "category": "testator-eligibility",
+            "priority": "high",
+            "description": "The testator is under 18. Only a person aged 18 or over can make a valid will (Wills Act 1837 s.7), apart from a few narrow exceptions such as some members of the armed forces on active service.",
+            "suggestedAction": "Do not sign. Wait until the testator is 18, or take legal advice about whether an exception applies."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Marriage expected without a contemplation clause",
+      "description": "The testator is engaged and the will does not say it is made in contemplation of the marriage, so the marriage would revoke it. Expect validityClass formality-risk and the marriage-revocation flag.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "single",
+          "marriageExpected": "yes",
+          "contemplationOfMarriageClause": "no",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-MARRIAGE-REVOCATION-001",
+            "category": "marriage-revocation",
+            "priority": "high",
+            "description": "A marriage or civil partnership is expected. Marrying or forming a civil partnership revokes an earlier will unless it was made in expectation of that marriage and says so (Wills Act 1837 s.18).",
+            "suggestedAction": "Add a clause stating the will is made in contemplation of the named marriage or civil partnership, or plan to make a new will after the ceremony."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Domiciled in Scotland",
+      "description": "Scottish domicile; England and Wales rules do not apply. Expect validityClass formality-risk and the other-jurisdictions (domicile) flag.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "scotland",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-DOMICILE-001",
+            "category": "other-jurisdictions",
+            "priority": "high",
+            "description": "The testator's domicile is scotland, not England and Wales. The rules this tool applies (Wills Act 1837) are for England and Wales only; Scotland, Northern Ireland and other countries have different rules.",
+            "suggestedAction": "Take advice from a solicitor in the relevant jurisdiction."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Lacks capacity",
+      "description": "Capacity is recorded as no. Expect validityClass formality-risk and a high capacity flag.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "widowed",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "no",
+          "madeVoluntarily": "yes",
+          "previousWill": "none",
+          "revocationClause": "yes"
+        },
+        "estate": {
+          "estateValueBand": "under-325k",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "no",
+          "otherJurisdictionsDetail": "",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "yes"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "yes"
+        },
+        "family": {
+          "hasChildrenUnder18": "no",
+          "guardianName": "",
+          "funeralWishes": "cremation",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "formality-risk",
+        "formalityRisk": true,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-CAPACITY-001",
+            "category": "capacity-or-voluntariness",
+            "priority": "high",
+            "description": "The record says the testator lacks testamentary capacity or is not making the will freely. A will made without capacity, or under undue influence, can be set aside.",
+            "suggestedAction": "Take legal advice before going further. Where capacity is in doubt, a medical assessment at the time of signing is good practice."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid but complex: partner, children, foreign property, large estate",
+      "description": "A cohabiting testator with children under 18, no guardian, a property in Spain, an earlier will not revoked, an estate over £2 million, and Inheritance Act claims not yet considered; the content is complete (executor, shares 100%). Expect validityClass valid with a cluster of medium and low awareness flags: partner not provided for, other jurisdictions, previous will, guardian not named, Inheritance Act, inheritance tax.",
+      "state": {
+        "testator": {
+          "testatorName": "Margaret Ellis",
+          "dateOfBirth": "1958-03-14",
+          "testatorAddress": "12 Station Road, Leeds LS1 4AB",
+          "domicile": "england-wales",
+          "maritalStatus": "cohabiting",
+          "marriageExpected": "no",
+          "contemplationOfMarriageClause": "",
+          "hasMentalCapacity": "yes",
+          "madeVoluntarily": "yes",
+          "previousWill": "exists",
+          "revocationClause": "no"
+        },
+        "estate": {
+          "estateValueBand": "over-2m",
+          "ownsHome": "yes",
+          "homeToDirectDescendants": "yes",
+          "charityGiftPercent": null,
+          "estateOtherJurisdictions": "yes",
+          "otherJurisdictionsDetail": "Holiday flat in Malaga, Spain",
+          "specificGiftsNotes": "My wedding ring to my daughter Anna."
+        },
+        "executors": {
+          "executorFirstName": "Anna Ellis",
+          "executorFirstRelationship": "daughter",
+          "executorSecondName": "Peter Hughes",
+          "executorSecondRelationship": "solicitor",
+          "executorsAdultConfirmed": "no"
+        },
+        "beneficiaries": {
+          "beneficiaryFirstName": "Anna Ellis",
+          "beneficiaryFirstRelationship": "child",
+          "beneficiaryFirstSharePercent": 50,
+          "beneficiaryFirstIsMinor": "no",
+          "beneficiaryFirstHasTrustee": "",
+          "beneficiarySecondName": "Tom Ellis",
+          "beneficiarySecondRelationship": "child",
+          "beneficiarySecondSharePercent": 50,
+          "beneficiarySecondIsMinor": "no",
+          "beneficiarySecondHasTrustee": "",
+          "beneficiaryThirdName": "",
+          "beneficiaryThirdRelationship": "",
+          "beneficiaryThirdSharePercent": null,
+          "beneficiaryThirdIsMinor": "",
+          "beneficiaryThirdHasTrustee": "",
+          "beneficiaryFourthName": "",
+          "beneficiaryFourthRelationship": "",
+          "beneficiaryFourthSharePercent": null,
+          "beneficiaryFourthIsMinor": "",
+          "beneficiaryFourthHasTrustee": "",
+          "residuaryClause": "yes",
+          "dependantsConsidered": "no"
+        },
+        "family": {
+          "hasChildrenUnder18": "yes",
+          "guardianName": "",
+          "funeralWishes": "",
+          "funeralWishesNote": "A simple service; no flowers."
+        },
+        "execution": {
+          "executionStatus": "draft",
+          "dateOfWill": null,
+          "willInWriting": "yes",
+          "testatorSigned": "",
+          "witnessesPresentTogether": "",
+          "witnessesSigned": "",
+          "witnessFirstName": "",
+          "witnessFirstOver18": "",
+          "witnessFirstIsBeneficiaryOrSpouse": "",
+          "witnessSecondName": "",
+          "witnessSecondOver18": "",
+          "witnessSecondIsBeneficiaryOrSpouse": "",
+          "drafterNote": ""
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "formalityRisk": false,
+        "sharesTotalPercent": 100,
+        "witnessCount": 0,
+        "flaggedIssues": [
+          {
+            "id": "F-PARTNER-001",
+            "category": "partner-not-provided-for",
+            "priority": "medium",
+            "description": "The testator lives with an unmarried partner who is not named as a beneficiary. An unmarried partner inherits nothing under the intestacy rules, and may have to claim under the Inheritance (Provision for Family and Dependants) Act 1975.",
+            "suggestedAction": "Decide whether to provide for the partner in the will, and say so explicitly."
+          },
+          {
+            "id": "F-OTHER-JURISDICTIONS-001",
+            "category": "other-jurisdictions",
+            "priority": "medium",
+            "description": "The estate includes property outside England and Wales. Foreign property is often governed by local succession law, and a separate will may be needed there.",
+            "suggestedAction": "Take advice on whether a separate will, or local formalities, are needed for that property."
+          },
+          {
+            "id": "F-PREVIOUS-WILL-001",
+            "category": "previous-will",
+            "priority": "medium",
+            "description": "An earlier will exists and this will does not expressly revoke it. Two wills can conflict.",
+            "suggestedAction": "Add a clause revoking all earlier wills and codicils, and destroy or file the old will as advised."
+          },
+          {
+            "id": "F-GUARDIAN-001",
+            "category": "guardian-not-named",
+            "priority": "medium",
+            "description": "The testator has children under 18 but no guardian is named. A will can name who should look after them if no parent with parental responsibility survives.",
+            "suggestedAction": "Name a guardian (and a reserve), and talk to them first."
+          },
+          {
+            "id": "F-INHERITANCE-ACT-001",
+            "category": "inheritance-act-provision",
+            "priority": "medium",
+            "description": "It is not confirmed that claims under the Inheritance (Provision for Family and Dependants) Act 1975 were considered. A spouse or civil partner, a former partner, a partner of two years or more, a child, a child of the family, or anyone financially maintained may apply to court within six months of the grant of probate if the will leaves them without reasonable provision.",
+            "suggestedAction": "List who might claim, provide for them, or record the reason for leaving them out in a signed letter kept with the will."
+          },
+          {
+            "id": "F-WITNESSES-PLAN-001",
+            "category": "witness-formalities",
+            "priority": "low",
+            "description": "Two independent adult witnesses are not yet named. They must both watch the testator sign and then sign themselves.",
+            "suggestedAction": "Arrange two adult witnesses who are not beneficiaries or married to a beneficiary."
+          },
+          {
+            "id": "F-EXECUTOR-ADULT-001",
+            "category": "no-executor",
+            "priority": "low",
+            "description": "It is not confirmed that every executor is an adult who is willing to act.",
+            "suggestedAction": "Ask each executor to agree, and confirm they are 18 or over."
+          },
+          {
+            "id": "F-INHERITANCE-TAX-001",
+            "category": "inheritance-tax",
+            "priority": "low",
+            "description": "The estate may exceed the £325,000 inheritance tax nil-rate band. Anything left to a spouse, civil partner or charity is normally exempt. Leaving the home to children or grandchildren can add a residence nil-rate band of up to £175,000 (tapered for estates above £2 million). Leaving at least 10% of the net estate to charity can lower the rate to 36%.",
+            "suggestedAction": "Consider tax planning, and take advice if the estate is large or complex."
+          },
+          {
+            "id": "F-FUNERAL-001",
+            "category": "other",
+            "priority": "low",
+            "description": "Funeral wishes are not recorded. They are not legally binding on the executors, but they guide them.",
+            "suggestedAction": "Record burial or cremation and any wishes, and tell the executors."
+          }
+        ]
+      }
+    }
+  ]
+}

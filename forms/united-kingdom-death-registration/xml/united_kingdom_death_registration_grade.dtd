@@ -1,0 +1,11 @@
+<!ELEMENT united_kingdom_death_registration_grade (id,created_at,updated_at,deleted_at,united_kingdom_death_registration_id,registration_class,deadline_status,days_since_confirmation,informant_qualified,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_death_registration_id (#PCDATA)>
+<!ELEMENT registration_class (#PCDATA)>
+<!ELEMENT deadline_status (#PCDATA)>
+<!ELEMENT days_since_confirmation (#PCDATA)>
+<!ELEMENT informant_qualified (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

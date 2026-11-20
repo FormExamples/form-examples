@@ -1,0 +1,14 @@
+<!ELEMENT testator (id,created_at,updated_at,deleted_at,name,birth_date,email,phone,postal_address_as_full_text,state,postcode,country_as_iso_3166_1_alpha_2,citizenship_status)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT citizenship_status (#PCDATA)>

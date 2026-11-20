@@ -1,0 +1,49 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_vehicle_bill_of_sale_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_vehicle_bill_of_sale;
+
+enum UnitedStatesVehicleBillOfSaleGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_ODOMETER_DISCLOSURE_MISSING = 1;  // odometer-disclosure-missing
+  CATEGORY_ODOMETER_DISCREPANCY = 2;  // odometer-discrepancy
+  CATEGORY_ODOMETER_EXEMPT_NOTE = 3;  // odometer-exempt-note
+  CATEGORY_INVALID_VIN = 4;  // invalid-vin
+  CATEGORY_LIEN_OUTSTANDING = 5;  // lien-outstanding
+  CATEGORY_TITLE_PROBLEM = 6;  // title-problem
+  CATEGORY_TITLE_BRAND = 7;  // title-brand
+  CATEGORY_NOTARIZATION_REQUIRED = 8;  // notarization-required
+  CATEGORY_MISSING_PARTY_DETAILS = 9;  // missing-party-details
+  CATEGORY_MISSING_SIGNATURE = 10;  // missing-signature
+  CATEGORY_MISSING_TERMS = 11;  // missing-terms
+  CATEGORY_RELEASE_OF_LIABILITY = 12;  // release-of-liability
+  CATEGORY_BUYER_TITLE_DEADLINE = 13;  // buyer-title-deadline
+  CATEGORY_SALES_TAX_BASIS = 14;  // sales-tax-basis
+  CATEGORY_VERIFY_STATE_RULE = 15;  // verify-state-rule
+  CATEGORY_STATE_FORM = 16;  // state-form
+  CATEGORY_IMPLAUSIBLE_DATA = 17;  // implausible-data
+  CATEGORY_DISCLAIMER = 18;  // disclaimer
+  CATEGORY_OTHER = 19;  // other
+}
+
+enum UnitedStatesVehicleBillOfSaleGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedStatesVehicleBillOfSaleGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_vehicle_bill_of_sale_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedStatesVehicleBillOfSaleGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedStatesVehicleBillOfSaleGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

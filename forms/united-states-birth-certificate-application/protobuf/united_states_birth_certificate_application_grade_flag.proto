@@ -1,0 +1,45 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_states_birth_certificate_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_birth_certificate_application;
+
+enum UnitedStatesBirthCertificateApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_INELIGIBLE_REQUESTER = 1;  // ineligible-requester
+  CATEGORY_REQUESTER_UNDERAGE = 2;  // requester-underage
+  CATEGORY_MISSING_ID = 3;  // missing-id
+  CATEGORY_MISSING_PROOF = 4;  // missing-proof
+  CATEGORY_MISSING_AUTHORITY = 5;  // missing-authority
+  CATEGORY_MISSING_NOTARIZATION = 6;  // missing-notarization
+  CATEGORY_MISSING_REGISTRANT_DATA = 7;  // missing-registrant-data
+  CATEGORY_CERTIFICATE_TYPE_UNACCEPTABLE = 8;  // certificate-type-unacceptable
+  CATEGORY_FEE_SHORTFALL = 9;  // fee-shortfall
+  CATEGORY_ADOPTED_REGISTRANT = 10;  // adopted-registrant
+  CATEGORY_APOSTILLE = 11;  // apostille
+  CATEGORY_DECEASED_REGISTRANT = 12;  // deceased-registrant
+  CATEGORY_STATE_RULE_UNVERIFIED = 13;  // state-rule-unverified
+  CATEGORY_MISSING_DECLARATION = 14;  // missing-declaration
+  CATEGORY_OTHER = 15;  // other
+}
+
+enum UnitedStatesBirthCertificateApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedStatesBirthCertificateApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_states_birth_certificate_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedStatesBirthCertificateApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedStatesBirthCertificateApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

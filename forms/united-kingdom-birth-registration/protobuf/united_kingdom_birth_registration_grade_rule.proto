@@ -1,0 +1,30 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_birth_registration_grade_rule
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_birth_registration;
+
+enum UnitedKingdomBirthRegistrationGradeRuleDimensionEnum {
+  DIMENSION_UNSPECIFIED = 0;
+  DIMENSION_CHILD = 1;  // child
+  DIMENSION_MOTHER = 2;  // mother
+  DIMENSION_PARENTAGE = 3;  // parentage
+  DIMENSION_INFORMANT = 4;  // informant
+  DIMENSION_EVIDENCE = 5;  // evidence
+  DIMENSION_CERTIFICATE = 6;  // certificate
+  DIMENSION_DEADLINE = 7;  // deadline
+  DIMENSION_CLASSIFICATION = 8;  // classification
+}
+
+message UnitedKingdomBirthRegistrationGradeRule {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_birth_registration_grade_id = 5;  // UUID — uuid
+  string rule_id = 6;  // VARCHAR(40) — max 40 chars
+  UnitedKingdomBirthRegistrationGradeRuleDimensionEnum dimension = 7;  // VARCHAR(20)
+  string category = 8;  // VARCHAR(50) — max 50 chars
+  string description = 9;  // VARCHAR(500) — max 500 chars
+}

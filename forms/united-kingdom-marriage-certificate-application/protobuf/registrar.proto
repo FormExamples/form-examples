@@ -1,0 +1,36 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: registrar
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_marriage_certificate_application;
+
+enum RegistrarRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_REGISTRAR = 1;  // registrar
+  ROLE_SUPERINTENDENT_REGISTRAR = 2;  // superintendent-registrar
+  ROLE_DEPUTY_REGISTRAR = 3;  // deputy-registrar
+  ROLE_OTHER = 4;  // other
+}
+
+enum RegistrarRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_GRO = 1;  // GRO
+  REGISTRATIONBODY_LOCAL_AUTHORITY = 2;  // local-authority
+  REGISTRATIONBODY_OTHER = 3;  // other
+}
+
+message Registrar {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string postcode = 9;  // TEXT
+  RegistrarRoleEnum role = 10;  // VARCHAR(24)
+  RegistrarRegistrationBodyEnum registration_body = 11;  // VARCHAR(15)
+  string registration_number = 12;  // TEXT
+}

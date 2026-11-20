@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001004"
+  deletedAt: null
+  unitedStatesDivorcePetitionId: "00000000-0000-4000-8000-000000001003"
+  readinessClass: "ready-to-file"
+  propertyRegime: "equitable"
+  earliestDecreeDate: null
+  stateRuleKnown: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"

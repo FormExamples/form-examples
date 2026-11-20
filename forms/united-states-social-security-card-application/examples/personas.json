@@ -1,0 +1,1081 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "validateApplication(d) returns only { applicationClass, missingEvidenceCount, replacementLimitReached } with no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: applicantDeceased OR a replacement limit reached with no supported exception -> 'not-eligible'; missing required fields, an in-person violation, or a minor signer problem -> 'incomplete'; any evidence gap -> 'evidence-missing'; else 'ready-to-submit'. A legal name change does not count toward the replacement limits. Flags are stable-sorted high > medium > low. Regenerate expected with: bin/test-personas united-states-social-security-card-application --update",
+  "personas": [
+    {
+      "name": "Ready: adult original card, all evidence",
+      "description": "Adult US-born applicant requests an original card in person with an unexpired Texas driver license and a US birth certificate that prove identity, age, and citizenship; originals; signs for self. Expect ready-to-submit and no flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "TX",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready: replacement card, evidence on file",
+      "description": "Replacement of a lost card, second replacement this year and third in a lifetime, with the name on the most recent card given, a US passport as identity, and citizenship already on file. Expect ready-to-submit; the near-limit flag fires because two have been issued this year.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "replacement",
+          "channel": "in-person",
+          "previouslyApplied": "yes",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": 2,
+          "replacementsLifetime": 3,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "Maria Elena Santos",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "CA",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-passport",
+          "identityDocumentExpired": "no",
+          "ageDocument": "none",
+          "citizenshipDocument": "none",
+          "citizenshipOnFile": "yes",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-REPLACEMENT-LIMIT-NEAR-001",
+            "category": "replacement-limit",
+            "priority": "low",
+            "description": "This would be the last replacement card allowed before a limit is reached.",
+            "suggestedAction": "Keep the new card in a safe place; a legal name change does not count toward the limits."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: child original card signed by a parent",
+      "description": "Seven-year-old US-born child; the mother signs, gives her name, and brings her own identity document; the child's identity, age, and citizenship are shown by a US birth certificate and a school identity card. Expect ready-to-submit.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Noah James Whitfield",
+          "nameAtBirth": "Noah James Whitfield",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "2019-02-02",
+          "placeOfBirthCity": "Columbus",
+          "placeOfBirthRegion": "Ohio",
+          "sex": "male",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "OH",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "school-id",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "parent",
+          "signerName": "Dana Whitfield",
+          "signerIdentityDocument": "yes",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Incomplete: blank-ish application",
+      "description": "Only the request type is chosen; the applicant items, evidence, signer, and Tell-SSA answers are blank. Expect incomplete with the missing-fields, signature, identity, age, and citizenship flags.",
+      "state": {
+        "request": {
+          "applicationDate": null,
+          "requestType": "original",
+          "channel": "",
+          "previouslyApplied": "",
+          "nameChange": "",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "",
+          "nameAtBirth": "",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": null,
+          "placeOfBirthCity": "",
+          "placeOfBirthRegion": "",
+          "sex": "",
+          "citizenship": "",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "",
+          "fatherName": "",
+          "stateOfResidence": "",
+          "mailingAddress": "",
+          "phone": ""
+        },
+        "evidence": {
+          "identityDocument": "",
+          "identityDocumentExpired": "",
+          "ageDocument": "",
+          "citizenshipDocument": "",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": ""
+        },
+        "filer": {
+          "signerRelationship": "",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": ""
+        },
+        "tellSsa": {
+          "applicantDeceased": "",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "missingEvidenceCount": 3,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IDENTITY-EVIDENCE-001",
+            "category": "identity-evidence",
+            "priority": "high",
+            "description": "No acceptable proof of identity is recorded. SSA requires a current document showing name, identifying information, and preferably a photograph.",
+            "suggestedAction": "Bring a current US driver license, state ID card, or US passport (or another listed identity document)."
+          },
+          {
+            "id": "F-AGE-EVIDENCE-001",
+            "category": "age-evidence",
+            "priority": "high",
+            "description": "No acceptable proof of age is recorded. SSA requires one for an original card or a date-of-birth correction.",
+            "suggestedAction": "Bring a US birth certificate or, if unavailable, a US passport or another listed record."
+          },
+          {
+            "id": "F-CITIZENSHIP-EVIDENCE-001",
+            "category": "citizenship-evidence",
+            "priority": "high",
+            "description": "No acceptable proof of US citizenship or lawful alien status matching the citizenship answer is recorded.",
+            "suggestedAction": "Bring a US birth certificate or passport (citizen), or a Permanent Resident Card, Form I-94 with work authorization, or Employment Authorization Document (noncitizen)."
+          },
+          {
+            "id": "F-SIGNATURE-001",
+            "category": "signer-authority",
+            "priority": "high",
+            "description": "The application is not signed (item 19). SSA returns an unsigned SS-5.",
+            "suggestedAction": "Sign and date the application."
+          },
+          {
+            "id": "F-MISSING-FIELDS-001",
+            "category": "missing-field",
+            "priority": "medium",
+            "description": "Required items are blank: Application date; How the application is submitted; Whether an SSN was applied for before; Whether the name changed; Name to be shown on the card; Full name at birth; Date of birth; City of birth; State or country of birth; Sex; Citizenship; Mother's name at birth; Mailing address; State of residence; Who is signing; Whether documents are originals or certified copies; Whether the applicant has died.",
+            "suggestedAction": "Complete every required item on the SS-5."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: original card by mail for a 30-year-old",
+      "description": "Everything is present, but an applicant aged 12 or older chooses to mail an original-card application. Expect incomplete with the in-person flag; a state code 'ZZ' is also unrecognized so the verify-state flag fires.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "mail",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "ZZ",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IN-PERSON-001",
+            "category": "in-person-required",
+            "priority": "high",
+            "description": "An applicant aged 12 or older requesting an original card must apply in person, not by mail.",
+            "suggestedAction": "Visit a Social Security office with the original documents."
+          },
+          {
+            "id": "F-MISSING-FIELDS-001",
+            "category": "missing-field",
+            "priority": "medium",
+            "description": "Required items are blank: State of residence.",
+            "suggestedAction": "Complete every required item on the SS-5."
+          },
+          {
+            "id": "F-STATE-VERIFY-001",
+            "category": "state-verify",
+            "priority": "low",
+            "description": "The state of residence is not a recognized two-letter USPS code. SS-5 rules are federal and do not vary by state.",
+            "suggestedAction": "Enter a valid two-letter code such as CA, NY, or TX."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: minor signs for self",
+      "description": "A 15-year-old signs for herself; a parent is required. Expect incomplete with the minor-signer flag. The name differs from the birth name with no name change recorded, so the name-differs flag also fires.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Ava Marie Lindgren-Cole",
+          "nameAtBirth": "Ava Marie Lindgren",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "2011-03-09",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "TX",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "school-id",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-MINOR-SIGNER-001",
+            "category": "signer-authority",
+            "priority": "high",
+            "description": "The applicant is under 18, so a parent or legal guardian must sign and give their name and relationship.",
+            "suggestedAction": "Have a parent or legal guardian sign, and record their name and relationship."
+          },
+          {
+            "id": "F-NAME-DIFFERS-001",
+            "category": "name-change-evidence",
+            "priority": "medium",
+            "description": "The name on the card differs from the name at birth, but no legal name change is recorded.",
+            "suggestedAction": "Answer the name-change question and provide the name-change document, or correct the names."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: replacement says never applied",
+      "description": "Replacement requested but item 12 answers no, which contradicts the request, and the name on the most recent card is blank. Expect incomplete with the missing-fields and prior-application flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "replacement",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": 0,
+          "replacementsLifetime": 0,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "TX",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "none",
+          "citizenshipOnFile": "yes",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-MISSING-FIELDS-001",
+            "category": "missing-field",
+            "priority": "medium",
+            "description": "Required items are blank: Name on the most recent card.",
+            "suggestedAction": "Complete every required item on the SS-5."
+          },
+          {
+            "id": "F-PRIOR-APPLICATION-001",
+            "category": "missing-field",
+            "priority": "medium",
+            "description": "A replacement or corrected card is requested, but the answer says no Social Security number was applied for before.",
+            "suggestedAction": "Check whether an original card was already issued, or change the request type to an original card."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Evidence missing: noncitizen without work authorization",
+      "description": "Lawfully admitted noncitizen not allowed to work requests an original card with a Permanent Resident Card but no valid non-work reason, and an expired foreign identity document. Expect evidence-missing with identity-evidence and work-authorization flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Chen Wei",
+          "nameAtBirth": "Chen Wei",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Chengdu",
+          "placeOfBirthRegion": "China",
+          "sex": "female",
+          "citizenship": "legal-alien-not-allowed-to-work",
+          "nonWorkReasonValid": "no",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "WA",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "other",
+          "identityDocumentExpired": "no",
+          "ageDocument": "immigration-record",
+          "citizenshipDocument": "permanent-resident-card",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "evidence-missing",
+        "missingEvidenceCount": 2,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IDENTITY-EVIDENCE-001",
+            "category": "identity-evidence",
+            "priority": "high",
+            "description": "No acceptable proof of identity is recorded. SSA requires a current document showing name, identifying information, and preferably a photograph.",
+            "suggestedAction": "Bring a current US driver license, state ID card, or US passport (or another listed identity document)."
+          },
+          {
+            "id": "F-WORK-AUTHORIZATION-001",
+            "category": "work-authorization",
+            "priority": "high",
+            "description": "A lawfully admitted noncitizen without work authorization needs a valid non-work reason (a federal or state law or benefit that requires an SSN).",
+            "suggestedAction": "Obtain the letter from the benefit-paying agency that shows why the number is required, and bring it with the immigration documents."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Evidence missing: name change without document, photocopies, no age proof",
+      "description": "Corrected card after marriage: name change claimed, no marriage certificate, an expired license, photocopies, and the date of birth also corrected with no age document. Expect evidence-missing with identity, age, name-change, and originals flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "correction",
+          "channel": "in-person",
+          "previouslyApplied": "yes",
+          "nameChange": "yes",
+          "nameChangeReason": "marriage",
+          "dateOfBirthCorrection": "yes",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Priya Raman Iyer",
+          "nameAtBirth": "Priya Raman",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "Priya Raman",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "NY",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "yes",
+          "ageDocument": "none",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "none",
+          "documentsOriginalOrCertified": "no"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "evidence-missing",
+        "missingEvidenceCount": 4,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-IDENTITY-EVIDENCE-001",
+            "category": "identity-evidence",
+            "priority": "high",
+            "description": "The identity document is expired. SSA requires a current, unexpired document.",
+            "suggestedAction": "Bring a current US driver license, state ID card, or US passport (or another listed identity document)."
+          },
+          {
+            "id": "F-AGE-EVIDENCE-001",
+            "category": "age-evidence",
+            "priority": "high",
+            "description": "No acceptable proof of age is recorded. SSA requires one for an original card or a date-of-birth correction.",
+            "suggestedAction": "Bring a US birth certificate or, if unavailable, a US passport or another listed record."
+          },
+          {
+            "id": "F-NAME-CHANGE-EVIDENCE-001",
+            "category": "name-change-evidence",
+            "priority": "high",
+            "description": "A legal name change is claimed but no document proving it is recorded.",
+            "suggestedAction": "Bring the marriage certificate, divorce decree, or court order that shows the new name."
+          },
+          {
+            "id": "F-DOCUMENT-ORIGINALS-001",
+            "category": "document-quality",
+            "priority": "medium",
+            "description": "SSA accepts only original documents or copies certified by the issuing agency; photocopies and notarized copies are rejected.",
+            "suggestedAction": "Obtain originals or agency-certified copies of every document."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Evidence missing: adult signed for by another without identity",
+      "description": "An adult applicant is signed for by a custodian who has no identity document with them. Expect evidence-missing with the signer-identity and adult-signer flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Walter Alan Pruitt",
+          "nameAtBirth": "Walter Alan Pruitt",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1971-10-30",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "FL",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "custodian",
+          "signerName": "Janet Pruitt",
+          "signerIdentityDocument": "no",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "evidence-missing",
+        "missingEvidenceCount": 1,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-ADULT-SIGNER-001",
+            "category": "signer-authority",
+            "priority": "medium",
+            "description": "An adult applicant is being signed for by another person. SSA accepts this only where the applicant cannot sign and the signer has legal authority.",
+            "suggestedAction": "Bring proof of the signer authority, such as a court order or power of attorney."
+          },
+          {
+            "id": "F-SIGNER-IDENTITY-001",
+            "category": "signer-authority",
+            "priority": "medium",
+            "description": "The person signing for the applicant has not shown their own proof of identity.",
+            "suggestedAction": "The signer must bring their own current identity document."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible: replacement limit reached, no exception",
+      "description": "Third replacement this year already issued; no name change and no exception claimed. Expect not-eligible and the replacement-limit flag.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "replacement",
+          "channel": "in-person",
+          "previouslyApplied": "yes",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": 3,
+          "replacementsLifetime": 5,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "Maria Elena Santos",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "IL",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "none",
+          "citizenshipOnFile": "yes",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": true,
+        "flaggedIssues": [
+          {
+            "id": "F-REPLACEMENT-LIMIT-001",
+            "category": "replacement-limit",
+            "priority": "high",
+            "description": "A replacement-card limit is reached (3 per calendar year or 10 per lifetime) and no supported exception is recorded. SSA denies the replacement card.",
+            "suggestedAction": "Wait until the next calendar year, or document an exception: a legal name change, a legend change, non-receipt of a card, an SSA error, or hardship."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: limit reached but non-receipt exception documented",
+      "description": "Tenth replacement in a lifetime already issued, but the last card was never received and documents support the exception. Expect ready-to-submit with the low exception flag.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "replacement",
+          "channel": "in-person",
+          "previouslyApplied": "yes",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": 1,
+          "replacementsLifetime": 10,
+          "limitExceptionReason": "non-receipt",
+          "limitExceptionEvidence": "yes"
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "Maria Elena Santos",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "PA",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "none",
+          "citizenshipOnFile": "yes",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": true,
+        "flaggedIssues": [
+          {
+            "id": "F-REPLACEMENT-LIMIT-EXCEPTION-001",
+            "category": "replacement-limit",
+            "priority": "low",
+            "description": "A replacement-card limit is reached but an exception reason is claimed with supporting documents. SSA decides whether the exception applies.",
+            "suggestedAction": "Bring the documents that support the exception reason."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible: exception claimed without documents",
+      "description": "Lifetime limit exceeded (11 replacements); hardship is claimed but nothing supports it, so the exception is unsupported. Expect not-eligible, replacementLimitReached true, with the limit flag and the unsupported-exception flag.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "replacement",
+          "channel": "in-person",
+          "previouslyApplied": "yes",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": 0,
+          "replacementsLifetime": 11,
+          "limitExceptionReason": "hardship",
+          "limitExceptionEvidence": "no"
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "Maria Elena Santos",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "TX",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "none",
+          "citizenshipOnFile": "yes",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "no",
+          "deathReportedToSsa": "",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": true,
+        "flaggedIssues": [
+          {
+            "id": "F-REPLACEMENT-LIMIT-001",
+            "category": "replacement-limit",
+            "priority": "high",
+            "description": "A replacement-card limit is reached (3 per calendar year or 10 per lifetime) and no supported exception is recorded. SSA denies the replacement card.",
+            "suggestedAction": "Wait until the next calendar year, or document an exception: a legal name change, a legend change, non-receipt of a card, an SSA error, or hardship."
+          },
+          {
+            "id": "F-REPLACEMENT-LIMIT-EXCEPTION-002",
+            "category": "replacement-limit",
+            "priority": "medium",
+            "description": "An exception reason is claimed but no supporting documents are available.",
+            "suggestedAction": "Gather documentation for the exception reason before applying."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not eligible: applicant has died",
+      "description": "A family member begins an application for a person who has died; the death has not been reported to SSA. Expect not-eligible with the deceased and death-report flags.",
+      "state": {
+        "request": {
+          "applicationDate": "2026-09-03",
+          "requestType": "original",
+          "channel": "in-person",
+          "previouslyApplied": "no",
+          "nameChange": "no",
+          "nameChangeReason": "",
+          "dateOfBirthCorrection": "",
+          "replacementsThisYear": null,
+          "replacementsLifetime": null,
+          "limitExceptionReason": "",
+          "limitExceptionEvidence": ""
+        },
+        "applicant": {
+          "nameOnCard": "Maria Elena Santos",
+          "nameAtBirth": "Maria Elena Santos",
+          "otherNamesUsed": "",
+          "nameOnMostRecentCard": "",
+          "dateOfBirth": "1994-05-17",
+          "placeOfBirthCity": "Houston",
+          "placeOfBirthRegion": "Texas",
+          "sex": "female",
+          "citizenship": "us-citizen",
+          "nonWorkReasonValid": "",
+          "motherNameAtBirth": "Rosa Delgado",
+          "fatherName": "Luis Santos",
+          "stateOfResidence": "TX",
+          "mailingAddress": "1420 Elm Street, Houston, TX 77002",
+          "phone": "713-555-0142"
+        },
+        "evidence": {
+          "identityDocument": "us-driver-license",
+          "identityDocumentExpired": "no",
+          "ageDocument": "us-birth-certificate",
+          "citizenshipDocument": "us-birth-certificate",
+          "citizenshipOnFile": "",
+          "nameChangeDocument": "",
+          "documentsOriginalOrCertified": "yes"
+        },
+        "filer": {
+          "signerRelationship": "self",
+          "signerName": "",
+          "signerIdentityDocument": "",
+          "signaturePresent": "yes"
+        },
+        "tellSsa": {
+          "applicantDeceased": "yes",
+          "deathReportedToSsa": "no",
+          "preparerNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "not-eligible",
+        "missingEvidenceCount": 0,
+        "replacementLimitReached": false,
+        "flaggedIssues": [
+          {
+            "id": "F-APPLICANT-DECEASED-001",
+            "category": "applicant-deceased",
+            "priority": "high",
+            "description": "The person in item 1 has died. SSA does not issue a Social Security card for a deceased person, so Form SS-5 cannot be used.",
+            "suggestedAction": "Do not submit an SS-5. Report the death to SSA instead (funeral home, or 1-800-772-1213)."
+          },
+          {
+            "id": "F-DEATH-REPORT-001",
+            "category": "applicant-deceased",
+            "priority": "medium",
+            "description": "The death has not yet been reported to SSA.",
+            "suggestedAction": "Tell SSA about the death: the funeral home usually reports it, or a family member can call 1-800-772-1213."
+          }
+        ]
+      }
+    }
+  ]
+}

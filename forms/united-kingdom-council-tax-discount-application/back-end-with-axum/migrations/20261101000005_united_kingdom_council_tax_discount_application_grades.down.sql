@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_council_tax_discount_application_grades";

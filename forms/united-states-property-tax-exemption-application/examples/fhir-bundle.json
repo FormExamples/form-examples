@@ -1,0 +1,530 @@
+{
+  "resourceType": "Bundle",
+  "id": "550e8400-e29b-41d4-a716-000000000063",
+  "type": "collection",
+  "timestamp": "2026-04-09T10:00:00+00:00",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/StructureDefinition/Bundle"
+    ],
+    "tag": [
+      {
+        "system": "https://github.com/joelparkerhenderson/form-examples",
+        "code": "example",
+        "display": "United States Property Tax Exemption Application example bundle"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-states-property-tax-exemption-application",
+              "code": "applicant",
+              "display": "Applicant"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "postal_address_as_full_text",
+                  "display": "Postal Address As Full Text"
+                }
+              ]
+            },
+            "valueString": "Example text."
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "state",
+                  "display": "State"
+                }
+              ]
+            },
+            "valueString": "Example State"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "zip_code",
+                  "display": "Zip Code"
+                }
+              ]
+            },
+            "valueString": "ABC123"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:660e8400-e29b-41d4-a716-446655440001",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-states-property-tax-exemption-application",
+              "code": "assessor",
+              "display": "Assessor"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "name",
+                  "display": "Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "email",
+                  "display": "Email"
+                }
+              ]
+            },
+            "valueString": "jane.doe@example.com"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "phone",
+                  "display": "Phone"
+                }
+              ]
+            },
+            "valueString": "07700900000"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "office_name",
+                  "display": "Office Name"
+                }
+              ]
+            },
+            "valueString": "Example"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "county",
+                  "display": "County"
+                }
+              ]
+            },
+            "valueString": "Example County"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "state",
+                  "display": "State"
+                }
+              ]
+            },
+            "valueString": "Example State"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "role",
+                  "display": "Role"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application:role",
+                  "code": "assessor",
+                  "display": "Assessor"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:770e8400-e29b-41d4-a716-446655440002",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "770e8400-e29b-41d4-a716-446655440002",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Encounter"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "planned",
+        "class": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "code": "AMB",
+                "display": "ambulatory"
+              }
+            ]
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ],
+            "text": "United States Property Tax Exemption Application"
+          }
+        ],
+        "actualPeriod": {
+          "start": "2026-04-09T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:880e8400-e29b-41d4-a716-446655440003",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "880e8400-e29b-41d4-a716-446655440003",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/Observation"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-states-property-tax-exemption-application",
+              "code": "property_tax_exemption_application_grade",
+              "display": "Property Tax Exemption Application Grade"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "urn:uuid:770e8400-e29b-41d4-a716-446655440002"
+        },
+        "effectiveDateTime": "2026-04-09T10:00:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "deleted_at",
+                  "display": "Deleted At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "eligibility_class",
+                  "display": "Eligibility Class"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application:eligibility_class",
+                  "code": "likely-eligible",
+                  "display": "Likely-Eligible"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "filing_deadline",
+                  "display": "Filing Deadline"
+                }
+              ]
+            },
+            "valueDateTime": "2026-01-15"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "filed_late",
+                  "display": "Filed Late"
+                }
+              ]
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application:filed_late",
+                  "code": "yes",
+                  "display": "Yes"
+                }
+              ]
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "qualifying_exemptions",
+                  "display": "Qualifying Exemptions"
+                }
+              ]
+            },
+            "valueString": "Example Qualifying Exemptions"
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                  "code": "graded_at",
+                  "display": "Graded At"
+                }
+              ]
+            },
+            "valueDateTime": "2026-04-09T10:00:00+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa0e8400-e29b-41d4-a716-446655440005",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "aa0e8400-e29b-41d4-a716-446655440005",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                "code": "grading-additional-flag",
+                "display": "ownership"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-states-property-tax-exemption-application:flags",
+              "code": "FLAG-001",
+              "display": "Safety flag"
+            }
+          ]
+        },
+        "severity": "low",
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Clinical flag detected."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:990e8400-e29b-41d4-a716-446655440004",
+      "resource": {
+        "resourceType": "DetectedIssue",
+        "id": "990e8400-e29b-41d4-a716-446655440004",
+        "meta": {
+          "profile": [
+            "http://hl7.org/fhir/StructureDefinition/DetectedIssue"
+          ],
+          "lastUpdated": "2026-04-09T10:00:00+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:form-examples:united-states-property-tax-exemption-application",
+                "code": "grading-fired-rule",
+                "display": "General"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:form-examples:united-states-property-tax-exemption-application:rules",
+              "code": "RULE-001",
+              "display": "Example grading rule"
+            }
+          ]
+        },
+        "severity": "moderate",
+        "identifiedDateTime": "2026-04-09T10:00:00+00:00",
+        "detail": "Example text."
+      }
+    }
+  ]
+}

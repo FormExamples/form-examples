@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000019046"
+  deletedAt: null
+  validityClass: "ready-to-submit"
+  earliestCeremonyDate: "2026-06-01"
+  latestCeremonyDate: "2026-06-01"
+  immigrationReferralIndicated: "yes"
+  gradedAt: "2026-01-01T00:00:00Z"
+  unitedKingdomMarriageCertificateApplicationId: "00000000-0000-4000-8000-00000001ee3b"

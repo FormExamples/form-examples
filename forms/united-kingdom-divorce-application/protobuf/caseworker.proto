@@ -1,0 +1,39 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: caseworker
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_divorce_application;
+
+enum CaseworkerRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_SOLICITOR = 1;  // solicitor
+  ROLE_LEGAL_ADVISER = 2;  // legal-adviser
+  ROLE_COURT_OFFICER = 3;  // court-officer
+  ROLE_MCKENZIE_FRIEND = 4;  // mckenzie-friend
+  ROLE_OTHER = 5;  // other
+}
+
+enum CaseworkerRegistrationBodyEnum {
+  REGISTRATIONBODY_UNSPECIFIED = 0;
+  REGISTRATIONBODY_SRA = 1;  // SRA
+  REGISTRATIONBODY_CILEX = 2;  // CILEx
+  REGISTRATIONBODY_BSB = 3;  // BSB
+  REGISTRATIONBODY_OTHER = 4;  // other
+}
+
+message Caseworker {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string postal_address_as_full_text = 8;  // TEXT
+  string country_as_iso_3166_1_alpha_2 = 9;  // CHAR(2) — max 2 chars
+  string postcode = 10;  // TEXT
+  CaseworkerRoleEnum role = 11;  // VARCHAR(15)
+  CaseworkerRegistrationBodyEnum registration_body = 12;  // VARCHAR(5)
+  string registration_number = 13;  // TEXT
+}

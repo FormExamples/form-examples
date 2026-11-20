@@ -1,0 +1,1029 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeDirective",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "gradeDirective(d) returns only { readinessClass, ruleSetName, missingCount, executionRisk } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: principal under 18 at signing, capacity or voluntariness denied, an ineligible agent (under 18, or an unrelated provider or facility employee where barred), or any execution defect (witness barred, too few witnesses, no unrelated witness, notary not accepted, California skilled-nursing ombudsman missing) -> 'execution-risk'; else any blank required field -> 'incomplete'; else 'ready-to-execute'. State rules cover CA, NY, TX, FL, IL, PA, OH, WA; any other state uses the uniform default and raises F-HCPOA-012.",
+  "personas": [
+    {
+      "name": "California directive, ready to execute",
+      "description": "Complete California directive signed before two unrelated, disinterested witnesses; adult-child agent, two successors, HIPAA release, organ donation addressed, copies distributed. Expect ready-to-execute and no flags.",
+      "state": {
+        "principal": {
+          "principalName": "Maria Elena Vargas",
+          "birthDate": "1958-03-14",
+          "state": "CA",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Peter Lindqvist",
+          "witness2IsRelative": "no",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-execute",
+        "ruleSetName": "California",
+        "missingCount": 0,
+        "executionRisk": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "New York health care proxy, relatives may witness",
+      "description": "New York needs two adult witnesses and allows relatives; the agent is not a witness. Expect ready-to-execute.",
+      "state": {
+        "principal": {
+          "principalName": "Harold Weiss",
+          "birthDate": "1949-07-02",
+          "state": "NY",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Ruth Weiss",
+          "agentRelationship": "spouse",
+          "agentAge": 71,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Aaron Weiss",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": ""
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Naomi Weiss",
+          "witness1IsRelative": "yes",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Isaac Weiss",
+          "witness2IsRelative": "yes",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-execute",
+        "ruleSetName": "New York",
+        "missingCount": 0,
+        "executionRisk": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Texas medical power of attorney via notary",
+      "description": "Texas accepts a notary acknowledgment in place of witnesses. Expect ready-to-execute.",
+      "state": {
+        "principal": {
+          "principalName": "Billy Ray Tucker",
+          "birthDate": "1962-11-30",
+          "state": "TX",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "notary",
+          "witnessesPresent": "yes",
+          "witness1Name": "",
+          "witness1IsRelative": "",
+          "witness1IsHeir": "",
+          "witness1IsAgent": "",
+          "witness1IsProvider": "",
+          "witness2Name": "",
+          "witness2IsRelative": "",
+          "witness2IsHeir": "",
+          "witness2IsAgent": "",
+          "witness2IsProvider": "",
+          "notaryName": "Carla Mendez, Notary Public",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-execute",
+        "ruleSetName": "Texas",
+        "missingCount": 0,
+        "executionRisk": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Illinois directive with one witness",
+      "description": "Illinois requires a single adult witness who is not related to the principal and not a provider. Expect ready-to-execute.",
+      "state": {
+        "principal": {
+          "principalName": "Dolores Kowalski",
+          "birthDate": "1953-05-21",
+          "state": "IL",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "one-witness",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "",
+          "witness2IsRelative": "",
+          "witness2IsHeir": "",
+          "witness2IsAgent": "",
+          "witness2IsProvider": "",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-execute",
+        "ruleSetName": "Illinois",
+        "missingCount": 0,
+        "executionRisk": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Blank-ish draft is incomplete",
+      "description": "Florida principal who has named an agent but not chosen when authority begins, a signing date, or a method. Expect incomplete with the missing-required flag and no execution defect.",
+      "state": {
+        "principal": {
+          "principalName": "Maria Elena Vargas",
+          "birthDate": "1958-03-14",
+          "state": "FL",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": ""
+        },
+        "authority": {
+          "effectiveWhen": "",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "no",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": null,
+          "executionMethod": "",
+          "witnessesPresent": "",
+          "witness1Name": "",
+          "witness1IsRelative": "",
+          "witness1IsHeir": "",
+          "witness1IsAgent": "",
+          "witness1IsProvider": "",
+          "witness2Name": "",
+          "witness2IsRelative": "",
+          "witness2IsHeir": "",
+          "witness2IsAgent": "",
+          "witness2IsProvider": "",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "",
+          "copyToPhysician": "",
+          "copyToSuccessor": "",
+          "copyToFacility": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "ruleSetName": "Florida",
+        "missingCount": 3,
+        "executionRisk": false,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-019",
+            "category": "missing-required",
+            "priority": "medium",
+            "description": "Required content is blank: when the agent's authority begins, signature date, signing method (witnesses or notary).",
+            "suggestedAction": "Complete every required field before the document is printed for signing."
+          },
+          {
+            "id": "F-HCPOA-007",
+            "category": "successor-agent",
+            "priority": "medium",
+            "description": "No successor agent is named. If the agent is unwilling, unavailable, or incapacitated, no one may be able to act.",
+            "suggestedAction": "Name at least one successor agent, in order of priority."
+          },
+          {
+            "id": "F-HCPOA-008",
+            "category": "hipaa",
+            "priority": "medium",
+            "description": "No HIPAA authorization is included, so providers may refuse the agent access to protected health information before incapacity is certified.",
+            "suggestedAction": "Add a HIPAA release (45 CFR 164.508) so the agent can see records and talk to providers."
+          },
+          {
+            "id": "F-HCPOA-013",
+            "category": "distribution",
+            "priority": "low",
+            "description": "The signed directive has not been given to the agent and the principal's physician. A directive nobody can find does not help the principal.",
+            "suggestedAction": "Give copies to the agent, any successor agents, and the physician; bring a copy to every hospital admission (federal Patient Self-Determination Act, 42 U.S.C. 1395cc(f))."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Florida: agent signed as a witness",
+      "description": "Florida needs two witnesses, one neither spouse nor blood relative, and the surrogate cannot witness. Witness 1 is the agent; witness 2 is the principal's sister. Expect execution-risk with witness-eligibility and execution-formalities flags.",
+      "state": {
+        "principal": {
+          "principalName": "Evelyn Brooks",
+          "birthDate": "1947-01-09",
+          "state": "FL",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Tom Brooks",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Tom Brooks",
+          "witness1IsRelative": "yes",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "yes",
+          "witness1IsProvider": "no",
+          "witness2Name": "Janet Brooks",
+          "witness2IsRelative": "yes",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "execution-risk",
+        "ruleSetName": "Florida",
+        "missingCount": 0,
+        "executionRisk": true,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-003",
+            "category": "witness-eligibility",
+            "priority": "high",
+            "description": "Witness 1 (Tom Brooks) is the named agent (an agent may not witness the appointment).",
+            "suggestedAction": "Replace the witness with a disinterested adult; an agent should never witness the appointment."
+          },
+          {
+            "id": "F-HCPOA-004",
+            "category": "execution-formalities",
+            "priority": "high",
+            "description": "Florida needs 2 qualified witnesses; only 1 valid witness is recorded.",
+            "suggestedAction": "Obtain the required number of qualified witnesses before signing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "California nursing-home resident without ombudsman",
+      "description": "Skilled nursing facility resident in California; one witness is the facility's provider staff and no ombudsman signed; the agent is the facility's unrelated employee. Expect execution-risk with facility-rule, witness-eligibility and agent-eligibility flags.",
+      "state": {
+        "principal": {
+          "principalName": "Walter Ng",
+          "birthDate": "1939-12-02",
+          "state": "CA",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Pat Hollis",
+          "agentRelationship": "other",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "yes",
+          "agentIsFacilityEmployee": "yes",
+          "agentRelatedToPrincipal": "no",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Nurse Alma Reyes",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "yes",
+          "witness2Name": "Peter Lindqvist",
+          "witness2IsRelative": "no",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "yes",
+          "ombudsmanSigned": "no"
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "execution-risk",
+        "ruleSetName": "California",
+        "missingCount": 0,
+        "executionRisk": true,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-002",
+            "category": "agent-eligibility",
+            "priority": "high",
+            "description": "The named agent is the principal's treating health care provider or its employee and is not related to the principal; California restricts this (Cal. Prob. Code 4673, 4674, 4675, 4659).",
+            "suggestedAction": "Name a different agent, or confirm the exception for relatives and co-workers in the state statute."
+          },
+          {
+            "id": "F-HCPOA-002",
+            "category": "agent-eligibility",
+            "priority": "high",
+            "description": "The named agent operates or works at the facility where the principal is a patient and is not related to the principal. Many states bar or limit this appointment.",
+            "suggestedAction": "Name an agent who is not affiliated with the facility, or confirm the state exception for relatives."
+          },
+          {
+            "id": "F-HCPOA-003",
+            "category": "witness-eligibility",
+            "priority": "high",
+            "description": "Witness 1 (Nurse Alma Reyes) is the principal's health care provider or facility staff.",
+            "suggestedAction": "Replace the barred witness with an adult who is not a relative, heir, provider, or facility staff member."
+          },
+          {
+            "id": "F-HCPOA-004",
+            "category": "execution-formalities",
+            "priority": "high",
+            "description": "California needs 2 qualified witnesses; only 1 valid witness is recorded.",
+            "suggestedAction": "Obtain the required number of qualified witnesses before signing."
+          },
+          {
+            "id": "F-HCPOA-005",
+            "category": "facility-rule",
+            "priority": "high",
+            "description": "A skilled-nursing-facility resident needs a patient advocate or ombudsman to sign as a witness (Cal. Prob. Code 4675).",
+            "suggestedAction": "Arrange for a patient advocate or ombudsman designated by the state to sign as a witness."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Washington: principal and agent are minors",
+      "description": "Washington principal who was 17 at signing, with a 16-year-old agent; capacity is confirmed and two valid witnesses signed. Expect execution-risk with the principal-minor and agent-eligibility flags.",
+      "state": {
+        "principal": {
+          "principalName": "Kai Nakamura",
+          "birthDate": "2009-04-10",
+          "state": "WA",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Mika Nakamura",
+          "agentRelationship": "sibling",
+          "agentAge": 16,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-08-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Peter Lindqvist",
+          "witness2IsRelative": "no",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "execution-risk",
+        "ruleSetName": "Washington",
+        "missingCount": 0,
+        "executionRisk": true,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-006",
+            "category": "capacity",
+            "priority": "high",
+            "description": "The principal was under 18 on the signature date. Adult health care powers of attorney require an adult principal (or a legally emancipated minor).",
+            "suggestedAction": "Confirm the date of birth and the signature date, or seek state-specific advice for an emancipated minor."
+          },
+          {
+            "id": "F-HCPOA-002",
+            "category": "agent-eligibility",
+            "priority": "high",
+            "description": "The named agent is 16, under 18. An agent must be an adult.",
+            "suggestedAction": "Name an adult agent."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ohio: relative witness bars the signing",
+      "description": "Ohio bars relatives as witnesses; witness 2 is the principal's nephew, leaving only one valid witness. Expect execution-risk with a witness-count and witness-eligibility flag.",
+      "state": {
+        "principal": {
+          "principalName": "Frances Miller",
+          "birthDate": "1951-08-17",
+          "state": "OH",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Dale Miller",
+          "witness2IsRelative": "yes",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "execution-risk",
+        "ruleSetName": "Ohio",
+        "missingCount": 0,
+        "executionRisk": true,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-003",
+            "category": "witness-eligibility",
+            "priority": "high",
+            "description": "Witness 2 (Dale Miller) is related to the principal by blood, marriage or adoption.",
+            "suggestedAction": "Replace the barred witness with an adult who is not a relative, heir, provider, or facility staff member."
+          },
+          {
+            "id": "F-HCPOA-004",
+            "category": "execution-formalities",
+            "priority": "high",
+            "description": "Ohio needs 2 qualified witnesses; only 1 valid witness is recorded.",
+            "suggestedAction": "Obtain the required number of qualified witnesses before signing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Alaska uses the uniform default",
+      "description": "Alaska is not in the verified rule table, so the uniform default applies (two unrelated witnesses) and the verify-state-rule flag fires. Serious illness with no POLST and no organ-donation answer also flag. Expect ready-to-execute with state-rule, POLST and organ-donation flags.",
+      "state": {
+        "principal": {
+          "principalName": "Siku Anderson",
+          "birthDate": "1944-06-05",
+          "state": "AK",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "yes",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "yes",
+          "successor1Name": "Lucia Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": "Rosa Ortiz"
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "no",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "not-addressed",
+          "priorDirectiveStatus": "none-existing"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "refuse",
+          "cpr": "accept",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "yes",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Peter Lindqvist",
+          "witness2IsRelative": "no",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "no",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-execute",
+        "ruleSetName": "Uniform default",
+        "missingCount": 0,
+        "executionRisk": false,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-008",
+            "category": "hipaa",
+            "priority": "medium",
+            "description": "No HIPAA authorization is included, so providers may refuse the agent access to protected health information before incapacity is certified.",
+            "suggestedAction": "Add a HIPAA release (45 CFR 164.508) so the agent can see records and talk to providers."
+          },
+          {
+            "id": "F-HCPOA-009",
+            "category": "treatment-wishes",
+            "priority": "medium",
+            "description": "The general wish refuses life-sustaining treatment, but a specific wish (CPR or artificial nutrition) accepts it. Providers may not know which to follow.",
+            "suggestedAction": "Reconcile the instructions so the general and specific wishes agree."
+          },
+          {
+            "id": "F-HCPOA-010",
+            "category": "polst",
+            "priority": "medium",
+            "description": "The principal has a serious illness or frailty but no POLST (Physician Orders for Life-Sustaining Treatment). A health care power of attorney is not a medical order; emergency staff follow only a POLST or similar order.",
+            "suggestedAction": "Ask the treating clinician about a POLST, and keep it consistent with this directive."
+          },
+          {
+            "id": "F-HCPOA-011",
+            "category": "organ-donation",
+            "priority": "low",
+            "description": "Organ and tissue donation is not addressed. Without direction, the agent or family decides at a stressful time.",
+            "suggestedAction": "State whether the principal wishes to donate, and register under the state donor registry if so."
+          },
+          {
+            "id": "F-HCPOA-012",
+            "category": "state-rule",
+            "priority": "medium",
+            "description": "State \"AK\" is not in this tool's verified rule table; the uniform default (two witnesses or a notary, at least one unrelated witness, no provider witnesses) was applied.",
+            "suggestedAction": "Verify the state rule with the state statute, the state attorney general, or an attorney, and use the state's own form if it has one."
+          },
+          {
+            "id": "F-HCPOA-013",
+            "category": "distribution",
+            "priority": "low",
+            "description": "The signed directive has not been given to the agent and the principal's physician. A directive nobody can find does not help the principal.",
+            "suggestedAction": "Give copies to the agent, any successor agents, and the physician; bring a copy to every hospital admission (federal Patient Self-Determination Act, 42 U.S.C. 1395cc(f))."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pennsylvania: capacity doubt, prior directive remains",
+      "description": "The signer states the principal may not understand the document; an earlier directive remains in force; agent has not agreed. Expect execution-risk with capacity, revocation and successor-agent flags.",
+      "state": {
+        "principal": {
+          "principalName": "Arthur Pell",
+          "birthDate": "1940-02-28",
+          "state": "PA",
+          "phone": "415-555-0142",
+          "capacityConfirmed": "no",
+          "signedVoluntarily": "yes"
+        },
+        "agent": {
+          "agentName": "Daniel Vargas",
+          "agentRelationship": "adult-child",
+          "agentAge": 34,
+          "agentPhone": "415-555-0177",
+          "agentIsHealthCareProvider": "no",
+          "agentIsFacilityEmployee": "no",
+          "agentRelatedToPrincipal": "yes",
+          "agentAccepted": "no",
+          "successor1Name": "Daniel Vargas",
+          "successor1Phone": "415-555-0181",
+          "successor2Name": ""
+        },
+        "authority": {
+          "effectiveWhen": "upon-incapacity",
+          "incapacityDeterminedBy": "two-physicians",
+          "hipaaRelease": "yes",
+          "mentalHealthAuthority": "yes",
+          "organDonation": "any-needs",
+          "priorDirectiveStatus": "prior-remains"
+        },
+        "wishes": {
+          "lifeSustainingTreatment": "time-limited-trial",
+          "cpr": "agent-decides",
+          "ventilator": "agent-decides",
+          "artificialNutrition": "agent-decides",
+          "comfortCareFirst": "yes",
+          "seriousIllness": "no",
+          "polstStatus": "none",
+          "wishesNote": "Keep me comfortable and at home if possible."
+        },
+        "execution": {
+          "signatureDate": "2026-09-01",
+          "executionMethod": "two-witnesses",
+          "witnessesPresent": "yes",
+          "witness1Name": "Grace Okafor",
+          "witness1IsRelative": "no",
+          "witness1IsHeir": "no",
+          "witness1IsAgent": "no",
+          "witness1IsProvider": "no",
+          "witness2Name": "Peter Lindqvist",
+          "witness2IsRelative": "no",
+          "witness2IsHeir": "no",
+          "witness2IsAgent": "no",
+          "witness2IsProvider": "no",
+          "notaryName": "",
+          "principalInSkilledNursingFacility": "no",
+          "ombudsmanSigned": ""
+        },
+        "distribution": {
+          "copyToAgent": "yes",
+          "copyToPhysician": "yes",
+          "copyToSuccessor": "yes",
+          "copyToFacility": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "execution-risk",
+        "ruleSetName": "Pennsylvania",
+        "missingCount": 0,
+        "executionRisk": true,
+        "flaggedIssues": [
+          {
+            "id": "F-HCPOA-001",
+            "category": "capacity",
+            "priority": "high",
+            "description": "The principal is recorded as lacking capacity, or as not signing voluntarily. A directive signed without capacity or under pressure can be set aside.",
+            "suggestedAction": "Do not sign. Obtain a clinician capacity assessment and make sure the principal acts freely; ask an attorney for guidance."
+          },
+          {
+            "id": "F-HCPOA-015",
+            "category": "successor-agent",
+            "priority": "low",
+            "description": "A successor agent has the same name as the primary agent.",
+            "suggestedAction": "Name a different person as successor."
+          },
+          {
+            "id": "F-HCPOA-016",
+            "category": "successor-agent",
+            "priority": "medium",
+            "description": "The agent has not been told about, or has not agreed to, the appointment.",
+            "suggestedAction": "Talk with the agent about the principal's wishes and confirm they are willing to serve."
+          },
+          {
+            "id": "F-HCPOA-014",
+            "category": "revocation",
+            "priority": "medium",
+            "description": "A prior directive remains in force alongside this one, so the two may conflict.",
+            "suggestedAction": "State in writing that this document revokes earlier health care powers of attorney, and notify holders of the old copies."
+          }
+        ]
+      }
+    }
+  ]
+}

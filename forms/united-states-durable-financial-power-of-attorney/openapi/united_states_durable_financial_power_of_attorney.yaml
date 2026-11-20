@@ -1,0 +1,639 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: united_states_durable_financial_power_of_attorney
+openapi: 3.1.0
+info:
+  title: United States Durable Financial Power Of Attorney — UnitedStatesDurableFinancialPowerOfAttorney
+  version: 1.0.0
+  description: "Main United States durable financial power of attorney record: principal, durability and effectiveness, agent and successor, general grants and hot powers, execution plan, and acceptance plan. Classification, fired rules, and flags live in child tables."
+paths:
+  /api/united_states_durable_financial_power_of_attorneys:
+    get:
+      summary: List UnitedStatesDurableFinancialPowerOfAttorney records
+      operationId: listUnitedStatesDurableFinancialPowerOfAttorney
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of UnitedStatesDurableFinancialPowerOfAttorney records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new UnitedStatesDurableFinancialPowerOfAttorney
+      operationId: createUnitedStatesDurableFinancialPowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+      responses:
+        "200":
+          description: The newly created UnitedStatesDurableFinancialPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/united_states_durable_financial_power_of_attorneys/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one UnitedStatesDurableFinancialPowerOfAttorney by id
+      operationId: getUnitedStatesDurableFinancialPowerOfAttorney
+      responses:
+        "200":
+          description: The requested UnitedStatesDurableFinancialPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+        "404":
+          description: UnitedStatesDurableFinancialPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing UnitedStatesDurableFinancialPowerOfAttorney
+      operationId: updateUnitedStatesDurableFinancialPowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+      responses:
+        "200":
+          description: The updated UnitedStatesDurableFinancialPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+        "404":
+          description: UnitedStatesDurableFinancialPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing UnitedStatesDurableFinancialPowerOfAttorney
+      operationId: replaceUnitedStatesDurableFinancialPowerOfAttorney
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+      responses:
+        "200":
+          description: The updated UnitedStatesDurableFinancialPowerOfAttorney
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnitedStatesDurableFinancialPowerOfAttorney"
+        "404":
+          description: UnitedStatesDurableFinancialPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a UnitedStatesDurableFinancialPowerOfAttorney
+      operationId: deleteUnitedStatesDurableFinancialPowerOfAttorney
+      responses:
+        "200":
+          description: UnitedStatesDurableFinancialPowerOfAttorney deleted
+        "404":
+          description: UnitedStatesDurableFinancialPowerOfAttorney not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    UnitedStatesDurableFinancialPowerOfAttorney:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was updated most-recently.
+        principal_id:
+          type: string
+          format: uuid
+          description: Foreign key to the principal who signs the instrument (restrict delete).
+        agent_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the primary agent (restrict delete); optional.
+        principal_name:
+          type: string
+          description: Full legal name of the principal as written in the instrument.
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Date of birth of the principal.
+        state:
+          type: string
+          maxLength: 2
+          description: Governing state as the two-letter United States postal code; empty when unanswered.
+        principal_address:
+          type: string
+          description: Principal address.
+        capacity_confirmed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal has capacity to sign and understands the document (yes/no).
+        durable_statement:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: "Whether the instrument is durable: its authority survives the principal incapacity (yes/no)."
+        effectiveness:
+          type: string
+          enum:
+            - immediate
+            - springing
+            - ""
+          description: "When the power takes effect: immediate on signing, or springing on a later event."
+        springing_trigger:
+          type: string
+          enum:
+            - physician-certification
+            - named-person-declaration
+            - court-determination
+            - ""
+          description: "Who determines the springing event: physician-certification, named-person-declaration, or court-determination."
+        statutory_notice_included:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the mandatory statutory notice text for the governing state is included (yes/no).
+        agent_name:
+          type: string
+          description: Full name of the primary agent.
+        agent_relationship:
+          type: string
+          enum:
+            - spouse
+            - child
+            - other-family
+            - friend
+            - professional
+            - financial-institution
+            - ""
+          description: Relationship of the agent to the principal.
+        agent_is_adult:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent is an adult individual (18 or older) or a qualifying institution (yes/no).
+        agent_signed_acknowledgment:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent has signed the acknowledgment of duties required by some states (yes/no).
+        successor_agent_name:
+          type: string
+          description: Full name of the successor agent, if any.
+        co_agents_mode:
+          type: string
+          enum:
+            - sole
+            - jointly
+            - independently
+            - ""
+          description: "How multiple agents act: sole, jointly, or independently."
+        compensation:
+          type: string
+          enum:
+            - none
+            - reasonable
+            - fixed
+            - ""
+          description: "Agent compensation: none, reasonable, or fixed."
+        compensation_amount:
+          type: [number, 'null']
+          format: double
+          description: Fixed annual compensation in US dollars, when compensation is fixed.
+        grant_banking:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over banking and financial institutions (yes/no).
+        grant_real_estate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over real estate (yes/no).
+        grant_investments:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over stocks, bonds, and investments (yes/no).
+        grant_business:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over business operations (yes/no).
+        grant_insurance:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over insurance and annuities (yes/no).
+        grant_tax_matters:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over tax matters (yes/no).
+        grant_benefits:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over government and public benefits (yes/no).
+        grant_retirement:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over retirement plans (yes/no).
+        grant_claims:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over claims and litigation (yes/no).
+        grant_personal_property:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: General authority granted over personal property (yes/no).
+        hot_create_trust:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to create, amend, revoke, or terminate a trust (yes/no).
+        hot_gift:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to make gifts (yes/no).
+        hot_survivorship:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to create or change rights of survivorship (yes/no).
+        hot_beneficiary:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to create or change a beneficiary designation (yes/no).
+        hot_delegate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to delegate the agent authority (yes/no).
+        hot_annuity_waiver:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to waive the principal right to a joint and survivor annuity benefit (yes/no).
+        hot_disclaim:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Express grant of the hot power to disclaim property (yes/no).
+        hot_powers_initialed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the principal initials beside each hot power, required in Florida (yes/no).
+        gift_limit_type:
+          type: string
+          enum:
+            - annual-exclusion
+            - fixed-amount
+            - unlimited
+            - none
+            - ""
+          description: "Gift limit: annual-exclusion, fixed-amount, unlimited, or none."
+        gift_limit_amount:
+          type: [number, 'null']
+          format: double
+          description: Fixed per-year gift limit in US dollars, when the limit is a fixed amount.
+        self_gifting_allowed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the agent may make gifts to the agent (yes/no).
+        notary_arranged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a notary acknowledgment is arranged for the principal signature (yes/no).
+        witness_count:
+          type: [integer, 'null']
+          format: int32
+          description: Number of witnesses arranged, not counting the notary.
+        witness_is_agent:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether any witness is an agent or successor agent (yes/no).
+        used_for_real_estate:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the instrument will be recorded for a real-estate transaction (yes/no).
+        bank_form_completed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - not-needed
+            - ""
+          description: "Whether the financial institution own POA form is completed: yes, no, or not-needed."
+        form2848_status:
+          type: string
+          enum:
+            - filed
+            - not-filed
+            - not-needed
+            - ""
+          description: "Status of IRS Form 2848 for tax representation: filed, not-filed, or not-needed."
+      required:
+        - created_at
+        - updated_at
+        - principal_id
+        - principal_name
+        - state
+        - principal_address
+        - capacity_confirmed
+        - durable_statement
+        - effectiveness
+        - springing_trigger
+        - statutory_notice_included
+        - agent_name
+        - agent_relationship
+        - agent_is_adult
+        - agent_signed_acknowledgment
+        - successor_agent_name
+        - co_agents_mode
+        - compensation
+        - grant_banking
+        - grant_real_estate
+        - grant_investments
+        - grant_business
+        - grant_insurance
+        - grant_tax_matters
+        - grant_benefits
+        - grant_retirement
+        - grant_claims
+        - grant_personal_property
+        - hot_create_trust
+        - hot_gift
+        - hot_survivorship
+        - hot_beneficiary
+        - hot_delegate
+        - hot_annuity_waiver
+        - hot_disclaim
+        - hot_powers_initialed
+        - gift_limit_type
+        - self_gifting_allowed
+        - notary_arranged
+        - witness_is_agent
+        - used_for_real_estate
+        - bank_form_completed
+        - form2848_status
+      description: "Main United States durable financial power of attorney record: principal, durability and effectiveness, agent and successor, general grants and hot powers, execution plan, and acceptance plan. Classification, fired rules, and flags live in child tables."

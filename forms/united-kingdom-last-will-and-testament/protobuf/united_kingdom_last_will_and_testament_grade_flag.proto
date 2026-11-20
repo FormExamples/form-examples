@@ -1,0 +1,48 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_last_will_and_testament_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_last_will_and_testament;
+
+enum UnitedKingdomLastWillAndTestamentGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_TESTATOR_ELIGIBILITY = 1;  // testator-eligibility
+  CATEGORY_CAPACITY_OR_VOLUNTARINESS = 2;  // capacity-or-voluntariness
+  CATEGORY_WITNESS_FORMALITIES = 3;  // witness-formalities
+  CATEGORY_WITNESS_IS_BENEFICIARY = 4;  // witness-is-beneficiary
+  CATEGORY_NO_EXECUTOR = 5;  // no-executor
+  CATEGORY_NO_BENEFICIARY = 6;  // no-beneficiary
+  CATEGORY_RESIDUARY_CLAUSE_MISSING = 7;  // residuary-clause-missing
+  CATEGORY_SHARES_NOT_100 = 8;  // shares-not-100
+  CATEGORY_MINOR_BENEFICIARY_NO_TRUSTEE = 9;  // minor-beneficiary-no-trustee
+  CATEGORY_PARTNER_NOT_PROVIDED_FOR = 10;  // partner-not-provided-for
+  CATEGORY_OTHER_JURISDICTIONS = 11;  // other-jurisdictions
+  CATEGORY_MARRIAGE_REVOCATION = 12;  // marriage-revocation
+  CATEGORY_PREVIOUS_WILL = 13;  // previous-will
+  CATEGORY_GUARDIAN_NOT_NAMED = 14;  // guardian-not-named
+  CATEGORY_INHERITANCE_ACT_PROVISION = 15;  // inheritance-act-provision
+  CATEGORY_INHERITANCE_TAX = 16;  // inheritance-tax
+  CATEGORY_INCOMPLETE_DETAILS = 17;  // incomplete-details
+  CATEGORY_OTHER = 18;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message UnitedKingdomLastWillAndTestamentGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_last_will_and_testament_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  UnitedKingdomLastWillAndTestamentGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  UnitedKingdomLastWillAndTestamentGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

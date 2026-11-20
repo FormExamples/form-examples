@@ -1,0 +1,10 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000021e2e"
+  deletedAt: null
+  flagId: "F-V5C-LOST-STOLEN-DESTROYED-001"
+  category: "v5c-lost-stolen-destroyed"
+  priority: "low"
+  description: "The V5C was lost, so a replacement is requested with the 25 pound fee."
+  suggestedAction: "Post the V62 with a cheque or postal order for 25 pounds payable to DVLA, Swansea."
+  unitedKingdomVehicleRegistrationApplicationGradeId: "00000000-0000-4000-8000-000000019046"

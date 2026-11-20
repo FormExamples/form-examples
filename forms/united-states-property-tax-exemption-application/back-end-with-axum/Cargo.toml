@@ -1,0 +1,67 @@
+[workspace]
+
+[workspace.package]
+rust-version = "1.98"
+
+[package]
+name = "united_states_property_tax_exemption_application"
+version = "0.1.0"
+edition = "2021"
+rust-version.workspace = true
+publish = false
+description = "United States Property Tax Exemption Application back-end JSON API"
+default-run = "united_states_property_tax_exemption_application-cli"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace.dependencies]
+axa = { version = "0.20", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
+
+[dependencies]
+axa = { workspace = true }
+serde-saphyr = "2"
+sqlx = { version = "0.9", default-features = false, features = ["derive", "json", "macros", "migrate", "postgres", "runtime-tokio", "tls-rustls-ring-webpki", "uuid"] }
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tokio = { version = "1.54", default-features = false, features = [
+  "rt-multi-thread",
+  "signal",
+  "sync",
+] }
+async-trait = { version = "0.1" }
+axum = { version = "0.8" }
+tracing = { version = "0.1" }
+jiff = { version = "0.2", features = ["serde"] }
+jiff-sqlx = { version = "0.2.2", features = ["postgres", "serde"] }
+validator = { version = "0.21", features = ["derive"] }
+uuid = { version = "1.29", features = ["serde", "v4"] }
+
+[[bin]]
+name = "united_states_property_tax_exemption_application-cli"
+path = "src/united_states_property_tax_exemption_application/bin/main.rs"
+required-features = []
+
+[dev-dependencies]
+axa-test = "0.11"
+serial_test = { version = "4.0.1" }
+insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
+
+[lib]
+path = "src/united_states_property_tax_exemption_application/lib.rs"
+
+# cargo-mutants builds every mutant once in a throwaway copy of the tree: no debug information and no
+# incremental state make each build quicker and smaller. `etc/cargo-mutants.toml` selects it.
+[profile.mutants]
+inherits = "test"
+debug = "none"
+incremental = false
+
+# Lighter dev builds: line tables for backtraces, and a separate debug-info file on macOS.
+[profile.dev]
+debug = "line-tables-only"
+split-debuginfo = "unpacked"
+
+# Dependencies carry no debug information in dev builds.
+[profile.dev.package."*"]
+debug = false

@@ -1,0 +1,6 @@
+ALTER TABLE "united_states_vehicle_bill_of_sale_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grade_flags_priority_check";
+ALTER TABLE "united_states_vehicle_bill_of_sale_grade_flags" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grade_flags_category_check";
+ALTER TABLE "united_states_vehicle_bill_of_sale_grade_rules" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grade_rules_dimension_check";
+ALTER TABLE "united_states_vehicle_bill_of_sale_grades" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grades_state_rule_k_cb01b604";
+ALTER TABLE "united_states_vehicle_bill_of_sale_grades" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grades_odometer_dis_d29feb5c";
+ALTER TABLE "united_states_vehicle_bill_of_sale_grades" DROP CONSTRAINT IF EXISTS "united_states_vehicle_bill_of_sale_grades_completeness_de4cf33d";

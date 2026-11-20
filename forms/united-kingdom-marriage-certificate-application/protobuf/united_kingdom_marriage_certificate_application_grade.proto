@@ -1,0 +1,33 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_marriage_certificate_application_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_marriage_certificate_application;
+
+enum UnitedKingdomMarriageCertificateApplicationGradeValidityClassEnum {
+  VALIDITYCLASS_UNSPECIFIED = 0;
+  VALIDITYCLASS_READY_TO_SUBMIT = 1;  // ready-to-submit
+  VALIDITYCLASS_INCOMPLETE = 2;  // incomplete
+  VALIDITYCLASS_NEEDS_EVIDENCE = 3;  // needs-evidence
+  VALIDITYCLASS_INELIGIBLE = 4;  // ineligible
+}
+
+enum UnitedKingdomMarriageCertificateApplicationGradeImmigrationReferralIndicatedEnum {
+  IMMIGRATIONREFERRALINDICATED_UNSPECIFIED = 0;
+  IMMIGRATIONREFERRALINDICATED_YES = 1;  // yes
+  IMMIGRATIONREFERRALINDICATED_NO = 2;  // no
+}
+
+message UnitedKingdomMarriageCertificateApplicationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_marriage_certificate_application_id = 5;  // UUID — uuid
+  UnitedKingdomMarriageCertificateApplicationGradeValidityClassEnum validity_class = 6;  // VARCHAR(15)
+  string earliest_ceremony_date = 7;  // DATE — iso 8601 date
+  string latest_ceremony_date = 8;  // DATE — iso 8601 date
+  UnitedKingdomMarriageCertificateApplicationGradeImmigrationReferralIndicatedEnum immigration_referral_indicated = 9;  // VARCHAR(3)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

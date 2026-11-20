@@ -1,0 +1,1159 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateInstrument",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateInstrument(d) returns { validityClass, governingState, executionRiskIndicated, firedRules } and no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's detectFlaggedIssues(state). Classification is first-match: any execution risk (an ANSWERED item contradicts the governing state rule) -> 'execution-risk'; any unanswered core item -> 'incomplete'; else 'ready-to-execute'. Unanswered items never create a risk. Flags are stable-sorted high > medium > low. The 'timestamp' key is added by form-app.js. Regenerate expected with: bin/test-personas united-states-durable-financial-power-of-attorney --update",
+  "personas": [
+    {
+      "name": "Ready: Texas, notarized, gift cap, Form 2848 filed",
+      "description": "Texas principal, durable wording, immediate effect, notary arranged (Texas needs no witnesses), spouse agent plus successor, all general grants, gifting limited to the annual exclusion, bank form completed, Form 2848 filed. Expect ready-to-execute with no flags.",
+      "state": {
+        "principal": {
+          "principalName": "Elena Alvarez",
+          "dateOfBirth": "1948-03-14",
+          "state": "TX",
+          "principalAddress": "210 Mesa Dr, Austin, TX 78701",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": "yes"
+        },
+        "agents": {
+          "agentName": "Marco Alvarez",
+          "agentRelationship": "spouse",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "yes",
+          "successorAgentName": "Sofia Alvarez",
+          "coAgentsMode": "sole",
+          "compensation": "none",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "yes",
+          "giftLimitType": "annual-exclusion",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 0,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "yes",
+          "bankFormCompleted": "yes",
+          "form2848Status": "filed"
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-execute",
+        "governingState": "Texas",
+        "executionRiskIndicated": false,
+        "firedRules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready: New York, notary counts as second witness",
+      "description": "New York needs two witnesses and acknowledgment; the notary may be one, so one separate witness plus the notary satisfies it. Agent signed and acknowledged; statutory notice included. No hot powers are granted, so only the low default-deny advisory fires. Expect ready-to-execute.",
+      "state": {
+        "principal": {
+          "principalName": "Patricia Dunn",
+          "dateOfBirth": "1951-07-22",
+          "state": "NY",
+          "principalAddress": "88 Elm St, Albany, NY 12207",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": "yes"
+        },
+        "agents": {
+          "agentName": "Thomas Dunn",
+          "agentRelationship": "child",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "yes",
+          "successorAgentName": "Karen Dunn",
+          "coAgentsMode": "sole",
+          "compensation": "reasonable",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "no",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "none",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 1,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "not-needed",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-execute",
+        "governingState": "New York",
+        "executionRiskIndicated": false,
+        "firedRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-HOT-POWER-DEFAULT-DENY-001",
+            "category": "authority-scope",
+            "priority": "low",
+            "description": "No hot power is granted, so the agent cannot make gifts, create or change trusts, change beneficiaries, or create survivorship rights.",
+            "suggestedAction": "Confirm this is intended; grant a specific hot power expressly if the principal needs it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Execution risk: Florida springing power, uninitialed hot powers, agent witness",
+      "description": "Florida: a springing power is ineffective (709.2108(3)); hot powers granted but not initialed (709.2202); only one witness (two needed) and that witness is an agent. Expect execution-risk with the Florida flags.",
+      "state": {
+        "principal": {
+          "principalName": "Harold Brooks",
+          "dateOfBirth": "1944-11-02",
+          "state": "FL",
+          "principalAddress": "14 Palm Way, Tampa, FL 33602",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "springing",
+          "springingTrigger": "physician-certification",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "Diane Brooks",
+          "agentRelationship": "child",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "no",
+          "successorAgentName": "",
+          "coAgentsMode": "sole",
+          "compensation": "reasonable",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "yes",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "yes",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "fixed-amount",
+          "giftLimitAmount": 15000,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 1,
+          "witnessIsAgent": "yes"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "no",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "execution-risk",
+        "governingState": "Florida",
+        "executionRiskIndicated": true,
+        "firedRules": [
+          {
+            "ruleId": "R-WITNESSES-SHORT-01",
+            "dimension": "execution",
+            "category": "witnesses",
+            "description": "1 witness(es) counted; Florida requires 2."
+          },
+          {
+            "ruleId": "R-WITNESS-IS-AGENT-01",
+            "dimension": "execution",
+            "category": "witnesses",
+            "description": "A witness is an agent or successor agent, which disqualifies the witness."
+          },
+          {
+            "ruleId": "R-SPRINGING-BANNED-01",
+            "dimension": "effectiveness",
+            "category": "springing",
+            "description": "Florida makes a springing power of attorney ineffective (Fla. Stat. 709.2105, 709.2108, 709.2202)."
+          },
+          {
+            "ruleId": "R-HOT-INITIALS-01",
+            "dimension": "authority",
+            "category": "hot-powers",
+            "description": "Florida requires the principal's signature or initials beside each hot power."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-WITNESSES-SHORT-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "1 qualifying witness(es) counted; Florida (Fla. Stat. 709.2105, 709.2108, 709.2202) requires 2.",
+            "suggestedAction": "Arrange 2 adult, disinterested witnesses to sign in the principal's presence."
+          },
+          {
+            "id": "F-WITNESS-IS-AGENT-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "A witness is an agent or successor agent. An agent cannot witness the principal's signature.",
+            "suggestedAction": "Replace the witness with an adult who is not named in the instrument."
+          },
+          {
+            "id": "F-SPRINGING-PROHIBITED-001",
+            "category": "effectiveness",
+            "priority": "high",
+            "description": "Florida makes a power of attorney that takes effect on a future date or event ineffective (Fla. Stat. 709.2105, 709.2108, 709.2202).",
+            "suggestedAction": "Make the power effective on signing, and keep the signed original in trust until needed."
+          },
+          {
+            "id": "F-HOT-POWERS-NOT-INITIALED-001",
+            "category": "authority-scope",
+            "priority": "high",
+            "description": "Florida (Fla. Stat. 709.2105, 709.2108, 709.2202) allows each hot power only if the principal signs or initials next to it, and the initials are not planned.",
+            "suggestedAction": "Have the principal initial beside each enumerated hot power in the instrument."
+          },
+          {
+            "id": "F-NO-SUCCESSOR-AGENT-001",
+            "category": "agent",
+            "priority": "medium",
+            "description": "No successor agent is named. If the agent dies, resigns, or becomes incapacitated, the power may end and a court-supervised conservatorship may be needed.",
+            "suggestedAction": "Name at least one successor agent."
+          },
+          {
+            "id": "F-BANK-ACCEPTANCE-001",
+            "category": "acceptance",
+            "priority": "low",
+            "description": "The financial institution's own power-of-attorney form is not completed. Many institutions insist on it even though the Uniform Act obliges acceptance of an acknowledged power within seven business days or a stated request for certification.",
+            "suggestedAction": "Ask the bank for its form and a pre-approval of the signed instrument."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Execution risk: California without notary and with one witness",
+      "description": "California accepts a notary OR two witnesses. Neither is satisfied: no notary and one witness. Statutory warning text is missing. Expect execution-risk (notarization and witnesses flags) plus the California notice flag.",
+      "state": {
+        "principal": {
+          "principalName": "Wei Chen",
+          "dateOfBirth": "1953-01-30",
+          "state": "CA",
+          "principalAddress": "5 Bay Rd, San Jose, CA 95112",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": "no"
+        },
+        "agents": {
+          "agentName": "Lin Chen",
+          "agentRelationship": "spouse",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "yes",
+          "successorAgentName": "Ming Chen",
+          "coAgentsMode": "sole",
+          "compensation": "none",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "annual-exclusion",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "no",
+          "witnessCount": 1,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "yes",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "execution-risk",
+        "governingState": "California",
+        "executionRiskIndicated": true,
+        "firedRules": [
+          {
+            "ruleId": "R-NOTARY-MISSING-01",
+            "dimension": "execution",
+            "category": "notarization",
+            "description": "No notary acknowledgment is arranged but California (Cal. Prob. Code 4121-4124, 4264) or the planned use requires one."
+          },
+          {
+            "ruleId": "R-WITNESSES-SHORT-01",
+            "dimension": "execution",
+            "category": "witnesses",
+            "description": "1 witness(es) counted; California requires 2."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NOTARIZATION-REQUIRED-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "No notary acknowledgment is arranged, but California (Cal. Prob. Code 4121-4124, 4264) or the planned use requires an acknowledged signature.",
+            "suggestedAction": "Have the principal sign before a notary public who completes an acknowledgment certificate."
+          },
+          {
+            "id": "F-WITNESSES-SHORT-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "1 qualifying witness(es) counted; California (Cal. Prob. Code 4121-4124, 4264) requires 2.",
+            "suggestedAction": "Arrange 2 adult, disinterested witnesses to sign in the principal's presence."
+          },
+          {
+            "id": "F-STATUTORY-NOTICE-MISSING-001",
+            "category": "execution-formality",
+            "priority": "medium",
+            "description": "California (Cal. Prob. Code 4121-4124, 4264) calls for statutory warning or notice text for the principal and agent, which is not included.",
+            "suggestedAction": "Add the statutory notice to the principal and the information for the agent."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Execution risk: Texas, not durable, no capacity, minor agent, real estate",
+      "description": "Texas plan with several answered defects: not durable, capacity not confirmed, agent is not an adult, no notary although the plan records real estate, unlimited gifting, and agent self-gifting. Expect execution-risk and the matching high and medium flags.",
+      "state": {
+        "principal": {
+          "principalName": "Samuel Garcia",
+          "dateOfBirth": "1940-05-09",
+          "state": "TX",
+          "principalAddress": "9 Ranch Rd, Dallas, TX 75201",
+          "capacityConfirmed": "no"
+        },
+        "instrument": {
+          "durableStatement": "no",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "Rosa Garcia",
+          "agentRelationship": "friend",
+          "agentIsAdult": "no",
+          "agentSignedAcknowledgment": "no",
+          "successorAgentName": "",
+          "coAgentsMode": "",
+          "compensation": "",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "unlimited",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "yes"
+        },
+        "execution": {
+          "notaryArranged": "no",
+          "witnessCount": 0,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "yes",
+          "bankFormCompleted": "no",
+          "form2848Status": "not-filed"
+        }
+      },
+      "expected": {
+        "validityClass": "execution-risk",
+        "governingState": "Texas",
+        "executionRiskIndicated": true,
+        "firedRules": [
+          {
+            "ruleId": "R-NOTARY-MISSING-01",
+            "dimension": "execution",
+            "category": "notarization",
+            "description": "No notary acknowledgment is arranged but Texas (Tex. Est. Code ch. 751, 752) or the planned use requires one."
+          },
+          {
+            "ruleId": "R-NOT-DURABLE-01",
+            "dimension": "effectiveness",
+            "category": "durability",
+            "description": "The instrument is not durable: it would end on the principal's incapacity."
+          },
+          {
+            "ruleId": "R-CAPACITY-01",
+            "dimension": "execution",
+            "category": "capacity",
+            "description": "The principal's capacity to sign is not confirmed."
+          },
+          {
+            "ruleId": "R-AGENT-INELIGIBLE-01",
+            "dimension": "agent",
+            "category": "eligibility",
+            "description": "The agent is not an adult individual or a qualifying institution."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NOTARIZATION-REQUIRED-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "No notary acknowledgment is arranged, but Texas (Tex. Est. Code ch. 751, 752) or the planned use requires an acknowledged signature.",
+            "suggestedAction": "Have the principal sign before a notary public who completes an acknowledgment certificate."
+          },
+          {
+            "id": "F-DURABILITY-LANGUAGE-001",
+            "category": "effectiveness",
+            "priority": "high",
+            "description": "The instrument is not durable, so the agent's authority would end when the principal loses capacity, which is the situation a durable power of attorney exists for.",
+            "suggestedAction": "Add language that the authority is not affected by the principal's later incapacity."
+          },
+          {
+            "id": "F-CAPACITY-NOT-CONFIRMED-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "The principal's capacity to understand and sign the document is not confirmed. A document signed without capacity can be voided.",
+            "suggestedAction": "Obtain a capacity assessment or physician letter before signing, and have an attorney supervise."
+          },
+          {
+            "id": "F-AGENT-NOT-ELIGIBLE-001",
+            "category": "agent",
+            "priority": "high",
+            "description": "The named agent is not an adult individual or a financial institution with trust powers.",
+            "suggestedAction": "Name an agent who is at least 18, or a qualifying institution."
+          },
+          {
+            "id": "F-REAL-ESTATE-NOT-RECORDABLE-001",
+            "category": "acceptance",
+            "priority": "high",
+            "description": "The instrument will be used for real estate but no acknowledgment is planned. County recorders accept only acknowledged instruments.",
+            "suggestedAction": "Acknowledge the signature before a notary and attach the legal description when recording."
+          },
+          {
+            "id": "F-GIFT-AUTHORITY-UNLIMITED-001",
+            "category": "gifting",
+            "priority": "medium",
+            "description": "The agent may make unlimited gifts. Unlimited gifting is the most abused hot power and can defeat the principal's care and Medicaid planning.",
+            "suggestedAction": "Cap gifts at the federal annual exclusion or a stated amount, and name permitted recipients."
+          },
+          {
+            "id": "F-SELF-GIFTING-001",
+            "category": "gifting",
+            "priority": "medium",
+            "description": "The agent is allowed to make gifts to the agent. Self-gifting is a conflict of interest and needs clear, specific limits.",
+            "suggestedAction": "Restrict self-gifting to a stated amount or to the principal's documented wishes, or remove it."
+          },
+          {
+            "id": "F-NO-SUCCESSOR-AGENT-001",
+            "category": "agent",
+            "priority": "medium",
+            "description": "No successor agent is named. If the agent dies, resigns, or becomes incapacitated, the power may end and a court-supervised conservatorship may be needed.",
+            "suggestedAction": "Name at least one successor agent."
+          },
+          {
+            "id": "F-IRS-FORM-2848-001",
+            "category": "tax-representation",
+            "priority": "medium",
+            "description": "A durable power of attorney does not by itself authorize someone to represent the principal before the IRS. The IRS accepts a state power of attorney only with the details and declaration required of Form 2848.",
+            "suggestedAction": "Complete IRS Form 2848 for the named representative, or attach the durable power with the required declaration."
+          },
+          {
+            "id": "F-BANK-ACCEPTANCE-001",
+            "category": "acceptance",
+            "priority": "low",
+            "description": "The financial institution's own power-of-attorney form is not completed. Many institutions insist on it even though the Uniform Act obliges acceptance of an acknowledged power within seven business days or a stated request for certification.",
+            "suggestedAction": "Ask the bank for its form and a pre-approval of the signed instrument."
+          },
+          {
+            "id": "F-COMPENSATION-UNDEFINED-001",
+            "category": "agent",
+            "priority": "low",
+            "description": "Agent compensation is not stated. Under the Uniform Act an agent is entitled to reasonable compensation unless the instrument says otherwise.",
+            "suggestedAction": "State whether the agent is paid, and how."
+          },
+          {
+            "id": "F-CO-AGENTS-UNDEFINED-001",
+            "category": "agent",
+            "priority": "low",
+            "description": "It is not stated whether one agent or several co-agents act, or whether co-agents act jointly or independently.",
+            "suggestedAction": "State sole agent, or whether co-agents act jointly or independently."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Execution risk: New York agent signature not acknowledged",
+      "description": "New York makes the power effective only when each agent signature is acknowledged. Agent has not signed. Everything else is in order. Expect execution-risk with F-AGENT-SIGNATURE-REQUIRED-001 at high priority.",
+      "state": {
+        "principal": {
+          "principalName": "Marian Hughes",
+          "dateOfBirth": "1949-09-18",
+          "state": "NY",
+          "principalAddress": "3 Park Ave, New York, NY 10016",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": "yes"
+        },
+        "agents": {
+          "agentName": "Peter Hughes",
+          "agentRelationship": "child",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "no",
+          "successorAgentName": "Jane Hughes",
+          "coAgentsMode": "sole",
+          "compensation": "none",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "annual-exclusion",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 1,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "yes",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "execution-risk",
+        "governingState": "New York",
+        "executionRiskIndicated": true,
+        "firedRules": [
+          {
+            "ruleId": "R-AGENT-SIGNATURE-01",
+            "dimension": "agent",
+            "category": "agent-signature",
+            "description": "New York makes the power effective only once the agent's signature is acknowledged."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-AGENT-SIGNATURE-REQUIRED-001",
+            "category": "agent",
+            "priority": "high",
+            "description": "New York makes the power effective only after the agent signs and the signature is acknowledged.",
+            "suggestedAction": "Have the agent sign the acknowledgment (before the notary where required) before the power is used."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready with advisories: Pennsylvania agent acknowledgment, tax authority, no gift limit",
+      "description": "Pennsylvania: notary and two witnesses arranged; statutory notice included. The agent acknowledgment is still unsigned (medium, not blocking), tax authority is granted without Form 2848, gift power has no stated limit, no bank form. Expect ready-to-execute with medium and low flags.",
+      "state": {
+        "principal": {
+          "principalName": "Linda Foster",
+          "dateOfBirth": "1946-12-01",
+          "state": "PA",
+          "principalAddress": "77 Walnut St, Philadelphia, PA 19106",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": "yes"
+        },
+        "agents": {
+          "agentName": "Gary Foster",
+          "agentRelationship": "spouse",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "no",
+          "successorAgentName": "Beth Foster",
+          "coAgentsMode": "sole",
+          "compensation": "reasonable",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "yes",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "none",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 2,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "no",
+          "form2848Status": "not-filed"
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-execute",
+        "governingState": "Pennsylvania",
+        "executionRiskIndicated": false,
+        "firedRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-AGENT-SIGNATURE-REQUIRED-001",
+            "category": "agent",
+            "priority": "medium",
+            "description": "Pennsylvania requires the agent to sign an acknowledgment of the agent's duties before acting.",
+            "suggestedAction": "Have the agent sign the acknowledgment (before the notary where required) before the power is used."
+          },
+          {
+            "id": "F-GIFT-LIMIT-UNDEFINED-001",
+            "category": "gifting",
+            "priority": "medium",
+            "description": "Gift authority is granted without a stated limit. Under the Uniform Act the default limit is the federal gift-tax annual exclusion, which is often not what the principal intends.",
+            "suggestedAction": "State the gift limit explicitly: annual exclusion, a fixed amount, or none."
+          },
+          {
+            "id": "F-IRS-FORM-2848-001",
+            "category": "tax-representation",
+            "priority": "medium",
+            "description": "A durable power of attorney does not by itself authorize someone to represent the principal before the IRS. The IRS accepts a state power of attorney only with the details and declaration required of Form 2848.",
+            "suggestedAction": "Complete IRS Form 2848 for the named representative, or attach the durable power with the required declaration."
+          },
+          {
+            "id": "F-BANK-ACCEPTANCE-001",
+            "category": "acceptance",
+            "priority": "low",
+            "description": "The financial institution's own power-of-attorney form is not completed. Many institutions insist on it even though the Uniform Act obliges acceptance of an acknowledged power within seven business days or a stated request for certification.",
+            "suggestedAction": "Ask the bank for its form and a pre-approval of the signed instrument."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Execution risk: Illinois with no witness",
+      "description": "Illinois requires one witness who is not the notary, and a notary. A notary is arranged but no witness. Expect execution-risk with F-WITNESSES-SHORT-001.",
+      "state": {
+        "principal": {
+          "principalName": "Ruth Ito",
+          "dateOfBirth": "1950-04-04",
+          "state": "IL",
+          "principalAddress": "12 Lake Dr, Chicago, IL 60601",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "immediate",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "Ken Ito",
+          "agentRelationship": "child",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "yes",
+          "successorAgentName": "Yuki Ito",
+          "coAgentsMode": "sole",
+          "compensation": "none",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "no",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "yes",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "no",
+          "giftLimitType": "none",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 0,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "yes",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "execution-risk",
+        "governingState": "Illinois",
+        "executionRiskIndicated": true,
+        "firedRules": [
+          {
+            "ruleId": "R-WITNESSES-SHORT-01",
+            "dimension": "execution",
+            "category": "witnesses",
+            "description": "0 witness(es) counted; Illinois requires 1."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-WITNESSES-SHORT-001",
+            "category": "execution-formality",
+            "priority": "high",
+            "description": "0 qualifying witness(es) counted; Illinois (755 ILCS 45/3-3, 3-3.6) requires 1.",
+            "suggestedAction": "Arrange 1 adult, disinterested witnesses to sign in the principal's presence."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Ohio, agent and effectiveness unanswered",
+      "description": "Ohio principal named, but no agent, no effectiveness, no durability answer, no capacity answer, no notary plan, and no grants. Expect incomplete (unanswered items never create an execution risk) with the no-successor flag and low advisories.",
+      "state": {
+        "principal": {
+          "principalName": "Robert Evans",
+          "dateOfBirth": null,
+          "state": "OH",
+          "principalAddress": "",
+          "capacityConfirmed": ""
+        },
+        "instrument": {
+          "durableStatement": "",
+          "effectiveness": "",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "",
+          "agentRelationship": "",
+          "agentIsAdult": "",
+          "agentSignedAcknowledgment": "",
+          "successorAgentName": "",
+          "coAgentsMode": "",
+          "compensation": "",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "",
+          "grantRealEstate": "",
+          "grantInvestments": "",
+          "grantBusiness": "",
+          "grantInsurance": "",
+          "grantTaxMatters": "",
+          "grantBenefits": "",
+          "grantRetirement": "",
+          "grantClaims": "",
+          "grantPersonalProperty": "",
+          "hotCreateTrust": "",
+          "hotGift": "",
+          "hotSurvivorship": "",
+          "hotBeneficiary": "",
+          "hotDelegate": "",
+          "hotAnnuityWaiver": "",
+          "hotDisclaim": "",
+          "hotPowersInitialed": "",
+          "giftLimitType": "",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": ""
+        },
+        "execution": {
+          "notaryArranged": "",
+          "witnessCount": null,
+          "witnessIsAgent": ""
+        },
+        "acceptance": {
+          "usedForRealEstate": "",
+          "bankFormCompleted": "",
+          "form2848Status": ""
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "governingState": "Ohio",
+        "executionRiskIndicated": false,
+        "firedRules": [
+          {
+            "ruleId": "R-INC-AGENT-01",
+            "dimension": "completeness",
+            "category": "agent",
+            "description": "No agent is named."
+          },
+          {
+            "ruleId": "R-INC-EFFECT-01",
+            "dimension": "completeness",
+            "category": "effectiveness",
+            "description": "Immediate or springing effectiveness is not chosen."
+          },
+          {
+            "ruleId": "R-INC-DURABLE-01",
+            "dimension": "completeness",
+            "category": "effectiveness",
+            "description": "Durability is not answered."
+          },
+          {
+            "ruleId": "R-INC-CAPACITY-01",
+            "dimension": "completeness",
+            "category": "capacity",
+            "description": "Capacity is not answered."
+          },
+          {
+            "ruleId": "R-INC-NOTARY-01",
+            "dimension": "completeness",
+            "category": "execution",
+            "description": "The notary plan is not answered."
+          },
+          {
+            "ruleId": "R-INC-GRANTS-01",
+            "dimension": "completeness",
+            "category": "authority",
+            "description": "No general authority is granted."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-NO-SUCCESSOR-AGENT-001",
+            "category": "agent",
+            "priority": "medium",
+            "description": "No successor agent is named. If the agent dies, resigns, or becomes incapacitated, the power may end and a court-supervised conservatorship may be needed.",
+            "suggestedAction": "Name at least one successor agent."
+          },
+          {
+            "id": "F-COMPENSATION-UNDEFINED-001",
+            "category": "agent",
+            "priority": "low",
+            "description": "Agent compensation is not stated. Under the Uniform Act an agent is entitled to reasonable compensation unless the instrument says otherwise.",
+            "suggestedAction": "State whether the agent is paid, and how."
+          },
+          {
+            "id": "F-CO-AGENTS-UNDEFINED-001",
+            "category": "agent",
+            "priority": "low",
+            "description": "It is not stated whether one agent or several co-agents act, or whether co-agents act jointly or independently.",
+            "suggestedAction": "State sole agent, or whether co-agents act jointly or independently."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: unknown state with springing trigger unanswered",
+      "description": "Oregon is not in the state table so the uniform default applies and the verify flag fires. A springing power is chosen without a trigger. Grants and notary are otherwise answered. Expect incomplete with F-STATE-RULE-VERIFY-001 and F-SPRINGING-NO-DETERMINER-001.",
+      "state": {
+        "principal": {
+          "principalName": "Kenji Ito",
+          "dateOfBirth": "1955-08-20",
+          "state": "OR",
+          "principalAddress": "",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "springing",
+          "springingTrigger": "",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "Hana Ito",
+          "agentRelationship": "spouse",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "",
+          "successorAgentName": "",
+          "coAgentsMode": "sole",
+          "compensation": "none",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "no",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "",
+          "giftLimitType": "",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 0,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "not-needed",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "governingState": "Uniform default (verify)",
+        "executionRiskIndicated": false,
+        "firedRules": [
+          {
+            "ruleId": "R-INC-TRIGGER-01",
+            "dimension": "completeness",
+            "category": "effectiveness",
+            "description": "A springing power needs a named determination of the event."
+          },
+          {
+            "ruleId": "R-JURISDICTION-01",
+            "dimension": "jurisdiction",
+            "category": "state-rule",
+            "description": "The state is blank or not in the state-rule table; the uniform default is applied."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SPRINGING-NO-DETERMINER-001",
+            "category": "effectiveness",
+            "priority": "medium",
+            "description": "A springing power is chosen but nobody is designated to determine that the event has happened, so banks may refuse to accept it.",
+            "suggestedAction": "Name who determines incapacity (one or two physicians, a named person, or a court)."
+          },
+          {
+            "id": "F-NO-SUCCESSOR-AGENT-001",
+            "category": "agent",
+            "priority": "medium",
+            "description": "No successor agent is named. If the agent dies, resigns, or becomes incapacitated, the power may end and a court-supervised conservatorship may be needed.",
+            "suggestedAction": "Name at least one successor agent."
+          },
+          {
+            "id": "F-STATE-RULE-VERIFY-001",
+            "category": "jurisdiction",
+            "priority": "medium",
+            "description": "The state is blank or not in this tool's rule table, so the uniform default was applied. Execution formalities vary by state.",
+            "suggestedAction": "Verify the notary, witness, and form rules of the governing state against its current statute."
+          },
+          {
+            "id": "F-HOT-POWER-DEFAULT-DENY-001",
+            "category": "authority-scope",
+            "priority": "low",
+            "description": "No hot power is granted, so the agent cannot make gifts, create or change trusts, change beneficiaries, or create survivorship rights.",
+            "suggestedAction": "Confirm this is intended; grant a specific hot power expressly if the principal needs it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready: Washington springing power with named determiner",
+      "description": "Washington UPOAA state: notary arranged, no witnesses required, springing allowed with a physician determiner, successor agent named, no hot powers. Expect ready-to-execute with only the low default-deny advisory.",
+      "state": {
+        "principal": {
+          "principalName": "Anna Lindqvist",
+          "dateOfBirth": "1952-06-06",
+          "state": "WA",
+          "principalAddress": "400 Pine St, Seattle, WA 98101",
+          "capacityConfirmed": "yes"
+        },
+        "instrument": {
+          "durableStatement": "yes",
+          "effectiveness": "springing",
+          "springingTrigger": "physician-certification",
+          "statutoryNoticeIncluded": ""
+        },
+        "agents": {
+          "agentName": "Erik Lindqvist",
+          "agentRelationship": "child",
+          "agentIsAdult": "yes",
+          "agentSignedAcknowledgment": "yes",
+          "successorAgentName": "Maja Lindqvist",
+          "coAgentsMode": "sole",
+          "compensation": "reasonable",
+          "compensationAmount": null
+        },
+        "authority": {
+          "grantBanking": "yes",
+          "grantRealEstate": "yes",
+          "grantInvestments": "yes",
+          "grantBusiness": "yes",
+          "grantInsurance": "yes",
+          "grantTaxMatters": "yes",
+          "grantBenefits": "yes",
+          "grantRetirement": "yes",
+          "grantClaims": "yes",
+          "grantPersonalProperty": "yes",
+          "hotCreateTrust": "no",
+          "hotGift": "no",
+          "hotSurvivorship": "no",
+          "hotBeneficiary": "no",
+          "hotDelegate": "no",
+          "hotAnnuityWaiver": "no",
+          "hotDisclaim": "no",
+          "hotPowersInitialed": "",
+          "giftLimitType": "none",
+          "giftLimitAmount": null,
+          "selfGiftingAllowed": "no"
+        },
+        "execution": {
+          "notaryArranged": "yes",
+          "witnessCount": 0,
+          "witnessIsAgent": "no"
+        },
+        "acceptance": {
+          "usedForRealEstate": "no",
+          "bankFormCompleted": "yes",
+          "form2848Status": "not-needed"
+        }
+      },
+      "expected": {
+        "validityClass": "ready-to-execute",
+        "governingState": "Washington",
+        "executionRiskIndicated": false,
+        "firedRules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-HOT-POWER-DEFAULT-DENY-001",
+            "category": "authority-scope",
+            "priority": "low",
+            "description": "No hot power is granted, so the agent cannot make gifts, create or change trusts, change beneficiaries, or create survivorship rights.",
+            "suggestedAction": "Confirm this is intended; grant a specific hot power expressly if the principal needs it."
+          }
+        ]
+      }
+    }
+  ]
+}

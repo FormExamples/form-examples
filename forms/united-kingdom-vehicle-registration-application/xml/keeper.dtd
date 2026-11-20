@@ -1,0 +1,13 @@
+<!ELEMENT keeper (id,created_at,updated_at,deleted_at,name,keeper_type,company_registration_number,email,phone,postal_address_as_full_text,country_as_iso_3166_1_alpha_2,postcode)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT keeper_type (#PCDATA)>
+<!ELEMENT company_registration_number (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT country_as_iso_3166_1_alpha_2 (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>

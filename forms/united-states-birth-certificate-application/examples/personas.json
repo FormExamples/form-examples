@@ -1,0 +1,912 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "validateApplication(d) returns only { applicationClass, expectedFeeUsd, stateRuleApplied } with no flags array, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues (flagsArgs [\"state\"], mirroring form-app.js). Classification is first-match: ineligibleRequester -> 'ineligible-requester'; any blocking gap -> 'incomplete'; else 'ready-to-submit'. The state rule comes from STATE_RULES (CA, NY, TX, FL, IL, PA, OH, WA); other states use the uniform default and raise F-BIRTH-STATE-001. The wall clock is frozen for the self-requester age test. Regenerate expected with: bin/test-personas united-states-birth-certificate-application --update",
+  "personas": [
+    {
+      "name": "California adult requests own long form for a passport",
+      "description": "An adult Californian born in Fresno asks for one certified long-form copy for a passport, by mail with the notarized sworn statement California requires, ID unexpired, fee 31 enclosed. Expect ready-to-submit with no flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Elena Maria Garcia",
+          "dateOfBirth": "1990-04-12",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Elena Maria Garcia",
+          "sex": "female",
+          "dateOfBirth": "1990-04-12",
+          "placeOfBirth": "Fresno",
+          "countyOfBirth": "Fresno",
+          "state": "CA",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Rosa Lucia Hernandez",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "self",
+          "purpose": "passport",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-long-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 31
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "yes"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "expectedFeeUsd": 31,
+        "stateRuleApplied": "state",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Texas parent orders two copies for school",
+      "description": "A mother named on a Texas record (fee 22 plus 3 for the second copy, 25 total) requests two certified short-form copies for school enrollment by mail with unexpired ID. Expect ready-to-submit; Texas fee verified, no flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Ngozi Okafor",
+          "dateOfBirth": "1985-09-30",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Chidi Okafor",
+          "sex": "female",
+          "dateOfBirth": "2016-02-03",
+          "placeOfBirth": "Houston",
+          "countyOfBirth": "Fresno",
+          "state": "TX",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Ngozi Adeyemi",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "parent",
+          "purpose": "school",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 2,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 25
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "expectedFeeUsd": 25,
+        "stateRuleApplied": "state",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "New York spouse missing proof, expired ID, short fee",
+      "description": "A spouse asks New York State for a certified copy but encloses no marriage certificate, the ID is expired, and 15 dollars is enclosed against 30. Expect incomplete with ID, proof and fee flags plus the NYC reminder.",
+      "state": {
+        "applicant": {
+          "applicantName": "Anna Nowak",
+          "dateOfBirth": "1980-06-01",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Piotr Nowak",
+          "sex": "female",
+          "dateOfBirth": "1978-11-20",
+          "placeOfBirth": "Albany",
+          "countyOfBirth": "Fresno",
+          "state": "NY",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Maria Kowalski",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "spouse",
+          "purpose": "benefits",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-long-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 15
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "no",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "expectedFeeUsd": 30,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-ID-001",
+            "category": "missing-id",
+            "priority": "high",
+            "description": "Certified copies require a current, unexpired government-issued photo ID; none is stated as valid.",
+            "suggestedAction": "Attach a copy of an unexpired photo ID, or ask the office which alternative documents it accepts."
+          },
+          {
+            "id": "F-BIRTH-PROOF-001",
+            "category": "missing-proof",
+            "priority": "high",
+            "description": "The request does not include proof of the relationship to the person named (for example a marriage certificate, your own birth certificate, or a death certificate for a deceased registrant).",
+            "suggestedAction": "Enclose documents that link you to the person named on the certificate."
+          },
+          {
+            "id": "F-BIRTH-FEE-001",
+            "category": "fee-shortfall",
+            "priority": "medium",
+            "description": "The fee enclosed is missing or below the expected total of $30.00 for 1 copy in New York (outside New York City).",
+            "suggestedAction": "Enclose the full fee in the form of payment the office accepts."
+          },
+          {
+            "id": "F-BIRTH-NYC-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "Births in New York City are issued by the NYC Department of Health and Mental Hygiene, not the State Department of Health.",
+            "suggestedAction": "If the birth was in one of the five boroughs, apply to the NYC Health Department instead."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Florida sibling of a living registrant is ineligible",
+      "description": "A sibling asks Florida for a certified copy of a living person's record. Florida limits living registrants' records to the person, a parent named on it, a guardian or a legal representative. Expect ineligible-requester.",
+      "state": {
+        "applicant": {
+          "applicantName": "Devon Brown",
+          "dateOfBirth": "1992-01-15",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Marcus Brown",
+          "sex": "female",
+          "dateOfBirth": "1989-07-07",
+          "placeOfBirth": "Tampa",
+          "countyOfBirth": "Fresno",
+          "state": "FL",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Janet Wills",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "sibling",
+          "purpose": "employment",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-long-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 15
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "yes",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ineligible-requester",
+        "expectedFeeUsd": 15,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-INELIGIBLE-001",
+            "category": "ineligible-requester",
+            "priority": "high",
+            "description": "Florida restricts certified copies, and a sibling is not on its list of eligible requesters.",
+            "suggestedAction": "Ask an eligible person (the person named, a parent named on the record, a guardian, or a legal representative) to apply, or obtain a court order."
+          },
+          {
+            "id": "F-BIRTH-STATE-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "The Florida fee in this tool is not confirmed against the current official schedule.",
+            "suggestedAction": "Verify eligibility, fees, and accepted ID with the issuing office (CDC/NCHS Where to Write for Vital Records) before sending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Florida sibling of a deceased registrant is eligible",
+      "description": "The same Florida sibling relationship is allowed once the registrant is deceased; proof of relationship and death are enclosed. Expect ready-to-submit with the deceased-registrant and unverified-fee flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Devon Brown",
+          "dateOfBirth": "1992-01-15",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Marcus Brown",
+          "sex": "female",
+          "dateOfBirth": "1989-07-07",
+          "placeOfBirth": "Tampa",
+          "countyOfBirth": "Fresno",
+          "state": "FL",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Janet Wills",
+          "fatherName": "Carlos Garcia",
+          "deceased": "yes",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "sibling",
+          "purpose": "benefits",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 15
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "yes",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "expectedFeeUsd": 15,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-DECEASED-001",
+            "category": "deceased-registrant",
+            "priority": "medium",
+            "description": "The person named is deceased; offices usually require proof of death and of the requester's relationship before issuing a certified copy.",
+            "suggestedAction": "Enclose a death certificate and proof of relationship."
+          },
+          {
+            "id": "F-BIRTH-STATE-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "The Florida fee in this tool is not confirmed against the current official schedule.",
+            "suggestedAction": "Verify eligibility, fees, and accepted ID with the issuing office (CDC/NCHS Where to Write for Vital Records) before sending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pennsylvania 15-year-old orders own record",
+      "description": "A 15-year-old asks Pennsylvania for their own certificate; the state minimum for self-requests is 16. Expect ineligible-requester via the underage flag.",
+      "state": {
+        "applicant": {
+          "applicantName": "Sam Ellis",
+          "dateOfBirth": "2011-05-05",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Sam Ellis",
+          "sex": "female",
+          "dateOfBirth": "2011-05-05",
+          "placeOfBirth": "Pittsburgh",
+          "countyOfBirth": "Fresno",
+          "state": "PA",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Kate Moran",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "self",
+          "purpose": "school",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 20
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ineligible-requester",
+        "expectedFeeUsd": 20,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-UNDERAGE-001",
+            "category": "requester-underage",
+            "priority": "high",
+            "description": "Pennsylvania does not issue a certified copy to a registrant under age 16 ordering their own record.",
+            "suggestedAction": "Have a parent named on the certificate, or a legal guardian, make the request."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Washington grandparent chooses an informational copy",
+      "description": "A non-parent applicant in Washington who is not eligible for a certified copy asks for an informational copy for genealogy; WA offers these to anyone, so no ID, proof or eligibility check applies. Expect ready-to-submit with no flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Min-ji Lee",
+          "dateOfBirth": "1955-03-03",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Hana Lee",
+          "sex": "female",
+          "dateOfBirth": "1999-12-12",
+          "placeOfBirth": "Seattle",
+          "countyOfBirth": "Fresno",
+          "state": "WA",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Sun Park",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "other",
+          "purpose": "genealogy",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "informational",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 25
+        },
+        "evidence": {
+          "idType": "",
+          "idUnexpired": "",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": ""
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "expectedFeeUsd": 25,
+        "stateRuleApplied": "state",
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Illinois stranger is ineligible",
+      "description": "A friend with no legal interest asks the Illinois Division of Vital Records for a certified copy. Expect ineligible-requester and the unverified-fee note.",
+      "state": {
+        "applicant": {
+          "applicantName": "R. Costa",
+          "dateOfBirth": "1983-08-08",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Marcos Silva",
+          "sex": "female",
+          "dateOfBirth": "1983-03-09",
+          "placeOfBirth": "Chicago",
+          "countyOfBirth": "Fresno",
+          "state": "IL",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Luisa Pereira",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "other",
+          "purpose": "other",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 15
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "yes",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ineligible-requester",
+        "expectedFeeUsd": 15,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-INELIGIBLE-001",
+            "category": "ineligible-requester",
+            "priority": "high",
+            "description": "Illinois restricts certified copies, and a other (no direct relationship) is not on its list of eligible requesters.",
+            "suggestedAction": "Ask an eligible person (the person named, a parent named on the record, a guardian, or a legal representative) to apply, or obtain a court order."
+          },
+          {
+            "id": "F-BIRTH-STATE-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "The Illinois fee in this tool is not confirmed against the current official schedule.",
+            "suggestedAction": "Verify eligibility, fees, and accepted ID with the issuing office (CDC/NCHS Where to Write for Vital Records) before sending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Unknown state with apostille, short form, no destination",
+      "description": "A self-requester born in Minnesota (no verified rule held) wants an apostille on a short-form copy and names no country. Expect incomplete: type-unacceptable and apostille-country flags plus the verify-state-rule flag; fee unknown.",
+      "state": {
+        "applicant": {
+          "applicantName": "Elena Maria Garcia",
+          "dateOfBirth": "1990-04-12",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "12 Pine Road, Duluth, MN"
+        },
+        "registrant": {
+          "registrantName": "Elena Maria Garcia",
+          "sex": "female",
+          "dateOfBirth": "1990-04-12",
+          "placeOfBirth": "Duluth",
+          "countyOfBirth": "Fresno",
+          "state": "MN",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Rosa Lucia Hernandez",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "self",
+          "purpose": "foreign-use",
+          "needsApostille": "yes",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": null
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "expectedFeeUsd": null,
+        "stateRuleApplied": "default",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-TYPE-001",
+            "category": "certificate-type-unacceptable",
+            "priority": "high",
+            "description": "The certified short form (abstract) you chose cannot serve this purpose: passports, foreign use and apostilles need the certified long form (a full copy with the registrar's signature and seal); informational copies are never valid for identity.",
+            "suggestedAction": "Order the certified long form."
+          },
+          {
+            "id": "F-BIRTH-APOSTILLE-001",
+            "category": "apostille",
+            "priority": "medium",
+            "description": "An apostille is wanted but no destination country is named.",
+            "suggestedAction": "Name the destination country; a Hague Apostille Convention member accepts an apostille, otherwise embassy legalization is needed."
+          },
+          {
+            "id": "F-BIRTH-STATE-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "No verified rule is held for MN; the uniform default rule was applied.",
+            "suggestedAction": "Verify eligibility, fees, and accepted ID with the issuing office (CDC/NCHS Where to Write for Vital Records) before sending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "California legal guardian without court order, adopted ward",
+      "description": "A guardian orders a ward's California certificate by mail without letters of guardianship or the notarized statement; the ward was adopted. Expect incomplete with authority, notarization, fee-short and adopted flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Ruth Okonkwo",
+          "dateOfBirth": "1975-10-10",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Tobi Reyes",
+          "sex": "female",
+          "dateOfBirth": "2014-09-01",
+          "placeOfBirth": "Fresno",
+          "countyOfBirth": "Fresno",
+          "state": "CA",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Rosa Lucia Hernandez",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "yes"
+        },
+        "purpose": {
+          "relationship": "legal-guardian",
+          "purpose": "school",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": null
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "expectedFeeUsd": 31,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-AUTHORITY-001",
+            "category": "missing-authority",
+            "priority": "high",
+            "description": "A guardian, legal representative, or agency request needs the authorizing document (court order or letters of guardianship, attorney engagement letter, or official agency request).",
+            "suggestedAction": "Enclose the authorizing document with the application."
+          },
+          {
+            "id": "F-BIRTH-NOTARY-001",
+            "category": "missing-notarization",
+            "priority": "high",
+            "description": "California requires a notarized sworn statement of identity with a mailed application for a certified copy.",
+            "suggestedAction": "Sign the sworn statement before a notary public and enclose it."
+          },
+          {
+            "id": "F-BIRTH-FEE-001",
+            "category": "fee-shortfall",
+            "priority": "medium",
+            "description": "The fee enclosed is missing or below the expected total of $31.00 for 1 copy in California.",
+            "suggestedAction": "Enclose the full fee in the form of payment the office accepts."
+          },
+          {
+            "id": "F-BIRTH-ADOPTED-001",
+            "category": "adopted-registrant",
+            "priority": "medium",
+            "description": "For an adopted registrant the original record is typically sealed and an amended certificate is issued; the office may need the adoption decree.",
+            "suggestedAction": "Request the amended certificate and attach the adoption decree if the office asks for it."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ohio open record, unrelated applicant without proof, unsigned",
+      "description": "Ohio birth records are open, so an unrelated applicant is eligible, but this request lacks proof, ID details and the signed declaration. Expect incomplete with proof, ID and declaration flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Pat Hollis",
+          "dateOfBirth": "1970-02-02",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Dana Hollis",
+          "sex": "female",
+          "dateOfBirth": "1968-04-04",
+          "placeOfBirth": "Columbus",
+          "countyOfBirth": "Fresno",
+          "state": "OH",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Ann Fisher",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "other",
+          "purpose": "genealogy",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-short-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 21.5
+        },
+        "evidence": {
+          "idType": "none",
+          "idUnexpired": "",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "no",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "expectedFeeUsd": 21.5,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-ID-001",
+            "category": "missing-id",
+            "priority": "high",
+            "description": "Certified copies require a current, unexpired government-issued photo ID; none is stated as valid.",
+            "suggestedAction": "Attach a copy of an unexpired photo ID, or ask the office which alternative documents it accepts."
+          },
+          {
+            "id": "F-BIRTH-PROOF-001",
+            "category": "missing-proof",
+            "priority": "high",
+            "description": "The request does not include proof of the relationship to the person named (for example a marriage certificate, your own birth certificate, or a death certificate for a deceased registrant).",
+            "suggestedAction": "Enclose documents that link you to the person named on the certificate."
+          },
+          {
+            "id": "F-BIRTH-DECLARATION-001",
+            "category": "missing-declaration",
+            "priority": "high",
+            "description": "The declaration under penalty of perjury has not been signed.",
+            "suggestedAction": "Sign and date the declaration before submitting."
+          },
+          {
+            "id": "F-BIRTH-STATE-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "The Ohio fee in this tool is not confirmed against the current official schedule.",
+            "suggestedAction": "Verify eligibility, fees, and accepted ID with the issuing office (CDC/NCHS Where to Write for Vital Records) before sending."
+          }
+        ]
+      }
+    },
+    {
+      "name": "New York self with apostille ready",
+      "description": "A New Yorker requests a certified long form with an apostille for Italy, ID unexpired and 30 dollars enclosed. Expect ready-to-submit with the apostille process note and the NYC reminder.",
+      "state": {
+        "applicant": {
+          "applicantName": "Lucia Bianchi",
+          "dateOfBirth": "1988-12-01",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "Lucia Bianchi",
+          "sex": "female",
+          "dateOfBirth": "1988-12-01",
+          "placeOfBirth": "Buffalo",
+          "countyOfBirth": "Fresno",
+          "state": "NY",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "Gina Rossi",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "self",
+          "purpose": "foreign-use",
+          "needsApostille": "yes",
+          "apostilleCountry": "Italy"
+        },
+        "order": {
+          "certificateType": "certified-long-form",
+          "copies": 1,
+          "deliveryMethod": "mail",
+          "feeEnclosedUsd": 30
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": "no"
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "ready-to-submit",
+        "expectedFeeUsd": 30,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-APOSTILLE-002",
+            "category": "apostille",
+            "priority": "medium",
+            "description": "An apostille is issued by the state Secretary of State (or equivalent), not by the vital records office, and only on a recent certified long-form copy.",
+            "suggestedAction": "Order the certified copy first, then submit it to the Secretary of State for the apostille; check whether the destination country is a Hague Apostille Convention member."
+          },
+          {
+            "id": "F-BIRTH-NYC-001",
+            "category": "state-rule-unverified",
+            "priority": "low",
+            "description": "Births in New York City are issued by the NYC Department of Health and Mental Hygiene, not the State Department of Health.",
+            "suggestedAction": "If the birth was in one of the five boroughs, apply to the NYC Health Department instead."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Texas request missing identifiers and order details",
+      "description": "A Texas request missing the registrant name, mother name, copy count and delivery method. Expect incomplete with the missing-registrant-data flag.",
+      "state": {
+        "applicant": {
+          "applicantName": "Elena Maria Garcia",
+          "dateOfBirth": "1990-04-12",
+          "email": "elena.garcia@example.org",
+          "phone": "555-0142",
+          "postalAddress": "410 Alder Street, Sacramento, CA 95814"
+        },
+        "registrant": {
+          "registrantName": "",
+          "sex": "female",
+          "dateOfBirth": "1990-04-12",
+          "placeOfBirth": "Fresno",
+          "countyOfBirth": "Fresno",
+          "state": "TX",
+          "birthFacility": "Community Regional Medical Center",
+          "motherNameBeforeFirstMarriage": "",
+          "fatherName": "Carlos Garcia",
+          "deceased": "no",
+          "adopted": "no"
+        },
+        "purpose": {
+          "relationship": "self",
+          "purpose": "passport",
+          "needsApostille": "no",
+          "apostilleCountry": ""
+        },
+        "order": {
+          "certificateType": "certified-long-form",
+          "copies": null,
+          "deliveryMethod": "",
+          "feeEnclosedUsd": null
+        },
+        "evidence": {
+          "idType": "state-driver-license",
+          "idUnexpired": "yes",
+          "proofOfRelationship": "no",
+          "authorityDocument": "no",
+          "notarizedSwornStatement": ""
+        },
+        "declaration": {
+          "declarationSigned": "yes",
+          "applicationNote": ""
+        }
+      },
+      "expected": {
+        "applicationClass": "incomplete",
+        "expectedFeeUsd": null,
+        "stateRuleApplied": "state",
+        "flaggedIssues": [
+          {
+            "id": "F-BIRTH-DATA-001",
+            "category": "missing-registrant-data",
+            "priority": "high",
+            "description": "The request lacks identifiers needed to locate the record (full name, valid date of birth, place and state of birth, mother's name before first marriage) or the order details (relationship, purpose, copy type, copies, delivery).",
+            "suggestedAction": "Complete every identifying and order field; a record cannot be searched without them."
+          }
+        ]
+      }
+    }
+  ]
+}

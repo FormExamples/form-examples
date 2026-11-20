@@ -1,0 +1,13 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000002c1"
+  deletedAt: null
+  name: "Los Angeles County Registrar-Recorder/County Clerk"
+  state: "CA"
+  county: "Los Angeles County"
+  email: "clerk@example.org"
+  phone: "+12135550100"
+  postalAddressAsFullText: "12400 Imperial Highway, Norwalk, CA"
+  countryAsIso31661Alpha2: "US"
+  postcode: "90650"
+  website: "https://example.org/marriage"

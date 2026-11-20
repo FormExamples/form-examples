@@ -1,0 +1,1 @@
+DROP TABLE "united_states_standard_certificate_of_death_grade_flags";

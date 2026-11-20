@@ -1,0 +1,6 @@
+pub mod registrars;
+pub mod united_kingdom_marriage_certificate_application_grade_flags;
+pub mod united_kingdom_marriage_certificate_application_grade_rules;
+pub mod united_kingdom_marriage_certificate_application_grades;
+pub mod united_kingdom_marriage_certificate_applications;
+pub mod applicants;

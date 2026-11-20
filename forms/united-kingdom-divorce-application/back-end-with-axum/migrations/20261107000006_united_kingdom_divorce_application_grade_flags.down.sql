@@ -1,0 +1,1 @@
+DROP TABLE "united_kingdom_divorce_application_grade_flags";

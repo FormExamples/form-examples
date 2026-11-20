@@ -1,0 +1,10 @@
+<!ELEMENT occupant (id,created_at,updated_at,deleted_at,united_kingdom_council_tax_discount_application_id,name,birth_date,status,evidence_held)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_council_tax_discount_application_id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT evidence_held (#PCDATA)>

@@ -1,0 +1,339 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_last_will_and_testament
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_last_will_and_testament;
+
+enum UnitedKingdomLastWillAndTestamentDomicileEnum {
+  DOMICILE_UNSPECIFIED = 0;
+  DOMICILE_ENGLAND_WALES = 1;  // england-wales
+  DOMICILE_SCOTLAND = 2;  // scotland
+  DOMICILE_NORTHERN_IRELAND = 3;  // northern-ireland
+  DOMICILE_OTHER = 4;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentMaritalStatusEnum {
+  MARITALSTATUS_UNSPECIFIED = 0;
+  MARITALSTATUS_SINGLE = 1;  // single
+  MARITALSTATUS_MARRIED = 2;  // married
+  MARITALSTATUS_CIVIL_PARTNERSHIP = 3;  // civil-partnership
+  MARITALSTATUS_COHABITING = 4;  // cohabiting
+  MARITALSTATUS_DIVORCED_OR_DISSOLVED = 5;  // divorced-or-dissolved
+  MARITALSTATUS_WIDOWED = 6;  // widowed
+}
+
+enum UnitedKingdomLastWillAndTestamentMarriageExpectedEnum {
+  MARRIAGEEXPECTED_UNSPECIFIED = 0;
+  MARRIAGEEXPECTED_YES = 1;  // yes
+  MARRIAGEEXPECTED_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentContemplationOfMarriageClauseEnum {
+  CONTEMPLATIONOFMARRIAGECLAUSE_UNSPECIFIED = 0;
+  CONTEMPLATIONOFMARRIAGECLAUSE_YES = 1;  // yes
+  CONTEMPLATIONOFMARRIAGECLAUSE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentHasMentalCapacityEnum {
+  HASMENTALCAPACITY_UNSPECIFIED = 0;
+  HASMENTALCAPACITY_YES = 1;  // yes
+  HASMENTALCAPACITY_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentMadeVoluntarilyEnum {
+  MADEVOLUNTARILY_UNSPECIFIED = 0;
+  MADEVOLUNTARILY_YES = 1;  // yes
+  MADEVOLUNTARILY_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentPreviousWillEnum {
+  PREVIOUSWILL_UNSPECIFIED = 0;
+  PREVIOUSWILL_NONE = 1;  // none
+  PREVIOUSWILL_EXISTS = 2;  // exists
+  PREVIOUSWILL_UNSURE = 3;  // unsure
+}
+
+enum UnitedKingdomLastWillAndTestamentRevocationClauseEnum {
+  REVOCATIONCLAUSE_UNSPECIFIED = 0;
+  REVOCATIONCLAUSE_YES = 1;  // yes
+  REVOCATIONCLAUSE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentEstateValueBandEnum {
+  ESTATEVALUEBAND_UNSPECIFIED = 0;
+  ESTATEVALUEBAND_UNDER_325K = 1;  // under-325k
+  ESTATEVALUEBAND_V_325K_500K = 2;  // 325k-500k
+  ESTATEVALUEBAND_V_500K_2M = 3;  // 500k-2m
+  ESTATEVALUEBAND_OVER_2M = 4;  // over-2m
+}
+
+enum UnitedKingdomLastWillAndTestamentOwnsHomeEnum {
+  OWNSHOME_UNSPECIFIED = 0;
+  OWNSHOME_YES = 1;  // yes
+  OWNSHOME_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentHomeToDirectDescendantsEnum {
+  HOMETODIRECTDESCENDANTS_UNSPECIFIED = 0;
+  HOMETODIRECTDESCENDANTS_YES = 1;  // yes
+  HOMETODIRECTDESCENDANTS_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentEstateOtherJurisdictionsEnum {
+  ESTATEOTHERJURISDICTIONS_UNSPECIFIED = 0;
+  ESTATEOTHERJURISDICTIONS_YES = 1;  // yes
+  ESTATEOTHERJURISDICTIONS_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentExecutorsAdultConfirmedEnum {
+  EXECUTORSADULTCONFIRMED_UNSPECIFIED = 0;
+  EXECUTORSADULTCONFIRMED_YES = 1;  // yes
+  EXECUTORSADULTCONFIRMED_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFirstRelationshipEnum {
+  BENEFICIARYFIRSTRELATIONSHIP_UNSPECIFIED = 0;
+  BENEFICIARYFIRSTRELATIONSHIP_SPOUSE_OR_CIVIL_PARTNER = 1;  // spouse-or-civil-partner
+  BENEFICIARYFIRSTRELATIONSHIP_UNMARRIED_PARTNER = 2;  // unmarried-partner
+  BENEFICIARYFIRSTRELATIONSHIP_CHILD = 3;  // child
+  BENEFICIARYFIRSTRELATIONSHIP_GRANDCHILD = 4;  // grandchild
+  BENEFICIARYFIRSTRELATIONSHIP_OTHER_RELATIVE = 5;  // other-relative
+  BENEFICIARYFIRSTRELATIONSHIP_FRIEND = 6;  // friend
+  BENEFICIARYFIRSTRELATIONSHIP_CHARITY = 7;  // charity
+  BENEFICIARYFIRSTRELATIONSHIP_OTHER = 8;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFirstIsMinorEnum {
+  BENEFICIARYFIRSTISMINOR_UNSPECIFIED = 0;
+  BENEFICIARYFIRSTISMINOR_YES = 1;  // yes
+  BENEFICIARYFIRSTISMINOR_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFirstHasTrusteeEnum {
+  BENEFICIARYFIRSTHASTRUSTEE_UNSPECIFIED = 0;
+  BENEFICIARYFIRSTHASTRUSTEE_YES = 1;  // yes
+  BENEFICIARYFIRSTHASTRUSTEE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiarySecondRelationshipEnum {
+  BENEFICIARYSECONDRELATIONSHIP_UNSPECIFIED = 0;
+  BENEFICIARYSECONDRELATIONSHIP_SPOUSE_OR_CIVIL_PARTNER = 1;  // spouse-or-civil-partner
+  BENEFICIARYSECONDRELATIONSHIP_UNMARRIED_PARTNER = 2;  // unmarried-partner
+  BENEFICIARYSECONDRELATIONSHIP_CHILD = 3;  // child
+  BENEFICIARYSECONDRELATIONSHIP_GRANDCHILD = 4;  // grandchild
+  BENEFICIARYSECONDRELATIONSHIP_OTHER_RELATIVE = 5;  // other-relative
+  BENEFICIARYSECONDRELATIONSHIP_FRIEND = 6;  // friend
+  BENEFICIARYSECONDRELATIONSHIP_CHARITY = 7;  // charity
+  BENEFICIARYSECONDRELATIONSHIP_OTHER = 8;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiarySecondIsMinorEnum {
+  BENEFICIARYSECONDISMINOR_UNSPECIFIED = 0;
+  BENEFICIARYSECONDISMINOR_YES = 1;  // yes
+  BENEFICIARYSECONDISMINOR_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiarySecondHasTrusteeEnum {
+  BENEFICIARYSECONDHASTRUSTEE_UNSPECIFIED = 0;
+  BENEFICIARYSECONDHASTRUSTEE_YES = 1;  // yes
+  BENEFICIARYSECONDHASTRUSTEE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryThirdRelationshipEnum {
+  BENEFICIARYTHIRDRELATIONSHIP_UNSPECIFIED = 0;
+  BENEFICIARYTHIRDRELATIONSHIP_SPOUSE_OR_CIVIL_PARTNER = 1;  // spouse-or-civil-partner
+  BENEFICIARYTHIRDRELATIONSHIP_UNMARRIED_PARTNER = 2;  // unmarried-partner
+  BENEFICIARYTHIRDRELATIONSHIP_CHILD = 3;  // child
+  BENEFICIARYTHIRDRELATIONSHIP_GRANDCHILD = 4;  // grandchild
+  BENEFICIARYTHIRDRELATIONSHIP_OTHER_RELATIVE = 5;  // other-relative
+  BENEFICIARYTHIRDRELATIONSHIP_FRIEND = 6;  // friend
+  BENEFICIARYTHIRDRELATIONSHIP_CHARITY = 7;  // charity
+  BENEFICIARYTHIRDRELATIONSHIP_OTHER = 8;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryThirdIsMinorEnum {
+  BENEFICIARYTHIRDISMINOR_UNSPECIFIED = 0;
+  BENEFICIARYTHIRDISMINOR_YES = 1;  // yes
+  BENEFICIARYTHIRDISMINOR_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryThirdHasTrusteeEnum {
+  BENEFICIARYTHIRDHASTRUSTEE_UNSPECIFIED = 0;
+  BENEFICIARYTHIRDHASTRUSTEE_YES = 1;  // yes
+  BENEFICIARYTHIRDHASTRUSTEE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFourthRelationshipEnum {
+  BENEFICIARYFOURTHRELATIONSHIP_UNSPECIFIED = 0;
+  BENEFICIARYFOURTHRELATIONSHIP_SPOUSE_OR_CIVIL_PARTNER = 1;  // spouse-or-civil-partner
+  BENEFICIARYFOURTHRELATIONSHIP_UNMARRIED_PARTNER = 2;  // unmarried-partner
+  BENEFICIARYFOURTHRELATIONSHIP_CHILD = 3;  // child
+  BENEFICIARYFOURTHRELATIONSHIP_GRANDCHILD = 4;  // grandchild
+  BENEFICIARYFOURTHRELATIONSHIP_OTHER_RELATIVE = 5;  // other-relative
+  BENEFICIARYFOURTHRELATIONSHIP_FRIEND = 6;  // friend
+  BENEFICIARYFOURTHRELATIONSHIP_CHARITY = 7;  // charity
+  BENEFICIARYFOURTHRELATIONSHIP_OTHER = 8;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFourthIsMinorEnum {
+  BENEFICIARYFOURTHISMINOR_UNSPECIFIED = 0;
+  BENEFICIARYFOURTHISMINOR_YES = 1;  // yes
+  BENEFICIARYFOURTHISMINOR_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentBeneficiaryFourthHasTrusteeEnum {
+  BENEFICIARYFOURTHHASTRUSTEE_UNSPECIFIED = 0;
+  BENEFICIARYFOURTHHASTRUSTEE_YES = 1;  // yes
+  BENEFICIARYFOURTHHASTRUSTEE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentResiduaryClauseEnum {
+  RESIDUARYCLAUSE_UNSPECIFIED = 0;
+  RESIDUARYCLAUSE_YES = 1;  // yes
+  RESIDUARYCLAUSE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentDependantsConsideredEnum {
+  DEPENDANTSCONSIDERED_UNSPECIFIED = 0;
+  DEPENDANTSCONSIDERED_YES = 1;  // yes
+  DEPENDANTSCONSIDERED_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentHasChildrenUnder18Enum {
+  HASCHILDRENUNDER18_UNSPECIFIED = 0;
+  HASCHILDRENUNDER18_YES = 1;  // yes
+  HASCHILDRENUNDER18_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentFuneralWishesEnum {
+  FUNERALWISHES_UNSPECIFIED = 0;
+  FUNERALWISHES_BURIAL = 1;  // burial
+  FUNERALWISHES_CREMATION = 2;  // cremation
+  FUNERALWISHES_NO_PREFERENCE = 3;  // no-preference
+  FUNERALWISHES_OTHER = 4;  // other
+}
+
+enum UnitedKingdomLastWillAndTestamentExecutionStatusEnum {
+  EXECUTIONSTATUS_UNSPECIFIED = 0;
+  EXECUTIONSTATUS_DRAFT = 1;  // draft
+  EXECUTIONSTATUS_SIGNED = 2;  // signed
+}
+
+enum UnitedKingdomLastWillAndTestamentWillInWritingEnum {
+  WILLINWRITING_UNSPECIFIED = 0;
+  WILLINWRITING_YES = 1;  // yes
+  WILLINWRITING_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentTestatorSignedEnum {
+  TESTATORSIGNED_UNSPECIFIED = 0;
+  TESTATORSIGNED_YES = 1;  // yes
+  TESTATORSIGNED_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessesPresentTogetherEnum {
+  WITNESSESPRESENTTOGETHER_UNSPECIFIED = 0;
+  WITNESSESPRESENTTOGETHER_YES = 1;  // yes
+  WITNESSESPRESENTTOGETHER_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessesSignedEnum {
+  WITNESSESSIGNED_UNSPECIFIED = 0;
+  WITNESSESSIGNED_YES = 1;  // yes
+  WITNESSESSIGNED_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessFirstOver18Enum {
+  WITNESSFIRSTOVER18_UNSPECIFIED = 0;
+  WITNESSFIRSTOVER18_YES = 1;  // yes
+  WITNESSFIRSTOVER18_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessFirstIsBeneficiaryOrSpouseEnum {
+  WITNESSFIRSTISBENEFICIARYORSPOUSE_UNSPECIFIED = 0;
+  WITNESSFIRSTISBENEFICIARYORSPOUSE_YES = 1;  // yes
+  WITNESSFIRSTISBENEFICIARYORSPOUSE_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessSecondOver18Enum {
+  WITNESSSECONDOVER18_UNSPECIFIED = 0;
+  WITNESSSECONDOVER18_YES = 1;  // yes
+  WITNESSSECONDOVER18_NO = 2;  // no
+}
+
+enum UnitedKingdomLastWillAndTestamentWitnessSecondIsBeneficiaryOrSpouseEnum {
+  WITNESSSECONDISBENEFICIARYORSPOUSE_UNSPECIFIED = 0;
+  WITNESSSECONDISBENEFICIARYORSPOUSE_YES = 1;  // yes
+  WITNESSSECONDISBENEFICIARYORSPOUSE_NO = 2;  // no
+}
+
+message UnitedKingdomLastWillAndTestament {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string testator_id = 5;  // UUID — uuid
+  string testator_name = 6;  // TEXT
+  string date_of_birth = 7;  // DATE — iso 8601 date
+  string testator_address = 8;  // TEXT
+  UnitedKingdomLastWillAndTestamentDomicileEnum domicile = 9;  // VARCHAR(16)
+  UnitedKingdomLastWillAndTestamentMaritalStatusEnum marital_status = 10;  // VARCHAR(21)
+  UnitedKingdomLastWillAndTestamentMarriageExpectedEnum marriage_expected = 11;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentContemplationOfMarriageClauseEnum contemplation_of_marriage_clause = 12;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentHasMentalCapacityEnum has_mental_capacity = 13;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentMadeVoluntarilyEnum made_voluntarily = 14;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentPreviousWillEnum previous_will = 15;  // VARCHAR(10)
+  UnitedKingdomLastWillAndTestamentRevocationClauseEnum revocation_clause = 16;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentEstateValueBandEnum estate_value_band = 17;  // VARCHAR(10)
+  UnitedKingdomLastWillAndTestamentOwnsHomeEnum owns_home = 18;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentHomeToDirectDescendantsEnum home_to_direct_descendants = 19;  // VARCHAR(5)
+  double charity_gift_percent = 20;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedKingdomLastWillAndTestamentEstateOtherJurisdictionsEnum estate_other_jurisdictions = 21;  // VARCHAR(5)
+  string other_jurisdictions_detail = 22;  // TEXT
+  string specific_gifts_notes = 23;  // TEXT
+  string executor_first_name = 24;  // TEXT
+  string executor_first_relationship = 25;  // TEXT
+  string executor_second_name = 26;  // TEXT
+  string executor_second_relationship = 27;  // TEXT
+  UnitedKingdomLastWillAndTestamentExecutorsAdultConfirmedEnum executors_adult_confirmed = 28;  // VARCHAR(5)
+  string beneficiary_first_name = 29;  // TEXT
+  UnitedKingdomLastWillAndTestamentBeneficiaryFirstRelationshipEnum beneficiary_first_relationship = 30;  // VARCHAR(23)
+  double beneficiary_first_share_percent = 31;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedKingdomLastWillAndTestamentBeneficiaryFirstIsMinorEnum beneficiary_first_is_minor = 32;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentBeneficiaryFirstHasTrusteeEnum beneficiary_first_has_trustee = 33;  // VARCHAR(5)
+  string beneficiary_second_name = 34;  // TEXT
+  UnitedKingdomLastWillAndTestamentBeneficiarySecondRelationshipEnum beneficiary_second_relationship = 35;  // VARCHAR(23)
+  double beneficiary_second_share_percent = 36;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedKingdomLastWillAndTestamentBeneficiarySecondIsMinorEnum beneficiary_second_is_minor = 37;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentBeneficiarySecondHasTrusteeEnum beneficiary_second_has_trustee = 38;  // VARCHAR(5)
+  string beneficiary_third_name = 39;  // TEXT
+  UnitedKingdomLastWillAndTestamentBeneficiaryThirdRelationshipEnum beneficiary_third_relationship = 40;  // VARCHAR(23)
+  double beneficiary_third_share_percent = 41;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedKingdomLastWillAndTestamentBeneficiaryThirdIsMinorEnum beneficiary_third_is_minor = 42;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentBeneficiaryThirdHasTrusteeEnum beneficiary_third_has_trustee = 43;  // VARCHAR(5)
+  string beneficiary_fourth_name = 44;  // TEXT
+  UnitedKingdomLastWillAndTestamentBeneficiaryFourthRelationshipEnum beneficiary_fourth_relationship = 45;  // VARCHAR(23)
+  double beneficiary_fourth_share_percent = 46;  // NUMERIC(5,2) — numeric(5,2)
+  UnitedKingdomLastWillAndTestamentBeneficiaryFourthIsMinorEnum beneficiary_fourth_is_minor = 47;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentBeneficiaryFourthHasTrusteeEnum beneficiary_fourth_has_trustee = 48;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentResiduaryClauseEnum residuary_clause = 49;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentDependantsConsideredEnum dependants_considered = 50;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentHasChildrenUnder18Enum has_children_under_18 = 51;  // VARCHAR(5)
+  string guardian_name = 52;  // TEXT
+  UnitedKingdomLastWillAndTestamentFuneralWishesEnum funeral_wishes = 53;  // VARCHAR(13)
+  string funeral_wishes_note = 54;  // TEXT
+  UnitedKingdomLastWillAndTestamentExecutionStatusEnum execution_status = 55;  // VARCHAR(10)
+  string date_of_will = 56;  // DATE — iso 8601 date
+  UnitedKingdomLastWillAndTestamentWillInWritingEnum will_in_writing = 57;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentTestatorSignedEnum testator_signed = 58;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentWitnessesPresentTogetherEnum witnesses_present_together = 59;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentWitnessesSignedEnum witnesses_signed = 60;  // VARCHAR(5)
+  string witness_first_name = 61;  // TEXT
+  UnitedKingdomLastWillAndTestamentWitnessFirstOver18Enum witness_first_over_18 = 62;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentWitnessFirstIsBeneficiaryOrSpouseEnum witness_first_is_beneficiary_or_spouse = 63;  // VARCHAR(5)
+  string witness_second_name = 64;  // TEXT
+  UnitedKingdomLastWillAndTestamentWitnessSecondOver18Enum witness_second_over_18 = 65;  // VARCHAR(5)
+  UnitedKingdomLastWillAndTestamentWitnessSecondIsBeneficiaryOrSpouseEnum witness_second_is_beneficiary_or_spouse = 66;  // VARCHAR(5)
+  string drafter_note = 67;  // TEXT
+}

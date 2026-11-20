@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE united_states_vehicle_bill_of_sale_grade SYSTEM "united_states_vehicle_bill_of_sale_grade.dtd">
+<united_states_vehicle_bill_of_sale_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<united_states_vehicle_bill_of_sale_id>770e8400-e29b-41d4-a716-446655440002</united_states_vehicle_bill_of_sale_id>
+<completeness_class>complete</completeness_class>
+<odometer_disclosure_exempt>yes</odometer_disclosure_exempt>
+<state_rule_known>yes</state_rule_known>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</united_states_vehicle_bill_of_sale_grade>

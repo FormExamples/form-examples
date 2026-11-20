@@ -1,0 +1,44 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: property_tax_exemption_application_grade_flag
+
+syntax = "proto3";
+
+package form_examples.united_states_property_tax_exemption_application;
+
+enum PropertyTaxExemptionApplicationGradeFlagCategoryEnum {
+  CATEGORY_UNSPECIFIED = 0;
+  CATEGORY_OWNERSHIP = 1;  // ownership
+  CATEGORY_OCCUPANCY = 2;  // occupancy
+  CATEGORY_DUPLICATE_HOMESTEAD = 3;  // duplicate-homestead
+  CATEGORY_LATE_FILING = 4;  // late-filing
+  CATEGORY_AGE_REQUIREMENT = 5;  // age-requirement
+  CATEGORY_INCOME_LIMIT = 6;  // income-limit
+  CATEGORY_VETERAN_RATING = 7;  // veteran-rating
+  CATEGORY_NO_EXEMPTION_CLAIMED = 8;  // no-exemption-claimed
+  CATEGORY_MISSING_INFORMATION = 9;  // missing-information
+  CATEGORY_MISSING_DOCUMENTS = 10;  // missing-documents
+  CATEGORY_MISSING_SIGNATURE = 11;  // missing-signature
+  CATEGORY_STATE_RULE_VERIFY = 12;  // state-rule-verify
+  CATEGORY_APPEAL_GUIDANCE = 13;  // appeal-guidance
+  CATEGORY_OTHER = 14;  // other
+}
+
+enum PropertyTaxExemptionApplicationGradeFlagPriorityEnum {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;  // low
+  PRIORITY_MEDIUM = 2;  // medium
+  PRIORITY_HIGH = 3;  // high
+}
+
+message PropertyTaxExemptionApplicationGradeFlag {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string property_tax_exemption_application_grade_id = 5;  // UUID — uuid
+  string flag_id = 6;  // VARCHAR(50) — max 50 chars
+  PropertyTaxExemptionApplicationGradeFlagCategoryEnum category = 7;  // VARCHAR(50)
+  PropertyTaxExemptionApplicationGradeFlagPriorityEnum priority = 8;  // VARCHAR(10)
+  string description = 9;  // VARCHAR(500) — max 500 chars
+  string suggested_action = 10;  // VARCHAR(500) — max 500 chars
+}

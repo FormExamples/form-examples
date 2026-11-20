@@ -1,0 +1,27 @@
+# United States Divorce Petition
+
+> Petition for dissolution of marriage, the divorce decree and the vital-records divorce certificate for United States courts. A single continuous wizard collects the filing state and county, spouses and residency, children and child support, property division (community or equitable), service of process, and the decree; the engine checks the filing state's residency, separation and waiting-period rules and classifies the petition as **ready to file**, **incomplete**, or **not yet eligible**, with prioritized flags.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

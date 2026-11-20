@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-00000001ee3b"
+  deletedAt: null
+  principalId: "00000000-0000-4000-8000-0000000dda39"
+  reviewerId: null
+  principalName: "Test Principal"
+  birthDate: "1990-01-01"
+  agentName: "Test Agent"

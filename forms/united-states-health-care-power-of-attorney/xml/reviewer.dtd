@@ -1,0 +1,10 @@
+<!ELEMENT reviewer (id,created_at,updated_at,deleted_at,name,email,phone,role,bar_or_license_number)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT bar_or_license_number (#PCDATA)>

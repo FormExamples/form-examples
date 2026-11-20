@@ -1,0 +1,29 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: assessor
+
+syntax = "proto3";
+
+package form_examples.united_states_property_tax_exemption_application;
+
+enum AssessorRoleEnum {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ASSESSOR = 1;  // assessor
+  ROLE_DEPUTY_ASSESSOR = 2;  // deputy-assessor
+  ROLE_APPRAISER = 3;  // appraiser
+  ROLE_CLERK = 4;  // clerk
+  ROLE_OTHER = 5;  // other
+}
+
+message Assessor {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string name = 5;  // TEXT
+  string email = 6;  // TEXT
+  string phone = 7;  // TEXT
+  string office_name = 8;  // TEXT
+  string county = 9;  // TEXT
+  string state = 10;  // VARCHAR(2) — max 2 chars
+  AssessorRoleEnum role = 11;  // VARCHAR(40)
+}

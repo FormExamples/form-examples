@@ -1,0 +1,11 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000027f31"
+  deletedAt: null
+  name: "Test Informant"
+  email: "test.informant@example.com"
+  phone: "+441234567890"
+  postalAddressAsFullText: "4 Mill Lane, Reading"
+  countryAsIso31661Alpha2: "GB"
+  postcode: "RG1 2AB"
+  relationship: "relative-present-at-death"

@@ -1,0 +1,15 @@
+<!ELEMENT applicant (id,created_at,updated_at,deleted_at,name,owner_type,birth_date,email,phone,postal_address_as_full_text,state_code,postcode,identification_type,identification_number)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT owner_type (#PCDATA)>
+<!ELEMENT birth_date (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT postal_address_as_full_text (#PCDATA)>
+<!ELEMENT state_code (#PCDATA)>
+<!ELEMENT postcode (#PCDATA)>
+<!ELEMENT identification_type (#PCDATA)>
+<!ELEMENT identification_number (#PCDATA)>

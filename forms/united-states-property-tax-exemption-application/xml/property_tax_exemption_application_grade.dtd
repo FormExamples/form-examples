@@ -1,0 +1,11 @@
+<!ELEMENT property_tax_exemption_application_grade (id,created_at,updated_at,deleted_at,property_tax_exemption_application_id,eligibility_class,filing_deadline,filed_late,qualifying_exemptions,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT property_tax_exemption_application_id (#PCDATA)>
+<!ELEMENT eligibility_class (#PCDATA)>
+<!ELEMENT filing_deadline (#PCDATA)>
+<!ELEMENT filed_late (#PCDATA)>
+<!ELEMENT qualifying_exemptions (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

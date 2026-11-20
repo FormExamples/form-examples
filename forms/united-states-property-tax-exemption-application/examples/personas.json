@@ -1,0 +1,906 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "gradeApplication",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "clock": "2026-09-03T12:00:00Z",
+  "note": "gradeApplication(d) returns { eligibilityClass, filingDeadline, filedLate, qualifyingExemptions, rules }; the flags are a separate detector, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js. Classification is first-match: a failed base requirement (not owner, not occupant, another homestead), a filing after the state deadline that is not marked 'late', or every claimed exemption failing the state test -> 'likely-ineligible'; else missing identification, blank assessment-date answers, no claim, a claim still waiting on an answer, missing proofs or an unsigned declaration -> 'incomplete'; else 'likely-eligible'. Flags are stable-sorted high > medium > low. The 'timestamp' key is added by form-app.js, not the grader. Regenerate expected with: bin/test-personas united-states-property-tax-exemption-application --update",
+  "personas": [
+    {
+      "name": "Likely eligible: Texas homestead plus over-65, filed in time",
+      "description": "Austin homeowner aged 71, owner-occupier on January 1, claims the homestead and the over-65 exemption (Texas has no income limit), all proofs attached, signed, filed 18 March 2026 before the 30 April deadline. Expect likely-eligible, deadline 2026-04-30, filed on time, qualifying homestead and senior, and no flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Maria Elena Gonzalez",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 71,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "TX",
+          "county": "Travis",
+          "parcelNumber": "0412-3300-0017",
+          "propertyAddress": "4821 Live Oak Lane, Austin, TX 78745",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "yes",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": 38200,
+          "incomeTaxYear": 2025
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "yes",
+          "proofOfIncome": "yes",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-03-18",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-03-18"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "filingDeadline": "2026-04-30",
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead",
+          "senior"
+        ],
+        "rules": [],
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Likely eligible: California Homeowners' Exemption with appeal guidance",
+      "description": "Los Angeles owner-occupier claims only the $7,000 Homeowners' Exemption, files 3 February 2026 before the 15 February deadline, and asks for appeal guidance with a notice date. Expect likely-eligible with a single low appeal-guidance flag.",
+      "state": {
+        "applicant": {
+          "applicantName": "Ngozi Okafor",
+          "dateOfBirth": "1985-09-02",
+          "ageOnAssessmentDate": 40,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "CA",
+          "county": "Los Angeles",
+          "parcelNumber": "5043-012-031",
+          "propertyAddress": "1180 W 36th St, Los Angeles, CA 90007",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "no",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": null,
+          "incomeTaxYear": null
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-02-03",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "yes",
+          "noticeOfValueDate": "2026-02-01",
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-02-03"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "filingDeadline": "2026-02-15",
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead"
+        ],
+        "rules": [],
+        "flaggedIssues": [
+          {
+            "id": "F-APPEAL-001",
+            "category": "appeal-guidance",
+            "priority": "low",
+            "description": "Assessment appeal basics: an exemption does not appeal the value. Appeal to the county assessment appeals board; the regular filing window is set by the county and closes in the fall.",
+            "suggestedAction": "Keep the notice of value and file the appeal inside the stated window."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Florida application with no proofs, unsigned",
+      "description": "Orange County owner-occupier, homestead and senior claimed, filed 20 February 2026 (before 1 March) but no proof documents are marked attached, household income and age are present, and the declaration is neither signed nor acknowledged. Expect incomplete, with signature, documents and state-figures flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Dale Whitaker",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 68,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "FL",
+          "county": "Orange",
+          "parcelNumber": "R-2291-0045",
+          "propertyAddress": "77 Cypress Court, Orlando, FL 32801",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "yes",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": 38200,
+          "incomeTaxYear": 2025
+        },
+        "documents": {
+          "proofOfOwnership": "no",
+          "proofOfResidency": "no",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-02-20",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "no",
+          "signedByApplicant": "no",
+          "signatureDate": null
+        }
+      },
+      "expected": {
+        "eligibilityClass": "incomplete",
+        "filingDeadline": "2026-03-01",
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead",
+          "senior"
+        ],
+        "rules": [
+          {
+            "id": "R-DOCUMENTS-01",
+            "dimension": "documents",
+            "category": "required-component",
+            "description": "Missing proof: proof of ownership, proof of residency, proof of age, proof of income."
+          },
+          {
+            "id": "R-DECLARATION-01",
+            "dimension": "declaration",
+            "category": "required-component",
+            "description": "The declaration is unsigned or the false-statement penalty is not acknowledged."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-SIGNATURE-001",
+            "category": "missing-signature",
+            "priority": "high",
+            "description": "The declaration is unsigned, undated, or the penalty for a false statement is not acknowledged. A false statement can lead to back taxes, penalties and prosecution.",
+            "suggestedAction": "Read the penalty statement, acknowledge it, sign and date the application."
+          },
+          {
+            "id": "F-DOCUMENTS-001",
+            "category": "missing-documents",
+            "priority": "medium",
+            "description": "Proof is not marked attached: proof of ownership, proof of residency, proof of age, proof of income.",
+            "suggestedAction": "Attach each document, or the assessor will return the application."
+          },
+          {
+            "id": "F-STATE-FIGURES-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Some Florida figures vary by county or year ($25,000 plus an additional exemption of up to about $25,722 on assessed value over $50,000 (non-school taxes)).",
+            "suggestedAction": "Confirm the current amounts and income limit with the county assessor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Washington disabled veteran missing rating and income",
+      "description": "King County applicant claims homestead, disability and disabled-veteran relief but gives no VA rating or income, no disability proof, and the unencoded-deadline state raises low flags. Expect incomplete: the blank VA rating raises the income-missing (needs-an-answer) flag, alongside documents, no-deadline and figures flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Camila Reyes",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 63,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "WA",
+          "county": "King",
+          "parcelNumber": "3829-114-006",
+          "propertyAddress": "2210 NE 65th St, Seattle, WA 98115",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "no",
+          "claimDisability": "yes",
+          "claimVeteran": "yes",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": null,
+          "incomeTaxYear": null
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-04-15",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-03-18"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "incomplete",
+        "filingDeadline": null,
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead",
+          "disability"
+        ],
+        "rules": [
+          {
+            "id": "R-DOCUMENTS-01",
+            "dimension": "documents",
+            "category": "required-component",
+            "description": "Missing proof: proof of income, proof of disability or VA rating."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-INCOME-MISSING-001",
+            "category": "missing-information",
+            "priority": "medium",
+            "description": "A test for the veteran claim needs an answer that is blank (age, household income or VA rating).",
+            "suggestedAction": "Enter the age, household income or VA rating the claim depends on."
+          },
+          {
+            "id": "F-DOCUMENTS-001",
+            "category": "missing-documents",
+            "priority": "medium",
+            "description": "Proof is not marked attached: proof of income, proof of disability or VA rating.",
+            "suggestedAction": "Attach each document, or the assessor will return the application."
+          },
+          {
+            "id": "F-STATE-NODEADLINE-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Washington sets no single statewide filing date. File with the county assessor; confirm the county's date and income threshold.",
+            "suggestedAction": "Ask the county assessor for the local filing date."
+          },
+          {
+            "id": "F-STATE-FIGURES-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Some Washington figures vary by county or year (Senior citizen and disabled persons exemption (RCW 84.36.381), age 61+; income thresholds set by county).",
+            "suggestedAction": "Confirm the current amounts and income limit with the county assessor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Likely ineligible: Illinois homestead not occupied, second homestead",
+      "description": "Cook County owner who did not live in the home on January 1 and also claims a homestead elsewhere. Illinois sets no statewide deadline, so no late flag fires. Expect likely-ineligible with occupancy and duplicate-homestead high flags.",
+      "state": {
+        "applicant": {
+          "applicantName": "Anna Kowalski",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 59,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "IL",
+          "county": "Cook",
+          "parcelNumber": "17-04-226-019",
+          "propertyAddress": "1560 N Damen Ave, Chicago, IL 60622",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "no",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "yes"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "no",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": null,
+          "incomeTaxYear": null
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-06-02",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-06-02"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "filingDeadline": null,
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead"
+        ],
+        "rules": [
+          {
+            "id": "R-OCCUPANCY-01",
+            "dimension": "occupancy",
+            "category": "base-eligibility",
+            "description": "The property was not the primary residence on the assessment date."
+          },
+          {
+            "id": "R-DUPLICATE-01",
+            "dimension": "exemption",
+            "category": "base-eligibility",
+            "description": "A homestead exemption is already claimed on another property."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-OCCUPANCY-001",
+            "category": "occupancy",
+            "priority": "high",
+            "description": "The property was not the applicant's primary residence on the assessment date.",
+            "suggestedAction": "A homestead exemption needs owner occupancy as a primary residence on that date. Apply for the year when it is met."
+          },
+          {
+            "id": "F-DUPLICATE-HOMESTEAD-001",
+            "category": "duplicate-homestead",
+            "priority": "high",
+            "description": "A homestead exemption is already claimed on another property. Only one primary residence may carry one.",
+            "suggestedAction": "Remove the other homestead claim or choose which property is the primary residence."
+          },
+          {
+            "id": "F-STATE-NODEADLINE-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Illinois sets no single statewide filing date. No single statewide filing date; each county sets its own.",
+            "suggestedAction": "Ask the county assessor for the local filing date."
+          },
+          {
+            "id": "F-STATE-FIGURES-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Some Illinois figures vary by county or year (General homestead exemption; senior exemption of $8,000 (Cook and contiguous counties) or $5,000; senior assessment freeze).",
+            "suggestedAction": "Confirm the current amounts and income limit with the county assessor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Likely ineligible: Ohio senior over the income limit and filed after December 31",
+      "description": "Franklin County owner aged 70 with household income $52,000, above the $41,000 Ohio limit, filing 4 January 2027 for assessment year 2026, after the 31 December 2026 deadline, as an initial (not late) application. Expect likely-ineligible with late-filing, income and no passing exemption.",
+      "state": {
+        "applicant": {
+          "applicantName": "Harold Brooks",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 70,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "OH",
+          "county": "Franklin",
+          "parcelNumber": "010-001234",
+          "propertyAddress": "918 Elm St, Columbus, OH 43215",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "no",
+          "claimSenior": "yes",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": 52000,
+          "incomeTaxYear": 2025
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "yes",
+          "proofOfIncome": "yes",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2027-01-04",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2027-01-04"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "filingDeadline": "2026-12-31",
+        "filedLate": true,
+        "qualifyingExemptions": [],
+        "rules": [
+          {
+            "id": "R-FILING-01",
+            "dimension": "filing",
+            "category": "state-rule",
+            "description": "The filing date is after the state filing deadline."
+          },
+          {
+            "id": "R-EXEMPTION-SENIOR-01",
+            "dimension": "income",
+            "category": "state-rule",
+            "description": "The senior claim fails the state test (income)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-LATE-001",
+            "category": "late-filing",
+            "priority": "high",
+            "description": "The filing date 2027-01-04 is after the Ohio deadline of 2026-12-31.",
+            "suggestedAction": "Mark the application as late and ask the assessor whether late-filing relief is available. Application (DTE 105A) is due on or before December 31 of the year the exemption is sought."
+          },
+          {
+            "id": "F-INCOME-001",
+            "category": "income-limit",
+            "priority": "high",
+            "description": "Household income of $52000 is above the Ohio limit of $41000 for the senior claim.",
+            "suggestedAction": "Check which income counts, and drop the claim if the limit is exceeded."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Likely ineligible: New York senior under 65 claiming Enhanced STAR",
+      "description": "Monroe County owner aged 58 claiming only the senior relief, which needs age 65. Expect likely-ineligible because the sole claim fails the age test, plus an age flag and a state-figures low flag.",
+      "state": {
+        "applicant": {
+          "applicantName": "Patricia Lane",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 58,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "NY",
+          "county": "Monroe",
+          "parcelNumber": "136.12-2-14",
+          "propertyAddress": "35 Linden Ave, Rochester, NY 14610",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "no",
+          "claimSenior": "yes",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": 64000,
+          "incomeTaxYear": 2025
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "yes",
+          "proofOfIncome": "yes",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-02-27",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-02-27"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "filingDeadline": "2026-03-01",
+        "filedLate": false,
+        "qualifyingExemptions": [],
+        "rules": [
+          {
+            "id": "R-EXEMPTION-SENIOR-01",
+            "dimension": "exemption",
+            "category": "state-rule",
+            "description": "The senior claim fails the state test (age)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-AGE-001",
+            "category": "age-requirement",
+            "priority": "high",
+            "description": "The applicant is 58, below the New York senior minimum age of 65.",
+            "suggestedAction": "Drop the senior claim, or apply in the year the age requirement is met."
+          },
+          {
+            "id": "F-STATE-FIGURES-001",
+            "category": "state-rule-verify",
+            "priority": "low",
+            "description": "Some New York figures vary by county or year (Basic STAR exemption or credit (income limit $500,000 credit, $250,000 exemption); Enhanced STAR for age 65+).",
+            "suggestedAction": "Confirm the current amounts and income limit with the county assessor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Eligible with late-filing relief: Pennsylvania filed after March 1 as a late application",
+      "description": "Allegheny County owner aged 66, income $31,000 (under the $48,110 limit), homestead and circuit-breaker claimed; filed 10 April 2026 against the 1 March 2025 deadline for the 2026 year but marked as a late application. Expect likely-eligible with a medium late-relief flag and qualifying homestead and circuit-breaker.",
+      "state": {
+        "applicant": {
+          "applicantName": "Linh Nguyen",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 66,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "PA",
+          "county": "Allegheny",
+          "parcelNumber": "0045-K-00312",
+          "propertyAddress": "408 Beechwood Blvd, Pittsburgh, PA 15217",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "no",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "yes",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": 31000,
+          "incomeTaxYear": 2025
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "yes",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-04-10",
+          "applicationType": "late"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-04-10"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "filingDeadline": "2025-03-01",
+        "filedLate": true,
+        "qualifyingExemptions": [
+          "homestead",
+          "circuit-breaker"
+        ],
+        "rules": [
+          {
+            "id": "R-FILING-01",
+            "dimension": "filing",
+            "category": "state-rule",
+            "description": "The filing date is after the state filing deadline."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-DEADLINE-LATE-001",
+            "category": "late-filing",
+            "priority": "medium",
+            "description": "The filing date 2026-04-10 is after the Pennsylvania deadline of 2025-03-01.",
+            "suggestedAction": "Late-filing relief is discretionary; attach a statement of the reason and ask the assessor how to proceed."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Likely eligible with verify flag: unknown state uses the default rule",
+      "description": "A Georgia application (not in the encoded table) otherwise complete: the default rule applies, no deadline can be derived, and a verify-state-rule flag is raised. Expect likely-eligible with the medium state-verify flag and no derived deadline.",
+      "state": {
+        "applicant": {
+          "applicantName": "Eli Carter",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 71,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "GA",
+          "county": "Fulton",
+          "parcelNumber": "14-0078-0003-021-4",
+          "propertyAddress": "62 Peachtree Way, Atlanta, GA 30309",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "yes",
+          "claimSenior": "no",
+          "claimDisability": "no",
+          "claimVeteran": "no",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": null
+        },
+        "income": {
+          "householdIncomeDollars": null,
+          "incomeTaxYear": null
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "no"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-03-18",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-03-18"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-eligible",
+        "filingDeadline": null,
+        "filedLate": false,
+        "qualifyingExemptions": [
+          "homestead"
+        ],
+        "rules": [
+          {
+            "id": "R-STATE-01",
+            "dimension": "classification",
+            "category": "state-rule",
+            "description": "State not in the encoded table; the default rule was used."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-STATE-VERIFY-001",
+            "category": "state-rule-verify",
+            "priority": "medium",
+            "description": "State \"GA\" is not in the encoded rule table, so the default rule is used and the deadline is unknown.",
+            "suggestedAction": "Verify the deadline, age and income limits with the county assessor or state revenue department."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Likely ineligible: disabled-veteran claim below the minimum rating and no claims otherwise",
+      "description": "Texas owner claims only the disabled-veteran exemption with a 0 percent VA rating. Expect likely-ineligible with a veteran-rating high flag.",
+      "state": {
+        "applicant": {
+          "applicantName": "Ray Dunn",
+          "dateOfBirth": "1954-03-12",
+          "ageOnAssessmentDate": 52,
+          "mailingAddress": "4821 Live Oak Lane, Austin, TX 78745"
+        },
+        "property": {
+          "state": "TX",
+          "county": "Travis",
+          "parcelNumber": "0412-3300-0017",
+          "propertyAddress": "4821 Live Oak Lane, Austin, TX 78745",
+          "propertyType": "single-family",
+          "ownershipType": "sole",
+          "ownerOnAssessmentDate": "yes",
+          "occupiedAsPrimaryResidence": "yes",
+          "occupancyStartDate": "2011-06-01",
+          "otherHomesteadClaimed": "no"
+        },
+        "exemptions": {
+          "claimHomestead": "no",
+          "claimSenior": "no",
+          "claimDisability": "no",
+          "claimVeteran": "yes",
+          "claimCircuitBreaker": "no",
+          "veteranDisabilityPercent": 0
+        },
+        "income": {
+          "householdIncomeDollars": null,
+          "incomeTaxYear": null
+        },
+        "documents": {
+          "proofOfOwnership": "yes",
+          "proofOfResidency": "yes",
+          "proofOfAge": "no",
+          "proofOfIncome": "no",
+          "proofOfDisability": "yes"
+        },
+        "filing": {
+          "assessmentYear": 2026,
+          "filingDate": "2026-03-18",
+          "applicationType": "initial"
+        },
+        "appeal": {
+          "appealRequested": "no",
+          "noticeOfValueDate": null,
+          "appealFiled": "no"
+        },
+        "declaration": {
+          "penaltyAcknowledged": "yes",
+          "signedByApplicant": "yes",
+          "signatureDate": "2026-03-18"
+        }
+      },
+      "expected": {
+        "eligibilityClass": "likely-ineligible",
+        "filingDeadline": "2026-04-30",
+        "filedLate": false,
+        "qualifyingExemptions": [],
+        "rules": [
+          {
+            "id": "R-EXEMPTION-VETERAN-01",
+            "dimension": "exemption",
+            "category": "state-rule",
+            "description": "The veteran claim fails the state test (rating)."
+          }
+        ],
+        "flaggedIssues": [
+          {
+            "id": "F-VETERAN-RATING-001",
+            "category": "veteran-rating",
+            "priority": "high",
+            "description": "The VA service-connected rating is 0%, below the common 10% minimum.",
+            "suggestedAction": "Attach the VA rating letter and confirm the state minimum rating."
+          }
+        ]
+      }
+    }
+  ]
+}

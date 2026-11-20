@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vehicle_title_application_grade SYSTEM "vehicle_title_application_grade.dtd">
+<vehicle_title_application_grade>
+<id>880e8400-e29b-41d4-a716-446655440003</id>
+<created_at>2026-04-09T10:00:00Z</created_at>
+<updated_at>2026-04-09T10:00:00Z</updated_at>
+<deleted_at>2026-04-09T10:00:00Z</deleted_at>
+<vehicle_title_application_id>770e8400-e29b-41d4-a716-446655440002</vehicle_title_application_id>
+<application_class>ready-to-submit</application_class>
+<vin_status>valid</vin_status>
+<odometer_disclosure_required>yes</odometer_disclosure_required>
+<brand_or_lien_issue>yes</brand_or_lien_issue>
+<outstanding_item_count>2</outstanding_item_count>
+<state_rule_known>yes</state_rule_known>
+<graded_at>2026-04-09T10:00:00Z</graded_at>
+</vehicle_title_application_grade>

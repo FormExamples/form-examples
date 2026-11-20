@@ -1,0 +1,230 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: ss5_application
+
+syntax = "proto3";
+
+package form_examples.united_states_social_security_card_application;
+
+enum Ss5ApplicationRequestTypeEnum {
+  REQUESTTYPE_UNSPECIFIED = 0;
+  REQUESTTYPE_ORIGINAL = 1;  // original
+  REQUESTTYPE_REPLACEMENT = 2;  // replacement
+  REQUESTTYPE_CORRECTION = 3;  // correction
+}
+
+enum Ss5ApplicationChannelEnum {
+  CHANNEL_UNSPECIFIED = 0;
+  CHANNEL_IN_PERSON = 1;  // in-person
+  CHANNEL_MAIL = 2;  // mail
+}
+
+enum Ss5ApplicationPreviouslyAppliedEnum {
+  PREVIOUSLYAPPLIED_UNSPECIFIED = 0;
+  PREVIOUSLYAPPLIED_YES = 1;  // yes
+  PREVIOUSLYAPPLIED_NO = 2;  // no
+  PREVIOUSLYAPPLIED_DONT_KNOW = 3;  // dont-know
+}
+
+enum Ss5ApplicationNameChangeEnum {
+  NAMECHANGE_UNSPECIFIED = 0;
+  NAMECHANGE_YES = 1;  // yes
+  NAMECHANGE_NO = 2;  // no
+}
+
+enum Ss5ApplicationNameChangeReasonEnum {
+  NAMECHANGEREASON_UNSPECIFIED = 0;
+  NAMECHANGEREASON_MARRIAGE = 1;  // marriage
+  NAMECHANGEREASON_DIVORCE = 2;  // divorce
+  NAMECHANGEREASON_COURT_ORDER = 3;  // court-order
+  NAMECHANGEREASON_OTHER = 4;  // other
+}
+
+enum Ss5ApplicationDateOfBirthCorrectionEnum {
+  DATEOFBIRTHCORRECTION_UNSPECIFIED = 0;
+  DATEOFBIRTHCORRECTION_YES = 1;  // yes
+  DATEOFBIRTHCORRECTION_NO = 2;  // no
+}
+
+enum Ss5ApplicationLimitExceptionReasonEnum {
+  LIMITEXCEPTIONREASON_UNSPECIFIED = 0;
+  LIMITEXCEPTIONREASON_NAME_CHANGE = 1;  // name-change
+  LIMITEXCEPTIONREASON_LEGEND_CHANGE = 2;  // legend-change
+  LIMITEXCEPTIONREASON_NON_RECEIPT = 3;  // non-receipt
+  LIMITEXCEPTIONREASON_SSA_ERROR = 4;  // ssa-error
+  LIMITEXCEPTIONREASON_HARDSHIP = 5;  // hardship
+}
+
+enum Ss5ApplicationLimitExceptionEvidenceEnum {
+  LIMITEXCEPTIONEVIDENCE_UNSPECIFIED = 0;
+  LIMITEXCEPTIONEVIDENCE_YES = 1;  // yes
+  LIMITEXCEPTIONEVIDENCE_NO = 2;  // no
+}
+
+enum Ss5ApplicationSexEnum {
+  SEX_UNSPECIFIED = 0;
+  SEX_FEMALE = 1;  // female
+  SEX_MALE = 2;  // male
+}
+
+enum Ss5ApplicationCitizenshipEnum {
+  CITIZENSHIP_UNSPECIFIED = 0;
+  CITIZENSHIP_US_CITIZEN = 1;  // us-citizen
+  CITIZENSHIP_LEGAL_ALIEN_ALLOWED_TO_WORK = 2;  // legal-alien-allowed-to-work
+  CITIZENSHIP_LEGAL_ALIEN_NOT_ALLOWED_TO_WORK = 3;  // legal-alien-not-allowed-to-work
+  CITIZENSHIP_OTHER = 4;  // other
+}
+
+enum Ss5ApplicationNonWorkReasonValidEnum {
+  NONWORKREASONVALID_UNSPECIFIED = 0;
+  NONWORKREASONVALID_YES = 1;  // yes
+  NONWORKREASONVALID_NO = 2;  // no
+}
+
+enum Ss5ApplicationIdentityDocumentEnum {
+  IDENTITYDOCUMENT_UNSPECIFIED = 0;
+  IDENTITYDOCUMENT_US_DRIVER_LICENSE = 1;  // us-driver-license
+  IDENTITYDOCUMENT_STATE_ID_CARD = 2;  // state-id-card
+  IDENTITYDOCUMENT_US_PASSPORT = 3;  // us-passport
+  IDENTITYDOCUMENT_MILITARY_ID = 4;  // military-id
+  IDENTITYDOCUMENT_EMPLOYEE_ID = 5;  // employee-id
+  IDENTITYDOCUMENT_SCHOOL_ID = 6;  // school-id
+  IDENTITYDOCUMENT_HEALTH_INSURANCE_CARD = 7;  // health-insurance-card
+  IDENTITYDOCUMENT_OTHER = 8;  // other
+  IDENTITYDOCUMENT_NONE = 9;  // none
+}
+
+enum Ss5ApplicationIdentityDocumentExpiredEnum {
+  IDENTITYDOCUMENTEXPIRED_UNSPECIFIED = 0;
+  IDENTITYDOCUMENTEXPIRED_YES = 1;  // yes
+  IDENTITYDOCUMENTEXPIRED_NO = 2;  // no
+}
+
+enum Ss5ApplicationAgeDocumentEnum {
+  AGEDOCUMENT_UNSPECIFIED = 0;
+  AGEDOCUMENT_US_BIRTH_CERTIFICATE = 1;  // us-birth-certificate
+  AGEDOCUMENT_US_PASSPORT = 2;  // us-passport
+  AGEDOCUMENT_HOSPITAL_RECORD = 3;  // hospital-record
+  AGEDOCUMENT_RELIGIOUS_RECORD = 4;  // religious-record
+  AGEDOCUMENT_IMMIGRATION_RECORD = 5;  // immigration-record
+  AGEDOCUMENT_OTHER = 6;  // other
+  AGEDOCUMENT_NONE = 7;  // none
+}
+
+enum Ss5ApplicationCitizenshipDocumentEnum {
+  CITIZENSHIPDOCUMENT_UNSPECIFIED = 0;
+  CITIZENSHIPDOCUMENT_US_BIRTH_CERTIFICATE = 1;  // us-birth-certificate
+  CITIZENSHIPDOCUMENT_US_PASSPORT = 2;  // us-passport
+  CITIZENSHIPDOCUMENT_CERTIFICATE_OF_NATURALIZATION = 3;  // certificate-of-naturalization
+  CITIZENSHIPDOCUMENT_CERTIFICATE_OF_CITIZENSHIP = 4;  // certificate-of-citizenship
+  CITIZENSHIPDOCUMENT_CONSULAR_REPORT_OF_BIRTH_ABROAD = 5;  // consular-report-of-birth-abroad
+  CITIZENSHIPDOCUMENT_PERMANENT_RESIDENT_CARD = 6;  // permanent-resident-card
+  CITIZENSHIPDOCUMENT_I_94_WITH_WORK_AUTHORIZATION = 7;  // i-94-with-work-authorization
+  CITIZENSHIPDOCUMENT_EMPLOYMENT_AUTHORIZATION_DOCUMENT = 8;  // employment-authorization-document
+  CITIZENSHIPDOCUMENT_OTHER = 9;  // other
+  CITIZENSHIPDOCUMENT_NONE = 10;  // none
+}
+
+enum Ss5ApplicationCitizenshipOnFileEnum {
+  CITIZENSHIPONFILE_UNSPECIFIED = 0;
+  CITIZENSHIPONFILE_YES = 1;  // yes
+  CITIZENSHIPONFILE_NO = 2;  // no
+  CITIZENSHIPONFILE_DONT_KNOW = 3;  // dont-know
+}
+
+enum Ss5ApplicationNameChangeDocumentEnum {
+  NAMECHANGEDOCUMENT_UNSPECIFIED = 0;
+  NAMECHANGEDOCUMENT_MARRIAGE_CERTIFICATE = 1;  // marriage-certificate
+  NAMECHANGEDOCUMENT_DIVORCE_DECREE = 2;  // divorce-decree
+  NAMECHANGEDOCUMENT_COURT_ORDER = 3;  // court-order
+  NAMECHANGEDOCUMENT_CERTIFICATE_OF_NATURALIZATION = 4;  // certificate-of-naturalization
+  NAMECHANGEDOCUMENT_OTHER = 5;  // other
+  NAMECHANGEDOCUMENT_NONE = 6;  // none
+}
+
+enum Ss5ApplicationDocumentsOriginalOrCertifiedEnum {
+  DOCUMENTSORIGINALORCERTIFIED_UNSPECIFIED = 0;
+  DOCUMENTSORIGINALORCERTIFIED_YES = 1;  // yes
+  DOCUMENTSORIGINALORCERTIFIED_NO = 2;  // no
+}
+
+enum Ss5ApplicationSignerRelationshipEnum {
+  SIGNERRELATIONSHIP_UNSPECIFIED = 0;
+  SIGNERRELATIONSHIP_SELF = 1;  // self
+  SIGNERRELATIONSHIP_PARENT = 2;  // parent
+  SIGNERRELATIONSHIP_LEGAL_GUARDIAN = 3;  // legal-guardian
+  SIGNERRELATIONSHIP_CUSTODIAN = 4;  // custodian
+  SIGNERRELATIONSHIP_OTHER = 5;  // other
+}
+
+enum Ss5ApplicationSignerIdentityDocumentEnum {
+  SIGNERIDENTITYDOCUMENT_UNSPECIFIED = 0;
+  SIGNERIDENTITYDOCUMENT_YES = 1;  // yes
+  SIGNERIDENTITYDOCUMENT_NO = 2;  // no
+}
+
+enum Ss5ApplicationSignaturePresentEnum {
+  SIGNATUREPRESENT_UNSPECIFIED = 0;
+  SIGNATUREPRESENT_YES = 1;  // yes
+  SIGNATUREPRESENT_NO = 2;  // no
+}
+
+enum Ss5ApplicationApplicantDeceasedEnum {
+  APPLICANTDECEASED_UNSPECIFIED = 0;
+  APPLICANTDECEASED_YES = 1;  // yes
+  APPLICANTDECEASED_NO = 2;  // no
+}
+
+enum Ss5ApplicationDeathReportedToSsaEnum {
+  DEATHREPORTEDTOSSA_UNSPECIFIED = 0;
+  DEATHREPORTEDTOSSA_YES = 1;  // yes
+  DEATHREPORTEDTOSSA_NO = 2;  // no
+}
+
+message Ss5Application {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string patient_id = 5;  // UUID — uuid
+  string clinician_id = 6;  // UUID — uuid
+  string application_date = 7;  // DATE — iso 8601 date
+  Ss5ApplicationRequestTypeEnum request_type = 8;  // VARCHAR(11)
+  Ss5ApplicationChannelEnum channel = 9;  // VARCHAR(9)
+  Ss5ApplicationPreviouslyAppliedEnum previously_applied = 10;  // VARCHAR(9)
+  Ss5ApplicationNameChangeEnum name_change = 11;  // VARCHAR(5)
+  Ss5ApplicationNameChangeReasonEnum name_change_reason = 12;  // VARCHAR(11)
+  Ss5ApplicationDateOfBirthCorrectionEnum date_of_birth_correction = 13;  // VARCHAR(5)
+  int32 replacements_this_year = 14;  // INTEGER
+  int32 replacements_lifetime = 15;  // INTEGER
+  Ss5ApplicationLimitExceptionReasonEnum limit_exception_reason = 16;  // VARCHAR(13)
+  Ss5ApplicationLimitExceptionEvidenceEnum limit_exception_evidence = 17;  // VARCHAR(5)
+  string name_on_card = 18;  // TEXT
+  string name_at_birth = 19;  // TEXT
+  string other_names_used = 20;  // TEXT
+  string name_on_most_recent_card = 21;  // TEXT
+  string date_of_birth = 22;  // DATE — iso 8601 date
+  string place_of_birth_city = 23;  // TEXT
+  string place_of_birth_region = 24;  // TEXT
+  Ss5ApplicationSexEnum sex = 25;  // VARCHAR(6)
+  Ss5ApplicationCitizenshipEnum citizenship = 26;  // VARCHAR(31)
+  Ss5ApplicationNonWorkReasonValidEnum non_work_reason_valid = 27;  // VARCHAR(5)
+  string mother_name_at_birth = 28;  // TEXT
+  string father_name = 29;  // TEXT
+  string state_of_residence = 30;  // VARCHAR(2) — max 2 chars
+  string mailing_address = 31;  // TEXT
+  string phone = 32;  // TEXT
+  Ss5ApplicationIdentityDocumentEnum identity_document = 33;  // VARCHAR(21)
+  Ss5ApplicationIdentityDocumentExpiredEnum identity_document_expired = 34;  // VARCHAR(5)
+  Ss5ApplicationAgeDocumentEnum age_document = 35;  // VARCHAR(20)
+  Ss5ApplicationCitizenshipDocumentEnum citizenship_document = 36;  // VARCHAR(33)
+  Ss5ApplicationCitizenshipOnFileEnum citizenship_on_file = 37;  // VARCHAR(9)
+  Ss5ApplicationNameChangeDocumentEnum name_change_document = 38;  // VARCHAR(29)
+  Ss5ApplicationDocumentsOriginalOrCertifiedEnum documents_original_or_certified = 39;  // VARCHAR(5)
+  Ss5ApplicationSignerRelationshipEnum signer_relationship = 40;  // VARCHAR(14)
+  string signer_name = 41;  // TEXT
+  Ss5ApplicationSignerIdentityDocumentEnum signer_identity_document = 42;  // VARCHAR(5)
+  Ss5ApplicationSignaturePresentEnum signature_present = 43;  // VARCHAR(5)
+  Ss5ApplicationApplicantDeceasedEnum applicant_deceased = 44;  // VARCHAR(5)
+  Ss5ApplicationDeathReportedToSsaEnum death_reported_to_ssa = 45;  // VARCHAR(5)
+  string preparer_note = 46;  // TEXT
+}

@@ -1,0 +1,10 @@
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_suggeste_f457d3fa";
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_descript_1aa9331d";
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_priority_length";
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_category_length";
+ALTER TABLE "united_kingdom_death_registration_grade_flags" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_flags_flag_id_length";
+ALTER TABLE "united_kingdom_death_registration_grade_rules" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_rules_descript_c3a91464";
+ALTER TABLE "united_kingdom_death_registration_grade_rules" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_rules_category_length";
+ALTER TABLE "united_kingdom_death_registration_grade_rules" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_rules_dimension_length";
+ALTER TABLE "united_kingdom_death_registration_grade_rules" DROP CONSTRAINT IF EXISTS "united_kingdom_death_registration_grade_rules_rule_id_length";
+ALTER TABLE "patients" DROP CONSTRAINT IF EXISTS "patients_name_length";

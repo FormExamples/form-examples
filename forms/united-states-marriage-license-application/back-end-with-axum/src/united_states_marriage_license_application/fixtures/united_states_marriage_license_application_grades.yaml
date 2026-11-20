@@ -1,0 +1,9 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-0000000004a1"
+  deletedAt: null
+  applicationClass: "ready-to-apply"
+  earliestCeremonyDate: "2026-08-20"
+  licenseExpiryDate: "2026-11-18"
+  gradedAt: "2026-01-01T00:00:00Z"
+  unitedStatesMarriageLicenseApplicationId: "00000000-0000-4000-8000-0000000003a1"

@@ -1,0 +1,11 @@
+<!ELEMENT united_kingdom_marriage_certificate_application_grade (id,created_at,updated_at,deleted_at,united_kingdom_marriage_certificate_application_id,validity_class,earliest_ceremony_date,latest_ceremony_date,immigration_referral_indicated,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_marriage_certificate_application_id (#PCDATA)>
+<!ELEMENT validity_class (#PCDATA)>
+<!ELEMENT earliest_ceremony_date (#PCDATA)>
+<!ELEMENT latest_ceremony_date (#PCDATA)>
+<!ELEMENT immigration_referral_indicated (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

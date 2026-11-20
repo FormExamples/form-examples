@@ -1,0 +1,545 @@
+# Generated from sql/. Do not edit by hand.
+# SOURCE: property_tax_exemption_application
+openapi: 3.1.0
+info:
+  title: United States Property Tax Exemption Application — PropertyTaxExemptionApplication
+  version: 1.0.0
+  description: "Main United States property tax exemption application: parcel, ownership and occupancy on the assessment date, exemptions claimed, income, proof documents, filing date, appeal basics and the signed declaration."
+paths:
+  /api/property_tax_exemption_applications:
+    get:
+      summary: List PropertyTaxExemptionApplication records
+      operationId: listPropertyTaxExemptionApplication
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+          required: false
+          description: Rows on a page. A larger limit is refused, not clamped
+        - name: cursor
+          in: query
+          schema:
+            type: string
+          required: false
+          description: The next page, as the previous page's Link header gave it. Opaque and signed for this list and these filters
+      responses:
+        "200":
+          description: A page of PropertyTaxExemptionApplication records, with no total
+          headers:
+            link:
+              description: The next page, as <...>; rel="next", while more rows follow. Absent on the last page
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+        "422":
+          description: The limit or the cursor is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    post:
+      summary: Create a new PropertyTaxExemptionApplication
+      operationId: createPropertyTaxExemptionApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+      responses:
+        "200":
+          description: The newly created PropertyTaxExemptionApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+        "400":
+          description: The request was refused
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /api/property_tax_exemption_applications/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Fetch one PropertyTaxExemptionApplication by id
+      operationId: getPropertyTaxExemptionApplication
+      responses:
+        "200":
+          description: The requested PropertyTaxExemptionApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+        "404":
+          description: PropertyTaxExemptionApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    patch:
+      summary: Update an existing PropertyTaxExemptionApplication
+      operationId: updatePropertyTaxExemptionApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+      responses:
+        "200":
+          description: The updated PropertyTaxExemptionApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+        "404":
+          description: PropertyTaxExemptionApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    put:
+      summary: Replace an existing PropertyTaxExemptionApplication
+      operationId: replacePropertyTaxExemptionApplication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+      responses:
+        "200":
+          description: The updated PropertyTaxExemptionApplication
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PropertyTaxExemptionApplication"
+        "404":
+          description: PropertyTaxExemptionApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "409":
+          description: It duplicates a row, or refers to a missing one
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: The body does not match the schema, or a value is outside what its field allows
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+    delete:
+      summary: Delete a PropertyTaxExemptionApplication
+      operationId: deletePropertyTaxExemptionApplication
+      responses:
+        "200":
+          description: PropertyTaxExemptionApplication deleted
+        "404":
+          description: PropertyTaxExemptionApplication not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "429":
+          description: This client sent too many requests
+          headers:
+            retry-after:
+              description: Seconds to wait before sending again
+              schema:
+                type: integer
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+components:
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem details
+      properties:
+        type:
+          type: string
+          description: A URI identifying the problem type
+        title:
+          type: string
+          description: A short summary of the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: An explanation of this occurrence
+        instance:
+          type: string
+          description: A URI identifying this occurrence
+        code:
+          type: string
+          description: A short machine-readable reason
+        errors:
+          type: object
+          description: Per-field detail, when validation failed
+      required:
+        - type
+        - title
+        - status
+    PropertyTaxExemptionApplication:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Primary key UUID, auto-generated.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the row was most recently updated.
+        applicant_id:
+          type: string
+          format: uuid
+          description: Foreign key to the applicant.
+        assessor_id:
+          type: [string, 'null']
+          format: uuid
+          description: Foreign key to the assessing official; null until assigned.
+        applicant_name:
+          type: string
+          description: Applicant name as written on the application.
+        date_of_birth:
+          type: [string, 'null']
+          format: date
+          description: Applicant date of birth; used for the senior age test.
+        age_on_assessment_date:
+          type: [integer, 'null']
+          format: int32
+          description: Applicant age in whole years on the assessment date.
+        mailing_address:
+          type: string
+          description: Mailing address for notices about the application.
+        state:
+          type: string
+          maxLength: 2
+          description: Two-letter code of the state where the property is located; selects the state rule set.
+        county:
+          type: string
+          description: County where the property is located.
+        parcel_number:
+          type: string
+          maxLength: 50
+          description: Assessor parcel number (APN) or account number identifying the property.
+        property_address:
+          type: string
+          description: Street address of the property claiming the exemption.
+        property_type:
+          type: string
+          enum:
+            - single-family
+            - condominium
+            - manufactured-home
+            - multi-unit
+            - other
+            - ""
+          description: "Property type: single-family, condominium, manufactured-home, multi-unit, or other."
+        ownership_type:
+          type: string
+          enum:
+            - sole
+            - joint
+            - trust
+            - life-estate
+            - contract-buyer
+            - other
+            - ""
+          description: "How the applicant holds title: sole, joint, trust, life-estate, contract-buyer, or other."
+        owner_on_assessment_date:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant held title on the assessment (lien) date (yes/no).
+        occupied_as_primary_residence:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant occupied the property as the primary residence on the assessment date (yes/no).
+        occupancy_start_date:
+          type: [string, 'null']
+          format: date
+          description: Date the applicant began occupying the property as a primary residence.
+        other_homestead_claimed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a homestead exemption is already claimed on another property (yes/no); only one is allowed.
+        claim_homestead:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the general homestead exemption is claimed (yes/no).
+        claim_senior:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a senior (age-based) exemption or relief is claimed (yes/no).
+        claim_disability:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a disability exemption is claimed (yes/no).
+        claim_veteran:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether a disabled-veteran exemption is claimed (yes/no).
+        claim_circuit_breaker:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether circuit-breaker (income-based property tax relief) is claimed (yes/no).
+        veteran_disability_percent:
+          type: [integer, 'null']
+          format: int32
+          description: VA service-connected disability rating percent (0 to 100); null when not applicable.
+        household_income_dollars:
+          type: [integer, 'null']
+          format: int32
+          description: Total household income in whole US dollars for the income year.
+        income_tax_year:
+          type: [integer, 'null']
+          format: int32
+          description: Calendar year the reported household income covers.
+        assessment_year:
+          type: [integer, 'null']
+          format: int32
+          description: Assessment or tax year the exemption is sought for.
+        filing_date:
+          type: [string, 'null']
+          format: date
+          description: Date the application is filed with the assessor.
+        application_type:
+          type: string
+          enum:
+            - initial
+            - renewal
+            - late
+            - ""
+          description: "Application type: initial, renewal, or late (late-filing relief requested)."
+        proof_of_ownership:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether proof of ownership (deed) is attached (yes/no).
+        proof_of_residency:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether proof of residency (driver licence, voter or vehicle registration) is attached (yes/no).
+        proof_of_age:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether proof of age is attached (yes/no).
+        proof_of_income:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether proof of income (tax return, benefit letter) is attached (yes/no).
+        proof_of_disability:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether proof of disability or VA rating is attached (yes/no).
+        appeal_requested:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant wants guidance on appealing the assessed value (yes/no).
+        notice_of_value_date:
+          type: [string, 'null']
+          format: date
+          description: Date of the assessment or value notice, which starts the appeal window.
+        appeal_filed:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether an assessment appeal has already been filed (yes/no).
+        penalty_acknowledged:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant acknowledged the penalty for a false statement (yes/no).
+        signed_by_applicant:
+          type: string
+          enum:
+            - "yes"
+            - "no"
+            - ""
+          description: Whether the applicant signed the declaration (yes/no).
+        signature_date:
+          type: [string, 'null']
+          format: date
+          description: Date the applicant signed the declaration.
+      required:
+        - created_at
+        - updated_at
+        - applicant_id
+        - applicant_name
+        - mailing_address
+        - state
+        - county
+        - parcel_number
+        - property_address
+        - property_type
+        - ownership_type
+        - owner_on_assessment_date
+        - occupied_as_primary_residence
+        - other_homestead_claimed
+        - claim_homestead
+        - claim_senior
+        - claim_disability
+        - claim_veteran
+        - claim_circuit_breaker
+        - application_type
+        - proof_of_ownership
+        - proof_of_residency
+        - proof_of_age
+        - proof_of_income
+        - proof_of_disability
+        - appeal_requested
+        - appeal_filed
+        - penalty_acknowledged
+        - signed_by_applicant
+      description: "Main United States property tax exemption application: parcel, ownership and occupancy on the assessment date, exemptions claimed, income, proof documents, filing date, appeal basics and the signed declaration."

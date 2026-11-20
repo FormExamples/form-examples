@@ -1,0 +1,27 @@
+# United Kingdom Vehicle Registration Application
+
+> Registering a vehicle with the Driver and Vehicle Licensing Agency (DVLA) in Great Britain: the **V62** application for a vehicle registration certificate (V5C, the log book), and the first-registration variants **V55/4** (new vehicle), **V55/5** (used vehicle), imported vehicles, and **V627/1** (rebuilt or kit vehicles). The applicant records who is applying, who the registered keeper and owner are, the vehicle's identity, the evidence enclosed, and the fee, and the form checks the application before it is posted.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

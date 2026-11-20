@@ -1,0 +1,179 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: property_tax_exemption_application
+
+syntax = "proto3";
+
+package form_examples.united_states_property_tax_exemption_application;
+
+enum PropertyTaxExemptionApplicationPropertyTypeEnum {
+  PROPERTYTYPE_UNSPECIFIED = 0;
+  PROPERTYTYPE_SINGLE_FAMILY = 1;  // single-family
+  PROPERTYTYPE_CONDOMINIUM = 2;  // condominium
+  PROPERTYTYPE_MANUFACTURED_HOME = 3;  // manufactured-home
+  PROPERTYTYPE_MULTI_UNIT = 4;  // multi-unit
+  PROPERTYTYPE_OTHER = 5;  // other
+}
+
+enum PropertyTaxExemptionApplicationOwnershipTypeEnum {
+  OWNERSHIPTYPE_UNSPECIFIED = 0;
+  OWNERSHIPTYPE_SOLE = 1;  // sole
+  OWNERSHIPTYPE_JOINT = 2;  // joint
+  OWNERSHIPTYPE_TRUST = 3;  // trust
+  OWNERSHIPTYPE_LIFE_ESTATE = 4;  // life-estate
+  OWNERSHIPTYPE_CONTRACT_BUYER = 5;  // contract-buyer
+  OWNERSHIPTYPE_OTHER = 6;  // other
+}
+
+enum PropertyTaxExemptionApplicationOwnerOnAssessmentDateEnum {
+  OWNERONASSESSMENTDATE_UNSPECIFIED = 0;
+  OWNERONASSESSMENTDATE_YES = 1;  // yes
+  OWNERONASSESSMENTDATE_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationOccupiedAsPrimaryResidenceEnum {
+  OCCUPIEDASPRIMARYRESIDENCE_UNSPECIFIED = 0;
+  OCCUPIEDASPRIMARYRESIDENCE_YES = 1;  // yes
+  OCCUPIEDASPRIMARYRESIDENCE_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationOtherHomesteadClaimedEnum {
+  OTHERHOMESTEADCLAIMED_UNSPECIFIED = 0;
+  OTHERHOMESTEADCLAIMED_YES = 1;  // yes
+  OTHERHOMESTEADCLAIMED_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationClaimHomesteadEnum {
+  CLAIMHOMESTEAD_UNSPECIFIED = 0;
+  CLAIMHOMESTEAD_YES = 1;  // yes
+  CLAIMHOMESTEAD_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationClaimSeniorEnum {
+  CLAIMSENIOR_UNSPECIFIED = 0;
+  CLAIMSENIOR_YES = 1;  // yes
+  CLAIMSENIOR_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationClaimDisabilityEnum {
+  CLAIMDISABILITY_UNSPECIFIED = 0;
+  CLAIMDISABILITY_YES = 1;  // yes
+  CLAIMDISABILITY_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationClaimVeteranEnum {
+  CLAIMVETERAN_UNSPECIFIED = 0;
+  CLAIMVETERAN_YES = 1;  // yes
+  CLAIMVETERAN_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationClaimCircuitBreakerEnum {
+  CLAIMCIRCUITBREAKER_UNSPECIFIED = 0;
+  CLAIMCIRCUITBREAKER_YES = 1;  // yes
+  CLAIMCIRCUITBREAKER_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationApplicationTypeEnum {
+  APPLICATIONTYPE_UNSPECIFIED = 0;
+  APPLICATIONTYPE_INITIAL = 1;  // initial
+  APPLICATIONTYPE_RENEWAL = 2;  // renewal
+  APPLICATIONTYPE_LATE = 3;  // late
+}
+
+enum PropertyTaxExemptionApplicationProofOfOwnershipEnum {
+  PROOFOFOWNERSHIP_UNSPECIFIED = 0;
+  PROOFOFOWNERSHIP_YES = 1;  // yes
+  PROOFOFOWNERSHIP_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationProofOfResidencyEnum {
+  PROOFOFRESIDENCY_UNSPECIFIED = 0;
+  PROOFOFRESIDENCY_YES = 1;  // yes
+  PROOFOFRESIDENCY_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationProofOfAgeEnum {
+  PROOFOFAGE_UNSPECIFIED = 0;
+  PROOFOFAGE_YES = 1;  // yes
+  PROOFOFAGE_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationProofOfIncomeEnum {
+  PROOFOFINCOME_UNSPECIFIED = 0;
+  PROOFOFINCOME_YES = 1;  // yes
+  PROOFOFINCOME_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationProofOfDisabilityEnum {
+  PROOFOFDISABILITY_UNSPECIFIED = 0;
+  PROOFOFDISABILITY_YES = 1;  // yes
+  PROOFOFDISABILITY_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationAppealRequestedEnum {
+  APPEALREQUESTED_UNSPECIFIED = 0;
+  APPEALREQUESTED_YES = 1;  // yes
+  APPEALREQUESTED_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationAppealFiledEnum {
+  APPEALFILED_UNSPECIFIED = 0;
+  APPEALFILED_YES = 1;  // yes
+  APPEALFILED_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationPenaltyAcknowledgedEnum {
+  PENALTYACKNOWLEDGED_UNSPECIFIED = 0;
+  PENALTYACKNOWLEDGED_YES = 1;  // yes
+  PENALTYACKNOWLEDGED_NO = 2;  // no
+}
+
+enum PropertyTaxExemptionApplicationSignedByApplicantEnum {
+  SIGNEDBYAPPLICANT_UNSPECIFIED = 0;
+  SIGNEDBYAPPLICANT_YES = 1;  // yes
+  SIGNEDBYAPPLICANT_NO = 2;  // no
+}
+
+message PropertyTaxExemptionApplication {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string applicant_id = 5;  // UUID — uuid
+  string assessor_id = 6;  // UUID — uuid
+  string applicant_name = 7;  // TEXT
+  string date_of_birth = 8;  // DATE — iso 8601 date
+  int32 age_on_assessment_date = 9;  // INTEGER
+  string mailing_address = 10;  // TEXT
+  string state = 11;  // VARCHAR(2) — max 2 chars
+  string county = 12;  // TEXT
+  string parcel_number = 13;  // VARCHAR(50) — max 50 chars
+  string property_address = 14;  // TEXT
+  PropertyTaxExemptionApplicationPropertyTypeEnum property_type = 15;  // VARCHAR(20)
+  PropertyTaxExemptionApplicationOwnershipTypeEnum ownership_type = 16;  // VARCHAR(20)
+  PropertyTaxExemptionApplicationOwnerOnAssessmentDateEnum owner_on_assessment_date = 17;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationOccupiedAsPrimaryResidenceEnum occupied_as_primary_residence = 18;  // VARCHAR(5)
+  string occupancy_start_date = 19;  // DATE — iso 8601 date
+  PropertyTaxExemptionApplicationOtherHomesteadClaimedEnum other_homestead_claimed = 20;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationClaimHomesteadEnum claim_homestead = 21;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationClaimSeniorEnum claim_senior = 22;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationClaimDisabilityEnum claim_disability = 23;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationClaimVeteranEnum claim_veteran = 24;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationClaimCircuitBreakerEnum claim_circuit_breaker = 25;  // VARCHAR(5)
+  int32 veteran_disability_percent = 26;  // INTEGER
+  int32 household_income_dollars = 27;  // INTEGER
+  int32 income_tax_year = 28;  // INTEGER
+  int32 assessment_year = 29;  // INTEGER
+  string filing_date = 30;  // DATE — iso 8601 date
+  PropertyTaxExemptionApplicationApplicationTypeEnum application_type = 31;  // VARCHAR(10)
+  PropertyTaxExemptionApplicationProofOfOwnershipEnum proof_of_ownership = 32;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationProofOfResidencyEnum proof_of_residency = 33;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationProofOfAgeEnum proof_of_age = 34;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationProofOfIncomeEnum proof_of_income = 35;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationProofOfDisabilityEnum proof_of_disability = 36;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationAppealRequestedEnum appeal_requested = 37;  // VARCHAR(5)
+  string notice_of_value_date = 38;  // DATE — iso 8601 date
+  PropertyTaxExemptionApplicationAppealFiledEnum appeal_filed = 39;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationPenaltyAcknowledgedEnum penalty_acknowledged = 40;  // VARCHAR(5)
+  PropertyTaxExemptionApplicationSignedByApplicantEnum signed_by_applicant = 41;  // VARCHAR(5)
+  string signature_date = 42;  // DATE — iso 8601 date
+}

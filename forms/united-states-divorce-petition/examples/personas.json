@@ -1,0 +1,799 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validatePetition",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validatePetition(d) returns only { readinessClass, propertyRegime, earliestDecreeDate, stateRuleKnown } with no flags, so this is a SPLIT engine: the oracle pins detectFlaggedIssues(state) as expected.flaggedIssues with flagsArgs [\"state\"], mirroring form-app.js's detectFlaggedIssues(state). Classification is first-match: not-yet-eligible (state or county residency short, separation short, decree before the waiting period), then incomplete (core details, custody plan or child-support worksheet, unavailable fault ground, uncontested without agreement, decree without service), else ready-to-file. All dates come from the persona state, so no clock is read.",
+  "personas": [
+    {
+      "name": "Ready to file: Illinois uncontested, no children, served by acceptance",
+      "description": "Both spouses agree; 14 months in Illinois (90 days needed), settlement agreement signed, financial disclosure ready, respondent signed an acceptance of service a week after filing, no children, no decree yet. Illinois has no waiting period before the decree. Expect readinessClass 'ready-to-file', property regime equitable, and no flags.",
+      "state": {
+        "filing": {
+          "state": "IL",
+          "county": "Cook",
+          "filingDate": "2026-08-03",
+          "caseType": "uncontested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Maria L. Alvarez",
+          "respondentName": "Daniel R. Alvarez",
+          "marriageDate": "2015-06-20",
+          "marriagePlace": "Chicago, IL",
+          "separationDate": "2026-01-10",
+          "petitionerResidencyMonths": 168,
+          "countyResidencyDays": 5000,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "equitable",
+          "settlementAgreementSigned": "yes",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "acceptance",
+          "serviceDate": "2026-08-10",
+          "respondentResponded": "yes"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-file",
+        "propertyRegime": "equitable",
+        "earliestDecreeDate": null,
+        "stateRuleKnown": true,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Ready to file: California uncontested with children, waiting period pending",
+      "description": "California uncontested no-fault with two minor children, custody plan and guideline worksheet done ($1,240 a month), 9 months in state and 5 months in county, served personally on 2026-07-20. Expect 'ready-to-file', community property, earliest decree 2027-01-21 (six months and a day from service) and only the low waiting-period-pending flag.",
+      "state": {
+        "filing": {
+          "state": "CA",
+          "county": "Alameda",
+          "filingDate": "2026-07-06",
+          "caseType": "uncontested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Priya N. Shah",
+          "respondentName": "Arjun K. Shah",
+          "marriageDate": "2016-02-14",
+          "marriagePlace": "San Jose, CA",
+          "separationDate": "2026-03-01",
+          "petitionerResidencyMonths": 108,
+          "countyResidencyDays": 900,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "yes",
+          "childrenCount": 2,
+          "childrenHomeStateMonths": 96,
+          "pregnant": "no",
+          "custodyPlanDocumented": "yes",
+          "childSupportWorksheetCompleted": "yes",
+          "childSupportMonthlyAmount": 1240
+        },
+        "property": {
+          "propertyDivisionApproach": "community",
+          "settlementAgreementSigned": "yes",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "personal",
+          "serviceDate": "2026-07-20",
+          "respondentResponded": "no"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-file",
+        "propertyRegime": "community",
+        "earliestDecreeDate": "2027-01-21",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-WAITING-002",
+            "category": "waiting-period-pending",
+            "priority": "low",
+            "description": "California has a waiting period; the earliest date a decree may be entered is 2027-01-21.",
+            "suggestedAction": "Do not schedule the final hearing or submit the decree before that date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not yet eligible: Texas residency and county residency short",
+      "description": "Texas petition filed after only 4 months in the state and 60 days in the county (6 months and 90 days are required). Everything else is complete. Expect 'not-yet-eligible' with high state-residency and county-residency flags and the low waiting-period flag (60 days from filing).",
+      "state": {
+        "filing": {
+          "state": "TX",
+          "county": "Travis",
+          "filingDate": "2026-08-10",
+          "caseType": "uncontested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Hannah J. Brooks",
+          "respondentName": "Tyler M. Brooks",
+          "marriageDate": "2019-09-07",
+          "marriagePlace": "Dallas, TX",
+          "separationDate": "2026-05-01",
+          "petitionerResidencyMonths": 4,
+          "countyResidencyDays": 60,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "community",
+          "settlementAgreementSigned": "yes",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "acceptance",
+          "serviceDate": "2026-08-12",
+          "respondentResponded": "yes"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "not-yet-eligible",
+        "propertyRegime": "community",
+        "earliestDecreeDate": "2026-10-09",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-RESIDENCY-001",
+            "category": "state-residency",
+            "priority": "high",
+            "description": "The petitioner has lived in Texas for 4 month(s); 6 month(s) are required before filing (Tex. Fam. Code 6.301 (6 months state, 90 days county), 6.702 (60 days from filing)).",
+            "suggestedAction": "Wait until the residency period is met, or file in a state where a spouse already meets it."
+          },
+          {
+            "id": "F-DIV-COUNTY-001",
+            "category": "county-residency",
+            "priority": "high",
+            "description": "The petitioner has lived in the county for 60 day(s); 90 days are required in Texas.",
+            "suggestedAction": "Wait until the county residency period is met, or file in the county where it is met."
+          },
+          {
+            "id": "F-DIV-WAITING-002",
+            "category": "waiting-period-pending",
+            "priority": "low",
+            "description": "Texas has a waiting period; the earliest date a decree may be entered is 2026-10-09.",
+            "suggestedAction": "Do not schedule the final hearing or submit the decree before that date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not yet eligible: Pennsylvania contested no-fault, separation too short",
+      "description": "Contested Pennsylvania no-fault petition under 3301(d); the spouses separated 2026-03-01 and the petition is filed 2026-08-15, about 167 days against the one year required. Expect 'not-yet-eligible' with the high separation flag, and the low waiting-period flag (90 days from service).",
+      "state": {
+        "filing": {
+          "state": "PA",
+          "county": "Allegheny",
+          "filingDate": "2026-08-15",
+          "caseType": "contested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Grace E. Kowalski",
+          "respondentName": "Peter J. Kowalski",
+          "marriageDate": "2012-10-13",
+          "marriagePlace": "Pittsburgh, PA",
+          "separationDate": "2026-03-01",
+          "petitionerResidencyMonths": 240,
+          "countyResidencyDays": 7000,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "equitable",
+          "settlementAgreementSigned": "no",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "yes"
+        },
+        "service": {
+          "serviceMethod": "personal",
+          "serviceDate": "2026-08-25",
+          "respondentResponded": "yes"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "not-yet-eligible",
+        "propertyRegime": "equitable",
+        "earliestDecreeDate": "2026-11-23",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-SEPARATION-001",
+            "category": "separation-period",
+            "priority": "high",
+            "description": "A contested no-fault divorce in Pennsylvania needs 365 days of separation before filing, and the stated separation date is too recent.",
+            "suggestedAction": "Wait until the separation period has run, obtain the respondent's written agreement where the state allows, or plead an available fault ground."
+          },
+          {
+            "id": "F-DIV-WAITING-002",
+            "category": "waiting-period-pending",
+            "priority": "low",
+            "description": "Pennsylvania has a waiting period; the earliest date a decree may be entered is 2026-11-23.",
+            "suggestedAction": "Do not schedule the final hearing or submit the decree before that date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Florida with a fault ground, missing names and children paperwork",
+      "description": "Florida has no fault grounds (only irretrievable breakdown), yet adultery is pleaded; the respondent and marriage date are missing; there are children with no custody plan or child-support worksheet; no financial disclosure. Expect 'incomplete' with core-missing, ground-not-available, custody-plan, child-support and financial-disclosure flags.",
+      "state": {
+        "filing": {
+          "state": "FL",
+          "county": "Orange",
+          "filingDate": "2026-08-20",
+          "caseType": "contested",
+          "groundType": "fault",
+          "faultGround": "adultery"
+        },
+        "spouses": {
+          "petitionerName": "Carla M. Reyes",
+          "respondentName": "",
+          "marriageDate": null,
+          "marriagePlace": "",
+          "separationDate": null,
+          "petitionerResidencyMonths": 30,
+          "countyResidencyDays": 900,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "yes",
+          "childrenCount": 1,
+          "childrenHomeStateMonths": 30,
+          "pregnant": "no",
+          "custodyPlanDocumented": "no",
+          "childSupportWorksheetCompleted": "no",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "equitable",
+          "settlementAgreementSigned": "no",
+          "financialDisclosureFiled": "no",
+          "spousalSupportRequested": "yes"
+        },
+        "service": {
+          "serviceMethod": "none",
+          "serviceDate": null,
+          "respondentResponded": ""
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "propertyRegime": "equitable",
+        "earliestDecreeDate": "2026-09-09",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-CORE-MISSING-001",
+            "category": "missing-core-details",
+            "priority": "high",
+            "description": "Required petition details are missing: respondent name, marriage date.",
+            "suggestedAction": "Complete every required item before filing."
+          },
+          {
+            "id": "F-DIV-GROUND-001",
+            "category": "ground-not-available",
+            "priority": "high",
+            "description": "Florida has no fault grounds for divorce; only a no-fault ground (irretrievable breakdown or irreconcilable differences) can be pleaded.",
+            "suggestedAction": "Plead the state's no-fault ground instead of a fault ground."
+          },
+          {
+            "id": "F-DIV-CUSTODY-001",
+            "category": "custody-plan-missing",
+            "priority": "high",
+            "description": "There are minor children but no custody and parenting-time plan is documented.",
+            "suggestedAction": "Prepare a parenting plan (legal and physical custody, parenting time, decision-making) to file with the petition."
+          },
+          {
+            "id": "F-DIV-CHILDSUPPORT-001",
+            "category": "child-support-missing",
+            "priority": "high",
+            "description": "There are minor children but the state child-support guideline worksheet is not completed.",
+            "suggestedAction": "Complete the state guideline worksheet from both parents' incomes and parenting time, and record the monthly amount."
+          },
+          {
+            "id": "F-DIV-DISCLOSURE-001",
+            "category": "financial-disclosure-missing",
+            "priority": "medium",
+            "description": "The financial disclosure or affidavit is not filed or ready. Most states require sworn disclosure of income, assets and debts.",
+            "suggestedAction": "Complete the state financial affidavit or disclosure form and exchange it with the other spouse."
+          },
+          {
+            "id": "F-DIV-SERVICE-002",
+            "category": "service-incomplete",
+            "priority": "low",
+            "description": "The respondent has not yet been served. Service of process follows filing.",
+            "suggestedAction": "After filing, serve the respondent personally, by acceptance of service, or by another method the court allows, and file proof of service."
+          },
+          {
+            "id": "F-DIV-WAITING-002",
+            "category": "waiting-period-pending",
+            "priority": "low",
+            "description": "Florida has a waiting period; the earliest date a decree may be entered is 2026-09-09.",
+            "suggestedAction": "Do not schedule the final hearing or submit the decree before that date."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Not yet eligible: Washington decree entered before the 90-day waiting period",
+      "description": "Washington petition filed 2026-07-01, served 2026-07-10, but a decree is recorded as entered 2026-08-20; the 90 days run from the later of filing or service, so the earliest decree date is 2026-10-08. Name restoration is requested without a name and no divorce certificate is requested. Expect 'not-yet-eligible' with decree-before-waiting-period, name-restoration and certificate flags.",
+      "state": {
+        "filing": {
+          "state": "WA",
+          "county": "King",
+          "filingDate": "2026-07-01",
+          "caseType": "uncontested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Olivia T. Nguyen",
+          "respondentName": "Ethan P. Nguyen",
+          "marriageDate": "2018-05-12",
+          "marriagePlace": "Seattle, WA",
+          "separationDate": "2026-02-01",
+          "petitionerResidencyMonths": 96,
+          "countyResidencyDays": 2800,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "community",
+          "settlementAgreementSigned": "yes",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "personal",
+          "serviceDate": "2026-07-10",
+          "respondentResponded": "yes"
+        },
+        "decree": {
+          "decreeEntered": "yes",
+          "decreeDate": "2026-08-20",
+          "nameRestorationRequested": "yes",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "not-yet-eligible",
+        "propertyRegime": "community",
+        "earliestDecreeDate": "2026-10-08",
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-WAITING-001",
+            "category": "decree-before-waiting-period",
+            "priority": "high",
+            "description": "The decree date 2026-08-20 is before the earliest permitted date 2026-10-08 under the Washington waiting period.",
+            "suggestedAction": "Check the decree and waiting-period dates; a decree entered early may be void or voidable."
+          },
+          {
+            "id": "F-DIV-NAME-001",
+            "category": "name-restoration-incomplete",
+            "priority": "low",
+            "description": "Restoration of a former name is requested, but the name to restore is not stated.",
+            "suggestedAction": "State the exact former name to be restored in the petition and decree."
+          },
+          {
+            "id": "F-DIV-CERTIFICATE-001",
+            "category": "certificate-not-requested",
+            "priority": "low",
+            "description": "The decree is entered but no vital-records divorce certificate or certified decree is requested.",
+            "suggestedAction": "Order certified copies from the clerk, and a divorce certificate from the state vital-records office if needed (for example for a name change or remarriage)."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready to file with flags: unknown state, UCCJEA gap, military respondent, publication",
+      "description": "Minnesota is not in the verified rule table, so the default 90-day domicile rule applies and a verify-state-rule flag is raised. The children have lived there only 4 months (UCCJEA six-month home-state test), the respondent is on active duty and has not appeared, service is by publication, and no financial disclosure is ready. Expect 'ready-to-file' with unknown-state, home-state, military, publication and disclosure flags.",
+      "state": {
+        "filing": {
+          "state": "MN",
+          "county": "Hennepin",
+          "filingDate": "2026-08-05",
+          "caseType": "contested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Sofia A. Lindqvist",
+          "respondentName": "Marcus D. Lindqvist",
+          "marriageDate": "2014-07-19",
+          "marriagePlace": "Duluth, MN",
+          "separationDate": "2025-12-01",
+          "petitionerResidencyMonths": 48,
+          "countyResidencyDays": 1400,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "yes"
+        },
+        "children": {
+          "hasMinorChildren": "yes",
+          "childrenCount": 2,
+          "childrenHomeStateMonths": 4,
+          "pregnant": "no",
+          "custodyPlanDocumented": "yes",
+          "childSupportWorksheetCompleted": "yes",
+          "childSupportMonthlyAmount": 980
+        },
+        "property": {
+          "propertyDivisionApproach": "",
+          "settlementAgreementSigned": "no",
+          "financialDisclosureFiled": "no",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "publication",
+          "serviceDate": "2026-08-30",
+          "respondentResponded": "no"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-file",
+        "propertyRegime": "unknown",
+        "earliestDecreeDate": null,
+        "stateRuleKnown": false,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-HOMESTATE-001",
+            "category": "home-state-jurisdiction",
+            "priority": "high",
+            "description": "The children have lived in MN for 4 month(s). Under the UCCJEA a state is the home state for custody only after six consecutive months, so the court may lack custody jurisdiction.",
+            "suggestedAction": "Confirm which state is the children's home state before asking this court to decide custody."
+          },
+          {
+            "id": "F-DIV-UNKNOWN-STATE-001",
+            "category": "unknown-state-rule",
+            "priority": "medium",
+            "description": "\"MN\" is not in this tool's verified state-rule table, so the default 90-day domicile rule was used.",
+            "suggestedAction": "Verify the residency, waiting-period and property rules with the state court website or an attorney before relying on this result."
+          },
+          {
+            "id": "F-DIV-DISCLOSURE-001",
+            "category": "financial-disclosure-missing",
+            "priority": "medium",
+            "description": "The financial disclosure or affidavit is not filed or ready. Most states require sworn disclosure of income, assets and debts.",
+            "suggestedAction": "Complete the state financial affidavit or disclosure form and exchange it with the other spouse."
+          },
+          {
+            "id": "F-DIV-MILITARY-001",
+            "category": "military-respondent",
+            "priority": "medium",
+            "description": "The respondent is on active military duty and has not appeared. The Servicemembers Civil Relief Act (50 U.S.C. 3931) requires an affidavit before a default judgment.",
+            "suggestedAction": "File the SCRA affidavit (check the DMDC database) before requesting a default decree."
+          },
+          {
+            "id": "F-DIV-PUBLICATION-001",
+            "category": "service-by-publication",
+            "priority": "medium",
+            "description": "Service by publication is a last resort and normally needs a court order and proof of a diligent search for the respondent.",
+            "suggestedAction": "File a motion for alternate service with a declaration of diligent search before publishing."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ready to file with flag: New York with the shortened residency and a property mismatch",
+      "description": "New York needs two years of residency, or one year when the spouses married or lived as spouses in New York; this petitioner has 14 months and married in New York, so residency is met. The petition pleads community property although New York uses equitable distribution. A decree is entered with a certificate requested. Expect 'ready-to-file' with the property-approach-mismatch flag only.",
+      "state": {
+        "filing": {
+          "state": "NY",
+          "county": "Kings",
+          "filingDate": "2026-06-01",
+          "caseType": "uncontested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Renee S. Dubois",
+          "respondentName": "Paul A. Dubois",
+          "marriageDate": "2017-04-22",
+          "marriagePlace": "Brooklyn, NY",
+          "separationDate": "2025-09-01",
+          "petitionerResidencyMonths": 14,
+          "countyResidencyDays": 420,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "community",
+          "settlementAgreementSigned": "yes",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "acceptance",
+          "serviceDate": "2026-06-05",
+          "respondentResponded": "yes"
+        },
+        "decree": {
+          "decreeEntered": "yes",
+          "decreeDate": "2026-09-01",
+          "nameRestorationRequested": "yes",
+          "nameToRestore": "Renee S. Martin",
+          "certificateRequested": "yes"
+        }
+      },
+      "expected": {
+        "readinessClass": "ready-to-file",
+        "propertyRegime": "equitable",
+        "earliestDecreeDate": null,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-PROPERTY-001",
+            "category": "property-approach-mismatch",
+            "priority": "medium",
+            "description": "The petition pleads community property division, but New York is a equitable state.",
+            "suggestedAction": "Plead the equitable approach used in New York."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: Ohio contested no-fault with no separation date",
+      "description": "Ohio contested no-fault needs a year of separation (ORC 3105.01(J)) but no separation date is recorded; 7 months in Ohio and 120 days in the county satisfy residency. Expect 'incomplete' with core-missing and separation-period (medium) flags.",
+      "state": {
+        "filing": {
+          "state": "OH",
+          "county": "Franklin",
+          "filingDate": "2026-08-12",
+          "caseType": "contested",
+          "groundType": "no-fault",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "Kevin B. Walsh",
+          "respondentName": "Laura C. Walsh",
+          "marriageDate": "2010-03-27",
+          "marriagePlace": "Columbus, OH",
+          "separationDate": null,
+          "petitionerResidencyMonths": 7,
+          "countyResidencyDays": 120,
+          "marriedOrLivedInState": "yes",
+          "respondentMilitary": "no"
+        },
+        "children": {
+          "hasMinorChildren": "no",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "equitable",
+          "settlementAgreementSigned": "no",
+          "financialDisclosureFiled": "yes",
+          "spousalSupportRequested": "no"
+        },
+        "service": {
+          "serviceMethod": "mail",
+          "serviceDate": "2026-08-20",
+          "respondentResponded": "no"
+        },
+        "decree": {
+          "decreeEntered": "no",
+          "decreeDate": null,
+          "nameRestorationRequested": "no",
+          "nameToRestore": "",
+          "certificateRequested": "no"
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "propertyRegime": "equitable",
+        "earliestDecreeDate": null,
+        "stateRuleKnown": true,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-CORE-MISSING-001",
+            "category": "missing-core-details",
+            "priority": "high",
+            "description": "Required petition details are missing: separation date.",
+            "suggestedAction": "Complete every required item before filing."
+          },
+          {
+            "id": "F-DIV-SEPARATION-002",
+            "category": "separation-period",
+            "priority": "medium",
+            "description": "Ohio requires 365 days of separation for a contested no-fault divorce, but no separation date is recorded.",
+            "suggestedAction": "Record the date the spouses began living separate and apart."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: blank petition",
+      "description": "A fresh blank petition. Expect 'incomplete', with core-missing, financial-disclosure and not-yet-served flags.",
+      "state": {
+        "filing": {
+          "state": "",
+          "county": "",
+          "filingDate": null,
+          "caseType": "",
+          "groundType": "",
+          "faultGround": ""
+        },
+        "spouses": {
+          "petitionerName": "",
+          "respondentName": "",
+          "marriageDate": null,
+          "marriagePlace": "",
+          "separationDate": null,
+          "petitionerResidencyMonths": null,
+          "countyResidencyDays": null,
+          "marriedOrLivedInState": "",
+          "respondentMilitary": ""
+        },
+        "children": {
+          "hasMinorChildren": "",
+          "childrenCount": null,
+          "childrenHomeStateMonths": null,
+          "pregnant": "",
+          "custodyPlanDocumented": "",
+          "childSupportWorksheetCompleted": "",
+          "childSupportMonthlyAmount": null
+        },
+        "property": {
+          "propertyDivisionApproach": "",
+          "settlementAgreementSigned": "",
+          "financialDisclosureFiled": "",
+          "spousalSupportRequested": ""
+        },
+        "service": {
+          "serviceMethod": "",
+          "serviceDate": null,
+          "respondentResponded": ""
+        },
+        "decree": {
+          "decreeEntered": "",
+          "decreeDate": null,
+          "nameRestorationRequested": "",
+          "nameToRestore": "",
+          "certificateRequested": ""
+        }
+      },
+      "expected": {
+        "readinessClass": "incomplete",
+        "propertyRegime": "unknown",
+        "earliestDecreeDate": null,
+        "stateRuleKnown": false,
+        "flaggedIssues": [
+          {
+            "id": "F-DIV-CORE-MISSING-001",
+            "category": "missing-core-details",
+            "priority": "high",
+            "description": "Required petition details are missing: filing state, county, filing date, uncontested or contested, ground type, petitioner name, respondent name, marriage date, petitioner residency, minor children answer.",
+            "suggestedAction": "Complete every required item before filing."
+          },
+          {
+            "id": "F-DIV-DISCLOSURE-001",
+            "category": "financial-disclosure-missing",
+            "priority": "medium",
+            "description": "The financial disclosure or affidavit is not filed or ready. Most states require sworn disclosure of income, assets and debts.",
+            "suggestedAction": "Complete the state financial affidavit or disclosure form and exchange it with the other spouse."
+          },
+          {
+            "id": "F-DIV-SERVICE-002",
+            "category": "service-incomplete",
+            "priority": "low",
+            "description": "The respondent has not yet been served. Service of process follows filing.",
+            "suggestedAction": "After filing, serve the respondent personally, by acceptance of service, or by another method the court allows, and file proof of service."
+          }
+        ]
+      }
+    }
+  ]
+}

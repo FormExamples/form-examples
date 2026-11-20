@@ -1,0 +1,44 @@
+// Generated from sql/. Do not edit by hand.
+// SOURCE: united_kingdom_death_registration_grade
+
+syntax = "proto3";
+
+package form_examples.united_kingdom_death_registration;
+
+enum UnitedKingdomDeathRegistrationGradeRegistrationClassEnum {
+  REGISTRATIONCLASS_UNSPECIFIED = 0;
+  REGISTRATIONCLASS_READY_TO_REGISTER = 1;  // ready-to-register
+  REGISTRATIONCLASS_INCOMPLETE = 2;  // incomplete
+  REGISTRATIONCLASS_REFERRED_TO_CORONER_PENDING = 3;  // referred-to-coroner-pending
+  REGISTRATIONCLASS_REGISTERED = 4;  // registered
+}
+
+enum UnitedKingdomDeathRegistrationGradeDeadlineStatusEnum {
+  DEADLINESTATUS_UNSPECIFIED = 0;
+  DEADLINESTATUS_NOT_STARTED = 1;  // not-started
+  DEADLINESTATUS_PAUSED_CORONER = 2;  // paused-coroner
+  DEADLINESTATUS_ON_TRACK = 3;  // on-track
+  DEADLINESTATUS_DUE_SOON = 4;  // due-soon
+  DEADLINESTATUS_OVERDUE = 5;  // overdue
+  DEADLINESTATUS_REGISTERED = 6;  // registered
+  DEADLINESTATUS_REGISTERED_LATE = 7;  // registered-late
+}
+
+enum UnitedKingdomDeathRegistrationGradeInformantQualifiedEnum {
+  INFORMANTQUALIFIED_UNSPECIFIED = 0;
+  INFORMANTQUALIFIED_YES = 1;  // yes
+  INFORMANTQUALIFIED_NO = 2;  // no
+}
+
+message UnitedKingdomDeathRegistrationGrade {
+  string id = 1;  // UUID — uuid
+  string created_at = 2;  // TIMESTAMPTZ — iso 8601
+  string updated_at = 3;  // TIMESTAMPTZ — iso 8601
+  string deleted_at = 4;  // TIMESTAMPTZ — iso 8601
+  string united_kingdom_death_registration_id = 5;  // UUID — uuid
+  UnitedKingdomDeathRegistrationGradeRegistrationClassEnum registration_class = 6;  // VARCHAR(30)
+  UnitedKingdomDeathRegistrationGradeDeadlineStatusEnum deadline_status = 7;  // VARCHAR(20)
+  int32 days_since_confirmation = 8;  // INTEGER
+  UnitedKingdomDeathRegistrationGradeInformantQualifiedEnum informant_qualified = 9;  // VARCHAR(5)
+  string graded_at = 10;  // TIMESTAMPTZ — iso 8601
+}

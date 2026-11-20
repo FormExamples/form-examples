@@ -1,0 +1,1125 @@
+{
+  "engine": "front-end-with-html",
+  "graderHint": "validateCertificate",
+  "flagsHint": "detectFlaggedIssues",
+  "flagsArgs": [
+    "state"
+  ],
+  "note": "validateCertificate(d) returns { validityClass, underlyingCause, referralIndicated }; flags come from detectFlaggedIssues(state), mirroring form-app.js, so this is a SPLIT engine and the oracle pins the flags with flagsArgs [\"state\"]. Classification is first-match: referralIndicated (not already certified by a medical examiner or coroner, and a referral answer or listed reason, a non-natural manner, injury or poisoning wording in the cause lines, or an unattended death) -> refer-to-medical-examiner-or-coroner; Part I line (a) missing, a mechanism of death as the only cause, or any required item blank -> incomplete; else valid. underlyingCause is the lowest completed Part I line. Flags are stable-sorted high > medium > low. The wall clock is irrelevant: every deadline compares dates inside the state. Regenerate expected with: bin/test-personas united-states-standard-certificate-of-death --update",
+  "personas": [
+    {
+      "name": "Valid: natural death in a California hospital, complete certificate",
+      "description": "Expected death of an 83-year-old woman: aspiration pneumonia due to an ischemic stroke due to atrial fibrillation, Part II type 2 diabetes mellitus, all intervals given, natural manner, tobacco no, pregnancy not applicable, certified the day of death, filed in 3 days, five copies at the California fee of $24 each. Expect valid, underlying cause Atrial fibrillation, no flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "CA"
+        },
+        "decedent": {
+          "decedentName": "Ellis, Margaret",
+          "sex": "female",
+          "dateOfBirth": "1943-02-11",
+          "ageYears": 83,
+          "maritalStatus": "widowed",
+          "veteranStatus": "no",
+          "stateOfResidence": "CA"
+        },
+        "death": {
+          "placeOfDeathType": "hospital-inpatient",
+          "placeOfDeathFacility": "St. Mary’s Hospital, Sacramento, CA",
+          "dateOfDeath": "2026-06-19",
+          "timeOfDeath": "04:20"
+        },
+        "certifier": {
+          "certifierName": "Dr. Rosa Okafor",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "A123456",
+          "certificationDate": "2026-06-19",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-18"
+        },
+        "partI": {
+          "causeIaCondition": "Aspiration pneumonia",
+          "causeIaInterval": "3 days",
+          "causeIbCondition": "Ischemic stroke of the left middle cerebral artery",
+          "causeIbInterval": "2 weeks",
+          "causeIcCondition": "Atrial fibrillation",
+          "causeIcInterval": "6 years",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Type 2 diabetes mellitus",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "no",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "burial",
+          "dispositionDate": "2026-06-23",
+          "dispositionPlace": "Capital Memorial Cemetery",
+          "filedDate": "2026-06-22"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 5,
+          "requesterRelationship": "child",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 120
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Atrial fibrillation",
+        "referralIndicated": false,
+        "flaggedIssues": []
+      }
+    },
+    {
+      "name": "Incomplete: cardiac arrest as the only cause (Texas)",
+      "description": "A 74-year-old man whose only Part I line is \"Cardiac arrest\" with Part II empty. The NCHS Handbook forbids a mechanism standing alone. Everything else is complete, so the class is incomplete and F-MECHANISM-001 fires.",
+      "state": {
+        "jurisdiction": {
+          "state": "TX"
+        },
+        "decedent": {
+          "decedentName": "Nowak, Piotr",
+          "sex": "male",
+          "dateOfBirth": "1951-09-30",
+          "ageYears": 74,
+          "maritalStatus": "married",
+          "veteranStatus": "no",
+          "stateOfResidence": "TX"
+        },
+        "death": {
+          "placeOfDeathType": "decedent-home",
+          "placeOfDeathFacility": "1140 Bluebonnet Lane, Austin, TX",
+          "dateOfDeath": "2026-06-22",
+          "timeOfDeath": "18:45"
+        },
+        "certifier": {
+          "certifierName": "Dr. Lena Mensah",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "A123456",
+          "certificationDate": "2026-06-23",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-18"
+        },
+        "partI": {
+          "causeIaCondition": "Cardiac arrest",
+          "causeIaInterval": "minutes",
+          "causeIbCondition": "",
+          "causeIbInterval": "",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "probably",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "burial",
+          "dispositionDate": "2026-06-26",
+          "dispositionPlace": "Capital Memorial Cemetery",
+          "filedDate": "2026-06-25"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 2,
+          "requesterRelationship": "child",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 23
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "underlyingCause": "Cardiac arrest",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-MECHANISM-001",
+            "category": "mechanism-of-death",
+            "priority": "high",
+            "description": "The only cause given (\"Cardiac arrest\") is a mechanism of death, not a disease or injury. NCHS instructs that a mechanism must not be listed alone.",
+            "suggestedAction": "State the underlying disease or injury that led to the mechanism on a lower Part I line."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Refer: accidental fall, cremation planned, copies ordered (New York)",
+      "description": "A 58-year-old man who fell from a ladder: subdural hematoma due to blunt force head injury due to a fall from a ladder. Manner accident, referral recorded with reason accident, injury items complete, cremation planned and two copies ordered before the case is released. Expect refer-to-medical-examiner-or-coroner with F-ME-REFERRAL-001, F-CREMATION-HOLD-001 and F-COPIES-001.",
+      "state": {
+        "jurisdiction": {
+          "state": "NY"
+        },
+        "decedent": {
+          "decedentName": "Okafor, Chidi",
+          "sex": "male",
+          "dateOfBirth": "1968-03-02",
+          "ageYears": 58,
+          "maritalStatus": "married",
+          "veteranStatus": "yes",
+          "stateOfResidence": "NY"
+        },
+        "death": {
+          "placeOfDeathType": "hospital-emergency-outpatient",
+          "placeOfDeathFacility": "Bellevue Hospital Center, New York, NY",
+          "dateOfDeath": "2026-06-25",
+          "timeOfDeath": "22:10"
+        },
+        "certifier": {
+          "certifierName": "Dr. James Hughes",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "NY-338812",
+          "certificationDate": "2026-06-26",
+          "attendedDeceased": "no",
+          "lastSeenAliveDate": null
+        },
+        "partI": {
+          "causeIaCondition": "Subdural hematoma",
+          "causeIaInterval": "hours",
+          "causeIbCondition": "Blunt force head injury",
+          "causeIbInterval": "hours",
+          "causeIcCondition": "Fall from a ladder",
+          "causeIcInterval": "hours",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "",
+          "autopsyPerformed": "yes",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "accident",
+          "tobaccoUseContributed": "no",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": "2026-06-25",
+          "injuryTime": "20:30",
+          "injuryPlace": "Decedent’s home",
+          "injuryAtWork": "no",
+          "injuryLocation": "88 Court Street, Brooklyn, NY 11201",
+          "injuryDescription": "Fell from a ladder while painting a ceiling",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "yes",
+          "referralReason": "accident",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "cremation",
+          "dispositionDate": "2026-06-28",
+          "dispositionPlace": "Green-Wood Crematory",
+          "filedDate": "2026-06-27"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 2,
+          "requesterRelationship": "spouse",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 60
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-medical-examiner-or-coroner",
+        "underlyingCause": "Fall from a ladder",
+        "referralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-ME-REFERRAL-001",
+            "category": "medical-examiner-referral-required",
+            "priority": "high",
+            "description": "A medical examiner or coroner referral criterion is asserted or implied (referral recorded; accident or injury; manner of death is accident; injury, poisoning or procedure wording in the cause lines; decedent not attended by the certifier). A physician should not certify the cause and manner of death until the medical examiner or coroner has accepted or declined jurisdiction.",
+            "suggestedAction": "Report the death to the medical examiner or coroner and let that office complete the cause-of-death and manner-of-death items, or release the case to you in writing."
+          },
+          {
+            "id": "F-CREMATION-HOLD-001",
+            "category": "disposition",
+            "priority": "high",
+            "description": "Cremation is planned while a medical examiner or coroner referral is open or the manner of death is pending or undetermined. Cremation is irreversible and most states require the medical examiner or coroner to authorize it first.",
+            "suggestedAction": "Hold the cremation until the medical examiner or coroner has released the body or issued a cremation authorization."
+          },
+          {
+            "id": "F-COPIES-001",
+            "category": "certified-copies",
+            "priority": "medium",
+            "description": "The certified-copy order has issues: certified copies are issued only from a registered certificate, and this one is not final.",
+            "suggestedAction": "Verify the requester’s identity and eligibility under state law, and order copies once the certificate is registered."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Incomplete: many gaps and unwritten abbreviations (Florida)",
+      "description": "A 36-year-old woman. Part I line (a) is empty while (b) says COPD and (c) says DM, so the sequence is illogical, the terms are abbreviated and diabetes has no type. Part II says only \"Diabetes\". Date of birth, manner, tobacco and pregnancy are blank, the certifier has no license number or date, and no funeral director is named. Expect incomplete with the full set of completeness flags.",
+      "state": {
+        "jurisdiction": {
+          "state": "FL"
+        },
+        "decedent": {
+          "decedentName": "Byrne, Aoife",
+          "sex": "female",
+          "dateOfBirth": null,
+          "ageYears": 36,
+          "maritalStatus": "never-married",
+          "veteranStatus": "no",
+          "stateOfResidence": "FL"
+        },
+        "death": {
+          "placeOfDeathType": "nursing-home",
+          "placeOfDeathFacility": "Palm Grove Care Center, Tampa, FL",
+          "dateOfDeath": "2026-06-25",
+          "timeOfDeath": null
+        },
+        "certifier": {
+          "certifierName": "Dr. Sunil Patel",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "",
+          "certificationDate": null,
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-24"
+        },
+        "partI": {
+          "causeIaCondition": "",
+          "causeIaInterval": "",
+          "causeIbCondition": "COPD",
+          "causeIbInterval": "",
+          "causeIcCondition": "DM",
+          "causeIcInterval": "10 years",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Diabetes",
+          "autopsyPerformed": "",
+          "autopsyFindingsAvailable": ""
+        },
+        "manner": {
+          "mannerOfDeath": "",
+          "tobaccoUseContributed": "",
+          "pregnancyStatus": ""
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "",
+          "funeralDirectorLicenseNumber": "",
+          "dispositionMethod": "",
+          "dispositionDate": null,
+          "dispositionPlace": "",
+          "filedDate": null
+        },
+        "copies": {
+          "certifiedCopiesRequested": null,
+          "requesterRelationship": "",
+          "requesterIdentityVerified": "",
+          "feePaidInUsd": null
+        }
+      },
+      "expected": {
+        "validityClass": "incomplete",
+        "underlyingCause": "DM",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-MISSING-PART-I-001",
+            "category": "missing-part-i",
+            "priority": "high",
+            "description": "No immediate cause of death is recorded on Part I line (a). Every certificate must record the final disease or condition resulting in death.",
+            "suggestedAction": "Record the immediate cause of death on Part I line (a), with the underlying cause on the lowest line used."
+          },
+          {
+            "id": "F-MANNER-001",
+            "category": "missing-manner",
+            "priority": "high",
+            "description": "Manner of death (natural, accident, suicide, homicide, pending investigation, or could not be determined) is not recorded.",
+            "suggestedAction": "Select the manner of death; use pending investigation rather than leaving the item blank when it is not yet known."
+          },
+          {
+            "id": "F-SEQUENCE-001",
+            "category": "illogical-sequence",
+            "priority": "medium",
+            "description": "The Part I lines are not in a downward causal order: a lower line is completed while the line above it is empty.",
+            "suggestedAction": "Fill the lines in order, from the immediate cause on line (a) down to the underlying cause, each \"due to\" the line below."
+          },
+          {
+            "id": "F-ABBREVIATION-001",
+            "category": "abbreviation-used",
+            "priority": "medium",
+            "description": "The cause lines use abbreviations (COPD, DM). The NCHS Handbook asks that every term be written in full; abbreviations can be misread by the coder.",
+            "suggestedAction": "Write each condition out in full. HIV and AIDS are the only abbreviations accepted."
+          },
+          {
+            "id": "F-SPECIFICITY-001",
+            "category": "nonspecific-cause",
+            "priority": "medium",
+            "description": "Diabetes is named without its type. The Handbook asks for type 1 or type 2 (or secondary or gestational) and any complications.",
+            "suggestedAction": "State the type of diabetes and any complication, for example \"Type 2 diabetes mellitus with chronic kidney disease\"."
+          },
+          {
+            "id": "F-PREGNANCY-001",
+            "category": "pregnancy-item",
+            "priority": "medium",
+            "description": "The pregnancy item is blank for a female decedent in the age band to which it applies (10 to 54, or age unknown).",
+            "suggestedAction": "Answer the pregnancy item; use \"unknown\" if the status cannot be determined."
+          },
+          {
+            "id": "F-CERTIFIER-001",
+            "category": "incomplete-certifier",
+            "priority": "medium",
+            "description": "Certifier items are blank: Certifier license number, Date certified.",
+            "suggestedAction": "Complete the certifier name, type, license number and the date certified."
+          },
+          {
+            "id": "F-DECEDENT-001",
+            "category": "incomplete-decedent",
+            "priority": "medium",
+            "description": "Decedent items are blank: Date of birth.",
+            "suggestedAction": "Complete the decedent items; the registrar cannot accept the certificate without them."
+          },
+          {
+            "id": "F-FUNERAL-DIRECTOR-001",
+            "category": "incomplete-funeral-director",
+            "priority": "medium",
+            "description": "Funeral director items are blank: Funeral director name, Method of disposition.",
+            "suggestedAction": "Complete the funeral director name and the method of disposition."
+          },
+          {
+            "id": "F-INTERVAL-001",
+            "category": "missing-interval",
+            "priority": "low",
+            "description": "Part I line (b) has no onset-to-death interval.",
+            "suggestedAction": "Add the approximate interval between onset and death for each completed line, even \"unknown\" when it is not known."
+          },
+          {
+            "id": "F-TOBACCO-001",
+            "category": "tobacco-item",
+            "priority": "low",
+            "description": "The item \"Did tobacco use contribute to death?\" is blank.",
+            "suggestedAction": "Answer yes, probably, no, or unknown."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with flags: unspecified cancer, late certification and filing (Ohio)",
+      "description": "A 66-year-old woman with sepsis due to metastatic cancer of the pancreas (no histologic type). Certified 3 days after death and filed 5 days after, against Ohio limits of 2 and 3. Complete otherwise, so the class is valid while F-SPECIFICITY-001, F-CERTIFY-DEADLINE-001 and F-FILING-DEADLINE-001 fire.",
+      "state": {
+        "jurisdiction": {
+          "state": "OH"
+        },
+        "decedent": {
+          "decedentName": "Fletcher, Rosemary",
+          "sex": "female",
+          "dateOfBirth": "1960-04-09",
+          "ageYears": 66,
+          "maritalStatus": "divorced",
+          "veteranStatus": "no",
+          "stateOfResidence": "OH"
+        },
+        "death": {
+          "placeOfDeathType": "hospice",
+          "placeOfDeathFacility": "Riverside Hospice, Columbus, OH",
+          "dateOfDeath": "2026-06-10",
+          "timeOfDeath": "03:05"
+        },
+        "certifier": {
+          "certifierName": "Dr. Alan Brooks",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "35.123456",
+          "certificationDate": "2026-06-13",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-09"
+        },
+        "partI": {
+          "causeIaCondition": "Sepsis",
+          "causeIaInterval": "2 days",
+          "causeIbCondition": "Metastatic cancer of the pancreas",
+          "causeIbInterval": "14 months",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Hypertension",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "yes",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "cremation",
+          "dispositionDate": "2026-06-16",
+          "dispositionPlace": "Columbus Crematory",
+          "filedDate": "2026-06-15"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 3,
+          "requesterRelationship": "child",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 63
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Metastatic cancer of the pancreas",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-SPECIFICITY-001",
+            "category": "nonspecific-cause",
+            "priority": "medium",
+            "description": "A cancer is named without a histologic type. The Handbook asks for the primary site and the histologic type, and whether the site is primary or metastatic.",
+            "suggestedAction": "State the primary site and cell type, for example \"Adenocarcinoma of the sigmoid colon\"."
+          },
+          {
+            "id": "F-CERTIFY-DEADLINE-001",
+            "category": "filing-deadline",
+            "priority": "medium",
+            "description": "The cause of death was certified 3 days after death; Ohio allows 2.",
+            "suggestedAction": "Certify promptly; if the deadline has passed, expect the registrar to ask for a late-filing explanation."
+          },
+          {
+            "id": "F-FILING-DEADLINE-001",
+            "category": "filing-deadline",
+            "priority": "medium",
+            "description": "The certificate was filed 5 days after death; Ohio allows 3. This deadline has not been independently verified against the statute; confirm it with the state registrar.",
+            "suggestedAction": "File with the local or state registrar as soon as possible; ask the registrar whether a delayed-registration procedure applies."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with flags: pregnancy at death, copy order problems (Illinois)",
+      "description": "A 31-year-old woman who died pregnant (amniotic fluid embolism). Valid certificate. The requester is outside the immediate family and unverified, and the fee paid ($57) differs from Illinois’s $19 plus $4 per additional copy ($27). Expect F-COPIES-001 and F-FEE-001 only.",
+      "state": {
+        "jurisdiction": {
+          "state": "IL"
+        },
+        "decedent": {
+          "decedentName": "Alvarez, Camila",
+          "sex": "female",
+          "dateOfBirth": "1995-08-21",
+          "ageYears": 30,
+          "maritalStatus": "married",
+          "veteranStatus": "no",
+          "stateOfResidence": "IL"
+        },
+        "death": {
+          "placeOfDeathType": "hospital-inpatient",
+          "placeOfDeathFacility": "Northwestern Memorial Hospital, Chicago, IL",
+          "dateOfDeath": "2026-06-27",
+          "timeOfDeath": "11:52"
+        },
+        "certifier": {
+          "certifierName": "Dr. Priya Raman",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "036-112233",
+          "certificationDate": "2026-06-28",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-27"
+        },
+        "partI": {
+          "causeIaCondition": "Cardiopulmonary collapse due to amniotic fluid embolism",
+          "causeIaInterval": "minutes",
+          "causeIbCondition": "Term intrauterine pregnancy in labor",
+          "causeIbInterval": "hours",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "no",
+          "pregnancyStatus": "pregnant-at-time-of-death"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "burial",
+          "dispositionDate": "2026-07-02",
+          "dispositionPlace": "Capital Memorial Cemetery",
+          "filedDate": "2026-06-30"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 3,
+          "requesterRelationship": "other",
+          "requesterIdentityVerified": "no",
+          "feePaidInUsd": 57
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Term intrauterine pregnancy in labor",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-COPIES-001",
+            "category": "certified-copies",
+            "priority": "medium",
+            "description": "The certified-copy order has issues: the requester’s identity is not recorded as verified; a requester outside the immediate family needs documented eligibility.",
+            "suggestedAction": "Verify the requester’s identity and eligibility under state law, and order copies once the certificate is registered."
+          },
+          {
+            "id": "F-FEE-001",
+            "category": "certified-copies",
+            "priority": "low",
+            "description": "The fee paid ($57.00) differs from the Illinois fee for 3 certified copies ($27.00).",
+            "suggestedAction": "Confirm the current fee with the issuing vital-records office; fees change and counties may add charges."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Refer: suicide by overdose with injury items missing and late filing (Washington)",
+      "description": "A 41-year-old man: acute diphenhydramine toxicity, manner suicide, referred to the medical examiner. The injury items are blank. Died Friday 2026-06-12 and filed Thursday 2026-06-18, four business days against Washington’s three. Expect refer, F-ME-REFERRAL-001, F-INJURY-001, F-FILING-DEADLINE-001 (unverified note).",
+      "state": {
+        "jurisdiction": {
+          "state": "WA"
+        },
+        "decedent": {
+          "decedentName": "Whitaker, Daniel",
+          "sex": "male",
+          "dateOfBirth": "1985-05-05",
+          "ageYears": 41,
+          "maritalStatus": "divorced",
+          "veteranStatus": "no",
+          "stateOfResidence": "WA"
+        },
+        "death": {
+          "placeOfDeathType": "decedent-home",
+          "placeOfDeathFacility": "2210 Pine Street, Seattle, WA",
+          "dateOfDeath": "2026-06-12",
+          "timeOfDeath": "07:30"
+        },
+        "certifier": {
+          "certifierName": "Dr. Mei Tanaka",
+          "certifierType": "certifying-physician",
+          "certifierLicenseNumber": "MD60112233",
+          "certificationDate": "2026-06-15",
+          "attendedDeceased": "no",
+          "lastSeenAliveDate": null
+        },
+        "partI": {
+          "causeIaCondition": "Acute diphenhydramine toxicity",
+          "causeIaInterval": "hours",
+          "causeIbCondition": "",
+          "causeIbInterval": "",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Major depressive disorder",
+          "autopsyPerformed": "yes",
+          "autopsyFindingsAvailable": "yes"
+        },
+        "manner": {
+          "mannerOfDeath": "suicide",
+          "tobaccoUseContributed": "unknown",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "yes",
+          "referralReason": "suicide",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "cremation",
+          "dispositionDate": "2026-06-16",
+          "dispositionPlace": "Evergreen Crematory",
+          "filedDate": "2026-06-18"
+        },
+        "copies": {
+          "certifiedCopiesRequested": null,
+          "requesterRelationship": "",
+          "requesterIdentityVerified": "",
+          "feePaidInUsd": null
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-medical-examiner-or-coroner",
+        "underlyingCause": "Acute diphenhydramine toxicity",
+        "referralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-ME-REFERRAL-001",
+            "category": "medical-examiner-referral-required",
+            "priority": "high",
+            "description": "A medical examiner or coroner referral criterion is asserted or implied (referral recorded; suicide; manner of death is suicide; injury, poisoning or procedure wording in the cause lines; decedent not attended by the certifier). A physician should not certify the cause and manner of death until the medical examiner or coroner has accepted or declined jurisdiction.",
+            "suggestedAction": "Report the death to the medical examiner or coroner and let that office complete the cause-of-death and manner-of-death items, or release the case to you in writing."
+          },
+          {
+            "id": "F-CREMATION-HOLD-001",
+            "category": "disposition",
+            "priority": "high",
+            "description": "Cremation is planned while a medical examiner or coroner referral is open or the manner of death is pending or undetermined. Cremation is irreversible and most states require the medical examiner or coroner to authorize it first.",
+            "suggestedAction": "Hold the cremation until the medical examiner or coroner has released the body or issued a cremation authorization."
+          },
+          {
+            "id": "F-INJURY-001",
+            "category": "injury-items",
+            "priority": "medium",
+            "description": "Manner of death is suicide, but the injury items are incomplete (date of injury, place of injury, injury at work, description of how the injury occurred).",
+            "suggestedAction": "Complete the injury items; describe how the injury occurred specifically enough to code the external cause."
+          },
+          {
+            "id": "F-FILING-DEADLINE-001",
+            "category": "filing-deadline",
+            "priority": "medium",
+            "description": "The certificate was filed 4 business days after death; Washington allows 3. This deadline has not been independently verified against the statute; confirm it with the state registrar.",
+            "suggestedAction": "File with the local or state registrar as soon as possible; ask the registrar whether a delayed-registration procedure applies."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with flags: medical examiner certifies, manner pending (Pennsylvania)",
+      "description": "A 52-year-old man found dead; the medical examiner is the certifier, so no referral is needed. Manner is pending investigation and the autopsy items are blank, and cremation is planned. Expect valid with F-PENDING-001, F-AUTOPSY-001 and F-CREMATION-HOLD-001.",
+      "state": {
+        "jurisdiction": {
+          "state": "PA"
+        },
+        "decedent": {
+          "decedentName": "Kowalski, Henryk",
+          "sex": "male",
+          "dateOfBirth": "1974-11-30",
+          "ageYears": 51,
+          "maritalStatus": "unknown",
+          "veteranStatus": "no",
+          "stateOfResidence": "PA"
+        },
+        "death": {
+          "placeOfDeathType": "other",
+          "placeOfDeathFacility": "Found at 412 Mill Road, Pittsburgh, PA",
+          "dateOfDeath": "2026-06-20",
+          "timeOfDeath": null
+        },
+        "certifier": {
+          "certifierName": "Dr. Grace Liu",
+          "certifierType": "medical-examiner",
+          "certifierLicenseNumber": "MD445566",
+          "certificationDate": "2026-06-21",
+          "attendedDeceased": "no",
+          "lastSeenAliveDate": null
+        },
+        "partI": {
+          "causeIaCondition": "Pending investigation",
+          "causeIaInterval": "unknown",
+          "causeIbCondition": "",
+          "causeIbInterval": "",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "",
+          "autopsyPerformed": "",
+          "autopsyFindingsAvailable": ""
+        },
+        "manner": {
+          "mannerOfDeath": "pending-investigation",
+          "tobaccoUseContributed": "unknown",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "yes",
+          "referralReason": "unidentified",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "cremation",
+          "dispositionDate": "2026-06-24",
+          "dispositionPlace": "Allegheny Crematory",
+          "filedDate": "2026-06-23"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 1,
+          "requesterRelationship": "sibling",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 20
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Pending investigation",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-CREMATION-HOLD-001",
+            "category": "disposition",
+            "priority": "high",
+            "description": "Cremation is planned while a medical examiner or coroner referral is open or the manner of death is pending or undetermined. Cremation is irreversible and most states require the medical examiner or coroner to authorize it first.",
+            "suggestedAction": "Hold the cremation until the medical examiner or coroner has released the body or issued a cremation authorization."
+          },
+          {
+            "id": "F-PENDING-001",
+            "category": "pending-determination",
+            "priority": "medium",
+            "description": "The manner of death is pending investigation, so this is an interim certificate.",
+            "suggestedAction": "File the certificate as pending and submit a supplemental cause-of-death report to the registrar when the investigation concludes."
+          },
+          {
+            "id": "F-COPIES-001",
+            "category": "certified-copies",
+            "priority": "medium",
+            "description": "The certified-copy order has issues: certified copies are issued only from a registered certificate, and this one is not final.",
+            "suggestedAction": "Verify the requester’s identity and eligibility under state law, and order copies once the certificate is registered."
+          },
+          {
+            "id": "F-AUTOPSY-001",
+            "category": "pending-determination",
+            "priority": "low",
+            "description": "The manner of death is pending or undetermined and the autopsy items are blank.",
+            "suggestedAction": "Record whether an autopsy was performed and whether its findings were available."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Refer: natural manner with a hip fracture, unattended, unlisted state (Georgia)",
+      "description": "An 80-year-old woman recorded as a natural death although line (b) is a hip fracture; the certifier did not attend her. Dates are inconsistent (certified before death, stated age 80 but dates give 66). Georgia is not in the state table. Expect refer with F-ME-REFERRAL-001, F-MANNER-MISMATCH-001, F-DATES-001 and F-VERIFY-STATE-001.",
+      "state": {
+        "jurisdiction": {
+          "state": "GA"
+        },
+        "decedent": {
+          "decedentName": "Pruitt, Eleanor",
+          "sex": "female",
+          "dateOfBirth": "1960-02-01",
+          "ageYears": 80,
+          "maritalStatus": "widowed",
+          "veteranStatus": "no",
+          "stateOfResidence": "GA"
+        },
+        "death": {
+          "placeOfDeathType": "decedent-home",
+          "placeOfDeathFacility": "77 Peachtree Way, Atlanta, GA",
+          "dateOfDeath": "2026-06-05",
+          "timeOfDeath": "09:15"
+        },
+        "certifier": {
+          "certifierName": "Dr. Omar Haddad",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "GA-77231",
+          "certificationDate": "2026-06-03",
+          "attendedDeceased": "no",
+          "lastSeenAliveDate": "2026-05-10"
+        },
+        "partI": {
+          "causeIaCondition": "Pneumonia",
+          "causeIaInterval": "5 days",
+          "causeIbCondition": "Hip fracture",
+          "causeIbInterval": "3 weeks",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Osteoporosis",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "no",
+          "pregnancyStatus": "not-applicable"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "burial",
+          "dispositionDate": "2026-06-09",
+          "dispositionPlace": "Capital Memorial Cemetery",
+          "filedDate": "2026-06-08"
+        },
+        "copies": {
+          "certifiedCopiesRequested": null,
+          "requesterRelationship": "",
+          "requesterIdentityVerified": "",
+          "feePaidInUsd": null
+        }
+      },
+      "expected": {
+        "validityClass": "refer-to-medical-examiner-or-coroner",
+        "underlyingCause": "Hip fracture",
+        "referralIndicated": true,
+        "flaggedIssues": [
+          {
+            "id": "F-ME-REFERRAL-001",
+            "category": "medical-examiner-referral-required",
+            "priority": "high",
+            "description": "A medical examiner or coroner referral criterion is asserted or implied (injury, poisoning or procedure wording in the cause lines; decedent not attended by the certifier). A physician should not certify the cause and manner of death until the medical examiner or coroner has accepted or declined jurisdiction.",
+            "suggestedAction": "Report the death to the medical examiner or coroner and let that office complete the cause-of-death and manner-of-death items, or release the case to you in writing."
+          },
+          {
+            "id": "F-MANNER-MISMATCH-001",
+            "category": "manner-mismatch",
+            "priority": "medium",
+            "description": "Manner of death is natural, but the cause lines or injury items describe an injury, poisoning or procedure.",
+            "suggestedAction": "Reconsider the manner of death and refer the case to the medical examiner or coroner if an injury contributed."
+          },
+          {
+            "id": "F-DATES-001",
+            "category": "date-inconsistency",
+            "priority": "medium",
+            "description": "Dates are inconsistent: certified before the date of death; stated age 80 does not match the dates (66).",
+            "suggestedAction": "Check the dates against the medical record and the funeral director’s worksheet."
+          },
+          {
+            "id": "F-VERIFY-STATE-001",
+            "category": "verify-state-rule",
+            "priority": "low",
+            "description": "The state \"GA\" is not in this tool’s state table, so the default uniform deadlines apply and no fee check was made.",
+            "suggestedAction": "Verify the filing deadline, the certification deadline and the certified-copy fee with the state vital-records office."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Valid with flags: pregnancy item inconsistent, accident-free but late (Texas)",
+      "description": "A 50-year-old man whose pregnancy item says pregnant at time of death. Certified 7 days after death (Texas allows 5 for the physician, verified) and filed 12 days after (Texas allows 10, not independently verified). Natural manner, valid otherwise. Expect F-PREGNANCY-001, F-CERTIFY-DEADLINE-001, F-FILING-DEADLINE-001.",
+      "state": {
+        "jurisdiction": {
+          "state": "TX"
+        },
+        "decedent": {
+          "decedentName": "Garza, Mateo",
+          "sex": "male",
+          "dateOfBirth": "1976-07-14",
+          "ageYears": 50,
+          "maritalStatus": "married",
+          "veteranStatus": "no",
+          "stateOfResidence": "TX"
+        },
+        "death": {
+          "placeOfDeathType": "hospital-inpatient",
+          "placeOfDeathFacility": "Houston Methodist Hospital, Houston, TX",
+          "dateOfDeath": "2026-06-01",
+          "timeOfDeath": "14:00"
+        },
+        "certifier": {
+          "certifierName": "Dr. Beth Calloway",
+          "certifierType": "pronouncing-and-certifying-physician",
+          "certifierLicenseNumber": "TX-N4412",
+          "certificationDate": "2026-06-08",
+          "attendedDeceased": "yes",
+          "lastSeenAliveDate": "2026-06-01"
+        },
+        "partI": {
+          "causeIaCondition": "Acute myocardial infarction",
+          "causeIaInterval": "1 day",
+          "causeIbCondition": "Atherosclerotic coronary artery disease",
+          "causeIbInterval": "10 years",
+          "causeIcCondition": "",
+          "causeIcInterval": "",
+          "causeIdCondition": "",
+          "causeIdInterval": ""
+        },
+        "partII": {
+          "partIiConditions": "Hyperlipidemia",
+          "autopsyPerformed": "no",
+          "autopsyFindingsAvailable": "no"
+        },
+        "manner": {
+          "mannerOfDeath": "natural",
+          "tobaccoUseContributed": "yes",
+          "pregnancyStatus": "pregnant-at-time-of-death"
+        },
+        "injury": {
+          "injuryDate": null,
+          "injuryTime": null,
+          "injuryPlace": "",
+          "injuryAtWork": "",
+          "injuryLocation": "",
+          "injuryDescription": "",
+          "transportationInjuryRole": ""
+        },
+        "referral": {
+          "referredToMedicalExaminer": "no",
+          "referralReason": "none",
+          "certifierNote": ""
+        },
+        "funeral": {
+          "funeralDirectorName": "Delgado Family Funeral Home",
+          "funeralDirectorLicenseNumber": "FD-4471",
+          "dispositionMethod": "burial",
+          "dispositionDate": "2026-06-14",
+          "dispositionPlace": "Capital Memorial Cemetery",
+          "filedDate": "2026-06-13"
+        },
+        "copies": {
+          "certifiedCopiesRequested": 4,
+          "requesterRelationship": "child",
+          "requesterIdentityVerified": "yes",
+          "feePaidInUsd": 29
+        }
+      },
+      "expected": {
+        "validityClass": "valid",
+        "underlyingCause": "Atherosclerotic coronary artery disease",
+        "referralIndicated": false,
+        "flaggedIssues": [
+          {
+            "id": "F-PREGNANCY-001",
+            "category": "pregnancy-item",
+            "priority": "medium",
+            "description": "A pregnancy status is recorded for a decedent to whom the pregnancy item does not apply (male, or female outside the age band).",
+            "suggestedAction": "Check the sex and age entries and the pregnancy status; select \"not applicable\" when the item does not apply."
+          },
+          {
+            "id": "F-CERTIFY-DEADLINE-001",
+            "category": "filing-deadline",
+            "priority": "medium",
+            "description": "The cause of death was certified 7 days after death; Texas allows 5.",
+            "suggestedAction": "Certify promptly; if the deadline has passed, expect the registrar to ask for a late-filing explanation."
+          },
+          {
+            "id": "F-FILING-DEADLINE-001",
+            "category": "filing-deadline",
+            "priority": "medium",
+            "description": "The certificate was filed 12 days after death; Texas allows 10. This deadline has not been independently verified against the statute; confirm it with the state registrar.",
+            "suggestedAction": "File with the local or state registrar as soon as possible; ask the registrar whether a delayed-registration procedure applies."
+          }
+        ]
+      }
+    }
+  ]
+}

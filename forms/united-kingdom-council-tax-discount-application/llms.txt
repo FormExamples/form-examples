@@ -1,0 +1,27 @@
+# United Kingdom Council Tax Discount Application
+
+> A single-page, step-by-step application to a local council in England for a Council Tax discount, exemption, disregard or reduction. It captures the claim type (single person discount, 50% all-disregarded discount, student exemption, severe mental impairment, disabled band reduction, care-leaver relief or Council Tax Reduction), the applicant and property (band A to H), the occupant roster, the supporting evidence, the effective date and the declaration.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

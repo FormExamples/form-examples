@@ -1,0 +1,10 @@
+<!ELEMENT united_kingdom_vehicle_registration_application_grade (id,created_at,updated_at,deleted_at,united_kingdom_vehicle_registration_application_id,validity_class,fee_due_as_pence,missing_item_count,graded_at)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT created_at (#PCDATA)>
+<!ELEMENT updated_at (#PCDATA)>
+<!ELEMENT deleted_at (#PCDATA)>
+<!ELEMENT united_kingdom_vehicle_registration_application_id (#PCDATA)>
+<!ELEMENT validity_class (#PCDATA)>
+<!ELEMENT fee_due_as_pence (#PCDATA)>
+<!ELEMENT missing_item_count (#PCDATA)>
+<!ELEMENT graded_at (#PCDATA)>

@@ -1,0 +1,27 @@
+# United States Vehicle Bill of Sale
+
+> A bill of sale for a private-party sale of a motor vehicle in the United States. One continuous single-page wizard collects the sale (state, date, price, payment, sales-tax basis), the seller and buyer, the vehicle (year, make, model, body type, VIN, title brand), the federal odometer disclosure statement (49 CFR Part 580), the as-is clause, title and lien status, notarization where the state requires it, and the post-sale release of liability and buyer title application. The engine classifies the sale as **complete**, **incomplete**, or **risk flagged** and raises prioritized flags. It is documentation support, not legal advice: the state motor vehicle agency decides what it accepts.
+
+## Docs
+
+- [Form description and scoring details](index.md)
+- [Living domain spec — the behavioural contract](spec/index.md)
+- [Agent instructions](AGENTS.md)
+- [Implementation plan](plan.md)
+- [Task tracking](tasks.md)
+- [Changelog](CHANGELOG.md)
+
+## Artefacts
+
+- [SQL migrations — source of truth for the data shape](sql/)
+- [Filled-form JSON fixture + FHIR R5 Bundle examples](examples/)
+- [HTML front-end — single-page wizard + dashboard](front-end-with-html/)
+- [SvelteKit front-end — RESTful wizard + dashboard](front-end-with-svelte/)
+- [Rust Axum JSON-API back-end](back-end-with-axum/)
+
+## Generated representations
+
+- [XML + DTD per SQL table](xml/)
+- [FHIR HL7 R5 JSON per SQL entity](fhir/r5/)
+- [Protocol Buffers schemas](protobuf/)
+- [OpenAPI 3.1 specifications](openapi/)

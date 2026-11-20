@@ -1,0 +1,40 @@
+- createdAt: "2026-01-01T00:00:00Z"
+  updatedAt: "2026-01-01T00:00:00Z"
+  id: "00000000-0000-4000-8000-000000001003"
+  deletedAt: null
+  petitionerId: "00000000-0000-4000-8000-000000001001"
+  attorneyId: "00000000-0000-4000-8000-000000001002"
+  state: "IL"
+  county: "Cook"
+  filingDate: "2026-08-03"
+  caseType: "uncontested"
+  groundType: "no-fault"
+  faultGround: ""
+  petitionerName: "Maria L. Alvarez"
+  respondentName: "Daniel R. Alvarez"
+  marriageDate: "2015-06-20"
+  marriagePlace: "Chicago, IL"
+  separationDate: "2026-01-10"
+  petitionerResidencyMonths: 168
+  countyResidencyDays: 5000
+  marriedOrLivedInState: "yes"
+  respondentMilitary: "no"
+  hasMinorChildren: "no"
+  childrenCount: null
+  childrenHomeStateMonths: null
+  pregnant: ""
+  custodyPlanDocumented: ""
+  childSupportWorksheetCompleted: ""
+  childSupportMonthlyAmount: null
+  propertyDivisionApproach: "equitable"
+  settlementAgreementSigned: "yes"
+  financialDisclosureFiled: "yes"
+  spousalSupportRequested: "no"
+  serviceMethod: "acceptance"
+  serviceDate: "2026-08-10"
+  respondentResponded: "yes"
+  decreeEntered: "no"
+  decreeDate: null
+  nameRestorationRequested: "no"
+  nameToRestore: ""
+  certificateRequested: "yes"
