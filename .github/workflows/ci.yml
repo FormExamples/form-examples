@@ -193,6 +193,9 @@ jobs:
       - name: Every Axum crate migrates the CHECK constraints from sql/
         run: bin/axum-check-constraints --check --all
 
+      - name: Every Axum crate validates requests from the column types
+        run: bin/axum-request-validation --check --all
+
       - name: Every SQL table has an HTTP route
         run: bin/axum-entity-routes --check --all
 
