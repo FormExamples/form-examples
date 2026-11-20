@@ -12,7 +12,18 @@ example `pre_operative_assessment_by_clinician`, comes from
 
 ## Requirements
 
-Examples use the form `forms/pre-operative-assessment-by-clinician/`.
+Examples use the form `forms/pre-operative-assessment-by-clinician/`:
+
+| Subproject directory | Every name starts with |
+| --- | --- |
+| `sql/` | `pre_operative_assessment_by_clinician.` (the form's schema), e.g. `pre_operative_assessment_by_clinician.patient` |
+| `back-end-with-axum/` | `/api/pre-operative-assessment-by-clinician/`, e.g. `/api/pre-operative-assessment-by-clinician/patients` |
+| `front-end-with-svelte/` | `/pre-operative-assessment-by-clinician/`, e.g. `/pre-operative-assessment-by-clinician/pre-operative-assessments-by-clinician/` |
+
+So every data table's fully qualified name starts with the form's snake-case
+slug. The separator is the schema's `.`, not `_`, so that table names stay
+unique within PostgreSQL's 63-character limit (see below and
+[`spec/postgresql-name-length/`](../postgresql-name-length/)).
 
 ### SQL schema
 
@@ -45,7 +56,9 @@ schema. Extensions (`pgcrypto`, `pg_trgm`) stay in `public`.
 The namespace is a schema, not a `<slug>_` name prefix, because Postgres caps
 every identifier at 63 bytes and silently truncates longer ones. A
 `<slug>_<table>` prefix would have pushed 265 tables in 59 forms over that
-limit. A schema name is the slug alone. It may itself be longer than 63
+limit, and 46 groups of them would no longer be unique within it (10 even
+after dropping table names' duplicated stems, including every table of the
+two Lasting Power of Attorney forms, whose slugs are 64 and 70 characters). A schema name is the slug alone. It may itself be longer than 63
 bytes, as two are, in which case Postgres truncates it. Every form's schema
 name must be unique within its first 63 bytes, and `bin/sql-schema-namespace`
 refuses to run otherwise. See
