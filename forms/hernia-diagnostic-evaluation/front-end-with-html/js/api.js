@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const EVALUATIONS_PATH = '/api/hernia_diagnostic_evaluations';
+const EVALUATIONS_PATH = '/api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations';
 
 /**
  * Fetch the assessment list from the back-end.

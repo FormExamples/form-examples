@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Person who fills out the agile-consulting scorecard on behalf of an organization. Typically a buyer-side leader.
 paths:
-  /api/respondents:
+  /api/agile-consulting-scorecard-for-hiring-help/respondents:
     get:
       summary: List Respondent records
       operationId: listRespondent
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/respondents/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/respondents/{id}:
     parameters:
       - name: id
         in: path

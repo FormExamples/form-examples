@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Nuclear medicine (radionuclide scan) result (report). Captures the performed examination, the radiopharmaceutical and injected activity, clinical history, the narrative and structured findings, key quantitative measurements (e.g. ejection fraction, split renal function), the impression and structured reporting category (e.g. V/Q PE probability), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/nuclear_medicine_test_results:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_results:
     get:
       summary: List NuclearMedicineTestResult records
       operationId: listNuclearMedicineTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/nuclear_medicine_test_results/{id}:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_results/{id}:
     parameters:
       - name: id
         in: path

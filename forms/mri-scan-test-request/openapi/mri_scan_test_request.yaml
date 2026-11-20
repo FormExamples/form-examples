@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: MRI scan request (referral). Captures the requested examination (body region, indication, clinical question), contrast and gadolinium / renal (NSF) risk, MRI safety screening for ferromagnetic and electronic implants, and triage urgency.
 paths:
-  /api/mri_scan_test_requests:
+  /api/mri-scan-test-request/mri_scan_test_requests:
     get:
       summary: List MriScanTestRequest records
       operationId: listMriScanTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mri_scan_test_requests/{id}:
+  /api/mri-scan-test-request/mri_scan_test_requests/{id}:
     parameters:
       - name: id
         in: path

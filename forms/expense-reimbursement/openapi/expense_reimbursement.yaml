@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Expense reimbursement claim: a worker asks the employer to repay money the worker spent personally on work-related expenses."
 paths:
-  /api/expense_reimbursements:
+  /api/expense-reimbursement/expense_reimbursements:
     get:
       summary: List ExpenseReimbursement records
       operationId: listExpenseReimbursement
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/expense_reimbursements/{id}:
+  /api/expense-reimbursement/expense_reimbursements/{id}:
     parameters:
       - name: id
         in: path

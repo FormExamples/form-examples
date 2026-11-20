@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (indication match / NICE UTI, 1-9), preanalytical specimen suitability, request completeness, and triage priority."
 paths:
-  /api/urinalysis_test_request_grades:
+  /api/urinalysis-test-request/urinalysis_test_request_grades:
     get:
       summary: List UrinalysisTestRequestGrade records
       operationId: listUrinalysisTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/urinalysis_test_request_grades/{id}:
+  /api/urinalysis-test-request/urinalysis_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

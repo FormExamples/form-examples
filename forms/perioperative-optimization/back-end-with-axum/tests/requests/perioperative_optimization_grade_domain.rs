@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_perioperative_optimization_grade_domains() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/perioperative_optimization_grade_domains")
+            .get("/api/perioperative-optimization/perioperative_optimization_grade_domains")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

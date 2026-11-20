@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_constraint_items() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/constraint_items").await;
+        let res = request.get("/api/arc42/constraint_items").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

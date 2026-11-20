@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main United States Last Will and Testament record: testator and state, family and spouse, estate and bequests, personal representative and clauses, execution plan and witnesses, and the self-proving affidavit. Validity classification, fired rules, and flags live in child tables."
 paths:
-  /api/united_states_last_will_and_testaments:
+  /api/united-states-last-will-and-testament/united_states_last_will_and_testaments:
     get:
       summary: List UnitedStatesLastWillAndTestament records
       operationId: listUnitedStatesLastWillAndTestament
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_last_will_and_testaments/{id}:
+  /api/united-states-last-will-and-testament/united_states_last_will_and_testaments/{id}:
     parameters:
       - name: id
         in: path

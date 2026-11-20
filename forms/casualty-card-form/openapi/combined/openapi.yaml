@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/casualty_card_allergies:
+  /api/casualty-card-form/casualty_card_allergies:
     get:
       summary: List CasualtyCardAllergy records
       operationId: listCasualtyCardAllergy
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_allergies/{id}:
+  /api/casualty-card-form/casualty_card_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_arrival_triages:
+  /api/casualty-card-form/casualty_card_arrival_triages:
     get:
       summary: List CasualtyCardArrivalTriage records
       operationId: listCasualtyCardArrivalTriage
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_arrival_triages/{id}:
+  /api/casualty-card-form/casualty_card_arrival_triages/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_assessment_plans:
+  /api/casualty-card-form/casualty_card_assessment_plans:
     get:
       summary: List CasualtyCardAssessmentPlan records
       operationId: listCasualtyCardAssessmentPlan
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_assessment_plans/{id}:
+  /api/casualty-card-form/casualty_card_assessment_plans/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_clinical_examinations:
+  /api/casualty-card-form/casualty_card_clinical_examinations:
     get:
       summary: List CasualtyCardClinicalExamination records
       operationId: listCasualtyCardClinicalExamination
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_clinical_examinations/{id}:
+  /api/casualty-card-form/casualty_card_clinical_examinations/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_demographics:
+  /api/casualty-card-form/casualty_card_demographics:
     get:
       summary: List CasualtyCardDemographics records
       operationId: listCasualtyCardDemographics
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_demographics/{id}:
+  /api/casualty-card-form/casualty_card_demographics/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_dispositions:
+  /api/casualty-card-form/casualty_card_dispositions:
     get:
       summary: List CasualtyCardDisposition records
       operationId: listCasualtyCardDisposition
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_dispositions/{id}:
+  /api/casualty-card-form/casualty_card_dispositions/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_gps:
+  /api/casualty-card-form/casualty_card_gps:
     get:
       summary: List CasualtyCardGp records
       operationId: listCasualtyCardGp
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_gps/{id}:
+  /api/casualty-card-form/casualty_card_gps/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_investigations:
+  /api/casualty-card-form/casualty_card_investigations:
     get:
       summary: List CasualtyCardInvestigations records
       operationId: listCasualtyCardInvestigations
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_investigations/{id}:
+  /api/casualty-card-form/casualty_card_investigations/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_medical_histories:
+  /api/casualty-card-form/casualty_card_medical_histories:
     get:
       summary: List CasualtyCardMedicalHistory records
       operationId: listCasualtyCardMedicalHistory
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_medical_histories/{id}:
+  /api/casualty-card-form/casualty_card_medical_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_medications:
+  /api/casualty-card-form/casualty_card_medications:
     get:
       summary: List CasualtyCardMedication records
       operationId: listCasualtyCardMedication
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_medications/{id}:
+  /api/casualty-card-form/casualty_card_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_next_of_kins:
+  /api/casualty-card-form/casualty_card_next_of_kins:
     get:
       summary: List CasualtyCardNextOfKin records
       operationId: listCasualtyCardNextOfKin
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_next_of_kins/{id}:
+  /api/casualty-card-form/casualty_card_next_of_kins/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_pain_assessments:
+  /api/casualty-card-form/casualty_card_pain_assessments:
     get:
       summary: List CasualtyCardPainAssessment records
       operationId: listCasualtyCardPainAssessment
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_pain_assessments/{id}:
+  /api/casualty-card-form/casualty_card_pain_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_presenting_complaints:
+  /api/casualty-card-form/casualty_card_presenting_complaints:
     get:
       summary: List CasualtyCardPresentingComplaint records
       operationId: listCasualtyCardPresentingComplaint
@@ -3058,7 +3058,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_presenting_complaints/{id}:
+  /api/casualty-card-form/casualty_card_presenting_complaints/{id}:
     parameters:
     - name: id
       in: path
@@ -3206,7 +3206,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_primary_surveys:
+  /api/casualty-card-form/casualty_card_primary_surveys:
     get:
       summary: List CasualtyCardPrimarySurvey records
       operationId: listCasualtyCardPrimarySurvey
@@ -3304,7 +3304,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_primary_surveys/{id}:
+  /api/casualty-card-form/casualty_card_primary_surveys/{id}:
     parameters:
     - name: id
       in: path
@@ -3452,7 +3452,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_safeguarding_consents:
+  /api/casualty-card-form/casualty_card_safeguarding_consents:
     get:
       summary: List CasualtyCardSafeguardingConsent records
       operationId: listCasualtyCardSafeguardingConsent
@@ -3550,7 +3550,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_safeguarding_consents/{id}:
+  /api/casualty-card-form/casualty_card_safeguarding_consents/{id}:
     parameters:
     - name: id
       in: path
@@ -3698,7 +3698,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_treatments:
+  /api/casualty-card-form/casualty_card_treatments:
     get:
       summary: List CasualtyCardTreatment records
       operationId: listCasualtyCardTreatment
@@ -3796,7 +3796,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_treatments/{id}:
+  /api/casualty-card-form/casualty_card_treatments/{id}:
     parameters:
     - name: id
       in: path
@@ -3944,7 +3944,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_vital_signs:
+  /api/casualty-card-form/casualty_card_vital_signs:
     get:
       summary: List CasualtyCardVitalSigns records
       operationId: listCasualtyCardVitalSigns
@@ -4042,7 +4042,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_card_vital_signs/{id}:
+  /api/casualty-card-form/casualty_card_vital_signs/{id}:
     parameters:
     - name: id
       in: path
@@ -4190,7 +4190,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_cards:
+  /api/casualty-card-form/casualty_cards:
     get:
       summary: List CasualtyCard records
       operationId: listCasualtyCard
@@ -4288,7 +4288,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/casualty_cards/{id}:
+  /api/casualty-card-form/casualty_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -4436,7 +4436,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/casualty-card-form/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -4534,7 +4534,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/casualty-card-form/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -4682,7 +4682,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/flagged_issues:
+  /api/casualty-card-form/flagged_issues:
     get:
       summary: List FlaggedIssue records
       operationId: listFlaggedIssue
@@ -4780,7 +4780,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/flagged_issues/{id}:
+  /api/casualty-card-form/flagged_issues/{id}:
     parameters:
     - name: id
       in: path
@@ -4928,7 +4928,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/news2_results:
+  /api/casualty-card-form/news2_results:
     get:
       summary: List News2Result records
       operationId: listNews2Result
@@ -5026,7 +5026,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/news2_results/{id}:
+  /api/casualty-card-form/news2_results/{id}:
     parameters:
     - name: id
       in: path
@@ -5174,7 +5174,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/casualty-card-form/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -5185,7 +5185,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/casualty-card-form/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -5283,7 +5283,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/casualty-card-form/patients/{id}:
     parameters:
     - name: id
       in: path

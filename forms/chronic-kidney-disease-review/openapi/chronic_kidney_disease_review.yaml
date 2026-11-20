@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main chronic kidney disease annual-review record (NICE NG203): patient and clinician identification, review context, the two KDIGO staging measurements (current eGFR and urine ACR), the prior eGFR for the decline check, blood pressure, a structured medication review, and the core CKD bloods. The derived G-stage, albuminuria stage, KDIGO risk zone, completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/chronic_kidney_disease_reviews:
+  /api/chronic-kidney-disease-review/chronic_kidney_disease_reviews:
     get:
       summary: List ChronicKidneyDiseaseReview records
       operationId: listChronicKidneyDiseaseReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/chronic_kidney_disease_reviews/{id}:
+  /api/chronic-kidney-disease-review/chronic_kidney_disease_reviews/{id}:
     parameters:
       - name: id
         in: path

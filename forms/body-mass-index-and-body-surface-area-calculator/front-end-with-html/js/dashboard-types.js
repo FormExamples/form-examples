@@ -44,7 +44,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/body-mass-index-and-body-surface-area-calculator/dashboard/assessments`.
  *
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items

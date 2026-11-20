@@ -1,4 +1,4 @@
-//! Dashboard listing endpoint under `/api/dashboard`.
+//! Dashboard listing endpoint under `/api/neurodiversity-adjustment-response/dashboard`.
 //!
 //! Joins each computed grade back to its parent response so the dashboard can
 //! show one row per graded response with the four-axis summary.
@@ -10,7 +10,7 @@ use serde_json::{Value, json};
 use crate::models::neurodiversity_adjustment_response_grades;
 use crate::models::neurodiversity_adjustment_responses;
 
-/// GET /api/dashboard — list graded responses (response joined to its grade).
+/// GET /api/neurodiversity-adjustment-response/dashboard — list graded responses (response joined to its grade).
 #[debug_handler]
 async fn dashboard(
     State(ctx): State<AppContext>,
@@ -53,5 +53,5 @@ async fn dashboard(
 
 /// Routes.
 pub fn routes() -> Routes {
-    Routes::new().prefix("api").add("dashboard", get(dashboard))
+    Routes::new().prefix("api/neurodiversity-adjustment-response/").add("dashboard", get(dashboard))
 }

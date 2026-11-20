@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed three-axis grade for an expense reimbursement claim: policy compliance, completeness and approval tier."
 paths:
-  /api/expense_reimbursement_grades:
+  /api/expense-reimbursement/expense_reimbursement_grades:
     get:
       summary: List ExpenseReimbursementGrade records
       operationId: listExpenseReimbursementGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/expense_reimbursement_grades/{id}:
+  /api/expense-reimbursement/expense_reimbursement_grades/{id}:
     parameters:
       - name: id
         in: path

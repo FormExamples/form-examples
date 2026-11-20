@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`timi_risk_score_for_acute_coronary_syndrome/`](timi_risk_score_for_acute_coronary_syndrome/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/timi-risk-score-for-acute-coronary-syndrome/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

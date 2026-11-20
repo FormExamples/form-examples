@@ -1,6 +1,6 @@
 import { SAMPLE_CHECKLISTS } from './data.js';
 
-const API_BASE = '/api/checklists';
+const API_BASE = '/api/hospital-daily-monitoring-checklist/checklists';
 const CACHE_KEY = 'hospital-daily-monitoring-checklist-dashboard:cache:v1';
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

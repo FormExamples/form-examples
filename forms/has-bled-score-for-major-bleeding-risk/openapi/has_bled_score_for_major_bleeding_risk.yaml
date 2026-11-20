@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main HAS-BLED assessment record: assessment context, patient identification, and the nine scored criterion inputs (hypertension, abnormal renal function, abnormal liver function, stroke, bleeding, labile INR, elderly, drugs, alcohol)."
 paths:
-  /api/has_bled_score_for_major_bleeding_risks:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risks:
     get:
       summary: List HasBledScoreForMajorBleedingRisk records
       operationId: listHasBledScoreForMajorBleedingRisk
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/has_bled_score_for_major_bleeding_risks/{id}:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risks/{id}:
     parameters:
       - name: id
         in: path

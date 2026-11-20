@@ -36,7 +36,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/notes`.
+ * Response from `GET /api/ward-round-note/dashboard/notes`.
  *
  * @typedef {Object} DashboardNotesResponse
  * @property {NoteRow[]} items

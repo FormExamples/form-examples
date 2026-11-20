@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every decision rule evaluated during Ottawa Knee Rule computation: instrument, criterion, whether it fired, category, and description."
 paths:
-  /api/ottawa_knee_rule_grade_rules:
+  /api/ottawa-knee-rule/ottawa_knee_rule_grade_rules:
     get:
       summary: List OttawaKneeRuleGradeRule records
       operationId: listOttawaKneeRuleGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ottawa_knee_rule_grade_rules/{id}:
+  /api/ottawa-knee-rule/ottawa_knee_rule_grade_rules/{id}:
     parameters:
       - name: id
         in: path

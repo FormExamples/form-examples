@@ -81,7 +81,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/teams`.
+ * Response from `GET /api/workplace-climate-assessment/dashboard/teams`.
  *
  * @typedef {Object} DashboardTeamsResponse
  * @property {TeamRow[]} items

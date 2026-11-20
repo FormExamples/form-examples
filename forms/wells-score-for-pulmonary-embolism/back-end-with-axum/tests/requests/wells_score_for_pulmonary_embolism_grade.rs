@@ -9,7 +9,7 @@ use wells_score_for_pulmonary_embolism::app::App;
 async fn can_get_wells_score_for_pulmonary_embolism_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/wells_score_for_pulmonary_embolism_grades")
+            .get("/api/wells-score-for-pulmonary-embolism/wells_score_for_pulmonary_embolism_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

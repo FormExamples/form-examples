@@ -9,7 +9,7 @@ use structured_medication_review::app::App;
 async fn can_get_structured_medication_review_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/structured_medication_review_grade_flags")
+            .get("/api/structured-medication-review/structured_medication_review_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

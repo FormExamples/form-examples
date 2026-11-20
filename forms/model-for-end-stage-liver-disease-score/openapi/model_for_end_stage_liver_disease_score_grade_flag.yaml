@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Red-flag issues that fire alongside the MELD score, with priority and a suggested action for the clinical team.
 paths:
-  /api/model_for_end_stage_liver_disease_score_grade_flags:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_score_grade_flags:
     get:
       summary: List ModelForEndStageLiverDiseaseScoreGradeFlag records
       operationId: listModelForEndStageLiverDiseaseScoreGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/model_for_end_stage_liver_disease_score_grade_flags/{id}:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_score_grade_flags/{id}:
     parameters:
       - name: id
         in: path

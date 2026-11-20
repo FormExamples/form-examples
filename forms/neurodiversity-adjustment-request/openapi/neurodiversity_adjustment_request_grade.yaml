@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments request: Equality Act 2010 eligibility, impact / wellbeing risk, request completeness, and handling priority. Being neurodivergent will often amount to a disability under the Equality Act 2010; a substantial and long-term adverse effect drives the eligibility axis, and a worker at risk of absence / burnout auto-escalates the impact and priority axes."
 paths:
-  /api/neurodiversity_adjustment_request_grades:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_request_grades:
     get:
       summary: List NeurodiversityAdjustmentRequestGrade records
       operationId: listNeurodiversityAdjustmentRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_request_grades/{id}:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_request_grades/{id}:
     parameters:
       - name: id
         in: path

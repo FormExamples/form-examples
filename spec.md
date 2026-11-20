@@ -181,9 +181,9 @@ fleet's current conformance.
   front-end.
 - **JSON API only.** No HTML rendering, no Tera templates, no HTMX, no
   Alpine.js, no static assets, no Lily Design System. The canonical
-  resource is `/api/assessments` (list, create, read, update, submit,
+  resource is `/api/<slug>/assessments` (list, create, read, update, submit,
   result); see [`AGENTS/back-end-with-axum.md`](AGENTS/back-end-with-axum.md).
-- **Every SQL table is reachable over HTTP**, through its own `/api/<plural>` routes
+- **Every SQL table is reachable over HTTP**, through its own `/api/<slug>/<plural>` routes
   or a hand-written aggregate.
 - **`DELETE` is a soft delete.** It sets `deleted_at` on the row and along its
   `ON DELETE CASCADE` keys. Reads and updates skip marked rows, `deleted_at` is in no

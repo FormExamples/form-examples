@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/dashboard:
+  /api/neurodiversity-adjustment-response/dashboard:
     get:
       summary: Each response with its grade, newest grade first
       description: Lists grades newest first, each paired with the record it grades.
@@ -62,7 +62,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurodiversity_adjustment_responses:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses:
     get:
       summary: List NeurodiversityAdjustmentResponse records
       operationId: listNeurodiversityAdjustmentResponse
@@ -160,7 +160,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurodiversity_adjustment_responses/{id}:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}:
     parameters:
     - name: id
       in: path
@@ -263,7 +263,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurodiversity_adjustment_responses/{id}/result:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/result:
     parameters:
     - name: id
       in: path
@@ -298,7 +298,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurodiversity_adjustment_responses/{id}/submit:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/submit:
     parameters:
     - name: id
       in: path

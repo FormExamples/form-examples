@@ -8,7 +8,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const BILLS_PATH = '/api/dashboard/bills-of-sale';
+const BILLS_PATH = '/api/united-kingdom-vehicle-bill-of-sale/dashboard/bills-of-sale';
 
 /**
  * Fetch the bill of sale list from the backend.

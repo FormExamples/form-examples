@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main ReSPECT record: one personalised emergency care and treatment plan created through shared decision-making, covering the person's summary of health, preferences, agreed clinical recommendations, CPR recommendation, ceilings of treatment, capacity and involvement, and clinician sign-off. Completeness grade, fired rules, and flags live in child tables. The short base name `respect` is used because the full slug would exceed PostgreSQL's 63-byte identifier limit."
 paths:
-  /api/respects:
+  /api/recommended-summary-plan-for-emergency-care-and-treatment/respects:
     get:
       summary: List Respect records
       operationId: listRespect
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/respects/{id}:
+  /api/recommended-summary-plan-for-emergency-care-and-treatment/respects/{id}:
     parameters:
       - name: id
         in: path

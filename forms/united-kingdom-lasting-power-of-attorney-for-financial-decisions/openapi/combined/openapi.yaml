@@ -8,7 +8,7 @@ info:
     Decisions form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/addresses:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses:
     get:
       summary: List Address records
       operationId: listAddress
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/addresses/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lasting_power_of_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys:
     get:
       summary: List LastingPowerOfAttorney records
       operationId: listLastingPowerOfAttorney
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lasting_power_of_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_attorneys:
     get:
       summary: List LpaAttorney records
       operationId: listLpaAttorney
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_certificate_providers:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers:
     get:
       summary: List LpaCertificateProvider records
       operationId: listLpaCertificateProvider
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_certificate_providers/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_continuation_sheets:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_continuation_sheets:
     get:
       summary: List LpaContinuationSheet records
       operationId: listLpaContinuationSheet
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_continuation_sheets/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_continuation_sheets/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_person_to_notifies:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_person_to_notifies:
     get:
       summary: List LpaPersonToNotify records
       operationId: listLpaPersonToNotify
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_person_to_notifies/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_person_to_notifies/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_preferences_and_instructions:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_preferences_and_instructions:
     get:
       summary: List LpaPreferencesAndInstructions records
       operationId: listLpaPreferencesAndInstructions
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_preferences_and_instructions/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_preferences_and_instructions/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_applications:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_applications:
     get:
       summary: List LpaRegistrationApplication records
       operationId: listLpaRegistrationApplication
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_applications/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_applications/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_recipients:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_recipients:
     get:
       summary: List LpaRegistrationRecipient records
       operationId: listLpaRegistrationRecipient
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_recipients/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_recipients/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_replacement_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
       operationId: listLpaReplacementAttorney
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_replacement_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_signatures:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_signatures:
     get:
       summary: List LpaSignature records
       operationId: listLpaSignature
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_signatures/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_signatures/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_flags:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_flags:
     get:
       summary: List LpaValidationFlag records
       operationId: listLpaValidationFlag
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_flags/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_results:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results:
     get:
       summary: List LpaValidationResult records
       operationId: listLpaValidationResult
@@ -3058,7 +3058,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_results/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results/{id}:
     parameters:
     - name: id
       in: path
@@ -3206,7 +3206,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_rules:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_rules:
     get:
       summary: List LpaValidationRule records
       operationId: listLpaValidationRule
@@ -3304,7 +3304,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validation_rules/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -3452,7 +3452,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_witnesses:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_witnesses:
     get:
       summary: List LpaWitness records
       operationId: listLpaWitness
@@ -3550,7 +3550,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_witnesses/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_witnesses/{id}:
     parameters:
     - name: id
       in: path
@@ -3698,7 +3698,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -3709,7 +3709,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/people:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/people:
     get:
       summary: List Person records
       operationId: listPerson
@@ -3807,7 +3807,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/people/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/people/{id}:
     parameters:
     - name: id
       in: path

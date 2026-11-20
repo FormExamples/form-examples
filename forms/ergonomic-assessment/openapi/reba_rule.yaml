@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reference table of REBA scoring rules. Each rule has an ID, system, description, and score contribution.
 paths:
-  /api/reba_rules:
+  /api/ergonomic-assessment/reba_rules:
     get:
       summary: List RebaRule records
       operationId: listRebaRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/reba_rules/{id}:
+  /api/ergonomic-assessment/reba_rules/{id}:
     parameters:
       - name: id
         in: path

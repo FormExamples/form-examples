@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical clinical flags raised alongside the grading result.
 paths:
-  /api/grading_additional_flags:
+  /api/emergency-medical-technician-psychomotor-examination/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grading_additional_flags/{id}:
+  /api/emergency-medical-technician-psychomotor-examination/grading_additional_flags/{id}:
     parameters:
       - name: id
         in: path

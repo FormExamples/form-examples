@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main H&P clerking record for one patient encounter: encounter context, patient and clinician identification, the full history, vital signs, examination by body system, investigations, impression, and management plan as free text. Completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/history_and_physical_examinations:
+  /api/history-and-physical-examination/history_and_physical_examinations:
     get:
       summary: List HistoryAndPhysicalExamination records
       operationId: listHistoryAndPhysicalExamination
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/history_and_physical_examinations/{id}:
+  /api/history-and-physical-examination/history_and_physical_examinations/{id}:
     parameters:
       - name: id
         in: path

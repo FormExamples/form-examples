@@ -25,18 +25,18 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/patient_room_readiness_checklists?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/patient-room-readiness/patient_room_readiness_checklists?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/patient-room-readiness/no-such-route").await, 404);
+        problem!(request.delete("/api/patient-room-readiness/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
         problem!(
             request
-                .get(&format!("/api/patient_room_readiness_checklists/{id}"))
+                .get(&format!("/api/patient-room-readiness/patient_room_readiness_checklists/{id}"))
                 .await,
             404
         );
@@ -44,7 +44,7 @@ async fn every_failure_is_a_problem() {
         // An extractor's refusal says what was wrong, and quotes nothing.
         let (body, text) = problem!(
             request
-                .get("/api/patient_room_readiness_checklists/not-a-uuid")
+                .get("/api/patient-room-readiness/patient_room_readiness_checklists/not-a-uuid")
                 .await,
             400
         );
@@ -52,7 +52,7 @@ async fn every_failure_is_a_problem() {
         assert!(!text.contains("not-a-uuid"));
         problem!(
             request
-                .post("/api/patient_room_readiness_checklists")
+                .post("/api/patient-room-readiness/patient_room_readiness_checklists")
                 .json(&"not an object")
                 .await,
             422

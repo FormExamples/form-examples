@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (BTS 1-9), cancer-pathway urgency (NICE NG12 two-week-wait), request completeness, and pre-procedure bleeding / hypoxia risk."
 paths:
-  /api/bronchoscopy_test_request_grades:
+  /api/bronchoscopy-test-request/bronchoscopy_test_request_grades:
     get:
       summary: List BronchoscopyTestRequestGrade records
       operationId: listBronchoscopyTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/bronchoscopy_test_request_grades/{id}:
+  /api/bronchoscopy-test-request/bronchoscopy_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

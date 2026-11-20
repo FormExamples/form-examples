@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a oral and maxillofacial surgery waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/omfs_waiting_list_cards:
+  /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_cards:
     get:
       summary: List OmfsWaitingListCard records
       operationId: listOmfsWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/omfs_waiting_list_cards/{id}:
+  /api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

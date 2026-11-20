@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness and validity classification for a United Kingdom Birth Registration application: readiness class (ready-to-submit/incomplete/needs-additional-evidence/out-of-scope), days from birth to registration, late-registration indicator, and count of missing items."
 paths:
-  /api/united_kingdom_birth_registration_grades:
+  /api/united-kingdom-birth-registration/united_kingdom_birth_registration_grades:
     get:
       summary: List UnitedKingdomBirthRegistrationGrade records
       operationId: listUnitedKingdomBirthRegistrationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_birth_registration_grades/{id}:
+  /api/united-kingdom-birth-registration/united_kingdom_birth_registration_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const OBSERVATIONS_PATH = '/api/dashboard/observations';
+const OBSERVATIONS_PATH = '/api/modified-early-warning-score/dashboard/observations';
 
 /**
  * Fetch the observation list from the backend.

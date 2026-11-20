@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/anion_gap_calculator_grade_flags:
+  /api/anion-gap-calculator/anion_gap_calculator_grade_flags:
     get:
       summary: List AnionGapCalculatorGradeFlag records
       operationId: listAnionGapCalculatorGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculator_grade_flags/{id}:
+  /api/anion-gap-calculator/anion_gap_calculator_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculator_grade_rules:
+  /api/anion-gap-calculator/anion_gap_calculator_grade_rules:
     get:
       summary: List AnionGapCalculatorGradeRule records
       operationId: listAnionGapCalculatorGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculator_grade_rules/{id}:
+  /api/anion-gap-calculator/anion_gap_calculator_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculator_grades:
+  /api/anion-gap-calculator/anion_gap_calculator_grades:
     get:
       summary: List AnionGapCalculatorGrade records
       operationId: listAnionGapCalculatorGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculator_grades/{id}:
+  /api/anion-gap-calculator/anion_gap_calculator_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculators:
+  /api/anion-gap-calculator/anion_gap_calculators:
     get:
       summary: List AnionGapCalculator records
       operationId: listAnionGapCalculator
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anion_gap_calculators/{id}:
+  /api/anion-gap-calculator/anion_gap_calculators/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/anion-gap-calculator/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/anion-gap-calculator/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/anion-gap-calculator/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/anion-gap-calculator/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/anion-gap-calculator/patients/{id}:
     parameters:
     - name: id
       in: path

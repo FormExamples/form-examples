@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Rockall grading result: per-parameter points, the pre-endoscopy clinical score (0-7), the full post-endoscopy score (0-11 or null), and the derived risk band."
 paths:
-  /api/rockall_score_for_upper_gastrointestinal_bleeding_grades:
+  /api/rockall-score-for-upper-gastrointestinal-bleeding/rockall_score_for_upper_gastrointestinal_bleeding_grades:
     get:
       summary: List RockallScoreForUpperGastrointestinalBleedingGrade records
       operationId: listRockallScoreForUpperGastrointestinalBleedingGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/rockall_score_for_upper_gastrointestinal_bleeding_grades/{id}:
+  /api/rockall-score-for-upper-gastrointestinal-bleeding/rockall_score_for_upper_gastrointestinal_bleeding_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -1,5 +1,5 @@
   
-  const API_BASE = '/api/checklists';
+  const API_BASE = '/api/agile-checklist/checklists';
   const CACHE_KEY = 'agile-checklist-dashboard:cache:v1';
   const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

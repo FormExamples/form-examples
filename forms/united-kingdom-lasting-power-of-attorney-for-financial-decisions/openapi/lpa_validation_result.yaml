@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "LPA validation result — the LPA validator output: registration-readiness band and composite-risk grade."
 paths:
-  /api/lpa_validation_results:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results:
     get:
       summary: List LpaValidationResult records
       operationId: listLpaValidationResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_validation_results/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_validation_results/{id}:
     parameters:
       - name: id
         in: path

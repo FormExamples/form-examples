@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One row per submission. Stores the 12 Agile Manifesto principle Likert scores (1-5, nullable when unanswered) and free-text comments per principle. Composite maturity is computed in agile_principles_assessment_grade.
 paths:
-  /api/agile_principles_assessments:
+  /api/agile-principles-assessment/agile_principles_assessments:
     get:
       summary: List AgilePrinciplesAssessment records
       operationId: listAgilePrinciplesAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/agile_principles_assessments/{id}:
+  /api/agile-principles-assessment/agile_principles_assessments/{id}:
     parameters:
       - name: id
         in: path

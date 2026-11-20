@@ -8,7 +8,7 @@
 // usable standalone (e.g.
 
 const API_BASE = 'http://localhost:5150';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const PATIENTS_PATH = '/api/patient-satisfaction-survey/dashboard/patients';
 
 /**
  * Fetch the patient list from the backend.

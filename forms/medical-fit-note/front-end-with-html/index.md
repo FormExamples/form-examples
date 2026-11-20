@@ -27,9 +27,9 @@ engine's exact expected grade. The page tries the Axum back-end first (see
 ## Back-end wiring
 
 The Axum back-end has no bespoke dashboard or submit endpoint, so `js/api.js`
-talks to the plain REST resources (`/api/employees`, `/api/clinicians`,
-`/api/medical_fit_notes`, `/api/medical_fit_note_grades`,
-`/api/medical_fit_note_grade_rules`, `/api/medical_fit_note_grade_flags`).
+talks to the plain REST resources (`/api/medical-fit-note/employees`, `/api/medical-fit-note/clinicians`,
+`/api/medical-fit-note/medical_fit_notes`, `/api/medical-fit-note/medical_fit_note_grades`,
+`/api/medical-fit-note/medical_fit_note_grade_rules`, `/api/medical-fit-note/medical_fit_note_grade_flags`).
 
 - **API base**: `http://localhost:5150` by default; override with
   `window.__API_BASE__` or a `?api=http://host:port` query parameter.
@@ -38,12 +38,12 @@ talks to the plain REST resources (`/api/employees`, `/api/clinicians`,
   omitted). On any failure or an empty result it keeps the sample rows and
   shows the "Showing sample data" notice.
 - **Submit**: after the local engine grades the wizard (the report always
-  renders), `saveFitNote` sends, in order: `GET /api/employees` then
-  `POST` if no match (NHS number, or name + birth date); `GET /api/clinicians`
+  renders), `saveFitNote` sends, in order: `GET /api/medical-fit-note/employees` then
+  `POST` if no match (NHS number, or name + birth date); `GET /api/medical-fit-note/clinicians`
   then `POST` if no match (registration body + number, or name);
-  `POST /api/medical_fit_notes` (`status: 'signed'` only when the engine says
+  `POST /api/medical-fit-note/medical_fit_notes` (`status: 'signed'` only when the engine says
   approved and the declaration is given, else `'draft'`);
-  `POST /api/medical_fit_note_grades`; one `POST` per fired rule and per flag
+  `POST /api/medical-fit-note/medical_fit_note_grades`; one `POST` per fired rule and per flag
   (flag categories outside the SQL CHECK list are skipped). Saving needs
   employee name, date of birth and clinician name; otherwise the notice says
   what to enter. Success shows the note id; failure shows an error and keeps

@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_rockall_score_for_upper_gastrointestinal_bleedings() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/rockall_score_for_upper_gastrointestinal_bleedings")
+            .get("/api/rockall-score-for-upper-gastrointestinal-bleeding/rockall_score_for_upper_gastrointestinal_bleedings")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

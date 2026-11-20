@@ -31,9 +31,9 @@ migrations 05–07: `outcome`, `approvalStatus`, `durationDays`,
 
 `sql` is the source of truth; `xml`, `fhir`, `protobuf`, `openapi` and the
 Axum setup script are generated. The HTML and SvelteKit front-ends and the Axum back-end are implemented and
-wired together. The back-end serves plain REST JSON at `/api/employees`,
-`/api/clinicians`, `/api/medical_fit_notes`, `/api/medical_fit_note_grades`,
-`/api/medical_fit_note_grade_rules` and `/api/medical_fit_note_grade_flags`
+wired together. The back-end serves plain REST JSON at `/api/medical-fit-note/employees`,
+`/api/medical-fit-note/clinicians`, `/api/medical-fit-note/medical_fit_notes`, `/api/medical-fit-note/medical_fit_note_grades`,
+`/api/medical-fit-note/medical_fit_note_grade_rules` and `/api/medical-fit-note/medical_fit_note_grade_flags`
 (no bespoke submit or result endpoint), with permissive CORS in development.
 The API base is `window.__API_BASE__` / `?api=` (HTML) or `VITE_API_BASE`
 (Svelte), default `http://localhost:5150`.

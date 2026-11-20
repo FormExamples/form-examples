@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Mast Cell Activation Syndrome Assessment form.
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/mast-cell-activation-syndrome-assessment/assessments` (list, create, read, update,
+submit, result) plus `/api/mast-cell-activation-syndrome-assessment/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

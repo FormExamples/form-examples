@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reporting clinician (biomedical scientist, transfusion practitioner, or consultant haematologist) who authors and signs the blood cross-match test result report.
 paths:
-  /api/clinicians:
+  /api/blood-cross-match-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/blood-cross-match-test-result/clinicians/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Family pedigree section: family structure, consanguinity, and adoption status. One-to-one child of assessment."
 paths:
-  /api/assessment_family_pedigrees:
+  /api/genetic-assessment/assessment_family_pedigrees:
     get:
       summary: List AssessmentFamilyPedigree records
       operationId: listAssessmentFamilyPedigree
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_family_pedigrees/{id}:
+  /api/genetic-assessment/assessment_family_pedigrees/{id}:
     parameters:
       - name: id
         in: path

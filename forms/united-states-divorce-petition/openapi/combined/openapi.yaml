@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/attorneys:
+  /api/united-states-divorce-petition/attorneys:
     get:
       summary: List Attorney records
       operationId: listAttorney
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/attorneys/{id}:
+  /api/united-states-divorce-petition/attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-divorce-petition/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/petitioners:
+  /api/united-states-divorce-petition/petitioners:
     get:
       summary: List Petitioner records
       operationId: listPetitioner
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/petitioners/{id}:
+  /api/united-states-divorce-petition/petitioners/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grade_flags:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags:
     get:
       summary: List UnitedStatesDivorcePetitionGradeFlag records
       operationId: listUnitedStatesDivorcePetitionGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grade_flags/{id}:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grade_rules:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_rules:
     get:
       summary: List UnitedStatesDivorcePetitionGradeRule records
       operationId: listUnitedStatesDivorcePetitionGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grade_rules/{id}:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grades:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grades:
     get:
       summary: List UnitedStatesDivorcePetitionGrade records
       operationId: listUnitedStatesDivorcePetitionGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petition_grades/{id}:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petitions:
+  /api/united-states-divorce-petition/united_states_divorce_petitions:
     get:
       summary: List UnitedStatesDivorcePetition records
       operationId: listUnitedStatesDivorcePetition
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_divorce_petitions/{id}:
+  /api/united-states-divorce-petition/united_states_divorce_petitions/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual COPM performance rating for a specific occupational issue identified by the patient.
 paths:
-  /api/assessment_performance_rating_items:
+  /api/occupational-therapy-assessment/assessment_performance_rating_items:
     get:
       summary: List AssessmentPerformanceRatingItem records
       operationId: listAssessmentPerformanceRatingItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_performance_rating_items/{id}:
+  /api/occupational-therapy-assessment/assessment_performance_rating_items/{id}:
     parameters:
       - name: id
         in: path

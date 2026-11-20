@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness and risk classification for a vehicle bill of sale: complete, incomplete, or risk-flagged; whether the federal odometer disclosure is exempt; and whether the state rule was in the engine table."
 paths:
-  /api/united_states_vehicle_bill_of_sale_grades:
+  /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedStatesVehicleBillOfSaleGrade records
       operationId: listUnitedStatesVehicleBillOfSaleGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_vehicle_bill_of_sale_grades/{id}:
+  /api/united-states-vehicle-bill-of-sale/united_states_vehicle_bill_of_sale_grades/{id}:
     parameters:
       - name: id
         in: path

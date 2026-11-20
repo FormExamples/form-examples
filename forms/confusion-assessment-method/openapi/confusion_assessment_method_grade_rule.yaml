@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during CAM computation: feature, whether it was positive, category, and description."
 paths:
-  /api/confusion_assessment_method_grade_rules:
+  /api/confusion-assessment-method/confusion_assessment_method_grade_rules:
     get:
       summary: List ConfusionAssessmentMethodGradeRule records
       operationId: listConfusionAssessmentMethodGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/confusion_assessment_method_grade_rules/{id}:
+  /api/confusion-assessment-method/confusion_assessment_method_grade_rules/{id}:
     parameters:
       - name: id
         in: path

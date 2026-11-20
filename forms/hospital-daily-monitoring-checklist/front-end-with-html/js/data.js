@@ -1,6 +1,6 @@
 // Sample inspection-round data for the dashboard's offline / no-backend
 // fallback. Field shape matches the (aggregated) rows the Rust backend's
-// GET /api/checklists endpoint is expected to return.
+// GET /api/hospital-daily-monitoring-checklist/checklists endpoint is expected to return.
 
 export const SAMPLE_CHECKLISTS = [
   { id: 'H001', date: '2026-06-01', hospitalName: 'St. Mary District Hospital', departmentOrSite: 'Main block', inspectingOfficerName: 'Dr. Anjali Rao', inspectingOfficerDesignation: 'Medical Superintendent', answeredCount: 97, needsAttentionCount: 0, sectionsFlaggedCount: 0, topFlaggedAreas: [] },

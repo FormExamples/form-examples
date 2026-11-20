@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "A tangible deliverable produced by the meeting: document, decision, data, recording, minutes, slides, agreement."
 paths:
-  /api/meeting_outputs:
+  /api/meeting/meeting_outputs:
     get:
       summary: List MeetingOutput records
       operationId: listMeetingOutput
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/meeting_outputs/{id}:
+  /api/meeting/meeting_outputs/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Framingham Risk Score for Hard CHD assessment form. Estimates 10-year risk of heart attack in patients 30-79 years. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/framingham-risk-score-for-hard-coronary-heart-disease/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/framingham-risk-score-for-hard-coronary-heart-disease/assessments/{id}:
     parameters:
       - name: id
         in: path

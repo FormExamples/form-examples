@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/bills-of-sale`.
+ * Response from `GET /api/united-states-vehicle-bill-of-sale/dashboard/bills-of-sale`.
  * @typedef {Object} DashboardBillsOfSaleResponse
  * @property {BillOfSaleRow[]} items
  * @property {number} total

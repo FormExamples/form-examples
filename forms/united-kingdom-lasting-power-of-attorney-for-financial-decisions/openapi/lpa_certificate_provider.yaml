@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA certificate provider — the single person who certifies the donor's capacity and lack of undue pressure (LP1F section 10).
 paths:
-  /api/lpa_certificate_providers:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers:
     get:
       summary: List LpaCertificateProvider records
       operationId: listLpaCertificateProvider
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_certificate_providers/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_certificate_providers/{id}:
     parameters:
       - name: id
         in: path

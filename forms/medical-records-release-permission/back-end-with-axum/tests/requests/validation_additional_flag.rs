@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_validation_additional_flags() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/validation_additional_flags").await;
+        let res = request.get("/api/medical-records-release-permission/validation_additional_flags").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

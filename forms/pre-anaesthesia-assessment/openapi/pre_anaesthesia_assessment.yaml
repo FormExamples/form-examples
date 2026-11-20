@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Clinician-led pre-operative assessment: objective findings, scoring inputs (ASA, Mallampati, RCRI, STOP-BANG, Clinical Frailty Scale), planned anaesthesia strategy, and safety flags for adult elective and urgent surgery."
 paths:
-  /api/pre_anaesthesia_assessments:
+  /api/pre-anaesthesia-assessment/pre_anaesthesia_assessments:
     get:
       summary: List PreAnaesthesiaAssessment records
       operationId: listPreAnaesthesiaAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pre_anaesthesia_assessments/{id}:
+  /api/pre-anaesthesia-assessment/pre_anaesthesia_assessments/{id}:
     parameters:
       - name: id
         in: path

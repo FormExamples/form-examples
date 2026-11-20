@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for the prescription. Captures per-eye refractive class, presbyopia, anisometropia, and overall complexity. Stores both computed and final complexity with an override reason.
 paths:
-  /api/eye_prescription_grades:
+  /api/eye-prescription/eye_prescription_grades:
     get:
       summary: List EyePrescriptionGrade records
       operationId: listEyePrescriptionGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eye_prescription_grades/{id}:
+  /api/eye-prescription/eye_prescription_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Applicant for the FP92A medical exemption certificate.
 paths:
-  /api/patients:
+  /api/united-kingdom-nhs-england-medical-exemption-certificate/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patients/{id}:
+  /api/united-kingdom-nhs-england-medical-exemption-certificate/patients/{id}:
     parameters:
       - name: id
         in: path

@@ -44,7 +44,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/anion-gap-calculator/dashboard/assessments`.
  *
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items

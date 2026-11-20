@@ -48,7 +48,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/edinburgh-postnatal-depression-scale/dashboard/assessments`.
  *
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items

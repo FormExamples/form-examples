@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-kingdom-marriage-certificate-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-kingdom-marriage-certificate-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-marriage-certificate-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/registrars:
+  /api/united-kingdom-marriage-certificate-application/registrars:
     get:
       summary: List Registrar records
       operationId: listRegistrar
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/registrars/{id}:
+  /api/united-kingdom-marriage-certificate-application/registrars/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grade_flags:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_flags:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGradeFlag records
       operationId: listUnitedKingdomMarriageCertificateApplicationGradeFlag
@@ -610,7 +610,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grade_flags/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -758,7 +758,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grade_rules:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_rules:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGradeRule records
       operationId: listUnitedKingdomMarriageCertificateApplicationGradeRule
@@ -857,7 +857,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grade_rules/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1005,7 +1005,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grades:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGrade records
       operationId: listUnitedKingdomMarriageCertificateApplicationGrade
@@ -1103,7 +1103,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_application_grades/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1251,7 +1251,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_applications:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications:
     get:
       summary: List UnitedKingdomMarriageCertificateApplication records
       operationId: listUnitedKingdomMarriageCertificateApplication
@@ -1349,7 +1349,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_marriage_certificate_applications/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications/{id}:
     parameters:
     - name: id
       in: path

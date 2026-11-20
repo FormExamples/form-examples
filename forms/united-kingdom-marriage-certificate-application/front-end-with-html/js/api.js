@@ -8,7 +8,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CERTIFICATES_PATH = '/api/dashboard/certificates';
+const CERTIFICATES_PATH = '/api/united-kingdom-marriage-certificate-application/dashboard/certificates';
 
 /**
  * Fetch the certificate list from the backend.

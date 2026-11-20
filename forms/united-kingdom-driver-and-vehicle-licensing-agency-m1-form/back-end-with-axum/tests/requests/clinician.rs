@@ -8,7 +8,7 @@ use united_kingdom_driver_and_vehicle_licensing_agency_m1_form::app::App;
 #[serial]
 async fn can_get_clinicians() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/clinicians").await;
+        let res = request.get("/api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/clinicians").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

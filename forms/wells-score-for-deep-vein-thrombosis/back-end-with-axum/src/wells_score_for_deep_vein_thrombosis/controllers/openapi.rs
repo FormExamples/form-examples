@@ -18,6 +18,6 @@ pub async fn get_openapi() -> Result<Response> {
 /// Build the route for serving the `OpenAPI` spec.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/")
+        .prefix("api/wells-score-for-deep-vein-thrombosis/")
         .add("openapi.yaml", get(get_openapi))
 }

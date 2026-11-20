@@ -6,7 +6,7 @@
 // sample data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REPORTS_PATH = '/api/dashboard/reports';
+const REPORTS_PATH = '/api/microbiology-culture-test-result/dashboard/reports';
 
 /**
  * Fetch the graded-report list from the backend.

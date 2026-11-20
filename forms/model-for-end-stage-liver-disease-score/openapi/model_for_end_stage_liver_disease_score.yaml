@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main MELD assessment record: assessment context, patient identification, chosen MELD variant, and the laboratory inputs (total bilirubin, INR, serum creatinine, dialysis history, serum sodium, and serum albumin)."
 paths:
-  /api/model_for_end_stage_liver_disease_scores:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_scores:
     get:
       summary: List ModelForEndStageLiverDiseaseScore records
       operationId: listModelForEndStageLiverDiseaseScore
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/model_for_end_stage_liver_disease_scores/{id}:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_scores/{id}:
     parameters:
       - name: id
         in: path

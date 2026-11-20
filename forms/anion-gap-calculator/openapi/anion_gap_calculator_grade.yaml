@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed anion-gap result: the raw anion gap, the albumin-corrected anion gap, and the classification band (low / normal / high / very-high), 1:1 with the parent calculation record."
 paths:
-  /api/anion_gap_calculator_grades:
+  /api/anion-gap-calculator/anion_gap_calculator_grades:
     get:
       summary: List AnionGapCalculatorGrade records
       operationId: listAnionGapCalculatorGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anion_gap_calculator_grades/{id}:
+  /api/anion-gap-calculator/anion_gap_calculator_grades/{id}:
     parameters:
       - name: id
         in: path

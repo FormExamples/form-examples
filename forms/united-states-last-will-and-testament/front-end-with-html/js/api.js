@@ -8,7 +8,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const WILLS_PATH = '/api/dashboard/wills';
+const WILLS_PATH = '/api/united-states-last-will-and-testament/dashboard/wills';
 
 /**
  * Fetch the will list from the backend.

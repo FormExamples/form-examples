@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_general_practitioner_referral_letters() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/general_practitioner_referral_letters")
+            .get("/api/general-practitioner-referral-letter/general_practitioner_referral_letters")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

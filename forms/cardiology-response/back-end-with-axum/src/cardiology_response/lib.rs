@@ -26,14 +26,14 @@
 //! # HTTP API
 //!
 //! ```text
-//! POST   /api/cardiology_responses              create a response (draft or filled)
-//! GET    /api/cardiology_responses              list responses (newest first)
-//! GET    /api/cardiology_responses/{id}         fetch one response
-//! PATCH  /api/cardiology_responses/{id}         overwrite the response payload
-//! DELETE /api/cardiology_responses/{id}         soft-delete the response
-//! POST   /api/cardiology_responses/{id}/submit  run the engine, persist the grade
-//! GET    /api/cardiology_responses/{id}/result  read back the persisted grade
-//! GET    /api/dashboard                         list graded responses (joined)
+//! POST   /api/cardiology-response/cardiology_responses              create a response (draft or filled)
+//! GET    /api/cardiology-response/cardiology_responses              list responses (newest first)
+//! GET    /api/cardiology-response/cardiology_responses/{id}         fetch one response
+//! PATCH  /api/cardiology-response/cardiology_responses/{id}         overwrite the response payload
+//! DELETE /api/cardiology-response/cardiology_responses/{id}         soft-delete the response
+//! POST   /api/cardiology-response/cardiology_responses/{id}/submit  run the engine, persist the grade
+//! GET    /api/cardiology-response/cardiology_responses/{id}/result  read back the persisted grade
+//! GET    /api/cardiology-response/dashboard                         list graded responses (joined)
 //! ```
 //!
 //! # Example

@@ -109,7 +109,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/centor_score_for_streptococcal_pharyngitis_grades/")
+        .prefix("api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grades/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

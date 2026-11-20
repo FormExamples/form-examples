@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (bacterial meningitis pattern, suggested subarachnoid haemorrhage, or positive culture) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
 paths:
-  /api/lumbar_puncture_test_result_grades:
+  /api/lumbar-puncture-test-result/lumbar_puncture_test_result_grades:
     get:
       summary: List LumbarPunctureTestResultGrade records
       operationId: listLumbarPunctureTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lumbar_puncture_test_result_grades/{id}:
+  /api/lumbar-puncture-test-result/lumbar_puncture_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

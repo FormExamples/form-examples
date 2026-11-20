@@ -28,14 +28,14 @@
 //! # HTTP API
 //!
 //! ```text
-//! POST   /api/neurodiversity_adjustment_responses              create a response (draft or filled)
-//! GET    /api/neurodiversity_adjustment_responses              list responses (newest first)
-//! GET    /api/neurodiversity_adjustment_responses/{id}         fetch one response
-//! PATCH  /api/neurodiversity_adjustment_responses/{id}         overwrite the response payload
-//! DELETE /api/neurodiversity_adjustment_responses/{id}         soft-delete the response
-//! POST   /api/neurodiversity_adjustment_responses/{id}/submit  run the engine, persist the grade
-//! GET    /api/neurodiversity_adjustment_responses/{id}/result  read back the persisted grade
-//! GET    /api/dashboard                         list graded responses (joined)
+//! POST   /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses              create a response (draft or filled)
+//! GET    /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses              list responses (newest first)
+//! GET    /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}         fetch one response
+//! PATCH  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}         overwrite the response payload
+//! DELETE /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}         soft-delete the response
+//! POST   /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/submit  run the engine, persist the grade
+//! GET    /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/result  read back the persisted grade
+//! GET    /api/neurodiversity-adjustment-response/dashboard                         list graded responses (joined)
 //! ```
 //!
 //! # Example

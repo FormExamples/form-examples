@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed MELD grading result: derived intermediate values, the integer MELD score (6-40 when computable), the mapped 3-month mortality band, and the estimated mortality percentage."
 paths:
-  /api/model_for_end_stage_liver_disease_score_grades:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_score_grades:
     get:
       summary: List ModelForEndStageLiverDiseaseScoreGrade records
       operationId: listModelForEndStageLiverDiseaseScoreGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/model_for_end_stage_liver_disease_score_grades/{id}:
+  /api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_score_grades/{id}:
     parameters:
       - name: id
         in: path

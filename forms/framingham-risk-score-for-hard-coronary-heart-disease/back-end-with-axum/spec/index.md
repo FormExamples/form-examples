@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/framingham-risk-score-for-hard-coronary-heart-disease/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

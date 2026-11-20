@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Periodic progress check-in narrative for an objective. Many rows per okr_objective.
 paths:
-  /api/okr_check_ins:
+  /api/objectives-and-key-results-tracker/okr_check_ins:
     get:
       summary: List OkrCheckIn records
       operationId: listOkrCheckIn
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/okr_check_ins/{id}:
+  /api/objectives-and-key-results-tracker/okr_check_ins/{id}:
     parameters:
       - name: id
         in: path

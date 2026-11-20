@@ -57,7 +57,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/reports`.
+ * Response from `GET /api/x-ray-test-result/dashboard/reports`.
  *
  * @typedef {Object} DashboardReportsResponse
  * @property {ReportRow[]} items

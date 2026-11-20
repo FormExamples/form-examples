@@ -67,13 +67,18 @@ The fleet had 379 forms when this spec was written (2026-11-20). Their status:
 | Layer | Conforming | Notes |
 | --- | --- | --- |
 | Svelte routes | 379 / 379 | Already nested under `src/routes/<slug>/` (`bin/route-svelte-layout`) |
-| Axum API routes | 0 / 379 | Routes are `/api/<plural>`, for example `/api/allergies` |
+| Axum API routes | 379 / 379 | Moved from `/api/<plural>` by `bin/axum-api-namespace` (2026-11-20) |
 | SQL tables | 3 / 379 | 376 forms create unprefixed tables, most often `patient`, `clinician`, `practitioner`, `grade`, `grading_fired_rule`, `grading_additional_flag`, `assessment` |
 
-New forms must conform from the start. Existing forms migrate with a
-fleet-wide tool that has a `--check` CI drift detector, following the same
-pattern as the other `bin/axum-*` tools. Renaming a SQL table has knock-on
-effects, and the migration must carry each one in step:
+New forms must conform from the start. `cargo run -- generate scaffold --api`
+emits un-namespaced `.prefix("api/<plural>/")` routes, so run
+`bin/axum-api-namespace <slug>` on a newly scaffolded crate. Its `--check`
+mode is the CI drift detector for the API layer.
+
+The SQL tables still need a fleet-wide migration tool with a `--check` CI
+drift detector, following the same pattern as the other `bin/axum-*` tools.
+Renaming a SQL table has knock-on effects, and the migration must carry each
+one in step:
 
 - the generated XML, FHIR, protobuf and OpenAPI representations;
 - the Axum crate's migrations, entities, controllers and tests;
@@ -85,6 +90,8 @@ effects, and the migration must carry each one in step:
 
 - `bin/test-sql-apply <slug>` and a check that every `CREATE TABLE` name
   starts with the snake_case slug.
+- `bin/axum-api-namespace --check <slug>`, the CI drift detector for the
+  API routes.
 - `bin/openapi/generate-openapi-combined.py --check <slug>`, with every
   domain path under `/api/<slug>/`.
 - `bin/test-axum-routes`, and the crate's `cargo test`.

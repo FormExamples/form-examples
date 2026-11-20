@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Reporting clinician sign-off: who completed the report and when."
 paths:
-  /api/outpatient_outcome_signoffs:
+  /api/outpatient-outcome/outpatient_outcome_signoffs:
     get:
       summary: List OutpatientOutcomeSignoff records
       operationId: listOutpatientOutcomeSignoff
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_signoffs/{id}:
+  /api/outpatient-outcome/outpatient_outcome_signoffs/{id}:
     parameters:
       - name: id
         in: path

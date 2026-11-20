@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed PACU grading result: per-parameter Aldrete sub-scores, the summed Aldrete total (0-10), the derived discharge-readiness band, and the optional PADSS total and street-fitness result."
 paths:
-  /api/post_anaesthesia_care_unit_record_grades:
+  /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grades:
     get:
       summary: List PostAnaesthesiaCareUnitRecordGrade records
       operationId: listPostAnaesthesiaCareUnitRecordGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/post_anaesthesia_care_unit_record_grades/{id}:
+  /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grades/{id}:
     parameters:
       - name: id
         in: path

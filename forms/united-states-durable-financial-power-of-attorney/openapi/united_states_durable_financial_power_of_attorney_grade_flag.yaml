@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Flagged issues raised independently of the validity class, with priority and a suggested action.
 paths:
-  /api/united_states_durable_financial_power_of_attorney_grade_flags:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_durable_financial_power_of_attorney_grade_flags/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/medical-information-form-for-air-travel/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/medical-information-form-for-air-travel/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grade_flags:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_flags:
     get:
       summary: List MedicalInformationFormForAirTravelGradeFlag records
       operationId: listMedicalInformationFormForAirTravelGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grade_flags/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grade_rules:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules:
     get:
       summary: List MedicalInformationFormForAirTravelGradeRule records
       operationId: listMedicalInformationFormForAirTravelGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grade_rules/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grades:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grades:
     get:
       summary: List MedicalInformationFormForAirTravelGrade records
       operationId: listMedicalInformationFormForAirTravelGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travel_grades/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travels:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travels:
     get:
       summary: List MedicalInformationFormForAirTravel records
       operationId: listMedicalInformationFormForAirTravel
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_information_form_for_air_travels/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travels/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/medical-information-form-for-air-travel/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/medical-information-form-for-air-travel/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/medical-information-form-for-air-travel/patients/{id}:
     parameters:
     - name: id
       in: path

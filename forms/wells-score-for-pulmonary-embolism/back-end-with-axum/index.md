@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`wells_score_for_pulmonary_embolism/`](wells_score_for_pulmonary_embolism/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/wells-score-for-pulmonary-embolism/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

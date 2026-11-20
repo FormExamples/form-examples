@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off classification and urgency result for one hernia diagnostic evaluation. Stores both the engine-computed values and the clinician-final values with an override reason.
 paths:
-  /api/hernia_diagnostic_evaluation_grades:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades:
     get:
       summary: List HerniaDiagnosticEvaluationGrade records
       operationId: listHerniaDiagnosticEvaluationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hernia_diagnostic_evaluation_grades/{id}:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades/{id}:
     parameters:
       - name: id
         in: path

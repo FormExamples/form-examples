@@ -11,7 +11,7 @@ The organizing thesis: **a single uniform design is instantiated once per
 domain.** Every form has the identical directory layout, the identical engine
 file decomposition (`types → rules → grader → flagged-issues`), the identical
 UI class vocabulary (Lily), and the identical API surface
-(`/api/assessments`). Uniformity is the product; a new form is a new *instance*
+(`/api/<slug>/assessments`). Uniformity is the product; a new form is a new *instance*
 of the pattern, scaffolded by `bin/create-form`. → *quality: uniformity.*
 
 ## 4.2 SQL → generated representations pipeline

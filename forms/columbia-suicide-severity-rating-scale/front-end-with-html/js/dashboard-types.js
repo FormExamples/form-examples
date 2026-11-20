@@ -43,7 +43,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/columbia-suicide-severity-rating-scale/dashboard/assessments`.
  *
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items

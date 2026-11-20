@@ -28,11 +28,11 @@ async fn can_create_and_read_back_principal() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/principals` (no
-        // trailing slash), whereas the list handler is at `/api/principals/`
+        // NB: the scaffold's create handler mounts at `/api/united-states-durable-financial-power-of-attorney/principals` (no
+        // trailing slash), whereas the list handler is at `/api/united-states-durable-financial-power-of-attorney/principals/`
         // (with one) on some Axum versions and 404s the other way on
         // others — the exact path matters either way.
-        let create_res = request.post("/api/principals").json(&new_principal).await;
+        let create_res = request.post("/api/united-states-durable-financial-power-of-attorney/principals").json(&new_principal).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -52,7 +52,7 @@ async fn can_create_and_read_back_principal() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/principals/{id}")).await;
+        let get_res = request.get(&format!("/api/united-states-durable-financial-power-of-attorney/principals/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -76,7 +76,7 @@ async fn can_create_and_read_back_principal() {
         assert_eq!(fetched["postcode"], "20500");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/principals").await;
+        let list_res = request.get("/api/united-states-durable-financial-power-of-attorney/principals").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

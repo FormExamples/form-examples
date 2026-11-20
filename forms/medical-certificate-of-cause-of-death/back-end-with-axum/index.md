@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`medical_certificate_of_cause_of_death/`](medical_certificate_of_cause_of_death/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/medical-certificate-of-cause-of-death/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

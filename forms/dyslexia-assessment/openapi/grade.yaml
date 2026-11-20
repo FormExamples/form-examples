@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed dyslexia severity grading result. Severity: none (85-115), mild (70-84), moderate (55-69), severe (<55). One-to-one child of assessment."
 paths:
-  /api/grades:
+  /api/dyslexia-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/dyslexia-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

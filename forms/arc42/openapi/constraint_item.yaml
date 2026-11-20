@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Constraint item captured in §2 Constraints of the arc42 documentation.
 paths:
-  /api/constraint_items:
+  /api/arc42/constraint_items:
     get:
       summary: List ConstraintItem records
       operationId: listConstraintItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/constraint_items/{id}:
+  /api/arc42/constraint_items/{id}:
     parameters:
       - name: id
         in: path

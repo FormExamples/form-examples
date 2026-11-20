@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main US Standard Certificate of Death record (NCHS 2003 revision): decedent facts, the certifier's Part I and Part II cause-of-death chain, manner of death, tobacco, pregnancy and injury items, medical examiner or coroner referral, the funeral director's disposition, and the certified-copy order. Validity classification, fired rules and flags live in child tables."
 paths:
-  /api/united_states_standard_certificate_of_deaths:
+  /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_deaths:
     get:
       summary: List UnitedStatesStandardCertificateOfDeath records
       operationId: listUnitedStatesStandardCertificateOfDeath
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_standard_certificate_of_deaths/{id}:
+  /api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_deaths/{id}:
     parameters:
       - name: id
         in: path

@@ -54,11 +54,11 @@
       from the wizard root
 - [x] "Submit to backend" section on `/report` — configurable backend
       URL (default `http://localhost:5150`), POSTs the current
-      assessment to `/api/scorecards`, shows the new id + lookup URL
+      assessment to `/api/agile-consulting-scorecard-for-hiring-help/scorecards`, shows the new id + lookup URL
       on success or the error message on failure. Closes the
       wizard → Rust → dashboard loop end-to-end (verified live:
       submitting the golden sample creates `s-1000`, dashboard grows
-      12 → 13, `GET /api/scorecards/s-1000` returns the row)
+      12 → 13, `GET /api/agile-consulting-scorecard-for-hiring-help/scorecards/s-1000` returns the row)
 - [x] Initialize the SvelteKit project on top of the engine (Vite,
       Svelte 5 runes, Tailwind 4)
 - [x] Author `src/lib/stores/assessment.svelte.ts` (class-based runes store)

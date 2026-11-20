@@ -9,7 +9,7 @@ use urology_waiting_list_card::app::App;
 async fn can_get_urology_waiting_list_card_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/urology_waiting_list_card_grade_rules")
+            .get("/api/urology-waiting-list-card/urology_waiting_list_card_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

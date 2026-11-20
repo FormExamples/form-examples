@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_pregnancy_ultrasound_test_request_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/pregnancy_ultrasound_test_request_grades")
+            .get("/api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_request_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

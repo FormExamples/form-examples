@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of grading rules that fired when computing the maturity of an arc42 documentation snapshot.
 paths:
-  /api/arc42_documentation_grade_rules:
+  /api/arc42/arc42_documentation_grade_rules:
     get:
       summary: List Arc42DocumentationGradeRule records
       operationId: listArc42DocumentationGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/arc42_documentation_grade_rules/{id}:
+  /api/arc42/arc42_documentation_grade_rules/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed readiness classification for a divorce or dissolution application: application class (ready-to-apply/incomplete/not-eligible-yet), earliest eligible date for the stage, and whether a jurisdiction ground is met."
 paths:
-  /api/united_kingdom_divorce_application_grades:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades:
     get:
       summary: List UnitedKingdomDivorceApplicationGrade records
       operationId: listUnitedKingdomDivorceApplicationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_divorce_application_grades/{id}:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades/{id}:
     parameters:
       - name: id
         in: path

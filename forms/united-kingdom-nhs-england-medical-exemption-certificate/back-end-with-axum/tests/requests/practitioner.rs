@@ -8,7 +8,7 @@ use united_kingdom_nhs_england_medical_exemption_certificate::app::App;
 #[serial]
 async fn can_get_practitioners() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/practitioners").await;
+        let res = request.get("/api/united-kingdom-nhs-england-medical-exemption-certificate/practitioners").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

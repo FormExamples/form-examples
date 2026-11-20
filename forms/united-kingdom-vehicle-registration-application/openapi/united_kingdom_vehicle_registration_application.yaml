@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main vehicle registration application record: V62 replacement V5C, V55/4 or V55/5 first registration, imported vehicle, or V627/1 rebuilt or kit vehicle, with keeper, vehicle identity, supporting evidence, fee, and declaration."
 paths:
-  /api/united_kingdom_vehicle_registration_applications:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplication records
       operationId: listUnitedKingdomVehicleRegistrationApplication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_vehicle_registration_applications/{id}:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications/{id}:
     parameters:
       - name: id
         in: path

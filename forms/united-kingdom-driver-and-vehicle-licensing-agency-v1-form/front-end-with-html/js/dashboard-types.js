@@ -25,7 +25,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/patients`.
+ * Response from `GET /api/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/dashboard/patients`.
  *
  * @typedef {Object} DashboardPatientsResponse
  * @property {PatientRow[]} items

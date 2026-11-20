@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main CURB-65 pneumonia severity assessment record: assessment context, patient identification, the five scored criterion inputs (confusion, urea, respiratory rate, blood pressure, age), advisory adjuncts, and the clinician disposition override."
 paths:
-  /api/curb_65_pneumonia_severity_scores:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores:
     get:
       summary: List Curb65PneumoniaSeverityScore records
       operationId: listCurb65PneumoniaSeverityScore
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/curb_65_pneumonia_severity_scores/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores/{id}:
     parameters:
       - name: id
         in: path

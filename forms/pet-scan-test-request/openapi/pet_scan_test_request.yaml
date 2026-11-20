@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: PET-CT scan request (referral). Captures the requested tracer / scan type, the clinical indication and question, primary tumour site, FDG-PET patient-preparation and safety data (glucose control, pregnancy, breastfeeding, renal function), IR(ME)R justification, and triage urgency.
 paths:
-  /api/pet_scan_test_requests:
+  /api/pet-scan-test-request/pet_scan_test_requests:
     get:
       summary: List PetScanTestRequest records
       operationId: listPetScanTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pet_scan_test_requests/{id}:
+  /api/pet-scan-test-request/pet_scan_test_requests/{id}:
     parameters:
       - name: id
         in: path

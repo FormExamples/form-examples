@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Substance abuse assessment form using AUDIT and DAST-10 screening instruments. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/substance-abuse-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/substance-abuse-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

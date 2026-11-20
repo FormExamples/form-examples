@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every rule that fired during corrected-calcium computation: instrument, band, category, and description."
 paths:
-  /api/corrected_calcium_calculator_grade_rules:
+  /api/corrected-calcium-calculator/corrected_calcium_calculator_grade_rules:
     get:
       summary: List CorrectedCalciumCalculatorGradeRule records
       operationId: listCorrectedCalciumCalculatorGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/corrected_calcium_calculator_grade_rules/{id}:
+  /api/corrected-calcium-calculator/corrected_calcium_calculator_grade_rules/{id}:
     parameters:
       - name: id
         in: path

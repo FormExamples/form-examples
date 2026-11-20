@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments response: outcome classification, legal / discrimination risk (reasonableness), response completeness, and follow-up / review urgency. Declining adjustments for a worker likely covered by the Equality Act 2010 without an adequate reasonableness justification or alternatives drives the legal-risk axis to high-risk and raises the discrimination-risk flag regardless of the other axes."
 paths:
-  /api/neurodiversity_adjustment_response_grades:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_response_grades:
     get:
       summary: List NeurodiversityAdjustmentResponseGrade records
       operationId: listNeurodiversityAdjustmentResponseGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_response_grades/{id}:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_response_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every coaching rule fired by the maturity engine, one row per principle that was placed into a band (high / mid / low / unanswered).
 paths:
-  /api/agile_principles_assessment_grade_rules:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_rules:
     get:
       summary: List AgilePrinciplesAssessmentGradeRule records
       operationId: listAgilePrinciplesAssessmentGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/agile_principles_assessment_grade_rules/{id}:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_rules/{id}:
     parameters:
       - name: id
         in: path

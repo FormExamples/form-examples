@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_confusion_assessment_method_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/confusion_assessment_method_grade_flags")
+            .get("/api/confusion-assessment-method/confusion_assessment_method_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

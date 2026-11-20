@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Public Health Waiting List Card form. Pure bac
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/public-health-waiting-list-card/assessments` (list, create, read, update,
+submit, result) plus `/api/public-health-waiting-list-card/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

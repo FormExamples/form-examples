@@ -43,7 +43,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/observations`.
+ * Response from `GET /api/modified-early-warning-score/dashboard/observations`.
  *
  * @typedef {Object} DashboardObservationsResponse
  * @property {ObservationRow[]} items

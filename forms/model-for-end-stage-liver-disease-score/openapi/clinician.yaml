@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician identifying information for the assessing clinician.
 paths:
-  /api/clinicians:
+  /api/model-for-end-stage-liver-disease-score/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/model-for-end-stage-liver-disease-score/clinicians/{id}:
     parameters:
       - name: id
         in: path

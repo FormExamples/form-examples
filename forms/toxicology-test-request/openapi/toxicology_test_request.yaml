@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Toxicology / poisons / therapeutic-drug-level blood-test request. Captures the requested assays (booleans), the clinical indication and details, suspected agent and ingestion timing, specimen handling, and triage urgency.
 paths:
-  /api/toxicology_test_requests:
+  /api/toxicology-test-request/toxicology_test_requests:
     get:
       summary: List ToxicologyTestRequest records
       operationId: listToxicologyTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/toxicology_test_requests/{id}:
+  /api/toxicology-test-request/toxicology_test_requests/{id}:
     parameters:
       - name: id
         in: path

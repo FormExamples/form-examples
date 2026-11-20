@@ -62,7 +62,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/candidates`.
+ * Response from `GET /api/emergency-medical-technician-psychomotor-examination/dashboard/candidates`.
  *
  * @typedef {Object} DashboardCandidatesResponse
  * @property {CandidateRow[]} items

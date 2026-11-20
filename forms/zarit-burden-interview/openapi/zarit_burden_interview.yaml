@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Zarit Burden Interview record: assessment context, carer and care-recipient identification, and the twenty-two 0-4 item ratings."
 paths:
-  /api/zarit_burden_interviews:
+  /api/zarit-burden-interview/zarit_burden_interviews:
     get:
       summary: List ZaritBurdenInterview records
       operationId: listZaritBurdenInterview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/zarit_burden_interviews/{id}:
+  /api/zarit-burden-interview/zarit_burden_interviews/{id}:
     parameters:
       - name: id
         in: path

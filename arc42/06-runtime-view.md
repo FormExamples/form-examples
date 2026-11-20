@@ -44,7 +44,7 @@ Key points:
 
 ## 6.2 JSON-API request flow (back-end)
 
-The Axum crate exposes the canonical `/api/assessments` resource. Grading runs
+The Axum crate exposes the canonical `/api/<slug>/assessments` resource. Grading runs
 server-side through the Rust mirror of the engine.
 
 ```mermaid
@@ -54,17 +54,17 @@ sequenceDiagram
   participant Engine as Rust engine
   participant DB as PostgreSQL (sqlx)
 
-  Client->>Axum: POST /api/assessments (draft)
+  Client->>Axum: POST /api/<slug>/assessments (draft)
   Axum->>DB: insert <form> record
   Axum-->>Client: {id, data}
-  Client->>Axum: PATCH /api/assessments/{id} (partial)
+  Client->>Axum: PATCH /api/<slug>/assessments/{id} (partial)
   Axum->>DB: merge partial into record
-  Client->>Axum: POST /api/assessments/{id}/submit
+  Client->>Axum: POST /api/<slug>/assessments/{id}/submit
   Axum->>Engine: grade(record)
   Engine-->>Axum: grade + fired rules + flags
   Axum->>DB: persist <form>_grade (+ _grade_rule, _grade_flag)
   Axum-->>Client: result JSON
-  Client->>Axum: GET /api/assessments/{id}/result
+  Client->>Axum: GET /api/<slug>/assessments/{id}/result
   Axum-->>Client: stored grading result
 ```
 

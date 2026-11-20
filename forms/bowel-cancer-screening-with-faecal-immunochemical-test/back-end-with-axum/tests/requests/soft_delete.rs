@@ -39,7 +39,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .await
         .unwrap();
 
-        let path = format!("/api/bowel_cancer_screening_fit_grades/{row2}");
+        let path = format!("/api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grades/{row2}");
         let live = request.get(&path).await;
         assert_eq!(live.status_code(), 200);
         let body = live.json::<serde_json::Value>();
@@ -48,7 +48,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         request.delete(&path).await.assert_status_success();
         assert_eq!(request.get(&path).await.status_code(), 404);
         assert_eq!(request.delete(&path).await.status_code(), 404);
-        let listed = request.get("/api/bowel_cancer_screening_fit_grades").await.json::<serde_json::Value>();
+        let listed = request.get("/api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grades").await.json::<serde_json::Value>();
         assert!(!listed.to_string().contains(&row2.to_string()));
         let stale = request.patch(&path).json(&body).await;
         assert!(!stale.status_code().is_success(), "an update reached a deleted row");

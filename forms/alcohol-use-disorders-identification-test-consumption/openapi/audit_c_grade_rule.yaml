@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during AUDIT-C computation: item, points contributed, category, and description."
 paths:
-  /api/audit_c_grade_rules:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules:
     get:
       summary: List AuditCGradeRule records
       operationId: listAuditCGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/audit_c_grade_rules/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/acknowledgments:
+  /api/screening-program-privacy-notice/acknowledgments:
     get:
       summary: List Acknowledgment records
       operationId: listAcknowledgment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/acknowledgments/{id}:
+  /api/screening-program-privacy-notice/acknowledgments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/screening-program-privacy-notice/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/screening-program-privacy-notice/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/screening-program-privacy-notice/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/screening-program-privacy-notice/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/screening-program-privacy-notice/patients/{id}:
     parameters:
     - name: id
       in: path

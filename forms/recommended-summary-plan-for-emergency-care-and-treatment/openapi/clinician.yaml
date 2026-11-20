@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician identifying information for the clinician who completed and signed the ReSPECT plan and any senior clinician who endorsed it.
 paths:
-  /api/clinicians:
+  /api/recommended-summary-plan-for-emergency-care-and-treatment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/recommended-summary-plan-for-emergency-care-and-treatment/clinicians/{id}:
     parameters:
       - name: id
         in: path

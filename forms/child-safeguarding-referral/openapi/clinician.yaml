@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Referrer identifying information for the professional making the child safeguarding referral.
 paths:
-  /api/clinicians:
+  /api/child-safeguarding-referral/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/child-safeguarding-referral/clinicians/{id}:
     parameters:
       - name: id
         in: path

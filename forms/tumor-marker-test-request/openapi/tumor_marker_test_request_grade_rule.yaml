@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every appropriateness / interpretation / completeness / urgency rule that fired for this request.
 paths:
-  /api/tumor_marker_test_request_grade_rules:
+  /api/tumor-marker-test-request/tumor_marker_test_request_grade_rules:
     get:
       summary: List TumorMarkerTestRequestGradeRule records
       operationId: listTumorMarkerTestRequestGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/tumor_marker_test_request_grade_rules/{id}:
+  /api/tumor-marker-test-request/tumor_marker_test_request_grade_rules/{id}:
     parameters:
       - name: id
         in: path

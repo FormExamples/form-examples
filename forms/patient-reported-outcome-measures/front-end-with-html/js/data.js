@@ -1,6 +1,6 @@
 // Sample subject/visit rows for the dashboard's offline / no-backend
 // fallback. Field shape matches the (aggregated) rows the Rust backend's
-// GET /api/patient-reported-outcome-measures endpoint is expected to
+// GET /api/patient-reported-outcome-measures/patient-reported-outcome-measures endpoint is expected to
 // return: one row per completed assessment, with each of the 4
 // instruments' headline computed outputs alongside the visit header.
 

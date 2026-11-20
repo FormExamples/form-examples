@@ -30,7 +30,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/checks`.
+ * Response from `GET /api/learning-disability-annual-health-check/dashboard/checks`.
  *
  * @typedef {Object} DashboardChecksResponse
  * @property {CheckRow[]} items

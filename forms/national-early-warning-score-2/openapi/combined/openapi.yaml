@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/national-early-warning-score-2/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/national-early-warning-score-2/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grade_flags:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grade_flags:
     get:
       summary: List NationalEarlyWarningScore2GradeFlag records
       operationId: listNationalEarlyWarningScore2GradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grade_flags/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grade_rules:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grade_rules:
     get:
       summary: List NationalEarlyWarningScore2GradeRule records
       operationId: listNationalEarlyWarningScore2GradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grade_rules/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grades:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grades:
     get:
       summary: List NationalEarlyWarningScore2Grade records
       operationId: listNationalEarlyWarningScore2Grade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2_grades/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2s:
+  /api/national-early-warning-score-2/national_early_warning_score_2s:
     get:
       summary: List NationalEarlyWarningScore2 records
       operationId: listNationalEarlyWarningScore2
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/national_early_warning_score_2s/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2s/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/national-early-warning-score-2/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/national-early-warning-score-2/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/national-early-warning-score-2/patients/{id}:
     parameters:
     - name: id
       in: path

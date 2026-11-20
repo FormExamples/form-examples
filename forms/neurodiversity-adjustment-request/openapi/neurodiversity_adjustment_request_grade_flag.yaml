@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Compliance and wellbeing flags that fire independently of the four axes, with priority and a suggested action for the manager / HR contact.
 paths:
-  /api/neurodiversity_adjustment_request_grade_flags:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_request_grade_flags:
     get:
       summary: List NeurodiversityAdjustmentRequestGradeFlag records
       operationId: listNeurodiversityAdjustmentRequestGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_request_grade_flags/{id}:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_request_grade_flags/{id}:
     parameters:
       - name: id
         in: path

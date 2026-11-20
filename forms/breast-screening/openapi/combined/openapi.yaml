@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/breast_screening_grade_flags:
+  /api/breast-screening/breast_screening_grade_flags:
     get:
       summary: List BreastScreeningGradeFlag records
       operationId: listBreastScreeningGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screening_grade_flags/{id}:
+  /api/breast-screening/breast_screening_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screening_grade_rules:
+  /api/breast-screening/breast_screening_grade_rules:
     get:
       summary: List BreastScreeningGradeRule records
       operationId: listBreastScreeningGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screening_grade_rules/{id}:
+  /api/breast-screening/breast_screening_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screening_grades:
+  /api/breast-screening/breast_screening_grades:
     get:
       summary: List BreastScreeningGrade records
       operationId: listBreastScreeningGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screening_grades/{id}:
+  /api/breast-screening/breast_screening_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screenings:
+  /api/breast-screening/breast_screenings:
     get:
       summary: List BreastScreening records
       operationId: listBreastScreening
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/breast_screenings/{id}:
+  /api/breast-screening/breast_screenings/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/breast-screening/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/breast-screening/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/breast-screening/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/breast-screening/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/breast-screening/patients/{id}:
     parameters:
     - name: id
       in: path

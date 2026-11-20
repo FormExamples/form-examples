@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), preparation / technical suitability, request completeness, and triage priority."
 paths:
-  /api/ultrasound_test_request_grades:
+  /api/ultrasound-test-request/ultrasound_test_request_grades:
     get:
       summary: List UltrasoundTestRequestGrade records
       operationId: listUltrasoundTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ultrasound_test_request_grades/{id}:
+  /api/ultrasound-test-request/ultrasound_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

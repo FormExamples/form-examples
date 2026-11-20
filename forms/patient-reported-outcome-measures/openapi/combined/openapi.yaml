@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/openapi.yaml:
+  /api/patient-reported-outcome-measures/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -19,7 +19,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patient_reported_outcome_measures:
+  /api/patient-reported-outcome-measures/patient_reported_outcome_measures:
     get:
       summary: List PatientReportedOutcomeMeasures records
       operationId: listPatientReportedOutcomeMeasures
@@ -117,7 +117,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_reported_outcome_measures/{id}:
+  /api/patient-reported-outcome-measures/patient_reported_outcome_measures/{id}:
     parameters:
     - name: id
       in: path
@@ -265,7 +265,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_reported_outcome_measures_scores:
+  /api/patient-reported-outcome-measures/patient_reported_outcome_measures_scores:
     get:
       summary: List PatientReportedOutcomeMeasuresScore records
       operationId: listPatientReportedOutcomeMeasuresScore
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_reported_outcome_measures_scores/{id}:
+  /api/patient-reported-outcome-measures/patient_reported_outcome_measures_scores/{id}:
     parameters:
     - name: id
       in: path

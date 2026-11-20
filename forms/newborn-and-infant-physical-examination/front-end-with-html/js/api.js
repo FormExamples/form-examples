@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const EXAMINATIONS_PATH = '/api/dashboard/examinations';
+const EXAMINATIONS_PATH = '/api/newborn-and-infant-physical-examination/dashboard/examinations';
 
 /**
  * Fetch the examination list from the backend.

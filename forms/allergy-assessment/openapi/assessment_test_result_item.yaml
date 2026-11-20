@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual test result entry with test type, allergen tested, and result.
 paths:
-  /api/assessment_test_result_items:
+  /api/allergy-assessment/assessment_test_result_items:
     get:
       summary: List AssessmentTestResultItem records
       operationId: listAssessmentTestResultItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_test_result_items/{id}:
+  /api/allergy-assessment/assessment_test_result_items/{id}:
     parameters:
       - name: id
         in: path

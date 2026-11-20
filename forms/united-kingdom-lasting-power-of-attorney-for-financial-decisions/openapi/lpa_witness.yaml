@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA witness — captures the witness for a donor or attorney signature (LPA Regulations 2007 reg. 9(2)).
 paths:
-  /api/lpa_witnesses:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_witnesses:
     get:
       summary: List LpaWitness records
       operationId: listLpaWitness
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_witnesses/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_witnesses/{id}:
     parameters:
       - name: id
         in: path

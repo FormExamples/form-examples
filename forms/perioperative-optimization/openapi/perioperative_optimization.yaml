@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Perioperative optimization: the payload of the 16-step single-page wizard, covering the eight optimization domains plus the history, medication, allergy, frailty, and social context that shapes the prehabilitation plan."
 paths:
-  /api/perioperative_optimizations:
+  /api/perioperative-optimization/perioperative_optimizations:
     get:
       summary: List PerioperativeOptimization records
       operationId: listPerioperativeOptimization
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/perioperative_optimizations/{id}:
+  /api/perioperative-optimization/perioperative_optimizations/{id}:
     parameters:
       - name: id
         in: path

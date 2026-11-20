@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed result classification for a breast-screening record: eligibility status, outcome band (result class), the recommended screening outcome / next action, and completeness status."
 paths:
-  /api/breast_screening_grades:
+  /api/breast-screening/breast_screening_grades:
     get:
       summary: List BreastScreeningGrade records
       operationId: listBreastScreeningGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/breast_screening_grades/{id}:
+  /api/breast-screening/breast_screening_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: UK Statement of Fitness for Work (Med 3 / fit note). A single assessment record covering diagnosis, fitness category, adaptations, period, and follow-up.
 paths:
-  /api/united_kingdom_statement_of_fitness_for_works:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWork records
       operationId: listUnitedKingdomStatementOfFitnessForWork
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_statement_of_fitness_for_works/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works/{id}:
     parameters:
       - name: id
         in: path

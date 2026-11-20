@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/cataract_diagnostic_evaluation_grade_flags:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags:
     get:
       summary: List CataractDiagnosticEvaluationGradeFlag records
       operationId: listCataractDiagnosticEvaluationGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cataract_diagnostic_evaluation_grade_flags/{id}:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cataract_diagnostic_evaluation_grades:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grades:
     get:
       summary: List CataractDiagnosticEvaluationGrade records
       operationId: listCataractDiagnosticEvaluationGrade
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cataract_diagnostic_evaluation_grades/{id}:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cataract_diagnostic_evaluations:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations:
     get:
       summary: List CataractDiagnosticEvaluation records
       operationId: listCataractDiagnosticEvaluation
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cataract_diagnostic_evaluations/{id}:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/cataract-diagnostic-evaluation/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/cataract-diagnostic-evaluation/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/cataract-diagnostic-evaluation/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/cataract-diagnostic-evaluation/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/cataract-diagnostic-evaluation/patients/{id}:
     parameters:
     - name: id
       in: path

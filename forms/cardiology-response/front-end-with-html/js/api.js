@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const RESPONSES_PATH = '/api/cardiology_responses';
+const RESPONSES_PATH = '/api/cardiology-response/cardiology_responses';
 
 /**
  * Fetch the response list from the backend.

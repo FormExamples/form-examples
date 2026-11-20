@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_model_for_end_stage_liver_disease_scores() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/model_for_end_stage_liver_disease_scores")
+            .get("/api/model-for-end-stage-liver-disease-score/model_for_end_stage_liver_disease_scores")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

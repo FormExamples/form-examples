@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clin_neurophys_waiting_list_card_appointments:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_appointments:
     get:
       summary: List ClinNeurophysWaitingListCardAppointment records
       operationId: listClinNeurophysWaitingListCardAppointment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_appointments/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grade_flags:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grade_flags:
     get:
       summary: List ClinNeurophysWaitingListCardGradeFlag records
       operationId: listClinNeurophysWaitingListCardGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grade_flags/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grade_rules:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grade_rules:
     get:
       summary: List ClinNeurophysWaitingListCardGradeRule records
       operationId: listClinNeurophysWaitingListCardGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grade_rules/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grades:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grades:
     get:
       summary: List ClinNeurophysWaitingListCardGrade records
       operationId: listClinNeurophysWaitingListCardGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_card_grades/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_cards:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_cards:
     get:
       summary: List ClinNeurophysWaitingListCard records
       operationId: listClinNeurophysWaitingListCard
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clin_neurophys_waiting_list_cards/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/clin_neurophys_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/clinical-neurophysiology-waiting-list-card/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/clinical-neurophysiology-waiting-list-card/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners:
+  /api/clinical-neurophysiology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners/{id}:
+  /api/clinical-neurophysiology-waiting-list-card/practitioners/{id}:
     parameters:
     - name: id
       in: path

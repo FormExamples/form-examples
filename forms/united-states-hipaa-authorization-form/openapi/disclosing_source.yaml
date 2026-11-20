@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Person(s) or class of persons authorized to make the disclosure. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(ii).
 paths:
-  /api/disclosing_sources:
+  /api/united-states-hipaa-authorization-form/disclosing_sources:
     get:
       summary: List DisclosingSource records
       operationId: listDisclosingSource
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/disclosing_sources/{id}:
+  /api/united-states-hipaa-authorization-form/disclosing_sources/{id}:
     parameters:
       - name: id
         in: path

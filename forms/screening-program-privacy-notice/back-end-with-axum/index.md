@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Screening Program Privacy Notice form. Pure ba
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/screening-program-privacy-notice/assessments` (list, create, read, update,
+submit, result) plus `/api/screening-program-privacy-notice/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

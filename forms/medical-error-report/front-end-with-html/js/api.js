@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const INCIDENTS_PATH = '/api/dashboard/incidents';
+const INCIDENTS_PATH = '/api/medical-error-report/dashboard/incidents';
 
 /**
  * Fetch the incident list from the backend.

@@ -7,7 +7,7 @@
 // `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CHARTS_PATH = '/api/dashboard/charts';
+const CHARTS_PATH = '/api/fluid-balance-chart/dashboard/charts';
 
 /**
  * Fetch the chart list from the backend.

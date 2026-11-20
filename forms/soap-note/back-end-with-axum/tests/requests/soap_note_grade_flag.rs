@@ -8,7 +8,7 @@ use soap_note::app::App;
 #[serial]
 async fn can_get_soap_note_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/soap_note_grade_flags").await;
+        let res = request.get("/api/soap-note/soap_note_grade_flags").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

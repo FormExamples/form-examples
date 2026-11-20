@@ -58,7 +58,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/reports`.
+ * Response from `GET /api/eye-vision-test-result/dashboard/reports`.
  *
  * @typedef {Object} DashboardReportsResponse
  * @property {ReportRow[]} items

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician information for the medical certifier (physician, medical examiner, or coroner) who completes the cause-of-death section of the US Standard Certificate of Death.
 paths:
-  /api/clinicians:
+  /api/united-states-standard-certificate-of-death/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/united-states-standard-certificate-of-death/clinicians/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: The deceased person whose death is being registered in England and Wales.
 paths:
-  /api/patients:
+  /api/united-kingdom-death-registration/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patients/{id}:
+  /api/united-kingdom-death-registration/patients/{id}:
     parameters:
       - name: id
         in: path

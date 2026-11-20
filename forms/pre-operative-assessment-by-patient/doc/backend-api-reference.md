@@ -29,7 +29,7 @@ REST API documentation for the Pre-Operative Assessment backend, built with Rust
 #### Create Assessment
 
 ```
-POST /api/assessments
+POST /api/pre-operative-assessment-by-patient/assessments
 ```
 
 **Request Body:** JSON `AssessmentData` object, or empty `{}` for a blank draft.
@@ -49,7 +49,7 @@ POST /api/assessments
 #### List Assessments (Paginated)
 
 ```
-GET /api/assessments?page=0&per_page=20
+GET /api/pre-operative-assessment-by-patient/assessments?page=0&per_page=20
 ```
 
 **Query Parameters:**
@@ -68,7 +68,7 @@ GET /api/assessments?page=0&per_page=20
 #### Get Single Assessment
 
 ```
-GET /api/assessments/{id}
+GET /api/pre-operative-assessment-by-patient/assessments/{id}
 ```
 
 **Response:** `200 OK` with `AssessmentResponse`, or `404 Not Found`.
@@ -76,7 +76,7 @@ GET /api/assessments/{id}
 #### Update Assessment
 
 ```
-PUT /api/assessments/{id}
+PUT /api/pre-operative-assessment-by-patient/assessments/{id}
 ```
 
 **Request Body:** JSON `AssessmentData` object (replaces existing data).
@@ -86,7 +86,7 @@ PUT /api/assessments/{id}
 #### Delete Assessment
 
 ```
-DELETE /api/assessments/{id}
+DELETE /api/pre-operative-assessment-by-patient/assessments/{id}
 ```
 
 **Response:** `200 OK` with empty body.
@@ -94,7 +94,7 @@ DELETE /api/assessments/{id}
 #### Grade Assessment
 
 ```
-POST /api/assessments/{id}/grade
+POST /api/pre-operative-assessment-by-patient/assessments/{id}/grade
 ```
 
 Runs the ASA grading engine against the stored assessment data. Saves the result and sets status to `"graded"`.
@@ -129,7 +129,7 @@ Runs the ASA grading engine against the stored assessment data. Saves the result
 #### Generate Text Report
 
 ```
-POST /api/reports/text
+POST /api/pre-operative-assessment-by-patient/reports/text
 ```
 
 **Request Body:**
@@ -182,7 +182,7 @@ The backend contains a complete port of the frontend grading engine:
 - **Safety flag detection** for 20+ alert categories
 - **Utility functions** for BMI, METs, age calculations
 
-The engine is invoked via the `POST /api/assessments/{id}/grade` endpoint and stores results in the assessment record.
+The engine is invoked via the `POST /api/pre-operative-assessment-by-patient/assessments/{id}/grade` endpoint and stores results in the assessment record.
 
 ---
 

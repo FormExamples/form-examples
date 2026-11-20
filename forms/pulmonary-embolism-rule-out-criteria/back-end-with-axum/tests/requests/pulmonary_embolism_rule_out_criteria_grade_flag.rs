@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_pulmonary_embolism_rule_out_criteria_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/pulmonary_embolism_rule_out_criteria_grade_flags")
+            .get("/api/pulmonary-embolism-rule-out-criteria/pulmonary_embolism_rule_out_criteria_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

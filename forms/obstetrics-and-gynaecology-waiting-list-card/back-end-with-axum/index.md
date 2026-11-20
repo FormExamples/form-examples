@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Obstetrics and Gynaecology Waiting List Card f
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/obstetrics-and-gynaecology-waiting-list-card/assessments` (list, create, read, update,
+submit, result) plus `/api/obstetrics-and-gynaecology-waiting-list-card/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

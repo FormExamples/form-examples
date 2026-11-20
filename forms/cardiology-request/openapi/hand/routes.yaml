@@ -1,7 +1,7 @@
 # Routes no SQL table describes, documented by hand. Merged into
 # combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
 paths:
-  /api/cardiology_requests/{id}/submit:
+  /api/cardiology-request/cardiology_requests/{id}/submit:
     parameters:
     - name: id
       in: path
@@ -38,7 +38,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cardiology_requests/{id}/result:
+  /api/cardiology-request/cardiology_requests/{id}/result:
     parameters:
     - name: id
       in: path
@@ -73,7 +73,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dashboard:
+  /api/cardiology-request/dashboard:
     get:
       summary: Each request with its grade, newest first
       description: Lists records newest first, each paired with its grade, or null when ungraded.

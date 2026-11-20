@@ -41,7 +41,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/patients`.
+ * Response from `GET /api/framingham-risk-score-for-hard-coronary-heart-disease/dashboard/patients`.
  *
  * @typedef {Object} DashboardPatientsResponse
  * @property {PatientRow[]} items

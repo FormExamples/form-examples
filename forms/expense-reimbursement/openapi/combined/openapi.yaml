@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/expense_reimbursement_grade_flags:
+  /api/expense-reimbursement/expense_reimbursement_grade_flags:
     get:
       summary: List ExpenseReimbursementGradeFlag records
       operationId: listExpenseReimbursementGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_grade_flags/{id}:
+  /api/expense-reimbursement/expense_reimbursement_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_grade_rules:
+  /api/expense-reimbursement/expense_reimbursement_grade_rules:
     get:
       summary: List ExpenseReimbursementGradeRule records
       operationId: listExpenseReimbursementGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_grade_rules/{id}:
+  /api/expense-reimbursement/expense_reimbursement_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_grades:
+  /api/expense-reimbursement/expense_reimbursement_grades:
     get:
       summary: List ExpenseReimbursementGrade records
       operationId: listExpenseReimbursementGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_grades/{id}:
+  /api/expense-reimbursement/expense_reimbursement_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_items:
+  /api/expense-reimbursement/expense_reimbursement_items:
     get:
       summary: List ExpenseReimbursementItem records
       operationId: listExpenseReimbursementItem
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursement_items/{id}:
+  /api/expense-reimbursement/expense_reimbursement_items/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursements:
+  /api/expense-reimbursement/expense_reimbursements:
     get:
       summary: List ExpenseReimbursement records
       operationId: listExpenseReimbursement
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expense_reimbursements/{id}:
+  /api/expense-reimbursement/expense_reimbursements/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/managers:
+  /api/expense-reimbursement/managers:
     get:
       summary: List Manager records
       operationId: listManager
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/managers/{id}:
+  /api/expense-reimbursement/managers/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/expense-reimbursement/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1495,7 +1495,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/workers:
+  /api/expense-reimbursement/workers:
     get:
       summary: List Worker records
       operationId: listWorker
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/workers/{id}:
+  /api/expense-reimbursement/workers/{id}:
     parameters:
     - name: id
       in: path

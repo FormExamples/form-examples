@@ -49,7 +49,7 @@ python3 -m http.server --directory forms/hip-replacement-surgery-evaluation/fron
 
 Then open <http://localhost:8000/index.html>.
 
-The dashboard reads `GET /api/hip_replacement_surgery_evaluations` from the
+The dashboard reads `GET /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations` from the
 Axum back-end at `http://localhost:5150`, and falls back to the sample rows in
 `js/data.js` with a banner when that is unavailable.
 

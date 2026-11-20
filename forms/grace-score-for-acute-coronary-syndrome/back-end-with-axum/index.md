@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`grace_score_for_acute_coronary_syndrome/`](grace_score_for_acute_coronary_syndrome/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/grace-score-for-acute-coronary-syndrome/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

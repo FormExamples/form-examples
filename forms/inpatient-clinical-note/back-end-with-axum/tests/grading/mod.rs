@@ -306,13 +306,13 @@ async fn the_grade_endpoints_round_trip_over_http() {
 
         // Nothing graded yet.
         let before = request
-            .get(&format!("/api/inpatient_clinical_notes/{note_id}/grade"))
+            .get(&format!("/api/inpatient-clinical-note/inpatient_clinical_notes/{note_id}/grade"))
             .await;
         assert_eq!(before.status_code(), 404);
 
         // Grading returns both the persisted row and the engine result.
         let posted = request
-            .post(&format!("/api/inpatient_clinical_notes/{note_id}/grade"))
+            .post(&format!("/api/inpatient-clinical-note/inpatient_clinical_notes/{note_id}/grade"))
             .await;
         assert_eq!(posted.status_code(), 200);
         let body: serde_json::Value = posted.json();
@@ -335,7 +335,7 @@ async fn the_grade_endpoints_round_trip_over_http() {
 
         // And it is now readable.
         let after = request
-            .get(&format!("/api/inpatient_clinical_notes/{note_id}/grade"))
+            .get(&format!("/api/inpatient-clinical-note/inpatient_clinical_notes/{note_id}/grade"))
             .await;
         assert_eq!(after.status_code(), 200);
         assert_eq!(
@@ -351,7 +351,7 @@ async fn the_grade_endpoints_round_trip_over_http() {
 async fn grading_an_absent_note_over_http_is_404() {
     request::<App, _, _>(|request, _ctx| async move {
         let response = request
-            .post("/api/inpatient_clinical_notes/00000000-0000-0000-0000-0000000fa0c6/grade")
+            .post("/api/inpatient-clinical-note/inpatient_clinical_notes/00000000-0000-0000-0000-0000000fa0c6/grade")
             .await;
         assert_eq!(response.status_code(), 404);
     })

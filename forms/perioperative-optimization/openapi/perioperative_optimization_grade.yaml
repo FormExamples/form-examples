@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for one perioperative optimization assessment, holding the engine-computed and clinician-final surgical readiness bands.
 paths:
-  /api/perioperative_optimization_grades:
+  /api/perioperative-optimization/perioperative_optimization_grades:
     get:
       summary: List PerioperativeOptimizationGrade records
       operationId: listPerioperativeOptimizationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/perioperative_optimization_grades/{id}:
+  /api/perioperative-optimization/perioperative_optimization_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main abdominal-aortic-aneurysm-screening record for one aortic ultrasound scan: scan context, patient identification and eligibility, consent, the ultrasound measurement (maximum antero-posterior aortic diameter), and clinical observations. Classification, fired rules, and flags live in child tables."
 paths:
-  /api/abdominal_aortic_aneurysm_screenings:
+  /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screenings:
     get:
       summary: List AbdominalAorticAneurysmScreening records
       operationId: listAbdominalAorticAneurysmScreening
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/abdominal_aortic_aneurysm_screenings/{id}:
+  /api/abdominal-aortic-aneurysm-screening/abdominal_aortic_aneurysm_screenings/{id}:
     parameters:
       - name: id
         in: path

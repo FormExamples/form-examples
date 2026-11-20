@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Lumbar puncture (LP) / cerebrospinal-fluid (CSF) analysis result (report). Captures the manometry opening pressure, CSF macroscopic appearance, cell counts, biochemistry (protein, glucose, CSF:serum glucose ratio, lactate), microbiology (Gram stain, culture, PCR), specialist tests (oligoclonal bands, xanthochromia spectrophotometry), the narrative and structured interpretive findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/lumbar_puncture_test_results:
+  /api/lumbar-puncture-test-result/lumbar_puncture_test_results:
     get:
       summary: List LumbarPunctureTestResult records
       operationId: listLumbarPunctureTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lumbar_puncture_test_results/{id}:
+  /api/lumbar-puncture-test-result/lumbar_puncture_test_results/{id}:
     parameters:
       - name: id
         in: path

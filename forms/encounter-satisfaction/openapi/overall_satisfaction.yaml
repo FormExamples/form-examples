@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Overall Satisfaction domain: 3 Likert-scale questions plus free-text comments."
 paths:
-  /api/overall_satisfactions:
+  /api/encounter-satisfaction/overall_satisfactions:
     get:
       summary: List OverallSatisfaction records
       operationId: listOverallSatisfaction
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/overall_satisfactions/{id}:
+  /api/encounter-satisfaction/overall_satisfactions/{id}:
     parameters:
       - name: id
         in: path

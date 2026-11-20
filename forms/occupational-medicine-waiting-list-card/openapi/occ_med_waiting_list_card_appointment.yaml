@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Scheduled or upcoming appointment attached to a waiting list card. A card may have zero or many appointments over its lifetime.
 paths:
-  /api/occ_med_waiting_list_card_appointments:
+  /api/occupational-medicine-waiting-list-card/occ_med_waiting_list_card_appointments:
     get:
       summary: List OccMedWaitingListCardAppointment records
       operationId: listOccMedWaitingListCardAppointment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/occ_med_waiting_list_card_appointments/{id}:
+  /api/occupational-medicine-waiting-list-card/occ_med_waiting_list_card_appointments/{id}:
     parameters:
       - name: id
         in: path

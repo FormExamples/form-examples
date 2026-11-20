@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/mast-cell-activation-syndrome-assessment/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/mast-cell-activation-syndrome-assessment/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/mast-cell-activation-syndrome-assessment/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/mast-cell-activation-syndrome-assessment/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/mast-cell-activation-syndrome-assessment/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/mast-cell-activation-syndrome-assessment/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/mast-cell-activation-syndrome-assessment/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

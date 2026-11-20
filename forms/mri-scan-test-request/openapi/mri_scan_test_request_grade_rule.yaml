@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every appropriateness / safety / completeness / triage rule that fired for this request.
 paths:
-  /api/mri_scan_test_request_grade_rules:
+  /api/mri-scan-test-request/mri_scan_test_request_grade_rules:
     get:
       summary: List MriScanTestRequestGradeRule records
       operationId: listMriScanTestRequestGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mri_scan_test_request_grade_rules/{id}:
+  /api/mri-scan-test-request/mri_scan_test_request_grade_rules/{id}:
     parameters:
       - name: id
         in: path

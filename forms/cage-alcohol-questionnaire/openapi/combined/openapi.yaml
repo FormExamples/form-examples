@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/cage_alcohol_questionnaire_grade_flags:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grade_flags:
     get:
       summary: List CageAlcoholQuestionnaireGradeFlag records
       operationId: listCageAlcoholQuestionnaireGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaire_grade_flags/{id}:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaire_grade_rules:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grade_rules:
     get:
       summary: List CageAlcoholQuestionnaireGradeRule records
       operationId: listCageAlcoholQuestionnaireGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaire_grade_rules/{id}:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaire_grades:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grades:
     get:
       summary: List CageAlcoholQuestionnaireGrade records
       operationId: listCageAlcoholQuestionnaireGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaire_grades/{id}:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaire_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaires:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaires:
     get:
       summary: List CageAlcoholQuestionnaire records
       operationId: listCageAlcoholQuestionnaire
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cage_alcohol_questionnaires/{id}:
+  /api/cage-alcohol-questionnaire/cage_alcohol_questionnaires/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/cage-alcohol-questionnaire/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/cage-alcohol-questionnaire/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/cage-alcohol-questionnaire/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/cage-alcohol-questionnaire/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/cage-alcohol-questionnaire/patients/{id}:
     parameters:
     - name: id
       in: path

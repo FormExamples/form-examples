@@ -59,7 +59,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/employees`.
+ * Response from `GET /api/employee-offboarding-checklist/dashboard/employees`.
  *
  * @typedef {Object} DashboardEmployeesResponse
  * @property {EmployeeRow[]} items

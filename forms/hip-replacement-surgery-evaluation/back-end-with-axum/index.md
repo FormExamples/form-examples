@@ -22,11 +22,11 @@ relational, never a single JSONB blob.
 
 | Entity | Route prefix |
 | --- | --- |
-| `patient` | `/api/patients/` |
-| `clinician` | `/api/clinicians/` |
-| `hip_replacement_surgery_evaluation` | `/api/hip_replacement_surgery_evaluations/` |
-| `hip_replacement_surgery_evaluation_grade` | `/api/hip_replacement_surgery_evaluation_grades/` |
-| `hip_replacement_surgery_evaluation_grade_flag` | `/api/hip_replacement_surgery_evaluation_grade_flags/` |
+| `patient` | `/api/hip-replacement-surgery-evaluation/patients/` |
+| `clinician` | `/api/hip-replacement-surgery-evaluation/clinicians/` |
+| `hip_replacement_surgery_evaluation` | `/api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations/` |
+| `hip_replacement_surgery_evaluation_grade` | `/api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grades/` |
+| `hip_replacement_surgery_evaluation_grade_flag` | `/api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grade_flags/` |
 
 Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.

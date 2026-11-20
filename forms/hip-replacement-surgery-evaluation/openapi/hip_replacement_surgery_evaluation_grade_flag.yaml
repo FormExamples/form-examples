@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the candidacy recommendation, with a priority and a suggested action for the joint-replacement clinic team.
 paths:
-  /api/hip_replacement_surgery_evaluation_grade_flags:
+  /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grade_flags:
     get:
       summary: List HipReplacementSurgeryEvaluationGradeFlag records
       operationId: listHipReplacementSurgeryEvaluationGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hip_replacement_surgery_evaluation_grade_flags/{id}:
+  /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluation_grade_flags/{id}:
     parameters:
       - name: id
         in: path

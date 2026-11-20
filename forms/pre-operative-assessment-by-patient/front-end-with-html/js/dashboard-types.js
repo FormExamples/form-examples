@@ -31,7 +31,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/patients`.
+ * Response from `GET /api/pre-operative-assessment-by-patient/dashboard/patients`.
  *
  * @typedef {Object} DashboardPatientsResponse
  * @property {PatientRow[]} items

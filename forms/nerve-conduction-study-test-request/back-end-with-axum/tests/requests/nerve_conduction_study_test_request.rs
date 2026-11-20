@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_nerve_conduction_study_test_requests() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/nerve_conduction_study_test_requests")
+            .get("/api/nerve-conduction-study-test-request/nerve_conduction_study_test_requests")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

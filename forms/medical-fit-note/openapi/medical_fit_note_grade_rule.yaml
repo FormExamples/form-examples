@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Medical fit note grade rule.
 paths:
-  /api/medical_fit_note_grade_rules:
+  /api/medical-fit-note/medical_fit_note_grade_rules:
     get:
       summary: List MedicalFitNoteGradeRule records
       operationId: listMedicalFitNoteGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_fit_note_grade_rules/{id}:
+  /api/medical-fit-note/medical_fit_note_grade_rules/{id}:
     parameters:
       - name: id
         in: path

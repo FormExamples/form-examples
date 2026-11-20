@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "One daily-monitoring inspection round at one hospital site: who inspected, when, and the sign-off notes."
 paths:
-  /api/hospital_daily_monitoring_checklists:
+  /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklists:
     get:
       summary: List HospitalDailyMonitoringChecklist records
       operationId: listHospitalDailyMonitoringChecklist
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hospital_daily_monitoring_checklists/{id}:
+  /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklists/{id}:
     parameters:
       - name: id
         in: path

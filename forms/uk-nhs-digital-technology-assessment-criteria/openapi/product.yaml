@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Digital health technology product under assessment.
 paths:
-  /api/products:
+  /api/uk-nhs-digital-technology-assessment-criteria/products:
     get:
       summary: List Product records
       operationId: listProduct
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/products/{id}:
+  /api/uk-nhs-digital-technology-assessment-criteria/products/{id}:
     parameters:
       - name: id
         in: path

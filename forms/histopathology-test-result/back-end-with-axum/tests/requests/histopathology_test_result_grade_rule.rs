@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_histopathology_test_result_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/histopathology_test_result_grade_rules")
+            .get("/api/histopathology-test-result/histopathology_test_result_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

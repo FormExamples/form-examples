@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_news2_results() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/news2_results").await;
+        let res = request.get("/api/casualty-card-form/news2_results").await;
         assert_eq!(res.status_code(), 200);
 
         // you can assert content like this:

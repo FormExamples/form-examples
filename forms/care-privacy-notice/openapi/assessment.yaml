@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Care privacy notice form with completeness validation. Parent entity for practice configuration and acknowledgment.
 paths:
-  /api/assessments:
+  /api/care-privacy-notice/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/care-privacy-notice/assessments/{id}:
     parameters:
       - name: id
         in: path

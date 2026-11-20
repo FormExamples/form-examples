@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Parent fluid balance chart header: charting context, patient identification, charting period, and patient weight enabling the mL/kg/h urine output rate."
 paths:
-  /api/fluid_balance_charts:
+  /api/fluid-balance-chart/fluid_balance_charts:
     get:
       summary: List FluidBalanceChart records
       operationId: listFluidBalanceChart
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/fluid_balance_charts/{id}:
+  /api/fluid-balance-chart/fluid_balance_charts/{id}:
     parameters:
       - name: id
         in: path

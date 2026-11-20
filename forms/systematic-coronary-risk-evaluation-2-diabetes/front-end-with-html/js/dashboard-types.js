@@ -38,7 +38,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/patients`.
+ * Response from `GET /api/systematic-coronary-risk-evaluation-2-diabetes/dashboard/patients`.
  *
  * @typedef {Object} DashboardPatientsResponse
  * @property {PatientRow[]} items

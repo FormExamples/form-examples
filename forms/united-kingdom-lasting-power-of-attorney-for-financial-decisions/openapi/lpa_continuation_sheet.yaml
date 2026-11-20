@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA continuation sheet — one row per LPC continuation sheet (LPC sheets 1, 2, 3, 4) attached to the LP1F deed.
 paths:
-  /api/lpa_continuation_sheets:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_continuation_sheets:
     get:
       summary: List LpaContinuationSheet records
       operationId: listLpaContinuationSheet
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_continuation_sheets/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_continuation_sheets/{id}:
     parameters:
       - name: id
         in: path

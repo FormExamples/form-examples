@@ -30,7 +30,7 @@
  */
 
 /**
- * Response from `GET /api/arc42_documentations`.
+ * Response from `GET /api/arc42/arc42_documentations`.
  *
  * The Axum backend returns a bare JSON array of `DashboardRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

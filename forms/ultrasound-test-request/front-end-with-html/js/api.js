@@ -8,7 +8,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REQUESTS_PATH = '/api/requests';
+const REQUESTS_PATH = '/api/ultrasound-test-request/requests';
 
 /**
  * Fetch the request list from the backend.

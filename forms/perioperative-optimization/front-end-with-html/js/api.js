@@ -5,7 +5,7 @@
 // back to the sample data in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ASSESSMENTS_PATH = '/api/perioperative_optimizations';
+const ASSESSMENTS_PATH = '/api/perioperative-optimization/perioperative_optimizations';
 
 /**
  * Fetch the assessment list from the back-end.

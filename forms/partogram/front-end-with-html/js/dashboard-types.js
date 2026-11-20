@@ -34,7 +34,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/partograms`.
+ * Response from `GET /api/partogram/dashboard/partograms`.
  *
  * @typedef {Object} DashboardPartogramsResponse
  * @property {PartogramRow[]} items

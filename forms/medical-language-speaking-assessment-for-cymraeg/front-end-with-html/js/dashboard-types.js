@@ -53,7 +53,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/candidates`.
+ * Response from `GET /api/medical-language-speaking-assessment-for-cymraeg/dashboard/candidates`.
  *
  * @typedef {Object} DashboardCandidatesResponse
  * @property {CandidateRow[]} items

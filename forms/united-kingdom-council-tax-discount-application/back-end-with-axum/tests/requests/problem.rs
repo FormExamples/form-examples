@@ -25,23 +25,23 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/billing_authorities?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/united-kingdom-council-tax-discount-application/billing_authorities?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/united-kingdom-council-tax-discount-application/no-such-route").await, 404);
+        problem!(request.delete("/api/united-kingdom-council-tax-discount-application/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/billing_authorities/{id}")).await, 404);
+        problem!(request.get(&format!("/api/united-kingdom-council-tax-discount-application/billing_authorities/{id}")).await, 404);
 
         // An extractor's refusal says what was wrong, and quotes nothing.
-        let (body, text) = problem!(request.get("/api/billing_authorities/not-a-uuid").await, 400);
+        let (body, text) = problem!(request.get("/api/united-kingdom-council-tax-discount-application/billing_authorities/not-a-uuid").await, 400);
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
-            request.post("/api/billing_authorities").json(&"not an object").await,
+            request.post("/api/united-kingdom-council-tax-discount-application/billing_authorities").json(&"not an object").await,
             422
         );
     })
@@ -92,7 +92,7 @@ async fn the_middleware_cannot_escape_it() {
 async fn a_value_outside_a_check_is_unprocessable() {
     request::<App, _, _>(|request, _ctx| async move {
         let applicant = request
-            .post("/api/applicants")
+            .post("/api/united-kingdom-council-tax-discount-application/applicants")
             .json(&serde_json::json!({ "name": "Test Applicant", "birthDate": "1990-01-01" }))
             .await;
         applicant.assert_status_ok();
@@ -106,7 +106,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "claimType": "not-a-listed-value"
         });
         let response = request
-            .post("/api/united_kingdom_council_tax_discount_applications")
+            .post("/api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications")
             .json(&refused)
             .await;
         let (body, text) = problem!(response, 422);
@@ -120,7 +120,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "claimType": "single-person-discount"
         });
         request
-            .post("/api/united_kingdom_council_tax_discount_applications")
+            .post("/api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications")
             .json(&accepted)
             .await
             .assert_status_ok();

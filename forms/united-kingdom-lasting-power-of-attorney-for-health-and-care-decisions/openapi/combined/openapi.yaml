@@ -8,7 +8,7 @@ info:
     and Care Decisions form, merged from the per-entity specs in this directory. One RESTful resource
     per routed SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys:
     get:
       summary: List Attorney records
       operationId: listAttorney
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/certificate_providers:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/certificate_providers:
     get:
       summary: List CertificateProvider records
       operationId: listCertificateProvider
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/certificate_providers/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/certificate_providers/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/donors:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/donors:
     get:
       summary: List Donor records
       operationId: listDonor
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/donors/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/donors/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_attorneys:
     get:
       summary: List LpaAttorney records
       operationId: listLpaAttorney
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_decision_rules:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_decision_rules:
     get:
       summary: List LpaDecisionRule records
       operationId: listLpaDecisionRule
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_decision_rules/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_decision_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_instructions:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions:
     get:
       summary: List LpaInstruction records
       operationId: listLpaInstruction
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_instructions/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_lst_choices:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_lst_choices:
     get:
       summary: List LpaLstChoice records
       operationId: listLpaLstChoice
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_lst_choices/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_lst_choices/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_person_to_notifies:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies:
     get:
       summary: List LpaPersonToNotify records
       operationId: listLpaPersonToNotify
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_person_to_notifies/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_preferences:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_preferences:
     get:
       summary: List LpaPreference records
       operationId: listLpaPreference
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_preferences/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_preferences/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_applications:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_registration_applications:
     get:
       summary: List LpaRegistrationApplication records
       operationId: listLpaRegistrationApplication
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_registration_applications/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_registration_applications/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_replacement_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
       operationId: listLpaReplacementAttorney
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_replacement_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_replacement_attorneys/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_signatures:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_signatures:
     get:
       summary: List LpaSignature records
       operationId: listLpaSignature
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_signatures/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_signatures/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validities:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validities:
     get:
       summary: List LpaValidity records
       operationId: listLpaValidity
@@ -3058,7 +3058,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validities/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validities/{id}:
     parameters:
     - name: id
       in: path
@@ -3206,7 +3206,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validity_additional_flags:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_additional_flags:
     get:
       summary: List LpaValidityAdditionalFlag records
       operationId: listLpaValidityAdditionalFlag
@@ -3304,7 +3304,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validity_additional_flags/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -3452,7 +3452,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validity_fired_rules:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_fired_rules:
     get:
       summary: List LpaValidityFiredRule records
       operationId: listLpaValidityFiredRule
@@ -3550,7 +3550,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpa_validity_fired_rules/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_validity_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -3698,7 +3698,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpas:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpas:
     get:
       summary: List Lpa records
       operationId: listLpa
@@ -3796,7 +3796,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lpas/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpas/{id}:
     parameters:
     - name: id
       in: path
@@ -3944,7 +3944,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -3955,7 +3955,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/person_to_notifies:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/person_to_notifies:
     get:
       summary: List PersonToNotify records
       operationId: listPersonToNotify
@@ -4053,7 +4053,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/person_to_notifies/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/person_to_notifies/{id}:
     parameters:
     - name: id
       in: path
@@ -4201,7 +4201,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/replacement_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/replacement_attorneys:
     get:
       summary: List ReplacementAttorney records
       operationId: listReplacementAttorney
@@ -4299,7 +4299,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/replacement_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/replacement_attorneys/{id}:
     parameters:
     - name: id
       in: path

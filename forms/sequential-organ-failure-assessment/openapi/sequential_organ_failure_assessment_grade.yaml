@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed SOFA grading result: per-system 0-4 sub-scores, summed total (0-24), delta-SOFA versus baseline, derived mortality band, and the Sepsis-3 flag."
 paths:
-  /api/sequential_organ_failure_assessment_grades:
+  /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grades:
     get:
       summary: List SequentialOrganFailureAssessmentGrade records
       operationId: listSequentialOrganFailureAssessmentGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/sequential_organ_failure_assessment_grades/{id}:
+  /api/sequential-organ-failure-assessment/sequential_organ_failure_assessment_grades/{id}:
     parameters:
       - name: id
         in: path

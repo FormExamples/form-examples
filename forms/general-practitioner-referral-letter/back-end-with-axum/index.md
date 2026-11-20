@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`general_practitioner_referral_letter/`](general_practitioner_referral_letter/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/general-practitioner-referral-letter/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

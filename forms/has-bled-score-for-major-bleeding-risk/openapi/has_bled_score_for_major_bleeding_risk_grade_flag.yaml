@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Red-flag issues that fire independently of the total score, with priority and a suggested action for the clinical team. The four modifiable-factor flags surface correctable bleeding-risk factors rather than gate anticoagulation.
 paths:
-  /api/has_bled_score_for_major_bleeding_risk_grade_flags:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_flags:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGradeFlag records
       operationId: listHasBledScoreForMajorBleedingRiskGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/has_bled_score_for_major_bleeding_risk_grade_flags/{id}:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_flags/{id}:
     parameters:
       - name: id
         in: path

@@ -24,7 +24,7 @@ async fn can_create_and_read_back_applicant() {
             "countryAsIso31661Alpha2": "GB"
         });
 
-        let create_res = request.post("/api/applicants").json(&new_row).await;
+        let create_res = request.post("/api/united-kingdom-council-tax-discount-application/applicants").json(&new_row).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -43,7 +43,7 @@ async fn can_create_and_read_back_applicant() {
             "id should be a UUID, got {id}"
         );
 
-        let get_res = request.get(&format!("/api/applicants/{id}")).await;
+        let get_res = request.get(&format!("/api/united-kingdom-council-tax-discount-application/applicants/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -61,7 +61,7 @@ async fn can_create_and_read_back_applicant() {
         assert_eq!(fetched["postcode"], "SW1A 2AA");
         assert_eq!(fetched["countryAsIso31661Alpha2"], "GB");
 
-        let list_res = request.get("/api/applicants").await;
+        let list_res = request.get("/api/united-kingdom-council-tax-discount-application/applicants").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

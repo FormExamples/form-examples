@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient demographic information used by the history-and-physical-examination clerking record.
 paths:
-  /api/patients:
+  /api/history-and-physical-examination/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patients/{id}:
+  /api/history-and-physical-examination/patients/{id}:
     parameters:
       - name: id
         in: path

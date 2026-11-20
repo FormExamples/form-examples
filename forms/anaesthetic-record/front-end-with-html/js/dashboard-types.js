@@ -35,7 +35,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/records`.
+ * Response from `GET /api/anaesthetic-record/dashboard/records`.
  *
  * @typedef {Object} DashboardRecordsResponse
  * @property {RecordRow[]} items

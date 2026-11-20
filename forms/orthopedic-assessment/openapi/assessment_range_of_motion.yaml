@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Range of motion section header: joint, side, and overall status. One-to-one child of assessment."
 paths:
-  /api/assessment_range_of_motions:
+  /api/orthopedic-assessment/assessment_range_of_motions:
     get:
       summary: List AssessmentRangeOfMotion records
       operationId: listAssessmentRangeOfMotion
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_range_of_motions/{id}:
+  /api/orthopedic-assessment/assessment_range_of_motions/{id}:
     parameters:
       - name: id
         in: path

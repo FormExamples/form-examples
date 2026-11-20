@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`recommended_summary_plan_for_emergency_care_and_treatment/`](recommended_summary_plan_for_emergency_care_and_treatment/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/recommended-summary-plan-for-emergency-care-and-treatment/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

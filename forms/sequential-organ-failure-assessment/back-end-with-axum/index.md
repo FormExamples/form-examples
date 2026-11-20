@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`sequential_organ_failure_assessment/`](sequential_organ_failure_assessment/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/sequential-organ-failure-assessment/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

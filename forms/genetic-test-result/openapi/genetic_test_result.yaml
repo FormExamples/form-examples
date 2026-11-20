@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Genetic / genomic test result (report). Captures the performed test, the genes tested and sample type, clinical history and inheritance pattern, the detected variants and their ACMG/AMP-ACGS classification and zygosity, structured finding booleans, the interpretation and impression, the ACMG reporting category, recommended cascade testing and follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/genetic_test_results:
+  /api/genetic-test-result/genetic_test_results:
     get:
       summary: List GeneticTestResult records
       operationId: listGeneticTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/genetic_test_results/{id}:
+  /api/genetic-test-result/genetic_test_results/{id}:
     parameters:
       - name: id
         in: path

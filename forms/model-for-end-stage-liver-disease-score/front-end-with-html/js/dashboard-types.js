@@ -50,7 +50,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/model-for-end-stage-liver-disease-score/dashboard/assessments`.
  *
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items

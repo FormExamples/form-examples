@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CLAIMS_PATH = '/api/expense_reimbursements';
+const CLAIMS_PATH = '/api/expense-reimbursement/expense_reimbursements';
 
 /**
  * Fetch the claim list from the backend.

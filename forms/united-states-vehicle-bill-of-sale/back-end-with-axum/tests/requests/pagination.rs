@@ -23,7 +23,7 @@ async fn lists_come_in_cursor_pages() {
         .await
         .unwrap();
 
-        let first = request.get("/api/buyers?limit=1").await;
+        let first = request.get("/api/united-states-vehicle-bill-of-sale/buyers?limit=1").await;
         first.assert_status_ok();
         assert!(first.maybe_header("x-total-count").is_none());
         let first_rows: Vec<Value> = first.json();
@@ -36,7 +36,7 @@ async fn lists_come_in_cursor_pages() {
             .and_then(|rest| rest.strip_suffix(">; rel=\"next\""))
             .unwrap()
             .to_string();
-        assert!(next.starts_with("/api/buyers?limit=1&cursor="), "{next}");
+        assert!(next.starts_with("/api/united-states-vehicle-bill-of-sale/buyers?limit=1&cursor="), "{next}");
 
         let second = request.get(&next).await;
         second.assert_status_ok();
@@ -48,10 +48,10 @@ async fn lists_come_in_cursor_pages() {
         let carried = format!("{next}&status=other");
         for refused in [
             carried.as_str(),
-            "/api/buyers?cursor=forged",
-            "/api/buyers?limit=0",
-            "/api/buyers?limit=1001",
-            "/api/buyers?limit=many",
+            "/api/united-states-vehicle-bill-of-sale/buyers?cursor=forged",
+            "/api/united-states-vehicle-bill-of-sale/buyers?limit=0",
+            "/api/united-states-vehicle-bill-of-sale/buyers?limit=1001",
+            "/api/united-states-vehicle-bill-of-sale/buyers?limit=many",
         ] {
             request.get(refused).await.assert_status_unprocessable_entity();
         }

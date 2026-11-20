@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Ottawa Ankle Rules assessment record: identification, context, the applicability flag, and the eight objective bedside criterion inputs."
 paths:
-  /api/ottawa_ankle_rules:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules:
     get:
       summary: List OttawaAnkleRules records
       operationId: listOttawaAnkleRules
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ottawa_ankle_rules/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules/{id}:
     parameters:
       - name: id
         in: path

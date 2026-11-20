@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Sequential Organ Failure Assessment (SOFA) record: assessment context, patient identification and baseline, and the raw inputs for the six scored organ systems (respiration, coagulation, liver, cardiovascular, central nervous system, renal)."
 paths:
-  /api/sequential_organ_failure_assessments:
+  /api/sequential-organ-failure-assessment/sequential_organ_failure_assessments:
     get:
       summary: List SequentialOrganFailureAssessment records
       operationId: listSequentialOrganFailureAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/sequential_organ_failure_assessments/{id}:
+  /api/sequential-organ-failure-assessment/sequential_organ_failure_assessments/{id}:
     parameters:
       - name: id
         in: path

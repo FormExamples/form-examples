@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Parent partogram labour record header: recording context, patient identification, admission findings, and the active-phase start time that anchors the alert and action lines."
 paths:
-  /api/partograms:
+  /api/partogram/partograms:
     get:
       summary: List Partogram records
       operationId: listPartogram
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/partograms/{id}:
+  /api/partogram/partograms/{id}:
     parameters:
       - name: id
         in: path

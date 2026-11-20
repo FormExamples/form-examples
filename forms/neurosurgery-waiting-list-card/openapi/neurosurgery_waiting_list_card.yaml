@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a neurosurgery waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/neurosurgery_waiting_list_cards:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards:
     get:
       summary: List NeurosurgeryWaitingListCard records
       operationId: listNeurosurgeryWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurosurgery_waiting_list_cards/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/anaesthetic_record_drug_administrations:
+  /api/anaesthetic-record/anaesthetic_record_drug_administrations:
     get:
       summary: List AnaestheticRecordDrugAdministration records
       operationId: listAnaestheticRecordDrugAdministration
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_drug_administrations/{id}:
+  /api/anaesthetic-record/anaesthetic_record_drug_administrations/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grade_flags:
+  /api/anaesthetic-record/anaesthetic_record_grade_flags:
     get:
       summary: List AnaestheticRecordGradeFlag records
       operationId: listAnaestheticRecordGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grade_flags/{id}:
+  /api/anaesthetic-record/anaesthetic_record_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grade_rules:
+  /api/anaesthetic-record/anaesthetic_record_grade_rules:
     get:
       summary: List AnaestheticRecordGradeRule records
       operationId: listAnaestheticRecordGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grade_rules/{id}:
+  /api/anaesthetic-record/anaesthetic_record_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grades:
+  /api/anaesthetic-record/anaesthetic_record_grades:
     get:
       summary: List AnaestheticRecordGrade records
       operationId: listAnaestheticRecordGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_grades/{id}:
+  /api/anaesthetic-record/anaesthetic_record_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_intra_operative_events:
+  /api/anaesthetic-record/anaesthetic_record_intra_operative_events:
     get:
       summary: List AnaestheticRecordIntraOperativeEvent records
       operationId: listAnaestheticRecordIntraOperativeEvent
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_intra_operative_events/{id}:
+  /api/anaesthetic-record/anaesthetic_record_intra_operative_events/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_timed_observations:
+  /api/anaesthetic-record/anaesthetic_record_timed_observations:
     get:
       summary: List AnaestheticRecordTimedObservation records
       operationId: listAnaestheticRecordTimedObservation
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_record_timed_observations/{id}:
+  /api/anaesthetic-record/anaesthetic_record_timed_observations/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_records:
+  /api/anaesthetic-record/anaesthetic_records:
     get:
       summary: List AnaestheticRecord records
       operationId: listAnaestheticRecord
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/anaesthetic_records/{id}:
+  /api/anaesthetic-record/anaesthetic_records/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/anaesthetic-record/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/anaesthetic-record/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/anaesthetic-record/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1987,7 +1987,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/anaesthetic-record/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/anaesthetic-record/patients/{id}:
     parameters:
     - name: id
       in: path

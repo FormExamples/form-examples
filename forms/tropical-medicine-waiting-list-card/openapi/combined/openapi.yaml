@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/openapi.yaml:
+  /api/tropical-medicine-waiting-list-card/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -19,7 +19,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/tropical-medicine-waiting-list-card/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -117,7 +117,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/tropical-medicine-waiting-list-card/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -265,7 +265,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners:
+  /api/tropical-medicine-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners/{id}:
+  /api/tropical-medicine-waiting-list-card/practitioners/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_appointments:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_appointments:
     get:
       summary: List TropMedWaitingListCardAppointment records
       operationId: listTropMedWaitingListCardAppointment
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_appointments/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grade_flags:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_flags:
     get:
       summary: List TropMedWaitingListCardGradeFlag records
       operationId: listTropMedWaitingListCardGradeFlag
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grade_flags/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grade_rules:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_rules:
     get:
       summary: List TropMedWaitingListCardGradeRule records
       operationId: listTropMedWaitingListCardGradeRule
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grade_rules/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grades:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grades:
     get:
       summary: List TropMedWaitingListCardGrade records
       operationId: listTropMedWaitingListCardGrade
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_card_grades/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_cards:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_cards:
     get:
       summary: List TropMedWaitingListCard records
       operationId: listTropMedWaitingListCard
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/trop_med_waiting_list_cards/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path

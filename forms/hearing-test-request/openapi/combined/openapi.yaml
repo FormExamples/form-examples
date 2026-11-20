@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/hearing-test-request/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/hearing-test-request/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grade_flags:
+  /api/hearing-test-request/hearing_test_request_grade_flags:
     get:
       summary: List HearingTestRequestGradeFlag records
       operationId: listHearingTestRequestGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grade_flags/{id}:
+  /api/hearing-test-request/hearing_test_request_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grade_rules:
+  /api/hearing-test-request/hearing_test_request_grade_rules:
     get:
       summary: List HearingTestRequestGradeRule records
       operationId: listHearingTestRequestGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grade_rules/{id}:
+  /api/hearing-test-request/hearing_test_request_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grades:
+  /api/hearing-test-request/hearing_test_request_grades:
     get:
       summary: List HearingTestRequestGrade records
       operationId: listHearingTestRequestGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_request_grades/{id}:
+  /api/hearing-test-request/hearing_test_request_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_requests:
+  /api/hearing-test-request/hearing_test_requests:
     get:
       summary: List HearingTestRequest records
       operationId: listHearingTestRequest
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hearing_test_requests/{id}:
+  /api/hearing-test-request/hearing_test_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/hearing-test-request/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/hearing-test-request/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/hearing-test-request/patients/{id}:
     parameters:
     - name: id
       in: path

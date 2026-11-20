@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_edinburgh_postnatal_depression_scales() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/edinburgh_postnatal_depression_scales")
+            .get("/api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scales")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

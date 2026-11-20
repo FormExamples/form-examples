@@ -8,7 +8,7 @@ info:
     (AUDIT-C) form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/audit_c_grade_flags:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_flags:
     get:
       summary: List AuditCGradeFlag records
       operationId: listAuditCGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_c_grade_flags/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_c_grade_rules:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules:
     get:
       summary: List AuditCGradeRule records
       operationId: listAuditCGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_c_grade_rules/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_c_grades:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grades:
     get:
       summary: List AuditCGrade records
       operationId: listAuditCGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_c_grades/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_cs:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_cs:
     get:
       summary: List AuditC records
       operationId: listAuditC
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/audit_cs/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_cs/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/alcohol-use-disorders-identification-test-consumption/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/alcohol-use-disorders-identification-test-consumption/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/alcohol-use-disorders-identification-test-consumption/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/patients/{id}:
     parameters:
     - name: id
       in: path

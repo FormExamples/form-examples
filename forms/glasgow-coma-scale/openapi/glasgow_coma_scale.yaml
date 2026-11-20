@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Glasgow Coma Scale assessment record: assessment context, patient identification, confounders, the three component responses (eye, verbal, motor) with not-testable handling, pupillary findings for GCS-Pupils, and trend fields."
 paths:
-  /api/glasgow_coma_scales:
+  /api/glasgow-coma-scale/glasgow_coma_scales:
     get:
       summary: List GlasgowComaScale records
       operationId: listGlasgowComaScale
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/glasgow_coma_scales/{id}:
+  /api/glasgow-coma-scale/glasgow_coma_scales/{id}:
     parameters:
       - name: id
         in: path

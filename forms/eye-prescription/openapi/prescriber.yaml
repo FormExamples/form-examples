@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: GOC-registered prescriber who issued the spectacle prescription.
 paths:
-  /api/prescribers:
+  /api/eye-prescription/prescribers:
     get:
       summary: List Prescriber records
       operationId: listPrescriber
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/prescribers/{id}:
+  /api/eye-prescription/prescribers/{id}:
     parameters:
       - name: id
         in: path

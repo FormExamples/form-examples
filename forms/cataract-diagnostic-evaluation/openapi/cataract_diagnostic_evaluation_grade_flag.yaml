@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the surgical-candidacy recommendation, with a priority and a suggested action. Flags are never suppressed by a clinician override.
 paths:
-  /api/cataract_diagnostic_evaluation_grade_flags:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags:
     get:
       summary: List CataractDiagnosticEvaluationGradeFlag records
       operationId: listCataractDiagnosticEvaluationGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cataract_diagnostic_evaluation_grade_flags/{id}:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags/{id}:
     parameters:
       - name: id
         in: path

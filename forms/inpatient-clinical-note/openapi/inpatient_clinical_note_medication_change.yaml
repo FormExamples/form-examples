@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Prescribing-change rows for an inpatient clinical note: one row per drug started, stopped, dose-changed, held, switched, or explicitly continued, with indication, route, and review date."
 paths:
-  /api/inpatient_clinical_note_medication_changes:
+  /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes:
     get:
       summary: List InpatientClinicalNoteMedicationChange records
       operationId: listInpatientClinicalNoteMedicationChange
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/inpatient_clinical_note_medication_changes/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes/{id}:
     parameters:
       - name: id
         in: path

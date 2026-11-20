@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Pulmonary function test (lung-function / spirometry) request (referral). Captures the requested test, the clinical indication and question, symptoms, smoking and inhaler background, a safety / contraindication screen, and triage urgency.
 paths:
-  /api/pulmonary_function_test_requests:
+  /api/pulmonary-function-test-request/pulmonary_function_test_requests:
     get:
       summary: List PulmonaryFunctionTestRequest records
       operationId: listPulmonaryFunctionTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pulmonary_function_test_requests/{id}:
+  /api/pulmonary-function-test-request/pulmonary_function_test_requests/{id}:
     parameters:
       - name: id
         in: path

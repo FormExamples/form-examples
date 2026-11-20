@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Parkland-formula result: total 24-hour volume, phase volumes and rates (time-offset), and the urine-output titration band (1:1 with the parent calculation record)."
 paths:
-  /api/parkland_formula_for_burns_grades:
+  /api/parkland-formula-for-burns/parkland_formula_for_burns_grades:
     get:
       summary: List ParklandFormulaForBurnsGrade records
       operationId: listParklandFormulaForBurnsGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/parkland_formula_for_burns_grades/{id}:
+  /api/parkland-formula-for-burns/parkland_formula_for_burns_grades/{id}:
     parameters:
       - name: id
         in: path

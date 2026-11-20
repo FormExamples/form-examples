@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reporting clinician (respiratory physician, sleep physician, or clinical physiologist) who authors and signs the sleep study result report.
 paths:
-  /api/clinicians:
+  /api/sleep-study-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/sleep-study-test-result/clinicians/{id}:
     parameters:
       - name: id
         in: path

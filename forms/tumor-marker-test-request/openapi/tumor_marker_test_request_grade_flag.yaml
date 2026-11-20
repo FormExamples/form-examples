@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the vetting team.
 paths:
-  /api/tumor_marker_test_request_grade_flags:
+  /api/tumor-marker-test-request/tumor_marker_test_request_grade_flags:
     get:
       summary: List TumorMarkerTestRequestGradeFlag records
       operationId: listTumorMarkerTestRequestGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/tumor_marker_test_request_grade_flags/{id}:
+  /api/tumor-marker-test-request/tumor_marker_test_request_grade_flags/{id}:
     parameters:
       - name: id
         in: path

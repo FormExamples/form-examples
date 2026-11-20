@@ -1,6 +1,6 @@
 import { SAMPLE_PERFORMANCE_INDICATORS } from './data.js';
 
-const API_BASE = '/api/hospital-performance-indicators';
+const API_BASE = '/api/hospital-performance-indicators/hospital-performance-indicators';
 const CACHE_KEY = 'hospital-performance-indicators-dashboard:cache:v1';
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

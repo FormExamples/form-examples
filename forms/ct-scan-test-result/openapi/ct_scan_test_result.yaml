@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: CT (computed tomography) scan result (report). Captures the performed examination, contrast and technique, clinical history, the narrative and structured findings, key measurements and radiation dose (DLP), the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/ct_scan_test_results:
+  /api/ct-scan-test-result/ct_scan_test_results:
     get:
       summary: List CtScanTestResult records
       operationId: listCtScanTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ct_scan_test_results/{id}:
+  /api/ct-scan-test-result/ct_scan_test_results/{id}:
     parameters:
       - name: id
         in: path

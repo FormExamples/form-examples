@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed KDIGO classification and completeness grading result for a CKD annual review: G-stage, albuminuria stage, KDIGO risk zone, review status, the selected blood-pressure target and whether it is met, and the completeness score. 1:1 with the parent review."
 paths:
-  /api/chronic_kidney_disease_review_grades:
+  /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grades:
     get:
       summary: List ChronicKidneyDiseaseReviewGrade records
       operationId: listChronicKidneyDiseaseReviewGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/chronic_kidney_disease_review_grades/{id}:
+  /api/chronic-kidney-disease-review/chronic_kidney_disease_review_grades/{id}:
     parameters:
       - name: id
         in: path

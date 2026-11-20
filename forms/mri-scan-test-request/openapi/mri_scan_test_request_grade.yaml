@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR 1-9), MRI safety, request completeness, and triage priority."
 paths:
-  /api/mri_scan_test_request_grades:
+  /api/mri-scan-test-request/mri_scan_test_request_grades:
     get:
       summary: List MriScanTestRequestGrade records
       operationId: listMriScanTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mri_scan_test_request_grades/{id}:
+  /api/mri-scan-test-request/mri_scan_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

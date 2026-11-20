@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Address — postal address used by an LPA, normalised across persons and roles.
 paths:
-  /api/addresses:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses:
     get:
       summary: List Address records
       operationId: listAddress
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/addresses/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: General (non-obstetric) diagnostic ultrasound request (referral). Captures the requested examination (body region, laterality), the clinical indication and question, relevant history, preparation requirements, and triage urgency.
 paths:
-  /api/ultrasound_test_requests:
+  /api/ultrasound-test-request/ultrasound_test_requests:
     get:
       summary: List UltrasoundTestRequest records
       operationId: listUltrasoundTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ultrasound_test_requests/{id}:
+  /api/ultrasound-test-request/ultrasound_test_requests/{id}:
     parameters:
       - name: id
         in: path

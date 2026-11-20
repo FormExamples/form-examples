@@ -18,7 +18,7 @@ Alpine.js, no CSS, no Lily Design System.**
 
 ## JSON API
 
-A RESTful JSON resource is served per domain table under `/api/…`, each
+A RESTful JSON resource is served per domain table under `/api/inpatient-clinical-note/…`, each
 supporting list (`GET`), create (`POST`), and `GET` / `PUT` / `PATCH` /
 `DELETE` by id. All bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`. Prometheus metrics are exposed at
@@ -37,10 +37,10 @@ supporting list (`GET`), create (`POST`), and `GET` / `PUT` / `PATCH` /
 
 Beyond the per-table CRUD, the note resource carries two grading endpoints:
 
-- `POST /api/inpatient_clinical_notes/{id}/grade` — run both engines over the
+- `POST /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade` — run both engines over the
   stored note and persist the result. Returns the grade row and the full engine
   output, including the fired-rule and flag audit trail.
-- `GET /api/inpatient_clinical_notes/{id}/grade` — the most recent persisted
+- `GET /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade` — the most recent persisted
   grade, or 404 if the note has never been graded.
 
 Grading is **append-only**: each `POST` inserts a new grade row rather than

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every completeness-and-risk rule that fired during grading: domain, category, and description."
 paths:
-  /api/mental_state_examination_grade_rules:
+  /api/mental-state-examination/mental_state_examination_grade_rules:
     get:
       summary: List MentalStateExaminationGradeRule records
       operationId: listMentalStateExaminationGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mental_state_examination_grade_rules/{id}:
+  /api/mental-state-examination/mental_state_examination_grade_rules/{id}:
     parameters:
       - name: id
         in: path

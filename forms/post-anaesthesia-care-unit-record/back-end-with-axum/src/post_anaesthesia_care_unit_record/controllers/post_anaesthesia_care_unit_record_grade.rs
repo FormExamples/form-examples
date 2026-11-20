@@ -119,7 +119,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/post_anaesthesia_care_unit_record_grades/")
+        .prefix("api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_record_grades/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

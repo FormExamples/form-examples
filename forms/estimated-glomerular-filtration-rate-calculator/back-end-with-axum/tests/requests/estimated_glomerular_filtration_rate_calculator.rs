@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_estimated_glomerular_filtration_rate_calculators() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/estimated_glomerular_filtration_rate_calculators")
+            .get("/api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculators")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

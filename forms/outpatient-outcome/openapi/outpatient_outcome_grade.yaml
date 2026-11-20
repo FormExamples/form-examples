@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Outpatient Outcome Composite Grade (OOCG) result: four per-domain letter grades and the overall grade (worst-of-four)."
 paths:
-  /api/outpatient_outcome_grades:
+  /api/outpatient-outcome/outpatient_outcome_grades:
     get:
       summary: List OutpatientOutcomeGrade records
       operationId: listOutpatientOutcomeGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_grades/{id}:
+  /api/outpatient-outcome/outpatient_outcome_grades/{id}:
     parameters:
       - name: id
         in: path

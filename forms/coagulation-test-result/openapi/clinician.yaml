@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reporting clinician (consultant haematologist, biomedical scientist, or other reporting clinician) who authors and signs the coagulation test result report.
 paths:
-  /api/clinicians:
+  /api/coagulation-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/coagulation-test-result/clinicians/{id}:
     parameters:
       - name: id
         in: path

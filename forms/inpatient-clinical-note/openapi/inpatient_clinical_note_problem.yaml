@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Problem-list rows for an inpatient clinical note: one row per active, resolving, resolved, or chronic problem, with category, priority, onset, and progress commentary."
 paths:
-  /api/inpatient_clinical_note_problems:
+  /api/inpatient-clinical-note/inpatient_clinical_note_problems:
     get:
       summary: List InpatientClinicalNoteProblem records
       operationId: listInpatientClinicalNoteProblem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/inpatient_clinical_note_problems/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_problems/{id}:
     parameters:
       - name: id
         in: path

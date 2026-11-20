@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_medical_information_form_for_air_travel_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/medical_information_form_for_air_travel_grade_rules")
+            .get("/api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

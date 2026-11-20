@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_eye_vision_test_request_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/eye_vision_test_request_grade_rules")
+            .get("/api/eye-vision-test-request/eye_vision_test_request_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/hospital_dashboard_metric_values:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metric_values:
     get:
       summary: List HospitalDashboardMetricValue records
       operationId: listHospitalDashboardMetricValue
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_dashboard_metric_values/{id}:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metric_values/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_dashboard_metrics:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metrics:
     get:
       summary: List HospitalDashboardMetrics records
       operationId: listHospitalDashboardMetrics
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_dashboard_metrics/{id}:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metrics/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/hospital-dashboard-metrics/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi

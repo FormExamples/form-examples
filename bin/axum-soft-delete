@@ -212,9 +212,9 @@ def routes(source):
     found = {}
     for path in source.glob("controllers/*.rs"):
         text = path.read_text()
-        prefix = re.search(r'\.prefix\("(api/[\w-]+)/?"\)', text)
+        prefix = re.search(r'\.prefix\("(api/(?:[\w-]+/)?([\w-]+))/?"\)', text)
         if prefix and re.search(r"\bdelete\(", text):
-            found[prefix[1].removeprefix("api/").replace("-", "_")] = "/" + prefix[1]
+            found[prefix[2].replace("-", "_")] = "/" + prefix[1]
     return found
 
 

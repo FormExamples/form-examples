@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A person nominated as an attorney by the donor. Must be ≥ 18 with capacity per MCA 2005 s.10.
 paths:
-  /api/attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys:
     get:
       summary: List Attorney records
       operationId: listAttorney
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/attorneys/{id}:
     parameters:
       - name: id
         in: path

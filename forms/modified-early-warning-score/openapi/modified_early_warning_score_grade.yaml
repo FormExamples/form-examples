@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed MEWS grading result: five per-parameter sub-scores, aggregate total (0-14), single-parameter trigger indicator, derived clinical-risk band, and recommended monitoring frequency. One row per observation record (1:1)."
 paths:
-  /api/modified_early_warning_score_grades:
+  /api/modified-early-warning-score/modified_early_warning_score_grades:
     get:
       summary: List ModifiedEarlyWarningScoreGrade records
       operationId: listModifiedEarlyWarningScoreGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/modified_early_warning_score_grades/{id}:
+  /api/modified-early-warning-score/modified_early_warning_score_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -25,23 +25,23 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/assessors?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/uk-nhs-digital-technology-assessment-criteria/assessors?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/uk-nhs-digital-technology-assessment-criteria/no-such-route").await, 404);
+        problem!(request.delete("/api/uk-nhs-digital-technology-assessment-criteria/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/assessors/{id}")).await, 404);
+        problem!(request.get(&format!("/api/uk-nhs-digital-technology-assessment-criteria/assessors/{id}")).await, 404);
 
         // An extractor's refusal says what was wrong, and quotes nothing.
-        let (body, text) = problem!(request.get("/api/assessors/not-a-uuid").await, 400);
+        let (body, text) = problem!(request.get("/api/uk-nhs-digital-technology-assessment-criteria/assessors/not-a-uuid").await, 400);
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
-            request.post("/api/assessors").json(&"not an object").await,
+            request.post("/api/uk-nhs-digital-technology-assessment-criteria/assessors").json(&"not an object").await,
             422
         );
     })
@@ -100,7 +100,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "organisation": "Test organisation",
             "role": "not-a-listed-value"
         });
-        let response = request.post("/api/assessors").json(&refused).await;
+        let response = request.post("/api/uk-nhs-digital-technology-assessment-criteria/assessors").json(&refused).await;
         let (body, text) = problem!(response, 422);
         assert_eq!(body["code"], "unprocessable_entity");
         assert_eq!(body["detail"], "A value is outside what this field allows");

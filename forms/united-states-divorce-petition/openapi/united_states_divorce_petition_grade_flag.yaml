@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Flagged issues that fire independently of the readiness class, with priority and suggested action.
 paths:
-  /api/united_states_divorce_petition_grade_flags:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags:
     get:
       summary: List UnitedStatesDivorcePetitionGradeFlag records
       operationId: listUnitedStatesDivorcePetitionGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_divorce_petition_grade_flags/{id}:
+  /api/united-states-divorce-petition/united_states_divorce_petition_grade_flags/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical finding (pneumothorax, free intraperitoneal air, unstable fracture) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
 paths:
-  /api/x_ray_test_result_grades:
+  /api/x-ray-test-result/x_ray_test_result_grades:
     get:
       summary: List XRayTestResultGrade records
       operationId: listXRayTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/x_ray_test_result_grades/{id}:
+  /api/x-ray-test-result/x_ray_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

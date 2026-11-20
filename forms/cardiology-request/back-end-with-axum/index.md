@@ -23,14 +23,14 @@ front-end engine. The red-flag auto-escalation invariant is preserved.
 
 | Method | Route                                  | Purpose                                                           |
 | ------ | -------------------------------------- | ----------------------------------------------------------------- |
-| GET    | `/api/cardiology_requests`             | List requests (most recent first)                                 |
-| POST   | `/api/cardiology_requests`             | Create a referral request (FKs `patientId`, `clinicianId`)        |
-| GET    | `/api/cardiology_requests/{id}`        | Return one request record                                         |
-| PATCH  | `/api/cardiology_requests/{id}`        | Replace the request fields                                        |
-| DELETE | `/api/cardiology_requests/{id}`        | Delete a request (cascades its grade, rules, flags)               |
-| POST   | `/api/cardiology_requests/{id}/submit` | Run the engine, transactionally persist the grade + rules + flags |
-| GET    | `/api/cardiology_requests/{id}/result` | Return the stored grade with its fired rules and flags            |
-| GET    | `/api/dashboard`                       | List requests joined with their grade (`?status=`, paged)        |
+| GET    | `/api/cardiology-request/cardiology_requests`             | List requests (most recent first)                                 |
+| POST   | `/api/cardiology-request/cardiology_requests`             | Create a referral request (FKs `patientId`, `clinicianId`)        |
+| GET    | `/api/cardiology-request/cardiology_requests/{id}`        | Return one request record                                         |
+| PATCH  | `/api/cardiology-request/cardiology_requests/{id}`        | Replace the request fields                                        |
+| DELETE | `/api/cardiology-request/cardiology_requests/{id}`        | Delete a request (cascades its grade, rules, flags)               |
+| POST   | `/api/cardiology-request/cardiology_requests/{id}/submit` | Run the engine, transactionally persist the grade + rules + flags |
+| GET    | `/api/cardiology-request/cardiology_requests/{id}/result` | Return the stored grade with its fired rules and flags            |
+| GET    | `/api/cardiology-request/dashboard`                       | List requests joined with their grade (`?status=`, paged)        |
 
 All bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

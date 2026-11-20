@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One vaccination or prophylaxis entry on an International Certificate of Vaccination or Prophylaxis. Multiple entries may appear on a single certificate for different diseases or booster doses.
 paths:
-  /api/international_certificate_of_vaccination_or_prophylaxis_entries:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis_entries:
     get:
       summary: List InternationalCertificateOfVaccinationOrProphylaxisEntry records
       operationId: listInternationalCertificateOfVaccinationOrProphylaxisEntry
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/international_certificate_of_vaccination_or_prophylaxis_entries/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis_entries/{id}:
     parameters:
       - name: id
         in: path

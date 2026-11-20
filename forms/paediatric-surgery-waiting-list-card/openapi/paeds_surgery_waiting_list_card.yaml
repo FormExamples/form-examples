@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a paediatric surgery waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/paeds_surgery_waiting_list_cards:
+  /api/paediatric-surgery-waiting-list-card/paeds_surgery_waiting_list_cards:
     get:
       summary: List PaedsSurgeryWaitingListCard records
       operationId: listPaedsSurgeryWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/paeds_surgery_waiting_list_cards/{id}:
+  /api/paediatric-surgery-waiting-list-card/paeds_surgery_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

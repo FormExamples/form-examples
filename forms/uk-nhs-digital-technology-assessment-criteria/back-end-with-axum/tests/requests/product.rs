@@ -8,7 +8,7 @@ use uk_nhs_digital_technology_assessment_criteria::app::App;
 #[serial]
 async fn can_get_products() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/products").await;
+        let res = request.get("/api/uk-nhs-digital-technology-assessment-criteria/products").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered, not Axum's HTML welcome page.
         let content_type = res

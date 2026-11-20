@@ -22,7 +22,7 @@
  */
 
 /**
- * Response from `GET /api/patient-room-readiness-checklists`.
+ * Response from `GET /api/patient-room-readiness/patient-room-readiness-checklists`.
  *
  * The Axum backend returns a bare JSON array of `ChecklistRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

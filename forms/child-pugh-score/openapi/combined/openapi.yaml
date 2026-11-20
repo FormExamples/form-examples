@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/child_pugh_score_grade_flags:
+  /api/child-pugh-score/child_pugh_score_grade_flags:
     get:
       summary: List ChildPughScoreGradeFlag records
       operationId: listChildPughScoreGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_score_grade_flags/{id}:
+  /api/child-pugh-score/child_pugh_score_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_score_grade_rules:
+  /api/child-pugh-score/child_pugh_score_grade_rules:
     get:
       summary: List ChildPughScoreGradeRule records
       operationId: listChildPughScoreGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_score_grade_rules/{id}:
+  /api/child-pugh-score/child_pugh_score_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_score_grades:
+  /api/child-pugh-score/child_pugh_score_grades:
     get:
       summary: List ChildPughScoreGrade records
       operationId: listChildPughScoreGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_score_grades/{id}:
+  /api/child-pugh-score/child_pugh_score_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_scores:
+  /api/child-pugh-score/child_pugh_scores:
     get:
       summary: List ChildPughScore records
       operationId: listChildPughScore
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/child_pugh_scores/{id}:
+  /api/child-pugh-score/child_pugh_scores/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/child-pugh-score/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/child-pugh-score/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/child-pugh-score/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/child-pugh-score/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/child-pugh-score/patients/{id}:
     parameters:
     - name: id
       in: path

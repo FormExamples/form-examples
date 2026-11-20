@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Binding instruction the attorneys must follow. LP1H s.7 (instructions), MCA 2005 s.9(4).
 paths:
-  /api/lpa_instructions:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions:
     get:
       summary: List LpaInstruction records
       operationId: listLpaInstruction
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_instructions/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_instructions/{id}:
     parameters:
       - name: id
         in: path

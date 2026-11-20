@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed Asthma Control Test (ACT) grading result. Score 20-25 = well controlled, 16-19 = not well controlled, 5-15 = very poorly controlled. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/asthma-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/asthma-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

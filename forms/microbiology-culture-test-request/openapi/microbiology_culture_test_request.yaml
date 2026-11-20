@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Microbiology specimen culture / MC&S request (referral). Captures the specimen, the requested tests (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
 paths:
-  /api/microbiology_culture_test_requests:
+  /api/microbiology-culture-test-request/microbiology_culture_test_requests:
     get:
       summary: List MicrobiologyCultureTestRequest records
       operationId: listMicrobiologyCultureTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/microbiology_culture_test_requests/{id}:
+  /api/microbiology-culture-test-request/microbiology_culture_test_requests/{id}:
     parameters:
       - name: id
         in: path

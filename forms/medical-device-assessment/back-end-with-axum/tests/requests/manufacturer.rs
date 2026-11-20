@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_manufacturers() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/manufacturers").await;
+        let res = request.get("/api/medical-device-assessment/manufacturers").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered, not Axum's HTML welcome page,
         // which a trailing-slash URL falls through to (also returning 200).

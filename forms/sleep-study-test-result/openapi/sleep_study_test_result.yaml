@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Sleep study / polysomnography result (report). Captures the performed study type and adequacy, clinical history, the key quantitative metrics (recording and sleep time, apnoea-hypopnoea index, oxygen desaturation index, minimum and time-below-90% SpO2, mean heart rate), the OSA severity band, the narrative and structured findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/sleep_study_test_results:
+  /api/sleep-study-test-result/sleep_study_test_results:
     get:
       summary: List SleepStudyTestResult records
       operationId: listSleepStudyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/sleep_study_test_results/{id}:
+  /api/sleep-study-test-result/sleep_study_test_results/{id}:
     parameters:
       - name: id
         in: path

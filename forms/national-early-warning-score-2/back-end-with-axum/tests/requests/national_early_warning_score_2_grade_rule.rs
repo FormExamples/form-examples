@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_national_early_warning_score_2_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/national_early_warning_score_2_grade_rules")
+            .get("/api/national-early-warning-score-2/national_early_warning_score_2_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
 

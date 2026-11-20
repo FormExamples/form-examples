@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness classification for a vehicle bill of sale: classification (complete/incomplete/risk-flagged), missing item count, and risk flag count."
 paths:
-  /api/united_kingdom_vehicle_bill_of_sale_grades:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGrade records
       operationId: listUnitedKingdomVehicleBillOfSaleGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_vehicle_bill_of_sale_grades/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades/{id}:
     parameters:
       - name: id
         in: path

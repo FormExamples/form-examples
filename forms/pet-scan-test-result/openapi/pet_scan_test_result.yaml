@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: PET-CT (positron emission tomography) scan result (report). Captures the tracer / scan type, the clinical history and acquisition data (blood glucose, injected activity), the narrative and structured metabolic findings, key measurements (SUVmax, largest lesion size), comparison and treatment response, the impression, the structured reporting category (e.g. Deauville score or PERCIST category), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/pet_scan_test_results:
+  /api/pet-scan-test-result/pet_scan_test_results:
     get:
       summary: List PetScanTestResult records
       operationId: listPetScanTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pet_scan_test_results/{id}:
+  /api/pet-scan-test-result/pet_scan_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during HAS-BLED computation: criterion, points contributed, category, and description."
 paths:
-  /api/has_bled_score_for_major_bleeding_risk_grade_rules:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_rules:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGradeRule records
       operationId: listHasBledScoreForMajorBleedingRiskGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/has_bled_score_for_major_bleeding_risk_grade_rules/{id}:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grade_rules/{id}:
     parameters:
       - name: id
         in: path

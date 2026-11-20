@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA registration recipient — who receives the registered LPA and how (LP1F section 13).
 paths:
-  /api/lpa_registration_recipients:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_recipients:
     get:
       summary: List LpaRegistrationRecipient records
       operationId: listLpaRegistrationRecipient
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_registration_recipients/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_registration_recipients/{id}:
     parameters:
       - name: id
         in: path

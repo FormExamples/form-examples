@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/ottawa-ankle-rules/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/ottawa-ankle-rules/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/ottawa-ankle-rules/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/ottawa_ankle_rules:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules:
     get:
       summary: List OttawaAnkleRules records
       operationId: listOttawaAnkleRules
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grade_flags:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_flags:
     get:
       summary: List OttawaAnkleRulesGradeFlag records
       operationId: listOttawaAnkleRulesGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grade_flags/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grade_rules:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_rules:
     get:
       summary: List OttawaAnkleRulesGradeRule records
       operationId: listOttawaAnkleRulesGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grade_rules/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grades:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grades:
     get:
       summary: List OttawaAnkleRulesGrade records
       operationId: listOttawaAnkleRulesGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ottawa_ankle_rules_grades/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/ottawa-ankle-rules/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/ottawa-ankle-rules/patients/{id}:
     parameters:
     - name: id
       in: path

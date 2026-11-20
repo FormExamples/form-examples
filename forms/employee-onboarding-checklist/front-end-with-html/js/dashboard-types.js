@@ -49,7 +49,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/employees`.
+ * Response from `GET /api/employee-onboarding-checklist/dashboard/employees`.
  *
  * @typedef {Object} DashboardEmployeesResponse
  * @property {EmployeeRow[]} items

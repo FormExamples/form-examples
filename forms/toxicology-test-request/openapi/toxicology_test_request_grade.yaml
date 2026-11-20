@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 indication match), timing band (ingestion-time validity), request completeness, and triage priority."
 paths:
-  /api/toxicology_test_request_grades:
+  /api/toxicology-test-request/toxicology_test_request_grades:
     get:
       summary: List ToxicologyTestRequestGrade records
       operationId: listToxicologyTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/toxicology_test_request_grades/{id}:
+  /api/toxicology-test-request/toxicology_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

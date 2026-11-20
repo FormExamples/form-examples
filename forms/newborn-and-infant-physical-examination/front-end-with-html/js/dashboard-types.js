@@ -41,7 +41,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/examinations`.
+ * Response from `GET /api/newborn-and-infant-physical-examination/dashboard/examinations`.
  *
  * @typedef {Object} DashboardExaminationsResponse
  * @property {ExaminationRow[]} items

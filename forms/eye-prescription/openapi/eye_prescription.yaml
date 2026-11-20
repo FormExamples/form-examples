@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Spectacle prescription header; one row per issued prescription.
 paths:
-  /api/eye_prescriptions:
+  /api/eye-prescription/eye_prescriptions:
     get:
       summary: List EyePrescription records
       operationId: listEyePrescription
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eye_prescriptions/{id}:
+  /api/eye-prescription/eye_prescriptions/{id}:
     parameters:
       - name: id
         in: path

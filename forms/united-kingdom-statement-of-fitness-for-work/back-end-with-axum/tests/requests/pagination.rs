@@ -11,7 +11,7 @@ use serial_test::serial;
 #[serial]
 async fn lists_come_in_cursor_pages() {
     request::<App, _, _>(|request, _ctx| async move {
-        let page = request.get("/api/clinicians?limit=1").await;
+        let page = request.get("/api/united-kingdom-statement-of-fitness-for-work/clinicians?limit=1").await;
         page.assert_status_ok();
         assert!(page.maybe_header("x-total-count").is_none());
         assert!(page.maybe_header("link").is_none());
@@ -19,10 +19,10 @@ async fn lists_come_in_cursor_pages() {
         assert!(rows.is_empty());
 
         for refused in [
-            "/api/clinicians?cursor=forged",
-            "/api/clinicians?limit=0",
-            "/api/clinicians?limit=1001",
-            "/api/clinicians?limit=many",
+            "/api/united-kingdom-statement-of-fitness-for-work/clinicians?cursor=forged",
+            "/api/united-kingdom-statement-of-fitness-for-work/clinicians?limit=0",
+            "/api/united-kingdom-statement-of-fitness-for-work/clinicians?limit=1001",
+            "/api/united-kingdom-statement-of-fitness-for-work/clinicians?limit=many",
         ] {
             request.get(refused).await.assert_status_unprocessable_entity();
         }

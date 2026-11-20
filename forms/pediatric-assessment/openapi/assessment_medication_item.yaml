@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual medication entry with name, dose, frequency, and route.
 paths:
-  /api/assessment_medication_items:
+  /api/pediatric-assessment/assessment_medication_items:
     get:
       summary: List AssessmentMedicationItem records
       operationId: listAssessmentMedicationItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_medication_items/{id}:
+  /api/pediatric-assessment/assessment_medication_items/{id}:
     parameters:
       - name: id
         in: path

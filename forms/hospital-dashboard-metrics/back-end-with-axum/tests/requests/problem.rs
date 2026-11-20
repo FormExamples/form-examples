@@ -25,18 +25,18 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/hospital_dashboard_metric_values?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/hospital-dashboard-metrics/hospital_dashboard_metric_values?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/hospital-dashboard-metrics/no-such-route").await, 404);
+        problem!(request.delete("/api/hospital-dashboard-metrics/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
         problem!(
             request
-                .get(&format!("/api/hospital_dashboard_metric_values/{id}"))
+                .get(&format!("/api/hospital-dashboard-metrics/hospital_dashboard_metric_values/{id}"))
                 .await,
             404
         );
@@ -44,7 +44,7 @@ async fn every_failure_is_a_problem() {
         // An extractor's refusal says what was wrong, and quotes nothing.
         let (body, text) = problem!(
             request
-                .get("/api/hospital_dashboard_metric_values/not-a-uuid")
+                .get("/api/hospital-dashboard-metrics/hospital_dashboard_metric_values/not-a-uuid")
                 .await,
             400
         );
@@ -52,7 +52,7 @@ async fn every_failure_is_a_problem() {
         assert!(!text.contains("not-a-uuid"));
         problem!(
             request
-                .post("/api/hospital_dashboard_metric_values")
+                .post("/api/hospital-dashboard-metrics/hospital_dashboard_metric_values")
                 .json(&"not an object")
                 .await,
             422
@@ -115,7 +115,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "status": "not-a-listed-value",
             "signedAt": "2026-01-01T00:00:00Z"
         });
-        let response = request.post("/api/hospital_dashboard_metrics").json(&refused).await;
+        let response = request.post("/api/hospital-dashboard-metrics/hospital_dashboard_metrics").json(&refused).await;
         let (body, text) = problem!(response, 422);
         assert_eq!(body["code"], "unprocessable_entity");
         assert_eq!(body["detail"], "A value is outside what this field allows");

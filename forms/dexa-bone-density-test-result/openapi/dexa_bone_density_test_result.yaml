@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: DEXA / DXA (dual-energy X-ray absorptiometry) bone-density result (report). Captures the performed examination, the clinical history, the quantitative findings (BMD in g/cm2, T-scores and Z-scores at the lumbar spine, femoral neck, and total hip, plus the lowest T-score), the WHO densitometric classification, FRAX 10-year fracture probabilities, vertebral-fracture identification, comparison with previous DEXA, the impression, and recommended follow-up. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/dexa_bone_density_test_results:
+  /api/dexa-bone-density-test-result/dexa_bone_density_test_results:
     get:
       summary: List DexaBoneDensityTestResult records
       operationId: listDexaBoneDensityTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/dexa_bone_density_test_results/{id}:
+  /api/dexa-bone-density-test-result/dexa_bone_density_test_results/{id}:
     parameters:
       - name: id
         in: path

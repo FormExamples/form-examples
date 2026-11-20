@@ -7,7 +7,7 @@ use serial_test::serial;
 async fn can_get_eye_prescription_lens_recommendations() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/eye_prescription_lens_recommendations")
+            .get("/api/eye-prescription/eye_prescription_lens_recommendations")
             .await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());

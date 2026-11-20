@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/petitions`.
+ * Response from `GET /api/united-states-divorce-petition/dashboard/petitions`.
  * @typedef {Object} DashboardPetitionsResponse
  * @property {PetitionRow[]} items
  * @property {number} total

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/eye_prescription_eyes:
+  /api/eye-prescription/eye_prescription_eyes:
     get:
       summary: List EyePrescriptionEye records
       operationId: listEyePrescriptionEye
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_eyes/{id}:
+  /api/eye-prescription/eye_prescription_eyes/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grade_flags:
+  /api/eye-prescription/eye_prescription_grade_flags:
     get:
       summary: List EyePrescriptionGradeFlag records
       operationId: listEyePrescriptionGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grade_flags/{id}:
+  /api/eye-prescription/eye_prescription_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grade_rules:
+  /api/eye-prescription/eye_prescription_grade_rules:
     get:
       summary: List EyePrescriptionGradeRule records
       operationId: listEyePrescriptionGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grade_rules/{id}:
+  /api/eye-prescription/eye_prescription_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grades:
+  /api/eye-prescription/eye_prescription_grades:
     get:
       summary: List EyePrescriptionGrade records
       operationId: listEyePrescriptionGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_grades/{id}:
+  /api/eye-prescription/eye_prescription_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_lens_recommendations:
+  /api/eye-prescription/eye_prescription_lens_recommendations:
     get:
       summary: List EyePrescriptionLensRecommendation records
       operationId: listEyePrescriptionLensRecommendation
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_lens_recommendations/{id}:
+  /api/eye-prescription/eye_prescription_lens_recommendations/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_ocular_health_findings:
+  /api/eye-prescription/eye_prescription_ocular_health_findings:
     get:
       summary: List EyePrescriptionOcularHealthFinding records
       operationId: listEyePrescriptionOcularHealthFinding
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_ocular_health_findings/{id}:
+  /api/eye-prescription/eye_prescription_ocular_health_findings/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_pupillary_distances:
+  /api/eye-prescription/eye_prescription_pupillary_distances:
     get:
       summary: List EyePrescriptionPupillaryDistance records
       operationId: listEyePrescriptionPupillaryDistance
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_pupillary_distances/{id}:
+  /api/eye-prescription/eye_prescription_pupillary_distances/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_visual_acuities:
+  /api/eye-prescription/eye_prescription_visual_acuities:
     get:
       summary: List EyePrescriptionVisualAcuity records
       operationId: listEyePrescriptionVisualAcuity
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescription_visual_acuities/{id}:
+  /api/eye-prescription/eye_prescription_visual_acuities/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescriptions:
+  /api/eye-prescription/eye_prescriptions:
     get:
       summary: List EyePrescription records
       operationId: listEyePrescription
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/eye_prescriptions/{id}:
+  /api/eye-prescription/eye_prescriptions/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/eye-prescription/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2233,7 +2233,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/eye-prescription/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/eye-prescription/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -2479,7 +2479,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/prescribers:
+  /api/eye-prescription/prescribers:
     get:
       summary: List Prescriber records
       operationId: listPrescriber
@@ -2577,7 +2577,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/prescribers/{id}:
+  /api/eye-prescription/prescribers/{id}:
     parameters:
     - name: id
       in: path

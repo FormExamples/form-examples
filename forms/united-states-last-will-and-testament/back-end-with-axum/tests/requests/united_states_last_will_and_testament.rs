@@ -9,7 +9,7 @@ use united_states_last_will_and_testament::app::App;
 async fn can_get_united_states_last_will_and_testaments() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/united_states_last_will_and_testaments")
+            .get("/api/united-states-last-will-and-testament/united_states_last_will_and_testaments")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

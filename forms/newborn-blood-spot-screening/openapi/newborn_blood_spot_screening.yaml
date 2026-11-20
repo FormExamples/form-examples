@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main newborn-blood-spot-screening record for one heel-prick screening event: sample-taker and setting, baby identification, eligibility and consent, the sample event and its timing, sample quality, and the per-condition result class for the nine screened conditions. Overall outcome, fired rules, and flags live in child tables."
 paths:
-  /api/newborn_blood_spot_screenings:
+  /api/newborn-blood-spot-screening/newborn_blood_spot_screenings:
     get:
       summary: List NewbornBloodSpotScreening records
       operationId: listNewbornBloodSpotScreening
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/newborn_blood_spot_screenings/{id}:
+  /api/newborn-blood-spot-screening/newborn_blood_spot_screenings/{id}:
     parameters:
       - name: id
         in: path

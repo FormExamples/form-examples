@@ -8,7 +8,7 @@ use venereology_waiting_list_card::app::App;
 #[serial]
 async fn can_get_venereology_waiting_list_cards() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/venereology_waiting_list_cards").await;
+        let res = request.get("/api/venereology-waiting-list-card/venereology_waiting_list_cards").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

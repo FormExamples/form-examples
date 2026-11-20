@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/medication-reconciliation/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/medication-reconciliation/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_allergies:
+  /api/medication-reconciliation/medication_reconciliation_allergies:
     get:
       summary: List MedicationReconciliationAllergy records
       operationId: listMedicationReconciliationAllergy
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_allergies/{id}:
+  /api/medication-reconciliation/medication_reconciliation_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_discrepancies:
+  /api/medication-reconciliation/medication_reconciliation_discrepancies:
     get:
       summary: List MedicationReconciliationDiscrepancy records
       operationId: listMedicationReconciliationDiscrepancy
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_discrepancies/{id}:
+  /api/medication-reconciliation/medication_reconciliation_discrepancies/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grade_flags:
+  /api/medication-reconciliation/medication_reconciliation_grade_flags:
     get:
       summary: List MedicationReconciliationGradeFlag records
       operationId: listMedicationReconciliationGradeFlag
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grade_flags/{id}:
+  /api/medication-reconciliation/medication_reconciliation_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grade_rules:
+  /api/medication-reconciliation/medication_reconciliation_grade_rules:
     get:
       summary: List MedicationReconciliationGradeRule records
       operationId: listMedicationReconciliationGradeRule
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grade_rules/{id}:
+  /api/medication-reconciliation/medication_reconciliation_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grades:
+  /api/medication-reconciliation/medication_reconciliation_grades:
     get:
       summary: List MedicationReconciliationGrade records
       operationId: listMedicationReconciliationGrade
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_grades/{id}:
+  /api/medication-reconciliation/medication_reconciliation_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_information_sources:
+  /api/medication-reconciliation/medication_reconciliation_information_sources:
     get:
       summary: List MedicationReconciliationInformationSource records
       operationId: listMedicationReconciliationInformationSource
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_information_sources/{id}:
+  /api/medication-reconciliation/medication_reconciliation_information_sources/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_line_items:
+  /api/medication-reconciliation/medication_reconciliation_line_items:
     get:
       summary: List MedicationReconciliationLineItem records
       operationId: listMedicationReconciliationLineItem
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliation_line_items/{id}:
+  /api/medication-reconciliation/medication_reconciliation_line_items/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliations:
+  /api/medication-reconciliation/medication_reconciliations:
     get:
       summary: List MedicationReconciliation records
       operationId: listMedicationReconciliation
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medication_reconciliations/{id}:
+  /api/medication-reconciliation/medication_reconciliations/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/medication-reconciliation/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2233,7 +2233,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/medication-reconciliation/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/medication-reconciliation/patients/{id}:
     parameters:
     - name: id
       in: path

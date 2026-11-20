@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/certificates`.
+ * Response from `GET /api/medical-certificate-of-cause-of-death/dashboard/certificates`.
  * @typedef {Object} DashboardCertificatesResponse
  * @property {CertificateRow[]} items
  * @property {number} total

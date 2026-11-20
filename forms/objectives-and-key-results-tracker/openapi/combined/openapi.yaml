@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/okr_check_ins:
+  /api/objectives-and-key-results-tracker/okr_check_ins:
     get:
       summary: List OkrCheckIn records
       operationId: listOkrCheckIn
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_check_ins/{id}:
+  /api/objectives-and-key-results-tracker/okr_check_ins/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grade_flags:
+  /api/objectives-and-key-results-tracker/okr_grade_flags:
     get:
       summary: List OkrGradeFlag records
       operationId: listOkrGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grade_flags/{id}:
+  /api/objectives-and-key-results-tracker/okr_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grade_rules:
+  /api/objectives-and-key-results-tracker/okr_grade_rules:
     get:
       summary: List OkrGradeRule records
       operationId: listOkrGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grade_rules/{id}:
+  /api/objectives-and-key-results-tracker/okr_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grades:
+  /api/objectives-and-key-results-tracker/okr_grades:
     get:
       summary: List OkrGrade records
       operationId: listOkrGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_grades/{id}:
+  /api/objectives-and-key-results-tracker/okr_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_key_results:
+  /api/objectives-and-key-results-tracker/okr_key_results:
     get:
       summary: List OkrKeyResult records
       operationId: listOkrKeyResult
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_key_results/{id}:
+  /api/objectives-and-key-results-tracker/okr_key_results/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_objectives:
+  /api/objectives-and-key-results-tracker/okr_objectives:
     get:
       summary: List OkrObjective records
       operationId: listOkrObjective
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/okr_objectives/{id}:
+  /api/objectives-and-key-results-tracker/okr_objectives/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/objectives-and-key-results-tracker/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1495,7 +1495,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/participants:
+  /api/objectives-and-key-results-tracker/participants:
     get:
       summary: List Participant records
       operationId: listParticipant
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/participants/{id}:
+  /api/objectives-and-key-results-tracker/participants/{id}:
     parameters:
     - name: id
       in: path
@@ -1741,7 +1741,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reporters:
+  /api/objectives-and-key-results-tracker/reporters:
     get:
       summary: List Reporter records
       operationId: listReporter
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reporters/{id}:
+  /api/objectives-and-key-results-tracker/reporters/{id}:
     parameters:
     - name: id
       in: path

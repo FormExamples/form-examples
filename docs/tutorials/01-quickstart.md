@@ -103,11 +103,11 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-Axum listens on `localhost:5150`. Controllers mount under the `api/` prefix, so
+Axum listens on `localhost:5150`. Controllers mount under the form's own `api/apgar-score/` prefix, so
 in another shell:
 
 ```sh
-curl -s http://localhost:5150/api/patients
+curl -s http://localhost:5150/api/apgar-score/patients
 ```
 
 You should get a JSON array (empty until you create a record). Tutorial 5

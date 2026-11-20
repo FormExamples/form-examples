@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/fluid-balance-chart/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/fluid-balance-chart/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_entries:
+  /api/fluid-balance-chart/fluid_balance_chart_entries:
     get:
       summary: List FluidBalanceChartEntry records
       operationId: listFluidBalanceChartEntry
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_entries/{id}:
+  /api/fluid-balance-chart/fluid_balance_chart_entries/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grade_flags:
+  /api/fluid-balance-chart/fluid_balance_chart_grade_flags:
     get:
       summary: List FluidBalanceChartGradeFlag records
       operationId: listFluidBalanceChartGradeFlag
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grade_flags/{id}:
+  /api/fluid-balance-chart/fluid_balance_chart_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grade_rules:
+  /api/fluid-balance-chart/fluid_balance_chart_grade_rules:
     get:
       summary: List FluidBalanceChartGradeRule records
       operationId: listFluidBalanceChartGradeRule
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grade_rules/{id}:
+  /api/fluid-balance-chart/fluid_balance_chart_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grades:
+  /api/fluid-balance-chart/fluid_balance_chart_grades:
     get:
       summary: List FluidBalanceChartGrade records
       operationId: listFluidBalanceChartGrade
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_chart_grades/{id}:
+  /api/fluid-balance-chart/fluid_balance_chart_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_charts:
+  /api/fluid-balance-chart/fluid_balance_charts:
     get:
       summary: List FluidBalanceChart records
       operationId: listFluidBalanceChart
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fluid_balance_charts/{id}:
+  /api/fluid-balance-chart/fluid_balance_charts/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/fluid-balance-chart/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1495,7 +1495,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/fluid-balance-chart/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/fluid-balance-chart/patients/{id}:
     parameters:
     - name: id
       in: path

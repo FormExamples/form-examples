@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REFERRALS_PATH = '/api/dashboard/referrals';
+const REFERRALS_PATH = '/api/child-safeguarding-referral/dashboard/referrals';
 
 /**
  * Fetch the referral list from the backend.

@@ -53,7 +53,7 @@
  */
 
 /**
- * Response from `GET /api/dietic_assessments`.
+ * Response from `GET /api/dietic-assessment/dietic_assessments`.
  *
  * The Axum back-end returns a bare JSON array of `AssessmentRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so a

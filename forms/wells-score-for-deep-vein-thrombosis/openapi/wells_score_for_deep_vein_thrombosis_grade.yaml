@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Wells DVT grading result: total score, two-level band, three-level band, and recommended investigation pathway. One-to-one with the parent assessment."
 paths:
-  /api/wells_score_for_deep_vein_thrombosis_grades:
+  /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grades:
     get:
       summary: List WellsScoreForDeepVeinThrombosisGrade records
       operationId: listWellsScoreForDeepVeinThrombosisGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/wells_score_for_deep_vein_thrombosis_grades/{id}:
+  /api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thrombosis_grades/{id}:
     parameters:
       - name: id
         in: path

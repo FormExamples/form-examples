@@ -26,12 +26,12 @@ async fn delete_hides_the_record_and_keeps_it() {
         .fetch_one(&ctx.db)
         .await
         .unwrap();
-        assert_eq!(request.get("/api/adrs/kept").await.status_code(), 200);
+        assert_eq!(request.get("/api/architecture-decision-record/adrs/kept").await.status_code(), 200);
 
         Model::delete(&ctx.db, id).await.unwrap();
 
-        assert_eq!(request.get("/api/adrs/kept").await.status_code(), 404);
-        let listed = request.get("/api/adrs").await.json::<serde_json::Value>();
+        assert_eq!(request.get("/api/architecture-decision-record/adrs/kept").await.status_code(), 404);
+        let listed = request.get("/api/architecture-decision-record/adrs").await.json::<serde_json::Value>();
         assert!(!listed.to_string().contains(&id.to_string()));
         let hidden: bool = sqlx::query_scalar(
             "SELECT deleted_at IS NOT NULL FROM architecture_decision_records WHERE id = $1",

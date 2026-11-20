@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "The applicant: the spouse or civil partner who makes the application (or one of two joint applicants)."
 paths:
-  /api/applicants:
+  /api/united-kingdom-divorce-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/applicants/{id}:
+  /api/united-kingdom-divorce-application/applicants/{id}:
     parameters:
       - name: id
         in: path

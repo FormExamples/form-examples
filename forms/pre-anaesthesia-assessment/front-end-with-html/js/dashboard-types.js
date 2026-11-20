@@ -50,7 +50,7 @@
  */
 
 /**
- * Response from `GET /api/assessments`.
+ * Response from `GET /api/pre-anaesthesia-assessment/assessments`.
  *
  * The Axum backend returns a bare JSON array of `AssessmentRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

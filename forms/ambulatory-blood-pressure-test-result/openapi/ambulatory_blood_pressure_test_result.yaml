@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Ambulatory blood pressure monitoring (ABPM) result (report). Captures the monitoring type, recording adequacy, clinical history, the daytime / nighttime / 24-hour averaged blood pressures, the nocturnal dip and dipper status, the narrative and structured interpretation, the impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/ambulatory_blood_pressure_test_results:
+  /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_results:
     get:
       summary: List AmbulatoryBloodPressureTestResult records
       operationId: listAmbulatoryBloodPressureTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ambulatory_blood_pressure_test_results/{id}:
+  /api/ambulatory-blood-pressure-test-result/ambulatory_blood_pressure_test_results/{id}:
     parameters:
       - name: id
         in: path

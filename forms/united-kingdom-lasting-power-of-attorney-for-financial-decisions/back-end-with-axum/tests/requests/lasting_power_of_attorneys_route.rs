@@ -6,7 +6,7 @@ use united_kingdom_lasting_power_of_attorney_for_financial_decisions::app::App;
 #[serial]
 async fn can_get_lasting_power_of_attorneys() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/lasting_power_of_attorneys").await;
+        let res = request.get("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys").await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());
     })

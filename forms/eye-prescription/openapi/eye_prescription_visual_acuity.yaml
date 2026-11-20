@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Visual acuity measurements: Snellen distance and near, unaided and corrected, per eye and binocular, plus pinhole VA and dominant eye."
 paths:
-  /api/eye_prescription_visual_acuities:
+  /api/eye-prescription/eye_prescription_visual_acuities:
     get:
       summary: List EyePrescriptionVisualAcuity records
       operationId: listEyePrescriptionVisualAcuity
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eye_prescription_visual_acuities/{id}:
+  /api/eye-prescription/eye_prescription_visual_acuities/{id}:
     parameters:
       - name: id
         in: path

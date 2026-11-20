@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/directives`.
+ * Response from `GET /api/united-states-health-care-power-of-attorney/dashboard/directives`.
  * @typedef {Object} DashboardDirectivesResponse
  * @property {DirectiveRow[]} items
  * @property {number} total

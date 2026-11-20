@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Disposition, discharge, admission, or transfer details.
 paths:
-  /api/casualty_card_dispositions:
+  /api/casualty-card-form/casualty_card_dispositions:
     get:
       summary: List CasualtyCardDisposition records
       operationId: listCasualtyCardDisposition
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_dispositions/{id}:
+  /api/casualty-card-form/casualty_card_dispositions/{id}:
     parameters:
       - name: id
         in: path

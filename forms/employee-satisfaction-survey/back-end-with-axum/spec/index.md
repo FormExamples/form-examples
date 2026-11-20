@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/employee-satisfaction-survey/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/employee-satisfaction-survey/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/employee-satisfaction-survey/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/employee-satisfaction-survey/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/employee-satisfaction-survey/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/employee-satisfaction-survey/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/employee-satisfaction-survey/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

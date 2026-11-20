@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "The liable person applying for the Council Tax discount: name, birth date and contact details."
 paths:
-  /api/applicants:
+  /api/united-kingdom-council-tax-discount-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/applicants/{id}:
+  /api/united-kingdom-council-tax-discount-application/applicants/{id}:
     parameters:
       - name: id
         in: path

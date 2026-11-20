@@ -21,16 +21,16 @@ relational, never a single JSONB blob.
 
 | Entity | Route prefix |
 | --- | --- |
-| `patient` | `/api/patients/` |
-| `clinician` | `/api/clinicians/` |
-| `cataract_diagnostic_evaluation` | `/api/cataract_diagnostic_evaluations/` |
-| `cataract_diagnostic_evaluation_grade` | `/api/cataract_diagnostic_evaluation_grades/` |
-| `cataract_diagnostic_evaluation_grade_flag` | `/api/cataract_diagnostic_evaluation_grade_flags/` |
+| `patient` | `/api/cataract-diagnostic-evaluation/patients/` |
+| `clinician` | `/api/cataract-diagnostic-evaluation/clinicians/` |
+| `cataract_diagnostic_evaluation` | `/api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations/` |
+| `cataract_diagnostic_evaluation_grade` | `/api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grades/` |
+| `cataract_diagnostic_evaluation_grade_flag` | `/api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluation_grade_flags/` |
 
 Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.
 
-The SvelteKit dashboard reads `GET /api/cataract_diagnostic_evaluations`, and
+The SvelteKit dashboard reads `GET /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations`, and
 the HTML dashboard reads the same endpoint from `http://localhost:5150`,
 falling back to its bundled sample rows when the server is not running.
 

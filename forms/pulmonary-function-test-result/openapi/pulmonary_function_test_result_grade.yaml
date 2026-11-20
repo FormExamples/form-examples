@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. severe / very-severe obstruction or restriction, or marked decline versus previous) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
 paths:
-  /api/pulmonary_function_test_result_grades:
+  /api/pulmonary-function-test-result/pulmonary_function_test_result_grades:
     get:
       summary: List PulmonaryFunctionTestResultGrade records
       operationId: listPulmonaryFunctionTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pulmonary_function_test_result_grades/{id}:
+  /api/pulmonary-function-test-result/pulmonary_function_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

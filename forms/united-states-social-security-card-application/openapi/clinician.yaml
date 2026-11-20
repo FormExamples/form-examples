@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician information for the preparer or assisting staff member who helps complete the Social Security card application.
 paths:
-  /api/clinicians:
+  /api/united-states-social-security-card-application/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/united-states-social-security-card-application/clinicians/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Glasgow Coma Scale grading result: resolved component scores (null when NT), summed total (3-15, null when any component is NT), breakdown and total-display strings, severity band, Pupil Reactivity Score, and the secondary GCS-Pupils score."
 paths:
-  /api/glasgow_coma_scale_grades:
+  /api/glasgow-coma-scale/glasgow_coma_scale_grades:
     get:
       summary: List GlasgowComaScaleGrade records
       operationId: listGlasgowComaScaleGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/glasgow_coma_scale_grades/{id}:
+  /api/glasgow-coma-scale/glasgow_coma_scale_grades/{id}:
     parameters:
       - name: id
         in: path

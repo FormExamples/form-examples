@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed CHA2DS2-VASc grading result: per-criterion sub-scores, summed total (0-9), derived risk band, looked-up annual stroke rate, and anticoagulation recommendation."
 paths:
-  /api/cha2ds2_vasc_grades:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grades:
     get:
       summary: List Cha2ds2VascGrade records
       operationId: listCha2ds2VascGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cha2ds2_vasc_grades/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grades/{id}:
     parameters:
       - name: id
         in: path

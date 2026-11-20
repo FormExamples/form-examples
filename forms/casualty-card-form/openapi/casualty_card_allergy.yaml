@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Many-to-one with casualty_card. Each row is one documented allergy.
 paths:
-  /api/casualty_card_allergies:
+  /api/casualty-card-form/casualty_card_allergies:
     get:
       summary: List CasualtyCardAllergy records
       operationId: listCasualtyCardAllergy
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_allergies/{id}:
+  /api/casualty-card-form/casualty_card_allergies/{id}:
     parameters:
       - name: id
         in: path

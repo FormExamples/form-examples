@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed CURB-65 (or CRB-65 fallback) grading result: per-criterion 0-or-1 sub-scores, summed total, score variant used, derived mortality-risk band, and recommended site-of-care disposition."
 paths:
-  /api/curb_65_pneumonia_severity_score_grades:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades:
     get:
       summary: List Curb65PneumoniaSeverityScoreGrade records
       operationId: listCurb65PneumoniaSeverityScoreGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/curb_65_pneumonia_severity_score_grades/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades/{id}:
     parameters:
       - name: id
         in: path

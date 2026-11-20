@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient allergy.
 paths:
-  /api/patient_allergies:
+  /api/pre-operative-assessment-by-clinician/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patient_allergies/{id}:
+  /api/pre-operative-assessment-by-clinician/patient_allergies/{id}:
     parameters:
       - name: id
         in: path

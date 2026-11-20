@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Deployment node captured in §7 Deployment View of the arc42 documentation.
 paths:
-  /api/deployment_nodes:
+  /api/arc42/deployment_nodes:
     get:
       summary: List DeploymentNode records
       operationId: listDeploymentNode
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/deployment_nodes/{id}:
+  /api/arc42/deployment_nodes/{id}:
     parameters:
       - name: id
         in: path

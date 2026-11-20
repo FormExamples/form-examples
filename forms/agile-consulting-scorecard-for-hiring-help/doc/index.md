@@ -8,7 +8,7 @@
   triple, tests, schema regeneration, engine-parity regeneration).
 - [`api-reference.md`](./api-reference.md) — request / response shapes
   for the nine HTTP endpoints exposed by the Rust axum server
-  (`/api/dashboard/scorecards`, `/api/scorecards/{id}`, `/api/stats`,
-  `/api/scorecards`, `/api/grade`, `/api/recommendations`,
-  `/api/pre-tender`, `/api/diff`, `/api/bulk-import`), with curl
+  (`/api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards`, `/api/agile-consulting-scorecard-for-hiring-help/scorecards/{id}`, `/api/agile-consulting-scorecard-for-hiring-help/stats`,
+  `/api/agile-consulting-scorecard-for-hiring-help/scorecards`, `/api/agile-consulting-scorecard-for-hiring-help/grade`, `/api/agile-consulting-scorecard-for-hiring-help/recommendations`,
+  `/api/agile-consulting-scorecard-for-hiring-help/pre-tender`, `/api/agile-consulting-scorecard-for-hiring-help/diff`, `/api/agile-consulting-scorecard-for-hiring-help/bulk-import`), with curl
   examples.

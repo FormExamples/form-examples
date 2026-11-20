@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`sleep_study_test_result/`](sleep_study_test_result/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/sleep-study-test-result/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

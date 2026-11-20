@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/allergies:
+  /api/perioperative-optimization/allergies:
     get:
       summary: List Allergy records
       operationId: listAllergy
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/allergies/{id}:
+  /api/perioperative-optimization/allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/perioperative-optimization/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/perioperative-optimization/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications:
+  /api/perioperative-optimization/medications:
     get:
       summary: List Medication records
       operationId: listMedication
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications/{id}:
+  /api/perioperative-optimization/medications/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/perioperative-optimization/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -757,7 +757,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patient_allergies:
+  /api/perioperative-optimization/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_allergies/{id}:
+  /api/perioperative-optimization/patient_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications:
+  /api/perioperative-optimization/patient_medications:
     get:
       summary: List PatientMedication records
       operationId: listPatientMedication
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications/{id}:
+  /api/perioperative-optimization/patient_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/perioperative-optimization/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/perioperative-optimization/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grade_domains:
+  /api/perioperative-optimization/perioperative_optimization_grade_domains:
     get:
       summary: List PerioperativeOptimizationGradeDomain records
       operationId: listPerioperativeOptimizationGradeDomain
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grade_domains/{id}:
+  /api/perioperative-optimization/perioperative_optimization_grade_domains/{id}:
     parameters:
     - name: id
       in: path
@@ -1741,7 +1741,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grade_flags:
+  /api/perioperative-optimization/perioperative_optimization_grade_flags:
     get:
       summary: List PerioperativeOptimizationGradeFlag records
       operationId: listPerioperativeOptimizationGradeFlag
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grade_flags/{id}:
+  /api/perioperative-optimization/perioperative_optimization_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1987,7 +1987,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grades:
+  /api/perioperative-optimization/perioperative_optimization_grades:
     get:
       summary: List PerioperativeOptimizationGrade records
       operationId: listPerioperativeOptimizationGrade
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimization_grades/{id}:
+  /api/perioperative-optimization/perioperative_optimization_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -2233,7 +2233,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimizations:
+  /api/perioperative-optimization/perioperative_optimizations:
     get:
       summary: List PerioperativeOptimization records
       operationId: listPerioperativeOptimization
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/perioperative_optimizations/{id}:
+  /api/perioperative-optimization/perioperative_optimizations/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`ambulatory_blood_pressure_test_result/`](ambulatory_blood_pressure_test_result/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/ambulatory-blood-pressure-test-result/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

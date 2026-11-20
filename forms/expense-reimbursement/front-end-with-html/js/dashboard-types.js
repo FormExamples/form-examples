@@ -40,7 +40,7 @@
  */
 
 /**
- * Response from `GET /api/expense_reimbursements`.
+ * Response from `GET /api/expense-reimbursement/expense_reimbursements`.
  *
  * The Axum backend returns a bare JSON array of `ClaimRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

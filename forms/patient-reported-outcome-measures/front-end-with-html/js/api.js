@@ -1,6 +1,6 @@
 import { SAMPLE_PATIENT_REPORTED_OUTCOME_MEASURES } from './data.js';
 
-const API_BASE = '/api/patient-reported-outcome-measures';
+const API_BASE = '/api/patient-reported-outcome-measures/patient-reported-outcome-measures';
 const CACHE_KEY = 'patient-reported-outcome-measures-dashboard:cache:v1';
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

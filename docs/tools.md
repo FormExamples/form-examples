@@ -2,8 +2,9 @@
 
 Auto-generated from each tool's source header by `bin/generate-tools-doc.py` — do not hand-edit. Run the generator after adding or re-documenting a tool.
 
-120 tools.
+121 tools.
 
+- [`bin/axum-api-namespace`](#axum-api-namespace)
 - [`bin/axum-axa-0-10`](#axum-axa-0-10)
 - [`bin/axum-axa-0-11`](#axum-axa-0-11)
 - [`bin/axum-axa-0-12`](#axum-axa-0-12)
@@ -124,6 +125,53 @@ Auto-generated from each tool's source header by `bin/generate-tools-doc.py` —
 - [`bin/back-end-with-axum/generate-rust-docs.py`](#back-end-with-axumgenerate-rust-docspy)
 - [`bin/sql/generate-sql-combined.py`](#sqlgenerate-sql-combinedpy)
 - [`bin/sql/generate-sql-comments.py`](#sqlgenerate-sql-commentspy)
+
+<h2 id="axum-api-namespace"><code>bin/axum-api-namespace</code></h2>
+
+```text
+bin/axum-api-namespace — serve every form's HTTP API under `/api/<slug>/`.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form subproject
+is fully namespaced by its slug, so every domain route a form's
+`back-end-with-axum/` crate serves starts with `/api/<slug>/`. For example
+`/api/pre-operative-assessment-by-clinician/patients` replaces `/api/patients`,
+and the served OpenAPI document moves to
+`/api/pre-operative-assessment-by-clinician/openapi.yaml`. The axa health
+checks (`/_health/*`) stay outside the namespace.
+
+The tool rewrites every `api/` path token that is not yet namespaced, in each
+form's:
+
+    back-end-with-axum/src/**/*.rs       `.prefix("api/<plural>/")` and docs
+    back-end-with-axum/tests/**/*.rs     request paths
+    back-end-with-axum/*.md, spec/**/*.md  crate docs
+    examples/api-create.http             bin/generate-api-transcripts output
+    index.md, spec/, doc/, scripts/*.sh  the form's own docs and demo scripts
+    openapi/hand/routes.yaml             hand-documented routes
+    front-end-with-html/**/*.{js,html,md}  fetch paths and docs
+    front-end-with-svelte/src/**, *.md   fetch paths and docs
+
+A token counts as a path when `api/` is not preceded by a letter, digit, `_`,
+`.` or `-`, so `openapi/`, `../../openapi/` and `bin/openapi/` are left alone,
+and so are module paths under `lib/api/` (`$lib/api/...`, `#lib/api/...`).
+A URL on another host is left alone. A token already followed by `<slug>/` is left alone, so the tool is idempotent.
+
+Afterwards regenerate the derived artefacts, which read the crates' prefixes:
+
+    python3 bin/openapi/generate-openapi-representations.py
+    python3 bin/openapi/generate-openapi-combined.py <slug>...
+
+This is an ongoing convention, not a one-shot migration: `cargo run --
+generate scaffold --api` emits `.prefix("api/<plural>/")`, so run this tool on
+a newly scaffolded crate. `--check` is the CI drift detector.
+
+Usage:
+  bin/axum-api-namespace <slug>...        # named forms
+  bin/axum-api-namespace --all            # every form
+  bin/axum-api-namespace --dry-run --all  # show what would change
+  bin/axum-api-namespace --check --all    # CI drift check (non-zero on drift)
+  bin/axum-api-namespace --verbose --all  # list every file touched
+```
 
 <h2 id="axum-axa-0-10"><code>bin/axum-axa-0-10</code></h2>
 
@@ -651,7 +699,7 @@ bin/axum-entity-routes [--check] [--root DIR] [--all|<slug>...]
 Each table in forms/<slug>/sql/ must be reachable through the crate's API.
 For a table no controller touches, this writes what is missing: the migration
 (from sql/, in the fleet's type mapping, parents first), the model, a
-controller under /api/<plural>, a request test, and the wiring. A table a
+controller under /api/<slug>/<plural>, a request test, and the wiring. A table a
 hand-written controller already reads or writes counts as reachable, so the
 aggregate APIs of the cardiology and neurodiversity crates are left as they
 are. Run bin/axum-soft-delete afterwards; it owns the delete and filter SQL.
@@ -3391,10 +3439,10 @@ per form, so this merges every `forms/<slug>/openapi/*.yaml` into a single
 not collide across a form's entities, so the union is unambiguous.
 
 The per-entity files describe every SQL table, but not every table has a route.
-The combined document is what a crate serves at `GET /api/openapi.yaml`, so it
+The combined document is what a crate serves at `GET /api/<slug>/openapi.yaml`, so it
 keeps only the paths the crate's controllers declare, and the schemas those use.
 Where a table's own controller (`controllers/<table>.rs`) serves it under another
-path than the generated plural, such as `/api/people` for `person`, the document
+path than the generated plural, such as `/api/<slug>/people` for `person`, the document
 uses the served path. A column `sql/` declares but the crate's table lacks is left
 out, so the document describes what is sent. Property names are camelCase, as the crates send them; the
 per-entity files keep the SQL column names, because they describe storage.
@@ -3402,7 +3450,7 @@ per-entity files keep the SQL column names, because they describe storage.
 Routes no SQL table describes, such as a dashboard or a `submit` action, are
 documented by hand in `forms/<slug>/openapi/hand/routes.yaml`, a fragment with
 `paths` and, if it needs them, `components.schemas`. It is merged in as written.
-Every document also describes `GET /api/openapi.yaml` itself, and an operation the
+Every document also describes `GET /api/<slug>/openapi.yaml` itself, and an operation the
 crate does not serve, such as a `PUT` a hand-written controller lacks, is left out.
 
 `--check` fails when a combined document is stale, and when a route the crate

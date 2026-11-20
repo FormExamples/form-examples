@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Join table linking an LPA to its replacement attorneys.
 paths:
-  /api/lpa_replacement_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
       operationId: listLpaReplacementAttorney
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_replacement_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_replacement_attorneys/{id}:
     parameters:
       - name: id
         in: path

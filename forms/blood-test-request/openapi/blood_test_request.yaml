@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Pathology / phlebotomy blood-test order (request). Captures the requested test panels (booleans), the clinical indication and details, pre-analytical / specimen handling, patient-safety factors, and triage urgency.
 paths:
-  /api/blood_test_requests:
+  /api/blood-test-request/blood_test_requests:
     get:
       summary: List BloodTestRequest records
       operationId: listBloodTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/blood_test_requests/{id}:
+  /api/blood-test-request/blood_test_requests/{id}:
     parameters:
       - name: id
         in: path

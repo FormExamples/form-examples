@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Health screening questionnaire, i.e. the payload of the 14-step single-page wizard: assessment context, personal details, lifestyle, medical and family history, symptom review, PAR-Q+ screen, optional vital signs, occupational factors, wellbeing check, vaccination status, and consent."
 paths:
-  /api/health_screening_questionnaires:
+  /api/health-screening-questionnaire/health_screening_questionnaires:
     get:
       summary: List HealthScreeningQuestionnaire records
       operationId: listHealthScreeningQuestionnaire
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/health_screening_questionnaires/{id}:
+  /api/health-screening-questionnaire/health_screening_questionnaires/{id}:
     parameters:
       - name: id
         in: path

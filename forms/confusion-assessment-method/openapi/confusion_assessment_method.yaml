@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Confusion Assessment Method (CAM) record: assessment context, patient identification, and the four observational feature inputs plus CAM-ICU support fields. Status / classification form with no numeric total."
 paths:
-  /api/confusion_assessment_methods:
+  /api/confusion-assessment-method/confusion_assessment_methods:
     get:
       summary: List ConfusionAssessmentMethod records
       operationId: listConfusionAssessmentMethod
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/confusion_assessment_methods/{id}:
+  /api/confusion-assessment-method/confusion_assessment_methods/{id}:
     parameters:
       - name: id
         in: path

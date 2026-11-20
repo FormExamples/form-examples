@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CARE_PLANS_PATH = '/api/dashboard/care-plans';
+const CARE_PLANS_PATH = '/api/nursing-care-plan/dashboard/care-plans';
 
 /**
  * Fetch the care-plan list from the backend.

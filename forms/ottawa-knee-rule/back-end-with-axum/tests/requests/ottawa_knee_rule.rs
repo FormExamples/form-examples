@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_ottawa_knee_rules() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/ottawa_knee_rules").await;
+        let res = request.get("/api/ottawa-knee-rule/ottawa_knee_rules").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

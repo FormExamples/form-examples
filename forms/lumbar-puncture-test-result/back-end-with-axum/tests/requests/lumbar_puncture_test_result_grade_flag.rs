@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_lumbar_puncture_test_result_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/lumbar_puncture_test_result_grade_flags")
+            .get("/api/lumbar-puncture-test-result/lumbar_puncture_test_result_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

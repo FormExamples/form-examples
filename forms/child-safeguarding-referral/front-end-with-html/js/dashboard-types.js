@@ -45,7 +45,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/referrals`.
+ * Response from `GET /api/child-safeguarding-referral/dashboard/referrals`.
  *
  * @typedef {Object} DashboardReferralsResponse
  * @property {ReferralRow[]} items

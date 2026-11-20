@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main breast-screening record for one NHS Breast Screening Programme mammography encounter: context and identification, eligibility, consent, mammogram views, double-read opinions and arbitration, the reading outcome, and the five-point breast imaging classification when assessed. Screening outcome, fired rules, and flags live in child tables."
 paths:
-  /api/breast_screenings:
+  /api/breast-screening/breast_screenings:
     get:
       summary: List BreastScreening records
       operationId: listBreastScreening
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/breast_screenings/{id}:
+  /api/breast-screening/breast_screenings/{id}:
     parameters:
       - name: id
         in: path

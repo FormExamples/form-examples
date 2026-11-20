@@ -38,7 +38,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/assessments`.
+ * Response from `GET /api/mental-health-act-assessment/dashboard/assessments`.
  * @typedef {Object} DashboardAssessmentsResponse
  * @property {AssessmentRow[]} items
  * @property {number} total

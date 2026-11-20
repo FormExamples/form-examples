@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed documentation-completeness and risk grading result for a mental state examination: status (complete/partial), risk level (none/low/moderate/high), completeness percentage, and per-domain documented flags."
 paths:
-  /api/mental_state_examination_grades:
+  /api/mental-state-examination/mental_state_examination_grades:
     get:
       summary: List MentalStateExaminationGrade records
       operationId: listMentalStateExaminationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mental_state_examination_grades/{id}:
+  /api/mental-state-examination/mental_state_examination_grades/{id}:
     parameters:
       - name: id
         in: path

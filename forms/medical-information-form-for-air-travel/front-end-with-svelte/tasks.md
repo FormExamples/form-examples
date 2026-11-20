@@ -15,4 +15,4 @@
 - [ ] PDF download via `pdfmake`
 - [ ] FHIR R5 Bundle generator
 - [ ] CSV / TSV / XML / JSON export
-- [ ] POST integration with `/api/medifs`
+- [ ] POST integration with `/api/medical-information-form-for-air-travel/medifs`

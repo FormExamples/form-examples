@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessments:
+  /api/care-privacy-notice/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/care-privacy-notice/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/care-privacy-notice/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/care-privacy-notice/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/care-privacy-notice/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/care-privacy-notice/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/care-privacy-notice/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/care-privacy-notice/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/care-privacy-notice/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/care-privacy-notice/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/care-privacy-notice/patients/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Allergies section header: drug, food, environmental, and other allergies. One-to-one child of assessment."
 paths:
-  /api/assessment_allergies:
+  /api/patient-intake/assessment_allergies:
     get:
       summary: List AssessmentAllergies records
       operationId: listAssessmentAllergies
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_allergies/{id}:
+  /api/patient-intake/assessment_allergies/{id}:
     parameters:
       - name: id
         in: path

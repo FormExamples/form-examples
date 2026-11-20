@@ -8,7 +8,7 @@ use united_kingdom_statement_of_fitness_for_work::app::App;
 #[serial]
 async fn can_get_medical_practices() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/medical_practices").await;
+        let res = request.get("/api/united-kingdom-statement-of-fitness-for-work/medical_practices").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

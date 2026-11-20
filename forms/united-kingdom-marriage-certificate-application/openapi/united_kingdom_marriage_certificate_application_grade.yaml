@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness and validity-classification result for a United Kingdom marriage certificate application: class (ready-to-submit/incomplete/needs-evidence/ineligible), earliest and latest permitted ceremony dates, and whether an immigration referral is indicated."
 paths:
-  /api/united_kingdom_marriage_certificate_application_grades:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades:
     get:
       summary: List UnitedKingdomMarriageCertificateApplicationGrade records
       operationId: listUnitedKingdomMarriageCertificateApplicationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_marriage_certificate_application_grades/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_application_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Bhutani bilirubin nomogram assessment record: assessment context, infant identification, measurement inputs (age in hours, total serum bilirubin, measurement method, gestational age), and neonatal hyperbilirubinaemia risk factors."
 paths:
-  /api/bhutani_bilirubin_nomograms:
+  /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomograms:
     get:
       summary: List BhutaniBilirubinNomogram records
       operationId: listBhutaniBilirubinNomogram
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/bhutani_bilirubin_nomograms/{id}:
+  /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomograms/{id}:
     parameters:
       - name: id
         in: path

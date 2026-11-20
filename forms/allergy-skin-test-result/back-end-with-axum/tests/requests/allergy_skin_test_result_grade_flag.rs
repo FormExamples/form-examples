@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_allergy_skin_test_result_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/allergy_skin_test_result_grade_flags")
+            .get("/api/allergy-skin-test-result/allergy_skin_test_result_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

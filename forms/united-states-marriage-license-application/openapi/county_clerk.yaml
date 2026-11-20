@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: The county clerk, recorder, or registrar office that issues the marriage license and records the certificate.
 paths:
-  /api/county_clerks:
+  /api/united-states-marriage-license-application/county_clerks:
     get:
       summary: List CountyClerk records
       operationId: listCountyClerk
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/county_clerks/{id}:
+  /api/united-states-marriage-license-application/county_clerks/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main C-SSRS assessment record: context, patient identification, the five ordinal ideation items, optional ideation-intensity sub-items, categorical behaviour items with recency, and lethality and means inputs."
 paths:
-  /api/columbia_suicide_severity_rating_scales:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scales:
     get:
       summary: List ColumbiaSuicideSeverityRatingScale records
       operationId: listColumbiaSuicideSeverityRatingScale
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/columbia_suicide_severity_rating_scales/{id}:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scales/{id}:
     parameters:
       - name: id
         in: path

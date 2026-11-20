@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed PERC classification result: binary classification, all-criteria-satisfied flag, applicability, and recommended pathway. One-to-one with the parent assessment."
 paths:
-  /api/pulmonary_embolism_rule_out_criteria_grades:
+  /api/pulmonary-embolism-rule-out-criteria/pulmonary_embolism_rule_out_criteria_grades:
     get:
       summary: List PulmonaryEmbolismRuleOutCriteriaGrade records
       operationId: listPulmonaryEmbolismRuleOutCriteriaGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pulmonary_embolism_rule_out_criteria_grades/{id}:
+  /api/pulmonary-embolism-rule-out-criteria/pulmonary_embolism_rule_out_criteria_grades/{id}:
     parameters:
       - name: id
         in: path

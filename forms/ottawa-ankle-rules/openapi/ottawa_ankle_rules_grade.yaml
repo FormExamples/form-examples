@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Ottawa Ankle Rules decision result: the derived unable-to-bear-weight finding and the two independent imaging decisions. One-to-one with the parent assessment."
 paths:
-  /api/ottawa_ankle_rules_grades:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grades:
     get:
       summary: List OttawaAnkleRulesGrade records
       operationId: listOttawaAnkleRulesGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ottawa_ankle_rules_grades/{id}:
+  /api/ottawa-ankle-rules/ottawa_ankle_rules_grades/{id}:
     parameters:
       - name: id
         in: path

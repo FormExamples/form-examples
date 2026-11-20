@@ -56,7 +56,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/reports`.
+ * Response from `GET /api/cardiac-stress-test-result/dashboard/reports`.
  *
  * @typedef {Object} DashboardReportsResponse
  * @property {ReportRow[]} items

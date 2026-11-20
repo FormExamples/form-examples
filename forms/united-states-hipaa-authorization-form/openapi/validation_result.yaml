@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Result of the HIPAA-authorization validity engine. One-to-one child of hipaa_authorization.
 paths:
-  /api/validation_results:
+  /api/united-states-hipaa-authorization-form/validation_results:
     get:
       summary: List ValidationResult records
       operationId: listValidationResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/validation_results/{id}:
+  /api/united-states-hipaa-authorization-form/validation_results/{id}:
     parameters:
       - name: id
         in: path

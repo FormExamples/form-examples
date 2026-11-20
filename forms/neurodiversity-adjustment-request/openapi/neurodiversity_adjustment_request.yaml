@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Neurodiversity workplace reasonable-adjustments request. Captures the worker's neurodivergent profile (conditions, diagnosis status, disability self-assessment, disclosure consent), the functional difficulties experienced across the ACAS functional areas, the specific adjustments requested across the ACAS adjustment categories, supporting evidence, and impact / urgency. This is the source-of-truth record that the four-axis grade is computed from. Aligned with ACAS reasonable-adjustments guidance and the Equality Act 2010 duty to make reasonable adjustments.
 paths:
-  /api/neurodiversity_adjustment_requests:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_requests:
     get:
       summary: List NeurodiversityAdjustmentRequest records
       operationId: listNeurodiversityAdjustmentRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_requests/{id}:
+  /api/neurodiversity-adjustment-request/neurodiversity_adjustment_requests/{id}:
     parameters:
       - name: id
         in: path

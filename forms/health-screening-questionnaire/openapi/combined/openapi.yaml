@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/assessors:
+  /api/health-screening-questionnaire/assessors:
     get:
       summary: List Assessor records
       operationId: listAssessor
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessors/{id}:
+  /api/health-screening-questionnaire/assessors/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaire_grade_flags:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grade_flags:
     get:
       summary: List HealthScreeningQuestionnaireGradeFlag records
       operationId: listHealthScreeningQuestionnaireGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaire_grade_flags/{id}:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaire_grades:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grades:
     get:
       summary: List HealthScreeningQuestionnaireGrade records
       operationId: listHealthScreeningQuestionnaireGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaire_grades/{id}:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaires:
+  /api/health-screening-questionnaire/health_screening_questionnaires:
     get:
       summary: List HealthScreeningQuestionnaire records
       operationId: listHealthScreeningQuestionnaire
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/health_screening_questionnaires/{id}:
+  /api/health-screening-questionnaire/health_screening_questionnaires/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/health-screening-questionnaire/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/health-screening-questionnaire/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/health-screening-questionnaire/patients/{id}:
     parameters:
     - name: id
       in: path

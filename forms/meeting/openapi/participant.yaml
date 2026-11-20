@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One invited attendee for a meeting. Captures role on the invitation (required/optional/observer), the RSVP response, and the actual attendance status.
 paths:
-  /api/participants:
+  /api/meeting/participants:
     get:
       summary: List Participant records
       operationId: listParticipant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/participants/{id}:
+  /api/meeting/participants/{id}:
     parameters:
       - name: id
         in: path

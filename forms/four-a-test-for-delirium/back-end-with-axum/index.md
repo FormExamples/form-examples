@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`four_a_test_for_delirium/`](four_a_test_for_delirium/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/four-a-test-for-delirium/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

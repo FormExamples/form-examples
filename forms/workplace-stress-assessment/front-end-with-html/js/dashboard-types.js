@@ -66,7 +66,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/teams`.
+ * Response from `GET /api/workplace-stress-assessment/dashboard/teams`.
  *
  * @typedef {Object} DashboardTeamsResponse
  * @property {TeamRow[]} items

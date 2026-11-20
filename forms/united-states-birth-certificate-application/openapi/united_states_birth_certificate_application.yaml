@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A request for a certified copy of a US birth certificate from a state or territory vital records office, with eligibility, identification, fee, apostille, and declaration data.
 paths:
-  /api/united_states_birth_certificate_applications:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_applications:
     get:
       summary: List UnitedStatesBirthCertificateApplication records
       operationId: listUnitedStatesBirthCertificateApplication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_birth_certificate_applications/{id}:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_applications/{id}:
     parameters:
       - name: id
         in: path

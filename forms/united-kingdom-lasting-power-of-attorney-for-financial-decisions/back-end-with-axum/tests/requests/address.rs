@@ -8,7 +8,7 @@ use united_kingdom_lasting_power_of_attorney_for_financial_decisions::app::App;
 #[serial]
 async fn can_get_addresses() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/addresses").await;
+        let res = request.get("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

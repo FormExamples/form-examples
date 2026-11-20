@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_body_mass_index_and_body_surface_area_calculators() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/body_mass_index_and_body_surface_area_calculators")
+            .get("/api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculators")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

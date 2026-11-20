@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/columbia-suicide-severity-rating-scale/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/columbia-suicide-severity-rating-scale/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grade_flags:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_flags:
     get:
       summary: List ColumbiaSuicideSeverityRatingScaleGradeFlag records
       operationId: listColumbiaSuicideSeverityRatingScaleGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grade_flags/{id}:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grade_rules:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_rules:
     get:
       summary: List ColumbiaSuicideSeverityRatingScaleGradeRule records
       operationId: listColumbiaSuicideSeverityRatingScaleGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grade_rules/{id}:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grades:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grades:
     get:
       summary: List ColumbiaSuicideSeverityRatingScaleGrade records
       operationId: listColumbiaSuicideSeverityRatingScaleGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scale_grades/{id}:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scales:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scales:
     get:
       summary: List ColumbiaSuicideSeverityRatingScale records
       operationId: listColumbiaSuicideSeverityRatingScale
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/columbia_suicide_severity_rating_scales/{id}:
+  /api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scales/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/columbia-suicide-severity-rating-scale/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/columbia-suicide-severity-rating-scale/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/columbia-suicide-severity-rating-scale/patients/{id}:
     parameters:
     - name: id
       in: path

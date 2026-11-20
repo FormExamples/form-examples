@@ -8,7 +8,7 @@ use ultrasound_test_result::app::App;
 #[serial]
 async fn can_get_ultrasound_test_result_grades() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/ultrasound_test_result_grades").await;
+        let res = request.get("/api/ultrasound-test-result/ultrasound_test_result_grades").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

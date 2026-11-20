@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Blood pressure readings and antihypertensive treatment status.
 paths:
-  /api/blood_pressures:
+  /api/heart-health-check/blood_pressures:
     get:
       summary: List BloodPressure records
       operationId: listBloodPressure
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/blood_pressures/{id}:
+  /api/heart-health-check/blood_pressures/{id}:
     parameters:
       - name: id
         in: path

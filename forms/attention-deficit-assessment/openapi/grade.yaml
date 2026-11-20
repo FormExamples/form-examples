@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed ASRS v1.1 screening result. Part A: 4+ darkly shaded responses = highly consistent with ADHD diagnosis. One-to-one child of assessment."
 paths:
-  /api/grades:
+  /api/attention-deficit-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/attention-deficit-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

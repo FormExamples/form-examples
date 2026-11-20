@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Mental health assessment form using PHQ-9 and GAD-7 instruments. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/mental-health-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/mental-health-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

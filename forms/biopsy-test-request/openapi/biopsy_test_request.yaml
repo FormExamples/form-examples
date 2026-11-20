@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Tissue biopsy procedure / pathology request (referral). Captures the requested procedure (site, method, laterality), the clinical indication and question, lesion description, bleeding / coagulation status, and triage urgency.
 paths:
-  /api/biopsy_test_requests:
+  /api/biopsy-test-request/biopsy_test_requests:
     get:
       summary: List BiopsyTestRequest records
       operationId: listBiopsyTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/biopsy_test_requests/{id}:
+  /api/biopsy-test-request/biopsy_test_requests/{id}:
     parameters:
       - name: id
         in: path

@@ -63,7 +63,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/candidates`.
+ * Response from `GET /api/lifeguard-certification-checklist/dashboard/candidates`.
  *
  * @typedef {Object} DashboardCandidatesResponse
  * @property {CandidateRow[]} items

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main MEWS observation record: raw physiological observations for a single vital-sign set plus recording context (care setting, ward/location, observation timestamp) and the optional previous aggregate for the deteriorating-trend flag. Sub-scores, aggregate, risk band, rules, and flags live in child tables."
 paths:
-  /api/modified_early_warning_scores:
+  /api/modified-early-warning-score/modified_early_warning_scores:
     get:
       summary: List ModifiedEarlyWarningScore records
       operationId: listModifiedEarlyWarningScore
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/modified_early_warning_scores/{id}:
+  /api/modified-early-warning-score/modified_early_warning_scores/{id}:
     parameters:
       - name: id
         in: path

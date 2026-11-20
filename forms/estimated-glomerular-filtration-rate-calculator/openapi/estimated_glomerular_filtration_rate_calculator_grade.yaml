@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed eGFR result: the derived serum creatinine in mg/dL, the eGFR in mL/min/1.73 m^2, and its CKD G-stage classification (1:1 with the parent calculation record)."
 paths:
-  /api/estimated_glomerular_filtration_rate_calculator_grades:
+  /api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculator_grades:
     get:
       summary: List EstimatedGlomerularFiltrationRateCalculatorGrade records
       operationId: listEstimatedGlomerularFiltrationRateCalculatorGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/estimated_glomerular_filtration_rate_calculator_grades/{id}:
+  /api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculator_grades/{id}:
     parameters:
       - name: id
         in: path

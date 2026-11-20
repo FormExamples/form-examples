@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/allergies:
+  /api/dietic-assessment/allergies:
     get:
       summary: List Allergy records
       operationId: listAllergy
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/allergies/{id}:
+  /api/dietic-assessment/allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grade_flags:
+  /api/dietic-assessment/dietic_assessment_grade_flags:
     get:
       summary: List DieticAssessmentGradeFlag records
       operationId: listDieticAssessmentGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grade_flags/{id}:
+  /api/dietic-assessment/dietic_assessment_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grade_rules:
+  /api/dietic-assessment/dietic_assessment_grade_rules:
     get:
       summary: List DieticAssessmentGradeRule records
       operationId: listDieticAssessmentGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grade_rules/{id}:
+  /api/dietic-assessment/dietic_assessment_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grades:
+  /api/dietic-assessment/dietic_assessment_grades:
     get:
       summary: List DieticAssessmentGrade records
       operationId: listDieticAssessmentGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessment_grades/{id}:
+  /api/dietic-assessment/dietic_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessments:
+  /api/dietic-assessment/dietic_assessments:
     get:
       summary: List DieticAssessment records
       operationId: listDieticAssessment
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietic_assessments/{id}:
+  /api/dietic-assessment/dietic_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietitians:
+  /api/dietic-assessment/dietitians:
     get:
       summary: List Dietitian records
       operationId: listDietitian
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dietitians/{id}:
+  /api/dietic-assessment/dietitians/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications:
+  /api/dietic-assessment/medications:
     get:
       summary: List Medication records
       operationId: listMedication
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications/{id}:
+  /api/dietic-assessment/medications/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/dietic-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1741,7 +1741,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patient_allergies:
+  /api/dietic-assessment/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_allergies/{id}:
+  /api/dietic-assessment/patient_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -1987,7 +1987,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications:
+  /api/dietic-assessment/patient_medications:
     get:
       summary: List PatientMedication records
       operationId: listPatientMedication
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications/{id}:
+  /api/dietic-assessment/patient_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -2233,7 +2233,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/dietic-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/dietic-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

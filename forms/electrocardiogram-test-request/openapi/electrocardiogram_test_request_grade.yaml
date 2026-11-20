@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (AHA/ACC 1-9), urgency triage tier, request completeness, and clinical priority."
 paths:
-  /api/electrocardiogram_test_request_grades:
+  /api/electrocardiogram-test-request/electrocardiogram_test_request_grades:
     get:
       summary: List ElectrocardiogramTestRequestGrade records
       operationId: listElectrocardiogramTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/electrocardiogram_test_request_grades/{id}:
+  /api/electrocardiogram-test-request/electrocardiogram_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

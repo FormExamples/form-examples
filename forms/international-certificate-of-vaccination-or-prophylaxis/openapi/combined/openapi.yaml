@@ -8,7 +8,7 @@ info:
     (ICVP) form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL
     table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/centers:
+  /api/international-certificate-of-vaccination-or-prophylaxis/centers:
     get:
       summary: List Center records
       operationId: listCenter
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/centers/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/centers/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/international-certificate-of-vaccination-or-prophylaxis/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/international_certificate_of_vaccination_or_prophylaxes:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxes:
     get:
       summary: List InternationalCertificateOfVaccinationOrProphylaxis records
       operationId: listInternationalCertificateOfVaccinationOrProphylaxis
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/international_certificate_of_vaccination_or_prophylaxes/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxes/{id}:
     parameters:
     - name: id
       in: path
@@ -746,8 +746,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/international_certificate_of_vaccination_or_prophylaxis_entries:
-    get:
+  ? /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis_entries
+  : get:
       summary: List InternationalCertificateOfVaccinationOrProphylaxisEntry records
       operationId: listInternationalCertificateOfVaccinationOrProphylaxisEntry
       parameters:
@@ -845,8 +845,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/international_certificate_of_vaccination_or_prophylaxis_entries/{id}:
-    parameters:
+  ? /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis_entries/{id}
+  : parameters:
     - name: id
       in: path
       required: true
@@ -993,7 +993,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/international-certificate-of-vaccination-or-prophylaxis/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1004,7 +1004,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/international-certificate-of-vaccination-or-prophylaxis/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1102,7 +1102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/patients/{id}:
     parameters:
     - name: id
       in: path

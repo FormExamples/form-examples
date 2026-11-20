@@ -7,7 +7,7 @@
 // standalone.
 
 const API_BASE = 'http://localhost:5150';
-const EMPLOYEES_PATH = '/api/dashboard/employees';
+const EMPLOYEES_PATH = '/api/employee-onboarding-checklist/dashboard/employees';
 
 /**
  * Fetch the employee list from the backend.

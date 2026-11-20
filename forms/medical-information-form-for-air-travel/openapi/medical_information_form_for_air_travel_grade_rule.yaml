@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every fitness-to-fly rule that fired for this MEDIF, including the contributing instrument and resulting band.
 paths:
-  /api/medical_information_form_for_air_travel_grade_rules:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules:
     get:
       summary: List MedicalInformationFormForAirTravelGradeRule records
       operationId: listMedicalInformationFormForAirTravelGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_information_form_for_air_travel_grade_rules/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_rules/{id}:
     parameters:
       - name: id
         in: path

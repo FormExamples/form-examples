@@ -23,22 +23,22 @@ All payloads use camelCase JSON. Errors return
 | Method | Path | Purpose | Same-origin in… |
 | --- | --- | --- | --- |
 | GET  | `/` | Help banner listing the endpoints | — |
-| GET  | `/api/dashboard/scorecards` | List submitted scorecards | dashboard |
-| GET  | `/api/scorecards/{id}` | Look up one scorecard | dashboard |
-| GET  | `/api/stats` | Aggregate counts and averages | dashboard |
-| POST | `/api/scorecards` | Submit a new scorecard | — |
-| POST | `/api/grade` | Score an assessment | — |
-| POST | `/api/recommendations` | Recommended next actions for false items | — |
-| POST | `/api/pre-tender` | Redacted vendor-facing summary | — |
-| POST | `/api/diff` | Compare two assessments | — |
-| POST | `/api/bulk-import` | Bulk-load assessments from JSON Lines | — |
+| GET  | `/api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards` | List submitted scorecards | dashboard |
+| GET  | `/api/agile-consulting-scorecard-for-hiring-help/scorecards/{id}` | Look up one scorecard | dashboard |
+| GET  | `/api/agile-consulting-scorecard-for-hiring-help/stats` | Aggregate counts and averages | dashboard |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/scorecards` | Submit a new scorecard | — |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/grade` | Score an assessment | — |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/recommendations` | Recommended next actions for false items | — |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/pre-tender` | Redacted vendor-facing summary | — |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/diff` | Compare two assessments | — |
+| POST | `/api/agile-consulting-scorecard-for-hiring-help/bulk-import` | Bulk-load assessments from JSON Lines | — |
 
-## GET /api/dashboard/scorecards
+## GET /api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards
 
 Returns the seed scorecards plus anything submitted since the server started.
 
 ```sh
-curl http://127.0.0.1:5150/api/dashboard/scorecards
+curl http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards
 ```
 
 Response (truncated):
@@ -64,21 +64,21 @@ Response (truncated):
 }
 ```
 
-## GET /api/scorecards/{id}
+## GET /api/agile-consulting-scorecard-for-hiring-help/scorecards/{id}
 
 Look up one scorecard. Returns the same `ScorecardRow` shape as the
 list endpoint, or `404 { "error": "..." }` when no row matches.
 
 ```sh
-curl http://127.0.0.1:5150/api/scorecards/s-003
+curl http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/scorecards/s-003
 ```
 
-## GET /api/stats
+## GET /api/agile-consulting-scorecard-for-hiring-help/stats
 
 Aggregate counts across seed + submitted scorecards.
 
 ```sh
-curl http://127.0.0.1:5150/api/stats
+curl http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/stats
 ```
 
 Response (12 seed rows):
@@ -95,14 +95,14 @@ Response (12 seed rows):
 }
 ```
 
-## POST /api/scorecards
+## POST /api/agile-consulting-scorecard-for-hiring-help/scorecards
 
 Submit a new scorecard. The server runs the scoring engine, stores
 the result in the in-memory `ScorecardStore` with a generated
 `s-1000+` id, and returns the row.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/scorecards \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/scorecards \
      -H 'Content-Type: application/json' \
      --data @samples/sample-assessment.json
 ```
@@ -122,13 +122,13 @@ Response:
 Errors: 400 on invalid JSON, 422 on schema failure (e.g. unknown enum
 value, missing field, wrong-type `done`).
 
-## POST /api/grade
+## POST /api/agile-consulting-scorecard-for-hiring-help/grade
 
 Stateless: take an assessment, return the `GradeResult` without
 storing it.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/grade \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/grade \
      -H 'Content-Type: application/json' \
      --data @samples/sample-assessment.json
 ```
@@ -150,12 +150,12 @@ Response (truncated):
 }
 ```
 
-## POST /api/recommendations
+## POST /api/agile-consulting-scorecard-for-hiring-help/recommendations
 
 For each item marked `false`, return the seed-defined intervention.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/recommendations \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/recommendations \
      -H 'Content-Type: application/json' \
      --data @samples/sample-assessment.json
 ```
@@ -172,13 +172,13 @@ Response:
 }
 ```
 
-## POST /api/pre-tender
+## POST /api/agile-consulting-scorecard-for-hiring-help/pre-tender
 
 Build the redacted vendor-facing summary suitable to share with
 prospective consultants.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/pre-tender \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/pre-tender \
      -H 'Content-Type: application/json' \
      --data @samples/sample-assessment.json
 ```
@@ -202,12 +202,12 @@ Note the deliberate redactions: no respondent name / email, no
 per-item answers or evidence, no organization legal name / website /
 headcount, no flag prose or suggested actions.
 
-## POST /api/diff
+## POST /api/agile-consulting-scorecard-for-hiring-help/diff
 
 Compare two complete assessments.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/diff \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/diff \
      -H 'Content-Type: application/json' \
      --data '{"before": <assessment>, "after": <assessment>}'
 ```
@@ -216,14 +216,14 @@ Response includes `scoreDelta`, `manifestoDelta`, `principlesDelta`,
 `bandBefore`, `bandAfter`, `bandChanged`, plus full `items`,
 `improved`, `regressed`, `newFlags`, and `clearedFlags` lists.
 
-## POST /api/bulk-import
+## POST /api/agile-consulting-scorecard-for-hiring-help/bulk-import
 
 Submit a JSON-Lines document (one assessment per line). Every
 accepted row is persisted into the in-memory store. Blank and
 `#`-prefixed lines are skipped silently.
 
 ```sh
-curl -X POST http://127.0.0.1:5150/api/bulk-import \
+curl -X POST http://127.0.0.1:5150/api/agile-consulting-scorecard-for-hiring-help/bulk-import \
      -H 'Content-Type: application/x-ndjson' \
      --data-binary @scorecards.jsonl
 ```

@@ -6,7 +6,7 @@
 //! controller per domain concept — the note, its four child collections, and
 //! the grade with its rule and flag children. There is no JSONB blob column.
 //!
-//! Grading is server-side: `POST /api/inpatient_clinical_notes/{id}/grade`
+//! Grading is server-side: `POST /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade`
 //! runs both engines over a stored note and persists the result. See
 //! [`grading`].
 //!

@@ -7,7 +7,7 @@
 // `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const RECORDS_PATH = '/api/dashboard/records';
+const RECORDS_PATH = '/api/anaesthetic-record/dashboard/records';
 
 /**
  * Fetch the record list from the backend.

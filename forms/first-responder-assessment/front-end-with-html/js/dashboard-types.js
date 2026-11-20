@@ -56,7 +56,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/responders`.
+ * Response from `GET /api/first-responder-assessment/dashboard/responders`.
  *
  * @typedef {Object} DashboardRespondersResponse
  * @property {ResponderRow[]} items

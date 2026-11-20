@@ -27,32 +27,32 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/cardiology_responses?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/cardiology-response/cardiology_responses?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/cardiology_responses").await, 405);
+        problem!(request.get("/api/cardiology-response/no-such-route").await, 404);
+        problem!(request.delete("/api/cardiology-response/cardiology_responses").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
         problem!(
             request
-                .get(&format!("/api/cardiology_responses/{id}"))
+                .get(&format!("/api/cardiology-response/cardiology_responses/{id}"))
                 .await,
             404
         );
 
         // An extractor's refusal says what was wrong, and quotes nothing.
         let (body, text) = problem!(
-            request.get("/api/cardiology_responses/not-a-uuid").await,
+            request.get("/api/cardiology-response/cardiology_responses/not-a-uuid").await,
             400
         );
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
             request
-                .post("/api/cardiology_responses")
+                .post("/api/cardiology-response/cardiology_responses")
                 .json(&"not an object")
                 .await,
             422
@@ -114,7 +114,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             body
         };
         let response = request
-            .post("/api/cardiology_responses")
+            .post("/api/cardiology-response/cardiology_responses")
             .json(&body("not-a-listed-value"))
             .await;
         let (problem, text) = problem!(response, 422);
@@ -127,7 +127,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
 
         // The same body with a listed value is stored, so the shape was never the fault.
         request
-            .post("/api/cardiology_responses")
+            .post("/api/cardiology-response/cardiology_responses")
             .json(&body("preliminary"))
             .await
             .assert_status_ok();

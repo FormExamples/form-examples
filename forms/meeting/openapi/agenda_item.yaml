@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One topic on the meeting agenda. Ordered by position. Captures presenter, planned duration, and free-text notes.
 paths:
-  /api/agenda_items:
+  /api/meeting/agenda_items:
     get:
       summary: List AgendaItem records
       operationId: listAgendaItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/agenda_items/{id}:
+  /api/meeting/agenda_items/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Seller (transferor) contact record for a United States vehicle bill of sale: name, contact details, ZIP code, and whether an individual or a business."
 paths:
-  /api/sellers:
+  /api/united-states-vehicle-bill-of-sale/sellers:
     get:
       summary: List Seller records
       operationId: listSeller
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/sellers/{id}:
+  /api/united-states-vehicle-bill-of-sale/sellers/{id}:
     parameters:
       - name: id
         in: path

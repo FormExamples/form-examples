@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessment_imaging_histories:
+  /api/orthopedic-assessment/assessment_imaging_histories:
     get:
       summary: List AssessmentImagingHistory records
       operationId: listAssessmentImagingHistory
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_imaging_histories/{id}:
+  /api/orthopedic-assessment/assessment_imaging_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_imaging_items:
+  /api/orthopedic-assessment/assessment_imaging_items:
     get:
       summary: List AssessmentImagingItem records
       operationId: listAssessmentImagingItem
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_imaging_items/{id}:
+  /api/orthopedic-assessment/assessment_imaging_items/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_range_of_motions:
+  /api/orthopedic-assessment/assessment_range_of_motions:
     get:
       summary: List AssessmentRangeOfMotion records
       operationId: listAssessmentRangeOfMotion
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_range_of_motions/{id}:
+  /api/orthopedic-assessment/assessment_range_of_motions/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_rom_measurements:
+  /api/orthopedic-assessment/assessment_rom_measurements:
     get:
       summary: List AssessmentRomMeasurement records
       operationId: listAssessmentRomMeasurement
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_rom_measurements/{id}:
+  /api/orthopedic-assessment/assessment_rom_measurements/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_strength_test_items:
+  /api/orthopedic-assessment/assessment_strength_test_items:
     get:
       summary: List AssessmentStrengthTestItem records
       operationId: listAssessmentStrengthTestItem
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_strength_test_items/{id}:
+  /api/orthopedic-assessment/assessment_strength_test_items/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_strength_testings:
+  /api/orthopedic-assessment/assessment_strength_testings:
     get:
       summary: List AssessmentStrengthTesting records
       operationId: listAssessmentStrengthTesting
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_strength_testings/{id}:
+  /api/orthopedic-assessment/assessment_strength_testings/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_surgery_items:
+  /api/orthopedic-assessment/assessment_surgery_items:
     get:
       summary: List AssessmentSurgeryItem records
       operationId: listAssessmentSurgeryItem
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_surgery_items/{id}:
+  /api/orthopedic-assessment/assessment_surgery_items/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_surgical_histories:
+  /api/orthopedic-assessment/assessment_surgical_histories:
     get:
       summary: List AssessmentSurgicalHistory records
       operationId: listAssessmentSurgicalHistory
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_surgical_histories/{id}:
+  /api/orthopedic-assessment/assessment_surgical_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments:
+  /api/orthopedic-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/orthopedic-assessment/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/orthopedic-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/orthopedic-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/orthopedic-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/orthopedic-assessment/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/orthopedic-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/orthopedic-assessment/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/orthopedic-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -3058,7 +3058,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/orthopedic-assessment/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -3206,7 +3206,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/orthopedic-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -3217,7 +3217,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/orthopedic-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -3315,7 +3315,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/orthopedic-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/access_schedulings:
+  /api/encounter-satisfaction/access_schedulings:
     get:
       summary: List AccessScheduling records
       operationId: listAccessScheduling
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/access_schedulings/{id}:
+  /api/encounter-satisfaction/access_schedulings/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/care_qualities:
+  /api/encounter-satisfaction/care_qualities:
     get:
       summary: List CareQuality records
       operationId: listCareQuality
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/care_qualities/{id}:
+  /api/encounter-satisfaction/care_qualities/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/encounter-satisfaction/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/encounter-satisfaction/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/communications:
+  /api/encounter-satisfaction/communications:
     get:
       summary: List Communication records
       operationId: listCommunication
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/communications/{id}:
+  /api/encounter-satisfaction/communications/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/encounter_satisfactions:
+  /api/encounter-satisfaction/encounter_satisfactions:
     get:
       summary: List EncounterSatisfaction records
       operationId: listEncounterSatisfaction
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/encounter_satisfactions/{id}:
+  /api/encounter-satisfaction/encounter_satisfactions/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/environments:
+  /api/encounter-satisfaction/environments:
     get:
       summary: List Environment records
       operationId: listEnvironment
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/environments/{id}:
+  /api/encounter-satisfaction/environments/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/flagged_issues:
+  /api/encounter-satisfaction/flagged_issues:
     get:
       summary: List FlaggedIssue records
       operationId: listFlaggedIssue
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/flagged_issues/{id}:
+  /api/encounter-satisfaction/flagged_issues/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/encounter-satisfaction/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1741,7 +1741,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/overall_satisfactions:
+  /api/encounter-satisfaction/overall_satisfactions:
     get:
       summary: List OverallSatisfaction records
       operationId: listOverallSatisfaction
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/overall_satisfactions/{id}:
+  /api/encounter-satisfaction/overall_satisfactions/{id}:
     parameters:
     - name: id
       in: path
@@ -1987,7 +1987,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/encounter-satisfaction/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/encounter-satisfaction/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -2233,7 +2233,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/satisfaction_results:
+  /api/encounter-satisfaction/satisfaction_results:
     get:
       summary: List SatisfactionResult records
       operationId: listSatisfactionResult
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/satisfaction_results/{id}:
+  /api/encounter-satisfaction/satisfaction_results/{id}:
     parameters:
     - name: id
       in: path
@@ -2479,7 +2479,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/staff_professionalisms:
+  /api/encounter-satisfaction/staff_professionalisms:
     get:
       summary: List StaffProfessionalism records
       operationId: listStaffProfessionalism
@@ -2577,7 +2577,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/staff_professionalisms/{id}:
+  /api/encounter-satisfaction/staff_professionalisms/{id}:
     parameters:
     - name: id
       in: path
@@ -2725,7 +2725,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/visit_informations:
+  /api/encounter-satisfaction/visit_informations:
     get:
       summary: List VisitInformation records
       operationId: listVisitInformation
@@ -2823,7 +2823,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/visit_informations/{id}:
+  /api/encounter-satisfaction/visit_informations/{id}:
     parameters:
     - name: id
       in: path

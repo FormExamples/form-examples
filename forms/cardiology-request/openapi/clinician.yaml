@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Referring clinician (referrer) who completes the cardiology referral request.
 paths:
-  /api/clinicians:
+  /api/cardiology-request/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/cardiology-request/clinicians/{id}:
     parameters:
       - name: id
         in: path

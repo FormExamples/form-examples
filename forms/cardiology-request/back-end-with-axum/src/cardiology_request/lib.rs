@@ -20,14 +20,14 @@
 //! # HTTP API
 //!
 //! ```text
-//! POST   /api/cardiology_requests              create a request (returns JSON)
-//! GET    /api/cardiology_requests              list requests (newest first)
-//! GET    /api/cardiology_requests/{id}         fetch one request
-//! PATCH  /api/cardiology_requests/{id}         replace request fields
-//! DELETE /api/cardiology_requests/{id}         delete a request (cascades grade)
-//! POST   /api/cardiology_requests/{id}/submit  run the engine, persist the grade
-//! GET    /api/cardiology_requests/{id}/result  fetch grade + fired rules + flags
-//! GET    /api/dashboard                        list requests joined with grade
+//! POST   /api/cardiology-request/cardiology_requests              create a request (returns JSON)
+//! GET    /api/cardiology-request/cardiology_requests              list requests (newest first)
+//! GET    /api/cardiology-request/cardiology_requests/{id}         fetch one request
+//! PATCH  /api/cardiology-request/cardiology_requests/{id}         replace request fields
+//! DELETE /api/cardiology-request/cardiology_requests/{id}         delete a request (cascades grade)
+//! POST   /api/cardiology-request/cardiology_requests/{id}/submit  run the engine, persist the grade
+//! GET    /api/cardiology-request/cardiology_requests/{id}/result  fetch grade + fired rules + flags
+//! GET    /api/cardiology-request/dashboard                        list requests joined with grade
 //! ```
 //!
 //! # Example

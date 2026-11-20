@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Cardiology referral / consult request (referral into cardiology). Captures the requested cardiology service and reason, the specific clinical question, presenting symptoms and functional class, acute red flags, investigations already performed (ECG, troponin, BNP), cardiac history and risk factors, and triage details. This is the source-of-truth record that the four-axis vetting grade is computed from.
 paths:
-  /api/cardiology_requests:
+  /api/cardiology-request/cardiology_requests:
     get:
       summary: List CardiologyRequest records
       operationId: listCardiologyRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cardiology_requests/{id}:
+  /api/cardiology-request/cardiology_requests/{id}:
     parameters:
       - name: id
         in: path

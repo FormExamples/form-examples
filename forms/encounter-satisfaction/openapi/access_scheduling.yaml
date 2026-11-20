@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Access & Scheduling domain: 3 Likert-scale satisfaction questions."
 paths:
-  /api/access_schedulings:
+  /api/encounter-satisfaction/access_schedulings:
     get:
       summary: List AccessScheduling records
       operationId: listAccessScheduling
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/access_schedulings/{id}:
+  /api/encounter-satisfaction/access_schedulings/{id}:
     parameters:
       - name: id
         in: path

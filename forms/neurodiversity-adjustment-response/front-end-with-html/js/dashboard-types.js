@@ -43,7 +43,7 @@
  */
 
 /**
- * Response from `GET /api/neurodiversity_adjustment_responses`.
+ * Response from `GET /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses`.
  *
  * The Axum backend returns a bare JSON array of `ResponseRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

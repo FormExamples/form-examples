@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "EQ-5D-5L PROM responses (before and after treatment): five dimensions (1-5) and VAS (0-100). © EuroQol Research Foundation; item wording paraphrased in the UI; production use requires a licence."
 paths:
-  /api/outpatient_outcome_prom_eq5d5ls:
+  /api/outpatient-outcome/outpatient_outcome_prom_eq5d5ls:
     get:
       summary: List OutpatientOutcomePromEq5d5l records
       operationId: listOutpatientOutcomePromEq5d5l
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_prom_eq5d5ls/{id}:
+  /api/outpatient-outcome/outpatient_outcome_prom_eq5d5ls/{id}:
     parameters:
       - name: id
         in: path

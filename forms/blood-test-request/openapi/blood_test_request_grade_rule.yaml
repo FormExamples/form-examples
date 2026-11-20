@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every appropriateness / preanalytical / completeness / triage rule that fired for this request.
 paths:
-  /api/blood_test_request_grade_rules:
+  /api/blood-test-request/blood_test_request_grade_rules:
     get:
       summary: List BloodTestRequestGradeRule records
       operationId: listBloodTestRequestGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/blood_test_request_grade_rules/{id}:
+  /api/blood-test-request/blood_test_request_grade_rules/{id}:
     parameters:
       - name: id
         in: path

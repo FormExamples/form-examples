@@ -65,7 +65,7 @@
  */
 
 /**
- * Response from `GET /api/operation-notes`.
+ * Response from `GET /api/medical-operation-note/operation-notes`.
  *
  * The Axum backend returns a bare JSON array of `OperationNoteRow` objects;
  * the dashboard accepts either a bare array or an `{ items, total }` envelope

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One person applying for a marriage license; the application references two of these rows.
 paths:
-  /api/applicants:
+  /api/united-states-marriage-license-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/applicants/{id}:
+  /api/united-states-marriage-license-application/applicants/{id}:
     parameters:
       - name: id
         in: path

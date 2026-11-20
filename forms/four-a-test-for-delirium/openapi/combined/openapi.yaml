@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/four-a-test-for-delirium/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/four-a-test-for-delirium/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grade_flags:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_flags:
     get:
       summary: List FourATestForDeliriumGradeFlag records
       operationId: listFourATestForDeliriumGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grade_flags/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grade_rules:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_rules:
     get:
       summary: List FourATestForDeliriumGradeRule records
       operationId: listFourATestForDeliriumGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grade_rules/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grades:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grades:
     get:
       summary: List FourATestForDeliriumGrade records
       operationId: listFourATestForDeliriumGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_delirium_grades/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_deliriums:
+  /api/four-a-test-for-delirium/four_a_test_for_deliriums:
     get:
       summary: List FourATestForDelirium records
       operationId: listFourATestForDelirium
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/four_a_test_for_deliriums/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_deliriums/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/four-a-test-for-delirium/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/four-a-test-for-delirium/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/four-a-test-for-delirium/patients/{id}:
     parameters:
     - name: id
       in: path

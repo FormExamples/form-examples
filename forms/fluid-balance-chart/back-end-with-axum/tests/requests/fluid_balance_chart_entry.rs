@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_fluid_balance_chart_entries() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/fluid_balance_chart_entries").await;
+        let res = request.get("/api/fluid-balance-chart/fluid_balance_chart_entries").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

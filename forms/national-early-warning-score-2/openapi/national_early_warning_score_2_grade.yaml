@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed NEWS2 grading result: per-parameter subscores, aggregate total (0-20+), red-score indicator, derived clinical-risk band, and RCP-recommended monitoring frequency and escalation response. One row per observation record (1:1)."
 paths:
-  /api/national_early_warning_score_2_grades:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grades:
     get:
       summary: List NationalEarlyWarningScore2Grade records
       operationId: listNationalEarlyWarningScore2Grade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/national_early_warning_score_2_grades/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2_grades/{id}:
     parameters:
       - name: id
         in: path

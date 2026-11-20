@@ -20,7 +20,7 @@ outranks `needs-supporting-documents`. Only the DVLA decides every application.
 
 - `index.html` — wizard shell; the eight steps are rendered by `js/form-app.js`.
 - `dashboard.html` + `js/dashboard-app.js` — sortable, filterable table over
-  `js/data.js` sample rows (or `GET /api/dashboard/applications` when the back-end
+  `js/data.js` sample rows (or `GET /api/united-kingdom-vehicle-registration-application/dashboard/applications` when the back-end
   is up).
 - `js/types.js` — `emptyApplication()`, enum labels.
 - `js/rules.js` — fee rules, format checks, `evaluate()`.

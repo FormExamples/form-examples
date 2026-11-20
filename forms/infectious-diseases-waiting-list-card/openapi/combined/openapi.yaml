@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/infect_dis_waiting_list_card_appointments:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_appointments:
     get:
       summary: List InfectDisWaitingListCardAppointment records
       operationId: listInfectDisWaitingListCardAppointment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_appointments/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grade_flags:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_flags:
     get:
       summary: List InfectDisWaitingListCardGradeFlag records
       operationId: listInfectDisWaitingListCardGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grade_flags/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grade_rules:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_rules:
     get:
       summary: List InfectDisWaitingListCardGradeRule records
       operationId: listInfectDisWaitingListCardGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grade_rules/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grades:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grades:
     get:
       summary: List InfectDisWaitingListCardGrade records
       operationId: listInfectDisWaitingListCardGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_card_grades/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_cards:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_cards:
     get:
       summary: List InfectDisWaitingListCard records
       operationId: listInfectDisWaitingListCard
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/infect_dis_waiting_list_cards/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/infectious-diseases-waiting-list-card/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/infectious-diseases-waiting-list-card/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/infectious-diseases-waiting-list-card/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners:
+  /api/infectious-diseases-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners/{id}:
+  /api/infectious-diseases-waiting-list-card/practitioners/{id}:
     parameters:
     - name: id
       in: path

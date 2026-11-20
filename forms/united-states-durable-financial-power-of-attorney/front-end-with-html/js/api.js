@@ -8,7 +8,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const INSTRUMENTS_PATH = '/api/dashboard/instruments';
+const INSTRUMENTS_PATH = '/api/united-states-durable-financial-power-of-attorney/dashboard/instruments';
 
 /**
  * Fetch the instrument list from the backend.

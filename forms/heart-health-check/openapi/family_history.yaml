@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Family history of cardiovascular disease and diabetes.
 paths:
-  /api/family_histories:
+  /api/heart-health-check/family_histories:
     get:
       summary: List FamilyHistory records
       operationId: listFamilyHistory
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/family_histories/{id}:
+  /api/heart-health-check/family_histories/{id}:
     parameters:
       - name: id
         in: path

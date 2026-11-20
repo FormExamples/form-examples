@@ -8,7 +8,7 @@ use urinalysis_test_request::app::App;
 #[serial]
 async fn can_get_urinalysis_test_request_grades() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/urinalysis_test_request_grades").await;
+        let res = request.get("/api/urinalysis-test-request/urinalysis_test_request_grades").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

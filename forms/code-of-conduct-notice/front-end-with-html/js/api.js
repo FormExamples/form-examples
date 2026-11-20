@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const STAFF_PATH = '/api/dashboard/staff';
+const STAFF_PATH = '/api/code-of-conduct-notice/dashboard/staff';
 
 /**
  * Fetch the staff list from the backend.

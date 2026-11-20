@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Operational efficiency data: referral-to-appointment wait time vs service target, NHS Attendance Outcome code."
 paths:
-  /api/outpatient_outcome_operationals:
+  /api/outpatient-outcome/outpatient_outcome_operationals:
     get:
       summary: List OutpatientOutcomeOperational records
       operationId: listOutpatientOutcomeOperational
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_operationals/{id}:
+  /api/outpatient-outcome/outpatient_outcome_operationals/{id}:
     parameters:
       - name: id
         in: path

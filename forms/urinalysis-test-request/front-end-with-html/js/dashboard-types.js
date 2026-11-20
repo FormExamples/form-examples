@@ -39,7 +39,7 @@
  */
 
 /**
- * Response from `GET /api/requests`.
+ * Response from `GET /api/urinalysis-test-request/requests`.
  *
  * The Axum backend returns a bare JSON array of `RequestRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Centor / McIsaac computation: criterion, points contributed, category, and description."
 paths:
-  /api/centor_score_for_streptococcal_pharyngitis_grade_rules:
+  /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grade_rules:
     get:
       summary: List CentorScoreForStreptococcalPharyngitisGradeRule records
       operationId: listCentorScoreForStreptococcalPharyngitisGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/centor_score_for_streptococcal_pharyngitis_grade_rules/{id}:
+  /api/centor-score-for-streptococcal-pharyngitis/centor_score_for_streptococcal_pharyngitis_grade_rules/{id}:
     parameters:
       - name: id
         in: path

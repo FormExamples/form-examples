@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/applications`.
+ * Response from `GET /api/united-kingdom-vehicle-registration-application/dashboard/applications`.
  * @typedef {Object} DashboardApplicationsResponse
  * @property {ApplicationRow[]} items
  * @property {number} total

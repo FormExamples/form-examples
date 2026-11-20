@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Join table linking an LPA to its 1-4 named attorneys, with their order on the form.
 paths:
-  /api/lpa_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_attorneys:
     get:
       summary: List LpaAttorney records
       operationId: listLpaAttorney
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_attorneys/{id}:
     parameters:
       - name: id
         in: path

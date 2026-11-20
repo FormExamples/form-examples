@@ -1,4 +1,4 @@
-//! Dashboard listing endpoint under `/api/dashboard`.
+//! Dashboard listing endpoint under `/api/cardiology-request/dashboard`.
 //!
 //! Joins each request with its computed grade (left join: ungraded drafts are
 //! still listed, with a null grade) for the cardiology vetting worklist.
@@ -16,7 +16,7 @@ struct DashboardParams {
     status: Option<String>,
 }
 
-/// GET /api/dashboard -- list requests joined with their grade as JSON.
+/// GET /api/cardiology-request/dashboard -- list requests joined with their grade as JSON.
 #[debug_handler]
 async fn dashboard(
     State(ctx): State<AppContext>,
@@ -57,5 +57,5 @@ async fn dashboard(
 
 /// Routes.
 pub fn routes() -> Routes {
-    Routes::new().prefix("api").add("dashboard", get(dashboard))
+    Routes::new().prefix("api/cardiology-request/").add("dashboard", get(dashboard))
 }

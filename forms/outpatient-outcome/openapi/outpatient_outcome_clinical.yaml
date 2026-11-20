@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Clinician-rated clinical outcome for this encounter: presenting complaint, diagnosis, treatment, and five-level outcome classification."
 paths:
-  /api/outpatient_outcome_clinicals:
+  /api/outpatient-outcome/outpatient_outcome_clinicals:
     get:
       summary: List OutpatientOutcomeClinical records
       operationId: listOutpatientOutcomeClinical
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_clinicals/{id}:
+  /api/outpatient-outcome/outpatient_outcome_clinicals/{id}:
     parameters:
       - name: id
         in: path

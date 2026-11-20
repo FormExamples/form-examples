@@ -7,7 +7,7 @@
 // data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PRESCRIPTIONS_PATH = '/api/dashboard/prescriptions';
+const PRESCRIPTIONS_PATH = '/api/prescription-request/dashboard/prescriptions';
 
 /**
  * Fetch the prescription-request list from the backend.

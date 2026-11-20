@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_assessment_polypharmacy_reviews() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/assessment_polypharmacy_reviews").await;
+        let res = request.get("/api/gerontology-assessment/assessment_polypharmacy_reviews").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

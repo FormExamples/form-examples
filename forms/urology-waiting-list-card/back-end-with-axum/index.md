@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Urology Waiting List Card form. Pure back-end:
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/urology-waiting-list-card/assessments` (list, create, read, update,
+submit, result) plus `/api/urology-waiting-list-card/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

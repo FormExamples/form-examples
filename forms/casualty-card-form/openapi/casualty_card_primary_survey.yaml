@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. ABCDE primary survey assessment with GCS scoring.
 paths:
-  /api/casualty_card_primary_surveys:
+  /api/casualty-card-form/casualty_card_primary_surveys:
     get:
       summary: List CasualtyCardPrimarySurvey records
       operationId: listCasualtyCardPrimarySurvey
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_primary_surveys/{id}:
+  /api/casualty-card-form/casualty_card_primary_surveys/{id}:
     parameters:
       - name: id
         in: path

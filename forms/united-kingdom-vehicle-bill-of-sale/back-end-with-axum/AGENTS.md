@@ -19,7 +19,7 @@ Alpine.js, no CSS, no Lily Design System.**
 
 ## JSON API
 
-A RESTful JSON resource is served per domain table under `/api/…`, each
+A RESTful JSON resource is served per domain table under `/api/united-kingdom-vehicle-bill-of-sale/…`, each
 supporting list (`GET`), create (`POST`), and `GET` / `PUT` / `PATCH` /
 `DELETE` by id. All bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`. Prometheus metrics are exposed at

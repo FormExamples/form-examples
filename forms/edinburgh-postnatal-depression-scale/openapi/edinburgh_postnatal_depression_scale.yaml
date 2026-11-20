@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main EPDS assessment record: assessment context, respondent identification, and the ten already-reverse-corrected item responses (0-3 each, higher = more symptomatic)."
 paths:
-  /api/edinburgh_postnatal_depression_scales:
+  /api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scales:
     get:
       summary: List EdinburghPostnatalDepressionScale records
       operationId: listEdinburghPostnatalDepressionScale
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/edinburgh_postnatal_depression_scales/{id}:
+  /api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scales/{id}:
     parameters:
       - name: id
         in: path

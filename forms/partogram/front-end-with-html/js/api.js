@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PARTOGRAMS_PATH = '/api/dashboard/partograms';
+const PARTOGRAMS_PATH = '/api/partogram/dashboard/partograms';
 
 /**
  * Fetch the partogram list from the backend.

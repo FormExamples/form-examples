@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-states-property-tax-exemption-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-states-property-tax-exemption-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessors:
+  /api/united-states-property-tax-exemption-application/assessors:
     get:
       summary: List Assessor records
       operationId: listAssessor
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessors/{id}:
+  /api/united-states-property-tax-exemption-application/assessors/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-property-tax-exemption-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/property_tax_exemption_application_grade_flags:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_flags:
     get:
       summary: List PropertyTaxExemptionApplicationGradeFlag records
       operationId: listPropertyTaxExemptionApplicationGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_application_grade_flags/{id}:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_application_grade_rules:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_rules:
     get:
       summary: List PropertyTaxExemptionApplicationGradeRule records
       operationId: listPropertyTaxExemptionApplicationGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_application_grade_rules/{id}:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_application_grades:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grades:
     get:
       summary: List PropertyTaxExemptionApplicationGrade records
       operationId: listPropertyTaxExemptionApplicationGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_application_grades/{id}:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_applications:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_applications:
     get:
       summary: List PropertyTaxExemptionApplication records
       operationId: listPropertyTaxExemptionApplication
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/property_tax_exemption_applications/{id}:
+  /api/united-states-property-tax-exemption-application/property_tax_exemption_applications/{id}:
     parameters:
     - name: id
       in: path

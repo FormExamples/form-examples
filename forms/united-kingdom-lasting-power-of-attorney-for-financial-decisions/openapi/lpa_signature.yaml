@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA signature — one row per signing event on the LP1F deed or registration application; the audit trail for sections 9, 10, 11 and 15.
 paths:
-  /api/lpa_signatures:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_signatures:
     get:
       summary: List LpaSignature records
       operationId: listLpaSignature
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_signatures/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_signatures/{id}:
     parameters:
       - name: id
         in: path

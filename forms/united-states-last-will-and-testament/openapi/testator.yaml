@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Testator: the person making the will, with contact details, state of domicile, and citizenship status."
 paths:
-  /api/testators:
+  /api/united-states-last-will-and-testament/testators:
     get:
       summary: List Testator records
       operationId: listTestator
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/testators/{id}:
+  /api/united-states-last-will-and-testament/testators/{id}:
     parameters:
       - name: id
         in: path

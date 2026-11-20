@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main hypertension annual-review record (NICE NG136): patient and clinician identification, review context, diagnosis and comorbidity target drivers, clinic and home/ambulatory blood pressure, medication and adherence, cardiovascular risk, annual bloods, urine ACR, lifestyle, and complications. The computed control classification, completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/hypertension_reviews:
+  /api/hypertension-review/hypertension_reviews:
     get:
       summary: List HypertensionReview records
       operationId: listHypertensionReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hypertension_reviews/{id}:
+  /api/hypertension-review/hypertension_reviews/{id}:
     parameters:
       - name: id
         in: path

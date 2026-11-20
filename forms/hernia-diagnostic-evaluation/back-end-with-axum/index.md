@@ -22,16 +22,16 @@ a single JSONB blob.
 
 | Entity | Route prefix |
 | --- | --- |
-| `patient` | `/api/patients/` |
-| `clinician` | `/api/clinicians/` |
-| `hernia_diagnostic_evaluation` | `/api/hernia_diagnostic_evaluations/` |
-| `hernia_diagnostic_evaluation_grade` | `/api/hernia_diagnostic_evaluation_grades/` |
-| `hernia_diagnostic_evaluation_grade_flag` | `/api/hernia_diagnostic_evaluation_grade_flags/` |
+| `patient` | `/api/hernia-diagnostic-evaluation/patients/` |
+| `clinician` | `/api/hernia-diagnostic-evaluation/clinicians/` |
+| `hernia_diagnostic_evaluation` | `/api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations/` |
+| `hernia_diagnostic_evaluation_grade` | `/api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades/` |
+| `hernia_diagnostic_evaluation_grade_flag` | `/api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grade_flags/` |
 
 Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.
 
-The SvelteKit dashboard reads `GET /api/hernia_diagnostic_evaluations`, and
+The SvelteKit dashboard reads `GET /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations`, and
 the HTML dashboard reads the same endpoint from `http://localhost:5150`,
 falling back to its bundled sample rows when the server is not running.
 

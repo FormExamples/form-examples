@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`waterlow_pressure_ulcer_risk_assessment/`](waterlow_pressure_ulcer_risk_assessment/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/waterlow-pressure-ulcer-risk-assessment/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

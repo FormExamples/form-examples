@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Nursing problems / needs identified for a care plan: RLT activity category, actual/potential, assessment data, linked risk, and inline evaluation."
 paths:
-  /api/nursing_care_plan_problems:
+  /api/nursing-care-plan/nursing_care_plan_problems:
     get:
       summary: List NursingCarePlanProblem records
       operationId: listNursingCarePlanProblem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/nursing_care_plan_problems/{id}:
+  /api/nursing-care-plan/nursing_care_plan_problems/{id}:
     parameters:
       - name: id
         in: path

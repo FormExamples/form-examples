@@ -7,7 +7,7 @@
 
   export const fetchApplications = async function () {
     try {
-      const res = await fetch("/api/applications", { headers: { Accept: "application/json" } });
+      const res = await fetch("/api/united-kingdom-nhs-england-medical-exemption-certificate/applications", { headers: { Accept: "application/json" } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       return { items: json, source: "api" };

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessment_current_medications:
+  /api/oncology-assessment/assessment_current_medications:
     get:
       summary: List AssessmentCurrentMedications records
       operationId: listAssessmentCurrentMedications
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_current_medications/{id}:
+  /api/oncology-assessment/assessment_current_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_medication_items:
+  /api/oncology-assessment/assessment_medication_items:
     get:
       summary: List AssessmentMedicationItem records
       operationId: listAssessmentMedicationItem
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_medication_items/{id}:
+  /api/oncology-assessment/assessment_medication_items/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments:
+  /api/oncology-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/oncology-assessment/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/oncology-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/oncology-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/oncology-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/oncology-assessment/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/oncology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/oncology-assessment/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/oncology-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/oncology-assessment/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/oncology-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1741,7 +1741,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/oncology-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/oncology-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

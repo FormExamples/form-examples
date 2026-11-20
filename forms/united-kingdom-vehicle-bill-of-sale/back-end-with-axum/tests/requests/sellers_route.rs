@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_sellers() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/sellers").await;
+        let res = request.get("/api/united-kingdom-vehicle-bill-of-sale/sellers").await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());
     })

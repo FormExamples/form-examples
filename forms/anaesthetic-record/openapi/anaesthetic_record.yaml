@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Contemporaneous intra-operative anaesthesia chart: case identification, pre-induction checks, ASA and airway assessment, airway management, monitoring, technique, fluids, regional technique, recovery handover, and sign-off."
 paths:
-  /api/anaesthetic_records:
+  /api/anaesthetic-record/anaesthetic_records:
     get:
       summary: List AnaestheticRecord records
       operationId: listAnaestheticRecord
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anaesthetic_records/{id}:
+  /api/anaesthetic-record/anaesthetic_records/{id}:
     parameters:
       - name: id
         in: path

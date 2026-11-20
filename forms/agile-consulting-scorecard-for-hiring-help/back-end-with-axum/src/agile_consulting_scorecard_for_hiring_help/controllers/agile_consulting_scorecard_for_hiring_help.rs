@@ -231,7 +231,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/agile_consulting_scorecard_for_hiring_helps/")
+        .prefix("api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ASSESSMENTS_PATH = '/api/dashboard/assessments';
+const ASSESSMENTS_PATH = '/api/caprini-venous-thromboembolism-risk-assessment/dashboard/assessments';
 
 /**
  * Fetch the assessment list from the backend.

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/inpatient-clinical-note/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/inpatient-clinical-note/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grade_flags:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grade_flags:
     get:
       summary: List InpatientClinicalNoteGradeFlag records
       operationId: listInpatientClinicalNoteGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grade_flags/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grade_rules:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grade_rules:
     get:
       summary: List InpatientClinicalNoteGradeRule records
       operationId: listInpatientClinicalNoteGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grade_rules/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grades:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grades:
     get:
       summary: List InpatientClinicalNoteGrade records
       operationId: listInpatientClinicalNoteGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_grades/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_investigations:
+  /api/inpatient-clinical-note/inpatient_clinical_note_investigations:
     get:
       summary: List InpatientClinicalNoteInvestigation records
       operationId: listInpatientClinicalNoteInvestigation
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_investigations/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_investigations/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_jobs:
+  /api/inpatient-clinical-note/inpatient_clinical_note_jobs:
     get:
       summary: List InpatientClinicalNoteJob records
       operationId: listInpatientClinicalNoteJob
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_jobs/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_jobs/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_medication_changes:
+  /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes:
     get:
       summary: List InpatientClinicalNoteMedicationChange records
       operationId: listInpatientClinicalNoteMedicationChange
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_medication_changes/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_medication_changes/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_problems:
+  /api/inpatient-clinical-note/inpatient_clinical_note_problems:
     get:
       summary: List InpatientClinicalNoteProblem records
       operationId: listInpatientClinicalNoteProblem
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_note_problems/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_problems/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_notes:
+  /api/inpatient-clinical-note/inpatient_clinical_notes:
     get:
       summary: List InpatientClinicalNote records
       operationId: listInpatientClinicalNote
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_notes/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_notes/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/inpatient_clinical_notes/{id}/grade:
+  /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade:
     parameters:
     - name: id
       in: path
@@ -2288,7 +2288,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/inpatient-clinical-note/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2299,7 +2299,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/inpatient-clinical-note/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2397,7 +2397,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/inpatient-clinical-note/patients/{id}:
     parameters:
     - name: id
       in: path

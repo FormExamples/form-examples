@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Pulmonary function test (lung-function / spirometry) result (report). Captures the performed test type and quality, clinical history, the measured spirometry / gas-transfer values, the structured ventilatory interpretation (pattern, severity, bronchodilator reversibility), the narrative and structured findings, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/pulmonary_function_test_results:
+  /api/pulmonary-function-test-result/pulmonary_function_test_results:
     get:
       summary: List PulmonaryFunctionTestResult records
       operationId: listPulmonaryFunctionTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pulmonary_function_test_results/{id}:
+  /api/pulmonary-function-test-result/pulmonary_function_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main ward-round-note record for one daily inpatient review: review header, patient and clinician identification, and the ten review components (overnight events, problem list, examination and NEWS2, investigations, VTE, medication, plan, escalation, estimated discharge) as free text and enum flags. Completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/ward_round_notes:
+  /api/ward-round-note/ward_round_notes:
     get:
       summary: List WardRoundNote records
       operationId: listWardRoundNote
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ward_round_notes/{id}:
+  /api/ward-round-note/ward_round_notes/{id}:
     parameters:
       - name: id
         in: path

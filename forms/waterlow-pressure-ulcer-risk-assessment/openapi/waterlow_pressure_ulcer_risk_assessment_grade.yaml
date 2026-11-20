@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Waterlow grading result: per-category points, summed Waterlow total, derived risk band, and recommended prevention actions."
 paths:
-  /api/waterlow_pressure_ulcer_risk_assessment_grades:
+  /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grades:
     get:
       summary: List WaterlowPressureUlcerRiskAssessmentGrade records
       operationId: listWaterlowPressureUlcerRiskAssessmentGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/waterlow_pressure_ulcer_risk_assessment_grades/{id}:
+  /api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grades/{id}:
     parameters:
       - name: id
         in: path

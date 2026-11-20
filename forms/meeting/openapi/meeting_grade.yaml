@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off validation result for a meeting. One-to-one with meeting. Stores the derived counts and completion status from validateMeeting() plus the organiser sign-off.
 paths:
-  /api/meeting_grades:
+  /api/meeting/meeting_grades:
     get:
       summary: List MeetingGrade records
       operationId: listMeetingGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/meeting_grades/{id}:
+  /api/meeting/meeting_grades/{id}:
     parameters:
       - name: id
         in: path

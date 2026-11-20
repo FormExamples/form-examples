@@ -64,12 +64,12 @@ FORMS_DIR = REPO_ROOT / "forms"
 PARAMS_BLOCK_RE = re.compile(r"pub struct Params\s*\{(.*?)\n\s*\}", re.DOTALL)
 FIELD_RE = re.compile(r"pub\s+(\w+)\s*:\s*([^,\n]+?)\s*,?\s*$", re.MULTILINE)
 CHECK_ENUM_RE = re.compile(r"CHECK\s*\(\s*(\w+)\s+IN\s*\(([^)]+)\)\s*\)", re.IGNORECASE)
-PREFIX_RE = re.compile(r'\.prefix\("api/([^"/]+)/?"\)')
+PREFIX_RE = re.compile(r'\.prefix\("api/((?:[^"/]+/)?[^"/]+)/?"\)')
 PORT_RE = re.compile(r"^\s*port:\s*(\d+),", re.MULTILINE)
 DATABASE_RE = re.compile(r'^\s*database:\s*"([\w-]+)",', re.MULTILINE)
 VOLATILE_RE = re.compile(
     r'("(?:id|createdAt|updatedAt)": )"[^"]*"'
-    r'|(GET http://localhost:\d+/api/[\w-]+/)[0-9a-f-]{36}'
+    r'|(GET http://localhost:\d+/api/(?:[\w-]+/)?[\w-]+/)[0-9a-f-]{36}'
 )
 BIN_NAME_RE = re.compile(r'name\s*=\s*"([\w-]+)"')
 

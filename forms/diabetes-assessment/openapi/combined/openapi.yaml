@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessments:
+  /api/diabetes-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/diabetes-assessment/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/diabetes-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/diabetes-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/diabetes_rules:
+  /api/diabetes-assessment/diabetes_rules:
     get:
       summary: List DiabetesRule records
       operationId: listDiabetesRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/diabetes_rules/{id}:
+  /api/diabetes-assessment/diabetes_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/diabetes-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/diabetes-assessment/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/diabetes-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/diabetes-assessment/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/diabetes-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/diabetes-assessment/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/diabetes-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1495,7 +1495,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/diabetes-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/diabetes-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Tissue histopathology specimen request (referral). Captures the specimen, the clinical indication and question, clinical details, provisional diagnosis, previous histology, and triage urgency.
 paths:
-  /api/histopathology_test_requests:
+  /api/histopathology-test-request/histopathology_test_requests:
     get:
       summary: List HistopathologyTestRequest records
       operationId: listHistopathologyTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/histopathology_test_requests/{id}:
+  /api/histopathology-test-request/histopathology_test_requests/{id}:
     parameters:
       - name: id
         in: path

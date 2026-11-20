@@ -1,7 +1,7 @@
 # Routes no SQL table describes, documented by hand. Merged into
 # combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
 paths:
-  /api/inpatient_clinical_notes/{id}/grade:
+  /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade:
     parameters:
     - name: id
       in: path

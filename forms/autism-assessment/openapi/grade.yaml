@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed AQ-10 grading result. Score 0-5 is below threshold; score 6-10 indicates referral for diagnostic assessment is recommended. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/autism-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/autism-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

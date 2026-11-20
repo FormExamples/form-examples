@@ -1,5 +1,5 @@
   
-  const API_BASE = '/api/assessments';
+  const API_BASE = '/api/agile-principles-assessment/assessments';
 
   export const fetchAssessments = function () {
     return fetch(API_BASE)

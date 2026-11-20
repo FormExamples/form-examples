@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Cataract diagnostic evaluation: the payload of the 15-step single-page wizard."
 paths:
-  /api/cataract_diagnostic_evaluations:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations:
     get:
       summary: List CataractDiagnosticEvaluation records
       operationId: listCataractDiagnosticEvaluation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cataract_diagnostic_evaluations/{id}:
+  /api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations/{id}:
     parameters:
       - name: id
         in: path

@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const EVALUATIONS_PATH = '/api/knee_replacement_surgery_evaluations';
+const EVALUATIONS_PATH = '/api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations';
 
 /**
  * Fetch the evaluation list from the back-end.

@@ -6,7 +6,7 @@
   
 
   const API_BASE = 'http://localhost:5150';
-  const CARDS_PATH = '/api/dashboard/cards';
+  const CARDS_PATH = '/api/clinical-chemistry-waiting-list-card/dashboard/cards';
 
   /**
    * @returns {Promise<import('./types.js').WaitingListCardSummary[]>}

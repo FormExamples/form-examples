@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Breast mammography result (report). Captures the performed examination and laterality, the clinical history, the narrative and structured findings, breast density (ACR A-D), the largest lesion measurement, the impression, the BI-RADS final assessment category (the key structured score), recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/mammography_test_results:
+  /api/mammography-test-result/mammography_test_results:
     get:
       summary: List MammographyTestResult records
       operationId: listMammographyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mammography_test_results/{id}:
+  /api/mammography-test-result/mammography_test_results/{id}:
     parameters:
       - name: id
         in: path

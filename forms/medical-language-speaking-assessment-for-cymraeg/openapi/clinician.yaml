@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician
 paths:
-  /api/clinicians:
+  /api/medical-language-speaking-assessment-for-cymraeg/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/medical-language-speaking-assessment-for-cymraeg/clinicians/{id}:
     parameters:
       - name: id
         in: path

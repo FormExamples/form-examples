@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Building block captured in §5 Building Block View of the arc42 documentation.
 paths:
-  /api/building_blocks:
+  /api/arc42/building_blocks:
     get:
       summary: List BuildingBlock records
       operationId: listBuildingBlock
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/building_blocks/{id}:
+  /api/arc42/building_blocks/{id}:
     parameters:
       - name: id
         in: path

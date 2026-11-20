@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with assessment. Stores computed diabetes control level and composite score.
 paths:
-  /api/grades:
+  /api/diabetes-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/diabetes-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

@@ -4,8 +4,8 @@ Server-side Rust JSON API for the United Kingdom Driver And Vehicle Licensing Ag
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/assessments` (list, create, read, update,
+submit, result) plus `/api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

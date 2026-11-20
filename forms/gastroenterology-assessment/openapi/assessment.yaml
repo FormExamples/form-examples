@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Gastroenterology assessment form using GI Symptom Severity Score with red flag detection. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/gastroenterology-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/gastroenterology-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

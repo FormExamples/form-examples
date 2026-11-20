@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Vaccination rules that fired during assessment grading. Many-to-one child of grade.
 paths:
-  /api/fired_rules:
+  /api/vaccinations-assessment/fired_rules:
     get:
       summary: List FiredRule records
       operationId: listFiredRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/fired_rules/{id}:
+  /api/vaccinations-assessment/fired_rules/{id}:
     parameters:
       - name: id
         in: path

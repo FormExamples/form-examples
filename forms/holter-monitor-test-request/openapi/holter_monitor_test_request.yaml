@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Ambulatory ECG (Holter) monitoring request (referral). Captures the requested monitor type, primary indication and clinical question, symptoms and symptom frequency, cardiac context and red flags, relevant history and medications, and triage urgency.
 paths:
-  /api/holter_monitor_test_requests:
+  /api/holter-monitor-test-request/holter_monitor_test_requests:
     get:
       summary: List HolterMonitorTestRequest records
       operationId: listHolterMonitorTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/holter_monitor_test_requests/{id}:
+  /api/holter-monitor-test-request/holter_monitor_test_requests/{id}:
     parameters:
       - name: id
         in: path

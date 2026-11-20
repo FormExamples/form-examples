@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A DTAC assessment of one digital health technology product by one assessor.
 paths:
-  /api/uk_nhs_digital_technology_assessment_criterias:
+  /api/uk-nhs-digital-technology-assessment-criteria/uk_nhs_digital_technology_assessment_criterias:
     get:
       summary: List UkNhsDigitalTechnologyAssessmentCriteria records
       operationId: listUkNhsDigitalTechnologyAssessmentCriteria
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/uk_nhs_digital_technology_assessment_criterias/{id}:
+  /api/uk-nhs-digital-technology-assessment-criteria/uk_nhs_digital_technology_assessment_criterias/{id}:
     parameters:
       - name: id
         in: path

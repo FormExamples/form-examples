@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_casualty_card_safeguarding_consents() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/casualty_card_safeguarding_consents")
+            .get("/api/casualty-card-form/casualty_card_safeguarding_consents")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

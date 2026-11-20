@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Red-flag issues that fire independently of the present / absent classification, with priority and a suggested action for the clinical team.
 paths:
-  /api/confusion_assessment_method_grade_flags:
+  /api/confusion-assessment-method/confusion_assessment_method_grade_flags:
     get:
       summary: List ConfusionAssessmentMethodGradeFlag records
       operationId: listConfusionAssessmentMethodGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/confusion_assessment_method_grade_flags/{id}:
+  /api/confusion-assessment-method/confusion_assessment_method_grade_flags/{id}:
     parameters:
       - name: id
         in: path

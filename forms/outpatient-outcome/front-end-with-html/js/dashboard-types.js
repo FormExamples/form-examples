@@ -30,7 +30,7 @@
  */
 
 /**
- * Response from `GET /api/outpatient_outcomes`.
+ * Response from `GET /api/outpatient-outcome/outpatient_outcomes`.
  *
  * The Axum backend returns a bare JSON array of `OutcomeRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

@@ -1,6 +1,6 @@
 import { SAMPLE_DASHBOARD_METRICS } from './data.js';
 
-const API_BASE = '/api/hospital-dashboard-metrics';
+const API_BASE = '/api/hospital-dashboard-metrics/hospital-dashboard-metrics';
 const CACHE_KEY = 'hospital-dashboard-metrics-dashboard:cache:v1';
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24h
 

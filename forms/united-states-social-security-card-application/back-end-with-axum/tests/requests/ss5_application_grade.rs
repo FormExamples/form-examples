@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_ss5_application_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/ss5_application_grades")
+            .get("/api/united-states-social-security-card-application/ss5_application_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

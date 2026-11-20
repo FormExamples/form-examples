@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const SCREENINGS_PATH = '/api/dashboard/screenings';
+const SCREENINGS_PATH = '/api/newborn-blood-spot-screening/dashboard/screenings';
 
 /**
  * Fetch the screening list from the backend.

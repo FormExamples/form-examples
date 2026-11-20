@@ -32,11 +32,11 @@ async fn can_create_and_read_back_registrant() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/registrants` (no
-        // trailing slash), whereas the list handler is at `/api/registrants/`
+        // NB: the scaffold's create handler mounts at `/api/united-states-birth-certificate-application/registrants` (no
+        // trailing slash), whereas the list handler is at `/api/united-states-birth-certificate-application/registrants/`
         // (with one) on some Axum versions and 404s the other way on
         // others — the exact path matters either way.
-        let create_res = request.post("/api/registrants").json(&new_registrant).await;
+        let create_res = request.post("/api/united-states-birth-certificate-application/registrants").json(&new_registrant).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -56,7 +56,7 @@ async fn can_create_and_read_back_registrant() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/registrants/{id}")).await;
+        let get_res = request.get(&format!("/api/united-states-birth-certificate-application/registrants/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -77,7 +77,7 @@ async fn can_create_and_read_back_registrant() {
         assert_eq!(fetched["isDeceased"], "no");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/registrants").await;
+        let list_res = request.get("/api/united-states-birth-certificate-application/registrants").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

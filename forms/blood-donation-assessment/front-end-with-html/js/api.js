@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const DONORS_PATH = '/api/dashboard/donors';
+const DONORS_PATH = '/api/blood-donation-assessment/dashboard/donors';
 
 /**
  * Fetch the donor list from the backend.

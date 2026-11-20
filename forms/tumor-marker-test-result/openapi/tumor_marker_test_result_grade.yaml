@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A markedly elevated value or rising trend on treatment drives an abnormal/urgent oncology review; a very high AFP / beta-hCG (suggesting a germ-cell tumour) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
 paths:
-  /api/tumor_marker_test_result_grades:
+  /api/tumor-marker-test-result/tumor_marker_test_result_grades:
     get:
       summary: List TumorMarkerTestResultGrade records
       operationId: listTumorMarkerTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/tumor_marker_test_result_grades/{id}:
+  /api/tumor-marker-test-result/tumor_marker_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

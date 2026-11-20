@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`learning_disability_annual_health_check/`](learning_disability_annual_health_check/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/learning-disability-annual-health-check/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

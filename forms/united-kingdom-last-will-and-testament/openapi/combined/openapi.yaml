@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/openapi.yaml:
+  /api/united-kingdom-last-will-and-testament/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -19,7 +19,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/testators:
+  /api/united-kingdom-last-will-and-testament/testators:
     get:
       summary: List Testator records
       operationId: listTestator
@@ -117,7 +117,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/testators/{id}:
+  /api/united-kingdom-last-will-and-testament/testators/{id}:
     parameters:
     - name: id
       in: path
@@ -265,7 +265,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grade_flags:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_flags:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGradeFlag records
       operationId: listUnitedKingdomLastWillAndTestamentGradeFlag
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grade_flags/{id}:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grade_rules:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_rules:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGradeRule records
       operationId: listUnitedKingdomLastWillAndTestamentGradeRule
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grade_rules/{id}:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grades:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grades:
     get:
       summary: List UnitedKingdomLastWillAndTestamentGrade records
       operationId: listUnitedKingdomLastWillAndTestamentGrade
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testament_grades/{id}:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testament_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testaments:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testaments:
     get:
       summary: List UnitedKingdomLastWillAndTestament records
       operationId: listUnitedKingdomLastWillAndTestament
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_last_will_and_testaments/{id}:
+  /api/united-kingdom-last-will-and-testament/united_kingdom_last_will_and_testaments/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Investigations-reviewed rows for an inpatient clinical note: one row per result looked at, with whether it was abnormal, whether it was actioned, and the action taken."
 paths:
-  /api/inpatient_clinical_note_investigations:
+  /api/inpatient-clinical-note/inpatient_clinical_note_investigations:
     get:
       summary: List InpatientClinicalNoteInvestigation records
       operationId: listInpatientClinicalNoteInvestigation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/inpatient_clinical_note_investigations/{id}:
+  /api/inpatient-clinical-note/inpatient_clinical_note_investigations/{id}:
     parameters:
       - name: id
         in: path

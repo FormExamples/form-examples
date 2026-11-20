@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Repeated per-timepoint five-sign Apgar scores (1, 5, 10 minutes, and beyond); cascades from the parent apgar_score.
 paths:
-  /api/apgar_score_timepoints:
+  /api/apgar-score/apgar_score_timepoints:
     get:
       summary: List ApgarScoreTimepoint records
       operationId: listApgarScoreTimepoint
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/apgar_score_timepoints/{id}:
+  /api/apgar-score/apgar_score_timepoints/{id}:
     parameters:
       - name: id
         in: path

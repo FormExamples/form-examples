@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const DOCUMENTS_PATH = '/api/arc42_documentations';
+const DOCUMENTS_PATH = '/api/arc42/arc42_documentations';
 
 /**
  * Fetch the document list from the backend.

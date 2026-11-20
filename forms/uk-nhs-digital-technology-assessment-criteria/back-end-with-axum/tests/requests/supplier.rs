@@ -29,7 +29,7 @@ async fn can_create_and_read_back_supplier() {
             "contactPhone": "+441234567890"
         });
 
-        let create_res = request.post("/api/suppliers").json(&new_supplier).await;
+        let create_res = request.post("/api/uk-nhs-digital-technology-assessment-criteria/suppliers").json(&new_supplier).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -48,7 +48,7 @@ async fn can_create_and_read_back_supplier() {
             "id should be a UUID, got {id}"
         );
 
-        let get_res = request.get(&format!("/api/suppliers/{id}")).await;
+        let get_res = request.get(&format!("/api/uk-nhs-digital-technology-assessment-criteria/suppliers/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -73,7 +73,7 @@ async fn can_create_and_read_back_supplier() {
         assert_eq!(fetched["contactEmail"], "alex@supplier.example.com");
         assert_eq!(fetched["contactPhone"], "+441234567890");
 
-        let list_res = request.get("/api/suppliers").await;
+        let list_res = request.get("/api/uk-nhs-digital-technology-assessment-criteria/suppliers").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

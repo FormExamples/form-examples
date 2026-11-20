@@ -29,7 +29,7 @@ async fn can_create_and_read_back_manufacturer() {
 
         // 1. CREATE over HTTP.
         let create_res = request
-            .post("/api/manufacturers")
+            .post("/api/medical-device-assessment/manufacturers")
             .json(&new_manufacturer)
             .await;
         assert_eq!(
@@ -51,7 +51,7 @@ async fn can_create_and_read_back_manufacturer() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/manufacturers/{id}")).await;
+        let get_res = request.get(&format!("/api/medical-device-assessment/manufacturers/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -67,7 +67,7 @@ async fn can_create_and_read_back_manufacturer() {
         }
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/manufacturers").await;
+        let list_res = request.get("/api/medical-device-assessment/manufacturers").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

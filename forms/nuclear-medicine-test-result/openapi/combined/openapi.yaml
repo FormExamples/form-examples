@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/nuclear-medicine-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/nuclear-medicine-test-result/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grade_flags:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grade_flags:
     get:
       summary: List NuclearMedicineTestResultGradeFlag records
       operationId: listNuclearMedicineTestResultGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grade_flags/{id}:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grade_rules:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grade_rules:
     get:
       summary: List NuclearMedicineTestResultGradeRule records
       operationId: listNuclearMedicineTestResultGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grade_rules/{id}:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grades:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grades:
     get:
       summary: List NuclearMedicineTestResultGrade records
       operationId: listNuclearMedicineTestResultGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_result_grades/{id}:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_result_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_results:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_results:
     get:
       summary: List NuclearMedicineTestResult records
       operationId: listNuclearMedicineTestResult
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nuclear_medicine_test_results/{id}:
+  /api/nuclear-medicine-test-result/nuclear_medicine_test_results/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/nuclear-medicine-test-result/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/nuclear-medicine-test-result/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/nuclear-medicine-test-result/patients/{id}:
     parameters:
     - name: id
       in: path

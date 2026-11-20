@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: County assessing official who receives and decides the property tax exemption application.
 paths:
-  /api/assessors:
+  /api/united-states-property-tax-exemption-application/assessors:
     get:
       summary: List Assessor records
       operationId: listAssessor
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessors/{id}:
+  /api/united-states-property-tax-exemption-application/assessors/{id}:
     parameters:
       - name: id
         in: path

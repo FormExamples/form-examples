@@ -8,7 +8,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const TEAMS_PATH = '/api/dashboard/teams';
+const TEAMS_PATH = '/api/employee-satisfaction-survey/dashboard/teams';
 
 /**
  * Fetch the team / department aggregate list from the backend.

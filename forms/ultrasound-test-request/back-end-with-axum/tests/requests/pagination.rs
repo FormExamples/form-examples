@@ -23,7 +23,7 @@ async fn lists_come_in_cursor_pages() {
         .await
         .unwrap();
 
-        let first = request.get("/api/ultrasound_test_request_grade_flags?limit=1").await;
+        let first = request.get("/api/ultrasound-test-request/ultrasound_test_request_grade_flags?limit=1").await;
         first.assert_status_ok();
         assert!(first.maybe_header("x-total-count").is_none());
         let first_rows: Vec<Value> = first.json();
@@ -36,7 +36,7 @@ async fn lists_come_in_cursor_pages() {
             .and_then(|rest| rest.strip_suffix(">; rel=\"next\""))
             .unwrap()
             .to_string();
-        assert!(next.starts_with("/api/ultrasound_test_request_grade_flags?limit=1&cursor="), "{next}");
+        assert!(next.starts_with("/api/ultrasound-test-request/ultrasound_test_request_grade_flags?limit=1&cursor="), "{next}");
 
         let second = request.get(&next).await;
         second.assert_status_ok();
@@ -48,10 +48,10 @@ async fn lists_come_in_cursor_pages() {
         let carried = format!("{next}&status=other");
         for refused in [
             carried.as_str(),
-            "/api/ultrasound_test_request_grade_flags?cursor=forged",
-            "/api/ultrasound_test_request_grade_flags?limit=0",
-            "/api/ultrasound_test_request_grade_flags?limit=1001",
-            "/api/ultrasound_test_request_grade_flags?limit=many",
+            "/api/ultrasound-test-request/ultrasound_test_request_grade_flags?cursor=forged",
+            "/api/ultrasound-test-request/ultrasound_test_request_grade_flags?limit=0",
+            "/api/ultrasound-test-request/ultrasound_test_request_grade_flags?limit=1001",
+            "/api/ultrasound-test-request/ultrasound_test_request_grade_flags?limit=many",
         ] {
             request.get(refused).await.assert_status_unprocessable_entity();
         }

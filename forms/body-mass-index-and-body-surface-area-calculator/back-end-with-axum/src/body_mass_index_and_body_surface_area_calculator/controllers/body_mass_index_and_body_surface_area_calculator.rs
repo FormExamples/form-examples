@@ -133,7 +133,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/body_mass_index_and_body_surface_area_calculators/")
+        .prefix("api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculators/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

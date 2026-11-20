@@ -7,7 +7,7 @@
 // `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CHECKS_PATH = '/api/dashboard/checks';
+const CHECKS_PATH = '/api/learning-disability-annual-health-check/dashboard/checks';
 
 /**
  * Fetch the check list from the backend.

@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/agents:
+  /api/united-states-durable-financial-power-of-attorney/agents:
     get:
       summary: List Agent records
       operationId: listAgent
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agents/{id}:
+  /api/united-states-durable-financial-power-of-attorney/agents/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-durable-financial-power-of-attorney/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/principals:
+  /api/united-states-durable-financial-power-of-attorney/principals:
     get:
       summary: List Principal records
       operationId: listPrincipal
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/principals/{id}:
+  /api/united-states-durable-financial-power-of-attorney/principals/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grade_flags:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGradeFlag records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGradeFlag
@@ -610,7 +610,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grade_flags/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -758,7 +758,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grade_rules:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_rules:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGradeRule records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGradeRule
@@ -857,7 +857,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grade_rules/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1005,7 +1005,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grades:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grades:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGrade records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGrade
@@ -1103,7 +1103,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorney_grades/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1251,7 +1251,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorneys:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorneys:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorney records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorney
@@ -1349,7 +1349,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_durable_financial_power_of_attorneys/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorneys/{id}:
     parameters:
     - name: id
       in: path

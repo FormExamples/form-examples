@@ -41,7 +41,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/reconciliations`.
+ * Response from `GET /api/medication-reconciliation/dashboard/reconciliations`.
  *
  * @typedef {Object} DashboardReconciliationsResponse
  * @property {ReconciliationRow[]} items

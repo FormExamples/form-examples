@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main United Kingdom marriage certificate application record: notice of marriage or civil partnership in England and Wales, planned ceremony, both parties' residence, identity, prior-relationship and immigration evidence, witnesses, and the GRO certificate order. Classification, fired rules, and flags live in child tables."
 paths:
-  /api/united_kingdom_marriage_certificate_applications:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications:
     get:
       summary: List UnitedKingdomMarriageCertificateApplication records
       operationId: listUnitedKingdomMarriageCertificateApplication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_marriage_certificate_applications/{id}:
+  /api/united-kingdom-marriage-certificate-application/united_kingdom_marriage_certificate_applications/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Angiography result (report). Captures the performed examination, modality and contrast, clinical history, the narrative and structured vascular findings, the maximum stenosis percentage and whether an intervention was performed, the impression and reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/angiography_test_results:
+  /api/angiography-test-result/angiography_test_results:
     get:
       summary: List AngiographyTestResult records
       operationId: listAngiographyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/angiography_test_results/{id}:
+  /api/angiography-test-result/angiography_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Reviewer: the attorney, social worker, or facility staff member who reviews the directive for execution readiness."
 paths:
-  /api/reviewers:
+  /api/united-states-health-care-power-of-attorney/reviewers:
     get:
       summary: List Reviewer records
       operationId: listReviewer
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/reviewers/{id}:
+  /api/united-states-health-care-power-of-attorney/reviewers/{id}:
     parameters:
       - name: id
         in: path

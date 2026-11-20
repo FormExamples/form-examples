@@ -9,7 +9,7 @@ use uk_nhs_digital_technology_assessment_criteria::app::App;
 async fn can_get_uk_nhs_digital_technology_assessment_criteria_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/uk_nhs_digital_technology_assessment_criteria_grade_rules")
+            .get("/api/uk-nhs-digital-technology-assessment-criteria/uk_nhs_digital_technology_assessment_criteria_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered, not Axum's HTML welcome page.

@@ -263,7 +263,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/international_certificate_of_vaccination_or_prophylaxis_entries/")
+        .prefix("api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis_entries/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

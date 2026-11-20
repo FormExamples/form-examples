@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Allergen that a patient may react to.
 paths:
-  /api/allergies:
+  /api/dietic-assessment/allergies:
     get:
       summary: List Allergy records
       operationId: listAllergy
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/allergies/{id}:
+  /api/dietic-assessment/allergies/{id}:
     parameters:
       - name: id
         in: path

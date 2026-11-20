@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/genetic-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/genetic-test-result/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grade_flags:
+  /api/genetic-test-result/genetic_test_result_grade_flags:
     get:
       summary: List GeneticTestResultGradeFlag records
       operationId: listGeneticTestResultGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grade_flags/{id}:
+  /api/genetic-test-result/genetic_test_result_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grade_rules:
+  /api/genetic-test-result/genetic_test_result_grade_rules:
     get:
       summary: List GeneticTestResultGradeRule records
       operationId: listGeneticTestResultGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grade_rules/{id}:
+  /api/genetic-test-result/genetic_test_result_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grades:
+  /api/genetic-test-result/genetic_test_result_grades:
     get:
       summary: List GeneticTestResultGrade records
       operationId: listGeneticTestResultGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_result_grades/{id}:
+  /api/genetic-test-result/genetic_test_result_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_results:
+  /api/genetic-test-result/genetic_test_results:
     get:
       summary: List GeneticTestResult records
       operationId: listGeneticTestResult
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/genetic_test_results/{id}:
+  /api/genetic-test-result/genetic_test_results/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/genetic-test-result/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/genetic-test-result/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/genetic-test-result/patients/{id}:
     parameters:
     - name: id
       in: path

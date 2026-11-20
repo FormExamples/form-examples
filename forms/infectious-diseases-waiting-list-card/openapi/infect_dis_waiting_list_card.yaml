@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a infectious diseases waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/infect_dis_waiting_list_cards:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_cards:
     get:
       summary: List InfectDisWaitingListCard records
       operationId: listInfectDisWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/infect_dis_waiting_list_cards/{id}:
+  /api/infectious-diseases-waiting-list-card/infect_dis_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

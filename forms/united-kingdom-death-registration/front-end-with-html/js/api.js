@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REGISTRATIONS_PATH = '/api/dashboard/registrations';
+const REGISTRATIONS_PATH = '/api/united-kingdom-death-registration/dashboard/registrations';
 
 /**
  * Fetch the registration list from the backend.

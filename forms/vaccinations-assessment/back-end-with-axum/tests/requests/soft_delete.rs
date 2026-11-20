@@ -28,7 +28,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .await
         .unwrap();
 
-        let path = format!("/api/assessments/{row1}");
+        let path = format!("/api/vaccinations-assessment/assessments/{row1}");
         let live = request.get(&path).await;
         assert_eq!(live.status_code(), 200);
         let body = live.json::<serde_json::Value>();
@@ -38,7 +38,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         assert_eq!(request.get(&path).await.status_code(), 404);
         assert_eq!(request.delete(&path).await.status_code(), 404);
         let listed = request
-            .get("/api/assessments")
+            .get("/api/vaccinations-assessment/assessments")
             .await
             .json::<serde_json::Value>();
         assert!(!listed.to_string().contains(&row1.to_string()));

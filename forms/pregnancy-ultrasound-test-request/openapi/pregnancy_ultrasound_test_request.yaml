@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Obstetric ultrasound scan request (referral). Captures pregnancy dating, obstetric history, the requested examination, the clinical indication and question, symptoms / red flags, risk factors, and triage urgency.
 paths:
-  /api/pregnancy_ultrasound_test_requests:
+  /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_requests:
     get:
       summary: List PregnancyUltrasoundTestRequest records
       operationId: listPregnancyUltrasoundTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pregnancy_ultrasound_test_requests/{id}:
+  /api/pregnancy-ultrasound-test-request/pregnancy_ultrasound_test_requests/{id}:
     parameters:
       - name: id
         in: path

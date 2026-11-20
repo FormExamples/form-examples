@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "A resource required for the meeting: room, equipment, document, link, budget line, catering, interpreter, transport. Tracks quantity, cost, reservation status."
 paths:
-  /api/resources:
+  /api/meeting/resources:
     get:
       summary: List Resource records
       operationId: listResource
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/resources/{id}:
+  /api/meeting/resources/{id}:
     parameters:
       - name: id
         in: path

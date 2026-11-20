@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A single agile-consulting readiness scorecard for an organization, captured via a 6-step single-page wizard. Holds organization/respondent FKs, the 16 yes/no items (4 manifesto + 12 principles), and per-item evidence text. Computed scores live in the *_grade child table.
 paths:
-  /api/agile_consulting_scorecard_for_hiring_helps:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps:
     get:
       summary: List AgileConsultingScorecardForHiringHelp records
       operationId: listAgileConsultingScorecardForHiringHelp
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/agile_consulting_scorecard_for_hiring_helps/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps/{id}:
     parameters:
       - name: id
         in: path

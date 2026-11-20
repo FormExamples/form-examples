@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`united_kingdom_vehicle_registration_application/`](united_kingdom_vehicle_registration_application/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/united-kingdom-vehicle-registration-application/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

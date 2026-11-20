@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_fluoroscopy_test_requests() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/fluoroscopy_test_requests").await;
+        let res = request.get("/api/fluoroscopy-test-request/fluoroscopy_test_requests").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

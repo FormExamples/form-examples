@@ -34,7 +34,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/registrations`.
+ * Response from `GET /api/united-kingdom-death-registration/dashboard/registrations`.
  * @typedef {Object} DashboardRegistrationsResponse
  * @property {RegistrationRow[]} items
  * @property {number} total

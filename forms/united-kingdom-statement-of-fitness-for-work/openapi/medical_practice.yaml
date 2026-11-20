@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: The medical practice that owns the fit note (mandatory per DWP policy 3.7).
 paths:
-  /api/medical_practices:
+  /api/united-kingdom-statement-of-fitness-for-work/medical_practices:
     get:
       summary: List MedicalPractice records
       operationId: listMedicalPractice
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_practices/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/medical_practices/{id}:
     parameters:
       - name: id
         in: path

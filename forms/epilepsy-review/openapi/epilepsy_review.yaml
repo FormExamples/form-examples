@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main epilepsy annual-review record (NICE NG217): patient and clinician identification, review context, epilepsy profile, seizures and anti-seizure medication with adherence and side effects, triggers, SUDEP discussion, injuries and status epilepticus, safety (DVLA driving, bathing, occupation), valproate and pregnancy-prevention arrangements, mental health, and the care plan. The computed seizure-control classification, completeness grade, fired rules, and safety flags live in child tables."
 paths:
-  /api/epilepsy_reviews:
+  /api/epilepsy-review/epilepsy_reviews:
     get:
       summary: List EpilepsyReview records
       operationId: listEpilepsyReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/epilepsy_reviews/{id}:
+  /api/epilepsy-review/epilepsy_reviews/{id}:
     parameters:
       - name: id
         in: path

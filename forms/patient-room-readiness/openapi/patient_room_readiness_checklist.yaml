@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "One room-readiness inspection: location, 25 fixed fixture/fabric checkpoints, inspector, and inspection date/time."
 paths:
-  /api/patient_room_readiness_checklists:
+  /api/patient-room-readiness/patient_room_readiness_checklists:
     get:
       summary: List PatientRoomReadinessChecklist records
       operationId: listPatientRoomReadinessChecklist
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patient_room_readiness_checklists/{id}:
+  /api/patient-room-readiness/patient_room_readiness_checklists/{id}:
     parameters:
       - name: id
         in: path

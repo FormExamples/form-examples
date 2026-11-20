@@ -10,7 +10,7 @@ Alpine.js, no CSS, no Lily Design System.**
 - `src/united_kingdom_council_tax_discount_application/` — the Axum crate source (`models/`, `controllers/`, `fixtures/`, `support/`); `migrations/` and `tests/` sit at the crate root.
 - Relational per-table schema mirroring [`../sql/`](../sql/): `billing_authorities`,
   `applicants`, the application header, the `occupants` roster, and the grade /
-  grade_rule / grade_flag trio. Routes are `/api/<plural>/`.
+  grade_rule / grade_flag trio. Routes are `/api/united-kingdom-council-tax-discount-application/<plural>/`.
 
 ## Verify
 

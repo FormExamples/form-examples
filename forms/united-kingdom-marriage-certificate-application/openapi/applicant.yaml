@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Applicant who gives notice of marriage or civil partnership and submits the United Kingdom marriage certificate application, with contact details.
 paths:
-  /api/applicants:
+  /api/united-kingdom-marriage-certificate-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/applicants/{id}:
+  /api/united-kingdom-marriage-certificate-application/applicants/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_diabetes_eye_screening_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/diabetes_eye_screening_grade_flags").await;
+        let res = request.get("/api/diabetes-eye-screening/diabetes_eye_screening_grade_flags").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

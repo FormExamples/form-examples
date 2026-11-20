@@ -25,23 +25,23 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/addresses?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/no-such-route").await, 404);
+        problem!(request.delete("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/addresses/{id}")).await, 404);
+        problem!(request.get(&format!("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses/{id}")).await, 404);
 
         // An extractor's refusal says what was wrong, and quotes nothing.
-        let (body, text) = problem!(request.get("/api/addresses/not-a-uuid").await, 400);
+        let (body, text) = problem!(request.get("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses/not-a-uuid").await, 400);
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
-            request.post("/api/addresses").json(&"not an object").await,
+            request.post("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/addresses").json(&"not an object").await,
             422
         );
     })
@@ -105,7 +105,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "isBankrupt": false,
             "hasDebtReliefOrder": false
         });
-        let donor: Value = request.post("/api/people").json(&donor).await.json();
+        let donor: Value = request.post("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/people").json(&donor).await.json();
         let lpa = |status: &str| {
             serde_json::json!({
                 "decisionMode": "jointly",
@@ -121,7 +121,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             })
         };
         let response = request
-            .post("/api/lasting_power_of_attorneys")
+            .post("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys")
             .json(&lpa("not-a-listed-value"))
             .await;
         let (body, text) = problem!(response, 422);
@@ -131,7 +131,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
 
         // The same body with a listed value is stored, so the shape was never the fault.
         request
-            .post("/api/lasting_power_of_attorneys")
+            .post("/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lasting_power_of_attorneys")
             .json(&lpa("draft"))
             .await
             .assert_status_ok();

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main anion-gap calculation record: context and identification, plus the electrolyte-panel inputs (sodium, chloride, bicarbonate, optional potassium) and the optional albumin used for the correction."
 paths:
-  /api/anion_gap_calculators:
+  /api/anion-gap-calculator/anion_gap_calculators:
     get:
       summary: List AnionGapCalculator records
       operationId: listAnionGapCalculator
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anion_gap_calculators/{id}:
+  /api/anion-gap-calculator/anion_gap_calculators/{id}:
     parameters:
       - name: id
         in: path

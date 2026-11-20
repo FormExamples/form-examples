@@ -8,7 +8,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const DIRECTIVES_PATH = '/api/dashboard/directives';
+const DIRECTIVES_PATH = '/api/united-states-health-care-power-of-attorney/dashboard/directives';
 
 /**
  * Fetch the directive list from the backend.

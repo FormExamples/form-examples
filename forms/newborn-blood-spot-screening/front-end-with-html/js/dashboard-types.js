@@ -31,7 +31,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/screenings`.
+ * Response from `GET /api/newborn-blood-spot-screening/dashboard/screenings`.
  *
  * @typedef {Object} DashboardScreeningsResponse
  * @property {ScreeningRow[]} items

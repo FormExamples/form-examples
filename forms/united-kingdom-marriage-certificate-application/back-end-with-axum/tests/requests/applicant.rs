@@ -27,11 +27,11 @@ async fn can_create_and_read_back_applicant() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/applicants` (no
-        // trailing slash), whereas the list handler is at `/api/applicants/`
+        // NB: the scaffold's create handler mounts at `/api/united-kingdom-marriage-certificate-application/applicants` (no
+        // trailing slash), whereas the list handler is at `/api/united-kingdom-marriage-certificate-application/applicants/`
         // (with one) on some Axum versions and 404s the other way on
         // others — the exact path matters either way.
-        let create_res = request.post("/api/applicants").json(&new_applicant).await;
+        let create_res = request.post("/api/united-kingdom-marriage-certificate-application/applicants").json(&new_applicant).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -51,7 +51,7 @@ async fn can_create_and_read_back_applicant() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/applicants/{id}")).await;
+        let get_res = request.get(&format!("/api/united-kingdom-marriage-certificate-application/applicants/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -74,7 +74,7 @@ async fn can_create_and_read_back_applicant() {
         assert_eq!(fetched["postcode"], "SW1A 2AA");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/applicants").await;
+        let list_res = request.get("/api/united-kingdom-marriage-certificate-application/applicants").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

@@ -8,7 +8,7 @@ The schema is relational and mirrors [`../sql/`](../sql/): one migration, one
 sqlx entity and one RESTful scaffold controller per SQL table (`employee`,
 `clinician`, `medical_fit_note`, `medical_fit_note_grade`,
 `medical_fit_note_grade_rule`, `medical_fit_note_grade_flag`), with UUID primary
-keys and camelCase JSON. `GET /api/openapi.yaml` serves the form's combined
+keys and camelCase JSON. `GET /api/medical-fit-note/openapi.yaml` serves the form's combined
 OpenAPI 3.1 specification. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/` consume this API.
 

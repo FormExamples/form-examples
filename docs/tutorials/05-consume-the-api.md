@@ -19,25 +19,27 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-Axum serves on `localhost:5150` and mounts controllers under the `api/` prefix.
+Axum serves on `localhost:5150` and mounts controllers under the form's own `api/apgar-score/` prefix
+(every form's routes are namespaced by its slug; see
+[`spec/form-namespacing/`](../../spec/form-namespacing/)).
 
 ## 2. The OpenAPI ↔ live-route mapping
 
 The OpenAPI specs are generated per SQL entity into
-`forms/apgar-score/openapi/`. Each spec documents the resource path (e.g.
-`/patients`); the running crate serves that resource under `api/`. So:
+`forms/apgar-score/openapi/`. Each spec documents the live route, under the
+form's `/api/apgar-score/` namespace. So `openapi/patient.yaml` documents:
 
-| OpenAPI path (`openapi/patient.yaml`) | Live route | Verb → handler |
-| --- | --- | --- |
-| `GET /patients` | `GET /api/patients` | list |
-| `POST /patients` | `POST /api/patients` | create |
-| `GET /patients/{id}` | `GET /api/patients/{id}` | get one |
-| `PUT /patients/{id}` | `PUT /api/patients/{id}` | update |
-| `DELETE /patients/{id}` | `DELETE /api/patients/{id}` | delete |
+| Live route | Verb → handler |
+| --- | --- |
+| `GET /api/apgar-score/patients` | list |
+| `POST /api/apgar-score/patients` | create |
+| `GET /api/apgar-score/patients/{id}` | get one |
+| `PUT /api/apgar-score/patients/{id}` | update |
+| `DELETE /api/apgar-score/patients/{id}` | delete |
 
 Every entity has the same five-verb shape: `apgar_score`,
 `apgar_score_timepoint`, `clinician`, etc., each with its own
-`openapi/<entity>.yaml` and its own `api/<plural>` route.
+`openapi/<entity>.yaml` and its own `api/apgar-score/<plural>` route.
 
 Read the spec you are about to exercise:
 
@@ -54,7 +56,7 @@ fields are `name`, `birth_date`, `sex`, `united_kingdom_nhs_number`,
 `allergies_summary`):
 
 ```sh
-curl -s -X POST http://localhost:5150/api/patients \
+curl -s -X POST http://localhost:5150/api/apgar-score/patients \
   -H 'content-type: application/json' \
   -d '{
     "name": "Baby Okoro",
@@ -68,25 +70,25 @@ curl -s -X POST http://localhost:5150/api/patients \
 The response echoes the created row including its `id`. Capture it:
 
 ```sh
-ID=$(curl -s http://localhost:5150/api/patients | python3 -c 'import sys,json; print(json.load(sys.stdin)[0]["id"])')
+ID=$(curl -s http://localhost:5150/api/apgar-score/patients | python3 -c 'import sys,json; print(json.load(sys.stdin)[0]["id"])')
 ```
 
 **Read one:**
 
 ```sh
-curl -s http://localhost:5150/api/patients/"$ID"
+curl -s http://localhost:5150/api/apgar-score/patients/"$ID"
 ```
 
 **List:**
 
 ```sh
-curl -s http://localhost:5150/api/patients
+curl -s http://localhost:5150/api/apgar-score/patients
 ```
 
 **Update** (PUT — send the full body, same shape as create):
 
 ```sh
-curl -s -X PUT http://localhost:5150/api/patients/"$ID" \
+curl -s -X PUT http://localhost:5150/api/apgar-score/patients/"$ID" \
   -H 'content-type: application/json' \
   -d '{
     "name": "Baby Okoro",
@@ -100,10 +102,10 @@ curl -s -X PUT http://localhost:5150/api/patients/"$ID" \
 **Delete:**
 
 ```sh
-curl -s -X DELETE http://localhost:5150/api/patients/"$ID"
+curl -s -X DELETE http://localhost:5150/api/apgar-score/patients/"$ID"
 ```
 
-The same verbs work against `/api/apgar_scores`, `/api/clinicians`, and the
+The same verbs work against `/api/apgar-score/apgar_scores`, `/api/apgar-score/clinicians`, and the
 child tables — one route set per SQL entity.
 
 ## 4. Export the FHIR R5 bundle

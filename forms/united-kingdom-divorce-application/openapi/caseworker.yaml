@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Caseworker information for the legal adviser or court officer who prepares or checks the application.
 paths:
-  /api/caseworkers:
+  /api/united-kingdom-divorce-application/caseworkers:
     get:
       summary: List Caseworker records
       operationId: listCaseworker
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/caseworkers/{id}:
+  /api/united-kingdom-divorce-application/caseworkers/{id}:
     parameters:
       - name: id
         in: path

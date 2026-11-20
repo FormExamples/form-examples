@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: WHO-designated vaccination centre that administers vaccinations and validates each certificate entry with its uniform stamp.
 paths:
-  /api/centers:
+  /api/international-certificate-of-vaccination-or-prophylaxis/centers:
     get:
       summary: List Center records
       operationId: listCenter
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/centers/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/centers/{id}:
     parameters:
       - name: id
         in: path

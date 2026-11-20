@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed 4AT grading result: per-item sub-scores, summed total (0-12), and derived interpretation band."
 paths:
-  /api/four_a_test_for_delirium_grades:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grades:
     get:
       summary: List FourATestForDeliriumGrade records
       operationId: listFourATestForDeliriumGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/four_a_test_for_delirium_grades/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_delirium_grades/{id}:
     parameters:
       - name: id
         in: path

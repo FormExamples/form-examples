@@ -8,7 +8,7 @@ use vaccinations_assessment::app::App;
 #[serial]
 async fn can_get_consent_informations() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/consent_informations").await;
+        let res = request.get("/api/vaccinations-assessment/consent_informations").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

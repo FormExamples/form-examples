@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One answered checkpoint (of 97) within a daily-monitoring inspection round.
 paths:
-  /api/hospital_daily_monitoring_checklist_items:
+  /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklist_items:
     get:
       summary: List HospitalDailyMonitoringChecklistItem records
       operationId: listHospitalDailyMonitoringChecklistItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hospital_daily_monitoring_checklist_items/{id}:
+  /api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklist_items/{id}:
     parameters:
       - name: id
         in: path

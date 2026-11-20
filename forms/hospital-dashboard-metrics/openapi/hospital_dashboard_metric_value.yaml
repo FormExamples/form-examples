@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: One recorded metric (of 67) within a hospital dashboard reporting period.
 paths:
-  /api/hospital_dashboard_metric_values:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metric_values:
     get:
       summary: List HospitalDashboardMetricValue records
       operationId: listHospitalDashboardMetricValue
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hospital_dashboard_metric_values/{id}:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metric_values/{id}:
     parameters:
       - name: id
         in: path

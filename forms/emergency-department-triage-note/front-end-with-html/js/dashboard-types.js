@@ -41,7 +41,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/triage-notes`.
+ * Response from `GET /api/emergency-department-triage-note/dashboard/triage-notes`.
  *
  * @typedef {Object} DashboardTriageNotesResponse
  * @property {TriageRow[]} items

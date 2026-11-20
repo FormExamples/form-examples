@@ -8,7 +8,7 @@
 // data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const OPERATION_NOTES_PATH = '/api/operation-notes';
+const OPERATION_NOTES_PATH = '/api/medical-operation-note/operation-notes';
 
 /**
  * Fetch the operation-note list from the backend.

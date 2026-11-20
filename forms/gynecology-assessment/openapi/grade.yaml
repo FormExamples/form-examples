@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed gynaecological symptom severity result based on frequency, intensity, and clinical significance. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/gynecology-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/gynecology-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed EPDS grading result: summed total (0-30), interpretation band (lower/possible/likely), item 10 self-harm score, and mandatory self-harm flag."
 paths:
-  /api/edinburgh_postnatal_depression_scale_grades:
+  /api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scale_grades:
     get:
       summary: List EdinburghPostnatalDepressionScaleGrade records
       operationId: listEdinburghPostnatalDepressionScaleGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/edinburgh_postnatal_depression_scale_grades/{id}:
+  /api/edinburgh-postnatal-depression-scale/edinburgh_postnatal_depression_scale_grades/{id}:
     parameters:
       - name: id
         in: path

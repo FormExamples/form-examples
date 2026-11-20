@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main heart-failure annual-review record (NICE NG106): patient and clinician identification, review context, diagnosis and subtype, functional status (NYHA), fluid balance and observations, monitoring bloods, the four pillars of guideline-directed medical therapy plus loop diuretic and other medications, devices, vaccinations, and self-management. The computed functional status, medication-optimisation status, completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/heart_failure_reviews:
+  /api/heart-failure-review/heart_failure_reviews:
     get:
       summary: List HeartFailureReview records
       operationId: listHeartFailureReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/heart_failure_reviews/{id}:
+  /api/heart-failure-review/heart_failure_reviews/{id}:
     parameters:
       - name: id
         in: path

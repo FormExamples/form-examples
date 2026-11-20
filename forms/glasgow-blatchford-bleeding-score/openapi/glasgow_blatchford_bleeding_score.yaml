@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Glasgow-Blatchford Bleeding Score assessment record: assessment context, patient identification, and the eight weighted admission parameter inputs (blood urea, haemoglobin, systolic blood pressure, pulse, melaena, syncope, hepatic disease, cardiac failure)."
 paths:
-  /api/glasgow_blatchford_bleeding_scores:
+  /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_scores:
     get:
       summary: List GlasgowBlatchfordBleedingScore records
       operationId: listGlasgowBlatchfordBleedingScore
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/glasgow_blatchford_bleeding_scores/{id}:
+  /api/glasgow-blatchford-bleeding-score/glasgow_blatchford_bleeding_scores/{id}:
     parameters:
       - name: id
         in: path

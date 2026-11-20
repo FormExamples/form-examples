@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const EVALUATIONS_PATH = '/api/cataract_diagnostic_evaluations';
+const EVALUATIONS_PATH = '/api/cataract-diagnostic-evaluation/cataract_diagnostic_evaluations';
 
 /**
  * Fetch the evaluation list from the back-end.

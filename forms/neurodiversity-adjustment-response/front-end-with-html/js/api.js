@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const RESPONSES_PATH = '/api/neurodiversity_adjustment_responses';
+const RESPONSES_PATH = '/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses';
 
 /**
  * Fetch the response list from the backend.

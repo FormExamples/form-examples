@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_four_a_test_for_delirium_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/four_a_test_for_delirium_grade_flags")
+            .get("/api/four-a-test-for-delirium/four_a_test_for_delirium_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

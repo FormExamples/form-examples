@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Pre Operative Assessment By Patient form. Pure
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/pre-operative-assessment-by-patient/assessments` (list, create, read, update,
+submit, result) plus `/api/pre-operative-assessment-by-patient/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

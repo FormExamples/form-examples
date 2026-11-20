@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the four axes, with priority and a suggested action for the pathology team.
 paths:
-  /api/histopathology_test_request_grade_flags:
+  /api/histopathology-test-request/histopathology_test_request_grade_flags:
     get:
       summary: List HistopathologyTestRequestGradeFlag records
       operationId: listHistopathologyTestRequestGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/histopathology_test_request_grade_flags/{id}:
+  /api/histopathology-test-request/histopathology_test_request_grade_flags/{id}:
     parameters:
       - name: id
         in: path

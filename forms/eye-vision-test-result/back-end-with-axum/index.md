@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`eye_vision_test_result/`](eye_vision_test_result/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/eye-vision-test-result/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

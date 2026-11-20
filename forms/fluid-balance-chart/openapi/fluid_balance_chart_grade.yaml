@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed grading result for a fluid balance chart: intake/output totals, net balance, urine output rate, and the classified fluid status; 1:1 with the chart."
 paths:
-  /api/fluid_balance_chart_grades:
+  /api/fluid-balance-chart/fluid_balance_chart_grades:
     get:
       summary: List FluidBalanceChartGrade records
       operationId: listFluidBalanceChartGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/fluid_balance_chart_grades/{id}:
+  /api/fluid-balance-chart/fluid_balance_chart_grades/{id}:
     parameters:
       - name: id
         in: path

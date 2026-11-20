@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main PACU recovery record: recovery context, patient identification, the five Modified Aldrete parameter inputs, airway / pain / PONV observations, and the optional PADSS criterion inputs for day-surgery discharge."
 paths:
-  /api/post_anaesthesia_care_unit_records:
+  /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_records:
     get:
       summary: List PostAnaesthesiaCareUnitRecord records
       operationId: listPostAnaesthesiaCareUnitRecord
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/post_anaesthesia_care_unit_records/{id}:
+  /api/post-anaesthesia-care-unit-record/post_anaesthesia_care_unit_records/{id}:
     parameters:
       - name: id
         in: path

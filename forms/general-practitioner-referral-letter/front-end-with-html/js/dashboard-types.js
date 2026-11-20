@@ -39,7 +39,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/referrals`.
+ * Response from `GET /api/general-practitioner-referral-letter/dashboard/referrals`.
  *
  * @typedef {Object} DashboardReferralsResponse
  * @property {ReferralRow[]} items

@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PETITIONS_PATH = '/api/dashboard/petitions';
+const PETITIONS_PATH = '/api/united-states-divorce-petition/dashboard/petitions';
 
 /**
  * Fetch the petition list from the backend.

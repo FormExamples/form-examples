@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main eGFR calculation record: context and identification, plus the serum creatinine, age, sex, specimen date, and steady-state inputs and the chosen estimating equation."
 paths:
-  /api/estimated_glomerular_filtration_rate_calculators:
+  /api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculators:
     get:
       summary: List EstimatedGlomerularFiltrationRateCalculator records
       operationId: listEstimatedGlomerularFiltrationRateCalculator
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/estimated_glomerular_filtration_rate_calculators/{id}:
+  /api/estimated-glomerular-filtration-rate-calculator/estimated_glomerular_filtration_rate_calculators/{id}:
     parameters:
       - name: id
         in: path

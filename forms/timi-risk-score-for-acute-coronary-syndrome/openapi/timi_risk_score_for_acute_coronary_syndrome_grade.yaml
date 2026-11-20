@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed TIMI grading result: summed total score (0-7), derived risk band (low/intermediate/high), looked-up 14-day composite-event risk percentage, and a management recommendation."
 paths:
-  /api/timi_risk_score_for_acute_coronary_syndrome_grades:
+  /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndrome_grades:
     get:
       summary: List TimiRiskScoreForAcuteCoronarySyndromeGrade records
       operationId: listTimiRiskScoreForAcuteCoronarySyndromeGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/timi_risk_score_for_acute_coronary_syndrome_grades/{id}:
+  /api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndrome_grades/{id}:
     parameters:
       - name: id
         in: path

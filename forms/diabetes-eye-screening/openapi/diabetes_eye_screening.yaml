@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main diabetes-eye-screening record for one DESP retinal screening episode: grading context, patient identification, and the right-eye and left-eye grading blocks (R grade, M grade, P marker, U marker, visual acuity). The worst-eye classification and recall / referral outcome, fired rules, and flags live in child tables."
 paths:
-  /api/diabetes_eye_screenings:
+  /api/diabetes-eye-screening/diabetes_eye_screenings:
     get:
       summary: List DiabetesEyeScreening records
       operationId: listDiabetesEyeScreening
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/diabetes_eye_screenings/{id}:
+  /api/diabetes-eye-screening/diabetes_eye_screenings/{id}:
     parameters:
       - name: id
         in: path

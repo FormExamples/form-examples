@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A critical result (e.g. motor neurone disease features, or a severe acute neuropathy such as a Guillain-Barre syndrome pattern) auto-escalates the follow-up urgency to critical-alert regardless of the other axes."
 paths:
-  /api/nerve_conduction_study_test_result_grades:
+  /api/nerve-conduction-study-test-result/nerve_conduction_study_test_result_grades:
     get:
       summary: List NerveConductionStudyTestResultGrade records
       operationId: listNerveConductionStudyTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/nerve_conduction_study_test_result_grades/{id}:
+  /api/nerve-conduction-study-test-result/nerve_conduction_study_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

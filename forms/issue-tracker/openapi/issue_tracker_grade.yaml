@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for an issue. One-to-one with issue_tracker. Stores both engine-computed and triager-final composite priority, the seven dimension scores, and a triage recommendation.
 paths:
-  /api/issue_tracker_grades:
+  /api/issue-tracker/issue_tracker_grades:
     get:
       summary: List IssueTrackerGrade records
       operationId: listIssueTrackerGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/issue_tracker_grades/{id}:
+  /api/issue-tracker/issue_tracker_grades/{id}:
     parameters:
       - name: id
         in: path

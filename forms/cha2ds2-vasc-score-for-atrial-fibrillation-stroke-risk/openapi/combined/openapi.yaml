@@ -8,7 +8,7 @@ info:
     Risk form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL
     table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/cha2ds2_vasc_grade_flags:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_flags:
     get:
       summary: List Cha2ds2VascGradeFlag records
       operationId: listCha2ds2VascGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vasc_grade_flags/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vasc_grade_rules:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_rules:
     get:
       summary: List Cha2ds2VascGradeRule records
       operationId: listCha2ds2VascGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vasc_grade_rules/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vasc_grades:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grades:
     get:
       summary: List Cha2ds2VascGrade records
       operationId: listCha2ds2VascGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vasc_grades/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vasc_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vascs:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vascs:
     get:
       summary: List Cha2ds2Vasc records
       operationId: listCha2ds2Vasc
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cha2ds2_vascs/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/cha2ds2_vascs/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/patients/{id}:
     parameters:
     - name: id
       in: path

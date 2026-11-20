@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician issuing the Return to Work statement (GP, OH physician, hospital doctor, registered nurse, pharmacist, physiotherapist, or occupational therapist authorised under the UK fit-note scheme).
 paths:
-  /api/clinicians:
+  /api/return-to-work/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/return-to-work/clinicians/{id}:
     parameters:
       - name: id
         in: path

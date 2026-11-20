@@ -111,7 +111,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/pvt_rules/")
+        .prefix("api/predicting-risk-of-cardiovascular-disease-events/pvt_rules/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

@@ -37,7 +37,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/incidents`.
+ * Response from `GET /api/medical-error-report/dashboard/incidents`.
  *
  * @typedef {Object} DashboardIncidentsResponse
  * @property {IncidentRow[]} items

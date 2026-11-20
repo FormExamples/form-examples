@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "The lienholder: the bank, credit union, or finance company holding a security interest in the vehicle."
 paths:
-  /api/lienholders:
+  /api/united-states-vehicle-title-and-registration-application/lienholders:
     get:
       summary: List Lienholder records
       operationId: listLienholder
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lienholders/{id}:
+  /api/united-states-vehicle-title-and-registration-application/lienholders/{id}:
     parameters:
       - name: id
         in: path

@@ -35,7 +35,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/notes`.
+ * Response from `GET /api/soap-note/dashboard/notes`.
  *
  * @typedef {Object} DashboardNotesResponse
  * @property {NoteRow[]} items

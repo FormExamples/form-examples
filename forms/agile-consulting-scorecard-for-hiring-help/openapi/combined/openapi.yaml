@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/agile_consulting_scorecard_for_hiring_help_grade_flags:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_flags:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeFlag records
       operationId: listAgileConsultingScorecardForHiringHelpGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_help_grade_flags/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_help_grade_rules:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_rules:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGradeRule records
       operationId: listAgileConsultingScorecardForHiringHelpGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_help_grade_rules/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_help_grades:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grades:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGrade records
       operationId: listAgileConsultingScorecardForHiringHelpGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_help_grades/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_helps:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps:
     get:
       summary: List AgileConsultingScorecardForHiringHelp records
       operationId: listAgileConsultingScorecardForHiringHelp
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_consulting_scorecard_for_hiring_helps/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_helps/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/agile-consulting-scorecard-for-hiring-help/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/organizations:
+  /api/agile-consulting-scorecard-for-hiring-help/organizations:
     get:
       summary: List Organization records
       operationId: listOrganization
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/organizations/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/organizations/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/respondents:
+  /api/agile-consulting-scorecard-for-hiring-help/respondents:
     get:
       summary: List Respondent records
       operationId: listRespondent
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/respondents/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/respondents/{id}:
     parameters:
     - name: id
       in: path

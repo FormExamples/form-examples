@@ -30,11 +30,11 @@ async fn can_create_and_read_back_patient() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/patients` (no
-        // trailing slash), whereas the list handler is at `/api/patients/`
+        // NB: the scaffold's create handler mounts at `/api/united-states-hipaa-authorization-form/patients` (no
+        // trailing slash), whereas the list handler is at `/api/united-states-hipaa-authorization-form/patients/`
         // (with one) on some Axum versions and 404s the other way on
         // others — the exact path matters either way.
-        let create_res = request.post("/api/patients").json(&new_patient).await;
+        let create_res = request.post("/api/united-states-hipaa-authorization-form/patients").json(&new_patient).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -54,7 +54,7 @@ async fn can_create_and_read_back_patient() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/patients/{id}")).await;
+        let get_res = request.get(&format!("/api/united-states-hipaa-authorization-form/patients/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -77,7 +77,7 @@ async fn can_create_and_read_back_patient() {
         assert_eq!(fetched["email"], "test.patient@example.com");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/patients").await;
+        let list_res = request.get("/api/united-states-hipaa-authorization-form/patients").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

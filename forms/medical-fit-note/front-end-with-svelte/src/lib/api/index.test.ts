@@ -11,7 +11,7 @@ function fakeApi(seed: Record<string, Record<string, unknown>[]> = {}) {
   const calls: Call[] = [];
   let n = 0;
   const fetchImpl = (async (url: string, init: RequestInit = {}) => {
-    const path = new URL(url).pathname.replace('/api/', '');
+    const path = new URL(url).pathname.replace('/api/medical-fit-note/', '');
     const method = init.method ?? 'GET';
     const body = init.body ? JSON.parse(init.body as string) : undefined;
     calls.push({ method, path, body });

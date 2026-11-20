@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient allergy, i.e. one allergen that one patient reacts to, with the reaction and its severity.
 paths:
-  /api/patient_allergies:
+  /api/dietic-assessment/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patient_allergies/{id}:
+  /api/dietic-assessment/patient_allergies/{id}:
     parameters:
       - name: id
         in: path

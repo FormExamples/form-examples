@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (NHS Cervical Screening / indication match, 1-9), pre-analytical specimen adequacy, request completeness, and triage priority."
 paths:
-  /api/cytology_test_request_grades:
+  /api/cytology-test-request/cytology_test_request_grades:
     get:
       summary: List CytologyTestRequestGrade records
       operationId: listCytologyTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cytology_test_request_grades/{id}:
+  /api/cytology-test-request/cytology_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     M1 Form form, merged from the per-entity specs in this directory. One RESTful resource per routed
     SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/assessments:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/united-kingdom-driver-and-vehicle-licensing-agency-m1-form/patients/{id}:
     parameters:
     - name: id
       in: path

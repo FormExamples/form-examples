@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Validation rules that fired during assessment. Many-to-one child of validation_result.
 paths:
-  /api/validation_fired_rules:
+  /api/medical-records-release-permission/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
       operationId: listValidationFiredRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/validation_fired_rules/{id}:
+  /api/medical-records-release-permission/validation_fired_rules/{id}:
     parameters:
       - name: id
         in: path

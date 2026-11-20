@@ -49,7 +49,7 @@ python3 -m http.server --directory forms/knee-replacement-surgery-evaluation/fro
 
 Then open <http://localhost:8000/index.html>.
 
-The dashboard reads `GET /api/knee_replacement_surgery_evaluations` from the
+The dashboard reads `GET /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations` from the
 Axum back-end at `http://localhost:5150`, and falls back to the sample rows
 in `js/data.js` with a banner when that is unavailable.
 

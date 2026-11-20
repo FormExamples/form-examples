@@ -30,11 +30,11 @@ async fn can_create_and_read_back_testator() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/testators` (no
-        // trailing slash), whereas the list handler is at `/api/testators/`
+        // NB: the scaffold's create handler mounts at `/api/united-states-last-will-and-testament/testators` (no
+        // trailing slash), whereas the list handler is at `/api/united-states-last-will-and-testament/testators/`
         // (with one) on some Axum versions and 404s the other way on
         // others — the exact path matters either way.
-        let create_res = request.post("/api/testators").json(&new_testator).await;
+        let create_res = request.post("/api/united-states-last-will-and-testament/testators").json(&new_testator).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -54,7 +54,7 @@ async fn can_create_and_read_back_testator() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/testators/{id}")).await;
+        let get_res = request.get(&format!("/api/united-states-last-will-and-testament/testators/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -80,7 +80,7 @@ async fn can_create_and_read_back_testator() {
         assert_eq!(fetched["citizenshipStatus"], "us-citizen");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/testators").await;
+        let list_res = request.get("/api/united-states-last-will-and-testament/testators").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

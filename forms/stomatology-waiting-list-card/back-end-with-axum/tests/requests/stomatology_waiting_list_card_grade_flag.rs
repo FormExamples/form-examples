@@ -9,7 +9,7 @@ use stomatology_waiting_list_card::app::App;
 async fn can_get_stomatology_waiting_list_card_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/stomatology_waiting_list_card_grade_flags")
+            .get("/api/stomatology-waiting-list-card/stomatology_waiting_list_card_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

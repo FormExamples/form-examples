@@ -1,4 +1,4 @@
-//! Cardiology-response CRUD + grade endpoints under `/api/cardiology_responses`.
+//! Cardiology-response CRUD + grade endpoints under `/api/cardiology-response/cardiology_responses`.
 //!
 //! The relational schema is the source of truth: a response row references a
 //! patient and a clinician; the four-axis grade is persisted across the
@@ -89,7 +89,7 @@ async fn ensure_clinician(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     .id)
 }
 
-/// POST /`api/cardiology_responses` — create a response (draft or filled).
+/// POST /`api/cardiology-response/cardiology_responses` — create a response (draft or filled).
 #[debug_handler]
 async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> Result<Response> {
     let patient_id = ensure_patient(&ctx, body.patient_id).await?;
@@ -98,7 +98,7 @@ async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> 
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// GET /`api/cardiology_responses` — list responses (newest first).
+/// GET /`api/cardiology-response/cardiology_responses` — list responses (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> Result<Response> {
     let page = cursor_page(&ctx, &uri)?;
@@ -107,7 +107,7 @@ async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> R
     Ok(page.respond(items))
 }
 
-/// GET /`api/cardiology_responses/{id`} — fetch one response.
+/// GET /`api/cardiology-response/cardiology_responses/{id`} — fetch one response.
 #[debug_handler]
 async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&db(&ctx), id)
@@ -116,7 +116,7 @@ async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Res
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// PATCH /`api/cardiology_responses/{id`} — overwrite the response payload fields.
+/// PATCH /`api/cardiology-response/cardiology_responses/{id`} — overwrite the response payload fields.
 #[debug_handler]
 async fn update(
     Path(id): Path<Uuid>,
@@ -134,7 +134,7 @@ async fn update(
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// DELETE /`api/cardiology_responses/{id`} — soft-delete the response.
+/// DELETE /`api/cardiology-response/cardiology_responses/{id`} — soft-delete the response.
 #[debug_handler]
 async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&db(&ctx), id)
@@ -144,7 +144,7 @@ async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(json!({ "id": id, "deleted": true })).into_response())
 }
 
-/// POST /`api/cardiology_responses/{id}/submit` — run the four-axis engine over
+/// POST /`api/cardiology-response/cardiology_responses/{id}/submit` — run the four-axis engine over
 /// the stored response and transactionally persist the grade, fired rules, and
 /// flags. Idempotent: re-submitting replaces the prior grade.
 #[debug_handler]
@@ -162,7 +162,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(grade_to_json(&grade_row, &rules, &flags)).into_response())
 }
 
-/// GET /`api/cardiology_responses/{id}/result` — read back the persisted grade.
+/// GET /`api/cardiology-response/cardiology_responses/{id}/result` — read back the persisted grade.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let grade = cardiology_response_grades::find_for_response(&db(&ctx), id)
@@ -176,7 +176,7 @@ async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/cardiology_responses")
+        .prefix("api/cardiology-response/cardiology_responses")
         .add("/", get(list))
         .add("/", post(create))
         .add("{id}", get(show))

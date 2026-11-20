@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual hearing aid candidacy rules that evaluated to true during HHIE-S grading.
 paths:
-  /api/grading_fired_rules:
+  /api/hearing-aid-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grading_fired_rules/{id}:
+  /api/hearing-aid-assessment/grading_fired_rules/{id}:
     parameters:
       - name: id
         in: path

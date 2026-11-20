@@ -55,7 +55,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/staff`.
+ * Response from `GET /api/code-of-conduct-notice/dashboard/staff`.
  *
  * @typedef {Object} DashboardStaffResponse
  * @property {StaffRow[]} items

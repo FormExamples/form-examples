@@ -8,7 +8,7 @@ info:
     in this directory. One RESTful resource per routed SQL table, and any routes documented by hand in
     hand/routes.yaml.
 paths:
-  /api/apgar_score_grade_flags:
+  /api/apgar-score/apgar_score_grade_flags:
     get:
       summary: List ApgarScoreGradeFlag records
       operationId: listApgarScoreGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_grade_flags/{id}:
+  /api/apgar-score/apgar_score_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_grade_rules:
+  /api/apgar-score/apgar_score_grade_rules:
     get:
       summary: List ApgarScoreGradeRule records
       operationId: listApgarScoreGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_grade_rules/{id}:
+  /api/apgar-score/apgar_score_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_grades:
+  /api/apgar-score/apgar_score_grades:
     get:
       summary: List ApgarScoreGrade records
       operationId: listApgarScoreGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_grades/{id}:
+  /api/apgar-score/apgar_score_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_timepoints:
+  /api/apgar-score/apgar_score_timepoints:
     get:
       summary: List ApgarScoreTimepoint records
       operationId: listApgarScoreTimepoint
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_score_timepoints/{id}:
+  /api/apgar-score/apgar_score_timepoints/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_scores:
+  /api/apgar-score/apgar_scores:
     get:
       summary: List ApgarScore records
       operationId: listApgarScore
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/apgar_scores/{id}:
+  /api/apgar-score/apgar_scores/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/apgar-score/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/apgar-score/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/apgar-score/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1495,7 +1495,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/apgar-score/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/apgar-score/patients/{id}:
     parameters:
     - name: id
       in: path

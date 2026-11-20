@@ -37,7 +37,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/sites`.
+ * Response from `GET /api/workplace-safety-assessment/dashboard/sites`.
  *
  * @typedef {Object} DashboardSitesResponse
  * @property {SiteRow[]} items

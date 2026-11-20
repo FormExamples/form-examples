@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/emergency-department-triage-note/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/emergency-department-triage-note/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grade_flags:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grade_flags:
     get:
       summary: List EmergencyDepartmentTriageNoteGradeFlag records
       operationId: listEmergencyDepartmentTriageNoteGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grade_flags/{id}:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grade_rules:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grade_rules:
     get:
       summary: List EmergencyDepartmentTriageNoteGradeRule records
       operationId: listEmergencyDepartmentTriageNoteGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grade_rules/{id}:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grades:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grades:
     get:
       summary: List EmergencyDepartmentTriageNoteGrade records
       operationId: listEmergencyDepartmentTriageNoteGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_note_grades/{id}:
+  /api/emergency-department-triage-note/emergency_department_triage_note_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_notes:
+  /api/emergency-department-triage-note/emergency_department_triage_notes:
     get:
       summary: List EmergencyDepartmentTriageNote records
       operationId: listEmergencyDepartmentTriageNote
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/emergency_department_triage_notes/{id}:
+  /api/emergency-department-triage-note/emergency_department_triage_notes/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/emergency-department-triage-note/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/emergency-department-triage-note/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/emergency-department-triage-note/patients/{id}:
     parameters:
     - name: id
       in: path

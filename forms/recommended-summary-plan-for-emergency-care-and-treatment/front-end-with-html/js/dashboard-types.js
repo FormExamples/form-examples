@@ -36,7 +36,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/plans`.
+ * Response from `GET /api/recommended-summary-plan-for-emergency-care-and-treatment/dashboard/plans`.
  *
  * @typedef {Object} DashboardPlansResponse
  * @property {PlanRow[]} items

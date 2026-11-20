@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Lens recommendation: design, material, coatings, tint. One row per prescription."
 paths:
-  /api/eye_prescription_lens_recommendations:
+  /api/eye-prescription/eye_prescription_lens_recommendations:
     get:
       summary: List EyePrescriptionLensRecommendation records
       operationId: listEyePrescriptionLensRecommendation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eye_prescription_lens_recommendations/{id}:
+  /api/eye-prescription/eye_prescription_lens_recommendations/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Global Rating of Change (7-point -3..+3) and self-rated health (5-level) PROM responses. Unlicensed, public-domain instruments.
 paths:
-  /api/outpatient_outcome_prom_grcs:
+  /api/outpatient-outcome/outpatient_outcome_prom_grcs:
     get:
       summary: List OutpatientOutcomePromGrc records
       operationId: listOutpatientOutcomePromGrc
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_prom_grcs/{id}:
+  /api/outpatient-outcome/outpatient_outcome_prom_grcs/{id}:
     parameters:
       - name: id
         in: path

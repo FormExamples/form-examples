@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A reportable issue captured via a 10-step single-page wizard. Holds reporter metadata, the nine SOAP-style sections, and the seven raw input scores. Computed scores live in the issue_tracker_grade child table.
 paths:
-  /api/issue_trackers:
+  /api/issue-tracker/issue_trackers:
     get:
       summary: List IssueTracker records
       operationId: listIssueTracker
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/issue_trackers/{id}:
+  /api/issue-tracker/issue_trackers/{id}:
     parameters:
       - name: id
         in: path

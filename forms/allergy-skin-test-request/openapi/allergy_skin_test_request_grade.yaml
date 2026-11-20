@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (BSACI / EAACI indication match, 1-9), validity-and-safety, request completeness, and triage priority."
 paths:
-  /api/allergy_skin_test_request_grades:
+  /api/allergy-skin-test-request/allergy_skin_test_request_grades:
     get:
       summary: List AllergySkinTestRequestGrade records
       operationId: listAllergySkinTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/allergy_skin_test_request_grades/{id}:
+  /api/allergy-skin-test-request/allergy_skin_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

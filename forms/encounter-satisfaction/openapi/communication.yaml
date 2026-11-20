@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Communication domain: 4 Likert-scale satisfaction questions."
 paths:
-  /api/communications:
+  /api/encounter-satisfaction/communications:
     get:
       summary: List Communication records
       operationId: listCommunication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/communications/{id}:
+  /api/encounter-satisfaction/communications/{id}:
     parameters:
       - name: id
         in: path

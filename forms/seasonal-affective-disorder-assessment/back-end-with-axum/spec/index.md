@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/seasonal-affective-disorder-assessment/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/seasonal-affective-disorder-assessment/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/seasonal-affective-disorder-assessment/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/seasonal-affective-disorder-assessment/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/seasonal-affective-disorder-assessment/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/seasonal-affective-disorder-assessment/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/seasonal-affective-disorder-assessment/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

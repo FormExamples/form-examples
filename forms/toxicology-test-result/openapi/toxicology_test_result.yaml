@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Toxicology / poisons / therapeutic-drug-level test result (report). Captures the specimen condition, clinical history and suspected agent, the assay result values (paracetamol, salicylate, ethanol, lithium, digoxin, carboxyhaemoglobin, drugs-of-abuse screen, named specific drug), the paracetamol-nomogram interpretation, the overall result status, the narrative findings and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/toxicology_test_results:
+  /api/toxicology-test-result/toxicology_test_results:
     get:
       summary: List ToxicologyTestResult records
       operationId: listToxicologyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/toxicology_test_results/{id}:
+  /api/toxicology-test-result/toxicology_test_results/{id}:
     parameters:
       - name: id
         in: path

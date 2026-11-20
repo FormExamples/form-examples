@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis interpretation grade: result classification, abnormality severity / structured-reporting category, report completeness, and follow-up urgency. A pathogenic / likely-pathogenic actionable variant auto-escalates the result classification toward abnormal or critical and the follow-up urgency toward urgent / critical-alert regardless of the other axes."
 paths:
-  /api/genetic_test_result_grades:
+  /api/genetic-test-result/genetic_test_result_grades:
     get:
       summary: List GeneticTestResultGrade records
       operationId: listGeneticTestResultGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/genetic_test_result_grades/{id}:
+  /api/genetic-test-result/genetic_test_result_grades/{id}:
     parameters:
       - name: id
         in: path

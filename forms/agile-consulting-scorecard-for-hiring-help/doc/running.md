@@ -48,8 +48,8 @@ pnpm run build
 ```
 
 By default the dashboard fetches from its own same-origin
-`+server.ts` endpoints (`/api/dashboard/scorecards`,
-`/api/scorecards/[id]`, `/api/stats`), which return the bundled sample
+`+server.ts` endpoints (`/api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards`,
+`/api/agile-consulting-scorecard-for-hiring-help/scorecards/[id]`, `/api/agile-consulting-scorecard-for-hiring-help/stats`), which return the bundled sample
 data. To point at the Rust backend instead, pass a base URL into
 `fetchScorecards(base)` etc. (see `src/lib/api.ts`).
 

@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/agile_principles_assessment_grade_flags:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_flags:
     get:
       summary: List AgilePrinciplesAssessmentGradeFlag records
       operationId: listAgilePrinciplesAssessmentGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessment_grade_flags/{id}:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessment_grade_rules:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_rules:
     get:
       summary: List AgilePrinciplesAssessmentGradeRule records
       operationId: listAgilePrinciplesAssessmentGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessment_grade_rules/{id}:
+  /api/agile-principles-assessment/agile_principles_assessment_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessment_grades:
+  /api/agile-principles-assessment/agile_principles_assessment_grades:
     get:
       summary: List AgilePrinciplesAssessmentGrade records
       operationId: listAgilePrinciplesAssessmentGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessment_grades/{id}:
+  /api/agile-principles-assessment/agile_principles_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessments:
+  /api/agile-principles-assessment/agile_principles_assessments:
     get:
       summary: List AgilePrinciplesAssessment records
       operationId: listAgilePrinciplesAssessment
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agile_principles_assessments/{id}:
+  /api/agile-principles-assessment/agile_principles_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/agile-principles-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/respondents:
+  /api/agile-principles-assessment/respondents:
     get:
       summary: List Respondent records
       operationId: listRespondent
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/respondents/{id}:
+  /api/agile-principles-assessment/respondents/{id}:
     parameters:
     - name: id
       in: path

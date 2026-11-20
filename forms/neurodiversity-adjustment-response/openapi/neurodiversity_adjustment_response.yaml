@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Neurodiversity reasonable-adjustments response: the employer's decision, written confirmation, and review arrangements in answer to a request. Captures the overall decision and rationale, which adjustments were agreed (and any alternatives offered), the trial period and review date, support / resources / responsibilities, and any escalation. This is the source-of-truth record that the four-axis grade is computed from. Aligned with the ACAS reasonable-adjustment confirmation and review templates and the Equality Act 2010 duty to make reasonable adjustments."
 paths:
-  /api/neurodiversity_adjustment_responses:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses:
     get:
       summary: List NeurodiversityAdjustmentResponse records
       operationId: listNeurodiversityAdjustmentResponse
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_responses/{id}:
+  /api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}:
     parameters:
       - name: id
         in: path

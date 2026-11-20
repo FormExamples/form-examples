@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Timed intrapartum observation rows for a partogram: labour progress, contractions, fetal heart rate, liquor and moulding, maternal vitals, urine, and drugs / oxytocin."
 paths:
-  /api/partogram_observations:
+  /api/partogram/partogram_observations:
     get:
       summary: List PartogramObservation records
       operationId: listPartogramObservation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/partogram_observations/{id}:
+  /api/partogram/partogram_observations/{id}:
     parameters:
       - name: id
         in: path

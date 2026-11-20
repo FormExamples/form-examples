@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Neurodiversity reasonable-adjustments review: a periodic check of whether the agreed adjustments are still working, completed by the manager / HR with the worker. Captures the per-category effectiveness of the adjustments in place, the worker's feedback and outcomes, any changes arising, and the next review date. This is the source-of-truth record that the four-axis grade is computed from. It is the review half of the ACAS request / confirmation / review cycle and follows the ACAS reasonable-adjustments review template."
 paths:
-  /api/neurodiversity_adjustment_reviews:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews:
     get:
       summary: List NeurodiversityAdjustmentReview records
       operationId: listNeurodiversityAdjustmentReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_reviews/{id}:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}:
     parameters:
       - name: id
         in: path

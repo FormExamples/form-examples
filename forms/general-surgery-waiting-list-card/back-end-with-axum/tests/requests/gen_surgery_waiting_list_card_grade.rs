@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_gen_surgery_waiting_list_card_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/gen_surgery_waiting_list_card_grades")
+            .get("/api/general-surgery-waiting-list-card/gen_surgery_waiting_list_card_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

@@ -46,7 +46,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/notes`.
+ * Response from `GET /api/inpatient-clinical-note/dashboard/notes`.
  *
  * @typedef {Object} DashboardNotesResponse
  * @property {NoteRow[]} items

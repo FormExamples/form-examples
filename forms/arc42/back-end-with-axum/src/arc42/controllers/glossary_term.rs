@@ -110,7 +110,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/glossary_terms/")
+        .prefix("api/arc42/glossary_terms/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

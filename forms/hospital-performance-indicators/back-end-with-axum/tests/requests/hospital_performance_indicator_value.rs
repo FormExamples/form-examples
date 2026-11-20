@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_hospital_performance_indicator_values() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/hospital_performance_indicator_values")
+            .get("/api/hospital-performance-indicators/hospital_performance_indicator_values")
             .await;
         assert_eq!(res.status_code(), 200);
 

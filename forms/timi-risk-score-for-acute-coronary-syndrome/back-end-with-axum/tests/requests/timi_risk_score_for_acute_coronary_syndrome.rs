@@ -9,7 +9,7 @@ use timi_risk_score_for_acute_coronary_syndrome::app::App;
 async fn can_get_timi_risk_score_for_acute_coronary_syndromes() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/timi_risk_score_for_acute_coronary_syndromes")
+            .get("/api/timi-risk-score-for-acute-coronary-syndrome/timi_risk_score_for_acute_coronary_syndromes")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

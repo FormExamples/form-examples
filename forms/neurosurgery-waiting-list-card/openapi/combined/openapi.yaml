@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/neurosurgery_waiting_list_card_appointments:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_appointments:
     get:
       summary: List NeurosurgeryWaitingListCardAppointment records
       operationId: listNeurosurgeryWaitingListCardAppointment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_appointments/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grade_flags:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_flags:
     get:
       summary: List NeurosurgeryWaitingListCardGradeFlag records
       operationId: listNeurosurgeryWaitingListCardGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grade_flags/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grade_rules:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_rules:
     get:
       summary: List NeurosurgeryWaitingListCardGradeRule records
       operationId: listNeurosurgeryWaitingListCardGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grade_rules/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grades:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grades:
     get:
       summary: List NeurosurgeryWaitingListCardGrade records
       operationId: listNeurosurgeryWaitingListCardGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_card_grades/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_cards:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards:
     get:
       summary: List NeurosurgeryWaitingListCard records
       operationId: listNeurosurgeryWaitingListCard
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurosurgery_waiting_list_cards/{id}:
+  /api/neurosurgery-waiting-list-card/neurosurgery_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/neurosurgery-waiting-list-card/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/neurosurgery-waiting-list-card/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/neurosurgery-waiting-list-card/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners:
+  /api/neurosurgery-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners/{id}:
+  /api/neurosurgery-waiting-list-card/practitioners/{id}:
     parameters:
     - name: id
       in: path

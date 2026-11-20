@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/united-kingdom-statement-of-fitness-for-work/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_practices:
+  /api/united-kingdom-statement-of-fitness-for-work/medical_practices:
     get:
       summary: List MedicalPractice records
       operationId: listMedicalPractice
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_practices/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/medical_practices/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-statement-of-fitness-for-work/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/united-kingdom-statement-of-fitness-for-work/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grade_flags:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_flags:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeFlag records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeFlag
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grade_flags/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grade_rules:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_rules:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeRule records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeRule
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grade_rules/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grades:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grades:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGrade records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGrade
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_work_grades/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_works:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWork records
       operationId: listUnitedKingdomStatementOfFitnessForWork
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_statement_of_fitness_for_works/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works/{id}:
     parameters:
     - name: id
       in: path

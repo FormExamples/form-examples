@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed Clinical Frailty Scale result. CFS 1 = Very fit, 4 = Vulnerable, 7 = Severely frail, 9 = Terminally ill. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/gerontology-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/gerontology-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

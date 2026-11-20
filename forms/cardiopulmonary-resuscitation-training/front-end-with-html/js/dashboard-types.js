@@ -51,7 +51,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/trainees`.
+ * Response from `GET /api/cardiopulmonary-resuscitation-training/dashboard/trainees`.
  *
  * @typedef {Object} DashboardTraineesResponse
  * @property {TraineeRow[]} items

@@ -39,11 +39,11 @@ async fn can_create_and_read_back_patient() {
 
         // 1. CREATE over HTTP.
         //
-        // NB: the scaffold's create handler mounts at `/api/patients` (no
-        // trailing slash), whereas the list handler is at `/api/patients/`
+        // NB: the scaffold's create handler mounts at `/api/apgar-score/patients` (no
+        // trailing slash), whereas the list handler is at `/api/apgar-score/patients/`
         // (with one). Posting to the trailing-slash form falls through to
         // Axum's welcome/fallback page, so the exact path matters here.
-        let create_res = request.post("/api/patients").json(&new_patient).await;
+        let create_res = request.post("/api/apgar-score/patients").json(&new_patient).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -63,7 +63,7 @@ async fn can_create_and_read_back_patient() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/patients/{id}")).await;
+        let get_res = request.get(&format!("/api/apgar-score/patients/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -95,9 +95,9 @@ async fn can_create_and_read_back_patient() {
 
         // 4. The new record is present in the list endpoint.
         //    (Same trailing-slash caveat as the create route: the real list
-        //    handler is at `/api/patients`; `/api/patients/` hits the
+        //    handler is at `/api/apgar-score/patients`; `/api/apgar-score/patients/` hits the
         //    fallback page.)
-        let list_res = request.get("/api/patients").await;
+        let list_res = request.get("/api/apgar-score/patients").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

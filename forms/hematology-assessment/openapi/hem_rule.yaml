@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Catalogue of 20 hematology rules evaluated during grading.
 paths:
-  /api/hem_rules:
+  /api/hematology-assessment/hem_rules:
     get:
       summary: List HemRule records
       operationId: listHemRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hem_rules/{id}:
+  /api/hematology-assessment/hem_rules/{id}:
     parameters:
       - name: id
         in: path

@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5210';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const PATIENTS_PATH = '/api/predicting-risk-of-cardiovascular-disease-events/dashboard/patients';
 
 /**
  * Fetch the patient list from the backend.

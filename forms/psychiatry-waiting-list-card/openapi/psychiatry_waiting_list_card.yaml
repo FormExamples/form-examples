@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a psychiatry waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/psychiatry_waiting_list_cards:
+  /api/psychiatry-waiting-list-card/psychiatry_waiting_list_cards:
     get:
       summary: List PsychiatryWaitingListCard records
       operationId: listPsychiatryWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/psychiatry_waiting_list_cards/{id}:
+  /api/psychiatry-waiting-list-card/psychiatry_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

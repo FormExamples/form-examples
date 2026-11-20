@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Post Operative Report form. Pure back-end: no 
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/post-operative-report/assessments` (list, create, read, update,
+submit, result) plus `/api/post-operative-report/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

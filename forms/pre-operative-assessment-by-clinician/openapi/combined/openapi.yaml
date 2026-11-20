@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/allergies:
+  /api/pre-operative-assessment-by-clinician/allergies:
     get:
       summary: List Allergy records
       operationId: listAllergy
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/allergies/{id}:
+  /api/pre-operative-assessment-by-clinician/allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/pre-operative-assessment-by-clinician/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/pre-operative-assessment-by-clinician/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications:
+  /api/pre-operative-assessment-by-clinician/medications:
     get:
       summary: List Medication records
       operationId: listMedication
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medications/{id}:
+  /api/pre-operative-assessment-by-clinician/medications/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/pre-operative-assessment-by-clinician/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -757,7 +757,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patient_allergies:
+  /api/pre-operative-assessment-by-clinician/patient_allergies:
     get:
       summary: List PatientAllergy records
       operationId: listPatientAllergy
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_allergies/{id}:
+  /api/pre-operative-assessment-by-clinician/patient_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications:
+  /api/pre-operative-assessment-by-clinician/patient_medications:
     get:
       summary: List PatientMedication records
       operationId: listPatientMedication
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_medications/{id}:
+  /api/pre-operative-assessment-by-clinician/patient_medications/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/pre-operative-assessment-by-clinician/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/pre-operative-assessment-by-clinician/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grade_flags:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_flags:
     get:
       summary: List PreOperativeAssessmentByClinicianGradeFlag records
       operationId: listPreOperativeAssessmentByClinicianGradeFlag
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grade_flags/{id}:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1741,7 +1741,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grade_rules:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_rules:
     get:
       summary: List PreOperativeAssessmentByClinicianGradeRule records
       operationId: listPreOperativeAssessmentByClinicianGradeRule
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grade_rules/{id}:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1987,7 +1987,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grades:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grades:
     get:
       summary: List PreOperativeAssessmentByClinicianGrade records
       operationId: listPreOperativeAssessmentByClinicianGrade
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinician_grades/{id}:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinician_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -2233,7 +2233,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinicians:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinicians:
     get:
       summary: List PreOperativeAssessmentByClinician records
       operationId: listPreOperativeAssessmentByClinician
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/pre_operative_assessment_by_clinicians/{id}:
+  /api/pre-operative-assessment-by-clinician/pre_operative_assessment_by_clinicians/{id}:
     parameters:
     - name: id
       in: path

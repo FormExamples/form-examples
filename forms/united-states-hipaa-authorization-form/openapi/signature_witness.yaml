@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Signature, date, and witness fields. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(1)(vi).
 paths:
-  /api/signature_witnesses:
+  /api/united-states-hipaa-authorization-form/signature_witnesses:
     get:
       summary: List SignatureWitness records
       operationId: listSignatureWitness
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/signature_witnesses/{id}:
+  /api/united-states-hipaa-authorization-form/signature_witnesses/{id}:
     parameters:
       - name: id
         in: path

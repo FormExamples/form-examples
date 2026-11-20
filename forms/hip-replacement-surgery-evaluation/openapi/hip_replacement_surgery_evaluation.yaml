@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Hip-replacement surgery evaluation: the payload of the 15-step single-page wizard, i.e. the orthopaedic assessment of whether a patient's hip disease and functional decline justify total hip arthroplasty and whether conservative options have been exhausted."
 paths:
-  /api/hip_replacement_surgery_evaluations:
+  /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations:
     get:
       summary: List HipReplacementSurgeryEvaluation records
       operationId: listHipReplacementSurgeryEvaluation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hip_replacement_surgery_evaluations/{id}:
+  /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations/{id}:
     parameters:
       - name: id
         in: path

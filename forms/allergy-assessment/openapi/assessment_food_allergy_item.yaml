@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual food allergy entry with allergen, reaction type, and severity.
 paths:
-  /api/assessment_food_allergy_items:
+  /api/allergy-assessment/assessment_food_allergy_items:
     get:
       summary: List AssessmentFoodAllergyItem records
       operationId: listAssessmentFoodAllergyItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_food_allergy_items/{id}:
+  /api/allergy-assessment/assessment_food_allergy_items/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`pulmonary_embolism_rule_out_criteria/`](pulmonary_embolism_rule_out_criteria/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/pulmonary-embolism-rule-out-criteria/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

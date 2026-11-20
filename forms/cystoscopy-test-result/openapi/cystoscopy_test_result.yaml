@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Cystoscopy (bladder endoscopy) result (report). Captures the performed procedure and anaesthesia, the clinical history, the narrative and structured endoscopic findings, tumour / lesion detail, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/cystoscopy_test_results:
+  /api/cystoscopy-test-result/cystoscopy_test_results:
     get:
       summary: List CystoscopyTestResult records
       operationId: listCystoscopyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cystoscopy_test_results/{id}:
+  /api/cystoscopy-test-result/cystoscopy_test_results/{id}:
     parameters:
       - name: id
         in: path

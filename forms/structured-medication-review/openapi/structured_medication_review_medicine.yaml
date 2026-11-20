@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Medicines reviewed within a structured medication review: name, form and strength, dose, indication, regular/high-risk flags, adherence, anticholinergic burden, monitoring, deprescribing candidacy, and STOPP/START criteria."
 paths:
-  /api/structured_medication_review_medicines:
+  /api/structured-medication-review/structured_medication_review_medicines:
     get:
       summary: List StructuredMedicationReviewMedicine records
       operationId: listStructuredMedicationReviewMedicine
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/structured_medication_review_medicines/{id}:
+  /api/structured-medication-review/structured_medication_review_medicines/{id}:
     parameters:
       - name: id
         in: path

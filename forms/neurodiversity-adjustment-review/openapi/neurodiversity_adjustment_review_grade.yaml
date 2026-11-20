@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grade for a neurodiversity reasonable-adjustments review: overall effectiveness, wellbeing risk, review completeness, and next-step urgency. Any adjustment reported as not-working, a dissatisfied worker, declining wellbeing, or an escalation drives the wellbeing-risk axis and the next-step urgency regardless of the other axes."
 paths:
-  /api/neurodiversity_adjustment_review_grades:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_review_grades:
     get:
       summary: List NeurodiversityAdjustmentReviewGrade records
       operationId: listNeurodiversityAdjustmentReviewGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neurodiversity_adjustment_review_grades/{id}:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_review_grades/{id}:
     parameters:
       - name: id
         in: path

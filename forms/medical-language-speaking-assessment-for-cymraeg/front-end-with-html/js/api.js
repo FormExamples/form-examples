@@ -8,7 +8,7 @@
 // data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CANDIDATES_PATH = '/api/dashboard/candidates';
+const CANDIDATES_PATH = '/api/medical-language-speaking-assessment-for-cymraeg/dashboard/candidates';
 
 /**
  * Fetch the candidate list from the backend.

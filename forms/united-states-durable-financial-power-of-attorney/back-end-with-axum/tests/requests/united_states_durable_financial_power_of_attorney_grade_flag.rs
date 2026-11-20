@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_united_states_durable_financial_power_of_attorney_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/united_states_durable_financial_power_of_attorney_grade_flags")
+            .get("/api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

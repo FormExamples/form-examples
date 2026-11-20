@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main GRACE assessment record: assessment context, patient identification, and the eight GRACE variable inputs (age, heart rate, systolic blood pressure, serum creatinine, Killip class, cardiac arrest at admission, ST-segment deviation, elevated cardiac enzymes)."
 paths:
-  /api/grace_score_for_acute_coronary_syndromes:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndromes:
     get:
       summary: List GraceScoreForAcuteCoronarySyndrome records
       operationId: listGraceScoreForAcuteCoronarySyndrome
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grace_score_for_acute_coronary_syndromes/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndromes/{id}:
     parameters:
       - name: id
         in: path

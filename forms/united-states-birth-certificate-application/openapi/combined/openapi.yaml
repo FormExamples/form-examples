@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-states-birth-certificate-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-states-birth-certificate-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-birth-certificate-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/registrants:
+  /api/united-states-birth-certificate-application/registrants:
     get:
       summary: List Registrant records
       operationId: listRegistrant
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/registrants/{id}:
+  /api/united-states-birth-certificate-application/registrants/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grade_flags:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_flags:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGradeFlag records
       operationId: listUnitedStatesBirthCertificateApplicationGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grade_flags/{id}:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grade_rules:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_rules:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGradeRule records
       operationId: listUnitedStatesBirthCertificateApplicationGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grade_rules/{id}:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grades:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grades:
     get:
       summary: List UnitedStatesBirthCertificateApplicationGrade records
       operationId: listUnitedStatesBirthCertificateApplicationGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_application_grades/{id}:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_applications:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_applications:
     get:
       summary: List UnitedStatesBirthCertificateApplication records
       operationId: listUnitedStatesBirthCertificateApplication
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_birth_certificate_applications/{id}:
+  /api/united-states-birth-certificate-application/united_states_birth_certificate_applications/{id}:
     parameters:
     - name: id
       in: path

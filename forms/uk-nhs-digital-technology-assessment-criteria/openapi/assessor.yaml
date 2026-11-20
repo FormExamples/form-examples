@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Person carrying out the DTAC assessment on behalf of an NHS or care organisation.
 paths:
-  /api/assessors:
+  /api/uk-nhs-digital-technology-assessment-criteria/assessors:
     get:
       summary: List Assessor records
       operationId: listAssessor
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessors/{id}:
+  /api/uk-nhs-digital-technology-assessment-criteria/assessors/{id}:
     parameters:
       - name: id
         in: path

@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const RECONCILIATIONS_PATH = '/api/dashboard/reconciliations';
+const RECONCILIATIONS_PATH = '/api/medication-reconciliation/dashboard/reconciliations';
 
 /**
  * Fetch the reconciliation list from the backend.

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician identifying information for the authoring nurse and contributing professionals.
 paths:
-  /api/clinicians:
+  /api/nursing-care-plan/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/nursing-care-plan/clinicians/{id}:
     parameters:
       - name: id
         in: path

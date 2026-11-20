@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "A participant linked to an OKR objective: DRI, contributor, reviewer, stakeholder, or observer."
 paths:
-  /api/participants:
+  /api/objectives-and-key-results-tracker/participants:
     get:
       summary: List Participant records
       operationId: listParticipant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/participants/{id}:
+  /api/objectives-and-key-results-tracker/participants/{id}:
     parameters:
       - name: id
         in: path

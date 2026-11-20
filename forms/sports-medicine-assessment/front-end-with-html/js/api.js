@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ATHLETES_PATH = '/api/dashboard/athletes';
+const ATHLETES_PATH = '/api/sports-medicine-assessment/dashboard/athletes';
 
 /**
  * Fetch the athlete list from the backend.

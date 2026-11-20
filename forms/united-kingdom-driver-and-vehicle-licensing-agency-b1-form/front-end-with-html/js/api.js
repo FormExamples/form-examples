@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const PATIENTS_PATH = '/api/united-kingdom-driver-and-vehicle-licensing-agency-b1-form/dashboard/patients';
 
 /**
  * Fetch the applicant list from the backend.

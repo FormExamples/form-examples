@@ -49,7 +49,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/screenings`.
+ * Response from `GET /api/diabetes-eye-screening/dashboard/screenings`.
  *
  * @typedef {Object} DashboardScreeningsResponse
  * @property {ScreeningRow[]} items

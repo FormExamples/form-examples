@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed execution-readiness classification: validity class, governing state rule applied, and whether an execution risk is indicated."
 paths:
-  /api/united_states_durable_financial_power_of_attorney_grades:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grades:
     get:
       summary: List UnitedStatesDurableFinancialPowerOfAttorneyGrade records
       operationId: listUnitedStatesDurableFinancialPowerOfAttorneyGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_states_durable_financial_power_of_attorney_grades/{id}:
+  /api/united-states-durable-financial-power-of-attorney/united_states_durable_financial_power_of_attorney_grades/{id}:
     parameters:
       - name: id
         in: path

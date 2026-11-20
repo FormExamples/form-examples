@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/mental-state-examination/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/mental-state-examination/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grade_flags:
+  /api/mental-state-examination/mental_state_examination_grade_flags:
     get:
       summary: List MentalStateExaminationGradeFlag records
       operationId: listMentalStateExaminationGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grade_flags/{id}:
+  /api/mental-state-examination/mental_state_examination_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grade_rules:
+  /api/mental-state-examination/mental_state_examination_grade_rules:
     get:
       summary: List MentalStateExaminationGradeRule records
       operationId: listMentalStateExaminationGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grade_rules/{id}:
+  /api/mental-state-examination/mental_state_examination_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grades:
+  /api/mental-state-examination/mental_state_examination_grades:
     get:
       summary: List MentalStateExaminationGrade records
       operationId: listMentalStateExaminationGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examination_grades/{id}:
+  /api/mental-state-examination/mental_state_examination_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examinations:
+  /api/mental-state-examination/mental_state_examinations:
     get:
       summary: List MentalStateExamination records
       operationId: listMentalStateExamination
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_state_examinations/{id}:
+  /api/mental-state-examination/mental_state_examinations/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/mental-state-examination/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/mental-state-examination/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/mental-state-examination/patients/{id}:
     parameters:
     - name: id
       in: path

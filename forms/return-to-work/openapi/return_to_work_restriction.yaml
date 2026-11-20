@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual workplace restriction or reasonable adjustment associated with a Return to Work record. Many-to-one relation to return_to_work.
 paths:
-  /api/return_to_work_restrictions:
+  /api/return-to-work/return_to_work_restrictions:
     get:
       summary: List ReturnToWorkRestriction records
       operationId: listReturnToWorkRestriction
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/return_to_work_restrictions/{id}:
+  /api/return-to-work/return_to_work_restrictions/{id}:
     parameters:
       - name: id
         in: path

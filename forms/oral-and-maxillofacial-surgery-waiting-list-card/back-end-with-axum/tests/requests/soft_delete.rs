@@ -45,7 +45,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         .await
         .unwrap();
 
-        let path = format!("/api/omfs_waiting_list_card_grades/{row3}");
+        let path = format!("/api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_grades/{row3}");
         let live = request.get(&path).await;
         assert_eq!(live.status_code(), 200);
         let body = live.json::<serde_json::Value>();
@@ -55,7 +55,7 @@ async fn delete_hides_the_row_and_keeps_it() {
         assert_eq!(request.get(&path).await.status_code(), 404);
         assert_eq!(request.delete(&path).await.status_code(), 404);
         let listed = request
-            .get("/api/omfs_waiting_list_card_grades")
+            .get("/api/oral-and-maxillofacial-surgery-waiting-list-card/omfs_waiting_list_card_grades")
             .await
             .json::<serde_json::Value>();
         assert!(!listed.to_string().contains(&row3.to_string()));

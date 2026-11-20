@@ -76,7 +76,7 @@ where in the team's lifecycle the ADR is being captured.
      `http://localhost:5173`
 2. Fill the 16-step wizard. The HTML and SvelteKit forms autosave to
    `localStorage` under `adr.form.v1` as you type. To store an ADR,
-   `POST` it to the Axum back end's `/api/adrs`, which numbers and slugs
+   `POST` it to the Axum back end's `/api/architecture-decision-record/adrs`, which numbers and slugs
    it when the body leaves those out.
 3. Click **Generate Markdown ADR**. Copy the output or download the
    `.md` file into `docs/adr/NNNN-slug.md` in your project repo.
@@ -95,7 +95,7 @@ where in the team's lifecycle the ADR is being captured.
   when wiring to a real backend.
 - `front-end-with-svelte/` — sortable / filterable register
   with status pills. Set `VITE_API_BASE_URL=http://localhost:5150` in
-  `.env.local` to read live from the Axum backend's `/api/adrs`
+  `.env.local` to read live from the Axum backend's `/api/architecture-decision-record/adrs`
   endpoint. Clicking a row navigates to `/{slug}` for an inline
   Markdown view.
 
@@ -107,12 +107,12 @@ cargo run -- db migrate
 cargo run -- start
 ```
 
-The back end is a JSON API (`GET /api/openapi.yaml` describes it):
+The back end is a JSON API (`GET /api/architecture-decision-record/openapi.yaml` describes it):
 
-- `GET  /api/adrs` — the register, by number, paged
-- `POST /api/adrs` — create an ADR; a missing number is the next one, and a
+- `GET  /api/architecture-decision-record/adrs` — the register, by number, paged
+- `POST /api/architecture-decision-record/adrs` — create an ADR; a missing number is the next one, and a
   missing slug comes from the title. Answers the stored row
-- `GET  /api/adrs/{slug}` — one ADR's metadata and its rendered Markdown
+- `GET  /api/architecture-decision-record/adrs/{slug}` — one ADR's metadata and its rendered Markdown
 
 ## Directory structure
 

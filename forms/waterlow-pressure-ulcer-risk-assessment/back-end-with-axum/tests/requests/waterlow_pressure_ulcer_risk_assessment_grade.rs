@@ -9,7 +9,7 @@ use waterlow_pressure_ulcer_risk_assessment::app::App;
 async fn can_get_waterlow_pressure_ulcer_risk_assessment_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/waterlow_pressure_ulcer_risk_assessment_grades")
+            .get("/api/waterlow-pressure-ulcer-risk-assessment/waterlow_pressure_ulcer_risk_assessment_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

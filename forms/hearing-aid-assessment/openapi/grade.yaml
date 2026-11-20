@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed HHIE-S grading result. 0-8 = No handicap, 10-24 = Mild-moderate, 26-40 = Significant. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/hearing-aid-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/hearing-aid-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

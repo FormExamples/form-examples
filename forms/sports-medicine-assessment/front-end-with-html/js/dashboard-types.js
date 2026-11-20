@@ -48,7 +48,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/athletes`.
+ * Response from `GET /api/sports-medicine-assessment/dashboard/athletes`.
  *
  * @typedef {Object} DashboardAthletesResponse
  * @property {AthleteRow[]} items

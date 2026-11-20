@@ -36,7 +36,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/donors`.
+ * Response from `GET /api/blood-donation-assessment/dashboard/donors`.
  *
  * @typedef {Object} DashboardDonorsResponse
  * @property {DonorRow[]} items

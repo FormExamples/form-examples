@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Arc42 form. Pure back-end: no HTML
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/arc42/assessments` (list, create, read, update,
+submit, result) plus `/api/arc42/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

@@ -30,14 +30,14 @@ A critical result auto-escalates Axis D to `critical-alert` and raises the
 
 | Method | Route                                   | Purpose                                           |
 | ------ | --------------------------------------- | ------------------------------------------------- |
-| GET    | `/api/cardiology_responses`             | List responses (most recent first)                |
-| POST   | `/api/cardiology_responses`             | Create a response (draft or filled)               |
-| GET    | `/api/cardiology_responses/{id}`        | Return the response record                        |
-| PATCH  | `/api/cardiology_responses/{id}`        | Overwrite the response payload fields             |
-| DELETE | `/api/cardiology_responses/{id}`        | Soft-delete the response                          |
-| POST   | `/api/cardiology_responses/{id}/submit` | Run the engine, persist the grade transactionally |
-| GET    | `/api/cardiology_responses/{id}/result` | Return the stored grade + fired rules + flags     |
-| GET    | `/api/dashboard`                        | List graded responses with their response (paged) |
+| GET    | `/api/cardiology-response/cardiology_responses`             | List responses (most recent first)                |
+| POST   | `/api/cardiology-response/cardiology_responses`             | Create a response (draft or filled)               |
+| GET    | `/api/cardiology-response/cardiology_responses/{id}`        | Return the response record                        |
+| PATCH  | `/api/cardiology-response/cardiology_responses/{id}`        | Overwrite the response payload fields             |
+| DELETE | `/api/cardiology-response/cardiology_responses/{id}`        | Soft-delete the response                          |
+| POST   | `/api/cardiology-response/cardiology_responses/{id}/submit` | Run the engine, persist the grade transactionally |
+| GET    | `/api/cardiology-response/cardiology_responses/{id}/result` | Return the stored grade + fired rules + flags     |
+| GET    | `/api/cardiology-response/dashboard`                        | List graded responses with their response (paged) |
 
 All request and response bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9, NICE NG202 / SIGN), clinical priority, request completeness, and triage."
 paths:
-  /api/sleep_study_test_request_grades:
+  /api/sleep-study-test-request/sleep_study_test_request_grades:
     get:
       summary: List SleepStudyTestRequestGrade records
       operationId: listSleepStudyTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/sleep_study_test_request_grades/{id}:
+  /api/sleep-study-test-request/sleep_study_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

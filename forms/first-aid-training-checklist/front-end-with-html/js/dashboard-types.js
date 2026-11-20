@@ -52,7 +52,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/trainees`.
+ * Response from `GET /api/first-aid-training-checklist/dashboard/trainees`.
  *
  * @typedef {Object} DashboardTraineesResponse
  * @property {TraineeRow[]} items

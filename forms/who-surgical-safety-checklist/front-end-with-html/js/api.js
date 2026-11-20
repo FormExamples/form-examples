@@ -6,7 +6,7 @@
 // shipped in `sample-data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const CHECKLISTS_PATH = '/api/checklists';
+const CHECKLISTS_PATH = '/api/who-surgical-safety-checklist/checklists';
 
 /**
  * Fetch the checklist list from the backend.

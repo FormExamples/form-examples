@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: NHS Friends and Family Test PREM response and free-text comment. Open Government Licence v3.0.
 paths:
-  /api/outpatient_outcome_prem_ffts:
+  /api/outpatient-outcome/outpatient_outcome_prem_ffts:
     get:
       summary: List OutpatientOutcomePremFft records
       operationId: listOutpatientOutcomePremFft
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_prem_ffts/{id}:
+  /api/outpatient-outcome/outpatient_outcome_prem_ffts/{id}:
     parameters:
       - name: id
         in: path

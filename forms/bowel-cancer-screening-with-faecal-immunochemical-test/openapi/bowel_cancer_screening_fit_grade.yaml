@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed result classification for a bowel-cancer-screening FIT record: result class, recommended management action, symptomatic-pathway indicator, and completeness status."
 paths:
-  /api/bowel_cancer_screening_fit_grades:
+  /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grades:
     get:
       summary: List BowelCancerScreeningFitGrade records
       operationId: listBowelCancerScreeningFitGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/bowel_cancer_screening_fit_grades/{id}:
+  /api/bowel-cancer-screening-with-faecal-immunochemical-test/bowel_cancer_screening_fit_grades/{id}:
     parameters:
       - name: id
         in: path

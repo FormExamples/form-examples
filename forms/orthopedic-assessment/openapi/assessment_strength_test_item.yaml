@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual manual muscle testing result using MRC scale (0-5).
 paths:
-  /api/assessment_strength_test_items:
+  /api/orthopedic-assessment/assessment_strength_test_items:
     get:
       summary: List AssessmentStrengthTestItem records
       operationId: listAssessmentStrengthTestItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_strength_test_items/{id}:
+  /api/orthopedic-assessment/assessment_strength_test_items/{id}:
     parameters:
       - name: id
         in: path

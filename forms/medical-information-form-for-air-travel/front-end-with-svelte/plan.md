@@ -23,6 +23,6 @@
 
 ## Phase 4 — Backend integration
 
-- POST the assessment payload to `/api/medifs`.
+- POST the assessment payload to `/api/medical-information-form-for-air-travel/medifs`.
 - Generate FHIR R5 Bundle from the assessment.
 - PDF download via `pdfmake`.

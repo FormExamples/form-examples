@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/ct-scan-test-request/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/ct-scan-test-request/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grade_flags:
+  /api/ct-scan-test-request/ct_scan_test_request_grade_flags:
     get:
       summary: List CtScanTestRequestGradeFlag records
       operationId: listCtScanTestRequestGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grade_flags/{id}:
+  /api/ct-scan-test-request/ct_scan_test_request_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grade_rules:
+  /api/ct-scan-test-request/ct_scan_test_request_grade_rules:
     get:
       summary: List CtScanTestRequestGradeRule records
       operationId: listCtScanTestRequestGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grade_rules/{id}:
+  /api/ct-scan-test-request/ct_scan_test_request_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grades:
+  /api/ct-scan-test-request/ct_scan_test_request_grades:
     get:
       summary: List CtScanTestRequestGrade records
       operationId: listCtScanTestRequestGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_request_grades/{id}:
+  /api/ct-scan-test-request/ct_scan_test_request_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_requests:
+  /api/ct-scan-test-request/ct_scan_test_requests:
     get:
       summary: List CtScanTestRequest records
       operationId: listCtScanTestRequest
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ct_scan_test_requests/{id}:
+  /api/ct-scan-test-request/ct_scan_test_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/ct-scan-test-request/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/ct-scan-test-request/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/ct-scan-test-request/patients/{id}:
     parameters:
     - name: id
       in: path

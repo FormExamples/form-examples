@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient acknowledgements of rights regarding records release. One-to-one child of release_form.
 paths:
-  /api/patient_rights:
+  /api/medical-records-release-permission/patient_rights:
     get:
       summary: List PatientRights records
       operationId: listPatientRights
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patient_rights/{id}:
+  /api/medical-records-release-permission/patient_rights/{id}:
     parameters:
       - name: id
         in: path

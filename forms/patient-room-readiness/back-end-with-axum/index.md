@@ -5,7 +5,7 @@ back-end: no HTML rendering, no Tera templates, no HTMX, no Alpine.js,
 no CSS, no Lily Design System.
 
 A single RESTful JSON resource, `patient_room_readiness_checklist`, is
-served under `/api/patient_room_readiness_checklists` (list, create,
+served under `/api/patient-room-readiness/patient_room_readiness_checklists` (list, create,
 read, update, delete). The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/` consume this
 API.

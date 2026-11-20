@@ -8,7 +8,7 @@ info:
     Prediction Score) form, merged from the per-entity specs in this directory. One RESTful resource per
     routed SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/padua-venous-thromboembolism-risk-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/padua-venous-thromboembolism-risk-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/padua_venous_thromboembolism_risk_assessment_grade_flags:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_flags:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGradeFlag records
       operationId: listPaduaVenousThromboembolismRiskAssessmentGradeFlag
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessment_grade_flags/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessment_grade_rules:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_rules:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGradeRule records
       operationId: listPaduaVenousThromboembolismRiskAssessmentGradeRule
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessment_grade_rules/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessment_grades:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grades:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessmentGrade records
       operationId: listPaduaVenousThromboembolismRiskAssessmentGrade
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessment_grades/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessments:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessments:
     get:
       summary: List PaduaVenousThromboembolismRiskAssessment records
       operationId: listPaduaVenousThromboembolismRiskAssessment
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/padua_venous_thromboembolism_risk_assessments/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/padua_venous_thromboembolism_risk_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/padua-venous-thromboembolism-risk-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/padua-venous-thromboembolism-risk-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

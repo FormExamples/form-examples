@@ -45,7 +45,7 @@
  */
 
 /**
- * Response from `GET /api/cardiology_requests`.
+ * Response from `GET /api/cardiology-request/cardiology_requests`.
  *
  * The Axum backend returns a bare JSON array of `RequestRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

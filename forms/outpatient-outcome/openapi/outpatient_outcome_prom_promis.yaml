@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: PROMIS Global Health Short Form v1.2 responses (10 items) and derived GPH/GMH T-scores. Public domain (NIH-funded). Scaffold uses linear approximation; production use requires official IRT calibration tables.
 paths:
-  /api/outpatient_outcome_prom_promis:
+  /api/outpatient-outcome/outpatient_outcome_prom_promis:
     get:
       summary: List OutpatientOutcomePromPromis records
       operationId: listOutpatientOutcomePromPromis
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/outpatient_outcome_prom_promis/{id}:
+  /api/outpatient-outcome/outpatient_outcome_prom_promis/{id}:
     parameters:
       - name: id
         in: path

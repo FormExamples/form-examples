@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for one health screening questionnaire. Stores both the engine-computed values and the assessor-final values with an override reason.
 paths:
-  /api/health_screening_questionnaire_grades:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grades:
     get:
       summary: List HealthScreeningQuestionnaireGrade records
       operationId: listHealthScreeningQuestionnaireGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/health_screening_questionnaire_grades/{id}:
+  /api/health-screening-questionnaire/health_screening_questionnaire_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed HAS-BLED grading result: per-criterion 0-1 sub-scores, summed total (0-9), derived risk band, and a summary of modifiable bleeding-risk factors."
 paths:
-  /api/has_bled_score_for_major_bleeding_risk_grades:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grades:
     get:
       summary: List HasBledScoreForMajorBleedingRiskGrade records
       operationId: listHasBledScoreForMajorBleedingRiskGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/has_bled_score_for_major_bleeding_risk_grades/{id}:
+  /api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grades/{id}:
     parameters:
       - name: id
         in: path

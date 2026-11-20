@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Next of kin contact details and notification status.
 paths:
-  /api/casualty_card_next_of_kins:
+  /api/casualty-card-form/casualty_card_next_of_kins:
     get:
       summary: List CasualtyCardNextOfKin records
       operationId: listCasualtyCardNextOfKin
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_next_of_kins/{id}:
+  /api/casualty-card-form/casualty_card_next_of_kins/{id}:
     parameters:
       - name: id
         in: path

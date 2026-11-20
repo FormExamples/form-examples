@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Blood / pathology test result (report). Captures the specimen, clinical history, the quantitative analyte result values (full blood count, urea & electrolytes / renal, liver function, inflammation, glycaemic, endocrine, haematinics, and coagulation), the overall interpretation summary with abnormal- and critical-value flags, the narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/blood_test_results:
+  /api/blood-test-result/blood_test_results:
     get:
       summary: List BloodTestResult records
       operationId: listBloodTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/blood_test_results/{id}:
+  /api/blood-test-result/blood_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ASSESSMENTS_PATH = '/api/dietic_assessments';
+const ASSESSMENTS_PATH = '/api/dietic-assessment/dietic_assessments';
 
 /**
  * Fetch the assessment list from the back-end.

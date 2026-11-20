@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const SITES_PATH = '/api/dashboard/sites';
+const SITES_PATH = '/api/workplace-safety-assessment/dashboard/sites';
 
 /**
  * Fetch the site list from the backend.

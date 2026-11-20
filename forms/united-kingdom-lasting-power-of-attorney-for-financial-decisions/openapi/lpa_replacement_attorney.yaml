@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: LPA replacement attorney — join table linking persons appointed as replacement attorneys to an LPA (LP1F section 4).
 paths:
-  /api/lpa_replacement_attorneys:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys:
     get:
       summary: List LpaReplacementAttorney records
       operationId: listLpaReplacementAttorney
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_replacement_attorneys/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/lpa_replacement_attorneys/{id}:
     parameters:
       - name: id
         in: path

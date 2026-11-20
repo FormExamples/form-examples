@@ -5,7 +5,7 @@ Rust JSON API for the Inpatient Clinical Note form: axum + axa + sqlx 0.16 + sql
 
 ## What it serves
 
-Ten RESTful JSON resources under `/api/…`, one per SQL table, plus the
+Ten RESTful JSON resources under `/api/inpatient-clinical-note/…`, one per SQL table, plus the
 authentication routes the Axum starter provides and a Prometheus `/metrics`
 endpoint.
 

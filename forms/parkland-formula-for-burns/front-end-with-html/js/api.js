@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ASSESSMENTS_PATH = '/api/dashboard/assessments';
+const ASSESSMENTS_PATH = '/api/parkland-formula-for-burns/dashboard/assessments';
 
 /**
  * Fetch the assessment list from the backend.

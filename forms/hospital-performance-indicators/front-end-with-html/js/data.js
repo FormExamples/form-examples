@@ -1,6 +1,6 @@
 // Sample reporting-period data for the dashboard's offline / no-backend
 // fallback. Field shape matches the (aggregated) rows the Rust backend's
-// GET /api/hospital-performance-indicators endpoint is expected to return.
+// GET /api/hospital-performance-indicators/hospital-performance-indicators endpoint is expected to return.
 //
 // recordedCount is out of 50 (see ../js/indicators.js PERFORMANCE_INDICATORS).
 // categoryGaps lists Balanced Scorecard perspective titles with at least one

@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_columbia_suicide_severity_rating_scale_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/columbia_suicide_severity_rating_scale_grade_flags")
+            .get("/api/columbia-suicide-severity-rating-scale/columbia_suicide_severity_rating_scale_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

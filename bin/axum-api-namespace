@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""bin/axum-api-namespace — serve every form's HTTP API under `/api/<slug>/`.
+
+Per [`spec/form-namespacing/`](../spec/form-namespacing/), each form subproject
+is fully namespaced by its slug, so every domain route a form's
+`back-end-with-axum/` crate serves starts with `/api/<slug>/`. For example
+`/api/pre-operative-assessment-by-clinician/patients` replaces `/api/patients`,
+and the served OpenAPI document moves to
+`/api/pre-operative-assessment-by-clinician/openapi.yaml`. The axa health
+checks (`/_health/*`) stay outside the namespace.
+
+The tool rewrites every `api/` path token that is not yet namespaced, in each
+form's:
+
+    back-end-with-axum/src/**/*.rs       `.prefix("api/<plural>/")` and docs
+    back-end-with-axum/tests/**/*.rs     request paths
+    back-end-with-axum/*.md, spec/**/*.md  crate docs
+    examples/api-create.http             bin/generate-api-transcripts output
+    index.md, spec/, doc/, scripts/*.sh  the form's own docs and demo scripts
+    openapi/hand/routes.yaml             hand-documented routes
+    front-end-with-html/**/*.{js,html,md}  fetch paths and docs
+    front-end-with-svelte/src/**, *.md   fetch paths and docs
+
+A token counts as a path when `api/` is not preceded by a letter, digit, `_`,
+`.` or `-`, so `openapi/`, `../../openapi/` and `bin/openapi/` are left alone,
+and so are module paths under `lib/api/` (`$lib/api/...`, `#lib/api/...`).
+A URL on another host is left alone. A token already followed by `<slug>/` is left alone, so the tool is idempotent.
+
+Afterwards regenerate the derived artefacts, which read the crates' prefixes:
+
+    python3 bin/openapi/generate-openapi-representations.py
+    python3 bin/openapi/generate-openapi-combined.py <slug>...
+
+This is an ongoing convention, not a one-shot migration: `cargo run --
+generate scaffold --api` emits `.prefix("api/<plural>/")`, so run this tool on
+a newly scaffolded crate. `--check` is the CI drift detector.
+
+Usage:
+  bin/axum-api-namespace <slug>...        # named forms
+  bin/axum-api-namespace --all            # every form
+  bin/axum-api-namespace --dry-run --all  # show what would change
+  bin/axum-api-namespace --check --all    # CI drift check (non-zero on drift)
+  bin/axum-api-namespace --verbose --all  # list every file touched
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+FORMS = ROOT / "forms"
+
+SKIP_DIRS = {"node_modules", "target", ".svelte-kit", "build", "dist"}
+
+
+def files(form: pathlib.Path):
+    crate = form / "back-end-with-axum"
+    yield from sorted(crate.glob("src/**/*.rs"))
+    yield from sorted(crate.glob("tests/**/*.rs"))
+    yield from sorted(crate.glob("*.md"))
+    yield from sorted(crate.glob("spec/**/*.md"))
+    transcript = form / "examples" / "api-create.http"
+    if transcript.is_file():
+        yield transcript
+    hand = form / "openapi" / "hand" / "routes.yaml"
+    if hand.is_file():
+        yield hand
+    for pattern in ("index.md", "spec/**/*.md", "doc/**/*.md", "scripts/*.sh"):
+        yield from sorted(form.glob(pattern))
+    html = form / "front-end-with-html"
+    for pattern in ("**/*.js", "**/*.html", "**/*.md"):
+        for path in sorted(html.glob(pattern)):
+            if not SKIP_DIRS & set(path.relative_to(html).parts):
+                yield path
+    svelte = form / "front-end-with-svelte"
+    for path in sorted(svelte.glob("src/**/*")):
+        if path.suffix in {".ts", ".js", ".svelte"} and not SKIP_DIRS & set(path.relative_to(svelte).parts):
+            yield path
+    yield from sorted(svelte.glob("*.md"))
+
+
+def rewrite(text: str, slug: str) -> str:
+    # A bare `.prefix("api")`, with no trailing slash (the dashboard routes).
+    text = re.sub(r'\.prefix\("/?api"\)', f'.prefix("api/{slug}/")', text)
+    pattern = re.compile(r"(?<![A-Za-z0-9_.\-])(?<!lib/)api/(?!" + re.escape(slug) + "/)")
+
+    def namespaced(match: re.Match) -> str:
+        # Leave another host's URL alone; only this crate's routes (and
+        # localhost, where it runs) are namespaced.
+        token = re.split(r"[\s\"'`(<\[]", text[: match.start()])[-1]
+        if "://" in token and not re.search(r"://(localhost|127\.0\.0\.1)\b", token):
+            return match.group(0)
+        return f"api/{slug}/"
+
+    return pattern.sub(namespaced, text)
+
+
+def forms(args) -> list[pathlib.Path]:
+    if args.all:
+        return sorted(p for p in FORMS.iterdir() if (p / "back-end-with-axum").is_dir())
+    out = []
+    for slug in args.slugs:
+        form = FORMS / slug
+        if not (form / "back-end-with-axum").is_dir():
+            sys.exit(f"axum-api-namespace: no such form crate: {slug}")
+        out.append(form)
+    return out
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("slugs", nargs="*")
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
+    args = parser.parse_args()
+    if not args.all and not args.slugs:
+        parser.error("name one or more slugs, or --all")
+
+    changed_files = 0
+    changed_forms = 0
+    for form in forms(args):
+        slug = form.name
+        touched = 0
+        for path in files(form):
+            try:
+                old = path.read_text()
+            except (UnicodeDecodeError, IsADirectoryError):
+                continue
+            new = rewrite(old, slug)
+            if new == old:
+                continue
+            touched += 1
+            if args.verbose or args.dry_run or args.check:
+                print(path.relative_to(ROOT))
+            if not (args.check or args.dry_run):
+                path.write_text(new)
+        if touched:
+            changed_forms += 1
+            changed_files += touched
+
+    verb = "out of step" if args.check else ("would change" if args.dry_run else "changed")
+    print(f"axum-api-namespace: {changed_forms} form(s), {changed_files} file(s) {verb}")
+    return 1 if args.check and changed_files else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

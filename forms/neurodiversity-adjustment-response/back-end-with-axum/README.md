@@ -35,14 +35,14 @@ Axis D, regardless of the other axes.
 
 | Method | Route                                                  | Purpose                                           |
 | ------ | ------------------------------------------------------ | ------------------------------------------------- |
-| GET    | `/api/neurodiversity_adjustment_responses`             | List responses (most recent first)                |
-| POST   | `/api/neurodiversity_adjustment_responses`             | Create a response (draft or filled)               |
-| GET    | `/api/neurodiversity_adjustment_responses/{id}`        | Return the response record                        |
-| PATCH  | `/api/neurodiversity_adjustment_responses/{id}`        | Overwrite the response payload fields             |
-| DELETE | `/api/neurodiversity_adjustment_responses/{id}`        | Soft-delete the response                          |
-| POST   | `/api/neurodiversity_adjustment_responses/{id}/submit` | Run the engine, persist the grade transactionally |
-| GET    | `/api/neurodiversity_adjustment_responses/{id}/result` | Return the stored grade + fired rules + flags     |
-| GET    | `/api/dashboard`                                       | List graded responses, grade joined to response   |
+| GET    | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses`             | List responses (most recent first)                |
+| POST   | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses`             | Create a response (draft or filled)               |
+| GET    | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}`        | Return the response record                        |
+| PATCH  | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}`        | Overwrite the response payload fields             |
+| DELETE | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}`        | Soft-delete the response                          |
+| POST   | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/submit` | Run the engine, persist the grade transactionally |
+| GET    | `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/result` | Return the stored grade + fired rules + flags     |
+| GET    | `/api/neurodiversity-adjustment-response/dashboard`                                       | List graded responses, grade joined to response   |
 
 All request and response bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`.

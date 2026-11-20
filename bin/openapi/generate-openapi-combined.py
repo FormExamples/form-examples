@@ -9,10 +9,10 @@ per form, so this merges every `forms/<slug>/openapi/*.yaml` into a single
 not collide across a form's entities, so the union is unambiguous.
 
 The per-entity files describe every SQL table, but not every table has a route.
-The combined document is what a crate serves at `GET /api/openapi.yaml`, so it
+The combined document is what a crate serves at `GET /api/<slug>/openapi.yaml`, so it
 keeps only the paths the crate's controllers declare, and the schemas those use.
 Where a table's own controller (`controllers/<table>.rs`) serves it under another
-path than the generated plural, such as `/api/people` for `person`, the document
+path than the generated plural, such as `/api/<slug>/people` for `person`, the document
 uses the served path. A column `sql/` declares but the crate's table lacks is left
 out, so the document describes what is sent. Property names are camelCase, as the crates send them; the
 per-entity files keep the SQL column names, because they describe storage.
@@ -20,7 +20,7 @@ per-entity files keep the SQL column names, because they describe storage.
 Routes no SQL table describes, such as a dashboard or a `submit` action, are
 documented by hand in `forms/<slug>/openapi/hand/routes.yaml`, a fragment with
 `paths` and, if it needs them, `components.schemas`. It is merged in as written.
-Every document also describes `GET /api/openapi.yaml` itself, and an operation the
+Every document also describes `GET /api/<slug>/openapi.yaml` itself, and an operation the
 crate does not serve, such as a `PUT` a hand-written controller lacks, is left out.
 
 `--check` fails when a combined document is stale, and when a route the crate
@@ -234,8 +234,9 @@ def build(slug: str) -> str:
             paths.setdefault(route, {}).update(item)
         for name, schema in ((fragment.get("components") or {}).get("schemas") or {}).items():
             schemas[name] = schema
-    if ("get", "/api/openapi.yaml") in served_operations(slug):
-        paths["/api/openapi.yaml"] = SELF
+    for own in (f"/api/{slug}/openapi.yaml", "/api/openapi.yaml"):
+        if ("get", own) in served_operations(slug):
+            paths[own] = SELF
     schemas = referenced(paths, schemas)
 
     doc = {

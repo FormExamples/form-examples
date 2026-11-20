@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reporting clinician (interventional radiologist, radiologist, cardiologist, or vascular surgeon) who authors and signs the angiography result report.
 paths:
-  /api/clinicians:
+  /api/angiography-test-result/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/angiography-test-result/clinicians/{id}:
     parameters:
       - name: id
         in: path

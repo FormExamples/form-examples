@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/united-kingdom-maternity-certificate-mat-b1/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/united-kingdom-maternity-certificate-mat-b1/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/united-kingdom-maternity-certificate-mat-b1/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/united-kingdom-maternity-certificate-mat-b1/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/united-kingdom-maternity-certificate-mat-b1/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/united-kingdom-maternity-certificate-mat-b1/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/united-kingdom-maternity-certificate-mat-b1/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

@@ -8,7 +8,7 @@ info:
     in this directory. One RESTful resource per routed SQL table, and any routes documented by hand in
     hand/routes.yaml.
 paths:
-  /api/issue_tracker_grade_flags:
+  /api/issue-tracker/issue_tracker_grade_flags:
     get:
       summary: List IssueTrackerGradeFlag records
       operationId: listIssueTrackerGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_tracker_grade_flags/{id}:
+  /api/issue-tracker/issue_tracker_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_tracker_grade_rules:
+  /api/issue-tracker/issue_tracker_grade_rules:
     get:
       summary: List IssueTrackerGradeRule records
       operationId: listIssueTrackerGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_tracker_grade_rules/{id}:
+  /api/issue-tracker/issue_tracker_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_tracker_grades:
+  /api/issue-tracker/issue_tracker_grades:
     get:
       summary: List IssueTrackerGrade records
       operationId: listIssueTrackerGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_tracker_grades/{id}:
+  /api/issue-tracker/issue_tracker_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_trackers:
+  /api/issue-tracker/issue_trackers:
     get:
       summary: List IssueTracker records
       operationId: listIssueTracker
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/issue_trackers/{id}:
+  /api/issue-tracker/issue_trackers/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/issue-tracker/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/participants:
+  /api/issue-tracker/participants:
     get:
       summary: List Participant records
       operationId: listParticipant
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/participants/{id}:
+  /api/issue-tracker/participants/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reporters:
+  /api/issue-tracker/reporters:
     get:
       summary: List Reporter records
       operationId: listReporter
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reporters/{id}:
+  /api/issue-tracker/reporters/{id}:
     parameters:
     - name: id
       in: path

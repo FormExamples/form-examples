@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 anchored on UKHSA SMI specimen / indication match), pre-analytical / specimen safety, request completeness, and triage priority."
 paths:
-  /api/microbiology_culture_test_request_grades:
+  /api/microbiology-culture-test-request/microbiology_culture_test_request_grades:
     get:
       summary: List MicrobiologyCultureTestRequestGrade records
       operationId: listMicrobiologyCultureTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/microbiology_culture_test_request_grades/{id}:
+  /api/microbiology-culture-test-request/microbiology_culture_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

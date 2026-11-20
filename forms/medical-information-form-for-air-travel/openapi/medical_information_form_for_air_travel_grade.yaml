@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off MEDIF result. Stores both the engine-computed fitness-to-fly band and the physician-final band with an override reason.
 paths:
-  /api/medical_information_form_for_air_travel_grades:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grades:
     get:
       summary: List MedicalInformationFormForAirTravelGrade records
       operationId: listMedicalInformationFormForAirTravelGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_information_form_for_air_travel_grades/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grades/{id}:
     parameters:
       - name: id
         in: path

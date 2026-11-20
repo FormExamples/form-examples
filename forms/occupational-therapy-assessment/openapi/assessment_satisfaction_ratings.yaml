@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "COPM satisfaction ratings section: patient-rated satisfaction scores (1-10) across occupational domains. One-to-one child of assessment."
 paths:
-  /api/assessment_satisfaction_ratings:
+  /api/occupational-therapy-assessment/assessment_satisfaction_ratings:
     get:
       summary: List AssessmentSatisfactionRatings records
       operationId: listAssessmentSatisfactionRatings
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_satisfaction_ratings/{id}:
+  /api/occupational-therapy-assessment/assessment_satisfaction_ratings/{id}:
     parameters:
       - name: id
         in: path

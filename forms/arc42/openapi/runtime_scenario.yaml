@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Runtime scenario captured in §6 Runtime View of the arc42 documentation.
 paths:
-  /api/runtime_scenarios:
+  /api/arc42/runtime_scenarios:
     get:
       summary: List RuntimeScenario records
       operationId: listRuntimeScenario
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/runtime_scenarios/{id}:
+  /api/arc42/runtime_scenarios/{id}:
     parameters:
       - name: id
         in: path

@@ -9,7 +9,7 @@ use sleep_study_test_request::app::App;
 async fn can_get_sleep_study_test_request_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/sleep_study_test_request_grade_flags")
+            .get("/api/sleep-study-test-request/sleep_study_test_request_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

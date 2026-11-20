@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every ASA / Mallampati / RCRI / STOP-BANG / frailty rule that fired for this assessment.
 paths:
-  /api/grading_fired_rules:
+  /api/pre-operative-assessment-by-patient/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grading_fired_rules/{id}:
+  /api/pre-operative-assessment-by-patient/grading_fired_rules/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/return-to-work/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/return-to-work/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/employers:
+  /api/return-to-work/employers:
     get:
       summary: List Employer records
       operationId: listEmployer
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/employers/{id}:
+  /api/return-to-work/employers/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/return-to-work/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/return-to-work/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/return-to-work/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grade_flags:
+  /api/return-to-work/return_to_work_grade_flags:
     get:
       summary: List ReturnToWorkGradeFlag records
       operationId: listReturnToWorkGradeFlag
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grade_flags/{id}:
+  /api/return-to-work/return_to_work_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grade_rules:
+  /api/return-to-work/return_to_work_grade_rules:
     get:
       summary: List ReturnToWorkGradeRule records
       operationId: listReturnToWorkGradeRule
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grade_rules/{id}:
+  /api/return-to-work/return_to_work_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grades:
+  /api/return-to-work/return_to_work_grades:
     get:
       summary: List ReturnToWorkGrade records
       operationId: listReturnToWorkGrade
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_grades/{id}:
+  /api/return-to-work/return_to_work_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_restrictions:
+  /api/return-to-work/return_to_work_restrictions:
     get:
       summary: List ReturnToWorkRestriction records
       operationId: listReturnToWorkRestriction
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_work_restrictions/{id}:
+  /api/return-to-work/return_to_work_restrictions/{id}:
     parameters:
     - name: id
       in: path
@@ -1741,7 +1741,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_works:
+  /api/return-to-work/return_to_works:
     get:
       summary: List ReturnToWork records
       operationId: listReturnToWork
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/return_to_works/{id}:
+  /api/return-to-work/return_to_works/{id}:
     parameters:
     - name: id
       in: path

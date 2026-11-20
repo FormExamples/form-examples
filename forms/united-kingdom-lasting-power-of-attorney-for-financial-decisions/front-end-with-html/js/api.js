@@ -9,7 +9,7 @@
 
 const API_BASE = 'http://localhost:5150';
 const REQUESTS_PATH =
-  '/api/united_kingdom_lasting_powers_of_attorney_for_financial_decisions';
+  '/api/united-kingdom-lasting-power-of-attorney-for-financial-decisions/united_kingdom_lasting_powers_of_attorney_for_financial_decisions';
 
 /**
  * Fetch the LPA list from the backend.

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/medical-operation-note/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/medical-operation-note/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_complications:
+  /api/medical-operation-note/medical_operation_note_complications:
     get:
       summary: List MedicalOperationNoteComplication records
       operationId: listMedicalOperationNoteComplication
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_complications/{id}:
+  /api/medical-operation-note/medical_operation_note_complications/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_drains:
+  /api/medical-operation-note/medical_operation_note_drains:
     get:
       summary: List MedicalOperationNoteDrain records
       operationId: listMedicalOperationNoteDrain
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_drains/{id}:
+  /api/medical-operation-note/medical_operation_note_drains/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grade_flags:
+  /api/medical-operation-note/medical_operation_note_grade_flags:
     get:
       summary: List MedicalOperationNoteGradeFlag records
       operationId: listMedicalOperationNoteGradeFlag
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grade_flags/{id}:
+  /api/medical-operation-note/medical_operation_note_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grade_rules:
+  /api/medical-operation-note/medical_operation_note_grade_rules:
     get:
       summary: List MedicalOperationNoteGradeRule records
       operationId: listMedicalOperationNoteGradeRule
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grade_rules/{id}:
+  /api/medical-operation-note/medical_operation_note_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grades:
+  /api/medical-operation-note/medical_operation_note_grades:
     get:
       summary: List MedicalOperationNoteGrade records
       operationId: listMedicalOperationNoteGrade
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_grades/{id}:
+  /api/medical-operation-note/medical_operation_note_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_implants:
+  /api/medical-operation-note/medical_operation_note_implants:
     get:
       summary: List MedicalOperationNoteImplant records
       operationId: listMedicalOperationNoteImplant
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_implants/{id}:
+  /api/medical-operation-note/medical_operation_note_implants/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_procedures:
+  /api/medical-operation-note/medical_operation_note_procedures:
     get:
       summary: List MedicalOperationNoteProcedure records
       operationId: listMedicalOperationNoteProcedure
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_procedures/{id}:
+  /api/medical-operation-note/medical_operation_note_procedures/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_specimens:
+  /api/medical-operation-note/medical_operation_note_specimens:
     get:
       summary: List MedicalOperationNoteSpecimen records
       operationId: listMedicalOperationNoteSpecimen
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_specimens/{id}:
+  /api/medical-operation-note/medical_operation_note_specimens/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_steps:
+  /api/medical-operation-note/medical_operation_note_steps:
     get:
       summary: List MedicalOperationNoteStep records
       operationId: listMedicalOperationNoteStep
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_steps/{id}:
+  /api/medical-operation-note/medical_operation_note_steps/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_team_members:
+  /api/medical-operation-note/medical_operation_note_team_members:
     get:
       summary: List MedicalOperationNoteTeamMember records
       operationId: listMedicalOperationNoteTeamMember
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_note_team_members/{id}:
+  /api/medical-operation-note/medical_operation_note_team_members/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_notes:
+  /api/medical-operation-note/medical_operation_notes:
     get:
       summary: List MedicalOperationNote records
       operationId: listMedicalOperationNote
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_operation_notes/{id}:
+  /api/medical-operation-note/medical_operation_notes/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/medical-operation-note/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2971,7 +2971,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/medical-operation-note/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -3069,7 +3069,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/medical-operation-note/patients/{id}:
     parameters:
     - name: id
       in: path

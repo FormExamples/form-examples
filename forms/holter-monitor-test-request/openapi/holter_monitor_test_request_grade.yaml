@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (AHA/ACC ambulatory ECG 1-9), urgency / triage, request completeness, and clinical priority."
 paths:
-  /api/holter_monitor_test_request_grades:
+  /api/holter-monitor-test-request/holter_monitor_test_request_grades:
     get:
       summary: List HolterMonitorTestRequestGrade records
       operationId: listHolterMonitorTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/holter_monitor_test_request_grades/{id}:
+  /api/holter-monitor-test-request/holter_monitor_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

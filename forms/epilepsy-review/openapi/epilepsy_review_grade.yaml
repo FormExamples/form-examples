@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed seizure-control classification and completeness grading result for an epilepsy annual review: seizure control, review-completeness status, and the count of documented required domains. 1:1 with the parent review."
 paths:
-  /api/epilepsy_review_grades:
+  /api/epilepsy-review/epilepsy_review_grades:
     get:
       summary: List EpilepsyReviewGrade records
       operationId: listEpilepsyReviewGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/epilepsy_review_grades/{id}:
+  /api/epilepsy-review/epilepsy_review_grades/{id}:
     parameters:
       - name: id
         in: path

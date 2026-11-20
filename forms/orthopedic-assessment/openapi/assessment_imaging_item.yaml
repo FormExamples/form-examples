@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual imaging study with modality, region, date, and findings.
 paths:
-  /api/assessment_imaging_items:
+  /api/orthopedic-assessment/assessment_imaging_items:
     get:
       summary: List AssessmentImagingItem records
       operationId: listAssessmentImagingItem
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_imaging_items/{id}:
+  /api/orthopedic-assessment/assessment_imaging_items/{id}:
     parameters:
       - name: id
         in: path

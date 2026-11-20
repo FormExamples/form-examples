@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Hernia diagnostic evaluation: the payload of the 14-step single-page wizard used to detect, classify, and grade the urgency of an abdominal-wall or groin hernia."
 paths:
-  /api/hernia_diagnostic_evaluations:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations:
     get:
       summary: List HerniaDiagnosticEvaluation records
       operationId: listHerniaDiagnosticEvaluation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hernia_diagnostic_evaluations/{id}:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations/{id}:
     parameters:
       - name: id
         in: path

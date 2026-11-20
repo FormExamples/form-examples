@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main learning-disability annual-health-check record: context and identification, one field per required component (reasonable adjustments and communication, physical health, screening and immunisation uptake, medication review including STOMP, mental health and behaviour, syndrome-specific checks, carer and social), and the Health Action Plan. Completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/learning_disability_annual_health_checks:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_checks:
     get:
       summary: List LearningDisabilityAnnualHealthCheck records
       operationId: listLearningDisabilityAnnualHealthCheck
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/learning_disability_annual_health_checks/{id}:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_checks/{id}:
     parameters:
       - name: id
         in: path

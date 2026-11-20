@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with encounter_satisfaction. Computed ESS score with category and per-domain breakdown.
 paths:
-  /api/satisfaction_results:
+  /api/encounter-satisfaction/satisfaction_results:
     get:
       summary: List SatisfactionResult records
       operationId: listSatisfactionResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/satisfaction_results/{id}:
+  /api/encounter-satisfaction/satisfaction_results/{id}:
     parameters:
       - name: id
         in: path

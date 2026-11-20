@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/buyers:
+  /api/united-kingdom-vehicle-bill-of-sale/buyers:
     get:
       summary: List Buyer records
       operationId: listBuyer
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/buyers/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/buyers/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-vehicle-bill-of-sale/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -265,7 +265,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/sellers:
+  /api/united-kingdom-vehicle-bill-of-sale/sellers:
     get:
       summary: List Seller records
       operationId: listSeller
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/sellers/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/sellers/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grade_flags:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_flags:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGradeFlag records
       operationId: listUnitedKingdomVehicleBillOfSaleGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grade_flags/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grade_rules:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_rules:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGradeRule records
       operationId: listUnitedKingdomVehicleBillOfSaleGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grade_rules/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grades:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades:
     get:
       summary: List UnitedKingdomVehicleBillOfSaleGrade records
       operationId: listUnitedKingdomVehicleBillOfSaleGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sale_grades/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sale_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sales:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales:
     get:
       summary: List UnitedKingdomVehicleBillOfSale records
       operationId: listUnitedKingdomVehicleBillOfSale
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_bill_of_sales/{id}:
+  /api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales/{id}:
     parameters:
     - name: id
       in: path

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/medical-fit-note/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/medical-fit-note/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/employees:
+  /api/medical-fit-note/employees:
     get:
       summary: List Employee records
       operationId: listEmployee
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/employees/{id}:
+  /api/medical-fit-note/employees/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grade_flags:
+  /api/medical-fit-note/medical_fit_note_grade_flags:
     get:
       summary: List MedicalFitNoteGradeFlag records
       operationId: listMedicalFitNoteGradeFlag
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grade_flags/{id}:
+  /api/medical-fit-note/medical_fit_note_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grade_rules:
+  /api/medical-fit-note/medical_fit_note_grade_rules:
     get:
       summary: List MedicalFitNoteGradeRule records
       operationId: listMedicalFitNoteGradeRule
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grade_rules/{id}:
+  /api/medical-fit-note/medical_fit_note_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grades:
+  /api/medical-fit-note/medical_fit_note_grades:
     get:
       summary: List MedicalFitNoteGrade records
       operationId: listMedicalFitNoteGrade
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_note_grades/{id}:
+  /api/medical-fit-note/medical_fit_note_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_notes:
+  /api/medical-fit-note/medical_fit_notes:
     get:
       summary: List MedicalFitNote records
       operationId: listMedicalFitNote
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_fit_notes/{id}:
+  /api/medical-fit-note/medical_fit_notes/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/medical-fit-note/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi

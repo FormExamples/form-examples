@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/assessors:
+  /api/medical-device-assessment/assessors:
     get:
       summary: List Assessor records
       operationId: listAssessor
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessors/{id}:
+  /api/medical-device-assessment/assessors/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/manufacturers:
+  /api/medical-device-assessment/manufacturers:
     get:
       summary: List Manufacturer records
       operationId: listManufacturer
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/manufacturers/{id}:
+  /api/medical-device-assessment/manufacturers/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grade_flags:
+  /api/medical-device-assessment/medical_device_assessment_grade_flags:
     get:
       summary: List MedicalDeviceAssessmentGradeFlag records
       operationId: listMedicalDeviceAssessmentGradeFlag
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grade_flags/{id}:
+  /api/medical-device-assessment/medical_device_assessment_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grade_rules:
+  /api/medical-device-assessment/medical_device_assessment_grade_rules:
     get:
       summary: List MedicalDeviceAssessmentGradeRule records
       operationId: listMedicalDeviceAssessmentGradeRule
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grade_rules/{id}:
+  /api/medical-device-assessment/medical_device_assessment_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grades:
+  /api/medical-device-assessment/medical_device_assessment_grades:
     get:
       summary: List MedicalDeviceAssessmentGrade records
       operationId: listMedicalDeviceAssessmentGrade
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessment_grades/{id}:
+  /api/medical-device-assessment/medical_device_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessments:
+  /api/medical-device-assessment/medical_device_assessments:
     get:
       summary: List MedicalDeviceAssessment records
       operationId: listMedicalDeviceAssessment
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_device_assessments/{id}:
+  /api/medical-device-assessment/medical_device_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/medical-device-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi

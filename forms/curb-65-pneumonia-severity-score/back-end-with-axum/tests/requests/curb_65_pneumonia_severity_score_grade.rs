@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_curb_65_pneumonia_severity_score_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/curb_65_pneumonia_severity_score_grades")
+            .get("/api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades")
             .await;
         assert_eq!(res.status_code(), 200);
 

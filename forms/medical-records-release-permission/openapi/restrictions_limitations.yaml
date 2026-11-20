@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient restrictions on which sensitive record categories to exclude from release. One-to-one child of release_form.
 paths:
-  /api/restrictions_limitations:
+  /api/medical-records-release-permission/restrictions_limitations:
     get:
       summary: List RestrictionsLimitations records
       operationId: listRestrictionsLimitations
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/restrictions_limitations/{id}:
+  /api/medical-records-release-permission/restrictions_limitations/{id}:
     parameters:
       - name: id
         in: path

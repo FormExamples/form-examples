@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Drains, packs, urinary catheters, NG tubes, and other devices left in situ at the end of the procedure.
 paths:
-  /api/medical_operation_note_drains:
+  /api/medical-operation-note/medical_operation_note_drains:
     get:
       summary: List MedicalOperationNoteDrain records
       operationId: listMedicalOperationNoteDrain
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_operation_note_drains/{id}:
+  /api/medical-operation-note/medical_operation_note_drains/{id}:
     parameters:
       - name: id
         in: path

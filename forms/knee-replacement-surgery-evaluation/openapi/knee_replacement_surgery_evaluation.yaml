@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Knee replacement surgery evaluation: the payload of the 15-step single-page wizard, covering presenting history, the Oxford Knee Score, physical examination, diagnostic imaging, conservative-treatment audit, general health screen, pre-operative bloods checklist, shared decision-making, and the management plan."
 paths:
-  /api/knee_replacement_surgery_evaluations:
+  /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations:
     get:
       summary: List KneeReplacementSurgeryEvaluation records
       operationId: listKneeReplacementSurgeryEvaluation
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/knee_replacement_surgery_evaluations/{id}:
+  /api/knee-replacement-surgery-evaluation/knee_replacement_surgery_evaluations/{id}:
     parameters:
       - name: id
         in: path

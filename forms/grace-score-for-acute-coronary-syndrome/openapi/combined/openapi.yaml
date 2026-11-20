@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/grace-score-for-acute-coronary-syndrome/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grade_flags:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grade_flags:
     get:
       summary: List GraceScoreForAcuteCoronarySyndromeGradeFlag records
       operationId: listGraceScoreForAcuteCoronarySyndromeGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grade_flags/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grade_rules:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grade_rules:
     get:
       summary: List GraceScoreForAcuteCoronarySyndromeGradeRule records
       operationId: listGraceScoreForAcuteCoronarySyndromeGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grade_rules/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grades:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grades:
     get:
       summary: List GraceScoreForAcuteCoronarySyndromeGrade records
       operationId: listGraceScoreForAcuteCoronarySyndromeGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndrome_grades/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndrome_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndromes:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndromes:
     get:
       summary: List GraceScoreForAcuteCoronarySyndrome records
       operationId: listGraceScoreForAcuteCoronarySyndrome
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grace_score_for_acute_coronary_syndromes/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/grace_score_for_acute_coronary_syndromes/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/grace-score-for-acute-coronary-syndrome/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/grace-score-for-acute-coronary-syndrome/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/grace-score-for-acute-coronary-syndrome/patients/{id}:
     parameters:
     - name: id
       in: path

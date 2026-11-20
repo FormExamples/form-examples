@@ -1,6 +1,6 @@
 // Sample reporting-period data for the dashboard's offline / no-backend
 // fallback. Field shape matches the (aggregated) rows the Rust backend's
-// GET /api/hospital-dashboard-metrics endpoint is expected to return.
+// GET /api/hospital-dashboard-metrics/hospital-dashboard-metrics endpoint is expected to return.
 //
 // recordedCount is out of 67 (see ../js/metrics.js DASHBOARD_METRICS).
 // categoryGaps lists category titles with at least one unrecorded metric.

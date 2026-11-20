@@ -9,7 +9,7 @@ use tumor_marker_test_request::app::App;
 async fn can_get_tumor_marker_test_request_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/tumor_marker_test_request_grade_rules")
+            .get("/api/tumor-marker-test-request/tumor_marker_test_request_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

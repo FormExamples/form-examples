@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: WHO International Certificate of Vaccination or Prophylaxis (IHR 2005 Annex 6). One row per vaccinee per issued certificate; vaccination entries are recorded in the companion *_entry table.
 paths:
-  /api/international_certificate_of_vaccination_or_prophylaxis:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis:
     get:
       summary: List InternationalCertificateOfVaccinationOrProphylaxis records
       operationId: listInternationalCertificateOfVaccinationOrProphylaxis
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/international_certificate_of_vaccination_or_prophylaxis/{id}:
+  /api/international-certificate-of-vaccination-or-prophylaxis/international_certificate_of_vaccination_or_prophylaxis/{id}:
     parameters:
       - name: id
         in: path

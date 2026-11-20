@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const TRAINEES_PATH = '/api/dashboard/trainees';
+const TRAINEES_PATH = '/api/cardiopulmonary-resuscitation-training/dashboard/trainees';
 
 /**
  * Fetch the trainee list from the backend.

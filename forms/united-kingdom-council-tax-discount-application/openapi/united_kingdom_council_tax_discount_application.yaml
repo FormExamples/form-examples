@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main United Kingdom Council Tax discount application: one application to an English billing authority for a Council Tax discount, exemption, disregard or reduction. It captures the claim type, the property, the evidence and the declaration; the occupant roster lives in the occupant table. The completeness and eligibility classification, the audit trail of fired rules and the flagged issues live in dedicated child tables. Eligibility is decided by the billing authority, not by this record."
 paths:
-  /api/united_kingdom_council_tax_discount_applications:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplication records
       operationId: listUnitedKingdomCouncilTaxDiscountApplication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_council_tax_discount_applications/{id}:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_applications/{id}:
     parameters:
       - name: id
         in: path

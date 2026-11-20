@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a anaesthetics waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/anaesthetics_waiting_list_cards:
+  /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_cards:
     get:
       summary: List AnaestheticsWaitingListCard records
       operationId: listAnaestheticsWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anaesthetics_waiting_list_cards/{id}:
+  /api/anaesthetics-waiting-list-card/anaesthetics_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

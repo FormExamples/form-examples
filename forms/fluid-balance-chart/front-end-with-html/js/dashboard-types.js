@@ -35,7 +35,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/charts`.
+ * Response from `GET /api/fluid-balance-chart/dashboard/charts`.
  *
  * @typedef {Object} DashboardChartsResponse
  * @property {ChartRow[]} items

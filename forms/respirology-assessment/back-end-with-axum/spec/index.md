@@ -26,13 +26,13 @@ in the `assessments` table:
 
 | Method | Route                          | Purpose                                                       |
 | ------ | ------------------------------ | ------------------------------------------------------------- |
-| GET    | `/api/assessments`             | List assessments. Returns `{ items, total }`.                 |
-| POST   | `/api/assessments`             | Create draft. Returns the new record.                         |
-| GET    | `/api/assessments/{id}`        | Return the record (404 if missing).                           |
-| PATCH  | `/api/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
-| POST   | `/api/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
-| GET    | `/api/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
-| GET    | `/api/dashboard`               | List by status. Query params: `status`, `limit`.              |
+| GET    | `/api/respirology-assessment/assessments`             | List assessments. Returns `{ items, total }`.                 |
+| POST   | `/api/respirology-assessment/assessments`             | Create draft. Returns the new record.                         |
+| GET    | `/api/respirology-assessment/assessments/{id}`        | Return the record (404 if missing).                           |
+| PATCH  | `/api/respirology-assessment/assessments/{id}`        | Deep-merge the request body into `data`. Returns the record.  |
+| POST   | `/api/respirology-assessment/assessments/{id}/submit` | Mark `status = completed`. Returns the record.                |
+| GET    | `/api/respirology-assessment/assessments/{id}/result` | Return `{ id, result }`. `result` may be null.                |
+| GET    | `/api/respirology-assessment/dashboard`               | List by status. Query params: `status`, `limit`.              |
 | GET    | `/metrics`                     | Prometheus text-format scrape endpoint.                       |
 
 ## 3. Wire format

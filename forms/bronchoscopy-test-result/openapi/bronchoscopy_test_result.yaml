@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Bronchoscopy (airway endoscopy) result (procedure report). Captures the performed procedure, sedation and extent examined, the clinical history, the narrative and structured findings, samples taken, any complication, the impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/bronchoscopy_test_results:
+  /api/bronchoscopy-test-result/bronchoscopy_test_results:
     get:
       summary: List BronchoscopyTestResult records
       operationId: listBronchoscopyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/bronchoscopy_test_results/{id}:
+  /api/bronchoscopy-test-result/bronchoscopy_test_results/{id}:
     parameters:
       - name: id
         in: path

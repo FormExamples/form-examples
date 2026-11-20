@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Fluoroscopy / contrast-study result (report). Captures the performed examination (barium / water-soluble / proctogram / hysterosalpingogram / cystourethrogram / arthrogram / fluoroscopy-guided procedure), the contrast used, screening time, clinical history, the narrative and structured findings, the impression and structured-reporting category, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/fluoroscopy_test_results:
+  /api/fluoroscopy-test-result/fluoroscopy_test_results:
     get:
       summary: List FluoroscopyTestResult records
       operationId: listFluoroscopyTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/fluoroscopy_test_results/{id}:
+  /api/fluoroscopy-test-result/fluoroscopy_test_results/{id}:
     parameters:
       - name: id
         in: path

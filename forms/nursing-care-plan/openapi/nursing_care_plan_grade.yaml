@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness grading result for a nursing care plan: overall status and completeness percent."
 paths:
-  /api/nursing_care_plan_grades:
+  /api/nursing-care-plan/nursing_care_plan_grades:
     get:
       summary: List NursingCarePlanGrade records
       operationId: listNursingCarePlanGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/nursing_care_plan_grades/{id}:
+  /api/nursing-care-plan/nursing_care_plan_grades/{id}:
     parameters:
       - name: id
         in: path

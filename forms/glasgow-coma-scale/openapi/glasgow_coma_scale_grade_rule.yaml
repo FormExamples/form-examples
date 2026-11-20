@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every grading rule that fired during Glasgow Coma Scale computation: component, score contributed, category, and description."
 paths:
-  /api/glasgow_coma_scale_grade_rules:
+  /api/glasgow-coma-scale/glasgow_coma_scale_grade_rules:
     get:
       summary: List GlasgowComaScaleGradeRule records
       operationId: listGlasgowComaScaleGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/glasgow_coma_scale_grade_rules/{id}:
+  /api/glasgow-coma-scale/glasgow_coma_scale_grade_rules/{id}:
     parameters:
       - name: id
         in: path

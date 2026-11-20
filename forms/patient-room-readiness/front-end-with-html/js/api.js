@@ -8,7 +8,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const ASSESSMENTS_PATH = '/api/patient-room-readiness-checklists';
+const ASSESSMENTS_PATH = '/api/patient-room-readiness/patient-room-readiness-checklists';
 
 /**
  * Fetch the assessment list from the backend.

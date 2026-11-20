@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/ent_waiting_list_card_appointments:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_appointments:
     get:
       summary: List EntWaitingListCardAppointment records
       operationId: listEntWaitingListCardAppointment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_appointments/{id}:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_appointments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grade_flags:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_flags:
     get:
       summary: List EntWaitingListCardGradeFlag records
       operationId: listEntWaitingListCardGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grade_flags/{id}:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grade_rules:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_rules:
     get:
       summary: List EntWaitingListCardGradeRule records
       operationId: listEntWaitingListCardGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grade_rules/{id}:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grades:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grades:
     get:
       summary: List EntWaitingListCardGrade records
       operationId: listEntWaitingListCardGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_card_grades/{id}:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_card_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_cards:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_cards:
     get:
       summary: List EntWaitingListCard records
       operationId: listEntWaitingListCard
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/ent_waiting_list_cards/{id}:
+  /api/otorhinolaryngology-waiting-list-card/ent_waiting_list_cards/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/otorhinolaryngology-waiting-list-card/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/otorhinolaryngology-waiting-list-card/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/otorhinolaryngology-waiting-list-card/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners:
+  /api/otorhinolaryngology-waiting-list-card/practitioners:
     get:
       summary: List Practitioner records
       operationId: listPractitioner
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/practitioners/{id}:
+  /api/otorhinolaryngology-waiting-list-card/practitioners/{id}:
     parameters:
     - name: id
       in: path

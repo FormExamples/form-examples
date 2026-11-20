@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "One hospital KPI reporting period: hospital/site, period month/year, prepared-by, and sign-off notes."
 paths:
-  /api/hospital_dashboard_metrics:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metrics:
     get:
       summary: List HospitalDashboardMetrics records
       operationId: listHospitalDashboardMetrics
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hospital_dashboard_metrics/{id}:
+  /api/hospital-dashboard-metrics/hospital_dashboard_metrics/{id}:
     parameters:
       - name: id
         in: path

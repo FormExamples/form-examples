@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const OUTCOMES_PATH = '/api/outpatient_outcomes';
+const OUTCOMES_PATH = '/api/outpatient-outcome/outpatient_outcomes';
 
 /**
  * Fetch the outcome list from the backend.

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Ambulatory ECG (Holter) monitor result (report). Captures the monitor type and recording quality, clinical history, the rhythm and rate summary (mean / minimum / maximum heart rate, longest pause, ectopy burden), structured findings (AF, significant pauses, VT, SVT, high-grade AV block, symptom-rhythm correlation, normal study), the narrative and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/holter_monitor_test_results:
+  /api/holter-monitor-test-result/holter_monitor_test_results:
     get:
       summary: List HolterMonitorTestResult records
       operationId: listHolterMonitorTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/holter_monitor_test_results/{id}:
+  /api/holter-monitor-test-result/holter_monitor_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness and eligibility result for a Council Tax discount application. The engine classifies the application as likely-eligible, incomplete or likely-ineligible, counts the adults and states the indicative outcome. It is not a decision: eligibility is decided by the billing authority."
 paths:
-  /api/united_kingdom_council_tax_discount_application_grades:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grades:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGrade records
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_council_tax_discount_application_grades/{id}:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grades/{id}:
     parameters:
       - name: id
         in: path

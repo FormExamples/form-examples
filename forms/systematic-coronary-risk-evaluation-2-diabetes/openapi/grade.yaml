@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed SCORE2-Diabetes risk grading result. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/systematic-coronary-risk-evaluation-2-diabetes/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/systematic-coronary-risk-evaluation-2-diabetes/grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Software architecture being documented with arc42.
 paths:
-  /api/architectures:
+  /api/arc42/architectures:
     get:
       summary: List Architecture records
       operationId: listArchitecture
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/architectures/{id}:
+  /api/arc42/architectures/{id}:
     parameters:
       - name: id
         in: path

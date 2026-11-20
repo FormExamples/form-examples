@@ -29,16 +29,16 @@ one RESTful resource per SQL table in [`../sql/`](../sql/).
 
 ## 2. Routes
 
-Every resource carries the same six routes under `/api/<plural>/`:
+Every resource carries the same six routes under `/api/inpatient-clinical-note/<plural>/`:
 
 | Method | Route | Purpose |
 | --- | --- | --- |
-| GET | `/api/<plural>/` | List every record |
-| POST | `/api/<plural>/` | Create a record |
-| GET | `/api/<plural>/{id}` | Fetch one record |
-| PUT | `/api/<plural>/{id}` | Replace a record |
-| PATCH | `/api/<plural>/{id}` | Update a record |
-| DELETE | `/api/<plural>/{id}` | Remove a record |
+| GET | `/api/inpatient-clinical-note/<plural>/` | List every record |
+| POST | `/api/inpatient-clinical-note/<plural>/` | Create a record |
+| GET | `/api/inpatient-clinical-note/<plural>/{id}` | Fetch one record |
+| PUT | `/api/inpatient-clinical-note/<plural>/{id}` | Replace a record |
+| PATCH | `/api/inpatient-clinical-note/<plural>/{id}` | Update a record |
+| DELETE | `/api/inpatient-clinical-note/<plural>/{id}` | Remove a record |
 
 Request and response bodies are `application/json` with camelCase keys via
 `serde(rename_all = "camelCase")`. Prometheus metrics are at `/metrics`.
@@ -79,7 +79,7 @@ are the shared fixtures.
 
 No controller currently persists a computed grade. `grade()` is callable but
 the `inpatient_clinical_note_grade` rows are written by clients today. A
-`POST /api/inpatient_clinical_notes/{id}/grade` endpoint that runs the engine
+`POST /api/inpatient-clinical-note/inpatient_clinical_notes/{id}/grade` endpoint that runs the engine
 server-side and persists the grade, its rules, and its flags is the natural next
 step; it is deliberately out of scope until a caller needs it.
 

@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_has_bled_score_for_major_bleeding_risk_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/has_bled_score_for_major_bleeding_risk_grades")
+            .get("/api/has-bled-score-for-major-bleeding-risk/has_bled_score_for_major_bleeding_risk_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

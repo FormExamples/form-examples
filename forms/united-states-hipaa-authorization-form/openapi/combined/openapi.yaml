@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/authorized_recipients:
+  /api/united-states-hipaa-authorization-form/authorized_recipients:
     get:
       summary: List AuthorizedRecipient records
       operationId: listAuthorizedRecipient
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/authorized_recipients/{id}:
+  /api/united-states-hipaa-authorization-form/authorized_recipients/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/disclosing_sources:
+  /api/united-states-hipaa-authorization-form/disclosing_sources:
     get:
       summary: List DisclosingSource records
       operationId: listDisclosingSource
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/disclosing_sources/{id}:
+  /api/united-states-hipaa-authorization-form/disclosing_sources/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expirations:
+  /api/united-states-hipaa-authorization-form/expirations:
     get:
       summary: List Expiration records
       operationId: listExpiration
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/expirations/{id}:
+  /api/united-states-hipaa-authorization-form/expirations/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hipaa_authorizations:
+  /api/united-states-hipaa-authorization-form/hipaa_authorizations:
     get:
       summary: List HipaaAuthorization records
       operationId: listHipaaAuthorization
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hipaa_authorizations/{id}:
+  /api/united-states-hipaa-authorization-form/hipaa_authorizations/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-hipaa-authorization-form/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patient_rights_acknowledgements:
+  /api/united-states-hipaa-authorization-form/patient_rights_acknowledgements:
     get:
       summary: List PatientRightsAcknowledgement records
       operationId: listPatientRightsAcknowledgement
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patient_rights_acknowledgements/{id}:
+  /api/united-states-hipaa-authorization-form/patient_rights_acknowledgements/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients:
+  /api/united-states-hipaa-authorization-form/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/united-states-hipaa-authorization-form/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -1495,7 +1495,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/purpose_of_disclosures:
+  /api/united-states-hipaa-authorization-form/purpose_of_disclosures:
     get:
       summary: List PurposeOfDisclosure records
       operationId: listPurposeOfDisclosure
@@ -1593,7 +1593,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/purpose_of_disclosures/{id}:
+  /api/united-states-hipaa-authorization-form/purpose_of_disclosures/{id}:
     parameters:
     - name: id
       in: path
@@ -1741,7 +1741,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/records_to_discloses:
+  /api/united-states-hipaa-authorization-form/records_to_discloses:
     get:
       summary: List RecordsToDisclose records
       operationId: listRecordsToDisclose
@@ -1839,7 +1839,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/records_to_discloses/{id}:
+  /api/united-states-hipaa-authorization-form/records_to_discloses/{id}:
     parameters:
     - name: id
       in: path
@@ -1987,7 +1987,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/signature_witnesses:
+  /api/united-states-hipaa-authorization-form/signature_witnesses:
     get:
       summary: List SignatureWitness records
       operationId: listSignatureWitness
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/signature_witnesses/{id}:
+  /api/united-states-hipaa-authorization-form/signature_witnesses/{id}:
     parameters:
     - name: id
       in: path
@@ -2233,7 +2233,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/signers:
+  /api/united-states-hipaa-authorization-form/signers:
     get:
       summary: List Signer records
       operationId: listSigner
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/signers/{id}:
+  /api/united-states-hipaa-authorization-form/signers/{id}:
     parameters:
     - name: id
       in: path
@@ -2479,7 +2479,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_additional_flags:
+  /api/united-states-hipaa-authorization-form/validation_additional_flags:
     get:
       summary: List ValidationAdditionalFlag records
       operationId: listValidationAdditionalFlag
@@ -2577,7 +2577,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_additional_flags/{id}:
+  /api/united-states-hipaa-authorization-form/validation_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -2725,7 +2725,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_fired_rules:
+  /api/united-states-hipaa-authorization-form/validation_fired_rules:
     get:
       summary: List ValidationFiredRule records
       operationId: listValidationFiredRule
@@ -2823,7 +2823,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_fired_rules/{id}:
+  /api/united-states-hipaa-authorization-form/validation_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -2971,7 +2971,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_results:
+  /api/united-states-hipaa-authorization-form/validation_results:
     get:
       summary: List ValidationResult records
       operationId: listValidationResult
@@ -3069,7 +3069,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/validation_results/{id}:
+  /api/united-states-hipaa-authorization-form/validation_results/{id}:
     parameters:
     - name: id
       in: path

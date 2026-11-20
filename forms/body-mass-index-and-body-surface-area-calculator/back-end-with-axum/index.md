@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`body_mass_index_and_body_surface_area_calculator/`](body_mass_index_and_body_surface_area_calculator/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/body-mass-index-and-body-surface-area-calculator/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

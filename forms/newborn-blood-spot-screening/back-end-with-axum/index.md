@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`newborn_blood_spot_screening/`](newborn_blood_spot_screening/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/newborn-blood-spot-screening/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

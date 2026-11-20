@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_property_tax_exemption_applications() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/property_tax_exemption_applications").await;
+        let res = request.get("/api/united-states-property-tax-exemption-application/property_tax_exemption_applications").await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());
     })

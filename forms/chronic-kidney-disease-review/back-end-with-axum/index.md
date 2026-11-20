@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`chronic_kidney_disease_review/`](chronic_kidney_disease_review/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/chronic-kidney-disease-review/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

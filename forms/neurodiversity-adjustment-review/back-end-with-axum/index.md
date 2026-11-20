@@ -38,14 +38,14 @@ to review), `neurodiversity_adjustment_review_grade_rules`, and
 ## HTTP API
 
 ```text
-POST   /api/neurodiversity_adjustment_reviews              create a review (draft or filled)
-GET    /api/neurodiversity_adjustment_reviews              list reviews (newest first)
-GET    /api/neurodiversity_adjustment_reviews/{id}         fetch one review
-PATCH  /api/neurodiversity_adjustment_reviews/{id}         overwrite the review payload
-DELETE /api/neurodiversity_adjustment_reviews/{id}         soft-delete the review
-POST   /api/neurodiversity_adjustment_reviews/{id}/submit  run the engine, persist the grade
-GET    /api/neurodiversity_adjustment_reviews/{id}/result  read back the persisted grade
-GET    /api/dashboard                          list graded reviews with their review (paged)
+POST   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews              create a review (draft or filled)
+GET    /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews              list reviews (newest first)
+GET    /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}         fetch one review
+PATCH  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}         overwrite the review payload
+DELETE /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}         soft-delete the review
+POST   /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}/submit  run the engine, persist the grade
+GET    /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}/result  read back the persisted grade
+GET    /api/neurodiversity-adjustment-review/dashboard                          list graded reviews with their review (paged)
 ```
 
 `POST .../submit` runs the engine and persists the grade + fired-rule rows +

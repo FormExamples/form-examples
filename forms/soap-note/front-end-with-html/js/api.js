@@ -7,7 +7,7 @@
 // `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const NOTES_PATH = '/api/dashboard/notes';
+const NOTES_PATH = '/api/soap-note/dashboard/notes';
 
 /**
  * Fetch the note list from the backend.

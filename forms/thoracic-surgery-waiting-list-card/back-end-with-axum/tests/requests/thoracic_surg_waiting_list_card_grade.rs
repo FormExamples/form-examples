@@ -9,7 +9,7 @@ use thoracic_surgery_waiting_list_card::app::App;
 async fn can_get_thoracic_surg_waiting_list_card_grades() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/thoracic_surg_waiting_list_card_grades")
+            .get("/api/thoracic-surgery-waiting-list-card/thoracic_surg_waiting_list_card_grades")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

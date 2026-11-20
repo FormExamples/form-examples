@@ -118,7 +118,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Build the routes for the inpatient clinical note grade rules resource.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/inpatient_clinical_note_grade_rules/")
+        .prefix("api/inpatient-clinical-note/inpatient_clinical_note_grade_rules/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

@@ -8,7 +8,7 @@ use serde_json::Value;
 #[tokio::test]
 async fn lists_come_in_cursor_pages() {
     request::<App, _, _>(|request, _ctx| async move {
-        let page = request.get("/api/cardiology_responses?limit=1").await;
+        let page = request.get("/api/cardiology-response/cardiology_responses?limit=1").await;
         page.assert_status_ok();
         assert!(page.maybe_header("x-total-count").is_none());
         assert!(page.maybe_header("link").is_none());
@@ -16,10 +16,10 @@ async fn lists_come_in_cursor_pages() {
         assert!(rows.is_empty());
 
         for refused in [
-            "/api/cardiology_responses?cursor=forged",
-            "/api/cardiology_responses?limit=0",
-            "/api/cardiology_responses?limit=1001",
-            "/api/cardiology_responses?limit=many",
+            "/api/cardiology-response/cardiology_responses?cursor=forged",
+            "/api/cardiology-response/cardiology_responses?limit=0",
+            "/api/cardiology-response/cardiology_responses?limit=1001",
+            "/api/cardiology-response/cardiology_responses?limit=many",
         ] {
             request.get(refused).await.assert_status_unprocessable_entity();
         }

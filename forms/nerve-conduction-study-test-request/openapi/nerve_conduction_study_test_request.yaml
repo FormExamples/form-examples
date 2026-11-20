@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Nerve conduction study / EMG (electrodiagnostic / neurophysiology) request (referral). Captures the requested study, region and laterality, the clinical indication and question, symptoms, safety factors (anticoagulation, cardiac device), and triage urgency.
 paths:
-  /api/nerve_conduction_study_test_requests:
+  /api/nerve-conduction-study-test-request/nerve_conduction_study_test_requests:
     get:
       summary: List NerveConductionStudyTestRequest records
       operationId: listNerveConductionStudyTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/nerve_conduction_study_test_requests/{id}:
+  /api/nerve-conduction-study-test-request/nerve_conduction_study_test_requests/{id}:
     parameters:
       - name: id
         in: path

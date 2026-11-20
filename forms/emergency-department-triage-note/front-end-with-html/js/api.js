@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const TRIAGE_NOTES_PATH = '/api/dashboard/triage-notes';
+const TRIAGE_NOTES_PATH = '/api/emergency-department-triage-note/dashboard/triage-notes';
 
 /**
  * Fetch the triage-note list from the backend.

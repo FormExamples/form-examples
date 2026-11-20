@@ -5,8 +5,8 @@
 //! - `POST /architecture_decision_records` — create an ADR (validates the
 //!   `status` / `decision_group` enums, auto-assigns the next sequential
 //!   number, and auto-derives a slug from the title).
-//! - `GET /api/adrs` — the JSON register consumed by the dashboard.
-//! - `GET /api/adrs/{slug}` — a single ADR rendered as Tyree & Akerman
+//! - `GET /api/architecture-decision-record/adrs` — the JSON register consumed by the dashboard.
+//! - `GET /api/architecture-decision-record/adrs/{slug}` — a single ADR rendered as Tyree & Akerman
 //!   Markdown plus row metadata.
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::unnecessary_struct_initialization)]
@@ -208,7 +208,7 @@ fn pad4(n: Option<i32>) -> String {
 }
 
 /// Render an ADR (and its joined positions, notes, author, organization) as
-/// a Tyree & Akerman Markdown document for the JSON `/api/adrs/{slug}`
+/// a Tyree & Akerman Markdown document for the JSON `/api/architecture-decision-record/adrs/{slug}`
 /// viewer endpoint.
 #[allow(clippy::too_many_lines)] // linear Markdown builder; splitting adds indirection, not clarity
 async fn render_markdown(ctx: &AppContext, item: &Model) -> Result<String> {
@@ -451,10 +451,10 @@ async fn api_index(
     Ok(page.respond(out))
 }
 
-/// Routes for the JSON register under `/api/adrs`: list, create, and read by slug.
+/// Routes for the JSON register under `/api/architecture-decision-record/adrs`: list, create, and read by slug.
 pub fn api_routes() -> Routes {
     Routes::new()
-        .prefix("api/adrs")
+        .prefix("api/architecture-decision-record/adrs")
         .add("/", get(api_index))
         .add("/", post(add))
         .add("{slug}", get(api_show_by_slug))

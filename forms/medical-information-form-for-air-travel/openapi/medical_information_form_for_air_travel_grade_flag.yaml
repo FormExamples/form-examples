@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags that fire independently of the fitness-to-fly band, with priority and a suggested action for the airline medical desk.
 paths:
-  /api/medical_information_form_for_air_travel_grade_flags:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_flags:
     get:
       summary: List MedicalInformationFormForAirTravelGradeFlag records
       operationId: listMedicalInformationFormForAirTravelGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_information_form_for_air_travel_grade_flags/{id}:
+  /api/medical-information-form-for-air-travel/medical_information_form_for_air_travel_grade_flags/{id}:
     parameters:
       - name: id
         in: path

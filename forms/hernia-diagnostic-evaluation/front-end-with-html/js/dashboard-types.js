@@ -43,7 +43,7 @@
  */
 
 /**
- * Response from `GET /api/hernia_diagnostic_evaluations`.
+ * Response from `GET /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations`.
  *
  * The Axum back-end returns a bare JSON array of `EvaluationRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so a

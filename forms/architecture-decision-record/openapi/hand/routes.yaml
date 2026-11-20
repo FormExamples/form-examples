@@ -1,7 +1,7 @@
 # Routes no SQL table describes, documented by hand. Merged into
 # combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
 paths:
-  /api/adrs:
+  /api/architecture-decision-record/adrs:
     get:
       summary: List the decision records, by number
       operationId: listAdrs
@@ -98,7 +98,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
       description: A missing number becomes the next one, and a missing slug comes from the title.
-  /api/adrs/{slug}:
+  /api/architecture-decision-record/adrs/{slug}:
     parameters:
     - name: slug
       in: path

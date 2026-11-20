@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`national_early_warning_score_2/`](national_early_warning_score_2/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/national-early-warning-score-2/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

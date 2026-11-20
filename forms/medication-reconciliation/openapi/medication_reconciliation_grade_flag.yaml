@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety flags raised independently of the reconciliation status, with priority, description, and a suggested action for the pharmacy or prescribing team.
 paths:
-  /api/medication_reconciliation_grade_flags:
+  /api/medication-reconciliation/medication_reconciliation_grade_flags:
     get:
       summary: List MedicationReconciliationGradeFlag records
       operationId: listMedicationReconciliationGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medication_reconciliation_grade_flags/{id}:
+  /api/medication-reconciliation/medication_reconciliation_grade_flags/{id}:
     parameters:
       - name: id
         in: path

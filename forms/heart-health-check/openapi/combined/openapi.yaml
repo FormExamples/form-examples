@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessments:
+  /api/heart-health-check/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/heart-health-check/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_pressures:
+  /api/heart-health-check/blood_pressures:
     get:
       summary: List BloodPressure records
       operationId: listBloodPressure
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_pressures/{id}:
+  /api/heart-health-check/blood_pressures/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/body_measurements:
+  /api/heart-health-check/body_measurements:
     get:
       summary: List BodyMeasurements records
       operationId: listBodyMeasurements
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/body_measurements/{id}:
+  /api/heart-health-check/body_measurements/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cholesterols:
+  /api/heart-health-check/cholesterols:
     get:
       summary: List Cholesterol records
       operationId: listCholesterol
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cholesterols/{id}:
+  /api/heart-health-check/cholesterols/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/heart-health-check/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/heart-health-check/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/demographics_ethnicities:
+  /api/heart-health-check/demographics_ethnicities:
     get:
       summary: List DemographicsEthnicity records
       operationId: listDemographicsEthnicity
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/demographics_ethnicities/{id}:
+  /api/heart-health-check/demographics_ethnicities/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/family_histories:
+  /api/heart-health-check/family_histories:
     get:
       summary: List FamilyHistory records
       operationId: listFamilyHistory
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/family_histories/{id}:
+  /api/heart-health-check/family_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/heart-health-check/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/heart-health-check/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/heart-health-check/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/heart-health-check/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/heart-health-check/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/heart-health-check/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_conditions:
+  /api/heart-health-check/medical_conditions:
     get:
       summary: List MedicalConditions records
       operationId: listMedicalConditions
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/medical_conditions/{id}:
+  /api/heart-health-check/medical_conditions/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/heart-health-check/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2725,7 +2725,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/heart-health-check/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2823,7 +2823,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/heart-health-check/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -2971,7 +2971,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/physical_activity_diets:
+  /api/heart-health-check/physical_activity_diets:
     get:
       summary: List PhysicalActivityDiet records
       operationId: listPhysicalActivityDiet
@@ -3069,7 +3069,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/physical_activity_diets/{id}:
+  /api/heart-health-check/physical_activity_diets/{id}:
     parameters:
     - name: id
       in: path
@@ -3217,7 +3217,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/review_calculates:
+  /api/heart-health-check/review_calculates:
     get:
       summary: List ReviewCalculate records
       operationId: listReviewCalculate
@@ -3315,7 +3315,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/review_calculates/{id}:
+  /api/heart-health-check/review_calculates/{id}:
     parameters:
     - name: id
       in: path
@@ -3463,7 +3463,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/smoking_alcohols:
+  /api/heart-health-check/smoking_alcohols:
     get:
       summary: List SmokingAlcohol records
       operationId: listSmokingAlcohol
@@ -3561,7 +3561,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/smoking_alcohols/{id}:
+  /api/heart-health-check/smoking_alcohols/{id}:
     parameters:
     - name: id
       in: path

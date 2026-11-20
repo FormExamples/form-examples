@@ -21,7 +21,7 @@ fn patient() -> Value {
 #[serial]
 async fn valid_patient_is_accepted() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.post("/api/patients").json(&patient()).await;
+        let res = request.post("/api/four-a-test-for-delirium/patients").json(&patient()).await;
         assert_eq!(res.status_code(), 200, "{}", res.text());
     })
     .await;
@@ -40,7 +40,7 @@ async fn implausible_values_are_422_and_name_the_field() {
         ] {
             let mut body = patient();
             body[field] = value;
-            let res = request.post("/api/patients").json(&body).await;
+            let res = request.post("/api/four-a-test-for-delirium/patients").json(&body).await;
             assert_eq!(res.status_code(), 422, "{field}: {}", res.text());
             let problem: Value = res.json();
             assert!(

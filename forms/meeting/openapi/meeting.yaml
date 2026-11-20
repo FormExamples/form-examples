@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A meeting record captured via a 10-step single-page wizard. Holds the invitation metadata, the 250-character summary, and the sign-off. Variable-length collections live in child tables.
 paths:
-  /api/meetings:
+  /api/meeting/meetings:
     get:
       summary: List Meeting records
       operationId: listMeeting
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/meetings/{id}:
+  /api/meeting/meetings/{id}:
     parameters:
       - name: id
         in: path

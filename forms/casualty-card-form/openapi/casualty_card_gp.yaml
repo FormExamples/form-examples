@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Registered GP and practice details for communication and follow-up.
 paths:
-  /api/casualty_card_gps:
+  /api/casualty-card-form/casualty_card_gps:
     get:
       summary: List CasualtyCardGp records
       operationId: listCasualtyCardGp
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_gps/{id}:
+  /api/casualty-card-form/casualty_card_gps/{id}:
     parameters:
       - name: id
         in: path

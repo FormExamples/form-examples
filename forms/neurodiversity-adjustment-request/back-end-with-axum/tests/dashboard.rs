@@ -70,7 +70,7 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
         .await
         .unwrap();
 
-        let page = request.get("/api/dashboard").await;
+        let page = request.get("/api/neurodiversity-adjustment-request/dashboard").await;
         page.assert_status_ok();
         assert!(page.maybe_header("x-total-count").is_none());
         assert!(page.maybe_header("link").is_none());
@@ -86,7 +86,7 @@ async fn the_dashboard_pairs_each_request_with_its_own_grade() {
             }
         }
 
-        let page = request.get("/api/dashboard?limit=1").await;
+        let page = request.get("/api/neurodiversity-adjustment-request/dashboard?limit=1").await;
         assert_eq!(page.json::<Vec<Value>>().len(), 1);
         let link = page.header("link");
         let next = link

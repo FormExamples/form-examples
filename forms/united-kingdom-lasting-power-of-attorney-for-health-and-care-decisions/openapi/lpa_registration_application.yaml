@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: OPG registration application (LP1H Part C). 1:1 with lpa.
 paths:
-  /api/lpa_registration_applications:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_registration_applications:
     get:
       summary: List LpaRegistrationApplication records
       operationId: listLpaRegistrationApplication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_registration_applications/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_registration_applications/{id}:
     parameters:
       - name: id
         in: path

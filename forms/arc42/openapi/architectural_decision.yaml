@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Architectural Decision Record (ADR) captured in §9 Architectural Decisions of the arc42 documentation.
 paths:
-  /api/architectural_decisions:
+  /api/arc42/architectural_decisions:
     get:
       summary: List ArchitecturalDecision records
       operationId: listArchitecturalDecision
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/architectural_decisions/{id}:
+  /api/arc42/architectural_decisions/{id}:
     parameters:
       - name: id
         in: path

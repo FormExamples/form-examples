@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: First responder assessment form evaluating fitness and competency for paramedics, EMTs, and first aiders. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/first-responder-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/first-responder-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a neuropsychiatry waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/neuropsych_waiting_list_cards:
+  /api/neuropsychiatry-waiting-list-card/neuropsych_waiting_list_cards:
     get:
       summary: List NeuropsychWaitingListCard records
       operationId: listNeuropsychWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/neuropsych_waiting_list_cards/{id}:
+  /api/neuropsychiatry-waiting-list-card/neuropsych_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

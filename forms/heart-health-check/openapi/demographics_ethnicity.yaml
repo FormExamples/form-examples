@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Demographics and ethnicity for QRISK3 risk calculation.
 paths:
-  /api/demographics_ethnicities:
+  /api/heart-health-check/demographics_ethnicities:
     get:
       summary: List DemographicsEthnicity records
       operationId: listDemographicsEthnicity
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/demographics_ethnicities/{id}:
+  /api/heart-health-check/demographics_ethnicities/{id}:
     parameters:
       - name: id
         in: path

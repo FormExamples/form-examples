@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/certificates`.
+ * Response from `GET /api/united-kingdom-marriage-certificate-application/dashboard/certificates`.
  * @typedef {Object} DashboardCertificatesResponse
  * @property {CertificateRow[]} items
  * @property {number} total

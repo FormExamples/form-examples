@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Additional safety-critical flags detected during dermatology assessment grading (e.g. suspicious lesion, skin cancer risk, severe DLQI impact).
 paths:
-  /api/grading_additional_flags:
+  /api/dermatology-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grading_additional_flags/{id}:
+  /api/dermatology-assessment/grading_additional_flags/{id}:
     parameters:
       - name: id
         in: path

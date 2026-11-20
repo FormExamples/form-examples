@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/blood_test_request_grade_flags:
+  /api/blood-test-request/blood_test_request_grade_flags:
     get:
       summary: List BloodTestRequestGradeFlag records
       operationId: listBloodTestRequestGradeFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_request_grade_flags/{id}:
+  /api/blood-test-request/blood_test_request_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_request_grade_rules:
+  /api/blood-test-request/blood_test_request_grade_rules:
     get:
       summary: List BloodTestRequestGradeRule records
       operationId: listBloodTestRequestGradeRule
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_request_grade_rules/{id}:
+  /api/blood-test-request/blood_test_request_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_request_grades:
+  /api/blood-test-request/blood_test_request_grades:
     get:
       summary: List BloodTestRequestGrade records
       operationId: listBloodTestRequestGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_request_grades/{id}:
+  /api/blood-test-request/blood_test_request_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_requests:
+  /api/blood-test-request/blood_test_requests:
     get:
       summary: List BloodTestRequest records
       operationId: listBloodTestRequest
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/blood_test_requests/{id}:
+  /api/blood-test-request/blood_test_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/blood-test-request/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/blood-test-request/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/blood-test-request/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/blood-test-request/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/blood-test-request/patients/{id}:
     parameters:
     - name: id
       in: path

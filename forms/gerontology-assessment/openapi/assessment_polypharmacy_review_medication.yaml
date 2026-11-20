@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual medication entry within the polypharmacy review.
 paths:
-  /api/assessment_polypharmacy_review_medications:
+  /api/gerontology-assessment/assessment_polypharmacy_review_medications:
     get:
       summary: List AssessmentPolypharmacyReviewMedication records
       operationId: listAssessmentPolypharmacyReviewMedication
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessment_polypharmacy_review_medications/{id}:
+  /api/gerontology-assessment/assessment_polypharmacy_review_medications/{id}:
     parameters:
       - name: id
         in: path

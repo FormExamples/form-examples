@@ -4,8 +4,8 @@ Server-side Rust JSON API for the Framingham Risk Score For Hard Coronary Heart 
 rendering, no Tera templates, no HTMX, no Alpine.js, no CSS, no Lily
 Design System.
 
-The HTTP contract is `/api/assessments` (list, create, read, update,
-submit, result) plus `/api/dashboard`. The companion front-ends in
+The HTTP contract is `/api/framingham-risk-score-for-hard-coronary-heart-disease/assessments` (list, create, read, update,
+submit, result) plus `/api/framingham-risk-score-for-hard-coronary-heart-disease/dashboard`. The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/`
 consume this API.
 

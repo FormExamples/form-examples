@@ -152,7 +152,7 @@ mirroring the `_grade_flag` table.
 - `validateCertificate(d)` returns `{ validityClass, underlyingCause, referralIndicated }`; the Svelte port also returns `flaggedIssues` and `timestamp`.
 - `detectFlaggedIssues(d)` returns the sorted `FlaggedIssue[]`.
 - Export and import: JSON, XML, CSV, TSV through the shared `form-export.js` and `form-import.js`.
-- HTTP: list (signed-cursor paging), `POST`, `GET`, `PUT`, `PATCH`, `DELETE` per SQL table; `GET /api/openapi.yaml`.
+- HTTP: list (signed-cursor paging), `POST`, `GET`, `PUT`, `PATCH`, `DELETE` per SQL table; `GET /api/united-states-standard-certificate-of-death/openapi.yaml`.
 
 ## 7. Artifacts
 

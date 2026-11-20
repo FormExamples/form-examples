@@ -23,7 +23,7 @@ async fn lists_come_in_cursor_pages() {
         .await
         .unwrap();
 
-        let first = request.get("/api/acknowledgments?limit=1").await;
+        let first = request.get("/api/legal-requirements-privacy-notice/acknowledgments?limit=1").await;
         first.assert_status_ok();
         assert!(first.maybe_header("x-total-count").is_none());
         let first_rows: Vec<Value> = first.json();
@@ -36,7 +36,7 @@ async fn lists_come_in_cursor_pages() {
             .and_then(|rest| rest.strip_suffix(">; rel=\"next\""))
             .unwrap()
             .to_string();
-        assert!(next.starts_with("/api/acknowledgments?limit=1&cursor="), "{next}");
+        assert!(next.starts_with("/api/legal-requirements-privacy-notice/acknowledgments?limit=1&cursor="), "{next}");
 
         let second = request.get(&next).await;
         second.assert_status_ok();
@@ -48,10 +48,10 @@ async fn lists_come_in_cursor_pages() {
         let carried = format!("{next}&status=other");
         for refused in [
             carried.as_str(),
-            "/api/acknowledgments?cursor=forged",
-            "/api/acknowledgments?limit=0",
-            "/api/acknowledgments?limit=1001",
-            "/api/acknowledgments?limit=many",
+            "/api/legal-requirements-privacy-notice/acknowledgments?cursor=forged",
+            "/api/legal-requirements-privacy-notice/acknowledgments?limit=0",
+            "/api/legal-requirements-privacy-notice/acknowledgments?limit=1001",
+            "/api/legal-requirements-privacy-notice/acknowledgments?limit=many",
         ] {
             request.get(refused).await.assert_status_unprocessable_entity();
         }

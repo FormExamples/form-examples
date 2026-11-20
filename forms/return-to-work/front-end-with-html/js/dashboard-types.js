@@ -30,7 +30,7 @@
  */
 
 /**
- * Response from `GET /api/return_to_works`.
+ * Response from `GET /api/return-to-work/return_to_works`.
  *
  * The Axum backend returns a bare JSON array of `DashboardRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so

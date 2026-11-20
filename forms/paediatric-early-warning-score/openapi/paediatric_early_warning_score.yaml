@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main PEWS observation record: raw physiological observations for a single measurement set plus recording context (age band, care setting, observation timestamp) and the documented-concern override triggers. Sub-scores, aggregate, escalation band, rules, and flags live in child tables."
 paths:
-  /api/paediatric_early_warning_scores:
+  /api/paediatric-early-warning-score/paediatric_early_warning_scores:
     get:
       summary: List PaediatricEarlyWarningScore records
       operationId: listPaediatricEarlyWarningScore
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/paediatric_early_warning_scores/{id}:
+  /api/paediatric-early-warning-score/paediatric_early_warning_scores/{id}:
     parameters:
       - name: id
         in: path

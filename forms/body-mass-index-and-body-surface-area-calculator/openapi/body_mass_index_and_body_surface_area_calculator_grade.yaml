@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed anthropometry result: body mass index and its WHO adult weight-status category, plus both body-surface-area values (1:1 with the parent calculation record)."
 paths:
-  /api/body_mass_index_and_body_surface_area_calculator_grades:
+  /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grades:
     get:
       summary: List BodyMassIndexAndBodySurfaceAreaCalculatorGrade records
       operationId: listBodyMassIndexAndBodySurfaceAreaCalculatorGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/body_mass_index_and_body_surface_area_calculator_grades/{id}:
+  /api/body-mass-index-and-body-surface-area-calculator/body_mass_index_and_body_surface_area_calculator_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/curb-65-pneumonia-severity-score/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/curb-65-pneumonia-severity-score/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grade_flags:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_flags:
     get:
       summary: List Curb65PneumoniaSeverityScoreGradeFlag records
       operationId: listCurb65PneumoniaSeverityScoreGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grade_flags/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grade_rules:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_rules:
     get:
       summary: List Curb65PneumoniaSeverityScoreGradeRule records
       operationId: listCurb65PneumoniaSeverityScoreGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grade_rules/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grades:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades:
     get:
       summary: List Curb65PneumoniaSeverityScoreGrade records
       operationId: listCurb65PneumoniaSeverityScoreGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_score_grades/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_score_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_scores:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores:
     get:
       summary: List Curb65PneumoniaSeverityScore records
       operationId: listCurb65PneumoniaSeverityScore
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/curb_65_pneumonia_severity_scores/{id}:
+  /api/curb-65-pneumonia-severity-score/curb_65_pneumonia_severity_scores/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/curb-65-pneumonia-severity-score/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/curb-65-pneumonia-severity-score/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/curb-65-pneumonia-severity-score/patients/{id}:
     parameters:
     - name: id
       in: path

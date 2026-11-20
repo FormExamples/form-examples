@@ -46,7 +46,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/screenings`.
+ * Response from `GET /api/cervical-screening/dashboard/screenings`.
  *
  * @typedef {Object} DashboardScreeningsResponse
  * @property {ScreeningRow[]} items

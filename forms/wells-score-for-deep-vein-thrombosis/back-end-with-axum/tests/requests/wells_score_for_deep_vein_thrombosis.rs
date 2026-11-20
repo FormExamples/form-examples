@@ -9,7 +9,7 @@ use wells_score_for_deep_vein_thrombosis::app::App;
 async fn can_get_wells_score_for_deep_vein_thromboses() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/wells_score_for_deep_vein_thromboses")
+            .get("/api/wells-score-for-deep-vein-thrombosis/wells_score_for_deep_vein_thromboses")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

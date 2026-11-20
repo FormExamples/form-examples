@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a cardiology waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/cardiology_waiting_list_cards:
+  /api/cardiology-waiting-list-card/cardiology_waiting_list_cards:
     get:
       summary: List CardiologyWaitingListCard records
       operationId: listCardiologyWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/cardiology_waiting_list_cards/{id}:
+  /api/cardiology-waiting-list-card/cardiology_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

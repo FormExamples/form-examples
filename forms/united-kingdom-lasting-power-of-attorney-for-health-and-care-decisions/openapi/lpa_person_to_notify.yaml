@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Join table linking an LPA to the (up to 5) persons to notify on registration (R-MCA-NOTIFY-MAX).
 paths:
-  /api/lpa_person_to_notifies:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies:
     get:
       summary: List LpaPersonToNotify records
       operationId: listLpaPersonToNotify
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lpa_person_to_notifies/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa_person_to_notifies/{id}:
     parameters:
       - name: id
         in: path

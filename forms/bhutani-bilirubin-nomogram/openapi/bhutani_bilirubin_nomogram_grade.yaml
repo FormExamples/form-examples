@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Bhutani bilirubin nomogram classification result (1:1): percentile risk zone, mirrored percentile band, interpolated gestation-specific phototherapy and exchange thresholds, and the yes/no above-threshold signals."
 paths:
-  /api/bhutani_bilirubin_nomogram_grades:
+  /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grades:
     get:
       summary: List BhutaniBilirubinNomogramGrade records
       operationId: listBhutaniBilirubinNomogramGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/bhutani_bilirubin_nomogram_grades/{id}:
+  /api/bhutani-bilirubin-nomogram/bhutani_bilirubin_nomogram_grades/{id}:
     parameters:
       - name: id
         in: path

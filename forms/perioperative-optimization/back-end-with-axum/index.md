@@ -22,16 +22,16 @@ single JSONB blob.
 
 | Entity | Route prefix |
 | --- | --- |
-| `patient` | `/api/patients/` |
-| `clinician` | `/api/clinicians/` |
-| `medication` | `/api/medications/` |
-| `patient_medication` | `/api/patient_medications/` |
-| `allergy` | `/api/allergies/` |
-| `patient_allergy` | `/api/patient_allergies/` |
-| `perioperative_optimization` | `/api/perioperative_optimizations/` |
-| `perioperative_optimization_grade` | `/api/perioperative_optimization_grades/` |
-| `perioperative_optimization_grade_domain` | `/api/perioperative_optimization_grade_domains/` |
-| `perioperative_optimization_grade_flag` | `/api/perioperative_optimization_grade_flags/` |
+| `patient` | `/api/perioperative-optimization/patients/` |
+| `clinician` | `/api/perioperative-optimization/clinicians/` |
+| `medication` | `/api/perioperative-optimization/medications/` |
+| `patient_medication` | `/api/perioperative-optimization/patient_medications/` |
+| `allergy` | `/api/perioperative-optimization/allergies/` |
+| `patient_allergy` | `/api/perioperative-optimization/patient_allergies/` |
+| `perioperative_optimization` | `/api/perioperative-optimization/perioperative_optimizations/` |
+| `perioperative_optimization_grade` | `/api/perioperative-optimization/perioperative_optimization_grades/` |
+| `perioperative_optimization_grade_domain` | `/api/perioperative-optimization/perioperative_optimization_grade_domains/` |
+| `perioperative_optimization_grade_flag` | `/api/perioperative-optimization/perioperative_optimization_grade_flags/` |
 
 Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.
@@ -42,7 +42,7 @@ an audit trail beneath a single score, so they are a first-class resource. A
 waiting-list dashboard can query it directly for "every assessment with an
 anaemia domain short on time".
 
-Both dashboards read `GET /api/perioperative_optimizations`, falling back to
+Both dashboards read `GET /api/perioperative-optimization/perioperative_optimizations`, falling back to
 bundled sample rows when the server is not running.
 
 ## Schema source of truth

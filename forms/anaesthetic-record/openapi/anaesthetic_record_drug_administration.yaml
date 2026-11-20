@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Drug administrations recorded during the anaesthetic: drug, dose, unit, route, category, and time."
 paths:
-  /api/anaesthetic_record_drug_administrations:
+  /api/anaesthetic-record/anaesthetic_record_drug_administrations:
     get:
       summary: List AnaestheticRecordDrugAdministration records
       operationId: listAnaestheticRecordDrugAdministration
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anaesthetic_record_drug_administrations/{id}:
+  /api/anaesthetic-record/anaesthetic_record_drug_administrations/{id}:
     parameters:
       - name: id
         in: path

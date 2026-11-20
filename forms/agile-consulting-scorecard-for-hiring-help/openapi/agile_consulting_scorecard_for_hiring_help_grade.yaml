@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed and signed-off grading result for an agile-consulting scorecard. One-to-one with agile_consulting_scorecard_for_hiring_help. Stores total score (0-16), manifesto subtotal (0-4), principles subtotal (0-12), the engine-computed and respondent-final readiness bands (low/borderline/medium/high), and a recommendation.
 paths:
-  /api/agile_consulting_scorecard_for_hiring_help_grades:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grades:
     get:
       summary: List AgileConsultingScorecardForHiringHelpGrade records
       operationId: listAgileConsultingScorecardForHiringHelpGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/agile_consulting_scorecard_for_hiring_help_grades/{id}:
+  /api/agile-consulting-scorecard-for-hiring-help/agile_consulting_scorecard_for_hiring_help_grades/{id}:
     parameters:
       - name: id
         in: path

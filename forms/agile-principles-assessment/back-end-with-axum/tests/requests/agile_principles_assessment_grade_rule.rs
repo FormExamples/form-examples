@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_agile_principles_assessment_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/agile_principles_assessment_grade_rules")
+            .get("/api/agile-principles-assessment/agile_principles_assessment_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

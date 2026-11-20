@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/assessment_cancer_histories:
+  /api/genetic-assessment/assessment_cancer_histories:
     get:
       summary: List AssessmentCancerHistory records
       operationId: listAssessmentCancerHistory
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_cancer_histories/{id}:
+  /api/genetic-assessment/assessment_cancer_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_cancer_history_items:
+  /api/genetic-assessment/assessment_cancer_history_items:
     get:
       summary: List AssessmentCancerHistoryItem records
       operationId: listAssessmentCancerHistoryItem
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_cancer_history_items/{id}:
+  /api/genetic-assessment/assessment_cancer_history_items/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_family_pedigree_members:
+  /api/genetic-assessment/assessment_family_pedigree_members:
     get:
       summary: List AssessmentFamilyPedigreeMember records
       operationId: listAssessmentFamilyPedigreeMember
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_family_pedigree_members/{id}:
+  /api/genetic-assessment/assessment_family_pedigree_members/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_family_pedigrees:
+  /api/genetic-assessment/assessment_family_pedigrees:
     get:
       summary: List AssessmentFamilyPedigree records
       operationId: listAssessmentFamilyPedigree
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessment_family_pedigrees/{id}:
+  /api/genetic-assessment/assessment_family_pedigrees/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments:
+  /api/genetic-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/genetic-assessment/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/genetic-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/genetic-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/genetic-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/genetic-assessment/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags:
+  /api/genetic-assessment/grading_additional_flags:
     get:
       summary: List GradingAdditionalFlag records
       operationId: listGradingAdditionalFlag
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_additional_flags/{id}:
+  /api/genetic-assessment/grading_additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules:
+  /api/genetic-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grading_fired_rules/{id}:
+  /api/genetic-assessment/grading_fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/genetic-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2233,7 +2233,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/genetic-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2331,7 +2331,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/genetic-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

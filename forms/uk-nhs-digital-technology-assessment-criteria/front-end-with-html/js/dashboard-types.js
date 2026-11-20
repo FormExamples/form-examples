@@ -26,7 +26,7 @@
  */
 
 /**
- * Response from `GET /api/assessments`: a bare array or an `{ items, total }` envelope.
+ * Response from `GET /api/uk-nhs-digital-technology-assessment-criteria/assessments`: a bare array or an `{ items, total }` envelope.
  *
  * @typedef {AssessmentRow[] | { items: AssessmentRow[], total?: number }} DashboardAssessmentsResponse
  */

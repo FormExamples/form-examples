@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_united_states_standard_certificate_of_death_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/united_states_standard_certificate_of_death_grade_rules")
+            .get("/api/united-states-standard-certificate-of-death/united_states_standard_certificate_of_death_grade_rules")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed AUDIT-C grading result (1:1 with audit_c): summed total (0-12), derived risk band, and positive-screen indicator (total >= 5)."
 paths:
-  /api/audit_c_grades:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grades:
     get:
       summary: List AuditCGrade records
       operationId: listAuditCGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/audit_c_grades/{id}:
+  /api/alcohol-use-disorders-identification-test-consumption/audit_c_grades/{id}:
     parameters:
       - name: id
         in: path

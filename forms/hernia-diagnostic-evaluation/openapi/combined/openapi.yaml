@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/hernia-diagnostic-evaluation/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/hernia-diagnostic-evaluation/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluation_grade_flags:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grade_flags:
     get:
       summary: List HerniaDiagnosticEvaluationGradeFlag records
       operationId: listHerniaDiagnosticEvaluationGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluation_grade_flags/{id}:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluation_grades:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades:
     get:
       summary: List HerniaDiagnosticEvaluationGrade records
       operationId: listHerniaDiagnosticEvaluationGrade
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluation_grades/{id}:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluation_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluations:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations:
     get:
       summary: List HerniaDiagnosticEvaluation records
       operationId: listHerniaDiagnosticEvaluation
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hernia_diagnostic_evaluations/{id}:
+  /api/hernia-diagnostic-evaluation/hernia_diagnostic_evaluations/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/hernia-diagnostic-evaluation/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1003,7 +1003,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/hernia-diagnostic-evaluation/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/hernia-diagnostic-evaluation/patients/{id}:
     parameters:
     - name: id
       in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Main OKR objective row. Holds reporter and metadata, all step fields, and the seven raw input scores. Computed scores live in okr_grade.
 paths:
-  /api/okr_objectives:
+  /api/objectives-and-key-results-tracker/okr_objectives:
     get:
       summary: List OkrObjective records
       operationId: listOkrObjective
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/okr_objectives/{id}:
+  /api/objectives-and-key-results-tracker/okr_objectives/{id}:
     parameters:
       - name: id
         in: path

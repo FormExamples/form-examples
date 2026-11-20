@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety-critical flags fired independently of the fitness category, with priority and suggested action.
 paths:
-  /api/united_kingdom_statement_of_fitness_for_work_grade_flags:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_flags:
     get:
       summary: List UnitedKingdomStatementOfFitnessForWorkGradeFlag records
       operationId: listUnitedKingdomStatementOfFitnessForWorkGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_statement_of_fitness_for_work_grade_flags/{id}:
+  /api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_work_grade_flags/{id}:
     parameters:
       - name: id
         in: path

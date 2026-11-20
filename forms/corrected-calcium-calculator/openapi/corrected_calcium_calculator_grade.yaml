@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed corrected-calcium result: the albumin-adjusted corrected calcium value and its classification against the adult reference range (1:1 with the parent calculation record)."
 paths:
-  /api/corrected_calcium_calculator_grades:
+  /api/corrected-calcium-calculator/corrected_calcium_calculator_grades:
     get:
       summary: List CorrectedCalciumCalculatorGrade records
       operationId: listCorrectedCalciumCalculatorGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/corrected_calcium_calculator_grades/{id}:
+  /api/corrected-calcium-calculator/corrected_calcium_calculator_grades/{id}:
     parameters:
       - name: id
         in: path

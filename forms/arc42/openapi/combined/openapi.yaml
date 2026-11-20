@@ -7,7 +7,7 @@ info:
   description: Combined OpenAPI specification for the arc42 form, merged from the per-entity specs in
     this directory. One RESTful resource per routed SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/arc42_documentation_grade_flags:
+  /api/arc42/arc42_documentation_grade_flags:
     get:
       summary: List Arc42DocumentationGradeFlag records
       operationId: listArc42DocumentationGradeFlag
@@ -105,7 +105,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentation_grade_flags/{id}:
+  /api/arc42/arc42_documentation_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -253,7 +253,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentation_grade_rules:
+  /api/arc42/arc42_documentation_grade_rules:
     get:
       summary: List Arc42DocumentationGradeRule records
       operationId: listArc42DocumentationGradeRule
@@ -351,7 +351,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentation_grade_rules/{id}:
+  /api/arc42/arc42_documentation_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -499,7 +499,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentation_grades:
+  /api/arc42/arc42_documentation_grades:
     get:
       summary: List Arc42DocumentationGrade records
       operationId: listArc42DocumentationGrade
@@ -597,7 +597,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentation_grades/{id}:
+  /api/arc42/arc42_documentation_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -745,7 +745,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentations:
+  /api/arc42/arc42_documentations:
     get:
       summary: List Arc42Documentation records
       operationId: listArc42Documentation
@@ -843,7 +843,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/arc42_documentations/{id}:
+  /api/arc42/arc42_documentations/{id}:
     parameters:
     - name: id
       in: path
@@ -991,7 +991,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/architectural_decisions:
+  /api/arc42/architectural_decisions:
     get:
       summary: List ArchitecturalDecision records
       operationId: listArchitecturalDecision
@@ -1089,7 +1089,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/architectural_decisions/{id}:
+  /api/arc42/architectural_decisions/{id}:
     parameters:
     - name: id
       in: path
@@ -1237,7 +1237,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/architectures:
+  /api/arc42/architectures:
     get:
       summary: List Architecture records
       operationId: listArchitecture
@@ -1335,7 +1335,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/architectures/{id}:
+  /api/arc42/architectures/{id}:
     parameters:
     - name: id
       in: path
@@ -1483,7 +1483,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/building_blocks:
+  /api/arc42/building_blocks:
     get:
       summary: List BuildingBlock records
       operationId: listBuildingBlock
@@ -1581,7 +1581,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/building_blocks/{id}:
+  /api/arc42/building_blocks/{id}:
     parameters:
     - name: id
       in: path
@@ -1729,7 +1729,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/business_goals:
+  /api/arc42/business_goals:
     get:
       summary: List BusinessGoal records
       operationId: listBusinessGoal
@@ -1827,7 +1827,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/business_goals/{id}:
+  /api/arc42/business_goals/{id}:
     parameters:
     - name: id
       in: path
@@ -1975,7 +1975,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/constraint_items:
+  /api/arc42/constraint_items:
     get:
       summary: List ConstraintItem records
       operationId: listConstraintItem
@@ -2073,7 +2073,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/constraint_items/{id}:
+  /api/arc42/constraint_items/{id}:
     parameters:
     - name: id
       in: path
@@ -2221,7 +2221,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/context_partners:
+  /api/arc42/context_partners:
     get:
       summary: List ContextPartner records
       operationId: listContextPartner
@@ -2319,7 +2319,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/context_partners/{id}:
+  /api/arc42/context_partners/{id}:
     parameters:
     - name: id
       in: path
@@ -2467,7 +2467,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/deployment_nodes:
+  /api/arc42/deployment_nodes:
     get:
       summary: List DeploymentNode records
       operationId: listDeploymentNode
@@ -2565,7 +2565,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/deployment_nodes/{id}:
+  /api/arc42/deployment_nodes/{id}:
     parameters:
     - name: id
       in: path
@@ -2713,7 +2713,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/glossary_terms:
+  /api/arc42/glossary_terms:
     get:
       summary: List GlossaryTerm records
       operationId: listGlossaryTerm
@@ -2811,7 +2811,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/glossary_terms/{id}:
+  /api/arc42/glossary_terms/{id}:
     parameters:
     - name: id
       in: path
@@ -2959,7 +2959,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/arc42/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -2970,7 +2970,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/quality_goals:
+  /api/arc42/quality_goals:
     get:
       summary: List QualityGoal records
       operationId: listQualityGoal
@@ -3068,7 +3068,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/quality_goals/{id}:
+  /api/arc42/quality_goals/{id}:
     parameters:
     - name: id
       in: path
@@ -3216,7 +3216,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/quality_scenarios:
+  /api/arc42/quality_scenarios:
     get:
       summary: List QualityScenario records
       operationId: listQualityScenario
@@ -3314,7 +3314,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/quality_scenarios/{id}:
+  /api/arc42/quality_scenarios/{id}:
     parameters:
     - name: id
       in: path
@@ -3462,7 +3462,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/risk_items:
+  /api/arc42/risk_items:
     get:
       summary: List RiskItem records
       operationId: listRiskItem
@@ -3560,7 +3560,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/risk_items/{id}:
+  /api/arc42/risk_items/{id}:
     parameters:
     - name: id
       in: path
@@ -3708,7 +3708,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/runtime_scenarios:
+  /api/arc42/runtime_scenarios:
     get:
       summary: List RuntimeScenario records
       operationId: listRuntimeScenario
@@ -3806,7 +3806,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/runtime_scenarios/{id}:
+  /api/arc42/runtime_scenarios/{id}:
     parameters:
     - name: id
       in: path
@@ -3954,7 +3954,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/stakeholders:
+  /api/arc42/stakeholders:
     get:
       summary: List Stakeholder records
       operationId: listStakeholder
@@ -4052,7 +4052,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/stakeholders/{id}:
+  /api/arc42/stakeholders/{id}:
     parameters:
     - name: id
       in: path
@@ -4200,7 +4200,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/technology_decisions:
+  /api/arc42/technology_decisions:
     get:
       summary: List TechnologyDecision records
       operationId: listTechnologyDecision
@@ -4298,7 +4298,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/technology_decisions/{id}:
+  /api/arc42/technology_decisions/{id}:
     parameters:
     - name: id
       in: path

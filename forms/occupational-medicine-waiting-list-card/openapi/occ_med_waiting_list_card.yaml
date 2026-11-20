@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a occupational medicine waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/occ_med_waiting_list_cards:
+  /api/occupational-medicine-waiting-list-card/occ_med_waiting_list_cards:
     get:
       summary: List OccMedWaitingListCard records
       operationId: listOccMedWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/occ_med_waiting_list_cards/{id}:
+  /api/occupational-medicine-waiting-list-card/occ_med_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk/`](cha2ds2_vasc_score_for_atrial_fibrillation_stroke_risk/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/cha2ds2-vasc-score-for-atrial-fibrillation-stroke-risk/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinical flags that fire independently of the completeness status, with priority and a suggested action for the clinician or governance team.
 paths:
-  /api/learning_disability_annual_health_check_grade_flags:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_flags:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeFlag records
       operationId: listLearningDisabilityAnnualHealthCheckGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/learning_disability_annual_health_check_grade_flags/{id}:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_flags/{id}:
     parameters:
       - name: id
         in: path

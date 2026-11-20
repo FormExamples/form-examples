@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed grading result for a waiting list card. One-to-one child of the card. Stores the Waiting Time Status, clinical priority, and derived day / week counts used by the dashboard and patient view.
 paths:
-  /api/thoracic_surg_waiting_list_card_grades:
+  /api/thoracic-surgery-waiting-list-card/thoracic_surg_waiting_list_card_grades:
     get:
       summary: List ThoracicSurgWaitingListCardGrade records
       operationId: listThoracicSurgWaitingListCardGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/thoracic_surg_waiting_list_card_grades/{id}:
+  /api/thoracic-surgery-waiting-list-card/thoracic_surg_waiting_list_card_grades/{id}:
     parameters:
       - name: id
         in: path

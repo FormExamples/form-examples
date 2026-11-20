@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed control-classification and completeness grading result for a hypertension annual review: control status, hypertension stage, review status, the primary reading source, the selected blood-pressure target and its driving group. 1:1 with the parent review."
 paths:
-  /api/hypertension_review_grades:
+  /api/hypertension-review/hypertension_review_grades:
     get:
       summary: List HypertensionReviewGrade records
       operationId: listHypertensionReviewGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hypertension_review_grades/{id}:
+  /api/hypertension-review/hypertension_review_grades/{id}:
     parameters:
       - name: id
         in: path

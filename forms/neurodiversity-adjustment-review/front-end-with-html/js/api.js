@@ -7,7 +7,7 @@
 // in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REVIEWS_PATH = '/api/neurodiversity_adjustment_reviews';
+const REVIEWS_PATH = '/api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews';
 
 /**
  * Fetch the review list from the backend.

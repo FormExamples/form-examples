@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (1-9 anchored on BSH indication / retest-interval match), pre-analytical / specimen safety (citrate tube fill / ratio / timing), request completeness, and triage priority."
 paths:
-  /api/coagulation_test_request_grades:
+  /api/coagulation-test-request/coagulation_test_request_grades:
     get:
       summary: List CoagulationTestRequestGrade records
       operationId: listCoagulationTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/coagulation_test_request_grades/{id}:
+  /api/coagulation-test-request/coagulation_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@
 // to the sample data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const PATIENTS_PATH = '/api/vaccinations-checklist/dashboard/patients';
 
 /**
  * Fetch the patient list from the backend.

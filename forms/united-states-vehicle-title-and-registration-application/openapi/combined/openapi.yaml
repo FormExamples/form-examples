@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-states-vehicle-title-and-registration-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-states-vehicle-title-and-registration-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lienholders:
+  /api/united-states-vehicle-title-and-registration-application/lienholders:
     get:
       summary: List Lienholder records
       operationId: listLienholder
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/lienholders/{id}:
+  /api/united-states-vehicle-title-and-registration-application/lienholders/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-states-vehicle-title-and-registration-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/vehicle_title_application_grade_flags:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_flags:
     get:
       summary: List VehicleTitleApplicationGradeFlag records
       operationId: listVehicleTitleApplicationGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_application_grade_flags/{id}:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_application_grade_rules:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_rules:
     get:
       summary: List VehicleTitleApplicationGradeRule records
       operationId: listVehicleTitleApplicationGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_application_grade_rules/{id}:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_application_grades:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grades:
     get:
       summary: List VehicleTitleApplicationGrade records
       operationId: listVehicleTitleApplicationGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_application_grades/{id}:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_applications:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_applications:
     get:
       summary: List VehicleTitleApplication records
       operationId: listVehicleTitleApplication
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/vehicle_title_applications/{id}:
+  /api/united-states-vehicle-title-and-registration-application/vehicle_title_applications/{id}:
     parameters:
     - name: id
       in: path

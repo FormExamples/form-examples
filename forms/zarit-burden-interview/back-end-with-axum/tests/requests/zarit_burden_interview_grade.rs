@@ -8,7 +8,7 @@ use zarit_burden_interview::app::App;
 #[serial]
 async fn can_get_zarit_burden_interview_grades() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/zarit_burden_interview_grades").await;
+        let res = request.get("/api/zarit-burden-interview/zarit_burden_interview_grades").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

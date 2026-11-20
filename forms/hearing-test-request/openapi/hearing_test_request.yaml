@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audiology / hearing-assessment request (referral). Captures the requested test, laterality, the clinical indication and question, relevant history, symptoms / red flags, and triage urgency.
 paths:
-  /api/hearing_test_requests:
+  /api/hearing-test-request/hearing_test_requests:
     get:
       summary: List HearingTestRequest records
       operationId: listHearingTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/hearing_test_requests/{id}:
+  /api/hearing-test-request/hearing_test_requests/{id}:
     parameters:
       - name: id
         in: path

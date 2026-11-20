@@ -8,7 +8,7 @@ use united_kingdom_driver_and_vehicle_licensing_agency_v1_form::app::App;
 #[serial]
 async fn can_get_assessments() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/assessments").await;
+        let res = request.get("/api/united-kingdom-driver-and-vehicle-licensing-agency-v1-form/assessments").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

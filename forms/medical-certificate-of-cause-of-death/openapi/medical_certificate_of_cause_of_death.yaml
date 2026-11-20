@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Medical Certificate of Cause of Death (MCCD) record: certification context, deceased death details, the Part I direct causal sequence (I(a) -> I(b) -> I(c)) with onset-to-death intervals, the Part II contributory conditions, and the coroner / medical-examiner referral status. Validity classification, fired rules, and flags live in child tables."
 paths:
-  /api/medical_certificate_of_cause_of_deaths:
+  /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_deaths:
     get:
       summary: List MedicalCertificateOfCauseOfDeath records
       operationId: listMedicalCertificateOfCauseOfDeath
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/medical_certificate_of_cause_of_deaths/{id}:
+  /api/medical-certificate-of-cause-of-death/medical_certificate_of_cause_of_deaths/{id}:
     parameters:
       - name: id
         in: path

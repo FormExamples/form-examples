@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main NIPE screening record: one head-to-toe physical examination of a baby, with context and baby identification, hip risk factors, the observation fields for the four key screening components (eyes, heart, hips, testes), the head-to-toe systematic-examination fields, and optional practitioner-recorded per-component results. Classification, fired rules, and referral flags live in child tables."
 paths:
-  /api/newborn_and_infant_physical_examinations:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examinations:
     get:
       summary: List NewbornAndInfantPhysicalExamination records
       operationId: listNewbornAndInfantPhysicalExamination
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/newborn_and_infant_physical_examinations/{id}:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examinations/{id}:
     parameters:
       - name: id
         in: path

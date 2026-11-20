@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician-issued Statement of Fitness for Work (Med 3 / fit note) authorising an employee return to work after illness, injury, or extended absence.
 paths:
-  /api/return_to_works:
+  /api/return-to-work/return_to_works:
     get:
       summary: List ReturnToWork records
       operationId: listReturnToWork
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/return_to_works/{id}:
+  /api/return-to-work/return_to_works/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`recognition_of_stroke_in_the_emergency_room/`](recognition_of_stroke_in_the_emergency_room/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/recognition-of-stroke-in-the-emergency-room/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

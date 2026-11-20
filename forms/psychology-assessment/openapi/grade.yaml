@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed DASS-21 grading result. Each subscale raw score (0-21) is doubled to align with DASS-42 norms, yielding a 0-42 range, and mapped to a severity category. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/psychology-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/psychology-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

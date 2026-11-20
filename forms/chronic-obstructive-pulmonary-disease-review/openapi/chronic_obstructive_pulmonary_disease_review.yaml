@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main COPD annual-review record (NICE NG115, GOLD 2023+): patient and clinician identification, review context, diagnosis and exposure history, post-bronchodilator spirometry, symptom burden (MRC / mMRC / CAT), exacerbation history, smoking and cessation, inhaler therapy, technique and adherence, vaccinations, pulmonary rehabilitation, oxygen, comorbidities, and self-management plan. The computed GOLD airflow grade, ABE group, review-completeness grade, fired rules, and flags live in child tables."
 paths:
-  /api/chronic_obstructive_pulmonary_disease_reviews:
+  /api/chronic-obstructive-pulmonary-disease-review/chronic_obstructive_pulmonary_disease_reviews:
     get:
       summary: List ChronicObstructivePulmonaryDiseaseReview records
       operationId: listChronicObstructivePulmonaryDiseaseReview
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/chronic_obstructive_pulmonary_disease_reviews/{id}:
+  /api/chronic-obstructive-pulmonary-disease-review/chronic_obstructive_pulmonary_disease_reviews/{id}:
     parameters:
       - name: id
         in: path

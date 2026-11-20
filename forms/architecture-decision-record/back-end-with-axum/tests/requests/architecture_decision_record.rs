@@ -1,7 +1,7 @@
 // HTTP integration tests for the architecture-decision-record backend.
 //
 // Exercises the full request pipeline: validation, auto-numbering, auto-slug,
-// the JSON `/api/adrs` register, and the `/api/adrs/:slug` viewer.
+// the JSON `/api/architecture-decision-record/adrs` register, and the `/api/architecture-decision-record/adrs/:slug` viewer.
 //
 // Requires a running Postgres with the `architecture_decision_record_test`
 // database (created by the setup script in this directory's parent). Tests
@@ -49,7 +49,7 @@ async fn post_auto_numbers_and_auto_slugs() {
 
         // First POST: title only — backend assigns number=1 and slug derived from title.
         let res = request
-            .post("/api/adrs")
+            .post("/api/architecture-decision-record/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -60,7 +60,7 @@ async fn post_auto_numbers_and_auto_slugs() {
 
         // Second POST: explicit number=99, no slug.
         let res = request
-            .post("/api/adrs")
+            .post("/api/architecture-decision-record/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -72,7 +72,7 @@ async fn post_auto_numbers_and_auto_slugs() {
 
         // Third POST: no number → auto-assigns 100 (max + 1).
         let res = request
-            .post("/api/adrs")
+            .post("/api/architecture-decision-record/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -81,8 +81,8 @@ async fn post_auto_numbers_and_auto_slugs() {
             .await;
         assert_eq!(res.status_code(), 200);
 
-        // GET /api/adrs returns the three rows with sane number / slug values.
-        let res = request.get("/api/adrs").await;
+        // GET /api/architecture-decision-record/adrs returns the three rows with sane number / slug values.
+        let res = request.get("/api/architecture-decision-record/adrs").await;
         assert_eq!(res.status_code(), 200);
         let rows: Vec<serde_json::Value> = res.json();
         assert_eq!(rows.len(), 3, "expected three ADRs in the register");
@@ -113,7 +113,7 @@ async fn post_with_bad_status_returns_400() {
         let organization_id = seed_org(&ctx).await;
 
         let res = request
-            .post("/api/adrs")
+            .post("/api/architecture-decision-record/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -142,7 +142,7 @@ async fn api_show_by_slug_returns_rendered_markdown() {
         let organization_id = seed_org(&ctx).await;
 
         request
-            .post("/api/adrs")
+            .post("/api/architecture-decision-record/adrs")
             .json(&serde_json::json!({
                 "authorId": author_id,
                 "organizationId": organization_id,
@@ -153,7 +153,7 @@ async fn api_show_by_slug_returns_rendered_markdown() {
             }))
             .await;
 
-        let res = request.get("/api/adrs/adopt-event-sourcing").await;
+        let res = request.get("/api/architecture-decision-record/adrs/adopt-event-sourcing").await;
         assert_eq!(res.status_code(), 200);
         let body: serde_json::Value = res.json();
         assert_eq!(body["title"], "Adopt event sourcing");
@@ -177,7 +177,7 @@ async fn api_show_by_slug_returns_rendered_markdown() {
 #[serial]
 async fn api_show_by_slug_returns_404_for_unknown_slug() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/adrs/nonexistent-slug").await;
+        let res = request.get("/api/architecture-decision-record/adrs/nonexistent-slug").await;
         assert_eq!(res.status_code(), 404);
     })
     .await;

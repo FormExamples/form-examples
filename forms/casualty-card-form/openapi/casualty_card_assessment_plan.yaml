@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Working diagnosis, differentials, clinical impression, and risk stratification.
 paths:
-  /api/casualty_card_assessment_plans:
+  /api/casualty-card-form/casualty_card_assessment_plans:
     get:
       summary: List CasualtyCardAssessmentPlan records
       operationId: listCasualtyCardAssessmentPlan
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_assessment_plans/{id}:
+  /api/casualty-card-form/casualty_card_assessment_plans/{id}:
     parameters:
       - name: id
         in: path

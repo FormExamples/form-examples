@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a tropical medicine waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/trop_med_waiting_list_cards:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_cards:
     get:
       summary: List TropMedWaitingListCard records
       operationId: listTropMedWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/trop_med_waiting_list_cards/{id}:
+  /api/tropical-medicine-waiting-list-card/trop_med_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

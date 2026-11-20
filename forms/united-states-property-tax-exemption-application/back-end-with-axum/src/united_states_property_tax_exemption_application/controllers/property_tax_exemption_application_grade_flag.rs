@@ -115,7 +115,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/property_tax_exemption_application_grade_flags/")
+        .prefix("api/united-states-property-tax-exemption-application/property_tax_exemption_application_grade_flags/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))

@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/wills`.
+ * Response from `GET /api/united-states-last-will-and-testament/dashboard/wills`.
  * @typedef {Object} DashboardWillsResponse
  * @property {WillRow[]} items
  * @property {number} total

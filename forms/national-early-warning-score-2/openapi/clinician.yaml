@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician identifying information for the person who recorded the NEWS2 observation set.
 paths:
-  /api/clinicians:
+  /api/national-early-warning-score-2/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/national-early-warning-score-2/clinicians/{id}:
     parameters:
       - name: id
         in: path

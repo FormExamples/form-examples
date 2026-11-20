@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Signature and consent confirmations for the release form. One-to-one child of release_form.
 paths:
-  /api/signature_consents:
+  /api/medical-records-release-permission/signature_consents:
     get:
       summary: List SignatureConsent records
       operationId: listSignatureConsent
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/signature_consents/{id}:
+  /api/medical-records-release-permission/signature_consents/{id}:
     parameters:
       - name: id
         in: path

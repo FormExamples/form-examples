@@ -35,7 +35,7 @@ flowchart TD
 
 | Artefact | Build | Runtime shape |
 | -------- | ----- | ------------- |
-| **HTML front-end** | none (no build step) | Static files served over HTTP or `file://`; self-contained; talks to the API via `fetch /api/...` with a sample-data fallback. |
+| **HTML front-end** | none (no build step) | Static files served over HTTP or `file://`; self-contained; talks to the API via `fetch /api/<slug>/...` with a sample-data fallback. |
 | **Svelte front-end** | SvelteKit adapter build (`pnpm build`) | Adapter output (static or Node) served under `/<slug>/`; client-only SVAR grid on the dashboard route. |
 | **Axum back-end** | `cargo build --release` | axum service (default port 5150); one crate per form; JSON API only. |
 | **Database** | sqlx migrations (`cargo run -- db migrate`) | PostgreSQL 18; per-form databases `<slug_snake>_{development,test,production}`; production URL from `DB_URL`. |

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Dietetic assessment: the payload of the 16-step single-page wizard, covering medical history, medication and supplements, dietary recall, lifestyle and food environment, and physical measurements."
 paths:
-  /api/dietic_assessments:
+  /api/dietic-assessment/dietic_assessments:
     get:
       summary: List DieticAssessment records
       operationId: listDieticAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/dietic_assessments/{id}:
+  /api/dietic-assessment/dietic_assessments/{id}:
     parameters:
       - name: id
         in: path

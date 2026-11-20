@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Computed NEWS2 score with clinical response threshold and parameter breakdown.
 paths:
-  /api/news2_results:
+  /api/casualty-card-form/news2_results:
     get:
       summary: List News2Result records
       operationId: listNews2Result
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/news2_results/{id}:
+  /api/casualty-card-form/news2_results/{id}:
     parameters:
       - name: id
         in: path

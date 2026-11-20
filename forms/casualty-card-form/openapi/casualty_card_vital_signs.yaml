@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: 1:1 with casualty_card. Vital signs observations used for NEWS2 auto-calculation.
 paths:
-  /api/casualty_card_vital_signs:
+  /api/casualty-card-form/casualty_card_vital_signs:
     get:
       summary: List CasualtyCardVitalSigns records
       operationId: listCasualtyCardVitalSigns
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/casualty_card_vital_signs/{id}:
+  /api/casualty-card-form/casualty_card_vital_signs/{id}:
     parameters:
       - name: id
         in: path

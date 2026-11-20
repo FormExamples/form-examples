@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_qrisk3_cardiovascular_disease_risk_score_grade_flags() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/qrisk3_cardiovascular_disease_risk_score_grade_flags")
+            .get("/api/qrisk3-cardiovascular-disease-risk-score/qrisk3_cardiovascular_disease_risk_score_grade_flags")
             .await;
         assert_eq!(res.status_code(), 200);
 

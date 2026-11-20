@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Author of an architecture decision record (the architect or decision-maker).
 paths:
-  /api/authors:
+  /api/architecture-decision-record/authors:
     get:
       summary: List Author records
       operationId: listAuthor
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/authors/{id}:
+  /api/architecture-decision-record/authors/{id}:
     parameters:
       - name: id
         in: path

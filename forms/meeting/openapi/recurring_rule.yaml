@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Optional recurrence rule for a meeting, modelled on RFC 5545 RRULE but restricted to the seven frequencies a non-technical user is likely to need.
 paths:
-  /api/recurring_rules:
+  /api/meeting/recurring_rules:
     get:
       summary: List RecurringRule records
       operationId: listRecurringRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/recurring_rules/{id}:
+  /api/meeting/recurring_rules/{id}:
     parameters:
       - name: id
         in: path

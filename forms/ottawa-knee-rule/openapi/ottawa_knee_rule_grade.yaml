@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed Ottawa Knee Rule grading result: the binary imaging decision (xray_indicated) and decision label. One-to-one with the parent assessment."
 paths:
-  /api/ottawa_knee_rule_grades:
+  /api/ottawa-knee-rule/ottawa_knee_rule_grades:
     get:
       summary: List OttawaKneeRuleGrade records
       operationId: listOttawaKneeRuleGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ottawa_knee_rule_grades/{id}:
+  /api/ottawa-knee-rule/ottawa_knee_rule_grades/{id}:
     parameters:
       - name: id
         in: path

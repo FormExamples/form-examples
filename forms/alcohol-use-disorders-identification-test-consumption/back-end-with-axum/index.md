@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`alcohol_use_disorders_identification_test_consumption/`](alcohol_use_disorders_identification_test_consumption/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/alcohol-use-disorders-identification-test-consumption/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

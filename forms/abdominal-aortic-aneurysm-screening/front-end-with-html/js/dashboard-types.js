@@ -44,7 +44,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/screenings`.
+ * Response from `GET /api/abdominal-aortic-aneurysm-screening/dashboard/screenings`.
  *
  * @typedef {Object} DashboardScreeningsResponse
  * @property {ScreeningRow[]} items

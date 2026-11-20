@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinical genetics / genomic test request (referral). Captures the requested test type, the clinical indication and question, clinical details, family history, consent and pre-test counselling status, specimen type, and triage urgency. Aligned with the NHS National Genomic Test Directory eligibility criteria.
 paths:
-  /api/genetic_test_requests:
+  /api/genetic-test-request/genetic_test_requests:
     get:
       summary: List GeneticTestRequest records
       operationId: listGeneticTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/genetic_test_requests/{id}:
+  /api/genetic-test-request/genetic_test_requests/{id}:
     parameters:
       - name: id
         in: path

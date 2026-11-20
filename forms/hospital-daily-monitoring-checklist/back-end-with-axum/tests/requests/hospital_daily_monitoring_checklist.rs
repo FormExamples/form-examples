@@ -9,7 +9,7 @@ use serial_test::serial;
 async fn can_get_hospital_daily_monitoring_checklists() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/hospital_daily_monitoring_checklists")
+            .get("/api/hospital-daily-monitoring-checklist/hospital_daily_monitoring_checklists")
             .await;
         assert_eq!(res.status_code(), 200);
 

@@ -1,7 +1,7 @@
 # Routes no SQL table describes, documented by hand. Merged into
 # combined/openapi.yaml by bin/openapi/generate-openapi-combined.py.
 paths:
-  /api/neurodiversity_adjustment_reviews/{id}/submit:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}/submit:
     parameters:
     - name: id
       in: path
@@ -38,7 +38,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/neurodiversity_adjustment_reviews/{id}/result:
+  /api/neurodiversity-adjustment-review/neurodiversity_adjustment_reviews/{id}/result:
     parameters:
     - name: id
       in: path
@@ -73,7 +73,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dashboard:
+  /api/neurodiversity-adjustment-review/dashboard:
     get:
       summary: Each review with its grade, newest grade first
       description: Lists grades newest first, each paired with the record it grades.

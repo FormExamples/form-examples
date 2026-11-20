@@ -24,7 +24,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/instruments`.
+ * Response from `GET /api/united-states-durable-financial-power-of-attorney/dashboard/instruments`.
  * @typedef {Object} DashboardInstrumentsResponse
  * @property {InstrumentRow[]} items
  * @property {number} total

@@ -7,7 +7,7 @@
 // `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const REVIEWS_PATH = '/api/dashboard/reviews';
+const REVIEWS_PATH = '/api/chronic-kidney-disease-review/dashboard/reviews';
 
 /**
  * Fetch the review list from the backend.

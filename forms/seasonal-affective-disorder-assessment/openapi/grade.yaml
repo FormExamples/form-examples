@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed SAD grading result. SPAQ GSS 0-24, PHQ-9 0-27, combined severity. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/seasonal-affective-disorder-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/seasonal-affective-disorder-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

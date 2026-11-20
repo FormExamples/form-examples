@@ -11,7 +11,7 @@ function esc(s) {
 
 async function loadAuthorizations() {
   try {
-    const r = await fetch('/api/authorizations', { headers: { Accept: 'application/json' } });
+    const r = await fetch('/api/united-states-hipaa-authorization-form/authorizations', { headers: { Accept: 'application/json' } });
     if (r.ok) return await r.json();
   } catch (_) {}
   return sampleAuthorizations;

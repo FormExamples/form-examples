@@ -6,7 +6,7 @@ bin/axum-entity-routes [--check] [--root DIR] [--all|<slug>...]
 Each table in forms/<slug>/sql/ must be reachable through the crate's API.
 For a table no controller touches, this writes what is missing: the migration
 (from sql/, in the fleet's type mapping, parents first), the model, a
-controller under /api/<plural>, a request test, and the wiring. A table a
+controller under /api/<slug>/<plural>, a request test, and the wiring. A table a
 hand-written controller already reads or writes counts as reachable, so the
 aggregate APIs of the cardiology and neurodiversity crates are left as they
 are. Run bin/axum-soft-delete afterwards; it owns the delete and filter SQL.
@@ -172,7 +172,7 @@ impl Model {{
 '''
 
 
-def controller(table, name, module, model_name):
+def controller(table, name, module, model_name, slug):
     domain = table.domain()
     params = "".join(
         f"    /// {words(c.name)}.\n    pub {field(c.name)}: {rust_type(c)},\n" for c in domain
@@ -280,7 +280,7 @@ pub async fn get_one(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Res
 /// Routes.
 pub fn routes() -> Routes {{
     Routes::new()
-        .prefix("api/{name}/")
+        .prefix("api/{slug}/{name}/")
         .add("/", get(list))
         .add("/", post(add))
         .add("{{id}}", get(get_one))
@@ -291,7 +291,7 @@ pub fn routes() -> Routes {{
 '''
 
 
-def request_test(name, library):
+def request_test(name, library, slug):
     return f'''use axa_test::prelude::*;
 use {library}::app::App;
 use serial_test::serial;
@@ -300,7 +300,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_{name}() {{
     request::<App, _, _>(|request, _ctx| async move {{
-        let res = request.get("/api/{name}").await;
+        let res = request.get("/api/{slug}/{name}").await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());
     }})
@@ -350,6 +350,7 @@ def plan(crate):
 
 def write(crate, wanted, resolved, migrated, missing):
     source = ac.source_dir(crate)
+    slug = crate.parent.name
     library = re.search(r"use (\w+)::app::App", (crate / "tests/requests/pagination.rs").read_text()
                         if (crate / "tests/requests/pagination.rs").exists()
                         else next(crate.glob("tests/*.rs")).read_text())[1]
@@ -370,7 +371,7 @@ def write(crate, wanted, resolved, migrated, missing):
             (source / "models" / f"{name}.rs").write_text(model(shape, name))
             add_line(source / "models" / "mod.rs", f"pub mod {name};")
         module = table if not (source / "controllers" / f"{table}.rs").exists() else name
-        (source / "controllers" / f"{module}.rs").write_text(controller(shape, name, module, name))
+        (source / "controllers" / f"{module}.rs").write_text(controller(shape, name, module, name, slug))
         add_line(source / "controllers" / "mod.rs", f"pub mod {module};")
         app = source / "app.rs"
         text = app.read_text()
@@ -379,10 +380,10 @@ def write(crate, wanted, resolved, migrated, missing):
         app.write_text(text[:end] + f"            .add_route(crate::controllers::{module}::routes())\n" + text[end:])
         tests = crate / "tests" / "requests"
         if tests.is_dir():
-            (tests / f"{name}_route.rs").write_text(request_test(name, library))
+            (tests / f"{name}_route.rs").write_text(request_test(name, library, slug))
             add_line(tests / "mod.rs", f"mod {name}_route;")
         else:
-            (crate / "tests" / f"{name}_route.rs").write_text("#![forbid(unsafe_code)]\n\n" + request_test(name, library))
+            (crate / "tests" / f"{name}_route.rs").write_text("#![forbid(unsafe_code)]\n\n" + request_test(name, library, slug))
 
 
 def main():

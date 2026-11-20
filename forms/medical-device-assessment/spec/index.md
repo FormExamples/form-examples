@@ -55,10 +55,10 @@ determiningRule, readiness, firedRules[], flags[] }` (migrations 05–07).
 
 Both front-ends use one client (`front-end-with-html/js/api.js`,
 `front-end-with-svelte/src/lib/api/medical-device-assessments.ts`) against the
-per-table REST API (`/api/manufacturers`, `/api/assessors`,
-`/api/medical_device_assessments`, `/api/medical_device_assessment_grades`,
-`/api/medical_device_assessment_grade_rules`,
-`/api/medical_device_assessment_grade_flags`; no bespoke submit endpoint).
+per-table REST API (`/api/medical-device-assessment/manufacturers`, `/api/medical-device-assessment/assessors`,
+`/api/medical-device-assessment/medical_device_assessments`, `/api/medical-device-assessment/medical_device_assessment_grades`,
+`/api/medical-device-assessment/medical_device_assessment_grade_rules`,
+`/api/medical-device-assessment/medical_device_assessment_grade_flags`; no bespoke submit endpoint).
 
 - API base: HTML `?api=` or `window.__API_BASE__`, Svelte `VITE_API_BASE`;
   default `http://localhost:5150`.

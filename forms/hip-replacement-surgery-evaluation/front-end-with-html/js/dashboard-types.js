@@ -33,7 +33,7 @@
  */
 
 /**
- * Response from `GET /api/hip_replacement_surgery_evaluations`.
+ * Response from `GET /api/hip-replacement-surgery-evaluation/hip_replacement_surgery_evaluations`.
  *
  * The Axum back-end returns a bare JSON array of `EvaluationRow` objects; the
  * dashboard accepts either a bare array or an `{ items, total }` envelope so a

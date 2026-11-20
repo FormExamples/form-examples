@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "1:1 with encounter_satisfaction. Staff & Professionalism domain: 3 Likert-scale satisfaction questions."
 paths:
-  /api/staff_professionalisms:
+  /api/encounter-satisfaction/staff_professionalisms:
     get:
       summary: List StaffProfessionalism records
       operationId: listStaffProfessionalism
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/staff_professionalisms/{id}:
+  /api/encounter-satisfaction/staff_professionalisms/{id}:
     parameters:
       - name: id
         in: path

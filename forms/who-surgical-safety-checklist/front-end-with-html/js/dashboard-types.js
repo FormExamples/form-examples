@@ -120,7 +120,7 @@
  */
 
 /**
- * Response from `GET /api/checklists`.
+ * Response from `GET /api/who-surgical-safety-checklist/checklists`.
  *
  * Accepts either a bare array of `ChecklistRow` or a paginated
  * `{ items, total }` envelope for forwards compatibility.

@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/modified-early-warning-score/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/modified-early-warning-score/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grade_flags:
+  /api/modified-early-warning-score/modified_early_warning_score_grade_flags:
     get:
       summary: List ModifiedEarlyWarningScoreGradeFlag records
       operationId: listModifiedEarlyWarningScoreGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grade_flags/{id}:
+  /api/modified-early-warning-score/modified_early_warning_score_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grade_rules:
+  /api/modified-early-warning-score/modified_early_warning_score_grade_rules:
     get:
       summary: List ModifiedEarlyWarningScoreGradeRule records
       operationId: listModifiedEarlyWarningScoreGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grade_rules/{id}:
+  /api/modified-early-warning-score/modified_early_warning_score_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grades:
+  /api/modified-early-warning-score/modified_early_warning_score_grades:
     get:
       summary: List ModifiedEarlyWarningScoreGrade records
       operationId: listModifiedEarlyWarningScoreGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_score_grades/{id}:
+  /api/modified-early-warning-score/modified_early_warning_score_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_scores:
+  /api/modified-early-warning-score/modified_early_warning_scores:
     get:
       summary: List ModifiedEarlyWarningScore records
       operationId: listModifiedEarlyWarningScore
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/modified_early_warning_scores/{id}:
+  /api/modified-early-warning-score/modified_early_warning_scores/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/modified-early-warning-score/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/modified-early-warning-score/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/modified-early-warning-score/patients/{id}:
     parameters:
     - name: id
       in: path

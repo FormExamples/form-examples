@@ -8,7 +8,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_corrected_calcium_calculators() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/corrected_calcium_calculators").await;
+        let res = request.get("/api/corrected-calcium-calculator/corrected_calcium_calculators").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

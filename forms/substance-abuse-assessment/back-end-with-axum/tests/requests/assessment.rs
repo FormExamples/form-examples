@@ -8,7 +8,7 @@ use substance_abuse_assessment::app::App;
 #[serial]
 async fn can_get_assessments() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/assessments").await;
+        let res = request.get("/api/substance-abuse-assessment/assessments").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Individual rules that evaluated to true during grading.
 paths:
-  /api/grading_fired_rules:
+  /api/learning-disability-assessment/grading_fired_rules:
     get:
       summary: List GradingFiredRule records
       operationId: listGradingFiredRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grading_fired_rules/{id}:
+  /api/learning-disability-assessment/grading_fired_rules/{id}:
     parameters:
       - name: id
         in: path

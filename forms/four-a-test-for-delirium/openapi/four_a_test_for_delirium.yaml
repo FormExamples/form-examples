@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main 4AT assessment record: patient and assessment identification, context, and the four scored item inputs (alertness, AMT4, attention via months-backwards, and acute change or fluctuating course)."
 paths:
-  /api/four_a_test_for_deliriums:
+  /api/four-a-test-for-delirium/four_a_test_for_deliriums:
     get:
       summary: List FourATestForDelirium records
       operationId: listFourATestForDelirium
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/four_a_test_for_deliriums/{id}:
+  /api/four-a-test-for-delirium/four_a_test_for_deliriums/{id}:
     parameters:
       - name: id
         in: path

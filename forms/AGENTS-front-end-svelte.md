@@ -31,7 +31,9 @@ So for the `cardiology-request` form (slug), everything lives under
 `src/routes/cardiology-request/`: `/cardiology-request/cardiology-requests/` is
 the dashboard list and `/cardiology-request/cardiology-requests/[id]` (e.g.
 `…/new`) is the input form. Internal route links (`href`/`goto`) are absolute
-and include the `/<slug>` prefix; `/api/` fetch paths do not. Do **not** put
+and include the `/<slug>` prefix; `/api/<slug>/` fetch paths are namespaced by
+the slug too, but under `/api/` (see
+[`spec/form-namespacing/`](../spec/form-namespacing/)). Do **not** put
 routes directly under `src/routes/` (no `<slug>/` parent) — that is the legacy
 layout, with one exception: `src/routes/+server.ts` at the true root, whose
 only job is redirecting `/` to `/<slug>/`:

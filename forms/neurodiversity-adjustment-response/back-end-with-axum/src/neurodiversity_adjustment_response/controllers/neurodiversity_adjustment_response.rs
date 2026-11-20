@@ -1,4 +1,4 @@
-//! Neurodiversity-adjustment-response CRUD + grade endpoints under `/api/neurodiversity_adjustment_responses`.
+//! Neurodiversity-adjustment-response CRUD + grade endpoints under `/api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses`.
 //!
 //! The relational schema is the source of truth: a response row references a
 //! worker and a manager; the four-axis grade is persisted across the
@@ -94,7 +94,7 @@ async fn ensure_manager(ctx: &AppContext, id: Option<Uuid>) -> Result<Uuid> {
     .id)
 }
 
-/// POST /`api/neurodiversity_adjustment_responses` — create a response (draft or filled).
+/// POST /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses` — create a response (draft or filled).
 #[debug_handler]
 async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> Result<Response> {
     let worker_id = ensure_worker(&ctx, body.worker_id).await?;
@@ -103,7 +103,7 @@ async fn create(State(ctx): State<AppContext>, Json(body): Json<CreateBody>) -> 
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// GET /`api/neurodiversity_adjustment_responses` — list responses (newest first).
+/// GET /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses` — list responses (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> Result<Response> {
     let page = cursor_page(&ctx, &uri)?;
@@ -112,7 +112,7 @@ async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> R
     Ok(page.respond(items))
 }
 
-/// GET /`api/neurodiversity_adjustment_responses/{id`} — fetch one response.
+/// GET /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id`} — fetch one response.
 #[debug_handler]
 async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&db(&ctx), id)
@@ -121,7 +121,7 @@ async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Res
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// PATCH /`api/neurodiversity_adjustment_responses/{id`} — overwrite the response payload fields.
+/// PATCH /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id`} — overwrite the response payload fields.
 #[debug_handler]
 async fn update(
     Path(id): Path<Uuid>,
@@ -139,7 +139,7 @@ async fn update(
     Ok(Json(response_to_json(&model)).into_response())
 }
 
-/// DELETE /`api/neurodiversity_adjustment_responses/{id`} — soft-delete the response.
+/// DELETE /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id`} — soft-delete the response.
 #[debug_handler]
 async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = find_by_id(&db(&ctx), id)
@@ -149,7 +149,7 @@ async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(json!({ "id": id, "deleted": true })).into_response())
 }
 
-/// POST /`api/neurodiversity_adjustment_responses/{id}/submit` — run the four-axis engine over
+/// POST /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/submit` — run the four-axis engine over
 /// the stored response and transactionally persist the grade, fired rules, and
 /// flags. Idempotent: re-submitting replaces the prior grade.
 #[debug_handler]
@@ -171,7 +171,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(grade_to_json(&grade_row, &rules, &flags)).into_response())
 }
 
-/// GET /`api/neurodiversity_adjustment_responses/{id}/result` — read back the persisted grade.
+/// GET /`api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses/{id}/result` — read back the persisted grade.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let grade = neurodiversity_adjustment_response_grades::find_for_response(&db(&ctx), id)
@@ -187,7 +187,7 @@ async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/neurodiversity_adjustment_responses")
+        .prefix("api/neurodiversity-adjustment-response/neurodiversity_adjustment_responses")
         .add("/", get(list))
         .add("/", post(create))
         .add("{id}", get(show))

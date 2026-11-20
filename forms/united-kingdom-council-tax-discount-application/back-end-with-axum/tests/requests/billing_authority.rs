@@ -22,7 +22,7 @@ async fn can_create_and_read_back_billing_authority() {
             "websiteUrl": "Test websiteUrl"
         });
 
-        let create_res = request.post("/api/billing_authorities").json(&new_row).await;
+        let create_res = request.post("/api/united-kingdom-council-tax-discount-application/billing_authorities").json(&new_row).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -41,7 +41,7 @@ async fn can_create_and_read_back_billing_authority() {
             "id should be a UUID, got {id}"
         );
 
-        let get_res = request.get(&format!("/api/billing_authorities/{id}")).await;
+        let get_res = request.get(&format!("/api/united-kingdom-council-tax-discount-application/billing_authorities/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -57,7 +57,7 @@ async fn can_create_and_read_back_billing_authority() {
         assert_eq!(fetched["phone"], "Test phone");
         assert_eq!(fetched["websiteUrl"], "Test websiteUrl");
 
-        let list_res = request.get("/api/billing_authorities").await;
+        let list_res = request.get("/api/united-kingdom-council-tax-discount-application/billing_authorities").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

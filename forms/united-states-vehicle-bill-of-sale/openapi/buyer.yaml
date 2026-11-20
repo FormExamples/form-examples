@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Buyer (transferee) contact record for a United States vehicle bill of sale: name, contact details, ZIP code, and whether an individual or a business."
 paths:
-  /api/buyers:
+  /api/united-states-vehicle-bill-of-sale/buyers:
     get:
       summary: List Buyer records
       operationId: listBuyer
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/buyers/{id}:
+  /api/united-states-vehicle-bill-of-sale/buyers/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level assessment instance for research-and-planning-privacy-notice. Parent entity for domain-specific sections and the grading result.
 paths:
-  /api/assessments:
+  /api/research-and-planning-privacy-notice/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/research-and-planning-privacy-notice/assessments/{id}:
     parameters:
       - name: id
         in: path

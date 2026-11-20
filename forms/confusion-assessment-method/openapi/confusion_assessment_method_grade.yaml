@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed CAM classification result (1:1): boolean delirium status, derived classification (present / absent / unable-to-assess), the positive-feature set, and the motoric subtype. Status result with no numeric total."
 paths:
-  /api/confusion_assessment_method_grades:
+  /api/confusion-assessment-method/confusion_assessment_method_grades:
     get:
       summary: List ConfusionAssessmentMethodGrade records
       operationId: listConfusionAssessmentMethodGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/confusion_assessment_method_grades/{id}:
+  /api/confusion-assessment-method/confusion_assessment_method_grades/{id}:
     parameters:
       - name: id
         in: path

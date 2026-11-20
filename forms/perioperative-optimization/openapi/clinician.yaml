@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician, i.e. the practitioner who conducts the perioperative optimization assessment.
 paths:
-  /api/clinicians:
+  /api/perioperative-optimization/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/perioperative-optimization/clinicians/{id}:
     parameters:
       - name: id
         in: path

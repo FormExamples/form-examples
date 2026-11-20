@@ -7,7 +7,7 @@ use serial_test::serial;
 async fn can_get_assessment_performance_rating_items() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/assessment_performance_rating_items")
+            .get("/api/occupational-therapy-assessment/assessment_performance_rating_items")
             .await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());

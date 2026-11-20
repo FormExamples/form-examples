@@ -3,7 +3,7 @@
 // non-2xx response we fall back to sample data and surface a banner.
 
 const API_BASE = 'http://localhost:5150';
-const LPAS_PATH = '/api/lpa';
+const LPAS_PATH = '/api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/lpa';
 
 /**
  * Fetch the LPA list from the backend.

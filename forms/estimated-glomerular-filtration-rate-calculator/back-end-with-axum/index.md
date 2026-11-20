@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`estimated_glomerular_filtration_rate_calculator/`](estimated_glomerular_filtration_rate_calculator/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/estimated-glomerular-filtration-rate-calculator/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

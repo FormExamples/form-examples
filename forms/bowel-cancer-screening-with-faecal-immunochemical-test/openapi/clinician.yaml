@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Clinician identifying information for the reviewing clinician or screening administrator who reviewed the FIT kit outcome.
 paths:
-  /api/clinicians:
+  /api/bowel-cancer-screening-with-faecal-immunochemical-test/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/clinicians/{id}:
+  /api/bowel-cancer-screening-with-faecal-immunochemical-test/clinicians/{id}:
     parameters:
       - name: id
         in: path

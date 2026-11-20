@@ -8,7 +8,7 @@ use vaccinations_assessment::app::App;
 #[serial]
 async fn can_get_immunization_histories() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/immunization_histories").await;
+        let res = request.get("/api/vaccinations-assessment/immunization_histories").await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.
         let content_type = res

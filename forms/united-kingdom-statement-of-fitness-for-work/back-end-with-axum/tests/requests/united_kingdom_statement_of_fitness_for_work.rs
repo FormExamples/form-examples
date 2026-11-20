@@ -9,7 +9,7 @@ use united_kingdom_statement_of_fitness_for_work::app::App;
 async fn can_get_united_kingdom_statement_of_fitness_for_works() {
     request::<App, _, _>(|request, _ctx| async move {
         let res = request
-            .get("/api/united_kingdom_statement_of_fitness_for_works")
+            .get("/api/united-kingdom-statement-of-fitness-for-work/united_kingdom_statement_of_fitness_for_works")
             .await;
         assert_eq!(res.status_code(), 200);
         // Assert the JSON list handler answered.

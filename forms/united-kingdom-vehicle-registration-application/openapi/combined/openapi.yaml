@@ -8,7 +8,7 @@ info:
     form, merged from the per-entity specs in this directory. One RESTful resource per routed SQL table,
     and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-kingdom-vehicle-registration-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-kingdom-vehicle-registration-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/keepers:
+  /api/united-kingdom-vehicle-registration-application/keepers:
     get:
       summary: List Keeper records
       operationId: listKeeper
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/keepers/{id}:
+  /api/united-kingdom-vehicle-registration-application/keepers/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-vehicle-registration-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/united_kingdom_vehicle_registration_application_grade_flags:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_flags:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGradeFlag records
       operationId: listUnitedKingdomVehicleRegistrationApplicationGradeFlag
@@ -610,7 +610,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_application_grade_flags/{id}:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -758,7 +758,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_application_grade_rules:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_rules:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGradeRule records
       operationId: listUnitedKingdomVehicleRegistrationApplicationGradeRule
@@ -857,7 +857,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_application_grade_rules/{id}:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1005,7 +1005,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_application_grades:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grades:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplicationGrade records
       operationId: listUnitedKingdomVehicleRegistrationApplicationGrade
@@ -1103,7 +1103,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_application_grades/{id}:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1251,7 +1251,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_applications:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications:
     get:
       summary: List UnitedKingdomVehicleRegistrationApplication records
       operationId: listUnitedKingdomVehicleRegistrationApplication
@@ -1349,7 +1349,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_vehicle_registration_applications/{id}:
+  /api/united-kingdom-vehicle-registration-application/united_kingdom_vehicle_registration_applications/{id}:
     parameters:
     - name: id
       in: path

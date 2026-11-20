@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const RECORDS_PATH = '/api/return_to_works';
+const RECORDS_PATH = '/api/return-to-work/return_to_works';
 
 /**
  * Fetch the record list from the backend.

@@ -1,9 +1,9 @@
 // Backend API client for the medical fit note front-end.
 //
 // The Axum back-end (forms/medical-fit-note/back-end-with-axum) serves plain
-// REST JSON (camelCase, UUID ids) at /api/employees, /api/clinicians,
-// /api/medical_fit_notes, /api/medical_fit_note_grades,
-// /api/medical_fit_note_grade_rules and /api/medical_fit_note_grade_flags
+// REST JSON (camelCase, UUID ids) at /api/medical-fit-note/employees, /api/medical-fit-note/clinicians,
+// /api/medical-fit-note/medical_fit_notes, /api/medical-fit-note/medical_fit_note_grades,
+// /api/medical-fit-note/medical_fit_note_grade_rules and /api/medical-fit-note/medical_fit_note_grade_flags
 // (GET + POST on the bare path, GET/PUT/PATCH/DELETE on /{id}; no trailing
 // slash). There is no bespoke dashboard or submit endpoint, so this module
 //   - joins the six tables client-side into the dashboard's FitNoteRow shape
@@ -45,12 +45,12 @@ function resolveApiBase() {
 const API_BASE = resolveApiBase();
 
 const PATHS = {
-  employees: '/api/employees',
-  clinicians: '/api/clinicians',
-  notes: '/api/medical_fit_notes',
-  grades: '/api/medical_fit_note_grades',
-  rules: '/api/medical_fit_note_grade_rules',
-  flags: '/api/medical_fit_note_grade_flags'
+  employees: '/api/medical-fit-note/employees',
+  clinicians: '/api/medical-fit-note/clinicians',
+  notes: '/api/medical-fit-note/medical_fit_notes',
+  grades: '/api/medical-fit-note/medical_fit_note_grades',
+  rules: '/api/medical-fit-note/medical_fit_note_grade_rules',
+  flags: '/api/medical-fit-note/medical_fit_note_grade_flags'
 };
 
 // Flag categories the SQL CHECK list in sql/07 accepts ('' is also valid).

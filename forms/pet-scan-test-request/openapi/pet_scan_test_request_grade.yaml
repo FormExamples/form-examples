@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed four-axis grading result: appropriateness (ACR / RCR iRefer 1-9), preparation safety and radiation dose, request completeness, and triage priority."
 paths:
-  /api/pet_scan_test_request_grades:
+  /api/pet-scan-test-request/pet_scan_test_request_grades:
     get:
       summary: List PetScanTestRequestGrade records
       operationId: listPetScanTestRequestGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/pet_scan_test_request_grades/{id}:
+  /api/pet-scan-test-request/pet_scan_test_request_grades/{id}:
     parameters:
       - name: id
         in: path

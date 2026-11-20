@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Dyslexia assessment form using standardised scores for reading, writing, spelling, phonological processing, working memory, and processing speed. Parent entity for all assessment sections.
 paths:
-  /api/assessments:
+  /api/dyslexia-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/dyslexia-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

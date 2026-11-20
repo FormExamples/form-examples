@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main United Kingdom Birth Registration record: the child, mother, parentage basis for a second parent, informant and identity evidence, and the birth-certificate order for registering a birth in England and Wales. Readiness classification, fired rules, and flags live in child tables."
 paths:
-  /api/united_kingdom_birth_registrations:
+  /api/united-kingdom-birth-registration/united_kingdom_birth_registrations:
     get:
       summary: List UnitedKingdomBirthRegistration records
       operationId: listUnitedKingdomBirthRegistration
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_birth_registrations/{id}:
+  /api/united-kingdom-birth-registration/united_kingdom_birth_registrations/{id}:
     parameters:
       - name: id
         in: path

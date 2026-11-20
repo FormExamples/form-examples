@@ -6,7 +6,7 @@ Design System.
 
 The Axum crate lives in [`has_bled_score_for_major_bleeding_risk/`](has_bled_score_for_major_bleeding_risk/) — one migration, sqlx
 entity, and JSON REST controller per SQL table, with routes under
-`/api/<plural>/`. The companion consolidated front-ends in
+`/api/has-bled-score-for-major-bleeding-risk/<plural>/`. The companion consolidated front-ends in
 [`../front-end-with-html/`](../front-end-with-html/) and
 [`../front-end-with-svelte/`](../front-end-with-svelte/) consume this API.
 

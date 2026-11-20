@@ -28,7 +28,7 @@ Reference: <https://spec.openapis.org/oas/v3.1.0>
 ## Per-entity files and the served document
 
 The per-entity files describe every SQL table. `openapi/combined/openapi.yaml`,
-which a crate serves at `GET /api/openapi.yaml`, keeps only the paths its
+which a crate serves at `GET /api/<slug>/openapi.yaml`, keeps only the paths its
 controllers declare, so it never lists a route that does not exist. A table with no
 controller therefore has a per-entity file and no entry in the combined document.
 
@@ -36,7 +36,7 @@ controller therefore has a per-entity file and no entry in the combined document
 
 One `.yaml` file per SQL table, because each table has its own routes. The
 `assessment_<section>` tables are not folded into `assessment.yaml`: a folded schema
-would list columns that `POST /api/assessments` does not accept.
+would list columns that `POST /api/<slug>/assessments` does not accept.
 
 ```
 openapi/
@@ -60,13 +60,13 @@ resource:
 - `openapi: 3.1.0`
 - `info` — title (`<Form Slug Titlecased> — <Resource>`), version
   (`1.0.0`), and description sourced from the SQL `COMMENT ON TABLE`.
-- `paths` — six operations per resource, under `/api/<plural>`:
-  - `GET    /api/<plural>`        — list, with `limit` + `cursor` query params, a `link` header to the next page, no total, and `422` for a bad limit or cursor
-  - `POST   /api/<plural>`        — create
-  - `GET    /api/<plural>/{id}`   — fetch by id
-  - `PUT    /api/<plural>/{id}`   — replace
-  - `PATCH  /api/<plural>/{id}`   — update
-  - `DELETE /api/<plural>/{id}`   — soft-delete
+- `paths` — six operations per resource, under `/api/<slug>/<plural>`:
+  - `GET    /api/<slug>/<plural>`        — list, with `limit` + `cursor` query params, a `link` header to the next page, no total, and `422` for a bad limit or cursor
+  - `POST   /api/<slug>/<plural>`        — create
+  - `GET    /api/<slug>/<plural>/{id}`   — fetch by id
+  - `PUT    /api/<slug>/<plural>/{id}`   — replace
+  - `PATCH  /api/<slug>/<plural>/{id}`   — update
+  - `DELETE /api/<slug>/<plural>/{id}`   — soft-delete
 - `components.schemas.<Resource>` — the single object schema describing
   every column in the source SQL table.
 
@@ -74,15 +74,15 @@ resource:
 
 - Property names in the per-entity files follow SQL `snake_case`, because
   they describe storage. The combined document, which each crate serves at
-  `GET /api/openapi.yaml`, renames them to `camelCase`, as the crates send
+  `GET /api/<slug>/openapi.yaml`, renames them to `camelCase`, as the crates send
   them (`serde(rename_all = "camelCase")`).
 - A nullable column admits `null`: its `type` is a list such as
   `[string, 'null']`, and a nullable enum lists `null` among its values.
 - Resource names are `PascalCase` from the SQL table name (`patient` →
   `Patient`, `grading_fired_rule` → `GradingFiredRule`).
 - Path segments are snake_case plurals of the table name
-  (`patient_medication` → `/api/patient_medications`). Where a table's own
-  controller serves another path, such as `/api/people` for `person`, the
+  (`patient_medication` → `/api/<slug>/patient_medications`). Where a table's own
+  controller serves another path, such as `/api/<slug>/people` for `person`, the
   combined document uses the served path.
 - A header comment marks the file as generated:
   `# Generated from sql/. Do not edit by hand.`
@@ -187,7 +187,7 @@ pnpm dlx @stoplight/prism-cli mock forms/<slug>/openapi/patient.yaml
 
 `bin/openapi/generate-openapi-combined.py` merges a form's per-entity files into
 `openapi/combined/openapi.yaml`, the document the crate serves. It keeps only the
-paths and methods the crate's controllers declare, adds `GET /api/openapi.yaml`, and
+paths and methods the crate's controllers declare, adds `GET /api/<slug>/openapi.yaml`, and
 merges `openapi/hand/routes.yaml` where a form has routes no SQL table describes:
 dashboards, `submit` and `result` actions, a grading endpoint. That file is written
 and kept by hand, as an OpenAPI fragment with `paths` and `components.schemas`, and

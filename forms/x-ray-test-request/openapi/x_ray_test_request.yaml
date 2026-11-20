@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Plain-radiograph (X-ray) imaging request (referral). Captures the requested body region and laterality, the clinical indication and question, relevant history, radiation-safety details (pregnancy status, recent similar exposure), mobility, and triage urgency.
 paths:
-  /api/x_ray_test_requests:
+  /api/x-ray-test-request/x_ray_test_requests:
     get:
       summary: List XRayTestRequest records
       operationId: listXRayTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/x_ray_test_requests/{id}:
+  /api/x-ray-test-request/x_ray_test_requests/{id}:
     parameters:
       - name: id
         in: path

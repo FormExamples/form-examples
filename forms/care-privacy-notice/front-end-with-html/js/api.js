@@ -7,7 +7,7 @@ const API_BASE = 'http://localhost:5150';
  * Resolves to an array of patient rows; throws on transport or HTTP errors.
  */
 async function fetchPatients() {
-  const res = await fetch(API_BASE + '/api/dashboard/acknowledgments');
+  const res = await fetch(API_BASE + '/api/care-privacy-notice/dashboard/acknowledgments');
   if (!res.ok) {
     throw new Error('Failed to fetch acknowledgements: ' + res.status);
   }

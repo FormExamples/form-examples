@@ -1,10 +1,10 @@
 // Backend API client for the dashboard and the wizard.
 //
 // Talks to the Axum REST API in ../back-end-with-axum: plain per-table CRUD
-// (camelCase JSON, UUID ids) at /api/manufacturers, /api/assessors,
-// /api/medical_device_assessments, /api/medical_device_assessment_grades,
-// /api/medical_device_assessment_grade_rules and
-// /api/medical_device_assessment_grade_flags. There is no bespoke submit or
+// (camelCase JSON, UUID ids) at /api/medical-device-assessment/manufacturers, /api/medical-device-assessment/assessors,
+// /api/medical-device-assessment/medical_device_assessments, /api/medical-device-assessment/medical_device_assessment_grades,
+// /api/medical-device-assessment/medical_device_assessment_grade_rules and
+// /api/medical-device-assessment/medical_device_assessment_grade_flags. There is no bespoke submit or
 // dashboard endpoint, so this module
 //   * joins the tables client-side into the dashboard row shape, and
 //   * saves a wizard submission as a sequence of POSTs.
@@ -23,12 +23,12 @@ export const API_BASE: string = (
 ).replace(/\/+$/, '');
 
 const PATHS = {
-  manufacturers: '/api/manufacturers',
-  assessors: '/api/assessors',
-  assessments: '/api/medical_device_assessments',
-  grades: '/api/medical_device_assessment_grades',
-  rules: '/api/medical_device_assessment_grade_rules',
-  flags: '/api/medical_device_assessment_grade_flags'
+  manufacturers: '/api/medical-device-assessment/manufacturers',
+  assessors: '/api/medical-device-assessment/assessors',
+  assessments: '/api/medical-device-assessment/medical_device_assessments',
+  grades: '/api/medical-device-assessment/medical_device_assessment_grades',
+  rules: '/api/medical-device-assessment/medical_device_assessment_grade_rules',
+  flags: '/api/medical-device-assessment/medical_device_assessment_grade_flags'
 } as const;
 
 // Row shapes returned by the API (only the fields this client reads).
@@ -190,12 +190,12 @@ export interface SaveOutcome {
 
 /**
  * Save a wizard submission. Request sequence:
- *   1. GET /api/manufacturers, then POST if no name match
- *   2. GET /api/assessors, then POST if no name match
- *   3. POST /api/medical_device_assessments
- *   4. POST /api/medical_device_assessment_grades   (skipped when blocked)
- *   5. POST /api/medical_device_assessment_grade_rules, one per fired rule
- *   6. POST /api/medical_device_assessment_grade_flags, one per flag
+ *   1. GET /api/medical-device-assessment/manufacturers, then POST if no name match
+ *   2. GET /api/medical-device-assessment/assessors, then POST if no name match
+ *   3. POST /api/medical-device-assessment/medical_device_assessments
+ *   4. POST /api/medical-device-assessment/medical_device_assessment_grades   (skipped when blocked)
+ *   5. POST /api/medical-device-assessment/medical_device_assessment_grade_rules, one per fired rule
+ *   6. POST /api/medical-device-assessment/medical_device_assessment_grade_flags, one per flag
  *
  * A blocked result (IVD, or missing device kind / intended purpose: empty
  * computed class) saves the assessment as status 'draft' and skips steps 4-6.

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed grading result for a child safeguarding referral: completeness/validity status (complete/partial/incomplete), urgency classification (emergency/urgent/standard), and completeness percentage."
 paths:
-  /api/child_safeguarding_referral_grades:
+  /api/child-safeguarding-referral/child_safeguarding_referral_grades:
     get:
       summary: List ChildSafeguardingReferralGrade records
       operationId: listChildSafeguardingReferralGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/child_safeguarding_referral_grades/{id}:
+  /api/child-safeguarding-referral/child_safeguarding_referral_grades/{id}:
     parameters:
       - name: id
         in: path

@@ -25,23 +25,23 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/keepers?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/united-kingdom-vehicle-registration-application/keepers?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/united-kingdom-vehicle-registration-application/no-such-route").await, 404);
+        problem!(request.delete("/api/united-kingdom-vehicle-registration-application/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/keepers/{id}")).await, 404);
+        problem!(request.get(&format!("/api/united-kingdom-vehicle-registration-application/keepers/{id}")).await, 404);
 
         // An extractor's refusal says what was wrong, and quotes nothing.
-        let (body, text) = problem!(request.get("/api/keepers/not-a-uuid").await, 400);
+        let (body, text) = problem!(request.get("/api/united-kingdom-vehicle-registration-application/keepers/not-a-uuid").await, 400);
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
-            request.post("/api/keepers").json(&"not an object").await,
+            request.post("/api/united-kingdom-vehicle-registration-application/keepers").json(&"not an object").await,
             422
         );
     })
@@ -103,7 +103,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "identityDocumentType": "not-a-listed-value",
             "addressDocumentType": "photocard-driving-licence"
         });
-        let response = request.post("/api/applicants").json(&refused).await;
+        let response = request.post("/api/united-kingdom-vehicle-registration-application/applicants").json(&refused).await;
         let (body, text) = problem!(response, 422);
         assert_eq!(body["code"], "unprocessable_entity");
         assert_eq!(body["detail"], "A value is outside what this field allows");
@@ -122,7 +122,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             "identityDocumentType": "photocard-driving-licence",
             "addressDocumentType": "photocard-driving-licence"
         });
-        request.post("/api/applicants").json(&accepted).await.assert_status_ok();
+        request.post("/api/united-kingdom-vehicle-registration-application/applicants").json(&accepted).await.assert_status_ok();
     })
     .await;
 }

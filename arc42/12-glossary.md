@@ -26,5 +26,5 @@
 | **Spec-driven development** | The process of updating the spec before code, and changing code because the spec changed (`spec.md` §10). |
 | **Living spec** | The hand-maintained per-form domain spec at `forms/<slug>/spec/index.md` (with a `README.md` symlink); the behaviour contract. |
 | **AGENTS.md / CLAUDE.md** | Machine-readable instructions that direct AI coding agents operating the repo, at the root and per-form/per-stack. |
-| **`/api/assessments`** | The canonical JSON API resource every back-end exposes (list, create, read, update, submit, result). |
+| **`/api/<slug>/assessments`** | The canonical JSON API resource every back-end exposes (list, create, read, update, submit, result). |
 | **Background queue (`bg_pg`)** | The Postgres-backed Axum job queue — the only queue backend used (`bg_sqlt`/`bg_redis` are forbidden). |

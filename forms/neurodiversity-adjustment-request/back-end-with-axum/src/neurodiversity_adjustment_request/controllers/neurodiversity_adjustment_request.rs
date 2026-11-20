@@ -1,5 +1,5 @@
 //! Neurodiversity-adjustment-request CRUD + grade endpoints under
-//! `/api/neurodiversity-adjustment-requests`.
+//! `/api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests`.
 //!
 //! The relational schema keeps the source-of-truth request in
 //! `neurodiversity_adjustment_requests` (with FKs to `workers` and `managers`),
@@ -346,7 +346,7 @@ async fn load_request(db: &PgPool, id: Uuid) -> Result<neurodiversity_adjustment
         .ok_or_else(|| Error::NotFound)
 }
 
-/// POST /api/neurodiversity-adjustment-requests -- create a new request.
+/// POST /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests -- create a new request.
 #[debug_handler]
 async fn create(
     State(ctx): State<AppContext>,
@@ -356,7 +356,7 @@ async fn create(
     Ok(Json(model).into_response())
 }
 
-/// GET /api/neurodiversity-adjustment-requests -- list requests (newest first).
+/// GET /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests -- list requests (newest first).
 #[debug_handler]
 async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> Result<Response> {
     let page = cursor_page(&ctx, &uri)?;
@@ -372,14 +372,14 @@ async fn list(State(ctx): State<AppContext>, OriginalUri(uri): OriginalUri) -> R
     Ok(page.respond(models))
 }
 
-/// GET /api/neurodiversity-adjustment-requests/{id} -- fetch one request.
+/// GET /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id} -- fetch one request.
 #[debug_handler]
 async fn show(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
     let model = load_request(&db(&ctx), id).await?;
     Ok(Json(model).into_response())
 }
 
-/// PATCH /api/neurodiversity-adjustment-requests/{id} -- replace request fields.
+/// PATCH /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id} -- replace request fields.
 #[debug_handler]
 async fn update(
     Path(id): Path<Uuid>,
@@ -391,7 +391,7 @@ async fn update(
     Ok(Json(model).into_response())
 }
 
-/// DELETE /api/neurodiversity-adjustment-requests/{id} -- remove a request
+/// DELETE /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id} -- remove a request
 /// (cascades its grade).
 #[debug_handler]
 async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
@@ -400,7 +400,7 @@ async fn remove(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     format::empty()
 }
 
-/// POST /api/neurodiversity-adjustment-requests/{id}/submit -- run the four-axis
+/// POST /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}/submit -- run the four-axis
 /// engine over the persisted request (joined with its worker and manager), then
 /// transactionally persist the computed grade into
 /// `neurodiversity_adjustment_request_grades`, one row per fired rule into
@@ -511,7 +511,7 @@ async fn submit(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
     Ok(Json(grade_row).into_response())
 }
 
-/// GET /api/neurodiversity-adjustment-requests/{id}/result -- read the stored
+/// GET /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}/result -- read the stored
 /// grade back, together with its fired-rule audit trail and compliance flags.
 #[debug_handler]
 async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<Response> {
@@ -551,7 +551,7 @@ async fn result(Path(id): Path<Uuid>, State(ctx): State<AppContext>) -> Result<R
 /// Routes.
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("api/neurodiversity-adjustment-requests")
+        .prefix("api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests")
         .add("/", get(list))
         .add("/", post(create))
         .add("{id}", get(show))

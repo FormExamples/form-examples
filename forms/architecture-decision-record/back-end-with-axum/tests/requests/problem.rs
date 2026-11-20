@@ -25,12 +25,12 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/adrs?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/architecture-decision-record/adrs?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/adrs").await, 405);
+        problem!(request.get("/api/architecture-decision-record/no-such-route").await, 404);
+        problem!(request.delete("/api/architecture-decision-record/adrs").await, 405);
     })
     .await;
 }
@@ -99,9 +99,9 @@ async fn a_value_outside_a_check_is_refused() {
                 "status": status
             })
         };
-        let (body, _) = problem!(request.post("/api/adrs").json(&adr("provisional")).await, 400);
+        let (body, _) = problem!(request.post("/api/architecture-decision-record/adrs").json(&adr("provisional")).await, 400);
         assert!(body["detail"].as_str().unwrap().starts_with("status "));
-        request.post("/api/adrs").json(&adr("pending")).await.assert_status_ok();
+        request.post("/api/architecture-decision-record/adrs").json(&adr("pending")).await.assert_status_ok();
 
         let refused = sqlx::query("UPDATE authors SET role = 'not-a-listed-value'")
             .execute(&pool)

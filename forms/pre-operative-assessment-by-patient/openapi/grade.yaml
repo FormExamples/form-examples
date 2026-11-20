@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Step 16: computed and signed-off grading result. Stores both the engine-computed ASA grade and the clinician-final grade with an override reason."
 paths:
-  /api/grades:
+  /api/pre-operative-assessment-by-patient/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/pre-operative-assessment-by-patient/grades/{id}:
     parameters:
       - name: id
         in: path

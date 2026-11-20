@@ -30,7 +30,7 @@ async fn can_create_and_read_back_employee() {
         });
 
         // 1. CREATE over HTTP.
-        let create_res = request.post("/api/employees").json(&new_employee).await;
+        let create_res = request.post("/api/medical-fit-note/employees").json(&new_employee).await;
         assert_eq!(
             create_res.status_code(),
             200,
@@ -50,7 +50,7 @@ async fn can_create_and_read_back_employee() {
         );
 
         // 2. READ back by id over HTTP.
-        let get_res = request.get(&format!("/api/employees/{id}")).await;
+        let get_res = request.get(&format!("/api/medical-fit-note/employees/{id}")).await;
         assert_eq!(
             get_res.status_code(),
             200,
@@ -77,7 +77,7 @@ async fn can_create_and_read_back_employee() {
         assert_eq!(fetched["jobTitle"], "Warehouse Operative");
 
         // 4. The new record is present in the list endpoint.
-        let list_res = request.get("/api/employees").await;
+        let list_res = request.get("/api/medical-fit-note/employees").await;
         assert_eq!(list_res.status_code(), 200);
         let list: Value = list_res.json();
         let items = list.as_array().expect("list should be a JSON array");

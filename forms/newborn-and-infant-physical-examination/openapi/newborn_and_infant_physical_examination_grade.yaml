@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed screening-classification result for a NIPE examination: per-component results (eyes, heart, hips, testes), overall outcome (satisfactory/refer/incomplete), completeness status, and completeness percentage. A screening classification records whether onward referral is indicated; it is not a diagnosis."
 paths:
-  /api/newborn_and_infant_physical_examination_grades:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grades:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGrade records
       operationId: listNewbornAndInfantPhysicalExaminationGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/newborn_and_infant_physical_examination_grades/{id}:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grades/{id}:
     parameters:
       - name: id
         in: path

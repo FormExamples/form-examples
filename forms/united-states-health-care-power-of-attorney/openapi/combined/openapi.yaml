@@ -8,7 +8,7 @@ info:
     merged from the per-entity specs in this directory. One RESTful resource per routed SQL table, and
     any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/openapi.yaml:
+  /api/united-states-health-care-power-of-attorney/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -19,7 +19,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/principals:
+  /api/united-states-health-care-power-of-attorney/principals:
     get:
       summary: List Principal records
       operationId: listPrincipal
@@ -117,7 +117,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/principals/{id}:
+  /api/united-states-health-care-power-of-attorney/principals/{id}:
     parameters:
     - name: id
       in: path
@@ -265,7 +265,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reviewers:
+  /api/united-states-health-care-power-of-attorney/reviewers:
     get:
       summary: List Reviewer records
       operationId: listReviewer
@@ -363,7 +363,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/reviewers/{id}:
+  /api/united-states-health-care-power-of-attorney/reviewers/{id}:
     parameters:
     - name: id
       in: path
@@ -511,7 +511,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grade_flags:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_flags:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGradeFlag records
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grade_flags/{id}:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grade_rules:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_rules:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGradeRule records
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grade_rules/{id}:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grades:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grades:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorneyGrade records
       operationId: listUnitedStatesHealthCarePowerOfAttorneyGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorney_grades/{id}:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorney_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorneys:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorneys:
     get:
       summary: List UnitedStatesHealthCarePowerOfAttorney records
       operationId: listUnitedStatesHealthCarePowerOfAttorney
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_states_health_care_power_of_attorneys/{id}:
+  /api/united-states-health-care-power-of-attorney/united_states_health_care_power_of_attorneys/{id}:
     parameters:
     - name: id
       in: path

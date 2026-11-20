@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Flags that fire independently of the classification and completeness status, with priority and a suggested action for the clinician or governance team.
 paths:
-  /api/heart_failure_review_grade_flags:
+  /api/heart-failure-review/heart_failure_review_grade_flags:
     get:
       summary: List HeartFailureReviewGradeFlag records
       operationId: listHeartFailureReviewGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/heart_failure_review_grade_flags/{id}:
+  /api/heart-failure-review/heart_failure_review_grade_flags/{id}:
     parameters:
       - name: id
         in: path

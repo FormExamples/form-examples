@@ -22,21 +22,21 @@ JSONB blob.
 
 | Entity | Route prefix |
 | --- | --- |
-| `patient` | `/api/patients/` |
-| `dietitian` | `/api/dietitians/` |
-| `medication` | `/api/medications/` |
-| `patient_medication` | `/api/patient_medications/` |
-| `allergy` | `/api/allergies/` |
-| `patient_allergy` | `/api/patient_allergies/` |
-| `dietic_assessment` | `/api/dietic_assessments/` |
-| `dietic_assessment_grade` | `/api/dietic_assessment_grades/` |
-| `dietic_assessment_grade_rule` | `/api/dietic_assessment_grade_rules/` |
-| `dietic_assessment_grade_flag` | `/api/dietic_assessment_grade_flags/` |
+| `patient` | `/api/dietic-assessment/patients/` |
+| `dietitian` | `/api/dietic-assessment/dietitians/` |
+| `medication` | `/api/dietic-assessment/medications/` |
+| `patient_medication` | `/api/dietic-assessment/patient_medications/` |
+| `allergy` | `/api/dietic-assessment/allergies/` |
+| `patient_allergy` | `/api/dietic-assessment/patient_allergies/` |
+| `dietic_assessment` | `/api/dietic-assessment/dietic_assessments/` |
+| `dietic_assessment_grade` | `/api/dietic-assessment/dietic_assessment_grades/` |
+| `dietic_assessment_grade_rule` | `/api/dietic-assessment/dietic_assessment_grade_rules/` |
+| `dietic_assessment_grade_flag` | `/api/dietic-assessment/dietic_assessment_grade_flags/` |
 
 Each exposes the standard scaffold set: `GET /` (list), `POST /` (create),
 `GET /{id}`, `PUT /{id}`, `PATCH /{id}`, `DELETE /{id}`.
 
-The SvelteKit dashboard reads `GET /api/dietic_assessments`, and the HTML
+The SvelteKit dashboard reads `GET /api/dietic-assessment/dietic_assessments`, and the HTML
 dashboard reads the same endpoint from `http://localhost:5150`, falling back to
 its bundled sample rows when the server is not running.
 

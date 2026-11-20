@@ -7,7 +7,7 @@
 // shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const QUESTIONNAIRES_PATH = '/api/health_screening_questionnaires';
+const QUESTIONNAIRES_PATH = '/api/health-screening-questionnaire/health_screening_questionnaires';
 
 /**
  * Fetch the questionnaire list from the back-end.

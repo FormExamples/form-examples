@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Applicant (person making the application to the DVLA) for a vehicle registration application: name, date of birth, address, and identity documents supplied."
 paths:
-  /api/applicants:
+  /api/united-kingdom-vehicle-registration-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/applicants/{id}:
+  /api/united-kingdom-vehicle-registration-application/applicants/{id}:
     parameters:
       - name: id
         in: path

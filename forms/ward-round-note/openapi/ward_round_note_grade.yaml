@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed documentation-completeness grading result for a ward-round note: status (complete/partial/incomplete), completeness percentage over the eight required components, and per-component presence flags."
 paths:
-  /api/ward_round_note_grades:
+  /api/ward-round-note/ward_round_note_grades:
     get:
       summary: List WardRoundNoteGrade records
       operationId: listWardRoundNoteGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ward_round_note_grades/{id}:
+  /api/ward-round-note/ward_round_note_grades/{id}:
     parameters:
       - name: id
         in: path

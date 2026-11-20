@@ -114,16 +114,16 @@ echo "==> root help banner"
 curl -s "$BASE/" | head -2
 
 echo
-echo "==> /api/dashboard/scorecards — fresh DB starts empty"
-curl -s "$BASE/api/dashboard/scorecards" | python3 -c "
+echo "==> /api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards — fresh DB starts empty"
+curl -s "$BASE/api/agile-consulting-scorecard-for-hiring-help/dashboard/scorecards" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 print('total:', d['total'])
 "
 
 echo
-echo "==> POST /api/scorecards — submit golden sample"
-SUBMIT_RES=$(curl -s -X POST -H 'Content-Type: application/json' --data @"$SAMPLE" "$BASE/api/scorecards")
+echo "==> POST /api/agile-consulting-scorecard-for-hiring-help/scorecards — submit golden sample"
+SUBMIT_RES=$(curl -s -X POST -H 'Content-Type: application/json' --data @"$SAMPLE" "$BASE/api/agile-consulting-scorecard-for-hiring-help/scorecards")
 echo "$SUBMIT_RES" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
@@ -131,9 +131,9 @@ print('id:', d['id'], 'band:', d['computedBand'], 'score:', d['scoreTotal'])
 "
 
 echo
-echo "==> POST /api/grade — stateless grading"
+echo "==> POST /api/agile-consulting-scorecard-for-hiring-help/grade — stateless grading"
 curl -s -X POST -H 'Content-Type: application/json' --data @"$SAMPLE" \
-  "$BASE/api/grade" | python3 -c "
+  "$BASE/api/agile-consulting-scorecard-for-hiring-help/grade" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 print('score {0}/16   band {1}'.format(d['scoreTotal'], d['computedBand']))
@@ -141,9 +141,9 @@ print('flags:', [f['category'] for f in d['additionalFlags']])
 "
 
 echo
-echo "==> POST /api/recommendations"
+echo "==> POST /api/agile-consulting-scorecard-for-hiring-help/recommendations"
 curl -s -X POST -H 'Content-Type: application/json' --data @"$SAMPLE" \
-  "$BASE/api/recommendations" | python3 -c "
+  "$BASE/api/agile-consulting-scorecard-for-hiring-help/recommendations" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 print('total', d['total'])
@@ -152,9 +152,9 @@ for a in d['items']:
 "
 
 echo
-echo "==> POST /api/pre-tender"
+echo "==> POST /api/agile-consulting-scorecard-for-hiring-help/pre-tender"
 curl -s -X POST -H 'Content-Type: application/json' --data @"$SAMPLE" \
-  "$BASE/api/pre-tender" | python3 -c "
+  "$BASE/api/agile-consulting-scorecard-for-hiring-help/pre-tender" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 o = d['organization']
@@ -164,18 +164,18 @@ print('score {0}/16   band {1}   recommendation {2}'.format(s['total'], s['band'
 "
 
 echo
-echo "==> POST /api/bulk-import — three more golden rows"
+echo "==> POST /api/agile-consulting-scorecard-for-hiring-help/bulk-import — three more golden rows"
 GOLDEN_ONELINE=$(python3 -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1])), separators=(',',':')))" "$SAMPLE")
 printf "# bulk-import demo\n\n%s\n%s\nnot-json\n%s\n" "$GOLDEN_ONELINE" "$GOLDEN_ONELINE" "$GOLDEN_ONELINE" \
-  | curl -s -X POST -H 'Content-Type: application/x-ndjson' --data-binary @- "$BASE/api/bulk-import" | python3 -c "
+  | curl -s -X POST -H 'Content-Type: application/x-ndjson' --data-binary @- "$BASE/api/agile-consulting-scorecard-for-hiring-help/bulk-import" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 print('accepted {0}  rejected {1}  totalLines {2}'.format(d['accepted'], len(d['rejected']), d['totalLines']))
 "
 
 echo
-echo "==> /api/stats after submissions"
-curl -s "$BASE/api/stats" | python3 -c "
+echo "==> /api/agile-consulting-scorecard-for-hiring-help/stats after submissions"
+curl -s "$BASE/api/agile-consulting-scorecard-for-hiring-help/stats" | python3 -c "
 import sys, json
 d = json.load(sys.stdin)
 print('total {0}  avg {1:.2f}  flags {2}'.format(d['total'], d['averageScore'], d['flagCount']))

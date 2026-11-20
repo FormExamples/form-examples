@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Reference catalogue of all 22 diabetes assessment rules (DM-001 to DM-022). Seeded at deployment.
 paths:
-  /api/diabetes_rules:
+  /api/diabetes-assessment/diabetes_rules:
     get:
       summary: List DiabetesRule records
       operationId: listDiabetesRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/diabetes_rules/{id}:
+  /api/diabetes-assessment/diabetes_rules/{id}:
     parameters:
       - name: id
         in: path

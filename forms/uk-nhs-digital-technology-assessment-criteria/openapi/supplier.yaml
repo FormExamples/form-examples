@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Supplier of the digital health technology being assessed.
 paths:
-  /api/suppliers:
+  /api/uk-nhs-digital-technology-assessment-criteria/suppliers:
     get:
       summary: List Supplier records
       operationId: listSupplier
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/suppliers/{id}:
+  /api/uk-nhs-digital-technology-assessment-criteria/suppliers/{id}:
     parameters:
       - name: id
         in: path

@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/cardiology_requests:
+  /api/cardiology-request/cardiology_requests:
     get:
       summary: List CardiologyRequest records
       operationId: listCardiologyRequest
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cardiology_requests/{id}:
+  /api/cardiology-request/cardiology_requests/{id}:
     parameters:
     - name: id
       in: path
@@ -209,7 +209,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cardiology_requests/{id}/result:
+  /api/cardiology-request/cardiology_requests/{id}/result:
     parameters:
     - name: id
       in: path
@@ -244,7 +244,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/cardiology_requests/{id}/submit:
+  /api/cardiology-request/cardiology_requests/{id}/submit:
     parameters:
     - name: id
       in: path
@@ -281,7 +281,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/dashboard:
+  /api/cardiology-request/dashboard:
     get:
       summary: Each request with its grade, newest first
       description: Lists records newest first, each paired with its grade, or null when ungraded.

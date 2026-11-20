@@ -9,14 +9,14 @@ entity and one RESTful scaffold controller per SQL table, with UUID primary
 keys and camelCase JSON. Each controller exposes list, create, read, update
 (PUT and PATCH) and delete under these prefixes:
 
-- `/api/manufacturers`
-- `/api/assessors`
-- `/api/medical_device_assessments`
-- `/api/medical_device_assessment_grades`
-- `/api/medical_device_assessment_grade_rules`
-- `/api/medical_device_assessment_grade_flags`
+- `/api/medical-device-assessment/manufacturers`
+- `/api/medical-device-assessment/assessors`
+- `/api/medical-device-assessment/medical_device_assessments`
+- `/api/medical-device-assessment/medical_device_assessment_grades`
+- `/api/medical-device-assessment/medical_device_assessment_grade_rules`
+- `/api/medical-device-assessment/medical_device_assessment_grade_flags`
 
-It also serves `GET /api/openapi.yaml` (the form's combined OpenAPI 3.1
+It also serves `GET /api/medical-device-assessment/openapi.yaml` (the form's combined OpenAPI 3.1
 spec). The companion front-ends in
 `../front-end-with-svelte/` and `../front-end-with-html/` consume this API.
 

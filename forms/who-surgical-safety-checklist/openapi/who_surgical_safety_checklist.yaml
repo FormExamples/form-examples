@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: WHO Surgical Safety Checklist case record. One row per surgical case, holding all items of the three phases (Sign In, Time Out, Sign Out) and the case identification.
 paths:
-  /api/who_surgical_safety_checklists:
+  /api/who-surgical-safety-checklist/who_surgical_safety_checklists:
     get:
       summary: List WhoSurgicalSafetyChecklist records
       operationId: listWhoSurgicalSafetyChecklist
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/who_surgical_safety_checklists/{id}:
+  /api/who-surgical-safety-checklist/who_surgical_safety_checklists/{id}:
     parameters:
       - name: id
         in: path

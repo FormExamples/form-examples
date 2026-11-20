@@ -7,7 +7,7 @@ info:
   description: Combined OpenAPI specification for the Meeting form, merged from the per-entity specs in
     this directory. One RESTful resource per routed SQL table, and any routes documented by hand in hand/routes.yaml.
 paths:
-  /api/action_items:
+  /api/meeting/action_items:
     get:
       summary: List ActionItem records
       operationId: listActionItem
@@ -105,7 +105,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/action_items/{id}:
+  /api/meeting/action_items/{id}:
     parameters:
     - name: id
       in: path
@@ -253,7 +253,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agenda_items:
+  /api/meeting/agenda_items:
     get:
       summary: List AgendaItem records
       operationId: listAgendaItem
@@ -351,7 +351,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/agenda_items/{id}:
+  /api/meeting/agenda_items/{id}:
     parameters:
     - name: id
       in: path
@@ -499,7 +499,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grade_flags:
+  /api/meeting/meeting_grade_flags:
     get:
       summary: List MeetingGradeFlag records
       operationId: listMeetingGradeFlag
@@ -597,7 +597,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grade_flags/{id}:
+  /api/meeting/meeting_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -745,7 +745,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grade_rules:
+  /api/meeting/meeting_grade_rules:
     get:
       summary: List MeetingGradeRule records
       operationId: listMeetingGradeRule
@@ -843,7 +843,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grade_rules/{id}:
+  /api/meeting/meeting_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -991,7 +991,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grades:
+  /api/meeting/meeting_grades:
     get:
       summary: List MeetingGrade records
       operationId: listMeetingGrade
@@ -1089,7 +1089,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_grades/{id}:
+  /api/meeting/meeting_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1237,7 +1237,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_outcomes:
+  /api/meeting/meeting_outcomes:
     get:
       summary: List MeetingOutcome records
       operationId: listMeetingOutcome
@@ -1335,7 +1335,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_outcomes/{id}:
+  /api/meeting/meeting_outcomes/{id}:
     parameters:
     - name: id
       in: path
@@ -1483,7 +1483,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_outputs:
+  /api/meeting/meeting_outputs:
     get:
       summary: List MeetingOutput records
       operationId: listMeetingOutput
@@ -1581,7 +1581,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meeting_outputs/{id}:
+  /api/meeting/meeting_outputs/{id}:
     parameters:
     - name: id
       in: path
@@ -1729,7 +1729,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meetings:
+  /api/meeting/meetings:
     get:
       summary: List Meeting records
       operationId: listMeeting
@@ -1827,7 +1827,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/meetings/{id}:
+  /api/meeting/meetings/{id}:
     parameters:
     - name: id
       in: path
@@ -1975,7 +1975,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/meeting/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1986,7 +1986,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/organizers:
+  /api/meeting/organizers:
     get:
       summary: List Organizer records
       operationId: listOrganizer
@@ -2084,7 +2084,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/organizers/{id}:
+  /api/meeting/organizers/{id}:
     parameters:
     - name: id
       in: path
@@ -2232,7 +2232,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/participants:
+  /api/meeting/participants:
     get:
       summary: List Participant records
       operationId: listParticipant
@@ -2330,7 +2330,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/participants/{id}:
+  /api/meeting/participants/{id}:
     parameters:
     - name: id
       in: path
@@ -2478,7 +2478,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/recurring_rules:
+  /api/meeting/recurring_rules:
     get:
       summary: List RecurringRule records
       operationId: listRecurringRule
@@ -2576,7 +2576,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/recurring_rules/{id}:
+  /api/meeting/recurring_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -2724,7 +2724,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/resources:
+  /api/meeting/resources:
     get:
       summary: List Resource records
       operationId: listResource
@@ -2822,7 +2822,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/resources/{id}:
+  /api/meeting/resources/{id}:
     parameters:
     - name: id
       in: path

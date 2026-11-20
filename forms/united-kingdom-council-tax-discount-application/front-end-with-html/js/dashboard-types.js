@@ -29,7 +29,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/applications`.
+ * Response from `GET /api/united-kingdom-council-tax-discount-application/dashboard/applications`.
  * @typedef {Object} DashboardApplicationsResponse
  * @property {ApplicationRow[]} items
  * @property {number} total

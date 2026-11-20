@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Audit trail of every eligibility rule that fired during classification, with the application dimension it concerns, the category and a description.
 paths:
-  /api/united_kingdom_council_tax_discount_application_grade_rules:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grade_rules:
     get:
       summary: List UnitedKingdomCouncilTaxDiscountApplicationGradeRule records
       operationId: listUnitedKingdomCouncilTaxDiscountApplicationGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/united_kingdom_council_tax_discount_application_grade_rules/{id}:
+  /api/united-kingdom-council-tax-discount-application/united_kingdom_council_tax_discount_application_grade_rules/{id}:
     parameters:
       - name: id
         in: path

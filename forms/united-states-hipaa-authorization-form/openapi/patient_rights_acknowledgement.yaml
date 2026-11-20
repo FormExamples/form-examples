@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Patient acknowledgement of HIPAA-required statements. One-to-one child of hipaa_authorization. Required by 45 CFR § 164.508(c)(2).
 paths:
-  /api/patient_rights_acknowledgements:
+  /api/united-states-hipaa-authorization-form/patient_rights_acknowledgements:
     get:
       summary: List PatientRightsAcknowledgement records
       operationId: listPatientRightsAcknowledgement
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/patient_rights_acknowledgements/{id}:
+  /api/united-states-hipaa-authorization-form/patient_rights_acknowledgements/{id}:
     parameters:
       - name: id
         in: path

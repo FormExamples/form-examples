@@ -25,23 +25,23 @@ macro_rules! problem {
 async fn every_failure_is_a_problem() {
     request::<App, _, _>(|request, _ctx| async move {
         // axa's own error, whose text reaches the client.
-        let (body, _) = problem!(request.get("/api/buyers?cursor=forged").await, 422);
+        let (body, _) = problem!(request.get("/api/united-kingdom-vehicle-bill-of-sale/buyers?cursor=forged").await, 422);
         assert!(body["detail"].is_string());
 
         // A route that does not exist, and a wrong method.
-        problem!(request.get("/api/no-such-route").await, 404);
-        problem!(request.delete("/api/openapi.yaml").await, 405);
+        problem!(request.get("/api/united-kingdom-vehicle-bill-of-sale/no-such-route").await, 404);
+        problem!(request.delete("/api/united-kingdom-vehicle-bill-of-sale/openapi.yaml").await, 405);
 
         // A missing row.
         let id = "00000000-0000-4000-8000-000000000000";
-        problem!(request.get(&format!("/api/buyers/{id}")).await, 404);
+        problem!(request.get(&format!("/api/united-kingdom-vehicle-bill-of-sale/buyers/{id}")).await, 404);
 
         // An extractor's refusal says what was wrong, and quotes nothing.
-        let (body, text) = problem!(request.get("/api/buyers/not-a-uuid").await, 400);
+        let (body, text) = problem!(request.get("/api/united-kingdom-vehicle-bill-of-sale/buyers/not-a-uuid").await, 400);
         assert!(body["detail"].is_string());
         assert!(!text.contains("not-a-uuid"));
         problem!(
-            request.post("/api/buyers").json(&"not an object").await,
+            request.post("/api/united-kingdom-vehicle-bill-of-sale/buyers").json(&"not an object").await,
             422
         );
     })
@@ -131,7 +131,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
             })
         };
         let response = request
-            .post("/api/united_kingdom_vehicle_bill_of_sales")
+            .post("/api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales")
             .json(&sale("not-a-listed-value"))
             .await;
         let (body, text) = problem!(response, 422);
@@ -141,7 +141,7 @@ async fn a_value_outside_a_check_is_unprocessable() {
 
         // The same body with a listed value is stored, so the shape was never the fault.
         request
-            .post("/api/united_kingdom_vehicle_bill_of_sales")
+            .post("/api/united-kingdom-vehicle-bill-of-sale/united_kingdom_vehicle_bill_of_sales")
             .json(&sale("private"))
             .await
             .assert_status_ok();

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every completeness rule that fired during grading: required component, whether it was completed, category, and description."
 paths:
-  /api/learning_disability_annual_health_check_grade_rules:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_rules:
     get:
       summary: List LearningDisabilityAnnualHealthCheckGradeRule records
       operationId: listLearningDisabilityAnnualHealthCheckGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/learning_disability_annual_health_check_grade_rules/{id}:
+  /api/learning-disability-annual-health-check/learning_disability_annual_health_check_grade_rules/{id}:
     parameters:
       - name: id
         in: path

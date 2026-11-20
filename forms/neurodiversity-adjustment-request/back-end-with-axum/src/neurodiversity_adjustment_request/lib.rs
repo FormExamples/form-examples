@@ -21,14 +21,14 @@
 //! # HTTP API
 //!
 //! ```text
-//! POST   /api/neurodiversity-adjustment-requests              create a request (returns JSON)
-//! GET    /api/neurodiversity-adjustment-requests              list requests (newest first)
-//! GET    /api/neurodiversity-adjustment-requests/{id}         fetch one request
-//! PATCH  /api/neurodiversity-adjustment-requests/{id}         replace request fields
-//! DELETE /api/neurodiversity-adjustment-requests/{id}         delete a request (cascades grade)
-//! POST   /api/neurodiversity-adjustment-requests/{id}/submit  run the engine, persist the grade
-//! GET    /api/neurodiversity-adjustment-requests/{id}/result  fetch grade + fired rules + flags
-//! GET    /api/dashboard                                       list requests joined with grade
+//! POST   /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests              create a request (returns JSON)
+//! GET    /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests              list requests (newest first)
+//! GET    /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}         fetch one request
+//! PATCH  /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}         replace request fields
+//! DELETE /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}         delete a request (cascades grade)
+//! POST   /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}/submit  run the engine, persist the grade
+//! GET    /api/neurodiversity-adjustment-request/neurodiversity-adjustment-requests/{id}/result  fetch grade + fired rules + flags
+//! GET    /api/neurodiversity-adjustment-request/dashboard                                       list requests joined with grade
 //! ```
 //!
 //! # Example

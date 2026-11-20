@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: The person creating the LPA. Must be ≥ 18 with mental capacity at signing per Mental Capacity Act 2005 s.9.
 paths:
-  /api/donors:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/donors:
     get:
       summary: List Donor records
       operationId: listDonor
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/donors/{id}:
+  /api/united-kingdom-lasting-power-of-attorney-for-health-and-care-decisions/donors/{id}:
     parameters:
       - name: id
         in: path

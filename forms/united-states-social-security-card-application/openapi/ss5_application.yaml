@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main Form SS-5 application record: request type, applicant items, evidence documents presented, filer and signature, and death-related Tell-SSA items. Classification, fired rules, and flags live in child tables. The Social Security number is never stored."
 paths:
-  /api/ss5_applications:
+  /api/united-states-social-security-card-application/ss5_applications:
     get:
       summary: List Ss5Application records
       operationId: listSs5Application
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/ss5_applications/{id}:
+  /api/united-states-social-security-card-application/ss5_applications/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A single diabetes assessment visit. Child tables hold section-specific clinical data.
 paths:
-  /api/assessments:
+  /api/diabetes-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/assessments/{id}:
+  /api/diabetes-assessment/assessments/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Computed endometriosis staging and grading result. Revised ASRM Stage I-IV and EHP-30 quality of life score. One-to-one child of assessment.
 paths:
-  /api/grades:
+  /api/endometriosis-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/grades/{id}:
+  /api/endometriosis-assessment/grades/{id}:
     parameters:
       - name: id
         in: path

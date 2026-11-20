@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Blood cross-match / transfusion compatibility test result (report). Captures the ABO/Rh group, antibody screen and identification, the crossmatch / compatibility outcome and component availability, two-sample-rule and historical-group concordance for identity safety, special component requirements, the overall result status, narrative findings, impression, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/blood_cross_match_test_results:
+  /api/blood-cross-match-test-result/blood_cross_match_test_results:
     get:
       summary: List BloodCrossMatchTestResult records
       operationId: listBloodCrossMatchTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/blood_cross_match_test_results/{id}:
+  /api/blood-cross-match-test-result/blood_cross_match_test_results/{id}:
     parameters:
       - name: id
         in: path

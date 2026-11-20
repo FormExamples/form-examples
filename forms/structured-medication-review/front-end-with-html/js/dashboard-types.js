@@ -40,7 +40,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/reviews`.
+ * Response from `GET /api/structured-medication-review/dashboard/reviews`.
  *
  * @typedef {Object} DashboardReviewsResponse
  * @property {ReviewRow[]} items

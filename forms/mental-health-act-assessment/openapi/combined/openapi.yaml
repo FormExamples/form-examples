@@ -8,7 +8,7 @@ info:
     per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes documented
     by hand in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/mental-health-act-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/mental-health-act-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grade_flags:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grade_flags:
     get:
       summary: List MentalHealthActAssessmentGradeFlag records
       operationId: listMentalHealthActAssessmentGradeFlag
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grade_flags/{id}:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grade_rules:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grade_rules:
     get:
       summary: List MentalHealthActAssessmentGradeRule records
       operationId: listMentalHealthActAssessmentGradeRule
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grade_rules/{id}:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grades:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grades:
     get:
       summary: List MentalHealthActAssessmentGrade records
       operationId: listMentalHealthActAssessmentGrade
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessment_grades/{id}:
+  /api/mental-health-act-assessment/mental_health_act_assessment_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessments:
+  /api/mental-health-act-assessment/mental_health_act_assessments:
     get:
       summary: List MentalHealthActAssessment records
       operationId: listMentalHealthActAssessment
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/mental_health_act_assessments/{id}:
+  /api/mental-health-act-assessment/mental_health_act_assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/mental-health-act-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1249,7 +1249,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/mental-health-act-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/mental-health-act-assessment/patients/{id}:
     parameters:
     - name: id
       in: path

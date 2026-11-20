@@ -8,7 +8,7 @@ info:
     from the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/applicants:
+  /api/united-kingdom-divorce-application/applicants:
     get:
       summary: List Applicant records
       operationId: listApplicant
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/applicants/{id}:
+  /api/united-kingdom-divorce-application/applicants/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/caseworkers:
+  /api/united-kingdom-divorce-application/caseworkers:
     get:
       summary: List Caseworker records
       operationId: listCaseworker
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/caseworkers/{id}:
+  /api/united-kingdom-divorce-application/caseworkers/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/united-kingdom-divorce-application/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -511,7 +511,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/united_kingdom_divorce_application_grade_flags:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_flags:
     get:
       summary: List UnitedKingdomDivorceApplicationGradeFlag records
       operationId: listUnitedKingdomDivorceApplicationGradeFlag
@@ -609,7 +609,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_application_grade_flags/{id}:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -757,7 +757,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_application_grade_rules:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_rules:
     get:
       summary: List UnitedKingdomDivorceApplicationGradeRule records
       operationId: listUnitedKingdomDivorceApplicationGradeRule
@@ -855,7 +855,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_application_grade_rules/{id}:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -1003,7 +1003,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_application_grades:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades:
     get:
       summary: List UnitedKingdomDivorceApplicationGrade records
       operationId: listUnitedKingdomDivorceApplicationGrade
@@ -1101,7 +1101,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_application_grades/{id}:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_application_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1249,7 +1249,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_applications:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_applications:
     get:
       summary: List UnitedKingdomDivorceApplication records
       operationId: listUnitedKingdomDivorceApplication
@@ -1347,7 +1347,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/united_kingdom_divorce_applications/{id}:
+  /api/united-kingdom-divorce-application/united_kingdom_divorce_applications/{id}:
     parameters:
     - name: id
       in: path

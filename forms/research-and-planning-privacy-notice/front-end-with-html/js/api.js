@@ -8,7 +8,7 @@
 // to the sample data shipped in `data.js` so the page is usable standalone.
 
 const API_BASE = 'http://localhost:5150';
-const PATIENTS_PATH = '/api/dashboard/patients';
+const PATIENTS_PATH = '/api/research-and-planning-privacy-notice/dashboard/patients';
 
 /**
  * Fetch the patient list from the backend.

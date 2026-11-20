@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Top-level record placing a patient on a laboratory medicine waiting list. Parent of appointment(s) and grading result.
 paths:
-  /api/lab_med_waiting_list_cards:
+  /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_cards:
     get:
       summary: List LabMedWaitingListCard records
       operationId: listLabMedWaitingListCard
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/lab_med_waiting_list_cards/{id}:
+  /api/laboratory-medicine-waiting-list-card/lab_med_waiting_list_cards/{id}:
     parameters:
       - name: id
         in: path

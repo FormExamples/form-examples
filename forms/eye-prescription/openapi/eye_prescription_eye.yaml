@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Per-eye refractive prescription (sphere, cylinder, axis, addition, prism). One row per eye per prescription.
 paths:
-  /api/eye_prescription_eyes:
+  /api/eye-prescription/eye_prescription_eyes:
     get:
       summary: List EyePrescriptionEye records
       operationId: listEyePrescriptionEye
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eye_prescription_eyes/{id}:
+  /api/eye-prescription/eye_prescription_eyes/{id}:
     parameters:
       - name: id
         in: path

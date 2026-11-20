@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: A Key Result for an objective. 1-5 rows per okr_objective; UNIQUE on (okr_objective_id, position).
 paths:
-  /api/okr_key_results:
+  /api/objectives-and-key-results-tracker/okr_key_results:
     get:
       summary: List OkrKeyResult records
       operationId: listOkrKeyResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/okr_key_results/{id}:
+  /api/objectives-and-key-results-tracker/okr_key_results/{id}:
     parameters:
       - name: id
         in: path

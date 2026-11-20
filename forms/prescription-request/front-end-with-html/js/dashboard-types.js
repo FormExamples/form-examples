@@ -44,7 +44,7 @@
  */
 
 /**
- * Response from `GET /api/dashboard/prescriptions`.
+ * Response from `GET /api/prescription-request/dashboard/prescriptions`.
  *
  * @typedef {Object} DashboardPrescriptionsResponse
  * @property {PrescriptionRow[]} items

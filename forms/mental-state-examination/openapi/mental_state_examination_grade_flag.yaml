@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Safety flags that fire independently of the completeness status, with priority and a suggested action for the clinician or crisis / safeguarding team. The risk level on the grade is the highest priority present here.
 paths:
-  /api/mental_state_examination_grade_flags:
+  /api/mental-state-examination/mental_state_examination_grade_flags:
     get:
       summary: List MentalStateExaminationGradeFlag records
       operationId: listMentalStateExaminationGradeFlag
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/mental_state_examination_grade_flags/{id}:
+  /api/mental-state-examination/mental_state_examination_grade_flags/{id}:
     parameters:
       - name: id
         in: path

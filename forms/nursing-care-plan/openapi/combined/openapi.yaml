@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/clinicians:
+  /api/nursing-care-plan/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/nursing-care-plan/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_goals:
+  /api/nursing-care-plan/nursing_care_plan_goals:
     get:
       summary: List NursingCarePlanGoal records
       operationId: listNursingCarePlanGoal
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_goals/{id}:
+  /api/nursing-care-plan/nursing_care_plan_goals/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grade_flags:
+  /api/nursing-care-plan/nursing_care_plan_grade_flags:
     get:
       summary: List NursingCarePlanGradeFlag records
       operationId: listNursingCarePlanGradeFlag
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grade_flags/{id}:
+  /api/nursing-care-plan/nursing_care_plan_grade_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grade_rules:
+  /api/nursing-care-plan/nursing_care_plan_grade_rules:
     get:
       summary: List NursingCarePlanGradeRule records
       operationId: listNursingCarePlanGradeRule
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grade_rules/{id}:
+  /api/nursing-care-plan/nursing_care_plan_grade_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grades:
+  /api/nursing-care-plan/nursing_care_plan_grades:
     get:
       summary: List NursingCarePlanGrade records
       operationId: listNursingCarePlanGrade
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_grades/{id}:
+  /api/nursing-care-plan/nursing_care_plan_grades/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_interventions:
+  /api/nursing-care-plan/nursing_care_plan_interventions:
     get:
       summary: List NursingCarePlanIntervention records
       operationId: listNursingCarePlanIntervention
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_interventions/{id}:
+  /api/nursing-care-plan/nursing_care_plan_interventions/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_problems:
+  /api/nursing-care-plan/nursing_care_plan_problems:
     get:
       summary: List NursingCarePlanProblem records
       operationId: listNursingCarePlanProblem
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plan_problems/{id}:
+  /api/nursing-care-plan/nursing_care_plan_problems/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plans:
+  /api/nursing-care-plan/nursing_care_plans:
     get:
       summary: List NursingCarePlan records
       operationId: listNursingCarePlan
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/nursing_care_plans/{id}:
+  /api/nursing-care-plan/nursing_care_plans/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/nursing-care-plan/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -1987,7 +1987,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/nursing-care-plan/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -2085,7 +2085,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/nursing-care-plan/patients/{id}:
     parameters:
     - name: id
       in: path

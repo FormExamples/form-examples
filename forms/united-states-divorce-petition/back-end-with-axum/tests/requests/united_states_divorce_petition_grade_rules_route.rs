@@ -6,7 +6,7 @@ use serial_test::serial;
 #[serial]
 async fn can_get_united_states_divorce_petition_grade_rules() {
     request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/api/united_states_divorce_petition_grade_rules").await;
+        let res = request.get("/api/united-states-divorce-petition/united_states_divorce_petition_grade_rules").await;
         assert_eq!(res.status_code(), 200);
         assert!(res.json::<serde_json::Value>().is_array());
     })

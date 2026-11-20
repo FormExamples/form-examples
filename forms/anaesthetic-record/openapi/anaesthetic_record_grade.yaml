@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Computed completeness grading result for an anaesthetic record: overall status and completeness percent."
 paths:
-  /api/anaesthetic_record_grades:
+  /api/anaesthetic-record/anaesthetic_record_grades:
     get:
       summary: List AnaestheticRecordGrade records
       operationId: listAnaestheticRecordGrade
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/anaesthetic_record_grades/{id}:
+  /api/anaesthetic-record/anaesthetic_record_grades/{id}:
     parameters:
       - name: id
         in: path

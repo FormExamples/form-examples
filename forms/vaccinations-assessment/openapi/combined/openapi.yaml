@@ -8,7 +8,7 @@ info:
     specs in this directory. One RESTful resource per routed SQL table, and any routes documented by hand
     in hand/routes.yaml.
 paths:
-  /api/additional_flags:
+  /api/vaccinations-assessment/additional_flags:
     get:
       summary: List AdditionalFlag records
       operationId: listAdditionalFlag
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/additional_flags/{id}:
+  /api/vaccinations-assessment/additional_flags/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/administration_records:
+  /api/vaccinations-assessment/administration_records:
     get:
       summary: List AdministrationRecord records
       operationId: listAdministrationRecord
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/administration_records/{id}:
+  /api/vaccinations-assessment/administration_records/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/adult_vaccinations:
+  /api/vaccinations-assessment/adult_vaccinations:
     get:
       summary: List AdultVaccinations records
       operationId: listAdultVaccinations
@@ -598,7 +598,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/adult_vaccinations/{id}:
+  /api/vaccinations-assessment/adult_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -746,7 +746,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments:
+  /api/vaccinations-assessment/assessments:
     get:
       summary: List Assessment records
       operationId: listAssessment
@@ -844,7 +844,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/assessments/{id}:
+  /api/vaccinations-assessment/assessments/{id}:
     parameters:
     - name: id
       in: path
@@ -992,7 +992,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/childhood_vaccinations:
+  /api/vaccinations-assessment/childhood_vaccinations:
     get:
       summary: List ChildhoodVaccinations records
       operationId: listChildhoodVaccinations
@@ -1090,7 +1090,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/childhood_vaccinations/{id}:
+  /api/vaccinations-assessment/childhood_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -1238,7 +1238,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinical_reviews:
+  /api/vaccinations-assessment/clinical_reviews:
     get:
       summary: List ClinicalReview records
       operationId: listClinicalReview
@@ -1336,7 +1336,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinical_reviews/{id}:
+  /api/vaccinations-assessment/clinical_reviews/{id}:
     parameters:
     - name: id
       in: path
@@ -1484,7 +1484,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians:
+  /api/vaccinations-assessment/clinicians:
     get:
       summary: List Clinician records
       operationId: listClinician
@@ -1582,7 +1582,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/clinicians/{id}:
+  /api/vaccinations-assessment/clinicians/{id}:
     parameters:
     - name: id
       in: path
@@ -1730,7 +1730,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/consent_informations:
+  /api/vaccinations-assessment/consent_informations:
     get:
       summary: List ConsentInformation records
       operationId: listConsentInformation
@@ -1828,7 +1828,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/consent_informations/{id}:
+  /api/vaccinations-assessment/consent_informations/{id}:
     parameters:
     - name: id
       in: path
@@ -1976,7 +1976,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/contraindications_allergies:
+  /api/vaccinations-assessment/contraindications_allergies:
     get:
       summary: List ContraindicationsAllergies records
       operationId: listContraindicationsAllergies
@@ -2074,7 +2074,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/contraindications_allergies/{id}:
+  /api/vaccinations-assessment/contraindications_allergies/{id}:
     parameters:
     - name: id
       in: path
@@ -2222,7 +2222,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fired_rules:
+  /api/vaccinations-assessment/fired_rules:
     get:
       summary: List FiredRule records
       operationId: listFiredRule
@@ -2320,7 +2320,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/fired_rules/{id}:
+  /api/vaccinations-assessment/fired_rules/{id}:
     parameters:
     - name: id
       in: path
@@ -2468,7 +2468,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades:
+  /api/vaccinations-assessment/grades:
     get:
       summary: List Grade records
       operationId: listGrade
@@ -2566,7 +2566,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/grades/{id}:
+  /api/vaccinations-assessment/grades/{id}:
     parameters:
     - name: id
       in: path
@@ -2714,7 +2714,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/immunization_histories:
+  /api/vaccinations-assessment/immunization_histories:
     get:
       summary: List ImmunizationHistory records
       operationId: listImmunizationHistory
@@ -2812,7 +2812,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/immunization_histories/{id}:
+  /api/vaccinations-assessment/immunization_histories/{id}:
     parameters:
     - name: id
       in: path
@@ -2960,7 +2960,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/occupational_vaccinations:
+  /api/vaccinations-assessment/occupational_vaccinations:
     get:
       summary: List OccupationalVaccinations records
       operationId: listOccupationalVaccinations
@@ -3058,7 +3058,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/occupational_vaccinations/{id}:
+  /api/vaccinations-assessment/occupational_vaccinations/{id}:
     parameters:
     - name: id
       in: path
@@ -3206,7 +3206,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/vaccinations-assessment/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
@@ -3217,7 +3217,7 @@ paths:
             application/yaml:
               schema:
                 type: string
-  /api/patients:
+  /api/vaccinations-assessment/patients:
     get:
       summary: List Patient records
       operationId: listPatient
@@ -3315,7 +3315,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/patients/{id}:
+  /api/vaccinations-assessment/patients/{id}:
     parameters:
     - name: id
       in: path
@@ -3463,7 +3463,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/travel_vaccinations:
+  /api/vaccinations-assessment/travel_vaccinations:
     get:
       summary: List TravelVaccinations records
       operationId: listTravelVaccinations
@@ -3561,7 +3561,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/travel_vaccinations/{id}:
+  /api/vaccinations-assessment/travel_vaccinations/{id}:
     parameters:
     - name: id
       in: path

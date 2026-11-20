@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Closed list of the ten NHSBSA-recognised qualifying conditions for FP92A.
 paths:
-  /api/eligible_conditions:
+  /api/united-kingdom-nhs-england-medical-exemption-certificate/eligible_conditions:
     get:
       summary: List EligibleCondition records
       operationId: listEligibleCondition
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/eligible_conditions/{id}:
+  /api/united-kingdom-nhs-england-medical-exemption-certificate/eligible_conditions/{id}:
     parameters:
       - name: id
         in: path

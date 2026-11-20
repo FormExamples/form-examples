@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main corrected-calcium calculation record: context and identification, plus the measured total calcium and albumin inputs and the symptomatic flag."
 paths:
-  /api/corrected_calcium_calculators:
+  /api/corrected-calcium-calculator/corrected_calcium_calculators:
     get:
       summary: List CorrectedCalciumCalculator records
       operationId: listCorrectedCalciumCalculator
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/corrected_calcium_calculators/{id}:
+  /api/corrected-calcium-calculator/corrected_calcium_calculators/{id}:
     parameters:
       - name: id
         in: path

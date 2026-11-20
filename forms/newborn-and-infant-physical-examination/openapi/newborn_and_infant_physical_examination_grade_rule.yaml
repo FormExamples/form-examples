@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Audit trail of every classification rule that fired during grading: the key component, category, and description."
 paths:
-  /api/newborn_and_infant_physical_examination_grade_rules:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_rules:
     get:
       summary: List NewbornAndInfantPhysicalExaminationGradeRule records
       operationId: listNewbornAndInfantPhysicalExaminationGradeRule
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/newborn_and_infant_physical_examination_grade_rules/{id}:
+  /api/newborn-and-infant-physical-examination/newborn_and_infant_physical_examination_grade_rules/{id}:
     parameters:
       - name: id
         in: path

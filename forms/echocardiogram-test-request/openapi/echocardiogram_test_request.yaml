@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: Cardiac echocardiogram request (referral). Captures the requested echo type, clinical indication and question, relevant history, symptoms, NYHA class, ECG and natriuretic-peptide findings, prior echo, cardiotoxic-chemotherapy status, and triage urgency.
 paths:
-  /api/echocardiogram_test_requests:
+  /api/echocardiogram-test-request/echocardiogram_test_requests:
     get:
       summary: List EchocardiogramTestRequest records
       operationId: listEchocardiogramTestRequest
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/echocardiogram_test_requests/{id}:
+  /api/echocardiogram-test-request/echocardiogram_test_requests/{id}:
     parameters:
       - name: id
         in: path

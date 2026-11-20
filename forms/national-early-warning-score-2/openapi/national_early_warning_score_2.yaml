@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "Main NEWS2 observation record: raw physiological observations for a single vital-sign set plus recording context (ward/location, observation timestamp, SpO2 scale, supplemental-oxygen details). Subscores, aggregate, risk band, rules, and flags live in child tables."
 paths:
-  /api/national_early_warning_score_2s:
+  /api/national-early-warning-score-2/national_early_warning_score_2s:
     get:
       summary: List NationalEarlyWarningScore2 records
       operationId: listNationalEarlyWarningScore2
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/national_early_warning_score_2s/{id}:
+  /api/national-early-warning-score-2/national_early_warning_score_2s/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: ECG (electrocardiogram) test result (report). Captures the recorded ECG type and quality, the clinical history, the ventricular rate, rhythm and the PR / QRS / QT / QTc intervals and cardiac axis, the structured electrophysiological findings, the narrative interpretation and impression, recommended follow-up, and critical-result communication. This is the source-of-truth record that the four-axis interpretation grade is computed from.
 paths:
-  /api/electrocardiogram_test_results:
+  /api/electrocardiogram-test-result/electrocardiogram_test_results:
     get:
       summary: List ElectrocardiogramTestResult records
       operationId: listElectrocardiogramTestResult
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/electrocardiogram_test_results/{id}:
+  /api/electrocardiogram-test-result/electrocardiogram_test_results/{id}:
     parameters:
       - name: id
         in: path

@@ -6,7 +6,7 @@ info:
   version: 1.0.0
   description: "The impact or change resulting from the meeting: goal reached, risk identified, alignment achieved, decision recorded. Distinct from meeting_output: outputs are things, outcomes are changes."
 paths:
-  /api/meeting_outcomes:
+  /api/meeting/meeting_outcomes:
     get:
       summary: List MeetingOutcome records
       operationId: listMeetingOutcome
@@ -102,7 +102,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-  /api/meeting_outcomes/{id}:
+  /api/meeting/meeting_outcomes/{id}:
     parameters:
       - name: id
         in: path

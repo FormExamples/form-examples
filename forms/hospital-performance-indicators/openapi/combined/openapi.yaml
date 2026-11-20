@@ -8,7 +8,7 @@ info:
     the per-entity specs in this directory. One RESTful resource per routed SQL table, and any routes
     documented by hand in hand/routes.yaml.
 paths:
-  /api/hospital_performance_indicator_values:
+  /api/hospital-performance-indicators/hospital_performance_indicator_values:
     get:
       summary: List HospitalPerformanceIndicatorValue records
       operationId: listHospitalPerformanceIndicatorValue
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_performance_indicator_values/{id}:
+  /api/hospital-performance-indicators/hospital_performance_indicator_values/{id}:
     parameters:
     - name: id
       in: path
@@ -254,7 +254,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_performance_indicators:
+  /api/hospital-performance-indicators/hospital_performance_indicators:
     get:
       summary: List HospitalPerformanceIndicators records
       operationId: listHospitalPerformanceIndicators
@@ -352,7 +352,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/hospital_performance_indicators/{id}:
+  /api/hospital-performance-indicators/hospital_performance_indicators/{id}:
     parameters:
     - name: id
       in: path
@@ -500,7 +500,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /api/openapi.yaml:
+  /api/hospital-performance-indicators/openapi.yaml:
     get:
       summary: This document
       operationId: getOpenApi
