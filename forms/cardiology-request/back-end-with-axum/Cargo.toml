@@ -16,7 +16,7 @@ default-run = "cardiology-request-axum-crate-cli"
 path = "src/cardiology_request/lib.rs"
 
 [workspace.dependencies]
-axa = { version = "0.19", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
+axa = { version = "0.20", features = ["cursor-pagination", "postgres-sqlx", "queue", "ratelimit"] }
 
 [dependencies]
 axa = { workspace = true }
@@ -44,7 +44,7 @@ path = "src/cardiology_request/bin/main.rs"
 required-features = []
 
 [dev-dependencies]
-axa-test = "0.10"
+axa-test = "0.11"
 serial_test = { version = "4.0.1" }
 insta = { version = "1.49", features = ["redactions", "yaml", "filters"] }
 

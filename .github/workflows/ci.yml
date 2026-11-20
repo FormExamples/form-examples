@@ -181,8 +181,8 @@ jobs:
       - name: Every Axum crate uses jiff, not chrono
         run: bin/axum-chrono-to-jiff --check --all
 
-      - name: Every Axum crate is on axa 0.19
-        run: bin/axum-axa-0-19 --check --all
+      - name: Every Axum crate is on axa 0.20
+        run: bin/axum-axa-0-20 --check --all
 
       - name: Every Axum crate is on axa 0.6 with RFC 9457 errors
         run: bin/axum-axa-upgrade --check --all

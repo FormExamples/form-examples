@@ -266,7 +266,8 @@ bin/axum-axa-0-12 --check --all    # axa 0.12 or later, the postgres-sqlx featur
 bin/axum-axa-0-13 --check --all    # axa 0.13 or later, and axa-test 0.4, in Cargo.toml and Cargo.lock
 bin/axum-axa-0-14 --check --all    # axa 0.14 or later, and axa-test 0.5, in Cargo.toml and Cargo.lock
 # bin/axum-axa-0-16 --check --all   # one-shot, superseded by axum-axa-0-19 — expects axa 0.16; do not run as a CI gate
-bin/axum-axa-0-19 --check --all    # axa 0.19 and axa-test 0.10, in Cargo.toml and Cargo.lock
+# bin/axum-axa-0-19 --check --all   # one-shot, superseded by axum-axa-0-20 — expects axa 0.19; do not run as a CI gate
+bin/axum-axa-0-20 --check --all    # axa 0.20 and axa-test 0.11, in Cargo.toml and Cargo.lock
 bin/axum-chrono-to-jiff --check --all # no chrono in any crate; jiff + jiff-sqlx in Cargo.toml, the prelude aliases and Cargo.lock
 bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
 bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
