@@ -270,6 +270,7 @@ bin/axum-axa-0-19 --check --all    # axa 0.19 and axa-test 0.10, in Cargo.toml a
 bin/axum-chrono-to-jiff --check --all # no chrono in any crate; jiff + jiff-sqlx in Cargo.toml, the prelude aliases and Cargo.lock
 bin/axum-cursor-pagination --check --all # every list pages by signed cursor, with no total
 bin/axum-check-constraints --check --all # sql/ CHECK constraints migrated into every crate, plus build.rs
+bin/axum-request-validation --check --all # Params derive Validate from column types; add/update answer 422 naming the field
 bin/axum-fixture-checks --check --all    # fixtures and test rows satisfy those CHECKs (needs Postgres)
 bin/axum-entity-routes --check --all # every SQL table reachable over HTTP
 bin/axum-sql-columns --check --all   # every sql/ column in its crate, under its sql/ name
